@@ -303,9 +303,8 @@ char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 		#endif
 		if(strcmp(part,"w") == 0)
 			text_repeat_type=1; // repeating word
-		// TODO: Add repeating string support
-		/*else if(strcmp(part,"s") == 0)
-			text_repeat_type=2; // repeating string*/
+		else if(strcmp(part,"s") == 0)
+			text_repeat_type=2; // repeating string
 		else
 		{
 			if(text_repeat)
@@ -374,7 +373,8 @@ char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 						}
 						else
 						{
-							strcat(out," ");
+							if(text_repeat_type == 1)
+								strcat(out," ");
 							strcat(out,part);
 						}
 					}
