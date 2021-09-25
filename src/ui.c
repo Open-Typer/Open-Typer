@@ -85,7 +85,9 @@ char *_menu(FILE *cr, int lesson_id)
 			case 2:
 				out[0]='2';
 				sprintf(tmp,"%d",_level_selection(cr,lesson_id));
-				printf("Selected level: %s\n",tmp);
+				#ifdef DEBUG
+				printf("D: Selected level: %s\n",tmp);
+				#endif
 				strcat(out,tmp);
 				break;
 			case 3:
