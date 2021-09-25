@@ -38,7 +38,7 @@ Output:
 
 `Some text`
 
-- Repeating string: (WIP)
+- Repeating string:
 
 `1.2:1,s repeating`
 
