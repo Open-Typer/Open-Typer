@@ -93,6 +93,9 @@ char *_menu(FILE *cr, int lesson_id)
 			case 3:
 				out[0]='3';
 				sprintf(tmp,"%d",_lesson_selection(cr,true));
+				#ifdef DEBUG
+				printf("D: Selected lesson: %s\n",tmp);
+				#endif
 				strcat(out,tmp);
 				break;
 			case 4:
