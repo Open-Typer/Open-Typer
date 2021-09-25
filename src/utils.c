@@ -32,11 +32,15 @@ bool int_array_contains(int arr[], int target, int count)
 }
 void _clear_screen(void)
 {
+	#ifdef DEBUG
+	printf("D: Skipping screen clearing\n");
+	#else
 	#ifdef _WIN32
 	system("cls");
 	#else
 	#ifdef __unix__
 	system("clear");
+	#endif
 	#endif
 	#endif
 }
