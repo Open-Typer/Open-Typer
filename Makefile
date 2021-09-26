@@ -40,4 +40,4 @@ clean:
 	@echo CLEAN $(SRC)/
 	@rm -f $(OBJFILES)
 	@echo CLEAN ./
-	@rm -f $(OBJFILES) $(TARGET) $(TARGET).exe *~
+	@rm -f $(TARGET) $(TARGET).exe *~
