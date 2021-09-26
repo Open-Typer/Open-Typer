@@ -39,7 +39,7 @@ void _clear_screen(void)
 	system("cls");
 	#else
 	#ifdef __unix__
-	system("clear");
+	printf("\033[H\033[J");
 	#endif
 	#endif
 	#endif
