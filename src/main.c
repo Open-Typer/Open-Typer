@@ -32,12 +32,12 @@
 
 // Windows support warning
 #ifdef _WIN32
-#warning "Windows support is experimental."
+#pragma message "Windows support is experimental."
 #endif
 
 // Debug build warning
 #ifdef DEBUG
-#warning "This is a debug build."
+#pragma message "This is a debug build."
 #endif
 
 char *_play_level(FILE *cr, int lesson_id, int level_id)
