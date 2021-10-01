@@ -108,3 +108,20 @@ char *_menu(FILE *cr, int lesson_id)
 	}
 	return out;
 }
+
+#ifdef _WIN32
+void SetWindow(int Width, int Height)
+{ 
+	COORD coord;
+	coord.X = Width;
+	coord.Y = Height;
+	SMALL_RECT Rect;
+	Rect.Top = 0;
+	Rect.Left = 0;
+	Rect.Bottom = Height - 1;
+	Rect.Right = Width - 1;
+	HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleScreenBufferSize(Handle, coord);
+	SetConsoleWindowInfo(Handle, TRUE, &Rect);
+}
+#endif

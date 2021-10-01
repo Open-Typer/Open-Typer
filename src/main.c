@@ -228,6 +228,8 @@ int main()
 	cfi.FontWeight = FW_NORMAL;
 	wcscpy(cfi.FaceName, L"Lucida Console");
 	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
+	// Resize console window (see ui.c)
+	SetWindow(120,25);
 	#endif
 	// Show welcome message (init screen)
 	_init_screen();
