@@ -24,6 +24,10 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <stdbool.h>
+#ifdef _WIN32
+#include <windows.h>
+#include <locale.h>
+#endif
 #include "projectconfig.h"
 #include "utils.h"
 #include "configfile.h"
@@ -208,6 +212,13 @@ int main()
 		else
 			exit(1);
 	}
+	#ifdef _WIN32
+	// Fix multi-byte characters I/O on Windows
+	// Caution: multi-byte char input is broken on Windows 7.
+	setlocale(LC_ALL,"en_US.UTF-8");
+	SetConsoleCP(CP_UTF8);
+	SetConsoleOutputCP(CP_UTF8);
+	#endif
 	// Show welcome message (init screen)
 	_init_screen();
 	// Ask for lesson
