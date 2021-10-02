@@ -79,4 +79,11 @@ char *_get_win_release(void)
 	else
 		return out;
 }
+WCHAR* str_to_wcs(const char* str)
+{
+    size_t size = MultiByteToWideChar(CP_UTF8,0,str,(int)strlen(str),NULL,0)*sizeof(WCHAR)+2;
+    WCHAR* out = (WCHAR*) malloc(size);
+    MultiByteToWideChar(CP_UTF8,0,&str[0],(int)strlen(str),out,size);
+    return out;
+}
 #endif

@@ -27,6 +27,8 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <locale.h>
+#include <fcntl.h>
+#include <wchar.h>
 #endif
 #include "projectconfig.h"
 #include "utils.h"
@@ -46,20 +48,80 @@
 
 char *_play_level(FILE *cr, int lesson_id, int level_id)
 {
+	#ifdef _WIN32
+	char *winver = _get_win_release();
+	bool legacy=false;
+	if(strcmp(winver,"10") != 0)
+		legacy=true;
+	if(legacy)
+	{
+		// For Windows 8.1 and below
+		fflush(stdout);
+		_setmode(_fileno(stdout),_O_U8TEXT);
+	}
+	#endif
 	char *level = _lesson_level_text(cr,lesson_id,level_id);
+	#ifdef _WIN32
+	wchar_t *wlevel;
+	if(legacy)
+	{
+		wlevel = str_to_wcs(level);
+	}
+	#endif
 	int pos=0, errors=0, hits=0, i;
 	float final_time;
 	char c;
+	#ifdef _WIN32
+	wchar_t wc;
+	#endif
 	char *menu_ret = (char*) malloc(18);
 	char *tmp = (char*) malloc(17);
 	struct timeval stop, start;
+	#ifdef _WIN32
+	if(legacy)
+		wprintf(L"%ls\n",wlevel);
+	else
+		printf("%s\n",level);
+	#else
 	printf("%s\n",level);
-	while(pos < strlen(level))
+	#endif
+	bool tmpbool;
+	long len;
+	#ifdef _WIN32
+	if(legacy)
+		len=wcslen(wlevel);
+	else
+		len=strlen(level);
+	#else
+	len=strlen(level)
+	#endif
+	while(pos < len)
 	{
+		#ifdef _WIN32
+		if(legacy)
+		{
+			wc=_getwch();
+		}
+		else
+			c=getch();
+		#else
 		c=getch();
+		#endif
 		if(pos == 0)
 			gettimeofday(&start, NULL);
-		if(c == '*')
+		#ifdef _WIN32
+		if(legacy)
+		{
+			tmpbool=(wc == '*');
+		}
+		else
+		{
+			tmpbool=(c == '*');
+		}
+		#else
+		tmpbool=(c == '*');
+		#endif
+		if(tmpbool)
 			goto escape;
 		#ifdef __unix__
 		else if(c == '\033')
@@ -72,18 +134,63 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 		#endif
 		else
 		{
-			if(c == level[pos])
+			#ifdef _WIN32
+			if(legacy)
 			{
-				putchar(c);
+				tmpbool=(wc == wlevel[pos]);
 			}
 			else
 			{
-				if(c != '\n')
+				tmpbool=(c == level[pos]);
+			}
+			#else
+			tmpbool=(c == level[pos]);
+			#endif
+			if(tmpbool)
+			{
+				#ifdef _WIN32
+				if(legacy)
+					wprintf(L"%lc",wc);
+				else
+					putchar(c);
+				#else
+				putchar(c);
+				#endif
+			}
+			else
+			{
+				#ifdef _WIN32
+				if(legacy)
+					tmpbool=(wc != '\n');
+				else
+					tmpbool=(c != '\n');
+				#else
+				tmpbool=(c != '\n');
+				#endif
+				if(tmpbool)
 					errors++;
+				#ifdef _WIN32
+				while((!legacy && c != level[pos]) || (legacy && (wc != wlevel[pos])))
+				#else
 				while(c != level[pos])
+				#endif
 				{
+					#ifdef _WIN32
+					if(legacy)
+					{
+						wc=_getwch();
+						tmpbool=(wc == '*');
+					}
+					else
+					{
+						c=getch();
+						tmpbool=(c == '*');
+					}
+					#else
 					c=getch();
-					if(c == '*')
+					tmpbool=(c == '*');
+					#endif
+					if(tmpbool)
 						goto escape;
 					#ifdef __unix__
 					else if(c == '\033')
@@ -97,17 +204,39 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 					#endif
 					else
 					{
-						if(c != level[pos])
+						#ifdef _WIN32
+						if(legacy)
+							tmpbool=(wc != wlevel[pos]);
+						else
+							tmpbool=(c != level[pos]);
+						#else
+						tmpbool=(c != level[pos]);
+						#endif
+						if(tmpbool)
 							errors++;
 					}
 				}
+				#ifdef _WIN32
+				if(legacy)
+					wprintf(L"%lc",wc);
+				else
+					putchar(c);
+				#else
 				putchar(c);
+				#endif
 			}
 			hits++;
 			pos++;
 		}
 	}
 	gettimeofday(&stop, NULL);
+	#ifdef _WIN32
+	if(legacy)
+	{
+		fflush(stdout);
+		_setmode(_fileno(stdout),_O_TEXT);
+	}
+	#endif
 	putchar('\n');
 	printf("\nMistakes: %d\n",errors);
 	final_time = stop.tv_sec - start.tv_sec + (stop.tv_usec - start.tv_usec)/1000000.0;
@@ -117,6 +246,13 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 	return "";
 	
 	escape:
+		#ifdef _WIN32
+		if(legacy)
+		{
+			fflush(stdout);
+			_setmode(_fileno(stdout),_O_TEXT);
+		}
+		#endif
 		strcpy(menu_ret,_menu(cr,lesson_id));
 		switch(menu_ret[0]) {
 			case '1':

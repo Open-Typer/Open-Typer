@@ -11,4 +11,5 @@ void _clear_screen(void);
 
 #ifdef _WIN32
 char *_get_win_release(void);
+WCHAR* str_to_wcs(const char* str);
 #endif
