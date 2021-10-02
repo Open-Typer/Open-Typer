@@ -330,14 +330,30 @@ int main()
 	#ifdef _WIN32
 	// Check for updates
 	char *latest_ver = _get_latest_version();
+	bool update_success=false;
 	if(strcmp(_PROJECT_VERSION,latest_ver) != 0)
 	{
 		int dialog = MessageBox(NULL,"There's a new update available.\nWould you like to download and install it?\n\nThis will replace the open-typer.exe file.","Update available",MB_ICONEXCLAMATION | MB_YESNO);
 		if(dialog == IDYES)
 		{
-			_install_update(latest_ver);
-			MessageBox(NULL, "Please launch the program again.", "Update completed", MB_OK);
-			return 0;
+			int instret;
+			while(!update_success)
+			{
+				instret = _install_update(latest_ver);
+				if(instret != 0)
+				{
+					dialog = MessageBox(NULL,"Failed to download and/or install the update!","Update failure",MB_ICONERROR | MB_ABORTRETRYIGNORE);
+					if(dialog == IDABORT)
+						return 0;
+					else if(dialog == IDIGNORE)
+						update_success=true;
+				}
+				else
+				{
+					MessageBox(NULL,"Please launch the program again.","Update completed",MB_OK);
+					return 0;
+				}
+			}
 		}
 	}
 	#endif
