@@ -123,4 +123,5 @@ int _install_update(char *latest)
 	printf("D: Done\n",URL);
 	#endif
 	#endif
+	return 0;
 }
