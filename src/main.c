@@ -35,6 +35,7 @@
 #include "configfile.h"
 #include "keyboard.h"
 #include "ui.h"
+#include "updater.h"
 
 // Windows support warning
 #ifdef _WIN32
@@ -326,6 +327,20 @@ int _play_lesson(FILE *cr, int lesson_id)
 }
 int main()
 {
+	#ifdef _WIN32
+	// Check for updates
+	char *latest_ver = _get_latest_version();
+	if(strcmp(_PROJECT_VERSION,latest_ver) != 0)
+	{
+		int dialog = MessageBox(NULL,"There's a new update available.\nWould you like to download and install it?\n\nThis will replace the open-typer.exe file.","Update available",MB_ICONEXCLAMATION | MB_YESNO);
+		if(dialog == IDYES)
+		{
+			_install_update(latest_ver);
+			MessageBox(NULL, "Please launch the program again.", "Update completed", MB_OK);
+			return 0;
+		}
+	}
+	#endif
 	// Open config file
 	errno=0;
 	#ifdef _WIN32
