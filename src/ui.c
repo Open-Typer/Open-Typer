@@ -80,10 +80,10 @@ char *_menu(FILE *cr, int lesson_id)
 		end=true;
 		switch(sel) {
 			case 1:
-				out[0]='1';
+				strcpy(out,"1");
 				break;
 			case 2:
-				out[0]='2';
+				strcpy(out,"2");
 				sprintf(tmp,"%d",_level_selection(cr,lesson_id));
 				#ifdef DEBUG
 				printf("D: Selected level: %s\n",tmp);
@@ -91,7 +91,7 @@ char *_menu(FILE *cr, int lesson_id)
 				strcat(out,tmp);
 				break;
 			case 3:
-				out[0]='3';
+				strcpy(out,"3");
 				sprintf(tmp,"%d",_lesson_selection(cr,true));
 				#ifdef DEBUG
 				printf("D: Selected lesson: %s\n",tmp);
