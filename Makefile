@@ -19,6 +19,9 @@ $(error "No $(CC) in PATH, please make sure it's installed")
 endif
 CFLAGS   = -D _PROJECT_VERSION='"$(VERSION)"' -I'$(SRC)/include/'
 LDFLAGS  = 
+ifeq ($(PLATFORM),$(filter $(PLATFORM),WIN32 WIN64))
+LDFLAGS  += -lurlmon
+endif
 OBJFILES = $(SRC)/utils.o $(SRC)/configfile.o $(SRC)/keyboard.o $(SRC)/ui.o $(SRC)/main.o
 TARGET   = open-typer
 
