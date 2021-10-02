@@ -213,6 +213,14 @@ int main()
 			exit(1);
 	}
 	#ifdef _WIN32
+	// Check version support
+	char *winver = _get_win_release();
+	if((strcmp(winver,"7") != 0) && (strcmp(winver,"8") != 0) && (strcmp(winver,"8.1") != 0) && (strcmp(winver,"10") != 0))
+	{
+		ShowWindow(GetConsoleWindow(),SW_HIDE);
+		MessageBox(NULL, "You need at least Windows 7", "Version Not Supported", MB_OK);
+		exit(10);
+	}
 	// Fix multi-byte characters I/O on Windows
 	// Caution: multi-byte char input is broken on Windows 7.
 	setlocale(LC_ALL,"en_US.UTF-8");

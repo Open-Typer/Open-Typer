@@ -44,3 +44,39 @@ void _clear_screen(void)
 	#endif
 	#endif
 }
+
+#ifdef _WIN32
+char *_get_win_release(void)
+{
+	char *out = (char*) malloc(16);
+	strcpy(out,"");
+	if (IsWindowsXPOrGreater())
+	{
+		strcpy(out,"XP");
+	}
+	if (IsWindowsVistaOrGreater())
+	{
+		strcpy(out,"Vista");
+	}
+	if (IsWindows7OrGreater())
+	{
+		strcpy(out,"7");
+	}
+	if (IsWindows8OrGreater())
+	{
+		strcpy(out,"8");
+	}
+	if (IsWindows8Point1OrGreater())
+	{
+		strcpy(out,"8.1");
+	}
+	if (IsWindows10OrGreater())
+	{
+		strcpy(out,"10");
+	}
+	if(strcmp(out,"") == 0)
+		return NULL;
+	else
+		return out;
+}
+#endif
