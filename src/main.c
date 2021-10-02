@@ -93,7 +93,7 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 	else
 		len=strlen(level);
 	#else
-	len=strlen(level)
+	len=strlen(level);
 	#endif
 	while(pos < len)
 	{
