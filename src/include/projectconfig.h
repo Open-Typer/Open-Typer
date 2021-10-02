@@ -21,3 +21,4 @@
 #define _PROJECT_NAME "Open-Typer"
 #define _REPEAT_LIMIT 128
 #define _DEFAULT_CONFIG "typer.conf"
+#define _GITHUB_PATH "adazem009/Open-Typer"
