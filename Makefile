@@ -10,6 +10,7 @@ CC       = gcc
 else ifeq ($(PLATFORM),LINUX)
 CC       = gcc
 else ifeq ($(PLATFORM),)
+PLATFORM=LINUX
 CC       = gcc
 else
 $(error Unknown platform '$(PLATFORM)')
