@@ -8,7 +8,7 @@ A simple typing tutor program, which aims for **customizability** (see *Configur
 - Designed for use in terminals (I'm going to make it possible to use as a cross-platform GUI program later).
 - Customizability - custom lessons and levels (see *Configuring*).
 - Quick navigation (arrow up (not supported in Windows) or asterisk for level menu).
-- Cross-platform - can be compiled for most UNIX-like operating systems and Windows. Windows support is experimental right now (see *Known issues*).
+- Cross-platform - can be compiled for most UNIX-like operating systems and Windows. Windows support is experimental, but most of the features should work.
 
 ## How to use
 
@@ -99,4 +99,4 @@ Use `make` like this:
 
 # Known issues
 
-- Windows doesn't display special characters (and doesn't let you type them).
+- *none*
