@@ -44,6 +44,12 @@ void _clear_screen(void)
 	#endif
 	#endif
 }
+void _download_file(const char *url, const char *dest)
+{
+	#ifdef _WIN32
+	URLDownloadToFile(NULL,url,dest,0,NULL);
+	#endif
+}
 
 #ifdef _WIN32
 char *_get_win_release(void)
