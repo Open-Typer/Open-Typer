@@ -28,4 +28,4 @@
 #include "utils.h"
 
 char *_get_latest_version(void);
-void _install_update(char *latest);
+int _install_update(char *latest);

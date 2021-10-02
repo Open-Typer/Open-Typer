@@ -44,7 +44,14 @@ char *_get_latest_version(void)
 	char *Makefile_local_path=".open-typer-latest";
 	#endif
 	// Download Makefile from GitHub (contains latest version code)
-	_download_file(Makefile_URL,Makefile_local_path);
+	int dwret = _download_file(Makefile_URL,Makefile_local_path);
+	if(dwret != 0)
+	{
+		#ifdef DEBUG
+		printf("D: Download failure, error: %d\n",dwret);
+		#endif
+		return _PROJECT_VERSION;
+	}
 	#ifdef DEBUG
 	printf("D: Downloaded Makefile into %s\n",Makefile_local_path);
 	#endif
@@ -79,7 +86,7 @@ char *_get_latest_version(void)
 	return "";
 	#endif
 }
-void _install_update(char *latest)
+int _install_update(char *latest)
 {
 	#ifdef _WIN32
 	// This function is enabled only for Windows for now
@@ -98,13 +105,20 @@ void _install_update(char *latest)
 		#ifdef DEBUG
 		printf("D: No internet connection\n");
 		#endif
-		return;
+		return -1;
 	}
 	#endif
 	#ifdef DEBUG
 	printf("D: Downloading %s\n",URL);
 	#endif
-	_download_file(URL,URL_suffix2);
+	int dwret = _download_file(URL,URL_suffix2);
+	if(dwret != 0)
+	{
+		#ifdef DEBUG
+		printf("D: Download failure, error: %d\n",dwret);
+		#endif
+		return dwret;
+	}
 	#ifdef DEBUG
 	printf("D: Done\n",URL);
 	#endif
