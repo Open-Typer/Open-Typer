@@ -21,9 +21,11 @@ endif
 CFLAGS   = -D _PROJECT_VERSION='"$(VERSION)"' -I'$(SRC)/include/'
 LDFLAGS  = 
 ifeq ($(PLATFORM),$(filter $(PLATFORM),WIN32 WIN64))
-LDFLAGS  += -lurlmon
+LDFLAGS  += \
+    -lurlmon \
+    -lwininet
 endif
-OBJFILES = $(SRC)/utils.o $(SRC)/configfile.o $(SRC)/keyboard.o $(SRC)/ui.o $(SRC)/main.o
+OBJFILES = $(SRC)/utils.o $(SRC)/configfile.o $(SRC)/keyboard.o $(SRC)/updater.o $(SRC)/ui.o $(SRC)/main.o
 TARGET   = open-typer
 
 all: clean $(TARGET)

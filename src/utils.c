@@ -93,4 +93,10 @@ WCHAR* str_to_wcs(const char* str)
     MultiByteToWideChar(CP_UTF8,0,&str[0],-1,out,size);
     return out;
 }
+bool _win_internet_available(void)
+{
+	DWORD result;
+	InternetGetConnectedState(&result,0);
+	return (result == 18);
+}
 #endif
