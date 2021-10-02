@@ -79,3 +79,34 @@ char *_get_latest_version(void)
 	return "";
 	#endif
 }
+void _install_update(char *latest)
+{
+	#ifdef _WIN32
+	// This function is enabled only for Windows for now
+	char *URL_prefix = "https://github.com/";
+	char *URL_suffix1 = "/releases/download/v";
+	#ifdef _WIN32
+	char *URL_suffix2 = "open-typer.exe";
+	#else
+	char *URL_suffix2 = "open-typer-linux-amd64";
+	#endif
+	char *URL = (char*) malloc(strlen(URL_prefix)+strlen(_GITHUB_PATH)+strlen(URL_suffix1)+strlen(latest)+1+strlen(URL_suffix2)+1);
+	sprintf(URL,"%s%s%s%s/%s",URL_prefix,_GITHUB_PATH,URL_suffix1,latest,URL_suffix2);
+	#ifdef _WIN32
+	if(!_win_internet_available())
+	{
+		#ifdef DEBUG
+		printf("D: No internet connection\n");
+		#endif
+		return;
+	}
+	#endif
+	#ifdef DEBUG
+	printf("D: Downloading %s\n",URL);
+	#endif
+	_download_file(URL,URL_suffix2);
+	#ifdef DEBUG
+	printf("D: Done\n",URL);
+	#endif
+	#endif
+}
