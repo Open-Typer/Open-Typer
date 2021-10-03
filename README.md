@@ -9,6 +9,7 @@ A simple typing tutor program, which aims for **customizability** (see *Configur
 - Customizability - custom lessons and levels (see *Configuring*).
 - Quick navigation (arrow up or asterisk for level menu).
 - Cross-platform - can be compiled for most UNIX-like operating systems and Windows.
+- Auto updates on Windows: The program checks for updates everytime you open it. Update installation is fully automated.
 
 ## How to use
 
