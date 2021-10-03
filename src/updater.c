@@ -39,7 +39,7 @@ char *_get_latest_version(void)
 		#endif
 		return _PROJECT_VERSION;
 	}
-	char *Makefile_local_path="$open-typer-latest";
+	char *Makefile_local_path=".open-typer-latest";
 	#else
 	char *Makefile_local_path=".open-typer-latest";
 	#endif
