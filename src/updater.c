@@ -49,6 +49,11 @@ char *_get_latest_version(void)
 	{
 		#ifdef DEBUG
 		printf("D: Download failure, error: %d\n",dwret);
+		printf("D: Removing %s\n",Makefile_local_path);
+		#endif
+		remove(Makefile_local_path);
+		#ifdef _WIN32
+		MessageBox(NULL,"Failed to check for updates.\n","Error",MB_ICONEXCLAMATION | MB_OK);
 		#endif
 		return _PROJECT_VERSION;
 	}
