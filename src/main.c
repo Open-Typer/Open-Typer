@@ -385,7 +385,7 @@ int main()
 	if((strcmp(winver,"7") != 0) && (strcmp(winver,"8") != 0) && (strcmp(winver,"8.1") != 0) && (strcmp(winver,"10") != 0))
 	{
 		ShowWindow(GetConsoleWindow(),SW_HIDE);
-		MessageBox(NULL, "You need at least Windows 7", "Version Not Supported", MB_OK);
+		MessageBox(NULL, "You need at least Windows 7", "Version Not Supported", MB_ICONERROR | MB_OK);
 		exit(10);
 	}
 	// Fix multi-byte characters I/O on Windows
