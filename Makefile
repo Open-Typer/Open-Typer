@@ -24,6 +24,8 @@ ifeq ($(PLATFORM),$(filter $(PLATFORM),WIN32 WIN64))
 LDFLAGS  += \
     -lurlmon \
     -lwininet
+else
+LDFLAGS  += -lcurl
 endif
 OBJFILES = $(SRC)/utils.o $(SRC)/configfile.o $(SRC)/keyboard.o $(SRC)/updater.o $(SRC)/ui.o $(SRC)/main.o
 TARGET   = open-typer
