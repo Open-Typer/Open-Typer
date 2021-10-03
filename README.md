@@ -7,8 +7,8 @@ A simple typing tutor program, which aims for **customizability** (see *Configur
 - Lessons consist of levels
 - Designed for use in terminals (I'm going to make it possible to use as a cross-platform GUI program later).
 - Customizability - custom lessons and levels (see *Configuring*).
-- Quick navigation (arrow up (not supported in Windows) or asterisk for level menu).
-- Cross-platform - can be compiled for most UNIX-like operating systems and Windows. Windows support is experimental, but most of the features should work.
+- Quick navigation (arrow up or asterisk for level menu).
+- Cross-platform - can be compiled for most UNIX-like operating systems and Windows.
 
 ## How to use
 
