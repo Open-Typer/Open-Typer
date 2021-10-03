@@ -1,4 +1,4 @@
-VERSION  = 0.2.1
+VERSION  = 0.2.2
 
 SRC      = src
 ifeq ($(PLATFORM),WIN32)
