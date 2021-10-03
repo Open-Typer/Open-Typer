@@ -399,6 +399,10 @@ int main()
 				}
 				else
 				{
+					// Update subscribed config file
+					char *sub_url = _get_sub_url(confr);
+					fclose(confr);
+					_download_file(sub_url,_DEFAULT_CONFIG);
 					MessageBox(NULL,"Successfully updated.","Update completed",MB_OK);
 					WinExec("open-typer.exe",0);
 					return 0;
