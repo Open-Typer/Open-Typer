@@ -28,6 +28,8 @@ The entire program depends on a config file (see *Configuring*). If it doesn't e
 
 All lessons (and their levels) are saved in a config file called `typer.conf`
 
+**Some config files are in this repository (see the `configs` directory).**
+
 Each level is saved in one line. Here are some examples:
 
 - String:
@@ -63,6 +65,16 @@ Output:
 `:1,s` - repeating string
 
 `:1,w` - repeating word(s)
+
+### Subscribed configs
+
+You can set the config file to be automatically updated when there's a new release (supported only in Windows right now).
+
+For example, this is what you should place into the **first line** of your configuration file:
+
+`subscribe:https://raw.githubusercontent.com/adazem009/Open-Typer/master/configs/sk_SK_QWERTZ_1.conf`
+
+This will make the program automatically update the config from the specified URL.
 
 # Building 
 
