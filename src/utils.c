@@ -47,6 +47,7 @@ void _clear_screen(void)
 int _download_file(const char *url, const char *dest)
 {
 	#ifdef _WIN32
+	DeleteUrlCacheEntry(url);
 	return URLDownloadToFile(NULL,url,dest,0,NULL);
 	#endif
 }
