@@ -40,6 +40,62 @@ void _default_config(char *filename)
 	fclose(cw);
 }
 
+char *_read_first_line(FILE *cr)
+{
+	rewind(cr);
+	fseek(cr,0L,SEEK_END);
+	size_t size = ftell(cr);
+	rewind(cr);
+	char *line = (char*) malloc(size);
+	char c;
+	strcpy(line,"");
+	while((c != '\n') && (c != EOF))
+	{
+		c=getc(cr);
+		if((c != '\n') && (c != EOF))
+			strncat(line,&c,1);
+	}
+	return line;
+}
+void _skip_sub_url(FILE *cr)
+{
+	int i;
+	char *fline = _read_first_line(cr);
+	char *statement = (char*) malloc(strlen(fline)+1);
+	strcpy(statement,"");
+	for(i=0; i < 10; i++)
+	{
+		strncat(statement,&fline[i],1);
+		if(i >= strlen(fline))
+			break;
+	}
+	if(strcmp(statement,"subscribe:") != 0)
+		rewind(cr);
+}
+char *_get_sub_url(FILE *cr)
+{
+	int i;
+	char *fline = _read_first_line(cr);
+	char *statement = (char*) malloc(strlen(fline)+1);
+	strcpy(statement,"");
+	for(i=0; i < 10; i++)
+	{
+		strncat(statement,&fline[i],1);
+		if(i >= strlen(fline))
+			break;
+	}
+	if(strcmp(statement,"subscribe:") == 0)
+	{
+		strcpy(statement,"");
+		for(i=i; i < strlen(fline); i++)
+		{
+			strncat(statement,&fline[i],1);
+		}
+		return statement;
+	}
+	else
+		return "";
+}
 int _lesson_count(FILE *cr)
 {
 	char c='\0';
@@ -48,6 +104,8 @@ int _lesson_count(FILE *cr)
 	int lessons[1000];
 	char *part = (char*) malloc(16);
 	rewind(cr);
+	// Skip subscribe URL
+	_skip_sub_url(cr);
 	while(c != EOF)
 	{
 		// Lesson ID
@@ -120,6 +178,8 @@ int _lesson_level_count(FILE *cr, int tlesson)
 	int line=0, out=0, lIDc, lesson;
 	char *part = (char*) malloc(16);
 	rewind(cr);
+	// Skip subscribe URL
+	_skip_sub_url(cr);
 	while(c != EOF)
 	{
 		// Lesson ID
@@ -194,6 +254,8 @@ char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 	// NOTE: realloc is used only in the text part
 	// Who would use a number longer than 16 bytes?
 	rewind(cr);
+	// Skip subscribe URL
+	_skip_sub_url(cr);
 	while(c != EOF)
 	{
 		// Lesson ID
