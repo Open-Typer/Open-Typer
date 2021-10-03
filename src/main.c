@@ -124,7 +124,26 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 		#endif
 		if(tmpbool)
 			goto escape;
-		#ifdef __unix__
+		#ifdef _WIN32
+		else if((!legacy && c == 224) || (legacy && (wc == 224)))
+		{
+			// Arrow key (used to escape from the level)
+			if(legacy)
+			{
+				wc=_getwch();
+				if(wc == 'H')
+					goto escape;
+				wc='\n';
+			}
+			else
+			{
+				c=getch();
+				if(c == 'H')
+					goto escape;
+				c='\n';
+			}
+		}
+		#else
 		else if(c == '\033')
 		{
 			// Arrow key (used to escape from the level)
@@ -193,7 +212,26 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 					#endif
 					if(tmpbool)
 						goto escape;
-					#ifdef __unix__
+					#ifdef _WIN32
+					else if((!legacy && c == 224) || (legacy && (wc == 224)))
+					{
+						// Arrow key (used to escape from the level)
+						if(legacy)
+						{
+							wc=_getwch();
+							if(wc == 'H')
+								goto escape;
+							wc='\n';
+						}
+						else
+						{
+							c=getch();
+							if(c == 'H')
+								goto escape;
+							c='\n';
+						}
+					}
+					#else
 					else if(c == '\033')
 					{
 						// Arrow key (used to escape from the level)
@@ -286,11 +324,7 @@ int _play_lesson(FILE *cr, int lesson_id)
 	for(i=1; i<=levels; i++)
 	{
 		_clear_screen();
-		printf("Press ");
-		#ifdef __unix__
-		printf("the up arrow or ");
-		#endif
-		printf("'*' to open menu.\n");
+		printf("Press the up arrow or '*' to open menu.\n");
 		printf("Lesson %d, level %d:\n\n",lesson_id,i);
 		strcpy(level_ret,_play_level(cr,lesson_id,i));
 		if(strcmp(level_ret,"") == 0)
