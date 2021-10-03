@@ -5,6 +5,9 @@
 #include <windows.h>
 #include <versionhelpers.h>
 #include <wininet.h>
+#else
+#include <curl/curl.h>
+#include <curl/easy.h>
 #endif
 
 bool int_array_contains(int arr[], int target, int count);

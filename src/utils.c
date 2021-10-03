@@ -49,6 +49,20 @@ int _download_file(const char *url, const char *dest)
 	#ifdef _WIN32
 	DeleteUrlCacheEntry(url);
 	return URLDownloadToFile(NULL,url,dest,0,NULL);
+	#else
+	CURL *curl;
+	FILE *dw;
+	CURLcode res;
+	curl = curl_easy_init();
+	if (curl) {
+		dw = fopen(dest,"wb");
+		curl_easy_setopt(curl,CURLOPT_URL,url);
+		curl_easy_setopt(curl,CURLOPT_WRITEDATA,dw);
+		curl_easy_setopt(curl,CURLOPT_FOLLOWLOCATION,1L);
+		res = curl_easy_perform(curl);
+		curl_easy_cleanup(curl);
+		fclose(dw);
+	}
 	#endif
 }
 
