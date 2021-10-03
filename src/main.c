@@ -328,6 +328,8 @@ int _play_lesson(FILE *cr, int lesson_id)
 int main()
 {
 	#ifdef _WIN32
+	// Remove old version after update
+	remove("open-typer.exe.bak");
 	// Check for updates
 	char *latest_ver = _get_latest_version();
 	bool update_success=false;
