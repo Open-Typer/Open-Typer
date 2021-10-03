@@ -352,7 +352,8 @@ int main()
 				}
 				else
 				{
-					MessageBox(NULL,"Please launch the program again.","Update completed",MB_OK);
+					MessageBox(NULL,"Successfully updated.","Update completed",MB_OK);
+					WinExec("open-typer.exe",0);
 					return 0;
 				}
 			}
