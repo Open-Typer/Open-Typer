@@ -118,7 +118,11 @@ int _install_update(char *latest)
 	#ifdef DEBUG
 	printf("D: Downloading %s\n",URL);
 	#endif
-	int dwret = _download_file(URL,URL_suffix2);
+	char *dest = (char*) malloc(strlen(URL_suffix2)+4+1);
+	sprintf(dest,"%s.new",URL_suffix2);
+	char *bak = (char*) malloc(strlen(URL_suffix2)+4+1);
+	sprintf(bak,"%s.bak",URL_suffix2);
+	int dwret = _download_file(URL,dest);
 	if(dwret != 0)
 	{
 		#ifdef DEBUG
@@ -126,6 +130,19 @@ int _install_update(char *latest)
 		#endif
 		return dwret;
 	}
+	#ifdef DEBUG
+	printf("D: Downloaded to %s\n",dest);
+	printf("D: Renaming %s to %s\n",URL_suffix2,bak);
+	#endif
+	rename(URL_suffix2,bak);
+	#ifdef DEBUG
+	printf("D: Renaming %s to %s\n",dest,URL_suffix2);
+	#endif
+	rename(dest,URL_suffix2);
+	#ifdef DEBUG
+	printf("D: Removing %s\n",bak);
+	#endif
+	remove(bak);
 	#ifdef DEBUG
 	printf("D: Done\n",URL);
 	#endif
