@@ -37,11 +37,6 @@
 #include "ui.h"
 #include "updater.h"
 
-// Windows support warning
-#ifdef _WIN32
-#pragma message "Windows support is experimental."
-#endif
-
 // Debug build warning
 #ifdef DEBUG
 #pragma message "This is a debug build."
