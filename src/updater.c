@@ -22,8 +22,6 @@
 
 char *_get_latest_version(void)
 {
-	#ifdef _WIN32
-	// This function is enable only for Windows for now
 	#ifdef DEBUG
 	printf("D: Checking latest version...\n");
 	#endif
@@ -54,6 +52,8 @@ char *_get_latest_version(void)
 		remove(Makefile_local_path);
 		#ifdef _WIN32
 		MessageBox(NULL,"Failed to check for updates.\n","Error",MB_ICONEXCLAMATION | MB_OK);
+		#else
+		printf("Failed to check for updates.\n");
 		#endif
 		return _PROJECT_VERSION;
 	}
@@ -89,14 +89,9 @@ char *_get_latest_version(void)
 	#endif
 	remove(Makefile_local_path);
 	return out;
-	#else
-	return "";
-	#endif
 }
 int _install_update(char *latest)
 {
-	#ifdef _WIN32
-	// This function is enabled only for Windows for now
 	char *URL_prefix = "https://github.com/";
 	char *URL_suffix1 = "/releases/download/v";
 	#ifdef _WIN32
@@ -119,7 +114,11 @@ int _install_update(char *latest)
 	printf("D: Downloading %s\n",URL);
 	#endif
 	char *dest = (char*) malloc(strlen(URL_suffix2)+4+1);
+	#ifdef _WIN32
 	sprintf(dest,"%s.new",URL_suffix2);
+	#else
+	strcpy(dest,"open-typer");
+	#endif
 	char *bak = (char*) malloc(strlen(URL_suffix2)+4+1);
 	sprintf(bak,"%s.bak",URL_suffix2);
 	int dwret = _download_file(URL,dest);
@@ -144,8 +143,7 @@ int _install_update(char *latest)
 	#endif
 	remove(bak);
 	#ifdef DEBUG
-	printf("D: Done\n",URL);
-	#endif
+	printf("D: Done\n");
 	#endif
 	return 0;
 }
