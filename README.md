@@ -81,9 +81,9 @@ This will make the program automatically update the config from the specified UR
 
 **Building on Windows is not supported.**
 
-Install `gcc` and `make` (Debian, Ubuntu):
+Install `gcc`, `make` and other dependencies(Debian, Ubuntu):
 
-`sudo apt-get install gcc make`
+`sudo apt-get install gcc make libcurl4-openssl-dev`
 
 Optional: If you want to compile for Windows, install the mingw cross-compiler:
 
