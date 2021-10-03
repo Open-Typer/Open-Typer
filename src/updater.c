@@ -85,7 +85,9 @@ char *_get_latest_version(void)
 		strncat(out,&line[i],1);
 	#ifdef DEBUG
 	printf("D: Got version: %s\n",out);
+	printf("D: Removing %s\n",Makefile_local_path);
 	#endif
+	remove(Makefile_local_path);
 	return out;
 	#else
 	return "";
