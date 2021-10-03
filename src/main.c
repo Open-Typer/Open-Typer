@@ -327,39 +327,6 @@ int _play_lesson(FILE *cr, int lesson_id)
 }
 int main()
 {
-	#ifdef _WIN32
-	// Remove old version after update
-	remove("open-typer.exe.bak");
-	// Check for updates
-	char *latest_ver = _get_latest_version();
-	bool update_success=false;
-	if(strcmp(_PROJECT_VERSION,latest_ver) != 0)
-	{
-		int dialog = MessageBox(NULL,"There's a new update available.\nWould you like to download and install it?\n\nThis will replace the open-typer.exe file.","Update available",MB_ICONEXCLAMATION | MB_YESNO);
-		if(dialog == IDYES)
-		{
-			int instret;
-			while(!update_success)
-			{
-				instret = _install_update(latest_ver);
-				if(instret != 0)
-				{
-					dialog = MessageBox(NULL,"Failed to download and/or install the update!","Update failure",MB_ICONERROR | MB_ABORTRETRYIGNORE);
-					if(dialog == IDABORT)
-						return 0;
-					else if(dialog == IDIGNORE)
-						update_success=true;
-				}
-				else
-				{
-					MessageBox(NULL,"Successfully updated.","Update completed",MB_OK);
-					WinExec("open-typer.exe",0);
-					return 0;
-				}
-			}
-		}
-	}
-	#endif
 	// Open config file
 	errno=0;
 	#ifdef _WIN32
@@ -408,6 +375,37 @@ int main()
 	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 	// Resize console window (see ui.c)
 	SetWindow(120,25);
+	// Remove old version after update
+	remove("open-typer.exe.bak");
+	// Check for updates
+	char *latest_ver = _get_latest_version();
+	bool update_success=false;
+	if(strcmp(_PROJECT_VERSION,latest_ver) != 0)
+	{
+		int dialog = MessageBox(NULL,"There's a new update available.\nWould you like to download and install it?\n\nThis will replace the open-typer.exe file.","Update available",MB_ICONEXCLAMATION | MB_YESNO);
+		if(dialog == IDYES)
+		{
+			int instret;
+			while(!update_success)
+			{
+				instret = _install_update(latest_ver);
+				if(instret != 0)
+				{
+					dialog = MessageBox(NULL,"Failed to download and/or install the update!","Update failure",MB_ICONERROR | MB_ABORTRETRYIGNORE);
+					if(dialog == IDABORT)
+						return 0;
+					else if(dialog == IDIGNORE)
+						update_success=true;
+				}
+				else
+				{
+					MessageBox(NULL,"Successfully updated.","Update completed",MB_OK);
+					WinExec("open-typer.exe",0);
+					return 0;
+				}
+			}
+		}
+	}
 	#endif
 	// Show welcome message (init screen)
 	_init_screen();
