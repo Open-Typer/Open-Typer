@@ -86,23 +86,50 @@ int main()
 	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 	// Resize console window (see ui.c)
 	SetWindow(140,30);
+	#endif
 	// Remove old version after update
+	#ifdef _WIN32
 	remove("open-typer.exe.bak");
+	#else
+	remove("open-typer.bak");
+	#endif
 	// Check for updates
 	char *latest_ver = _get_latest_version();
 	bool update_success=false;
 	if(strcmp(_PROJECT_VERSION,latest_ver) != 0)
 	{
+		#ifdef _WIN32
 		int dialog = MessageBox(NULL,"There's a new update available.\nWould you like to download and install it?\n\nThis will replace the open-typer.exe file.","Update available",MB_ICONEXCLAMATION | MB_YESNO);
+		#else
+		printf("There's a new update available.\nWould you like to download and install it?\n\nWarning: This won't update the program, but only the subscribed config file.\nYou need to update the program manually or if possible, using your package manager. (Y/N) ");
+		char dialog;
+		scanf("%c",&dialog);
+		#endif
+		#if _WIN32
 		if(dialog == IDYES)
+		#else
+		if((dialog == 'y') || (dialog == 'Y'))
+		#endif
 		{
 			int instret;
 			while(!update_success)
 			{
+				#ifdef _WIN32
 				instret = _install_update(latest_ver);
+				#else
+				instret=0;
+				#endif
 				if(instret != 0)
 				{
+					#ifdef _WIN32
 					dialog = MessageBox(NULL,"Failed to download and/or install the update!","Update failure",MB_ICONERROR | MB_ABORTRETRYIGNORE);
+					#else
+					printf("Failed to download and/or install the update!\n");
+					printf("1) Abort\n2) Retry\n 3) Ignore\n> ");
+					int dialog;
+					scanf("%d",&dialog);
+					int IDABORT=1, IDRETRY=2, IDIGNORE=3;
+					#endif
 					if(dialog == IDABORT)
 						return 0;
 					else if(dialog == IDIGNORE)
@@ -114,14 +141,19 @@ int main()
 					char *sub_url = _get_sub_url(confr);
 					fclose(confr);
 					_download_file(sub_url,_DEFAULT_CONFIG);
+					#ifdef _WIN32
 					MessageBox(NULL,"Successfully updated.","Update completed",MB_OK);
 					WinExec("open-typer.exe",0);
 					return 0;
+					#else
+					printf("Successfully updated, reopening config file...\n");
+					confr = fopen(_DEFAULT_CONFIG,"r");
+					update_success=true;
+					#endif
 				}
 			}
 		}
 	}
-	#endif
 	// Main loop
 	while(true)
 		_main_menu(confr);
