@@ -69,7 +69,7 @@ Output:
 
 ### Subscribed configs
 
-You can set the config file to be automatically updated when there's a new release (supported only in Windows right now).
+You can set the config file to be automatically updated when there's a new release.
 
 For example, this is what you should place into the **first line** of your configuration file:
 
