@@ -374,7 +374,7 @@ int main()
 	wcscpy(cfi.FaceName, L"Lucida Console");
 	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 	// Resize console window (see ui.c)
-	SetWindow(120,25);
+	SetWindow(140,30);
 	// Remove old version after update
 	remove("open-typer.exe.bak");
 	// Check for updates
