@@ -279,11 +279,13 @@ int _lesson_level_count(FILE *cr, int tlesson)
 char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 {
 	char c='\0';
-	int line=0, lesson, level, lIDc, part_alloc=16, text_repeat_type, i, wordID;
+	int line=0, lesson, level, lIDc, part_alloc=16, text_repeat_type, i, wordID, limit_extension=1;
 	char *part = (char*) malloc(part_alloc);
 	char *part2;
 	char *out;
-	bool text_repeat, end;
+	char repeat_type_str[64];
+	strcpy(repeat_type_str,"");
+	bool text_repeat, end, has_limit_ext;
 	unsigned long pos;
 	// NOTE: realloc is used only in the text part
 	// Who would use a number longer than 16 bytes?
@@ -353,16 +355,33 @@ char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 		level=strtol(part,NULL,10);
 		// Level config
 		strcpy(part,"");
+		has_limit_ext=false;
 		while((c != ' ') && (c != EOF))
 		{
 			c=getc(cr);
-			if(c != ' ')
+			if((c == ' ') || (c == ';'))
+			{
+				if(c == ' ')
+				{
+					if(has_limit_ext)
+						limit_extension = strtol(part,NULL,10);
+					else
+						strcpy(repeat_type_str,part);
+				}
+				else
+				{
+					strcpy(repeat_type_str,part);
+					has_limit_ext=true;
+				}
+				strcpy(part,"");
+			}
+			else
 			{
 				if(strlen(part) >= 15)
 				{
-					printf("Invalid config on line %d. (level config: repeat text bool length)\n",line+1);
+					printf("Invalid config on line %d. (level config: repeat text bool or limit extension length)\n",line+1);
 					#ifdef DEBUG
-					printf("D: Function: _lesson_level_text()\nD: Can't store more than 14 bytes in repeat text bool\n");
+					printf("D: Function: _lesson_level_text()\nD: Can't store more than 14 bytes in repeat text bool or limit extension\n");
 					#endif
 					exit(2);
 				}
@@ -395,13 +414,13 @@ char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 			exit(2);
 		}
 		#ifdef DEBUG
-		printf("D: repeat type: %s\n",part);
+		printf("D: repeat type: %s\n",repeat_type_str);
 		#endif
-		if(strcmp(part,"w") == 0)
+		if(strcmp(repeat_type_str,"w") == 0)
 			text_repeat_type=1; // repeating word
-		else if(strcmp(part,"s") == 0)
+		else if(strcmp(repeat_type_str,"s") == 0)
 			text_repeat_type=2; // repeating string
-		else if(strcmp(part,"rw") == 0)
+		else if(strcmp(repeat_type_str,"rw") == 0)
 			text_repeat_type=3; // random words
 		else
 		{
@@ -409,18 +428,27 @@ char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 			{
 				printf("Invalid config on line %d. (level config: repeat method)\n",line+1);
 				#ifdef DEBUG
-				printf("D: Function: _lesson_level_text()\nD: Unknown repeat method '%s'\n",part);
+				printf("D: Function: _lesson_level_text()\nD: Unknown repeat method '%s'\n",repeat_type_str);
 				#endif
 				exit(2);
 			}
 		}
+		if( !( ((lesson == tlesson) && (level == tlevel)) ) )
+		{
+			limit_extension=1;
+			has_limit_ext=false;
+		}
+		#ifdef DEBUG
+		if(has_limit_ext)
+			printf("D: Limit extension: %d\n",limit_extension);
+		#endif
 		c='\0';
 		// Level text
 		#ifdef __unix__
 		fflush(cr);
 		#endif
 		pos=ftell(cr);
-		out = (char*) malloc(_REPEAT_LIMIT+1);
+		out = (char*) malloc(_REPEAT_LIMIT*limit_extension+1);
 		strcpy(out,"");
 		while((c != '\n') && (c != EOF))
 		{
@@ -458,7 +486,7 @@ char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 						{
 							wordID = rand() % _get_word_count(part) + 1;
 							strcpy(part2,_get_word(part,wordID));
-							if(strlen(out)+1+strlen(part2) > _REPEAT_LIMIT)
+							if(strlen(out)+1+strlen(part2) > _REPEAT_LIMIT*limit_extension)
 								break;
 							else
 							{
@@ -478,12 +506,12 @@ char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 						end=false;
 						if(strcmp(out,"") == 0)
 						{
-							if(strlen(part) > _REPEAT_LIMIT)
+							if(strlen(part) > _REPEAT_LIMIT*limit_extension)
 								end=true;
 						}
 						else
 						{
-							if(strlen(out)+1+strlen(part) > _REPEAT_LIMIT) // 1 is for a space between out and part
+							if(strlen(out)+1+strlen(part) > _REPEAT_LIMIT*limit_extension) // 1 is for a space between out and part
 								end=true;
 						}
 						if(end)
