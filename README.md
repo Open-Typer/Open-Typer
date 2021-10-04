@@ -57,6 +57,14 @@ Output:
 
 `words to repeat words to repeat words to repeat words to repeat words to repeat words to repeat words to repeat words to repeat`
 
+- Random sequence of words:
+
+`1.4:1,rw word1 word2 word3`
+
+Output:
+
+`word2 word1 word1 word3 word2 word3 word1 ...`
+
 ### Config explanation
 
 `1.1` - Lesson 1, level 1
@@ -66,6 +74,12 @@ Output:
 `:1,s` - repeating string
 
 `:1,w` - repeating word(s)
+
+`:1,rw` - random sequence of words
+
+It's possible to create a level, which is more than 1 line long, for example:
+
+`:1,w;3` - 3 lines long level
 
 ### Subscribed configs
 
