@@ -96,6 +96,39 @@ char *_get_sub_url(FILE *cr)
 	else
 		return "";
 }
+int _get_word_count(char *str)
+{
+	int i, out=0;
+	for(i=0; i < strlen(str); i++)
+	{
+		if(str[i] == ' ')
+			out++;
+	}
+	if(str[i] != ' ')
+		out++;
+	return out;
+}
+char *_get_word(char *str, int id)
+{
+	int i, cur=0;
+	char *out = (char*) malloc(strlen(str));
+	strcpy(out,"");
+	for(i=0; i < strlen(str); i++)
+	{
+		if((str[i] == ' ') || (i+1 == strlen(str)))
+		{
+			cur++;
+			if(i+1 == strlen(str))
+				strncat(out,&str[i],1);
+			if(cur == id)
+				return out;
+			strcpy(out,"");
+		}
+		else
+			strncat(out,&str[i],1);
+	}
+	return NULL;
+}
 int _lesson_count(FILE *cr)
 {
 	char c='\0';
@@ -246,8 +279,9 @@ int _lesson_level_count(FILE *cr, int tlesson)
 char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 {
 	char c='\0';
-	int line=0, lesson, level, lIDc, part_alloc=16, text_repeat_type, i;
+	int line=0, lesson, level, lIDc, part_alloc=16, text_repeat_type, i, wordID;
 	char *part = (char*) malloc(part_alloc);
+	char *part2;
 	char *out;
 	bool text_repeat, end;
 	unsigned long pos;
@@ -367,6 +401,8 @@ char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 			text_repeat_type=1; // repeating word
 		else if(strcmp(part,"s") == 0)
 			text_repeat_type=2; // repeating string
+		else if(strcmp(part,"rw") == 0)
+			text_repeat_type=3; // random words
 		else
 		{
 			if(text_repeat)
@@ -414,30 +450,56 @@ char *_lesson_level_text(FILE *cr, int tlesson, int tlevel)
 			{
 				if(text_repeat)
 				{
-					end=false;
-					if(strcmp(out,"") == 0)
+					if(text_repeat_type == 3)
 					{
-						if(strlen(part) > _REPEAT_LIMIT)
-							end=true;
-					}
-					else
-					{
-						if(strlen(out)+1+strlen(part) > _REPEAT_LIMIT) // 1 is for a space between out and part
-							end=true;
-					}
-					if(end)
+						part2 = (char*) malloc(strlen(part));
+						srand(time(0));
+						while(true)
+						{
+							wordID = rand() % _get_word_count(part) + 1;
+							strcpy(part2,_get_word(part,wordID));
+							if(strlen(out)+1+strlen(part2) > _REPEAT_LIMIT)
+								break;
+							else
+							{
+								if(strcmp(out,"") == 0)
+									strcpy(out,part2);
+								else
+								{
+									strcat(out," ");
+									strcat(out,part2);
+								}
+							}
+						}
 						return out;
+					}
 					else
 					{
+						end=false;
 						if(strcmp(out,"") == 0)
 						{
-							strcpy(out,part);
+							if(strlen(part) > _REPEAT_LIMIT)
+								end=true;
 						}
 						else
 						{
-							if(text_repeat_type == 1)
-								strcat(out," ");
-							strcat(out,part);
+							if(strlen(out)+1+strlen(part) > _REPEAT_LIMIT) // 1 is for a space between out and part
+								end=true;
+						}
+						if(end)
+							return out;
+						else
+						{
+							if(strcmp(out,"") == 0)
+							{
+								strcpy(out,part);
+							}
+							else
+							{
+								if(text_repeat_type == 1)
+									strcat(out," ");
+								strcat(out,part);
+							}
 						}
 					}
 				}

@@ -23,6 +23,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <errno.h>
+#include <time.h>
 #include "projectconfig.h"
 #include "utils.h"
 
@@ -30,6 +31,8 @@ void _default_config(char *filename);
 char *_read_first_line(FILE *cr);
 void _skip_sub_url(FILE *cr);
 char *_get_sub_url(FILE *cr);
+int _get_word_count(char *str);
+char *_get_word(char *str, int id);
 int _lesson_count(FILE *cr);
 int _lesson_level_count(FILE *cr, int tlesson);
 char *_lesson_level_text(FILE *cr, int tlesson, int tlevel);
