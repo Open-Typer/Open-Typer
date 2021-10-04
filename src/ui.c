@@ -66,7 +66,7 @@ char *level
 	void _newline(void)
 	{
 		#ifdef _WIN32
-		putwchar('\n');
+		wprintf(L"\n");
 		#else
 		putchar('\n');
 		#endif
@@ -115,7 +115,7 @@ char *level
 			#ifdef _WIN32
 			if(!first_word && (line_pos > 0))
 			{
-				putwchar(' ');
+				wprintf(L" ");
 			}
 			first_word=false;
 			wprintf(L"%ls",word);
@@ -172,7 +172,7 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 	int *lines, line_count, cur_line=1;
 	#ifdef _WIN32
 	lines = _print_level(wlevel);
-	putwchar('\n');
+	wprintf(L"\n");
 	#else
 	lines = _print_level(level);
 	putchar('\n');
@@ -304,7 +304,7 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 			if(line_pos >= lines[cur_line])
 			{
 				#ifdef _WIN32
-				putwchar('\n');
+				wprintf(L"\n");
 				#else
 				putchar('\n');
 				#endif
