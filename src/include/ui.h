@@ -15,6 +15,15 @@
 void _init_screen(void);
 int _lesson_selection(FILE *cr, bool clear);
 int _level_selection(FILE *cr, int lesson_id);
+
+int *_print_level(
+#ifdef _WIN32
+wchar_t *level
+#else
+char *level
+#endif
+);
+
 char *_play_level(FILE *cr, int lesson_id, int level_id);
 int _play_lesson(FILE *cr, int lesson_id);
 void _menuentry(int id, char *name);

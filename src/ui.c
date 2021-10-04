@@ -54,6 +54,100 @@ int _level_selection(FILE *cr, int lesson_id)
 			goto start;
 		return level_id;
 }
+
+int *_print_level(
+#ifdef _WIN32
+wchar_t *level
+#else
+char *level
+#endif
+)
+{
+	void _newline(void)
+	{
+		#ifdef _WIN32
+		putwchar('\n');
+		#else
+		putchar('\n');
+		#endif
+	}
+	long len, len2;
+	#ifdef _WIN32
+	len = wcslen(level);
+	#else
+	len = strlen(level);
+	#endif
+	int i, line_pos=0;
+	#ifdef _WIN32
+	wchar_t *word = (wchar_t*) malloc(wcslen(level)+1);
+	wcscpy(word,L"");
+	#else
+	char *word = (char*) malloc(strlen(level)+1);
+	strcpy(word,"");
+	#endif
+	int *out = (int*) malloc(129); // The first item of this array is the number of lines
+	int arr_id=1;
+	bool first_word=true;
+	for(i=0; i < len; i++)
+	{
+		if((level[i] == ' ') || (i+1 >= len))
+		{
+			if(i+1 >= len)
+			{
+				#ifdef _WIN32
+				wcsncat(word,&level[i],1);
+				#else
+				strncat(word,&level[i],1);
+				#endif
+			}
+			#ifdef _WIN32
+			len2 = wcslen(word);
+			#else
+			len2 = strlen(word);
+			#endif
+			if(line_pos+len2 > _REPEAT_LIMIT)
+			{
+				out[arr_id]=line_pos;
+				_newline();
+				arr_id++;
+				line_pos=0;
+			}
+			#ifdef _WIN32
+			if(!first_word && (line_pos > 0))
+			{
+				putwchar(' ');
+			}
+			first_word=false;
+			wprintf(L"%ls",word);
+			wcscpy(word,L"");
+			#else
+			if(!first_word && (line_pos > 0))
+			{
+				putchar(' ');
+			}
+			first_word=false;
+			printf("%s",word);
+			strcpy(word,"");
+			#endif
+			if(!first_word)
+				line_pos++;
+			line_pos=line_pos+len2;
+		}
+		else
+		{
+			#ifdef _WIN32
+			wcsncat(word,&level[i],1);
+			#else
+			strncat(word,&level[i],1);
+			#endif
+		}
+	}
+	out[arr_id]=line_pos-1;
+	out[0]=arr_id;
+	_newline();
+	return out;
+}
+
 char *_play_level(FILE *cr, int lesson_id, int level_id)
 {
 	#ifdef _WIN32
@@ -66,7 +160,7 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 	wchar_t *wlevel;
 	wlevel = str_to_wcs(level);
 	#endif
-	int pos=0, errors=0, hits=0, i;
+	int pos=0, line_pos=0, errors=0, hits=0, i;
 	float final_time;
 	char c;
 	#ifdef _WIN32
@@ -75,10 +169,18 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 	char *menu_ret = (char*) malloc(18);
 	char *tmp = (char*) malloc(17);
 	struct timeval stop, start;
+	int *lines, line_count, cur_line=1;
 	#ifdef _WIN32
-	wprintf(L"%ls\n",wlevel);
+	lines = _print_level(wlevel);
+	putwchar('\n');
 	#else
-	printf("%s\n",level);
+	lines = _print_level(level);
+	putchar('\n');
+	#endif
+	line_count = lines[0];
+	#ifdef DEBUG
+	printf("D: Printed %d lines\n",line_count);
+	printf("D: Line 1 length: %d\n",lines[cur_line]);
 	#endif
 	bool tmpbool;
 	long len;
@@ -198,6 +300,17 @@ char *_play_level(FILE *cr, int lesson_id, int level_id)
 			}
 			hits++;
 			pos++;
+			line_pos++;
+			if(line_pos >= lines[cur_line])
+			{
+				#ifdef _WIN32
+				putwchar('\n');
+				#else
+				putchar('\n');
+				#endif
+				line_pos=0;
+				cur_line++;
+			}
 		}
 	}
 	gettimeofday(&stop, NULL);
