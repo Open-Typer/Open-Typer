@@ -91,15 +91,10 @@ Install dependencies (Debian, Ubuntu):
 
 ## Building for UNIX-like operating systems
 
-Use `make` like this:
-
-`make`
-
-You can also use one of these commands, which are the same:
-
 ```
-make PLATFORM=UNIX
-make PLATFORM=LINUX
+qmake
+make
+./Open-Typer
 ```
 
 ## Building for Windows
