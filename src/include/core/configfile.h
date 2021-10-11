@@ -1,5 +1,5 @@
 /*
- * keyboard.c
+ * configfile.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021 - adazem009
@@ -18,19 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "keyboard.h"
+#include <iostream>
+#include <QString>
+#include "utils.h"
 
-#ifdef __unix__
-int getch(void)
-{
-	struct termios oldattr, newattr;
-	int ch;
-	tcgetattr( STDIN_FILENO, &oldattr );
-	newattr = oldattr;
-	newattr.c_lflag &= ~( ICANON | ECHO );
-	tcsetattr( STDIN_FILENO, TCSANOW, &newattr );
-	ch = getchar();
-	tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
-	return ch;
-}
-#endif
+#define _REPEAT_LIMIT 128
+
+int _lesson_count(FILE *cr);
+int _lesson_sublesson_count(FILE *cr, int tsublesson);
+int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson);
+char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order);

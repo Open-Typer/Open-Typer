@@ -1,5 +1,5 @@
 /*
- * updater.h
+ * levelsummary.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021 - adazem009
@@ -18,14 +18,32 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#ifdef _WIN32
-#include <windows.h>
-#endif
-#include "projectconfig.h"
-#include "utils.h"
+#ifndef LEVELSUMMARY_H
+#define LEVELSUMMARY_H
 
-char *_get_latest_version(void);
-int _install_update(char *latest);
+#include <QDialog>
+
+namespace Ui {
+class levelSummary;
+}
+
+class levelSummary : public QDialog
+{
+	Q_OBJECT
+
+public:
+	explicit levelSummary(QWidget *parent = nullptr);
+	~levelSummary();
+	void setTotalTime(double time);
+	void setHits(int hits);
+	void setMistakes(int mistakes);
+
+private:
+	Ui::levelSummary *ui;
+
+private slots:
+	void yesClicked(void);
+	void noClicked(void);
+};
+
+#endif // LEVELSUMMARY_H

@@ -4,38 +4,38 @@ A simple typing tutor program, which aims for **customizability** (see *Configur
 
 ## Features
 
-- Lessons consist of levels
-- Designed for use in terminals (I'm going to make it possible to use as a cross-platform GUI program later).
-- Customizability - custom lessons and levels (see *Configuring*).
-- Quick navigation (arrow up or asterisk for level menu).
-- Cross-platform - can be compiled for most UNIX-like operating systems and Windows.
-- Auto updates on Windows: The program checks for updates everytime you open it. Update installation is fully automated.
+- Cross-platform - runs on Linux and Windows.
+- Customizability - coming soon.
+- Quick navigation between lessons and exercises.
+- Support for various languages and keyboards - coming soon - please let me know if you can help :)
+- No installation needed - just put it on your desktop and it'll work.
 
 ## How to use
 
 Download a release [here](https://github.com/adazem009/Open-Typer/releases/latest).
 
+### GNU/Linux
 Make the file executable:
 
-`chmod +x open-typer`
+`chmod +x Open-Typer`
 
 Start the program:
 
-`./open-typer`
+`./Open-Typer`
 
-The entire program depends on a config file (see *Configuring*). If it doesn't exist, it'll take a sample config and save it (you can then edit it).
+**Note:** You might need some Qt dependencies (which should be installed by default on most modern distributions).
 
 ## Configuring
 
-All lessons (and their levels) are saved in a config file called `typer.conf`
+All lessons, sublessons and their levels are saved in config files.
 
-**Some config files are in this repository (see the `configs` directory).**
+**Some config files are in this repository (see the `res/configs` directory).**
 
 Each level is saved in one line. Here are some examples:
 
 - String:
 
-`1.1:0,0 Some text`
+`1.1.1:0,0 Some text`
 
 Output:
 
@@ -43,7 +43,7 @@ Output:
 
 - Repeating string:
 
-`1.2:1,s repeating`
+`1.1.2:1,s repeating`
 
 Output:
 
@@ -51,7 +51,7 @@ Output:
 
 - Repeating word(s):
 
-`1.3:1,w words to repeat`
+`1.1.3:1,w words to repeat`
 
 Output:
 
@@ -59,7 +59,7 @@ Output:
 
 - Random sequence of words:
 
-`1.4:1,rw word1 word2 word3`
+`1.1.4:1,rw word1 word2 word3`
 
 Output:
 
@@ -67,7 +67,7 @@ Output:
 
 ### Config explanation
 
-`1.1` - Lesson 1, level 1
+`1.1.1` - Lesson 1, sublesson 1, level 1
 
 `:0,0` - string (don't repeat anything)
 
@@ -81,27 +81,13 @@ It's possible to create a level, which is more than 1 line long, for example:
 
 `:1,w;3` - 3 lines long level
 
-### Subscribed configs
-
-You can set the config file to be automatically updated when there's a new release.
-
-For example, this is what you should place into the **first line** of your configuration file:
-
-`subscribe:https://raw.githubusercontent.com/adazem009/Open-Typer/master/configs/sk_SK_QWERTZ_1.conf`
-
-This will make the program automatically update the config from the specified URL.
-
 # Building 
 
 **Building on Windows is not supported.**
 
-Install `gcc`, `make` and other dependencies(Debian, Ubuntu):
+Install dependencies (Debian, Ubuntu):
 
-`sudo apt-get install gcc make libcurl4-openssl-dev`
-
-Optional: If you want to compile for Windows, install the mingw cross-compiler:
-
-`sudo apt-get install gcc-mingw-w64-i686 gcc-mingw-w64-x86-64`
+`sudo apt-get install gcc make build-essential`
 
 ## Building for UNIX-like operating systems
 
@@ -118,11 +104,7 @@ make PLATFORM=LINUX
 
 ## Building for Windows
 
-Use `make` like this:
-
-`make PLATFORM=WIN32` (to build for 32-bit and 64-bit Windows)
-
-`make PLATFORM=WIN64` (to build for 64-bit Windows)
+**Cross-compiling for Windows is coming soon.**
 
 # Known issues
 

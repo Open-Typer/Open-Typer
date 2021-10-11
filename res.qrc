@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>lang/Open-Typer_sk_SK.qm</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>res/configs/sk_SK-QWERTZ-B1</file>
+        <file>res/images/repeat.png</file>
+        <file>res/images/next.png</file>
+        <file>res/images/previous.png</file>
+    </qresource>
+</RCC>

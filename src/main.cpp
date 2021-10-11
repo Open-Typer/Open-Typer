@@ -1,5 +1,5 @@
 /*
- * keyboard.h
+ * main.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021 - adazem009
@@ -18,18 +18,22 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include <unistd.h>
-#ifdef _WIN32
-#include <conio.h>
-#else
-#ifdef __unix__
-#include <termios.h>
-#else
-#error "Your OS is not supported."
-#endif
-#endif
+#include <QApplication>
+#include <QLabel>
+#include <QTranslator>
+#include "opentyper.h"
 
-#ifdef __unix__
-int getch(void);
-#endif
+int main(int argc, char *argv[])
+{
+	QApplication a(argc, argv);
+	// Load translations
+	QTranslator* translator = new QTranslator();
+	if(translator->load(QLocale(), QLatin1String("Open-Typer"), QLatin1String("_"), QLatin1String(":/res/lang")))
+		a.installTranslator(translator);
+	else
+		printf("D: Failed to load language\n");
+	OpenTyper w;
+	w.setWindowState(Qt::WindowMaximized);
+	w.show();
+	return a.exec();
+}
