@@ -36,6 +36,7 @@ class OpenTyper : public QMainWindow
 	Q_OBJECT
 
 public:
+	void updateColors(void);
 	OpenTyper(QWidget *parent = nullptr);
 	~OpenTyper();
 	void loadConfigs(void);

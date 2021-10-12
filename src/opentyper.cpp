@@ -41,11 +41,20 @@
 extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
 #endif
 
+void OpenTyper::updateColors(void)
+{
+	// Set paper color
+	QPalette paperPalette = ui->paper->palette();
+	paperPalette.setColor(QPalette::Window,paperPalette.color(paperPalette.Base));
+	ui->paper->setPalette(paperPalette);
+}
+
 OpenTyper::OpenTyper(QWidget *parent)
 	: QMainWindow(parent)
 	, ui(new Ui::OpenTyper)
 {
 	ui->setupUi(this);
+	updateColors();
 	// Load packs (configs)
 	loadConfigs();
 	// Read config
