@@ -44,11 +44,13 @@ public:
 	void startLevel(FILE *cr, int lesson, int sublesson, int level);
 	QString level, displayLevel, input, displayInput, publicConfigName;
 	int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, levelPos, displayPos, levelMistakes;
+	float levelLengthExtension;
 	QElapsedTimer levelTimer;
 	bool levelInProgress, mistake;
 	int lastTime;
 	QString getConfigLoc(void);
 	bool isSpecialKey(QKeyEvent *event);
+	QString _init_level(QString level);
 
 protected:
 	void keyPressEvent(QKeyEvent *event);

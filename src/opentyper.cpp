@@ -165,7 +165,7 @@ char *OpenTyper::loadConfig(QString configName)
 	return configPath;
 }
 
-QString _init_level(QString level)
+QString OpenTyper::_init_level(QString level)
 {
 	int len, len2, i, line_pos=0;
 	QString out = "";
@@ -181,7 +181,7 @@ QString _init_level(QString level)
 				word += level[i];
 			}
 			len2 = QStringLen(word);
-			if(line_pos+len2 > _REPEAT_LIMIT)
+			if(line_pos+len2 > _REPEAT_LIMIT*levelLengthExtension)
 			{
 				out += '\n';
 				line_pos=0;
@@ -258,6 +258,8 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 		ui->randomOrderCheckBox->setEnabled(false);
 		ui->randomOrderCheckBox->setCheckState(Qt::Unchecked);
 	}
+	// Load length extension
+	levelLengthExtension = _lesson_sublesson_level_length_extension(cr,lessonID,sublessonID,levelID);
 	// Load level text
 	level = _lesson_sublesson_level_text(cr,
 		lessonID,
@@ -268,7 +270,7 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	ui->levelLabel->setText(displayLevel);
 	// Adjust paper width
 	QString longString = "";
-	for(int i=0; i < _REPEAT_LIMIT; i++)
+	for(int i=0; i < _REPEAT_LIMIT*levelLengthExtension; i++)
 		longString += ' ';
 	int newWidth = ui->levelLabel->fontMetrics().boundingRect(longString).width() +
 		(ui->levelLabel->font().pointSize()) * 5;
