@@ -514,4 +514,5 @@ void OpenTyper::updateCurrentTime(void)
 	else
 		time = lastTime;
 	ui->currentTimeNumber->setText(QString::number(time));
+	updateColors();
 }
