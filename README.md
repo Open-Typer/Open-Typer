@@ -87,7 +87,7 @@ It's possible to create a level, which is more than 1 line long, for example:
 
 Install dependencies (Debian, Ubuntu):
 
-`sudo apt-get install gcc make build-essential`
+`sudo apt-get install gcc make build-essential qt5-qmake qtbase5-dev`
 
 ## Building for UNIX-like operating systems
 
