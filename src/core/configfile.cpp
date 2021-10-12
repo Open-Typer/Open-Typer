@@ -304,17 +304,16 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 	}
 	return out;
 }
-char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order)
+float _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsublesson, int tlevel)
 {
 	char c='\0';
-	int line=0, lesson, sublesson, level, lIDc, text_repeat_type=0, i, wordID, limit_extension=1;
+	int line=0, lesson, sublesson, level, lIDc;
+	float length_extension=1;
 	unsigned int part_alloc=16;
 	char *part = (char*) malloc(part_alloc);
-	char *part2;
-	char *out;
 	char repeat_type_str[64];
 	strcpy(repeat_type_str,"");
-	bool text_repeat=false, end, has_limit_ext;
+	bool has_limit_ext, has_length_ext;
 	// NOTE: realloc is used only in the text part
 	// Who would use a number longer than 16 bytes?
 	rewind(cr);
@@ -414,6 +413,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		// Level config
 		strcpy(part,"");
 		has_limit_ext=false;
+		has_length_ext=false;
 		while((c != ' ') && (c != EOF))
 		{
 			c=getc(cr);
@@ -422,7 +422,10 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 				if(c == ' ')
 				{
 					if(has_limit_ext)
-						limit_extension = strtol(part,NULL,10);
+					{
+						if(has_length_ext)
+							length_extension = strtod(part,NULL);
+					}
 					else
 						strcpy(repeat_type_str,part);
 				}
@@ -445,17 +448,209 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 				}
 				if(c == ',')
 				{
-					#ifdef DEBUG
-					printf("repeat bool: %s\n",part);
-					#endif
-					if(strcmp(part,"1") == 0)
-						text_repeat=true;
-					else if(strcmp(part,"0") == 0)
-						text_repeat=false;
+					if(has_limit_ext)
+						has_length_ext=true;
 					else
 					{
-						printf("Invalid config on line %d. (level config: repeat text bool)\n",line+1);
-						exit(2);
+						#ifdef DEBUG
+						printf("repeat bool: %s\n",part);
+						#endif
+					}
+					strcpy(part,"");
+				}
+				else
+					strncat(part,&c,1);
+			}
+		}
+		if(c == EOF)
+		{
+			printf("Invalid config on line %d. (level config)\n",line+1);
+			#ifdef DEBUG
+			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
+			#endif
+			exit(2);
+		}
+		#ifdef DEBUG
+		printf("D: repeat type: %s\n",repeat_type_str);
+		printf("D: length extension: %f\n",length_extension);
+		#endif
+		if( ((lesson == tlesson) && (sublesson == tsublesson) && (level == tlevel)) )
+		{
+			return length_extension;
+		}
+		else
+			length_extension=1;
+		c='\0';
+		// Level text
+		while((c != '\n') && (c != EOF))
+		{
+			c=getc(cr);
+		}
+		line++;
+	}
+	return 1;
+}
+char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order)
+{
+	char c='\0';
+	int line=0, lesson, sublesson, level, lIDc, text_repeat_type=0, i, wordID, limit_extension=1;
+	unsigned int part_alloc=16;
+	char *part = (char*) malloc(part_alloc);
+	char *part2;
+	char *out;
+	char repeat_type_str[64];
+	strcpy(repeat_type_str,"");
+	bool text_repeat=false, end, has_limit_ext, has_length_ext;
+	// NOTE: realloc is used only in the text part
+	// Who would use a number longer than 16 bytes?
+	rewind(cr);
+	while(c != EOF)
+	{
+		// Lesson ID
+		strcpy(part,"");
+		lIDc=0;
+		while((c != '.') && (c != EOF))
+		{
+			c=getc(cr);
+			if(c != '.')
+			{
+				if(strlen(part) >= 15)
+				{
+					printf("Invalid config on line %d. (lesson ID length)\n",line+1);
+					#ifdef DEBUG
+					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
+					#endif
+					exit(2);
+				}
+				strncat(part,&c,1);
+			}
+			lIDc++;
+		}
+		if(c == EOF)
+		{
+			if(lIDc == 1)
+				break;
+			printf("Invalid config on line %d. (lesson ID)\n",line+1);
+			#ifdef DEBUG
+			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
+			#endif
+			exit(2);
+		}
+		lesson=strtol(part,NULL,10);
+		c='\0';
+		// Sublesson ID
+		strcpy(part,"");
+		lIDc=0;
+		while((c != '.') && (c != EOF))
+		{
+			c=getc(cr);
+			if(c != '.')
+			{
+				if(strlen(part) >= 15)
+				{
+					printf("Invalid config on line %d. (sublesson ID length)\n",line+1);
+					#ifdef DEBUG
+					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
+					#endif
+					exit(2);
+				}
+				strncat(part,&c,1);
+			}
+			lIDc++;
+		}
+		if(c == EOF)
+		{
+			if(lIDc == 1)
+				break;
+			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
+			#ifdef DEBUG
+			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
+			#endif
+			exit(2);
+		}
+		sublesson=strtol(part,NULL,10);
+		c='\0';
+		// Level ID
+		strcpy(part,"");
+		while((c != ':') && (c != EOF))
+		{
+			c=getc(cr);
+			if(c != ':')
+			{
+				if(strlen(part) >= 15)
+				{
+					printf("Invalid config on line %d. (level ID length)\n",line+1);
+					#ifdef DEBUG
+					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in level ID\n");
+					#endif
+					exit(2);
+				}
+				strncat(part,&c,1);
+			}
+		}
+		if(c == EOF)
+		{
+			printf("Invalid config on line %d. (level ID)\n",line+1);
+			#ifdef DEBUG
+			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
+			#endif
+			exit(2);
+		}
+		level=strtol(part,NULL,10);
+		// Level config
+		strcpy(part,"");
+		has_limit_ext=false;
+		has_length_ext=false;
+		while((c != ' ') && (c != EOF))
+		{
+			c=getc(cr);
+			if((c == ' ') || (c == ';'))
+			{
+				if(c == ' ')
+				{
+					if(has_limit_ext)
+					{
+						if(!has_length_ext)
+							limit_extension = strtol(part,NULL,10);
+					}
+					else
+						strcpy(repeat_type_str,part);
+				}
+				else
+				{
+					strcpy(repeat_type_str,part);
+					has_limit_ext=true;
+				}
+				strcpy(part,"");
+			}
+			else
+			{
+				if(strlen(part) >= 15)
+				{
+					printf("Invalid config on line %d. (level config: repeat text bool or limit extension length)\n",line+1);
+					#ifdef DEBUG
+					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in repeat text bool or limit extension\n");
+					#endif
+					exit(2);
+				}
+				if(c == ',')
+				{
+					if(has_limit_ext)
+						has_length_ext=true;
+					else
+					{
+						#ifdef DEBUG
+						printf("repeat bool: %s\n",part);
+						#endif
+						if(strcmp(part,"1") == 0)
+							text_repeat=true;
+						else if(strcmp(part,"0") == 0)
+							text_repeat=false;
+						else
+						{
+							printf("Invalid config on line %d. (level config: repeat text bool)\n",line+1);
+							exit(2);
+						}
 					}
 					strcpy(part,"");
 				}
