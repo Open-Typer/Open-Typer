@@ -257,6 +257,17 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 		ui->randomOrderCheckBox->isChecked());
 	displayLevel = _init_level(level);
 	ui->levelLabel->setText(displayLevel);
+	// Adjust paper width
+	QString longString = "";
+	for(int i=0; i < _REPEAT_LIMIT; i++)
+		longString += ' ';
+	int newWidth = ui->levelLabel->fontMetrics().boundingRect(longString).width() +
+		(ui->levelLabel->font().pointSize()) * 5;
+	ui->levelLabel->resize(newWidth,
+		ui->levelLabel->height());
+	ui->inputLabel->resize(newWidth,
+		ui->inputLabel->height());
+	ui->paper->setMinimumWidth(newWidth+20);
 	// Init level input
 	input = "";
 	displayInput = "";
