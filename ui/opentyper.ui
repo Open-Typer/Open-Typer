@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>OpenTyper</string>
+   <string notr="true">Open-Typer</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
