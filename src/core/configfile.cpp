@@ -497,8 +497,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order)
 {
 	char c='\0';
-	int line=0, lesson, sublesson, level, lIDc, text_repeat_type=0, i, wordID, outLength=0;
-	float limit_extension=1;
+	int line=0, lesson, sublesson, level, lIDc, text_repeat_type=0, i, limit_extension = _REPEAT_LIMIT, wordID, outLength=0;
 	unsigned int part_alloc=16;
 	char *part = (char*) malloc(part_alloc);
 	char *part2;
@@ -616,7 +615,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 					if(has_limit_ext)
 					{
 						if(!has_length_ext)
-							limit_extension = strtod(part,NULL);
+							limit_extension = strtol(part,NULL,10);
 					}
 					else
 						strcpy(repeat_type_str,part);
@@ -642,7 +641,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 				{
 					if(has_limit_ext)
 					{
-						limit_extension = strtod(part,NULL);
+						limit_extension = strtol(part,NULL,10);
 						has_length_ext=true;
 					}
 					else
@@ -708,7 +707,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		#ifdef __unix__
 		fflush(cr);
 		#endif
-		out = (char*) malloc(_REPEAT_LIMIT*limit_extension*2+1);
+		out = (char*) malloc(limit_extension*2+1);
 		strcpy(out,"");
 		while((c != '\n') && (c != EOF))
 		{
@@ -746,7 +745,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 						{
 							wordID = rand() % _get_word_count(part) + 1;
 							strcpy(part2,_get_word(part,wordID));
-							if(strlen(out)+1+strlen(part2) > (unsigned int) _REPEAT_LIMIT*limit_extension)
+							if(strlen(out)+1+strlen(part2) > (unsigned int) limit_extension)
 								break;
 							else
 							{
@@ -770,7 +769,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 							{
 								if(strcmp(out,"") == 0)
 								{
-									if(QStringLen(_get_word(part,i)) > (unsigned int) _REPEAT_LIMIT*limit_extension)
+									if(QStringLen(_get_word(part,i)) > limit_extension)
 									{
 										end=true;
 										break;
@@ -779,7 +778,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 								}
 								else
 								{
-									if(outLength+1+QStringLen(_get_word(part,i)) > (unsigned int) _REPEAT_LIMIT*limit_extension) // 1 is for a space between out and part
+									if(outLength+1+QStringLen(_get_word(part,i)) > limit_extension) // 1 is for a space between out and part
 									{
 										end=true;
 										break;
