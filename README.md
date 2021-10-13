@@ -77,9 +77,13 @@ Output:
 
 `:1,rw` - random sequence of words
 
-It's possible to create a level, which is more than 1 line long, for example:
+It's possible to create a level with a custom maximum length, for example:
 
-`:1,w;3` - 3 lines long level
+`:1,w;64` - 1/2 line long level
+
+To set a custom line length, which will resize the paper:
+
+`:1,w;128,64
 
 # Building 
 
