@@ -497,7 +497,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order)
 {
 	char c='\0';
-	int line=0, lesson, sublesson, level, lIDc, text_repeat_type=0, i, wordID;
+	int line=0, lesson, sublesson, level, lIDc, text_repeat_type=0, i, wordID, outLength=0;
 	float limit_extension=1;
 	unsigned int part_alloc=16;
 	char *part = (char*) malloc(part_alloc);
@@ -708,7 +708,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		#ifdef __unix__
 		fflush(cr);
 		#endif
-		out = (char*) malloc(_REPEAT_LIMIT*limit_extension+1);
+		out = (char*) malloc(_REPEAT_LIMIT*limit_extension*2+1);
 		strcpy(out,"");
 		while((c != '\n') && (c != EOF))
 		{
@@ -770,7 +770,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 							{
 								if(strcmp(out,"") == 0)
 								{
-									if(strlen(_get_word(part,i)) > (unsigned int) _REPEAT_LIMIT*limit_extension)
+									if(QStringLen(_get_word(part,i)) > (unsigned int) _REPEAT_LIMIT*limit_extension)
 									{
 										end=true;
 										break;
@@ -779,14 +779,16 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 								}
 								else
 								{
-									if(strlen(out)+1+strlen(_get_word(part,i)) > (unsigned int) _REPEAT_LIMIT*limit_extension) // 1 is for a space between out and part
+									if(outLength+1+QStringLen(_get_word(part,i)) > (unsigned int) _REPEAT_LIMIT*limit_extension) // 1 is for a space between out and part
 									{
 										end=true;
 										break;
 									}
 									strcat(out," ");
 									strcat(out,_get_word(part,i));
+									outLength += QStringLen(" ");
 								}
+								outLength += QStringLen(_get_word(part,i));
 							}
 						}
 						return out;
