@@ -95,7 +95,7 @@
           <property name="font">
            <font>
             <family>Courier</family>
-            <pointsize>12</pointsize>
+            <pointsize>14</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -145,7 +145,7 @@
           <property name="font">
            <font>
             <family>Courier</family>
-            <pointsize>12</pointsize>
+            <pointsize>14</pointsize>
            </font>
           </property>
           <property name="cursor">
@@ -188,7 +188,7 @@
           <property name="font">
            <font>
             <family>Courier</family>
-            <pointsize>12</pointsize>
+            <pointsize>14</pointsize>
             <weight>50</weight>
             <bold>false</bold>
            </font>
