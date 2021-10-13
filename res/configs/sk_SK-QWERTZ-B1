@@ -15,8 +15,8 @@
 1.1.15:1,w;120,60 kkfdd ddfkk
 1.1.16:1,w;120,60 jjdff ffdjj
 1.1.17:1,w;120,60 kkfjj jjfkk
-1.2.1:1,rw;3 ddd jjj fff kkk
-1.2.2:1,rw;3 fjk kjf dfj jfd fdkjk kjfdf dfjkj kjdfd
+1.2.1:1,rw;120,60 ddd jjj ddd jjj ddd jjj ddd jjj ddd jjj ddd jjj ddd jjj ddd fff kkk fff kkk fff kkk fff kkk fff kkk fff kkk fff kkk fff
+1.2.2:1,rw;120,60 fjk kjf dfj jfd fjk kjf dfj jfd fjk kjf dfj jfd fjk kjf dfj fdkjk kjfdf dfjkj kjdfd fdkjk kjfdf dfjkj kjdfd fdkjk kjfdf
 2.1.1:1,w;120,60 aa ôô
 2.1.2:1,w;120,60 aô ôa
 2.1.3:1,w;120,60 f j d k a ô
@@ -34,10 +34,10 @@
 2.1.15:1,w;120,60 fajka
 2.1.16:1,w;120,60 kajak dajak
 2.1.17:1,w;120,60 jaffa fajka
-2.2.1:1,rw;3 kajak fajka
-2.2.2:1,rw;3 ja jak jaka ak jak kajak kajaka fa fajka
-2.2.3:1,rw;3 aj daj kajak ajaj ja jaffa fa fajka aj daj kajaj kajak fa fajka fajkaj jaj a ak jak jaka jajkaj
-2.2.4:1,rw;3 aj jaj fajka a kajak jajkaj a fajkaj daj aj kajak jajkaj jaj ja a fajka ja a kajak daj aj kajak daj aj jaka fajka a jaffa
+2.2.1:1,rw;120,60 kajak kajak kajak kajak kajak kajak kajak kajak kajak kajak fajka fajka fajka fajka fajka fajka fajka fajka fajka fajka fajka
+2.2.2:1,rw;359,60 ja jak jaka ja jak jaka ja jak jaka ja jak jaka ja jak jaka ak jak kajak kajaka ak jak kajak kajaka ak jak kajak kajaka fa fajka fa fajka fa fajka fa fajka fa fajka fa fajka fajka aj daj kajak aj daj kajak aj daj kajak aj daj kajak aj ajaj ja jaffa fa fajka ja jaffa fa fajka ja jaffa fa fajka jaffa aj daj kajak kajak fa fajka fajkaj jaj a ak jak jaka jajkaj
+2.2.3:1,rw;59,60 ja a fajka daj jaka kajaka jak kajak kajaka fajka daj aj ja
+2.2.4:1,rw;121,60 aj jaj fajka a kajak jajkaj a fajkaj daj aj kajak jajkaj jaj ja a fajka ja a kajak daj aj kajak daj aj jaka fajka a jaffa
 3.1.1:1,w;120,60 ss ll
 3.1.2:1,w;120,60 sl ls
 3.1.3:1,w;120,60 f j d k s l a ô
@@ -53,17 +53,17 @@
 3.1.13:1,w;120,60 dal lak
 3.1.14:1,w;120,60 sklad
 3.1.15:1,w;120,60 skala
-3.2.1:1,rw;3 sal dal klada klasa
-3.2.2:1,rw;3 kôl kôs klas lak lada lasa skla sklad lad klad klada slad sklad skladal
-3.2.3:1,rw;3 dal dala skladal skladala jas jasal saj jasaj sad sadaj lak dal kal lak dal kal sal alfa fald
-3.2.4:1,rw;3 dal sa dala sa sad dala lak dala jas dala kôl dala kal sad sadal sklad skla lasa ak jajkal skala a skalka skladal skladala alfa jaffa fajka kajal sa a jajkal sklad skla a kôs daj lak ja dala a jasala fajkal a skladal sal a dal sadaj a skladaj sklad lasa a kôs jasal a fajkal dal jas dal lak dal kôl a kal
-3.2.5:1,rw;3 alfa dala slad skala a skalka skladal fald sklad kôs a skla jasal a jajkal sadaj a jasaj sklad lasa dal slad jajkal jaj
+3.2.1:1,rw;120,60 sal dal sal dal sal dal sal dal sal dal sal dal sal dal sal klada klasa klada klasa klada klasa klada klasa klada klasa
+3.2.2:1,rw;359,60 kôl kôs klas lak kôl kôs klas lak kôl kôs klas lak kôl klas lada lasa skla sklad lada lasa skla sklad lada lasa skla sa lad klad klada slad sklad lad klad klada slad sklad skladal dal dala skladal skladala dal dala skladal skladala skladal jas jasal saj jasaj sad sadaj jas jasal saj jasaj sad sadaj lak dal kal sal alfa fald lak dal kal sal alfa fald dal sal
+3.2.3:1,rw;58,60 dal slad a klas sklad skla sal jasal jasaj a sadaj skladaj
+3.2.4:1,rw;359,60 dal sa dala sa dala sad dala lak dala jas dala kôl dala kal sad sadal sklad skla sklad lasa ak jajkal slad sklad jajkal sklad skla skala a skalka skladal skladala alfa jaffa fajka kajal sa a jajkal sklad skla a kôs daj lak ja dala a jasala fajkal a skladal sal a dal sadaj a skladaj sklad lasa a kôs jasal a fajkal dal sa dala sa dal jas dal lak dal kôl a kal
+3.2.5:1,rw;120,60 alfa dala slad skala a skalka skladal fald sklad kôs a skla jasal a jajkal sadaj a jasaj sklad lasa dal slad jajkal jaj
 4.1.1:1,w;120,60 asdf jklô
 4.1.2:1,w;120,60 ôlkj fdsa
 4.1.3:1,w;120,60 asdf ôlkj
 4.1.4:1,w;120,60 fdsa jklô
-4.2.1:1,rw;3 sa kajala jaj jak aj sadal skladal sal dal fa fajka kôs kôl
-4.2.2:1,rw;3 sklad lasa dal kajak fajkal a jajkal sadaj jasaj fald sa skladal dala kôs skla slad jaj alfa jaffa
+4.2.1:1,rw;479,60 sal dal sal dal sal dal sal dal sal dal sal dal sal dal sal jaj jak jaj jak jaj jak jaj jak jaj jak jaj jak jaj jak jaj kôs kôl kôs kôl kôs kôl kôs kôl kôs kôl kôs kôl kôs kôl kôs fa fajka fa fajka fa fajka fa fajka fa fajka fa fajka fajka aj lad aj slad aj klad aj sklad aj klada aj kladka aj klasa aj sal aj dal aj sadal aj skladal aj klal aj fajkal a jasal sa dal sa dala sa skladal sa skladala sa kajal sa kajala sa aj sa dal a aj sa dala a aj sa dal a aj sa dala a aj sa dal
+4.2.2:1,rw;239,60 fald sa skladal dala kajak fajkal a jajkal sala slad aj kal dala jaka skladala fald alfa jasala fajka a jaffa sklad kôl jasal a jajkal sadaj a jasaj sklad lasa dal slad jajkal jaj alfa dala slad skala a skalka skladal fald sklad kôs a skla
 5.1.1:1,w;120,60 ded fed sed
 5.1.2:1,w;120,60 ak, sk, dk,
 5.1.3:1,w;120,60 dej sej lej
@@ -74,11 +74,11 @@
 5.1.8:1,w;120,60 jde kde ade
 5.1.9:1,w;120,60 lasa, lesa,
 5.1.10:1,w;120,60 slad, sled,
-5.2.1:1,rw;3 ale kde
-5.2.2:1,rw;3 ded deda, kefa kefka, dej deje, sej seje, sed sedel sedela, sej esej eseje, sekal sekala sekla, aleja, aleje, lesk, leskla, klesla klesala, ak kde kade skade, dôjde, dakde dôjde, lej lejak, kade kadekde,
-5.2.3:1,rw;3 des sed lek jej alad ej edk a ledes ded deda sa sad leje kel skale aleja skala keks ,aklaks ,lakjaj
-5.2.4:1,rw;3 daj kde a dal jej dakde lesk je keks, je, sedel, jedla, skla, esej, jej, kefka, kajak,
-5.3.1:0,0;3 dal jej, daj jej, dala jej kel, dala kôl, sala jed, dal sa, lesk skla, jej esej, daj aj jej, k fajke, daj keks, kde je, skala sa leskla, kde sedel, dakde jedla, dôjde lejak, seje, k jej skale, daj jej keks, klesla a sekala, dakde je skala, kde je jej kefka, dakde sedela aj jedla, k fajke jej dedka, a kde dal jej keks, sedela a jedla kel, a kde je jej kajak,
+5.2.1:1,rw;59,60 ale kde
+5.2.2:1,rw;485,60 ded deda, kefa kefka, ded deda, kefa kefka, ded deda, kefa, dej deje, sej seje, dej deje, sej seje, dej deje, sej seje, sed sedel sedela, sej esej eseje, sed sedel sedela, sej esej sekal sekala sekla, aleja, aleje, sekal sekala sekla, aleja, lesk leskla, klesla klesala, lesk leskla, klesla klesala, ak kde kade skade, dôjde, kde kade skade, dôjde, kde kade skade dakde dôjde, lej lejak, dakde dôjde, lej lejak, dakde dôjde, kade kadekde, dôjde, kade kadekde, dôjde, kade kadekde, kade
+5.2.3:1,rw;185,60 sa sad sed des ded deda sa sad sed des sed des ded deda sa as aleja keks leje jej skale kel skala keks leje kel skale aleja lek jej alad ,aklaks ej edk ,lakjaj a ledes ded ,skek jej jad
+5.2.4:1,rw;359,60 dal jej, daj jej, dala jej kel, dala kôl, sala jed, dal sa, lesk skla, jej esej, daj aj jej, k fajke, daj keks, kde je, skala sa leskla, kde sedel, dakde jedla, dôjde lejak, seje, k jej skale, daj jej keks, klesla a sekala, dakde je skala, kde je jej kefka, dakde sedela aj jedla, k fajke jej dedka, a kde dal jej keks, sedela a jedla kel, a kde je jej kajak,
+5.3.1:0,0;179,60 sekal jej kôl, jedla slede, les a aleja, seje kel, jej deka sa leskla, dala jej aj eseje, seje a leje, dal jej aj keks, kde dôjde, ak dôjde aj lejak, dôjde k lesklej skalke, jasaj
 6.1.1:1,w;120,60 sws lol
 6.1.2:1,w;120,60 sxs lol
 6.1.3:1,w;120,60 lol sol
