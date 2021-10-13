@@ -89,11 +89,11 @@
 6.1.8:1,w;120,60 odo olo
 6.1.9:1,w;120,60 jawa jawe
 6.1.10:1,w axel axla
-6.2.1:1,rw;3 odsal odsek doska doske
-6.2.2:1,rw;3 os osa oska joj jojkal sadol dosadol kola a kokakola doklad koks kokos kosa dojka doska, jojkala, odsadol, kokakola, jawa, waffle, dokladal, kolos, kofola, kofa, lalok, sojka,
-6.2.3:1,rw;3 okolo kolok odoslal dalkdo kodelsôd o so do dodal doklad odoslala dalkod od odklad dôsledok kes oko okolo ,ladalkdo ,dels ,ladalkod ,kesdo
-6.2.4:1,rw;3 doklad o sklade a kdekade do klesala koks dokladal od dôsledok ex odoslal dojal kose, kadejako, lesa, saka, jedla, sedla, oka, sokola, eseje, offo, deda,
-6.3.1:0,0;3 dojedol lososa, dojedol kokos, odkladal sedadlo, dôsledok ex offo dojedol lososa odkladal kakao, okolo lode, dôsledok ex offo odkladal koleso odkladal sedadlo, odkladal kakao, dôsledok lejaka, odkladal sedadlo, dôsledok lejaka,
+6.2.1:1,rw;360,120 odsal odsek doska doske
+6.2.2:1,rw;360,120 os osa oska joj jojkal sadol dosadol kola a kokakola doklad koks kokos kosa dojka doska, jojkala, odsadol, kokakola, jawa, waffle, dokladal, kolos, kofola, kofa, lalok, sojka,
+6.2.3:1,rw;360,120 okolo kolok odoslal dalkdo kodelsôd o so do dodal doklad odoslala dalkod od odklad dôsledok kes oko okolo ,ladalkdo ,dels ,ladalkod ,kesdo
+6.2.4:1,rw;360,120 doklad o sklade a kdekade do klesala koks dokladal od dôsledok ex odoslal dojal kose, kadejako, lesa, saka, jedla, sedla, oka, sokola, eseje, offo, deda,
+6.3.1:0,0;360,120 dojedol lososa, dojedol kokos, odkladal sedadlo, dôsledok ex offo dojedol lososa odkladal kakao, okolo lode, dôsledok ex offo odkladal koleso odkladal sedadlo, odkladal kakao, dôsledok lejaka, odkladal sedadlo, dôsledok lejaka,
 7.1.1:1,w;120,60 ftf atf stf dtf
 7.1.2:1,w;120,60 jnj knj lnj ônj
 7.1.3:1,w;120,60 jtf ktf ltf ôtf
@@ -104,8 +104,8 @@
 7.1.8:1,w;120,60 nes nos nad
 7.1.9:1,w;120,60 toto, atak,
 7.1.10:1,w;120,60 dane, lane,
-7.2.1:1,rw;3 jedno jasno latka fotka
-7.2.2:1,rw;3 font fond, konto konta, dane oddane, denne dennodenne, toto foto, tej tejto, ostala dostala nedostala, na dones nedones, odnes dodnes, ten tento, tne dotkne, nes dnes, nad nado
-7.2.3:1,rw;3 k tejto, k nej, na kto takto to toto dalkod otnet send senod na to, test text taxa foto flanel nej nejako to na tejto, k tej, teta teda feta
-7.2.4:1,rw;3 sedel tajne na stole, letel tadeto, dostal sa na tento stôl, jeden watt, otesal kôl, dnes nejako odolal, nedostane sa k nej, dajte aj tento atlas do stola,
-7.3.1:0,0;3 flanel dodajte neodkladne, flanel dodajte neodkladne, tak sa to stalo, doneste to dnes, len tento jeden text je o nafte, doneste to dnes, konajte dôsledne, tak sa to stalo, nedostatok slnka, nedostatok slnka, flanel dodajte neodkladne,
+7.2.1:1,rw;360,120 jedno jasno latka fotka
+7.2.2:1,rw;360,120 font fond, konto konta, dane oddane, denne dennodenne, toto foto, tej tejto, ostala dostala nedostala, na dones nedones, odnes dodnes, ten tento, tne dotkne, nes dnes, nad nado
+7.2.3:1,rw;360,120 k tejto, k nej, na kto takto to toto dalkod otnet send senod na to, test text taxa foto flanel nej nejako to na tejto, k tej, teta teda feta
+7.2.4:1,rw;360,120 sedel tajne na stole, letel tadeto, dostal sa na tento stôl, jeden watt, otesal kôl, dnes nejako odolal, nedostane sa k nej, dajte aj tento atlas do stola,
+7.3.1:0,0;360,120 flanel dodajte neodkladne, flanel dodajte neodkladne, tak sa to stalo, doneste to dnes, len tento jeden text je o nafte, doneste to dnes, konajte dôsledne, tak sa to stalo, nedostatok slnka, nedostatok slnka, flanel dodajte neodkladne,
