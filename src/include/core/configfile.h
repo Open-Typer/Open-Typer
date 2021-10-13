@@ -28,5 +28,5 @@
 int _lesson_count(FILE *cr);
 int _lesson_sublesson_count(FILE *cr, int tsublesson);
 int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson);
-float _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsublesson, int tlevel);
+int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsublesson, int tlevel);
 char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order);

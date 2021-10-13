@@ -304,11 +304,11 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 	}
 	return out;
 }
-float _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsublesson, int tlevel)
+int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsublesson, int tlevel)
 {
 	char c='\0';
 	int line=0, lesson, sublesson, level, lIDc;
-	float length_extension=1;
+	int length_extension = _REPEAT_LIMIT;
 	unsigned int part_alloc=16;
 	char *part = (char*) malloc(part_alloc);
 	char repeat_type_str[64];
@@ -427,7 +427,7 @@ float _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsuble
 					{
 						if(has_length_ext)
 						{
-							length_extension = strtod(part,NULL);
+							length_extension = strtol(part,NULL,10);
 						}
 					}
 					else
@@ -483,7 +483,7 @@ float _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsuble
 			return length_extension;
 		}
 		else
-			length_extension=1;
+			length_extension = _REPEAT_LIMIT;
 		c='\0';
 		// Level text
 		while((c != '\n') && (c != EOF))
@@ -492,12 +492,13 @@ float _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsuble
 		}
 		line++;
 	}
-	return 1;
+	return _REPEAT_LIMIT;
 }
 char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order)
 {
 	char c='\0';
-	int line=0, lesson, sublesson, level, lIDc, text_repeat_type=0, i, wordID, limit_extension=1;
+	int line=0, lesson, sublesson, level, lIDc, text_repeat_type=0, i, wordID;
+	float limit_extension=1;
 	unsigned int part_alloc=16;
 	char *part = (char*) malloc(part_alloc);
 	char *part2;
@@ -615,7 +616,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 					if(has_limit_ext)
 					{
 						if(!has_length_ext)
-							limit_extension = strtol(part,NULL,10);
+							limit_extension = strtod(part,NULL);
 					}
 					else
 						strcpy(repeat_type_str,part);
@@ -640,7 +641,10 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 				if(c == ',')
 				{
 					if(has_limit_ext)
+					{
+						limit_extension = strtod(part,NULL);
 						has_length_ext=true;
+					}
 					else
 					{
 						#ifdef DEBUG
@@ -697,7 +701,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		}
 		#ifdef DEBUG
 		if(has_limit_ext)
-			printf("D: Limit extension: %d\n",limit_extension);
+			printf("D: Limit extension: %f\n",limit_extension);
 		#endif
 		c='\0';
 		// Level text
