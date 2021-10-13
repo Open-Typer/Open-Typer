@@ -165,6 +165,17 @@ char *OpenTyper::loadConfig(QString configName)
 	return configPath;
 }
 
+int OpenTyper::_line_count(QString str)
+{
+	int out=0, i, len = QStringLen(str);
+	for(i=0; i < len; i++)
+	{
+		if((str[i] == '\n') || (i == len))
+			out++;
+	}
+	return out;
+}
+
 QString OpenTyper::_init_level(QString level)
 {
 	int len, len2, i, line_pos=0;
@@ -279,6 +290,14 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	ui->inputLabel->resize(newWidth,
 		ui->inputLabel->height());
 	ui->paper->setMinimumWidth(newWidth+20);
+	// Adjust levelSpace, levelLabel and inputLabel height
+	int newHeight = _line_count(displayLevel) *
+		(ui->levelLabel->font().pointSize()) * 1.5 + 60;
+	ui->levelSpace->setMinimumHeight(newHeight);
+	ui->levelLabel->resize(ui->levelLabel->width(),
+		newHeight);
+	ui->inputLabel->resize(ui->inputLabel->width(),
+		newHeight);
 	// Init level input
 	input = "";
 	displayInput = "";

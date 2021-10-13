@@ -50,6 +50,7 @@ public:
 	QString getConfigLoc(void);
 	bool isSpecialKey(QKeyEvent *event);
 	QString _init_level(QString level);
+	int _line_count(QString str);
 
 protected:
 	void keyPressEvent(QKeyEvent *event);
