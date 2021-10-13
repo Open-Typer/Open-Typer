@@ -314,6 +314,8 @@ float _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsuble
 	char repeat_type_str[64];
 	strcpy(repeat_type_str,"");
 	bool has_limit_ext, has_length_ext;
+	// Set locale
+	setlocale(LC_ALL,"C");
 	// NOTE: realloc is used only in the text part
 	// Who would use a number longer than 16 bytes?
 	rewind(cr);
@@ -424,7 +426,9 @@ float _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsuble
 					if(has_limit_ext)
 					{
 						if(has_length_ext)
+						{
 							length_extension = strtod(part,NULL);
+						}
 					}
 					else
 						strcpy(repeat_type_str,part);

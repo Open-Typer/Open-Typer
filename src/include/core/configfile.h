@@ -19,6 +19,7 @@
  */
 
 #include <iostream>
+#include <clocale>
 #include <QString>
 #include "utils.h"
 
