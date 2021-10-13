@@ -306,6 +306,8 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	levelInProgress=false;
 	lastTime=0;
 	mistake=false;
+	ignoreMistakeLabelAppend=false;
+	ui->mistakeLabel->setText("");
 	ui->currentTimeNumber->setText("0");
 	ui->currentMistakesNumber->setText("0");
 }
@@ -444,6 +446,16 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 		if(displayLevel[displayPos] == '\n')
 		{
 			displayInput += "<br>";
+			ui->mistakeLabel->setText(
+				ui->mistakeLabel->text() + "\n");
+		}
+		else
+		{
+			if(ignoreMistakeLabelAppend)
+				ignoreMistakeLabelAppend=false;
+			else
+				ui->mistakeLabel->setText(
+					ui->mistakeLabel->text() + " ");
 		}
 		ui->inputLabel->setText(displayInput+"<span style='color: blue';'>|</span>");
 		levelPos++;
@@ -456,7 +468,11 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 			if(event->key() == Qt::Key_Backspace)
 			{
 				ui->inputLabel->setText(displayInput+"<span style='color: blue';'>|</span>");
+				if(!ignoreMistakeLabelAppend)
+					ui->mistakeLabel->setText(
+						ui->mistakeLabel->text() + "_");
 				mistake=false;
+				ignoreMistakeLabelAppend=true;
 			}
 		}
 		else

@@ -46,7 +46,7 @@ public:
 	int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, levelPos, displayPos, levelMistakes;
 	float levelLengthExtension;
 	QElapsedTimer levelTimer;
-	bool levelInProgress, mistake;
+	bool levelInProgress, mistake, ignoreMistakeLabelAppend;
 	int lastTime;
 	QString getConfigLoc(void);
 	bool isSpecialKey(QKeyEvent *event);
