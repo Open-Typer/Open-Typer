@@ -181,7 +181,7 @@ QString OpenTyper::_init_level(QString level)
 				word += level[i];
 			}
 			len2 = QStringLen(word);
-			if(line_pos+len2 > _REPEAT_LIMIT*levelLengthExtension)
+			if(line_pos+len2 > levelLengthExtension)
 			{
 				out += '\n';
 				line_pos=0;
@@ -270,7 +270,7 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	ui->levelLabel->setText(displayLevel);
 	// Adjust paper width
 	QString longString = "";
-	for(int i=0; i < _REPEAT_LIMIT*levelLengthExtension; i++)
+	for(int i=0; i < levelLengthExtension; i++)
 		longString += ' ';
 	int newWidth = ui->levelLabel->fontMetrics().boundingRect(longString).width() +
 		(ui->levelLabel->font().pointSize()) * 5;
