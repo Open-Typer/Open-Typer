@@ -99,10 +99,13 @@
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">color: rgb(0, 125, 175);</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::WinPanel</enum>
           </property>
           <property name="frameShadow">
-           <enum>QFrame::Plain</enum>
+           <enum>QFrame::Raised</enum>
           </property>
           <property name="lineWidth">
            <number>1</number>
