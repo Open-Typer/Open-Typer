@@ -70,3 +70,6 @@ Thumbs.db
 *.dll
 *.exe
 
+# M cross environment
+mxe/
+

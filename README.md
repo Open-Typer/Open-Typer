@@ -103,7 +103,19 @@ make
 
 ## Building for Windows
 
-**Cross-compiling for Windows is coming soon.**
+Install dependencies (Debian, Ubuntu):
+
+```
+sudo apt-get install autoconf automake autopoint bash bison bzip2 flex g++ g++-multilib gettext git gperf intltool \
+    libc6-dev-i386 libgdk-pixbuf2.0-dev libltdl-dev libssl-dev libtool-bin libxml-parser-perl lzip make openssl \
+    p7zip-full patch perl python ruby sed unzip wget xz-utils
+```
+
+Execute the `winbuild.sh` script. The first build may take up to 1 hour.
+
+`./winbuild.sh`
+
+Then take `Open-Typer.exe` from the `release` directory.
 
 # Known issues
 
