@@ -220,39 +220,48 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 {
 	// Update selected lesson
 	ui->lessonSelectionList->setCurrentIndex(lessonID-1);
-	// Check if -1 (last sublesson in current lesson) was passed
-	if(sublessonID == -1)
-		sublessonID = _lesson_sublesson_count(cr,lessonID);
-	// Check if -1 (last level in current sublesson) was passed
-	if(levelID == -1)
-		levelID = _lesson_sublesson_level_count(cr,lessonID,sublessonID);
 	// Get sublesson count
 	sublessonCount = _lesson_sublesson_count(cr,lessonID);
 	// Update sublesson list
 	// This must happen before level loading!
 	ui->sublessonSelectionList->clear();
 	QStringList sublessons;
-	for(int i=1; i <= sublessonCount; i++)
+	int i, i2=0;
+	for(i=1; i <= sublessonCount+i2; i++)
 	{
-		switch(i) {
-			case 1:
-				sublessons += tr("Finger-key-combinations");
-				break;
-			case 2:
-				sublessons += tr("Words");
-				break;
-			case 3:
-				sublessons += tr("Sentences");
-				break;
-			default:
-				sublessons += tr("Sublesson") + " " + QString::number(i);
-				
+		if(_lesson_sublesson_level_count(cr,lessonID,i) > 0)
+		{
+			switch(i) {
+				case 1:
+					sublessons += tr("Finger-key-combinations");
+					break;
+				case 2:
+					sublessons += tr("Words");
+					break;
+				case 3:
+					sublessons += tr("Sentences");
+					break;
+				default:
+					sublessons += tr("Sublesson") + " " + QString::number(i);
+					break;
+			}
+		}
+		else
+		{
+			i2++;
 		}
 	}
+	sublessonListStart = i2;
+	// Check if -1 (last sublesson in current lesson) was passed
+	if(sublessonID == -1)
+		sublessonID = _lesson_sublesson_count(cr,lessonID);
+	// Check if -1 (last level in current sublesson) was passed
+	if(levelID == -1)
+		levelID = _lesson_sublesson_level_count(cr,lessonID,sublessonID+sublessonListStart);
 	ui->sublessonSelectionList->addItems(sublessons);
 	ui->sublessonSelectionList->setCurrentIndex(sublessonID-1);
 	// Update random order check box
-	if(sublessonID == 2) // words
+	if(sublessonID+sublessonListStart == 2) // words
 	{
 		ui->randomOrderCheckBox->setEnabled(true);
 		ui->randomOrderCheckBox->setCheckable(true);
@@ -270,11 +279,11 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 		ui->randomOrderCheckBox->setCheckState(Qt::Unchecked);
 	}
 	// Load length extension
-	levelLengthExtension = _lesson_sublesson_level_length_extension(cr,lessonID,sublessonID,levelID);
+	levelLengthExtension = _lesson_sublesson_level_length_extension(cr,lessonID,sublessonID+sublessonListStart,levelID);
 	// Load level text
 	level = _lesson_sublesson_level_text(cr,
 		lessonID,
-		sublessonID,
+		sublessonID+sublessonListStart,
 		levelID,
 		ui->randomOrderCheckBox->isChecked());
 	displayLevel = _init_level(level);
@@ -306,7 +315,7 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	// Get lesson count
 	lessonCount = _lesson_count(cr);
 	// Get level count (in current lesson)
-	levelCount = _lesson_sublesson_level_count(cr,lessonID,sublessonID);
+	levelCount = _lesson_sublesson_level_count(cr,lessonID,sublessonID+sublessonListStart);
 	// Update level list
 	ui->levelSelectionList->clear();
 	QStringList levels;
