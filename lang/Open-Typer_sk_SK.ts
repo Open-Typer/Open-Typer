@@ -4,110 +4,140 @@
 <context>
     <name>OpenTyper</name>
     <message>
-        <location filename="../ui/opentyper.ui" line="111"/>
+        <location filename="../ui/opentyper.ui" line="114"/>
         <source>level text</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="164"/>
+        <location filename="../ui/opentyper.ui" line="167"/>
         <source>input text</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="191"/>
+        <location filename="../ui/opentyper.ui" line="239"/>
         <source>Lesson packs</source>
         <translation>Balíky lekcií</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="216"/>
+        <location filename="../ui/opentyper.ui" line="264"/>
         <source>Selected lesson pack:</source>
         <translation>Vybraný balík lekcií:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="222"/>
+        <location filename="../ui/opentyper.ui" line="270"/>
         <source>Training</source>
         <translation>Výučba</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="261"/>
+        <location filename="../ui/opentyper.ui" line="309"/>
         <source>(no pack selected)</source>
         <translation>(nevybraný žiadny balík)</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="277"/>
+        <location filename="../ui/opentyper.ui" line="325"/>
         <source>Repeat exercise</source>
         <translation>Opakovať cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="374"/>
+        <location filename="../ui/opentyper.ui" line="422"/>
         <source>Time:</source>
         <translation>Čas:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="381"/>
-        <location filename="../ui/opentyper.ui" line="395"/>
+        <location filename="../ui/opentyper.ui" line="429"/>
+        <location filename="../ui/opentyper.ui" line="443"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="388"/>
+        <location filename="../ui/opentyper.ui" line="436"/>
         <source>Mistakes:</source>
         <translation>Počet chýb:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="408"/>
+        <location filename="../ui/opentyper.ui" line="456"/>
         <source>Current state:</source>
         <translation>Stav:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="445"/>
+        <location filename="../ui/opentyper.ui" line="493"/>
         <source>Lesson:</source>
         <translation>Lekcia:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="471"/>
+        <location filename="../ui/opentyper.ui" line="519"/>
         <source>Exercise:</source>
         <translation>Cvičenie:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="497"/>
+        <location filename="../ui/opentyper.ui" line="545"/>
         <source>Sublesson:</source>
         <translation>Podlekcia:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="529"/>
+        <location filename="../ui/opentyper.ui" line="577"/>
         <source>Random order</source>
         <translation>Náhodné poradie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="154"/>
+        <location filename="../src/opentyper.cpp" line="147"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="228"/>
+        <location filename="../src/opentyper.cpp" line="229"/>
         <source>Finger-key-combinations</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="231"/>
+        <location filename="../src/opentyper.cpp" line="232"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="234"/>
+        <location filename="../src/opentyper.cpp" line="235"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="237"/>
+        <location filename="../src/opentyper.cpp" line="238"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="293"/>
+        <location filename="../src/opentyper.cpp" line="316"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
+    </message>
+</context>
+<context>
+    <name>UpdaterDialog</name>
+    <message>
+        <location filename="../ui/updaterdialog.ui" line="26"/>
+        <source>Update</source>
+        <translation>Aktualizácia</translation>
+    </message>
+    <message>
+        <location filename="../ui/updaterdialog.ui" line="50"/>
+        <source>Yes</source>
+        <translation>Áno</translation>
+    </message>
+    <message>
+        <location filename="../ui/updaterdialog.ui" line="57"/>
+        <source>No</source>
+        <translation>Nie</translation>
+    </message>
+    <message>
+        <location filename="../ui/updaterdialog.ui" line="72"/>
+        <source>Update available</source>
+        <translation>Dostupná aktualizácia</translation>
+    </message>
+    <message>
+        <location filename="../ui/updaterdialog.ui" line="82"/>
+        <source>There&apos;s a new update available.
+Would you like to download and install it?</source>
+        <translation>Je dostupná nová aktualizácia.
+Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
 </context>
 <context>
