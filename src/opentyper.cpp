@@ -28,18 +28,12 @@
 #include <QDialog>
 #include <QDirIterator>
 #include <QTimer>
-#ifdef _WIN32
-#include <windows.h>
-#endif
+#include <sys/stat.h>
 #include "opentyper.h"
 #include "ui_opentyper.h"
 #include "levelsummary.h"
 #include "configfile.h"
 #include "utils.h"
-
-#ifdef _WIN32
-extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
-#endif
 
 void OpenTyper::updateColors(void)
 {
@@ -128,10 +122,7 @@ char *OpenTyper::loadConfig(QString configName)
 	if(!configDir.exists())
 		configDir.mkpath(configLoc);
 	// Extract selected config
-	#ifdef _WIN32
-	qt_ntfs_permission_lookup++;
-	DeleteFileA(qPrintable(configPath));
-	#endif
+	chmod(configPath, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	QFile::remove(configPath);
 	QFile::copy(":/res/configs/"+configName,configPath);
 	// Open extracted config (just to check that everything is OK and to update lesson list)
