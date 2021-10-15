@@ -1,5 +1,5 @@
 /*
- * main.cpp
+ * updaterdialog.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021 - adazem009
@@ -18,28 +18,29 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QApplication>
-#include <QLabel>
-#include <QTranslator>
-#include "opentyper.h"
+#include "updater/updaterdialog.h"
+#include "ui_updaterdialog.h"
 
-int main(int argc, char *argv[])
+UpdaterDialog::UpdaterDialog(QWidget *parent) :
+	QDialog(parent),
+	ui(new Ui::UpdaterDialog)
 {
-	QApplication a(argc, argv);
-	// Check if the program was recently updated
-	if(argc > 1)
-	{
-		QFile::remove(QString(argv[1]));
-		QFile::rename(QString(argv[1])+".part",QString(argv[1]));
-	}
-	// Load translations
-	QTranslator* translator = new QTranslator();
-	if(translator->load(QLocale(), QLatin1String("Open-Typer"), QLatin1String("_"), QLatin1String(":/res/lang")))
-		a.installTranslator(translator);
-	else
-		printf("D: Failed to load language\n");
-	OpenTyper w;
-	w.setWindowState(Qt::WindowMaximized);
-	w.show();
-	return a.exec();
+	ui->setupUi(this);
+	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(yesClicked()));
+	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(noClicked()));
+}
+
+UpdaterDialog::~UpdaterDialog()
+{
+	delete ui;
+}
+
+void UpdaterDialog::yesClicked(void)
+{
+	accept();
+}
+
+void UpdaterDialog::noClicked(void)
+{
+	reject();
 }

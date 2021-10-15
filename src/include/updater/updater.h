@@ -18,10 +18,16 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QCoreApplication>
+#include <QSaveFile>
+#include <QFile>
+#include <QProcess>
 #include "net.h"
 #include "version.h"
+#include "updaterdialog.h"
 
 #define _VERSION_H_URL "https://raw.githubusercontent.com/adazem009/Open-Typer/master/src/include/version.h"
+#define _GITHUB_REPO "https://github.com/adazem009/Open-Typer"
 
 class Updater : public QObject
 {
@@ -34,7 +40,9 @@ class Updater : public QObject
 		Downloader *versionHdw;
 		char *versionH;
 		char *readVersion(const char *versionHeader);
+		Downloader *updatedProgram;
 	
 	private slots:
 		void initUpdate();
+		void overwriteExecutable(void);
 };

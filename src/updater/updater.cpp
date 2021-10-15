@@ -34,9 +34,22 @@ void Updater::initUpdate()
 	versionH = (char*) malloc(1024);
 	strcpy(versionH,qPrintable(QString(versionHdw->downloadedData())));
 	char *newVer = readVersion(versionH);
-	printf("latest version: %s\n",newVer);
 	if(strcmp(newVer,_VERSION) != 0)
-		printf("New version found!\n");
+	{
+		// New version found
+		UpdaterDialog dialog;
+		if(dialog.exec() == QDialog::Accepted)
+		{
+			const char *executable;
+			#ifdef _WIN32
+			executable = "Open-Typer.exe";
+			#else
+			executable = "Open-Typer-linux-amd64";
+			#endif
+			updatedProgram = new Downloader(QString(_GITHUB_REPO)+"/releases/download/v"+QString(newVer)+"/"+QString(executable),this);
+			connect(updatedProgram,SIGNAL(downloaded()),this,SLOT(overwriteExecutable()));
+		}
+	}
 }
 
 char *Updater::readVersion(const char *versionHeader)
@@ -51,4 +64,17 @@ char *Updater::readVersion(const char *versionHeader)
 	if(strcmp(out,"") == 0)
 		return (char*) _VERSION;
 	return out;
+}
+
+void Updater::overwriteExecutable()
+{
+	QSaveFile file(QCoreApplication::applicationFilePath()+".part");
+	file.open(QIODevice::WriteOnly);
+	file.write(updatedProgram->downloadedData());
+	file.commit();
+	QProcess *process = new QProcess(this);
+	QStringList args;
+	args += QCoreApplication::applicationFilePath();
+	process->start(QCoreApplication::applicationFilePath()+".part",args);
+	exit(0);
 }

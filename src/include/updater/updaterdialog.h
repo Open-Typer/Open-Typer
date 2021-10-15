@@ -1,5 +1,5 @@
 /*
- * main.cpp
+ * updaterdialog.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021 - adazem009
@@ -18,28 +18,28 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QApplication>
-#include <QLabel>
-#include <QTranslator>
-#include "opentyper.h"
+#ifndef UPDATERDIALOG_H
+#define UPDATERDIALOG_H
 
-int main(int argc, char *argv[])
-{
-	QApplication a(argc, argv);
-	// Check if the program was recently updated
-	if(argc > 1)
-	{
-		QFile::remove(QString(argv[1]));
-		QFile::rename(QString(argv[1])+".part",QString(argv[1]));
-	}
-	// Load translations
-	QTranslator* translator = new QTranslator();
-	if(translator->load(QLocale(), QLatin1String("Open-Typer"), QLatin1String("_"), QLatin1String(":/res/lang")))
-		a.installTranslator(translator);
-	else
-		printf("D: Failed to load language\n");
-	OpenTyper w;
-	w.setWindowState(Qt::WindowMaximized);
-	w.show();
-	return a.exec();
+#include <QDialog>
+
+namespace Ui {
+class UpdaterDialog;
 }
+
+class UpdaterDialog : public QDialog
+{
+	Q_OBJECT
+	public:
+		explicit UpdaterDialog(QWidget *parent = nullptr);
+		~UpdaterDialog();
+	
+	private:
+		Ui::UpdaterDialog *ui;
+	
+	private slots:
+		void yesClicked(void);
+		void noClicked(void);
+};
+
+#endif // UPDATERDIALOG_H

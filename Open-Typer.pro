@@ -26,7 +26,8 @@ SOURCES += \
     src/levelsummary.cpp \
     src/updater/updater.cpp \
     src/main.cpp \
-    src/opentyper.cpp
+    src/opentyper.cpp \
+    src/updater/updaterdialog.cpp
 
 HEADERS += \
     src/include/core/utils.h \
@@ -34,12 +35,14 @@ HEADERS += \
     src/include/core/net.h \
     src/include/levelsummary.h \
     src/include/updater/updater.h \
+    src/include/updater/updaterdialog.h \
     src/include/version.h \
     src/include/opentyper.h
 
 FORMS += \
     ui/levelsummary.ui \
-    ui/opentyper.ui
+    ui/opentyper.ui \
+    ui/updaterdialog.ui
 
 TRANSLATIONS += \
     lang/Open-Typer_sk_SK.ts
