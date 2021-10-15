@@ -22,14 +22,19 @@ QMAKE_CXXFLAGS += \
 SOURCES += \
     src/core/utils.cpp \
     src/core/configfile.cpp \
+    src/core/net.cpp \
     src/levelsummary.cpp \
+    src/updater/updater.cpp \
     src/main.cpp \
     src/opentyper.cpp
 
 HEADERS += \
     src/include/core/utils.h \
     src/include/core/configfile.h \
+    src/include/core/net.h \
     src/include/levelsummary.h \
+    src/include/updater/updater.h \
+    src/include/version.h \
     src/include/opentyper.h
 
 FORMS += \
@@ -41,6 +46,8 @@ TRANSLATIONS += \
 
 RESOURCES += \
     res.qrc
+
+QT += network
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

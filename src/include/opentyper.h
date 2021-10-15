@@ -26,6 +26,7 @@
 #include <QLabel>
 #include <QElapsedTimer>
 #include <QSettings>
+#include "updater/updater.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class OpenTyper; }
@@ -52,6 +53,8 @@ public:
 	bool isSpecialKey(QKeyEvent *event);
 	QString _init_level(QString level);
 	int _line_count(QString str);
+	Updater *versionHdw;
+	void autoUpdate(void);
 
 protected:
 	void keyPressEvent(QKeyEvent *event);

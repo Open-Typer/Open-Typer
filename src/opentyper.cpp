@@ -73,6 +73,8 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->sublessonSelectionList,SIGNAL(activated(int)),this,SLOT(sublessonSelectionListIndexChanged(int)));
 	connect(ui->levelSelectionList,SIGNAL(activated(int)),this,SLOT(levelSelectionListIndexChanged(int)));
 	connect(ui->randomOrderCheckBox,SIGNAL(clicked(bool)),this,SLOT(randomOrderCheckBoxChanged(bool)));
+	// Check for updates
+	new Updater();
 	// Start timer
 	secLoop->start(1000);
 	// Load config and start
