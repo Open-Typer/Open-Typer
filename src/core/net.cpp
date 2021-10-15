@@ -24,6 +24,7 @@ Downloader::Downloader(QUrl url, QObject *parent) :
 	QObject(parent)
 {
 	QNetworkRequest request(url);
+	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute,true);
 	m_WebCtrl.get(request);
 	connect(&m_WebCtrl,SIGNAL(finished(QNetworkReply*)),this,SLOT(fileDownloaded(QNetworkReply*)));
 }
