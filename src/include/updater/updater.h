@@ -19,6 +19,7 @@
  */
 
 #include <QCoreApplication>
+#include <QMessageBox>
 #include <QSaveFile>
 #include <QFile>
 #include <QProcess>
