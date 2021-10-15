@@ -46,7 +46,7 @@ char *Updater::readVersion(const char *versionHeader)
 	strcpy(out,"");
 	// #define _VERSION "1.0.0"
 	//                  ^ 18
-	for(i=18; i < strlen(versionHeader)-1; i++)
+	for(i=18; i < strlen(versionHeader)-2; i++)
 		strncat(out,&versionHeader[i],1);
 	if(strcmp(out,"") == 0)
 		return (char*) _VERSION;
