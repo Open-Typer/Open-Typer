@@ -1,1 +1,1 @@
-#define _VERSION "1.0.0-rc1"
+#define _VERSION "1.0.0"
