@@ -18,6 +18,9 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef UPDATER_H
+#define UPDATER_H
+
 #include <QCoreApplication>
 #include <QMessageBox>
 #include <QSaveFile>
@@ -47,3 +50,5 @@ class Updater : public QObject
 		void initUpdate();
 		void overwriteExecutable(void);
 };
+
+#endif // UPDATER_H
