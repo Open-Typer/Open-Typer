@@ -23,8 +23,12 @@
 Updater::Updater(QObject *parent) :
 	QObject(parent)
 {
-	versionHdw = new Downloader(QString(_VERSION_H_URL),this);
-	connect(versionHdw,SIGNAL(downloaded()),this,SLOT(initUpdate()));
+	Net *net = new Net();
+	if(net->internetConnected())
+	{
+		versionHdw = new Downloader(QString(_VERSION_H_URL),this);
+		connect(versionHdw,SIGNAL(downloaded()),this,SLOT(initUpdate()));
+	}
 }
 
 Updater::~Updater() { }
@@ -42,6 +46,14 @@ void Updater::initUpdate()
 		dialog.setNewVer("v"+QString(newVer));
 		if(dialog.exec() == QDialog::Accepted)
 		{
+			Net *net = new Net();
+			if(!net->internetConnected())
+			{
+				QMessageBox errBox;
+				errBox.setText(tr("Error: No internet connection."));
+				errBox.exec();
+				return;
+			}
 			const char *executable;
 			#ifdef _WIN32
 			executable = "Open-Typer.exe";
