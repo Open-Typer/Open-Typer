@@ -111,9 +111,22 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/main.cpp" line="36"/>
+        <source>Successfully updated.</source>
+        <translation>Úspešne aktualizované.</translation>
+    </message>
+</context>
+<context>
     <name>Updater</name>
     <message>
-        <location filename="../src/updater/updater.cpp" line="54"/>
+        <location filename="../src/updater/updater.cpp" line="53"/>
+        <source>Error: No internet connection.</source>
+        <translation>Chyba: Žiadne pripojenie na internet.</translation>
+    </message>
+    <message>
+        <location filename="../src/updater/updater.cpp" line="66"/>
         <source>Downloading update, please wait...</source>
         <translation>Aktualizácia sa sťahuje, čakajte prosím...</translation>
     </message>
