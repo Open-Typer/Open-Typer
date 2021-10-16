@@ -28,12 +28,12 @@ int _lesson_count(FILE *cr)
 	int lessons[1000];
 	char *part = (char*) malloc(16);
 	rewind(cr);
-	while(c != EOF)
+	while((signed char) c != EOF)
 	{
 		// Lesson ID
 		lIDc=0;
 		strcpy(part,"");
-		while((c != '.') && (c != EOF))
+		while((c != '.') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != '.')
@@ -50,7 +50,7 @@ int _lesson_count(FILE *cr)
 			}
 			lIDc++;
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			if(lIDc == 1)
 				break;
@@ -68,9 +68,9 @@ int _lesson_count(FILE *cr)
 		}
 		c='\0';
 		// Sublesson ID, level ID and config
-		while((c != ' ') && (c != EOF))
+		while((c != ' ') && ((signed char) c != EOF))
 			c=getc(cr);
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (sublesson ID, level ID or config)\n",line+1);
 			#ifdef DEBUG
@@ -80,9 +80,9 @@ int _lesson_count(FILE *cr)
 		}
 		c='\0';
 		// Level text
-		while((c != '\n') && (c != EOF))
+		while((c != '\n') && ((signed char) c != EOF))
 			c=getc(cr);
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level text)\n",line+1);
 			#ifdef DEBUG
@@ -102,12 +102,12 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 	int sublessons[1000];
 	char *part = (char*) malloc(16);
 	rewind(cr);
-	while(c != EOF)
+	while((signed char) c != EOF)
 	{
 		// Lesson ID
 		lIDc=0;
 		strcpy(part,"");
-		while((c != '.') && (c != EOF))
+		while((c != '.') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != '.')
@@ -124,7 +124,7 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 			}
 			lIDc++;
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			if(lIDc == 1)
 				break;
@@ -139,7 +139,7 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 		// Sublesson ID
 		lIDc=0;
 		strcpy(part,"");
-		while((c != '.') && (c != EOF))
+		while((c != '.') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != '.')
@@ -156,7 +156,7 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 			}
 			lIDc++;
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			if(lIDc == 1)
 				break;
@@ -177,9 +177,9 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 		}
 		c='\0';
 		// Level ID and config
-		while((c != ' ') && (c != EOF))
+		while((c != ' ') && ((signed char) c != EOF))
 			c=getc(cr);
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID or config)\n",line+1);
 			#ifdef DEBUG
@@ -189,9 +189,9 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 		}
 		c='\0';
 		// Level text
-		while((c != '\n') && (c != EOF))
+		while((c != '\n') && ((signed char) c != EOF))
 			c=getc(cr);
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level text)\n",line+1);
 			#ifdef DEBUG
@@ -209,12 +209,12 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 	int line=0, out=0, lIDc, lesson, sublesson;
 	char *part = (char*) malloc(16);
 	rewind(cr);
-	while(c != EOF)
+	while((signed char) c != EOF)
 	{
 		// Lesson ID
 		strcpy(part,"");
 		lIDc=0;
-		while((c != '.') && (c != EOF))
+		while((c != '.') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != '.')
@@ -231,7 +231,7 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 			}
 			lIDc++;
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			if(lIDc == 1)
 				break;
@@ -246,7 +246,7 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 		// Sublesson ID
 		strcpy(part,"");
 		lIDc=0;
-		while((c != '.') && (c != EOF))
+		while((c != '.') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != '.')
@@ -263,7 +263,7 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 			}
 			lIDc++;
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			if(lIDc == 1)
 				break;
@@ -276,9 +276,9 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 		sublesson=strtol(part,NULL,10);
 		c='\0';
 		// Level ID and level config
-		while((c != ' ') && (c != EOF))
+		while((c != ' ') && ((signed char) c != EOF))
 			c=getc(cr);
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID or config)\n",line+1);
 			#ifdef DEBUG
@@ -290,9 +290,9 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 			out++;
 		c='\0';
 		// Level text
-		while((c != '\n') && (c != EOF))
+		while((c != '\n') && ((signed char) c != EOF))
 			c=getc(cr);
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level text)\n",line+1);
 			#ifdef DEBUG
@@ -319,12 +319,12 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 	// NOTE: realloc is used only in the text part
 	// Who would use a number longer than 16 bytes?
 	rewind(cr);
-	while(c != EOF)
+	while((signed char) c != EOF)
 	{
 		// Lesson ID
 		strcpy(part,"");
 		lIDc=0;
-		while((c != '.') && (c != EOF))
+		while((c != '.') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != '.')
@@ -341,7 +341,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 			}
 			lIDc++;
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			if(lIDc == 1)
 				break;
@@ -356,7 +356,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 		// Sublesson ID
 		strcpy(part,"");
 		lIDc=0;
-		while((c != '.') && (c != EOF))
+		while((c != '.') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != '.')
@@ -373,7 +373,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 			}
 			lIDc++;
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			if(lIDc == 1)
 				break;
@@ -387,7 +387,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 		c='\0';
 		// Level ID
 		strcpy(part,"");
-		while((c != ':') && (c != EOF))
+		while((c != ':') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != ':')
@@ -403,7 +403,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 				strncat(part,&c,1);
 			}
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID)\n",line+1);
 			#ifdef DEBUG
@@ -416,7 +416,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 		strcpy(part,"");
 		has_limit_ext=false;
 		has_length_ext=false;
-		while((c != ' ') && (c != EOF))
+		while((c != ' ') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if((c == ' ') || (c == ';'))
@@ -466,7 +466,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 					strncat(part,&c,1);
 			}
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level config)\n",line+1);
 			#ifdef DEBUG
@@ -486,7 +486,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 			length_extension = _REPEAT_LIMIT;
 		c='\0';
 		// Level text
-		while((c != '\n') && (c != EOF))
+		while((c != '\n') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 		}
@@ -508,12 +508,12 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 	// NOTE: realloc is used only in the text part
 	// Who would use a number longer than 16 bytes?
 	rewind(cr);
-	while(c != EOF)
+	while((signed char) c != EOF)
 	{
 		// Lesson ID
 		strcpy(part,"");
 		lIDc=0;
-		while((c != '.') && (c != EOF))
+		while((c != '.') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != '.')
@@ -530,7 +530,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 			}
 			lIDc++;
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			if(lIDc == 1)
 				break;
@@ -545,7 +545,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		// Sublesson ID
 		strcpy(part,"");
 		lIDc=0;
-		while((c != '.') && (c != EOF))
+		while((c != '.') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != '.')
@@ -562,7 +562,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 			}
 			lIDc++;
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			if(lIDc == 1)
 				break;
@@ -576,7 +576,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		c='\0';
 		// Level ID
 		strcpy(part,"");
-		while((c != ':') && (c != EOF))
+		while((c != ':') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if(c != ':')
@@ -592,7 +592,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 				strncat(part,&c,1);
 			}
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID)\n",line+1);
 			#ifdef DEBUG
@@ -605,7 +605,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		strcpy(part,"");
 		has_limit_ext=false;
 		has_length_ext=false;
-		while((c != ' ') && (c != EOF))
+		while((c != ' ') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
 			if((c == ' ') || (c == ';'))
@@ -665,7 +665,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 					strncat(part,&c,1);
 			}
 		}
-		if(c == EOF)
+		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level config)\n",line+1);
 			#ifdef DEBUG
@@ -709,10 +709,10 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		#endif
 		out = (char*) malloc(limit_extension*2+1);
 		strcpy(out,"");
-		while((c != '\n') && (c != EOF))
+		while((c != '\n') && ((signed char) c != EOF))
 		{
 			strcpy(part,"");
-			while((c != '\n') && (c != EOF))
+			while((c != '\n') && ((signed char) c != EOF))
 			{
 				c=getc(cr);
 				if((c != '\n') && (c != 0x0d))
@@ -725,7 +725,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 					strncat(part,&c,1);
 				}
 			}
-			if(c == EOF)
+			if((signed char) c == EOF)
 			{
 				printf("Invalid config on line %d. (level text)\n",line+1);
 				#ifdef DEBUG
