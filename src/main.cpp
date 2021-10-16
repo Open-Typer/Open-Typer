@@ -21,6 +21,7 @@
 #include <QApplication>
 #include <QLabel>
 #include <QTranslator>
+#include <QMessageBox>
 #include "opentyper.h"
 
 int main(int argc, char *argv[])
@@ -31,6 +32,9 @@ int main(int argc, char *argv[])
 	{
 		QFile::remove(QString(argv[1]));
 		QFile::rename(QString(argv[1])+".part",QString(argv[1]));
+		QMessageBox updateSuccess;
+		updateSuccess.setText(QObject::tr("Successfully updated."));
+		updateSuccess.exec();
 	}
 	// Load translations
 	QTranslator* translator = new QTranslator();
