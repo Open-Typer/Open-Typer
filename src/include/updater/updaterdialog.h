@@ -22,6 +22,7 @@
 #define UPDATERDIALOG_H
 
 #include <QDialog>
+#include "updater.h"
 
 namespace Ui {
 class UpdaterDialog;
@@ -33,6 +34,8 @@ class UpdaterDialog : public QDialog
 	public:
 		explicit UpdaterDialog(QWidget *parent = nullptr);
 		~UpdaterDialog();
+		void setCurrentVer(QString ver);
+		void setNewVer(QString ver);
 	
 	private:
 		Ui::UpdaterDialog *ui;

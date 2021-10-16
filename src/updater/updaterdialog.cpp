@@ -35,6 +35,19 @@ UpdaterDialog::~UpdaterDialog()
 	delete ui;
 }
 
+void UpdaterDialog::setCurrentVer(QString ver)
+{
+	ui->currentVerLabel->setText(
+		ui->currentVerLabel->text() + " " + ver);
+}
+
+void UpdaterDialog::setNewVer(QString ver)
+{
+	ui->newVerLabel->setText(
+		ui->newVerLabel->text() + " " + ver);
+	ui->changeLogLabel->setText(tr("Change log is available at") + " <a href=\"" + _GITHUB_REPO + "/releases/tag/" + ver + "\">GitHub</a>");
+}
+
 void UpdaterDialog::yesClicked(void)
 {
 	accept();
