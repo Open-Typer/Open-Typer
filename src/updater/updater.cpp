@@ -38,6 +38,8 @@ void Updater::initUpdate()
 	{
 		// New version found
 		UpdaterDialog dialog;
+		dialog.setCurrentVer("v"+QString(_VERSION));
+		dialog.setNewVer("v"+QString(newVer));
 		if(dialog.exec() == QDialog::Accepted)
 		{
 			const char *executable;
