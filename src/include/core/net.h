@@ -27,6 +27,13 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
+class Net : public QObject
+{
+	Q_OBJECT
+	public:
+		bool internetConnected();
+};
+
 class Downloader : public QObject
 {
 	Q_OBJECT

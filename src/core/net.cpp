@@ -42,3 +42,17 @@ QByteArray Downloader::downloadedData() const
 {
 	return m_DownloadedData;
 }
+
+bool Net::internetConnected()
+{
+	QTcpSocket* sock = new QTcpSocket(this);
+	sock->connectToHost("8.8.8.8", 53);
+	bool connected = sock->waitForConnected(30000);//ms
+	if (!connected)
+	{
+		sock->abort();
+		return false;
+	}
+	sock->close();
+	return true;
+}
