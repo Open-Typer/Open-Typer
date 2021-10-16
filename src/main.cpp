@@ -42,6 +42,8 @@ int main(int argc, char *argv[])
 		updateSuccess.setText(QObject::tr("Successfully updated."));
 		updateSuccess.exec();
 	}
+	// Set icon
+	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
 	OpenTyper w;
 	w.setWindowState(Qt::WindowMaximized);
 	w.show();

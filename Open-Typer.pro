@@ -50,6 +50,8 @@ TRANSLATIONS += \
 RESOURCES += \
     res.qrc
 
+win32:RC_ICONS += res/images/icon.ico
+
 QT += network
 
 # Default rules for deployment.
