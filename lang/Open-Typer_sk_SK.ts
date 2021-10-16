@@ -111,6 +111,14 @@
     </message>
 </context>
 <context>
+    <name>Updater</name>
+    <message>
+        <location filename="../src/updater/updater.cpp" line="54"/>
+        <source>Downloading update, please wait...</source>
+        <translation>Aktualizácia sa sťahuje, čakajte prosím...</translation>
+    </message>
+</context>
+<context>
     <name>UpdaterDialog</name>
     <message>
         <location filename="../ui/updaterdialog.ui" line="26"/>
@@ -118,26 +126,41 @@
         <translation>Aktualizácia</translation>
     </message>
     <message>
-        <location filename="../ui/updaterdialog.ui" line="50"/>
+        <location filename="../ui/updaterdialog.ui" line="100"/>
+        <source>Current version:</source>
+        <translation>Aktuálna verzia:</translation>
+    </message>
+    <message>
+        <location filename="../ui/updaterdialog.ui" line="125"/>
+        <source>New version:</source>
+        <translation>Nová verzia:</translation>
+    </message>
+    <message>
+        <location filename="../ui/updaterdialog.ui" line="170"/>
         <source>Yes</source>
         <translation>Áno</translation>
     </message>
     <message>
-        <location filename="../ui/updaterdialog.ui" line="57"/>
+        <location filename="../ui/updaterdialog.ui" line="177"/>
         <source>No</source>
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../ui/updaterdialog.ui" line="72"/>
+        <location filename="../ui/updaterdialog.ui" line="37"/>
         <source>Update available</source>
         <translation>Dostupná aktualizácia</translation>
     </message>
     <message>
-        <location filename="../ui/updaterdialog.ui" line="82"/>
+        <location filename="../ui/updaterdialog.ui" line="47"/>
         <source>There&apos;s a new update available.
 Would you like to download and install it?</source>
         <translation>Je dostupná nová aktualizácia.
 Prajete si ju stiahnuť a nainštalovať?</translation>
+    </message>
+    <message>
+        <location filename="../src/updater/updaterdialog.cpp" line="48"/>
+        <source>Change log is available at</source>
+        <translation>Zoznam zmien je dostupný na</translation>
     </message>
 </context>
 <context>
