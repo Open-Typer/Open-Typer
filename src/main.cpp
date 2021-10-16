@@ -27,6 +27,12 @@
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
+	// Load translations
+	QTranslator* translator = new QTranslator();
+	if(translator->load(QLocale(), QLatin1String("Open-Typer"), QLatin1String("_"), QLatin1String(":/res/lang")))
+		a.installTranslator(translator);
+	else
+		printf("D: Failed to load language\n");
 	// Check if the program was recently updated
 	if(argc > 1)
 	{
@@ -36,12 +42,6 @@ int main(int argc, char *argv[])
 		updateSuccess.setText(QObject::tr("Successfully updated."));
 		updateSuccess.exec();
 	}
-	// Load translations
-	QTranslator* translator = new QTranslator();
-	if(translator->load(QLocale(), QLatin1String("Open-Typer"), QLatin1String("_"), QLatin1String(":/res/lang")))
-		a.installTranslator(translator);
-	else
-		printf("D: Failed to load language\n");
 	OpenTyper w;
 	w.setWindowState(Qt::WindowMaximized);
 	w.show();
