@@ -26,6 +26,7 @@
 #include <QSaveFile>
 #include <QFile>
 #include <QProcess>
+#include <sys/stat.h>
 #include "net.h"
 #include "version.h"
 #include "updaterdialog.h"
