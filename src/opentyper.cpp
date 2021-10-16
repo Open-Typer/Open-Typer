@@ -294,7 +294,7 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	ui->paper->setMinimumWidth(newWidth+20);
 	// Adjust levelSpace, levelLabel and inputLabel height
 	int newHeight = _line_count(displayLevel) *
-		(ui->levelLabel->font().pointSize()) * 1.5 + 60;
+		(ui->levelLabel->fontMetrics().capHeight()) * 2 + 60;
 	ui->levelSpace->setMinimumHeight(newHeight);
 	ui->levelLabel->resize(ui->levelLabel->width(),
 		newHeight);
