@@ -84,6 +84,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->boldTextButton,SIGNAL(clicked()),this,SLOT(setBoldText()));
 	connect(ui->italicTextButton,SIGNAL(clicked()),this,SLOT(setItalicText()));
 	connect(ui->underlineTextButton,SIGNAL(clicked()),this,SLOT(setUnderlineText()));
+	connect(ui->fontResetButton,SIGNAL(clicked()),this,SLOT(resetFont()));
 	// Check for updates
 	new Updater();
 	// Select "Training" tab
@@ -632,6 +633,16 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	ui->levelLabel->setFont(newFont);
 	ui->inputLabel->setFont(newFont);
 	ui->mistakeLabel->setFont(mistakeLabelFont);
+}
+
+void OpenTyper::resetFont(void)
+{
+	// Default font
+	setFont("Courier", 	// Family
+		14,		// Point size
+		false,		// Bold
+		false,		// Italic
+		false);	// Underline
 }
 
 int OpenTyper::labelWidth(QLabel *targetLabel)

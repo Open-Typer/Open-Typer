@@ -80,5 +80,6 @@ private slots:
     void setBoldText(void);
     void setItalicText(void);
     void setUnderlineText(void);
+    void resetFont(void);
 };
 #endif // OPENTYPER_H
