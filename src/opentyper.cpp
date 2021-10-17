@@ -77,6 +77,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->fontSizeBox,SIGNAL(valueChanged(int)),this,SLOT(changeFontSize(int)));
 	connect(ui->boldTextButton,SIGNAL(clicked()),this,SLOT(setBoldText()));
 	connect(ui->italicTextButton,SIGNAL(clicked()),this,SLOT(setItalicText()));
+	connect(ui->underlineTextButton,SIGNAL(clicked()),this,SLOT(setUnderlineText()));
 	// Check for updates
 	new Updater();
 	// Start timer
@@ -594,4 +595,12 @@ void OpenTyper::setItalicText(void)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);
+}
+
+void OpenTyper::setUnderlineText(void)
+{
+	QFont oldFont = ui->levelLabel->font();
+	oldFont.setUnderline(ui->underlineTextButton->isChecked());
+	ui->levelLabel->setFont(oldFont);
+	ui->inputLabel->setFont(oldFont);
 }
