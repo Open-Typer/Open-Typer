@@ -226,7 +226,7 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 		{
 			switch(i) {
 				case 1:
-					sublessons += tr("Finger-key-combinations");
+					sublessons += tr("Fingering");
 					break;
 				case 2:
 					sublessons += tr("Words");
