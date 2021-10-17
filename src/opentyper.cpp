@@ -607,7 +607,7 @@ void OpenTyper::setUnderlineText(void)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/fontitalic",ui->italicTextButton->isChecked());
+	settings.setValue("theme/fontunderline",ui->underlineTextButton->isChecked());
 	adjustSize();
 }
 
