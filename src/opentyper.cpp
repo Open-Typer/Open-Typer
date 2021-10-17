@@ -80,6 +80,8 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->underlineTextButton,SIGNAL(clicked()),this,SLOT(setUnderlineText()));
 	// Check for updates
 	new Updater();
+	// Select "Training" tab
+	ui->tabWidget->setCurrentIndex(1);
 	// Start timer
 	secLoop->start(1000);
 	// Load config and start
