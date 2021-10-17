@@ -74,6 +74,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->levelSelectionList,SIGNAL(activated(int)),this,SLOT(levelSelectionListIndexChanged(int)));
 	connect(ui->randomOrderCheckBox,SIGNAL(clicked(bool)),this,SLOT(randomOrderCheckBoxChanged(bool)));
 	connect(ui->fontComboBox,SIGNAL(currentFontChanged(QFont)),this,SLOT(changeFont(QFont)));
+	connect(ui->fontSizeBox,SIGNAL(valueChanged(int)),this,SLOT(changeFontSize(int)));
 	// Check for updates
 	new Updater();
 	// Start timer
@@ -561,6 +562,15 @@ void OpenTyper::changeFont(QFont font)
 {
 	QFont oldFont = ui->levelLabel->font();
 	oldFont.setFamily(font.family());
+	ui->levelLabel->setFont(oldFont);
+	ui->inputLabel->setFont(oldFont);
+	ui->mistakeLabel->setFont(oldFont);
+}
+
+void OpenTyper::changeFontSize(int size)
+{
+	QFont oldFont = ui->levelLabel->font();
+	oldFont.setPointSize(size);
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);

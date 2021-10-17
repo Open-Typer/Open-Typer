@@ -73,5 +73,6 @@ private slots:
     void levelSelectionListIndexChanged(int index);
     void randomOrderCheckBoxChanged(bool checked);
     void changeFont(QFont font);
+    void changeFontSize(int size);
 };
 #endif // OPENTYPER_H
