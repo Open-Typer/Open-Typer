@@ -76,6 +76,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->fontComboBox,SIGNAL(currentFontChanged(QFont)),this,SLOT(changeFont(QFont)));
 	connect(ui->fontSizeBox,SIGNAL(valueChanged(int)),this,SLOT(changeFontSize(int)));
 	connect(ui->boldTextButton,SIGNAL(clicked()),this,SLOT(setBoldText()));
+	connect(ui->italicTextButton,SIGNAL(clicked()),this,SLOT(setItalicText()));
 	// Check for updates
 	new Updater();
 	// Start timer
@@ -581,6 +582,15 @@ void OpenTyper::setBoldText(void)
 {
 	QFont oldFont = ui->levelLabel->font();
 	oldFont.setBold(ui->boldTextButton->isChecked());
+	ui->levelLabel->setFont(oldFont);
+	ui->inputLabel->setFont(oldFont);
+	ui->mistakeLabel->setFont(oldFont);
+}
+
+void OpenTyper::setItalicText(void)
+{
+	QFont oldFont = ui->levelLabel->font();
+	oldFont.setItalic(ui->italicTextButton->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);

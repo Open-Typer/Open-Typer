@@ -75,5 +75,6 @@ private slots:
     void changeFont(QFont font);
     void changeFontSize(int size);
     void setBoldText(void);
+    void setItalicText(void);
 };
 #endif // OPENTYPER_H
