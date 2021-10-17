@@ -633,6 +633,13 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	ui->levelLabel->setFont(newFont);
 	ui->inputLabel->setFont(newFont);
 	ui->mistakeLabel->setFont(mistakeLabelFont);
+	// Save settings
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	settings.setValue("theme/font",fontFamily);
+	settings.setValue("theme/fontsize",fontSize);
+	settings.setValue("theme/fontbold",fontBold);
+	settings.setValue("theme/fontitalic",fontItalic);
+	settings.setValue("theme/fontunderline",fontUnderline);
 }
 
 void OpenTyper::resetFont(void)
