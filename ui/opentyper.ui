@@ -279,7 +279,7 @@
          </rect>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::WinPanel</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
@@ -404,7 +404,7 @@
          </rect>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::WinPanel</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
@@ -469,7 +469,7 @@
          </rect>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::WinPanel</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
@@ -608,7 +608,7 @@
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::WinPanel</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
