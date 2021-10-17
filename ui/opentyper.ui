@@ -695,7 +695,7 @@
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="text">
-          <string>U</string>
+          <string notr="true">U</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -719,7 +719,7 @@
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="text">
-          <string>I</string>
+          <string notr="true">I</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -744,7 +744,7 @@
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="text">
-          <string>B</string>
+          <string notr="true">B</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
