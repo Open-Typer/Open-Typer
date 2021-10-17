@@ -286,25 +286,7 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 		ui->randomOrderCheckBox->isChecked());
 	displayLevel = _init_level(level);
 	ui->levelLabel->setText(displayLevel);
-	// Adjust paper width
-	QString longString = "";
-	for(int i=0; i < levelLengthExtension; i++)
-		longString += ' ';
-	int newWidth = ui->levelLabel->fontMetrics().boundingRect(longString).width() +
-		(ui->levelLabel->font().pointSize()) * 5;
-	ui->levelLabel->resize(newWidth,
-		ui->levelLabel->height());
-	ui->inputLabel->resize(newWidth,
-		ui->inputLabel->height());
-	ui->paper->setMinimumWidth(newWidth+20);
-	// Adjust levelSpace, levelLabel and inputLabel height
-	int newHeight = _line_count(displayLevel) *
-		(ui->levelLabel->fontMetrics().capHeight()) * 2 + 60;
-	ui->levelSpace->setMinimumHeight(newHeight);
-	ui->levelLabel->resize(ui->levelLabel->width(),
-		newHeight);
-	ui->inputLabel->resize(ui->inputLabel->width(),
-		newHeight);
+	adjustSize();
 	// Init level input
 	input = "";
 	displayInput = "";
@@ -568,6 +550,7 @@ void OpenTyper::changeFont(QFont font)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);
+	adjustSize();
 }
 
 void OpenTyper::changeFontSize(int size)
@@ -577,6 +560,7 @@ void OpenTyper::changeFontSize(int size)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);
+	adjustSize();
 }
 
 void OpenTyper::setBoldText(void)
@@ -586,6 +570,7 @@ void OpenTyper::setBoldText(void)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);
+	adjustSize();
 }
 
 void OpenTyper::setItalicText(void)
@@ -595,6 +580,7 @@ void OpenTyper::setItalicText(void)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);
+	adjustSize();
 }
 
 void OpenTyper::setUnderlineText(void)
@@ -603,4 +589,28 @@ void OpenTyper::setUnderlineText(void)
 	oldFont.setUnderline(ui->underlineTextButton->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
+	adjustSize();
+}
+
+void OpenTyper::adjustSize(void)
+{
+	// Adjust paper width
+	QString longString = "";
+	for(int i=0; i < levelLengthExtension; i++)
+		longString += ' ';
+	int newWidth = ui->levelLabel->fontMetrics().boundingRect(longString).width() +
+		(ui->levelLabel->font().pointSize()) * 5;
+	ui->levelLabel->resize(newWidth,
+		ui->levelLabel->height());
+	ui->inputLabel->resize(newWidth,
+		ui->inputLabel->height());
+	ui->paper->setMinimumWidth(newWidth+20);
+	// Adjust levelSpace, levelLabel and inputLabel height
+	int newHeight = _line_count(displayLevel) *
+		(ui->levelLabel->fontMetrics().capHeight()) * 2 + 60;
+	ui->levelSpace->setMinimumHeight(newHeight);
+	ui->levelLabel->resize(ui->levelLabel->width(),
+		newHeight);
+	ui->inputLabel->resize(ui->inputLabel->width(),
+		newHeight);
 }

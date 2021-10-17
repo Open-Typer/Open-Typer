@@ -55,6 +55,7 @@ public:
 	int _line_count(QString str);
 	Updater *versionHdw;
 	void autoUpdate(void);
+	void adjustSize(void);
 
 protected:
 	void keyPressEvent(QKeyEvent *event);
