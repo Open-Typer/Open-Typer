@@ -74,5 +74,6 @@ private slots:
     void randomOrderCheckBoxChanged(bool checked);
     void changeFont(QFont font);
     void changeFontSize(int size);
+    void setBoldText(void);
 };
 #endif // OPENTYPER_H
