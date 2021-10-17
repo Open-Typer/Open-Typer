@@ -72,5 +72,6 @@ private slots:
     void sublessonSelectionListIndexChanged(int index);
     void levelSelectionListIndexChanged(int index);
     void randomOrderCheckBoxChanged(bool checked);
+    void changeFont(QFont font);
 };
 #endif // OPENTYPER_H

@@ -73,6 +73,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->sublessonSelectionList,SIGNAL(activated(int)),this,SLOT(sublessonSelectionListIndexChanged(int)));
 	connect(ui->levelSelectionList,SIGNAL(activated(int)),this,SLOT(levelSelectionListIndexChanged(int)));
 	connect(ui->randomOrderCheckBox,SIGNAL(clicked(bool)),this,SLOT(randomOrderCheckBoxChanged(bool)));
+	connect(ui->fontComboBox,SIGNAL(currentFontChanged(QFont)),this,SLOT(changeFont(QFont)));
 	// Check for updates
 	new Updater();
 	// Start timer
@@ -554,4 +555,13 @@ void OpenTyper::updateCurrentTime(void)
 		time = lastTime;
 	ui->currentTimeNumber->setText(QString::number(time));
 	updateColors();
+}
+
+void OpenTyper::changeFont(QFont font)
+{
+	QFont oldFont = ui->levelLabel->font();
+	oldFont.setFamily(font.family());
+	ui->levelLabel->setFont(oldFont);
+	ui->inputLabel->setFont(oldFont);
+	ui->mistakeLabel->setFont(oldFont);
 }
