@@ -597,7 +597,7 @@ void OpenTyper::adjustSize(void)
 	// Adjust paper width
 	QString longString = "";
 	for(int i=0; i < levelLengthExtension; i++)
-		longString += ' ';
+		longString += 'H';
 	int newWidth = ui->levelLabel->fontMetrics().boundingRect(longString).width() +
 		(ui->levelLabel->font().pointSize()) * 5;
 	ui->levelLabel->resize(newWidth,
