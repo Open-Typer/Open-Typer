@@ -592,14 +592,32 @@ void OpenTyper::setUnderlineText(void)
 	adjustSize();
 }
 
+int OpenTyper::labelWidth(QLabel *targetLabel)
+{
+	// Checks every line and gets the best label width
+	int i, current, max=50, len;
+	QString labelText = targetLabel->text();
+	QString line = "";
+	len = QStringLen(labelText);
+	for(i=0; i < len; i++)
+	{
+		if((labelText[i] == '\n') || (i+1 == len))
+		{
+			current = targetLabel->fontMetrics().boundingRect(line).width() +
+				targetLabel->font().pointSize() * 5;
+			if(current > max)
+				max = current;
+			line = "";
+		}
+		line += labelText[i];
+	}
+	return max;
+}
+
 void OpenTyper::adjustSize(void)
 {
 	// Adjust paper width
-	QString longString = "";
-	for(int i=0; i < levelLengthExtension; i++)
-		longString += 'H';
-	int newWidth = ui->levelLabel->fontMetrics().boundingRect(longString).width() +
-		(ui->levelLabel->font().pointSize()) * 5;
+	int newWidth = labelWidth(ui->levelLabel);
 	ui->levelLabel->resize(newWidth,
 		ui->levelLabel->height());
 	ui->inputLabel->resize(newWidth,

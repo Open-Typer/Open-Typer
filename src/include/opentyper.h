@@ -56,6 +56,7 @@ public:
 	Updater *versionHdw;
 	void autoUpdate(void);
 	void adjustSize(void);
+	int labelWidth(QLabel *targetLabel);
 
 protected:
 	void keyPressEvent(QKeyEvent *event);
