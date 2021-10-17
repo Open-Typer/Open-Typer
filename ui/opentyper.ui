@@ -228,11 +228,11 @@
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>125</height>
+        <height>130</height>
        </size>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="packsTab">
        <attribute name="title">
@@ -275,7 +275,7 @@
           <x>0</x>
           <y>0</y>
           <width>201</width>
-          <height>91</height>
+          <height>101</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -400,7 +400,7 @@
           <x>530</x>
           <y>0</y>
           <width>221</width>
-          <height>91</height>
+          <height>101</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -465,7 +465,7 @@
           <x>200</x>
           <y>-1</y>
           <width>331</width>
-          <height>91</height>
+          <height>101</height>
          </rect>
         </property>
         <property name="frameShape">
