@@ -80,32 +80,47 @@
         <translation>Náhodné poradie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="147"/>
+        <location filename="../ui/opentyper.ui" line="587"/>
+        <source>Customize</source>
+        <translation>Prispôsobiť</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="626"/>
+        <source>Font:</source>
+        <translation>Písmo:</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="652"/>
+        <source>Font size:</source>
+        <translation>Veľkosť písma:</translation>
+    </message>
+    <message>
+        <location filename="../src/opentyper.cpp" line="152"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="229"/>
-        <source>Finger-key-combinations</source>
+        <location filename="../src/opentyper.cpp" line="234"/>
+        <source>Fingering</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="232"/>
+        <location filename="../src/opentyper.cpp" line="237"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="235"/>
+        <location filename="../src/opentyper.cpp" line="240"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="238"/>
+        <location filename="../src/opentyper.cpp" line="243"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="316"/>
+        <location filename="../src/opentyper.cpp" line="303"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
@@ -113,7 +128,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="36"/>
+        <location filename="../src/main.cpp" line="42"/>
         <source>Successfully updated.</source>
         <translation>Úspešne aktualizované.</translation>
     </message>
