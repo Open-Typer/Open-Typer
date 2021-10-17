@@ -463,7 +463,7 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 		{
 			displayInput += "<br>";
 			ui->mistakeLabel->setText(
-				ui->mistakeLabel->text() + "\n");
+				ui->mistakeLabel->text() + "<br>");
 		}
 		else
 		{
@@ -471,7 +471,7 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 				ignoreMistakeLabelAppend=false;
 			else
 				ui->mistakeLabel->setText(
-					ui->mistakeLabel->text() + " ");
+					ui->mistakeLabel->text() + "<span style='color: rgba(0,0,0,0)'>" + event->text() + "</span>");
 		}
 		ui->inputLabel->setText(displayInput+"<span style='color: blue';'>|</span>");
 		levelPos++;
