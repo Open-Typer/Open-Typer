@@ -95,32 +95,37 @@
         <translation>Veľkosť písma:</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="152"/>
+        <location filename="../ui/opentyper.ui" line="766"/>
+        <source>Reset</source>
+        <translation>Obnoviť</translation>
+    </message>
+    <message>
+        <location filename="../src/opentyper.cpp" line="161"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="234"/>
+        <location filename="../src/opentyper.cpp" line="243"/>
         <source>Fingering</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="237"/>
+        <location filename="../src/opentyper.cpp" line="246"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="240"/>
+        <location filename="../src/opentyper.cpp" line="249"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="243"/>
+        <location filename="../src/opentyper.cpp" line="252"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="303"/>
+        <location filename="../src/opentyper.cpp" line="312"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
