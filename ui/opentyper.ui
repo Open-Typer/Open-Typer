@@ -750,6 +750,22 @@
           <bool>true</bool>
          </property>
         </widget>
+        <widget class="QPushButton" name="fontResetButton">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>70</y>
+           <width>80</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="text">
+          <string>Reset</string>
+         </property>
+        </widget>
        </widget>
       </widget>
      </widget>
