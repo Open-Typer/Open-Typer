@@ -61,6 +61,12 @@ OpenTyper::OpenTyper(QWidget *parent)
 		// TODO: Change this to en_US after a config for it is added.
 		configName = "sk_SK-QWERTZ-B1";
 	}
+	// Font
+	setFont(settings.value("theme/font","Courier").toString(),
+		settings.value("theme/fontsize","14").toInt(),
+		settings.value("theme/fontbold","false").toBool(),
+		settings.value("theme/fontitalic","false").toBool(),
+		settings.value("theme/fontunderline","false").toBool());
 	// Create timer (used to update currentTimeNumber every second)
 	QTimer *secLoop = new QTimer(this);
 	// Connect signals to slots
@@ -552,6 +558,8 @@ void OpenTyper::changeFont(QFont font)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	settings.setValue("theme/font",font.family());
 	adjustSize();
 }
 
@@ -562,6 +570,8 @@ void OpenTyper::changeFontSize(int size)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	settings.setValue("theme/fontsize",size);
 	adjustSize();
 }
 
@@ -572,6 +582,8 @@ void OpenTyper::setBoldText(void)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	settings.setValue("theme/fontbold",ui->boldTextButton->isChecked());
 	adjustSize();
 }
 
@@ -582,6 +594,8 @@ void OpenTyper::setItalicText(void)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	ui->mistakeLabel->setFont(oldFont);
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	settings.setValue("theme/fontitalic",ui->italicTextButton->isChecked());
 	adjustSize();
 }
 
@@ -591,7 +605,33 @@ void OpenTyper::setUnderlineText(void)
 	oldFont.setUnderline(ui->underlineTextButton->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	settings.setValue("theme/fontitalic",ui->italicTextButton->isChecked());
 	adjustSize();
+}
+
+void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline)
+{
+	QFont newFont, mistakeLabelFont;
+	// Set font
+	newFont.setFamily(fontFamily);
+	newFont.setPointSize(fontSize);
+	newFont.setBold(fontBold);
+	newFont.setItalic(fontItalic);
+	newFont.setUnderline(fontUnderline);
+	// Update input widgets
+	ui->fontComboBox->setCurrentFont(newFont);
+	ui->fontSizeBox->setValue(fontSize);
+	ui->boldTextButton->setChecked(fontBold);
+	ui->italicTextButton->setChecked(fontItalic);
+	ui->underlineTextButton->setChecked(fontUnderline);
+	// mistakeLabel cannot have underlined font enabled
+	mistakeLabelFont = newFont;
+	mistakeLabelFont.setUnderline(false);
+	// Update labels
+	ui->levelLabel->setFont(newFont);
+	ui->inputLabel->setFont(newFont);
+	ui->mistakeLabel->setFont(mistakeLabelFont);
 }
 
 int OpenTyper::labelWidth(QLabel *targetLabel)

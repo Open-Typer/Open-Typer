@@ -57,6 +57,7 @@ public:
 	void autoUpdate(void);
 	void adjustSize(void);
 	int labelWidth(QLabel *targetLabel);
+	void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
 
 protected:
 	void keyPressEvent(QKeyEvent *event);
