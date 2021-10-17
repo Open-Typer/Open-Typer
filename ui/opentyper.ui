@@ -133,9 +133,9 @@
          <widget class="QLabel" name="inputLabel">
           <property name="geometry">
            <rect>
-            <x>0</x>
+            <x>5</x>
             <y>0</y>
-            <width>1481</width>
+            <width>1476</width>
             <height>101</height>
            </rect>
           </property>
@@ -177,8 +177,8 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>0</y>
-            <width>1481</width>
+            <y>5</y>
+            <width>1476</width>
             <height>101</height>
            </rect>
           </property>
