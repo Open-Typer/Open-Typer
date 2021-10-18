@@ -815,7 +815,8 @@ void OpenTyper::setColors(void)
 		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",paperRedColor,paperGreenColor,paperBlueColor);
 		ui->paper->setStyleSheet(styleSheet);
 		// Fix inputLabel automatically set background color
-		ui->inputLabel->setStyleSheet("background-color: rgba(0,0,0,0)");
+		ui->inputLabel->setStyleSheet(
+			ui->inputLabel->styleSheet() + ";\nbackground-color: rgba(0,0,0,0)");
 		// Restore background color after setting paper color
 		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",bgRedColor,bgGreenColor,bgBlueColor);
 		ui->mainFrame->setStyleSheet(styleSheet);
