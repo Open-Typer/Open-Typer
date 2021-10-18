@@ -89,5 +89,6 @@ private slots:
     void resetFont(void);
     void changeLevelTextColor(void);
     void changeInputTextColor(void);
+    void resetTextColors(void);
 };
 #endif // OPENTYPER_H

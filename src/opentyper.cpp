@@ -99,6 +99,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->fontResetButton,SIGNAL(clicked()),this,SLOT(resetFont()));
 	connect(ui->levelTextColorButton,SIGNAL(clicked()),this,SLOT(changeLevelTextColor()));
 	connect(ui->inputTextColorButton,SIGNAL(clicked()),this,SLOT(changeInputTextColor()));
+	connect(ui->resetTextColorButton,SIGNAL(clicked()),this,SLOT(resetTextColors()));
 	// Check for updates
 	new Updater();
 	// Select "Training" tab
@@ -733,12 +734,28 @@ void OpenTyper::setColors(void)
 		sprintf(styleSheet,"color: rgb(%d, %d, %d)",levelTextRedColor,levelTextGreenColor,levelTextBlueColor);
 		ui->levelLabel->setStyleSheet(styleSheet);
 	}
+	else
+	{
+		// Default level text color
+		levelTextRedColor = 0;
+		levelTextGreenColor = 125;
+		levelTextBlueColor = 175;
+		ui->levelLabel->setStyleSheet("color: rgb(0, 125, 175)");
+	}
 	// Set input text color
 	if(customInputTextColor)
 	{
 		styleSheet = (char*) malloc(128);
 		sprintf(styleSheet,"color: rgb(%d, %d, %d)",inputTextRedColor,inputTextGreenColor,inputTextBlueColor);
 		ui->inputLabel->setStyleSheet(styleSheet);
+	}
+	else
+	{
+		// Default input text color
+		ui->inputLabel->setStyleSheet("");
+		inputTextRedColor = ui->inputLabel->palette().color(QPalette::Text).red();
+		inputTextGreenColor = ui->inputLabel->palette().color(QPalette::Text).green();
+		inputTextBlueColor = ui->inputLabel->palette().color(QPalette::Text).blue();
 	}
 }
 void OpenTyper::changeLevelTextColor(void)
@@ -773,4 +790,13 @@ void OpenTyper::changeInputTextColor(void)
 		saveColorSettings();
 		setColors();
 	}
+}
+
+void OpenTyper::resetTextColors(void)
+{
+	// There's no need to set RGB values because they're defined in setColors()
+	customLevelTextColor = false;
+	customInputTextColor = false;
+	saveColorSettings();
+	setColors();
 }
