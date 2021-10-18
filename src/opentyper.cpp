@@ -84,6 +84,11 @@ OpenTyper::OpenTyper(QWidget *parent)
 	bgRedColor = settings.value("theme/bgred","0").toInt();
 	bgGreenColor = settings.value("theme/bggreen","0").toInt();
 	bgBlueColor = settings.value("theme/bgblue","0").toInt();
+	// Paper
+	customPaperColor = settings.value("theme/custompapercolor","false").toBool();
+	paperRedColor = settings.value("theme/paperred","0").toInt();
+	paperGreenColor = settings.value("theme/papergreen","0").toInt();
+	paperBlueColor = settings.value("theme/paperblue","0").toInt();
 	// Create timer (used to update currentTimeNumber every second)
 	QTimer *secLoop = new QTimer(this);
 	// Connect signals to slots
@@ -106,6 +111,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->inputTextColorButton,SIGNAL(clicked()),this,SLOT(changeInputTextColor()));
 	connect(ui->resetTextColorButton,SIGNAL(clicked()),this,SLOT(resetTextColors()));
 	connect(ui->bgColorButton,SIGNAL(clicked()),this,SLOT(changeBgColor()));
+	connect(ui->paperColorButton,SIGNAL(clicked()),this,SLOT(changePaperColor()));
 	// Check for updates
 	new Updater();
 	// Select "Training" tab
@@ -733,6 +739,11 @@ void OpenTyper::saveColorSettings(void)
 	settings.setValue("theme/bgred",bgRedColor);
 	settings.setValue("theme/bggreen",bgGreenColor);
 	settings.setValue("theme/bgblue",bgBlueColor);
+	// Paper
+	settings.setValue("theme/custompapercolor",customPaperColor);
+	settings.setValue("theme/paperred",paperRedColor);
+	settings.setValue("theme/papergreen",paperGreenColor);
+	settings.setValue("theme/paperblue",paperBlueColor);
 }
 
 void OpenTyper::setColors(void)
@@ -782,6 +793,25 @@ void OpenTyper::setColors(void)
 		bgRedColor = ui->mainFrame->palette().color(QPalette::Base).red();
 		bgGreenColor = ui->mainFrame->palette().color(QPalette::Base).green();
 		bgBlueColor = ui->mainFrame->palette().color(QPalette::Base).blue();
+	}
+	// Set paper color
+	if(customPaperColor)
+	{
+		styleSheet = (char*) malloc(128);
+		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",paperRedColor,paperGreenColor,paperBlueColor);
+		ui->paper->setStyleSheet(styleSheet);
+	}
+	else
+	{
+		// Default paper color
+		paperRedColor = ui->paper->palette().color(QPalette::Base).red();
+		paperGreenColor = ui->paper->palette().color(QPalette::Base).green();
+		paperBlueColor = ui->paper->palette().color(QPalette::Base).blue();
+		styleSheet = (char*) malloc(128);
+		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",paperRedColor,paperGreenColor,paperBlueColor);
+		ui->paper->setStyleSheet(styleSheet);
+		// Fix inputLabel automatically set background color
+		ui->inputLabel->setStyleSheet("background-color: rgba(0,0,0,0)");
 	}
 }
 void OpenTyper::changeLevelTextColor(void)
@@ -839,6 +869,23 @@ void OpenTyper::changeBgColor(void)
 		bgGreenColor = colorDialog.greenColor;
 		bgBlueColor = colorDialog.blueColor;
 		customBgColor = true;
+		saveColorSettings();
+		setColors();
+	}
+}
+
+void OpenTyper::changePaperColor(void)
+{
+	SimpleColorDialog colorDialog;
+	colorDialog.setColor(paperRedColor,
+		paperGreenColor,
+		paperBlueColor);
+	if(colorDialog.exec() == QDialog::Accepted)
+	{
+		paperRedColor = colorDialog.redColor;
+		paperGreenColor = colorDialog.greenColor;
+		paperBlueColor = colorDialog.blueColor;
+		customPaperColor = true;
 		saveColorSettings();
 		setColors();
 	}

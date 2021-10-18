@@ -62,7 +62,8 @@ public:
 	int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
 	int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
 	int bgRedColor, bgGreenColor, bgBlueColor;
-	bool customLevelTextColor, customInputTextColor, customBgColor;
+	int paperRedColor, paperGreenColor, paperBlueColor;
+	bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor;
 	void saveColorSettings(void);
 	void setColors(void);
 
@@ -92,5 +93,6 @@ private slots:
     void changeInputTextColor(void);
     void resetTextColors(void);
     void changeBgColor(void);
+    void changePaperColor(void);
 };
 #endif // OPENTYPER_H
