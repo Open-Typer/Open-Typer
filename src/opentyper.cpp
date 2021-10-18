@@ -69,10 +69,16 @@ OpenTyper::OpenTyper(QWidget *parent)
 		settings.value("theme/fontitalic","false").toBool(),
 		settings.value("theme/fontunderline","false").toBool());
 	// Colors
+	// Level text
 	customLevelTextColor = settings.value("theme/customleveltextcolor","false").toBool();
 	levelTextRedColor = settings.value("theme/leveltextred","0").toInt();
 	levelTextGreenColor = settings.value("theme/leveltextgreen","0").toInt();
 	levelTextBlueColor = settings.value("theme/leveltextblue","0").toInt();
+	// Input text
+	customInputTextColor = settings.value("theme/custominputtextcolor","false").toBool();
+	inputTextRedColor = settings.value("theme/inputtextred","0").toInt();
+	inputTextGreenColor = settings.value("theme/inputtextgreen","0").toInt();
+	inputTextBlueColor = settings.value("theme/inputtextblue","0").toInt();
 	// Create timer (used to update currentTimeNumber every second)
 	QTimer *secLoop = new QTimer(this);
 	// Connect signals to slots
@@ -92,6 +98,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->underlineTextButton,SIGNAL(clicked()),this,SLOT(setUnderlineText()));
 	connect(ui->fontResetButton,SIGNAL(clicked()),this,SLOT(resetFont()));
 	connect(ui->levelTextColorButton,SIGNAL(clicked()),this,SLOT(changeLevelTextColor()));
+	connect(ui->inputTextColorButton,SIGNAL(clicked()),this,SLOT(changeInputTextColor()));
 	// Check for updates
 	new Updater();
 	// Select "Training" tab
@@ -704,20 +711,34 @@ void OpenTyper::adjustSize(void)
 void OpenTyper::saveColorSettings(void)
 {
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	// Level text
 	settings.setValue("theme/customleveltextcolor",customLevelTextColor);
 	settings.setValue("theme/leveltextred",levelTextRedColor);
 	settings.setValue("theme/leveltextgreen",levelTextGreenColor);
 	settings.setValue("theme/leveltextblue",levelTextBlueColor);
+	// Input text
+	settings.setValue("theme/custominputtextcolor",customInputTextColor);
+	settings.setValue("theme/inputtextred",inputTextRedColor);
+	settings.setValue("theme/inputtextgreen",inputTextGreenColor);
+	settings.setValue("theme/inputtextblue",inputTextBlueColor);
 }
 
 void OpenTyper::setColors(void)
 {
+	char *styleSheet;
 	// Set level text color
 	if(customLevelTextColor)
 	{
-		char *styleSheet = (char*) malloc(128);
+		styleSheet = (char*) malloc(128);
 		sprintf(styleSheet,"color: rgb(%d, %d, %d)",levelTextRedColor,levelTextGreenColor,levelTextBlueColor);
 		ui->levelLabel->setStyleSheet(styleSheet);
+	}
+	// Set input text color
+	if(customInputTextColor)
+	{
+		styleSheet = (char*) malloc(128);
+		sprintf(styleSheet,"color: rgb(%d, %d, %d)",inputTextRedColor,inputTextGreenColor,inputTextBlueColor);
+		ui->inputLabel->setStyleSheet(styleSheet);
 	}
 }
 void OpenTyper::changeLevelTextColor(void)
@@ -732,6 +753,23 @@ void OpenTyper::changeLevelTextColor(void)
 		levelTextGreenColor = colorDialog.greenColor;
 		levelTextBlueColor = colorDialog.blueColor;
 		customLevelTextColor = true;
+		saveColorSettings();
+		setColors();
+	}
+}
+
+void OpenTyper::changeInputTextColor(void)
+{
+	SimpleColorDialog colorDialog;
+	colorDialog.setColor(inputTextRedColor,
+		inputTextGreenColor,
+		inputTextBlueColor);
+	if(colorDialog.exec() == QDialog::Accepted)
+	{
+		inputTextRedColor = colorDialog.redColor;
+		inputTextGreenColor = colorDialog.greenColor;
+		inputTextBlueColor = colorDialog.blueColor;
+		customInputTextColor = true;
 		saveColorSettings();
 		setColors();
 	}

@@ -60,7 +60,8 @@ public:
 	int labelWidth(QLabel *targetLabel);
 	void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
 	int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
-	bool customLevelTextColor;
+	int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
+	bool customLevelTextColor, customInputTextColor;
 	void saveColorSettings(void);
 	void setColors(void);
 
@@ -87,5 +88,6 @@ private slots:
     void setUnderlineText(void);
     void resetFont(void);
     void changeLevelTextColor(void);
+    void changeInputTextColor(void);
 };
 #endif // OPENTYPER_H
