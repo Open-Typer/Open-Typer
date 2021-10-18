@@ -478,7 +478,7 @@ bool OpenTyper::isSpecialKey(QKeyEvent *event)
 
 void OpenTyper::keyPressEvent(QKeyEvent *event)
 {
-	if(event->key() == Qt::Key_Shift)
+	if(isSpecialKey(event) && (event->key() != Qt::Key_Backspace))
 		return;
 	if(levelPos == 0)
 	{
