@@ -96,36 +96,52 @@
     </message>
     <message>
         <location filename="../ui/opentyper.ui" line="766"/>
+        <location filename="../ui/opentyper.ui" line="843"/>
         <source>Reset</source>
         <translation>Obnoviť</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="161"/>
+        <location filename="../ui/opentyper.ui" line="795"/>
+        <source>Text color:</source>
+        <translation>Farba textu:</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="811"/>
+        <source>Change exercise text color</source>
+        <translation>Zmeniť farbu textu cvičenia</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="827"/>
+        <source>Change input text color</source>
+        <translation>Zmeniť farbu vstupného textu</translation>
+    </message>
+    <message>
+        <location filename="../src/opentyper.cpp" line="176"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="243"/>
+        <location filename="../src/opentyper.cpp" line="258"/>
         <source>Fingering</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="246"/>
+        <location filename="../src/opentyper.cpp" line="261"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="249"/>
+        <location filename="../src/opentyper.cpp" line="264"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="252"/>
+        <location filename="../src/opentyper.cpp" line="267"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="312"/>
+        <location filename="../src/opentyper.cpp" line="328"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
@@ -136,6 +152,39 @@
         <location filename="../src/main.cpp" line="42"/>
         <source>Successfully updated.</source>
         <translation>Úspešne aktualizované.</translation>
+    </message>
+</context>
+<context>
+    <name>SimpleColorDialog</name>
+    <message>
+        <location filename="../ui/simplecolordialog.ui" line="26"/>
+        <source>Color selection</source>
+        <translation>Výber farby</translation>
+    </message>
+    <message>
+        <location filename="../ui/simplecolordialog.ui" line="51"/>
+        <source>Choose a color</source>
+        <translation>Vyberte farbu</translation>
+    </message>
+    <message>
+        <location filename="../ui/simplecolordialog.ui" line="94"/>
+        <source>Quick selection:</source>
+        <translation>Rýchly výber:</translation>
+    </message>
+    <message>
+        <location filename="../ui/simplecolordialog.ui" line="345"/>
+        <source>Apply</source>
+        <translation>Použiť</translation>
+    </message>
+    <message>
+        <location filename="../ui/simplecolordialog.ui" line="355"/>
+        <source>Cancel</source>
+        <translation>Zrušiť</translation>
+    </message>
+    <message>
+        <location filename="../ui/simplecolordialog.ui" line="392"/>
+        <source>Advanced:</source>
+        <translation>Rozšírené:</translation>
     </message>
 </context>
 <context>
