@@ -467,6 +467,9 @@ bool OpenTyper::isSpecialKey(QKeyEvent *event)
 		case Qt::Key_Enter:
 			return true;
 			break;
+		case Qt::Key_Return:
+			return true;
+			break;
 		case Qt::Key_Escape:
 			return true;
 			break;
