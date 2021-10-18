@@ -27,6 +27,7 @@
 #include <QElapsedTimer>
 #include <QSettings>
 #include "updater/updater.h"
+#include "simplecolordialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class OpenTyper; }
@@ -58,6 +59,10 @@ public:
 	void adjustSize(void);
 	int labelWidth(QLabel *targetLabel);
 	void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
+	int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
+	bool customLevelTextColor;
+	void saveColorSettings(void);
+	void setColors(void);
 
 protected:
 	void keyPressEvent(QKeyEvent *event);
@@ -81,5 +86,6 @@ private slots:
     void setItalicText(void);
     void setUnderlineText(void);
     void resetFont(void);
+    void changeLevelTextColor(void);
 };
 #endif // OPENTYPER_H

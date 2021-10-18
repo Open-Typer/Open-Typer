@@ -28,6 +28,7 @@
 #include <QDialog>
 #include <QDirIterator>
 #include <QTimer>
+#include <QColorDialog>
 #include <sys/stat.h>
 #include "opentyper.h"
 #include "ui_opentyper.h"
@@ -67,6 +68,11 @@ OpenTyper::OpenTyper(QWidget *parent)
 		settings.value("theme/fontbold","false").toBool(),
 		settings.value("theme/fontitalic","false").toBool(),
 		settings.value("theme/fontunderline","false").toBool());
+	// Colors
+	customLevelTextColor = settings.value("theme/customleveltextcolor","false").toBool();
+	levelTextRedColor = settings.value("theme/leveltextred","0").toInt();
+	levelTextGreenColor = settings.value("theme/leveltextgreen","0").toInt();
+	levelTextBlueColor = settings.value("theme/leveltextblue","0").toInt();
 	// Create timer (used to update currentTimeNumber every second)
 	QTimer *secLoop = new QTimer(this);
 	// Connect signals to slots
@@ -85,6 +91,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->italicTextButton,SIGNAL(clicked()),this,SLOT(setItalicText()));
 	connect(ui->underlineTextButton,SIGNAL(clicked()),this,SLOT(setUnderlineText()));
 	connect(ui->fontResetButton,SIGNAL(clicked()),this,SLOT(resetFont()));
+	connect(ui->levelTextColorButton,SIGNAL(clicked()),this,SLOT(changeLevelTextColor()));
 	// Check for updates
 	new Updater();
 	// Select "Training" tab
@@ -296,6 +303,7 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	displayLevel = _init_level(level);
 	ui->levelLabel->setText(displayLevel);
 	adjustSize();
+	setColors();
 	// Init level input
 	input = "";
 	displayInput = "";
@@ -691,4 +699,40 @@ void OpenTyper::adjustSize(void)
 		newHeight);
 	ui->inputLabel->resize(ui->inputLabel->width(),
 		newHeight);
+}
+
+void OpenTyper::saveColorSettings(void)
+{
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	settings.setValue("theme/customleveltextcolor",customLevelTextColor);
+	settings.setValue("theme/leveltextred",levelTextRedColor);
+	settings.setValue("theme/leveltextgreen",levelTextGreenColor);
+	settings.setValue("theme/leveltextblue",levelTextBlueColor);
+}
+
+void OpenTyper::setColors(void)
+{
+	// Set level text color
+	if(customLevelTextColor)
+	{
+		char *styleSheet = (char*) malloc(128);
+		sprintf(styleSheet,"color: rgb(%d, %d, %d)",levelTextRedColor,levelTextGreenColor,levelTextBlueColor);
+		ui->levelLabel->setStyleSheet(styleSheet);
+	}
+}
+void OpenTyper::changeLevelTextColor(void)
+{
+	SimpleColorDialog colorDialog;
+	colorDialog.setColor(levelTextRedColor,
+		levelTextGreenColor,
+		levelTextBlueColor);
+	if(colorDialog.exec() == QDialog::Accepted)
+	{
+		levelTextRedColor = colorDialog.redColor;
+		levelTextGreenColor = colorDialog.greenColor;
+		levelTextBlueColor = colorDialog.blueColor;
+		customLevelTextColor = true;
+		saveColorSettings();
+		setColors();
+	}
 }
