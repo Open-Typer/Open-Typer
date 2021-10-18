@@ -61,7 +61,8 @@ public:
 	void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
 	int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
 	int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
-	bool customLevelTextColor, customInputTextColor;
+	int bgRedColor, bgGreenColor, bgBlueColor;
+	bool customLevelTextColor, customInputTextColor, customBgColor;
 	void saveColorSettings(void);
 	void setColors(void);
 
@@ -90,5 +91,6 @@ private slots:
     void changeLevelTextColor(void);
     void changeInputTextColor(void);
     void resetTextColors(void);
+    void changeBgColor(void);
 };
 #endif // OPENTYPER_H
