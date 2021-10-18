@@ -791,9 +791,9 @@ void OpenTyper::setColors(void)
 	{
 		// Default background color
 		ui->mainFrame->setStyleSheet("");
-		bgRedColor = ui->mainFrame->palette().color(QPalette::Base).red();
-		bgGreenColor = ui->mainFrame->palette().color(QPalette::Base).green();
-		bgBlueColor = ui->mainFrame->palette().color(QPalette::Base).blue();
+		bgRedColor = ui->mainFrame->palette().color(QPalette::Window).red();
+		bgGreenColor = ui->mainFrame->palette().color(QPalette::Window).green();
+		bgBlueColor = ui->mainFrame->palette().color(QPalette::Window).blue();
 	}
 	// Set paper color
 	if(customPaperColor)
@@ -804,6 +804,8 @@ void OpenTyper::setColors(void)
 	}
 	else
 	{
+		// Reset background color before setting paper color
+		ui->mainFrame->setStyleSheet("");
 		// Default paper color
 		ui->paper->setStyleSheet("");
 		paperRedColor = ui->paper->palette().color(QPalette::Base).red();
@@ -814,6 +816,9 @@ void OpenTyper::setColors(void)
 		ui->paper->setStyleSheet(styleSheet);
 		// Fix inputLabel automatically set background color
 		ui->inputLabel->setStyleSheet("background-color: rgba(0,0,0,0)");
+		// Restore background color after setting paper color
+		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",bgRedColor,bgGreenColor,bgBlueColor);
+		ui->mainFrame->setStyleSheet(styleSheet);
 	}
 }
 void OpenTyper::changeLevelTextColor(void)
