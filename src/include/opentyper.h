@@ -94,5 +94,6 @@ private slots:
     void resetTextColors(void);
     void changeBgColor(void);
     void changePaperColor(void);
+    void resetBgPaperColors(void);
 };
 #endif // OPENTYPER_H

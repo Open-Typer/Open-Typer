@@ -112,6 +112,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->resetTextColorButton,SIGNAL(clicked()),this,SLOT(resetTextColors()));
 	connect(ui->bgColorButton,SIGNAL(clicked()),this,SLOT(changeBgColor()));
 	connect(ui->paperColorButton,SIGNAL(clicked()),this,SLOT(changePaperColor()));
+	connect(ui->resetBgPaperColorButton,SIGNAL(clicked()),this,SLOT(resetBgPaperColors()));
 	// Check for updates
 	new Updater();
 	// Select "Training" tab
@@ -804,6 +805,7 @@ void OpenTyper::setColors(void)
 	else
 	{
 		// Default paper color
+		ui->paper->setStyleSheet("");
 		paperRedColor = ui->paper->palette().color(QPalette::Base).red();
 		paperGreenColor = ui->paper->palette().color(QPalette::Base).green();
 		paperBlueColor = ui->paper->palette().color(QPalette::Base).blue();
@@ -889,4 +891,13 @@ void OpenTyper::changePaperColor(void)
 		saveColorSettings();
 		setColors();
 	}
+}
+
+void OpenTyper::resetBgPaperColors(void)
+{
+	// There's no need to set RGB values because they're defined in setColors()
+	customBgColor = false;
+	customPaperColor = false;
+	saveColorSettings();
+	setColors();
 }
