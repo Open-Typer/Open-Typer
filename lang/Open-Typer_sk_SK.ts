@@ -4,12 +4,12 @@
 <context>
     <name>OpenTyper</name>
     <message>
-        <location filename="../ui/opentyper.ui" line="836"/>
+        <location filename="../ui/opentyper.ui" line="893"/>
         <source>level text</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="889"/>
+        <location filename="../ui/opentyper.ui" line="946"/>
         <source>input text</source>
         <translation></translation>
     </message>
@@ -132,32 +132,52 @@
         <translation>Zmeniť farbu papiera</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="189"/>
+        <location filename="../ui/opentyper.ui" line="744"/>
+        <source>Theme:</source>
+        <translation>Motív:</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="761"/>
+        <source>System (default)</source>
+        <translation>Systémový (predvolené)</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="766"/>
+        <source>Dark</source>
+        <translation>Tmavý</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="771"/>
+        <source>Light</source>
+        <translation>Svetlý</translation>
+    </message>
+    <message>
+        <location filename="../src/opentyper.cpp" line="185"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="271"/>
+        <location filename="../src/opentyper.cpp" line="267"/>
         <source>Fingering</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="274"/>
+        <location filename="../src/opentyper.cpp" line="270"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="277"/>
+        <location filename="../src/opentyper.cpp" line="273"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="280"/>
+        <location filename="../src/opentyper.cpp" line="276"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="341"/>
+        <location filename="../src/opentyper.cpp" line="337"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
