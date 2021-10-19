@@ -926,6 +926,8 @@ void OpenTyper::updateTheme(void)
 {
 	QPalette inputLabelPalette = ui->inputLabel->palette();
 	inputLabelPalette.setColor(QPalette::Text,Qt::black);
+	QPalette paperPalette = ui->paper->palette();
+	paperPalette.setColor(QPalette::Base,Qt::white);
 	// System (default)
 	currentPalette = style()->standardPalette();
 	setPalette(currentPalette);
@@ -937,8 +939,8 @@ void OpenTyper::updateTheme(void)
 			#ifndef Q_OS_WIN
 			currentPalette.setColor(QPalette::WindowText,Qt::white);
 			currentPalette.setColor(QPalette::Disabled,QPalette::WindowText,QColor(127,127,127));
-			#endif
 			currentPalette.setColor(QPalette::Base,QColor(25,25,25));
+			#endif
 			currentPalette.setColor(QPalette::AlternateBase,QColor(53,53,53));
 			#ifndef Q_OS_WIN
 			currentPalette.setColor(QPalette::ToolTipBase,Qt::white);
@@ -961,6 +963,7 @@ void OpenTyper::updateTheme(void)
 			currentPalette.setColor(QPalette::HighlightedText,Qt::black);
 			#endif
 			inputLabelPalette.setColor(QPalette::Text,Qt::white);
+			paperPalette.setColor(QPalette::Base,QColor(25,25,25));
 			break;
 		case 2:
 			// Light
@@ -989,5 +992,6 @@ void OpenTyper::updateTheme(void)
 			break;
 	}
 	ui->inputLabel->setPalette(inputLabelPalette);
+	ui->paper->setPalette(paperPalette);
 	setPalette(currentPalette);
 }
