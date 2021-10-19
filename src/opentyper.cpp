@@ -924,13 +924,13 @@ void OpenTyper::changeTheme(int index)
 }
 void OpenTyper::updateTheme(void)
 {
-	QPalette inputLabelPalette = ui->inputLabel->palette();
-	inputLabelPalette.setColor(QPalette::Text,Qt::black);
-	QPalette paperPalette = ui->paper->palette();
-	paperPalette.setColor(QPalette::Base,Qt::white);
 	// System (default)
 	currentPalette = style()->standardPalette();
 	setPalette(currentPalette);
+	QPalette inputLabelPalette = ui->inputLabel->palette();
+	QPalette paperPalette = ui->paper->palette();
+	inputLabelPalette.setColor(inputLabelPalette.Text,currentPalette.color(currentPalette.Text));
+	paperPalette.setColor(currentPalette.Base,currentPalette.color(currentPalette.Base));
 	switch(ui->themeBox->currentIndex()) {
 		case 1:
 			// Dark
@@ -989,6 +989,8 @@ void OpenTyper::updateTheme(void)
 			currentPalette.setColor(QPalette::Link,QColor(42,130,218));
 			currentPalette.setColor(QPalette::Highlight,QColor(42,130,218));
 			currentPalette.setColor(QPalette::HighlightedText,Qt::black);
+			inputLabelPalette.setColor(QPalette::Text,Qt::black);
+			paperPalette.setColor(QPalette::Base,Qt::white);
 			break;
 	}
 	ui->inputLabel->setPalette(inputLabelPalette);
