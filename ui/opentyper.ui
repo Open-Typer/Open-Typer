@@ -716,6 +716,63 @@
          </property>
         </widget>
        </widget>
+       <widget class="QFrame" name="customizeFrame4">
+        <property name="geometry">
+         <rect>
+          <x>700</x>
+          <y>0</y>
+          <width>151</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::WinPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QLabel" name="themeLabel">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>131</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Theme:</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="themeBox">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>131</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <item>
+          <property name="text">
+           <string>System (default)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Dark</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Light</string>
+          </property>
+         </item>
+        </widget>
+       </widget>
       </widget>
      </widget>
     </item>
