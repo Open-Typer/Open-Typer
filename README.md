@@ -93,6 +93,16 @@ Install dependencies (Debian, Ubuntu):
 
 `sudo apt-get install gcc make build-essential qt5-qmake qtbase5-dev`
 
+## Building for Debian and its derivatives
+```
+./build-deb.sh
+```
+### Installation
+```
+sudo dpkg -i open-typer*.deb
+Open-Typer
+```
+
 ## Building for UNIX-like operating systems
 
 ```
