@@ -109,7 +109,11 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->resetBgPaperColorButton,SIGNAL(clicked()),this,SLOT(resetBgPaperColors()));
 	connect(ui->themeBox,SIGNAL(activated(int)),this,SLOT(changeTheme(int)));
 	// Check for updates
+	#ifdef Q_OS_WINDOWS
+	#ifdef _WIN32
 	new Updater();
+	#endif
+	#endif
 	// Select "Training" tab
 	ui->tabWidget->setCurrentIndex(1);
 	// Start timer
