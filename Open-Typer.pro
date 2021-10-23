@@ -24,6 +24,7 @@ SOURCES += \
     src/core/configfile.cpp \
     src/core/net.cpp \
     src/levelsummary.cpp \
+    src/simplecolordialog.cpp \
     src/updater/updater.cpp \
     src/main.cpp \
     src/opentyper.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     src/include/core/configfile.h \
     src/include/core/net.h \
     src/include/levelsummary.h \
+    src/include/simplecolordialog.h \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
     src/include/version.h \
@@ -42,6 +44,7 @@ HEADERS += \
 FORMS += \
     ui/levelsummary.ui \
     ui/opentyper.ui \
+    ui/simplecolordialog.ui \
     ui/updaterdialog.ui
 
 TRANSLATIONS += \
