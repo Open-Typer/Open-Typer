@@ -53,6 +53,10 @@ TRANSLATIONS += \
 RESOURCES += \
     res.qrc
 
+RESOURCES += \
+    dark-theme/dark-style.qrc \
+    light-theme/light-style.qrc
+
 win32:RC_ICONS += res/images/icon.ico
 
 QT += network
