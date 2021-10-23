@@ -66,7 +66,6 @@ public:
 	void saveColorSettings(void);
 	void setColors(void);
 	void updateTheme(void);
-	QPalette currentPalette;
 
 protected:
 	void keyPressEvent(QKeyEvent *event);

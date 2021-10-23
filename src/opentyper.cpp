@@ -175,7 +175,7 @@ char *OpenTyper::loadConfig(QString configName)
 	{
 		QMessageBox errBox;
 		errBox.setText("Failed to read read configuration "+configName+": "+strerror(errno));
-		errBox.setPalette(currentPalette);
+		errBox.setStyleSheet(styleSheet());
 		errBox.exec();
 		// Select default configuration
 		configName = "sk_SK-QWERTZ-B1";
@@ -549,7 +549,7 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 		msgBox.setTotalTime(levelTimer.elapsed()/1000);
 		msgBox.setHits(levelPos*(60/(levelTimer.elapsed()/1000.0)));
 		msgBox.setMistakes(levelMistakes);
-		msgBox.setPalette(currentPalette);
+		msgBox.setStyleSheet(styleSheet());
 		int ret = msgBox.exec();
 		if(ret == QDialog::Accepted)
 		{
@@ -835,7 +835,7 @@ void OpenTyper::changeLevelTextColor(void)
 	colorDialog.setColor(levelTextRedColor,
 		levelTextGreenColor,
 		levelTextBlueColor);
-	colorDialog.setPalette(currentPalette);
+	colorDialog.setStyleSheet(styleSheet());
 	if(colorDialog.exec() == QDialog::Accepted)
 	{
 		levelTextRedColor = colorDialog.redColor;
@@ -853,7 +853,7 @@ void OpenTyper::changeInputTextColor(void)
 	colorDialog.setColor(inputTextRedColor,
 		inputTextGreenColor,
 		inputTextBlueColor);
-	colorDialog.setPalette(currentPalette);
+	colorDialog.setStyleSheet(styleSheet());
 	if(colorDialog.exec() == QDialog::Accepted)
 	{
 		inputTextRedColor = colorDialog.redColor;
@@ -880,7 +880,7 @@ void OpenTyper::changeBgColor(void)
 	colorDialog.setColor(bgRedColor,
 		bgGreenColor,
 		bgBlueColor);
-	colorDialog.setPalette(currentPalette);
+	colorDialog.setStyleSheet(styleSheet());
 	if(colorDialog.exec() == QDialog::Accepted)
 	{
 		bgRedColor = colorDialog.redColor;
@@ -898,7 +898,7 @@ void OpenTyper::changePaperColor(void)
 	colorDialog.setColor(paperRedColor,
 		paperGreenColor,
 		paperBlueColor);
-	colorDialog.setPalette(currentPalette);
+	colorDialog.setStyleSheet(styleSheet());
 	if(colorDialog.exec() == QDialog::Accepted)
 	{
 		paperRedColor = colorDialog.redColor;
@@ -928,76 +928,49 @@ void OpenTyper::changeTheme(int index)
 }
 void OpenTyper::updateTheme(void)
 {
-	// System (default)
-	currentPalette = style()->standardPalette();
-	setPalette(currentPalette);
-	QPalette inputLabelPalette = ui->inputLabel->palette();
-	QPalette paperPalette = ui->paper->palette();
-	inputLabelPalette.setColor(inputLabelPalette.Text,currentPalette.color(currentPalette.Text));
-	paperPalette.setColor(currentPalette.Base,currentPalette.color(currentPalette.Base));
+	QFile darkSheet(":/dark-theme/style.qss");
+	QFile lightSheet(":/light-theme/style.qss");
+	char *paperStyleSheet;
 	switch(ui->themeBox->currentIndex()) {
+		case 0:
+			// System (default)
+			setStyleSheet("");
+			paperStyleSheet = (char*) malloc(128);
+			sprintf(paperStyleSheet,"background-color: rgb(%d,%d,%d)",
+				palette().color(QPalette::Base).red(),
+				palette().color(QPalette::Base).green(),
+				palette().color(QPalette::Base).blue());
+			ui->paper->setStyleSheet(paperStyleSheet);
+			break;
 		case 1:
 			// Dark
-			currentPalette = palette();
-			currentPalette.setColor(QPalette::Window,QColor(53,53,53));
-			#ifndef Q_OS_WIN
-			currentPalette.setColor(QPalette::WindowText,Qt::white);
-			currentPalette.setColor(QPalette::Disabled,QPalette::WindowText,QColor(127,127,127));
-			currentPalette.setColor(QPalette::Base,QColor(25,25,25));
-			#endif
-			currentPalette.setColor(QPalette::AlternateBase,QColor(53,53,53));
-			#ifndef Q_OS_WIN
-			currentPalette.setColor(QPalette::ToolTipBase,Qt::white);
-			currentPalette.setColor(QPalette::ToolTipText,Qt::white);
-			#endif
-			#ifndef Q_OS_WIN
-			currentPalette.setColor(QPalette::Text,Qt::white);
-			currentPalette.setColor(QPalette::Disabled,QPalette::Text,QColor(127,127,127));
-			currentPalette.setColor(QPalette::Light,QColor(50,50,50));
-			currentPalette.setColor(QPalette::Midlight,QColor(40,40,40));
-			currentPalette.setColor(QPalette::Dark,QColor(35,35,35));
-			currentPalette.setColor(QPalette::Mid,QColor(30,30,30));
-			currentPalette.setColor(QPalette::Shadow,QColor(20,20,20));
-			currentPalette.setColor(QPalette::Button,QColor(53,53,53));
-			currentPalette.setColor(QPalette::ButtonText,Qt::white);
-			currentPalette.setColor(QPalette::Disabled,QPalette::ButtonText,QColor(127,127,127));
-			currentPalette.setColor(QPalette::BrightText,Qt::red);
-			currentPalette.setColor(QPalette::Link,QColor(42,130,218));
-			currentPalette.setColor(QPalette::Highlight,QColor(42,130,218));
-			currentPalette.setColor(QPalette::HighlightedText,Qt::black);
-			#endif
-			inputLabelPalette.setColor(QPalette::Text,Qt::white);
-			paperPalette.setColor(QPalette::Base,QColor(25,25,25));
+			if(darkSheet.exists())
+			{
+				darkSheet.open(QFile::ReadOnly | QFile::Text);
+				QTextStream ts(&darkSheet);
+				setStyleSheet(ts.readAll());
+			}
+			else
+			{
+				printf("D: Failed to open dark style\n");
+				darkSheet.open(QFile::ReadOnly | QFile::Text);
+				qDebug() << darkSheet.errorString();
+			}
+			ui->paper->setStyleSheet("background-color: rgb(15, 25, 35)");
 			break;
 		case 2:
 			// Light
-			currentPalette = palette();
-			currentPalette.setColor(QPalette::Window,QColor(239,240,241));
-			currentPalette.setColor(QPalette::WindowText,Qt::black);
-			currentPalette.setColor(QPalette::Disabled,QPalette::WindowText,QColor(127,127,127));
-			currentPalette.setColor(QPalette::Base,QColor(252,252,252));
-			currentPalette.setColor(QPalette::AlternateBase,QColor(224,224,224));
-			currentPalette.setColor(QPalette::ToolTipBase,Qt::black);
-			currentPalette.setColor(QPalette::ToolTipText,Qt::black);
-			currentPalette.setColor(QPalette::Text,Qt::black);
-			currentPalette.setColor(QPalette::Disabled,QPalette::Text,QColor(127,127,127));
-			currentPalette.setColor(QPalette::Light,QColor(250,250,250));
-			currentPalette.setColor(QPalette::Midlight,QColor(210,210,210));
-			currentPalette.setColor(QPalette::Dark,QColor(200,200,200));
-			currentPalette.setColor(QPalette::Mid,QColor(190,190,190));
-			currentPalette.setColor(QPalette::Shadow,QColor(170,170,170));
-			currentPalette.setColor(QPalette::Button,QColor(240,240,240));
-			currentPalette.setColor(QPalette::ButtonText,Qt::black);
-			currentPalette.setColor(QPalette::Disabled,QPalette::ButtonText,QColor(127,127,127));
-			currentPalette.setColor(QPalette::BrightText,Qt::red);
-			currentPalette.setColor(QPalette::Link,QColor(42,130,218));
-			currentPalette.setColor(QPalette::Highlight,QColor(42,130,218));
-			currentPalette.setColor(QPalette::HighlightedText,Qt::black);
-			inputLabelPalette.setColor(QPalette::Text,Qt::black);
-			paperPalette.setColor(QPalette::Base,Qt::white);
+			if(lightSheet.exists())
+			{
+				lightSheet.open(QFile::ReadOnly | QFile::Text);
+				QTextStream ts(&lightSheet);
+				setStyleSheet(ts.readAll());
+			}
+			else
+			{
+				printf("D: Failed to open light style\n");
+			}
+			ui->paper->setStyleSheet("background-color: rgb(255, 255, 255)");
 			break;
 	}
-	ui->inputLabel->setPalette(inputLabelPalette);
-	ui->paper->setPalette(paperPalette);
-	setPalette(currentPalette);
 }
