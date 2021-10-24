@@ -27,7 +27,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="packsTab">
        <attribute name="title">
@@ -192,7 +192,7 @@
        <widget class="QFrame" name="trainingFrame3">
         <property name="geometry">
          <rect>
-          <x>530</x>
+          <x>560</x>
           <y>0</y>
           <width>221</width>
           <height>101</height>
@@ -259,7 +259,7 @@
          <rect>
           <x>200</x>
           <y>-1</y>
-          <width>331</width>
+          <width>361</width>
           <height>101</height>
          </rect>
         </property>
@@ -280,7 +280,7 @@
           <rect>
            <x>10</x>
            <y>0</y>
-           <width>111</width>
+           <width>141</width>
            <height>20</height>
           </rect>
          </property>
@@ -293,7 +293,7 @@
           <rect>
            <x>10</x>
            <y>20</y>
-           <width>111</width>
+           <width>141</width>
            <height>21</height>
           </rect>
          </property>
@@ -306,7 +306,7 @@
           <rect>
            <x>10</x>
            <y>50</y>
-           <width>111</width>
+           <width>141</width>
            <height>20</height>
           </rect>
          </property>
@@ -319,7 +319,7 @@
           <rect>
            <x>10</x>
            <y>70</y>
-           <width>111</width>
+           <width>141</width>
            <height>21</height>
           </rect>
          </property>
@@ -330,7 +330,7 @@
         <widget class="QLabel" name="sublessonSelectionLabel">
          <property name="geometry">
           <rect>
-           <x>130</x>
+           <x>160</x>
            <y>0</y>
            <width>121</width>
            <height>20</height>
@@ -343,7 +343,7 @@
         <widget class="QComboBox" name="sublessonSelectionList">
          <property name="geometry">
           <rect>
-           <x>130</x>
+           <x>160</x>
            <y>20</y>
            <width>191</width>
            <height>21</height>
@@ -359,7 +359,7 @@
          </property>
          <property name="geometry">
           <rect>
-           <x>130</x>
+           <x>160</x>
            <y>60</y>
            <width>191</width>
            <height>26</height>
