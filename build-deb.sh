@@ -37,8 +37,12 @@ echo Version: $version
 arch=$(dpkg-architecture -q DEB_BUILD_ARCH)
 
 # Get maintainer
-maintainer=$(git config --get user.name) || exit $?
-maintainer_email=$(git config --get user.email) || exit $?
+maintainer=$(git config --get user.name)
+maintainer_email=$(git config --get user.email)
+if [[ $maintainer == "" ]] || [[ $mainteiner_email == "" ]]; then
+	git commit -m ""
+	exit 1
+fi
 
 # Create working directory
 working_dir="${pkg_name}_${version}-${revision}_${arch}"
