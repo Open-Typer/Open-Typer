@@ -39,7 +39,7 @@ arch=$(dpkg-architecture -q DEB_BUILD_ARCH)
 # Get maintainer
 maintainer=$(git config --get user.name)
 maintainer_email=$(git config --get user.email)
-if [[ $maintainer == "" ]] || [[ $mainteiner_email == "" ]]; then
+if [[ $maintainer == "" ]] || [[ $maintainer_email == "" ]]; then
 	git commit -m ""
 	exit 1
 fi
