@@ -152,32 +152,38 @@
         <translation>Svetlý</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="185"/>
+        <location filename="../src/opentyper.cpp" line="170"/>
+        <source>Revision</source>
+        <translation>Opakovanie</translation>
+    </message>
+    <message>
+        <location filename="../src/opentyper.cpp" line="226"/>
+        <location filename="../src/opentyper.cpp" line="228"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="267"/>
+        <location filename="../src/opentyper.cpp" line="312"/>
         <source>Fingering</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="270"/>
+        <location filename="../src/opentyper.cpp" line="315"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="273"/>
+        <location filename="../src/opentyper.cpp" line="318"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="276"/>
+        <location filename="../src/opentyper.cpp" line="321"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="337"/>
+        <location filename="../src/opentyper.cpp" line="382"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
@@ -185,7 +191,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="42"/>
+        <location filename="../src/main.cpp" line="43"/>
         <source>Successfully updated.</source>
         <translation>Úspešne aktualizované.</translation>
     </message>
