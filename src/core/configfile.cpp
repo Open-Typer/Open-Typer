@@ -313,7 +313,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 	char *part = (char*) malloc(part_alloc);
 	char repeat_type_str[64];
 	strcpy(repeat_type_str,"");
-	bool has_limit_ext, has_length_ext;
+	bool has_limit_ext, has_length_ext, has_desc;
 	// Set locale
 	setlocale(LC_ALL,"C");
 	// NOTE: realloc is used only in the text part
@@ -416,6 +416,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 		strcpy(part,"");
 		has_limit_ext=false;
 		has_length_ext=false;
+		has_desc=false;
 		while((c != ' ') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
@@ -425,7 +426,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 				{
 					if(has_limit_ext)
 					{
-						if(has_length_ext)
+						if((has_length_ext) && (!has_desc))
 						{
 							length_extension = strtol(part,NULL,10);
 						}
@@ -453,7 +454,14 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 				if(c == ',')
 				{
 					if(has_limit_ext)
+					{
+						if(has_length_ext)
+						{
+							length_extension = strtol(part,NULL,10);
+							has_desc=true;
+						}
 						has_length_ext=true;
+					}
 					else
 					{
 						#ifdef DEBUG
@@ -494,6 +502,197 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 	}
 	return _REPEAT_LIMIT;
 }
+char *_lesson_desc(FILE *cr, int tlesson)
+{
+	char c='\0';
+	int line=0, lesson, lIDc;
+	unsigned int part_alloc=16;
+	char *part = (char*) malloc(part_alloc);
+	char repeat_type_str[64];
+	strcpy(repeat_type_str,"");
+	bool has_limit_ext, has_length_ext, has_desc;
+	// NOTE: realloc is used only in the text part
+	// Who would use a number longer than 16 bytes?
+	rewind(cr);
+	while((signed char) c != EOF)
+	{
+		// Lesson ID
+		strcpy(part,"");
+		lIDc=0;
+		while((c != '.') && ((signed char) c != EOF))
+		{
+			c=getc(cr);
+			if(c != '.')
+			{
+				if(strlen(part) >= 15)
+				{
+					printf("Invalid config on line %d. (lesson ID length)\n",line+1);
+					#ifdef DEBUG
+					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
+					#endif
+					exit(2);
+				}
+				strncat(part,&c,1);
+			}
+			lIDc++;
+		}
+		if((signed char) c == EOF)
+		{
+			if(lIDc == 1)
+				break;
+			printf("Invalid config on line %d. (lesson ID)\n",line+1);
+			#ifdef DEBUG
+			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
+			#endif
+			exit(2);
+		}
+		lesson=strtol(part,NULL,10);
+		c='\0';
+		// Sublesson ID
+		strcpy(part,"");
+		lIDc=0;
+		while((c != '.') && ((signed char) c != EOF))
+		{
+			c=getc(cr);
+			if(c != '.')
+			{
+				if(strlen(part) >= 15)
+				{
+					printf("Invalid config on line %d. (sublesson ID length)\n",line+1);
+					#ifdef DEBUG
+					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
+					#endif
+					exit(2);
+				}
+				strncat(part,&c,1);
+			}
+			lIDc++;
+		}
+		if((signed char) c == EOF)
+		{
+			if(lIDc == 1)
+				break;
+			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
+			#ifdef DEBUG
+			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
+			#endif
+			exit(2);
+		}
+		c='\0';
+		// Level ID
+		strcpy(part,"");
+		while((c != ':') && ((signed char) c != EOF))
+		{
+			c=getc(cr);
+			if(c != ':')
+			{
+				if(strlen(part) >= 15)
+				{
+					printf("Invalid config on line %d. (level ID length)\n",line+1);
+					#ifdef DEBUG
+					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in level ID\n");
+					#endif
+					exit(2);
+				}
+				strncat(part,&c,1);
+			}
+		}
+		if((signed char) c == EOF)
+		{
+			printf("Invalid config on line %d. (level ID)\n",line+1);
+			#ifdef DEBUG
+			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
+			#endif
+			exit(2);
+		}
+		// Level config
+		strcpy(part,"");
+		has_limit_ext=false;
+		has_length_ext=false;
+		has_desc=false;
+		while((c != ' ') && ((signed char) c != EOF))
+		{
+			c=getc(cr);
+			if((c == ' ') || (c == ';'))
+			{
+				if(c == ' ')
+				{
+					if(has_limit_ext)
+					{
+						if(has_length_ext)
+						{
+							if(has_desc)
+							{
+								if(lesson == tlesson)
+									return part;
+							}
+						}
+					}
+					else
+						strcpy(repeat_type_str,part);
+				}
+				else
+				{
+					strcpy(repeat_type_str,part);
+					has_limit_ext=true;
+				}
+				strcpy(part,"");
+			}
+			else
+			{
+				if(strlen(part) >= 15)
+				{
+					printf("Invalid config on line %d. (level config: repeat text bool or limit extension length)\n",line+1);
+					#ifdef DEBUG
+					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in repeat text bool or limit extension\n");
+					#endif
+					exit(2);
+				}
+				if(c == ',')
+				{
+					if(has_limit_ext)
+					{
+						if(has_length_ext)
+						{
+							if(has_desc)
+							{
+								if(lesson == tlesson)
+									return part;
+							}
+							has_desc=true;
+						}
+						has_length_ext=true;
+					}
+					else
+					{
+						#ifdef DEBUG
+						printf("repeat bool: %s\n",part);
+						#endif
+					}
+					strcpy(part,"");
+				}
+				else
+					strncat(part,&c,1);
+			}
+		}
+		if((signed char) c == EOF)
+		{
+			printf("Invalid config on line %d. (level config)\n",line+1);
+			#ifdef DEBUG
+			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
+			#endif
+			exit(2);
+		}
+		c='\0';
+		// Level text
+		while((c != '\n') && ((signed char) c != EOF))
+		{
+			c=getc(cr);
+		}
+		line++;
+	}
+	return (char*) "";
+}
 char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order)
 {
 	char c='\0';
@@ -504,7 +703,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 	char *out;
 	char repeat_type_str[64];
 	strcpy(repeat_type_str,"");
-	bool text_repeat=false, end, has_limit_ext, has_length_ext;
+	bool text_repeat=false, end, has_limit_ext, has_length_ext, has_desc;
 	// NOTE: realloc is used only in the text part
 	// Who would use a number longer than 16 bytes?
 	rewind(cr);
@@ -605,6 +804,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		strcpy(part,"");
 		has_limit_ext=false;
 		has_length_ext=false;
+		has_desc=false;
 		while((c != ' ') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
@@ -614,7 +814,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 				{
 					if(has_limit_ext)
 					{
-						if(!has_length_ext)
+						if((!has_length_ext) && (!has_desc))
 							limit_extension = strtol(part,NULL,10);
 					}
 					else
@@ -641,8 +841,13 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 				{
 					if(has_limit_ext)
 					{
-						limit_extension = strtol(part,NULL,10);
-						has_length_ext=true;
+						if(has_length_ext)
+							has_desc=true;
+						else
+						{
+							limit_extension = strtol(part,NULL,10);
+							has_length_ext=true;
+						}
 					}
 					else
 					{
