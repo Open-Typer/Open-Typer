@@ -476,7 +476,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 		}
 		#ifdef DEBUG
 		printf("D: repeat type: %s\n",repeat_type_str);
-		printf("D: length extension: %f\n",length_extension);
+		printf("D: length extension: %d\n",length_extension);
 		#endif
 		if( ((lesson == tlesson) && (sublesson == tsublesson) && (level == tlevel)) )
 		{
@@ -700,7 +700,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		}
 		#ifdef DEBUG
 		if(has_limit_ext)
-			printf("D: Limit extension: %f\n",limit_extension);
+			printf("D: Limit extension: %d\n",limit_extension);
 		#endif
 		c='\0';
 		// Level text
