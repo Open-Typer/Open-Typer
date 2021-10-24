@@ -313,7 +313,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 	char *part = (char*) malloc(part_alloc);
 	char repeat_type_str[64];
 	strcpy(repeat_type_str,"");
-	bool has_limit_ext, has_length_ext, has_desc;
+	bool escape, has_limit_ext, has_length_ext, has_desc;
 	// Set locale
 	setlocale(LC_ALL,"C");
 	// NOTE: realloc is used only in the text part
@@ -420,7 +420,13 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 		while((c != ' ') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
-			if((c == ' ') || (c == ';'))
+			escape=false;
+			if(c == '\\')
+			{
+				c=getc(cr);
+				escape=true;
+			}
+			if(((c == ' ') || (c == ';')) && !escape)
 			{
 				if(c == ' ')
 				{
@@ -451,7 +457,7 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 					#endif
 					exit(2);
 				}
-				if(c == ',')
+				if((c == ',') && !escape)
 				{
 					if(has_limit_ext)
 					{
@@ -510,7 +516,7 @@ char *_lesson_desc(FILE *cr, int tlesson)
 	char *part = (char*) malloc(part_alloc);
 	char repeat_type_str[64];
 	strcpy(repeat_type_str,"");
-	bool has_limit_ext, has_length_ext, has_desc;
+	bool escape, has_limit_ext, has_length_ext, has_desc;
 	// NOTE: realloc is used only in the text part
 	// Who would use a number longer than 16 bytes?
 	rewind(cr);
@@ -613,7 +619,13 @@ char *_lesson_desc(FILE *cr, int tlesson)
 		while((c != ' ') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
-			if((c == ' ') || (c == ';'))
+			escape=false;
+			if(c == '\\')
+			{
+				c=getc(cr);
+				escape=true;
+			}
+			if(((c == ' ') || (c == ';')) && !escape)
 			{
 				if(c == ' ')
 				{
@@ -648,7 +660,7 @@ char *_lesson_desc(FILE *cr, int tlesson)
 					#endif
 					exit(2);
 				}
-				if(c == ',')
+				if((c == ',') && !escape)
 				{
 					if(has_limit_ext)
 					{
@@ -703,7 +715,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 	char *out;
 	char repeat_type_str[64];
 	strcpy(repeat_type_str,"");
-	bool text_repeat=false, end, has_limit_ext, has_length_ext, has_desc;
+	bool escape, text_repeat=false, end, has_limit_ext, has_length_ext, has_desc;
 	// NOTE: realloc is used only in the text part
 	// Who would use a number longer than 16 bytes?
 	rewind(cr);
@@ -808,7 +820,13 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		while((c != ' ') && ((signed char) c != EOF))
 		{
 			c=getc(cr);
-			if((c == ' ') || (c == ';'))
+			escape=false;
+			if(c == '\\')
+			{
+				c=getc(cr);
+				escape=true;
+			}
+			if(((c == ' ') || (c == ';')) && !escape)
 			{
 				if(c == ' ')
 				{
@@ -837,7 +855,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 					#endif
 					exit(2);
 				}
-				if(c == ',')
+				if((c == ',') && !escape)
 				{
 					if(has_limit_ext)
 					{
