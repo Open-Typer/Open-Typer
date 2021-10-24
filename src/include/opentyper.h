@@ -66,6 +66,7 @@ public:
 	void saveColorSettings(void);
 	void setColors(void);
 	void updateTheme(void);
+	QString parseDesc(QString desc);
 
 protected:
 	void keyPressEvent(QKeyEvent *event);

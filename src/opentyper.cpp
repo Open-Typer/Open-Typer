@@ -154,6 +154,39 @@ QString OpenTyper::getConfigLoc(void)
 {
 	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
 }
+QString OpenTyper::parseDesc(QString desc)
+{
+	QString out = "";
+	int i;
+	bool bracket=false;
+	for(i=0; i < QStringLen(desc); i++)
+	{
+		if(desc[i] == '%')
+		{
+			i++;
+			if(bracket)
+				out += '}';
+			if(desc[i] == 'r')
+				out += tr("Revision");
+			else if(desc[i] == '%')
+				out += '%';
+			// %b is reserved (it's used to separate 2 sets)
+			bracket=false;
+		}
+		else
+		{
+			if(!bracket)
+			{
+				out += '{';
+				bracket=true;
+			}
+			out += desc[i];
+		}
+	}
+	if(bracket)
+		out += '}';
+	return out;
+}
 char *OpenTyper::loadConfig(QString configName)
 {
 	// Returns config file name, which can be opened later.
@@ -184,9 +217,17 @@ char *OpenTyper::loadConfig(QString configName)
 	// Update lessonSelectionList widget
 	ui->lessonSelectionList->clear();
 	QStringList lessons;
+	QString _lessonDesc;
 	int i, count = _lesson_count(configCheckFile);
 	for(i=1; i <= count; i++)
-		lessons += tr("Lesson") + " " + QString::number(i);
+	{
+		_lessonDesc = parseDesc(_lesson_desc(configCheckFile,i));
+		if(_lessonDesc == "")
+			lessons += tr("Lesson") + " " + QString::number(i);
+		else
+			lessons += tr("Lesson") + " " + QString::number(i) +
+				" " + _lessonDesc;
+	}
 	ui->lessonSelectionList->addItems(lessons);
 	fclose(configCheckFile);
 	// Update packList widget
