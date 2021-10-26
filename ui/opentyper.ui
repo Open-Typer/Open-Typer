@@ -27,7 +27,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="packsTab">
        <attribute name="title">
@@ -56,7 +56,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Selected lesson pack:</string>
+         <string>Built-in packs:</string>
         </property>
        </widget>
       </widget>
