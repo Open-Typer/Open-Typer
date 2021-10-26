@@ -26,8 +26,10 @@
 #include <QLabel>
 #include <QElapsedTimer>
 #include <QSettings>
+#include <QFileDialog>
 #include "updater/updater.h"
 #include "simplecolordialog.h"
+#include "paperconfigdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class OpenTyper; }
@@ -43,6 +45,7 @@ public:
 	void loadConfigs(void);
 	char *loadConfig(QString configName);
 	void startLevel(FILE *cr, int lesson, int sublesson, int level);
+	void levelFinalInit(void);
 	QString level, displayLevel, input, displayInput, publicConfigName;
 	int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, levelPos, displayPos, levelMistakes, levelLengthExtension;
 	int sublessonListStart;
@@ -67,6 +70,7 @@ public:
 	void setColors(void);
 	void updateTheme(void);
 	QString parseDesc(QString desc);
+	bool customLevelLoaded;
 
 protected:
 	void keyPressEvent(QKeyEvent *event);
@@ -84,6 +88,7 @@ private slots:
     void sublessonSelectionListIndexChanged(int index);
     void levelSelectionListIndexChanged(int index);
     void randomOrderCheckBoxChanged(bool checked);
+    void openExerciseFromFile(void);
     void changeFont(QFont font);
     void changeFontSize(int size);
     void setBoldText(void);

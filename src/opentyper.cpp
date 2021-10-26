@@ -95,6 +95,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(ui->sublessonSelectionList,SIGNAL(activated(int)),this,SLOT(sublessonSelectionListIndexChanged(int)));
 	connect(ui->levelSelectionList,SIGNAL(activated(int)),this,SLOT(levelSelectionListIndexChanged(int)));
 	connect(ui->randomOrderCheckBox,SIGNAL(clicked(bool)),this,SLOT(randomOrderCheckBoxChanged(bool)));
+	connect(ui->openExerciseButton,SIGNAL(clicked()),this,SLOT(openExerciseFromFile()));
 	connect(ui->fontComboBox,SIGNAL(currentFontChanged(QFont)),this,SLOT(changeFont(QFont)));
 	connect(ui->fontSizeBox,SIGNAL(valueChanged(int)),this,SLOT(changeFontSize(int)));
 	connect(ui->boldTextButton,SIGNAL(clicked()),this,SLOT(setBoldText()));
@@ -294,6 +295,7 @@ QString OpenTyper::_init_level(QString level)
 
 void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 {
+	customLevelLoaded=false;
 	// Update selected lesson
 	ui->lessonSelectionList->setCurrentIndex(lessonID-1);
 	// Get sublesson count
@@ -362,15 +364,6 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 		sublessonID+sublessonListStart,
 		levelID,
 		ui->randomOrderCheckBox->isChecked());
-	displayLevel = _init_level(level);
-	ui->levelLabel->setText(displayLevel);
-	adjustSize();
-	setColors();
-	// Init level input
-	input = "";
-	displayInput = "";
-	ui->inputLabel->setTextFormat(Qt::RichText);
-	ui->inputLabel->setText(displayInput+"<span style='color: blue';'>|</span>");
 	// Get lesson count
 	lessonCount = _lesson_count(cr);
 	// Get level count (in current lesson)
@@ -387,6 +380,16 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	currentSublesson=sublessonID;
 	currentLevel=levelID;
 	// Init level
+	levelFinalInit();
+}
+
+void OpenTyper::levelFinalInit(void)
+{
+	// Init level
+	displayLevel = _init_level(level);
+	ui->levelLabel->setText(displayLevel);
+	adjustSize();
+	setColors();
 	levelPos=0;
 	displayPos=0;
 	levelMistakes=0;
@@ -397,6 +400,11 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	ui->mistakeLabel->setText("");
 	ui->currentTimeNumber->setText("0");
 	ui->currentMistakesNumber->setText("0");
+	// Init level input
+	input = "";
+	displayInput = "";
+	ui->inputLabel->setTextFormat(Qt::RichText);
+	ui->inputLabel->setText(displayInput+"<span style='color: blue';'>|</span>");
 }
 
 void OpenTyper::repeatLevel(void)
@@ -489,6 +497,54 @@ void OpenTyper::randomOrderCheckBoxChanged(bool checked)
 	else
 		settings.setValue("main/randomwords","false");
 	repeatLevel();
+}
+
+void OpenTyper::openExerciseFromFile(void)
+{
+	// Show file dialog
+	QFileDialog openDialog;
+	openDialog.setFileMode(QFileDialog::AnyFile);
+	openDialog.setNameFilter(tr("Text files") + " (*.txt)" + ";;" + tr("All files") + " (*)");
+	if(openDialog.exec())
+	{
+		// Get selected file
+		QString fileName = openDialog.selectedFiles()[0];
+		QFile exerciseFile(fileName);
+		if(exerciseFile.size() > 2048) // Maximum size
+		{
+			QMessageBox errBox;
+			errBox.setText(tr("This file is too large!"));
+			errBox.setStyleSheet(styleSheet());
+			errBox.exec();
+			return;
+		}
+		// Show paper config dialog
+		paperConfigDialog pconfig;
+		pconfig.setStyleSheet(styleSheet());
+		pconfig.exec();
+		levelLengthExtension = pconfig.lineLength;
+		// Read selected file
+		if(!exerciseFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			QMessageBox errBox;
+			errBox.setText(tr("Could not open the file."));
+			errBox.setStyleSheet(styleSheet());
+			errBox.exec();
+			return;
+		}
+		level = "";
+		QTextStream in(&exerciseFile);
+		while (!in.atEnd())
+		{
+			QString line = in.readLine();
+			if(level == "")
+				level = line;
+			else
+				level += " " + line;
+		}
+		customLevelLoaded=true;
+		levelFinalInit();
+	}
 }
 
 bool OpenTyper::isSpecialKey(QKeyEvent *event)
@@ -610,8 +666,12 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 			}
 			else
 				currentLevel++;
+			customLevelLoaded=false;
 		}
-		repeatLevel();
+		if(customLevelLoaded)
+			levelFinalInit();
+		else
+			repeatLevel();
 	}
 }
 
