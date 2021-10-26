@@ -24,6 +24,7 @@ SOURCES += \
     src/core/configfile.cpp \
     src/core/net.cpp \
     src/levelsummary.cpp \
+    src/paperconfigdialog.cpp \
     src/simplecolordialog.cpp \
     src/updater/updater.cpp \
     src/main.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     src/include/core/configfile.h \
     src/include/core/net.h \
     src/include/levelsummary.h \
+    src/include/paperconfigdialog.h \
     src/include/simplecolordialog.h \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
@@ -44,6 +46,7 @@ HEADERS += \
 FORMS += \
     ui/levelsummary.ui \
     ui/opentyper.ui \
+    ui/paperconfigdialog.ui \
     ui/simplecolordialog.ui \
     ui/updaterdialog.ui
 
