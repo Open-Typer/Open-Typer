@@ -8,5 +8,6 @@
         <file>res/images/next.png</file>
         <file>res/images/previous.png</file>
         <file>res/images/icon.ico</file>
+        <file>res/images/open.png</file>
     </qresource>
 </RCC>
