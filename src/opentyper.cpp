@@ -404,7 +404,7 @@ void OpenTyper::levelFinalInit(void)
 	input = "";
 	displayInput = "";
 	ui->inputLabel->setTextFormat(Qt::RichText);
-	ui->inputLabel->setText(displayInput+"<span style='color: blue';'>|</span>");
+	ui->inputLabel->setText(displayInput+"<span style='color: blue; font-family: FreeSans'>|</span>");
 }
 
 void OpenTyper::repeatLevel(void)
@@ -603,7 +603,7 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 				ui->mistakeLabel->setText(
 					ui->mistakeLabel->text() + "<span style='color: rgba(0,0,0,0)'>" + event->text() + "</span>");
 		}
-		ui->inputLabel->setText(displayInput+"<span style='color: blue';'>|</span>");
+		ui->inputLabel->setText(displayInput+"<span style='color: blue; font-family: FreeSans'>|</span>");
 		levelPos++;
 		displayPos++;
 	}
@@ -613,7 +613,7 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 		{
 			if(event->key() == Qt::Key_Backspace)
 			{
-				ui->inputLabel->setText(displayInput+"<span style='color: blue';'>|</span>");
+				ui->inputLabel->setText(displayInput+"<span style='color: blue; font-family: FreeSans'>|</span>");
 				if(!ignoreMistakeLabelAppend)
 					ui->mistakeLabel->setText(
 						ui->mistakeLabel->text() + "_");
@@ -631,7 +631,7 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 					errorAppend = "_";
 				else
 					errorAppend = event->text();
-				ui->inputLabel->setText(ui->inputLabel->text() + "<span style='color: red';'>" + errorAppend + "</span>" + "<span style='color: blue';'>|</span>");
+				ui->inputLabel->setText(ui->inputLabel->text() + "<span style='color: red';'>" + errorAppend + "</span>" + "<span style='color: blue; font-family: FreeSans'>|</span>");
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 				mistake=true;
