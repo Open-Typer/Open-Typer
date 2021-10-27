@@ -11,5 +11,6 @@
         <file>res/images/open.png</file>
         <file>res/images/new.png</file>
         <file>res/images/edit.png</file>
+        <file>res/images/packEditor.png</file>
     </qresource>
 </RCC>
