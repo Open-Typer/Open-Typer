@@ -18,18 +18,6 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QLabel>
-#include <QKeyEvent>
-#include <QString>
-#include <QMessageBox>
-#include <QSettings>
-#include <QStandardPaths>
-#include <QDir>
-#include <QDialog>
-#include <QDirIterator>
-#include <QTimer>
-#include <QColorDialog>
-#include <sys/stat.h>
 #include "opentyper.h"
 #include "ui_opentyper.h"
 #include "levelsummary.h"
