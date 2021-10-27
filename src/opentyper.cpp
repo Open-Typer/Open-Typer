@@ -20,9 +20,6 @@
 
 #include "opentyper.h"
 #include "ui_opentyper.h"
-#include "levelsummary.h"
-#include "configfile.h"
-#include "utils.h"
 
 OpenTyper::OpenTyper(QWidget *parent)
 	: QMainWindow(parent)

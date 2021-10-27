@@ -40,6 +40,9 @@
 #include "updater/updater.h"
 #include "simplecolordialog.h"
 #include "paperconfigdialog.h"
+#include "levelsummary.h"
+#include "configfile.h"
+#include "utils.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class OpenTyper; }
