@@ -237,10 +237,6 @@ void OpenTyper::loadConfigs(void)
 	ui->packList->addItems(items);
 }
 
-QString OpenTyper::getConfigLoc(void)
-{
-	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
-}
 QString OpenTyper::parseDesc(QString desc)
 {
 	QString out = "";

@@ -72,3 +72,7 @@ char *_get_word(char *str, int id)
 	}
 	return NULL;
 }
+QString getConfigLoc(void)
+{
+	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
+}

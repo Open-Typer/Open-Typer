@@ -28,7 +28,6 @@
 #include <QString>
 #include <QMessageBox>
 #include <QSettings>
-#include <QStandardPaths>
 #include <QDir>
 #include <QDialog>
 #include <QDirIterator>
@@ -65,7 +64,6 @@ public:
 	QElapsedTimer levelTimer;
 	bool levelInProgress, mistake, ignoreMistakeLabelAppend;
 	int lastTime;
-	QString getConfigLoc(void);
 	bool isSpecialKey(QKeyEvent *event);
 	QString _init_level(QString level);
 	int _line_count(QString str);
