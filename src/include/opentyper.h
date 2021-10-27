@@ -87,6 +87,7 @@ protected:
 
 private:
 	Ui::OpenTyper *ui;
+	void connectAll(void);
 
 private slots:
     void packListIndexChanged(int index);

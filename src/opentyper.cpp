@@ -71,32 +71,8 @@ OpenTyper::OpenTyper(QWidget *parent)
 	// Theme
 	ui->themeBox->setCurrentIndex(settings.value("theme/theme","0").toInt());
 	changeTheme(ui->themeBox->currentIndex());
-	// Create timer (used to update currentTimeNumber every second)
-	QTimer *secLoop = new QTimer(this);
 	// Connect signals to slots
-	connect(secLoop,SIGNAL(timeout()),this,SLOT(updateCurrentTime()));
-	connect(ui->packList,SIGNAL(activated(int)),this,SLOT(packListIndexChanged(int)));
-	connect(ui->repeatButton,SIGNAL(clicked()),this,SLOT(repeatLevel()));
-	connect(ui->nextButton,SIGNAL(clicked()),this,SLOT(nextLevel()));
-	connect(ui->previousButton,SIGNAL(clicked()),this,SLOT(previousLevel()));
-	connect(ui->lessonSelectionList,SIGNAL(activated(int)),this,SLOT(lessonSelectionListIndexChanged(int)));
-	connect(ui->sublessonSelectionList,SIGNAL(activated(int)),this,SLOT(sublessonSelectionListIndexChanged(int)));
-	connect(ui->levelSelectionList,SIGNAL(activated(int)),this,SLOT(levelSelectionListIndexChanged(int)));
-	connect(ui->randomOrderCheckBox,SIGNAL(clicked(bool)),this,SLOT(randomOrderCheckBoxChanged(bool)));
-	connect(ui->openExerciseButton,SIGNAL(clicked()),this,SLOT(openExerciseFromFile()));
-	connect(ui->fontComboBox,SIGNAL(currentFontChanged(QFont)),this,SLOT(changeFont(QFont)));
-	connect(ui->fontSizeBox,SIGNAL(valueChanged(int)),this,SLOT(changeFontSize(int)));
-	connect(ui->boldTextButton,SIGNAL(clicked()),this,SLOT(setBoldText()));
-	connect(ui->italicTextButton,SIGNAL(clicked()),this,SLOT(setItalicText()));
-	connect(ui->underlineTextButton,SIGNAL(clicked()),this,SLOT(setUnderlineText()));
-	connect(ui->fontResetButton,SIGNAL(clicked()),this,SLOT(resetFont()));
-	connect(ui->levelTextColorButton,SIGNAL(clicked()),this,SLOT(changeLevelTextColor()));
-	connect(ui->inputTextColorButton,SIGNAL(clicked()),this,SLOT(changeInputTextColor()));
-	connect(ui->resetTextColorButton,SIGNAL(clicked()),this,SLOT(resetTextColors()));
-	connect(ui->bgColorButton,SIGNAL(clicked()),this,SLOT(changeBgColor()));
-	connect(ui->paperColorButton,SIGNAL(clicked()),this,SLOT(changePaperColor()));
-	connect(ui->resetBgPaperColorButton,SIGNAL(clicked()),this,SLOT(resetBgPaperColors()));
-	connect(ui->themeBox,SIGNAL(activated(int)),this,SLOT(changeTheme(int)));
+	connectAll();
 	// Check for updates
 	#ifdef Q_OS_WINDOWS
 	#ifdef _WIN32
@@ -105,8 +81,6 @@ OpenTyper::OpenTyper(QWidget *parent)
 	#endif
 	// Select "Training" tab
 	ui->tabWidget->setCurrentIndex(1);
-	// Start timer
-	secLoop->start(1000);
 	// Load config and start
 	char *configPath = loadConfig(configName);
 	if(configPath == NULL)
@@ -120,6 +94,133 @@ OpenTyper::OpenTyper(QWidget *parent)
 OpenTyper::~OpenTyper()
 {
 	delete ui;
+}
+
+void OpenTyper::connectAll(void)
+{
+	// Create timer (used to update currentTimeNumber every second)
+	QTimer *secLoop = new QTimer(this);
+	// **Timers**
+	// Updates current time in seconds
+	connect(secLoop,
+		SIGNAL(timeout()),
+		this,
+		SLOT(updateCurrentTime()));
+	// **Lesson packs tab**
+	// List of lesson packs
+	connect(ui->packList,
+		SIGNAL(activated(int)),
+		this,
+		SLOT(packListIndexChanged(int)));
+	// **Training tab**
+	// Repeat exercise button
+	connect(ui->repeatButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(repeatLevel()));
+	// Next exercise button
+	connect(ui->nextButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(nextLevel()));
+	// Previous exercise button
+	connect(ui->previousButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(previousLevel()));
+	// List of lessons
+	connect(ui->lessonSelectionList,
+		SIGNAL(activated(int)),
+		this,
+		SLOT(lessonSelectionListIndexChanged(int)));
+	// List of sub lessons
+	connect(ui->sublessonSelectionList,
+		SIGNAL(activated(int)),
+		this,
+		SLOT(sublessonSelectionListIndexChanged(int)));
+	// List of levels
+	connect(ui->levelSelectionList,
+		SIGNAL(activated(int)),
+		this,
+		SLOT(levelSelectionListIndexChanged(int)));
+	// Random order checkbox
+	connect(ui->randomOrderCheckBox,
+		SIGNAL(clicked(bool)),
+		this,
+		SLOT(randomOrderCheckBoxChanged(bool)));
+	// Open exercise from file button
+	connect(ui->openExerciseButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(openExerciseFromFile()));
+	// **Customize tab**
+	// Font selector
+	connect(ui->fontComboBox,
+		SIGNAL(currentFontChanged(QFont)),
+		this,
+		SLOT(changeFont(QFont)));
+	// Font size box
+	connect(ui->fontSizeBox,
+		SIGNAL(valueChanged(int)),
+		this,
+		SLOT(changeFontSize(int)));
+	// Bold text button
+	connect(ui->boldTextButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(setBoldText()));
+	// Italic text button
+	connect(ui->italicTextButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(setItalicText()));
+	// Underline text button
+	connect(ui->underlineTextButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(setUnderlineText()));
+	// Reset font button
+	connect(ui->fontResetButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(resetFont()));
+	// Change level text color button
+	connect(ui->levelTextColorButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(changeLevelTextColor()));
+	// Change input text color button
+	connect(ui->inputTextColorButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(changeInputTextColor()));
+	// Reset text color button
+	connect(ui->resetTextColorButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(resetTextColors()));
+	// Change background color button
+	connect(ui->bgColorButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(changeBgColor()));
+	// Change paper color button
+	connect(ui->paperColorButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(changePaperColor()));
+	// Reset background and paper color button
+	connect(ui->resetBgPaperColorButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(resetBgPaperColors()));
+	// Theme selector
+	connect(ui->themeBox,
+		SIGNAL(activated(int)),
+		this,
+		SLOT(changeTheme(int)));
+	// Start timer
+	secLoop->start(1000);
 }
 
 void OpenTyper::loadConfigs(void)
