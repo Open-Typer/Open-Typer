@@ -80,7 +80,6 @@ public:
 	void saveColorSettings(void);
 	void setColors(void);
 	void updateTheme(void);
-	QString parseDesc(QString desc);
 	bool customLevelLoaded;
 
 protected:

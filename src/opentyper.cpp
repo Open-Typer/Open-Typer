@@ -237,39 +237,6 @@ void OpenTyper::loadConfigs(void)
 	ui->packList->addItems(items);
 }
 
-QString OpenTyper::parseDesc(QString desc)
-{
-	QString out = "";
-	int i;
-	bool bracket=false;
-	for(i=0; i < QStringLen(desc); i++)
-	{
-		if(desc[i] == '%')
-		{
-			i++;
-			if(bracket)
-				out += '}';
-			if(desc[i] == 'r')
-				out += tr("Revision");
-			else if(desc[i] == '%')
-				out += '%';
-			// %b is reserved (it's used to separate 2 sets)
-			bracket=false;
-		}
-		else
-		{
-			if(!bracket)
-			{
-				out += '{';
-				bracket=true;
-			}
-			out += desc[i];
-		}
-	}
-	if(bracket)
-		out += '}';
-	return out;
-}
 char *OpenTyper::loadConfig(QString configName)
 {
 	// Returns config file name, which can be opened later.
@@ -304,7 +271,7 @@ char *OpenTyper::loadConfig(QString configName)
 	int i, count = _lesson_count(configCheckFile);
 	for(i=1; i <= count; i++)
 	{
-		_lessonDesc = parseDesc(_lesson_desc(configCheckFile,i));
+		_lessonDesc = parseDesc(_lesson_desc(configCheckFile,i),tr("Revision"));
 		if(_lessonDesc == "")
 			lessons += tr("Lesson") + " " + QString::number(i);
 		else
