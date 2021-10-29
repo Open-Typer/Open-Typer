@@ -161,7 +161,7 @@
         <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset resource="res.qrc">
+        <iconset resource="../res.qrc">
          <normaloff>:/res/images/plus.png</normaloff>:/res/images/plus.png</iconset>
        </property>
        <property name="iconSize">
@@ -187,7 +187,7 @@
         <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset resource="res.qrc">
+        <iconset resource="../res.qrc">
          <normaloff>:/res/images/plus.png</normaloff>:/res/images/plus.png</iconset>
        </property>
        <property name="iconSize">
@@ -213,7 +213,7 @@
         <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset resource="res.qrc">
+        <iconset resource="../res.qrc">
          <normaloff>:/res/images/plus.png</normaloff>:/res/images/plus.png</iconset>
        </property>
        <property name="iconSize">
@@ -255,7 +255,7 @@
         <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset resource="res.qrc">
+        <iconset resource="../res.qrc">
          <normaloff>:/res/images/save.png</normaloff>:/res/images/save.png</iconset>
        </property>
        <property name="iconSize">
@@ -303,7 +303,7 @@
         <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset resource="res.qrc">
+        <iconset resource="../res.qrc">
          <normaloff>:/res/images/save_as.png</normaloff>:/res/images/save_as.png</iconset>
        </property>
        <property name="iconSize">
@@ -367,7 +367,7 @@
          </font>
         </property>
         <property name="text">
-         <string>level text</string>
+         <string notr="true">level text</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -428,7 +428,7 @@
        <string>Restore text</string>
       </property>
       <property name="icon">
-       <iconset resource="res.qrc">
+       <iconset resource="../res.qrc">
         <normaloff>:/res/images/refresh.png</normaloff>:/res/images/refresh.png</iconset>
       </property>
       <property name="iconSize">
@@ -472,7 +472,7 @@
        <string>Save text</string>
       </property>
       <property name="icon">
-       <iconset resource="res.qrc">
+       <iconset resource="../res.qrc">
         <normaloff>:/res/images/edit.png</normaloff>:/res/images/edit.png</iconset>
       </property>
       <property name="iconSize">
@@ -487,7 +487,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="res.qrc"/>
+  <include location="../res.qrc"/>
  </resources>
  <connections/>
 </ui>
