@@ -173,26 +173,30 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		sublessonCount++;
 	ui->sublessonSelectionBox->clear();
 	QStringList sublessons;
-	for(i=1; i <= sublessonCount; i++)
+	int i2=0;
+	for(i=1; i <= sublessonCount+i2; i++)
 	{
-		switch(i) {
-			case 1:
-				sublessons += tr("Fingering");
-				break;
-			case 2:
-				sublessons += tr("Words");
-				break;
-			case 3:
-				sublessons += tr("Sentences");
-				break;
-			default:
-				sublessons += tr("Sublesson") + " " + QString::number(i);
-				break;
-		}
-		if(!((newLesson || newSublesson) && (i == sublessonCount)))
+		if(_lesson_sublesson_level_count(targetFile,oldLesson+1,i) > 0)
 		{
-			if(_lesson_sublesson_level_count(targetFile,oldLesson+1,i) == 0)
-				sublessons[i] += " (" + tr("empty") + ")";
+			switch(i) {
+				case 1:
+					sublessons += tr("Fingering");
+					break;
+				case 2:
+					sublessons += tr("Words");
+					break;
+				case 3:
+					sublessons += tr("Sentences");
+					break;
+				default:
+					sublessons += tr("Sublesson") + " " + QString::number(i);
+					break;
+			}
+		}
+		else
+		{
+			sublessons += " (" + tr("empty") + ")";
+			i2++;
 		}
 	}
 	ui->sublessonSelectionBox->addItems(sublessons);
