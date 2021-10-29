@@ -120,8 +120,8 @@ bool packView::closeFile(void)
 				break;
 		}
 	}
-	return true;
 	QFile::remove(targetFileName);
+	return true;
 }
 
 void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
