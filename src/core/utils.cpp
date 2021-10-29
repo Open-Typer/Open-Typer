@@ -109,3 +109,42 @@ QString parseDesc(QString desc, QString trRevision)
 		out += '}';
 	return out;
 }
+QString _init_level(QString level, int levelLengthExtension)
+{
+	int len, len2, i, line_pos=0;
+	QString out = "";
+	len = QStringLen(level);
+	QString word = "";
+	bool first_word=true;
+	for(i=0; i < len; i++)
+	{
+		if((level[i] == ' ') || (i+1 >= len))
+		{
+			if(i+1 >= len)
+			{
+				word += level[i];
+			}
+			len2 = QStringLen(word);
+			if(line_pos+len2 > levelLengthExtension)
+			{
+				out += '\n';
+				line_pos=0;
+			}
+			if(!first_word && (line_pos > 0))
+			{
+				out += ' ';
+			}
+			first_word=false;
+			out += word;
+			word = "";
+			if(!first_word)
+				line_pos++;
+			line_pos=line_pos+len2;
+		}
+		else
+		{
+			word += level[i];
+		}
+	}
+	return out;
+}

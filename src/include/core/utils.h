@@ -28,3 +28,4 @@ int _get_word_count(char *str);
 char *_get_word(char *str, int id);
 QString getConfigLoc(void);
 QString parseDesc(QString desc, QString trRevision);
+QString _init_level(QString level, int levelLengthExtension);

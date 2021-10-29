@@ -65,7 +65,6 @@ public:
 	bool levelInProgress, mistake, ignoreMistakeLabelAppend;
 	int lastTime;
 	bool isSpecialKey(QKeyEvent *event);
-	QString _init_level(QString level);
 	int _line_count(QString str);
 	Updater *versionHdw;
 	void autoUpdate(void);

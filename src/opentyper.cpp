@@ -302,46 +302,6 @@ int OpenTyper::_line_count(QString str)
 	return out;
 }
 
-QString OpenTyper::_init_level(QString level)
-{
-	int len, len2, i, line_pos=0;
-	QString out = "";
-	len = QStringLen(level);
-	QString word = "";
-	bool first_word=true;
-	for(i=0; i < len; i++)
-	{
-		if((level[i] == ' ') || (i+1 >= len))
-		{
-			if(i+1 >= len)
-			{
-				word += level[i];
-			}
-			len2 = QStringLen(word);
-			if(line_pos+len2 > levelLengthExtension)
-			{
-				out += '\n';
-				line_pos=0;
-			}
-			if(!first_word && (line_pos > 0))
-			{
-				out += ' ';
-			}
-			first_word=false;
-			out += word;
-			word = "";
-			if(!first_word)
-				line_pos++;
-			line_pos=line_pos+len2;
-		}
-		else
-		{
-			word += level[i];
-		}
-	}
-	return out;
-}
-
 void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 {
 	customLevelLoaded=false;
@@ -435,7 +395,7 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 void OpenTyper::levelFinalInit(void)
 {
 	// Init level
-	displayLevel = _init_level(level);
+	displayLevel = _init_level(level,levelLengthExtension);
 	ui->levelLabel->setText(displayLevel);
 	adjustSize();
 	setColors();
