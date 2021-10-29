@@ -38,6 +38,8 @@ OpenTyper::OpenTyper(QWidget *parent)
 		// TODO: Change this to en_US after a config for it is added.
 		configName = "sk_SK-QWERTZ-B1";
 	}
+	// Custom pack
+	customConfig = settings.value("main/customconfig","false").toBool();
 	// Font
 	setFont(settings.value("theme/font","Courier").toString(),
 		settings.value("theme/fontsize","14").toInt(),
@@ -109,6 +111,16 @@ void OpenTyper::connectAll(void)
 		SIGNAL(activated(int)),
 		this,
 		SLOT(packListIndexChanged(int)));
+	// Open pack button
+	connect(ui->openPackButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(openPack()));
+	// Open editor button
+	connect(ui->openEditorButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(openEditor()));
 	// **Training tab**
 	// Repeat exercise button
 	connect(ui->repeatButton,
@@ -240,17 +252,27 @@ void OpenTyper::loadConfigs(void)
 char *OpenTyper::loadConfig(QString configName)
 {
 	// Returns config file name, which can be opened later.
-	QString configLoc = getConfigLoc();
-	char *configPath = (char*) malloc(strlen(qPrintable(configLoc))+1+strlen(qPrintable(configName))+1);
-	sprintf(configPath,"%s/%s",qPrintable(configLoc),qPrintable(configName));
-	// Create config directory if it doesn't exist
-	QDir configDir(configLoc);
-	if(!configDir.exists())
-		configDir.mkpath(configLoc);
-	// Extract selected config
-	chmod(configPath, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-	QFile::remove(configPath);
-	QFile::copy(":/res/configs/"+configName,configPath);
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	char *configPath = (char*) "";
+	if(customConfig)
+	{
+		configPath = (char*) malloc(strlen(qPrintable(configName))+1);
+		strcpy(configPath,qPrintable(configName));
+	}
+	else
+	{
+		QString configLoc = getConfigLoc();
+		configPath = (char*) malloc(strlen(qPrintable(configLoc))+1+strlen(qPrintable(configName))+1);
+		sprintf(configPath,"%s/%s",qPrintable(configLoc),qPrintable(configName));
+		// Create config directory if it doesn't exist
+		QDir configDir(configLoc);
+		if(!configDir.exists())
+			configDir.mkpath(configLoc);
+		// Extract selected config
+		chmod(configPath, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+		QFile::remove(configPath);
+		QFile::copy(":/res/configs/"+configName,configPath);
+	}
 	// Open extracted config (just to check that everything is OK and to update lesson list)
 	errno=0;
 	FILE *configCheckFile = fopen(configPath,"rb");
@@ -262,6 +284,8 @@ char *OpenTyper::loadConfig(QString configName)
 		errBox.exec();
 		// Select default configuration
 		configName = "sk_SK-QWERTZ-B1";
+		customConfig=false;
+		settings.setValue("main/customconfig",customConfig);
 		return loadConfig(configName);
 	}
 	// Update lessonSelectionList widget
@@ -280,13 +304,21 @@ char *OpenTyper::loadConfig(QString configName)
 	}
 	ui->lessonSelectionList->addItems(lessons);
 	fclose(configCheckFile);
+	if(customConfig)
+		configName = configPath;
 	// Update packList widget
 	int index = ui->packList->findText(configName);
 	ui->packList->setCurrentIndex(index);
 	// Save selected config to settings
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("main/configfile",configName);
-	ui->trainingPackNameLabel->setText(configName);
+	if(customConfig)
+	{
+		QFile configQFile(configName);
+		QFileInfo configQFileInfo(configQFile.fileName());
+		ui->trainingPackNameLabel->setText(configQFileInfo.fileName());
+	}
+	else
+		ui->trainingPackNameLabel->setText(configName);
 	publicConfigName = configName;
 	return configPath;
 }
@@ -465,6 +497,7 @@ void OpenTyper::previousLevel(void)
 }
 void OpenTyper::packListIndexChanged(int index)
 {
+	customConfig=false;
 	char *configPath = loadConfig(ui->packList->itemText(index));
 	if(configPath == NULL)
 	{
@@ -1083,4 +1116,34 @@ void OpenTyper::updateTheme(void)
 			ui->paper->setStyleSheet("background-color: rgb(255, 255, 255)");
 			break;
 	}
+}
+
+void OpenTyper::openPack(void)
+{
+	QFileDialog openDialog;
+	openDialog.setFileMode(QFileDialog::AnyFile);
+	openDialog.setNameFilter(tr("Open-Typer pack files") + " (*.typer)" + ";;" + tr("All files") + " (*)");
+	if(openDialog.exec())
+	{
+		// Get selected file
+		QString openFileName = openDialog.selectedFiles()[0];
+		customConfig=true;
+		QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+		settings.setValue("main/customconfig",customConfig);
+		loadConfig(openFileName);
+		repeatLevel();
+	}
+}
+
+void OpenTyper::openEditor(void)
+{
+	// Hide main window
+	hide();
+	// Open editor
+	packEditor editorWindow;
+	editorWindow.setStyleSheet(styleSheet());
+	editorWindow.init();
+	editorWindow.exec();
+	// Show main window
+	show();
 }

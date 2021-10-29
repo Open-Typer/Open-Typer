@@ -39,6 +39,7 @@
 #include "updater/updater.h"
 #include "simplecolordialog.h"
 #include "paperconfigdialog.h"
+#include "packEditor/packeditor.h"
 #include "levelsummary.h"
 #include "configfile.h"
 #include "utils.h"
@@ -80,6 +81,7 @@ public:
 	void setColors(void);
 	void updateTheme(void);
 	bool customLevelLoaded;
+	bool customConfig;
 
 protected:
 	void keyPressEvent(QKeyEvent *event);
@@ -90,6 +92,8 @@ private:
 
 private slots:
     void packListIndexChanged(int index);
+    void openPack(void);
+    void openEditor(void);
     void repeatLevel(void);
     void nextLevel(void);
     void previousLevel(void);
