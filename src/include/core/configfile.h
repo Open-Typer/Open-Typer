@@ -28,6 +28,9 @@
 int _lesson_count(FILE *cr);
 int _lesson_sublesson_count(FILE *cr, int tsublesson);
 int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson);
+int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlevel);
+char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson, int tlevel);
 char *_lesson_desc(FILE *cr, int tlesson);
+int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesson, int tlevel);
 int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsublesson, int tlevel);
 char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order);
