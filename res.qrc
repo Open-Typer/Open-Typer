@@ -14,5 +14,7 @@
         <file>res/images/packEditor.png</file>
         <file>res/images/plus.png</file>
         <file>res/images/refresh.png</file>
+        <file>res/images/save.png</file>
+        <file>res/images/save_as.png</file>
     </qresource>
 </RCC>
