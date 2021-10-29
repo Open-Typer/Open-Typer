@@ -13,5 +13,6 @@
         <file>res/images/edit.png</file>
         <file>res/images/packEditor.png</file>
         <file>res/images/plus.png</file>
+        <file>res/images/refresh.png</file>
     </qresource>
 </RCC>
