@@ -498,6 +498,8 @@ void OpenTyper::previousLevel(void)
 void OpenTyper::packListIndexChanged(int index)
 {
 	customConfig=false;
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	settings.setValue("main/customconfig",customConfig);
 	char *configPath = loadConfig(ui->packList->itemText(index));
 	if(configPath == NULL)
 	{
