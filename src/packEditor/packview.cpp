@@ -279,19 +279,18 @@ void packView::updateText(void)
 		stream << out;
 		targetQFile.close();
 		QString sourceText = ui->levelTextEdit->toPlainText();
-		char *targetText = (char*) malloc(QStringLen(sourceText)*4+1);
-		strcpy(targetText,"");
+		QString targetText = "";
 		for(int i=0; i < QStringLen(sourceText); i++)
 		{
 			if(sourceText[i] == '\n')
-				strcat(targetText," ");
+				targetText += " ";
 			else
-				strcat(targetText,qPrintable(sourceText[i]+""));
+				targetText += sourceText[i];
 		}
 		targetFile = fopen(qPrintable(targetFileName),"a");
 		bool repeat;
 		repeat = !(strcmp(repeatType,"0") == 0);
-		_add_level(targetFile,lesson,sublesson,level,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText);
+		_add_level(targetFile,lesson,sublesson,level,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText.toStdString().c_str());
 		fclose(targetFile);
 		saved=false;
 		refreshUi(false,false,false);
