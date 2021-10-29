@@ -315,15 +315,21 @@ void packView::restoreText(void)
 
 void packView::switchLesson(void)
 {
-	ui->sublessonSelectionBox->setCurrentIndex(0);
-	ui->exerciseSelectionBox->setCurrentIndex(0);
-	refreshUi(false,false,false);
+	for(int i=0; i < 2; i++)
+	{
+		ui->sublessonSelectionBox->setCurrentIndex(0);
+		ui->exerciseSelectionBox->setCurrentIndex(0);
+		refreshUi(false,false,false);
+	}
 }
 
 void packView::switchSublesson(void)
 {
-	ui->exerciseSelectionBox->setCurrentIndex(0);
-	refreshUi(false,false,false);
+	for(int i=0; i < 2; i++)
+	{
+		ui->exerciseSelectionBox->setCurrentIndex(0);
+		refreshUi(false,false,false);
+	}
 }
 
 void packView::switchExercise(void)
