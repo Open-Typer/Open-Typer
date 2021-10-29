@@ -1525,3 +1525,20 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 	}
 	return (char*) "";
 }
+// Write functions
+void _add_level(FILE *cr, int tlesson, int tsublesson, int tlevel,
+	bool repeat, char *repeat_type,
+	int limit_extension, int length_extension, char *desc,
+	const char *level_text)
+{
+	// Add level line
+	fprintf(cr,"%d.%d.%d:",tlesson,tsublesson,tlevel);
+	if(repeat)
+		putc('1',cr);
+	else
+		putc('0',cr);
+	fprintf(cr,",%s;%d,%d",repeat_type,limit_extension,length_extension);
+	if(strcmp(desc,"") != 0)
+		fprintf(cr,",%s",desc);
+	fprintf(cr," %s\n",level_text);
+}
