@@ -70,8 +70,8 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 	newFile = newf;
 	readOnly = rdonly;
 	targetFileName = getConfigLoc() + "/editor" + QString::number(fileID) + ".tmp";
-	targetFile = fopen(qPrintable(targetFileName),"w");
-	chmod(qPrintable(targetFileName), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+	targetFile = fopen(targetFileName.toStdString().c_str(),"w");
+	chmod(targetFileName.toStdString().c_str(), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if(targetFile == NULL)
 	{
 		QMessageBox errBox;
@@ -89,7 +89,7 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 	{
 		QFile::remove(targetFileName);
 		QFile::copy(saveFileName,targetFileName);
-		chmod(qPrintable(targetFileName), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+		chmod(targetFileName.toStdString().c_str(), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 		refreshUi(false,false,false);
 		ui->lessonSelectionBox->setCurrentIndex(0);
 		refreshUi(false,false,false);
@@ -143,8 +143,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		((packEditor*)(editorWindow))->setFileName(_saveFileName,(QWidget*)this);
 	else
 		((packEditor*)(editorWindow))->setFileName(_saveFileName + "*",(QWidget*)this);
-	targetFile = fopen(qPrintable(targetFileName),"rb");
-	((packEditor*)(editorWindow))->fixDuplicates();
+	targetFile = fopen(targetFileName.toStdString().c_str(),"rb");
 	// Lesson selector
 	int oldLesson = ui->lessonSelectionBox->currentIndex();
 	int i, count = _lesson_count(targetFile);
@@ -231,7 +230,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 	else
 	{
 		restoreText();
-		targetFile = fopen(qPrintable(targetFileName),"rb");
+		targetFile = fopen(targetFileName.toStdString().c_str(),"rb");
 		// Lesson description
 		QString lessonDesc = "";
 		QString rawLessonDesc = _lesson_desc(targetFile,oldLesson+1);
@@ -279,18 +278,22 @@ void packView::addLesson(void)
 
 void packView::addSublesson(void)
 {
+	if(ui->lessonSelectionBox->count() == 0)
+		return;
 	refreshUi(false,true,false);
 }
 
 void packView::addExercise(void)
 {
-	targetFile = fopen(qPrintable(targetFileName),"a");
+	if(ui->sublessonSelectionBox->count() == 0)
+		return;
+	targetFile = fopen(targetFileName.toStdString().c_str(),"a");
 	_add_level(targetFile,
 		ui->lessonSelectionBox->currentIndex()+1,
 		ui->sublessonSelectionBox->currentIndex()+1,
 		ui->exerciseSelectionBox->count()+1,
 		false,(char*)"0",120,60,(char*)"",
-		qPrintable(tr("New exercise")));
+		tr("New exercise").toStdString().c_str());
 	fclose(targetFile);
 	saved=false;
 	refreshUi(false,false,true);
@@ -298,7 +301,7 @@ void packView::addExercise(void)
 
 void packView::removeExercise(void)
 {
-	targetFile = fopen(qPrintable(targetFileName),"rb");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"rb");
 	int i, targetLesson, targetSublesson, targetLevel;
 	targetLesson = ui->lessonSelectionBox->currentIndex()+1;
 	targetSublesson = ui->sublessonSelectionBox->currentIndex()+1;
@@ -320,7 +323,7 @@ void packView::removeExercise(void)
 void packView::changeExercisePos(char *lessonDesc,int lesson, int sublesson, int level, int nlesson, int nsublesson, int nlevel)
 {
 	int limitExt, lengthExt;
-	targetFile = fopen(qPrintable(targetFileName),"r");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"r");
 	limitExt = _lesson_sublesson_level_limit_extension(targetFile,lesson,sublesson,level);
 	lengthExt = _lesson_sublesson_level_length_extension(targetFile,lesson,sublesson,level);
 	char *repeatType = _lesson_sublesson_level_repeat_type(targetFile,lesson,sublesson,level);
@@ -329,7 +332,7 @@ void packView::changeExercisePos(char *lessonDesc,int lesson, int sublesson, int
 	char *targetText = _lesson_sublesson_level_raw_text(targetFile,lesson,sublesson,level);
 	fclose(targetFile);
 	deleteExerciseLine(lesson,sublesson,level);
-	targetFile = fopen(qPrintable(targetFileName),"a");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"a");
 	bool repeat;
 	repeat = !(strcmp(repeatType,"0") == 0);
 	_add_level(targetFile,nlesson,nsublesson,nlevel,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText);
@@ -340,7 +343,7 @@ void packView::changeExercisePos(char *lessonDesc,int lesson, int sublesson, int
 void packView::deleteExerciseLine(int lesson, int sublesson, int level)
 {
 	int targetLine, curLine;
-	targetFile = fopen(qPrintable(targetFileName),"r");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"r");
 	targetLine = _lesson_sublesson_level_line(targetFile,lesson,sublesson,level);
 	fclose(targetFile);
 	QFile targetQFile(targetFileName);
@@ -379,13 +382,13 @@ void packView::changeLessonDesc(const QString rawLessonDesc)
 		else
 			strncat(lessonDesc,&rawLessonDesc2[i],1);
 	}
-	targetFile = fopen(qPrintable(targetFileName),"r");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"r");
 	int sublessonCount = _lesson_sublesson_count(targetFile,ui->lessonSelectionBox->currentIndex()+1);
 	fclose(targetFile);
 	int i, i2=0;
 	for(i=1; i <= sublessonCount+i2; i++)
 	{
-		targetFile = fopen(qPrintable(targetFileName),"r");
+		targetFile = fopen(targetFileName.toStdString().c_str(),"r");
 		int levelCount = _lesson_sublesson_level_count(
 			targetFile,
 			ui->lessonSelectionBox->currentIndex()+1,i);
@@ -414,7 +417,7 @@ void packView::updateText(void)
 	lesson = ui->lessonSelectionBox->currentIndex()+1;
 	sublesson = ui->sublessonSelectionBox->currentIndex()+1;
 	level = ui->exerciseSelectionBox->currentIndex()+1;
-	targetFile = fopen(qPrintable(targetFileName),"r");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"r");
 	limitExt = _lesson_sublesson_level_limit_extension(targetFile,lesson,sublesson,level);
 	lengthExt = _lesson_sublesson_level_length_extension(targetFile,lesson,sublesson,level);
 	char *repeatType = _lesson_sublesson_level_repeat_type(targetFile,lesson,sublesson,level);
@@ -434,7 +437,7 @@ void packView::updateText(void)
 		else
 			targetText += sourceText[i];
 	}
-	targetFile = fopen(qPrintable(targetFileName),"a");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"a");
 	bool repeat;
 	repeat = !(strcmp(repeatType,"0") == 0);
 	_add_level(targetFile,lesson,sublesson,level,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText.toStdString().c_str());
@@ -445,7 +448,7 @@ void packView::updateText(void)
 
 void packView::restoreText(void)
 {
-	targetFile = fopen(qPrintable(targetFileName),"rb");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"rb");
 	ui->levelLabel->setText(
 		_init_level(
 			_lesson_sublesson_level_text(
@@ -497,7 +500,7 @@ void packView::changeRepeating(int index)
 	lesson = ui->lessonSelectionBox->currentIndex()+1;
 	sublesson = ui->sublessonSelectionBox->currentIndex()+1;
 	level = ui->exerciseSelectionBox->currentIndex()+1;
-	targetFile = fopen(qPrintable(targetFileName),"r");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"r");
 	limitExt = _lesson_sublesson_level_limit_extension(targetFile,lesson,sublesson,level);
 	lengthExt = _lesson_sublesson_level_length_extension(targetFile,lesson,sublesson,level);
 	char *repeatType;
@@ -527,7 +530,7 @@ void packView::changeRepeating(int index)
 	char *targetText = _lesson_sublesson_level_raw_text(targetFile,lesson,sublesson,level);
 	fclose(targetFile);
 	deleteExerciseLine(lesson,sublesson,level);
-	targetFile = fopen(qPrintable(targetFileName),"a");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"a");
 	bool repeat;
 	repeat = !(strcmp(repeatType,"0") == 0);
 	_add_level(targetFile,lesson,sublesson,level,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText);
@@ -544,7 +547,7 @@ void packView::changeRepeatLength(int limitExt)
 	lesson = ui->lessonSelectionBox->currentIndex()+1;
 	sublesson = ui->sublessonSelectionBox->currentIndex()+1;
 	level = ui->exerciseSelectionBox->currentIndex()+1;
-	targetFile = fopen(qPrintable(targetFileName),"rb");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"rb");
 	lengthExt = _lesson_sublesson_level_length_extension(targetFile,lesson,sublesson,level);
 	char *repeatType = _lesson_sublesson_level_repeat_type(targetFile,lesson,sublesson,level);
 	char *lessonDesc;
@@ -555,7 +558,7 @@ void packView::changeRepeatLength(int limitExt)
 	char *targetText = _lesson_sublesson_level_raw_text(targetFile,lesson,sublesson,level);
 	fclose(targetFile);
 	deleteExerciseLine(lesson,sublesson,level);
-	targetFile = fopen(qPrintable(targetFileName),"a");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"a");
 	bool repeat;
 	repeat = !(strcmp(repeatType,"0") == 0);
 	_add_level(targetFile,lesson,sublesson,level,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText);
@@ -572,7 +575,7 @@ void packView::changeLineLength(int lengthExt)
 	lesson = ui->lessonSelectionBox->currentIndex()+1;
 	sublesson = ui->sublessonSelectionBox->currentIndex()+1;
 	level = ui->exerciseSelectionBox->currentIndex()+1;
-	targetFile = fopen(qPrintable(targetFileName),"rb");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"rb");
 	limitExt = _lesson_sublesson_level_limit_extension(targetFile,lesson,sublesson,level);
 	char *repeatType = _lesson_sublesson_level_repeat_type(targetFile,lesson,sublesson,level);
 	char *lessonDesc;
@@ -583,7 +586,7 @@ void packView::changeLineLength(int lengthExt)
 	char *targetText = _lesson_sublesson_level_raw_text(targetFile,lesson,sublesson,level);
 	fclose(targetFile);
 	deleteExerciseLine(lesson,sublesson,level);
-	targetFile = fopen(qPrintable(targetFileName),"a");
+	targetFile = fopen(targetFileName.toStdString().c_str(),"a");
 	bool repeat;
 	repeat = !(strcmp(repeatType,"0") == 0);
 	_add_level(targetFile,lesson,sublesson,level,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText);
@@ -608,7 +611,7 @@ void packView::save(void)
 				while(!stream.atEnd())
 				{
 					QString line = stream.readLine();
-					saveFile.write(qPrintable(line + "\n"));
+					saveFile.write(QString(line + "\n").toStdString().c_str());
 				}
 				saved=true;
 				refreshUi(false,false,false);
