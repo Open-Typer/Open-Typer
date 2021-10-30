@@ -553,14 +553,6 @@ char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson,
 			}
 			else
 			{
-				if(strlen(part) >= 15)
-				{
-					printf("Invalid config on line %d. (level config: repeat text bool or limit extension length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in repeat text bool or limit extension\n");
-					#endif
-					exit(2);
-				}
 				if((c == ',') && !escape)
 				{
 					if(!has_limit_ext)
@@ -572,7 +564,14 @@ char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson,
 					strcpy(part,"");
 				}
 				else
+				{
+					if(strlen(part)+2 > part_alloc)
+					{
+						part_alloc += 2;
+						part = (char*) realloc(part,part_alloc);
+					}
 					strncat(part,&c,1);
+				}
 			}
 		}
 		if((signed char) c == EOF)
@@ -745,14 +744,6 @@ int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesso
 			}
 			else
 			{
-				if(strlen(part) >= 15)
-				{
-					printf("Invalid config on line %d. (level config: repeat text bool or limit extension length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in repeat text bool or limit extension\n");
-					#endif
-					exit(2);
-				}
 				if((c == ',') && !escape)
 				{
 					if(has_limit_ext)
@@ -774,7 +765,14 @@ int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesso
 					strcpy(part,"");
 				}
 				else
+				{
+					if(strlen(part)+2 > part_alloc)
+					{
+						part_alloc += 2;
+						part = (char*) realloc(part,part_alloc);
+					}
 					strncat(part,&c,1);
+				}
 			}
 		}
 		if((signed char) c == EOF)
@@ -950,14 +948,6 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 			}
 			else
 			{
-				if(strlen(part) >= 15)
-				{
-					printf("Invalid config on line %d. (level config: repeat text bool or limit extension length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in repeat text bool or limit extension\n");
-					#endif
-					exit(2);
-				}
 				if((c == ',') && !escape)
 				{
 					if(has_limit_ext)
@@ -978,7 +968,14 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 					strcpy(part,"");
 				}
 				else
+				{
+					if(strlen(part)+2 > part_alloc)
+					{
+						part_alloc += 2;
+						part = (char*) realloc(part,part_alloc);
+					}
 					strncat(part,&c,1);
+				}
 			}
 		}
 		if((signed char) c == EOF)
@@ -1153,14 +1150,6 @@ char *_lesson_desc(FILE *cr, int tlesson)
 			}
 			else
 			{
-				if(strlen(part) >= 15)
-				{
-					printf("Invalid config on line %d. (level config: repeat text bool or limit extension length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in repeat text bool or limit extension\n");
-					#endif
-					exit(2);
-				}
 				if((c == ',') && !escape)
 				{
 					if(has_limit_ext)
@@ -1185,7 +1174,14 @@ char *_lesson_desc(FILE *cr, int tlesson)
 					strcpy(part,"");
 				}
 				else
+				{
+					if(strlen(part)+2 > part_alloc)
+					{
+						part_alloc += 2;
+						part = (char*) realloc(part,part_alloc);
+					}
 					strncat(part,&c,1);
+				}
 			}
 		}
 		if((signed char) c == EOF)
@@ -1339,14 +1335,6 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 			}
 			else
 			{
-				if(strlen(part) >= 15)
-				{
-					printf("Invalid config on line %d. (level config: repeat text bool or limit extension length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in repeat text bool or limit extension\n");
-					#endif
-					exit(2);
-				}
 				if((c == ',') && !escape)
 				{
 					if(!has_limit_ext)
@@ -1358,7 +1346,14 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 					strcpy(part,"");
 				}
 				else
+				{
+					if(strlen(part)+2 > part_alloc)
+					{
+						part_alloc += 2;
+						part = (char*) realloc(part,part_alloc);
+					}
 					strncat(part,&c,1);
+				}
 			}
 		}
 		if((signed char) c == EOF)
@@ -1536,14 +1531,6 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 			}
 			else
 			{
-				if(strlen(part) >= 15)
-				{
-					printf("Invalid config on line %d. (level config: repeat text bool or limit extension length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in repeat text bool or limit extension\n");
-					#endif
-					exit(2);
-				}
 				if((c == ',') && !escape)
 				{
 					if(has_limit_ext)
@@ -1574,7 +1561,14 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 					strcpy(part,"");
 				}
 				else
+				{
+					if(strlen(part)+2 > part_alloc)
+					{
+						part_alloc += 2;
+						part = (char*) realloc(part,part_alloc);
+					}
 					strncat(part,&c,1);
+				}
 			}
 		}
 		if((signed char) c == EOF)
