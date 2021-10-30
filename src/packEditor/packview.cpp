@@ -196,7 +196,8 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		else
 		{
 			sublessons += " (" + tr("empty") + ")";
-			i2++;
+			if(i < sublessonCount+i2)
+				i2++;
 		}
 	}
 	ui->sublessonSelectionBox->addItems(sublessons);
