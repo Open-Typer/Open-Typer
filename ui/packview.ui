@@ -511,7 +511,7 @@
      <widget class="QFrame" name="exercisePropsFrame">
       <property name="geometry">
        <rect>
-        <x>490</x>
+        <x>730</x>
         <y>0</y>
         <width>321</width>
         <height>101</height>
@@ -630,6 +630,77 @@
        </property>
        <property name="value">
         <number>120</number>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="lessonPropsFrame">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>0</y>
+        <width>241</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::WinPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="lessonOptionsLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>221</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Lesson options:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lessonDescLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>221</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Description:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lessonDescEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>70</y>
+         <width>131</width>
+         <height>25</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="lessonDescRevisionButton">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>70</y>
+         <width>80</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Revision</string>
        </property>
       </widget>
      </widget>
