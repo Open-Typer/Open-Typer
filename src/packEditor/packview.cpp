@@ -201,7 +201,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		else
 		{
 			sublessons += " (" + tr("empty") + ")";
-			if(i < sublessonCount+i2)
+			if(!((newLesson || newSublesson) && (i >= sublessonCount+i2)))
 				i2++;
 		}
 	}
