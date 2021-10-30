@@ -548,11 +548,6 @@
          <string>Words</string>
         </property>
        </item>
-       <item>
-        <property name="text">
-         <string>Strings</string>
-        </property>
-       </item>
       </widget>
       <widget class="QSpinBox" name="lineLengthBox">
        <property name="geometry">
