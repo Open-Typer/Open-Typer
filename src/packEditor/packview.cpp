@@ -42,11 +42,14 @@ packView::packView(QWidget *parent, int fileID_arg) :
 	connect(ui->sublessonSelectionBox,SIGNAL(activated(int)),this,SLOT(switchSublesson()));
 	connect(ui->exerciseSelectionBox,SIGNAL(activated(int)),this,SLOT(switchExercise()));
 	connect(ui->repeatingBox,SIGNAL(activated(int)),this,SLOT(changeRepeating(int)));
+	// Spin boxes
+	connect(ui->repeatLengthBox,SIGNAL(valueChanged(int)),this,SLOT(changeRepeatLength(int)));
 	// Default values
 	fileID = fileID_arg;
 	newFile=true;
 	readOnly=true;
 	saved=false;
+	skipBoxUpdates=false;
 	editorWindow = parent;
 }
 
@@ -231,15 +234,17 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 			ui->repeatingBox->setCurrentIndex(2);
 		else
 			ui->repeatingBox->setCurrentIndex(0);
-		fclose(targetFile);
 		// Text length
 		if(ui->repeatingBox->currentIndex() != 0)
 		{
 			ui->repeatLengthBox->setEnabled(true);
+			skipBoxUpdates=true;
 			ui->repeatLengthBox->setValue(_lesson_sublesson_level_limit_extension(targetFile,oldLesson+1,oldSublesson+1,oldExercise+1));
+			skipBoxUpdates=false;
 		}
 		else
 			ui->repeatLengthBox->setEnabled(false);
+		fclose(targetFile);
 	}
 }
 
@@ -394,6 +399,34 @@ void packView::changeRepeating(int index)
 			repeatType = (char*) "0";
 			break;
 	}
+	char *lessonDesc;
+	if((sublesson == 1) && (level == 1))
+		lessonDesc = _lesson_desc(targetFile,lesson);
+	else
+		lessonDesc = (char*) "";
+	char *targetText = _lesson_sublesson_level_raw_text(targetFile,lesson,sublesson,level);
+	fclose(targetFile);
+	deleteExerciseLine(lesson,sublesson,level);
+	targetFile = fopen(qPrintable(targetFileName),"a");
+	bool repeat;
+	repeat = !(strcmp(repeatType,"0") == 0);
+	_add_level(targetFile,lesson,sublesson,level,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText);
+	fclose(targetFile);
+	saved=false;
+	refreshUi(false,false,false);
+}
+
+void packView::changeRepeatLength(int limitExt)
+{
+	if(skipBoxUpdates)
+		return;
+	int lesson, sublesson, level, lengthExt;
+	lesson = ui->lessonSelectionBox->currentIndex()+1;
+	sublesson = ui->sublessonSelectionBox->currentIndex()+1;
+	level = ui->exerciseSelectionBox->currentIndex()+1;
+	targetFile = fopen(qPrintable(targetFileName),"rb");
+	lengthExt = _lesson_sublesson_level_length_extension(targetFile,lesson,sublesson,level);
+	char *repeatType = _lesson_sublesson_level_repeat_type(targetFile,lesson,sublesson,level);
 	char *lessonDesc;
 	if((sublesson == 1) && (level == 1))
 		lessonDesc = _lesson_desc(targetFile,lesson);
