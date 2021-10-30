@@ -275,7 +275,12 @@ char *OpenTyper::loadConfig(QString configName)
 	}
 	// Open extracted config (just to check that everything is OK and to update lesson list)
 	errno=0;
-	FILE *configCheckFile = fopen(configPath,"rb");
+	FILE *configCheckFile;
+	#ifdef Q_OS_WINDOWS
+	configCheckFile = _wfopen(str_to_wcs(configPath),L"rb");
+	#else
+	configCheckFile = fopen(configPath,"rb");
+	#endif
 	if(errno != 0)
 	{
 		QMessageBox errBox;
@@ -286,6 +291,7 @@ char *OpenTyper::loadConfig(QString configName)
 		configName = "sk_SK-QWERTZ-B1";
 		customConfig=false;
 		settings.setValue("main/customconfig",customConfig);
+		printf("%s\n",strerror(errno));
 		return loadConfig(configName);
 	}
 	// Update lessonSelectionList widget
@@ -450,7 +456,12 @@ void OpenTyper::levelFinalInit(void)
 
 void OpenTyper::repeatLevel(void)
 {
-	FILE *cr = fopen(loadConfig(publicConfigName),"rb");
+	FILE *cr;
+	#ifdef Q_OS_WINDOWS
+	cr = _wfopen(str_to_wcs(loadConfig(publicConfigName)),L"rb");
+	#else
+	cr = fopen(loadConfig(publicConfigName),"rb");
+	#endif
 	startLevel(cr,currentLesson,currentSublesson,currentLevel);
 	fclose(cr);
 }
