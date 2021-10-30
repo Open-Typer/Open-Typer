@@ -105,7 +105,8 @@ void packEditor::openPrebuilt(void)
 
 void packEditor::close(void)
 {
-	done(0);
+	if(closeAll())
+		done(0);
 }
 
 void packEditor::fixDuplicates(void)
