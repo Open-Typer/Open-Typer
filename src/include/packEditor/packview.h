@@ -64,6 +64,7 @@ class packView : public QWidget
 		void addExercise(void);
 		void removeExercise(void);
 		void changeLessonDesc(const QString rawLessonDesc);
+		void setRevisionLesson(void);
 		void updateText(void);
 		void restoreText(void);
 		void switchLesson(void);

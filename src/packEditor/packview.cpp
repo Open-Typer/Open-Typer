@@ -38,6 +38,7 @@ packView::packView(QWidget *parent, int fileID_arg) :
 	connect(ui->removeExerciseButton,SIGNAL(clicked()),this,SLOT(removeExercise()));
 	// Lesson options
 	connect(ui->lessonDescEdit,SIGNAL(textEdited(const QString)),this,SLOT(changeLessonDesc(const QString)));
+	connect(ui->lessonDescRevisionButton,SIGNAL(clicked()),this,SLOT(setRevisionLesson()));
 	// Text buttons
 	connect(ui->saveTextButton,SIGNAL(clicked()),this,SLOT(updateText()));
 	connect(ui->restoreTextButton,SIGNAL(clicked()),this,SLOT(restoreText()));
@@ -400,6 +401,11 @@ void packView::changeLessonDesc(const QString rawLessonDesc)
 			i2++;
 	}
 	refreshUi(false,false,false);
+}
+
+void packView::setRevisionLesson(void)
+{
+	changeLessonDesc("%r");
 }
 
 void packView::updateText(void)
