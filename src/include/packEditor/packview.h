@@ -68,6 +68,7 @@ class packView : public QWidget
 		void switchExercise(void);
 		void changeRepeating(int index);
 		void changeRepeatLength(int limitExt);
+		void changeLineLength(int lengthExt);
 };
 
 #endif // PACKVIEW_H
