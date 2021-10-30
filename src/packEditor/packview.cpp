@@ -36,6 +36,8 @@ packView::packView(QWidget *parent, int fileID_arg) :
 	connect(ui->newExerciseButton,SIGNAL(clicked()),this,SLOT(addExercise()));
 	// Remove button
 	connect(ui->removeExerciseButton,SIGNAL(clicked()),this,SLOT(removeExercise()));
+	// Lesson options
+	connect(ui->lessonDescEdit,SIGNAL(textEdited(const QString)),this,SLOT(changeLessonDesc(const QString)));
 	// Text buttons
 	connect(ui->saveTextButton,SIGNAL(clicked()),this,SLOT(updateText()));
 	connect(ui->restoreTextButton,SIGNAL(clicked()),this,SLOT(restoreText()));
@@ -228,8 +230,22 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 	else
 	{
 		restoreText();
-		// Repeat type
 		targetFile = fopen(qPrintable(targetFileName),"rb");
+		// Lesson description
+		QString lessonDesc = "";
+		QString rawLessonDesc = _lesson_desc(targetFile,oldLesson+1);
+		for(i=0; i < QStringLen(rawLessonDesc); i++)
+		{
+			if((rawLessonDesc[i] == '%') && (rawLessonDesc[i+1] == 'b'))
+			{
+				lessonDesc += ' ';
+				i++;
+			}
+			else
+				lessonDesc += rawLessonDesc[i];
+		}
+		ui->lessonDescEdit->setText(lessonDesc);
+		// Repeat type
 		char *repeatType = _lesson_sublesson_level_repeat_type(targetFile,oldLesson+1,oldSublesson+1,oldExercise+1);
 		if((strcmp(repeatType,"w") == 0) || (strcmp(repeatType,"rw") == 0))
 			ui->repeatingBox->setCurrentIndex(1);
@@ -318,7 +334,6 @@ void packView::changeExercisePos(char *lessonDesc,int lesson, int sublesson, int
 	_add_level(targetFile,nlesson,nsublesson,nlevel,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText);
 	fclose(targetFile);
 	saved=false;
-	refreshUi(false,false,false);
 }
 
 void packView::deleteExerciseLine(int lesson, int sublesson, int level)
@@ -346,6 +361,45 @@ void packView::deleteExerciseLine(int lesson, int sublesson, int level)
 		stream << out;
 		targetQFile.close();
 	}
+}
+
+void packView::changeLessonDesc(const QString rawLessonDesc)
+{
+	char *rawLessonDesc2 = (char*) malloc(QStringLen(rawLessonDesc)*2+1);
+	strcpy(rawLessonDesc2,rawLessonDesc.toStdString().c_str());
+	char *lessonDesc = (char*) malloc(strlen(rawLessonDesc2)*2+1);
+	strcpy(lessonDesc,"");
+	for(unsigned int i=0; i < strlen(rawLessonDesc2); i++)
+	{
+		if((rawLessonDesc2[i] == ',') || (rawLessonDesc2[i] == ';') || (rawLessonDesc2[i] == '\\'))
+			strcat(lessonDesc,"\\");
+		if(rawLessonDesc2[i] == ' ')
+			strcat(lessonDesc,"%b");
+		else
+			strncat(lessonDesc,&rawLessonDesc2[i],1);
+	}
+	targetFile = fopen(qPrintable(targetFileName),"r");
+	int sublessonCount = _lesson_sublesson_count(targetFile,ui->lessonSelectionBox->currentIndex()+1);
+	fclose(targetFile);
+	int i, i2=0;
+	for(i=1; i <= sublessonCount+i2; i++)
+	{
+		targetFile = fopen(qPrintable(targetFileName),"r");
+		int levelCount = _lesson_sublesson_level_count(
+			targetFile,
+			ui->lessonSelectionBox->currentIndex()+1,i);
+		fclose(targetFile);
+		if(levelCount > 0)
+		{
+			changeExercisePos(
+				lessonDesc,
+				ui->lessonSelectionBox->currentIndex()+1,i,1,
+				ui->lessonSelectionBox->currentIndex()+1,i,1);
+		}
+		else
+			i2++;
+	}
+	refreshUi(false,false,false);
 }
 
 void packView::updateText(void)
