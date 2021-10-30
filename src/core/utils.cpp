@@ -148,3 +148,13 @@ QString _init_level(QString level, int levelLengthExtension)
 	}
 	return out;
 }
+#ifdef Q_OS_WINDOWS
+WCHAR* str_to_wcs(const char* str)
+{
+	size_t size = MultiByteToWideChar(CP_UTF8,0,str,-1,NULL,0)*sizeof(WCHAR)+2;
+	WCHAR* out = (WCHAR*) malloc(size);
+	wcscpy(out,L"");
+	MultiByteToWideChar(CP_UTF8,0,&str[0],-1,out,size);
+	return out;
+}
+#endif

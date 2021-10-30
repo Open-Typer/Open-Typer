@@ -21,6 +21,9 @@
 #include <iostream>
 #include <QString>
 #include <QStandardPaths>
+#ifdef Q_OS_WINDOWS
+#include <windows.h>
+#endif
 
 int QStringLen(QString str);
 bool int_array_contains(int arr[], int target, int count);
@@ -29,3 +32,6 @@ char *_get_word(char *str, int id);
 QString getConfigLoc(void);
 QString parseDesc(QString desc, QString trRevision);
 QString _init_level(QString level, int levelLengthExtension);
+#ifdef Q_OS_WINDOWS
+WCHAR* str_to_wcs(const char* str);
+#endif
