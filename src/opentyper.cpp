@@ -1148,4 +1148,5 @@ void OpenTyper::openEditor(void)
 	editorWindow.exec();
 	// Show main window
 	show();
+	activateWindow();
 }
