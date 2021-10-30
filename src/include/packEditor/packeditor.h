@@ -56,6 +56,7 @@ class packEditor : public QDialog
 		void createNewFile(void);
 		void openFile(void);
 		void openPrebuilt(void);
+		void close(void);
 		void closeTab(int id);
 };
 

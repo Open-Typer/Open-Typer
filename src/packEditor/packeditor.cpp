@@ -33,6 +33,8 @@ packEditor::packEditor(QWidget *parent) :
 	connect(ui->openFileButton,SIGNAL(clicked()),this,SLOT(openFile()));
 	// Open built-in pack button
 	connect(ui->openPrebuiltButton,SIGNAL(clicked()),this,SLOT(openPrebuilt()));
+	// Close button
+	connect(ui->closeButton,SIGNAL(clicked()),this,SLOT(close()));
 	// Tab close button
 	connect(ui->fileTabWidget,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
 	// Default values
@@ -99,6 +101,11 @@ void packEditor::openPrebuilt(void)
 		newTab->openFile(newFileName,false,true);
 		ui->fileTabWidget->setCurrentIndex(ui->fileTabWidget->count()-1);
 	}
+}
+
+void packEditor::close(void)
+{
+	done(0);
 }
 
 void packEditor::fixDuplicates(void)
