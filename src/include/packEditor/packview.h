@@ -52,6 +52,7 @@ class packView : public QWidget
 		int fileID;
 		void refreshUi(bool newLesson, bool newSublesson, bool newExercise);
 		bool newFile, readOnly, saved;
+		void deleteExerciseLine(int lesson, int sublesson, int level);
 
 	private slots:
 		void save(void);
@@ -64,6 +65,7 @@ class packView : public QWidget
 		void switchLesson(void);
 		void switchSublesson(void);
 		void switchExercise(void);
+		void changeRepeating(int index);
 };
 
 #endif // PACKVIEW_H
