@@ -36,7 +36,7 @@ Updater::~Updater() { }
 void Updater::initUpdate()
 {
 	versionH = (char*) malloc(1024);
-	strcpy(versionH,qPrintable(QString(versionHdw->downloadedData())));
+	strcpy(versionH,QString(versionHdw->downloadedData()).toStdString().c_str());
 	char *newVer = readVersion(versionH);
 	if(strcmp(newVer,_VERSION) != 0)
 	{
@@ -90,7 +90,7 @@ void Updater::overwriteExecutable()
 	file.open(QIODevice::WriteOnly);
 	file.write(updatedProgram->downloadedData());
 	file.commit();
-	chmod(qPrintable(QCoreApplication::applicationFilePath()+".part"), S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IXGRP | S_IROTH | S_IXOTH);
+	chmod(QString(QCoreApplication::applicationFilePath()+".part").toStdString().c_str(), S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IXGRP | S_IROTH | S_IXOTH);
 	QProcess *process = new QProcess(this);
 	QStringList args;
 	args += QCoreApplication::applicationFilePath();
