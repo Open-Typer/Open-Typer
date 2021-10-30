@@ -185,7 +185,7 @@
        <rect>
         <x>160</x>
         <y>0</y>
-        <width>281</width>
+        <width>331</width>
         <height>101</height>
        </rect>
       </property>
@@ -312,8 +312,8 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>42</width>
-         <height>42</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
@@ -338,8 +338,8 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>42</width>
-         <height>42</height>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
@@ -364,8 +364,34 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>42</width>
-         <height>42</height>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="removeExerciseButton">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>50</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::TabFocus</enum>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="icon">
+        <iconset resource="../res.qrc">
+         <normaloff>:/res/images/remove.png</normaloff>:/res/images/remove.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
         </size>
        </property>
       </widget>
@@ -485,7 +511,7 @@
      <widget class="QFrame" name="exercisePropsFrame">
       <property name="geometry">
        <rect>
-        <x>440</x>
+        <x>490</x>
         <y>0</y>
         <width>321</width>
         <height>101</height>
