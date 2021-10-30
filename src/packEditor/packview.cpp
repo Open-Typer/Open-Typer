@@ -601,28 +601,16 @@ void packView::save(void)
 		saveAs();
 	else
 	{
-		QFile saveFile(saveFileName);
-		if(saveFile.open(QIODevice::WriteOnly | QIODevice::Text))
+		QFile saveQFile(saveFileName);
+		if(saveQFile.exists())
+			QFile::remove(saveFileName);
+		if(QFile::copy(targetFileName,saveFileName))
 		{
-			QFile targetQFile(targetFileName);
-			if(targetQFile.open(QIODevice::ReadOnly | QIODevice::Text))
-			{
-				QTextStream stream(&targetQFile);
-				while(!stream.atEnd())
-				{
-					QString line = stream.readLine();
-					saveFile.write(QString(line + "\n").toStdString().c_str());
-				}
-				saved=true;
-				refreshUi(false,false,false);
-			}
-			else
-				readOnly=true;
-			targetQFile.close();
+			saved=true;
+			refreshUi(false,false,false);
 		}
 		else
 			readOnly=true;
-		saveFile.close();
 	}
 }
 
