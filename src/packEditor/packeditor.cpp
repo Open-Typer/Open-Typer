@@ -31,6 +31,8 @@ packEditor::packEditor(QWidget *parent) :
 	connect(ui->newFileButton,SIGNAL(clicked()),this,SLOT(createNewFile()));
 	// Open file button
 	connect(ui->openFileButton,SIGNAL(clicked()),this,SLOT(openFile()));
+	// Open built-in pack button
+	connect(ui->openPrebuiltButton,SIGNAL(clicked()),this,SLOT(openPrebuilt()));
 	// Tab close button
 	connect(ui->fileTabWidget,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
 	// Default values
@@ -82,6 +84,21 @@ void packEditor::openFile(void)
 		ui->fileTabWidget->setCurrentIndex(ui->fileTabWidget->count()-1);
 	}
 	fixDuplicates();
+}
+
+void packEditor::openPrebuilt(void)
+{
+	packSelector packSel;
+	packSel.setStyleSheet(styleSheet());
+	if(packSel.exec() == QDialog::Accepted)
+	{
+		QString newFileName = getConfigLoc() + "/" + packSel.selectedConfig();
+		fileID++;
+		packView *newTab = new packView(this,fileID);
+		ui->fileTabWidget->addTab(newTab,newFileName);
+		newTab->openFile(newFileName,false,true);
+		ui->fileTabWidget->setCurrentIndex(ui->fileTabWidget->count()-1);
+	}
 }
 
 void packEditor::fixDuplicates(void)

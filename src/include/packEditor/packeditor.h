@@ -24,6 +24,7 @@
 #include <QDialog>
 #include <QCloseEvent>
 #include "packEditor/packview.h"
+#include "packEditor/packselector.h"
 #include "core/configfile.h"
 
 namespace Ui {
@@ -54,6 +55,7 @@ class packEditor : public QDialog
 	private slots:
 		void createNewFile(void);
 		void openFile(void);
+		void openPrebuilt(void);
 		void closeTab(int id);
 };
 
