@@ -26,6 +26,7 @@ SOURCES += \
     src/levelsummary.cpp \
     src/packEditor/packeditor.cpp \
     src/packEditor/packview.cpp \
+    src/packEditor/packselector.cpp \
     src/paperconfigdialog.cpp \
     src/simplecolordialog.cpp \
     src/updater/updater.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     src/include/levelsummary.h \
     src/include/packEditor/packeditor.h \
     src/include/packEditor/packview.h \
+    src/include/packEditor/packselector.h \
     src/include/paperconfigdialog.h \
     src/include/simplecolordialog.h \
     src/include/updater/updater.h \
@@ -51,6 +53,7 @@ FORMS += \
     ui/levelsummary.ui \
     ui/opentyper.ui \
     ui/packeditor.ui \
+    ui/packselector.ui \
     ui/packview.ui \
     ui/paperconfigdialog.ui \
     ui/simplecolordialog.ui \
