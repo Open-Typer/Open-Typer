@@ -256,14 +256,14 @@ char *OpenTyper::loadConfig(QString configName)
 	char *configPath = (char*) "";
 	if(customConfig)
 	{
-		configPath = (char*) malloc(strlen(qPrintable(configName))+1);
-		strcpy(configPath,qPrintable(configName));
+		configPath = (char*) malloc(strlen(configName.toStdString().c_str())+1);
+		strcpy(configPath,configName.toStdString().c_str());
 	}
 	else
 	{
 		QString configLoc = getConfigLoc();
-		configPath = (char*) malloc(strlen(qPrintable(configLoc))+1+strlen(qPrintable(configName))+1);
-		sprintf(configPath,"%s/%s",qPrintable(configLoc),qPrintable(configName));
+		configPath = (char*) malloc(strlen(configLoc.toStdString().c_str())+1+strlen(configName.toStdString().c_str())+1);
+		sprintf(configPath,"%s/%s",configLoc.toStdString().c_str(),configName.toStdString().c_str());
 		// Create config directory if it doesn't exist
 		QDir configDir(configLoc);
 		if(!configDir.exists())
