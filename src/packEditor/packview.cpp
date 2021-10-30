@@ -34,6 +34,8 @@ packView::packView(QWidget *parent, int fileID_arg) :
 	connect(ui->newLessonButton,SIGNAL(clicked()),this,SLOT(addLesson()));
 	connect(ui->newSublessonButton,SIGNAL(clicked()),this,SLOT(addSublesson()));
 	connect(ui->newExerciseButton,SIGNAL(clicked()),this,SLOT(addExercise()));
+	// Remove button
+	connect(ui->removeExerciseButton,SIGNAL(clicked()),this,SLOT(removeExercise()));
 	// Text buttons
 	connect(ui->saveTextButton,SIGNAL(clicked()),this,SLOT(updateText()));
 	connect(ui->restoreTextButton,SIGNAL(clicked()),this,SLOT(restoreText()));
@@ -275,6 +277,48 @@ void packView::addExercise(void)
 	fclose(targetFile);
 	saved=false;
 	refreshUi(false,false,true);
+}
+
+void packView::removeExercise(void)
+{
+	targetFile = fopen(qPrintable(targetFileName),"rb");
+	int i, targetLesson, targetSublesson, targetLevel;
+	targetLesson = ui->lessonSelectionBox->currentIndex()+1;
+	targetSublesson = ui->sublessonSelectionBox->currentIndex()+1;
+	targetLevel = ui->exerciseSelectionBox->currentIndex()+1;
+	int oldCount = _lesson_sublesson_level_count(targetFile,targetLesson,targetSublesson);
+	// Delete line
+	char *lessonDesc = _lesson_desc(targetFile,targetLesson);
+	deleteExerciseLine(targetLesson,targetSublesson,targetLevel);
+	// Fix empty space
+	for(i = targetLevel; i <= oldCount-1; i++)
+	{
+		changeExercisePos(lessonDesc,targetLesson,targetSublesson,i+1,targetLesson,targetSublesson,i);
+	}
+	if(targetLevel == oldCount)
+		ui->exerciseSelectionBox->setCurrentIndex(oldCount-2);
+	refreshUi(false,false,false);
+}
+
+void packView::changeExercisePos(char *lessonDesc,int lesson, int sublesson, int level, int nlesson, int nsublesson, int nlevel)
+{
+	int limitExt, lengthExt;
+	targetFile = fopen(qPrintable(targetFileName),"r");
+	limitExt = _lesson_sublesson_level_limit_extension(targetFile,lesson,sublesson,level);
+	lengthExt = _lesson_sublesson_level_length_extension(targetFile,lesson,sublesson,level);
+	char *repeatType = _lesson_sublesson_level_repeat_type(targetFile,lesson,sublesson,level);
+	if(nlevel != 1)
+		lessonDesc = (char*) "";
+	char *targetText = _lesson_sublesson_level_raw_text(targetFile,lesson,sublesson,level);
+	fclose(targetFile);
+	deleteExerciseLine(lesson,sublesson,level);
+	targetFile = fopen(qPrintable(targetFileName),"a");
+	bool repeat;
+	repeat = !(strcmp(repeatType,"0") == 0);
+	_add_level(targetFile,nlesson,nsublesson,nlevel,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText);
+	fclose(targetFile);
+	saved=false;
+	refreshUi(false,false,false);
 }
 
 void packView::deleteExerciseLine(int lesson, int sublesson, int level)
