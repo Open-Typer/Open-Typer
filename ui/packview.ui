@@ -487,7 +487,7 @@
        <rect>
         <x>440</x>
         <y>0</y>
-        <width>251</width>
+        <width>321</width>
         <height>101</height>
        </rect>
       </property>
@@ -534,7 +534,7 @@
         <rect>
          <x>100</x>
          <y>30</y>
-         <width>81</width>
+         <width>151</width>
          <height>31</height>
         </rect>
        </property>
@@ -587,7 +587,7 @@
       <widget class="QSpinBox" name="repeatLengthBox">
        <property name="geometry">
         <rect>
-         <x>190</x>
+         <x>260</x>
          <y>30</y>
          <width>51</width>
          <height>31</height>
