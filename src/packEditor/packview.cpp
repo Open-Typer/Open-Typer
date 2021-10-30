@@ -355,7 +355,11 @@ void packView::restoreText(void)
 				ui->lessonSelectionBox->currentIndex()+1,
 				ui->sublessonSelectionBox->currentIndex()+1,
 				ui->exerciseSelectionBox->currentIndex()+1)));
-	ui->levelTextEdit->setPlainText(ui->levelLabel->text());
+	ui->levelTextEdit->setPlainText(_lesson_sublesson_level_raw_text(
+		targetFile,
+		ui->lessonSelectionBox->currentIndex()+1,
+		ui->sublessonSelectionBox->currentIndex()+1,
+		ui->exerciseSelectionBox->currentIndex()+1));
 	fclose(targetFile);
 }
 
