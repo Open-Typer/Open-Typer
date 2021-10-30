@@ -1143,6 +1143,8 @@ void OpenTyper::openEditor(void)
 	hide();
 	// Open editor
 	packEditor editorWindow;
+	editorWindow.setWindowFlag(Qt::WindowMinimizeButtonHint,true);
+	editorWindow.setWindowFlag(Qt::WindowMaximizeButtonHint,true);
 	editorWindow.setStyleSheet(styleSheet());
 	editorWindow.init();
 	editorWindow.exec();
