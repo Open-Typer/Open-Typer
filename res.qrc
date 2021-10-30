@@ -17,5 +17,6 @@
         <file>res/images/save.png</file>
         <file>res/images/save_as.png</file>
         <file>res/images/remove.png</file>
+        <file>res/images/close.png</file>
     </qresource>
 </RCC>
