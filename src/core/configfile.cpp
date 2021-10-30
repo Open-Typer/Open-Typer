@@ -1392,7 +1392,7 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 			return part;
 		line++;
 	}
-	return (char*) "0";
+	return (char*) "";
 }
 char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order)
 {
