@@ -281,7 +281,7 @@ p, li { white-space: pre-wrap; }
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="packsTab">
        <attribute name="title">
@@ -599,7 +599,7 @@ p, li { white-space: pre-wrap; }
        <widget class="QFrame" name="trainingFrame4">
         <property name="geometry">
          <rect>
-          <x>740</x>
+          <x>790</x>
           <y>0</y>
           <width>221</width>
           <height>101</height>
@@ -666,7 +666,7 @@ p, li { white-space: pre-wrap; }
          <rect>
           <x>200</x>
           <y>-1</y>
-          <width>361</width>
+          <width>411</width>
           <height>101</height>
          </rect>
         </property>
@@ -739,7 +739,7 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>160</x>
            <y>0</y>
-           <width>121</width>
+           <width>191</width>
            <height>20</height>
           </rect>
          </property>
@@ -767,8 +767,8 @@ p, li { white-space: pre-wrap; }
          <property name="geometry">
           <rect>
            <x>160</x>
-           <y>60</y>
-           <width>191</width>
+           <y>40</y>
+           <width>241</width>
            <height>26</height>
           </rect>
          </property>
@@ -782,11 +782,36 @@ p, li { white-space: pre-wrap; }
           <bool>false</bool>
          </property>
         </widget>
+        <widget class="QCheckBox" name="spaceNewlineCheckBox">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>70</y>
+           <width>241</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="text">
+          <string>Start new line using space bar</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
        </widget>
        <widget class="QFrame" name="trainingFrame3">
         <property name="geometry">
          <rect>
-          <x>560</x>
+          <x>610</x>
           <y>0</y>
           <width>181</width>
           <height>101</height>
