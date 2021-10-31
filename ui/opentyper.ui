@@ -181,6 +181,9 @@
              <property name="focusPolicy">
               <enum>Qt::StrongFocus</enum>
              </property>
+             <property name="contextMenuPolicy">
+              <enum>Qt::NoContextMenu</enum>
+             </property>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
