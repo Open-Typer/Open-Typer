@@ -32,7 +32,8 @@ SOURCES += \
     src/updater/updater.cpp \
     src/main.cpp \
     src/opentyper.cpp \
-    src/updater/updaterdialog.cpp
+    src/updater/updaterdialog.cpp \
+    src/widgets/inputlabel.cpp
 
 HEADERS += \
     src/include/core/utils.h \
@@ -47,7 +48,8 @@ HEADERS += \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
     src/include/version.h \
-    src/include/opentyper.h
+    src/include/opentyper.h \
+    src/include/widgets/inputlabel.h
 
 FORMS += \
     ui/levelsummary.ui \
