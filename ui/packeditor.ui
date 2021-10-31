@@ -92,7 +92,7 @@
      <widget class="QPushButton" name="openFileButton">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>110</x>
         <y>10</y>
         <width>51</width>
         <height>41</height>
@@ -118,7 +118,7 @@
      <widget class="QLabel" name="openFileLabel">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>130</x>
         <y>50</y>
         <width>71</width>
         <height>20</height>
@@ -140,7 +140,7 @@
      <widget class="QLabel" name="closeLabel">
       <property name="geometry">
        <rect>
-        <x>340</x>
+        <x>250</x>
         <y>50</y>
         <width>71</width>
         <height>20</height>
@@ -162,7 +162,7 @@
      <widget class="QPushButton" name="closeButton">
       <property name="geometry">
        <rect>
-        <x>350</x>
+        <x>260</x>
         <y>10</y>
         <width>51</width>
         <height>41</height>
@@ -185,32 +185,10 @@
        </size>
       </property>
      </widget>
-     <widget class="QLabel" name="openPrebuiltLabel">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>50</y>
-        <width>121</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Open built-in pack</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
      <widget class="QPushButton" name="openPrebuiltButton">
       <property name="geometry">
        <rect>
-        <x>240</x>
+        <x>170</x>
         <y>10</y>
         <width>51</width>
         <height>41</height>
