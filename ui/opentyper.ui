@@ -151,7 +151,7 @@
             <property name="frameShadow">
              <enum>QFrame::Plain</enum>
             </property>
-            <widget class="QLabel" name="inputLabel">
+            <widget class="QTextEdit" name="inputLabel">
              <property name="geometry">
               <rect>
                <x>5</x>
@@ -172,29 +172,39 @@
                <pointsize>14</pointsize>
               </font>
              </property>
-             <property name="cursor">
+             <property name="cursor" stdset="0">
               <cursorShape>IBeamCursor</cursorShape>
              </property>
              <property name="mouseTracking">
               <bool>false</bool>
              </property>
              <property name="focusPolicy">
-              <enum>Qt::StrongFocus</enum>
+              <enum>Qt::NoFocus</enum>
              </property>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
-             <property name="text">
-              <string>input text</string>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
              </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="html">
+              <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Courier'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
              </property>
+             <property name="text" stdset="0">
+              <string notr="true">input text</string>
+             </property>
             </widget>
-            <widget class="QLabel" name="mistakeLabel">
+            <widget class="QTextEdit" name="mistakeLabel">
              <property name="geometry">
               <rect>
                <x>5</x>
@@ -217,26 +227,36 @@
                <bold>false</bold>
               </font>
              </property>
-             <property name="cursor">
+             <property name="cursor" stdset="0">
               <cursorShape>IBeamCursor</cursorShape>
              </property>
              <property name="mouseTracking">
               <bool>false</bool>
              </property>
              <property name="focusPolicy">
-              <enum>Qt::StrongFocus</enum>
+              <enum>Qt::NoFocus</enum>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(215, 71, 15);</string>
              </property>
-             <property name="text">
-              <string/>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
              </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="html">
+              <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Courier'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
+             </property>
+             <property name="text" stdset="0">
+              <string/>
              </property>
             </widget>
             <zorder>mistakeLabel</zorder>
