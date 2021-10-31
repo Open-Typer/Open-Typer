@@ -151,7 +151,7 @@
             <property name="frameShadow">
              <enum>QFrame::Plain</enum>
             </property>
-            <widget class="QTextEdit" name="inputLabel">
+            <widget class="inputLabelWidget" name="inputLabel">
              <property name="geometry">
               <rect>
                <x>5</x>
@@ -179,7 +179,7 @@
               <bool>false</bool>
              </property>
              <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
+              <enum>Qt::StrongFocus</enum>
              </property>
              <property name="styleSheet">
               <string notr="true"/>
@@ -198,7 +198,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="textInteractionFlags">
-              <set>Qt::NoTextInteraction</set>
+              <set>Qt::TextSelectableByKeyboard</set>
              </property>
              <property name="text" stdset="0">
               <string notr="true">input text</string>
@@ -1247,6 +1247,13 @@ p, li { white-space: pre-wrap; }
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>inputLabelWidget</class>
+   <extends>QTextEdit</extends>
+   <header>src/include/widgets/inputlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../res.qrc"/>
  </resources>
