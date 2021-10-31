@@ -9,227 +9,227 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="188"/>
-        <source>input text</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../ui/opentyper.ui" line="265"/>
+        <location filename="../ui/opentyper.ui" line="288"/>
         <source>Lesson packs</source>
         <translation>Balíky lekcií</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="298"/>
+        <location filename="../ui/opentyper.ui" line="321"/>
         <source>Built-in packs:</source>
         <translation>Vstavané balíky:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="346"/>
+        <location filename="../ui/opentyper.ui" line="369"/>
         <source>Custom packs:</source>
         <translation>Vlastné balíky:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="391"/>
+        <location filename="../ui/opentyper.ui" line="414"/>
         <source>Open pack</source>
         <translation>Otvoriť balík</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="439"/>
+        <location filename="../ui/opentyper.ui" line="462"/>
         <source>Open editor</source>
         <translation>Otvoriť editor</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="449"/>
+        <location filename="../ui/opentyper.ui" line="472"/>
         <source>Training</source>
         <translation>Výučba</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="488"/>
+        <location filename="../ui/opentyper.ui" line="511"/>
         <source>(no pack selected)</source>
         <translation>(nevybraný žiadny balík)</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="504"/>
+        <location filename="../ui/opentyper.ui" line="527"/>
         <source>Repeat exercise</source>
         <translation>Opakovať cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="601"/>
+        <location filename="../ui/opentyper.ui" line="624"/>
         <source>Time:</source>
         <translation>Čas:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="608"/>
-        <location filename="../ui/opentyper.ui" line="622"/>
+        <location filename="../ui/opentyper.ui" line="631"/>
+        <location filename="../ui/opentyper.ui" line="645"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="615"/>
+        <location filename="../ui/opentyper.ui" line="638"/>
         <source>Mistakes:</source>
         <translation>Počet chýb:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="635"/>
+        <location filename="../ui/opentyper.ui" line="658"/>
         <source>Current state:</source>
         <translation>Stav:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="672"/>
+        <location filename="../ui/opentyper.ui" line="695"/>
         <source>Lesson:</source>
         <translation>Lekcia:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="698"/>
+        <location filename="../ui/opentyper.ui" line="721"/>
         <source>Exercise:</source>
         <translation>Cvičenie:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="724"/>
+        <location filename="../ui/opentyper.ui" line="747"/>
         <source>Sublesson:</source>
         <translation>Podlekcia:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="756"/>
+        <location filename="../ui/opentyper.ui" line="779"/>
         <source>Random order</source>
         <translation>Náhodné poradie</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="794"/>
+        <location filename="../ui/opentyper.ui" line="801"/>
+        <source>Start new line using space bar</source>
+        <translation type="unfinished">Začať nový riadok medzerníkom</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="842"/>
         <source>Open exercise from file</source>
         <translation>Otvoriť cvičenie zo súboru</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="830"/>
+        <location filename="../ui/opentyper.ui" line="878"/>
         <source>Customize</source>
         <translation>Prispôsobiť</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="869"/>
+        <location filename="../ui/opentyper.ui" line="917"/>
         <source>Font:</source>
         <translation>Písmo:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="895"/>
+        <location filename="../ui/opentyper.ui" line="943"/>
         <source>Font size:</source>
         <translation>Veľkosť písma:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1009"/>
-        <location filename="../ui/opentyper.ui" line="1086"/>
-        <location filename="../ui/opentyper.ui" line="1163"/>
+        <location filename="../ui/opentyper.ui" line="1057"/>
+        <location filename="../ui/opentyper.ui" line="1134"/>
+        <location filename="../ui/opentyper.ui" line="1211"/>
         <source>Reset</source>
         <translation>Obnoviť</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1038"/>
+        <location filename="../ui/opentyper.ui" line="1086"/>
         <source>Text color:</source>
         <translation>Farba textu:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1054"/>
+        <location filename="../ui/opentyper.ui" line="1102"/>
         <source>Change exercise text color</source>
         <translation>Zmeniť farbu textu cvičenia</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1070"/>
+        <location filename="../ui/opentyper.ui" line="1118"/>
         <source>Change input text color</source>
         <translation>Zmeniť farbu vstupného textu</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1115"/>
+        <location filename="../ui/opentyper.ui" line="1163"/>
         <source>Background &amp; paper color:</source>
         <translation>Farba pozadia a papiera:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1131"/>
+        <location filename="../ui/opentyper.ui" line="1179"/>
         <source>Change background color</source>
         <translation>Zmeniť farbu pozadia</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1147"/>
+        <location filename="../ui/opentyper.ui" line="1195"/>
         <source>Change paper color</source>
         <translation>Zmeniť farbu papiera</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1192"/>
+        <location filename="../ui/opentyper.ui" line="1240"/>
         <source>Theme:</source>
         <translation>Motív:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1209"/>
+        <location filename="../ui/opentyper.ui" line="1257"/>
         <source>System (default)</source>
         <translation>Systémový (predvolené)</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1214"/>
+        <location filename="../ui/opentyper.ui" line="1262"/>
         <source>Dark</source>
         <translation>Tmavý</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1219"/>
+        <location filename="../ui/opentyper.ui" line="1267"/>
         <source>Light</source>
         <translation>Svetlý</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="298"/>
+        <location filename="../src/opentyper.cpp" line="319"/>
         <source>Revision</source>
         <translation>Opakovanie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="300"/>
-        <location filename="../src/opentyper.cpp" line="302"/>
+        <location filename="../src/opentyper.cpp" line="321"/>
+        <location filename="../src/opentyper.cpp" line="323"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="355"/>
+        <location filename="../src/opentyper.cpp" line="376"/>
         <source>Fingering</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="358"/>
+        <location filename="../src/opentyper.cpp" line="379"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="361"/>
+        <location filename="../src/opentyper.cpp" line="382"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="364"/>
+        <location filename="../src/opentyper.cpp" line="385"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="416"/>
+        <location filename="../src/opentyper.cpp" line="437"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="551"/>
+        <location filename="../src/opentyper.cpp" line="587"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="551"/>
-        <location filename="../src/opentyper.cpp" line="1127"/>
+        <location filename="../src/opentyper.cpp" line="587"/>
+        <location filename="../src/opentyper.cpp" line="1162"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="560"/>
+        <location filename="../src/opentyper.cpp" line="596"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="574"/>
+        <location filename="../src/opentyper.cpp" line="610"/>
         <source>Could not open the file.</source>
         <translation>Nepodarilo sa otvoriť súbor.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="1127"/>
+        <location filename="../src/opentyper.cpp" line="1162"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
@@ -404,12 +404,7 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Zavrieť</translation>
     </message>
     <message>
-        <location filename="../ui/packeditor.ui" line="204"/>
-        <source>Open built-in pack</source>
-        <translation>Otvoriť vstavaný balík</translation>
-    </message>
-    <message>
-        <location filename="../ui/packeditor.ui" line="264"/>
+        <location filename="../ui/packeditor.ui" line="242"/>
         <source>Pack editor</source>
         <translation>Editor balíkov</translation>
     </message>
@@ -507,7 +502,7 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
     <message>
         <location filename="../ui/packview.ui" line="574"/>
-        <location filename="../src/packEditor/packview.cpp" line="196"/>
+        <location filename="../src/packEditor/packview.cpp" line="195"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
@@ -528,7 +523,7 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
     <message>
         <location filename="../ui/packview.ui" line="703"/>
-        <location filename="../src/packEditor/packview.cpp" line="161"/>
+        <location filename="../src/packEditor/packview.cpp" line="160"/>
         <source>Revision</source>
         <translation>Opakovanie</translation>
     </message>
@@ -558,48 +553,48 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Zavrieť bez uloženia</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="163"/>
-        <location filename="../src/packEditor/packview.cpp" line="165"/>
+        <location filename="../src/packEditor/packview.cpp" line="162"/>
+        <location filename="../src/packEditor/packview.cpp" line="164"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="193"/>
+        <location filename="../src/packEditor/packview.cpp" line="192"/>
         <source>Fingering</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="199"/>
+        <location filename="../src/packEditor/packview.cpp" line="198"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="202"/>
+        <location filename="../src/packEditor/packview.cpp" line="201"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="208"/>
+        <location filename="../src/packEditor/packview.cpp" line="207"/>
         <source>empty</source>
         <translation>prázdna</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="223"/>
+        <location filename="../src/packEditor/packview.cpp" line="222"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="293"/>
+        <location filename="../src/packEditor/packview.cpp" line="296"/>
         <source>New exercise</source>
         <translation>Nové cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="630"/>
+        <location filename="../src/packEditor/packview.cpp" line="621"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="630"/>
+        <location filename="../src/packEditor/packview.cpp" line="621"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
