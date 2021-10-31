@@ -154,7 +154,7 @@
             <widget class="inputLabelWidget" name="inputLabel">
              <property name="geometry">
               <rect>
-               <x>5</x>
+               <x>0</x>
                <y>0</y>
                <width>1471</width>
                <height>101</height>
@@ -210,7 +210,7 @@ p, li { white-space: pre-wrap; }
             <widget class="QTextEdit" name="mistakeLabel">
              <property name="geometry">
               <rect>
-               <x>5</x>
+               <x>0</x>
                <y>0</y>
                <width>1471</width>
                <height>101</height>
