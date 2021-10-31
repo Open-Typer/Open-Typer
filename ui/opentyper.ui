@@ -711,8 +711,8 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="levelSelectionLabel">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>50</y>
+           <x>160</x>
+           <y>0</y>
            <width>141</width>
            <height>20</height>
           </rect>
@@ -724,8 +724,8 @@ p, li { white-space: pre-wrap; }
         <widget class="QComboBox" name="levelSelectionList">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>70</y>
+           <x>160</x>
+           <y>20</y>
            <width>141</width>
            <height>21</height>
           </rect>
@@ -737,9 +737,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="sublessonSelectionLabel">
          <property name="geometry">
           <rect>
-           <x>160</x>
-           <y>0</y>
-           <width>191</width>
+           <x>10</x>
+           <y>50</y>
+           <width>141</width>
            <height>20</height>
           </rect>
          </property>
@@ -750,9 +750,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QComboBox" name="sublessonSelectionList">
          <property name="geometry">
           <rect>
-           <x>160</x>
-           <y>20</y>
-           <width>191</width>
+           <x>10</x>
+           <y>70</y>
+           <width>141</width>
            <height>21</height>
           </rect>
          </property>
