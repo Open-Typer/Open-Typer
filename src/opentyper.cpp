@@ -105,6 +105,11 @@ void OpenTyper::connectAll(void)
 		SIGNAL(timeout()),
 		this,
 		SLOT(updateCurrentTime()));
+	// inputLabel
+	connect(ui->inputLabel,
+		SIGNAL(keyPressed(QKeyEvent*)),
+		this,
+		SLOT(keyPress(QKeyEvent*)));
 	// **Lesson packs tab**
 	// List of lesson packs
 	connect(ui->packList,
@@ -452,7 +457,7 @@ void OpenTyper::levelFinalInit(void)
 	input = "";
 	displayInput = "";
 	ui->inputLabel->setAcceptRichText(true);
-	ui->inputLabel->setHtml(displayInput+"<span style='color: blue; font-family: FreeSans'>|</span>");
+	ui->inputLabel->setHtml(displayInput);
 }
 
 void OpenTyper::repeatLevel(void)
@@ -632,7 +637,7 @@ bool OpenTyper::isSpecialKey(QKeyEvent *event)
 	}
 }
 
-void OpenTyper::keyPressEvent(QKeyEvent *event)
+void OpenTyper::keyPress(QKeyEvent *event)
 {
 	if(isSpecialKey(event) && (event->key() != Qt::Key_Backspace))
 		return;
@@ -661,7 +666,7 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 				ui->mistakeLabel->setHtml(mistakeLabelHtml);
 			}
 		}
-		ui->inputLabel->setHtml(displayInput+"<span style='color: blue; font-size: " + QString::number(ui->fontSizeBox->value()/10.0) + ";" + "font-family: FreeSans'>|</span>");
+		ui->inputLabel->setHtml(displayInput);
 		levelPos++;
 		displayPos++;
 	}
@@ -671,13 +676,12 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 		{
 			if(event->key() == Qt::Key_Backspace)
 			{
-				ui->inputLabel->setHtml(displayInput+"<span style='color: blue; font-size: " + QString::number(ui->fontSizeBox->value()/10.0) + ";" + "font-family: FreeSans'>|</span>");
+				ui->inputLabel->setHtml(displayInput);
 				if(!ignoreMistakeLabelAppend)
 				{
 					mistakeLabelHtml += "_";
 					ui->mistakeLabel->setHtml(mistakeLabelHtml);
 				}
-				printf("%s\n",qPrintable(ui->mistakeLabel->toHtml()));
 				mistake=false;
 				ignoreMistakeLabelAppend=true;
 			}
@@ -692,13 +696,14 @@ void OpenTyper::keyPressEvent(QKeyEvent *event)
 					errorAppend = "_";
 				else
 					errorAppend = event->text();
-				ui->inputLabel->setHtml(displayInput + "<span style='color: red';'>" + errorAppend + "</span>" + "<span style='color: blue; font-family: FreeSans'>|</span>");
+				ui->inputLabel->setHtml(displayInput + "<span style='color: red';'>" + errorAppend + "</span>");
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 				mistake=true;
 			}
 		}
 	}
+	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	if(QStringLen(input) >= QStringLen(level))
 	{
 		levelInProgress=false;

@@ -35,7 +35,9 @@
 #include <QColorDialog>
 #include <QElapsedTimer>
 #include <QFileDialog>
+#include <QTextCursor>
 #include <sys/stat.h>
+#include "widgets/inputlabel.h"
 #include "updater/updater.h"
 #include "simplecolordialog.h"
 #include "paperconfigdialog.h"
@@ -84,14 +86,12 @@ public:
 	bool customLevelLoaded;
 	bool customConfig;
 
-protected:
-	void keyPressEvent(QKeyEvent *event);
-
 private:
 	Ui::OpenTyper *ui;
 	void connectAll(void);
 
 private slots:
+    void keyPress(QKeyEvent *event);
     void packListIndexChanged(int index);
     void openPack(void);
     void openEditor(void);
