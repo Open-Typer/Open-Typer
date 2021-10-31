@@ -64,6 +64,7 @@ public:
 	int sublessonListStart;
 	QElapsedTimer levelTimer;
 	bool levelInProgress, mistake, ignoreMistakeLabelAppend;
+	QString inputLabelHtml, mistakeLabelHtml;
 	int lastTime;
 	bool isSpecialKey(QKeyEvent *event);
 	int _line_count(QString str);
