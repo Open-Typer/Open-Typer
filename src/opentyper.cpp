@@ -70,6 +70,11 @@ OpenTyper::OpenTyper(QWidget *parent)
 	// Theme
 	ui->themeBox->setCurrentIndex(settings.value("theme/theme","0").toInt());
 	changeTheme(ui->themeBox->currentIndex());
+	// Space bar new lines
+	if(settings.value("main/spacenewline","true").toBool())
+		ui->spaceNewlineCheckBox->setCheckState(Qt::Checked);
+	else
+		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
 	// Connect signals to slots
 	connectAll();
 	// Check for updates
@@ -162,6 +167,11 @@ void OpenTyper::connectAll(void)
 		SIGNAL(clicked(bool)),
 		this,
 		SLOT(randomOrderCheckBoxChanged(bool)));
+	// Space new line checkbox
+	connect(ui->spaceNewlineCheckBox,
+		SIGNAL(clicked(bool)),
+		this,
+		SLOT(spaceNewlineCheckBoxChanged(bool)));
 	// Open exercise from file button
 	connect(ui->openExerciseButton,
 		SIGNAL(clicked()),
@@ -560,6 +570,15 @@ void OpenTyper::randomOrderCheckBoxChanged(bool checked)
 	repeatLevel();
 }
 
+void OpenTyper::spaceNewlineCheckBoxChanged(bool checked)
+{
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	if(checked)
+		settings.setValue("main/spacenewline","true");
+	else
+		settings.setValue("main/spacenewline","false");
+}
+
 void OpenTyper::openExerciseFromFile(void)
 {
 	// Show file dialog
@@ -622,12 +641,6 @@ bool OpenTyper::isSpecialKey(QKeyEvent *event)
 		case Qt::Key_Backtab:
 			return true;
 			break;
-		case Qt::Key_Enter:
-			return true;
-			break;
-		case Qt::Key_Return:
-			return true;
-			break;
 		case Qt::Key_Escape:
 			return true;
 			break;
@@ -646,7 +659,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		levelTimer.start();
 		levelInProgress=true;
 	}
-	if((event->text() == level[levelPos]) && !mistake)
+	if((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || ui->spaceNewlineCheckBox->isChecked()) && (event->text() == level[levelPos]))) && !mistake)
 	{
 		input += event->text();
 		displayInput += event->text();

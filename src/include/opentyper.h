@@ -103,6 +103,7 @@ private slots:
     void sublessonSelectionListIndexChanged(int index);
     void levelSelectionListIndexChanged(int index);
     void randomOrderCheckBoxChanged(bool checked);
+    void spaceNewlineCheckBoxChanged(bool checked);
     void openExerciseFromFile(void);
     void changeFont(QFont font);
     void changeFontSize(int size);
