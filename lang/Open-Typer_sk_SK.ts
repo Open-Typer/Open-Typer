@@ -54,12 +54,6 @@
         <translation>Čas:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="631"/>
-        <location filename="../ui/opentyper.ui" line="645"/>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
         <location filename="../ui/opentyper.ui" line="638"/>
         <source>Mistakes:</source>
         <translation>Počet chýb:</translation>
@@ -92,7 +86,7 @@
     <message>
         <location filename="../ui/opentyper.ui" line="801"/>
         <source>Start new line using space bar</source>
-        <translation type="unfinished">Začať nový riadok medzerníkom</translation>
+        <translation>Začať nový riadok medzerníkom</translation>
     </message>
     <message>
         <location filename="../ui/opentyper.ui" line="842"/>
@@ -115,59 +109,47 @@
         <translation>Veľkosť písma:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1057"/>
-        <location filename="../ui/opentyper.ui" line="1134"/>
-        <location filename="../ui/opentyper.ui" line="1211"/>
-        <source>Reset</source>
-        <translation>Obnoviť</translation>
+        <location filename="../ui/opentyper.ui" line="1096"/>
+        <source>Colors:</source>
+        <translation>Farby:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1086"/>
-        <source>Text color:</source>
-        <translation>Farba textu:</translation>
+        <location filename="../ui/opentyper.ui" line="1187"/>
+        <source>Exercise text</source>
+        <translation>Text cvičenia</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1102"/>
-        <source>Change exercise text color</source>
-        <translation>Zmeniť farbu textu cvičenia</translation>
+        <location filename="../ui/opentyper.ui" line="1203"/>
+        <source>Input text</source>
+        <translation>Vstupný text</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1118"/>
-        <source>Change input text color</source>
-        <translation>Zmeniť farbu vstupného textu</translation>
+        <location filename="../ui/opentyper.ui" line="1271"/>
+        <source>Background</source>
+        <translation>Pozadie</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1163"/>
-        <source>Background &amp; paper color:</source>
-        <translation>Farba pozadia a papiera:</translation>
+        <location filename="../ui/opentyper.ui" line="1313"/>
+        <source>Paper</source>
+        <translation>Papier</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1179"/>
-        <source>Change background color</source>
-        <translation>Zmeniť farbu pozadia</translation>
-    </message>
-    <message>
-        <location filename="../ui/opentyper.ui" line="1195"/>
-        <source>Change paper color</source>
-        <translation>Zmeniť farbu papiera</translation>
-    </message>
-    <message>
-        <location filename="../ui/opentyper.ui" line="1240"/>
+        <location filename="../ui/opentyper.ui" line="1345"/>
         <source>Theme:</source>
         <translation>Motív:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1257"/>
+        <location filename="../ui/opentyper.ui" line="1362"/>
         <source>System (default)</source>
         <translation>Systémový (predvolené)</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1262"/>
+        <location filename="../ui/opentyper.ui" line="1367"/>
         <source>Dark</source>
         <translation>Tmavý</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="1267"/>
+        <location filename="../ui/opentyper.ui" line="1372"/>
         <source>Light</source>
         <translation>Svetlý</translation>
     </message>
@@ -250,27 +232,27 @@
         <translation>Výber farby</translation>
     </message>
     <message>
-        <location filename="../ui/simplecolordialog.ui" line="51"/>
+        <location filename="../ui/simplecolordialog.ui" line="323"/>
         <source>Choose a color</source>
         <translation>Vyberte farbu</translation>
     </message>
     <message>
-        <location filename="../ui/simplecolordialog.ui" line="94"/>
+        <location filename="../ui/simplecolordialog.ui" line="65"/>
         <source>Quick selection:</source>
         <translation>Rýchly výber:</translation>
     </message>
     <message>
-        <location filename="../ui/simplecolordialog.ui" line="345"/>
+        <location filename="../ui/simplecolordialog.ui" line="513"/>
         <source>Apply</source>
         <translation>Použiť</translation>
     </message>
     <message>
-        <location filename="../ui/simplecolordialog.ui" line="355"/>
+        <location filename="../ui/simplecolordialog.ui" line="523"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
     </message>
     <message>
-        <location filename="../ui/simplecolordialog.ui" line="392"/>
+        <location filename="../ui/simplecolordialog.ui" line="360"/>
         <source>Advanced:</source>
         <translation>Rozšírené:</translation>
     </message>
