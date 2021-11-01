@@ -281,7 +281,7 @@ p, li { white-space: pre-wrap; }
        </size>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="packsTab">
        <attribute name="title">
@@ -1058,7 +1058,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="icon">
           <iconset resource="../res.qrc">
-           <normaloff>:/res/images/refresh.png</normaloff>:/res/images/refresh.png</iconset>
+           <normaloff>:/res/images/reset.png</normaloff>:/res/images/reset.png</iconset>
          </property>
         </widget>
        </widget>
@@ -1165,7 +1165,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="icon">
           <iconset resource="../res.qrc">
-           <normaloff>:/res/images/refresh.png</normaloff>:/res/images/refresh.png</iconset>
+           <normaloff>:/res/images/reset.png</normaloff>:/res/images/reset.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -1249,7 +1249,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="icon">
           <iconset resource="../res.qrc">
-           <normaloff>:/res/images/refresh.png</normaloff>:/res/images/refresh.png</iconset>
+           <normaloff>:/res/images/reset.png</normaloff>:/res/images/reset.png</iconset>
          </property>
          <property name="iconSize">
           <size>
