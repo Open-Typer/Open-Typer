@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1088</width>
+    <width>1223</width>
     <height>746</height>
    </rect>
   </property>
@@ -185,7 +185,7 @@
        <rect>
         <x>160</x>
         <y>0</y>
-        <width>331</width>
+        <width>371</width>
         <height>101</height>
        </rect>
       </property>
@@ -200,7 +200,7 @@
         <rect>
          <x>100</x>
          <y>70</y>
-         <width>131</width>
+         <width>171</width>
          <height>21</height>
         </rect>
        </property>
@@ -251,7 +251,7 @@
         <rect>
          <x>100</x>
          <y>10</y>
-         <width>131</width>
+         <width>171</width>
          <height>21</height>
         </rect>
        </property>
@@ -264,7 +264,7 @@
         <rect>
          <x>100</x>
          <y>40</y>
-         <width>131</width>
+         <width>171</width>
          <height>21</height>
         </rect>
        </property>
@@ -294,7 +294,7 @@
       <widget class="QPushButton" name="newLessonButton">
        <property name="geometry">
         <rect>
-         <x>240</x>
+         <x>280</x>
          <y>10</y>
          <width>31</width>
          <height>21</height>
@@ -320,7 +320,7 @@
       <widget class="QPushButton" name="newSublessonButton">
        <property name="geometry">
         <rect>
-         <x>240</x>
+         <x>280</x>
          <y>40</y>
          <width>31</width>
          <height>21</height>
@@ -346,7 +346,7 @@
       <widget class="QPushButton" name="newExerciseButton">
        <property name="geometry">
         <rect>
-         <x>240</x>
+         <x>280</x>
          <y>70</y>
          <width>31</width>
          <height>21</height>
@@ -372,7 +372,7 @@
       <widget class="QPushButton" name="removeExerciseButton">
        <property name="geometry">
         <rect>
-         <x>280</x>
+         <x>320</x>
          <y>50</y>
          <width>41</width>
          <height>41</height>
@@ -511,7 +511,7 @@
      <widget class="QFrame" name="exercisePropsFrame">
       <property name="geometry">
        <rect>
-        <x>730</x>
+        <x>770</x>
         <y>0</y>
         <width>321</width>
         <height>101</height>
@@ -636,7 +636,7 @@
      <widget class="QFrame" name="lessonPropsFrame">
       <property name="geometry">
        <rect>
-        <x>490</x>
+        <x>530</x>
         <y>0</y>
         <width>241</width>
         <height>101</height>
