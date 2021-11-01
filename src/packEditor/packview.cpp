@@ -197,6 +197,9 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 				case 3:
 					sublessons += tr("Sentences");
 					break;
+				case 4:
+					sublessons += tr("Text");
+					break;
 				default:
 					sublessons += tr("Sublesson") + " " + QString::number(i);
 					break;

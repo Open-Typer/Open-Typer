@@ -381,6 +381,9 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 				case 3:
 					sublessons += tr("Sentences");
 					break;
+				case 4:
+					sublessons += tr("Text");
+					break;
 				default:
 					sublessons += tr("Sublesson") + " " + QString::number(i);
 					break;
