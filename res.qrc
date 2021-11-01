@@ -18,5 +18,9 @@
         <file>res/images/save_as.png</file>
         <file>res/images/remove.png</file>
         <file>res/images/close.png</file>
+        <file>res/images/bg_color.png</file>
+        <file>res/images/paper_color.png</file>
+        <file>res/images/extext_color.png</file>
+        <file>res/images/intext_color.png</file>
     </qresource>
 </RCC>
