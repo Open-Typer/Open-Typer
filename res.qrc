@@ -22,5 +22,6 @@
         <file>res/images/paper_color.png</file>
         <file>res/images/extext_color.png</file>
         <file>res/images/intext_color.png</file>
+        <file>res/images/reset.png</file>
     </qresource>
 </RCC>
