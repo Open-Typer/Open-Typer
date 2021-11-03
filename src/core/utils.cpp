@@ -54,7 +54,7 @@ char *_get_word(char *str, int id)
 {
 	unsigned int i;
 	int cur=0;
-	char *out = (char*) malloc(strlen(str));
+	char *out = (char*) malloc(strlen(str)+1);
 	strcpy(out,"");
 	for(i=0; i < strlen(str); i++)
 	{
