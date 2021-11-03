@@ -39,9 +39,6 @@ packView::packView(QWidget *parent, int fileID_arg) :
 	// Lesson options
 	connect(ui->lessonDescEdit,SIGNAL(textEdited(const QString)),this,SLOT(changeLessonDesc(const QString)));
 	connect(ui->lessonDescRevisionButton,SIGNAL(clicked()),this,SLOT(setRevisionLesson()));
-	// Text buttons
-	connect(ui->saveTextButton,SIGNAL(clicked()),this,SLOT(updateText()));
-	connect(ui->restoreTextButton,SIGNAL(clicked()),this,SLOT(restoreText()));
 	// Exercise text
 	connect(ui->levelTextEdit,SIGNAL(textChanged()),this,SLOT(updateText()));
 	// Comboboxes
