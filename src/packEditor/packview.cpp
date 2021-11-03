@@ -470,6 +470,7 @@ void packView::restoreText(void)
 				ui->lessonSelectionBox->currentIndex()+1,
 				ui->sublessonSelectionBox->currentIndex()+1,
 				ui->exerciseSelectionBox->currentIndex()+1)));
+	ui->textLengthLabel->setText(tr("Text length:") + " " + QString::number(QStringLen(ui->levelTextEdit->toPlainText())));
 	if(skipTextRefresh)
 	{
 		fclose(targetFile);
