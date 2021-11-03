@@ -54,7 +54,7 @@ class packView : public QWidget
 		bool newFile, readOnly, saved;
 		void deleteExerciseLine(int lesson, int sublesson, int level);
 		void changeExercisePos(char *lessonDesc, int lesson, int sublesson, int level, int nlesson, int nsublesson, int nlevel);
-		bool skipBoxUpdates;
+		bool skipBoxUpdates, skipTextUpdates, skipTextRefresh;
 
 	private slots:
 		void save(void);

@@ -42,6 +42,8 @@ packView::packView(QWidget *parent, int fileID_arg) :
 	// Text buttons
 	connect(ui->saveTextButton,SIGNAL(clicked()),this,SLOT(updateText()));
 	connect(ui->restoreTextButton,SIGNAL(clicked()),this,SLOT(restoreText()));
+	// Exercise text
+	connect(ui->levelTextEdit,SIGNAL(textChanged()),this,SLOT(updateText()));
 	// Comboboxes
 	connect(ui->lessonSelectionBox,SIGNAL(activated(int)),this,SLOT(switchLesson()));
 	connect(ui->sublessonSelectionBox,SIGNAL(activated(int)),this,SLOT(switchSublesson()));
@@ -56,6 +58,8 @@ packView::packView(QWidget *parent, int fileID_arg) :
 	readOnly=true;
 	saved=false;
 	skipBoxUpdates=false;
+	skipTextUpdates=false;
+	skipTextRefresh=false;
 	editorWindow = parent;
 }
 
@@ -416,6 +420,8 @@ void packView::setRevisionLesson(void)
 
 void packView::updateText(void)
 {
+	if(skipTextUpdates)
+		return;
 	int lesson, sublesson, level, limitExt, lengthExt;
 	lesson = ui->lessonSelectionBox->currentIndex()+1;
 	sublesson = ui->sublessonSelectionBox->currentIndex()+1;
@@ -446,7 +452,9 @@ void packView::updateText(void)
 	_add_level(targetFile,lesson,sublesson,level,repeat,repeatType,limitExt,lengthExt,lessonDesc,targetText.toStdString().c_str());
 	fclose(targetFile);
 	saved=false;
-	refreshUi(false,false,false);
+	skipTextRefresh=true;
+	restoreText();
+	skipTextRefresh=false;
 }
 
 void packView::restoreText(void)
@@ -465,11 +473,18 @@ void packView::restoreText(void)
 				ui->lessonSelectionBox->currentIndex()+1,
 				ui->sublessonSelectionBox->currentIndex()+1,
 				ui->exerciseSelectionBox->currentIndex()+1)));
+	if(skipTextRefresh)
+	{
+		fclose(targetFile);
+		return;
+	}
+	skipTextUpdates=true;
 	ui->levelTextEdit->setPlainText(_lesson_sublesson_level_raw_text(
 		targetFile,
 		ui->lessonSelectionBox->currentIndex()+1,
 		ui->sublessonSelectionBox->currentIndex()+1,
 		ui->exerciseSelectionBox->currentIndex()+1));
+	skipTextUpdates=false;
 	fclose(targetFile);
 }
 
