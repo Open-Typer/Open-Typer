@@ -70,7 +70,7 @@ char *_get_word(char *str, int id)
 		else
 			strncat(out,&str[i],1);
 	}
-	return NULL;
+	return (char*) "";
 }
 QString getConfigLoc(void)
 {
