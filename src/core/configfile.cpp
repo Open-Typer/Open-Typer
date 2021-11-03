@@ -1669,6 +1669,8 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 					else
 					{
 						end=false;
+						if(strcmp(part,"") == 0)
+							return (char*) "";
 						while(!end)
 						{
 							for(i=1; i <= _get_word_count(part); i++)
