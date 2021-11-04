@@ -476,9 +476,10 @@ void packView::restoreText(void)
 				ui->lessonSelectionBox->currentIndex()+1,
 				ui->sublessonSelectionBox->currentIndex()+1,
 				ui->exerciseSelectionBox->currentIndex()+1)));
-	ui->textLengthLabel->setText(tr("Text length:") + " " + QString::number(QStringLen(ui->levelTextEdit->toPlainText())));
+	QString textLengthStr = tr("Text length:") + " ";
 	if(skipTextRefresh)
 	{
+		ui->textLengthLabel->setText(textLengthStr + QString::number(QStringLen(ui->levelTextEdit->toPlainText())));
 		fclose(targetFile);
 		return;
 	}
@@ -489,6 +490,7 @@ void packView::restoreText(void)
 		ui->sublessonSelectionBox->currentIndex()+1,
 		ui->exerciseSelectionBox->currentIndex()+1));
 	skipTextUpdates=false;
+	ui->textLengthLabel->setText(textLengthStr + QString::number(QStringLen(ui->levelTextEdit->toPlainText())));
 	fclose(targetFile);
 }
 
