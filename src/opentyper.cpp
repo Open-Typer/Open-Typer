@@ -710,6 +710,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				QString errorAppend;
 				if(event->text() == " ")
 					errorAppend = "_";
+				else if((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))
+					errorAppend = "↵<br>";
 				else
 					errorAppend = event->text();
 				ui->inputLabel->setHtml(displayInput + "<span style='color: red';'>" + errorAppend + "</span>");
