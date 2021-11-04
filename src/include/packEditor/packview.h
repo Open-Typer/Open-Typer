@@ -51,6 +51,7 @@ class packView : public QWidget
 		QString targetFileName, saveFileName;
 		int fileID;
 		void refreshUi(bool newLesson, bool newSublesson, bool newExercise);
+		void updateTabTitle(void);
 		bool newFile, readOnly, saved;
 		void deleteExerciseLine(int lesson, int sublesson, int level);
 		void changeExercisePos(char *lessonDesc, int lesson, int sublesson, int level, int nlesson, int nsublesson, int nlevel);

@@ -137,13 +137,7 @@ bool packView::closeFile(void)
 
 void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 {
-	QFile saveQFile(saveFileName);
-	QFileInfo saveQFileInfo(saveQFile.fileName());
-	QString _saveFileName = saveQFileInfo.fileName();
-	if(saved)
-		((packEditor*)(editorWindow))->setFileName(_saveFileName,(QWidget*)this);
-	else
-		((packEditor*)(editorWindow))->setFileName(_saveFileName + "*",(QWidget*)this);
+	updateTabTitle();
 	targetFile = fopen(targetFileName.toStdString().c_str(),"rb");
 	// Lesson selector
 	int oldLesson = ui->lessonSelectionBox->currentIndex();
@@ -273,6 +267,17 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		skipBoxUpdates=false;
 		fclose(targetFile);
 	}
+}
+
+void packView::updateTabTitle(void)
+{
+	QFile saveQFile(saveFileName);
+	QFileInfo saveQFileInfo(saveQFile.fileName());
+	QString _saveFileName = saveQFileInfo.fileName();
+	if(saved)
+		((packEditor*)(editorWindow))->setFileName(_saveFileName,(QWidget*)this);
+	else
+		((packEditor*)(editorWindow))->setFileName(_saveFileName + "*",(QWidget*)this);
 }
 
 void packView::addLesson(void)
@@ -452,6 +457,7 @@ void packView::updateText(void)
 	skipTextRefresh=true;
 	restoreText();
 	skipTextRefresh=false;
+	updateTabTitle();
 }
 
 void packView::restoreText(void)
