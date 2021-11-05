@@ -33,7 +33,8 @@ SOURCES += \
     src/main.cpp \
     src/opentyper.cpp \
     src/updater/updaterdialog.cpp \
-    src/widgets/inputlabel.cpp
+    src/widgets/inputlabel.cpp \
+    src/widgets/languagecombobox.cpp
 
 HEADERS += \
     src/include/core/utils.h \
@@ -49,7 +50,8 @@ HEADERS += \
     src/include/updater/updaterdialog.h \
     src/include/version.h \
     src/include/opentyper.h \
-    src/include/widgets/inputlabel.h
+    src/include/widgets/inputlabel.h \
+    src/include/widgets/languagecombobox.h
 
 FORMS += \
     ui/levelsummary.ui \
