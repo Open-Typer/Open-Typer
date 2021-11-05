@@ -36,8 +36,10 @@
 #include <QElapsedTimer>
 #include <QFileDialog>
 #include <QTextCursor>
+#include <QTranslator>
 #include <sys/stat.h>
 #include "widgets/inputlabel.h"
+#include "widgets/languagecombobox.h"
 #include "updater/updater.h"
 #include "simplecolordialog.h"
 #include "paperconfigdialog.h"
@@ -85,6 +87,7 @@ public:
 	void updateTheme(void);
 	bool customLevelLoaded;
 	bool customConfig;
+	QTranslator* translator;
 
 private:
 	Ui::OpenTyper *ui;
@@ -118,5 +121,6 @@ private slots:
     void changePaperColor(void);
     void resetBgPaperColors(void);
     void changeTheme(int index);
+    void changeLanguage(int index);
 };
 #endif // OPENTYPER_H

@@ -93,6 +93,15 @@ OpenTyper::OpenTyper(QWidget *parent)
 	currentSublesson = 1;
 	currentLevel = 1;
 	repeatLevel();
+	// Set language
+	QString selectedLanguage = settings.value("main/language","").toString();
+	if(selectedLanguage == "")
+	{
+		ui->languageSelectBox->setCurrentIndex(0);
+	}
+	else
+		ui->languageSelectBox->setCurrentIndex(ui->languageSelectBox->findText(selectedLanguage));
+	changeLanguage(ui->languageSelectBox->currentIndex());
 }
 
 OpenTyper::~OpenTyper()
@@ -243,6 +252,12 @@ void OpenTyper::connectAll(void)
 		SIGNAL(activated(int)),
 		this,
 		SLOT(changeTheme(int)));
+	// **Options tab**
+	// Language selector
+	connect(ui->languageSelectBox,
+		SIGNAL(activated(int)),
+		this,
+		SLOT(changeLanguage(int)));
 	// Start timer
 	secLoop->start(1000);
 }
@@ -1191,4 +1206,26 @@ void OpenTyper::openEditor(void)
 	// Show main window
 	show();
 	activateWindow();
+}
+
+void OpenTyper::changeLanguage(int index)
+{
+	QLocale targetLocale;
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	if(index == 0)
+	{
+		targetLocale = QLocale::system();
+		settings.setValue("main/language","");
+	}
+	else
+	{
+		targetLocale = QLocale(ui->languageSelectBox->language(index),ui->languageSelectBox->country(index));
+		settings.setValue("main/language",ui->languageSelectBox->currentText());
+	}
+	QCoreApplication::removeTranslator(translator);
+	translator = new QTranslator();
+	if(translator->load(targetLocale,QLatin1String("Open-Typer"),QLatin1String("_"),QLatin1String(":/res/lang")))
+		QCoreApplication::installTranslator(translator);
+	ui->retranslateUi(this);
+	repeatLevel();
 }
