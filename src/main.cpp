@@ -20,7 +20,6 @@
 
 #include <QApplication>
 #include <QLabel>
-#include <QTranslator>
 #include <QMessageBox>
 #include "opentyper.h"
 
@@ -28,12 +27,6 @@ int main(int argc, char *argv[])
 {
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	QApplication a(argc, argv);
-	// Load translations
-	QTranslator* translator = new QTranslator();
-	if(translator->load(QLocale(), QLatin1String("Open-Typer"), QLatin1String("_"), QLatin1String(":/res/lang")))
-		a.installTranslator(translator);
-	else
-		printf("D: Failed to load language\n");
 	// Check if the program was recently updated
 	if(argc > 1)
 	{
