@@ -24,6 +24,7 @@
 #include <QDialog>
 #include <QTranslator>
 #include "options/keyboard.h"
+#include "options/customization.h"
 
 namespace Ui {
 	class optionsWindow;

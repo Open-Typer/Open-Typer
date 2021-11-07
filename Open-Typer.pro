@@ -24,6 +24,7 @@ SOURCES += \
     src/core/configfile.cpp \
     src/core/net.cpp \
     src/levelsummary.cpp \
+    src/options/customization.cpp \
     src/options/keyboard.cpp \
     src/options/optionswindow.cpp \
     src/packEditor/packeditor.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     src/include/core/configfile.h \
     src/include/core/net.h \
     src/include/levelsummary.h \
+    src/include/options/customization.h \
     src/include/options/keyboard.h \
     src/include/options/optionswindow.h \
     src/include/packEditor/packeditor.h \
@@ -58,6 +60,7 @@ HEADERS += \
     src/include/widgets/languagecombobox.h
 
 FORMS += \
+    ui/customization.ui \
     ui/keyboard.ui \
     ui/levelsummary.ui \
     ui/opentyper.ui \

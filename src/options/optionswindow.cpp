@@ -29,6 +29,7 @@ optionsWindow::optionsWindow(QWidget *parent) :
 	QStringList optionLabels;
 	// List of options
 	optionLabels += tr("Keyboard");
+	optionLabels += tr("Customization");
 	ui->list->addItems(optionLabels);
 	// Connections
 	connect(ui->list,SIGNAL(currentRowChanged(int)),this,SLOT(changeOptionWidget(int)));
@@ -43,10 +44,20 @@ void optionsWindow::changeOptionWidget(int index)
 {
 	switch(index) {
 		case 0:
-			// Keyboard
-			keyboardOptions *options = new keyboardOptions;
-			options->setStyleSheet(styleSheet());
-			ui->currentOptions->setWidget(options);
+			{
+				// Keyboard
+				keyboardOptions *options = new keyboardOptions;
+				options->setStyleSheet(styleSheet());
+				ui->currentOptions->setWidget(options);
+			}
+			break;
+		case 1:
+			{
+				// Customization
+				customizationOptions *options = new customizationOptions;
+				options->setStyleSheet(styleSheet());
+				ui->currentOptions->setWidget(options);
+			}
 			break;
 	}
 }
