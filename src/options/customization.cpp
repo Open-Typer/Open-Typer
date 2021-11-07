@@ -119,13 +119,18 @@ customizationOptions::customizationOptions(QWidget *parent) :
 		SIGNAL(activated(int)),
 		this,
 		SLOT(changeTheme(int)));
-	ui->themeBox->setCurrentIndex(settings.value("theme/theme","0").toInt());
-	setColors(false);
 }
 
 customizationOptions::~customizationOptions()
 {
 	delete ui;
+}
+
+void customizationOptions::init(void)
+{
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	ui->themeBox->setCurrentIndex(settings.value("theme/theme","0").toInt());
+	setColors();
 }
 
 void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline)
@@ -240,14 +245,14 @@ void customizationOptions::saveColorSettings(void)
 	settings.setValue("theme/paperblue",paperBlueColor);
 }
 
-void customizationOptions::setColors(bool setParentStyleSheet)
+void customizationOptions::setColors()
 {
 	// Reset style sheets
 	ui->inputLabel->setStyleSheet("");
 	ui->previewFrame->setStyleSheet("");
 	ui->paper->setStyleSheet("");
 	// Update theme
-	updateTheme(setParentStyleSheet);
+	updateTheme();
 	char *styleSheet;
 	// Set level text color
 	if(customLevelTextColor)
@@ -319,7 +324,7 @@ void customizationOptions::setColors(bool setParentStyleSheet)
 	}
 }
 
-void customizationOptions::updateTheme(bool setParentStyleSheet)
+void customizationOptions::updateTheme()
 {
 	QFile darkSheet(":/dark-theme/style.qss");
 	QFile lightSheet(":/light-theme/style.qss");
@@ -367,8 +372,7 @@ void customizationOptions::updateTheme(bool setParentStyleSheet)
 			ui->paper->setStyleSheet("background-color: rgb(255, 255, 255)");
 			break;
 	}
-	if(setParentStyleSheet)
-		parentWidget()->parentWidget()->parentWidget()->setStyleSheet(styleSheet());
+	parentWidget()->parentWidget()->parentWidget()->setStyleSheet(styleSheet());
 }
 
 void customizationOptions::changeLevelTextColor(void)
@@ -385,7 +389,7 @@ void customizationOptions::changeLevelTextColor(void)
 		levelTextBlueColor = colorDialog.blueColor;
 		customLevelTextColor = true;
 		saveColorSettings();
-		setColors(true);
+		setColors();
 	}
 }
 
@@ -403,7 +407,7 @@ void customizationOptions::changeInputTextColor(void)
 		inputTextBlueColor = colorDialog.blueColor;
 		customInputTextColor = true;
 		saveColorSettings();
-		setColors(true);
+		setColors();
 	}
 }
 
@@ -413,7 +417,7 @@ void customizationOptions::resetTextColors(void)
 	customLevelTextColor = false;
 	customInputTextColor = false;
 	saveColorSettings();
-	setColors(true);
+	setColors();
 }
 
 void customizationOptions::changeBgColor(void)
@@ -430,7 +434,7 @@ void customizationOptions::changeBgColor(void)
 		bgBlueColor = colorDialog.blueColor;
 		customBgColor = true;
 		saveColorSettings();
-		setColors(true);
+		setColors();
 	}
 }
 
@@ -448,7 +452,7 @@ void customizationOptions::changePaperColor(void)
 		paperBlueColor = colorDialog.blueColor;
 		customPaperColor = true;
 		saveColorSettings();
-		setColors(true);
+		setColors();
 	}
 }
 
@@ -458,13 +462,13 @@ void customizationOptions::resetBgPaperColors(void)
 	customBgColor = false;
 	customPaperColor = false;
 	saveColorSettings();
-	setColors(true);
+	setColors();
 }
 
 void customizationOptions::changeTheme(int index)
 {
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("theme/theme",index);
-	updateTheme(true);
-	setColors(true);
+	updateTheme();
+	setColors();
 }

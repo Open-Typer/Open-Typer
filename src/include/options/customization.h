@@ -40,6 +40,7 @@ class customizationOptions : public QWidget
 	public:
 		explicit customizationOptions(QWidget *parent = nullptr);
 		~customizationOptions();
+		void init(void);
 
 	private:
 		Ui::customizationOptions *ui;
@@ -50,8 +51,8 @@ class customizationOptions : public QWidget
 		bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor;
 		void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
 		void saveColorSettings(void);
-		void setColors(bool setParentStyleSheet);
-		void updateTheme(bool setParentStyleSheet);
+		void setColors();
+		void updateTheme();
 
 	private slots:
 		void changeFont(QFont font);
