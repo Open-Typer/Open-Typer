@@ -23,7 +23,6 @@
 inputLabelWidget::inputLabelWidget(QWidget *parent) :
 	QTextEdit(parent)
 {
-	new QTextEdit;
 	parentWidget = parent;
 }
 
