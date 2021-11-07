@@ -57,6 +57,7 @@ void optionsWindow::changeOptionWidget(int index)
 				customizationOptions *options = new customizationOptions;
 				options->setStyleSheet(styleSheet());
 				ui->currentOptions->setWidget(options);
+				options->init();
 			}
 			break;
 	}
