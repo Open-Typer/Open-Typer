@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>420</height>
+    <width>950</width>
+    <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>950</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>950</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Options</string>
@@ -40,8 +52,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>414</width>
-        <height>400</height>
+        <width>724</width>
+        <height>580</height>
        </rect>
       </property>
      </widget>
