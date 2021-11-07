@@ -513,6 +513,9 @@
          <property name="focusPolicy">
           <enum>Qt::StrongFocus</enum>
          </property>
+         <property name="toolTip">
+          <string>Reset</string>
+         </property>
          <property name="text">
           <string notr="true"/>
          </property>
