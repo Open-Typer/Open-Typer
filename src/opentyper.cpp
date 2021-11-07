@@ -26,8 +26,34 @@ OpenTyper::OpenTyper(QWidget *parent)
 	, ui(new Ui::OpenTyper)
 {
 	ui->setupUi(this);
-	// Load packs (configs)
-	loadConfigs();
+	refreshAll();
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	// Connect signals to slots
+	connectAll();
+	// Check for updates
+	#ifdef Q_OS_WINDOWS
+	#ifdef _WIN32
+	new Updater();
+	#endif
+	#endif
+	// Set language
+	QString selectedLanguage = settings.value("main/language","").toString();
+	if(selectedLanguage == "")
+	{
+		ui->languageSelectBox->setCurrentIndex(0);
+	}
+	else
+		ui->languageSelectBox->setCurrentIndex(ui->languageSelectBox->findText(selectedLanguage));
+	changeLanguage(ui->languageSelectBox->currentIndex());
+}
+
+OpenTyper::~OpenTyper()
+{
+	delete ui;
+}
+
+void OpenTyper::refreshAll(void)
+{
 	// Read config
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	// Config file (lesson pack) name
@@ -68,23 +94,12 @@ OpenTyper::OpenTyper(QWidget *parent)
 	paperGreenColor = settings.value("theme/papergreen","0").toInt();
 	paperBlueColor = settings.value("theme/paperblue","0").toInt();
 	// Theme
-	ui->themeBox->setCurrentIndex(settings.value("theme/theme","0").toInt());
-	changeTheme(ui->themeBox->currentIndex());
+	updateTheme();
 	// Space bar new lines
 	if(settings.value("main/spacenewline","true").toBool())
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Checked);
 	else
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
-	// Connect signals to slots
-	connectAll();
-	// Check for updates
-	#ifdef Q_OS_WINDOWS
-	#ifdef _WIN32
-	new Updater();
-	#endif
-	#endif
-	// Select "Training" tab
-	ui->tabWidget->setCurrentIndex(1);
 	// Load config and start
 	char *configPath = loadConfig(configName);
 	if(configPath == NULL)
@@ -93,20 +108,6 @@ OpenTyper::OpenTyper(QWidget *parent)
 	currentSublesson = 1;
 	currentLevel = 1;
 	repeatLevel();
-	// Set language
-	QString selectedLanguage = settings.value("main/language","").toString();
-	if(selectedLanguage == "")
-	{
-		ui->languageSelectBox->setCurrentIndex(0);
-	}
-	else
-		ui->languageSelectBox->setCurrentIndex(ui->languageSelectBox->findText(selectedLanguage));
-	changeLanguage(ui->languageSelectBox->currentIndex());
-}
-
-OpenTyper::~OpenTyper()
-{
-	delete ui;
 }
 
 void OpenTyper::connectAll(void)
@@ -124,12 +125,11 @@ void OpenTyper::connectAll(void)
 		SIGNAL(keyPressed(QKeyEvent*)),
 		this,
 		SLOT(keyPress(QKeyEvent*)));
-	// **Lesson packs tab**
-	// List of lesson packs
-	connect(ui->packList,
-		SIGNAL(activated(int)),
+	// Options button
+	connect(ui->optionsButton,
+		SIGNAL(clicked()),
 		this,
-		SLOT(packListIndexChanged(int)));
+		SLOT(openOptions()));
 	// Open pack button
 	connect(ui->openPackButton,
 		SIGNAL(clicked()),
@@ -186,72 +186,6 @@ void OpenTyper::connectAll(void)
 		SIGNAL(clicked()),
 		this,
 		SLOT(openExerciseFromFile()));
-	// **Customize tab**
-	// Font selector
-	connect(ui->fontComboBox,
-		SIGNAL(currentFontChanged(QFont)),
-		this,
-		SLOT(changeFont(QFont)));
-	// Font size box
-	connect(ui->fontSizeBox,
-		SIGNAL(valueChanged(int)),
-		this,
-		SLOT(changeFontSize(int)));
-	// Bold text button
-	connect(ui->boldTextButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(setBoldText()));
-	// Italic text button
-	connect(ui->italicTextButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(setItalicText()));
-	// Underline text button
-	connect(ui->underlineTextButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(setUnderlineText()));
-	// Reset font button
-	connect(ui->fontResetButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(resetFont()));
-	// Change level text color button
-	connect(ui->levelTextColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(changeLevelTextColor()));
-	// Change input text color button
-	connect(ui->inputTextColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(changeInputTextColor()));
-	// Reset text color button
-	connect(ui->resetTextColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(resetTextColors()));
-	// Change background color button
-	connect(ui->bgColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(changeBgColor()));
-	// Change paper color button
-	connect(ui->paperColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(changePaperColor()));
-	// Reset background and paper color button
-	connect(ui->resetBgPaperColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(resetBgPaperColors()));
-	// Theme selector
-	connect(ui->themeBox,
-		SIGNAL(activated(int)),
-		this,
-		SLOT(changeTheme(int)));
 	// **Options tab**
 	// Language selector
 	connect(ui->languageSelectBox,
@@ -260,23 +194,6 @@ void OpenTyper::connectAll(void)
 		SLOT(changeLanguage(int)));
 	// Start timer
 	secLoop->start(1000);
-}
-
-void OpenTyper::loadConfigs(void)
-{
-	QDirIterator it(":/res/configs/",QDirIterator::NoIteratorFlags);
-	int i;
-	QString item, current;
-	QStringList items;
-	while(it.hasNext())
-	{
-		item = it.next();
-		current = "";
-		for(i=14; i < QStringLen(item); i++)
-			current += item[i];
-		items += current;
-	}
-	ui->packList->addItems(items);
 }
 
 char *OpenTyper::loadConfig(QString configName)
@@ -342,9 +259,6 @@ char *OpenTyper::loadConfig(QString configName)
 	fclose(configCheckFile);
 	if(customConfig)
 		configName = configPath;
-	// Update packList widget
-	int index = ui->packList->findText(configName);
-	ui->packList->setCurrentIndex(index);
 	// Save selected config to settings
 	settings.setValue("main/configfile",configName);
 	if(customConfig)
@@ -540,21 +454,14 @@ void OpenTyper::previousLevel(void)
 		currentLevel--;
 	repeatLevel();
 }
-void OpenTyper::packListIndexChanged(int index)
+
+void OpenTyper::openOptions(void)
 {
-	customConfig=false;
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("main/customconfig",customConfig);
-	char *configPath = loadConfig(ui->packList->itemText(index));
-	if(configPath == NULL)
-	{
-		level = "";
-		input = "";
-	}
-	currentLesson = 1;
-	currentSublesson = 1;
-	currentLevel = 1;
-	repeatLevel();
+	optionsWindow optionsWin;
+	optionsWin.setStyleSheet(styleSheet());
+	optionsWin.init();
+	optionsWin.exec();
+	refreshAll();
 }
 
 void OpenTyper::lessonSelectionListIndexChanged(int index)
@@ -785,65 +692,6 @@ void OpenTyper::updateCurrentTime(void)
 	setColors();
 }
 
-void OpenTyper::changeFont(QFont font)
-{
-	QFont oldFont = ui->levelLabel->font();
-	oldFont.setFamily(font.family());
-	ui->levelLabel->setFont(oldFont);
-	ui->inputLabel->setFont(oldFont);
-	ui->mistakeLabel->setFont(oldFont);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/font",font.family());
-	adjustSize();
-}
-
-void OpenTyper::changeFontSize(int size)
-{
-	QFont oldFont = ui->levelLabel->font();
-	oldFont.setPointSize(size);
-	ui->levelLabel->setFont(oldFont);
-	ui->inputLabel->setFont(oldFont);
-	ui->mistakeLabel->setFont(oldFont);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/fontsize",size);
-	adjustSize();
-}
-
-void OpenTyper::setBoldText(void)
-{
-	QFont oldFont = ui->levelLabel->font();
-	oldFont.setBold(ui->boldTextButton->isChecked());
-	ui->levelLabel->setFont(oldFont);
-	ui->inputLabel->setFont(oldFont);
-	ui->mistakeLabel->setFont(oldFont);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/fontbold",ui->boldTextButton->isChecked());
-	adjustSize();
-}
-
-void OpenTyper::setItalicText(void)
-{
-	QFont oldFont = ui->levelLabel->font();
-	oldFont.setItalic(ui->italicTextButton->isChecked());
-	ui->levelLabel->setFont(oldFont);
-	ui->inputLabel->setFont(oldFont);
-	ui->mistakeLabel->setFont(oldFont);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/fontitalic",ui->italicTextButton->isChecked());
-	adjustSize();
-}
-
-void OpenTyper::setUnderlineText(void)
-{
-	QFont oldFont = ui->levelLabel->font();
-	oldFont.setUnderline(ui->underlineTextButton->isChecked());
-	ui->levelLabel->setFont(oldFont);
-	ui->inputLabel->setFont(oldFont);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/fontunderline",ui->underlineTextButton->isChecked());
-	adjustSize();
-}
-
 void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline)
 {
 	QFont newFont, mistakeLabelFont;
@@ -853,12 +701,6 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	newFont.setBold(fontBold);
 	newFont.setItalic(fontItalic);
 	newFont.setUnderline(fontUnderline);
-	// Update input widgets
-	ui->fontComboBox->setCurrentFont(newFont);
-	ui->fontSizeBox->setValue(fontSize);
-	ui->boldTextButton->setChecked(fontBold);
-	ui->italicTextButton->setChecked(fontItalic);
-	ui->underlineTextButton->setChecked(fontUnderline);
 	// mistakeLabel cannot have underlined font enabled
 	mistakeLabelFont = newFont;
 	mistakeLabelFont.setUnderline(false);
@@ -873,16 +715,6 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	settings.setValue("theme/fontbold",fontBold);
 	settings.setValue("theme/fontitalic",fontItalic);
 	settings.setValue("theme/fontunderline",fontUnderline);
-}
-
-void OpenTyper::resetFont(void)
-{
-	// Default font
-	setFont("Courier", 	// Family
-		14,		// Point size
-		false,		// Bold
-		false,		// Italic
-		false);	// Underline
 }
 
 int OpenTyper::labelWidth(QLabel *targetLabel)
@@ -924,31 +756,6 @@ void OpenTyper::adjustSize(void)
 		newHeight);
 	ui->inputLabel->resize(ui->inputLabel->width(),
 		newHeight);
-}
-
-void OpenTyper::saveColorSettings(void)
-{
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	// Level text
-	settings.setValue("theme/customleveltextcolor",customLevelTextColor);
-	settings.setValue("theme/leveltextred",levelTextRedColor);
-	settings.setValue("theme/leveltextgreen",levelTextGreenColor);
-	settings.setValue("theme/leveltextblue",levelTextBlueColor);
-	// Input text
-	settings.setValue("theme/custominputtextcolor",customInputTextColor);
-	settings.setValue("theme/inputtextred",inputTextRedColor);
-	settings.setValue("theme/inputtextgreen",inputTextGreenColor);
-	settings.setValue("theme/inputtextblue",inputTextBlueColor);
-	// Background
-	settings.setValue("theme/custombgcolor",customBgColor);
-	settings.setValue("theme/bgred",bgRedColor);
-	settings.setValue("theme/bggreen",bgGreenColor);
-	settings.setValue("theme/bgblue",bgBlueColor);
-	// Paper
-	settings.setValue("theme/custompapercolor",customPaperColor);
-	settings.setValue("theme/paperred",paperRedColor);
-	settings.setValue("theme/papergreen",paperGreenColor);
-	settings.setValue("theme/paperblue",paperBlueColor);
 }
 
 void OpenTyper::setColors(void)
@@ -1029,109 +836,14 @@ void OpenTyper::setColors(void)
 		bgBlueColor = ui->mainFrame->palette().color(QPalette::Window).blue();
 	}
 }
-void OpenTyper::changeLevelTextColor(void)
-{
-	SimpleColorDialog colorDialog;
-	colorDialog.setColor(levelTextRedColor,
-		levelTextGreenColor,
-		levelTextBlueColor);
-	colorDialog.setStyleSheet(styleSheet());
-	if(colorDialog.exec() == QDialog::Accepted)
-	{
-		levelTextRedColor = colorDialog.redColor;
-		levelTextGreenColor = colorDialog.greenColor;
-		levelTextBlueColor = colorDialog.blueColor;
-		customLevelTextColor = true;
-		saveColorSettings();
-		setColors();
-	}
-}
 
-void OpenTyper::changeInputTextColor(void)
-{
-	SimpleColorDialog colorDialog;
-	colorDialog.setColor(inputTextRedColor,
-		inputTextGreenColor,
-		inputTextBlueColor);
-	colorDialog.setStyleSheet(styleSheet());
-	if(colorDialog.exec() == QDialog::Accepted)
-	{
-		inputTextRedColor = colorDialog.redColor;
-		inputTextGreenColor = colorDialog.greenColor;
-		inputTextBlueColor = colorDialog.blueColor;
-		customInputTextColor = true;
-		saveColorSettings();
-		setColors();
-	}
-}
-
-void OpenTyper::resetTextColors(void)
-{
-	// There's no need to set RGB values because they're defined in setColors()
-	customLevelTextColor = false;
-	customInputTextColor = false;
-	saveColorSettings();
-	setColors();
-}
-
-void OpenTyper::changeBgColor(void)
-{
-	SimpleColorDialog colorDialog;
-	colorDialog.setColor(bgRedColor,
-		bgGreenColor,
-		bgBlueColor);
-	colorDialog.setStyleSheet(styleSheet());
-	if(colorDialog.exec() == QDialog::Accepted)
-	{
-		bgRedColor = colorDialog.redColor;
-		bgGreenColor = colorDialog.greenColor;
-		bgBlueColor = colorDialog.blueColor;
-		customBgColor = true;
-		saveColorSettings();
-		setColors();
-	}
-}
-
-void OpenTyper::changePaperColor(void)
-{
-	SimpleColorDialog colorDialog;
-	colorDialog.setColor(paperRedColor,
-		paperGreenColor,
-		paperBlueColor);
-	colorDialog.setStyleSheet(styleSheet());
-	if(colorDialog.exec() == QDialog::Accepted)
-	{
-		paperRedColor = colorDialog.redColor;
-		paperGreenColor = colorDialog.greenColor;
-		paperBlueColor = colorDialog.blueColor;
-		customPaperColor = true;
-		saveColorSettings();
-		setColors();
-	}
-}
-
-void OpenTyper::resetBgPaperColors(void)
-{
-	// There's no need to set RGB values because they're defined in setColors()
-	customBgColor = false;
-	customPaperColor = false;
-	saveColorSettings();
-	setColors();
-}
-
-void OpenTyper::changeTheme(int index)
-{
-	updateTheme();
-	setColors();
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/theme",index);
-}
 void OpenTyper::updateTheme(void)
 {
 	QFile darkSheet(":/dark-theme/style.qss");
 	QFile lightSheet(":/light-theme/style.qss");
 	char *paperStyleSheet;
-	switch(ui->themeBox->currentIndex()) {
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	switch(settings.value("theme/theme","0").toInt()) {
 		case 0:
 			// System (default)
 			setStyleSheet("");

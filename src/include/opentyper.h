@@ -44,6 +44,7 @@
 #include "simplecolordialog.h"
 #include "paperconfigdialog.h"
 #include "packEditor/packeditor.h"
+#include "options/optionswindow.h"
 #include "levelsummary.h"
 #include "configfile.h"
 #include "utils.h"
@@ -59,7 +60,6 @@ class OpenTyper : public QMainWindow
 public:
 	OpenTyper(QWidget *parent = nullptr);
 	~OpenTyper();
-	void loadConfigs(void);
 	char *loadConfig(QString configName);
 	void startLevel(FILE *cr, int lesson, int sublesson, int level);
 	void levelFinalInit(void);
@@ -87,7 +87,8 @@ public:
 	void updateTheme(void);
 	bool customLevelLoaded;
 	bool customConfig;
-	QTranslator* translator;
+	QTranslator *translator;
+	void refreshAll(void);
 
 private:
 	Ui::OpenTyper *ui;
@@ -95,9 +96,8 @@ private:
 
 private slots:
     void keyPress(QKeyEvent *event);
-    void packListIndexChanged(int index);
+    void openOptions(void);
     void openPack(void);
-    void openEditor(void);
     void repeatLevel(void);
     void nextLevel(void);
     void previousLevel(void);
@@ -108,19 +108,10 @@ private slots:
     void randomOrderCheckBoxChanged(bool checked);
     void spaceNewlineCheckBoxChanged(bool checked);
     void openExerciseFromFile(void);
-    void changeFont(QFont font);
-    void changeFontSize(int size);
-    void setBoldText(void);
-    void setItalicText(void);
-    void setUnderlineText(void);
-    void resetFont(void);
-    void changeLevelTextColor(void);
-    void changeInputTextColor(void);
-    void resetTextColors(void);
-    void changeBgColor(void);
-    void changePaperColor(void);
-    void resetBgPaperColors(void);
-    void changeTheme(int index);
     void changeLanguage(int index);
+
+public slots:
+	void openEditor(void);
 };
+
 #endif // OPENTYPER_H
