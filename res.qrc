@@ -23,5 +23,6 @@
         <file>res/images/extext_color.png</file>
         <file>res/images/intext_color.png</file>
         <file>res/images/reset.png</file>
+        <file>res/images/options.png</file>
     </qresource>
 </RCC>
