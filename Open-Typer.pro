@@ -60,17 +60,17 @@ HEADERS += \
     src/include/widgets/languagecombobox.h
 
 FORMS += \
-    ui/customization.ui \
-    ui/keyboard.ui \
+    ui/options/customization.ui \
+    ui/options/keyboard.ui \
     ui/levelsummary.ui \
     ui/opentyper.ui \
-    ui/optionswindow.ui \
-    ui/packeditor.ui \
-    ui/packselector.ui \
-    ui/packview.ui \
+    ui/options/optionswindow.ui \
+    ui/packEditor/packeditor.ui \
+    ui/packEditor/packselector.ui \
+    ui/packEditor/packview.ui \
     ui/paperconfigdialog.ui \
     ui/simplecolordialog.ui \
-    ui/updaterdialog.ui
+    ui/updater/updaterdialog.ui
 
 TRANSLATIONS += \
     lang/Open-Typer_sk_SK.ts
