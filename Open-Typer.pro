@@ -24,6 +24,8 @@ SOURCES += \
     src/core/configfile.cpp \
     src/core/net.cpp \
     src/levelsummary.cpp \
+    src/options/keyboard.cpp \
+    src/options/optionswindow.cpp \
     src/packEditor/packeditor.cpp \
     src/packEditor/packview.cpp \
     src/packEditor/packselector.cpp \
@@ -41,6 +43,8 @@ HEADERS += \
     src/include/core/configfile.h \
     src/include/core/net.h \
     src/include/levelsummary.h \
+    src/include/options/keyboard.h \
+    src/include/options/optionswindow.h \
     src/include/packEditor/packeditor.h \
     src/include/packEditor/packview.h \
     src/include/packEditor/packselector.h \
@@ -54,8 +58,10 @@ HEADERS += \
     src/include/widgets/languagecombobox.h
 
 FORMS += \
+    ui/keyboard.ui \
     ui/levelsummary.ui \
     ui/opentyper.ui \
+    ui/optionswindow.ui \
     ui/packeditor.ui \
     ui/packselector.ui \
     ui/packview.ui \
