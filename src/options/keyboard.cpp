@@ -46,7 +46,8 @@ keyboardOptions::keyboardOptions(QWidget *parent) :
 	// Get current pack
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	// TODO: Detect default config
-	ui->packList->setCurrentItem(ui->packList->findItems(settings.value("main/configfile","sk_SK-QWERTZ-B1").toString(),Qt::MatchExactly)[0]);
+	if(!settings.value("main/customconfig","false").toBool())
+		ui->packList->setCurrentItem(ui->packList->findItems(settings.value("main/configfile","sk_SK-QWERTZ-B1").toString(),Qt::MatchExactly)[0]);
 	// Connections
 	connect(ui->editorButton,SIGNAL(clicked()),this,SLOT(openEditor()));
 	connect(ui->packList,SIGNAL(currentRowChanged(int)),this,SLOT(changePack(int)));
@@ -71,4 +72,5 @@ void keyboardOptions::changePack(int index)
 {
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("main/configfile",rawItems[index]);
+	settings.setValue("main/customconfig","false");
 }
