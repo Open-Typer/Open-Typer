@@ -31,13 +31,15 @@ packSelector::packSelector(QWidget *parent) :
 	int i;
 	QString item, current;
 	QStringList items;
+	rawItems.clear();
 	while(it.hasNext())
 	{
 		item = it.next();
 		current = "";
 		for(i=14; i < QStringLen(item); i++)
 			current += item[i];
-		items += current;
+		rawItems += current;
+		items += _pack_name(current);
 	}
 	ui->selBox->addItems(items);
 	// Connect buttons
@@ -52,5 +54,5 @@ packSelector::~packSelector()
 
 QString packSelector::selectedConfig(void)
 {
-	return ui->selBox->currentText();
+	return rawItems[ui->selBox->currentIndex()];
 }

@@ -23,7 +23,8 @@
 
 #include <QDialog>
 #include <QDirIterator>
-#include "core/utils.h"
+#include "utils.h"
+#include "packs.h"
 
 namespace Ui {
 	class packSelector;
@@ -36,6 +37,7 @@ class packSelector : public QDialog
 		explicit packSelector(QWidget *parent = nullptr);
 		~packSelector();
 		QString selectedConfig(void);
+		QStringList rawItems;
 
 	private:
 		Ui::packSelector *ui;
