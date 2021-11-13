@@ -40,14 +40,14 @@ keyboardOptions::keyboardOptions(QWidget *parent) :
 			current += item[i];
 		// TODO: Translate pack name
 		rawItems += current;
-		items += current;
+		items += _pack_name(current);
 	}
 	ui->packList->addItems(items);
 	// Get current pack
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	// TODO: Detect default config
 	if(!settings.value("main/customconfig","false").toBool())
-		ui->packList->setCurrentItem(ui->packList->findItems(settings.value("main/configfile","sk_SK-QWERTZ-B1").toString(),Qt::MatchExactly)[0]);
+		ui->packList->setCurrentItem(ui->packList->item(rawItems.indexOf(settings.value("main/configfile","sk_SK-QWERTZ-B1").toString())));
 	// Connections
 	connect(ui->editorButton,SIGNAL(clicked()),this,SLOT(openEditor()));
 	connect(ui->packList,SIGNAL(currentRowChanged(int)),this,SLOT(changePack(int)));
