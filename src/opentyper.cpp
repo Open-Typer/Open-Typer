@@ -268,7 +268,7 @@ char *OpenTyper::loadConfig(QString configName)
 		ui->trainingPackNameLabel->setText(configQFileInfo.fileName());
 	}
 	else
-		ui->trainingPackNameLabel->setText(configName);
+		ui->trainingPackNameLabel->setText(_pack_name(configName));
 	publicConfigName = configName;
 	return configPath;
 }

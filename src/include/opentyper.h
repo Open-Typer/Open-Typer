@@ -48,6 +48,7 @@
 #include "levelsummary.h"
 #include "configfile.h"
 #include "utils.h"
+#include "packs.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class OpenTyper; }
