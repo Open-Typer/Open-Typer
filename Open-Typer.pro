@@ -23,6 +23,7 @@ SOURCES += \
     src/core/configfile.cpp \
     src/core/net.cpp \
     src/core/packs.cpp \
+    src/core/language.cpp \
     src/levelsummary.cpp \
     src/options/customization.cpp \
     src/options/keyboard.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
     src/include/core/configfile.h \
     src/include/core/net.h \
     src/include/core/packs.h \
+    src/include/core/language.h \
     src/include/levelsummary.h \
     src/include/options/customization.h \
     src/include/options/keyboard.h \
