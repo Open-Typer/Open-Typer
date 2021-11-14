@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>926</width>
-    <height>568</height>
+    <width>1019</width>
+    <height>654</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -25,13 +25,13 @@
      <property name="minimumSize">
       <size>
        <width>250</width>
-       <height>550</height>
+       <height>620</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>250</width>
-       <height>550</height>
+       <height>620</height>
       </size>
      </property>
      <property name="frameShape">
@@ -137,7 +137,7 @@
           <string notr="true"/>
          </property>
          <property name="icon">
-          <iconset resource="../res.qrc">
+          <iconset resource="../../res.qrc">
            <normaloff>:/res/images/reset.png</normaloff>:/res/images/reset.png</iconset>
          </property>
          <property name="iconSize">
@@ -322,13 +322,13 @@
         <property name="minimumSize">
          <size>
           <width>230</width>
-          <height>173</height>
+          <height>230</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>230</width>
-          <height>173</height>
+          <height>230</height>
          </size>
         </property>
         <property name="frameShape">
@@ -375,7 +375,7 @@
           <string notr="true"/>
          </property>
          <property name="icon">
-          <iconset resource="../res.qrc">
+          <iconset resource="../../res.qrc">
            <normaloff>:/res/images/intext_color.png</normaloff>:/res/images/intext_color.png</iconset>
          </property>
          <property name="iconSize">
@@ -404,7 +404,7 @@
           <string notr="true"/>
          </property>
          <property name="icon">
-          <iconset resource="../res.qrc">
+          <iconset resource="../../res.qrc">
            <normaloff>:/res/images/extext_color.png</normaloff>:/res/images/extext_color.png</iconset>
          </property>
          <property name="iconSize">
@@ -433,7 +433,7 @@
           <string notr="true"/>
          </property>
          <property name="icon">
-          <iconset resource="../res.qrc">
+          <iconset resource="../../res.qrc">
            <normaloff>:/res/images/reset.png</normaloff>:/res/images/reset.png</iconset>
          </property>
          <property name="iconSize">
@@ -462,7 +462,7 @@
           <string notr="true"/>
          </property>
          <property name="icon">
-          <iconset resource="../res.qrc">
+          <iconset resource="../../res.qrc">
            <normaloff>:/res/images/paper_color.png</normaloff>:/res/images/paper_color.png</iconset>
          </property>
          <property name="iconSize">
@@ -491,7 +491,7 @@
           <string notr="true"/>
          </property>
          <property name="icon">
-          <iconset resource="../res.qrc">
+          <iconset resource="../../res.qrc">
            <normaloff>:/res/images/bg_color.png</normaloff>:/res/images/bg_color.png</iconset>
          </property>
          <property name="iconSize">
@@ -504,8 +504,8 @@
         <widget class="QPushButton" name="resetBgPaperColorButton">
          <property name="geometry">
           <rect>
-           <x>170</x>
-           <y>110</y>
+           <x>100</x>
+           <y>170</y>
            <width>51</width>
            <height>51</height>
           </rect>
@@ -520,7 +520,7 @@
           <string notr="true"/>
          </property>
          <property name="icon">
-          <iconset resource="../res.qrc">
+          <iconset resource="../../res.qrc">
            <normaloff>:/res/images/reset.png</normaloff>:/res/images/reset.png</iconset>
          </property>
          <property name="iconSize">
@@ -528,6 +528,51 @@
            <width>36</width>
            <height>36</height>
           </size>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="panelColorButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>170</y>
+           <width>71</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string>Panel color</string>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../res.qrc">
+           <normaloff>:/res/images/panel_color.png</normaloff>:/res/images/panel_color.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QFrame" name="colorsFrameSpacer">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>90</y>
+           <width>231</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::HLine</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
          </property>
         </widget>
        </widget>
@@ -634,7 +679,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../res.qrc"/>
+  <include location="../../res.qrc"/>
  </resources>
  <connections/>
 </ui>
