@@ -448,10 +448,11 @@ void OpenTyper::previousLevel(void)
 
 void OpenTyper::openOptions(void)
 {
-	optionsWindow optionsWin;
-	optionsWin.setStyleSheet(styleSheet());
-	optionsWin.init();
-	optionsWin.exec();
+	optionsWindow *optionsWin = new optionsWindow;
+	optionsWin->setStyleSheet(styleSheet());
+	optionsWin->init();
+	connect(optionsWin,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
+	optionsWin->exec();
 	refreshAll();
 }
 
