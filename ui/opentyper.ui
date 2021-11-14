@@ -65,41 +65,6 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QLabel" name="languageLabel">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>211</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Language:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-       <widget class="languageComboBox" name="languageSelectBox">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>40</y>
-          <width>211</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-       </widget>
        <widget class="QFrame" name="mainButtonsFrame">
         <property name="geometry">
          <rect>
@@ -869,11 +834,6 @@ p, li { white-space: pre-wrap; }
    <class>inputLabelWidget</class>
    <extends>QTextEdit</extends>
    <header>src/include/widgets/inputlabel.h</header>
-  </customwidget>
-  <customwidget>
-   <class>languageComboBox</class>
-   <extends>QComboBox</extends>
-   <header>src/include/widgets/languagecombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources>
