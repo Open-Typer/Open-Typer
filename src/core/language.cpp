@@ -36,7 +36,6 @@ languageManager::languageManager(QObject *parent) :
 	boxItems.clear();
 	for(int i=0; i < supportedLanguages.count(); i++)
 		boxItems += QLocale::languageToString(supportedLanguages[i]) + " (" + QLocale::countryToString(supportedCountries[i]) + ")";
-	boxItems.sort();
 	boxItems.insert(0,tr("System (default)"));
 }
 
