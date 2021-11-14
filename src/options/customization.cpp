@@ -54,6 +54,11 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	paperRedColor = settings.value("theme/paperred","0").toInt();
 	paperGreenColor = settings.value("theme/papergreen","0").toInt();
 	paperBlueColor = settings.value("theme/paperblue","0").toInt();
+	// Panel
+	customPanelColor = settings.value("theme/custompanelcolor","false").toBool();
+	panelRedColor = settings.value("theme/panelred","0").toInt();
+	panelGreenColor = settings.value("theme/panelgreen","0").toInt();
+	panelBlueColor = settings.value("theme/panelblue","0").toInt();
 	// Font selector
 	connect(ui->fontComboBox,
 		SIGNAL(currentFontChanged(QFont)),
@@ -109,7 +114,12 @@ customizationOptions::customizationOptions(QWidget *parent) :
 		SIGNAL(clicked()),
 		this,
 		SLOT(changePaperColor()));
-	// Reset background and paper color button
+	// Change panel color button
+	connect(ui->panelColorButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(changePanelColor()));
+	// Reset background, paper and panel color button
 	connect(ui->resetBgPaperColorButton,
 		SIGNAL(clicked()),
 		this,
@@ -243,6 +253,11 @@ void customizationOptions::saveColorSettings(void)
 	settings.setValue("theme/paperred",paperRedColor);
 	settings.setValue("theme/papergreen",paperGreenColor);
 	settings.setValue("theme/paperblue",paperBlueColor);
+	// Panel
+	settings.setValue("theme/custompanelcolor",customPanelColor);
+	settings.setValue("theme/panelred",panelRedColor);
+	settings.setValue("theme/panelgreen",panelGreenColor);
+	settings.setValue("theme/panelblue",panelBlueColor);
 }
 
 void customizationOptions::setColors()
@@ -456,11 +471,30 @@ void customizationOptions::changePaperColor(void)
 	}
 }
 
+void customizationOptions::changePanelColor(void)
+{
+	SimpleColorDialog colorDialog;
+	colorDialog.setColor(panelRedColor,
+		panelGreenColor,
+		panelBlueColor);
+	colorDialog.setStyleSheet(styleSheet());
+	if(colorDialog.exec() == QDialog::Accepted)
+	{
+		panelRedColor = colorDialog.redColor;
+		panelGreenColor = colorDialog.greenColor;
+		panelBlueColor = colorDialog.blueColor;
+		customPanelColor = true;
+		saveColorSettings();
+		setColors();
+	}
+}
+
 void customizationOptions::resetBgPaperColors(void)
 {
 	// There's no need to set RGB values because they're defined in setColors()
 	customBgColor = false;
 	customPaperColor = false;
+	customPanelColor = false;
 	saveColorSettings();
 	setColors();
 }
