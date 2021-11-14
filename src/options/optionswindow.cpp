@@ -49,6 +49,7 @@ void optionsWindow::changeOptionWidget(int index)
 				// Language
 				languageList *options = new languageList;
 				options->setStyleSheet(styleSheet());
+				connect(options,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
 				ui->currentOptions->setWidget(options);
 			}
 			break;
@@ -75,4 +76,9 @@ void optionsWindow::changeOptionWidget(int index)
 void optionsWindow::init(void)
 {
 	ui->list->setCurrentRow(0);
+}
+
+void optionsWindow::changeLanguage(int index)
+{
+	emit languageChanged(index);
 }

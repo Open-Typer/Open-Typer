@@ -42,8 +42,12 @@ class optionsWindow : public QDialog
 	private:
 		Ui::optionsWindow *ui;
 
+	signals:
+		void languageChanged(int index);
+
 	private slots:
 		void changeOptionWidget(int index);
+		void changeLanguage(int);
 };
 
 #endif // OPTIONSWINDOW_H
