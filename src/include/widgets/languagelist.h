@@ -1,5 +1,5 @@
 /*
- * languagecombobox.h
+ * languagelist.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021 - adazem009
@@ -22,20 +22,25 @@
 #define LANGUAGECOMBOBOX_H
 
 #include <QWidget>
-#include <QComboBox>
+#include <QListWidget>
+#include <QSettings>
+#include "core/utils.h"
 #include "core/language.h"
 
-class languageComboBox : public QComboBox
+class languageList : public QListWidget
 {
 	Q_OBJECT
 	public:
-		explicit languageComboBox(QWidget *parent = nullptr);
-		~languageComboBox();
+		explicit languageList(QWidget *parent = nullptr);
+		~languageList();
 		QLocale::Language language(int index);
 		QLocale::Country country(int index);
 		
 	private:
 		languageManager *langMgr;
+
+	private slots:
+		void changeLanguage(int index);
 };
 
 #endif // LANGUAGECOMBOBOX_H

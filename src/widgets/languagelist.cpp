@@ -1,5 +1,5 @@
 /*
- * languagecombobox.cpp
+ * languagelist.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021 - adazem009
@@ -18,32 +18,29 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "widgets/languagecombobox.h"
+#include "widgets/languagelist.h"
 
-languageComboBox::languageComboBox(QWidget *parent) :
-	QComboBox(parent)
+languageList::languageList(QWidget *parent) :
+	QListWidget(parent)
 {
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	clear();
 	langMgr = new languageManager;
-	// Combobox list
-	QStringList boxItems;
-	for(int i=0; i < langMgr->supportedLanguages.count(); i++)
-	{
-		boxItems += QLocale::languageToString(langMgr->supportedLanguages[i]) + " (" + QLocale::countryToString(langMgr->supportedCountries[i]) + ")";
-	}
-	boxItems.sort();
-	boxItems.insert(0,tr("System (default)"));
-	addItems(boxItems);
+	addItems(langMgr->boxItems);
+	if(settings.value("main/language","").toString() == "")
+		setCurrentRow(0);
+	else
+		setCurrentRow(langMgr->boxItems.indexOf(settings.value("main/language","").toString()));
+	connect(this,SIGNAL(currentRowChanged(int)),this,SLOT(changeLanguage(int)));
 }
 
-languageComboBox::~languageComboBox() { }
+languageList::~languageList() { }
 
-QLocale::Language languageComboBox::language(int index)
+void languageList::changeLanguage(int index)
 {
-	return langMgr->supportedLanguages[index-1];
-}
-
-QLocale::Country languageComboBox::country(int index)
-{
-	return langMgr->supportedCountries[index-1];
+	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	if(index == 0)
+		settings.setValue("main/language","");
+	else
+		settings.setValue("main/language",langMgr->boxItems[index]);
 }

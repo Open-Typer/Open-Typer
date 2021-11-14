@@ -38,7 +38,7 @@ SOURCES += \
     src/opentyper.cpp \
     src/updater/updaterdialog.cpp \
     src/widgets/inputlabel.cpp \
-    src/widgets/languagecombobox.cpp
+    src/widgets/languagelist.cpp
 
 HEADERS += \
     src/include/core/utils.h \
@@ -60,7 +60,7 @@ HEADERS += \
     src/include/version.h \
     src/include/opentyper.h \
     src/include/widgets/inputlabel.h \
-    src/include/widgets/languagecombobox.h
+    src/include/widgets/languagelist.h
 
 FORMS += \
     ui/options/customization.ui \
