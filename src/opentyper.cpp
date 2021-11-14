@@ -90,6 +90,11 @@ void OpenTyper::refreshAll(void)
 	paperRedColor = settings.value("theme/paperred","0").toInt();
 	paperGreenColor = settings.value("theme/papergreen","0").toInt();
 	paperBlueColor = settings.value("theme/paperblue","0").toInt();
+	// Panel
+	customPanelColor = settings.value("theme/custompanelcolor","false").toBool();
+	panelRedColor = settings.value("theme/panelred","0").toInt();
+	panelGreenColor = settings.value("theme/panelgreen","0").toInt();
+	panelBlueColor = settings.value("theme/panelblue","0").toInt();
 	// Theme
 	updateTheme();
 	// Space bar new lines
@@ -758,13 +763,13 @@ void OpenTyper::setColors(void)
 	ui->paper->setStyleSheet("");
 	// Update theme
 	updateTheme();
-	char *styleSheet;
+	char *_styleSheet;
 	// Set level text color
 	if(customLevelTextColor)
 	{
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"color: rgb(%d, %d, %d)",levelTextRedColor,levelTextGreenColor,levelTextBlueColor);
-		ui->levelLabel->setStyleSheet(styleSheet);
+		_styleSheet = (char*) malloc(128);
+		sprintf(_styleSheet,"color: rgb(%d, %d, %d)",levelTextRedColor,levelTextGreenColor,levelTextBlueColor);
+		ui->levelLabel->setStyleSheet(_styleSheet);
 	}
 	else
 	{
@@ -777,9 +782,9 @@ void OpenTyper::setColors(void)
 	// Set input text color
 	if(customInputTextColor)
 	{
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"color: rgb(%d, %d, %d)",inputTextRedColor,inputTextGreenColor,inputTextBlueColor);
-		ui->inputLabel->setStyleSheet(styleSheet);
+		_styleSheet = (char*) malloc(128);
+		sprintf(_styleSheet,"color: rgb(%d, %d, %d)",inputTextRedColor,inputTextGreenColor,inputTextBlueColor);
+		ui->inputLabel->setStyleSheet(_styleSheet);
 	}
 	else
 	{
@@ -787,16 +792,16 @@ void OpenTyper::setColors(void)
 		inputTextRedColor = ui->inputLabel->palette().color(QPalette::Text).red();
 		inputTextGreenColor = ui->inputLabel->palette().color(QPalette::Text).green();
 		inputTextBlueColor = ui->inputLabel->palette().color(QPalette::Text).blue();
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"color: rgb(%d, %d, %d)",inputTextRedColor,inputTextGreenColor,inputTextBlueColor);
-		ui->inputLabel->setStyleSheet(styleSheet);
+		_styleSheet = (char*) malloc(128);
+		sprintf(_styleSheet,"color: rgb(%d, %d, %d)",inputTextRedColor,inputTextGreenColor,inputTextBlueColor);
+		ui->inputLabel->setStyleSheet(_styleSheet);
 	}
 	// Set paper color
 	if(customPaperColor)
 	{
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",paperRedColor,paperGreenColor,paperBlueColor);
-		ui->paper->setStyleSheet(styleSheet);
+		_styleSheet = (char*) malloc(128);
+		sprintf(_styleSheet,"background-color: rgb(%d, %d, %d)",paperRedColor,paperGreenColor,paperBlueColor);
+		ui->paper->setStyleSheet(_styleSheet);
 	}
 	else
 	{
@@ -806,19 +811,28 @@ void OpenTyper::setColors(void)
 		paperRedColor = ui->paper->palette().color(QPalette::Base).red();
 		paperGreenColor = ui->paper->palette().color(QPalette::Base).green();
 		paperBlueColor = ui->paper->palette().color(QPalette::Base).blue();
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",paperRedColor,paperGreenColor,paperBlueColor);
-		ui->paper->setStyleSheet(styleSheet);
+		_styleSheet = (char*) malloc(128);
+		sprintf(_styleSheet,"background-color: rgb(%d, %d, %d)",paperRedColor,paperGreenColor,paperBlueColor);
+		ui->paper->setStyleSheet(_styleSheet);
 		// Fix inputLabel automatically set background color
 		ui->inputLabel->setStyleSheet(
 			ui->inputLabel->styleSheet() + ";\nbackground-color: rgba(0,0,0,0)");
 	}
+	// Set panel color
+	if(customPanelColor)
+	{
+		_styleSheet = (char*) malloc(128);
+		sprintf(_styleSheet,"QFrame { background-color: rgb(%d, %d, %d); } QCheckBox { background-color: rgb(%d, %d, %d); }",
+			panelRedColor,panelGreenColor,panelBlueColor,
+			panelRedColor,panelGreenColor,panelBlueColor);
+		ui->controlFrame->setStyleSheet(_styleSheet);
+	}
 	// Set background color
 	if(customBgColor)
 	{
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",bgRedColor,bgGreenColor,bgBlueColor);
-		ui->mainFrame->setStyleSheet(styleSheet);
+		_styleSheet = (char*) malloc(128);
+		sprintf(_styleSheet,"background-color: rgb(%d, %d, %d)",bgRedColor,bgGreenColor,bgBlueColor);
+		ui->mainFrame->setStyleSheet(_styleSheet);
 	}
 	else
 	{
@@ -833,7 +847,7 @@ void OpenTyper::updateTheme(void)
 {
 	QFile darkSheet(":/dark-theme/style.qss");
 	QFile lightSheet(":/light-theme/style.qss");
-	char *paperStyleSheet;
+	char *paperStyleSheet, *panelStyleSheet;
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	switch(settings.value("theme/theme","0").toInt()) {
 		case 0:
@@ -844,7 +858,13 @@ void OpenTyper::updateTheme(void)
 				palette().color(QPalette::Base).red(),
 				palette().color(QPalette::Base).green(),
 				palette().color(QPalette::Base).blue());
+			panelStyleSheet = (char*) malloc(128);
+			sprintf(panelStyleSheet,"background-color: rgb(%d,%d,%d)",
+				palette().color(QPalette::Midlight).red(),
+				palette().color(QPalette::Midlight).green(),
+				palette().color(QPalette::Midlight).blue());
 			ui->paper->setStyleSheet(paperStyleSheet);
+			ui->controlFrame->setStyleSheet("QFrame { " + QString(panelStyleSheet) + "; }");
 			break;
 		case 1:
 			// Dark
@@ -861,6 +881,7 @@ void OpenTyper::updateTheme(void)
 				qDebug() << darkSheet.errorString();
 			}
 			ui->paper->setStyleSheet("background-color: rgb(15, 25, 35)");
+			ui->controlFrame->setStyleSheet("QFrame { background-color: rgb(20, 33, 47); }");
 			break;
 		case 2:
 			// Light
@@ -875,6 +896,7 @@ void OpenTyper::updateTheme(void)
 				printf("D: Failed to open light style\n");
 			}
 			ui->paper->setStyleSheet("background-color: rgb(255, 255, 255)");
+			ui->controlFrame->setStyleSheet("QFrame { background-color: rgb(255,255,255); }");
 			break;
 	}
 }

@@ -83,7 +83,8 @@ public:
 	int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
 	int bgRedColor, bgGreenColor, bgBlueColor;
 	int paperRedColor, paperGreenColor, paperBlueColor;
-	bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor;
+	int panelRedColor, panelGreenColor, panelBlueColor;
+	bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor, customPanelColor;
 	void saveColorSettings(void);
 	void setColors(void);
 	void updateTheme(void);
