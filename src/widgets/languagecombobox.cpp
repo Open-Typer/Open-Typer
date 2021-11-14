@@ -24,20 +24,12 @@ languageComboBox::languageComboBox(QWidget *parent) :
 	QComboBox(parent)
 {
 	clear();
-	supportedLanguages.clear();
-	supportedCountries.clear();
-	// Supported languages
-	// en_US
-	supportedLanguages += QLocale::English;
-	supportedCountries += QLocale::UnitedStates;
-	// sk_SK
-	supportedLanguages += QLocale::Slovak;
-	supportedCountries += QLocale::Slovakia;
+	langMgr = new languageManager;
 	// Combobox list
 	QStringList boxItems;
-	for(int i=0; i < supportedLanguages.count(); i++)
+	for(int i=0; i < langMgr->supportedLanguages.count(); i++)
 	{
-		boxItems += QLocale::languageToString(supportedLanguages[i]) + " (" + QLocale::countryToString(supportedCountries[i]) + ")";
+		boxItems += QLocale::languageToString(langMgr->supportedLanguages[i]) + " (" + QLocale::countryToString(langMgr->supportedCountries[i]) + ")";
 	}
 	boxItems.sort();
 	boxItems.insert(0,tr("System (default)"));
@@ -48,10 +40,10 @@ languageComboBox::~languageComboBox() { }
 
 QLocale::Language languageComboBox::language(int index)
 {
-	return supportedLanguages[index-1];
+	return langMgr->supportedLanguages[index-1];
 }
 
 QLocale::Country languageComboBox::country(int index)
 {
-	return supportedCountries[index-1];
+	return langMgr->supportedCountries[index-1];
 }

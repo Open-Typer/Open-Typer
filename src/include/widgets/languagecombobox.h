@@ -23,6 +23,7 @@
 
 #include <QWidget>
 #include <QComboBox>
+#include "core/language.h"
 
 class languageComboBox : public QComboBox
 {
@@ -32,10 +33,9 @@ class languageComboBox : public QComboBox
 		~languageComboBox();
 		QLocale::Language language(int index);
 		QLocale::Country country(int index);
-
+		
 	private:
-		QList<QLocale::Language> supportedLanguages;
-		QList<QLocale::Country> supportedCountries;
+		languageManager *langMgr;
 };
 
 #endif // LANGUAGECOMBOBOX_H
