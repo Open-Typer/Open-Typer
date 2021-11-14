@@ -26,6 +26,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	, ui(new Ui::OpenTyper)
 {
 	ui->setupUi(this);
+	langMgr = new languageManager;
 	refreshAll();
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	// Connect signals to slots
@@ -36,15 +37,6 @@ OpenTyper::OpenTyper(QWidget *parent)
 	new Updater();
 	#endif
 	#endif
-	// Set language
-	QString selectedLanguage = settings.value("main/language","").toString();
-	if(selectedLanguage == "")
-	{
-		ui->languageSelectBox->setCurrentIndex(0);
-	}
-	else
-		ui->languageSelectBox->setCurrentIndex(ui->languageSelectBox->findText(selectedLanguage));
-	changeLanguage(ui->languageSelectBox->currentIndex());
 }
 
 OpenTyper::~OpenTyper()
@@ -56,6 +48,11 @@ void OpenTyper::refreshAll(void)
 {
 	// Read config
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	// Set language
+	if(settings.value("main/language","").toString() == "")
+		changeLanguage(0);
+	else
+		changeLanguage(langMgr->boxItems.indexOf(settings.value("main/language","").toString()));
 	// Config file (lesson pack) name
 	QString configName = settings.value("main/configfile","").toString(); // default: "" (empty QString)
 	if(configName == "")
@@ -186,12 +183,6 @@ void OpenTyper::connectAll(void)
 		SIGNAL(clicked()),
 		this,
 		SLOT(openExerciseFromFile()));
-	// **Options tab**
-	// Language selector
-	connect(ui->languageSelectBox,
-		SIGNAL(activated(int)),
-		this,
-		SLOT(changeLanguage(int)));
 	// Start timer
 	secLoop->start(1000);
 }
@@ -923,21 +914,13 @@ void OpenTyper::openEditor(void)
 void OpenTyper::changeLanguage(int index)
 {
 	QLocale targetLocale;
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	if(index == 0)
-	{
 		targetLocale = QLocale::system();
-		settings.setValue("main/language","");
-	}
 	else
-	{
-		targetLocale = QLocale(ui->languageSelectBox->language(index),ui->languageSelectBox->country(index));
-		settings.setValue("main/language",ui->languageSelectBox->currentText());
-	}
+		targetLocale = QLocale(langMgr->supportedLanguages[index-1],langMgr->supportedCountries[index-1]);
 	QCoreApplication::removeTranslator(translator);
 	translator = new QTranslator();
 	if(translator->load(targetLocale,QLatin1String("Open-Typer"),QLatin1String("_"),QLatin1String(":/res/lang")))
 		QCoreApplication::installTranslator(translator);
 	ui->retranslateUi(this);
-	repeatLevel();
 }

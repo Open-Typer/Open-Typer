@@ -39,7 +39,7 @@
 #include <QTranslator>
 #include <sys/stat.h>
 #include "widgets/inputlabel.h"
-#include "widgets/languagecombobox.h"
+#include "widgets/languagelist.h"
 #include "updater/updater.h"
 #include "simplecolordialog.h"
 #include "paperconfigdialog.h"
@@ -49,6 +49,7 @@
 #include "core/configfile.h"
 #include "core/utils.h"
 #include "core/packs.h"
+#include "core/language.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class OpenTyper; }
@@ -93,6 +94,7 @@ public:
 
 private:
 	Ui::OpenTyper *ui;
+	languageManager *langMgr;
 	void connectAll(void);
 
 private slots:
