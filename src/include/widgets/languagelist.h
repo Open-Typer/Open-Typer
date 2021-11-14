@@ -24,6 +24,7 @@
 #include <QWidget>
 #include <QListWidget>
 #include <QSettings>
+#include "opentyper.h"
 #include "core/utils.h"
 #include "core/language.h"
 
@@ -38,6 +39,9 @@ class languageList : public QListWidget
 		
 	private:
 		languageManager *langMgr;
+
+	signals:
+		void languageChanged(int index);
 
 	private slots:
 		void changeLanguage(int index);
