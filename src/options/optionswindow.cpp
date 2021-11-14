@@ -28,6 +28,7 @@ optionsWindow::optionsWindow(QWidget *parent) :
 	ui->setupUi(this);
 	QStringList optionLabels;
 	// List of options
+	optionLabels += tr("Language");
 	optionLabels += tr("Keyboard");
 	optionLabels += tr("Customization");
 	ui->list->addItems(optionLabels);
@@ -45,13 +46,21 @@ void optionsWindow::changeOptionWidget(int index)
 	switch(index) {
 		case 0:
 			{
+				// Language
+				languageList *options = new languageList;
+				options->setStyleSheet(styleSheet());
+				ui->currentOptions->setWidget(options);
+			}
+			break;
+		case 1:
+			{
 				// Keyboard
 				keyboardOptions *options = new keyboardOptions;
 				options->setStyleSheet(styleSheet());
 				ui->currentOptions->setWidget(options);
 			}
 			break;
-		case 1:
+		case 2:
 			{
 				// Customization
 				customizationOptions *options = new customizationOptions;

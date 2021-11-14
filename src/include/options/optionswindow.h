@@ -25,6 +25,7 @@
 #include <QTranslator>
 #include "options/keyboard.h"
 #include "options/customization.h"
+#include "widgets/languagelist.h"
 
 namespace Ui {
 	class optionsWindow;
