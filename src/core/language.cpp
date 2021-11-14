@@ -32,6 +32,12 @@ languageManager::languageManager(QObject *parent) :
 	// sk_SK
 	supportedLanguages += QLocale::Slovak;
 	supportedCountries += QLocale::Slovakia;
+	// QStringList for combo boxes and list widgets
+	boxItems.clear();
+	for(int i=0; i < supportedLanguages.count(); i++)
+		boxItems += QLocale::languageToString(supportedLanguages[i]) + " (" + QLocale::countryToString(supportedCountries[i]) + ")";
+	boxItems.sort();
+	boxItems.insert(0,tr("System (default)"));
 }
 
 languageManager::~languageManager() { }

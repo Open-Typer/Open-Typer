@@ -32,6 +32,7 @@ class languageManager : public QObject
 		virtual ~languageManager();
 		QList<QLocale::Language> supportedLanguages;
 		QList<QLocale::Country> supportedCountries;
+		QStringList boxItems;
 };
 
 #endif // CORELANG_H
