@@ -26,14 +26,20 @@ optionsWindow::optionsWindow(QWidget *parent) :
 	ui(new Ui::optionsWindow)
 {
 	ui->setupUi(this);
+	setupList();
+	// Connections
+	connect(ui->list,SIGNAL(currentRowChanged(int)),this,SLOT(changeOptionWidget(int)));
+}
+
+void optionsWindow::setupList(void)
+{
+	ui->list->clear();
 	QStringList optionLabels;
 	// List of options
 	optionLabels += tr("Language");
 	optionLabels += tr("Keyboard");
 	optionLabels += tr("Customization");
 	ui->list->addItems(optionLabels);
-	// Connections
-	connect(ui->list,SIGNAL(currentRowChanged(int)),this,SLOT(changeOptionWidget(int)));
 }
 
 optionsWindow::~optionsWindow()
@@ -81,4 +87,15 @@ void optionsWindow::init(void)
 void optionsWindow::changeLanguage(int index)
 {
 	emit languageChanged(index);
+}
+
+void optionsWindow::changeEvent(QEvent *event)
+{
+	if(event->type() == QEvent::LanguageChange)
+	{
+		ui->retranslateUi(this);
+		setupList();
+	}
+	else
+		QWidget::changeEvent(event);
 }

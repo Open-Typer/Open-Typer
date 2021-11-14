@@ -41,6 +41,10 @@ class optionsWindow : public QDialog
 
 	private:
 		Ui::optionsWindow *ui;
+		void setupList(void);
+
+	protected:
+		void changeEvent(QEvent *event);
 
 	signals:
 		void languageChanged(int index);
