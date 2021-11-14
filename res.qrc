@@ -24,5 +24,6 @@
         <file>res/images/intext_color.png</file>
         <file>res/images/reset.png</file>
         <file>res/images/options.png</file>
+        <file>res/images/panel_color.png</file>
     </qresource>
 </RCC>
