@@ -28,7 +28,7 @@
 #include <QDebug>
 #include "options/optionswindow.h"
 #include "simplecolordialog.h"
-#include "utils.h"
+#include "core/utils.h"
 
 namespace Ui {
 	class customizationOptions;

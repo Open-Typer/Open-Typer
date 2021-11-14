@@ -27,8 +27,8 @@
 #include <QSettings>
 #include "options/optionswindow.h"
 #include "packEditor/packeditor.h"
-#include "utils.h"
-#include "packs.h"
+#include "core/utils.h"
+#include "core/packs.h"
 
 namespace Ui {
 	class keyboardOptions;

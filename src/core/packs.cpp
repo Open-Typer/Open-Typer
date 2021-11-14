@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "packs.h"
+#include "core/packs.h"
 
 QString _pack_name(QString rawName)
 {

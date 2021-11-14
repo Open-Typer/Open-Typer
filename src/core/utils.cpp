@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "utils.h"
+#include "core/utils.h"
 
 int QStringLen(QString str)
 {

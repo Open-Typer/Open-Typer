@@ -23,8 +23,8 @@
 
 #include <QDialog>
 #include <QDirIterator>
-#include "utils.h"
-#include "packs.h"
+#include "core/utils.h"
+#include "core/packs.h"
 
 namespace Ui {
 	class packSelector;

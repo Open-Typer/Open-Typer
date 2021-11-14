@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "configfile.h"
+#include "core/configfile.h"
 
 int _lesson_count(FILE *cr)
 {

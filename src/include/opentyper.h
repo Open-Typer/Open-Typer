@@ -46,9 +46,9 @@
 #include "packEditor/packeditor.h"
 #include "options/optionswindow.h"
 #include "levelsummary.h"
-#include "configfile.h"
-#include "utils.h"
-#include "packs.h"
+#include "core/configfile.h"
+#include "core/utils.h"
+#include "core/packs.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class OpenTyper; }
