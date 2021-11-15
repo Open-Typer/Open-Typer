@@ -19,6 +19,7 @@
  */
 
 #include <iostream>
+#include <QObject>
 #include <QString>
 #include <QStandardPaths>
 #ifdef Q_OS_WINDOWS
@@ -30,7 +31,7 @@ bool int_array_contains(int arr[], int target, int count);
 int _get_word_count(char *str);
 char *_get_word(char *str, int id);
 QString getConfigLoc(void);
-QString parseDesc(QString desc, QString trRevision);
+QString parseDesc(QString desc);
 QString _init_level(QString level, int levelLengthExtension);
 #ifdef Q_OS_WINDOWS
 WCHAR* str_to_wcs(const char* str);

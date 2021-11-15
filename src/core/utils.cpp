@@ -76,7 +76,7 @@ QString getConfigLoc(void)
 {
 	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
 }
-QString parseDesc(QString desc, QString trRevision)
+QString parseDesc(QString desc)
 {
 	QString out = "";
 	int i;
@@ -89,7 +89,7 @@ QString parseDesc(QString desc, QString trRevision)
 			if(bracket)
 				out += '}';
 			if(desc[i] == 'r')
-				out += trRevision;
+				out += QObject::tr("Revision");
 			else if(desc[i] == '%')
 				out += '%';
 			// %b is reserved (it's used to separate 2 sets)
