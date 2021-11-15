@@ -33,6 +33,7 @@ optionsWindow::optionsWindow(QWidget *parent) :
 
 void optionsWindow::setupList(void)
 {
+	int oldIndex = ui->list->currentRow();
 	ui->list->clear();
 	QStringList optionLabels;
 	// List of options
@@ -40,6 +41,7 @@ void optionsWindow::setupList(void)
 	optionLabels += tr("Keyboard");
 	optionLabels += tr("Customization");
 	ui->list->addItems(optionLabels);
+	ui->list->setCurrentRow(oldIndex);
 }
 
 optionsWindow::~optionsWindow()
