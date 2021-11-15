@@ -85,69 +85,64 @@
         <translation>Začať nový riadok medzerníkom</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="242"/>
-        <source>Revision</source>
-        <translation>Opakovanie</translation>
-    </message>
-    <message>
-        <location filename="../src/opentyper.cpp" line="244"/>
-        <location filename="../src/opentyper.cpp" line="246"/>
+        <location filename="../src/opentyper.cpp" line="249"/>
+        <location filename="../src/opentyper.cpp" line="251"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="296"/>
-        <source>Fingering</source>
+        <location filename="../src/opentyper.cpp" line="301"/>
+        <source>Touch</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="299"/>
+        <location filename="../src/opentyper.cpp" line="304"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="302"/>
+        <location filename="../src/opentyper.cpp" line="307"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="305"/>
+        <location filename="../src/opentyper.cpp" line="310"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="308"/>
+        <location filename="../src/opentyper.cpp" line="313"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="360"/>
+        <location filename="../src/opentyper.cpp" line="365"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="504"/>
+        <location filename="../src/opentyper.cpp" line="509"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="504"/>
-        <location filename="../src/opentyper.cpp" line="886"/>
+        <location filename="../src/opentyper.cpp" line="509"/>
+        <location filename="../src/opentyper.cpp" line="908"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="513"/>
+        <location filename="../src/opentyper.cpp" line="518"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="527"/>
+        <location filename="../src/opentyper.cpp" line="532"/>
         <source>Could not open the file.</source>
         <translation>Nepodarilo sa otvoriť súbor.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="886"/>
+        <location filename="../src/opentyper.cpp" line="908"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
@@ -163,6 +158,11 @@
         <location filename="../src/core/packs.cpp" line="31"/>
         <source>Unknown pack</source>
         <translation>Neznámy balík</translation>
+    </message>
+    <message>
+        <location filename="../src/core/utils.cpp" line="92"/>
+        <source>Revision</source>
+        <translation>Opakovanie</translation>
     </message>
 </context>
 <context>
@@ -340,6 +340,11 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <source>Background color</source>
         <translation>Farba pozadia</translation>
     </message>
+    <message>
+        <location filename="../ui/options/customization.ui" line="546"/>
+        <source>Panel color</source>
+        <translation>Farba panela</translation>
+    </message>
 </context>
 <context>
     <name>keyboardOptions</name>
@@ -352,7 +357,7 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
 <context>
     <name>languageManager</name>
     <message>
-        <location filename="../src/core/language.cpp" line="40"/>
+        <location filename="../src/core/language.cpp" line="39"/>
         <source>System (default)</source>
         <translation>Systémový (predvolené)</translation>
     </message>
@@ -413,17 +418,17 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Možnosti</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="39"/>
+        <location filename="../src/options/optionswindow.cpp" line="40"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="40"/>
+        <location filename="../src/options/optionswindow.cpp" line="41"/>
         <source>Keyboard</source>
         <translation>Klávesnica</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="41"/>
+        <location filename="../src/options/optionswindow.cpp" line="42"/>
         <source>Customization</source>
         <translation>Prispôsobenie</translation>
     </message>
@@ -560,7 +565,6 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
     <message>
         <location filename="../ui/packEditor/packview.ui" line="630"/>
-        <location filename="../src/packEditor/packview.cpp" line="155"/>
         <source>Revision</source>
         <translation>Opakovanie</translation>
     </message>
@@ -597,7 +601,7 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
     <message>
         <location filename="../src/packEditor/packview.cpp" line="187"/>
-        <source>Fingering</source>
+        <source>Touch</source>
         <translation>Hmaty</translation>
     </message>
     <message>
