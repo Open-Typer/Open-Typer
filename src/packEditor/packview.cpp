@@ -184,7 +184,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		{
 			switch(i) {
 				case 1:
-					sublessons += tr("Fingering");
+					sublessons += tr("Touch");
 					break;
 				case 2:
 					sublessons += tr("Words");
