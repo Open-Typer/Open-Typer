@@ -244,7 +244,7 @@ char *OpenTyper::loadConfig(QString configName)
 	int i, count = _lesson_count(configCheckFile);
 	for(i=1; i <= count; i++)
 	{
-		_lessonDesc = parseDesc(_lesson_desc(configCheckFile,i),tr("Revision"));
+		_lessonDesc = parseDesc(_lesson_desc(configCheckFile,i));
 		if(_lessonDesc == "")
 			lessons += tr("Lesson") + " " + QString::number(i);
 		else
