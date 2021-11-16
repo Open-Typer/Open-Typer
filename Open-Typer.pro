@@ -76,7 +76,8 @@ FORMS += \
     ui/updater/updaterdialog.ui
 
 TRANSLATIONS += \
-    lang/Open-Typer_sk_SK.ts
+    lang/Open-Typer_sk_SK.ts \
+    lang/Open-Typer_de_DE.ts
 
 RESOURCES += \
     res.qrc
