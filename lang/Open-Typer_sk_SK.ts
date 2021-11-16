@@ -660,7 +660,7 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     <message>
         <location filename="../ui/paperconfigdialog.ui" line="53"/>
         <source>Line length:</source>
-        <translation>Dĺžka riadku:</translation>
+        <translation>Dĺžka riadka:</translation>
     </message>
     <message>
         <location filename="../ui/paperconfigdialog.ui" line="94"/>
