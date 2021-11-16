@@ -26,6 +26,9 @@ languageManager::languageManager(QObject *parent) :
 	supportedLanguages.clear();
 	supportedCountries.clear();
 	// Supported languages
+	// de_DE
+	supportedLanguages += QLocale::German;
+	supportedCountries += QLocale::Germany;
 	// en_US
 	supportedLanguages += QLocale::English;
 	supportedCountries += QLocale::UnitedStates;
