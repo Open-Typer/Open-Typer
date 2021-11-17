@@ -31,8 +31,8 @@
 #include "version.h"
 #include "updaterdialog.h"
 
-#define _VERSION_H_URL "https://raw.githubusercontent.com/adazem009/Open-Typer/master/src/include/version.h"
-#define _GITHUB_REPO "https://github.com/adazem009/Open-Typer"
+#define _VERSION_H_URL "https://raw.githubusercontent.com/Open-Typer/Open-Typer/master/src/include/version.h"
+#define _GITHUB_REPO "https://github.com/Open-Typer/Open-Typer"
 
 class Updater : public QObject
 {
