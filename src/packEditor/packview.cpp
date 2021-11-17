@@ -181,25 +181,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 	for(i=1; i <= sublessonCount+i2; i++)
 	{
 		if(_lesson_sublesson_level_count(targetFile,oldLesson+1,i) > 0)
-		{
-			switch(i) {
-				case 1:
-					sublessons += tr("Touch");
-					break;
-				case 2:
-					sublessons += tr("Words");
-					break;
-				case 3:
-					sublessons += tr("Sentences");
-					break;
-				case 4:
-					sublessons += tr("Text");
-					break;
-				default:
-					sublessons += tr("Sublesson") + " " + QString::number(i);
-					break;
-			}
-		}
+			sublessons += _sublesson_text(i);
 		else
 		{
 			sublessons += " (" + tr("empty") + ")";
