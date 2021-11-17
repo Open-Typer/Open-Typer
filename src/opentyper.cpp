@@ -295,29 +295,9 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	for(i=1; i <= sublessonCount+i2; i++)
 	{
 		if(_lesson_sublesson_level_count(cr,lessonID,i) > 0)
-		{
-			switch(i) {
-				case 1:
-					sublessons += tr("Touch");
-					break;
-				case 2:
-					sublessons += tr("Words");
-					break;
-				case 3:
-					sublessons += tr("Sentences");
-					break;
-				case 4:
-					sublessons += tr("Text");
-					break;
-				default:
-					sublessons += tr("Sublesson") + " " + QString::number(i);
-					break;
-			}
-		}
+			sublessons += _sublesson_text(i);
 		else
-		{
 			i2++;
-		}
 	}
 	sublessonListStart = i2;
 	// Check if -1 (last sublesson in current lesson) was passed
