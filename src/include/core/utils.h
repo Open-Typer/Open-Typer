@@ -32,6 +32,7 @@ int _get_word_count(char *str);
 char *_get_word(char *str, int id);
 QString getConfigLoc(void);
 QString parseDesc(QString desc);
+QString _sublesson_text(int id);
 QString _init_level(QString level, int levelLengthExtension);
 #ifdef Q_OS_WINDOWS
 WCHAR* str_to_wcs(const char* str);
