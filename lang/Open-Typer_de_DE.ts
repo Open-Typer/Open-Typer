@@ -72,26 +72,6 @@
         <translation>Lektion</translation>
     </message>
     <message>
-        <source>Touch</source>
-        <translation>Berühren</translation>
-    </message>
-    <message>
-        <source>Words</source>
-        <translation>Wörter</translation>
-    </message>
-    <message>
-        <source>Sentences</source>
-        <translation>Sätze</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Text</translation>
-    </message>
-    <message>
-        <source>Sublesson</source>
-        <translation>Unter Lektion</translation>
-    </message>
-    <message>
         <source>Exercise</source>
         <translation>Aufgabe</translation>
     </message>
@@ -129,6 +109,26 @@
     <message>
         <source>Successfully updated.</source>
         <translation>Erfolgreich geupdated.</translation>
+    </message>
+    <message>
+        <source>Touch</source>
+        <translation>Berühren</translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation>Wörter</translation>
+    </message>
+    <message>
+        <source>Sentences</source>
+        <translation>Sätze</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Sublesson</source>
+        <translation>Unter Lektion</translation>
     </message>
 </context>
 <context>
@@ -214,7 +214,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>System (default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">System (Standard)</translation>
     </message>
     <message>
         <source>Dark</source>
@@ -281,7 +281,7 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>keyboardOptions</name>
     <message>
         <source>Editor</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -315,15 +315,15 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Mistakes:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler:</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nein</translation>
     </message>
     <message>
         <source>seconds</source>
@@ -334,7 +334,7 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>optionsWindow</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Optionen</translation>
     </message>
     <message>
         <source>Language</source>
@@ -377,11 +377,11 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Open-Typer pack files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Open-Typer packet Dateien</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alle Dateien</translation>
     </message>
 </context>
 <context>
@@ -396,7 +396,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Abbrechen</translation>
     </message>
     <message>
         <source>Load</source>
@@ -407,15 +407,15 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>packView</name>
     <message>
         <source>Lesson:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lektion:</translation>
     </message>
     <message>
         <source>Exercise:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aufgabe:</translation>
     </message>
     <message>
         <source>Sublesson:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Unter Lektion:</translation>
     </message>
     <message>
         <source>Save</source>
@@ -427,7 +427,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Exercise options:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aufgaben Optionen:</translation>
     </message>
     <message>
         <source>Repeating:</source>
@@ -439,7 +439,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Words</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wörter</translation>
     </message>
     <message>
         <source>Line length:</source>
@@ -455,7 +455,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Revision</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Revision</translation>
     </message>
     <message>
         <source>Write error</source>
@@ -471,7 +471,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Abbrechen</translation>
     </message>
     <message>
         <source>Close without saving</source>
@@ -479,23 +479,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Lesson</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Touch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sentences</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sublesson</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lektion</translation>
     </message>
     <message>
         <source>empty</source>
@@ -503,7 +487,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Exercise</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aufgabe</translation>
     </message>
     <message>
         <source>New exercise</source>
@@ -515,11 +499,11 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Open-Typer pack files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Open-Typer packet Dateien</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alle Dateien</translation>
     </message>
 </context>
 <context>
