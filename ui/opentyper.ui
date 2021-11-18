@@ -454,7 +454,7 @@
         <rect>
          <x>580</x>
          <y>0</y>
-         <width>241</width>
+         <width>341</width>
          <height>131</height>
         </rect>
        </property>
@@ -472,7 +472,7 @@
          <rect>
           <x>10</x>
           <y>30</y>
-          <width>221</width>
+          <width>321</width>
           <height>26</height>
          </rect>
         </property>
@@ -494,7 +494,7 @@
          <rect>
           <x>10</x>
           <y>50</y>
-          <width>221</width>
+          <width>321</width>
           <height>26</height>
          </rect>
         </property>
@@ -516,7 +516,7 @@
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>221</width>
+          <width>321</width>
           <height>17</height>
          </rect>
         </property>
@@ -534,7 +534,7 @@
       <widget class="QFrame" name="trainingFrame4">
        <property name="geometry">
         <rect>
-         <x>820</x>
+         <x>920</x>
          <y>0</y>
          <width>221</width>
          <height>131</height>
