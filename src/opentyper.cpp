@@ -309,8 +309,7 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	level = _lesson_sublesson_level_text(cr,
 		lessonID,
 		sublessonID+sublessonListStart,
-		levelID,
-		ui->randomOrderCheckBox->isChecked());
+		levelID);
 	// Get lesson count
 	lessonCount = _lesson_count(cr);
 	// Get level count (in current lesson)
