@@ -464,28 +464,6 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QCheckBox" name="randomOrderCheckBox">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>30</y>
-          <width>321</width>
-          <height>26</height>
-         </rect>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string>Random order</string>
-        </property>
-        <property name="checkable">
-         <bool>false</bool>
-        </property>
-       </widget>
        <widget class="QCheckBox" name="spaceNewlineCheckBox">
         <property name="enabled">
          <bool>true</bool>
@@ -493,7 +471,7 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>50</y>
+          <y>30</y>
           <width>321</width>
           <height>26</height>
          </rect>
