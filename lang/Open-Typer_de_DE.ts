@@ -72,6 +72,26 @@
         <translation>Lektion</translation>
     </message>
     <message>
+        <source>Touch</source>
+        <translation>Berühren</translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation>Wörter</translation>
+    </message>
+    <message>
+        <source>Sentences</source>
+        <translation>Sätze</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Sublesson</source>
+        <translation>Unter Lektion</translation>
+    </message>
+    <message>
         <source>Exercise</source>
         <translation>Aufgabe</translation>
     </message>
@@ -109,26 +129,6 @@
     <message>
         <source>Successfully updated.</source>
         <translation>Erfolgreich geupdated.</translation>
-    </message>
-    <message>
-        <source>Touch</source>
-        <translation>Berühren</translation>
-    </message>
-    <message>
-        <source>Words</source>
-        <translation>Wörter</translation>
-    </message>
-    <message>
-        <source>Sentences</source>
-        <translation>Sätze</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Text</translation>
-    </message>
-    <message>
-        <source>Sublesson</source>
-        <translation>Unter Lektion</translation>
     </message>
 </context>
 <context>
@@ -210,78 +210,78 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>customizationOptions</name>
     <message>
         <source>Theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Thema:</translation>
     </message>
     <message>
         <source>System (default)</source>
-        <translation type="unfinished">System (Standard)</translation>
+        <translation>System (Standard)</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkel</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Hell</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart:</translation>
     </message>
     <message>
         <source>Font size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrift größe:</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Kursiv</translation>
     </message>
     <message>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Fett gedruckt</translation>
     </message>
     <message>
         <source>Underlined</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstrichen</translation>
     </message>
     <message>
         <source>Text style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Text Stil:</translation>
     </message>
     <message>
         <source>Colors:</source>
-        <translation type="unfinished"></translation>
+        <translation>Farben:</translation>
     </message>
     <message>
         <source>Input text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Input Text Farbe</translation>
     </message>
     <message>
         <source>Exercise text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgaben Text Farbe</translation>
     </message>
     <message>
         <source>Paper color</source>
-        <translation type="unfinished"></translation>
+        <translation>Papier Farbe</translation>
     </message>
     <message>
         <source>Background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrund Farbe</translation>
     </message>
     <message>
         <source>Panel color</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel Farbe</translation>
     </message>
 </context>
 <context>
     <name>keyboardOptions</name>
     <message>
         <source>Editor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -295,230 +295,246 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>levelSummary</name>
     <message>
         <source>Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusammenfassung</translation>
     </message>
     <message>
         <source>Total time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamtzeit:</translation>
     </message>
     <message>
         <source>Would you like to continue to the next exercise?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchtest du mit der nächsten Aufgabe weiter machen?</translation>
     </message>
     <message>
         <source>Hits per minute:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schläge pro Minute:</translation>
     </message>
     <message>
         <source>Exercise completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgaben abgeschlossen</translation>
     </message>
     <message>
         <source>Mistakes:</source>
-        <translation type="unfinished">Fehler:</translation>
+        <translation>Fehler:</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Nein</translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunden</translation>
     </message>
 </context>
 <context>
     <name>optionsWindow</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Optionen</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <source>Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastatur</translation>
     </message>
     <message>
         <source>Customization</source>
-        <translation type="unfinished"></translation>
+        <translation>Anpassung</translation>
     </message>
 </context>
 <context>
     <name>packEditor</name>
     <message>
         <source>Open-Typer Pack Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Open-Typer Packet Editor</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Pack editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Packet Editor</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbenannt</translation>
     </message>
     <message>
         <source>Open-Typer pack files</source>
-        <translation type="unfinished">Open-Typer packet Dateien</translation>
+        <translation>Open-Typer Packet Dateien</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Alle Dateien</translation>
+        <translation>Alle Dateien</translation>
     </message>
 </context>
 <context>
     <name>packSelector</name>
     <message>
         <source>Open built-in pack</source>
-        <translation type="unfinished"></translation>
+        <translation>Built-In Packet öffnen</translation>
     </message>
     <message>
         <source>Choose built-in pack:</source>
-        <translation type="unfinished"></translation>
+        <translation>Built-In Packet auswählen:</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Laden</translation>
     </message>
 </context>
 <context>
     <name>packView</name>
     <message>
         <source>Lesson:</source>
-        <translation type="unfinished">Lektion:</translation>
+        <translation>Lektion:</translation>
     </message>
     <message>
         <source>Exercise:</source>
-        <translation type="unfinished">Aufgabe:</translation>
+        <translation>Aufgabe:</translation>
     </message>
     <message>
         <source>Sublesson:</source>
-        <translation type="unfinished">Unter Lektion:</translation>
+        <translation>Unter Lektion:</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichern</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichern als</translation>
     </message>
     <message>
         <source>Exercise options:</source>
-        <translation type="unfinished">Aufgaben Optionen:</translation>
+        <translation>Aufgaben Optionen:</translation>
     </message>
     <message>
         <source>Repeating:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederholend:</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>Words</source>
-        <translation type="unfinished">Wörter</translation>
+        <translation>Wörter</translation>
     </message>
     <message>
         <source>Line length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeilen Länge:</translation>
     </message>
     <message>
         <source>Lesson options:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lektions Optionen:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschreibung:</translation>
     </message>
     <message>
         <source>Revision</source>
-        <translation type="unfinished">Revision</translation>
+        <translation>Revision</translation>
     </message>
     <message>
         <source>Write error</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreib Fehler</translation>
     </message>
     <message>
         <source>Save changes to</source>
-        <translation type="unfinished"></translation>
+        <translation>Änderungen Sichern als</translation>
     </message>
     <message>
         <source>before closing?</source>
-        <translation type="unfinished"></translation>
+        <translation>bevor schließen?</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Close without saving</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohne speichern schließen</translation>
     </message>
     <message>
         <source>Lesson</source>
-        <translation type="unfinished">Lektion</translation>
+        <translation>Lektion</translation>
+    </message>
+    <message>
+        <source>Touch</source>
+        <translation>Berühren</translation>
+    </message>
+    <message>
+        <source>Sentences</source>
+        <translation>Sätze</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Sublesson</source>
+        <translation>Unter Lektion</translation>
     </message>
     <message>
         <source>empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Leer</translation>
     </message>
     <message>
         <source>Exercise</source>
-        <translation type="unfinished">Aufgabe</translation>
+        <translation>Aufgabe</translation>
     </message>
     <message>
         <source>New exercise</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Aufgabe</translation>
     </message>
     <message>
         <source>Text length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Text länge:</translation>
     </message>
     <message>
         <source>Open-Typer pack files</source>
-        <translation type="unfinished">Open-Typer packet Dateien</translation>
+        <translation>Open-Typer Paket Dateien</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished">Alle Dateien</translation>
+        <translation>Alle Dateien</translation>
     </message>
 </context>
 <context>
     <name>paperConfigDialog</name>
     <message>
         <source>Size preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Größen präferenzen</translation>
     </message>
     <message>
         <source>Line length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeilen Länge:</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Laden</translation>
     </message>
 </context>
 </TS>
