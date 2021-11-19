@@ -44,10 +44,6 @@
         <translation>Aufgabe:</translation>
     </message>
     <message>
-        <source>Random order</source>
-        <translation>Zufällige Ordnung</translation>
-    </message>
-    <message>
         <source>Start new line using space bar</source>
         <translation>Neue Zeile mit der Leer Taste beginnen</translation>
     </message>
@@ -70,26 +66,6 @@
     <message>
         <source>Lesson</source>
         <translation>Lektion</translation>
-    </message>
-    <message>
-        <source>Touch</source>
-        <translation>Berühren</translation>
-    </message>
-    <message>
-        <source>Words</source>
-        <translation>Wörter</translation>
-    </message>
-    <message>
-        <source>Sentences</source>
-        <translation>Sätze</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Text</translation>
-    </message>
-    <message>
-        <source>Sublesson</source>
-        <translation>Unter Lektion</translation>
     </message>
     <message>
         <source>Exercise</source>
@@ -129,6 +105,26 @@
     <message>
         <source>Successfully updated.</source>
         <translation>Erfolgreich geupdated.</translation>
+    </message>
+    <message>
+        <source>Touch</source>
+        <translation>Berühren</translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation>Wörter</translation>
+    </message>
+    <message>
+        <source>Sentences</source>
+        <translation>Sätze</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Sublesson</source>
+        <translation>Unter Lektion</translation>
     </message>
 </context>
 <context>
@@ -480,22 +476,6 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Lesson</source>
         <translation>Lektion</translation>
-    </message>
-    <message>
-        <source>Touch</source>
-        <translation>Berühren</translation>
-    </message>
-    <message>
-        <source>Sentences</source>
-        <translation>Sätze</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Text</translation>
-    </message>
-    <message>
-        <source>Sublesson</source>
-        <translation>Unter Lektion</translation>
     </message>
     <message>
         <source>empty</source>
