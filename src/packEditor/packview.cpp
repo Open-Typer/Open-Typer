@@ -451,8 +451,7 @@ void packView::restoreText(void)
 				targetFile,
 				ui->lessonSelectionBox->currentIndex()+1,
 				ui->sublessonSelectionBox->currentIndex()+1,
-				ui->exerciseSelectionBox->currentIndex()+1,
-				false),
+				ui->exerciseSelectionBox->currentIndex()+1),
 			_lesson_sublesson_level_length_extension(
 				targetFile,
 				ui->lessonSelectionBox->currentIndex()+1,
