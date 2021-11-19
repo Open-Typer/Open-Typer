@@ -173,11 +173,6 @@ void OpenTyper::connectAll(void)
 		SIGNAL(activated(int)),
 		this,
 		SLOT(levelSelectionListIndexChanged(int)));
-	// Random order checkbox
-	connect(ui->randomOrderCheckBox,
-		SIGNAL(clicked(bool)),
-		this,
-		SLOT(randomOrderCheckBoxChanged(bool)));
 	// Space new line checkbox
 	connect(ui->spaceNewlineCheckBox,
 		SIGNAL(clicked(bool)),
@@ -308,24 +303,6 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 		levelID = _lesson_sublesson_level_count(cr,lessonID,sublessonID+sublessonListStart);
 	ui->sublessonSelectionList->addItems(sublessons);
 	ui->sublessonSelectionList->setCurrentIndex(sublessonID-1);
-	// Update random order check box
-	if(sublessonID+sublessonListStart == 2) // words
-	{
-		ui->randomOrderCheckBox->setEnabled(true);
-		ui->randomOrderCheckBox->setCheckable(true);
-		QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-		QString randomize = settings.value("main/randomwords","false").toString(); // default: "false"
-		if(randomize == "true")
-			ui->randomOrderCheckBox->setCheckState(Qt::Checked);
-		else
-			ui->randomOrderCheckBox->setCheckState(Qt::Unchecked);
-	}
-	else
-	{
-		ui->randomOrderCheckBox->setCheckable(false);
-		ui->randomOrderCheckBox->setEnabled(false);
-		ui->randomOrderCheckBox->setCheckState(Qt::Unchecked);
-	}
 	// Load length extension
 	levelLengthExtension = _lesson_sublesson_level_length_extension(cr,lessonID,sublessonID+sublessonListStart,levelID);
 	// Load level text
@@ -459,16 +436,6 @@ void OpenTyper::sublessonSelectionListIndexChanged(int index)
 void OpenTyper::levelSelectionListIndexChanged(int index)
 {
 	currentLevel = index+1;
-	repeatLevel();
-}
-
-void OpenTyper::randomOrderCheckBoxChanged(bool checked)
-{
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	if(checked)
-		settings.setValue("main/randomwords","true");
-	else
-		settings.setValue("main/randomwords","false");
 	repeatLevel();
 }
 
