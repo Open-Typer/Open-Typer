@@ -1588,6 +1588,8 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		else if(strcmp(repeat_type_str,"rw") == 0)
 			text_repeat_type=3; // obsolete
 		else
+			text_repeat_type=0;
+		if(text_repeat_type == 0)
 		{
 			if(text_repeat)
 			{
