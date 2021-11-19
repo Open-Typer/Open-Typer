@@ -1389,13 +1389,12 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 	}
 	return (char*) "";
 }
-char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order)
+char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel)
 {
 	char c='\0';
-	int line=0, lesson, sublesson, level, lIDc, text_repeat_type=0, i, limit_extension = _REPEAT_LIMIT, wordID, outLength=0;
+	int line=0, lesson, sublesson, level, lIDc, text_repeat_type=0, i, limit_extension = _REPEAT_LIMIT, outLength=0;
 	unsigned int part_alloc=16;
 	char *part = (char*) malloc(part_alloc);
-	char *part2;
 	char *out;
 	char repeat_type_str[64];
 	strcpy(repeat_type_str,"");
@@ -1587,7 +1586,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		else if(strcmp(repeat_type_str,"s") == 0)
 			text_repeat_type=2; // repeating string
 		else if(strcmp(repeat_type_str,"rw") == 0)
-			text_repeat_type=3; // random words
+			text_repeat_type=3; // obsolete
 		else
 		{
 			if(text_repeat)
@@ -1643,63 +1642,37 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 			{
 				if(text_repeat)
 				{
-					if((text_repeat_type == 3) && random_order)
+					end=false;
+					if(strcmp(part,"") == 0)
+						return (char*) "";
+					while(!end)
 					{
-						part2 = (char*) malloc(strlen(part));
-						srand(time(0));
-						while(true)
+						for(i=1; i <= _get_word_count(part); i++)
 						{
-							wordID = rand() % _get_word_count(part) + 1;
-							strcpy(part2,_get_word(part,wordID));
-							if(strlen(out)+1+strlen(part2) > (unsigned int) limit_extension)
-								break;
+							if(strcmp(out,"") == 0)
+							{
+								if(QStringLen(_get_word(part,i)) > limit_extension)
+								{
+									end=true;
+									break;
+								}
+								strcpy(out,_get_word(part,i));
+							}
 							else
 							{
-								if(strcmp(out,"") == 0)
-									strcpy(out,part2);
-								else
+								if(outLength+1+QStringLen(_get_word(part,i)) > limit_extension) // 1 is for a space between out and part
 								{
-									strcat(out," ");
-									strcat(out,part2);
+									end=true;
+									break;
 								}
+								strcat(out," ");
+								strcat(out,_get_word(part,i));
+								outLength += QStringLen(" ");
 							}
+							outLength += QStringLen(_get_word(part,i));
 						}
-						return out;
 					}
-					else
-					{
-						end=false;
-						if(strcmp(part,"") == 0)
-							return (char*) "";
-						while(!end)
-						{
-							for(i=1; i <= _get_word_count(part); i++)
-							{
-								if(strcmp(out,"") == 0)
-								{
-									if(QStringLen(_get_word(part,i)) > limit_extension)
-									{
-										end=true;
-										break;
-									}
-									strcpy(out,_get_word(part,i));
-								}
-								else
-								{
-									if(outLength+1+QStringLen(_get_word(part,i)) > limit_extension) // 1 is for a space between out and part
-									{
-										end=true;
-										break;
-									}
-									strcat(out," ");
-									strcat(out,_get_word(part,i));
-									outLength += QStringLen(" ");
-								}
-								outLength += QStringLen(_get_word(part,i));
-							}
-						}
-						return out;
-					}
+					return out;
 				}
 				else
 					return part;

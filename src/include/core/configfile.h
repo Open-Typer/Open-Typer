@@ -34,6 +34,6 @@ char *_lesson_desc(FILE *cr, int tlesson);
 int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesson, int tlevel);
 int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsublesson, int tlevel);
 char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, int tlevel);
-char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel, bool random_order);
+char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel);
 // Write functions
 void _add_level(FILE *cr, int tlesson, int tsublesson, int tlevel, bool repeat, char *repeat_type, int limit_extension, int length_extension, char *desc, const char *level_text);
