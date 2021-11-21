@@ -20,13 +20,6 @@
 
 #include "core/utils.h"
 
-int QStringLen(QString str)
-{
-	int i=0;
-	while(str[i] != '\0')
-		i++;
-	return i;
-}
 bool int_array_contains(int arr[], int target, int count)
 {
 	int i;

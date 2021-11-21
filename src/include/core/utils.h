@@ -26,7 +26,6 @@
 #include <windows.h>
 #endif
 
-int QStringLen(QString str);
 bool int_array_contains(int arr[], int target, int count);
 int _get_word_count(char *str);
 char *_get_word(char *str, int id);
