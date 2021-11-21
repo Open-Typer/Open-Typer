@@ -36,7 +36,7 @@ keyboardOptions::keyboardOptions(QWidget *parent) :
 	{
 		item = it.next();
 		current = "";
-		for(i=14; i < QStringLen(item); i++)
+		for(i=14; i < item.count(); i++)
 			current += item[i];
 		// TODO: Translate pack name
 		rawItems += current;
