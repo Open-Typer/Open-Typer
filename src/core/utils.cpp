@@ -74,7 +74,7 @@ QString parseDesc(QString desc)
 	QString out = "";
 	int i;
 	bool bracket=false;
-	for(i=0; i < QStringLen(desc); i++)
+	for(i=0; i < desc.count(); i++)
 	{
 		if(desc[i] == '%')
 		{
@@ -126,7 +126,7 @@ QString _init_level(QString level, int levelLengthExtension)
 {
 	int len, len2, i, line_pos=0;
 	QString out = "";
-	len = QStringLen(level);
+	len = level.count();
 	QString word = "";
 	bool first_word=true;
 	for(i=0; i < len; i++)
@@ -137,7 +137,7 @@ QString _init_level(QString level, int levelLengthExtension)
 			{
 				word += level[i];
 			}
-			len2 = QStringLen(word);
+			len2 = word.count();
 			if(line_pos+len2 > levelLengthExtension)
 			{
 				out += '\n';
