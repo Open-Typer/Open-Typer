@@ -214,7 +214,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		// Lesson description
 		QString lessonDesc = "";
 		QString rawLessonDesc = _lesson_desc(targetFile,oldLesson+1);
-		for(i=0; i < QStringLen(rawLessonDesc); i++)
+		for(i=0; i < rawLessonDesc.count(); i++)
 		{
 			if((rawLessonDesc[i] == '%') && (rawLessonDesc[i+1] == 'b'))
 			{
@@ -360,7 +360,7 @@ void packView::deleteExerciseLine(int lesson, int sublesson, int level)
 
 void packView::changeLessonDesc(const QString rawLessonDesc)
 {
-	char *rawLessonDesc2 = (char*) malloc(QStringLen(rawLessonDesc)*2+1);
+	char *rawLessonDesc2 = (char*) malloc(rawLessonDesc.count()*2+1);
 	strcpy(rawLessonDesc2,rawLessonDesc.toStdString().c_str());
 	char *lessonDesc = (char*) malloc(strlen(rawLessonDesc2)*2+1);
 	strcpy(lessonDesc,"");
@@ -423,7 +423,7 @@ void packView::updateText(void)
 	deleteExerciseLine(lesson,sublesson,level);
 	QString sourceText = ui->levelTextEdit->toPlainText();
 	QString targetText = "";
-	for(int i=0; i < QStringLen(sourceText); i++)
+	for(int i=0; i < sourceText.count(); i++)
 	{
 		if(sourceText[i] == '\n')
 			targetText += " ";
@@ -460,7 +460,7 @@ void packView::restoreText(void)
 	QString textLengthStr = tr("Text length:") + " ";
 	if(skipTextRefresh)
 	{
-		ui->textLengthLabel->setText(textLengthStr + QString::number(QStringLen(ui->levelTextEdit->toPlainText())));
+		ui->textLengthLabel->setText(textLengthStr + QString::number(ui->levelTextEdit->toPlainText().count()));
 		fclose(targetFile);
 		return;
 	}
@@ -471,7 +471,7 @@ void packView::restoreText(void)
 		ui->sublessonSelectionBox->currentIndex()+1,
 		ui->exerciseSelectionBox->currentIndex()+1));
 	skipTextUpdates=false;
-	ui->textLengthLabel->setText(textLengthStr + QString::number(QStringLen(ui->levelTextEdit->toPlainText())));
+	ui->textLengthLabel->setText(textLengthStr + QString::number(ui->levelTextEdit->toPlainText().count()));
 	fclose(targetFile);
 }
 
