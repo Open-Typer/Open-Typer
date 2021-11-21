@@ -266,7 +266,7 @@ char *OpenTyper::loadConfig(QString configName)
 
 int OpenTyper::_line_count(QString str)
 {
-	int out=0, i, len = QStringLen(str);
+	int out=0, i, len = str.count();
 	for(i=0; i < len; i++)
 	{
 		if((str[i] == '\n') || (i == len))
@@ -587,7 +587,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		}
 	}
 	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
-	if(QStringLen(input) >= QStringLen(level))
+	if(input.count() >= level.count())
 	{
 		levelInProgress=false;
 		lastTime = levelTimer.elapsed()/1000;
@@ -666,7 +666,7 @@ int OpenTyper::labelWidth(QLabel *targetLabel)
 	int i, current, max=50, len;
 	QString labelText = targetLabel->text();
 	QString line = "";
-	len = QStringLen(labelText);
+	len = labelText.count();
 	for(i=0; i < len; i++)
 	{
 		if((labelText[i] == '\n') || (i+1 == len))
