@@ -36,7 +36,7 @@ packSelector::packSelector(QWidget *parent) :
 	{
 		item = it.next();
 		current = "";
-		for(i=14; i < QStringLen(item); i++)
+		for(i=14; i < item.count(); i++)
 			current += item[i];
 		rawItems += current;
 		items += _pack_name(current);
