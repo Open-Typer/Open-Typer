@@ -1653,7 +1653,7 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 						{
 							if(strcmp(out,"") == 0)
 							{
-								if(QStringLen(_get_word(part,i)) > limit_extension)
+								if(QString(_get_word(part,i)).count() > limit_extension)
 								{
 									end=true;
 									break;
@@ -1662,16 +1662,16 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 							}
 							else
 							{
-								if(outLength+1+QStringLen(_get_word(part,i)) > limit_extension) // 1 is for a space between out and part
+								if(outLength+1+QString(_get_word(part,i)).count() > limit_extension) // 1 is for a space between out and part
 								{
 									end=true;
 									break;
 								}
 								strcat(out," ");
 								strcat(out,_get_word(part,i));
-								outLength += QStringLen(" ");
+								outLength += 1; // for the space in strcat() above
 							}
-							outLength += QStringLen(_get_word(part,i));
+							outLength += QString(_get_word(part,i)).count();
 						}
 					}
 					return out;
