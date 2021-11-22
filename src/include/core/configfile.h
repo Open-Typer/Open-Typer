@@ -38,6 +38,7 @@ class configParser : public QObject
 
 	private:
 		QFile *configFile;
+		int exerciseID(const QString line, const int part);
 };
 
 int _lesson_sublesson_count(FILE *cr, int tsublesson);

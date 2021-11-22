@@ -33,6 +33,29 @@ bool configParser::open(const QString fileName)
 	return configFile->open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
+int configParser::exerciseID(const QString line, const int part)
+{
+	QString out = "";
+	int i, currentPart = 0;
+	for(i=0; i < line.count(); i++)
+	{
+		if(line[i] == '.')
+		{
+			currentPart++;
+			/*
+			 * 1: lesson ID
+			 * 2: sublesson ID
+			 * 3: exercise ID
+			 */
+			if(currentPart == part)
+				return out.toInt();
+			out = "";
+		}
+		out += line[i];
+	}
+	return 0;
+}
+
 int _lesson_count(FILE *cr)
 {
 	char c='\0';
