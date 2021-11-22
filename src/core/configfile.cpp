@@ -54,7 +54,7 @@ int configParser::exerciseID(const QString line, const int part)
 	int i, currentPart = 0;
 	for(i=0; i < line.count(); i++)
 	{
-		if(line[i] == '.')
+		if((line[i] == '.') || (line[i] == ' ') || (line[i] == ':'))
 		{
 			currentPart++;
 			/*
@@ -65,6 +65,7 @@ int configParser::exerciseID(const QString line, const int part)
 			if(currentPart == part)
 				return out.toInt();
 			out = "";
+			i++;
 		}
 		out += line[i];
 	}
