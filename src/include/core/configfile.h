@@ -18,14 +18,28 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
-#include <clocale>
+#ifndef CONFIGFILE_H
+#define CONFIGFILE_H
+
+#include <QObject>
+#include <QFile>
 #include <QString>
 #include "utils.h"
 
 #define _REPEAT_LIMIT 128
 
 int _lesson_count(FILE *cr);
+class configParser : public QObject
+{
+	Q_OBJECT
+	public:
+		explicit configParser(QObject *parent = nullptr);
+		bool open(const QString fileName);
+
+	private:
+		QFile *configFile;
+};
+
 int _lesson_sublesson_count(FILE *cr, int tsublesson);
 int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson);
 int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlevel);
@@ -37,3 +51,5 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel);
 // Write functions
 void _add_level(FILE *cr, int tlesson, int tsublesson, int tlevel, bool repeat, char *repeat_type, int limit_extension, int length_extension, char *desc, const char *level_text);
+
+#endif // CONFIGFILE_H

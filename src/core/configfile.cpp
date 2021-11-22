@@ -20,6 +20,19 @@
 
 #include "core/configfile.h"
 
+configParser::configParser(QObject *parent) :
+	QObject(parent)
+{
+	configFile = new QFile;
+}
+
+bool configParser::open(const QString fileName)
+{
+	configFile->close();
+	configFile->setFileName(fileName);
+	return configFile->open(QIODevice::ReadOnly | QIODevice::Text);
+}
+
 int _lesson_count(FILE *cr)
 {
 	char c='\0';
