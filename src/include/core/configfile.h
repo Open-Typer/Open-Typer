@@ -36,6 +36,7 @@ class configParser : public QObject
 		explicit configParser(QObject *parent = nullptr);
 		bool open(const QString fileName);
 		int lessonCount(void);
+		int sublessonCount(int lesson);
 
 	private:
 		QFile *configFile;
@@ -43,7 +44,7 @@ class configParser : public QObject
 };
 
 int _lesson_count(FILE *cr) __attribute__ ((deprecated));
-int _lesson_sublesson_count(FILE *cr, int tlesson);
+int _lesson_sublesson_count(FILE *cr, int tlesson) __attribute__ ((deprecated));
 int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson);
 int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlevel);
 char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson, int tlevel);

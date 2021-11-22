@@ -48,6 +48,25 @@ int configParser::lessonCount(void)
 	return lessonIDs.count();
 }
 
+int configParser::sublessonCount(int lesson)
+{
+	configFile->seek(0);
+	QTextStream fileStream(configFile);
+	QList<int> sublessonIDs;
+	while(!fileStream.atEnd())
+	{
+		QString line = fileStream.readLine();
+		int lessonID = exerciseID(line,1);
+		if(lessonID == lesson)
+		{
+			int sublessonID = exerciseID(line,2);
+			if(!sublessonIDs.contains(sublessonID))
+				sublessonIDs += sublessonID;
+		}
+	}
+	return sublessonIDs.count();
+}
+
 int configParser::exerciseID(const QString line, const int part)
 {
 	QString out = "";
