@@ -41,9 +41,6 @@ int _lesson_count(FILE *cr)
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config one line %d. (lesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_count()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -55,9 +52,6 @@ int _lesson_count(FILE *cr)
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (lesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		lesson=strtol(part,NULL,10);
@@ -73,9 +67,6 @@ int _lesson_count(FILE *cr)
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (sublesson ID, level ID or config)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		c='\0';
@@ -85,9 +76,6 @@ int _lesson_count(FILE *cr)
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level text)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		line++;
@@ -115,9 +103,6 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config one line %d. (lesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_count()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -129,9 +114,6 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (lesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		lesson=strtol(part,NULL,10);
@@ -147,9 +129,6 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config one line %d. (sublesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_count()\nD: Can't store more than 14 bytes in sublesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -161,9 +140,6 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		if(lesson == tlesson)
@@ -182,9 +158,6 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID or config)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		c='\0';
@@ -194,9 +167,6 @@ int _lesson_sublesson_count(FILE *cr, int tlesson)
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level text)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		line++;
@@ -222,9 +192,6 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (lesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_count()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -236,9 +203,6 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (lesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		lesson=strtol(part,NULL,10);
@@ -254,9 +218,6 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (sublesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_count()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -268,9 +229,6 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		sublesson=strtol(part,NULL,10);
@@ -281,9 +239,6 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID or config)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		if((lesson == tlesson) && (sublesson == tsublesson))
@@ -295,9 +250,6 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson)
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level text)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_count()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		line++;
@@ -326,9 +278,6 @@ int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlev
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (lesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -340,9 +289,6 @@ int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlev
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (lesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		lesson=strtol(part,NULL,10);
@@ -358,9 +304,6 @@ int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlev
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (sublesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -372,9 +315,6 @@ int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlev
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		sublesson=strtol(part,NULL,10);
@@ -389,9 +329,6 @@ int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlev
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (level ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in level ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -400,9 +337,6 @@ int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlev
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		level=strtol(part,NULL,10);
@@ -445,9 +379,6 @@ char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson,
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (lesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -459,9 +390,6 @@ char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson,
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (lesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		lesson=strtol(part,NULL,10);
@@ -477,9 +405,6 @@ char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson,
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (sublesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -491,9 +416,6 @@ char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson,
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		sublesson=strtol(part,NULL,10);
@@ -508,9 +430,6 @@ char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson,
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (level ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in level ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -519,9 +438,6 @@ char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson,
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		level=strtol(part,NULL,10);
@@ -577,9 +493,6 @@ char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson,
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level config)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		#ifdef DEBUG
@@ -627,9 +540,6 @@ int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesso
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (lesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -641,9 +551,6 @@ int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesso
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (lesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		lesson=strtol(part,NULL,10);
@@ -659,9 +566,6 @@ int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesso
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (sublesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -673,9 +577,6 @@ int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesso
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		sublesson=strtol(part,NULL,10);
@@ -690,9 +591,6 @@ int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesso
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (level ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in level ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -701,9 +599,6 @@ int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesso
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		level=strtol(part,NULL,10);
@@ -778,9 +673,6 @@ int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesso
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level config)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		#ifdef DEBUG
@@ -831,9 +723,6 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (lesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -845,9 +734,6 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (lesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		lesson=strtol(part,NULL,10);
@@ -863,9 +749,6 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (sublesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -877,9 +760,6 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		sublesson=strtol(part,NULL,10);
@@ -894,9 +774,6 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (level ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in level ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -905,9 +782,6 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		level=strtol(part,NULL,10);
@@ -981,9 +855,6 @@ int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsubless
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level config)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		#ifdef DEBUG
@@ -1031,9 +902,6 @@ char *_lesson_desc(FILE *cr, int tlesson)
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (lesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -1045,9 +913,6 @@ char *_lesson_desc(FILE *cr, int tlesson)
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (lesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		lesson=strtol(part,NULL,10);
@@ -1063,9 +928,6 @@ char *_lesson_desc(FILE *cr, int tlesson)
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (sublesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -1077,9 +939,6 @@ char *_lesson_desc(FILE *cr, int tlesson)
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		c='\0';
@@ -1093,9 +952,6 @@ char *_lesson_desc(FILE *cr, int tlesson)
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (level ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in level ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -1104,9 +960,6 @@ char *_lesson_desc(FILE *cr, int tlesson)
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		// Level config
@@ -1187,9 +1040,6 @@ char *_lesson_desc(FILE *cr, int tlesson)
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level config)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		c='\0';
@@ -1227,9 +1077,6 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (lesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -1241,9 +1088,6 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (lesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		lesson=strtol(part,NULL,10);
@@ -1259,9 +1103,6 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (sublesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -1273,9 +1114,6 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		sublesson=strtol(part,NULL,10);
@@ -1290,9 +1128,6 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (level ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in level ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -1301,9 +1136,6 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		level=strtol(part,NULL,10);
@@ -1359,9 +1191,6 @@ char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, in
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level config)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		#ifdef DEBUG
@@ -1415,9 +1244,6 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (lesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -1429,9 +1255,6 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (lesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		lesson=strtol(part,NULL,10);
@@ -1447,9 +1270,6 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (sublesson ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in lesson ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -1461,9 +1281,6 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 			if(lIDc == 1)
 				break;
 			printf("Invalid config on line %d. (sublesson ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		sublesson=strtol(part,NULL,10);
@@ -1478,9 +1295,6 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 				if(strlen(part) >= 15)
 				{
 					printf("Invalid config on line %d. (level ID length)\n",line+1);
-					#ifdef DEBUG
-					printf("D: Function: _lesson_sublesson_level_text()\nD: Can't store more than 14 bytes in level ID\n");
-					#endif
 					exit(2);
 				}
 				strncat(part,&c,1);
@@ -1489,9 +1303,6 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level ID)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		level=strtol(part,NULL,10);
@@ -1573,9 +1384,6 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 		if((signed char) c == EOF)
 		{
 			printf("Invalid config on line %d. (level config)\n",line+1);
-			#ifdef DEBUG
-			printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-			#endif
 			exit(2);
 		}
 		#ifdef DEBUG
@@ -1594,9 +1402,6 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 			if(text_repeat)
 			{
 				printf("Invalid config on line %d. (level config: repeat method)\n",line+1);
-				#ifdef DEBUG
-				printf("D: Function: _lesson_sublesson_level_text()\nD: Unknown repeat method '%s'\n",repeat_type_str);
-				#endif
 				exit(2);
 			}
 		}
@@ -1635,9 +1440,6 @@ char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tl
 			if((signed char) c == EOF)
 			{
 				printf("Invalid config on line %d. (level text)\n",line+1);
-				#ifdef DEBUG
-				printf("D: Function: _lesson_sublesson_level_text()\nD: Reached EOF\n");
-				#endif
 				exit(2);
 			}
 			if((lesson == tlesson) && (sublesson == tsublesson) && (level == tlevel))
