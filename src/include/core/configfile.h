@@ -23,24 +23,26 @@
 
 #include <QObject>
 #include <QFile>
+#include <QTextStream>
 #include <QString>
 #include "utils.h"
 
 #define _REPEAT_LIMIT 128
 
-int _lesson_count(FILE *cr);
 class configParser : public QObject
 {
 	Q_OBJECT
 	public:
 		explicit configParser(QObject *parent = nullptr);
 		bool open(const QString fileName);
+		int lessonCount(void);
 
 	private:
 		QFile *configFile;
 		int exerciseID(const QString line, const int part);
 };
 
+int _lesson_count(FILE *cr) __attribute__ ((deprecated));
 int _lesson_sublesson_count(FILE *cr, int tsublesson);
 int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson);
 int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlevel);

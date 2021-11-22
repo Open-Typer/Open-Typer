@@ -33,6 +33,20 @@ bool configParser::open(const QString fileName)
 	return configFile->open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
+int configParser::lessonCount(void)
+{
+	QTextStream fileStream(configFile);
+	QList<int> lessonIDs;
+	while(!fileStream.atEnd())
+	{
+		QString line = fileStream.readLine();
+		int lessonID = exerciseID(line,1);
+		if(!lessonIDs.contains(lessonID))
+			lessonIDs += lessonID;
+	}
+	return lessonIDs.count();
+}
+
 int configParser::exerciseID(const QString line, const int part)
 {
 	QString out = "";
