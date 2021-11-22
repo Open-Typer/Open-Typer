@@ -35,6 +35,7 @@ bool configParser::open(const QString fileName)
 
 int configParser::lessonCount(void)
 {
+	configFile->seek(0);
 	QTextStream fileStream(configFile);
 	QList<int> lessonIDs;
 	while(!fileStream.atEnd())
