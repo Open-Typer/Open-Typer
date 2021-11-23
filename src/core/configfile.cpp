@@ -188,7 +188,7 @@ int configParser::exerciseID(const QString line, const int part)
 	int i, currentPart = 0;
 	for(i=0; i < line.count(); i++)
 	{
-		if((line[i] == '.') || (line[i] == ' ') || (line[i] == ':'))
+		if((i+1 >= line.count()) || (line[i] == '.') || (line[i] == ' ') || (line[i] == ':'))
 		{
 			currentPart++;
 			/*
