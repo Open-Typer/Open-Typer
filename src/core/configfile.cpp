@@ -102,6 +102,27 @@ int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
 			return lineID;
 	}
+
+QString configParser::exerciseRepeatConfig(const QString line)
+{
+	QString out = "";
+	bool repeatConfigReached = false;
+	int i;
+	for(i=0; i < line.count(); i++)
+	{
+		if(line[i] == ':')
+			repeatConfigReached = true;
+		else if((i+1 >= line.count()) || (line[i] == ' ') || (line[i] == ';'))
+		{
+			return out;
+		}
+		else
+		{
+			if(repeatConfigReached)
+				out += line[i];
+		}
+	}
+	return "";
 }
 
 int configParser::exerciseID(const QString line, const int part)
