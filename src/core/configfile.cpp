@@ -117,6 +117,24 @@ bool configParser::exerciseRepeatBool(const QString config)
 	return "";
 }
 
+QString configParser::exerciseRepeatType(const QString config)
+{
+	QString out = "";
+	bool repeatTypeReached = false;
+	int i;
+	for(i=0; i < config.count(); i++)
+	{
+		if(config[i] == ',')
+			repeatTypeReached = true;
+		else
+		{
+			if(repeatTypeReached)
+				out += config[i];
+		}
+	}
+	return out;
+}
+
 QString configParser::exerciseRepeatConfig(const QString line)
 {
 	QString out = "";

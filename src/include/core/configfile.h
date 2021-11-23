@@ -44,6 +44,7 @@ class configParser : public QObject
 		QFile *configFile;
 		int exerciseID(const QString line, const int part);
 		bool exerciseRepeatBool(const QString config);
+		QString exerciseRepeatType(const QString config);
 		QString exerciseRepeatConfig(const QString line);
 };
 
