@@ -103,6 +103,20 @@ int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 			return lineID;
 	}
 
+bool configParser::exerciseRepeatBool(const QString config)
+{
+	QString out = "";
+	int i;
+	for(i=0; i < config.count(); i++)
+	{
+		if(config[i] == ',')
+			return (out == "1");
+		else
+			out += config[i];
+	}
+	return "";
+}
+
 QString configParser::exerciseRepeatConfig(const QString line)
 {
 	QString out = "";

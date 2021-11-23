@@ -43,6 +43,7 @@ class configParser : public QObject
 	private:
 		QFile *configFile;
 		int exerciseID(const QString line, const int part);
+		bool exerciseRepeatBool(const QString config);
 		QString exerciseRepeatConfig(const QString line);
 };
 
