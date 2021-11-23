@@ -90,6 +90,20 @@ int configParser::exerciseCount(int lesson, int sublesson)
 	return exerciseIDs.count();
 }
 
+int configParser::exerciseLine(int lesson, int sublesson, int exercise)
+{
+	configFile->seek(0);
+	QTextStream fileStream(configFile);
+	int lineID = 0;
+	while(!fileStream.atEnd())
+	{
+		lineID++;
+		QString line = fileStream.readLine();
+		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
+			return lineID;
+	}
+}
+
 int configParser::exerciseID(const QString line, const int part)
 {
 	QString out = "";
