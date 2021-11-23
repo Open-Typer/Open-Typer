@@ -102,6 +102,9 @@ int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
 			return lineID;
 	}
+	return 0;
+}
+
 bool configParser::exerciseRepeatBool(int lesson, int sublesson, int exercise)
 {
 	configFile->seek(0);
