@@ -40,6 +40,7 @@ class configParser : public QObject
 		int exerciseCount(int lesson, int sublesson);
 		int exerciseLine(int lesson, int sublesson, int exercise);
 		bool exerciseRepeatBool(int lesson, int sublesson, int exercise);
+		QString exerciseRepeatType(int lesson, int sublesson, int exercise);
 
 	private:
 		QFile *configFile;

@@ -115,6 +115,18 @@ bool configParser::exerciseRepeatBool(int lesson, int sublesson, int exercise)
 	return "";
 }
 
+QString configParser::exerciseRepeatType(int lesson, int sublesson, int exercise)
+{
+	configFile->seek(0);
+	QTextStream fileStream(configFile);
+	while(!fileStream.atEnd())
+	{
+		QString line = fileStream.readLine();
+		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
+			return exerciseRepeatType(exerciseRepeatConfig(line));
+	}
+	return "";
+}
 
 bool configParser::exerciseRepeatBool(const QString config)
 {
