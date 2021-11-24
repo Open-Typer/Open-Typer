@@ -227,7 +227,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		ui->lessonDescEdit->setText(lessonDesc);
 		// Repeat type
 		char *repeatType = _lesson_sublesson_level_repeat_type(targetFile,oldLesson+1,oldSublesson+1,oldExercise+1);
-		if((strcmp(repeatType,"w") == 0) || (strcmp(repeatType,"rw") == 0))
+		if((strcmp(repeatType,"w") == 0) || (strcmp(repeatType,"rw") == 0)) // Don't remove "rw", it's for old packs
 			ui->repeatingBox->setCurrentIndex(1);
 		else if(strcmp(repeatType,"s") == 0)
 			ui->repeatingBox->setCurrentIndex(2);
@@ -512,11 +512,7 @@ void packView::changeRepeating(int index)
 	switch(index) {
 		case 1:
 			// Words
-			if(sublesson == 2)
-				repeatType = (char*) "rw";
-			else
-				repeatType = (char*) "w";
-			break;
+			repeatType = (char*) "w";
 		// Obsolete
 		/*case 2:
 			// Strings
