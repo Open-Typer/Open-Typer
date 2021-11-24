@@ -154,7 +154,7 @@ int configParser::exerciseLineLength(int lesson, int sublesson, int exercise)
 		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
 			return exerciseAttribute(exerciseAttributes(line),1).toInt();
 	}
-	return defaultRepeatLimit;
+	return defaultLineLength;
 }
 
 bool configParser::exerciseRepeatBool(const QString config)

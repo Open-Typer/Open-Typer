@@ -36,6 +36,7 @@ class configParser : public QObject
 	public:
 		explicit configParser(QObject *parent = nullptr);
 		static const int defaultRepeatLimit = 128;
+		static const int defaultLineLength = 60;
 		bool open(const QString fileName);
 		int lessonCount(void);
 		int sublessonCount(int lesson);
