@@ -27,13 +27,15 @@
 #include <QString>
 #include "utils.h"
 
-#define _REPEAT_LIMIT 128
+#pragma message "TODO: Remove _REPEAT_LIMIT"
+#define _REPEAT_LIMIT 128 // deprecated
 
 class configParser : public QObject
 {
 	Q_OBJECT
 	public:
 		explicit configParser(QObject *parent = nullptr);
+		static const int defaultRepeatLimit = 128;
 		bool open(const QString fileName);
 		int lessonCount(void);
 		int sublessonCount(int lesson);
