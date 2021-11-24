@@ -144,6 +144,19 @@ int configParser::exerciseRepeatLimit(int lesson, int sublesson, int exercise)
 	return defaultRepeatLimit;
 }
 
+int configParser::exerciseLineLength(int lesson, int sublesson, int exercise)
+{
+	configFile->seek(0);
+	QTextStream fileStream(configFile);
+	while(!fileStream.atEnd())
+	{
+		QString line = fileStream.readLine();
+		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
+			return exerciseAttribute(exerciseAttributes(line),1).toInt();
+	}
+	return defaultRepeatLimit;
+}
+
 bool configParser::exerciseRepeatBool(const QString config)
 {
 	QString out = "";
