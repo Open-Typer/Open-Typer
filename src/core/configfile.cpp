@@ -172,17 +172,15 @@ QString configParser::exerciseRepeatConfig(const QString line)
 	{
 		if(line[i] == ':')
 			repeatConfigReached = true;
-		else if((i+1 >= line.count()) || (line[i] == ' ') || (line[i] == ';'))
-		{
+		else if((line[i] == ' ') || (line[i] == ';'))
 			return out;
-		}
 		else
 		{
 			if(repeatConfigReached)
 				out += line[i];
 		}
 	}
-	return "";
+	return out;
 }
 
 int configParser::exerciseID(const QString line, const int part)
@@ -191,7 +189,7 @@ int configParser::exerciseID(const QString line, const int part)
 	int i, currentPart = 0;
 	for(i=0; i < line.count(); i++)
 	{
-		if((i+1 >= line.count()) || (line[i] == '.') || (line[i] == ' ') || (line[i] == ':'))
+		if((line[i] == '.') || (line[i] == ' ') || (line[i] == ':'))
 		{
 			currentPart++;
 			/*
@@ -206,7 +204,10 @@ int configParser::exerciseID(const QString line, const int part)
 		}
 		out += line[i];
 	}
-	return 0;
+	if(currentPart+1 == part)
+		return out.toInt();
+	else
+		return 0;
 }
 
 int _lesson_count(FILE *cr)
