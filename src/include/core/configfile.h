@@ -43,6 +43,7 @@ class configParser : public QObject
 		int exerciseLine(int lesson, int sublesson, int exercise);
 		bool exerciseRepeatBool(int lesson, int sublesson, int exercise);
 		QString exerciseRepeatType(int lesson, int sublesson, int exercise);
+		int exerciseRepeatLimit(int lesson, int sublesson, int exercise);
 
 	private:
 		QFile *configFile;
@@ -60,8 +61,8 @@ int _lesson_sublesson_level_count(FILE *cr, int tlesson, int tsublesson) __attri
 int _lesson_sublesson_level_line(FILE *cr, int tlesson, int tsublesson, int tlevel) __attribute__ ((deprecated));
 char* _lesson_sublesson_level_repeat_type(FILE *cr, int tlesson, int tsublesson, int tlevel) __attribute__ ((deprecated));
 char *_lesson_desc(FILE *cr, int tlesson);
-int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesson, int tlevel);
 int _lesson_sublesson_level_length_extension(FILE *cr, int tlesson, int tsublesson, int tlevel);
+int _lesson_sublesson_level_limit_extension(FILE *cr, int tlesson, int tsublesson, int tlevel) __attribute__ ((deprecated));
 char* _lesson_sublesson_level_raw_text(FILE *cr, int tlesson, int tsublesson, int tlevel);
 char *_lesson_sublesson_level_text(FILE *cr, int tlesson, int tsublesson, int tlevel);
 // Write functions
