@@ -157,6 +157,23 @@ int configParser::exerciseLineLength(int lesson, int sublesson, int exercise)
 	return defaultLineLength;
 }
 
+QString configParser::lessonDesc(int lesson)
+{
+	configFile->seek(0);
+	QTextStream fileStream(configFile);
+	while(!fileStream.atEnd())
+	{
+		QString line = fileStream.readLine();
+		if(exerciseID(line,1) == lesson)
+		{
+			QString out = exerciseAttribute(exerciseAttributes(line),2);
+			if(out != "")
+				return out;
+		}
+	}
+	return "";
+}
+
 bool configParser::exerciseRepeatBool(const QString config)
 {
 	QString out = "";
