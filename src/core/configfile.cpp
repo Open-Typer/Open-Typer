@@ -163,7 +163,13 @@ bool configParser::exerciseRepeatBool(const QString config)
 	int i;
 	for(i=0; i < config.count(); i++)
 	{
-		if(config[i] == ',')
+		if(config[i] == '\\')
+		{
+			i++;
+			if(i < config.count())
+				out += config[i];
+		}
+		else if(config[i] == ',')
 			return (out == "1");
 		else
 			out += config[i];
@@ -178,7 +184,13 @@ QString configParser::exerciseRepeatType(const QString config)
 	int i;
 	for(i=0; i < config.count(); i++)
 	{
-		if(config[i] == ',')
+		if(config[i] == '\\')
+		{
+			i++;
+			if(i < config.count())
+				out += config[i];
+		}
+		else if(config[i] == ',')
 			repeatTypeReached = true;
 		else
 		{
@@ -196,7 +208,13 @@ QString configParser::exerciseRepeatConfig(const QString line)
 	int i;
 	for(i=0; i < line.count(); i++)
 	{
-		if(line[i] == ':')
+		if(line[i] == '\\')
+		{
+			i++;
+			if(i < line.count())
+				out += line[i];
+		}
+		else if(line[i] == ':')
 			repeatConfigReached = true;
 		else if((line[i] == ' ') || (line[i] == ';'))
 			return out;
@@ -215,7 +233,13 @@ QString configParser::exerciseAttribute(const QString config, const int id)
 	int i, currentID = 0;
 	for(i=0; i < config.count(); i++)
 	{
-		if(config[i] == ',')
+		if(config[i] == '\\')
+		{
+			i++;
+			if(i < config.count())
+				out += config[i];
+		}
+		else if(config[i] == ',')
 		{
 			if(currentID == id)
 				return out;
@@ -238,7 +262,13 @@ QString configParser::exerciseAttributes(const QString line)
 	int i;
 	for(i=0; i < line.count(); i++)
 	{
-		if(line[i] == ';')
+		if(line[i] == '\\')
+		{
+			i++;
+			if(i < line.count())
+				out += '\\' + line[i];
+		}
+		else if(line[i] == ';')
 			lengthConfigReached = true;
 		else if(line[i] == ' ')
 			return out;
@@ -257,20 +287,28 @@ int configParser::exerciseID(const QString line, const int part)
 	int i, currentPart = 0;
 	for(i=0; i < line.count(); i++)
 	{
-		if((line[i] == '.') || (line[i] == ' ') || (line[i] == ':'))
+		if(line[i] == '\\')
 		{
-			currentPart++;
-			/*
-			 * 1: lesson ID
-			 * 2: sublesson ID
-			 * 3: exercise ID
-			 */
-			if(currentPart == part)
-				return out.toInt();
-			out = "";
 			i++;
+			out += line[i];
 		}
-		out += line[i];
+		else
+		{
+			if((line[i] == '.') || (line[i] == ' ') || (line[i] == ':'))
+			{
+				currentPart++;
+				/*
+				 * 1: lesson ID
+				 * 2: sublesson ID
+				 * 3: exercise ID
+				 */
+				if(currentPart == part)
+					return out.toInt();
+				out = "";
+				i++;
+			}
+			out += line[i];
+		}
 	}
 	if(currentPart+1 == part)
 		return out.toInt();
