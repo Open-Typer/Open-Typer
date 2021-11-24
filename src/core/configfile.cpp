@@ -183,6 +183,26 @@ QString configParser::exerciseRepeatConfig(const QString line)
 	return out;
 }
 
+QString configParser::exerciseAttributes(const QString line)
+{
+	QString out = "";
+	bool lengthConfigReached = false;
+	int i;
+	for(i=0; i < line.count(); i++)
+	{
+		if(line[i] == ';')
+			lengthConfigReached = true;
+		else if(line[i] == ' ')
+			return out;
+		else
+		{
+			if(lengthConfigReached)
+				out += line[i];
+		}
+	}
+	return out;
+}
+
 int configParser::exerciseID(const QString line, const int part)
 {
 	QString out = "";

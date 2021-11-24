@@ -50,6 +50,7 @@ class configParser : public QObject
 		bool exerciseRepeatBool(const QString config);
 		QString exerciseRepeatType(const QString config);
 		QString exerciseRepeatConfig(const QString line);
+		QString exerciseAttributes(const QString line);
 };
 
 int _lesson_count(FILE *cr) __attribute__ ((deprecated));
