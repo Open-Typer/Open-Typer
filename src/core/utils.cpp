@@ -86,7 +86,17 @@ QString parseDesc(QString desc)
 			else if(desc[i] == '%')
 				out += '%';
 			// %b is reserved (it's used to separate 2 sets)
-			bracket=false;
+			if(desc[i] == 's')
+			{
+				if(!bracket)
+				{
+					out += '{';
+					bracket=true;
+				}
+				out += QObject::tr("Shift","Shift key");
+			}
+			else
+				bracket=false;
 		}
 		else
 		{
