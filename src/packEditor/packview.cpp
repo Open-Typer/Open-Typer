@@ -513,6 +513,7 @@ void packView::changeRepeating(int index)
 		case 1:
 			// Words
 			repeatType = (char*) "w";
+			break;
 		default:
 			// None
 			repeatType = (char*) "0";
