@@ -187,6 +187,26 @@ QString configParser::exerciseRawText(int lesson, int sublesson, int exercise)
 	return "";
 }
 
+QString configParser::exerciseText(int lesson, int sublesson, int exercise)
+{
+	configFile->seek(0);
+	QTextStream fileStream(configFile);
+	while(!fileStream.atEnd())
+	{
+		QString line = fileStream.readLine();
+		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
+		{
+			QString repeatConfig = exerciseRepeatConfig(line);
+			QString attributes = exerciseAttributes(line);
+			return generateText(exerciseRawText(line),
+				exerciseRepeatBool(repeatConfig),
+				exerciseRepeatType(repeatConfig),
+				exerciseAttribute(attributes,0).toInt());
+		}
+	}
+	return "";
+}
+
 bool configParser::exerciseRepeatBool(const QString config)
 {
 	QString out = "";
