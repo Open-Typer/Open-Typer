@@ -20,6 +20,19 @@
 
 #include "core/utils.h"
 
+int stringUtils::wordCount(QString str)
+{
+	int i, out = 0;
+	for(i=0; i < str.count(); i++)
+	{
+		if(str[i] == ' ')
+			out++;
+	}
+	if(str[i] != ' ')
+		out++;
+	return out;
+}
+
 bool int_array_contains(int arr[], int target, int count)
 {
 	int i;

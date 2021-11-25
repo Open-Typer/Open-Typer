@@ -26,8 +26,14 @@
 #include <windows.h>
 #endif
 
+class stringUtils
+{
+	public:
+		static int wordCount(QString str);
+};
+
 bool int_array_contains(int arr[], int target, int count);
-int _get_word_count(char *str);
+int _get_word_count(char *str) __attribute__ ((deprecated));
 char *_get_word(char *str, int id);
 QString getConfigLoc(void);
 QString parseDesc(QString desc);
