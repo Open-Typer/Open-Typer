@@ -555,6 +555,9 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		levelPos++;
 		displayPos++;
 		levelHits++;
+		// Count modifier keys
+		if(event->modifiers() != Qt::NoModifier)
+			levelHits++;
 	}
 	else
 	{
