@@ -58,6 +58,7 @@ class configParser : public QObject
 		QString exerciseAttribute(const QString config, const int id);
 		QString exerciseAttributes(const QString line);
 		QString exerciseRawText(const QString line);
+		QString generateText(QString rawText, bool repeat, QString repeatType, int repeatLimit);
 };
 
 int _lesson_count(FILE *cr) __attribute__ ((deprecated));

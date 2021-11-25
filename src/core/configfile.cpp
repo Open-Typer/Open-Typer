@@ -375,6 +375,38 @@ int configParser::exerciseID(const QString line, const int part)
 		return 0;
 }
 
+QString configParser::generateText(QString rawText, bool repeat, QString repeatType, int repeatLimit)
+{
+	if(repeat && (repeatType == "w")) // repeating words
+	{
+		if(rawText == "")
+			return "";
+		int i, words = stringUtils::wordCount(rawText);
+		QString out = "";
+		i = 1;
+		while(true)
+		{
+			QString nextWord = stringUtils::word(rawText,i);
+			int space = 0;
+			if(out.count() > 0)
+				space = 1; // for space between current text and new word
+			if((out.count() + space + nextWord.count()) <= repeatLimit)
+			{
+				if(space != 0)
+					out += ' ';
+				out += nextWord;
+			}
+			else
+				return out;
+			i++;
+			if(i > words)
+				i = 1;
+		}
+	}
+	else
+		return rawText;
+}
+
 int _lesson_count(FILE *cr)
 {
 	char c='\0';
