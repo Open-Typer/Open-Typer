@@ -892,4 +892,5 @@ void OpenTyper::changeLanguage(int index)
 	if(translator->load(targetLocale,QLatin1String("Open-Typer"),QLatin1String("_"),QLatin1String(":/res/lang")))
 		QCoreApplication::installTranslator(translator);
 	ui->retranslateUi(this);
+	refreshAll();
 }
