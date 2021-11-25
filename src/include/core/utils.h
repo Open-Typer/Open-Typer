@@ -33,11 +33,12 @@ class stringUtils
 {
 	public:
 		static int wordCount(QString str);
+		static QString word(QString str, int id);
 };
 
 bool int_array_contains(int arr[], int target, int count);
 int _get_word_count(char *str) __attribute__ ((deprecated));
-char *_get_word(char *str, int id);
+char *_get_word(char *str, int id) __attribute__ ((deprecated));
 QString getConfigLoc(void);
 QString parseDesc(QString desc);
 QString _sublesson_text(int id);

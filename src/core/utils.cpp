@@ -33,6 +33,27 @@ int stringUtils::wordCount(QString str)
 	return out;
 }
 
+QString stringUtils::word(QString str, int id)
+{
+	int i, cur = 0;
+	QString out = "";
+	for(i=0; i < str.count(); i++)
+	{
+		if((str[i] == ' ') || (i+1 == str.count()))
+		{
+			cur++;
+			if(i+1 == str.count())
+				out += str[i];
+			if(cur == id)
+				return out;
+			out = "";
+		}
+		else
+			out += str[i];
+	}
+	return "";
+}
+
 bool int_array_contains(int arr[], int target, int count)
 {
 	int i;
