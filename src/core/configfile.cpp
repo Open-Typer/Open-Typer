@@ -174,6 +174,19 @@ QString configParser::lessonDesc(int lesson)
 	return "";
 }
 
+QString configParser::exerciseRawText(int lesson, int sublesson, int exercise)
+{
+	configFile->seek(0);
+	QTextStream fileStream(configFile);
+	while(!fileStream.atEnd())
+	{
+		QString line = fileStream.readLine();
+		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
+			return exerciseRawText(line);
+	}
+	return "";
+}
+
 bool configParser::exerciseRepeatBool(const QString config)
 {
 	QString out = "";
@@ -292,6 +305,35 @@ QString configParser::exerciseAttributes(const QString line)
 		else
 		{
 			if(lengthConfigReached)
+				out += line[i];
+		}
+	}
+	return out;
+}
+
+QString configParser::exerciseRawText(const QString line)
+{
+	QString out = "";
+	bool textReached = false;
+	int i;
+	for(i=0; i < line.count(); i++)
+	{
+		if(line[i] == '\\')
+		{
+			i++;
+			if(i < line.count())
+			{
+				if(line[i] == '\n')
+					out += '\n';
+				else
+					out += line[i];
+			}
+		}
+		else if((line[i] == ' ') && !textReached)
+			textReached = true;
+		else
+		{
+			if(textReached)
 				out += line[i];
 		}
 	}
