@@ -18,6 +18,9 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <iostream>
 #include <QObject>
 #include <QString>
@@ -42,3 +45,5 @@ QString _init_level(QString level, int levelLengthExtension);
 #ifdef Q_OS_WINDOWS
 WCHAR* str_to_wcs(const char* str);
 #endif
+
+#endif // UTILS_H
