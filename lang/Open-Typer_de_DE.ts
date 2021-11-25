@@ -126,6 +126,11 @@
         <source>Sublesson</source>
         <translation>Unter Lektion</translation>
     </message>
+    <message>
+        <source>Shift</source>
+        <comment>Shift key</comment>
+        <translation>Shift</translation>
+    </message>
 </context>
 <context>
     <name>SimpleColorDialog</name>

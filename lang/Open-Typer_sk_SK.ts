@@ -130,32 +130,38 @@
         <translation>Neznámy balík</translation>
     </message>
     <message>
-        <location filename="../src/core/utils.cpp" line="92"/>
+        <location filename="../src/core/utils.cpp" line="85"/>
         <source>Revision</source>
         <translation>Opakovanie</translation>
     </message>
     <message>
-        <location filename="../src/core/utils.cpp" line="116"/>
+        <location filename="../src/core/utils.cpp" line="96"/>
+        <source>Shift</source>
+        <comment>Shift key</comment>
+        <translation>Shift</translation>
+    </message>
+    <message>
+        <location filename="../src/core/utils.cpp" line="119"/>
         <source>Touch</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/core/utils.cpp" line="119"/>
+        <location filename="../src/core/utils.cpp" line="122"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/core/utils.cpp" line="122"/>
+        <location filename="../src/core/utils.cpp" line="125"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/core/utils.cpp" line="125"/>
+        <location filename="../src/core/utils.cpp" line="128"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../src/core/utils.cpp" line="128"/>
+        <location filename="../src/core/utils.cpp" line="131"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
@@ -614,12 +620,12 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Dĺžka textu:</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="626"/>
+        <location filename="../src/packEditor/packview.cpp" line="617"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="626"/>
+        <location filename="../src/packEditor/packview.cpp" line="617"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
