@@ -342,6 +342,7 @@ void OpenTyper::levelFinalInit(void)
 	levelPos=0;
 	displayPos=0;
 	levelMistakes=0;
+	levelHits=0;
 	levelInProgress=false;
 	lastTime=0;
 	mistake=false;
@@ -553,6 +554,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		ui->inputLabel->setHtml(displayInput);
 		levelPos++;
 		displayPos++;
+		levelHits++;
 	}
 	else
 	{
@@ -596,7 +598,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		lastTime = levelTimer.elapsed()/1000;
 		levelSummary msgBox;
 		msgBox.setTotalTime(levelTimer.elapsed()/1000);
-		msgBox.setHits(levelPos*(60/(levelTimer.elapsed()/1000.0)));
+		msgBox.setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
 		msgBox.setMistakes(levelMistakes);
 		msgBox.setStyleSheet(styleSheet());
 		int ret = msgBox.exec();

@@ -66,7 +66,7 @@ public:
 	void startLevel(FILE *cr, int lesson, int sublesson, int level);
 	void levelFinalInit(void);
 	QString level, displayLevel, input, displayInput, publicConfigName;
-	int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, levelPos, displayPos, levelMistakes, levelLengthExtension;
+	int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, levelPos, displayPos, levelMistakes, levelHits, levelLengthExtension;
 	int sublessonListStart;
 	QElapsedTimer levelTimer;
 	bool levelInProgress, mistake, ignoreMistakeLabelAppend;
