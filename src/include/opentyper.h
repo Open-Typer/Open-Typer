@@ -91,7 +91,7 @@ public:
 	bool customLevelLoaded;
 	bool customConfig;
 	QTranslator *translator;
-	void refreshAll(void);
+	void refreshAll(bool setLang);
 
 private:
 	Ui::OpenTyper *ui;

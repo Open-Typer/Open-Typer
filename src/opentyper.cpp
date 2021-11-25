@@ -27,7 +27,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 {
 	ui->setupUi(this);
 	langMgr = new languageManager;
-	refreshAll();
+	refreshAll(true);
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	// Connect signals to slots
 	connectAll();
@@ -44,15 +44,18 @@ OpenTyper::~OpenTyper()
 	delete ui;
 }
 
-void OpenTyper::refreshAll(void)
+void OpenTyper::refreshAll(bool setLang)
 {
 	// Read config
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
 	// Set language
-	if(settings.value("main/language","").toString() == "")
-		changeLanguage(0);
-	else
-		changeLanguage(langMgr->boxItems.indexOf(settings.value("main/language","").toString()));
+	if(setLang)
+	{
+		if(settings.value("main/language","").toString() == "")
+			changeLanguage(0);
+		else
+			changeLanguage(langMgr->boxItems.indexOf(settings.value("main/language","").toString()));
+	}
 	// Config file (lesson pack) name
 	QString configName = settings.value("main/configfile","").toString(); // default: "" (empty QString)
 	if(configName == "")
@@ -414,7 +417,7 @@ void OpenTyper::openOptions(void)
 	optionsWin->init();
 	connect(optionsWin,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
 	optionsWin->exec();
-	refreshAll();
+	refreshAll(true);
 }
 
 void OpenTyper::lessonSelectionListIndexChanged(int index)
@@ -892,5 +895,5 @@ void OpenTyper::changeLanguage(int index)
 	if(translator->load(targetLocale,QLatin1String("Open-Typer"),QLatin1String("_"),QLatin1String(":/res/lang")))
 		QCoreApplication::installTranslator(translator);
 	ui->retranslateUi(this);
-	refreshAll();
+	refreshAll(false);
 }
