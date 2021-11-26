@@ -435,6 +435,27 @@ QString configParser::generateText(QString rawText, bool repeat, QString repeatT
 		return rawText;
 }
 
+bool configParser::addExercise(int lesson, int sublesson, int exercise, bool repeat, QString repeatType, int repeatLimit, int lineLength, QString desc, QString rawText)
+{
+	// Reopen for appending
+	if(!reopen(QIODevice::Append | QIODevice::Text))
+		return false;
+	// Add exercise line
+	configFile->write(QString(QString(lesson) + "." + QString(sublesson) + "." + QString(exercise) + ":").toUtf8());
+	if(repeat)
+		configFile->write("1");
+	else
+		configFile->write("0");
+	configFile->write(QString("," + repeatType + ";" + repeatLimit + "," + lineLength).toUtf8());
+	if(desc != "")
+		configFile->write(QString("," + desc).toUtf8());
+	configFile->write(QString(" " + rawText).toUtf8());
+	// Reopen for reading
+	if(!reopen(QIODevice::ReadOnly | QIODevice::Text)) // This shouldn't happen
+		return false;
+	return true;
+}
+
 int _lesson_count(FILE *cr)
 {
 	char c='\0';
