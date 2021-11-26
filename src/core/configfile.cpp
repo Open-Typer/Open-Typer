@@ -33,6 +33,14 @@ bool configParser::open(const QString fileName)
 	return configFile->open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
+bool configParser::reopen(QIODevice::OpenMode mode)
+{
+	if(configFile->fileName() == "")
+		return false;
+	configFile->close();
+	return configFile->open(mode);
+}
+
 int configParser::lessonCount(void)
 {
 	configFile->seek(0);

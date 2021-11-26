@@ -52,6 +52,7 @@ class configParser : public QObject
 
 	private:
 		QFile *configFile;
+		bool reopen(QIODevice::OpenMode mode);
 		int exerciseID(const QString line, const int part);
 		bool exerciseRepeatBool(const QString config);
 		QString exerciseRepeatType(const QString config);
