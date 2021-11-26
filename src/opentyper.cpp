@@ -106,7 +106,7 @@ void OpenTyper::refreshAll(bool setLang)
 	else
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
 	// Load config and start
-	char *configPath = loadConfig(configName);
+	QString configPath = loadConfig(configName);
 	if(configPath == NULL)
 		exit(1);
 	currentLesson = 1;
@@ -190,59 +190,48 @@ void OpenTyper::connectAll(void)
 	secLoop->start(1000);
 }
 
-char *OpenTyper::loadConfig(QString configName)
+QString OpenTyper::loadConfig(QString configName)
 {
 	// Returns config file name, which can be opened later.
 	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
-	char *configPath = (char*) "";
+	QString configPath = "";
 	if(customConfig)
-	{
-		configPath = (char*) malloc(strlen(configName.toStdString().c_str())+1);
-		strcpy(configPath,configName.toStdString().c_str());
-	}
+		configPath = configName;
 	else
 	{
 		QString configLoc = getConfigLoc();
-		configPath = (char*) malloc(strlen(configLoc.toStdString().c_str())+1+strlen(configName.toStdString().c_str())+1);
-		sprintf(configPath,"%s/%s",configLoc.toStdString().c_str(),configName.toStdString().c_str());
+		configPath = configLoc + "/" + configName;
 		// Create config directory if it doesn't exist
 		QDir configDir(configLoc);
 		if(!configDir.exists())
 			configDir.mkpath(configLoc);
 		// Extract selected config
-		chmod(configPath, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+		chmod(configPath.toStdString().c_str(), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 		QFile::remove(configPath);
 		QFile::copy(":/res/configs/"+configName,configPath);
 	}
-	// Open extracted config (just to check that everything is OK and to update lesson list)
-	errno=0;
-	FILE *configCheckFile;
-	#ifdef Q_OS_WINDOWS
-	configCheckFile = _wfopen(str_to_wcs(configPath),L"rb");
-	#else
-	configCheckFile = fopen(configPath,"rb");
-	#endif
-	if(errno != 0)
+	// Open selected config
+	parser = new configParser;
+	if(!parser->open(configPath))
 	{
 		QMessageBox errBox;
-		errBox.setText("Failed to read read configuration "+configName+": "+strerror(errno));
+		errBox.setText("Failed to read open pack " + configPath);
 		errBox.setStyleSheet(styleSheet());
 		errBox.exec();
 		// Select default configuration
 		configName = "sk_SK-QWERTZ-B1";
 		customConfig=false;
 		settings.setValue("main/customconfig",customConfig);
-		printf("%s\n",strerror(errno));
 		return loadConfig(configName);
 	}
 	// Update lessonSelectionList widget
 	ui->lessonSelectionList->clear();
 	QStringList lessons;
 	QString _lessonDesc;
-	int i, count = _lesson_count(configCheckFile);
+	int i, count = parser->lessonCount();
 	for(i=1; i <= count; i++)
 	{
-		_lessonDesc = parseDesc(_lesson_desc(configCheckFile,i));
+		_lessonDesc = parseDesc(parser->lessonDesc(i));
 		if(_lessonDesc == "")
 			lessons += tr("Lesson") + " " + QString::number(i);
 		else
@@ -250,7 +239,6 @@ char *OpenTyper::loadConfig(QString configName)
 				" " + _lessonDesc;
 	}
 	ui->lessonSelectionList->addItems(lessons);
-	fclose(configCheckFile);
 	if(customConfig)
 		configName = configPath;
 	// Save selected config to settings
@@ -278,13 +266,13 @@ int OpenTyper::_line_count(QString str)
 	return out;
 }
 
-void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
+void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 {
 	customLevelLoaded=false;
 	// Update selected lesson
 	ui->lessonSelectionList->setCurrentIndex(lessonID-1);
 	// Get sublesson count
-	sublessonCount = _lesson_sublesson_count(cr,lessonID);
+	sublessonCount = parser->sublessonCount(lessonID);
 	// Update sublesson list
 	// This must happen before level loading!
 	ui->sublessonSelectionList->clear();
@@ -292,7 +280,7 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	int i, i2=0;
 	for(i=1; i <= sublessonCount+i2; i++)
 	{
-		if(_lesson_sublesson_level_count(cr,lessonID,i) > 0)
+		if(parser->exerciseCount(lessonID,i) > 0)
 			sublessons += _sublesson_text(i);
 		else
 			i2++;
@@ -300,23 +288,22 @@ void OpenTyper::startLevel(FILE *cr, int lessonID, int sublessonID, int levelID)
 	sublessonListStart = i2;
 	// Check if -1 (last sublesson in current lesson) was passed
 	if(sublessonID == -1)
-		sublessonID = _lesson_sublesson_count(cr,lessonID);
+		sublessonID = parser->sublessonCount(lessonID);
 	// Check if -1 (last level in current sublesson) was passed
 	if(levelID == -1)
-		levelID = _lesson_sublesson_level_count(cr,lessonID,sublessonID+sublessonListStart);
+		levelID = parser->exerciseCount(lessonID,sublessonID+sublessonListStart);
 	ui->sublessonSelectionList->addItems(sublessons);
 	ui->sublessonSelectionList->setCurrentIndex(sublessonID-1);
 	// Load length extension
-	levelLengthExtension = _lesson_sublesson_level_length_extension(cr,lessonID,sublessonID+sublessonListStart,levelID);
+	levelLengthExtension = parser->exerciseLineLength(lessonID,sublessonID+sublessonListStart,levelID);
 	// Load level text
-	level = _lesson_sublesson_level_text(cr,
-		lessonID,
+	level = parser->exerciseText(lessonID,
 		sublessonID+sublessonListStart,
 		levelID);
 	// Get lesson count
-	lessonCount = _lesson_count(cr);
+	lessonCount = parser->lessonCount();
 	// Get level count (in current lesson)
-	levelCount = _lesson_sublesson_level_count(cr,lessonID,sublessonID+sublessonListStart);
+	levelCount = parser->exerciseCount(lessonID,sublessonID+sublessonListStart);
 	// Update level list
 	ui->levelSelectionList->clear();
 	QStringList levels;
@@ -360,14 +347,7 @@ void OpenTyper::levelFinalInit(void)
 
 void OpenTyper::repeatLevel(void)
 {
-	FILE *cr;
-	#ifdef Q_OS_WINDOWS
-	cr = _wfopen(str_to_wcs(loadConfig(publicConfigName)),L"rb");
-	#else
-	cr = fopen(loadConfig(publicConfigName),"rb");
-	#endif
-	startLevel(cr,currentLesson,currentSublesson,currentLevel);
-	fclose(cr);
+	startLevel(currentLesson,currentSublesson,currentLevel);
 }
 
 void OpenTyper::nextLevel(void)

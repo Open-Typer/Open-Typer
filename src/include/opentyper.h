@@ -62,8 +62,9 @@ class OpenTyper : public QMainWindow
 public:
 	OpenTyper(QWidget *parent = nullptr);
 	~OpenTyper();
-	char *loadConfig(QString configName);
-	void startLevel(FILE *cr, int lesson, int sublesson, int level);
+	configParser *parser;
+	QString loadConfig(QString configName);
+	void startLevel(int lesson, int sublesson, int level);
 	void levelFinalInit(void);
 	QString level, displayLevel, input, displayInput, publicConfigName;
 	int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, levelPos, displayPos, levelMistakes, levelHits, levelLengthExtension;
