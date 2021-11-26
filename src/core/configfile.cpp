@@ -403,6 +403,19 @@ int configParser::exerciseID(const QString line, const int part)
 		return 0;
 }
 
+QString configParser::lineOf(int lesson, int sublesson, int exercise)
+{
+	configFile->seek(0);
+	QTextStream fileStream(configFile);
+	while(!fileStream.atEnd())
+	{
+		QString line = fileStream.readLine();
+		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
+			return line;
+	}
+	return "";
+}
+
 QString configParser::generateText(QString rawText, bool repeat, QString repeatType, int repeatLimit)
 {
 	if(repeat && (repeatType == "w")) // repeating words
