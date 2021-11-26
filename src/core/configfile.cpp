@@ -115,54 +115,22 @@ int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 
 bool configParser::exerciseRepeatBool(int lesson, int sublesson, int exercise)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
-	while(!fileStream.atEnd())
-	{
-		QString line = fileStream.readLine();
-		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
-			return exerciseRepeatBool(exerciseRepeatConfig(line));
-	}
-	return "";
+	return exerciseRepeatBool(exerciseRepeatConfig(lineOf(lesson,sublesson,exercise)));
 }
 
 QString configParser::exerciseRepeatType(int lesson, int sublesson, int exercise)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
-	while(!fileStream.atEnd())
-	{
-		QString line = fileStream.readLine();
-		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
-			return exerciseRepeatType(exerciseRepeatConfig(line));
-	}
-	return "";
+	return exerciseRepeatType(exerciseRepeatConfig(lineOf(lesson,sublesson,exercise)));
 }
 
 int configParser::exerciseRepeatLimit(int lesson, int sublesson, int exercise)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
-	while(!fileStream.atEnd())
-	{
-		QString line = fileStream.readLine();
-		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
-			return exerciseAttribute(exerciseAttributes(line),0).toInt();
-	}
-	return defaultRepeatLimit;
+	return exerciseAttribute(exerciseAttributes(lineOf(lesson,sublesson,exercise)),0).toInt();
 }
 
 int configParser::exerciseLineLength(int lesson, int sublesson, int exercise)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
-	while(!fileStream.atEnd())
-	{
-		QString line = fileStream.readLine();
-		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
-			return exerciseAttribute(exerciseAttributes(line),1).toInt();
-	}
-	return defaultLineLength;
+	return exerciseAttribute(exerciseAttributes(lineOf(lesson,sublesson,exercise)),1).toInt();
 }
 
 QString configParser::lessonDesc(int lesson)
@@ -184,35 +152,18 @@ QString configParser::lessonDesc(int lesson)
 
 QString configParser::exerciseRawText(int lesson, int sublesson, int exercise)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
-	while(!fileStream.atEnd())
-	{
-		QString line = fileStream.readLine();
-		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
-			return exerciseRawText(line);
-	}
-	return "";
+	return exerciseRawText(lineOf(lesson,sublesson,exercise));
 }
 
 QString configParser::exerciseText(int lesson, int sublesson, int exercise)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
-	while(!fileStream.atEnd())
-	{
-		QString line = fileStream.readLine();
-		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
-		{
-			QString repeatConfig = exerciseRepeatConfig(line);
-			QString attributes = exerciseAttributes(line);
-			return generateText(exerciseRawText(line),
-				exerciseRepeatBool(repeatConfig),
-				exerciseRepeatType(repeatConfig),
-				exerciseAttribute(attributes,0).toInt());
-		}
-	}
-	return "";
+	QString line = lineOf(lesson,sublesson,exercise);
+	QString repeatConfig = exerciseRepeatConfig(line);
+	QString attributes = exerciseAttributes(line);
+	return generateText(exerciseRawText(line),
+		exerciseRepeatBool(repeatConfig),
+		exerciseRepeatType(repeatConfig),
+		exerciseAttribute(attributes,0).toInt());
 }
 
 bool configParser::exerciseRepeatBool(const QString config)
