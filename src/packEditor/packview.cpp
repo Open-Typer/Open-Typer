@@ -76,6 +76,15 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 	if(!configDir.exists())
 		configDir.mkpath(configLoc);
 	targetFileName = configLoc + "/editor" + QString::number(fileID) + ".tmp";
+	if(newFile)
+	{
+		// Create new temp file
+		QFile file(targetFileName);
+		file.open(QIODevice::WriteOnly);
+		file.close();
+	}
+	else
+		QFile::copy(path,targetFileName);
 	parser = new configParser;
 	if(!parser->open(targetFileName))
 	{
