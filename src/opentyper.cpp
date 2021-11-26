@@ -198,18 +198,7 @@ QString OpenTyper::loadConfig(QString configName)
 	if(customConfig)
 		configPath = configName;
 	else
-	{
-		QString configLoc = getConfigLoc();
-		configPath = configLoc + "/" + configName;
-		// Create config directory if it doesn't exist
-		QDir configDir(configLoc);
-		if(!configDir.exists())
-			configDir.mkpath(configLoc);
-		// Extract selected config
-		chmod(configPath.toStdString().c_str(), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-		QFile::remove(configPath);
-		QFile::copy(":/res/configs/"+configName,configPath);
-	}
+		configPath = ":/res/configs/" + configName;
 	// Open selected config
 	parser = new configParser;
 	if(!parser->open(configPath))
