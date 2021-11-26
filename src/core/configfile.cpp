@@ -45,6 +45,7 @@ int configParser::lessonCount(void)
 {
 	configFile->seek(0);
 	QTextStream fileStream(configFile);
+	fileStream.setCodec("UTF-8");
 	QList<int> lessonIDs;
 	while(!fileStream.atEnd())
 	{
@@ -60,6 +61,7 @@ int configParser::sublessonCount(int lesson)
 {
 	configFile->seek(0);
 	QTextStream fileStream(configFile);
+	fileStream.setCodec("UTF-8");
 	QList<int> sublessonIDs;
 	while(!fileStream.atEnd())
 	{
@@ -79,6 +81,7 @@ int configParser::exerciseCount(int lesson, int sublesson)
 {
 	configFile->seek(0);
 	QTextStream fileStream(configFile);
+	fileStream.setCodec("UTF-8");
 	QList<int> exerciseIDs;
 	while(!fileStream.atEnd())
 	{
@@ -102,6 +105,7 @@ int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 {
 	configFile->seek(0);
 	QTextStream fileStream(configFile);
+	fileStream.setCodec("UTF-8");
 	int lineID = 0;
 	while(!fileStream.atEnd())
 	{
@@ -137,6 +141,7 @@ QString configParser::lessonDesc(int lesson)
 {
 	configFile->seek(0);
 	QTextStream fileStream(configFile);
+	fileStream.setCodec("UTF-8");
 	while(!fileStream.atEnd())
 	{
 		QString line = fileStream.readLine();
@@ -358,6 +363,7 @@ QString configParser::lineOf(int lesson, int sublesson, int exercise)
 {
 	configFile->seek(0);
 	QTextStream fileStream(configFile);
+	fileStream.setCodec("UTF-8");
 	while(!fileStream.atEnd())
 	{
 		QString line = fileStream.readLine();
