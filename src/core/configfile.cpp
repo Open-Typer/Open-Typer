@@ -309,7 +309,7 @@ QString configParser::exerciseRawText(const QString line)
 			{
 				if(line[i] == '\n')
 					out += '\n';
-				else
+				else if(textReached)
 					out += line[i];
 			}
 		}
