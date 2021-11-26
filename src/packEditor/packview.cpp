@@ -70,7 +70,12 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 	saveFileName = path;
 	newFile = newf;
 	readOnly = rdonly;
-	targetFileName = getConfigLoc() + "/editor" + QString::number(fileID) + ".tmp";
+	QString configLoc = getConfigLoc();
+	// Create config directory if it doesn't exist
+	QDir configDir(configLoc);
+	if(!configDir.exists())
+		configDir.mkpath(configLoc);
+	targetFileName = configLoc + "/editor" + QString::number(fileID) + ".tmp";
 	targetFile = fopen(targetFileName.toStdString().c_str(),"w");
 	chmod(targetFileName.toStdString().c_str(), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if(targetFile == NULL)
