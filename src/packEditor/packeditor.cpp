@@ -94,7 +94,7 @@ void packEditor::openPrebuilt(void)
 	packSel.setStyleSheet(styleSheet());
 	if(packSel.exec() == QDialog::Accepted)
 	{
-		QString newFileName = getConfigLoc() + "/" + packSel.selectedConfig();
+		QString newFileName = ":res/configs/" + packSel.selectedConfig();
 		fileID++;
 		packView *newTab = new packView(this,fileID);
 		ui->fileTabWidget->addTab(newTab,newFileName);
