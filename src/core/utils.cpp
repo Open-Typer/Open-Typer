@@ -54,51 +54,6 @@ QString stringUtils::word(QString str, int id)
 	return "";
 }
 
-bool int_array_contains(int arr[], int target, int count)
-{
-	int i;
-	for(i=0; i < count; i++)
-	{
-		if(arr[i] == target)
-			return true;
-	}
-	return false;
-}
-int _get_word_count(char *str)
-{
-	unsigned int i;
-	int out=0;
-	for(i=0; i < strlen(str); i++)
-	{
-		if(str[i] == ' ')
-			out++;
-	}
-	if(str[i] != ' ')
-		out++;
-	return out;
-}
-char *_get_word(char *str, int id)
-{
-	unsigned int i;
-	int cur=0;
-	char *out = (char*) malloc(strlen(str)+1);
-	strcpy(out,"");
-	for(i=0; i < strlen(str); i++)
-	{
-		if((str[i] == ' ') || (i+1 == strlen(str)))
-		{
-			cur++;
-			if(i+1 == strlen(str))
-				strncat(out,&str[i],1);
-			if(cur == id)
-				return out;
-			strcpy(out,"");
-		}
-		else
-			strncat(out,&str[i],1);
-	}
-	return (char*) "";
-}
 QString getConfigLoc(void)
 {
 	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
@@ -205,13 +160,3 @@ QString _init_level(QString level, int levelLengthExtension)
 	}
 	return out;
 }
-#ifdef Q_OS_WINDOWS
-WCHAR* str_to_wcs(const char* str)
-{
-	size_t size = MultiByteToWideChar(CP_UTF8,0,str,-1,NULL,0)*sizeof(WCHAR)+2;
-	WCHAR* out = (WCHAR*) malloc(size);
-	wcscpy(out,L"");
-	MultiByteToWideChar(CP_UTF8,0,&str[0],-1,out,size);
-	return out;
-}
-#endif
