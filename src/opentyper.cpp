@@ -220,7 +220,7 @@ QString OpenTyper::loadConfig(QString configName)
 	int i, count = parser->lessonCount();
 	for(i=1; i <= count; i++)
 	{
-		_lessonDesc = parseDesc(parser->lessonDesc(i));
+		_lessonDesc = configParser::parseDesc(parser->lessonDesc(i));
 		if(_lessonDesc == "")
 			lessons += tr("Lesson") + " " + QString::number(i);
 		else

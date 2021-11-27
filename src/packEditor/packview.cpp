@@ -163,7 +163,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		if(newLesson && (i == count))
 			_lessonDesc = "";
 		else
-			_lessonDesc = parseDesc(parser->lessonDesc(i));
+			_lessonDesc = configParser::parseDesc(parser->lessonDesc(i));
 		if(_lessonDesc == "")
 			lessons += tr("Lesson") + " " + QString::number(i);
 		else
