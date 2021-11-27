@@ -43,7 +43,7 @@ keyboardOptions::keyboardOptions(QWidget *parent) :
 	}
 	ui->packList->addItems(items);
 	// Get current pack
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	// TODO: Detect default config
 	if(!settings.value("main/customconfig","false").toBool())
 		ui->packList->setCurrentItem(ui->packList->item(rawItems.indexOf(settings.value("main/configfile","sk_SK-QWERTZ-B1").toString())));
@@ -69,7 +69,7 @@ void keyboardOptions::openEditor(void)
 
 void keyboardOptions::changePack(int index)
 {
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("main/configfile",rawItems[index]);
 	settings.setValue("main/customconfig","false");
 }

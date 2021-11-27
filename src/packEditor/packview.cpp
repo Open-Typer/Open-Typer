@@ -70,7 +70,7 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 	saveFileName = path;
 	newFile = newf;
 	readOnly = rdonly;
-	QString configLoc = getConfigLoc();
+	QString configLoc = fileUtils::configLocation();
 	// Create config directory if it doesn't exist
 	QDir configDir(configLoc);
 	if(!configDir.exists())

@@ -23,7 +23,7 @@
 languageList::languageList(QWidget *parent) :
 	QListWidget(parent)
 {
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	clear();
 	langMgr = new languageManager;
 	addItems(langMgr->boxItems);
@@ -38,7 +38,7 @@ languageList::~languageList() { }
 
 void languageList::changeLanguage(int index)
 {
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	if(index == 0)
 		settings.setValue("main/language","");
 	else

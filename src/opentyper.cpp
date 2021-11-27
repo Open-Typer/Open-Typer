@@ -28,7 +28,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	ui->setupUi(this);
 	langMgr = new languageManager;
 	refreshAll(true);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	// Connect signals to slots
 	connectAll();
 	// Check for updates
@@ -47,7 +47,7 @@ OpenTyper::~OpenTyper()
 void OpenTyper::refreshAll(bool setLang)
 {
 	// Read config
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	// Set language
 	if(setLang)
 	{
@@ -193,7 +193,7 @@ void OpenTyper::connectAll(void)
 QString OpenTyper::loadConfig(QString configName)
 {
 	// Returns config file name, which can be opened later.
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	QString configPath = "";
 	if(customConfig)
 		configPath = configName;
@@ -413,7 +413,7 @@ void OpenTyper::levelSelectionListIndexChanged(int index)
 
 void OpenTyper::spaceNewlineCheckBoxChanged(bool checked)
 {
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	if(checked)
 		settings.setValue("main/spacenewline","true");
 	else
@@ -629,7 +629,7 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	ui->inputLabel->setFont(newFont);
 	ui->mistakeLabel->setFont(mistakeLabelFont);
 	// Save settings
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("theme/font",fontFamily);
 	settings.setValue("theme/fontsize",fontSize);
 	settings.setValue("theme/fontbold",fontBold);
@@ -771,7 +771,7 @@ void OpenTyper::updateTheme(void)
 	QFile darkSheet(":/dark-theme/style.qss");
 	QFile lightSheet(":/light-theme/style.qss");
 	char *paperStyleSheet, *panelStyleSheet;
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	switch(settings.value("theme/theme","0").toInt()) {
 		case 0:
 			// System (default)
@@ -834,7 +834,7 @@ void OpenTyper::openPack(void)
 		// Get selected file
 		QString openFileName = openDialog.selectedFiles()[0];
 		customConfig=true;
-		QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+		QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 		settings.setValue("main/customconfig",customConfig);
 		loadConfig(openFileName);
 		repeatLevel();

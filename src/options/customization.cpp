@@ -26,7 +26,7 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	ui(new Ui::customizationOptions)
 {
 	ui->setupUi(this);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	// Font
 	setFont(settings.value("theme/font","Courier").toString(),
 		settings.value("theme/fontsize","14").toInt(),
@@ -138,7 +138,7 @@ customizationOptions::~customizationOptions()
 
 void customizationOptions::init(void)
 {
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	ui->themeBox->setCurrentIndex(settings.value("theme/theme","0").toInt());
 	setColors();
 }
@@ -162,7 +162,7 @@ void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBo
 	ui->levelLabel->setFont(newFont);
 	ui->inputLabel->setFont(newFont);
 	// Save settings
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("theme/font",fontFamily);
 	settings.setValue("theme/fontsize",fontSize);
 	settings.setValue("theme/fontbold",fontBold);
@@ -176,7 +176,7 @@ void customizationOptions::changeFont(QFont font)
 	oldFont.setFamily(font.family());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("theme/font",font.family());
 }
 
@@ -186,7 +186,7 @@ void customizationOptions::changeFontSize(int size)
 	oldFont.setPointSize(size);
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("theme/fontsize",size);
 }
 
@@ -196,7 +196,7 @@ void customizationOptions::setBoldText(void)
 	oldFont.setBold(ui->boldTextBox->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("theme/fontbold",ui->boldTextBox->isChecked());
 }
 
@@ -206,7 +206,7 @@ void customizationOptions::setItalicText(void)
 	oldFont.setItalic(ui->italicTextBox->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("theme/fontitalic",ui->italicTextBox->isChecked());
 }
 
@@ -216,7 +216,7 @@ void customizationOptions::setUnderlineText(void)
 	oldFont.setUnderline(ui->underlineTextBox->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("theme/fontunderline",ui->underlineTextBox->isChecked());
 }
 
@@ -232,7 +232,7 @@ void customizationOptions::resetFont(void)
 
 void customizationOptions::saveColorSettings(void)
 {
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	// Level text
 	settings.setValue("theme/customleveltextcolor",customLevelTextColor);
 	settings.setValue("theme/leveltextred",levelTextRedColor);
@@ -344,7 +344,7 @@ void customizationOptions::updateTheme()
 	QFile darkSheet(":/dark-theme/style.qss");
 	QFile lightSheet(":/light-theme/style.qss");
 	char *paperStyleSheet;
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	switch(settings.value("theme/theme","0").toInt()) {
 		case 0:
 			// System (default)
@@ -501,7 +501,7 @@ void customizationOptions::resetBgPaperColors(void)
 
 void customizationOptions::changeTheme(int index)
 {
-	QSettings settings(getConfigLoc()+"/config.ini",QSettings::IniFormat);
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	settings.setValue("theme/theme",index);
 	updateTheme();
 	setColors();
