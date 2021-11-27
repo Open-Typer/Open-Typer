@@ -203,19 +203,19 @@ QString configParser::sublessonName(int id)
 {
 	switch(id) {
 		case 1:
-			return QObject::tr("Touch");
+			return tr("Touch");
 			break;
 		case 2:
-			return QObject::tr("Words");
+			return tr("Words");
 			break;
 		case 3:
-			return QObject::tr("Sentences");
+			return tr("Sentences");
 			break;
 		case 4:
-			return QObject::tr("Text");
+			return tr("Text");
 			break;
 		default:
-			return QObject::tr("Sublesson") + " " + QString::number(id);
+			return tr("Sublesson") + " " + QString::number(id);
 			break;
 	}
 }
