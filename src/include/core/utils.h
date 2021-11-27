@@ -33,9 +33,12 @@ class stringUtils
 		static QString word(QString str, int id);
 };
 
-class fileUtils { };
+class fileUtils
+{
+	public:
+		static QString configLocation(void);
+};
 
-QString getConfigLoc(void);
 QString parseDesc(QString desc);
 QString _sublesson_text(int id);
 QString _init_level(QString level, int levelLengthExtension);

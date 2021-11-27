@@ -54,10 +54,11 @@ QString stringUtils::word(QString str, int id)
 	return "";
 }
 
-QString getConfigLoc(void)
+QString fileUtils::configLocation(void)
 {
 	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
 }
+
 QString parseDesc(QString desc)
 {
 	QString out = "";
