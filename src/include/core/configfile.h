@@ -48,6 +48,7 @@ class configParser : public QObject
 		static QString sublessonName(int id);
 		QString exerciseRawText(int lesson, int sublesson, int exercise);
 		QString exerciseText(int lesson, int sublesson, int exercise);
+		static QString initExercise(QString exercise, int lineLength);
 		bool addExercise(int lesson, int sublesson, int exercise, bool repeat, QString repeatType, int repeatLimit, int lineLength, QString desc, QString rawText);
 
 	private:

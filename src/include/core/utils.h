@@ -39,6 +39,4 @@ class fileUtils
 		static QString configLocation(void);
 };
 
-QString _init_level(QString level, int levelLengthExtension);
-
 #endif // UTILS_H

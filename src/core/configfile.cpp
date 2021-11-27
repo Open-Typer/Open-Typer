@@ -236,6 +236,40 @@ QString configParser::exerciseText(int lesson, int sublesson, int exercise)
 		exerciseAttribute(attributes,0).toInt());
 }
 
+QString configParser::initExercise(QString exercise, int lineLength)
+{
+	int len, len2, i, line_pos=0;
+	QString out = "";
+	len = exercise.count();
+	QString word = "";
+	bool first_word=true;
+	for(i=0; i < len; i++)
+	{
+		if((exercise[i] == ' ') || (i+1 >= len))
+		{
+			if(i+1 >= len)
+				word += exercise[i];
+			len2 = word.count();
+			if(line_pos+len2 > lineLength)
+			{
+				out += '\n';
+				line_pos=0;
+			}
+			if(!first_word && (line_pos > 0))
+				out += ' ';
+			first_word=false;
+			out += word;
+			word = "";
+			if(!first_word)
+				line_pos++;
+			line_pos=line_pos+len2;
+		}
+		else
+			word += exercise[i];
+	}
+	return out;
+}
+
 bool configParser::exerciseRepeatBool(const QString config)
 {
 	QString out = "";
