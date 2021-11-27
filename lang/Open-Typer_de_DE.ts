@@ -107,26 +107,6 @@
         <translation>Erfolgreich geupdated.</translation>
     </message>
     <message>
-        <source>Touch</source>
-        <translation>Berühren</translation>
-    </message>
-    <message>
-        <source>Words</source>
-        <translation>Wörter</translation>
-    </message>
-    <message>
-        <source>Sentences</source>
-        <translation>Sätze</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Text</translation>
-    </message>
-    <message>
-        <source>Sublesson</source>
-        <translation>Unter Lektion</translation>
-    </message>
-    <message>
         <source>Shift</source>
         <comment>Shift key</comment>
         <translation>Shift</translation>
@@ -205,6 +185,29 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Change log is available at</source>
         <translation>Change log is verfügbar unter</translation>
+    </message>
+</context>
+<context>
+    <name>configParser</name>
+    <message>
+        <source>Touch</source>
+        <translation>Berühren</translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation>Wörter</translation>
+    </message>
+    <message>
+        <source>Sentences</source>
+        <translation>Sätze</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Sublesson</source>
+        <translation>Unter Lektion</translation>
     </message>
 </context>
 <context>
