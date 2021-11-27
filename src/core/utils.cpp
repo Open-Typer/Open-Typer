@@ -59,49 +59,6 @@ QString fileUtils::configLocation(void)
 	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
 }
 
-QString parseDesc(QString desc)
-{
-	QString out = "";
-	int i;
-	bool bracket=false;
-	for(i=0; i < desc.count(); i++)
-	{
-		if(desc[i] == '%')
-		{
-			i++;
-			if(bracket)
-				out += '}';
-			if(desc[i] == 'r')
-				out += QObject::tr("Revision");
-			else if(desc[i] == '%')
-				out += '%';
-			// %b is reserved (it's used to separate 2 sets)
-			if(desc[i] == 's')
-			{
-				if(!bracket)
-				{
-					out += '{';
-					bracket=true;
-				}
-				out += QObject::tr("Shift","Shift key");
-			}
-			else
-				bracket=false;
-		}
-		else
-		{
-			if(!bracket)
-			{
-				out += '{';
-				bracket=true;
-			}
-			out += desc[i];
-		}
-	}
-	if(bracket)
-		out += '}';
-	return out;
-}
 QString _sublesson_text(int id)
 {
 	switch(id) {

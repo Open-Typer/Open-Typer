@@ -39,7 +39,6 @@ class fileUtils
 		static QString configLocation(void);
 };
 
-QString parseDesc(QString desc);
 QString _sublesson_text(int id);
 QString _init_level(QString level, int levelLengthExtension);
 
