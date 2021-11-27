@@ -192,7 +192,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 	for(i=1; i <= sublessonCount+i2; i++)
 	{
 		if(parser->exerciseCount(oldLesson+1,i) > 0)
-			sublessons += _sublesson_text(i);
+			sublessons += configParser::sublessonName(i);
 		else
 		{
 			sublessons += " (" + tr("empty") + ")";

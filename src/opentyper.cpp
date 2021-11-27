@@ -270,7 +270,7 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 	for(i=1; i <= sublessonCount+i2; i++)
 	{
 		if(parser->exerciseCount(lessonID,i) > 0)
-			sublessons += _sublesson_text(i);
+			sublessons += configParser::sublessonName(i);
 		else
 			i2++;
 	}
