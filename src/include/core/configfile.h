@@ -27,9 +27,6 @@
 #include <QString>
 #include "utils.h"
 
-#pragma message "TODO: Remove _REPEAT_LIMIT"
-#define _REPEAT_LIMIT 128 // deprecated
-
 class configParser : public QObject
 {
 	Q_OBJECT
