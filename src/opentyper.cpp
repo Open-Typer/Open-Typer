@@ -311,7 +311,7 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 void OpenTyper::levelFinalInit(void)
 {
 	// Init level
-	displayLevel = _init_level(level,levelLengthExtension);
+	displayLevel = configParser::initExercise(level,levelLengthExtension);
 	ui->levelLabel->setText(displayLevel);
 	adjustSize();
 	setColors();

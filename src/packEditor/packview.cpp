@@ -431,7 +431,7 @@ void packView::updateText(void)
 void packView::restoreText(void)
 {
 	ui->levelLabel->setText(
-		_init_level(
+		configParser::initExercise(
 			parser->exerciseText(
 				ui->lessonSelectionBox->currentIndex()+1,
 				ui->sublessonSelectionBox->currentIndex()+1,
