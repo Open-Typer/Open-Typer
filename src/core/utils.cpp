@@ -59,26 +59,6 @@ QString fileUtils::configLocation(void)
 	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
 }
 
-QString _sublesson_text(int id)
-{
-	switch(id) {
-		case 1:
-			return QObject::tr("Touch");
-			break;
-		case 2:
-			return QObject::tr("Words");
-			break;
-		case 3:
-			return QObject::tr("Sentences");
-			break;
-		case 4:
-			return QObject::tr("Text");
-			break;
-		default:
-			return QObject::tr("Sublesson") + " " + QString::number(id);
-			break;
-	}
-}
 QString _init_level(QString level, int levelLengthExtension)
 {
 	int len, len2, i, line_pos=0;

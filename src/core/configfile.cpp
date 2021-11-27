@@ -199,6 +199,27 @@ QString configParser::parseDesc(QString desc)
 	return out;
 }
 
+QString configParser::sublessonName(int id)
+{
+	switch(id) {
+		case 1:
+			return QObject::tr("Touch");
+			break;
+		case 2:
+			return QObject::tr("Words");
+			break;
+		case 3:
+			return QObject::tr("Sentences");
+			break;
+		case 4:
+			return QObject::tr("Text");
+			break;
+		default:
+			return QObject::tr("Sublesson") + " " + QString::number(id);
+			break;
+	}
+}
+
 QString configParser::exerciseRawText(int lesson, int sublesson, int exercise)
 {
 	return exerciseRawText(lineOf(lesson,sublesson,exercise));
