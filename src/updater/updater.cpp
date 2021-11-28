@@ -35,10 +35,9 @@ Updater::~Updater() { }
 
 void Updater::initUpdate()
 {
-	versionH = (char*) malloc(1024);
-	strcpy(versionH,QString(versionHdw->downloadedData()).toStdString().c_str());
-	char *newVer = readVersion(versionH);
-	if(strcmp(newVer,_VERSION) != 0)
+	versionH = versionHdw->downloadedData();
+	QString newVer = readVersion(versionH);
+	if(newVer != _VERSION)
 	{
 		// New version found
 		UpdaterDialog dialog;
@@ -54,13 +53,13 @@ void Updater::initUpdate()
 				errBox.exec();
 				return;
 			}
-			const char *executable;
+			QString executable;
 			#ifdef _WIN32
 			executable = "Open-Typer.exe";
 			#else
 			executable = "Open-Typer-linux-amd64";
 			#endif
-			updatedProgram = new Downloader(QString(_GITHUB_REPO)+"/releases/download/v"+QString(newVer)+"/"+QString(executable),this);
+			updatedProgram = new Downloader(_GITHUB_REPO+QString("/releases/download/v")+newVer+"/"+executable,this);
 			connect(updatedProgram,SIGNAL(downloaded()),this,SLOT(overwriteExecutable()));
 			QMessageBox msgBox;
 			msgBox.setText(tr("Downloading update, please wait..."));
@@ -70,17 +69,16 @@ void Updater::initUpdate()
 	}
 }
 
-char *Updater::readVersion(const char *versionHeader)
+QString Updater::readVersion(const QString versionHeader)
 {
-	unsigned int i;
-	char *out = (char*) malloc(strlen(versionHeader));
-	strcpy(out,"");
+	int i;
+	QString out = "";
 	// #define _VERSION "1.0.0"
 	//                  ^ 18
-	for(i=18; i < strlen(versionHeader)-2; i++)
-		strncat(out,&versionHeader[i],1);
-	if(strcmp(out,"") == 0)
-		return (char*) _VERSION;
+	for(i=18; i < versionHeader.count()-2; i++)
+		out += versionHeader[i];
+	if(out == "")
+		return _VERSION;
 	return out;
 }
 

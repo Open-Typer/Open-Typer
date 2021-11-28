@@ -43,8 +43,8 @@ class Updater : public QObject
 	
 	private:
 		Downloader *versionHdw;
-		char *versionH;
-		char *readVersion(const char *versionHeader);
+		QString versionH;
+		QString readVersion(const QString versionHeader);
 		Downloader *updatedProgram;
 	
 	private slots:
