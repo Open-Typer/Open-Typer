@@ -102,7 +102,15 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 	{
 		QFile::remove(targetFileName);
 		QFile::copy(saveFileName,targetFileName);
-		chmod(targetFileName.toStdString().c_str(), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+		QFile::setPermissions(targetFileName,
+			QFileDevice::ReadOwner |
+			QFileDevice::WriteOwner |
+			QFileDevice::ReadUser |
+			QFileDevice::WriteUser |
+			QFileDevice::ReadGroup |
+			QFileDevice::WriteGroup |
+			QFileDevice::ReadOther |
+			QFileDevice::WriteOther);
 		refreshUi(false,false,false);
 		ui->lessonSelectionBox->setCurrentIndex(0);
 		refreshUi(false,false,false);
