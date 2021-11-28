@@ -41,6 +41,11 @@ bool configParser::reopen(QIODevice::OpenMode mode)
 	return configFile->open(mode);
 }
 
+void configParser::close(void)
+{
+	configFile->close();
+}
+
 int configParser::lessonCount(void)
 {
 	configFile->seek(0);
