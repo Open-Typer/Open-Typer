@@ -36,6 +36,7 @@ class configParser : public QObject
 		static const int defaultLineLength = 60;
 		bool open(const QString fileName);
 		void close(void);
+		QString fileName(void);
 		int lessonCount(void);
 		int sublessonCount(int lesson);
 		int exerciseCount(int lesson, int sublesson);

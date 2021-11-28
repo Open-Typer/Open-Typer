@@ -46,6 +46,11 @@ void configParser::close(void)
 	configFile->close();
 }
 
+QString configParser::fileName(void)
+{
+	return configFile->fileName();
+}
+
 int configParser::lessonCount(void)
 {
 	configFile->seek(0);
