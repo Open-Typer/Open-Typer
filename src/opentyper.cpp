@@ -843,6 +843,9 @@ void OpenTyper::openPack(void)
 
 void OpenTyper::openEditor(void)
 {
+	// Close pack file
+	QString oldFileName = parser->fileName();
+	parser->close();
 	// Hide main window
 	hide();
 	// Open editor
@@ -855,6 +858,8 @@ void OpenTyper::openEditor(void)
 	// Show main window
 	show();
 	activateWindow();
+	// Open pack file
+	parser->open(oldFileName);
 }
 
 void OpenTyper::changeLanguage(int index)
