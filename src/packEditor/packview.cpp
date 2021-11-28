@@ -366,7 +366,7 @@ void packView::deleteExerciseLine(int lesson, int sublesson, int level)
 void packView::changeLessonDesc(const QString rawLessonDesc)
 {
 	QString lessonDesc = "";
-	for(unsigned int i=0; i < rawLessonDesc.count(); i++)
+	for(int i=0; i < rawLessonDesc.count(); i++)
 	{
 		if((rawLessonDesc[i] == ',') || (rawLessonDesc[i] == ';') || (rawLessonDesc[i] == '\\'))
 			lessonDesc += "\\";
