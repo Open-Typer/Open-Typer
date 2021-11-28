@@ -356,18 +356,15 @@ void packView::deleteExerciseLine(int lesson, int sublesson, int level)
 
 void packView::changeLessonDesc(const QString rawLessonDesc)
 {
-	char *rawLessonDesc2 = (char*) malloc(rawLessonDesc.count()*2+1);
-	strcpy(rawLessonDesc2,rawLessonDesc.toStdString().c_str());
-	char *lessonDesc = (char*) malloc(strlen(rawLessonDesc2)*2+1);
-	strcpy(lessonDesc,"");
-	for(unsigned int i=0; i < strlen(rawLessonDesc2); i++)
+	QString lessonDesc = "";
+	for(unsigned int i=0; i < rawLessonDesc.count(); i++)
 	{
-		if((rawLessonDesc2[i] == ',') || (rawLessonDesc2[i] == ';') || (rawLessonDesc2[i] == '\\'))
-			strcat(lessonDesc,"\\");
-		if(rawLessonDesc2[i] == ' ')
-			strcat(lessonDesc,"%b");
+		if((rawLessonDesc[i] == ',') || (rawLessonDesc[i] == ';') || (rawLessonDesc[i] == '\\'))
+			lessonDesc += "\\";
+		if(rawLessonDesc[i] == ' ')
+			lessonDesc += "%b";
 		else
-			strncat(lessonDesc,&rawLessonDesc2[i],1);
+			lessonDesc += rawLessonDesc[i];
 	}
 	int sublessonCount = parser->sublessonCount(ui->lessonSelectionBox->currentIndex()+1);
 	int i, i2=0;
