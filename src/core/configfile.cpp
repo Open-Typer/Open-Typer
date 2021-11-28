@@ -528,7 +528,7 @@ bool configParser::addExercise(int lesson, int sublesson, int exercise, bool rep
 	configFile->write(QString("," + repeatType + ";" + QString::number(repeatLimit) + "," + QString::number(lineLength)).toUtf8());
 	if(desc != "")
 		configFile->write(QString("," + desc).toUtf8());
-	configFile->write(QString(" " + rawText).toUtf8());
+	configFile->write(QString(" " + rawText + '\n').toUtf8());
 	// Reopen for reading
 	if(!reopen(QIODevice::ReadOnly | QIODevice::Text)) // This shouldn't happen
 		return false;
