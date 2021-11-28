@@ -116,6 +116,7 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 
 bool packView::closeFile(void)
 {
+	parser->close();
 	if(!saved)
 	{
 		QFile saveQFile(saveFileName);
