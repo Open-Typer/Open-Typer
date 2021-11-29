@@ -38,4 +38,6 @@ class fileUtils
 		static QString configLocation(void);
 };
 
+class keyboardUtils { };
+
 #endif // UTILS_H
