@@ -24,9 +24,20 @@ inputLabelWidget::inputLabelWidget(QWidget *parent) :
 	QTextEdit(parent)
 {
 	parentWidget = parent;
+	setAttribute(Qt::WA_InputMethodEnabled,true);
 }
 
 inputLabelWidget::~inputLabelWidget() { }
+
+void inputLabelWidget::inputMethodEvent(QInputMethodEvent *event)
+{
+	if (!event->commitString().isEmpty())
+	{
+		QKeyEvent keyEvent(QEvent::KeyPress,0,Qt::NoModifier,event->commitString());
+		keyPressEvent(&keyEvent);
+	}
+	event->accept();
+}
 
 void inputLabelWidget::keyPressEvent(QKeyEvent *event)
 {

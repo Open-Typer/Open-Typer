@@ -24,6 +24,7 @@
 #include <QWidget>
 #include <QTextEdit>
 #include <QMainWindow>
+#include <QInputMethodEvent>
 
 class inputLabelWidget : public QTextEdit
 {
@@ -34,6 +35,7 @@ class inputLabelWidget : public QTextEdit
 		QWidget *parentWidget;
 
 	protected:
+		void inputMethodEvent(QInputMethodEvent *event);
 		void keyPressEvent(QKeyEvent *event);
 
 	signals:
