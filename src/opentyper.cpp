@@ -239,7 +239,7 @@ QString OpenTyper::loadConfig(QString configName)
 		ui->trainingPackNameLabel->setText(configQFileInfo.fileName());
 	}
 	else
-		ui->trainingPackNameLabel->setText(_pack_name(configName));
+		ui->trainingPackNameLabel->setText(builtinPacks::packName(configName));
 	publicConfigName = configName;
 	return configPath;
 }
