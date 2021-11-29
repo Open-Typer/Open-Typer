@@ -21,7 +21,6 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <iostream>
 #include <QObject>
 #include <QString>
 #include <QStandardPaths>
