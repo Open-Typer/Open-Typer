@@ -23,20 +23,14 @@
 
 #include <QMainWindow>
 #include <QWidget>
-#include <QLabel>
-#include <QString>
 #include <QMessageBox>
 #include <QSettings>
-#include <QDir>
 #include <QDialog>
-#include <QDirIterator>
 #include <QTimer>
-#include <QColorDialog>
 #include <QElapsedTimer>
 #include <QFileDialog>
 #include <QTextCursor>
 #include <QTranslator>
-#include <sys/stat.h>
 #include "widgets/inputlabel.h"
 #include "widgets/languagelist.h"
 #include "updater/updater.h"
