@@ -33,6 +33,7 @@ class inputLabelWidget : public QTextEdit
 		explicit inputLabelWidget(QWidget *parent = nullptr);
 		~inputLabelWidget();
 		QWidget *parentWidget;
+		static bool isDeadKey(int key);
 
 	protected:
 		void inputMethodEvent(QInputMethodEvent *event);

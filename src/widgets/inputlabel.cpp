@@ -29,6 +29,11 @@ inputLabelWidget::inputLabelWidget(QWidget *parent) :
 
 inputLabelWidget::~inputLabelWidget() { }
 
+bool inputLabelWidget::isDeadKey(int key)
+{
+	return ((key >= Qt::Key_Dead_Grave) && (key <= Qt::Key_Dead_Longsolidusoverlay));
+}
+
 void inputLabelWidget::inputMethodEvent(QInputMethodEvent *event)
 {
 	if (!event->commitString().isEmpty())
