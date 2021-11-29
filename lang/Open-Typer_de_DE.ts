@@ -96,7 +96,7 @@
     <name>QObject</name>
     <message>
         <source>Unknown pack</source>
-        <translation>Unbekanntes Paket</translation>
+        <translation type="vanished">Unbekanntes Paket</translation>
     </message>
     <message>
         <source>Revision</source>
@@ -185,6 +185,13 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Change log is available at</source>
         <translation>Change log is verfügbar unter</translation>
+    </message>
+</context>
+<context>
+    <name>builtinPacks</name>
+    <message>
+        <source>Unknown pack</source>
+        <translation>Unbekanntes Paket</translation>
     </message>
 </context>
 <context>

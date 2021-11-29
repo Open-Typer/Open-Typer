@@ -91,28 +91,28 @@
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="428"/>
+        <location filename="../src/opentyper.cpp" line="429"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="428"/>
-        <location filename="../src/opentyper.cpp" line="831"/>
+        <location filename="../src/opentyper.cpp" line="429"/>
+        <location filename="../src/opentyper.cpp" line="821"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="437"/>
+        <location filename="../src/opentyper.cpp" line="438"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="451"/>
+        <location filename="../src/opentyper.cpp" line="452"/>
         <source>Could not open the file.</source>
         <translation>Nepodarilo sa otvoriť súbor.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="831"/>
+        <location filename="../src/opentyper.cpp" line="821"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
@@ -125,17 +125,16 @@
         <translation>Úspešne aktualizované.</translation>
     </message>
     <message>
-        <location filename="../src/core/packs.cpp" line="31"/>
         <source>Unknown pack</source>
-        <translation>Neznámy balík</translation>
+        <translation type="vanished">Neznámy balík</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="171"/>
+        <location filename="../src/core/configfile.cpp" line="181"/>
         <source>Revision</source>
         <translation>Opakovanie</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="182"/>
+        <location filename="../src/core/configfile.cpp" line="192"/>
         <source>Shift</source>
         <comment>Shift key</comment>
         <translation>Shift</translation>
@@ -177,12 +176,12 @@
 <context>
     <name>Updater</name>
     <message>
-        <location filename="../src/updater/updater.cpp" line="53"/>
+        <location filename="../src/updater/updater.cpp" line="52"/>
         <source>Error: No internet connection.</source>
         <translation>Chyba: Žiadne pripojenie na internet.</translation>
     </message>
     <message>
-        <location filename="../src/updater/updater.cpp" line="66"/>
+        <location filename="../src/updater/updater.cpp" line="65"/>
         <source>Downloading update, please wait...</source>
         <translation>Aktualizácia sa sťahuje, čakajte prosím...</translation>
     </message>
@@ -233,29 +232,37 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
 </context>
 <context>
+    <name>builtinPacks</name>
+    <message>
+        <location filename="../src/core/packs.cpp" line="29"/>
+        <source>Unknown pack</source>
+        <translation>Neznámy balík</translation>
+    </message>
+</context>
+<context>
     <name>configParser</name>
     <message>
-        <location filename="../src/core/configfile.cpp" line="206"/>
+        <location filename="../src/core/configfile.cpp" line="216"/>
         <source>Touch</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="209"/>
+        <location filename="../src/core/configfile.cpp" line="219"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="212"/>
+        <location filename="../src/core/configfile.cpp" line="222"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="215"/>
+        <location filename="../src/core/configfile.cpp" line="225"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="218"/>
+        <location filename="../src/core/configfile.cpp" line="228"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
@@ -522,7 +529,7 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
     <message>
         <location filename="../ui/packEditor/packview.ui" line="383"/>
-        <location filename="../src/packEditor/packview.cpp" line="126"/>
+        <location filename="../src/packEditor/packview.cpp" line="135"/>
         <source>Save</source>
         <translation>Uložiť</translation>
     </message>
@@ -577,58 +584,58 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Chyba zápisu</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="125"/>
+        <location filename="../src/packEditor/packview.cpp" line="134"/>
         <source>Save changes to</source>
         <translation>Uložiť zmeny súboru</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="125"/>
+        <location filename="../src/packEditor/packview.cpp" line="134"/>
         <source>before closing?</source>
         <translation>pred zavretím?</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="127"/>
+        <location filename="../src/packEditor/packview.cpp" line="136"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="128"/>
+        <location filename="../src/packEditor/packview.cpp" line="137"/>
         <source>Close without saving</source>
         <translation>Zavrieť bez uloženia</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="168"/>
-        <location filename="../src/packEditor/packview.cpp" line="170"/>
+        <location filename="../src/packEditor/packview.cpp" line="177"/>
+        <location filename="../src/packEditor/packview.cpp" line="179"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="198"/>
+        <location filename="../src/packEditor/packview.cpp" line="207"/>
         <source>empty</source>
         <translation>prázdna</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="213"/>
+        <location filename="../src/packEditor/packview.cpp" line="222"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="293"/>
+        <location filename="../src/packEditor/packview.cpp" line="302"/>
         <source>New exercise</source>
         <translation>Nové cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="443"/>
+        <location filename="../src/packEditor/packview.cpp" line="449"/>
         <source>Text length:</source>
         <translation>Dĺžka textu:</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="586"/>
+        <location filename="../src/packEditor/packview.cpp" line="592"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="586"/>
+        <location filename="../src/packEditor/packview.cpp" line="592"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
