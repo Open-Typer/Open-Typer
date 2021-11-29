@@ -24,7 +24,6 @@
 #include <QWidget>
 #include <QListWidget>
 #include <QSettings>
-#include "opentyper.h"
 #include "core/utils.h"
 #include "core/language.h"
 
