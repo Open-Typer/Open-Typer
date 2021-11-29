@@ -67,6 +67,7 @@ public:
 	void levelFinalInit(void);
 	QString level, displayLevel, input, displayInput, publicConfigName;
 	int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, levelPos, displayPos, levelMistakes, levelHits, levelLengthExtension;
+	int deadKeys;
 	int sublessonListStart;
 	QElapsedTimer levelTimer;
 	bool levelInProgress, mistake, ignoreMistakeLabelAppend;

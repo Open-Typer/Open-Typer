@@ -319,6 +319,7 @@ void OpenTyper::levelFinalInit(void)
 	displayPos=0;
 	levelMistakes=0;
 	levelHits=0;
+	deadKeys=0;
 	levelInProgress=false;
 	lastTime=0;
 	mistake=false;
@@ -470,6 +471,14 @@ void OpenTyper::openExerciseFromFile(void)
 
 void OpenTyper::keyPress(QKeyEvent *event)
 {
+	if(keyboardUtils::isDeadKey(event->key()))
+	{
+		deadKeys++;
+		// Count modifier key used with the dead key
+		if(event->modifiers() != Qt::NoModifier)
+			deadKeys++;
+		return;
+	}
 	if(keyboardUtils::isSpecialKey(event) && (event->key() != Qt::Key_Backspace))
 		return;
 	if(levelPos == 0)
@@ -504,6 +513,9 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		// Count modifier keys
 		if(event->modifiers() != Qt::NoModifier)
 			levelHits++;
+		// Count dead keys
+		levelHits += deadKeys;
+		deadKeys = 0;
 	}
 	else
 	{
@@ -537,6 +549,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 				mistake=true;
+				deadKeys = 0;
 			}
 		}
 	}
