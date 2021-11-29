@@ -20,13 +20,11 @@
 
 #include "core/packs.h"
 
-QString _pack_name(QString rawName)
+QString builtinPacks::packName(QString rawName)
 {
 	// Human-readable built-in pack names
 	if(rawName == "sk_SK-QWERTZ-B1")
-	{
 		return "SK QWERTZ (ADK) [BETA]";
-	}
 	else
-		return QObject::tr("Unknown pack");
+		return tr("Unknown pack");
 }
