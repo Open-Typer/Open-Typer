@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QString>
 #include <QStandardPaths>
+#include <QKeyEvent>
 
 class stringUtils
 {
@@ -38,6 +39,10 @@ class fileUtils
 		static QString configLocation(void);
 };
 
-class keyboardUtils { };
+class keyboardUtils
+{
+	public:
+		static bool isSpecialKey(QKeyEvent *event);
+};
 
 #endif // UTILS_H

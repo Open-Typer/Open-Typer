@@ -24,7 +24,6 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QLabel>
-#include <QKeyEvent>
 #include <QString>
 #include <QMessageBox>
 #include <QSettings>
@@ -73,7 +72,6 @@ public:
 	bool levelInProgress, mistake, ignoreMistakeLabelAppend;
 	QString inputLabelHtml, mistakeLabelHtml;
 	int lastTime;
-	bool isSpecialKey(QKeyEvent *event);
 	int _line_count(QString str);
 	Updater *versionHdw;
 	void autoUpdate(void);

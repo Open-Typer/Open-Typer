@@ -58,3 +58,26 @@ QString fileUtils::configLocation(void)
 {
 	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
 }
+
+bool keyboardUtils::isSpecialKey(QKeyEvent *event)
+{
+	if(event->text() == "")
+		return true;
+	switch(event->key()) {
+		case Qt::Key_Delete:
+			return true;
+			break;
+		case Qt::Key_Backspace:
+			return true;
+			break;
+		case Qt::Key_Backtab:
+			return true;
+			break;
+		case Qt::Key_Escape:
+			return true;
+			break;
+		default:
+			return false;
+			break;
+	}
+}

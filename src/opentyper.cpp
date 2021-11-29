@@ -468,32 +468,9 @@ void OpenTyper::openExerciseFromFile(void)
 	}
 }
 
-bool OpenTyper::isSpecialKey(QKeyEvent *event)
-{
-	if(event->text() == "")
-		return true;
-	switch(event->key()) {
-		case Qt::Key_Delete:
-			return true;
-			break;
-		case Qt::Key_Backspace:
-			return true;
-			break;
-		case Qt::Key_Backtab:
-			return true;
-			break;
-		case Qt::Key_Escape:
-			return true;
-			break;
-		default:
-			return false;
-			break;
-	}
-}
-
 void OpenTyper::keyPress(QKeyEvent *event)
 {
-	if(isSpecialKey(event) && (event->key() != Qt::Key_Backspace))
+	if(keyboardUtils::isSpecialKey(event) && (event->key() != Qt::Key_Backspace))
 		return;
 	if(levelPos == 0)
 	{
@@ -546,7 +523,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		}
 		else
 		{
-			if(!isSpecialKey(event))
+			if(!keyboardUtils::isSpecialKey(event))
 			{
 				ui->inputLabel->setHtml(displayInput);
 				QString errorAppend;
