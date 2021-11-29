@@ -22,7 +22,6 @@
 #define OPTIONSWINDOW_H
 
 #include <QDialog>
-#include <QTranslator>
 #include "options/keyboard.h"
 #include "options/customization.h"
 #include "widgets/languagelist.h"
