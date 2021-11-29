@@ -25,7 +25,6 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QFileDialog>
-#include <sys/stat.h>
 #include "packEditor/packeditor.h"
 #include "core/utils.h"
 #include "core/configfile.h"
