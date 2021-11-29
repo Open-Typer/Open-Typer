@@ -38,6 +38,7 @@ class inputLabelWidget : public QTextEdit
 	protected:
 		void inputMethodEvent(QInputMethodEvent *event);
 		void keyPressEvent(QKeyEvent *event);
+		void keyReleaseEvent(QKeyEvent *event);
 
 	signals:
 		void keyPressed(QKeyEvent *event);
