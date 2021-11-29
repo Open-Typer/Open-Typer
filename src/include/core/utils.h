@@ -43,6 +43,7 @@ class keyboardUtils
 {
 	public:
 		static bool isSpecialKey(QKeyEvent *event);
+		static bool isDeadKey(int key);
 };
 
 #endif // UTILS_H

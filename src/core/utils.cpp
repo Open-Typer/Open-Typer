@@ -81,3 +81,8 @@ bool keyboardUtils::isSpecialKey(QKeyEvent *event)
 			break;
 	}
 }
+
+bool keyboardUtils::isDeadKey(int key)
+{
+	return ((key >= Qt::Key_Dead_Grave) && (key <= Qt::Key_Dead_Longsolidusoverlay));
+}
