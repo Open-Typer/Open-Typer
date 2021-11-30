@@ -262,22 +262,26 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 	ui->lessonSelectionList->setCurrentIndex(lessonID-1);
 	// Get sublesson count
 	sublessonCount = parser->sublessonCount(lessonID);
+	// Check if -1 (last sublesson in current lesson) was passed
+	if(sublessonID == -1)
+		sublessonID = sublessonCount;
 	// Update sublesson list
 	// This must happen before level loading!
 	ui->sublessonSelectionList->clear();
 	QStringList sublessons;
+	sublessonListStart = 0;
 	int i, i2=0;
 	for(i=1; i <= sublessonCount+i2; i++)
 	{
 		if(parser->exerciseCount(lessonID,i) > 0)
 			sublessons += configParser::sublessonName(i);
 		else
+		{
 			i2++;
+			if(sublessonID+i2 > i)
+				sublessonListStart++;
+		}
 	}
-	sublessonListStart = i2;
-	// Check if -1 (last sublesson in current lesson) was passed
-	if(sublessonID == -1)
-		sublessonID = parser->sublessonCount(lessonID);
 	// Check if -1 (last level in current sublesson) was passed
 	if(levelID == -1)
 		levelID = parser->exerciseCount(lessonID,sublessonID+sublessonListStart);
