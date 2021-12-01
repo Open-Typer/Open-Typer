@@ -38,6 +38,7 @@ void optionsWindow::setupList(void)
 	QStringList optionLabels;
 	// List of options
 	optionLabels += tr("Language");
+	optionLabels += tr("Behavior");
 	optionLabels += tr("Keyboard");
 	optionLabels += tr("Customization");
 	ui->list->addItems(optionLabels);
@@ -63,13 +64,21 @@ void optionsWindow::changeOptionWidget(int index)
 			break;
 		case 1:
 			{
+				// Behavior
+				behaviorOptions *options = new behaviorOptions;
+				options->setStyleSheet(styleSheet());
+				ui->currentOptions->setWidget(options);
+			}
+			break;
+		case 2:
+			{
 				// Keyboard
 				keyboardOptions *options = new keyboardOptions;
 				options->setStyleSheet(styleSheet());
 				ui->currentOptions->setWidget(options);
 			}
 			break;
-		case 2:
+		case 3:
 			{
 				// Customization
 				customizationOptions *options = new customizationOptions;

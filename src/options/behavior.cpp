@@ -1,5 +1,5 @@
 /*
- * optionswindow.h
+ * behavior.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021 - adazem009
@@ -18,40 +18,17 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef OPTIONSWINDOW_H
-#define OPTIONSWINDOW_H
-
-#include <QDialog>
 #include "options/behavior.h"
-#include "options/keyboard.h"
-#include "options/customization.h"
-#include "widgets/languagelist.h"
+#include "ui_behavior.h"
 
-namespace Ui {
-	class optionsWindow;
+behaviorOptions::behaviorOptions(QWidget *parent) :
+	QWidget(parent),
+	ui(new Ui::behaviorOptions)
+{
+	ui->setupUi(this);
 }
 
-class optionsWindow : public QDialog
+behaviorOptions::~behaviorOptions()
 {
-	Q_OBJECT
-	public:
-		explicit optionsWindow(QWidget *parent = nullptr);
-		~optionsWindow();
-		void init(void);
-
-	private:
-		Ui::optionsWindow *ui;
-		void setupList(void);
-
-	protected:
-		void changeEvent(QEvent *event);
-
-	signals:
-		void languageChanged(int index);
-
-	private slots:
-		void changeOptionWidget(int index);
-		void changeLanguage(int);
-};
-
-#endif // OPTIONSWINDOW_H
+	delete ui;
+}

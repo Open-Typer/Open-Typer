@@ -25,6 +25,7 @@ SOURCES += \
     src/core/packs.cpp \
     src/core/language.cpp \
     src/levelsummary.cpp \
+    src/options/behavior.cpp \
     src/options/customization.cpp \
     src/options/keyboard.cpp \
     src/options/optionswindow.cpp \
@@ -47,6 +48,7 @@ HEADERS += \
     src/include/core/packs.h \
     src/include/core/language.h \
     src/include/levelsummary.h \
+    src/include/options/behavior.h \
     src/include/options/customization.h \
     src/include/options/keyboard.h \
     src/include/options/optionswindow.h \
@@ -63,6 +65,7 @@ HEADERS += \
     src/include/widgets/languagelist.h
 
 FORMS += \
+    ui/options/behavior.ui \
     ui/options/customization.ui \
     ui/options/keyboard.ui \
     ui/levelsummary.ui \
