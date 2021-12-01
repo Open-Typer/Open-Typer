@@ -63,9 +63,7 @@ void SimpleColorDialog::setColor(int r, int g, int b)
 
 void SimpleColorDialog::updateColor(void)
 {
-	char *styleSheet = (char*) malloc(128);
-	sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",redColor,greenColor,blueColor);
-	ui->colorFrame->setStyleSheet(styleSheet);
+	ui->colorFrame->setStyleSheet("background-color: rgb(" + QString::number(redColor) + ", " + QString::number(greenColor) + ", " + QString::number(blueColor) + ")");
 	ui->redBox->setValue(redColor);
 	ui->greenBox->setValue(greenColor);
 	ui->blueBox->setValue(blueColor);
