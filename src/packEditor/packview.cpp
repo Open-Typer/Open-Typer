@@ -329,7 +329,7 @@ void packView::changeExercisePos(QString lessonDesc, int lesson, int sublesson, 
 	lengthExt = parser->exerciseLineLength(lesson,sublesson,level);
 	QString repeatType = parser->exerciseRepeatType(lesson,sublesson,level);
 	if(nlevel != 1)
-		lessonDesc = (char*) "";
+		lessonDesc = "";
 	QString targetText = parser->exerciseRawText(lesson,sublesson,level);
 	deleteExerciseLine(lesson,sublesson,level);
 	bool repeat;
