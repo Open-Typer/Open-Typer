@@ -268,14 +268,9 @@ void customizationOptions::setColors()
 	ui->paper->setStyleSheet("");
 	// Update theme
 	updateTheme();
-	char *styleSheet;
 	// Set level text color
 	if(customLevelTextColor)
-	{
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"color: rgb(%d, %d, %d)",levelTextRedColor,levelTextGreenColor,levelTextBlueColor);
-		ui->levelLabel->setStyleSheet(styleSheet);
-	}
+		ui->levelLabel->setStyleSheet("color: rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + ")");
 	else
 	{
 		// Default level text color
@@ -286,28 +281,18 @@ void customizationOptions::setColors()
 	}
 	// Set input text color
 	if(customInputTextColor)
-	{
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"color: rgb(%d, %d, %d)",inputTextRedColor,inputTextGreenColor,inputTextBlueColor);
-		ui->inputLabel->setStyleSheet(styleSheet);
-	}
+		ui->inputLabel->setStyleSheet("color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")");
 	else
 	{
 		// Default input text color
 		inputTextRedColor = ui->inputLabel->palette().color(QPalette::Text).red();
 		inputTextGreenColor = ui->inputLabel->palette().color(QPalette::Text).green();
 		inputTextBlueColor = ui->inputLabel->palette().color(QPalette::Text).blue();
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"color: rgb(%d, %d, %d)",inputTextRedColor,inputTextGreenColor,inputTextBlueColor);
-		ui->inputLabel->setStyleSheet(styleSheet);
+		ui->inputLabel->setStyleSheet("color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")");
 	}
 	// Set paper color
 	if(customPaperColor)
-	{
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",paperRedColor,paperGreenColor,paperBlueColor);
-		ui->paper->setStyleSheet(styleSheet);
-	}
+		ui->paper->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ")");
 	else
 	{
 		// Reset background color before setting paper color
@@ -316,20 +301,14 @@ void customizationOptions::setColors()
 		paperRedColor = ui->paper->palette().color(QPalette::Base).red();
 		paperGreenColor = ui->paper->palette().color(QPalette::Base).green();
 		paperBlueColor = ui->paper->palette().color(QPalette::Base).blue();
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",paperRedColor,paperGreenColor,paperBlueColor);
-		ui->paper->setStyleSheet(styleSheet);
+		ui->paper->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ")");
 		// Fix inputLabel automatically set background color
 		ui->inputLabel->setStyleSheet(
 			ui->inputLabel->styleSheet() + ";\nbackground-color: rgba(0,0,0,0)");
 	}
 	// Set background color
 	if(customBgColor)
-	{
-		styleSheet = (char*) malloc(128);
-		sprintf(styleSheet,"background-color: rgb(%d, %d, %d)",bgRedColor,bgGreenColor,bgBlueColor);
-		ui->previewFrame->setStyleSheet(styleSheet);
-	}
+		ui->previewFrame->setStyleSheet("background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ")");
 	else
 	{
 		// Default background color
