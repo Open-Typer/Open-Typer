@@ -723,7 +723,7 @@ void OpenTyper::setColors(void)
 	{
 		ui->controlFrame->setStyleSheet("QFrame { background-color: rgb(" +
 			QString::number(panelRedColor) + ", " + QString::number(panelGreenColor) + ", " + QString::number(panelBlueColor) +
-			"); } QCheckBox { background-color: rgb()" +
+			"); } QCheckBox { background-color: rgb(" +
 			QString::number(panelRedColor) + ", " + QString::number(panelGreenColor) + ", " + QString::number(panelBlueColor) + "); }");
 	}
 	// Set background color
