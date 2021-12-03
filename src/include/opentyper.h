@@ -85,6 +85,7 @@ public:
 	bool customLevelLoaded;
 	bool customConfig;
 	bool spaceNewline;
+	int errorPenalty;
 	QTranslator *translator;
 	void refreshAll(bool setLang);
 

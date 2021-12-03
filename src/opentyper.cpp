@@ -102,6 +102,8 @@ void OpenTyper::refreshAll(bool setLang)
 	updateTheme();
 	// Space new line
 	spaceNewline = settings.value("main/spacenewline","true").toBool();
+	// Error penalty
+	errorPenalty = settings.value("main/errorpenalty","10").toInt();
 	// Load config and start
 	QString configPath = loadConfig(configName);
 	if(configPath == NULL)
@@ -546,6 +548,9 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 				mistake=true;
 				deadKeys = 0;
+				levelHits -= errorPenalty;
+				if(levelHits < 0)
+					levelHits = 0;
 			}
 		}
 	}
