@@ -26,9 +26,28 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 	ui(new Ui::behaviorOptions)
 {
 	ui->setupUi(this);
+	// Load settings
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
+	// Space bar newline
+	if(settings.value("main/spacenewline","true").toBool())
+		ui->spaceNewlineCheckBox->setCheckState(Qt::Checked);
+	else
+		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
+	// Connect
+	// Space bar newline checkbox
+	connect(ui->spaceNewlineCheckBox,SIGNAL(clicked(bool)),this,SLOT(setSpaceNewline(bool)));
 }
 
 behaviorOptions::~behaviorOptions()
 {
 	delete ui;
+}
+
+void behaviorOptions::setSpaceNewline(bool value)
+{
+	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
+	if(value)
+		settings.setValue("main/spacenewline","true");
+	else
+		settings.setValue("main/spacenewline","false");
 }
