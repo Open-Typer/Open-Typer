@@ -449,70 +449,10 @@
         </property>
        </widget>
       </widget>
-      <widget class="QFrame" name="levelOptionsFrame">
-       <property name="geometry">
-        <rect>
-         <x>580</x>
-         <y>0</y>
-         <width>341</width>
-         <height>131</height>
-        </rect>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::WinPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <widget class="QCheckBox" name="spaceNewlineCheckBox">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>30</y>
-          <width>321</width>
-          <height>26</height>
-         </rect>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string>Start new line using space bar</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_2">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>321</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Exercise options:</string>
-        </property>
-       </widget>
-      </widget>
       <widget class="QFrame" name="trainingFrame4">
        <property name="geometry">
         <rect>
-         <x>920</x>
+         <x>580</x>
          <y>0</y>
          <width>221</width>
          <height>131</height>
