@@ -100,11 +100,8 @@ void OpenTyper::refreshAll(bool setLang)
 	panelBlueColor = settings.value("theme/panelblue","0").toInt();
 	// Theme
 	updateTheme();
-	// Space bar new lines
-	if(settings.value("main/spacenewline","true").toBool())
-		ui->spaceNewlineCheckBox->setCheckState(Qt::Checked);
-	else
-		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
+	// Space new line
+	spaceNewline = settings.value("main/spacenewline","true").toBool();
 	// Load config and start
 	QString configPath = loadConfig(configName);
 	if(configPath == NULL)
@@ -176,11 +173,6 @@ void OpenTyper::connectAll(void)
 		SIGNAL(activated(int)),
 		this,
 		SLOT(levelSelectionListIndexChanged(int)));
-	// Space new line checkbox
-	connect(ui->spaceNewlineCheckBox,
-		SIGNAL(clicked(bool)),
-		this,
-		SLOT(spaceNewlineCheckBoxChanged(bool)));
 	// Open exercise from file button
 	connect(ui->openExerciseButton,
 		SIGNAL(clicked()),
@@ -490,7 +482,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		levelTimer.start();
 		levelInProgress=true;
 	}
-	if((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || ui->spaceNewlineCheckBox->isChecked()) && (event->text() == level[levelPos]))) && !mistake)
+	if((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || spaceNewline) && (event->text() == level[levelPos]))) && !mistake)
 	{
 		input += event->text();
 		displayInput += event->text();

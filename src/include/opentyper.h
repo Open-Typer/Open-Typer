@@ -84,6 +84,7 @@ public:
 	void updateTheme(void);
 	bool customLevelLoaded;
 	bool customConfig;
+	bool spaceNewline;
 	QTranslator *translator;
 	void refreshAll(bool setLang);
 
