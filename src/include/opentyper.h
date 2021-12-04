@@ -60,8 +60,9 @@ public:
 	QString loadConfig(QString configName);
 	void startLevel(int lesson, int sublesson, int level);
 	void levelFinalInit(void);
-	QString level, displayLevel, input, displayInput, publicConfigName;
-	int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, levelPos, displayPos, levelMistakes, levelHits, levelLengthExtension;
+	void updateText(void);
+	QString level, displayLevel, finalDisplayLevel, input, displayInput, publicConfigName;
+	int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, currentLine, levelPos, displayPos, levelMistakes, levelHits, levelLengthExtension;
 	int deadKeys;
 	int sublessonListStart;
 	QElapsedTimer levelTimer;
@@ -72,7 +73,7 @@ public:
 	Updater *versionHdw;
 	void autoUpdate(void);
 	void adjustSize(void);
-	int labelWidth(QLabel *targetLabel);
+	int labelWidth(QLabel *targetLabel, QString labelText);
 	void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
 	int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
 	int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
@@ -87,7 +88,7 @@ public:
 	bool customConfig;
 	bool spaceNewline;
 	int errorPenalty;
-	bool fullScreenPaper;
+	bool fullScreenPaper, lineCountLimit;
 	int textViewMode;
 	QTranslator *translator;
 	void refreshAll(bool setLang);

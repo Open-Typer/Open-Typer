@@ -105,6 +105,7 @@ void OpenTyper::refreshAll(bool setLang)
 	// Text view mode
 	textViewMode = settings->value("main/textviewmode","0").toInt();
 	fullScreenPaper = ((textViewMode == 2) || (textViewMode == 3));
+	lineCountLimit = ((textViewMode == 1) || (textViewMode == 3));
 	// Load config and start
 	QString configPath = loadConfig(configName);
 	if(configPath == NULL)
@@ -309,8 +310,8 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 void OpenTyper::levelFinalInit(void)
 {
 	// Init level
-	displayLevel = configParser::initExercise(level,levelLengthExtension);
-	ui->levelLabel->setText(displayLevel);
+	currentLine=0;
+	updateText();
 	adjustSize();
 	setColors();
 	levelPos=0;
@@ -331,6 +332,36 @@ void OpenTyper::levelFinalInit(void)
 	displayInput = "";
 	ui->inputLabel->setAcceptRichText(true);
 	ui->inputLabel->setHtml(displayInput);
+}
+
+void OpenTyper::updateText(void)
+{
+	displayLevel = configParser::initExercise(level,levelLengthExtension);
+	// Process exercise text
+	if(lineCountLimit)
+	{
+		finalDisplayLevel = configParser::initExercise(level,levelLengthExtension,lineCountLimit,currentLine);
+		QString finalText = "";
+		int i, line = 0;
+		for(i=0; i < finalDisplayLevel.count(); i++)
+		{
+			if(finalDisplayLevel[i] == '\n')
+			{
+				finalText += "<br><span style=\"vertical-align: sub;\">";
+				line++;
+			}
+			else
+				finalText += finalDisplayLevel[i];
+		}
+		if(line > 0)
+			finalText += "</span>";
+		ui->levelLabel->setText(finalText);
+	}
+	else
+	{
+		finalDisplayLevel = displayLevel;
+		ui->levelLabel->setText(displayLevel);
+	}
 }
 
 void OpenTyper::repeatLevel(void)
@@ -492,6 +523,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			displayInput += "<br>";
 			mistakeLabelHtml += "<br>";
 			ui->mistakeLabel->setHtml(mistakeLabelHtml);
+			currentLine++;
+			updateText();
 		}
 		else
 		{
@@ -626,11 +659,10 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	settings->setValue("theme/fontunderline",fontUnderline);
 }
 
-int OpenTyper::labelWidth(QLabel *targetLabel)
+int OpenTyper::labelWidth(QLabel *targetLabel, QString labelText)
 {
 	// Checks every line and gets the best label width
 	int i, current, max=50, len;
-	QString labelText = targetLabel->text();
 	QString line = "";
 	len = labelText.count();
 	for(i=0; i < len; i++)
@@ -660,7 +692,7 @@ void OpenTyper::adjustSize(void)
 	}
 	else
 	{
-		int newWidth = labelWidth(ui->levelLabel);
+		int newWidth = labelWidth(ui->levelLabel,displayLevel);
 		ui->levelLabel->resize(newWidth,
 			ui->levelLabel->height());
 		ui->inputLabel->resize(newWidth,
@@ -670,13 +702,13 @@ void OpenTyper::adjustSize(void)
 		ui->paper->setMaximumWidth(ui->paper->minimumWidth());
 	}
 	// Adjust levelSpace, levelLabel and inputLabel height
-	int newHeight = _line_count(displayLevel) *
+	int newHeight = _line_count(finalDisplayLevel) *
 		(ui->levelLabel->fontMetrics().capHeight()) * 2 + 60;
 	ui->levelSpace->setMinimumHeight(newHeight);
 	ui->levelLabel->resize(ui->levelLabel->width(),
 		newHeight);
 	ui->inputLabel->resize(ui->inputLabel->width(),
-		newHeight);
+		QWIDGETSIZE_MAX);
 }
 
 void OpenTyper::setColors(void)
