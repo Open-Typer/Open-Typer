@@ -44,6 +44,7 @@ class customizationOptions : public QWidget
 
 	private:
 		Ui::customizationOptions *ui;
+		QSettings *settings;
 		int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
 		int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
 		int bgRedColor, bgGreenColor, bgBlueColor;

@@ -26,39 +26,39 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	ui(new Ui::customizationOptions)
 {
 	ui->setupUi(this);
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
+	settings = new QSettings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	// Font
-	setFont(settings.value("theme/font","Courier").toString(),
-		settings.value("theme/fontsize","14").toInt(),
-		settings.value("theme/fontbold","false").toBool(),
-		settings.value("theme/fontitalic","false").toBool(),
-		settings.value("theme/fontunderline","false").toBool());
+	setFont(settings->value("theme/font","Courier").toString(),
+		settings->value("theme/fontsize","14").toInt(),
+		settings->value("theme/fontbold","false").toBool(),
+		settings->value("theme/fontitalic","false").toBool(),
+		settings->value("theme/fontunderline","false").toBool());
 	// Colors
 	// Level text
-	customLevelTextColor = settings.value("theme/customleveltextcolor","false").toBool();
-	levelTextRedColor = settings.value("theme/leveltextred","0").toInt();
-	levelTextGreenColor = settings.value("theme/leveltextgreen","0").toInt();
-	levelTextBlueColor = settings.value("theme/leveltextblue","0").toInt();
+	customLevelTextColor = settings->value("theme/customleveltextcolor","false").toBool();
+	levelTextRedColor = settings->value("theme/leveltextred","0").toInt();
+	levelTextGreenColor = settings->value("theme/leveltextgreen","0").toInt();
+	levelTextBlueColor = settings->value("theme/leveltextblue","0").toInt();
 	// Input text
-	customInputTextColor = settings.value("theme/custominputtextcolor","false").toBool();
-	inputTextRedColor = settings.value("theme/inputtextred","0").toInt();
-	inputTextGreenColor = settings.value("theme/inputtextgreen","0").toInt();
-	inputTextBlueColor = settings.value("theme/inputtextblue","0").toInt();
+	customInputTextColor = settings->value("theme/custominputtextcolor","false").toBool();
+	inputTextRedColor = settings->value("theme/inputtextred","0").toInt();
+	inputTextGreenColor = settings->value("theme/inputtextgreen","0").toInt();
+	inputTextBlueColor = settings->value("theme/inputtextblue","0").toInt();
 	// Background
-	customBgColor = settings.value("theme/custombgcolor","false").toBool();
-	bgRedColor = settings.value("theme/bgred","0").toInt();
-	bgGreenColor = settings.value("theme/bggreen","0").toInt();
-	bgBlueColor = settings.value("theme/bgblue","0").toInt();
+	customBgColor = settings->value("theme/custombgcolor","false").toBool();
+	bgRedColor = settings->value("theme/bgred","0").toInt();
+	bgGreenColor = settings->value("theme/bggreen","0").toInt();
+	bgBlueColor = settings->value("theme/bgblue","0").toInt();
 	// Paper
-	customPaperColor = settings.value("theme/custompapercolor","false").toBool();
-	paperRedColor = settings.value("theme/paperred","0").toInt();
-	paperGreenColor = settings.value("theme/papergreen","0").toInt();
-	paperBlueColor = settings.value("theme/paperblue","0").toInt();
+	customPaperColor = settings->value("theme/custompapercolor","false").toBool();
+	paperRedColor = settings->value("theme/paperred","0").toInt();
+	paperGreenColor = settings->value("theme/papergreen","0").toInt();
+	paperBlueColor = settings->value("theme/paperblue","0").toInt();
 	// Panel
-	customPanelColor = settings.value("theme/custompanelcolor","false").toBool();
-	panelRedColor = settings.value("theme/panelred","0").toInt();
-	panelGreenColor = settings.value("theme/panelgreen","0").toInt();
-	panelBlueColor = settings.value("theme/panelblue","0").toInt();
+	customPanelColor = settings->value("theme/custompanelcolor","false").toBool();
+	panelRedColor = settings->value("theme/panelred","0").toInt();
+	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
+	panelBlueColor = settings->value("theme/panelblue","0").toInt();
 	// Font selector
 	connect(ui->fontComboBox,
 		SIGNAL(currentFontChanged(QFont)),
@@ -138,8 +138,7 @@ customizationOptions::~customizationOptions()
 
 void customizationOptions::init(void)
 {
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	ui->themeBox->setCurrentIndex(settings.value("theme/theme","0").toInt());
+	ui->themeBox->setCurrentIndex(settings->value("theme/theme","0").toInt());
 	setColors();
 }
 
@@ -162,12 +161,11 @@ void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBo
 	ui->levelLabel->setFont(newFont);
 	ui->inputLabel->setFont(newFont);
 	// Save settings
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/font",fontFamily);
-	settings.setValue("theme/fontsize",fontSize);
-	settings.setValue("theme/fontbold",fontBold);
-	settings.setValue("theme/fontitalic",fontItalic);
-	settings.setValue("theme/fontunderline",fontUnderline);
+	settings->setValue("theme/font",fontFamily);
+	settings->setValue("theme/fontsize",fontSize);
+	settings->setValue("theme/fontbold",fontBold);
+	settings->setValue("theme/fontitalic",fontItalic);
+	settings->setValue("theme/fontunderline",fontUnderline);
 }
 
 void customizationOptions::changeFont(QFont font)
@@ -176,8 +174,7 @@ void customizationOptions::changeFont(QFont font)
 	oldFont.setFamily(font.family());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/font",font.family());
+	settings->setValue("theme/font",font.family());
 }
 
 void customizationOptions::changeFontSize(int size)
@@ -186,8 +183,7 @@ void customizationOptions::changeFontSize(int size)
 	oldFont.setPointSize(size);
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/fontsize",size);
+	settings->setValue("theme/fontsize",size);
 }
 
 void customizationOptions::setBoldText(void)
@@ -196,8 +192,7 @@ void customizationOptions::setBoldText(void)
 	oldFont.setBold(ui->boldTextBox->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/fontbold",ui->boldTextBox->isChecked());
+	settings->setValue("theme/fontbold",ui->boldTextBox->isChecked());
 }
 
 void customizationOptions::setItalicText(void)
@@ -206,8 +201,7 @@ void customizationOptions::setItalicText(void)
 	oldFont.setItalic(ui->italicTextBox->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/fontitalic",ui->italicTextBox->isChecked());
+	settings->setValue("theme/fontitalic",ui->italicTextBox->isChecked());
 }
 
 void customizationOptions::setUnderlineText(void)
@@ -216,8 +210,7 @@ void customizationOptions::setUnderlineText(void)
 	oldFont.setUnderline(ui->underlineTextBox->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/fontunderline",ui->underlineTextBox->isChecked());
+	settings->setValue("theme/fontunderline",ui->underlineTextBox->isChecked());
 }
 
 void customizationOptions::resetFont(void)
@@ -232,32 +225,31 @@ void customizationOptions::resetFont(void)
 
 void customizationOptions::saveColorSettings(void)
 {
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	// Level text
-	settings.setValue("theme/customleveltextcolor",customLevelTextColor);
-	settings.setValue("theme/leveltextred",levelTextRedColor);
-	settings.setValue("theme/leveltextgreen",levelTextGreenColor);
-	settings.setValue("theme/leveltextblue",levelTextBlueColor);
+	settings->setValue("theme/customleveltextcolor",customLevelTextColor);
+	settings->setValue("theme/leveltextred",levelTextRedColor);
+	settings->setValue("theme/leveltextgreen",levelTextGreenColor);
+	settings->setValue("theme/leveltextblue",levelTextBlueColor);
 	// Input text
-	settings.setValue("theme/custominputtextcolor",customInputTextColor);
-	settings.setValue("theme/inputtextred",inputTextRedColor);
-	settings.setValue("theme/inputtextgreen",inputTextGreenColor);
-	settings.setValue("theme/inputtextblue",inputTextBlueColor);
+	settings->setValue("theme/custominputtextcolor",customInputTextColor);
+	settings->setValue("theme/inputtextred",inputTextRedColor);
+	settings->setValue("theme/inputtextgreen",inputTextGreenColor);
+	settings->setValue("theme/inputtextblue",inputTextBlueColor);
 	// Background
-	settings.setValue("theme/custombgcolor",customBgColor);
-	settings.setValue("theme/bgred",bgRedColor);
-	settings.setValue("theme/bggreen",bgGreenColor);
-	settings.setValue("theme/bgblue",bgBlueColor);
+	settings->setValue("theme/custombgcolor",customBgColor);
+	settings->setValue("theme/bgred",bgRedColor);
+	settings->setValue("theme/bggreen",bgGreenColor);
+	settings->setValue("theme/bgblue",bgBlueColor);
 	// Paper
-	settings.setValue("theme/custompapercolor",customPaperColor);
-	settings.setValue("theme/paperred",paperRedColor);
-	settings.setValue("theme/papergreen",paperGreenColor);
-	settings.setValue("theme/paperblue",paperBlueColor);
+	settings->setValue("theme/custompapercolor",customPaperColor);
+	settings->setValue("theme/paperred",paperRedColor);
+	settings->setValue("theme/papergreen",paperGreenColor);
+	settings->setValue("theme/paperblue",paperBlueColor);
 	// Panel
-	settings.setValue("theme/custompanelcolor",customPanelColor);
-	settings.setValue("theme/panelred",panelRedColor);
-	settings.setValue("theme/panelgreen",panelGreenColor);
-	settings.setValue("theme/panelblue",panelBlueColor);
+	settings->setValue("theme/custompanelcolor",customPanelColor);
+	settings->setValue("theme/panelred",panelRedColor);
+	settings->setValue("theme/panelgreen",panelGreenColor);
+	settings->setValue("theme/panelblue",panelBlueColor);
 }
 
 void customizationOptions::setColors()
@@ -323,8 +315,7 @@ void customizationOptions::updateTheme()
 	QFile darkSheet(":/dark-theme/style.qss");
 	QFile lightSheet(":/light-theme/style.qss");
 	char *paperStyleSheet;
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	switch(settings.value("theme/theme","0").toInt()) {
+	switch(settings->value("theme/theme","0").toInt()) {
 		case 0:
 			// System (default)
 			setStyleSheet("");
@@ -480,8 +471,7 @@ void customizationOptions::resetBgPaperColors(void)
 
 void customizationOptions::changeTheme(int index)
 {
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/theme",index);
+	settings->setValue("theme/theme",index);
 	updateTheme();
 	setColors();
 }
