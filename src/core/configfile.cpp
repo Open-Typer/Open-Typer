@@ -280,6 +280,35 @@ QString configParser::initExercise(QString exercise, int lineLength)
 	return out;
 }
 
+QString configParser::initExercise(QString exercise, int lineLength, bool lineCountLimit, int currentLine)
+{
+	QString text = initExercise(exercise, lineLength);
+	if(lineCountLimit)
+	{
+		QString out = "";
+		int i, line = 0;
+		for(i=0; i < text.count(); i++)
+		{
+			if(text[i] == '\n')
+			{
+				if((line >= currentLine) && (line+1 < currentLine+3))
+					out += text[i];
+				line++;
+			}
+			else
+			{
+				if((line >= currentLine) && (line < currentLine+3))
+					out += text[i];
+			}
+			if(line >= currentLine+3)
+				break;
+		}
+		return out;
+	}
+	else
+		return text;
+}
+
 bool configParser::exerciseRepeatBool(const QString config)
 {
 	QString out = "";
