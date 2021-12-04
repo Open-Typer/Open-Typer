@@ -189,6 +189,35 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>Exercise options</source>
         <translation>Aufgaben Optionen</translation>
     </message>
+    <message>
+        <source>View</source>
+        <extracomment>View mode options</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text view mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paper, whole text (default)</source>
+        <comment>Shows the entire text on a paper</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paper, 3 lines</source>
+        <comment>Shows current 3 lines of the text on a paper</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full screen, whole text</source>
+        <comment>Shows the entire text</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full screen, 3 lines</source>
+        <comment>Shows current 3 lines</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>builtinPacks</name>

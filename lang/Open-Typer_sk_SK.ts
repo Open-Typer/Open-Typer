@@ -70,39 +70,39 @@
         <translation>Otvoriť vlastný balík</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="216"/>
-        <location filename="../src/opentyper.cpp" line="218"/>
+        <location filename="../src/opentyper.cpp" line="220"/>
+        <location filename="../src/opentyper.cpp" line="222"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="295"/>
+        <location filename="../src/opentyper.cpp" line="299"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="423"/>
+        <location filename="../src/opentyper.cpp" line="457"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="423"/>
-        <location filename="../src/opentyper.cpp" line="794"/>
+        <location filename="../src/opentyper.cpp" line="457"/>
+        <location filename="../src/opentyper.cpp" line="853"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="432"/>
+        <location filename="../src/opentyper.cpp" line="466"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="446"/>
+        <location filename="../src/opentyper.cpp" line="480"/>
         <source>Could not open the file.</source>
         <translation>Nepodarilo sa otvoriť súbor.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="794"/>
+        <location filename="../src/opentyper.cpp" line="853"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
@@ -220,19 +220,54 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
 <context>
     <name>behaviorOptions</name>
     <message>
-        <location filename="../ui/options/behavior.ui" line="35"/>
+        <location filename="../ui/options/behavior.ui" line="38"/>
         <source>Start new line using space bar</source>
         <translation>Začať nový riadok medzerníkom</translation>
     </message>
     <message>
-        <location filename="../ui/options/behavior.ui" line="61"/>
+        <location filename="../ui/options/behavior.ui" line="64"/>
         <source>Error penalty:</source>
         <translation>Penalizácia chýb:</translation>
     </message>
     <message>
-        <location filename="../ui/options/behavior.ui" line="104"/>
+        <location filename="../ui/options/behavior.ui" line="100"/>
+        <source>View</source>
+        <extracomment>View mode options</extracomment>
+        <translation>Zobrazenie</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/behavior.ui" line="115"/>
+        <source>Text view mode:</source>
+        <translation>Režim zobrazenia textu:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/behavior.ui" line="26"/>
         <source>Exercise options</source>
         <translation>Možnosti cvičenia</translation>
+    </message>
+    <message>
+        <location filename="../src/options/behavior.cpp" line="40"/>
+        <source>Paper, whole text (default)</source>
+        <comment>Shows the entire text on a paper</comment>
+        <translation>Papier, celý text (predvolené)</translation>
+    </message>
+    <message>
+        <location filename="../src/options/behavior.cpp" line="41"/>
+        <source>Paper, 3 lines</source>
+        <comment>Shows current 3 lines of the text on a paper</comment>
+        <translation>Papier, 3 riadky</translation>
+    </message>
+    <message>
+        <location filename="../src/options/behavior.cpp" line="42"/>
+        <source>Full screen, whole text</source>
+        <comment>Shows the entire text</comment>
+        <translation>Celá obrazovka, celý text</translation>
+    </message>
+    <message>
+        <location filename="../src/options/behavior.cpp" line="43"/>
+        <source>Full screen, 3 lines</source>
+        <comment>Shows current 3 lines</comment>
+        <translation>Celá obrazovka, 3 riadky</translation>
     </message>
 </context>
 <context>
