@@ -38,6 +38,7 @@ class behaviorOptions : public QWidget
 
 	private:
 		Ui::behaviorOptions *ui;
+		QSettings *settings;
 
 	private slots:
 		void setSpaceNewline(bool value);
