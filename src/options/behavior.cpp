@@ -38,9 +38,9 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 	// Text view mode
 	QStringList textViewModes;
 	textViewModes += tr("Paper, whole text (default)","Shows the entire text on a paper");
-	textViewModes += tr("Paper, 2 lines","Shows current 2 lines of the text on a paper");
+	textViewModes += tr("Paper, 3 lines","Shows current 3 lines of the text on a paper");
 	textViewModes += tr("Full screen, whole text","Shows the entire text");
-	textViewModes += tr("Full screen, 2 lines","Shows current 2 lines");
+	textViewModes += tr("Full screen, 3 lines","Shows current 3 lines");
 	ui->textViewModeComboBox->addItems(textViewModes);
 	ui->textViewModeComboBox->setCurrentIndex(settings->value("main/textviewmode","0").toInt());
 	// Connect
