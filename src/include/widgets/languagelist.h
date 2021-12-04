@@ -38,6 +38,7 @@ class languageList : public QListWidget
 		
 	private:
 		languageManager *langMgr;
+		QSettings *settings;
 
 	signals:
 		void languageChanged(int index);
