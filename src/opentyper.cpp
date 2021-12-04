@@ -26,7 +26,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	, ui(new Ui::OpenTyper)
 {
 	ui->setupUi(this);
-	settings = new QSettings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
+	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	langMgr = new languageManager;
 	refreshAll(true);
 	// Connect signals to slots
