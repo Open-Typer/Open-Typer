@@ -55,6 +55,7 @@ class OpenTyper : public QMainWindow
 public:
 	OpenTyper(QWidget *parent = nullptr);
 	~OpenTyper();
+	QSettings *settings;
 	configParser *parser;
 	QString loadConfig(QString configName);
 	void startLevel(int lesson, int sublesson, int level);

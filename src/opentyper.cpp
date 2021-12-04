@@ -26,9 +26,9 @@ OpenTyper::OpenTyper(QWidget *parent)
 	, ui(new Ui::OpenTyper)
 {
 	ui->setupUi(this);
+	settings = new QSettings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	langMgr = new languageManager;
 	refreshAll(true);
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	// Connect signals to slots
 	connectAll();
 	// Check for updates
@@ -46,18 +46,16 @@ OpenTyper::~OpenTyper()
 
 void OpenTyper::refreshAll(bool setLang)
 {
-	// Read config
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	// Set language
 	if(setLang)
 	{
-		if(settings.value("main/language","").toString() == "")
+		if(settings->value("main/language","").toString() == "")
 			changeLanguage(0);
 		else
-			changeLanguage(langMgr->boxItems.indexOf(settings.value("main/language","").toString()));
+			changeLanguage(langMgr->boxItems.indexOf(settings->value("main/language","").toString()));
 	}
 	// Config file (lesson pack) name
-	QString configName = settings.value("main/configfile","").toString(); // default: "" (empty QString)
+	QString configName = settings->value("main/configfile","").toString(); // default: "" (empty QString)
 	if(configName == "")
 	{
 		// No config file selected, use sk_SK-QWERTZ-B1
@@ -65,45 +63,45 @@ void OpenTyper::refreshAll(bool setLang)
 		configName = "sk_SK-QWERTZ-B1";
 	}
 	// Custom pack
-	customConfig = settings.value("main/customconfig","false").toBool();
+	customConfig = settings->value("main/customconfig","false").toBool();
 	// Font
-	setFont(settings.value("theme/font","Courier").toString(),
-		settings.value("theme/fontsize","14").toInt(),
-		settings.value("theme/fontbold","false").toBool(),
-		settings.value("theme/fontitalic","false").toBool(),
-		settings.value("theme/fontunderline","false").toBool());
+	setFont(settings->value("theme/font","Courier").toString(),
+		settings->value("theme/fontsize","14").toInt(),
+		settings->value("theme/fontbold","false").toBool(),
+		settings->value("theme/fontitalic","false").toBool(),
+		settings->value("theme/fontunderline","false").toBool());
 	// Colors
 	// Level text
-	customLevelTextColor = settings.value("theme/customleveltextcolor","false").toBool();
-	levelTextRedColor = settings.value("theme/leveltextred","0").toInt();
-	levelTextGreenColor = settings.value("theme/leveltextgreen","0").toInt();
-	levelTextBlueColor = settings.value("theme/leveltextblue","0").toInt();
+	customLevelTextColor = settings->value("theme/customleveltextcolor","false").toBool();
+	levelTextRedColor = settings->value("theme/leveltextred","0").toInt();
+	levelTextGreenColor = settings->value("theme/leveltextgreen","0").toInt();
+	levelTextBlueColor = settings->value("theme/leveltextblue","0").toInt();
 	// Input text
-	customInputTextColor = settings.value("theme/custominputtextcolor","false").toBool();
-	inputTextRedColor = settings.value("theme/inputtextred","0").toInt();
-	inputTextGreenColor = settings.value("theme/inputtextgreen","0").toInt();
-	inputTextBlueColor = settings.value("theme/inputtextblue","0").toInt();
+	customInputTextColor = settings->value("theme/custominputtextcolor","false").toBool();
+	inputTextRedColor = settings->value("theme/inputtextred","0").toInt();
+	inputTextGreenColor = settings->value("theme/inputtextgreen","0").toInt();
+	inputTextBlueColor = settings->value("theme/inputtextblue","0").toInt();
 	// Background
-	customBgColor = settings.value("theme/custombgcolor","false").toBool();
-	bgRedColor = settings.value("theme/bgred","0").toInt();
-	bgGreenColor = settings.value("theme/bggreen","0").toInt();
-	bgBlueColor = settings.value("theme/bgblue","0").toInt();
+	customBgColor = settings->value("theme/custombgcolor","false").toBool();
+	bgRedColor = settings->value("theme/bgred","0").toInt();
+	bgGreenColor = settings->value("theme/bggreen","0").toInt();
+	bgBlueColor = settings->value("theme/bgblue","0").toInt();
 	// Paper
-	customPaperColor = settings.value("theme/custompapercolor","false").toBool();
-	paperRedColor = settings.value("theme/paperred","0").toInt();
-	paperGreenColor = settings.value("theme/papergreen","0").toInt();
-	paperBlueColor = settings.value("theme/paperblue","0").toInt();
+	customPaperColor = settings->value("theme/custompapercolor","false").toBool();
+	paperRedColor = settings->value("theme/paperred","0").toInt();
+	paperGreenColor = settings->value("theme/papergreen","0").toInt();
+	paperBlueColor = settings->value("theme/paperblue","0").toInt();
 	// Panel
-	customPanelColor = settings.value("theme/custompanelcolor","false").toBool();
-	panelRedColor = settings.value("theme/panelred","0").toInt();
-	panelGreenColor = settings.value("theme/panelgreen","0").toInt();
-	panelBlueColor = settings.value("theme/panelblue","0").toInt();
+	customPanelColor = settings->value("theme/custompanelcolor","false").toBool();
+	panelRedColor = settings->value("theme/panelred","0").toInt();
+	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
+	panelBlueColor = settings->value("theme/panelblue","0").toInt();
 	// Theme
 	updateTheme();
 	// Space new line
-	spaceNewline = settings.value("main/spacenewline","true").toBool();
+	spaceNewline = settings->value("main/spacenewline","true").toBool();
 	// Error penalty
-	errorPenalty = settings.value("main/errorpenalty","10").toInt();
+	errorPenalty = settings->value("main/errorpenalty","10").toInt();
 	// Load config and start
 	QString configPath = loadConfig(configName);
 	if(configPath == NULL)
@@ -187,7 +185,6 @@ void OpenTyper::connectAll(void)
 QString OpenTyper::loadConfig(QString configName)
 {
 	// Returns config file name, which can be opened later.
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	QString configPath = "";
 	if(customConfig)
 		configPath = configName;
@@ -204,7 +201,7 @@ QString OpenTyper::loadConfig(QString configName)
 		// Select default configuration
 		configName = "sk_SK-QWERTZ-B1";
 		customConfig=false;
-		settings.setValue("main/customconfig",customConfig);
+		settings->setValue("main/customconfig",customConfig);
 		return loadConfig(configName);
 	}
 	// Update lessonSelectionList widget
@@ -225,7 +222,7 @@ QString OpenTyper::loadConfig(QString configName)
 	if(customConfig)
 		configName = configPath;
 	// Save selected config to settings
-	settings.setValue("main/configfile",configName);
+	settings->setValue("main/configfile",configName);
 	if(customConfig)
 	{
 		QFile configQFile(configName);
@@ -412,11 +409,10 @@ void OpenTyper::levelSelectionListIndexChanged(int index)
 
 void OpenTyper::spaceNewlineCheckBoxChanged(bool checked)
 {
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
 	if(checked)
-		settings.setValue("main/spacenewline","true");
+		settings->setValue("main/spacenewline","true");
 	else
-		settings.setValue("main/spacenewline","false");
+		settings->setValue("main/spacenewline","false");
 }
 
 void OpenTyper::openExerciseFromFile(void)
@@ -620,12 +616,11 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	ui->inputLabel->setFont(newFont);
 	ui->mistakeLabel->setFont(mistakeLabelFont);
 	// Save settings
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	settings.setValue("theme/font",fontFamily);
-	settings.setValue("theme/fontsize",fontSize);
-	settings.setValue("theme/fontbold",fontBold);
-	settings.setValue("theme/fontitalic",fontItalic);
-	settings.setValue("theme/fontunderline",fontUnderline);
+	settings->setValue("theme/font",fontFamily);
+	settings->setValue("theme/fontsize",fontSize);
+	settings->setValue("theme/fontbold",fontBold);
+	settings->setValue("theme/fontitalic",fontItalic);
+	settings->setValue("theme/fontunderline",fontUnderline);
 }
 
 int OpenTyper::labelWidth(QLabel *targetLabel)
@@ -740,8 +735,7 @@ void OpenTyper::updateTheme(void)
 	QFile darkSheet(":/dark-theme/style.qss");
 	QFile lightSheet(":/light-theme/style.qss");
 	QString paperStyleSheet, panelStyleSheet;
-	QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-	switch(settings.value("theme/theme","0").toInt()) {
+	switch(settings->value("theme/theme","0").toInt()) {
 		case 0:
 			// System (default)
 			setStyleSheet("");
@@ -801,8 +795,7 @@ void OpenTyper::openPack(void)
 		// Get selected file
 		QString openFileName = openDialog.selectedFiles()[0];
 		customConfig=true;
-		QSettings settings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
-		settings.setValue("main/customconfig",customConfig);
+		settings->setValue("main/customconfig",customConfig);
 		loadConfig(openFileName);
 		repeatLevel();
 	}
