@@ -44,14 +44,6 @@
         <translation>Aufgabe:</translation>
     </message>
     <message>
-        <source>Start new line using space bar</source>
-        <translation>Neue Zeile mit der Leer Taste beginnen</translation>
-    </message>
-    <message>
-        <source>Exercise options:</source>
-        <translation>Aufgaben Optionen:</translation>
-    </message>
-    <message>
         <source>Time:</source>
         <translation>Zeit:</translation>
     </message>
@@ -94,10 +86,6 @@
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>Unknown pack</source>
-        <translation type="vanished">Unbekanntes Paket</translation>
-    </message>
     <message>
         <source>Revision</source>
         <translation>Revision</translation>
@@ -185,6 +173,21 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Change log is available at</source>
         <translation>Change log is verfügbar unter</translation>
+    </message>
+</context>
+<context>
+    <name>behaviorOptions</name>
+    <message>
+        <source>Start new line using space bar</source>
+        <translation>Neue Zeile mit der Leer Taste beginnen</translation>
+    </message>
+    <message>
+        <source>Error penalty:</source>
+        <translation>Fehlerstrafe:</translation>
+    </message>
+    <message>
+        <source>Exercise options</source>
+        <translation>Aufgaben Optionen</translation>
     </message>
 </context>
 <context>
@@ -358,6 +361,10 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Customization</source>
         <translation>Anpassung</translation>
+    </message>
+    <message>
+        <source>Behavior</source>
+        <translation>Verhalten</translation>
     </message>
 </context>
 <context>
