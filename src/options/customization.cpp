@@ -26,7 +26,7 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	ui(new Ui::customizationOptions)
 {
 	ui->setupUi(this);
-	settings = new QSettings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
+	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	// Font
 	setFont(settings->value("theme/font","Courier").toString(),
 		settings->value("theme/fontsize","14").toInt(),
