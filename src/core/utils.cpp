@@ -59,6 +59,11 @@ QString fileUtils::configLocation(void)
 	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
 }
 
+QString fileUtils::mainSettingsLocation(void)
+{
+	return configLocation()+"/config.ini";
+}
+
 bool keyboardUtils::isSpecialKey(QKeyEvent *event)
 {
 	if(event->text() == "")

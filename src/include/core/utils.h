@@ -25,6 +25,7 @@
 #include <QString>
 #include <QStandardPaths>
 #include <QKeyEvent>
+#include <QSettings>
 
 class stringUtils
 {
@@ -37,6 +38,7 @@ class fileUtils
 {
 	public:
 		static QString configLocation(void);
+		static QString mainSettingsLocation(void);
 };
 
 class keyboardUtils
