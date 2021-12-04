@@ -27,7 +27,7 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 {
 	ui->setupUi(this);
 	// Load settings
-	settings = new QSettings(fileUtils::configLocation()+"/config.ini",QSettings::IniFormat);
+	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	// Space bar newline
 	if(settings->value("main/spacenewline","true").toBool())
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Checked);
