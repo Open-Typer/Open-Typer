@@ -72,5 +72,5 @@ void behaviorOptions::setErrorPenalty(int value)
 
 void behaviorOptions::setTextViewMode(int mode)
 {
-	settings->setValue("main/typingmode",mode);
+	settings->setValue("main/textviewmode",mode);
 }
