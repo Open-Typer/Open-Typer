@@ -722,16 +722,18 @@ void OpenTyper::setColors(void)
 	}
 	// Set background color
 	if(customBgColor)
+	{
 		ui->mainFrame->setStyleSheet("background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ")");
+		ui->centralwidget->setStyleSheet("#centralwidget {background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ");}");
+	}
 	else
 	{
 		// Default background color
 		bgRedColor = ui->mainFrame->palette().color(QPalette::Window).red();
 		bgGreenColor = ui->mainFrame->palette().color(QPalette::Window).green();
 		bgBlueColor = ui->mainFrame->palette().color(QPalette::Window).blue();
+		ui->centralwidget->setStyleSheet("");
 	}
-	// Set centralwidget color (same as background)
-	ui->centralwidget->setStyleSheet("#centralwidget {background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ");}");
 }
 
 void OpenTyper::updateTheme(void)
