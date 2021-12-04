@@ -30,7 +30,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLabel" name="typingModeLabel">
+       <widget class="QLabel" name="textViewModeLabel">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -41,12 +41,12 @@
          <enum>QFrame::Plain</enum>
         </property>
         <property name="text">
-         <string>Typing mode:</string>
+         <string>Text view mode:</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="typingModeComboBox"/>
+       <widget class="QComboBox" name="textViewModeComboBox"/>
       </item>
      </layout>
     </widget>
