@@ -728,6 +728,8 @@ void OpenTyper::setColors(void)
 		bgGreenColor = ui->mainFrame->palette().color(QPalette::Window).green();
 		bgBlueColor = ui->mainFrame->palette().color(QPalette::Window).blue();
 	}
+	// Set centralwidget color (same as background)
+	ui->centralwidget->setStyleSheet("#centralwidget {background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ");}");
 }
 
 void OpenTyper::updateTheme(void)
