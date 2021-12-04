@@ -696,7 +696,7 @@ void OpenTyper::setColors(void)
 	}
 	// Set paper color
 	if(customPaperColor)
-		ui->paper->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ")");
+		ui->paper->setStyleSheet("#paper {background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");}");
 	else
 	{
 		// Reset background color before setting paper color
@@ -705,11 +705,13 @@ void OpenTyper::setColors(void)
 		paperRedColor = ui->paper->palette().color(QPalette::Base).red();
 		paperGreenColor = ui->paper->palette().color(QPalette::Base).green();
 		paperBlueColor = ui->paper->palette().color(QPalette::Base).blue();
-		ui->paper->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ")");
+		ui->paper->setStyleSheet("#paper {background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");}");
 		// Fix inputLabel automatically set background color
 		ui->inputLabel->setStyleSheet(
 			ui->inputLabel->styleSheet() + ";\nbackground-color: rgba(0,0,0,0)");
 	}
+	ui->levelSpace->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");");
+	ui->typingSpace->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");");
 	// Set panel color
 	if(customPanelColor)
 	{
@@ -766,7 +768,7 @@ void OpenTyper::updateTheme(void)
 				darkSheet.open(QFile::ReadOnly | QFile::Text);
 				qDebug() << darkSheet.errorString();
 			}
-			ui->paper->setStyleSheet("background-color: rgb(15, 25, 35)");
+			ui->paper->setStyleSheet("#paper {background-color: rgb(15, 25, 35);}");
 			ui->controlFrame->setStyleSheet("QFrame { background-color: rgb(20, 33, 47); }");
 			break;
 		case 2:
