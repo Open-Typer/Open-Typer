@@ -35,11 +35,21 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
 	// Error penalty
 	ui->errorPenaltyBox->setValue(settings->value("main/errorpenalty","10").toInt());
+	// Typing mode
+	QStringList typingModes;
+	typingModes += tr("Paper, whole text (default)","Shows the entire text on a paper");
+	typingModes += tr("Paper, 2 lines","Shows current 2 lines of the text on a paper");
+	typingModes += tr("Full screen, whole text","Shows the entire text");
+	typingModes += tr("Full screen, 2 lines","Shows current 2 lines");
+	ui->typingModeComboBox->addItems(typingModes);
+	ui->typingModeComboBox->setCurrentIndex(settings->value("main/typingmode","0").toInt());
 	// Connect
 	// Space bar newline checkbox
 	connect(ui->spaceNewlineCheckBox,SIGNAL(clicked(bool)),this,SLOT(setSpaceNewline(bool)));
 	// Error penalty box
 	connect(ui->errorPenaltyBox,SIGNAL(valueChanged(int)),this,SLOT(setErrorPenalty(int)));
+	// Typing mode combobox
+	connect(ui->typingModeComboBox,SIGNAL(activated(int)),this,SLOT(setTypingMode(int)));
 }
 
 behaviorOptions::~behaviorOptions()
@@ -58,4 +68,9 @@ void behaviorOptions::setSpaceNewline(bool value)
 void behaviorOptions::setErrorPenalty(int value)
 {
 	settings->setValue("main/errorpenalty",value);
+}
+
+void behaviorOptions::setTypingMode(int mode)
+{
+	settings->setValue("main/typingmode",mode);
 }

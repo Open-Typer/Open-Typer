@@ -43,6 +43,7 @@ class behaviorOptions : public QWidget
 	private slots:
 		void setSpaceNewline(bool value);
 		void setErrorPenalty(int value);
+		void setTypingMode(int mode);
 };
 
 #endif // BEHAVIOR_H
