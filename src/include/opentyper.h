@@ -87,6 +87,8 @@ public:
 	bool customConfig;
 	bool spaceNewline;
 	int errorPenalty;
+	int typingMode;
+	bool fullScreenPaper;
 	QTranslator *translator;
 	void refreshAll(bool setLang);
 

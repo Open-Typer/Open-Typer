@@ -102,6 +102,9 @@ void OpenTyper::refreshAll(bool setLang)
 	spaceNewline = settings->value("main/spacenewline","true").toBool();
 	// Error penalty
 	errorPenalty = settings->value("main/errorpenalty","10").toInt();
+	// Typing mode
+	typingMode = settings->value("main/typingmode","0").toInt();
+	fullScreenPaper = ((typingMode == 2) || (typingMode == 3));
 	// Load config and start
 	QString configPath = loadConfig(configName);
 	if(configPath == NULL)
@@ -648,12 +651,24 @@ int OpenTyper::labelWidth(QLabel *targetLabel)
 void OpenTyper::adjustSize(void)
 {
 	// Adjust paper width
-	int newWidth = labelWidth(ui->levelLabel);
-	ui->levelLabel->resize(newWidth,
-		ui->levelLabel->height());
-	ui->inputLabel->resize(newWidth,
-		ui->inputLabel->height());
-	ui->paper->setMinimumWidth(newWidth+20);
+	QSizePolicy paperPolicy = ui->paper->sizePolicy();
+	if(fullScreenPaper)
+	{
+		paperPolicy.setHorizontalPolicy(QSizePolicy::Minimum);
+		ui->paper->setSizePolicy(paperPolicy);
+		ui->paper->setMaximumWidth(QWIDGETSIZE_MAX);
+	}
+	else
+	{
+		int newWidth = labelWidth(ui->levelLabel);
+		ui->levelLabel->resize(newWidth,
+			ui->levelLabel->height());
+		ui->inputLabel->resize(newWidth,
+			ui->inputLabel->height());
+		paperPolicy.setHorizontalPolicy(QSizePolicy::Fixed);
+		ui->paper->setMinimumWidth(newWidth+20);
+		ui->paper->setMaximumWidth(ui->paper->minimumWidth());
+	}
 	// Adjust levelSpace, levelLabel and inputLabel height
 	int newHeight = _line_count(displayLevel) *
 		(ui->levelLabel->fontMetrics().capHeight()) * 2 + 60;
@@ -732,6 +747,12 @@ void OpenTyper::setColors(void)
 		bgRedColor = ui->mainFrame->palette().color(QPalette::Window).red();
 		bgGreenColor = ui->mainFrame->palette().color(QPalette::Window).green();
 		bgBlueColor = ui->mainFrame->palette().color(QPalette::Window).blue();
+		ui->centralwidget->setStyleSheet("");
+	}
+	// Disable background if full screen paper is enabled
+	if(fullScreenPaper)
+	{
+		ui->mainFrame->setStyleSheet("");
 		ui->centralwidget->setStyleSheet("");
 	}
 }
