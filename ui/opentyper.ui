@@ -621,10 +621,10 @@
               <string notr="true">color: rgb(0, 125, 175);</string>
              </property>
              <property name="frameShape">
-              <enum>QFrame::WinPanel</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
+              <enum>QFrame::Plain</enum>
              </property>
              <property name="lineWidth">
               <number>1</number>
