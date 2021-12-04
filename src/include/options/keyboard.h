@@ -43,6 +43,7 @@ class keyboardOptions : public QWidget
 
 	private:
 		Ui::keyboardOptions *ui;
+		QSettings *settings;
 		QStringList rawItems;
 
 	private slots:
