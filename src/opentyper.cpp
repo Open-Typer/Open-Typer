@@ -102,9 +102,9 @@ void OpenTyper::refreshAll(bool setLang)
 	spaceNewline = settings->value("main/spacenewline","true").toBool();
 	// Error penalty
 	errorPenalty = settings->value("main/errorpenalty","10").toInt();
-	// Typing mode
-	typingMode = settings->value("main/typingmode","0").toInt();
-	fullScreenPaper = ((typingMode == 2) || (typingMode == 3));
+	// Text view mode
+	textViewMode = settings->value("main/textviewmode","0").toInt();
+	fullScreenPaper = ((textViewMode == 2) || (textViewMode == 3));
 	// Load config and start
 	QString configPath = loadConfig(configName);
 	if(configPath == NULL)
