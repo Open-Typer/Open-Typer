@@ -6,14 +6,75 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>419</width>
-    <height>303</height>
+    <width>576</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="3" column="0">
+    <widget class="QFrame" name="viewOptions">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="typingModeLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="text">
+         <string>Typing mode:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="typingModeComboBox"/>
+      </item>
+      <item>
+       <widget class="QFrame" name="emptySpace2">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="exerciseOptionsLabel">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Exercise options</string>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="0">
     <widget class="QFrame" name="exerciseOptions">
      <property name="frameShape">
@@ -85,8 +146,8 @@
      </layout>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="exerciseOptionsLabel">
+   <item row="2" column="0">
+    <widget class="QLabel" name="viewLabel">
      <property name="maximumSize">
       <size>
        <width>16777215</width>
@@ -101,7 +162,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Exercise options</string>
+      <string extracomment="View mode options">View</string>
      </property>
     </widget>
    </item>
