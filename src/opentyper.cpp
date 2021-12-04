@@ -723,7 +723,7 @@ void OpenTyper::setColors(void)
 	// Set background color
 	if(customBgColor)
 	{
-		ui->mainFrame->setStyleSheet("background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ")");
+		ui->mainFrame->setStyleSheet("#mainFrame {background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ");}");
 		ui->centralwidget->setStyleSheet("#centralwidget {background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ");}");
 	}
 	else
