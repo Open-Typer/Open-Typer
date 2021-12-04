@@ -573,7 +573,7 @@
           <number>0</number>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
+          <item row="1" column="0">
            <widget class="QFrame" name="levelSpace">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -641,7 +641,7 @@
             </widget>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="3" column="0">
            <widget class="QFrame" name="typingSpace">
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -762,6 +762,13 @@ p, li { white-space: pre-wrap; }
             </widget>
             <zorder>mistakeLabel</zorder>
             <zorder>inputLabel</zorder>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="Line" name="paperSeparationLine">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
            </widget>
           </item>
          </layout>
