@@ -709,6 +709,8 @@ void OpenTyper::adjustSize(void)
 		newHeight);
 	ui->inputLabel->resize(ui->inputLabel->width(),
 		QWIDGETSIZE_MAX);
+	ui->mistakeLabel->resize(ui->mistakeLabel->width(),
+		QWIDGETSIZE_MAX);
 }
 
 void OpenTyper::setColors(void)
