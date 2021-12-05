@@ -26,6 +26,7 @@ UpdaterDialog::UpdaterDialog(QWidget *parent, bool downloading) :
 	ui(new Ui::UpdaterDialog)
 {
 	ui->setupUi(this);
+	_downloading = downloading;
 	if(downloading)
 	{
 		ui->title->hide();
@@ -56,4 +57,12 @@ void UpdaterDialog::setNewVer(QString ver)
 	ui->newVerLabel->setText(
 		ui->newVerLabel->text() + " " + ver);
 	ui->changeLogLabel->setText(tr("Change log is available at") + " <a href=\"" + _GITHUB_REPO + "/releases/tag/" + ver + "\">GitHub</a>");
+}
+
+void UpdaterDialog::closeEvent(QCloseEvent *event)
+{
+	if(_downloading)
+		event->ignore();
+	else
+		event->accept();
 }

@@ -22,6 +22,7 @@
 #define UPDATERDIALOG_H
 
 #include <QDialog>
+#include <QCloseEvent>
 #include "updater.h"
 
 namespace Ui {
@@ -36,9 +37,13 @@ class UpdaterDialog : public QDialog
 		~UpdaterDialog();
 		void setCurrentVer(QString ver);
 		void setNewVer(QString ver);
-	
+
+	protected:
+		void closeEvent(QCloseEvent *event);
+
 	private:
 		Ui::UpdaterDialog *ui;
+		bool _downloading;
 };
 
 #endif // UPDATERDIALOG_H
