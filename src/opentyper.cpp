@@ -126,6 +126,7 @@ void OpenTyper::connectAll(void)
 		SIGNAL(timeout()),
 		this,
 		SLOT(updateCurrentTime()));
+	// **Widgets**
 	// inputLabel
 	connect(ui->inputLabel,
 		SIGNAL(keyPressed(QKeyEvent*)),
@@ -146,7 +147,6 @@ void OpenTyper::connectAll(void)
 		SIGNAL(clicked()),
 		this,
 		SLOT(openEditor()));
-	// **Training tab**
 	// Repeat exercise button
 	connect(ui->repeatButton,
 		SIGNAL(clicked()),
