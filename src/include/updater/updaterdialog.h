@@ -44,6 +44,9 @@ class UpdaterDialog : public QDialog
 	private:
 		Ui::UpdaterDialog *ui;
 		bool _downloading;
+
+	public slots:
+		void updateProgress(int percentage);
 };
 
 #endif // UPDATERDIALOG_H

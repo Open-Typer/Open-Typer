@@ -60,6 +60,12 @@ void UpdaterDialog::setNewVer(QString ver)
 	ui->changeLogLabel->setText(tr("Change log is available at") + " <a href=\"" + _GITHUB_REPO + "/releases/tag/" + ver + "\">GitHub</a>");
 }
 
+void UpdaterDialog::updateProgress(int percentage)
+{
+	ui->progressBar->setRange(0,100);
+	ui->progressBar->setValue(percentage);
+}
+
 void UpdaterDialog::closeEvent(QCloseEvent *event)
 {
 	if(_downloading)
