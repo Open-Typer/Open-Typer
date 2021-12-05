@@ -45,7 +45,7 @@ class Downloader : public QObject
 
 	signals:
 		void downloaded();
-		void progressChanged();
+		void progressChanged(int);
 	
 	private slots:
 		void fileDownloaded(QNetworkReply* pReply);
