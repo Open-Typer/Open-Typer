@@ -61,8 +61,9 @@ void Updater::initUpdate()
 			#endif
 			updatedProgram = new Downloader(_GITHUB_REPO+QString("/releases/download/v")+newVer+"/"+executable,this);
 			connect(updatedProgram,SIGNAL(downloaded()),this,SLOT(overwriteExecutable()));
-			UpdaterDialog msgBox(nullptr,true);
-			msgBox.exec();
+			UpdaterDialog *msgBox = new UpdaterDialog(nullptr,true);
+			connect(updatedProgram,SIGNAL(progressChanged(int)),msgBox,SLOT(updateProgress(int)));
+			msgBox->exec();
 		}
 	}
 }
