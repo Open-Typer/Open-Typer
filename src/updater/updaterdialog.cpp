@@ -21,13 +21,23 @@
 #include "updater/updaterdialog.h"
 #include "ui_updaterdialog.h"
 
-UpdaterDialog::UpdaterDialog(QWidget *parent) :
+UpdaterDialog::UpdaterDialog(QWidget *parent, bool downloading) :
 	QDialog(parent),
 	ui(new Ui::UpdaterDialog)
 {
 	ui->setupUi(this);
-	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
-	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
+	if(downloading)
+	{
+		ui->title->hide();
+		ui->versionComparisonFrame->hide();
+		ui->buttonFrame->hide();
+		ui->notice->setText(tr("Downloading update, please wait..."));
+	}
+	else
+	{
+		connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
+		connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
+	}
 }
 
 UpdaterDialog::~UpdaterDialog()

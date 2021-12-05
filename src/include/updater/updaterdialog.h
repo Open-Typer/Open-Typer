@@ -32,7 +32,7 @@ class UpdaterDialog : public QDialog
 {
 	Q_OBJECT
 	public:
-		explicit UpdaterDialog(QWidget *parent = nullptr);
+		explicit UpdaterDialog(QWidget *parent = nullptr, bool downloading = false);
 		~UpdaterDialog();
 		void setCurrentVer(QString ver);
 		void setNewVer(QString ver);
