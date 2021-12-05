@@ -47,7 +47,7 @@ QByteArray Downloader::downloadedData() const
 
 void Downloader::downloadProgress(qint64 current, qint64 max)
 {
-	downloadProgressPercentage = 100*(current/max);
+	downloadProgressPercentage = (current*100)/max;
 	emit progressChanged();
 }
 
