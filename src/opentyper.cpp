@@ -182,6 +182,16 @@ void OpenTyper::connectAll(void)
 		SIGNAL(clicked()),
 		this,
 		SLOT(openExerciseFromFile()));
+	// Zoom in button
+	connect(ui->zoomInButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(zoomIn()));
+	// Zoom out button
+	connect(ui->zoomOutButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(zoomOut()));
 	// Start timer
 	secLoop->start(1000);
 }
@@ -896,4 +906,30 @@ void OpenTyper::changeLanguage(int index)
 		QCoreApplication::installTranslator(translator);
 	ui->retranslateUi(this);
 	refreshAll(false);
+}
+
+void OpenTyper::zoomIn(void)
+{
+	QString fontFamily = settings->value("theme/font","Courier").toString();
+	int fontSize = settings->value("theme/fontsize","14").toInt()+2;
+	bool fontBold = settings->value("theme/fontbold","false").toBool();
+	bool fontItalic = settings->value("theme/fontitalic","false").toBool();
+	bool fontUnderline = settings->value("theme/fontunderline","false").toBool();
+	if(fontSize > 20)
+		fontSize = 20;
+	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
+	adjustSize();
+}
+
+void OpenTyper::zoomOut(void)
+{
+	QString fontFamily = settings->value("theme/font","Courier").toString();
+	int fontSize = settings->value("theme/fontsize","14").toInt()-2;
+	bool fontBold = settings->value("theme/fontbold","false").toBool();
+	bool fontItalic = settings->value("theme/fontitalic","false").toBool();
+	bool fontUnderline = settings->value("theme/fontunderline","false").toBool();
+	if(fontSize <= 0)
+		fontSize = 2;
+	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
+	adjustSize();
 }

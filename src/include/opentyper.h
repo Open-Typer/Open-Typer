@@ -112,6 +112,8 @@ private slots:
 	void spaceNewlineCheckBoxChanged(bool checked);
 	void openExerciseFromFile(void);
 	void changeLanguage(int index);
+	void zoomIn(void);
+	void zoomOut(void);
 
 public slots:
 	void openEditor(void);
