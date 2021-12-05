@@ -41,12 +41,15 @@ class Downloader : public QObject
 		explicit Downloader(QUrl url, QObject *parent = nullptr);
 		virtual ~Downloader();
 		QByteArray downloadedData() const;
+		int downloadProgressPercentage;
 
 	signals:
 		void downloaded();
+		void progressChanged();
 	
 	private slots:
 		void fileDownloaded(QNetworkReply* pReply);
+		void downloadProgress(qint64 current, qint64 max);
 	
 	private:
 		QNetworkAccessManager m_WebCtrl;

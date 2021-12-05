@@ -23,10 +23,12 @@
 Downloader::Downloader(QUrl url, QObject *parent) :
 	QObject(parent)
 {
+	downloadProgressPercentage = 0;
 	QNetworkRequest request(url);
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute,true);
-	m_WebCtrl.get(request);
+	QNetworkReply *reply = m_WebCtrl.get(request);
 	connect(&m_WebCtrl,SIGNAL(finished(QNetworkReply*)),this,SLOT(fileDownloaded(QNetworkReply*)));
+	connect(reply,SIGNAL(downloadProgress(qint64,qint64)),this,SLOT(downloadProgress(qint64,qint64)));
 }
 
 Downloader::~Downloader() { }
@@ -41,6 +43,12 @@ void Downloader::fileDownloaded(QNetworkReply* pReply)
 QByteArray Downloader::downloadedData() const
 {
 	return m_DownloadedData;
+}
+
+void Downloader::downloadProgress(qint64 current, qint64 max)
+{
+	downloadProgressPercentage = 100*(current/max);
+	emit progressChanged();
 }
 
 bool Net::internetConnected()
