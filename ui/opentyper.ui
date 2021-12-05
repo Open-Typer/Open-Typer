@@ -530,7 +530,7 @@
       <property name="frameShadow">
        <enum>QFrame::Sunken</enum>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0">
        <property name="leftMargin">
         <number>2</number>
        </property>
@@ -543,6 +543,53 @@
        <property name="bottomMargin">
         <number>2</number>
        </property>
+       <item alignment="Qt::AlignLeft">
+        <widget class="QFrame" name="exerciseControlFrame">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="timedExerciseButton">
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="toolTip">
+             <string>Timed exercise</string>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/res/images/clock.png</normaloff>:/res/images/clock.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
        <item alignment="Qt::AlignRight">
         <widget class="QFrame" name="zoomFrame">
          <property name="sizePolicy">
