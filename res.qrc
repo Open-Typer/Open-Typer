@@ -27,5 +27,6 @@
         <file>res/images/options.png</file>
         <file>res/images/panel_color.png</file>
         <file>res/images/minus.png</file>
+        <file>res/images/clock.png</file>
     </qresource>
 </RCC>
