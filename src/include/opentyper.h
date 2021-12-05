@@ -99,19 +99,19 @@ private:
 	void connectAll(void);
 
 private slots:
-    void keyPress(QKeyEvent *event);
-    void openOptions(void);
-    void openPack(void);
-    void repeatLevel(void);
-    void nextLevel(void);
-    void previousLevel(void);
-    void updateCurrentTime(void);
-    void lessonSelectionListIndexChanged(int index);
-    void sublessonSelectionListIndexChanged(int index);
-    void levelSelectionListIndexChanged(int index);
-    void spaceNewlineCheckBoxChanged(bool checked);
-    void openExerciseFromFile(void);
-    void changeLanguage(int index);
+	void keyPress(QKeyEvent *event);
+	void openOptions(void);
+	void openPack(void);
+	void repeatLevel(void);
+	void nextLevel(void);
+	void previousLevel(void);
+	void updateCurrentTime(void);
+	void lessonSelectionListIndexChanged(int index);
+	void sublessonSelectionListIndexChanged(int index);
+	void levelSelectionListIndexChanged(int index);
+	void spaceNewlineCheckBoxChanged(bool checked);
+	void openExerciseFromFile(void);
+	void changeLanguage(int index);
 
 public slots:
 	void openEditor(void);
