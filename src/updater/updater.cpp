@@ -61,9 +61,7 @@ void Updater::initUpdate()
 			#endif
 			updatedProgram = new Downloader(_GITHUB_REPO+QString("/releases/download/v")+newVer+"/"+executable,this);
 			connect(updatedProgram,SIGNAL(downloaded()),this,SLOT(overwriteExecutable()));
-			QMessageBox msgBox;
-			msgBox.setText(tr("Downloading update, please wait..."));
-			msgBox.setStandardButtons(QMessageBox::NoButton);
+			UpdaterDialog msgBox(nullptr,true);
 			msgBox.exec();
 		}
 	}
