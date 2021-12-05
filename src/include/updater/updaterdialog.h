@@ -39,10 +39,6 @@ class UpdaterDialog : public QDialog
 	
 	private:
 		Ui::UpdaterDialog *ui;
-	
-	private slots:
-		void yesClicked(void);
-		void noClicked(void);
 };
 
 #endif // UPDATERDIALOG_H

@@ -26,8 +26,8 @@ UpdaterDialog::UpdaterDialog(QWidget *parent) :
 	ui(new Ui::UpdaterDialog)
 {
 	ui->setupUi(this);
-	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(yesClicked()));
-	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(noClicked()));
+	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
+	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
 }
 
 UpdaterDialog::~UpdaterDialog()
@@ -46,14 +46,4 @@ void UpdaterDialog::setNewVer(QString ver)
 	ui->newVerLabel->setText(
 		ui->newVerLabel->text() + " " + ver);
 	ui->changeLogLabel->setText(tr("Change log is available at") + " <a href=\"" + _GITHUB_REPO + "/releases/tag/" + ver + "\">GitHub</a>");
-}
-
-void UpdaterDialog::yesClicked(void)
-{
-	accept();
-}
-
-void UpdaterDialog::noClicked(void)
-{
-	reject();
 }
