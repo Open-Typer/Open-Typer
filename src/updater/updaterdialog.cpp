@@ -36,6 +36,7 @@ UpdaterDialog::UpdaterDialog(QWidget *parent, bool downloading) :
 	}
 	else
 	{
+		ui->progressBar->hide();
 		connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
 		connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
 	}
