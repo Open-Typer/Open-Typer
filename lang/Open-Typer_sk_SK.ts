@@ -70,39 +70,39 @@
         <translation>Otvoriť vlastný balík</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="220"/>
-        <location filename="../src/opentyper.cpp" line="222"/>
+        <location filename="../src/opentyper.cpp" line="230"/>
+        <location filename="../src/opentyper.cpp" line="232"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="299"/>
+        <location filename="../src/opentyper.cpp" line="309"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="457"/>
+        <location filename="../src/opentyper.cpp" line="467"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="457"/>
-        <location filename="../src/opentyper.cpp" line="853"/>
+        <location filename="../src/opentyper.cpp" line="467"/>
+        <location filename="../src/opentyper.cpp" line="867"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="466"/>
+        <location filename="../src/opentyper.cpp" line="476"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="480"/>
+        <location filename="../src/opentyper.cpp" line="490"/>
         <source>Could not open the file.</source>
         <translation>Nepodarilo sa otvoriť súbor.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="853"/>
+        <location filename="../src/opentyper.cpp" line="867"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
@@ -167,9 +167,8 @@
         <translation>Chyba: Žiadne pripojenie na internet.</translation>
     </message>
     <message>
-        <location filename="../src/updater/updater.cpp" line="65"/>
         <source>Downloading update, please wait...</source>
-        <translation>Aktualizácia sa sťahuje, čakajte prosím...</translation>
+        <translation type="vanished">Aktualizácia sa sťahuje, čakajte prosím...</translation>
     </message>
 </context>
 <context>
@@ -180,39 +179,44 @@
         <translation>Aktualizácia</translation>
     </message>
     <message>
-        <location filename="../ui/updater/updaterdialog.ui" line="100"/>
+        <location filename="../ui/updater/updaterdialog.ui" line="135"/>
         <source>Current version:</source>
         <translation>Aktuálna verzia:</translation>
     </message>
     <message>
-        <location filename="../ui/updater/updaterdialog.ui" line="125"/>
+        <location filename="../ui/updater/updaterdialog.ui" line="160"/>
         <source>New version:</source>
         <translation>Nová verzia:</translation>
     </message>
     <message>
-        <location filename="../ui/updater/updaterdialog.ui" line="170"/>
+        <location filename="../ui/updater/updaterdialog.ui" line="50"/>
         <source>Yes</source>
         <translation>Áno</translation>
     </message>
     <message>
-        <location filename="../ui/updater/updaterdialog.ui" line="177"/>
+        <location filename="../ui/updater/updaterdialog.ui" line="57"/>
         <source>No</source>
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../ui/updater/updaterdialog.ui" line="37"/>
+        <location filename="../ui/updater/updaterdialog.ui" line="72"/>
         <source>Update available</source>
         <translation>Dostupná aktualizácia</translation>
     </message>
     <message>
-        <location filename="../ui/updater/updaterdialog.ui" line="47"/>
+        <location filename="../ui/updater/updaterdialog.ui" line="82"/>
         <source>There&apos;s a new update available.
 Would you like to download and install it?</source>
         <translation>Je dostupná nová aktualizácia.
 Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
     <message>
-        <location filename="../src/updater/updaterdialog.cpp" line="48"/>
+        <location filename="../src/updater/updaterdialog.cpp" line="35"/>
+        <source>Downloading update, please wait...</source>
+        <translation>Aktualizácia sa sťahuje, čakajte prosím...</translation>
+    </message>
+    <message>
+        <location filename="../src/updater/updaterdialog.cpp" line="62"/>
         <source>Change log is available at</source>
         <translation>Zoznam zmien je dostupný na</translation>
     </message>

@@ -135,7 +135,7 @@
     </message>
     <message>
         <source>Downloading update, please wait...</source>
-        <translation>Update herunterladen, bitte warte...</translation>
+        <translation type="vanished">Update herunterladen, bitte warte...</translation>
     </message>
 </context>
 <context>
@@ -173,6 +173,10 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Change log is available at</source>
         <translation>Change log is verfügbar unter</translation>
+    </message>
+    <message>
+        <source>Downloading update, please wait...</source>
+        <translation>Update herunterladen, bitte warte...</translation>
     </message>
 </context>
 <context>
