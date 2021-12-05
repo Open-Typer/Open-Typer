@@ -33,6 +33,8 @@ UpdaterDialog::UpdaterDialog(QWidget *parent, bool downloading) :
 		ui->versionComparisonFrame->hide();
 		ui->buttonFrame->hide();
 		ui->notice->setText(tr("Downloading update, please wait..."));
+		setMinimumHeight(100);
+		setMaximumHeight(100);
 	}
 	else
 	{
