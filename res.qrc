@@ -26,5 +26,6 @@
         <file>res/images/reset.png</file>
         <file>res/images/options.png</file>
         <file>res/images/panel_color.png</file>
+        <file>res/images/minus.png</file>
     </qresource>
 </RCC>
