@@ -824,6 +824,7 @@ void OpenTyper::updateTheme(void)
 				QString::number(palette().color(QPalette::Midlight).blue()) + ")";
 			ui->paper->setStyleSheet(paperStyleSheet);
 			ui->controlFrame->setStyleSheet("QFrame { " + QString(panelStyleSheet) + "; }");
+			ui->bottomPanel->setStyleSheet("QFrame { " + QString(panelStyleSheet) + "; }");
 			break;
 		case 1:
 			// Dark
@@ -841,6 +842,7 @@ void OpenTyper::updateTheme(void)
 			}
 			ui->paper->setStyleSheet("#paper {background-color: rgb(15, 25, 35);}");
 			ui->controlFrame->setStyleSheet("QFrame { background-color: rgb(20, 33, 47); }");
+			ui->bottomPanel->setStyleSheet("QFrame { background-color: rgb(20, 33, 47); }");
 			break;
 		case 2:
 			// Light
@@ -856,6 +858,7 @@ void OpenTyper::updateTheme(void)
 			}
 			ui->paper->setStyleSheet("background-color: rgb(255, 255, 255)");
 			ui->controlFrame->setStyleSheet("QFrame { background-color: rgb(255,255,255); }");
+			ui->bottomPanel->setStyleSheet("QFrame { background-color: rgb(255,255,255); }");
 			break;
 	}
 }
