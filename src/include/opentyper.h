@@ -95,6 +95,7 @@ public:
 	void refreshAll(bool setLang);
 	void changeMode(int mode);
 	int currentMode;
+	int timedExHours, timedExMinutes, timedExSeconds;
 
 private:
 	Ui::OpenTyper *ui;

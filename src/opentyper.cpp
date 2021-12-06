@@ -668,7 +668,14 @@ void OpenTyper::updateCurrentTime(void)
 		time = levelTimer.elapsed()/1000;
 	else
 		time = lastTime;
-	ui->currentTimeNumber->setText(QString::number(time));
+	if(currentMode == 1)
+	{
+		QTime limitTime(timedExHours,timedExMinutes,timedExSeconds,0);
+		QTime currentTime = limitTime.addSecs(time*(-1));
+		ui->timedExTime->setTime(currentTime);
+	}
+	else
+		ui->currentTimeNumber->setText(QString::number(time));
 	setColors();
 }
 
@@ -990,7 +997,12 @@ void OpenTyper::initTimedExercise(void)
 	timeDialog timeSelect;
 	if(timeSelect.exec() == QDialog::Accepted)
 	{
+		timedExHours = timeSelect.hours;
+		timedExMinutes = timeSelect.minutes;
+		timedExSeconds = timeSelect.seconds;
 		changeMode(1);
 		levelFinalInit();
+		levelInProgress = true;
+		levelTimer.start();
 	}
 }
