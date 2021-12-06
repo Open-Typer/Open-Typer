@@ -92,6 +92,7 @@ public:
 	int textViewMode;
 	QTranslator *translator;
 	void refreshAll(bool setLang);
+	void changeMode(int mode);
 
 private:
 	Ui::OpenTyper *ui;

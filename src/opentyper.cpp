@@ -54,6 +54,8 @@ void OpenTyper::refreshAll(bool setLang)
 		else
 			changeLanguage(langMgr->boxItems.indexOf(settings->value("main/language","").toString()));
 	}
+	// Set mode
+	changeMode(0);
 	// Config file (lesson pack) name
 	QString configName = settings->value("main/configfile","").toString(); // default: "" (empty QString)
 	if(configName == "")
@@ -939,4 +941,20 @@ void OpenTyper::zoomOut(void)
 		fontSize = 2;
 	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
 	adjustSize();
+}
+
+void OpenTyper::changeMode(int mode)
+{
+	switch(mode) {
+		case 0:
+			// Default mode
+			ui->masterControlFrame->show();
+			ui->timedExControlFrame->hide();
+			break;
+		case 1:
+			// Timed exercise mode
+			ui->masterControlFrame->hide();
+			ui->timedExControlFrame->show();
+			break;
+	}
 }
