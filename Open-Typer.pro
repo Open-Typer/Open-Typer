@@ -25,6 +25,7 @@ SOURCES += \
     src/core/packs.cpp \
     src/core/language.cpp \
     src/levelsummary.cpp \
+    src/timedialog.cpp \
     src/options/behavior.cpp \
     src/options/customization.cpp \
     src/options/keyboard.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
     src/include/core/packs.h \
     src/include/core/language.h \
     src/include/levelsummary.h \
+    src/include/timedialog.h \
     src/include/options/behavior.h \
     src/include/options/customization.h \
     src/include/options/keyboard.h \
@@ -69,6 +71,7 @@ FORMS += \
     ui/options/customization.ui \
     ui/options/keyboard.ui \
     ui/levelsummary.ui \
+    ui/timedialog.ui \
     ui/opentyper.ui \
     ui/options/optionswindow.ui \
     ui/packEditor/packeditor.ui \
