@@ -94,6 +94,7 @@ public:
 	QTranslator *translator;
 	void refreshAll(bool setLang);
 	void changeMode(int mode);
+	int currentMode;
 
 private:
 	Ui::OpenTyper *ui;

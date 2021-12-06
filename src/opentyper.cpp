@@ -962,6 +962,7 @@ void OpenTyper::changeMode(int mode)
 			ui->timedExControlFrame->show();
 			break;
 	}
+	currentMode = mode;
 }
 
 void OpenTyper::initTimedExercise(void)
