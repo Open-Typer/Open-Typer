@@ -327,6 +327,8 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 void OpenTyper::levelFinalInit(void)
 {
 	// Init level
+	if(currentMode == 1)
+		level += '\n';
 	currentLine=0;
 	updateText();
 	adjustSize();
@@ -606,38 +608,56 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	if(input.count() >= level.count())
 	{
-		levelInProgress=false;
-		lastTime = levelTimer.elapsed()/1000;
-		levelSummary msgBox;
-		msgBox.setTotalTime(levelTimer.elapsed()/1000);
-		msgBox.setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
-		msgBox.setMistakes(levelMistakes);
-		msgBox.setStyleSheet(styleSheet());
-		int ret = msgBox.exec();
-		if(ret == QDialog::Accepted)
+		if(currentMode == 1)
 		{
-			if(currentLevel == levelCount)
+			currentLine=0;
+			updateText();
+			levelPos=0;
+			displayPos=0;
+			deadKeys=0;
+			mistake=false;
+			ignoreMistakeLabelAppend=false;
+			mistakeLabelHtml = "";
+			ui->mistakeLabel->setHtml(mistakeLabelHtml);
+			input = "";
+			displayInput = "";
+			ui->inputLabel->setHtml(displayInput);
+		}
+		else
+		{
+			levelInProgress=false;
+			lastTime = levelTimer.elapsed()/1000;
+			levelSummary msgBox;
+			msgBox.setTotalTime(levelTimer.elapsed()/1000);
+			msgBox.setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
+			msgBox.setMistakes(levelMistakes);
+			msgBox.setStyleSheet(styleSheet());
+			int ret = msgBox.exec();
+			if(ret == QDialog::Accepted)
 			{
-				if(currentSublesson == sublessonCount)
+				if(currentLevel == levelCount)
 				{
-					if(currentLesson == lessonCount)
-						currentLesson=1;
+					if(currentSublesson == sublessonCount)
+					{
+						if(currentLesson == lessonCount)
+							currentLesson=1;
+						else
+							currentLesson++;
+						currentSublesson=1;
+					}
 					else
-						currentLesson++;
-					currentSublesson=1;
+						currentSublesson++;
+					currentLevel=1;
 				}
 				else
-					currentSublesson++;
-				currentLevel=1;
+					currentLevel++;
+				customLevelLoaded=false;
 			}
+			if(customLevelLoaded)
+				levelFinalInit();
 			else
-				currentLevel++;
-			customLevelLoaded=false;
+				repeatLevel();
 		}
-		if(customLevelLoaded)
-			levelFinalInit();
-		else
-			repeatLevel();
 	}
 }
 
@@ -969,5 +989,8 @@ void OpenTyper::initTimedExercise(void)
 {
 	timeDialog timeSelect;
 	if(timeSelect.exec() == QDialog::Accepted)
+	{
 		changeMode(1);
+		levelFinalInit();
+	}
 }
