@@ -528,7 +528,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	}
 	if(keyboardUtils::isSpecialKey(event) && (event->key() != Qt::Key_Backspace))
 		return;
-	if(levelPos == 0)
+	if((levelPos == 0) && !levelInProgress)
 	{
 		levelTimer.start();
 		levelInProgress=true;
