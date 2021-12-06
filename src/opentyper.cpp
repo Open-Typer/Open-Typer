@@ -194,6 +194,11 @@ void OpenTyper::connectAll(void)
 		SIGNAL(clicked()),
 		this,
 		SLOT(zoomOut()));
+	// Timed exercise button
+	connect(ui->timedExerciseButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(initTimedExercise()));
 	// Start timer
 	secLoop->start(1000);
 }
@@ -957,4 +962,11 @@ void OpenTyper::changeMode(int mode)
 			ui->timedExControlFrame->show();
 			break;
 	}
+}
+
+void OpenTyper::initTimedExercise(void)
+{
+	timeDialog timeSelect;
+	if(timeSelect.exec() == QDialog::Accepted)
+		changeMode(1);
 }

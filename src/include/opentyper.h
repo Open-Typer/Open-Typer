@@ -39,6 +39,7 @@
 #include "packEditor/packeditor.h"
 #include "options/optionswindow.h"
 #include "levelsummary.h"
+#include "timedialog.h"
 #include "core/configfile.h"
 #include "core/utils.h"
 #include "core/packs.h"
@@ -115,6 +116,7 @@ private slots:
 	void changeLanguage(int index);
 	void zoomIn(void);
 	void zoomOut(void);
+	void initTimedExercise(void);
 
 public slots:
 	void openEditor(void);
