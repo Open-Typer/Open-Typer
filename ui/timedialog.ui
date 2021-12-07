@@ -48,7 +48,32 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QTimeEdit" name="timeEdit"/>
+       <widget class="QTimeEdit" name="timeEdit">
+        <property name="maximumTime">
+         <time>
+          <hour>0</hour>
+          <minute>59</minute>
+          <second>59</second>
+         </time>
+        </property>
+        <property name="minimumTime">
+         <time>
+          <hour>0</hour>
+          <minute>0</minute>
+          <second>15</second>
+         </time>
+        </property>
+        <property name="displayFormat">
+         <string>mm:ss</string>
+        </property>
+        <property name="time">
+         <time>
+          <hour>0</hour>
+          <minute>0</minute>
+          <second>15</second>
+         </time>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
