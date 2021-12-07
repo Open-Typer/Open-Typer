@@ -200,7 +200,7 @@ void OpenTyper::connectAll(void)
 		this,
 		SLOT(initTimedExercise()));
 	// Start timer
-	secLoop->start(1000);
+	secLoop->start(500);
 }
 
 QString OpenTyper::loadConfig(QString configName)
@@ -531,7 +531,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	if((levelPos == 0) && !levelInProgress)
 	{
 		levelTimer.start();
-		secLoop->start(1000);
+		secLoop->start(500);
 		levelInProgress=true;
 	}
 	if((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || spaceNewline) && (event->text() == level[levelPos]))) && !mistake)
@@ -700,7 +700,7 @@ void OpenTyper::updateCurrentTime(void)
 			{
 				timedExStarted = true;
 				levelTimer.start();
-				secLoop->start(1000);
+				secLoop->start(500);
 				ui->timedExRemainingLabel->show();
 				ui->timedExTime->show();
 				ui->timedExCountdownLabel->hide();
@@ -1058,7 +1058,7 @@ void OpenTyper::initTimedExercise(void)
 			levelFinalInit();
 			levelInProgress = true;
 			levelTimer.start();
-			secLoop->start(1000);
+			secLoop->start(500);
 		}
 	}
 }
