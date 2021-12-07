@@ -671,26 +671,49 @@ void OpenTyper::updateCurrentTime(void)
 		time = lastTime;
 	if(currentMode == 1)
 	{
-		QTime limitTime(timedExHours,timedExMinutes,timedExSeconds,0);
+		QTime limitTime;
+		if(timedExStarted)
+			limitTime.setHMS(timedExHours,timedExMinutes,timedExSeconds);
+		else
+			limitTime.setHMS(0,0,3);
 		QTime currentTime = limitTime.addSecs(time*(-1));
 		if((currentTime > limitTime) || (currentTime.hour()+currentTime.minute()+currentTime.second() == 0))
 		{
-			// Show summary
-			levelInProgress=false;
-			lastTime = levelTimer.elapsed()/1000;
-			levelSummary msgBox;
-			msgBox.setTotalTime(levelTimer.elapsed()/1000);
-			msgBox.setHitCount(levelHits);
-			msgBox.setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
-			msgBox.setMistakes(levelMistakes);
-			msgBox.showOK();
-			msgBox.setStyleSheet(styleSheet());
-			msgBox.exec();
-			// Switch to default mode
-			changeMode(0);
-			repeatLevel();
+			if(timedExStarted)
+			{
+				// Show summary
+				levelInProgress=false;
+				lastTime = levelTimer.elapsed()/1000;
+				levelSummary msgBox;
+				msgBox.setTotalTime(levelTimer.elapsed()/1000);
+				msgBox.setHitCount(levelHits);
+				msgBox.setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
+				msgBox.setMistakes(levelMistakes);
+				msgBox.showOK();
+				msgBox.setStyleSheet(styleSheet());
+				msgBox.exec();
+				// Switch to default mode
+				changeMode(0);
+				repeatLevel();
+			}
+			else
+			{
+				timedExStarted = true;
+				levelTimer.start();
+				secLoop->start(1000);
+				ui->timedExRemainingLabel->show();
+				ui->timedExTime->show();
+				ui->timedExCountdownLabel->hide();
+			}
 		}
-		ui->timedExTime->setTime(currentTime);
+		if(timedExStarted)
+		{
+			time = levelTimer.elapsed()/1000;
+			limitTime.setHMS(timedExHours,timedExMinutes,timedExSeconds);
+			ui->timedExTime->setTime(limitTime.addSecs(time*(-1)));
+		}
+		else
+			ui->timedExCountdownLabel->setText(QString::number(currentTime.second()));
 	}
 	else
 		ui->currentTimeNumber->setText(QString::number(time));
@@ -1026,7 +1049,12 @@ void OpenTyper::initTimedExercise(void)
 			timedExHours = timeSelect.hours;
 			timedExMinutes = timeSelect.minutes;
 			timedExSeconds = timeSelect.seconds;
+			timedExStarted = false;
 			changeMode(1);
+			ui->timedExCountdownLabel->setText("3");
+			ui->timedExTime->setTime(QTime(timedExHours,timedExMinutes,timedExSeconds));
+			ui->timedExTime->hide();
+			ui->timedExRemainingLabel->hide();
 			levelFinalInit();
 			levelInProgress = true;
 			levelTimer.start();

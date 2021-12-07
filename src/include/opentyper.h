@@ -97,6 +97,7 @@ public:
 	void changeMode(int mode);
 	int currentMode;
 	int timedExHours, timedExMinutes, timedExSeconds;
+	bool timedExStarted;
 
 private:
 	Ui::OpenTyper *ui;
