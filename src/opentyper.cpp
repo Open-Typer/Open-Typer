@@ -121,7 +121,7 @@ void OpenTyper::refreshAll(bool setLang)
 void OpenTyper::connectAll(void)
 {
 	// Create timer (used to update currentTimeNumber every second)
-	QTimer *secLoop = new QTimer(this);
+	secLoop = new QTimer(this);
 	// **Timers**
 	// Updates current time in seconds
 	connect(secLoop,
@@ -531,6 +531,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	if((levelPos == 0) && !levelInProgress)
 	{
 		levelTimer.start();
+		secLoop->start(1000);
 		levelInProgress=true;
 	}
 	if((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || spaceNewline) && (event->text() == level[levelPos]))) && !mistake)
@@ -1029,6 +1030,7 @@ void OpenTyper::initTimedExercise(void)
 			levelFinalInit();
 			levelInProgress = true;
 			levelTimer.start();
+			secLoop->start(1000);
 		}
 	}
 }

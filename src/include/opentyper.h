@@ -67,6 +67,7 @@ public:
 	int deadKeys;
 	int sublessonListStart;
 	QElapsedTimer levelTimer;
+	QTimer *secLoop;
 	bool levelInProgress, mistake, ignoreMistakeLabelAppend;
 	QString inputLabelHtml, mistakeLabelHtml;
 	int lastTime;
