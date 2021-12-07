@@ -1054,6 +1054,7 @@ void OpenTyper::initTimedExercise(void)
 			ui->timedExCountdownLabel->setText("3");
 			ui->timedExTime->setTime(QTime(timedExHours,timedExMinutes,timedExSeconds));
 			ui->timedExTime->hide();
+			ui->timedExCountdownLabel->show();
 			ui->timedExRemainingLabel->hide();
 			levelFinalInit();
 			levelInProgress = true;
