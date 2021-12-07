@@ -100,6 +100,7 @@ void OpenTyper::refreshAll(bool setLang)
 	panelBlueColor = settings->value("theme/panelblue","0").toInt();
 	// Theme
 	updateTheme();
+	setColors();
 	// Space new line
 	spaceNewline = settings->value("main/spacenewline","true").toBool();
 	// Error penalty
