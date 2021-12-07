@@ -26,17 +26,27 @@ levelSummary::levelSummary(QWidget *parent) :
 	ui(new Ui::levelSummary)
 {
 	ui->setupUi(this);
+	ui->okButton->hide();
 	ui->timeLabel->hide();
 	ui->hitsLabel->hide();
 	ui->hpmLabel->hide();
 	ui->mistakesLabel->hide();
 	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
 	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
+	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(accept()));
 }
 
 levelSummary::~levelSummary()
 {
 	delete ui;
+}
+
+void levelSummary::showOK(void)
+{
+	ui->yesButton->hide();
+	ui->noButton->hide();
+	ui->questionLabel->hide();
+	ui->okButton->show();
 }
 
 void levelSummary::setTotalTime(double time)

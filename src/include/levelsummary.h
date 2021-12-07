@@ -34,6 +34,7 @@ class levelSummary : public QDialog
 public:
 	explicit levelSummary(QWidget *parent = nullptr);
 	~levelSummary();
+	void showOK(void);
 	void setTotalTime(double time);
 	void setHitCount(int hits);
 	void setHits(int hits);
