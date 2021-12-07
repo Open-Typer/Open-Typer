@@ -26,6 +26,10 @@ levelSummary::levelSummary(QWidget *parent) :
 	ui(new Ui::levelSummary)
 {
 	ui->setupUi(this);
+	ui->timeLabel->hide();
+	ui->hitsLabel->hide();
+	ui->hpmLabel->hide();
+	ui->mistakesLabel->hide();
 	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
 	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
 }
@@ -39,16 +43,20 @@ void levelSummary::setTotalTime(double time)
 {
 	ui->timeLabel->setText(
 		ui->timeLabel->text() + " " + QString::number(time) + " " + tr("seconds"));
+	ui->timeLabel->show();
 }
+
 
 void levelSummary::setHits(int hits)
 {
 	ui->hpmLabel->setText(
 		ui->hpmLabel->text() + " " + QString::number(hits));
+	ui->hpmLabel->show();
 }
 
 void levelSummary::setMistakes(int mistakes)
 {
 	ui->mistakesLabel->setText(
 		ui->mistakesLabel->text() + " " + QString::number(mistakes));
+	ui->mistakesLabel->show();
 }
