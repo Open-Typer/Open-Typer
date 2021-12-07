@@ -41,9 +41,6 @@ public:
 private:
 	Ui::levelSummary *ui;
 
-private slots:
-	void yesClicked(void);
-	void noClicked(void);
 };
 
 #endif // LEVELSUMMARY_H

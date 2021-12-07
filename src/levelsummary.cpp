@@ -26,8 +26,8 @@ levelSummary::levelSummary(QWidget *parent) :
 	ui(new Ui::levelSummary)
 {
 	ui->setupUi(this);
-	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(yesClicked()));
-	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(noClicked()));
+	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
+	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
 }
 
 levelSummary::~levelSummary()
@@ -51,14 +51,4 @@ void levelSummary::setMistakes(int mistakes)
 {
 	ui->mistakesLabel->setText(
 		ui->mistakesLabel->text() + " " + QString::number(mistakes));
-}
-
-void levelSummary::yesClicked(void)
-{
-	accept();
-}
-
-void levelSummary::noClicked(void)
-{
-	reject();
 }
