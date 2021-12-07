@@ -1011,15 +1011,24 @@ void OpenTyper::changeMode(int mode)
 
 void OpenTyper::initTimedExercise(void)
 {
-	timeDialog timeSelect;
-	if(timeSelect.exec() == QDialog::Accepted)
+	if(currentMode == 1)
 	{
-		timedExHours = timeSelect.hours;
-		timedExMinutes = timeSelect.minutes;
-		timedExSeconds = timeSelect.seconds;
-		changeMode(1);
-		levelFinalInit();
-		levelInProgress = true;
-		levelTimer.start();
+		// Switch back to default mode
+		changeMode(0);
+		repeatLevel();
+	}
+	else
+	{
+		timeDialog timeSelect;
+		if(timeSelect.exec() == QDialog::Accepted)
+		{
+			timedExHours = timeSelect.hours;
+			timedExMinutes = timeSelect.minutes;
+			timedExSeconds = timeSelect.seconds;
+			changeMode(1);
+			levelFinalInit();
+			levelInProgress = true;
+			levelTimer.start();
+		}
 	}
 }
