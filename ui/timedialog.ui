@@ -64,7 +64,7 @@
          </time>
         </property>
         <property name="displayFormat">
-         <string>mm:ss</string>
+         <string notr="true">mm:ss</string>
         </property>
         <property name="time">
          <time>
