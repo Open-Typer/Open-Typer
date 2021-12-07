@@ -518,6 +518,8 @@ void OpenTyper::openExerciseFromFile(void)
 
 void OpenTyper::keyPress(QKeyEvent *event)
 {
+	if((currentMode == 1) && !timedExStarted)
+		return;
 	if(keyboardUtils::isDeadKey(event->key()))
 	{
 		deadKeys++;
