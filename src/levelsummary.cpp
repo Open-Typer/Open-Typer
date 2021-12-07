@@ -46,6 +46,12 @@ void levelSummary::setTotalTime(double time)
 	ui->timeLabel->show();
 }
 
+void levelSummary::setHitCount(int hits)
+{
+	ui->hitsLabel->setText(
+		ui->hitsLabel->text() + " " + QString::number(hits));
+	ui->hitsLabel->show();
+}
 
 void levelSummary::setHits(int hits)
 {

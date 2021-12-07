@@ -35,6 +35,7 @@ public:
 	explicit levelSummary(QWidget *parent = nullptr);
 	~levelSummary();
 	void setTotalTime(double time);
+	void setHitCount(int hits);
 	void setHits(int hits);
 	void setMistakes(int mistakes);
 
