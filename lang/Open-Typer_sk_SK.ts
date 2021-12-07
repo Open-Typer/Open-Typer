@@ -4,105 +4,115 @@
 <context>
     <name>OpenTyper</name>
     <message>
-        <location filename="../ui/opentyper.ui" line="183"/>
+        <location filename="../ui/opentyper.ui" line="246"/>
         <source>Open editor</source>
         <translation>Otvoriť editor</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="96"/>
+        <location filename="../ui/opentyper.ui" line="188"/>
         <source>Options</source>
         <translation>Možnosti</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="292"/>
-        <location filename="../ui/opentyper.ui" line="295"/>
+        <location filename="../ui/opentyper.ui" line="461"/>
+        <location filename="../ui/opentyper.ui" line="464"/>
         <source>Repeat exercise</source>
         <translation>Opakovať cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="327"/>
+        <location filename="../ui/opentyper.ui" line="496"/>
         <source>Previous exercise</source>
         <translation>Predchádzajúce cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="356"/>
+        <location filename="../ui/opentyper.ui" line="525"/>
         <source>Next exercise</source>
         <translation>Nasledujúce cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="477"/>
+        <location filename="../ui/opentyper.ui" line="572"/>
         <source>Time:</source>
         <translation>Čas:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="491"/>
+        <location filename="../ui/opentyper.ui" line="586"/>
         <source>Mistakes:</source>
         <translation>Počet chýb:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="511"/>
+        <location filename="../ui/opentyper.ui" line="606"/>
         <source>Current state:</source>
         <translation>Stav:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="383"/>
+        <location filename="../ui/opentyper.ui" line="680"/>
+        <source>Remaining time:</source>
+        <translation>Zostávajúci čas:</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="769"/>
+        <source>Timed exercise</source>
+        <translation>Cvičenie na čas</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="395"/>
         <source>Lesson:</source>
         <translation>Lekcia:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="435"/>
+        <location filename="../ui/opentyper.ui" line="415"/>
         <source>Exercise:</source>
         <translation>Cvičenie:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="422"/>
+        <location filename="../ui/opentyper.ui" line="362"/>
         <source>Sublesson:</source>
         <translation>Podlekcia:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="125"/>
+        <location filename="../ui/opentyper.ui" line="275"/>
         <source>Open custom exercise</source>
         <translation>Otvoriť vlastné cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="154"/>
+        <location filename="../ui/opentyper.ui" line="217"/>
         <source>Open custom pack</source>
         <translation>Otvoriť vlastný balík</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="230"/>
-        <location filename="../src/opentyper.cpp" line="232"/>
+        <location filename="../src/opentyper.cpp" line="237"/>
+        <location filename="../src/opentyper.cpp" line="239"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="309"/>
+        <location filename="../src/opentyper.cpp" line="316"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="467"/>
+        <location filename="../src/opentyper.cpp" line="476"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="467"/>
-        <location filename="../src/opentyper.cpp" line="867"/>
+        <location filename="../src/opentyper.cpp" line="476"/>
+        <location filename="../src/opentyper.cpp" line="945"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="476"/>
+        <location filename="../src/opentyper.cpp" line="485"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="490"/>
+        <location filename="../src/opentyper.cpp" line="499"/>
         <source>Could not open the file.</source>
         <translation>Nepodarilo sa otvoriť súbor.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="867"/>
+        <location filename="../src/opentyper.cpp" line="945"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
@@ -165,10 +175,6 @@
         <location filename="../src/updater/updater.cpp" line="52"/>
         <source>Error: No internet connection.</source>
         <translation>Chyba: Žiadne pripojenie na internet.</translation>
-    </message>
-    <message>
-        <source>Downloading update, please wait...</source>
-        <translation type="vanished">Aktualizácia sa sťahuje, čakajte prosím...</translation>
     </message>
 </context>
 <context>
@@ -424,22 +430,22 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Súhrn</translation>
     </message>
     <message>
-        <location filename="../ui/levelsummary.ui" line="32"/>
+        <location filename="../ui/levelsummary.ui" line="71"/>
         <source>Total time:</source>
         <translation>Celkový čas:</translation>
     </message>
     <message>
-        <location filename="../ui/levelsummary.ui" line="48"/>
+        <location filename="../ui/levelsummary.ui" line="87"/>
         <source>Would you like to continue to the next exercise?</source>
         <translation>Prajete si pokračovať na ďalšie cvičenie?</translation>
     </message>
     <message>
-        <location filename="../ui/levelsummary.ui" line="58"/>
+        <location filename="../ui/levelsummary.ui" line="61"/>
         <source>Hits per minute:</source>
         <translation>Počet čistých úderov za minútu:</translation>
     </message>
     <message>
-        <location filename="../ui/levelsummary.ui" line="87"/>
+        <location filename="../ui/levelsummary.ui" line="51"/>
         <source>Exercise completed</source>
         <translation>Cvičenie dokončené</translation>
     </message>
@@ -449,17 +455,22 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Počet chýb:</translation>
     </message>
     <message>
-        <location filename="../ui/levelsummary.ui" line="150"/>
+        <location filename="../ui/levelsummary.ui" line="131"/>
         <source>Yes</source>
         <translation>Áno</translation>
     </message>
     <message>
-        <location filename="../ui/levelsummary.ui" line="172"/>
+        <location filename="../ui/levelsummary.ui" line="153"/>
         <source>No</source>
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../src/levelsummary.cpp" line="41"/>
+        <location filename="../ui/levelsummary.ui" line="173"/>
+        <source>Total hits:</source>
+        <translation>Celkový počet úderov:</translation>
+    </message>
+    <message>
+        <location filename="../src/levelsummary.cpp" line="55"/>
         <source>seconds</source>
         <translation>sekúnd</translation>
     </message>
@@ -704,6 +715,24 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <location filename="../ui/paperconfigdialog.ui" line="94"/>
         <source>Load</source>
         <translation>Načítať</translation>
+    </message>
+</context>
+<context>
+    <name>timeDialog</name>
+    <message>
+        <location filename="../ui/timedialog.ui" line="29"/>
+        <source>Time</source>
+        <translation>Čas</translation>
+    </message>
+    <message>
+        <location filename="../ui/timedialog.ui" line="99"/>
+        <source>Start</source>
+        <translation>Štart</translation>
+    </message>
+    <message>
+        <location filename="../ui/timedialog.ui" line="112"/>
+        <source>Cancel</source>
+        <translation>Zrušiť</translation>
     </message>
 </context>
 </TS>

@@ -83,6 +83,14 @@
         <source>Open-Typer pack files</source>
         <translation>Open-Typer packet Dateien</translation>
     </message>
+    <message>
+        <source>Timed exercise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remaining time:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -132,10 +140,6 @@
     <message>
         <source>Error: No internet connection.</source>
         <translation>Fehler: Keine Internet Verbindung.</translation>
-    </message>
-    <message>
-        <source>Downloading update, please wait...</source>
-        <translation type="vanished">Update herunterladen, bitte warte...</translation>
     </message>
 </context>
 <context>
@@ -376,6 +380,10 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>seconds</source>
         <translation>Sekunden</translation>
     </message>
+    <message>
+        <source>Total hits:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>optionsWindow</name>
@@ -570,6 +578,21 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Load</source>
         <translation>Laden</translation>
+    </message>
+</context>
+<context>
+    <name>timeDialog</name>
+    <message>
+        <source>Time</source>
+        <translation>Zeit</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 </TS>
