@@ -672,6 +672,23 @@ void OpenTyper::updateCurrentTime(void)
 	{
 		QTime limitTime(timedExHours,timedExMinutes,timedExSeconds,0);
 		QTime currentTime = limitTime.addSecs(time*(-1));
+		if((currentTime > limitTime) || (currentTime.hour()+currentTime.minute()+currentTime.second() == 0))
+		{
+			// Show summary
+			levelInProgress=false;
+			lastTime = levelTimer.elapsed()/1000;
+			levelSummary msgBox;
+			msgBox.setTotalTime(levelTimer.elapsed()/1000);
+			msgBox.setHitCount(levelHits);
+			msgBox.setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
+			msgBox.setMistakes(levelMistakes);
+			msgBox.showOK();
+			msgBox.setStyleSheet(styleSheet());
+			msgBox.exec();
+			// Switch to default mode
+			changeMode(0);
+			repeatLevel();
+		}
 		ui->timedExTime->setTime(currentTime);
 	}
 	else
