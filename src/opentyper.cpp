@@ -337,6 +337,7 @@ void OpenTyper::levelFinalInit(void)
 	levelPos=0;
 	displayPos=0;
 	levelMistakes=0;
+	totalHits=0;
 	levelHits=0;
 	deadKeys=0;
 	levelInProgress=false;
@@ -562,11 +563,16 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		ui->inputLabel->setHtml(displayInput);
 		levelPos++;
 		displayPos++;
+		totalHits++;
 		levelHits++;
 		// Count modifier keys
 		if(event->modifiers() != Qt::NoModifier)
+		{
+			totalHits++;
 			levelHits++;
+		}
 		// Count dead keys
+		totalHits += deadKeys;
 		levelHits += deadKeys;
 		deadKeys = 0;
 	}
@@ -689,7 +695,7 @@ void OpenTyper::updateCurrentTime(void)
 				lastTime = levelTimer.elapsed()/1000;
 				levelSummary msgBox;
 				msgBox.setTotalTime(levelTimer.elapsed()/1000);
-				msgBox.setHitCount(levelHits);
+				msgBox.setHitCount(totalHits);
 				msgBox.setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
 				msgBox.setMistakes(levelMistakes);
 				msgBox.showOK();
