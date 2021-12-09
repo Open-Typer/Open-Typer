@@ -462,14 +462,6 @@ void OpenTyper::levelSelectionListIndexChanged(int index)
 	repeatLevel();
 }
 
-void OpenTyper::spaceNewlineCheckBoxChanged(bool checked)
-{
-	if(checked)
-		settings->setValue("main/spacenewline","true");
-	else
-		settings->setValue("main/spacenewline","false");
-}
-
 void OpenTyper::openExerciseFromFile(void)
 {
 	// Show file dialog

@@ -113,7 +113,6 @@ private slots:
 	void lessonSelectionListIndexChanged(int index);
 	void sublessonSelectionListIndexChanged(int index);
 	void levelSelectionListIndexChanged(int index);
-	void spaceNewlineCheckBoxChanged(bool checked);
 	void openExerciseFromFile(void);
 	void changeLanguage(int index);
 	void zoomIn(void);
