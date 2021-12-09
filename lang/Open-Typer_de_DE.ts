@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>Timed exercise</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitbegrenzte Aufgabe</translation>
     </message>
     <message>
         <source>Remaining time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbleibende Zeit:</translation>
     </message>
 </context>
 <context>
@@ -200,31 +200,31 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>View</source>
         <extracomment>View mode options</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Text view mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Textansichtsmodus:</translation>
     </message>
     <message>
         <source>Paper, whole text (default)</source>
         <comment>Shows the entire text on a paper</comment>
-        <translation type="unfinished"></translation>
+        <translation>Papier, Kompletter Text (Standard)</translation>
     </message>
     <message>
         <source>Paper, 3 lines</source>
         <comment>Shows current 3 lines of the text on a paper</comment>
-        <translation type="unfinished"></translation>
+        <translation>Papier, 3 Zeilen</translation>
     </message>
     <message>
         <source>Full screen, whole text</source>
         <comment>Shows the entire text</comment>
-        <translation type="unfinished"></translation>
+        <translation>Voller Bildschirm, Kompletter Text</translation>
     </message>
     <message>
         <source>Full screen, 3 lines</source>
         <comment>Shows current 3 lines</comment>
-        <translation type="unfinished"></translation>
+        <translation>Voller Bildschirm, 3 Zeilen</translation>
     </message>
 </context>
 <context>
@@ -382,7 +382,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Total hits:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamtschläge:</translation>
     </message>
 </context>
 <context>
@@ -588,7 +588,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Starten</translation>
     </message>
     <message>
         <source>Cancel</source>
