@@ -73,3 +73,6 @@ Thumbs.db
 # M cross environment
 mxe/
 
+# Docs
+docs/
+
