@@ -13,8 +13,9 @@ Open-Typer is a free and open source software for typewriting training and educa
 * Automatic updates on Windows (shows a dialog window when a new update is found).
 * No installation required (might change in future).
 
-## More information
+## Download
+Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typer/releases/latest) or [SourceForge](https://sourceforge.net/projects/open-typer/).
 
-[Download](https://github.com/Open-Typer/Open-Typer/wiki/Download)
+## More information
 
 [Build instructions](https://github.com/Open-Typer/Open-Typer/wiki/Build-instructions)
