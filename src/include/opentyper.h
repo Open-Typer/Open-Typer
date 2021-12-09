@@ -87,7 +87,6 @@ private:
 	int paperRedColor, paperGreenColor, paperBlueColor;
 	int panelRedColor, panelGreenColor, panelBlueColor;
 	bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor, customPanelColor;
-	void saveColorSettings(void);
 	void setColors(void);
 	void updateTheme(void);
 	bool customLevelLoaded;
