@@ -80,39 +80,39 @@
         <translation>Otvoriť vlastný balík</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="237"/>
-        <location filename="../src/opentyper.cpp" line="239"/>
+        <location filename="../src/opentyper.cpp" line="238"/>
+        <location filename="../src/opentyper.cpp" line="240"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="316"/>
+        <location filename="../src/opentyper.cpp" line="317"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="476"/>
+        <location filename="../src/opentyper.cpp" line="470"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="476"/>
-        <location filename="../src/opentyper.cpp" line="945"/>
+        <location filename="../src/opentyper.cpp" line="470"/>
+        <location filename="../src/opentyper.cpp" line="946"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="485"/>
+        <location filename="../src/opentyper.cpp" line="479"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="499"/>
+        <location filename="../src/opentyper.cpp" line="493"/>
         <source>Could not open the file.</source>
         <translation>Nepodarilo sa otvoriť súbor.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="945"/>
+        <location filename="../src/opentyper.cpp" line="946"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
