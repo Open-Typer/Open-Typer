@@ -78,7 +78,6 @@ private:
 	int lastTime;
 	int _line_count(QString str);
 	Updater *versionHdw;
-	void autoUpdate(void);
 	void adjustSize(void);
 	int labelWidth(QLabel *targetLabel, QString labelText);
 	void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
