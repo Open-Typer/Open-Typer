@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+  <namespace>Open-Typer</namespace>
+  <virtualFolder>Open-Typer</virtualFolder>
+  <filterSection>
+    <filterAttribute>doxygen</filterAttribute>
+    <toc>
+      <section title="Open-Typer 1" ref="index.html">
+        <section title="Classes" ref="annotated.html">
+          <section title="Class List" ref="annotated.html">
+            <section title="behaviorOptions" ref="classbehaviorOptions.html">
+              <section title="behaviorOptions" ref="classbehaviorOptions.html#a604e707e9c208f8dd09d47714b1d52a2" />
+              <section title="~behaviorOptions" ref="classbehaviorOptions.html#a29c9eb3ad18964f12ad48718190bd40b" />
+            </section>
+            <section title="builtinPacks" ref="classbuiltinPacks.html" />
+            <section title="configParser" ref="classconfigParser.html">
+              <section title="configParser" ref="classconfigParser.html#a7fca8c252df17f7dbdce4e6f7c61ae62" />
+              <section title="addExercise" ref="classconfigParser.html#aed55ed862ae8be82b42385f42193ea65" />
+              <section title="close" ref="classconfigParser.html#a5e3450f912f556b8361d57ba61cd7de1" />
+              <section title="exerciseCount" ref="classconfigParser.html#a2e435706e8bee559515f25074fbcd7a2" />
+              <section title="exerciseLine" ref="classconfigParser.html#a1f838b1e16a47bba35ffa184d7f5e5cc" />
+              <section title="exerciseLineLength" ref="classconfigParser.html#affe9b6fae6d5a864619ff35d7a0504ad" />
+              <section title="exerciseRawText" ref="classconfigParser.html#aaec1cc87884ad80cf354b7bb94bbfd0b" />
+              <section title="exerciseRepeatBool" ref="classconfigParser.html#a37d3235f050bb2b8066fc56ffd71709a" />
+              <section title="exerciseRepeatLimit" ref="classconfigParser.html#a82fd11566298d0ca9a928b74b277da52" />
+              <section title="exerciseRepeatType" ref="classconfigParser.html#a3f69cbbdb3e7268f730555c2cfe2c74c" />
+              <section title="exerciseText" ref="classconfigParser.html#abcf6455297d66a7b7401fb35de6b2dae" />
+              <section title="fileName" ref="classconfigParser.html#a71c4dbe698008b2e245effdf5360deae" />
+              <section title="lessonCount" ref="classconfigParser.html#a8ddc2e8a7c5871f7233014e4e33c2fe4" />
+              <section title="lessonDesc" ref="classconfigParser.html#aebd0b83cafef103a291c1a2b6ae1ef00" />
+              <section title="open" ref="classconfigParser.html#a82b6a29bf6a95792e94137d3925f5021" />
+              <section title="sublessonCount" ref="classconfigParser.html#a7b3b416c615c62bbe7526bc6181ccb86" />
+            </section>
+            <section title="customizationOptions" ref="classcustomizationOptions.html">
+              <section title="customizationOptions" ref="classcustomizationOptions.html#a6e49823810c19835385fd388442d362c" />
+              <section title="~customizationOptions" ref="classcustomizationOptions.html#a151df44d17775b94b225661a695d03be" />
+              <section title="init" ref="classcustomizationOptions.html#a71737219bdf919309735605c5633dbd5" />
+            </section>
+            <section title="Downloader" ref="classDownloader.html">
+              <section title="Downloader" ref="classDownloader.html#aa17d571750e0b99cd5d659597c6684e1" />
+              <section title="~Downloader" ref="classDownloader.html#a7ef888789ffe71122774bd249ccbbf32" />
+              <section title="downloaded" ref="classDownloader.html#a999c05d20756945267b268ab52ba6dae" />
+              <section title="downloadedData" ref="classDownloader.html#a5cdbcf299ec677c2176d07246dfa6313" />
+              <section title="progressChanged" ref="classDownloader.html#a6532e1a8bc8e0995f9dd27e6b2fc1be4" />
+              <section title="downloadProgressPercentage" ref="classDownloader.html#aa89c8a376d4afe0669890f0cf7131958" />
+            </section>
+            <section title="fileUtils" ref="classfileUtils.html" />
+            <section title="inputLabelWidget" ref="classinputLabelWidget.html">
+              <section title="inputLabelWidget" ref="classinputLabelWidget.html#a2683225e6719b9ae3efec1f5a6d38bfe" />
+              <section title="~inputLabelWidget" ref="classinputLabelWidget.html#a547a95ccb7ba47da543f87811017200a" />
+              <section title="inputMethodEvent" ref="classinputLabelWidget.html#a095860438ebd9dd726bc4c07ec985e99" />
+              <section title="keyPressed" ref="classinputLabelWidget.html#a013457681f05c2886b081cbed9b8eae3" />
+              <section title="keyPressEvent" ref="classinputLabelWidget.html#a4f873dc97764b15a05282ce70a696cb6" />
+              <section title="keyReleaseEvent" ref="classinputLabelWidget.html#a8d9dfa5a92b106065b67c216d66e7f60" />
+              <section title="parentWidget" ref="classinputLabelWidget.html#ae1e002554d4d8fc303424d666bc4a83c" />
+            </section>
+            <section title="keyboardOptions" ref="classkeyboardOptions.html">
+              <section title="keyboardOptions" ref="classkeyboardOptions.html#adc177d4a26aeac8ba7dd657d92a4e595" />
+              <section title="~keyboardOptions" ref="classkeyboardOptions.html#a0540bbfe63c9f19c73bc64a7922f7dc0" />
+            </section>
+            <section title="keyboardUtils" ref="classkeyboardUtils.html" />
+            <section title="languageList" ref="classlanguageList.html">
+              <section title="languageList" ref="classlanguageList.html#a561ad6910f45293e1889ce65048c335d" />
+              <section title="~languageList" ref="classlanguageList.html#a8d99b59d00bbdc29823c8caf94d83f75" />
+              <section title="country" ref="classlanguageList.html#a10f630a93cd14b66ed792e0ba9a0995a" />
+              <section title="language" ref="classlanguageList.html#a7b1fd7cdea0a16b632cadff52462d9db" />
+              <section title="languageChanged" ref="classlanguageList.html#ab7219e9a8283a94663012fdcbb3fc1c1" />
+            </section>
+            <section title="languageManager" ref="classlanguageManager.html">
+              <section title="languageManager" ref="classlanguageManager.html#abe17868a43f7d0ad2c10d37245ae43bb" />
+              <section title="~languageManager" ref="classlanguageManager.html#aa528e7f1356bfb831104e0c4e1c6c485" />
+              <section title="boxItems" ref="classlanguageManager.html#aedfb85e051ce25c65e5dbeb1dc4f97a8" />
+              <section title="supportedCountries" ref="classlanguageManager.html#ab715083a9b92b8a7a2b3f0ab8215c458" />
+              <section title="supportedLanguages" ref="classlanguageManager.html#a9a9c7204f4fda5fdaf854374cc609c29" />
+            </section>
+            <section title="levelSummary" ref="classlevelSummary.html">
+              <section title="levelSummary" ref="classlevelSummary.html#a1415b9fa1309edc70ac386e968688b28" />
+              <section title="~levelSummary" ref="classlevelSummary.html#a9ef285f93758398b40f81ca48f22fbf2" />
+              <section title="setHitCount" ref="classlevelSummary.html#a116f51387243910b3c62f1fc7bcb6fcb" />
+              <section title="setHits" ref="classlevelSummary.html#a093da2340a3a732091ad022db3c3d6a2" />
+              <section title="setMistakes" ref="classlevelSummary.html#aa521381ea57f44b2e0e5aeb959e17c66" />
+              <section title="setTotalTime" ref="classlevelSummary.html#a1e53aa0b4b860da5560afc0bdb163498" />
+              <section title="showOK" ref="classlevelSummary.html#a5316f7d53a5d106045166811d5e17a7e" />
+            </section>
+            <section title="Net" ref="classNet.html">
+              <section title="internetConnected" ref="classNet.html#adf463469ad1e88a19cd54e1687f8cd24" />
+            </section>
+            <section title="OpenTyper" ref="classOpenTyper.html">
+              <section title="OpenTyper" ref="classOpenTyper.html#a045934c687780e3a6b6c0c9beb1668ae" />
+              <section title="~OpenTyper" ref="classOpenTyper.html#a47f341fe57bb1127965119b293f2fe3f" />
+              <section title="_line_count" ref="classOpenTyper.html#a400082da2383c849dc23186b3c894766" />
+              <section title="adjustSize" ref="classOpenTyper.html#aef0c7a71750770dc237a73d657e696da" />
+              <section title="autoUpdate" ref="classOpenTyper.html#a7f1ca8eb33c15cc3b876d06fd092f566" />
+              <section title="changeMode" ref="classOpenTyper.html#aae58db84c62ad4d6f2b89ae8f1134765" />
+              <section title="labelWidth" ref="classOpenTyper.html#aa31ec90a40fe8c36b1ea25d9902e95c3" />
+              <section title="levelFinalInit" ref="classOpenTyper.html#a4b0b94bcf7267118e62e35fefa938ffe" />
+              <section title="loadConfig" ref="classOpenTyper.html#a80875642b144d87ea6f98e7a65a0619d" />
+              <section title="openEditor" ref="classOpenTyper.html#afd068c4fb723f3b7e8c8084ade8ddac1" />
+              <section title="refreshAll" ref="classOpenTyper.html#a5f0fcfa144eda646ca215b51851e0dd5" />
+              <section title="saveColorSettings" ref="classOpenTyper.html#a620e22a6ec7adc3e0ef82f1d2fc5ee0c" />
+              <section title="setColors" ref="classOpenTyper.html#ac4ac399f836ab91bc116d6a951cca9f5" />
+              <section title="setFont" ref="classOpenTyper.html#a0deeb213fc85bdc2f63e60b2f2f2d98e" />
+              <section title="startLevel" ref="classOpenTyper.html#ab3e6df43ee172d7ac8ce29fcd2dd8b2f" />
+              <section title="updateText" ref="classOpenTyper.html#a487997a86245492f13709904e8c47f4b" />
+              <section title="updateTheme" ref="classOpenTyper.html#a721ca1e0ea1bc604ae256bb13ccc35f0" />
+              <section title="bgBlueColor" ref="classOpenTyper.html#ad746b0166b8e817eedc6603874fea796" />
+              <section title="bgGreenColor" ref="classOpenTyper.html#af04878be70a80528f66e96145b532c69" />
+              <section title="bgRedColor" ref="classOpenTyper.html#a6be0e2423a7a3f72b8a6e2a2e451c495" />
+              <section title="currentLesson" ref="classOpenTyper.html#a72ce2a4317efbd0e32b9951d13e2c973" />
+              <section title="currentLevel" ref="classOpenTyper.html#a3a8c55b147e319670a467905fe7dc1af" />
+              <section title="currentLine" ref="classOpenTyper.html#a700491a183a3e0d7776c65d0ed62f33b" />
+              <section title="currentMode" ref="classOpenTyper.html#ad4a8245b56ca43efcd0357e3d9caaa0d" />
+              <section title="currentSublesson" ref="classOpenTyper.html#ac6c33ae608519db0bf885e72f3f82cda" />
+              <section title="customBgColor" ref="classOpenTyper.html#a42d83e3fb97c0883b7f5207e2862ccef" />
+              <section title="customConfig" ref="classOpenTyper.html#aad16c4c198a563019c359fda481d7043" />
+              <section title="customInputTextColor" ref="classOpenTyper.html#af11e55246108babf0da3cd6cf23f3993" />
+              <section title="customLevelLoaded" ref="classOpenTyper.html#a88af8cc9bf5b2d00ea487f1fd33699c7" />
+              <section title="customLevelTextColor" ref="classOpenTyper.html#acf08c12c70970bf33970e2e78a113fbb" />
+              <section title="customPanelColor" ref="classOpenTyper.html#abf97605796abf8bf5cb81630209e769f" />
+              <section title="customPaperColor" ref="classOpenTyper.html#ac04e567ab6b12201a493f5ab49d51257" />
+              <section title="deadKeys" ref="classOpenTyper.html#a861a89d172ff17b68d5f20996d26f0fe" />
+              <section title="displayInput" ref="classOpenTyper.html#af5bf1a5287311bede3a5793744b0ddfb" />
+              <section title="displayLevel" ref="classOpenTyper.html#ad7aeab8af40e65bc61abf7014996a28a" />
+              <section title="displayPos" ref="classOpenTyper.html#a21fc62b3a645bcdcf8dd38094851eee2" />
+              <section title="errorPenalty" ref="classOpenTyper.html#ac0db541c118a14cd7f5035be518af747" />
+              <section title="finalDisplayLevel" ref="classOpenTyper.html#a85f6f8d4f61ca89225fd88592df7d3da" />
+              <section title="fullScreenPaper" ref="classOpenTyper.html#aa287a60eea4be15121f493953bdedaa6" />
+              <section title="ignoreMistakeLabelAppend" ref="classOpenTyper.html#a7b9ab68b1c4f5fe3a89ea03fa72b2880" />
+              <section title="input" ref="classOpenTyper.html#adc7fb07b5c5d4919447f4e76eb112797" />
+              <section title="inputLabelHtml" ref="classOpenTyper.html#a1e48fa02f2c6c0ee7ea4126da3b538ba" />
+              <section title="inputTextBlueColor" ref="classOpenTyper.html#a31b78798cedbfda5505199b390f5b1f8" />
+              <section title="inputTextGreenColor" ref="classOpenTyper.html#a30bffc21713d790256334b4ce68c4497" />
+              <section title="inputTextRedColor" ref="classOpenTyper.html#a65de03ed188903c88465b9878d01fce4" />
+              <section title="lastTime" ref="classOpenTyper.html#a01e1ff993c97362c86d3267aee91d54a" />
+              <section title="lessonCount" ref="classOpenTyper.html#aa2d918b4b5c16425b0ea3f2aa5fd2687" />
+              <section title="level" ref="classOpenTyper.html#ac2090bcda281eaebd3faa44056e62a0e" />
+              <section title="levelCount" ref="classOpenTyper.html#a081931fd983018747ca985da379067cd" />
+              <section title="levelHits" ref="classOpenTyper.html#a25f94c1054f7565f744d559ec48313f3" />
+              <section title="levelInProgress" ref="classOpenTyper.html#a4799945c9f9cb2a99c2dfaf8dedb33e1" />
+              <section title="levelLengthExtension" ref="classOpenTyper.html#a0d284d4c3167a4c0adf5aabd7386a517" />
+              <section title="levelMistakes" ref="classOpenTyper.html#a7a15288c9ecdb77557ecadef7c350773" />
+              <section title="levelPos" ref="classOpenTyper.html#a6efb0aaf777c0c78a417c3ff88613427" />
+              <section title="levelTextBlueColor" ref="classOpenTyper.html#a0044db65183e8c9a01ecd090c3723025" />
+              <section title="levelTextGreenColor" ref="classOpenTyper.html#af02eb85d9c48b246cceee2507a89c764" />
+              <section title="levelTextRedColor" ref="classOpenTyper.html#a022701ff685a175c2c5a0aefa09b6592" />
+              <section title="levelTimer" ref="classOpenTyper.html#ac67c84b69a269e278421f2f60c8264c5" />
+              <section title="lineCountLimit" ref="classOpenTyper.html#a572ed35a87079716bdb0c15aa39ec628" />
+              <section title="mistake" ref="classOpenTyper.html#adbeb81a784d5c2a80446b66135c00439" />
+              <section title="mistakeLabelHtml" ref="classOpenTyper.html#a80fc48968afa6089603f4bc3be1e64af" />
+              <section title="panelBlueColor" ref="classOpenTyper.html#a744a2dd498b31e6a9a7dce0dede47716" />
+              <section title="panelGreenColor" ref="classOpenTyper.html#ac0bfeaed07d2f467ea8e58e80126a95e" />
+              <section title="panelRedColor" ref="classOpenTyper.html#a38516749055954882717e1755fde49ee" />
+              <section title="paperBlueColor" ref="classOpenTyper.html#a2ceb9826f256c779280eca71c8f9eede" />
+              <section title="paperGreenColor" ref="classOpenTyper.html#a1630a5a40a76d2f33a673f65f4fee038" />
+              <section title="paperRedColor" ref="classOpenTyper.html#a2b455133b920991c30cf4b4fb8c1dadd" />
+              <section title="parser" ref="classOpenTyper.html#a7bacd0bce442a3c7731026e0b577dd19" />
+              <section title="publicConfigName" ref="classOpenTyper.html#a1f78240a83ae72b1de7c338b9ab4d698" />
+              <section title="secLoop" ref="classOpenTyper.html#a2f011d9c3b5b599e77f5b361d55a1afe" />
+              <section title="settings" ref="classOpenTyper.html#aba3fad404b407e145845de14eb6582ca" />
+              <section title="spaceNewline" ref="classOpenTyper.html#ab2f7569ebb88a5af7c5072b79568a529" />
+              <section title="sublessonCount" ref="classOpenTyper.html#a1981b80bf3b9b4896981b4ef4000612b" />
+              <section title="sublessonListStart" ref="classOpenTyper.html#a6feb0e17ef3df450c8ede1b820b9b255" />
+              <section title="textViewMode" ref="classOpenTyper.html#adacd99853c589c035348d8806c1bb7a2" />
+              <section title="timedExHours" ref="classOpenTyper.html#ab17d79812f1a79ef92dade52bb018f84" />
+              <section title="timedExMinutes" ref="classOpenTyper.html#aab77fae5402e70bfea7e147358d755d8" />
+              <section title="timedExSeconds" ref="classOpenTyper.html#a4b26d9735821264f8570b4b0c84351df" />
+              <section title="timedExStarted" ref="classOpenTyper.html#a5b8f0b305c2bae1e0204973a3a1b4598" />
+              <section title="totalHits" ref="classOpenTyper.html#aae747fadc6c7eb67ef3989340dec89cd" />
+              <section title="translator" ref="classOpenTyper.html#ac51b800712544e02d5ab5de13eedb9aa" />
+              <section title="versionHdw" ref="classOpenTyper.html#aeb1910f5c784dd2927d3a23c508eaa9e" />
+            </section>
+            <section title="optionsWindow" ref="classoptionsWindow.html">
+              <section title="optionsWindow" ref="classoptionsWindow.html#a45fae6808c165b25c933492140379fd3" />
+              <section title="~optionsWindow" ref="classoptionsWindow.html#ad2942ee73b6562894bf2d25f554b9e5c" />
+              <section title="changeEvent" ref="classoptionsWindow.html#a61c4d2858f2a6a6cc2c938b79de2d754" />
+              <section title="init" ref="classoptionsWindow.html#aa1d9b8a39432d285200464166c704681" />
+              <section title="languageChanged" ref="classoptionsWindow.html#acf4c0ce7d0a7f69285a18730bae6e16a" />
+            </section>
+            <section title="packEditor" ref="classpackEditor.html">
+              <section title="packEditor" ref="classpackEditor.html#a2531c78a0bd8650d5395147566ed50c9" />
+              <section title="~packEditor" ref="classpackEditor.html#acc6fa330df5ca29c78538929eeabe382" />
+              <section title="closeEvent" ref="classpackEditor.html#aa403472b118aef534f8093106316ce05" />
+              <section title="fixDuplicates" ref="classpackEditor.html#adc05a78ba2be2683492db4f0842842be" />
+              <section title="init" ref="classpackEditor.html#a083811db9b0ccd3cfd3604563aa1e953" />
+              <section title="setFileName" ref="classpackEditor.html#acab56991754277171feb8adebd317130" />
+              <section title="setNewFile" ref="classpackEditor.html#ad40ff79b94794d3df4929ed1970bd0ff" />
+              <section title="fileID" ref="classpackEditor.html#a89e218a76482c6142a97afde339bfe71" />
+              <section title="ui" ref="classpackEditor.html#a84793e316cb752d373730d8bd0ec89f5" />
+            </section>
+            <section title="packSelector" ref="classpackSelector.html">
+              <section title="packSelector" ref="classpackSelector.html#a7627e7a69e37f6a66512643b1c95055d" />
+              <section title="~packSelector" ref="classpackSelector.html#ae5c599cf2c312ad8fad8d0171946f10b" />
+              <section title="selectedConfig" ref="classpackSelector.html#a5ff2264ada61381338ba429d1e36d008" />
+              <section title="rawItems" ref="classpackSelector.html#a6e6301be9f81850564cbb8c5766cfa7c" />
+            </section>
+            <section title="packView" ref="classpackView.html">
+              <section title="packView" ref="classpackView.html#a36852f6e8eaafd5985bcf05fcd19879c" />
+              <section title="~packView" ref="classpackView.html#a28036733eb5e69d1ae3dc7d6cb8f6898" />
+              <section title="closeFile" ref="classpackView.html#af4354b6daeb151a17ec54109bc6c32be" />
+              <section title="getFileName" ref="classpackView.html#ad9bbd4cb227e404ea9aaf1e5fca93585" />
+              <section title="openFile" ref="classpackView.html#a20fa54b8c61e6c7d63dcfefe95082d7e" />
+            </section>
+            <section title="paperConfigDialog" ref="classpaperConfigDialog.html">
+              <section title="paperConfigDialog" ref="classpaperConfigDialog.html#aa332336ca2ba987341d72ab24c1e991b" />
+              <section title="~paperConfigDialog" ref="classpaperConfigDialog.html#af6de249a3dd88ad11fcd941545e5d25b" />
+              <section title="lineLength" ref="classpaperConfigDialog.html#a44688a9ab62f88b12241b1df3ea2e046" />
+            </section>
+            <section title="SimpleColorDialog" ref="classSimpleColorDialog.html">
+              <section title="SimpleColorDialog" ref="classSimpleColorDialog.html#ae346e4635cd668f5acbfcf504247491c" />
+              <section title="~SimpleColorDialog" ref="classSimpleColorDialog.html#ac8cc4e4c6e6c0f49e5623019fbb713ad" />
+              <section title="setColor" ref="classSimpleColorDialog.html#ade99580a540a7f76a9847a0c7ede0d63" />
+              <section title="updateColor" ref="classSimpleColorDialog.html#a43ccccdab112f5295a162dabd07dbc48" />
+              <section title="blueColor" ref="classSimpleColorDialog.html#a1e7756f1b3ef02b8675fd415a4326f37" />
+              <section title="greenColor" ref="classSimpleColorDialog.html#ad75b2de1cbd4c339f5e70b723f49caed" />
+              <section title="redColor" ref="classSimpleColorDialog.html#a21c249aa302def7d0a159178edd4fb9f" />
+            </section>
+            <section title="stringUtils" ref="classstringUtils.html" />
+            <section title="timeDialog" ref="classtimeDialog.html">
+              <section title="timeDialog" ref="classtimeDialog.html#afee89fd18b8ade41b001e436dc73f522" />
+              <section title="~timeDialog" ref="classtimeDialog.html#ac3e69b247c53dc7ed4f3c81fab962766" />
+              <section title="hours" ref="classtimeDialog.html#aa0807a31f31cfe7033f8f5cbb183b938" />
+              <section title="minutes" ref="classtimeDialog.html#a11af2ae70725a78db25e2ad561b868e5" />
+              <section title="seconds" ref="classtimeDialog.html#a64e61022a1dfe4c28d17456e37c31472" />
+            </section>
+            <section title="Updater" ref="classUpdater.html">
+              <section title="Updater" ref="classUpdater.html#abf702b842504bc1147a5e7bebbbf15ea" />
+              <section title="~Updater" ref="classUpdater.html#a2f8434a97a4f3d3c716bb05abb20621e" />
+            </section>
+            <section title="UpdaterDialog" ref="classUpdaterDialog.html">
+              <section title="UpdaterDialog" ref="classUpdaterDialog.html#a3180b47a5f895b8ac8c4cf367d2391d0" />
+              <section title="~UpdaterDialog" ref="classUpdaterDialog.html#ab42ebaf4837dfff9f69b8040cbda1fa0" />
+              <section title="closeEvent" ref="classUpdaterDialog.html#abaf1c668d20d2760a723a86045f92ac1" />
+              <section title="setCurrentVer" ref="classUpdaterDialog.html#a79b915399378fa8dddece96e4ca889c3" />
+              <section title="setNewVer" ref="classUpdaterDialog.html#adcbb46b4934299196cf9f9d57376064e" />
+              <section title="updateProgress" ref="classUpdaterDialog.html#a5a5d0ae5fa8105215f1e974757a306f4" />
+            </section>
+          </section>
+          <section title="Class Index" ref="classes.html" />
+          <section title="Class Hierarchy" ref="hierarchy.html">
+            <section title="fileUtils" ref="classfileUtils.html" />
+            <section title="keyboardUtils" ref="classkeyboardUtils.html" />
+            <section title="QDialog">
+              <section title="levelSummary" ref="classlevelSummary.html" />
+              <section title="optionsWindow" ref="classoptionsWindow.html" />
+              <section title="packEditor" ref="classpackEditor.html" />
+              <section title="packSelector" ref="classpackSelector.html" />
+              <section title="paperConfigDialog" ref="classpaperConfigDialog.html" />
+              <section title="SimpleColorDialog" ref="classSimpleColorDialog.html" />
+              <section title="timeDialog" ref="classtimeDialog.html" />
+              <section title="UpdaterDialog" ref="classUpdaterDialog.html" />
+            </section>
+            <section title="QListWidget">
+              <section title="languageList" ref="classlanguageList.html" />
+            </section>
+            <section title="QMainWindow">
+              <section title="OpenTyper" ref="classOpenTyper.html" />
+            </section>
+            <section title="QObject">
+              <section title="builtinPacks" ref="classbuiltinPacks.html" />
+              <section title="configParser" ref="classconfigParser.html" />
+              <section title="Downloader" ref="classDownloader.html" />
+              <section title="languageManager" ref="classlanguageManager.html" />
+              <section title="Net" ref="classNet.html" />
+              <section title="Updater" ref="classUpdater.html" />
+            </section>
+            <section title="QTextEdit">
+              <section title="inputLabelWidget" ref="classinputLabelWidget.html" />
+            </section>
+            <section title="QWidget">
+              <section title="behaviorOptions" ref="classbehaviorOptions.html" />
+              <section title="customizationOptions" ref="classcustomizationOptions.html" />
+              <section title="keyboardOptions" ref="classkeyboardOptions.html" />
+              <section title="packView" ref="classpackView.html" />
+            </section>
+            <section title="stringUtils" ref="classstringUtils.html" />
+          </section>
+        </section>
+        <section title="Files" ref="files.html">
+          <section title="File List" ref="files.html">
+            <section title="src" ref="dir_68267d1309a1af8e8297ef4c3efbcdba.html">
+              <section title="include" ref="dir_b0856f6b0d80ccb263b2f415c91f9e17.html">
+                <section title="core" ref="dir_4cf372765f693cf540fc4810db0c309c.html">
+                  <section title="configfile.h" ref="configfile_8h_source.html" />
+                  <section title="language.h" ref="language_8h_source.html" />
+                  <section title="net.h" ref="net_8h_source.html" />
+                  <section title="packs.h" ref="packs_8h_source.html" />
+                  <section title="utils.h" ref="utils_8h_source.html" />
+                </section>
+                <section title="options" ref="dir_a6b8e448081bf8ce4db4cf71fa3ecf15.html">
+                  <section title="behavior.h" ref="behavior_8h_source.html" />
+                  <section title="customization.h" ref="customization_8h_source.html" />
+                  <section title="keyboard.h" ref="keyboard_8h_source.html" />
+                  <section title="optionswindow.h" ref="optionswindow_8h_source.html" />
+                </section>
+                <section title="packEditor" ref="dir_d684c3475f66f131a133112539f1805c.html">
+                  <section title="packeditor.h" ref="packeditor_8h_source.html" />
+                  <section title="packselector.h" ref="packselector_8h_source.html" />
+                  <section title="packview.h" ref="packview_8h_source.html" />
+                </section>
+                <section title="updater" ref="dir_7468157ebcb76345a67412f7bb97ed29.html">
+                  <section title="updater.h" ref="updater_8h_source.html" />
+                  <section title="updaterdialog.h" ref="updaterdialog_8h_source.html" />
+                </section>
+                <section title="widgets" ref="dir_99f4b16b17a360d9840a4176588db3c6.html">
+                  <section title="inputlabel.h" ref="inputlabel_8h_source.html" />
+                  <section title="languagelist.h" ref="languagelist_8h_source.html" />
+                </section>
+                <section title="levelsummary.h" ref="levelsummary_8h_source.html" />
+                <section title="opentyper.h" ref="opentyper_8h_source.html" />
+                <section title="paperconfigdialog.h" ref="paperconfigdialog_8h_source.html" />
+                <section title="simplecolordialog.h" ref="simplecolordialog_8h_source.html" />
+                <section title="timedialog.h" ref="timedialog_8h_source.html" />
+                <section title="version.h" ref="version_8h_source.html" />
+              </section>
+            </section>
+          </section>
+        </section>
+      </section>
+    </toc>
+    <keywords>
+      <keyword name="behaviorOptions" id="behaviorOptions" ref="classbehaviorOptions.html" />
+      <keyword name="behaviorOptions" id="behaviorOptions::behaviorOptions" ref="classbehaviorOptions.html#a604e707e9c208f8dd09d47714b1d52a2" />
+      <keyword name="builtinPacks" id="builtinPacks" ref="classbuiltinPacks.html" />
+      <keyword name="packName" id="builtinPacks::packName" ref="classbuiltinPacks.html#a6b49a3342d9edcadd208da1cc6b550b0" />
+      <keyword name="configParser" id="configParser" ref="classconfigParser.html" />
+      <keyword name="configParser" id="configParser::configParser" ref="classconfigParser.html#a7fca8c252df17f7dbdce4e6f7c61ae62" />
+      <keyword name="open" id="configParser::open" ref="classconfigParser.html#a82b6a29bf6a95792e94137d3925f5021" />
+      <keyword name="close" id="configParser::close" ref="classconfigParser.html#a5e3450f912f556b8361d57ba61cd7de1" />
+      <keyword name="fileName" id="configParser::fileName" ref="classconfigParser.html#a71c4dbe698008b2e245effdf5360deae" />
+      <keyword name="lessonCount" id="configParser::lessonCount" ref="classconfigParser.html#a8ddc2e8a7c5871f7233014e4e33c2fe4" />
+      <keyword name="sublessonCount" id="configParser::sublessonCount" ref="classconfigParser.html#a7b3b416c615c62bbe7526bc6181ccb86" />
+      <keyword name="exerciseCount" id="configParser::exerciseCount" ref="classconfigParser.html#a2e435706e8bee559515f25074fbcd7a2" />
+      <keyword name="exerciseLine" id="configParser::exerciseLine" ref="classconfigParser.html#a1f838b1e16a47bba35ffa184d7f5e5cc" />
+      <keyword name="exerciseRepeatBool" id="configParser::exerciseRepeatBool" ref="classconfigParser.html#a37d3235f050bb2b8066fc56ffd71709a" />
+      <keyword name="exerciseRepeatType" id="configParser::exerciseRepeatType" ref="classconfigParser.html#a3f69cbbdb3e7268f730555c2cfe2c74c" />
+      <keyword name="exerciseRepeatLimit" id="configParser::exerciseRepeatLimit" ref="classconfigParser.html#a82fd11566298d0ca9a928b74b277da52" />
+      <keyword name="exerciseLineLength" id="configParser::exerciseLineLength" ref="classconfigParser.html#affe9b6fae6d5a864619ff35d7a0504ad" />
+      <keyword name="lessonDesc" id="configParser::lessonDesc" ref="classconfigParser.html#aebd0b83cafef103a291c1a2b6ae1ef00" />
+      <keyword name="exerciseRawText" id="configParser::exerciseRawText" ref="classconfigParser.html#aaec1cc87884ad80cf354b7bb94bbfd0b" />
+      <keyword name="exerciseText" id="configParser::exerciseText" ref="classconfigParser.html#abcf6455297d66a7b7401fb35de6b2dae" />
+      <keyword name="addExercise" id="configParser::addExercise" ref="classconfigParser.html#aed55ed862ae8be82b42385f42193ea65" />
+      <keyword name="parseDesc" id="configParser::parseDesc" ref="classconfigParser.html#a1011cf48da6bafdf3f2275fb01fd0064" />
+      <keyword name="sublessonName" id="configParser::sublessonName" ref="classconfigParser.html#a2922133b71c6050af206853e6c64586d" />
+      <keyword name="initExercise" id="configParser::initExercise" ref="classconfigParser.html#a945cb810c17b0475b3a5e3892fad6d5c" />
+      <keyword name="initExercise" id="configParser::initExercise" ref="classconfigParser.html#a5ab3662fbf05c73db7d6e40a26f80c8c" />
+      <keyword name="defaultRepeatLimit" id="configParser::defaultRepeatLimit" ref="classconfigParser.html#aab141ff85227f0994b83d9c34ec6f571" />
+      <keyword name="defaultLineLength" id="configParser::defaultLineLength" ref="classconfigParser.html#adb40b9478c36d4859d6f4f5a0caa0d70" />
+      <keyword name="customizationOptions" id="customizationOptions" ref="classcustomizationOptions.html" />
+      <keyword name="customizationOptions" id="customizationOptions::customizationOptions" ref="classcustomizationOptions.html#a6e49823810c19835385fd388442d362c" />
+      <keyword name="init" id="customizationOptions::init" ref="classcustomizationOptions.html#a71737219bdf919309735605c5633dbd5" />
+      <keyword name="Downloader" id="Downloader" ref="classDownloader.html" />
+      <keyword name="downloaded" id="Downloader::downloaded" ref="classDownloader.html#a999c05d20756945267b268ab52ba6dae" />
+      <keyword name="progressChanged" id="Downloader::progressChanged" ref="classDownloader.html#a6532e1a8bc8e0995f9dd27e6b2fc1be4" />
+      <keyword name="Downloader" id="Downloader::Downloader" ref="classDownloader.html#aa17d571750e0b99cd5d659597c6684e1" />
+      <keyword name="downloadedData" id="Downloader::downloadedData" ref="classDownloader.html#a5cdbcf299ec677c2176d07246dfa6313" />
+      <keyword name="downloadProgressPercentage" id="Downloader::downloadProgressPercentage" ref="classDownloader.html#aa89c8a376d4afe0669890f0cf7131958" />
+      <keyword name="fileUtils" id="fileUtils" ref="classfileUtils.html" />
+      <keyword name="configLocation" id="fileUtils::configLocation" ref="classfileUtils.html#ad5cb3697ed9304de49faa998c9091bd5" />
+      <keyword name="mainSettingsLocation" id="fileUtils::mainSettingsLocation" ref="classfileUtils.html#a3c18f5df4c77a63e197dab52ebaaaaac" />
+      <keyword name="inputLabelWidget" id="inputLabelWidget" ref="classinputLabelWidget.html" />
+      <keyword name="keyPressed" id="inputLabelWidget::keyPressed" ref="classinputLabelWidget.html#a013457681f05c2886b081cbed9b8eae3" />
+      <keyword name="inputLabelWidget" id="inputLabelWidget::inputLabelWidget" ref="classinputLabelWidget.html#a2683225e6719b9ae3efec1f5a6d38bfe" />
+      <keyword name="parentWidget" id="inputLabelWidget::parentWidget" ref="classinputLabelWidget.html#ae1e002554d4d8fc303424d666bc4a83c" />
+      <keyword name="inputMethodEvent" id="inputLabelWidget::inputMethodEvent" ref="classinputLabelWidget.html#a095860438ebd9dd726bc4c07ec985e99" />
+      <keyword name="keyPressEvent" id="inputLabelWidget::keyPressEvent" ref="classinputLabelWidget.html#a4f873dc97764b15a05282ce70a696cb6" />
+      <keyword name="keyReleaseEvent" id="inputLabelWidget::keyReleaseEvent" ref="classinputLabelWidget.html#a8d9dfa5a92b106065b67c216d66e7f60" />
+      <keyword name="keyboardOptions" id="keyboardOptions" ref="classkeyboardOptions.html" />
+      <keyword name="keyboardOptions" id="keyboardOptions::keyboardOptions" ref="classkeyboardOptions.html#adc177d4a26aeac8ba7dd657d92a4e595" />
+      <keyword name="keyboardUtils" id="keyboardUtils" ref="classkeyboardUtils.html" />
+      <keyword name="isSpecialKey" id="keyboardUtils::isSpecialKey" ref="classkeyboardUtils.html#a4669db4e273b32bcaeb3f9b2dfb2d85c" />
+      <keyword name="isDeadKey" id="keyboardUtils::isDeadKey" ref="classkeyboardUtils.html#a62e8c562fdc522d0c8216ab2f4db4676" />
+      <keyword name="languageList" id="languageList" ref="classlanguageList.html" />
+      <keyword name="languageChanged" id="languageList::languageChanged" ref="classlanguageList.html#ab7219e9a8283a94663012fdcbb3fc1c1" />
+      <keyword name="languageList" id="languageList::languageList" ref="classlanguageList.html#a561ad6910f45293e1889ce65048c335d" />
+      <keyword name="language" id="languageList::language" ref="classlanguageList.html#a7b1fd7cdea0a16b632cadff52462d9db" />
+      <keyword name="country" id="languageList::country" ref="classlanguageList.html#a10f630a93cd14b66ed792e0ba9a0995a" />
+      <keyword name="languageManager" id="languageManager" ref="classlanguageManager.html" />
+      <keyword name="languageManager" id="languageManager::languageManager" ref="classlanguageManager.html#abe17868a43f7d0ad2c10d37245ae43bb" />
+      <keyword name="supportedLanguages" id="languageManager::supportedLanguages" ref="classlanguageManager.html#a9a9c7204f4fda5fdaf854374cc609c29" />
+      <keyword name="supportedCountries" id="languageManager::supportedCountries" ref="classlanguageManager.html#ab715083a9b92b8a7a2b3f0ab8215c458" />
+      <keyword name="boxItems" id="languageManager::boxItems" ref="classlanguageManager.html#aedfb85e051ce25c65e5dbeb1dc4f97a8" />
+      <keyword name="levelSummary" id="levelSummary" ref="classlevelSummary.html" />
+      <keyword name="levelSummary" id="levelSummary::levelSummary" ref="classlevelSummary.html#a1415b9fa1309edc70ac386e968688b28" />
+      <keyword name="showOK" id="levelSummary::showOK" ref="classlevelSummary.html#a5316f7d53a5d106045166811d5e17a7e" />
+      <keyword name="setTotalTime" id="levelSummary::setTotalTime" ref="classlevelSummary.html#a1e53aa0b4b860da5560afc0bdb163498" />
+      <keyword name="setHitCount" id="levelSummary::setHitCount" ref="classlevelSummary.html#a116f51387243910b3c62f1fc7bcb6fcb" />
+      <keyword name="setHits" id="levelSummary::setHits" ref="classlevelSummary.html#a093da2340a3a732091ad022db3c3d6a2" />
+      <keyword name="setMistakes" id="levelSummary::setMistakes" ref="classlevelSummary.html#aa521381ea57f44b2e0e5aeb959e17c66" />
+      <keyword name="Net" id="Net" ref="classNet.html" />
+      <keyword name="internetConnected" id="Net::internetConnected" ref="classNet.html#adf463469ad1e88a19cd54e1687f8cd24" />
+      <keyword name="OpenTyper" id="OpenTyper" ref="classOpenTyper.html" />
+      <keyword name="openEditor" id="OpenTyper::openEditor" ref="classOpenTyper.html#afd068c4fb723f3b7e8c8084ade8ddac1" />
+      <keyword name="OpenTyper" id="OpenTyper::OpenTyper" ref="classOpenTyper.html#a045934c687780e3a6b6c0c9beb1668ae" />
+      <keyword name="loadConfig" id="OpenTyper::loadConfig" ref="classOpenTyper.html#a80875642b144d87ea6f98e7a65a0619d" />
+      <keyword name="startLevel" id="OpenTyper::startLevel" ref="classOpenTyper.html#ab3e6df43ee172d7ac8ce29fcd2dd8b2f" />
+      <keyword name="levelFinalInit" id="OpenTyper::levelFinalInit" ref="classOpenTyper.html#a4b0b94bcf7267118e62e35fefa938ffe" />
+      <keyword name="updateText" id="OpenTyper::updateText" ref="classOpenTyper.html#a487997a86245492f13709904e8c47f4b" />
+      <keyword name="_line_count" id="OpenTyper::_line_count" ref="classOpenTyper.html#a400082da2383c849dc23186b3c894766" />
+      <keyword name="autoUpdate" id="OpenTyper::autoUpdate" ref="classOpenTyper.html#a7f1ca8eb33c15cc3b876d06fd092f566" />
+      <keyword name="adjustSize" id="OpenTyper::adjustSize" ref="classOpenTyper.html#aef0c7a71750770dc237a73d657e696da" />
+      <keyword name="labelWidth" id="OpenTyper::labelWidth" ref="classOpenTyper.html#aa31ec90a40fe8c36b1ea25d9902e95c3" />
+      <keyword name="setFont" id="OpenTyper::setFont" ref="classOpenTyper.html#a0deeb213fc85bdc2f63e60b2f2f2d98e" />
+      <keyword name="saveColorSettings" id="OpenTyper::saveColorSettings" ref="classOpenTyper.html#a620e22a6ec7adc3e0ef82f1d2fc5ee0c" />
+      <keyword name="setColors" id="OpenTyper::setColors" ref="classOpenTyper.html#ac4ac399f836ab91bc116d6a951cca9f5" />
+      <keyword name="updateTheme" id="OpenTyper::updateTheme" ref="classOpenTyper.html#a721ca1e0ea1bc604ae256bb13ccc35f0" />
+      <keyword name="refreshAll" id="OpenTyper::refreshAll" ref="classOpenTyper.html#a5f0fcfa144eda646ca215b51851e0dd5" />
+      <keyword name="changeMode" id="OpenTyper::changeMode" ref="classOpenTyper.html#aae58db84c62ad4d6f2b89ae8f1134765" />
+      <keyword name="settings" id="OpenTyper::settings" ref="classOpenTyper.html#aba3fad404b407e145845de14eb6582ca" />
+      <keyword name="parser" id="OpenTyper::parser" ref="classOpenTyper.html#a7bacd0bce442a3c7731026e0b577dd19" />
+      <keyword name="level" id="OpenTyper::level" ref="classOpenTyper.html#ac2090bcda281eaebd3faa44056e62a0e" />
+      <keyword name="displayLevel" id="OpenTyper::displayLevel" ref="classOpenTyper.html#ad7aeab8af40e65bc61abf7014996a28a" />
+      <keyword name="finalDisplayLevel" id="OpenTyper::finalDisplayLevel" ref="classOpenTyper.html#a85f6f8d4f61ca89225fd88592df7d3da" />
+      <keyword name="input" id="OpenTyper::input" ref="classOpenTyper.html#adc7fb07b5c5d4919447f4e76eb112797" />
+      <keyword name="displayInput" id="OpenTyper::displayInput" ref="classOpenTyper.html#af5bf1a5287311bede3a5793744b0ddfb" />
+      <keyword name="publicConfigName" id="OpenTyper::publicConfigName" ref="classOpenTyper.html#a1f78240a83ae72b1de7c338b9ab4d698" />
+      <keyword name="lessonCount" id="OpenTyper::lessonCount" ref="classOpenTyper.html#aa2d918b4b5c16425b0ea3f2aa5fd2687" />
+      <keyword name="sublessonCount" id="OpenTyper::sublessonCount" ref="classOpenTyper.html#a1981b80bf3b9b4896981b4ef4000612b" />
+      <keyword name="levelCount" id="OpenTyper::levelCount" ref="classOpenTyper.html#a081931fd983018747ca985da379067cd" />
+      <keyword name="currentLesson" id="OpenTyper::currentLesson" ref="classOpenTyper.html#a72ce2a4317efbd0e32b9951d13e2c973" />
+      <keyword name="currentSublesson" id="OpenTyper::currentSublesson" ref="classOpenTyper.html#ac6c33ae608519db0bf885e72f3f82cda" />
+      <keyword name="currentLevel" id="OpenTyper::currentLevel" ref="classOpenTyper.html#a3a8c55b147e319670a467905fe7dc1af" />
+      <keyword name="currentLine" id="OpenTyper::currentLine" ref="classOpenTyper.html#a700491a183a3e0d7776c65d0ed62f33b" />
+      <keyword name="levelPos" id="OpenTyper::levelPos" ref="classOpenTyper.html#a6efb0aaf777c0c78a417c3ff88613427" />
+      <keyword name="displayPos" id="OpenTyper::displayPos" ref="classOpenTyper.html#a21fc62b3a645bcdcf8dd38094851eee2" />
+      <keyword name="levelMistakes" id="OpenTyper::levelMistakes" ref="classOpenTyper.html#a7a15288c9ecdb77557ecadef7c350773" />
+      <keyword name="totalHits" id="OpenTyper::totalHits" ref="classOpenTyper.html#aae747fadc6c7eb67ef3989340dec89cd" />
+      <keyword name="levelHits" id="OpenTyper::levelHits" ref="classOpenTyper.html#a25f94c1054f7565f744d559ec48313f3" />
+      <keyword name="levelLengthExtension" id="OpenTyper::levelLengthExtension" ref="classOpenTyper.html#a0d284d4c3167a4c0adf5aabd7386a517" />
+      <keyword name="deadKeys" id="OpenTyper::deadKeys" ref="classOpenTyper.html#a861a89d172ff17b68d5f20996d26f0fe" />
+      <keyword name="sublessonListStart" id="OpenTyper::sublessonListStart" ref="classOpenTyper.html#a6feb0e17ef3df450c8ede1b820b9b255" />
+      <keyword name="levelTimer" id="OpenTyper::levelTimer" ref="classOpenTyper.html#ac67c84b69a269e278421f2f60c8264c5" />
+      <keyword name="secLoop" id="OpenTyper::secLoop" ref="classOpenTyper.html#a2f011d9c3b5b599e77f5b361d55a1afe" />
+      <keyword name="levelInProgress" id="OpenTyper::levelInProgress" ref="classOpenTyper.html#a4799945c9f9cb2a99c2dfaf8dedb33e1" />
+      <keyword name="mistake" id="OpenTyper::mistake" ref="classOpenTyper.html#adbeb81a784d5c2a80446b66135c00439" />
+      <keyword name="ignoreMistakeLabelAppend" id="OpenTyper::ignoreMistakeLabelAppend" ref="classOpenTyper.html#a7b9ab68b1c4f5fe3a89ea03fa72b2880" />
+      <keyword name="inputLabelHtml" id="OpenTyper::inputLabelHtml" ref="classOpenTyper.html#a1e48fa02f2c6c0ee7ea4126da3b538ba" />
+      <keyword name="mistakeLabelHtml" id="OpenTyper::mistakeLabelHtml" ref="classOpenTyper.html#a80fc48968afa6089603f4bc3be1e64af" />
+      <keyword name="lastTime" id="OpenTyper::lastTime" ref="classOpenTyper.html#a01e1ff993c97362c86d3267aee91d54a" />
+      <keyword name="versionHdw" id="OpenTyper::versionHdw" ref="classOpenTyper.html#aeb1910f5c784dd2927d3a23c508eaa9e" />
+      <keyword name="levelTextRedColor" id="OpenTyper::levelTextRedColor" ref="classOpenTyper.html#a022701ff685a175c2c5a0aefa09b6592" />
+      <keyword name="levelTextGreenColor" id="OpenTyper::levelTextGreenColor" ref="classOpenTyper.html#af02eb85d9c48b246cceee2507a89c764" />
+      <keyword name="levelTextBlueColor" id="OpenTyper::levelTextBlueColor" ref="classOpenTyper.html#a0044db65183e8c9a01ecd090c3723025" />
+      <keyword name="inputTextRedColor" id="OpenTyper::inputTextRedColor" ref="classOpenTyper.html#a65de03ed188903c88465b9878d01fce4" />
+      <keyword name="inputTextGreenColor" id="OpenTyper::inputTextGreenColor" ref="classOpenTyper.html#a30bffc21713d790256334b4ce68c4497" />
+      <keyword name="inputTextBlueColor" id="OpenTyper::inputTextBlueColor" ref="classOpenTyper.html#a31b78798cedbfda5505199b390f5b1f8" />
+      <keyword name="bgRedColor" id="OpenTyper::bgRedColor" ref="classOpenTyper.html#a6be0e2423a7a3f72b8a6e2a2e451c495" />
+      <keyword name="bgGreenColor" id="OpenTyper::bgGreenColor" ref="classOpenTyper.html#af04878be70a80528f66e96145b532c69" />
+      <keyword name="bgBlueColor" id="OpenTyper::bgBlueColor" ref="classOpenTyper.html#ad746b0166b8e817eedc6603874fea796" />
+      <keyword name="paperRedColor" id="OpenTyper::paperRedColor" ref="classOpenTyper.html#a2b455133b920991c30cf4b4fb8c1dadd" />
+      <keyword name="paperGreenColor" id="OpenTyper::paperGreenColor" ref="classOpenTyper.html#a1630a5a40a76d2f33a673f65f4fee038" />
+      <keyword name="paperBlueColor" id="OpenTyper::paperBlueColor" ref="classOpenTyper.html#a2ceb9826f256c779280eca71c8f9eede" />
+      <keyword name="panelRedColor" id="OpenTyper::panelRedColor" ref="classOpenTyper.html#a38516749055954882717e1755fde49ee" />
+      <keyword name="panelGreenColor" id="OpenTyper::panelGreenColor" ref="classOpenTyper.html#ac0bfeaed07d2f467ea8e58e80126a95e" />
+      <keyword name="panelBlueColor" id="OpenTyper::panelBlueColor" ref="classOpenTyper.html#a744a2dd498b31e6a9a7dce0dede47716" />
+      <keyword name="customLevelTextColor" id="OpenTyper::customLevelTextColor" ref="classOpenTyper.html#acf08c12c70970bf33970e2e78a113fbb" />
+      <keyword name="customInputTextColor" id="OpenTyper::customInputTextColor" ref="classOpenTyper.html#af11e55246108babf0da3cd6cf23f3993" />
+      <keyword name="customBgColor" id="OpenTyper::customBgColor" ref="classOpenTyper.html#a42d83e3fb97c0883b7f5207e2862ccef" />
+      <keyword name="customPaperColor" id="OpenTyper::customPaperColor" ref="classOpenTyper.html#ac04e567ab6b12201a493f5ab49d51257" />
+      <keyword name="customPanelColor" id="OpenTyper::customPanelColor" ref="classOpenTyper.html#abf97605796abf8bf5cb81630209e769f" />
+      <keyword name="customLevelLoaded" id="OpenTyper::customLevelLoaded" ref="classOpenTyper.html#a88af8cc9bf5b2d00ea487f1fd33699c7" />
+      <keyword name="customConfig" id="OpenTyper::customConfig" ref="classOpenTyper.html#aad16c4c198a563019c359fda481d7043" />
+      <keyword name="spaceNewline" id="OpenTyper::spaceNewline" ref="classOpenTyper.html#ab2f7569ebb88a5af7c5072b79568a529" />
+      <keyword name="errorPenalty" id="OpenTyper::errorPenalty" ref="classOpenTyper.html#ac0db541c118a14cd7f5035be518af747" />
+      <keyword name="fullScreenPaper" id="OpenTyper::fullScreenPaper" ref="classOpenTyper.html#aa287a60eea4be15121f493953bdedaa6" />
+      <keyword name="lineCountLimit" id="OpenTyper::lineCountLimit" ref="classOpenTyper.html#a572ed35a87079716bdb0c15aa39ec628" />
+      <keyword name="textViewMode" id="OpenTyper::textViewMode" ref="classOpenTyper.html#adacd99853c589c035348d8806c1bb7a2" />
+      <keyword name="translator" id="OpenTyper::translator" ref="classOpenTyper.html#ac51b800712544e02d5ab5de13eedb9aa" />
+      <keyword name="currentMode" id="OpenTyper::currentMode" ref="classOpenTyper.html#ad4a8245b56ca43efcd0357e3d9caaa0d" />
+      <keyword name="timedExHours" id="OpenTyper::timedExHours" ref="classOpenTyper.html#ab17d79812f1a79ef92dade52bb018f84" />
+      <keyword name="timedExMinutes" id="OpenTyper::timedExMinutes" ref="classOpenTyper.html#aab77fae5402e70bfea7e147358d755d8" />
+      <keyword name="timedExSeconds" id="OpenTyper::timedExSeconds" ref="classOpenTyper.html#a4b26d9735821264f8570b4b0c84351df" />
+      <keyword name="timedExStarted" id="OpenTyper::timedExStarted" ref="classOpenTyper.html#a5b8f0b305c2bae1e0204973a3a1b4598" />
+      <keyword name="optionsWindow" id="optionsWindow" ref="classoptionsWindow.html" />
+      <keyword name="languageChanged" id="optionsWindow::languageChanged" ref="classoptionsWindow.html#acf4c0ce7d0a7f69285a18730bae6e16a" />
+      <keyword name="optionsWindow" id="optionsWindow::optionsWindow" ref="classoptionsWindow.html#a45fae6808c165b25c933492140379fd3" />
+      <keyword name="init" id="optionsWindow::init" ref="classoptionsWindow.html#aa1d9b8a39432d285200464166c704681" />
+      <keyword name="changeEvent" id="optionsWindow::changeEvent" ref="classoptionsWindow.html#a61c4d2858f2a6a6cc2c938b79de2d754" />
+      <keyword name="packEditor" id="packEditor" ref="classpackEditor.html" />
+      <keyword name="packEditor" id="packEditor::packEditor" ref="classpackEditor.html#a2531c78a0bd8650d5395147566ed50c9" />
+      <keyword name="init" id="packEditor::init" ref="classpackEditor.html#a083811db9b0ccd3cfd3604563aa1e953" />
+      <keyword name="setNewFile" id="packEditor::setNewFile" ref="classpackEditor.html#ad40ff79b94794d3df4929ed1970bd0ff" />
+      <keyword name="setFileName" id="packEditor::setFileName" ref="classpackEditor.html#acab56991754277171feb8adebd317130" />
+      <keyword name="fixDuplicates" id="packEditor::fixDuplicates" ref="classpackEditor.html#adc05a78ba2be2683492db4f0842842be" />
+      <keyword name="ui" id="packEditor::ui" ref="classpackEditor.html#a84793e316cb752d373730d8bd0ec89f5" />
+      <keyword name="fileID" id="packEditor::fileID" ref="classpackEditor.html#a89e218a76482c6142a97afde339bfe71" />
+      <keyword name="closeEvent" id="packEditor::closeEvent" ref="classpackEditor.html#aa403472b118aef534f8093106316ce05" />
+      <keyword name="packSelector" id="packSelector" ref="classpackSelector.html" />
+      <keyword name="packSelector" id="packSelector::packSelector" ref="classpackSelector.html#a7627e7a69e37f6a66512643b1c95055d" />
+      <keyword name="selectedConfig" id="packSelector::selectedConfig" ref="classpackSelector.html#a5ff2264ada61381338ba429d1e36d008" />
+      <keyword name="rawItems" id="packSelector::rawItems" ref="classpackSelector.html#a6e6301be9f81850564cbb8c5766cfa7c" />
+      <keyword name="packView" id="packView" ref="classpackView.html" />
+      <keyword name="packView" id="packView::packView" ref="classpackView.html#a36852f6e8eaafd5985bcf05fcd19879c" />
+      <keyword name="openFile" id="packView::openFile" ref="classpackView.html#a20fa54b8c61e6c7d63dcfefe95082d7e" />
+      <keyword name="closeFile" id="packView::closeFile" ref="classpackView.html#af4354b6daeb151a17ec54109bc6c32be" />
+      <keyword name="getFileName" id="packView::getFileName" ref="classpackView.html#ad9bbd4cb227e404ea9aaf1e5fca93585" />
+      <keyword name="paperConfigDialog" id="paperConfigDialog" ref="classpaperConfigDialog.html" />
+      <keyword name="paperConfigDialog" id="paperConfigDialog::paperConfigDialog" ref="classpaperConfigDialog.html#aa332336ca2ba987341d72ab24c1e991b" />
+      <keyword name="lineLength" id="paperConfigDialog::lineLength" ref="classpaperConfigDialog.html#a44688a9ab62f88b12241b1df3ea2e046" />
+      <keyword name="SimpleColorDialog" id="SimpleColorDialog" ref="classSimpleColorDialog.html" />
+      <keyword name="SimpleColorDialog" id="SimpleColorDialog::SimpleColorDialog" ref="classSimpleColorDialog.html#ae346e4635cd668f5acbfcf504247491c" />
+      <keyword name="setColor" id="SimpleColorDialog::setColor" ref="classSimpleColorDialog.html#ade99580a540a7f76a9847a0c7ede0d63" />
+      <keyword name="updateColor" id="SimpleColorDialog::updateColor" ref="classSimpleColorDialog.html#a43ccccdab112f5295a162dabd07dbc48" />
+      <keyword name="redColor" id="SimpleColorDialog::redColor" ref="classSimpleColorDialog.html#a21c249aa302def7d0a159178edd4fb9f" />
+      <keyword name="greenColor" id="SimpleColorDialog::greenColor" ref="classSimpleColorDialog.html#ad75b2de1cbd4c339f5e70b723f49caed" />
+      <keyword name="blueColor" id="SimpleColorDialog::blueColor" ref="classSimpleColorDialog.html#a1e7756f1b3ef02b8675fd415a4326f37" />
+      <keyword name="stringUtils" id="stringUtils" ref="classstringUtils.html" />
+      <keyword name="wordCount" id="stringUtils::wordCount" ref="classstringUtils.html#a84f6e3df1c51c8b65fe60fbd031e01f2" />
+      <keyword name="word" id="stringUtils::word" ref="classstringUtils.html#a4abcd8458b8b50e9d6679e6f03788dc6" />
+      <keyword name="timeDialog" id="timeDialog" ref="classtimeDialog.html" />
+      <keyword name="timeDialog" id="timeDialog::timeDialog" ref="classtimeDialog.html#afee89fd18b8ade41b001e436dc73f522" />
+      <keyword name="hours" id="timeDialog::hours" ref="classtimeDialog.html#aa0807a31f31cfe7033f8f5cbb183b938" />
+      <keyword name="minutes" id="timeDialog::minutes" ref="classtimeDialog.html#a11af2ae70725a78db25e2ad561b868e5" />
+      <keyword name="seconds" id="timeDialog::seconds" ref="classtimeDialog.html#a64e61022a1dfe4c28d17456e37c31472" />
+      <keyword name="Updater" id="Updater" ref="classUpdater.html" />
+      <keyword name="Updater" id="Updater::Updater" ref="classUpdater.html#abf702b842504bc1147a5e7bebbbf15ea" />
+      <keyword name="UpdaterDialog" id="UpdaterDialog" ref="classUpdaterDialog.html" />
+      <keyword name="updateProgress" id="UpdaterDialog::updateProgress" ref="classUpdaterDialog.html#a5a5d0ae5fa8105215f1e974757a306f4" />
+      <keyword name="UpdaterDialog" id="UpdaterDialog::UpdaterDialog" ref="classUpdaterDialog.html#a3180b47a5f895b8ac8c4cf367d2391d0" />
+      <keyword name="setCurrentVer" id="UpdaterDialog::setCurrentVer" ref="classUpdaterDialog.html#a79b915399378fa8dddece96e4ca889c3" />
+      <keyword name="setNewVer" id="UpdaterDialog::setNewVer" ref="classUpdaterDialog.html#adcbb46b4934299196cf9f9d57376064e" />
+      <keyword name="closeEvent" id="UpdaterDialog::closeEvent" ref="classUpdaterDialog.html#abaf1c668d20d2760a723a86045f92ac1" />
+    </keywords>
+    <files>
+      <file>tabs.css</file>
+      <file>tab_a.png</file>
+      <file>tab_b.png</file>
+      <file>tab_h.png</file>
+      <file>tab_s.png</file>
+      <file>nav_h.png</file>
+      <file>nav_f.png</file>
+      <file>bc_s.png</file>
+      <file>doxygen.png</file>
+      <file>closed.png</file>
+      <file>open.png</file>
+      <file>bdwn.png</file>
+      <file>sync_on.png</file>
+      <file>sync_off.png</file>
+      <file>doxygen.css</file>
+      <file>jquery.js</file>
+      <file>dynsections.js</file>
+      <file>search/search_l.png</file>
+      <file>search/search_m.png</file>
+      <file>search/search_r.png</file>
+      <file>search/close.png</file>
+      <file>search/mag_sel.png</file>
+      <file>search/search.css</file>
+      <file>search/search.js</file>
+      <file>configfile_8h_source.html</file>
+      <file>language_8h_source.html</file>
+      <file>net_8h_source.html</file>
+      <file>packs_8h_source.html</file>
+      <file>utils_8h_source.html</file>
+      <file>levelsummary_8h_source.html</file>
+      <file>opentyper_8h_source.html</file>
+      <file>behavior_8h_source.html</file>
+      <file>customization_8h_source.html</file>
+      <file>keyboard_8h_source.html</file>
+      <file>optionswindow_8h_source.html</file>
+      <file>packeditor_8h_source.html</file>
+      <file>packselector_8h_source.html</file>
+      <file>packview_8h_source.html</file>
+      <file>paperconfigdialog_8h_source.html</file>
+      <file>simplecolordialog_8h_source.html</file>
+      <file>timedialog_8h_source.html</file>
+      <file>updater_8h_source.html</file>
+      <file>updaterdialog_8h_source.html</file>
+      <file>version_8h_source.html</file>
+      <file>inputlabel_8h_source.html</file>
+      <file>languagelist_8h_source.html</file>
+      <file>classbehaviorOptions.html</file>
+      <file>classbehaviorOptions__inherit__graph.png</file>
+      <file>classbehaviorOptions__coll__graph.png</file>
+      <file>classbehaviorOptions-members.html</file>
+      <file>classbuiltinPacks.html</file>
+      <file>classbuiltinPacks__inherit__graph.png</file>
+      <file>classbuiltinPacks__coll__graph.png</file>
+      <file>classbuiltinPacks-members.html</file>
+      <file>classconfigParser.html</file>
+      <file>classconfigParser__inherit__graph.png</file>
+      <file>classconfigParser__coll__graph.png</file>
+      <file>classconfigParser-members.html</file>
+      <file>classcustomizationOptions.html</file>
+      <file>classcustomizationOptions__inherit__graph.png</file>
+      <file>classcustomizationOptions__coll__graph.png</file>
+      <file>classcustomizationOptions-members.html</file>
+      <file>classDownloader.html</file>
+      <file>classDownloader__inherit__graph.png</file>
+      <file>classDownloader__coll__graph.png</file>
+      <file>classDownloader-members.html</file>
+      <file>classfileUtils.html</file>
+      <file>classfileUtils-members.html</file>
+      <file>classinputLabelWidget.html</file>
+      <file>classinputLabelWidget__inherit__graph.png</file>
+      <file>classinputLabelWidget__coll__graph.png</file>
+      <file>classinputLabelWidget-members.html</file>
+      <file>classkeyboardOptions.html</file>
+      <file>classkeyboardOptions__inherit__graph.png</file>
+      <file>classkeyboardOptions__coll__graph.png</file>
+      <file>classkeyboardOptions-members.html</file>
+      <file>classkeyboardUtils.html</file>
+      <file>classkeyboardUtils-members.html</file>
+      <file>classlanguageList.html</file>
+      <file>classlanguageList__inherit__graph.png</file>
+      <file>classlanguageList__coll__graph.png</file>
+      <file>classlanguageList-members.html</file>
+      <file>classlanguageManager.html</file>
+      <file>classlanguageManager__inherit__graph.png</file>
+      <file>classlanguageManager__coll__graph.png</file>
+      <file>classlanguageManager-members.html</file>
+      <file>classlevelSummary.html</file>
+      <file>classlevelSummary__inherit__graph.png</file>
+      <file>classlevelSummary__coll__graph.png</file>
+      <file>classlevelSummary-members.html</file>
+      <file>classNet.html</file>
+      <file>classNet__inherit__graph.png</file>
+      <file>classNet__coll__graph.png</file>
+      <file>classNet-members.html</file>
+      <file>classOpenTyper.html</file>
+      <file>classOpenTyper__inherit__graph.png</file>
+      <file>classOpenTyper__coll__graph.png</file>
+      <file>classOpenTyper-members.html</file>
+      <file>classoptionsWindow.html</file>
+      <file>classoptionsWindow__inherit__graph.png</file>
+      <file>classoptionsWindow__coll__graph.png</file>
+      <file>classoptionsWindow-members.html</file>
+      <file>classpackEditor.html</file>
+      <file>classpackEditor__inherit__graph.png</file>
+      <file>classpackEditor__coll__graph.png</file>
+      <file>classpackEditor-members.html</file>
+      <file>classpackSelector.html</file>
+      <file>classpackSelector__inherit__graph.png</file>
+      <file>classpackSelector__coll__graph.png</file>
+      <file>classpackSelector-members.html</file>
+      <file>classpackView.html</file>
+      <file>classpackView__inherit__graph.png</file>
+      <file>classpackView__coll__graph.png</file>
+      <file>classpackView-members.html</file>
+      <file>classpaperConfigDialog.html</file>
+      <file>classpaperConfigDialog__inherit__graph.png</file>
+      <file>classpaperConfigDialog__coll__graph.png</file>
+      <file>classpaperConfigDialog-members.html</file>
+      <file>classSimpleColorDialog.html</file>
+      <file>classSimpleColorDialog__inherit__graph.png</file>
+      <file>classSimpleColorDialog__coll__graph.png</file>
+      <file>classSimpleColorDialog-members.html</file>
+      <file>classstringUtils.html</file>
+      <file>classstringUtils-members.html</file>
+      <file>classtimeDialog.html</file>
+      <file>classtimeDialog__inherit__graph.png</file>
+      <file>classtimeDialog__coll__graph.png</file>
+      <file>classtimeDialog-members.html</file>
+      <file>classUpdater.html</file>
+      <file>classUpdater__inherit__graph.png</file>
+      <file>classUpdater__coll__graph.png</file>
+      <file>classUpdater-members.html</file>
+      <file>classUpdaterDialog.html</file>
+      <file>classUpdaterDialog__inherit__graph.png</file>
+      <file>classUpdaterDialog__coll__graph.png</file>
+      <file>classUpdaterDialog-members.html</file>
+      <file>graph_legend.png</file>
+      <file>graph_legend.html</file>
+      <file>dir_aebb8dcc11953d78e620bbef0b9e2183.html</file>
+      <file>dir_4cf372765f693cf540fc4810db0c309c.html</file>
+      <file>dir_b0856f6b0d80ccb263b2f415c91f9e17.html</file>
+      <file>dir_51d37d93a99f151d07755b62737feb84.html</file>
+      <file>dir_a6b8e448081bf8ce4db4cf71fa3ecf15.html</file>
+      <file>dir_aeb8d2f0c36d1a21bc807424066a339f.html</file>
+      <file>dir_d684c3475f66f131a133112539f1805c.html</file>
+      <file>dir_68267d1309a1af8e8297ef4c3efbcdba.html</file>
+      <file>dir_f356faf232716eaaa298279b6f90416b.html</file>
+      <file>dir_7468157ebcb76345a67412f7bb97ed29.html</file>
+      <file>dir_99f4b16b17a360d9840a4176588db3c6.html</file>
+      <file>dir_0abdee562046be6f5823d1ca8c3fd13c.html</file>
+      <file>index.html</file>
+      <file>annotated.html</file>
+      <file>classes.html</file>
+      <file>hierarchy.html</file>
+      <file>inherits.html</file>
+      <file>inherit_graph_0.png</file>
+      <file>inherit_graph_1.png</file>
+      <file>inherit_graph_2.png</file>
+      <file>inherit_graph_3.png</file>
+      <file>inherit_graph_4.png</file>
+      <file>inherit_graph_5.png</file>
+      <file>inherit_graph_6.png</file>
+      <file>inherit_graph_7.png</file>
+      <file>inherit_graph_8.png</file>
+      <file>files.html</file>
+    </files>
+  </filterSection>
+</QtHelpProject>
