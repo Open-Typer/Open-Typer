@@ -1,9 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,132,76,159"/>
-<area shape="rect" id="node2" href="$classbuiltinPacks.html" title=" " alt="" coords="139,5,233,32"/>
-<area shape="rect" id="node3" href="$classconfigParser.html" title=" " alt="" coords="139,56,233,83"/>
-<area shape="rect" id="node4" href="$classDownloader.html" title=" " alt="" coords="141,107,231,133"/>
-<area shape="rect" id="node5" href="$classlanguageManager.html" title=" " alt="" coords="124,157,248,184"/>
-<area shape="rect" id="node6" href="$classNet.html" title=" " alt="" coords="165,208,207,235"/>
-<area shape="rect" id="node7" href="$classUpdater.html" title=" " alt="" coords="152,259,220,285"/>
-</map>
