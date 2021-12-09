@@ -18,4 +18,4 @@ Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typ
 
 ## More information
 
-[Build instructions](https://github.com/Open-Typer/Open-Typer/wiki/Build-instructions)
+\ref md_docs-data_pages_Build_instructions "Build instructions"
