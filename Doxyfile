@@ -104,7 +104,9 @@ WARN_AS_ERROR          = NO
 WARN_FORMAT            = "$file:$line: $text"
 WARN_LOGFILE           =
 INPUT                  = "src" \
-                         README.md
+                         README.md \
+                         docs-data/pages
+
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                          *.cc \
