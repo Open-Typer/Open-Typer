@@ -5,7 +5,7 @@
   <filterSection>
     <filterAttribute>doxygen</filterAttribute>
     <toc>
-      <section title="Open-Typer 1" ref="index.html">
+      <section title="Open-Typer" ref="index.html">
         <section title="Classes" ref="annotated.html">
           <section title="Class List" ref="annotated.html">
             <section title="behaviorOptions" ref="classbehaviorOptions.html">
