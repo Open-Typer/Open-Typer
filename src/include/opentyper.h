@@ -56,6 +56,11 @@ class OpenTyper : public QMainWindow
 public:
 	OpenTyper(QWidget *parent = nullptr);
 	~OpenTyper();
+
+private:
+	Ui::OpenTyper *ui;
+	languageManager *langMgr;
+	void connectAll(void);
 	QSettings *settings;
 	configParser *parser;
 	QString loadConfig(QString configName);
@@ -98,11 +103,6 @@ public:
 	int currentMode;
 	int timedExHours, timedExMinutes, timedExSeconds;
 	bool timedExStarted;
-
-private:
-	Ui::OpenTyper *ui;
-	languageManager *langMgr;
-	void connectAll(void);
 
 private slots:
 	void keyPress(QKeyEvent *event);
