@@ -49,10 +49,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class OpenTyper; }
 QT_END_NAMESPACE
 
-/*!
- * \class OpenTyper
- * \brief The Open-Typer class is the main window class. It shows the UI, text and handles input and output.
- */
+/*! \brief The Open-Typer class is the main window class. It shows the UI, text and handles input and output. */
 class OpenTyper : public QMainWindow
 {
 	Q_OBJECT
