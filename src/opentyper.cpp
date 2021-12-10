@@ -767,7 +767,7 @@ void OpenTyper::updateCurrentTime(void)
 				msgBox.exec();
 				// Switch to default mode
 				changeMode(0);
-				repeatLevel();
+				levelFinalInit();
 			}
 			else
 			{
@@ -1146,7 +1146,7 @@ void OpenTyper::initTimedExercise(void)
 	{
 		// Switch back to default mode
 		changeMode(0);
-		repeatLevel();
+		levelFinalInit();
 	}
 	else
 	{
