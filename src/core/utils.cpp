@@ -54,11 +54,16 @@ QString stringUtils::word(QString str, int id)
 	return "";
 }
 
+/*!
+ * Returns the path to the program configuration directory.\n
+ * For example: <tt>/home/user/.config/Open-Typer</tt>
+ */
 QString fileUtils::configLocation(void)
 {
 	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
 }
 
+/*! Returns the path to the main configuration file, currently \c config.ini in the program configuration directory. */
 QString fileUtils::mainSettingsLocation(void)
 {
 	return configLocation()+"/config.ini";

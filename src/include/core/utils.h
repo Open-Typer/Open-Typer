@@ -34,6 +34,7 @@ class stringUtils
 		static QString word(QString str, int id);
 };
 
+/*! \brief The fileUtils class contains functions for file or directory paths. */
 class fileUtils
 {
 	public:
