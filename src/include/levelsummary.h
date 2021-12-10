@@ -27,6 +27,19 @@ namespace Ui {
 class levelSummary;
 }
 
+/*!
+ * \class levelSummary
+ * \brief A summary dialog window, which shows the exercise result.
+ *
+ * Each value can be set using the functions.\n
+ * They're all optional and unset values will be hidden.
+ * \c AlignLeft
+ * \image html levelSummary.png
+ *
+ * The dialog supports 2 modes.\n
+ * The first mode asks the user whether to continue to the next exercise or repeat it.\n
+ * The second mode shows the summary with an OK button. It can be enabled by calling showOK().
+ */
 class levelSummary : public QDialog
 {
 	Q_OBJECT

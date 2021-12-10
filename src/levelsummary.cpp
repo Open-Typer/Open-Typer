@@ -21,6 +21,7 @@
 #include "levelsummary.h"
 #include "ui_levelsummary.h"
 
+/*! Constructs the levelSummary dialog. */
 levelSummary::levelSummary(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::levelSummary)
@@ -36,11 +37,16 @@ levelSummary::levelSummary(QWidget *parent) :
 	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(accept()));
 }
 
+/*! Destroys the levelSummary object. */
 levelSummary::~levelSummary()
 {
 	delete ui;
 }
 
+/*!
+ * Hides the "continue to the next exercise" question and shows an OK button.
+ * \image html levelSummaryOK.png
+ */
 void levelSummary::showOK(void)
 {
 	ui->yesButton->hide();
@@ -49,6 +55,7 @@ void levelSummary::showOK(void)
 	ui->okButton->show();
 }
 
+/*! Sets and shows the exercise time. */
 void levelSummary::setTotalTime(double time)
 {
 	ui->timeLabel->setText(
@@ -56,6 +63,7 @@ void levelSummary::setTotalTime(double time)
 	ui->timeLabel->show();
 }
 
+/*! Sets and shows the total number of hits (excluding error penalty). */
 void levelSummary::setHitCount(int hits)
 {
 	ui->hitsLabel->setText(
@@ -63,6 +71,7 @@ void levelSummary::setHitCount(int hits)
 	ui->hitsLabel->show();
 }
 
+/*! Sets and shows the number of hits per minute. */
 void levelSummary::setHits(int hits)
 {
 	ui->hpmLabel->setText(
@@ -70,6 +79,7 @@ void levelSummary::setHits(int hits)
 	ui->hpmLabel->show();
 }
 
+/*! Sets and shows the number of mistakes */
 void levelSummary::setMistakes(int mistakes)
 {
 	ui->mistakesLabel->setText(
