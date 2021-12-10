@@ -28,7 +28,6 @@ class levelSummary;
 }
 
 /*!
- * \class levelSummary
  * \brief A summary dialog window, which shows the exercise result.
  *
  * Each value can be set using the functions.\n
