@@ -21,6 +21,7 @@
 #include "opentyper.h"
 #include "ui_opentyper.h"
 
+/*! Constructs the main window. */
 OpenTyper::OpenTyper(QWidget *parent)
 	: QMainWindow(parent)
 	, ui(new Ui::OpenTyper)
@@ -39,11 +40,20 @@ OpenTyper::OpenTyper(QWidget *parent)
 	#endif
 }
 
+/*!< Destroys the Open-Typer object. */
 OpenTyper::~OpenTyper()
 {
 	delete ui;
 }
 
+/*! Initializes the program and loads all settings.
+ * \param[in] setLang Whether to set the display language.
+ * \see changeLanguage
+ * \see changeMode
+ * \see updateTheme
+ * \see setColors
+ * \see repeatLevel
+ */
 void OpenTyper::refreshAll(bool setLang)
 {
 	// Set language
@@ -119,6 +129,7 @@ void OpenTyper::refreshAll(bool setLang)
 	repeatLevel();
 }
 
+/*! Sets up all connections. */
 void OpenTyper::connectAll(void)
 {
 	// Create timer (used to update currentTimeNumber every second)
@@ -204,6 +215,11 @@ void OpenTyper::connectAll(void)
 	secLoop->start(500);
 }
 
+/*!
+ * Opens a pack file using configParser.
+ * \param[in] configName If there's a custom pack opened, configName represents the absolute path to the pack. Otherwise, it represents the built-in pack name.
+ * \see configParser
+ */
 QString OpenTyper::loadConfig(QString configName)
 {
 	// Returns config file name, which can be opened later.
@@ -257,6 +273,11 @@ QString OpenTyper::loadConfig(QString configName)
 	return configPath;
 }
 
+/*!
+ * Gets number of lines of a string.
+ * Will be moved to stringUtils later.
+ * \see stringUtils
+ */
 int OpenTyper::_line_count(QString str)
 {
 	int out=0, i, len = str.count();
@@ -268,6 +289,13 @@ int OpenTyper::_line_count(QString str)
 	return out;
 }
 
+/*!
+ * Initializes the specified exercise.
+ * \param[in] lesson, sublesson, level Exercise location (lesson, sublesson and exercise ID).
+ * \see loadConfig
+ * \see configParser
+ * \see levelFinalInit
+ */
 void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 {
 	customLevelLoaded=false;
@@ -325,6 +353,11 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 	levelFinalInit();
 }
 
+/*!
+ * Sets initial values and shows the exercise text.
+ * \see startLevel
+ * \see updateText
+ */
 void OpenTyper::levelFinalInit(void)
 {
 	// Init level
@@ -355,6 +388,11 @@ void OpenTyper::levelFinalInit(void)
 	ui->inputLabel->setHtml(displayInput);
 }
 
+/*!
+ * Converts exercise text (line wrapping, limited number of lines).
+ * \see levelFinalInit
+ * \see configParser
+ */
 void OpenTyper::updateText(void)
 {
 	displayLevel = configParser::initExercise(level,levelLengthExtension);
@@ -385,11 +423,19 @@ void OpenTyper::updateText(void)
 	}
 }
 
+/*! Connected from repeatButton.\n
+ * Resets currently selected exercise.
+ * \see startLevel
+ */
 void OpenTyper::repeatLevel(void)
 {
 	startLevel(currentLesson,currentSublesson,currentLevel);
 }
 
+/*! Connected from nextButton.\n
+ * Selects the next exercise.
+ * \see repeatLevel
+ */
 void OpenTyper::nextLevel(void)
 {
 	if(currentLevel == levelCount)
@@ -410,6 +456,11 @@ void OpenTyper::nextLevel(void)
 		currentLevel++;
 	repeatLevel();
 }
+
+/*! Connected from previousButton.\n
+	 * Selects the previous exercise.
+	 * \see repeatLevel
+	 */
 void OpenTyper::previousLevel(void)
 {
 	if(currentLevel == 1)
@@ -431,6 +482,9 @@ void OpenTyper::previousLevel(void)
 	repeatLevel();
 }
 
+/*! Connected from optionsButton.\n
+ * Opens options window.
+ */
 void OpenTyper::openOptions(void)
 {
 	optionsWindow *optionsWin = new optionsWindow;
@@ -441,6 +495,9 @@ void OpenTyper::openOptions(void)
 	refreshAll(true);
 }
 
+/*! Connected from lessonSelectionList.\n
+ * Selects the lesson selected in lessonSelectionList.
+ */
 void OpenTyper::lessonSelectionListIndexChanged(int index)
 {
 	currentLesson = index+1;
@@ -449,6 +506,9 @@ void OpenTyper::lessonSelectionListIndexChanged(int index)
 	repeatLevel();
 }
 
+/*! Connected from sublessonSelectionList.\n
+ * Selects the sublesson selected in sublessonSelectionList.
+ */
 void OpenTyper::sublessonSelectionListIndexChanged(int index)
 {
 	currentSublesson = index+1;
@@ -456,12 +516,18 @@ void OpenTyper::sublessonSelectionListIndexChanged(int index)
 	repeatLevel();
 }
 
+/*! Connected from levelSelectionList.\n
+ * Selects the exercise selected in levelSelectionList.
+ */
 void OpenTyper::levelSelectionListIndexChanged(int index)
 {
 	currentLevel = index+1;
 	repeatLevel();
 }
 
+/*! Connected from openExerciseButton.\n
+ * Shows a file dialog and opens a custom exercise.
+ */
 void OpenTyper::openExerciseFromFile(void)
 {
 	// Show file dialog
@@ -510,6 +576,9 @@ void OpenTyper::openExerciseFromFile(void)
 	}
 }
 
+/*! Connected from inputLabelWidget#keyPressed signal.\n
+ * Handles all key presses, counts hits, displays typed characters and counts mistakes.
+ */
 void OpenTyper::keyPress(QKeyEvent *event)
 {
 	if((currentMode == 1) && !timedExStarted)
@@ -663,6 +732,9 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	}
 }
 
+/*! Connected from secLoop.\n
+ * Runs periodically and updates time widgets.
+ */
 void OpenTyper::updateCurrentTime(void)
 {
 	int time;
@@ -721,6 +793,7 @@ void OpenTyper::updateCurrentTime(void)
 	setColors();
 }
 
+/*! Sets exercise text font and saves it in the settings. \see customizationOptions#setFont */
 void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline)
 {
 	QFont newFont, mistakeLabelFont;
@@ -745,6 +818,11 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	settings->setValue("theme/fontunderline",fontUnderline);
 }
 
+/*!
+ * Gets the width of a QLabel with a text.\n
+ * This function is obsolete and will be removed after the paper widget starts using layouts.
+ * \see adjustSize
+ */
 int OpenTyper::labelWidth(QLabel *targetLabel, QString labelText)
 {
 	// Checks every line and gets the best label width
@@ -766,6 +844,7 @@ int OpenTyper::labelWidth(QLabel *targetLabel, QString labelText)
 	return max;
 }
 
+/*! Adjusts the width of the paper widget. \see labelWidth*/
 void OpenTyper::adjustSize(void)
 {
 	// Adjust paper width
@@ -799,6 +878,7 @@ void OpenTyper::adjustSize(void)
 		QWIDGETSIZE_MAX);
 }
 
+/*! Sets custom colors (if they are set) or default colors. \see customizationOptions#setColors */
 void OpenTyper::setColors(void)
 {
 	// Reset style sheets
@@ -881,6 +961,7 @@ void OpenTyper::setColors(void)
 	}
 }
 
+/*! Loads the style sheet of the selected theme. \see customizationOptions#updateTheme */
 void OpenTyper::updateTheme(void)
 {
 	QFile darkSheet(":/dark-theme/style.qss");
@@ -939,6 +1020,9 @@ void OpenTyper::updateTheme(void)
 	}
 }
 
+/*! Connected from openPackButton.\n
+ * Shows a file dialog and opens a custom pack.
+ */
 void OpenTyper::openPack(void)
 {
 	QFileDialog openDialog;
@@ -955,6 +1039,9 @@ void OpenTyper::openPack(void)
 	}
 }
 
+/*! Connected from openEditorButton.\n
+ * Opens the editor.
+ */
 void OpenTyper::openEditor(void)
 {
 	// Close pack file
@@ -976,6 +1063,11 @@ void OpenTyper::openEditor(void)
 	parser->open(oldFileName);
 }
 
+/*! Connected from optionsWindow#languageChanged.\n
+ * Retranslates the UI in the selected language.
+ * \param[in] index Index of the selected language in the list of languages
+ * \see languageManager
+ */
 void OpenTyper::changeLanguage(int index)
 {
 	QLocale targetLocale;
@@ -991,6 +1083,10 @@ void OpenTyper::changeLanguage(int index)
 	refreshAll(false);
 }
 
+/*! Connected from zoomInButton.\n
+ * Increases the text size.
+ * \see zoomOut
+ */
 void OpenTyper::zoomIn(void)
 {
 	QString fontFamily = settings->value("theme/font","Courier").toString();
@@ -1004,6 +1100,10 @@ void OpenTyper::zoomIn(void)
 	adjustSize();
 }
 
+/*! Connected from zoomOutButton.\n
+ * Decreases the text size.
+ * \see zoomIn
+ */
 void OpenTyper::zoomOut(void)
 {
 	QString fontFamily = settings->value("theme/font","Courier").toString();
@@ -1017,6 +1117,9 @@ void OpenTyper::zoomOut(void)
 	adjustSize();
 }
 
+/*! Changes the operation mode.\n
+ * Supported modes are default (0) and timed exercise mode (1).
+ */
 void OpenTyper::changeMode(int mode)
 {
 	switch(mode) {
@@ -1034,6 +1137,9 @@ void OpenTyper::changeMode(int mode)
 	currentMode = mode;
 }
 
+/*! Connected from timedExerciseButton.\n
+ * Switches to timed exercise mode.
+ */
 void OpenTyper::initTimedExercise(void)
 {
 	if(currentMode == 1)
