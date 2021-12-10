@@ -27,6 +27,21 @@ namespace Ui {
 	class paperConfigDialog;
 }
 
+/*!
+ * \brief The paperConfigDialog class is a dialog, which asks for line length.
+ *
+ * The dialog asks for line length, but it might be extended with more\n
+ * features in the future.
+ *
+ * \image html paperConfigDialog.png
+ *
+ * Line length can be accessed using the lineLength attribute.\n
+ * \code
+ * paperConfigDialog myDialog;
+ * myDialog.exec();
+ * int length = myDialog.lineLength; // Line length
+ * \endcode
+ */
 class paperConfigDialog : public QDialog
 {
 Q_OBJECT

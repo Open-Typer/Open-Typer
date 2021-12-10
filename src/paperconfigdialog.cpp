@@ -21,6 +21,7 @@
 #include "paperconfigdialog.h"
 #include "ui_paperconfigdialog.h"
 
+/*! Constructs the paperConfigDialog dialog. */
 paperConfigDialog::paperConfigDialog(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::paperConfigDialog)
@@ -32,13 +33,22 @@ paperConfigDialog::paperConfigDialog(QWidget *parent) :
 	updateLineLength(ui->lineLengthBox->value());
 }
 
+/*! Destroys the paperConfigDialog object. */
 paperConfigDialog::~paperConfigDialog()
 {
 	delete ui;
 }
 
+/*!
+ * Overrides QDialog#reject().\n
+ * Prevents the window from being closed.
+ */
 void paperConfigDialog::reject(void) { }
 
+/*!
+ * Connected from lineLengthBox.\n
+ * Sets line length.
+ */
 void paperConfigDialog::updateLineLength(int value)
 {
 	lineLength = value;
