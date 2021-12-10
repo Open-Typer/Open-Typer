@@ -40,7 +40,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	#endif
 }
 
-/*!< Destroys the Open-Typer object. */
+/*! Destroys the Open-Typer object. */
 OpenTyper::~OpenTyper()
 {
 	delete ui;
