@@ -19,7 +19,9 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
-  build-linux:
+
+name: Build
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Install Qt
