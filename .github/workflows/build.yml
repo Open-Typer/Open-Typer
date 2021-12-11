@@ -22,7 +22,11 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: 'build'
-    - run: .ci/common/push.sh $GITHUB_WORKSPACE
+    - run: |
+      git config --local user.email "action@github.com"
+      git config --local user.name "GitHub"
+      git add Open-Typer
+      git commit -m "build: Linux"
     - name: Push
       uses: ad-m/github-push-action@master
       with:
