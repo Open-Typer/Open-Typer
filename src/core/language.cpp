@@ -20,6 +20,7 @@
 
 #include "core/language.h"
 
+/*! Constructs languageManager. */
 languageManager::languageManager(QObject *parent) :
 	QObject(parent)
 {
@@ -42,4 +43,5 @@ languageManager::languageManager(QObject *parent) :
 	boxItems.insert(0,tr("System (default)"));
 }
 
+/*! Destroys the languageManager object. */
 languageManager::~languageManager() { }
