@@ -18,7 +18,9 @@ jobs:
         dir: '${{ github.workspace }}/build/'
         setup-python: 'false'
     - name: Build - Linux
-      run: .ci/common/linux-build.sh $GITHUB_WORKSPACE
+      run: |
+        .ci/common/linux-build.sh $GITHUB_WORKSPACE
+        .ci/common/push.sh
     - name: Push
       uses: ad-m/github-push-action@master
       with:
