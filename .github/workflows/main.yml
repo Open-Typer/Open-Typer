@@ -26,3 +26,9 @@ name: Build
     steps:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
+      with:
+        version: '5.12.8'
+        host: 'linux'
+        target: 'desktop'
+        dir: '${{ github.workspace }}/build/'
+        setup-python: 'false'
