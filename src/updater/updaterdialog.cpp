@@ -31,14 +31,17 @@ UpdaterDialog::UpdaterDialog(QWidget *parent, bool downloading) :
 	{
 		ui->title->hide();
 		ui->versionComparisonFrame->hide();
-		ui->buttonFrame->hide();
+		ui->yesButton->hide();
+		ui->noButton->hide();
 		ui->notice->setText(tr("Downloading update, please wait..."));
 		setMinimumHeight(100);
 		setMaximumHeight(100);
+		connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(abortDownload()));
 	}
 	else
 	{
 		ui->progressBar->hide();
+		ui->cancelButton->hide();
 		connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
 		connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
 	}
@@ -68,10 +71,14 @@ void UpdaterDialog::updateProgress(int percentage)
 	ui->progressBar->setValue(percentage);
 }
 
+void UpdaterDialog::abortDownload(void)
+{
+	emit cancelDownload();
+	close();
+}
+
 void UpdaterDialog::closeEvent(QCloseEvent *event)
 {
-	if(_downloading)
-		event->ignore();
-	else
-		event->accept();
+	emit cancelDownload();
+	event->accept();
 }

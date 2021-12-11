@@ -41,9 +41,15 @@ class UpdaterDialog : public QDialog
 	protected:
 		void closeEvent(QCloseEvent *event);
 
+	signals:
+		void cancelDownload();
+
 	private:
 		Ui::UpdaterDialog *ui;
 		bool _downloading;
+
+	private slots:
+		void abortDownload(void);
 
 	public slots:
 		void updateProgress(int percentage);
