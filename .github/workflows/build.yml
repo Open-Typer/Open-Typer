@@ -20,7 +20,7 @@ jobs:
     - name: Build - Linux
       run: |
         .ci/common/linux-build.sh $GITHUB_WORKSPACE
-        .ci/common/push.sh
+        .ci/common/push.sh $GITHUB_WORKSPACE
     - name: Push
       uses: ad-m/github-push-action@master
       with:
