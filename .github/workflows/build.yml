@@ -8,6 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    # Linux
     - uses: actions/checkout@v2
     - name: Qt - Linux
       uses: jurplel/install-qt-action@v2
@@ -22,14 +23,41 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: 'build'
-    - name: Commit
+    - name: Commit - Linux
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub"
         mv /tmp/release/Open-Typer ./
         git add Open-Typer
         git commit -m "build: Linux"
-    - name: Push
+    - name: Push - Linux
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: build
+    # Windows
+    - uses: actions/checkout@v2
+    - name: Qt - Windows
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: '5.12.8'
+        host: 'windows'
+        target: 'desktop'
+        dir: '${{ github.workspace }}/build-data/'
+        setup-python: 'false'
+    - name: Build - Windows
+      run: .ci/common/linux-build.sh $GITHUB_WORKSPACE
+    - uses: actions/checkout@v2
+      with:
+        ref: 'build'
+    - name: Commit - Linux
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub"
+        mv /tmp/release/Open-Typer.exe ./
+        git add Open-Typer.exe
+        git commit -m "build: Windows"
+    - name: Push - Linux
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
