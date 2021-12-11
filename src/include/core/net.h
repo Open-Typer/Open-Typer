@@ -50,10 +50,14 @@ class Downloader : public QObject
 	private slots:
 		void fileDownloaded(QNetworkReply* pReply);
 		void downloadProgress(qint64 current, qint64 max);
+
+	public slots:
+		void cancelDownload(void);
 	
 	private:
 		QNetworkAccessManager m_WebCtrl;
 		QByteArray m_DownloadedData;
+		QNetworkReply *reply;
 };
 
 #endif // NET_H
