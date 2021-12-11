@@ -21,6 +21,12 @@ jobs:
         publish_dir: ./docs
 
 name: Build
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
