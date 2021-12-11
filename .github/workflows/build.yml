@@ -19,3 +19,8 @@ jobs:
         setup-python: 'false'
     - name: Build - Linux
       run: .ci/common/linux-build.sh $GITHUB_WORKSPACE
+    - name: Push
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: build
