@@ -26,6 +26,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub"
+        mv /tmp/release/Open-Typer ./
         git add Open-Typer
         git commit -m "build: Linux"
     - name: Push
