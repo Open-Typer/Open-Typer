@@ -27,6 +27,24 @@
 #include <QString>
 #include "utils.h"
 
+// TODO: Add a link to pack file format documentation.
+/*!
+ * \brief The configParser class provides functions for the pack file format.
+ *
+ * Example usage:
+ * \code
+ * configParser parser;
+ * parser.open("/path/to/pack.typer");
+ * printf("There are %d lessons in the opened pack.\n",parser.lessonCount());
+ * \endcode
+ *
+ * Closing the file isn't required most of the time, but there might be
+ * some special situations, in which you'll have to close the file.\n
+ * For example if you need to open the file again before destroying the configParser object.
+ * \code
+ * parser.close();
+ * \endcode
+ */
 class configParser : public QObject
 {
 	Q_OBJECT

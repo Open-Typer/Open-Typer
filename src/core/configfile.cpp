@@ -20,12 +20,18 @@
 
 #include "core/configfile.h"
 
+/*! Constructs configParser. */
 configParser::configParser(QObject *parent) :
 	QObject(parent)
 {
 	configFile = new QFile;
 }
 
+/*!
+ * Opens a pack file.\n
+ * Returns true if successful.
+ * \see reopen()
+ */
 bool configParser::open(const QString fileName)
 {
 	configFile->close();
@@ -33,6 +39,19 @@ bool configParser::open(const QString fileName)
 	return configFile->open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
+/*!
+ * configParser provides read and write support.
+ * The pack file is opened for reading by default,
+ * so it must be reopened for writing while performing
+ * write operations.\n
+ *
+ * This function reopens the opened file in a new mode.\n
+ * Returns true if successful.
+ *
+ * \param[in] mode Open mode, like in the QIODevice#open() function.
+ *
+ * \see open()
+ */
 bool configParser::reopen(QIODevice::OpenMode mode)
 {
 	if(configFile->fileName() == "")
@@ -41,16 +60,19 @@ bool configParser::reopen(QIODevice::OpenMode mode)
 	return configFile->open(mode);
 }
 
+/*! Closes the opened pack file. */
 void configParser::close(void)
 {
 	configFile->close();
 }
 
+/*! Returns the file name of the opened pack file. */
 QString configParser::fileName(void)
 {
 	return configFile->fileName();
 }
 
+/*! Returns the number of lessons in the pack file. */
 int configParser::lessonCount(void)
 {
 	configFile->seek(0);
@@ -67,6 +89,11 @@ int configParser::lessonCount(void)
 	return lessonIDs.count();
 }
 
+/*!
+ * Returns the number of sublessons in a lesson.\n
+ * Note: Empty sublessons are allowed and will not be counted by this function.
+ * The exerciseCount() function can be used to detect an empty sublesson.
+ */
 int configParser::sublessonCount(int lesson)
 {
 	configFile->seek(0);
@@ -87,6 +114,7 @@ int configParser::sublessonCount(int lesson)
 	return sublessonIDs.count();
 }
 
+/*! Returns the number of exercises in a sublesson. */
 int configParser::exerciseCount(int lesson, int sublesson)
 {
 	configFile->seek(0);
@@ -111,6 +139,7 @@ int configParser::exerciseCount(int lesson, int sublesson)
 	return exerciseIDs.count();
 }
 
+/*! Returns the line the exercise is located in the pack file. */
 int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 {
 	configFile->seek(0);
@@ -127,26 +156,31 @@ int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 	return 0;
 }
 
+/*! Returns true if repeating is enabled in the exercise. */
 bool configParser::exerciseRepeatBool(int lesson, int sublesson, int exercise)
 {
 	return exerciseRepeatBool(exerciseRepeatConfig(lineOf(lesson,sublesson,exercise)));
 }
 
+/*! Returns repeat configuration of the exercise. */
 QString configParser::exerciseRepeatType(int lesson, int sublesson, int exercise)
 {
 	return exerciseRepeatType(exerciseRepeatConfig(lineOf(lesson,sublesson,exercise)));
 }
 
+/*! Returns the maximum number of characters of the exercise (if repeating is enabled). */
 int configParser::exerciseRepeatLimit(int lesson, int sublesson, int exercise)
 {
 	return exerciseAttribute(exerciseAttributes(lineOf(lesson,sublesson,exercise)),0).toInt();
 }
 
+/*! Returns the exercise's maximum number of characters in one line. */
 int configParser::exerciseLineLength(int lesson, int sublesson, int exercise)
 {
 	return exerciseAttribute(exerciseAttributes(lineOf(lesson,sublesson,exercise)),1).toInt();
 }
 
+/*! Returns the description of a lesson (what new characters are learned in it). */
 QString configParser::lessonDesc(int lesson)
 {
 	configFile->seek(0);
@@ -165,6 +199,16 @@ QString configParser::lessonDesc(int lesson)
 	return "";
 }
 
+/*!
+ * Converts a lesson description into a human-readable description.\n
+ * For example:\n
+ * \c dfjk  -> {dfjk}\n
+ * \c %%r    -> Revision\n
+ * \c %%s    -> Shift\n
+ * \c sl%%be -> {sl}{e}\n
+ *
+ * \see lessonDesc()
+ */
 QString configParser::parseDesc(QString desc)
 {
 	QString out = "";
@@ -209,6 +253,10 @@ QString configParser::parseDesc(QString desc)
 	return out;
 }
 
+/*! Returns the name of a sublesson.\n
+ * For example:\n
+ * 1 -> Touch
+ */
 QString configParser::sublessonName(int id)
 {
 	switch(id) {
@@ -230,11 +278,21 @@ QString configParser::sublessonName(int id)
 	}
 }
 
+/*!
+ * Returns raw text of the exercise (no repeating or line wrapping).
+ * \see exerciseText()
+ * \see initExercise()
+ */
 QString configParser::exerciseRawText(int lesson, int sublesson, int exercise)
 {
 	return exerciseRawText(lineOf(lesson,sublesson,exercise));
 }
 
+/*!
+ * Returns exercise text (with repeating and without line wrapping).
+ * \see exerciseRawText()
+ * \see initExercise()
+ */
 QString configParser::exerciseText(int lesson, int sublesson, int exercise)
 {
 	QString line = lineOf(lesson,sublesson,exercise);
@@ -246,6 +304,11 @@ QString configParser::exerciseText(int lesson, int sublesson, int exercise)
 		exerciseAttribute(attributes,0).toInt());
 }
 
+/*!
+ * Adds line wrapping to exercise text.
+ * \see exerciseRawText()
+ * \see exerciseText()
+ */
 QString configParser::initExercise(QString exercise, int lineLength)
 {
 	int len, len2, i, line_pos=0;
@@ -280,6 +343,11 @@ QString configParser::initExercise(QString exercise, int lineLength)
 	return out;
 }
 
+/*!
+ * Adds line wrapping to exercise text and (optionally) limits number of lines.\n
+ * \param[in] lineCountLimit Whether to limit number of lines.
+ * \param[in] currentLine The line the shortened text starts at. Note that lines start by 0 in this function.
+ */
 QString configParser::initExercise(QString exercise, int lineLength, bool lineCountLimit, int currentLine)
 {
 	QString text = initExercise(exercise, lineLength);
@@ -309,6 +377,7 @@ QString configParser::initExercise(QString exercise, int lineLength, bool lineCo
 		return text;
 }
 
+/*! Implementation of exerciseRepeatBool() for a config string. */
 bool configParser::exerciseRepeatBool(const QString config)
 {
 	QString out = "";
@@ -329,6 +398,7 @@ bool configParser::exerciseRepeatBool(const QString config)
 	return "";
 }
 
+/*! Implementation of exerciseRepeatType() for a config string. */
 QString configParser::exerciseRepeatType(const QString config)
 {
 	QString out = "";
@@ -353,6 +423,7 @@ QString configParser::exerciseRepeatType(const QString config)
 	return out;
 }
 
+/*! Gets config string from a line. */
 QString configParser::exerciseRepeatConfig(const QString line)
 {
 	QString out = "";
@@ -379,6 +450,7 @@ QString configParser::exerciseRepeatConfig(const QString line)
 	return out;
 }
 
+/*! Gets a specific exercise attribute from a config string. */
 QString configParser::exerciseAttribute(const QString config, const int id)
 {
 	QString out = "";
@@ -407,6 +479,7 @@ QString configParser::exerciseAttribute(const QString config, const int id)
 		return "";
 }
 
+/*! Gets a config string from a line. */
 QString configParser::exerciseAttributes(const QString line)
 {
 	QString out = "";
@@ -433,6 +506,7 @@ QString configParser::exerciseAttributes(const QString line)
 	return out;
 }
 
+/*! Implementation of exerciseRawText() for a line. */
 QString configParser::exerciseRawText(const QString line)
 {
 	QString out = "";
@@ -462,6 +536,12 @@ QString configParser::exerciseRawText(const QString line)
 	return out;
 }
 
+/*! Returns a part of the exercise ID (from a line).
+ *
+ * Part 1 - lesson ID\n
+ * Part 2 - sublesson ID\n
+ * Part 3 - exercise ID\n
+ */
 int configParser::exerciseID(const QString line, const int part)
 {
 	QString out = "";
@@ -497,6 +577,7 @@ int configParser::exerciseID(const QString line, const int part)
 		return 0;
 }
 
+/*! Returns line string of the exercise. */
 QString configParser::lineOf(int lesson, int sublesson, int exercise)
 {
 	configFile->seek(0);
@@ -511,6 +592,10 @@ QString configParser::lineOf(int lesson, int sublesson, int exercise)
 	return "";
 }
 
+/*!
+ * Adds repeating to a raw text.
+ * \see exerciseRawText()
+ */
 QString configParser::generateText(QString rawText, bool repeat, QString repeatType, int repeatLimit)
 {
 	if(repeat && (repeatType == "w")) // repeating words
@@ -543,6 +628,19 @@ QString configParser::generateText(QString rawText, bool repeat, QString repeatT
 		return rawText;
 }
 
+/*!
+ * Adds an exercise to the opened pack file.
+ *
+ * \param[in] lesson Lesson ID.
+ * \param[in] sublesson Sublesson ID.
+ * \param[in] exercise Exercise ID.
+ * \param[in] repeat Whether to enable repeating.
+ * \param[in] repeatType Repeat type string.
+ * \param[in] repeatLimit Maximum number of characters (if repeating is enabled).
+ * \param[in] lineLength Maximum number of characters in one line.
+ * \param[in] desc Lesson description. Should be used only in the first exercise of the lesson.
+ * \param[in] rawText Exercise raw text.
+ */
 bool configParser::addExercise(int lesson, int sublesson, int exercise, bool repeat, QString repeatType, int repeatLimit, int lineLength, QString desc, QString rawText)
 {
 	// Reopen for appending
