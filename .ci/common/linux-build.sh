@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BUILD = $1
+BUILD=$1
 
 cd $BUILD
 
