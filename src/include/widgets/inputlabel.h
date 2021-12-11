@@ -27,6 +27,37 @@
 #include <QInputMethodEvent>
 #include "core/utils.h"
 
+/*!
+ * \brief The inputLabelWidget class is a QTextEdit, which handles all key presses.
+ *
+ * The main window (OpenTyper) uses it to display the input text and receive key presses.
+ * \image html inputLabelWidget.png
+ *
+ * Usage example:
+ * \code
+ * class myClass : public QWidget
+ * {
+ * 	Q_OBJECT
+ * 	private:
+ * 		explicit myClass(QWidget *parent = nullptr);
+ * 		inputLabelWidget *inputText;
+ *
+ * 	private slots:
+ * 		void keyPressed(QKeyEvent* event);
+ * };
+ *
+ * void myClass::myClass(QWidget *parent)
+ * {
+ * 	inputText = new inputLabelWidget;
+ * 	connect(inputLabelWidget,SIGNAL(keyPressed(QKeyEvent*)),this,SLOT(keyPressed(QKeyEvent*)));
+ * }
+ *
+ * void myClass::keyPressed(QKeyEvent* event)
+ * {
+ * 	inputText->setText(inputText->text() + event->text());
+ * }
+ * \endcode
+ */
 class inputLabelWidget : public QTextEdit
 {
 	Q_OBJECT

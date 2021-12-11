@@ -20,6 +20,7 @@
 
 #include "widgets/inputlabel.h"
 
+/*! Constructs inputLabelWidget. */
 inputLabelWidget::inputLabelWidget(QWidget *parent) :
 	QTextEdit(parent)
 {
@@ -27,8 +28,14 @@ inputLabelWidget::inputLabelWidget(QWidget *parent) :
 	setAttribute(Qt::WA_InputMethodEnabled,true);
 }
 
+/*! Destroys the inputLabelWidget object. */
 inputLabelWidget::~inputLabelWidget() { }
 
+/*!
+ * Overrides QWidget#inputMethodEvent.
+ * Handles characters composed using dead keys.
+ * \see keyReleaseEvent()
+ */
 void inputLabelWidget::inputMethodEvent(QInputMethodEvent *event)
 {
 	if (!event->commitString().isEmpty())
@@ -39,11 +46,22 @@ void inputLabelWidget::inputMethodEvent(QInputMethodEvent *event)
 	event->accept();
 }
 
+/*!
+ * Overrides QWidget#keyPressEvent.
+ * Handles all key presses, including dead keys (using inputMethodEvent() and keyReleaseEvent()).
+ * \see inputMethodEvent()
+ * \see keyReleaseEvent()
+ */
 void inputLabelWidget::keyPressEvent(QKeyEvent *event)
 {
 	emit keyPressed(event);
 }
 
+/*!
+ * Overrides QWidget#keyReleaseEvent.
+ * Handles characters generated from 2 same dead keys.\n
+ * \see inputMethodEvent()
+ */
 void inputLabelWidget::keyReleaseEvent(QKeyEvent *event)
 {
 	if(keyboardUtils::isDeadKey(event->key()))
