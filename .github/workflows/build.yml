@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Install Qt
+    - name: Qt - Linux
       uses: jurplel/install-qt-action@v2
       with:
         version: '5.12.8'
@@ -16,3 +16,5 @@ jobs:
         target: 'desktop'
         dir: '${{ github.workspace }}/build/'
         setup-python: 'false'
+    - name: Build - Linux
+      run: .ci/common/linux-build.sh $GITHUB_WORKSPACE
