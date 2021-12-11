@@ -63,6 +63,7 @@ void Updater::initUpdate()
 			connect(updatedProgram,SIGNAL(downloaded()),this,SLOT(overwriteExecutable()));
 			UpdaterDialog *msgBox = new UpdaterDialog(nullptr,true);
 			connect(updatedProgram,SIGNAL(progressChanged(int)),msgBox,SLOT(updateProgress(int)));
+			connect(msgBox,SIGNAL(cancelDownload()),updatedProgram,SLOT(cancelDownload()));
 			msgBox->exec();
 		}
 	}
