@@ -19,22 +19,3 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
-
-name: Build
-
-on:
-  push:
-    branches: [ master ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v2
-      with:
-        version: '5.12.8'
-        host: 'linux'
-        target: 'desktop'
-        dir: '${{ github.workspace }}/build/'
-        setup-python: 'false'
