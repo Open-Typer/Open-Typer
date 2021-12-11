@@ -8,6 +8,5 @@ cd $BUILD
 git config --local user.email "action@github.com"
 git config --local user.name "GitHub"
 
-git checkout build
 git add $OUT
 git commit -m "Build $OUT"
