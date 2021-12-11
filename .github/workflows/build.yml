@@ -15,7 +15,7 @@ jobs:
         version: '5.12.8'
         host: 'linux'
         target: 'desktop'
-        dir: '${{ github.workspace }}/build/'
+        dir: '${{ github.workspace }}/build-data/'
         setup-python: 'false'
     - name: Build - Linux
       run: |
