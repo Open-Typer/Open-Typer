@@ -43,6 +43,7 @@ jobs:
         version: '5.12.8'
         host: 'windows'
         target: 'desktop'
+        arch: 'win32_mingw53'
         dir: '${{ github.workspace }}/build-data/'
         setup-python: 'false'
     - name: Build - Windows
