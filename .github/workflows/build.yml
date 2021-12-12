@@ -56,7 +56,7 @@ jobs:
       shell: bash
       run: |
         .ci/common/linux-build.sh $GITHUB_WORKSPACE
-        mv Open-Typer.exe ../
+        mv release/Open-Typer.exe ../
     - uses: actions/checkout@v2
       with:
         ref: 'build'
