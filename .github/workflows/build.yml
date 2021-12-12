@@ -37,7 +37,7 @@ jobs:
 #        branch: build
   # Windows
   build-windows:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
     - name: Qt - Windows
@@ -46,7 +46,7 @@ jobs:
         version: '5.15.1'
         host: 'windows'
         target: 'desktop'
-        arch: 'win32_mingw81'
+        arch: 'win32_msvc2019'
         dir: '${{ github.workspace }}/build-windows/'
         setup-python: 'false'
         aqtversion: '>=0.9.0'
