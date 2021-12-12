@@ -56,6 +56,7 @@ jobs:
     - name: Build - Windows
       shell: bash
       run: |
+        configure -static -release -no-exceptions
         qmake
         make -j$(nproc --all)
         mv release/Open-Typer.exe ../
