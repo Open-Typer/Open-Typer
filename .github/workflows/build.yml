@@ -40,13 +40,24 @@ jobs:
 #        branch: build
   # Windows
   build-windows:
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
+    - name: Qt - Windows
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: '5.15.1'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_mingw81'
+        dir: '${{ github.workspace }}/build-windows/'
+        setup-python: 'false'
+        aqtversion: '>=0.9.0'
     - name: Build - Windows
       shell: bash
       run: |
-        ./winbuild.sh
+        qmake
+        make -j$(nproc --all)
         mv release/Open-Typer.exe ../
     - uses: actions/checkout@v2
       with:
