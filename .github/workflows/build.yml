@@ -51,20 +51,23 @@ jobs:
         setup-python: 'false'
         aqtversion: '>=0.9.0'
     - name: Build - Windows
-      shell: bash
-      run: .ci/common/linux-build.sh $GITHUB_WORKSPACE
+      shell: cmd
+      run: |
+        call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        qmake
+        make
     - uses: actions/checkout@v2
       with:
         ref: 'build'
-    - name: Commit - Windows
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub"
-        mv /tmp/release/Open-Typer.exe ./
-        git add Open-Typer.exe
-        git commit -m "build: Windows"
-    - name: Push - Windows
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: build
+#    - name: Commit - Windows
+#      run: |
+#        git config --local user.email "action@github.com"
+#        git config --local user.name "GitHub"
+#        mv /tmp/release/Open-Typer.exe ./
+#        git add Open-Typer.exe
+#        git commit -m "build: Windows"
+#    - name: Push - Windows
+#      uses: ad-m/github-push-action@master
+#      with:
+#        github_token: ${{ secrets.GITHUB_TOKEN }}
+#        branch: build
