@@ -55,6 +55,11 @@ class optionsWindow : public QDialog
 		void changeEvent(QEvent *event);
 
 	signals:
+		/*!
+		 * A signal, which is emitted on language change.
+		 * \param[out] index The index in languageList.
+		 * \see languageList
+		 */
 		void languageChanged(int index);
 
 	private slots:
