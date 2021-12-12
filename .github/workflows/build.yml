@@ -52,14 +52,14 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: 'build'
-    - name: Commit - Linux
+    - name: Commit - Windows
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub"
         mv /tmp/release/Open-Typer.exe ./
         git add Open-Typer.exe
         git commit -m "build: Windows"
-    - name: Push - Linux
+    - name: Push - Windows
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
