@@ -5,10 +5,10 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    # Linux
+  # Linux
+#  build-linux:
+#    runs-on: ubuntu-latest
+#    steps:
 #    - uses: actions/checkout@v2
 #    - name: Qt - Linux
 #      uses: jurplel/install-qt-action@v2
@@ -35,7 +35,9 @@ jobs:
 #      with:
 #        github_token: ${{ secrets.GITHUB_TOKEN }}
 #        branch: build
-    # Windows
+  # Windows
+  build-windows:
+    runs-on: windows-latest
     - uses: actions/checkout@v2
     - name: Qt - Windows
       uses: jurplel/install-qt-action@v2
