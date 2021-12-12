@@ -43,7 +43,7 @@ jobs:
         version: '5.12.8'
         host: 'windows'
         target: 'desktop'
-        arch: 'win32_mingw81'
+        arch: 'win32_mingw73'
         dir: '${{ github.workspace }}/build-windows/'
         setup-python: 'false'
         aqtversion: '>=0.9.0'
