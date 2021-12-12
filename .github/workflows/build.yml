@@ -100,6 +100,7 @@ jobs:
         git config --global user.name "GitHub"
         qmake
         make -j$(nproc --all)
+        find
 #        mkdir -p ../build
 #        mv Open-Typer ../build/
 #    - uses: actions/checkout@v2
