@@ -37,7 +37,7 @@ namespace Ui {
  * The list of categories is can be changed in the setupList() function.\n
  * New categories can be added in the changeOptionWidget() function. Make sure to follow the other categories' code structure.
  *
- * \image optionsWindow.png
+ * \image html optionsWindow.png
  */
 class optionsWindow : public QDialog
 {

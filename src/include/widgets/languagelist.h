@@ -30,7 +30,7 @@
 /*!
  * \brief The languageList class is a QListWidget, which provides a language selector.
  *
- * \image languageList.png
+ * \image html languageList.png
  * \see languageManager
  * \see optionsWindow
  */
