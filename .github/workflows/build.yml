@@ -6,38 +6,38 @@ on:
 
 jobs:
   # Linux
-#  build-linux:
-#    runs-on: ubuntu-latest
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Qt - Linux
-#      uses: jurplel/install-qt-action@v2
-#      with:
-#        version: '5.15.1'
-#        host: 'linux'
-#        target: 'desktop'
-#        dir: '${{ github.workspace }}/build-linux/'
-#        setup-python: 'false'
-#    - name: Build - Linux
-#      run: |
-#        qmake
-#        make -j$(nproc --all)
-#        mv Open-Typer ../
-#    - uses: actions/checkout@v2
-#      with:
-#        ref: 'build'
-#    - name: Commit - Linux
-#      run: |
-#        git config --local user.email "action@github.com"
-#        git config --local user.name "GitHub"
-#        mv ../Open-Typer ./
-#        git add Open-Typer
-#        git commit -m "build: Linux"
-#    - name: Push - Linux
-#      uses: ad-m/github-push-action@master
-#      with:
-#        github_token: ${{ secrets.GITHUB_TOKEN }}
-#        branch: build
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Qt - Linux
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: '5.15.1'
+        host: 'linux'
+        target: 'desktop'
+        dir: '${{ github.workspace }}/build-linux/'
+        setup-python: 'false'
+    - name: Build - Linux
+      run: |
+        qmake
+        make -j$(nproc --all)
+        mv Open-Typer ../
+    - uses: actions/checkout@v2
+      with:
+        ref: 'build'
+    - name: Commit - Linux
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub"
+        mv ../Open-Typer ./
+        git add Open-Typer
+        git commit -m "build: Linux"
+    - name: Push - Linux
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: build
   # Windows
 #  build-windows:
 #    runs-on: windows-2019
