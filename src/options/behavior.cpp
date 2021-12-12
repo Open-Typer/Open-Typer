@@ -21,6 +21,7 @@
 #include "options/behavior.h"
 #include "ui_behavior.h"
 
+/*! Constructs behaviorOptions. */
 behaviorOptions::behaviorOptions(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::behaviorOptions)
@@ -52,11 +53,16 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 	connect(ui->textViewModeComboBox,SIGNAL(activated(int)),this,SLOT(setTextViewMode(int)));
 }
 
+/*! Destroys the behaviorOptions object. */
 behaviorOptions::~behaviorOptions()
 {
 	delete ui;
 }
 
+/*!
+ * Connected from spaceNewlineCheckBox#clicked().
+ * Enables or disables space bar at the end of line.
+ */
 void behaviorOptions::setSpaceNewline(bool value)
 {
 	if(value)
@@ -65,11 +71,19 @@ void behaviorOptions::setSpaceNewline(bool value)
 		settings->setValue("main/spacenewline","false");
 }
 
+/*!
+ * Connected from errorPenaltyBox#valueChanged().
+ * Sets error penalty value.
+ */
 void behaviorOptions::setErrorPenalty(int value)
 {
 	settings->setValue("main/errorpenalty",value);
 }
 
+/*!
+ * Connected from textViewModeComboBox#activated().
+ * Sets text view mode.
+ */
 void behaviorOptions::setTextViewMode(int mode)
 {
 	settings->setValue("main/textviewmode",mode);

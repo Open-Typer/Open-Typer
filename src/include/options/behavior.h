@@ -29,6 +29,11 @@ namespace Ui {
 	class behaviorOptions;
 }
 
+/*!
+ * \brief The behaviorOptions class is the behavior category in the options.
+ * \image behaviorOptions.png
+ * \see optionsWindow
+ */
 class behaviorOptions : public QWidget
 {
 	Q_OBJECT
