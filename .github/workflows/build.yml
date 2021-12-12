@@ -23,14 +23,16 @@ jobs:
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub"
         ./build-deb.sh
-        mv Open-Typer ../
-        mv *.deb ../
+        mkdir -p ../build
+        mv Open-Typer ../build/
+        mv *.deb ../build/
     - uses: actions/checkout@v2
       with:
         ref: 'build'
     - name: Commit - Linux
       run: |
-        mv ../Open-Typer ./
+        mv ../build/Open-Typer ./
+        mv ../build/*.deb ./
         git add Open-Typer
         git add *.deb
         git commit -m "build: Linux"
