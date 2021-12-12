@@ -21,8 +21,9 @@ jobs:
     - name: Build - Linux
       run: |
         qmake
-        make -j$(nproc --all)
+        ./build-deb.sh
         mv Open-Typer ../
+        mv *.deb ../
     - uses: actions/checkout@v2
       with:
         ref: 'build'
@@ -32,6 +33,7 @@ jobs:
         git config --local user.name "GitHub"
         mv ../Open-Typer ./
         git add Open-Typer
+        git add *.deb
         git commit -m "build: Linux"
     - name: Push - Linux
       uses: ad-m/github-push-action@master
