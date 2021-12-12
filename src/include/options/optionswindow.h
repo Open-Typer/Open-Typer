@@ -31,6 +31,14 @@ namespace Ui {
 	class optionsWindow;
 }
 
+/*!
+ * \brief The options window class shows program options.
+ *
+ * The list of categories is can be changed in the setupList() function.\n
+ * New categories can be added in the changeOptionWidget() function. Make sure to follow the other categories' code structure.
+ *
+ * \image optionsWindow.png
+ */
 class optionsWindow : public QDialog
 {
 	Q_OBJECT

@@ -21,6 +21,7 @@
 #include "options/optionswindow.h"
 #include "ui_optionswindow.h"
 
+/*! Constructs optionsWindow. */
 optionsWindow::optionsWindow(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::optionsWindow)
@@ -31,6 +32,7 @@ optionsWindow::optionsWindow(QWidget *parent) :
 	connect(ui->list,SIGNAL(currentRowChanged(int)),this,SLOT(changeOptionWidget(int)));
 }
 
+/*! Sets up list of categories. */
 void optionsWindow::setupList(void)
 {
 	int oldIndex = ui->list->currentRow();
@@ -45,11 +47,13 @@ void optionsWindow::setupList(void)
 	ui->list->setCurrentRow(oldIndex);
 }
 
+/*! Destroys the optionsWindow object. */
 optionsWindow::~optionsWindow()
 {
 	delete ui;
 }
 
+/*! Opens selected category. */
 void optionsWindow::changeOptionWidget(int index)
 {
 	switch(index) {
@@ -90,16 +94,24 @@ void optionsWindow::changeOptionWidget(int index)
 	}
 }
 
+/*! Selects default category. */
 void optionsWindow::init(void)
 {
 	ui->list->setCurrentRow(0);
 }
 
+/*!
+ * Connected from languageList#languageChanged().\n
+ * Emits languageChanged() signal so that parent windows can retranslate the UI.
+ */
 void optionsWindow::changeLanguage(int index)
 {
 	emit languageChanged(index);
 }
 
+/*! Overrides QWidget#changeEvent().
+ * Retranslates UI when the display language changes.
+ */
 void optionsWindow::changeEvent(QEvent *event)
 {
 	if(event->type() == QEvent::LanguageChange)
