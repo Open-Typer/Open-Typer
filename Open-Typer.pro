@@ -93,7 +93,6 @@ RESOURCES += \
     light-theme/light-style.qrc
 
 win32:RC_ICONS += res/images/icon.ico
-win32:QMAKE_LFLAGS += -shared
 
 QT += network
 
