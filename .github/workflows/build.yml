@@ -13,7 +13,7 @@ jobs:
     - name: Qt - Linux
       uses: jurplel/install-qt-action@v2
       with:
-        version: '5.15.1'
+        version: '5.12.8'
         host: 'linux'
         target: 'desktop'
         dir: '${{ github.workspace }}/build-linux/'
@@ -49,7 +49,7 @@ jobs:
 #    - name: Qt - Windows
 #      uses: jurplel/install-qt-action@v2
 #      with:
-#        version: '5.15.1'
+#        version: '5.12.8'
 #        host: 'windows'
 #        target: 'desktop'
 #        arch: 'win32_mingw81'
