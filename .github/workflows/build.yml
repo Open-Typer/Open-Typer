@@ -16,7 +16,7 @@ jobs:
         version: '5.12.8'
         host: 'linux'
         target: 'desktop'
-        dir: '${{ github.workspace }}/build-data/'
+        dir: '${{ github.workspace }}/build-linux/'
         setup-python: 'false'
     - name: Build - Linux
       run: .ci/common/linux-build.sh $GITHUB_WORKSPACE
@@ -44,7 +44,7 @@ jobs:
         host: 'windows'
         target: 'desktop'
         arch: 'win32_mingw53'
-        dir: '${{ github.workspace }}/build-data/'
+        dir: '${{ github.workspace }}/build-windows/'
         setup-python: 'false'
     - name: Build - Windows
       run: .ci/common/linux-build.sh $GITHUB_WORKSPACE
