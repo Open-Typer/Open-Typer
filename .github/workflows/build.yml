@@ -20,7 +20,8 @@ jobs:
         setup-python: 'false'
     - name: Build - Linux
       run: |
-        qmake
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub"
         ./build-deb.sh
         mv Open-Typer ../
         mv *.deb ../
@@ -32,8 +33,6 @@ jobs:
         mv ../Open-Typer ./
         git add Open-Typer
         git add *.deb
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub"
         git commit -m "build: Linux"
     - name: Push - Linux
       uses: ad-m/github-push-action@master
