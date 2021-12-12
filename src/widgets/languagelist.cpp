@@ -20,6 +20,7 @@
 
 #include "widgets/languagelist.h"
 
+/*! Constructs languageList. */
 languageList::languageList(QWidget *parent) :
 	QListWidget(parent)
 {
@@ -34,8 +35,14 @@ languageList::languageList(QWidget *parent) :
 	connect(this,SIGNAL(currentRowChanged(int)),this,SLOT(changeLanguage(int)));
 }
 
+/*! Destroys the languageList object. */
 languageList::~languageList() { }
 
+/*!
+ * Connected from languageList#currentRowChanged() (this object).
+ * Changes display language in program settings and emits languageChanged().
+ * \see languageChanged()
+ */
 void languageList::changeLanguage(int index)
 {
 	if(index == 0)

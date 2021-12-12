@@ -27,6 +27,13 @@
 #include "core/utils.h"
 #include "core/language.h"
 
+/*!
+ * \brief The languageList class is a QListWidget, which provides a language selector.
+ *
+ * \image languageList.png
+ * \see languageManager
+ * \see optionsWindow
+ */
 class languageList : public QListWidget
 {
 	Q_OBJECT
@@ -41,6 +48,10 @@ class languageList : public QListWidget
 		QSettings *settings;
 
 	signals:
+		/*!
+		 * A signal, which is emitted on language change.
+		 * \param[out] index The index in languageList.
+		 */
 		void languageChanged(int index);
 
 	private slots:
