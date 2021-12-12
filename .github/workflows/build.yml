@@ -64,6 +64,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub"
+        rm Open-Typer.exe
         mv ../Open-Typer.exe ./
         git add Open-Typer.exe
         git commit -m "build: Windows"
