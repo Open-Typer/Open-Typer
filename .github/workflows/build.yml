@@ -101,14 +101,14 @@ jobs:
         qmake
         make -j$(nproc --all)
         mkdir -p ../build
-        mv Open-Typer.app/Contents/MacOS/Open-Typer ../build/
+        mv Open-Typer.app/Contents/MacOS/Open-Typer ../build/Open-Typer-mac
     - uses: actions/checkout@v2
       with:
         ref: 'build'
     - name: Commit - MacOS
       run: |
-        mv ../build/Open-Typer ./
-        git add Open-Typer
+        mv ../build/Open-Typer-mac ./
+        git add Open-Typer-mac
         git commit -m "build: MacOS"
     - name: Push - MacOS
       uses: ad-m/github-push-action@master
