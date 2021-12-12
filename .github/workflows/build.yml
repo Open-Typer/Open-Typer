@@ -29,11 +29,11 @@ jobs:
         ref: 'build'
     - name: Commit - Linux
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub"
         mv ../Open-Typer ./
         git add Open-Typer
         git add *.deb
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub"
         git commit -m "build: Linux"
     - name: Push - Linux
       uses: ad-m/github-push-action@master
