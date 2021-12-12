@@ -38,6 +38,7 @@ jobs:
   # Windows
   build-windows:
     runs-on: windows-latest
+    steps:
     - uses: actions/checkout@v2
     - name: Qt - Windows
       uses: jurplel/install-qt-action@v2
