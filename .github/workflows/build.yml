@@ -58,10 +58,9 @@ jobs:
       with:
         platform: i686
     - name: Build - Windows
-      shell: bash
       run: |
         qmake
-        make -j$(nproc --all)
+        C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw32\bin\make.exe
         mv release/Open-Typer.exe ../
     - uses: actions/checkout@v2
       with:
