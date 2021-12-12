@@ -81,3 +81,37 @@ jobs:
 #      with:
 #        github_token: ${{ secrets.GITHUB_TOKEN }}
 #        branch: build
+  # MacOS
+  build-macos:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Qt - MacOS
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: '5.12.8'
+        host: 'mac'
+        target: 'desktop'
+        dir: '${{ github.workspace }}/build-macos/'
+        setup-python: 'false'
+    - name: Build - MacOS
+      run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub"
+        qmake
+        make -j$(nproc --all)
+#        mkdir -p ../build
+#        mv Open-Typer ../build/
+#    - uses: actions/checkout@v2
+#      with:
+#        ref: 'build'
+#    - name: Commit - MacOS
+#      run: |
+#        mv ../build/Open-Typer ./
+#        git add Open-Typer
+#        git commit -m "build: MacOS"
+#    - name: Push - MacOS
+#      uses: ad-m/github-push-action@master
+#      with:
+#        github_token: ${{ secrets.GITHUB_TOKEN }}
+#        branch: build
