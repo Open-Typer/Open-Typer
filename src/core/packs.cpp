@@ -20,6 +20,7 @@
 
 #include "core/packs.h"
 
+/*! Returns human-readable name of the built-in pack. */
 QString builtinPacks::packName(QString rawName)
 {
 	// Human-readable built-in pack names
