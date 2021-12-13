@@ -67,9 +67,9 @@ jobs:
         C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin\mingw32-make.exe
       shell: cmd
     - uses: papeloto/action-zip@v1
-        with:
-          files: release/p
-          dest: ../Open-Typer-win32.zip
+      with:
+        files: release/p
+        dest: ../Open-Typer-win32.zip
     - uses: actions/checkout@v2
       with:
         ref: 'build'
