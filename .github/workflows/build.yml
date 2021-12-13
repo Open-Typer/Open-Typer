@@ -34,8 +34,7 @@ jobs:
         rm *.deb
         mv ../build/Open-Typer ./
         mv ../build/*.deb ./
-        git add Open-Typer
-        git add *.deb
+        git add -A
         git commit -m "build: Linux"
     - name: Push - Linux
       uses: ad-m/github-push-action@master
