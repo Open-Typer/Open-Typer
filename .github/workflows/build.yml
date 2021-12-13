@@ -67,7 +67,7 @@ jobs:
       shell: cmd
     - uses: papeloto/action-zip@v1
       with:
-        files: release/p
+        files: release/
         dest: ../Open-Typer-win32.zip
     - uses: actions/checkout@v2
       with:
