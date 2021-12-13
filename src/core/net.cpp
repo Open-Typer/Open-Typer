@@ -20,6 +20,10 @@
 
 #include "core/net.h"
 
+/*!
+ * Constructs Downloader, which starts to download immediately.
+ * \param[in] url Remote file URL.
+ */
 Downloader::Downloader(QUrl url, QObject *parent) :
 	QObject(parent)
 {
@@ -31,8 +35,14 @@ Downloader::Downloader(QUrl url, QObject *parent) :
 	connect(reply,SIGNAL(downloadProgress(qint64,qint64)),this,SLOT(downloadProgress(qint64,qint64)));
 }
 
+/*! Destroys the Downloader object. */
 Downloader::~Downloader() { }
 
+/*!
+ * Connected from m_WebCtrl.finished().\n
+ * Reads downloaded data and emits downloaded().
+ * \see downloaded()
+ */
 void Downloader::fileDownloaded(QNetworkReply* pReply)
 {
 	if(!pReply->isOpen())
@@ -42,17 +52,27 @@ void Downloader::fileDownloaded(QNetworkReply* pReply)
 	emit downloaded();
 }
 
+/*!
+ * Returns downloaded data.
+ * \see downloaded()
+ */
 QByteArray Downloader::downloadedData() const
 {
 	return m_DownloadedData;
 }
 
+/*!
+ * Connected from reply->downloadProgress().\n
+ * Calculates download progress percentage and emits progressChanged().
+ * \see progressChanged()
+ */
 void Downloader::downloadProgress(qint64 current, qint64 max)
 {
 	downloadProgressPercentage = (current*100)/max;
 	emit progressChanged(downloadProgressPercentage);
 }
 
+/*! Aborts the download. */
 void Downloader::cancelDownload(void)
 {
 	reply->abort();

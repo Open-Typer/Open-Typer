@@ -34,6 +34,43 @@ class Net : public QObject
 		bool internetConnected();
 };
 
+/*!
+ * \brief The downloader class provides functions for file downloading.
+ *
+ * Usage example:
+ * \code
+ * class myClass : public QObject
+ * {
+ 	Q_OBJECT
+ * 	public:
+ * 		explicit myClass(QObject *parent = nullptr);
+ * 		void downloadFile(QUrl url, QString destination);
+ * 		Downloader *dw;
+ * 		QString dest;
+ *
+ * 	private slots:
+ * 		void saveFile(void);
+ * };
+ *
+ * void myClass::downloadFile(QUrl url, QString destination)
+ * {
+ * 	dest = destination;
+ * 	dw = new Downloader(url,this);
+ * 	connect(updatedProgram,SIGNAL(downloaded()),this,SLOT(saveFile()));
+ * }
+ *
+ * void myClass::saveFile(void)
+ * {
+ * 	QSaveFile file(dest);
+	file.open(QIODevice::WriteOnly);
+	file.write(dw->downloadedData());
+	file.commit();
+ * }
+ * \endcode
+ *
+ * \see Net
+ * \see Updater
+ */
 class Downloader : public QObject
 {
 	Q_OBJECT
@@ -44,7 +81,12 @@ class Downloader : public QObject
 		int downloadProgressPercentage;
 
 	signals:
+		/*! A signal, which is emitted when the download finishes. */
 		void downloaded();
+		/*!
+		 * A signal, which is emitted when the progress percentage changes.\n
+		 * The parameter is the progress percentage.
+		 */
 		void progressChanged(int);
 	
 	private slots:
