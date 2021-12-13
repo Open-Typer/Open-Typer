@@ -2,8 +2,7 @@ name: Build
 
 on:
   push:
-    tags:
-      '*'
+    branches: [ master ]
 
 jobs:
   # Linux
