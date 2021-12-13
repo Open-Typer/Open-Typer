@@ -63,7 +63,6 @@ jobs:
     - name: Build - Windows
       run: |
         qmake
-        whereis make
         make
         mv release/Open-Typer.exe ../
       shell: bash
