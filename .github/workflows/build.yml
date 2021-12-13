@@ -31,6 +31,7 @@ jobs:
         ref: 'build'
     - name: Commit - Linux
       run: |
+        rm *.deb
         mv ../build/Open-Typer ./
         mv ../build/*.deb ./
         git add Open-Typer
