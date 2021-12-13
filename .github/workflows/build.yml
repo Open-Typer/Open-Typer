@@ -64,6 +64,7 @@ jobs:
       run: |
         qmake
         C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin\mingw32-make.exe
+        dir
       shell: cmd
     - uses: papeloto/action-zip@v1
       with:
