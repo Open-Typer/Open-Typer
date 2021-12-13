@@ -64,11 +64,13 @@ jobs:
       run: |
         qmake
         C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin\mingw32-make.exe
-        dir
+        cd release
+        windeployqt
+        cd ..
       shell: cmd
     - uses: papeloto/action-zip@v1
       with:
-        files: release/
+        files: release/*.exe release/*.dll
         dest: ../Open-Typer-win32.zip
     - uses: actions/checkout@v2
       with:
