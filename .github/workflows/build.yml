@@ -84,6 +84,7 @@ jobs:
         mv ../Open-Typer-win32.zip ./
         git add Open-Typer-win32.zip
         git commit -m "build: Windows"
+      shell: bash
     - name: Push - Windows
       uses: ad-m/github-push-action@master
       with:
