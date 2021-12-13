@@ -64,9 +64,14 @@ jobs:
     - name: Build - Windows
       run: |
         qmake
-        make
+        dir C:\ProgramData\Chocolatey\lib\mingw\tools
+        dir C:\ProgramData\Chocolatey\lib\mingw\tools\install
+        dir C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32
+        dir C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin
+        C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin
+        C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin\i686-w64-mingw32-make.exe
         mv release/Open-Typer.exe ../
-      shell: bash
+      shell: cmd
 #    - uses: actions/checkout@v2
 #      with:
 #        ref: 'build'
