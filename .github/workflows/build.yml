@@ -109,15 +109,17 @@ jobs:
         git config --global user.name "GitHub"
         qmake
         make -j$(nproc --all)
-        mkdir -p ../build
-        mv Open-Typer.app/Contents/MacOS/Open-Typer ../build/Open-Typer-mac
+    - uses: papeloto/action-zip@v1
+      with:
+        files: Open-Typer.app/
+        dest: ../Open-Typer-macos.zip
     - uses: actions/checkout@v2
       with:
         ref: 'build'
     - name: Commit - MacOS
       run: |
-        mv ../build/Open-Typer-mac ./
-        git add Open-Typer-mac
+        mv ../Open-Typer-macos.zip ./
+        git add Open-Typer-macos.zip
         git commit -m "build: MacOS"
     - name: Push - MacOS
       uses: ad-m/github-push-action@master
