@@ -63,7 +63,8 @@ jobs:
     - name: Build - Windows
       run: |
         qmake
-        find /ProgramData/chocolatey/lib/mingw | grep make
+        whereis make
+        make
         mv release/Open-Typer.exe ../
       shell: bash
 #    - uses: actions/checkout@v2
