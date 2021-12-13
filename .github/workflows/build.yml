@@ -66,7 +66,7 @@ jobs:
         C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin\mingw32-make.exe
         cd release
         rm -f *.o
-        windeployqt
+        windeployqt *.exe
         cd ..
       shell: cmd
     - uses: papeloto/action-zip@v1
