@@ -64,26 +64,28 @@ jobs:
     - name: Build - Windows
       run: |
         qmake
-        dir C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin
         C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin\mingw32-make.exe
-        mv release/Open-Typer.exe ../
       shell: cmd
-#    - uses: actions/checkout@v2
-#      with:
-#        ref: 'build'
-#    - name: Commit - Windows
-#      run: |
-#        git config --local user.email "action@github.com"
-#        git config --local user.name "GitHub"
-#        rm Open-Typer.exe
-#        mv ../Open-Typer.exe ./
-#        git add Open-Typer.exe
-#        git commit -m "build: Windows"
-#    - name: Push - Windows
-#      uses: ad-m/github-push-action@master
-#      with:
-#        github_token: ${{ secrets.GITHUB_TOKEN }}
-#        branch: build
+    - uses: papeloto/action-zip@v1
+        with:
+          files: release/p
+          dest: ../Open-Typer-win32.zip
+    - uses: actions/checkout@v2
+      with:
+        ref: 'build'
+    - name: Commit - Windows
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub"
+        rm Open-Typer-win32.zip
+        mv ../Open-Typer-win32.zip ./
+        git add Open-Typer-win32.zip
+        git commit -m "build: Windows"
+    - name: Push - Windows
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: build
   # MacOS
   build-macos:
     runs-on: macos-latest
