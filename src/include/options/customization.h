@@ -34,6 +34,11 @@ namespace Ui {
 	class customizationOptions;
 }
 
+/*!
+ * \brief The customizationOptions class is the customization category in the options.
+ * \image html customizationOptions.png
+ * \see optionsWindow
+ */
 class customizationOptions : public QWidget
 {
 	Q_OBJECT

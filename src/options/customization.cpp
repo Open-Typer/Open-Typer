@@ -21,6 +21,7 @@
 #include "options/customization.h"
 #include "ui_customization.h"
 
+/*! Constructs customizationOptions. */
 customizationOptions::customizationOptions(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::customizationOptions)
@@ -131,17 +132,20 @@ customizationOptions::customizationOptions(QWidget *parent) :
 		SLOT(changeTheme(int)));
 }
 
+/*! Destroys the customizationOptions object. */
 customizationOptions::~customizationOptions()
 {
 	delete ui;
 }
 
+/*! Initializes widgets. */
 void customizationOptions::init(void)
 {
 	ui->themeBox->setCurrentIndex(settings->value("theme/theme","0").toInt());
 	setColors();
 }
 
+/*! Sets exercise text font and saves it in the settings. \see OpenTyper#setFont */
 void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline)
 {
 	QFont newFont, mistakeLabelFont;
@@ -168,6 +172,11 @@ void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBo
 	settings->setValue("theme/fontunderline",fontUnderline);
 }
 
+/*!
+ * Connected from fontComboBox->currentFontChanged().\n
+ * Sets exercise text font family and saves it in the settings.
+ * \see setFont()
+ */
 void customizationOptions::changeFont(QFont font)
 {
 	QFont oldFont = ui->levelLabel->font();
@@ -177,6 +186,11 @@ void customizationOptions::changeFont(QFont font)
 	settings->setValue("theme/font",font.family());
 }
 
+/*!
+ * Connected from fontSizeBox->valueChanged().\n
+ * Sets font size and saves it in the settings.
+ * \see setFont()
+ */
 void customizationOptions::changeFontSize(int size)
 {
 	QFont oldFont = ui->levelLabel->font();
@@ -186,6 +200,11 @@ void customizationOptions::changeFontSize(int size)
 	settings->setValue("theme/fontsize",size);
 }
 
+/*!
+ * Connected from boldTextBox->clicked().\n
+ * Switches bold text based on the value of boldTextBox.
+ * \see setFont()
+ */
 void customizationOptions::setBoldText(void)
 {
 	QFont oldFont = ui->levelLabel->font();
@@ -195,6 +214,11 @@ void customizationOptions::setBoldText(void)
 	settings->setValue("theme/fontbold",ui->boldTextBox->isChecked());
 }
 
+/*!
+ * Connected from italicTextBox->clicked().\n
+ * Switches bold text based on the value of italicTextBox.
+ * \see setFont()
+ */
 void customizationOptions::setItalicText(void)
 {
 	QFont oldFont = ui->levelLabel->font();
@@ -204,6 +228,11 @@ void customizationOptions::setItalicText(void)
 	settings->setValue("theme/fontitalic",ui->italicTextBox->isChecked());
 }
 
+/*!
+ * Connected from underlineTextBox->clicked().\n
+ * Switches bold text based on the value of underlineTextBox.
+ * \see setFont()
+ */
 void customizationOptions::setUnderlineText(void)
 {
 	QFont oldFont = ui->levelLabel->font();
@@ -213,6 +242,10 @@ void customizationOptions::setUnderlineText(void)
 	settings->setValue("theme/fontunderline",ui->underlineTextBox->isChecked());
 }
 
+/*!
+ * Connected from fontResetButton->clicked().\n
+ * Sets the default font.
+ */
 void customizationOptions::resetFont(void)
 {
 	// Default font
@@ -223,6 +256,7 @@ void customizationOptions::resetFont(void)
 		false);	// Underline
 }
 
+/*! Saves all custom colors in the settings. */
 void customizationOptions::saveColorSettings(void)
 {
 	// Level text
@@ -252,6 +286,7 @@ void customizationOptions::saveColorSettings(void)
 	settings->setValue("theme/panelblue",panelBlueColor);
 }
 
+/*! Sets custom colors (if they are set) or default colors. \see OpenTyper#setColors */
 void customizationOptions::setColors()
 {
 	// Reset style sheets
@@ -310,6 +345,7 @@ void customizationOptions::setColors()
 	}
 }
 
+/*! Loads the style sheet of the selected theme. \see OpenTyper#updateTheme */
 void customizationOptions::updateTheme()
 {
 	QFile darkSheet(":/dark-theme/style.qss");
@@ -360,6 +396,12 @@ void customizationOptions::updateTheme()
 	parentWidget()->parentWidget()->parentWidget()->setStyleSheet(styleSheet());
 }
 
+/*!
+ * Connected from levelTextColorButton->clicked().\n
+ * Opens SimpleColorDialog and sets exercise text color.
+ * \see SimpleColorDialog
+ * \see changeInputTextColor()
+ */
 void customizationOptions::changeLevelTextColor(void)
 {
 	SimpleColorDialog colorDialog;
@@ -378,6 +420,12 @@ void customizationOptions::changeLevelTextColor(void)
 	}
 }
 
+/*!
+ * Connected from inputTextColorButton->clicked().\n
+ * Opens SimpleColorDialog and sets input text color.
+ * \see SimpleColorDialog
+ * \see changeLevelTextColor()
+ */
 void customizationOptions::changeInputTextColor(void)
 {
 	SimpleColorDialog colorDialog;
@@ -396,6 +444,10 @@ void customizationOptions::changeInputTextColor(void)
 	}
 }
 
+/*!
+ * Connected from resetTextColorButton->clicked().\n
+ * Sets the default text colors.
+ */
 void customizationOptions::resetTextColors(void)
 {
 	// There's no need to set RGB values because they're defined in setColors()
@@ -405,6 +457,13 @@ void customizationOptions::resetTextColors(void)
 	setColors();
 }
 
+/*!
+ * Connected from bgColorButton->clicked().\n
+ * Opens SimpleColorDialog and sets background color.
+ * \see SimpleColorDialog
+ * \see changePaperColor()
+ * \see changePanelColor()
+ */
 void customizationOptions::changeBgColor(void)
 {
 	SimpleColorDialog colorDialog;
@@ -423,6 +482,13 @@ void customizationOptions::changeBgColor(void)
 	}
 }
 
+/*!
+ * Connected from paperColorButton->clicked().\n
+ * Opens SimpleColorDialog and sets paper color.
+ * \see SimpleColorDialog
+ * \see changeBgColor()
+ * \see changePanelColor()
+ */
 void customizationOptions::changePaperColor(void)
 {
 	SimpleColorDialog colorDialog;
@@ -441,6 +507,13 @@ void customizationOptions::changePaperColor(void)
 	}
 }
 
+/*!
+ * Connected from panelColorButton->clicked().\n
+ * Opens SimpleColorDialog and sets panel color.
+ * \see SimpleColorDialog
+ * \see changeBgColor()
+ * \see changePaperColor()
+ */
 void customizationOptions::changePanelColor(void)
 {
 	SimpleColorDialog colorDialog;
@@ -459,6 +532,10 @@ void customizationOptions::changePanelColor(void)
 	}
 }
 
+/*!
+ * Connected from resetBgPaperColorButton->clicked().\n
+ * Sets the default background, paper and panel colors.
+ */
 void customizationOptions::resetBgPaperColors(void)
 {
 	// There's no need to set RGB values because they're defined in setColors()
@@ -469,6 +546,10 @@ void customizationOptions::resetBgPaperColors(void)
 	setColors();
 }
 
+/*!
+ * Connected from themeBox->activated().\n
+ * Sets theme based on the value of themeBox.
+ */
 void customizationOptions::changeTheme(int index)
 {
 	settings->setValue("theme/theme",index);
