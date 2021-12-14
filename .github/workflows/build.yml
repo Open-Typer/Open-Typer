@@ -56,14 +56,14 @@ jobs:
         dir: '${{ github.workspace }}/build-windows/'
         setup-python: 'false'
         aqtversion: '>=0.9.0'
-    - uses: msys2/setup-msys2@v2
+    - name: MinGW-w64
+      uses: egor-tensin/setup-mingw@v2
       with:
-        msystem: mingw32
-        install: mingw-w64-i686-openssl
+        platform: i686
     - name: Build - Windows
       run: |
         qmake
-        make
+        C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin\mingw32-make.exe
         cd release
         rm -f *.o *.cpp *.h
         windeployqt Open-Typer.exe
