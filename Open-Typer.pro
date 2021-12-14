@@ -18,6 +18,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += \
     src/include
 
+QMAKE_LFLAGS_WINDOWS += \
+    -lcrypto-1_1 \
+    -lssl-1_1
+
 SOURCES += \
     src/core/utils.cpp \
     src/core/configfile.cpp \
