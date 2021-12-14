@@ -63,7 +63,7 @@ jobs:
     - name: Build - Windows
       run: |
         qmake
-        msys2 -c 'make'
+        make
         cd release
         rm -f *.o *.cpp *.h
         windeployqt Open-Typer.exe
