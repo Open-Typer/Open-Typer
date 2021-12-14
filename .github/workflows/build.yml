@@ -63,12 +63,12 @@ jobs:
     - name: Build - Windows
       run: |
         qmake
-        make
+        msys2 -c 'make'
         cd release
         rm -f *.o *.cpp *.h
         windeployqt Open-Typer.exe
         cd ..
-      shell: msys2 {0}
+      shell: cmd
     - uses: papeloto/action-zip@v1
       with:
         files: release/
