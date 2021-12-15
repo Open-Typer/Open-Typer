@@ -32,7 +32,7 @@ jobs:
         ref: 'master'
     - name: Commit - Linux
       run: |
-        rm *.deb
+        rm -f *.deb
         mv ../build/Open-Typer ./
         mv ../build/*.deb ./
         git add -A
