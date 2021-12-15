@@ -40,7 +40,7 @@ jobs:
     - name: Push - Linux
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.ACCESS_TOKEN }}
         repository: 'Open-Typer/builds'
         branch: master
   # Windows
@@ -100,7 +100,7 @@ jobs:
     - name: Push - Windows
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.ACCESS_TOKEN }}
         repository: 'Open-Typer/builds'
         branch: master
   # MacOS
@@ -138,6 +138,6 @@ jobs:
     - name: Push - MacOS
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.ACCESS_TOKEN }}
         repository: 'Open-Typer/builds'
         branch: master
