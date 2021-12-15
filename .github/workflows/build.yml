@@ -41,6 +41,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        repository: 'Open-Typer/builds'
         branch: master
   # Windows
   build-windows:
@@ -100,6 +101,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        repository: 'Open-Typer/builds'
         branch: master
   # MacOS
   build-macos:
@@ -137,4 +139,5 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        repository: 'Open-Typer/builds'
         branch: master
