@@ -34,6 +34,11 @@ namespace Ui {
 	class keyboardOptions;
 }
 
+/*!
+ * \brief The keyboardOptions class is the keyboard category in the options.
+ * \image html keyboardOptions.png
+ * \see optionsWindow
+ */
 class keyboardOptions : public QWidget
 {
 	Q_OBJECT

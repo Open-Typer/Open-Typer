@@ -21,6 +21,7 @@
 #include "options/keyboard.h"
 #include "ui_keyboard.h"
 
+/*! Constructs keyboardOptions object. */
 keyboardOptions::keyboardOptions(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::keyboardOptions)
@@ -52,11 +53,17 @@ keyboardOptions::keyboardOptions(QWidget *parent) :
 	connect(ui->packList,SIGNAL(currentRowChanged(int)),this,SLOT(changePack(int)));
 }
 
+/*! Destroys the keyboardOptions object. */
 keyboardOptions::~keyboardOptions()
 {
 	delete ui;
 }
 
+/*!
+ * Connected from editorButton->clicked().\n
+ * Opens the editor window.
+ * \see packEditor
+ */
 void keyboardOptions::openEditor(void)
 {
 	packEditor editorWindow;
@@ -67,6 +74,10 @@ void keyboardOptions::openEditor(void)
 	editorWindow.exec();
 }
 
+/*!
+ * Connected from packList->currentRowChanged().\n
+ * Sets selected pack based on the value in packList and saves it in the settings.
+ */
 void keyboardOptions::changePack(int index)
 {
 	settings->setValue("main/configfile",rawItems[index]);
