@@ -92,7 +92,7 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 		errBox.setText(tr("Write error"));
 		errBox.setStyleSheet(styleSheet());
 		errBox.exec();
-		exit(errno);
+		exit(1);
 	}
 	if(newFile)
 	{
