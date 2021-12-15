@@ -39,6 +39,7 @@ jobs:
         curl -o openssl.zip https://deac-fra.dl.sourceforge.net/project/openssl-for-windows/OpenSSL-1.1.1h_win32.zip
         mkdir C:\openssl
         unzip openssl.zip -d C:\openssl
+        rm openssl.zip
         mv C:\openssl\OpenSSL-1.1.1h_win32 C:\openssl\lib
       shell: cmd
     - name: Qt - Windows
