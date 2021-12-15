@@ -58,7 +58,7 @@ jobs:
     - name: Build - Windows
       run: |
         qmake
-        C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin\mingw32-make.exe
+        C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin\mingw32-make.exe -j2
         cd release
         rm -f *.o *.cpp *.h
         windeployqt Open-Typer.exe
@@ -92,7 +92,7 @@ jobs:
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub"
         qmake
-        make -j$(nproc --all)
+        make -j3
     - uses: papeloto/action-zip@v1
       with:
         files: Open-Typer.app/
