@@ -30,7 +30,6 @@ jobs:
       with:
         repository: 'Open-Typer/builds'
         ref: 'master'
-        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Commit - Linux
       run: |
         rm *.deb
@@ -88,7 +87,6 @@ jobs:
       with:
         repository: 'Open-Typer/builds'
         ref: 'master'
-        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Commit - Windows
       run: |
         git config --local user.email "action@github.com"
@@ -130,7 +128,6 @@ jobs:
       with:
         repository: 'Open-Typer/builds'
         ref: 'master'
-        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Commit - MacOS
       run: |
         mv ../Open-Typer-macos.zip ./
