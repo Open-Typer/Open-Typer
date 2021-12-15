@@ -41,7 +41,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: build
+        branch: master
   # Windows
   build-windows:
     runs-on: windows-2019
@@ -100,7 +100,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: build
+        branch: master
   # MacOS
   build-macos:
     runs-on: macos-latest
@@ -137,4 +137,4 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: build
+        branch: master
