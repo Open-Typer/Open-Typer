@@ -73,7 +73,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: build-windows
-        path: *.zip
+        path: '*.zip'
   # MacOS
   build-macos:
     runs-on: macos-latest
@@ -100,4 +100,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: build-macos
-        path: *.zip
+        path: '*.zip'
