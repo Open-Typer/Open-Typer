@@ -78,6 +78,10 @@ void Downloader::cancelDownload(void)
 	reply->abort();
 }
 
+/*!
+ * Returns true if an internet connection is available.\n
+ * This functions pings 8.8.8.8 to check connection availability.
+ */
 bool Net::internetConnected()
 {
 	QTcpSocket* sock = new QTcpSocket(this);

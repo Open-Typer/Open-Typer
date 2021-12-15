@@ -27,6 +27,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
+/*! \brief The Net class provides network functions. */
 class Net : public QObject
 {
 	Q_OBJECT
