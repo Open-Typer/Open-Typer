@@ -28,7 +28,8 @@ jobs:
         mv *.deb ../build/
     - uses: actions/checkout@v2
       with:
-        ref: 'build'
+        repository: 'builds'
+        ref: 'master'
     - name: Commit - Linux
       run: |
         rm *.deb
@@ -84,7 +85,8 @@ jobs:
         dest: ../Open-Typer-win32.zip
     - uses: actions/checkout@v2
       with:
-        ref: 'build'
+        repository: 'builds'
+        ref: 'master'
     - name: Commit - Windows
       run: |
         git config --local user.email "action@github.com"
@@ -124,7 +126,8 @@ jobs:
         dest: ../Open-Typer-macos.zip
     - uses: actions/checkout@v2
       with:
-        ref: 'build'
+        repository: 'builds'
+        ref: 'master'
     - name: Commit - MacOS
       run: |
         mv ../Open-Typer-macos.zip ./
