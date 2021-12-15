@@ -1,3 +1,5 @@
+[![Build](https://github.com/Open-Typer/Open-Typer/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Open-Typer/Open-Typer/actions/workflows/build.yml)
+
 # Open-Typer
 
 ## What is Open-Typer?
