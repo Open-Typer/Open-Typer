@@ -31,6 +31,29 @@ namespace Ui {
 	class packEditor;
 }
 
+/*!
+ * \brief The packEditor class is the pack editor window.
+ *
+ * \image html packEditor.png
+ *
+ * Usage example:
+ * \code
+ * packEditor editorWindow;
+ * editorWindow.init();
+ * editorWindow.exec();
+ * \endcode
+ *
+ * It is possible to create a new file when the editor starts:
+ * \code
+ * editorWindow.setNewFile(true);
+ * editorWindow.init();
+ * editorWindow.exec();
+ * \endcode
+ * Note that init() must be run for the settings to take effect.
+ *
+ * \see packView
+ * \see packSelector
+ */
 class packEditor : public QDialog
 {
 	Q_OBJECT

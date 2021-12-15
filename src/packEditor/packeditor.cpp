@@ -21,6 +21,7 @@
 #include "packEditor/packeditor.h"
 #include "ui_packeditor.h"
 
+/*! Constructs packEditor. */
 packEditor::packEditor(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::packEditor)
@@ -43,11 +44,13 @@ packEditor::packEditor(QWidget *parent) :
 	defaultFileName = tr("Unnamed") + ".typer";
 }
 
+/*! Destroys the packEditor object. */
 packEditor::~packEditor()
 {
 	delete ui;
 }
 
+/*! Applies settings. Must be run before exec() or show(). */
 void packEditor::init(void)
 {
 	if(newFile)
@@ -56,11 +59,17 @@ void packEditor::init(void)
 	}
 }
 
+/*! Enables creation of new file when the editor starts. \see createNewFile() */
 void packEditor::setNewFile(bool value)
 {
 	newFile = value;
 }
 
+/*!
+ * Connected from newFileButton->clicked().\n
+ * Opens a new file tab.
+ * \see setNewFile()
+ */
 void packEditor::createNewFile(void)
 {
 	fileID++;
@@ -70,6 +79,10 @@ void packEditor::createNewFile(void)
 	newTab->openFile(newFileName,true,false);
 }
 
+/*!
+ * Connected from openFileButton->clicked().\n
+ * Opens a file in a new tab.
+ */
 void packEditor::openFile(void)
 {
 	QFileDialog openDialog;
@@ -88,6 +101,7 @@ void packEditor::openFile(void)
 	fixDuplicates();
 }
 
+/*! Opens a built-in pack in a new tab. \see packSelector */
 void packEditor::openPrebuilt(void)
 {
 	packSelector packSel;
@@ -103,12 +117,18 @@ void packEditor::openPrebuilt(void)
 	}
 }
 
+/*!
+ * Connected from closeButton->clicked().\n
+ * Closes the editor window.
+ * \see closeAll()
+ */
 void packEditor::close(void)
 {
 	if(closeAll())
 		done(0);
 }
 
+/*! Closes duplicate tabs. */
 void packEditor::fixDuplicates(void)
 {
 	int i, i2, count = ui->fileTabWidget->count();
@@ -132,6 +152,7 @@ void packEditor::fixDuplicates(void)
 	}
 }
 
+/*! Used by packView to set the tab text. \see packView */
 void packEditor::setFileName(QString newFileName, QWidget *sourceWidget)
 {
 	ui->fileTabWidget->setTabText(
@@ -139,12 +160,18 @@ void packEditor::setFileName(QString newFileName, QWidget *sourceWidget)
 		newFileName);
 }
 
+/*!
+ * Connected from fileTabWidget->tabCloseRequested().\n
+ * Closes a tab.
+ * \see packView#closeFile()
+ */
 void packEditor::closeTab(int id)
 {
 	if(((packView*)ui->fileTabWidget->widget(id))->closeFile())
 		ui->fileTabWidget->removeTab(id);
 }
 
+/*! Closes all tabs. \see close()*/
 bool packEditor::closeAll(void)
 {
 	int count = ui->fileTabWidget->count();
@@ -168,6 +195,12 @@ bool packEditor::closeAll(void)
 	return true;
 }
 
+/*!
+ * Overrides QDialog#closeEvent().\n
+ * Closes all tabs before closing the window.
+ * \see close()
+ * \see closeAll()
+ */
 void packEditor::closeEvent(QCloseEvent *event)
 {
 	if(closeAll())
