@@ -42,6 +42,7 @@ class fileUtils
 		static QString mainSettingsLocation(void);
 };
 
+/*! \brief The keyboardUtils class provides functions related to keyboard and input method. */
 class keyboardUtils
 {
 	public:

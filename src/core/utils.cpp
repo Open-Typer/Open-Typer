@@ -69,6 +69,11 @@ QString fileUtils::mainSettingsLocation(void)
 	return configLocation()+"/config.ini";
 }
 
+/*!
+ * Returns true if the key is a special key.\n
+ * Special keys are ignored by OpenTyper#keyPress().
+ * \see OpenTyper#keyPress()
+ */
 bool keyboardUtils::isSpecialKey(QKeyEvent *event)
 {
 	if(event->text() == "")
@@ -92,6 +97,7 @@ bool keyboardUtils::isSpecialKey(QKeyEvent *event)
 	}
 }
 
+/*! Returns true if the key code belongs to a dead key. */
 bool keyboardUtils::isDeadKey(int key)
 {
 	return ((key >= Qt::Key_Dead_Grave) && (key <= Qt::Key_Dead_Longsolidusoverlay));
