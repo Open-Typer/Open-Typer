@@ -21,6 +21,7 @@
 #include "packEditor/packview.h"
 #include "ui_packview.h"
 
+/*! Constructs packView. */
 packView::packView(QWidget *parent, int fileID_arg) :
 	QWidget(parent),
 	ui(new Ui::packView)
@@ -60,11 +61,18 @@ packView::packView(QWidget *parent, int fileID_arg) :
 	editorWindow = parent;
 }
 
+/*! Destroys the packView object. */
 packView::~packView()
 {
 	delete ui;
 }
 
+/*!
+ * Opens a file.
+ * \param[in] path File name.
+ * \param[in] newf Whether to create a new file.
+ * \param[in] rdonly Whether to open the file read-only.
+ */
 void packView::openFile(QString path, bool newf, bool rdonly)
 {
 	saveFileName = path;
@@ -122,6 +130,7 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 	refreshUi(false,false,false);
 }
 
+/*! Closes opened file. */
 bool packView::closeFile(void)
 {
 	parser->close();
@@ -156,6 +165,20 @@ bool packView::closeFile(void)
 	return true;
 }
 
+/*!
+ * Updates tab title, loads selected exercise and refreshes widgets.
+ *
+ * \param[in] newLesson Whether to add a new lesson.
+ * \param[in] newSublesson Whether to add a new sublesson.
+ * \param[in] newExercise Whether to add a new exercise.
+ *
+ * \see updateTabTitle()
+ * \see addLesson()
+ * \see addSublesson()
+ * \see addExercise()
+ * \see configParser
+ * \see packEditor
+ */
 void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 {
 	updateTabTitle();
@@ -268,6 +291,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 	}
 }
 
+/*! Updates tab title in packEditor's tab widget. */
 void packView::updateTabTitle(void)
 {
 	QFile saveQFile(saveFileName);
@@ -279,11 +303,25 @@ void packView::updateTabTitle(void)
 		((packEditor*)(editorWindow))->setFileName(_saveFileName + "*",(QWidget*)this);
 }
 
+/*!
+ * Connected from newLessonButton->clicked().\n
+ * Adds a new lesson.
+ *
+ * \see addSublesson()
+ * \see addExercise()
+ */
 void packView::addLesson(void)
 {
 	refreshUi(true,false,false);
 }
 
+/*!
+ * Connected from newSublessonButton->clicked().\n
+ * Adds a new sublesson.
+ *
+ * \see addLesson()
+ * \see addExercise()
+ */
 void packView::addSublesson(void)
 {
 	if(ui->lessonSelectionBox->count() == 0)
@@ -291,6 +329,13 @@ void packView::addSublesson(void)
 	refreshUi(false,true,false);
 }
 
+/*!
+ * Connected from newExerciseButton->clicked().\n
+ * Adds a new exercise.
+ *
+ * \see addLesson()
+ * \see addSublesson()
+ */
 void packView::addExercise(void)
 {
 	if(ui->sublessonSelectionBox->count() == 0)
@@ -304,6 +349,10 @@ void packView::addExercise(void)
 	refreshUi(false,false,true);
 }
 
+/*!
+ * Connected from removeExerciseButton->clicked().\n
+ * Removes selected exercise.
+ */
 void packView::removeExercise(void)
 {
 	int i, targetLesson, targetSublesson, targetLevel;
@@ -322,6 +371,7 @@ void packView::removeExercise(void)
 	refreshUi(false,false,false);
 }
 
+/*! Moves exercise to a new position (lesson, sublesson, exercise). */
 void packView::changeExercisePos(QString lessonDesc, int lesson, int sublesson, int level, int nlesson, int nsublesson, int nlevel)
 {
 	int limitExt, lengthExt;
@@ -338,6 +388,7 @@ void packView::changeExercisePos(QString lessonDesc, int lesson, int sublesson, 
 	saved=false;
 }
 
+/*! Removes an exercise from the temporary file. */
 void packView::deleteExerciseLine(int lesson, int sublesson, int level)
 {
 	int targetLine, curLine;
@@ -363,6 +414,10 @@ void packView::deleteExerciseLine(int lesson, int sublesson, int level)
 	}
 }
 
+/*!
+ * Connected from lessonDescEdit->textEdited().\n
+ * Changes lesson description based on the value in lessonDescEdit.
+ */
 void packView::changeLessonDesc(const QString rawLessonDesc)
 {
 	QString lessonDesc = "";
@@ -393,11 +448,20 @@ void packView::changeLessonDesc(const QString rawLessonDesc)
 	refreshUi(false,false,false);
 }
 
+/*!
+ * Connected from lessonDescRevisionButton->clicked()
+ * Marks current lesson as a revision lesson.
+ * \see changeLessonDesc()
+ */
 void packView::setRevisionLesson(void)
 {
 	changeLessonDesc("%r");
 }
 
+/*!
+ * Connected from levelTextEdit->textChanged().\n
+ * Updates exercise text.
+ */
 void packView::updateText(void)
 {
 	if(skipTextUpdates)
@@ -434,6 +498,7 @@ void packView::updateText(void)
 	updateTabTitle();
 }
 
+/*! Loads current exercise text. */
 void packView::restoreText(void)
 {
 	ui->levelLabel->setText(
@@ -461,6 +526,13 @@ void packView::restoreText(void)
 	ui->textLengthLabel->setText(textLengthStr + QString::number(ui->levelTextEdit->toPlainText().count()));
 }
 
+/*!
+ * Connected from lessonSelectionBox->activated().\n
+ * Selects lesson selected in lessonSelectionBox.
+ *
+ * \see switchSublesson
+ * \see switchExercise
+ */
 void packView::switchLesson(void)
 {
 	for(int i=0; i < 2; i++)
@@ -471,6 +543,13 @@ void packView::switchLesson(void)
 	}
 }
 
+/*!
+ * Connected from sublessonSelectionBox->activated().\n
+ * Selects sublesson selected in sublessonSelectionBox.
+ *
+ * \see switchLesson
+ * \see switchExercise
+ */
 void packView::switchSublesson(void)
 {
 	for(int i=0; i < 2; i++)
@@ -480,11 +559,22 @@ void packView::switchSublesson(void)
 	}
 }
 
+/*!
+ * Connected from exerciseSelectionBox->activated().\n
+ * Selects exercise selected in exerciseSelectionBox.
+ *
+ * \see switchLesson
+ * \see switchSublesson
+ */
 void packView::switchExercise(void)
 {
 	refreshUi(false,false,false);
 }
 
+/*!
+ * Connected from repeatingBox->activated().\n
+ * Changes current exercise repeat method.
+ */
 void packView::changeRepeating(int index)
 {
 	int lesson, sublesson, level, limitExt, lengthExt;
@@ -518,6 +608,10 @@ void packView::changeRepeating(int index)
 	refreshUi(false,false,false);
 }
 
+/*!
+ * Connected from repeatLengthBox->valueChanged().\n
+ * Changes current exercise maximum number of characters (if repeating is enabled).
+ */
 void packView::changeRepeatLength(int limitExt)
 {
 	if(skipBoxUpdates)
@@ -542,6 +636,10 @@ void packView::changeRepeatLength(int limitExt)
 	refreshUi(false,false,false);
 }
 
+/*!
+ * Connected from lineLengthBox->valueChanged().\n
+ * Changes current exercise maximum number of characters in one line.
+ */
 void packView::changeLineLength(int lengthExt)
 {
 	if(skipBoxUpdates)
@@ -566,6 +664,10 @@ void packView::changeLineLength(int lengthExt)
 	refreshUi(false,false,false);
 }
 
+/*!
+ * Connected from saveButton->clicked().\n
+ * Saves opened pack file.
+ */
 void packView::save(void)
 {
 	if(newFile || readOnly)
@@ -585,6 +687,10 @@ void packView::save(void)
 	}
 }
 
+/*!
+ * Connected from saveAsButton->clicked().\n
+ * Saves opened pack file as another file.
+ */
 void packView::saveAs(void)
 {
 	QFileDialog saveDialog;
@@ -602,6 +708,7 @@ void packView::saveAs(void)
 	}
 }
 
+/*! Returns pack file name. */
 QString packView::getFileName(void)
 {
 	return saveFileName;

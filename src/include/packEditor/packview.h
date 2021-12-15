@@ -33,6 +33,38 @@ namespace Ui {
 	class packView;
 }
 
+// TODO: Make packEditor::defaultFileName a public static function.
+/*!
+ * \brief The packView class is the core part of the pack editor.
+ *
+ * \image html packView.png
+ *
+ * packEditor uses this widget for tab content.\n
+ * packView should be used only in packEditor (it communicates with its tab widget).
+ * This might change in future.\n
+ *
+ * Creating a new file:
+ * \code
+ * packView pack;
+ * pack.openFile("Unnamed.typer",true,false) // tr() should be used for translation here
+ * \endcode
+ *
+ * Opening existing file:
+ * \code
+ * pack.openFile(fileName,false,false)
+ * \endcode
+ *
+ * Opening existing file read-only:
+ * \code
+ * pack.openFile(fileName,false,true)
+ * \endcode
+ *
+ * packView saves opened files in the program configuration directory.\n
+ * They're automatically removed after they're closed.
+ *
+ * \see packEditor
+ * \see configParser
+ */
 class packView : public QWidget
 {
 	Q_OBJECT
