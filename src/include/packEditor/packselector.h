@@ -30,6 +30,11 @@ namespace Ui {
 	class packSelector;
 }
 
+/*!
+ * \brief The packSelector class is a QDialog, which allows the user to select a built-in pack.
+ *
+ * \image html packSelector.png
+ */
 class packSelector : public QDialog
 {
 	Q_OBJECT

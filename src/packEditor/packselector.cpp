@@ -21,6 +21,7 @@
 #include "packEditor/packselector.h"
 #include "ui_packselector.h"
 
+/*! Constructs packSelector. */
 packSelector::packSelector(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::packSelector)
@@ -47,11 +48,13 @@ packSelector::packSelector(QWidget *parent) :
 	connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(reject()));
 }
 
+/*! Destroys the packSelector object. */
 packSelector::~packSelector()
 {
 	delete ui;
 }
 
+/*! Returns selected built-in pack raw name. \see builtinPacks#packName() */
 QString packSelector::selectedConfig(void)
 {
 	return rawItems[ui->selBox->currentIndex()];
