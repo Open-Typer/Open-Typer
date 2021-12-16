@@ -21,6 +21,7 @@
 #include "timedialog.h"
 #include "ui_timedialog.h"
 
+/*! Constructs timeDialog. */
 timeDialog::timeDialog(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::timeDialog)
@@ -32,11 +33,16 @@ timeDialog::timeDialog(QWidget *parent) :
 	connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(reject()));
 }
 
+/*! Destroys the timeDialog class. */
 timeDialog::~timeDialog()
 {
 	delete ui;
 }
 
+/*!
+ * Connected from timeEdit->timeChanged().\n
+ * Sets time based on the value of timeEdit.
+ */
 void timeDialog::setTime(QTime time)
 {
 	hours = time.hour();

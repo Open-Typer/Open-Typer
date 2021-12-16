@@ -28,6 +28,21 @@ namespace Ui {
 	class timeDialog;
 }
 
+/*!
+ * \brief The timeDialog class is a time selector dialog used for timed exercises.
+ *
+ * \image html timeDialog.png
+ *
+ * Usage example:
+ * \code
+ * timeDialog dialog;
+ * dialog.exec();
+ * int hours, minutes, seconds;
+ * hours = dialog.hours; // Get hours
+ * minutes = dialog.minutes; // Get minutes
+ * seconds = dialog.seconds; // Get seconds
+ * \endcode
+ */
 class timeDialog : public QDialog
 {
 	Q_OBJECT
