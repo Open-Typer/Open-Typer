@@ -21,6 +21,7 @@
 #include "simplecolordialog.h"
 #include "ui_simplecolordialog.h"
 
+/*! Constructs SimpleColorDialog. */
 SimpleColorDialog::SimpleColorDialog(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::SimpleColorDialog)
@@ -48,11 +49,13 @@ SimpleColorDialog::SimpleColorDialog(QWidget *parent) :
 	connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(reject()));
 }
 
+/*! Destroys the SimpleColorDialog object. */
 SimpleColorDialog::~SimpleColorDialog()
 {
 	delete ui;
 }
 
+/*! Sets initial color. */
 void SimpleColorDialog::setColor(int r, int g, int b)
 {
 	redColor = r;
@@ -61,6 +64,7 @@ void SimpleColorDialog::setColor(int r, int g, int b)
 	updateColor();
 }
 
+/*! Updates color using the redColor, greenColor and blueColor variables. */
 void SimpleColorDialog::updateColor(void)
 {
 	ui->colorFrame->setStyleSheet("background-color: rgb(" + QString::number(redColor) + ", " + QString::number(greenColor) + ", " + QString::number(blueColor) + ")");
@@ -69,24 +73,28 @@ void SimpleColorDialog::updateColor(void)
 	ui->blueBox->setValue(blueColor);
 }
 
+/*! Connected from redBox->valueChanged(). */
 void SimpleColorDialog::setRedColorValue(int val)
 {
 	redColor = val;
 	updateColor();
 }
 
+/*! Connected from greenBox->valueChanged(). */
 void SimpleColorDialog::setGreenColorValue(int val)
 {
 	greenColor = val;
 	updateColor();
 }
 
+/*! Connected from blueBox->valueChanged(). */
 void SimpleColorDialog::setBlueColorValue(int val)
 {
 	blueColor = val;
 	updateColor();
 }
 
+/*! Connected from redColorButton->clicked(). */
 void SimpleColorDialog::setRedColor(void)
 {
 	redColor = 255;
@@ -95,6 +103,7 @@ void SimpleColorDialog::setRedColor(void)
 	updateColor();
 }
 
+/*! Connected from brownColorButton->clicked(). */
 void SimpleColorDialog::setBrownColor(void)
 {
 	redColor = 62;
@@ -103,6 +112,7 @@ void SimpleColorDialog::setBrownColor(void)
 	updateColor();
 }
 
+/*! Connected from orangeColorButton->clicked(). */
 void SimpleColorDialog::setOrangeColor(void)
 {
 	redColor = 255;
@@ -111,6 +121,7 @@ void SimpleColorDialog::setOrangeColor(void)
 	updateColor();
 }
 
+/*! Connected from yellowColorButton->clicked(). */
 void SimpleColorDialog::setYellowColor(void)
 {
 	redColor = 255;
@@ -119,6 +130,7 @@ void SimpleColorDialog::setYellowColor(void)
 	updateColor();
 }
 
+/*! Connected from greenColorButton->clicked(). */
 void SimpleColorDialog::setGreenColor(void)
 {
 	redColor = 0;
@@ -127,6 +139,7 @@ void SimpleColorDialog::setGreenColor(void)
 	updateColor();
 }
 
+/*! Connected from lightBlueColorButton->clicked(). */
 void SimpleColorDialog::setLightBlueColor(void)
 {
 	redColor = 0;
@@ -135,6 +148,7 @@ void SimpleColorDialog::setLightBlueColor(void)
 	updateColor();
 }
 
+/*! Connected from blueColorButton->clicked(). */
 void SimpleColorDialog::setBlueColor(void)
 {
 	redColor = 0;
@@ -143,6 +157,7 @@ void SimpleColorDialog::setBlueColor(void)
 	updateColor();
 }
 
+/*! Connected from pinkColorButton->clicked(). */
 void SimpleColorDialog::setPinkColor(void)
 {
 	redColor = 255;
@@ -151,6 +166,7 @@ void SimpleColorDialog::setPinkColor(void)
 	updateColor();
 }
 
+/*! Connected from purpleColorButton->clicked(). */
 void SimpleColorDialog::setPurpleColor(void)
 {
 	redColor = 85;
@@ -159,6 +175,7 @@ void SimpleColorDialog::setPurpleColor(void)
 	updateColor();
 }
 
+/*! Connected from blackColorButton->clicked(). */
 void SimpleColorDialog::setBlackColor(void)
 {
 	redColor = 0;
@@ -167,6 +184,7 @@ void SimpleColorDialog::setBlackColor(void)
 	updateColor();
 }
 
+/*! Connected from grayColorButton->clicked(). */
 void SimpleColorDialog::setGrayColor(void)
 {
 	redColor = 100;
@@ -175,6 +193,7 @@ void SimpleColorDialog::setGrayColor(void)
 	updateColor();
 }
 
+/*! Connected from whiteColorButton->clicked(). */
 void SimpleColorDialog::setWhiteColor(void)
 {
 	redColor = 255;

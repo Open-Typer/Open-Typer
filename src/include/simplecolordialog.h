@@ -27,6 +27,22 @@ namespace Ui {
 class SimpleColorDialog;
 }
 
+/*!
+ * \brief The SimpleColorDialog class is a simple color picker.
+ *
+ * \image html SimpleColorDialog.png
+ *
+ * Usage example:
+ * \code
+ * SimpleColorDialog dialog;
+ * dialog.setColor(255,255,255); // Default color, or the previously set color
+ * dialog.exec();
+ * int red, green, blue;
+ * red = dialog.redColor; // Get red color
+ * green = dialog.greenColor; // Get green color
+ * blue = dialog.blueColor; // Get blue color
+ * \endcode
+ */
 class SimpleColorDialog : public QDialog
 {
 	Q_OBJECT
