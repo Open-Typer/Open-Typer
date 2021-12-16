@@ -32,7 +32,7 @@ class levelSummary;
  *
  * Each value can be set using the functions.\n
  * They're all optional and unset values will be hidden.
- * \c AlignLeft
+ *
  * \image html levelSummary.png
  *
  * The dialog supports 2 modes.\n
