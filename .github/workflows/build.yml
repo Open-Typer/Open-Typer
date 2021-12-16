@@ -59,8 +59,8 @@ jobs:
         mkdir openssl
         unzip openssl.zip -d ..\openssl
         rm openssl.zip
-        cp ..\openssl\lib\libcrypto-1_1.dll .\
-        cp ..\openssl\lib\libssl-1_1.dll .\
+        cp ..\openssl\OpenSSL-1.1.1h_win32\lib\libcrypto-1_1.dll .\
+        cp ..\openssl\OpenSSL-1.1.1h_win32\lib\libssl-1_1.dll .\
         cd ..
       shell: cmd
     - uses: papeloto/action-zip@v1
