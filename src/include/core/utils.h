@@ -27,6 +27,7 @@
 #include <QKeyEvent>
 #include <QSettings>
 
+/*! \brief The stringUtils class contains functions related to strings. */
 class stringUtils
 {
 	public:

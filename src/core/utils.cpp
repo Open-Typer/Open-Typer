@@ -20,6 +20,7 @@
 
 #include "core/utils.h"
 
+/*! Returns number of words in the string. */
 int stringUtils::wordCount(QString str)
 {
 	int i, out = 0;
@@ -33,6 +34,7 @@ int stringUtils::wordCount(QString str)
 	return out;
 }
 
+/*! Returns a word in the string. */
 QString stringUtils::word(QString str, int id)
 {
 	int i, cur = 0;
