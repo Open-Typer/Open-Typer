@@ -5,96 +5,80 @@ on:
     branches: [ master ]
 
 jobs:
-  # Linux
-  build-linux:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ${{ matrix.os }}-latest
+    strategy:
+      matrix:
+        os: [ubuntu, windows, macos]
+        qt-version: ['5.12.8']
+        qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v2
-    - name: Qt - Linux
+    ## Install Qt
+    # Windows
+    - if: contains(matrix.os, 'windows')
+      name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        version: '5.12.8'
-        host: 'linux'
-        target: 'desktop'
-        dir: '${{ github.workspace }}/build-linux/'
-        setup-python: 'false'
-    - name: Build - Linux
-      run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub"
-        ./build-deb.sh
-    - uses: actions/upload-artifact@v2
-      with:
-        name: build-linux
-        path: |
-          Open-Typer
-          *.deb
-  # Windows
-  build-windows:
-    runs-on: windows-2019
-    steps:
-    - uses: actions/checkout@v2
-    - name: Qt - Windows
-      uses: jurplel/install-qt-action@v2
-      with:
-        version: '5.15.2'
+        version: ${{ matrix.qt-version }}
         host: 'windows'
-        target: 'desktop'
-        arch: 'win32_mingw81'
-        dir: '${{ github.workspace }}/build-windows/'
+        arch: 'win32_mingw73'
+        target: ${{ matrix.qt-target }}
+        dir: '${{ github.workspace }}'
         setup-python: 'false'
-        aqtversion: '>=0.9.0'
-    - name: MinGW-w64
+    - if: contains(matrix.os, 'windows')
+      name: Install 32-bit MinGW
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: i686
-    - name: Build - Windows
-      run: |
-        qmake
-        C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw32\bin\mingw32-make.exe -j2
-        cd release
-        rm -f *.o *.cpp *.h
-        windeployqt Open-Typer.exe
-        curl -o openssl.zip https://deac-fra.dl.sourceforge.net/project/openssl-for-windows/OpenSSL-1.1.1h_win32.zip
-        mkdir openssl
-        unzip openssl.zip -d ..\openssl
-        rm openssl.zip
-        cp ..\openssl\OpenSSL-1.1.1h_win32\lib\libcrypto-1_1.dll .\
-        cp ..\openssl\OpenSSL-1.1.1h_win32\lib\libssl-1_1.dll .\
-        cd ..
-      shell: cmd
-    - uses: papeloto/action-zip@v1
+    # Ubuntu
+    - if: contains(matrix.os, 'ubuntu')
+      name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: ${{ matrix.qt-version }}
+        host: 'linux'
+        target: ${{ matrix.qt-target }}
+        dir: '${{ github.workspace }}'
+        setup-python: 'false'
+    # MacOS
+    - if: contains(matrix.os, 'macos')
+      name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: ${{ matrix.qt-version }}
+        host: 'mac'
+        target: ${{ matrix.qt-target }}
+        dir: '${{ github.workspace }}'
+        setup-python: 'false'
+    ## Build
+    - run: source .ci/${{ matrix.os }}-build.sh
+      shell: bash
+    ## Package
+    # Windows
+    - if: contains(matrix.os, 'windows')
+      uses: papeloto/action-zip@v1
       with:
         files: release/
         dest: Open-Typer-win32.zip
-    - uses: actions/upload-artifact@v2
+    ## Upload
+    # Windows
+    - if: contains(matrix.os, 'windows')
+      uses: actions/upload-artifact@v2
       with:
         name: build-windows
         path: '*.zip'
-  # MacOS
-  build-macos:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Qt - MacOS
-      uses: jurplel/install-qt-action@v2
+    # Ubuntu
+    - if: contains(matrix.os, 'ubuntu')
+      uses: actions/upload-artifact@v2
       with:
-        version: '5.12.8'
-        host: 'mac'
-        target: 'desktop'
-        dir: '${{ github.workspace }}/build-macos/'
-        setup-python: 'false'
-    - name: Build - MacOS
-      run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub"
-        qmake
-        make -j3
-    - uses: papeloto/action-zip@v1
-      with:
-        files: Open-Typer.app/
-        dest: Open-Typer-macos.zip
-    - uses: actions/upload-artifact@v2
+        name: build-ubuntu
+        path: |
+          Open-Typer
+          *.deb
+    # MacOS
+    - if: contains(matrix.os, 'macos')
+      uses: actions/upload-artifact@v2
       with:
         name: build-macos
         path: '*.zip'
