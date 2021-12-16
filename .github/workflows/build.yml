@@ -34,14 +34,6 @@ jobs:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
-    - name: OpenSSL
-      run: |
-        curl -o openssl.zip https://deac-fra.dl.sourceforge.net/project/openssl-for-windows/OpenSSL-1.1.1h_win32.zip
-        mkdir C:\openssl
-        unzip openssl.zip -d C:\openssl
-        rm openssl.zip
-        mv C:\openssl\OpenSSL-1.1.1h_win32 C:\openssl\lib
-      shell: cmd
     - name: Qt - Windows
       uses: jurplel/install-qt-action@v2
       with:
@@ -63,8 +55,12 @@ jobs:
         cd release
         rm -f *.o *.cpp *.h
         windeployqt Open-Typer.exe
-        cp C:\openssl\lib\libcrypto-1_1.dll .\
-        cp C:\openssl\lib\libssl-1_1.dll .\
+        curl -o openssl.zip https://deac-fra.dl.sourceforge.net/project/openssl-for-windows/OpenSSL-1.1.1h_win32.zip
+        mkdir openssl
+        unzip openssl.zip -d ..\openssl
+        rm openssl.zip
+        cp ..\openssl\lib\libcrypto-1_1.dll .\
+        cp ..\openssl\lib\libssl-1_1.dll .\
         cd ..
       shell: cmd
     - uses: papeloto/action-zip@v1
