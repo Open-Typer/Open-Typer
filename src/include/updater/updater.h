@@ -34,7 +34,7 @@
 #define _GITHUB_REPO "https://github.com/Open-Typer/Open-Typer"
 
 /*!
- * \brief The updater class is used to check for updates and download new versions of the program.
+ * \brief The Updater class is used to check for updates and download new versions of the program.
  *
  * \see UpdaterDialog
  * \see Downloader
