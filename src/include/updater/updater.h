@@ -33,6 +33,13 @@
 #define _VERSION_H_URL "https://raw.githubusercontent.com/Open-Typer/Open-Typer/master/src/include/version.h"
 #define _GITHUB_REPO "https://github.com/Open-Typer/Open-Typer"
 
+/*!
+ * \brief The updater class is used to check for updates and download new versions of the program.
+ *
+ * \see UpdaterDialog
+ * \see Downloader
+ * \see Net
+ */
 class Updater : public QObject
 {
 	Q_OBJECT

@@ -20,6 +20,12 @@
 
 #include "updater/updater.h"
 
+/*!
+ * Constructs Updater, downloads version header file and calls initUpdate().\n
+ * Version header file URL is stored in the _VERSION_H_URL macro.
+ *
+ * \see initUpdate()
+ */
 Updater::Updater(QObject *parent) :
 	QObject(parent)
 {
@@ -31,8 +37,17 @@ Updater::Updater(QObject *parent) :
 	}
 }
 
+/*! Destroys the Updater object. */
 Updater::~Updater() { }
 
+/*!
+ * Reads version header data. If current build version is different than the latest version,\n
+ * shows UpdaterDialog and downloads the new version.
+ *
+ * \see readVersion()
+ * \see UpdaterDialog
+ * \see overwriteExecutable()
+ */
 void Updater::initUpdate()
 {
 	versionH = versionHdw->downloadedData();
@@ -69,6 +84,7 @@ void Updater::initUpdate()
 	}
 }
 
+/*! Gets version from version header. */
 QString Updater::readVersion(const QString versionHeader)
 {
 	int i;
@@ -82,6 +98,7 @@ QString Updater::readVersion(const QString versionHeader)
 	return out;
 }
 
+/*! Installs and starts the new executable. */
 void Updater::overwriteExecutable()
 {
 	QSaveFile file(QCoreApplication::applicationFilePath()+".part");
