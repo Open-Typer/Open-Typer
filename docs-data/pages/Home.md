@@ -8,10 +8,11 @@ It works on Linux and Windows.
 * Every lesson consists of touch, word, sentence and text exercises.
 * Pack editor - allows anyone to create their own packs with lessons.
 * Custom exercise (from a text file).
+* Timed exercises.
 * Multiple languages (still growing).
-* Customization (text font and size; colors; dark theme).
+* Customization (text font and size; colors; dark theme; view mode).
 * Automatic updates on Windows (shows a dialog window when a new update is found).
-* No installation required (might change in future).
+* No installation required (will change in v2.2).
 
 ## Download
 Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typer/releases/latest) or [SourceForge](https://sourceforge.net/projects/open-typer/).
