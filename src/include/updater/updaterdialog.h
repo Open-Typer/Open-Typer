@@ -29,6 +29,15 @@ namespace Ui {
 class UpdaterDialog;
 }
 
+/*!
+ * \brief The UpdaterDialog class is a dialog used for program updates.
+ *
+ * \image html UpdaterDialog.png
+ * \n
+ * \image html UpdaterDialogProgress.png
+ *
+ * \see Updater
+ */
 class UpdaterDialog : public QDialog
 {
 	Q_OBJECT
@@ -42,6 +51,7 @@ class UpdaterDialog : public QDialog
 		void closeEvent(QCloseEvent *event);
 
 	signals:
+		/*! A signal, which is emitted when the user cancels the download. */
 		void cancelDownload();
 
 	private:

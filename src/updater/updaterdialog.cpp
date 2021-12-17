@@ -21,6 +21,10 @@
 #include "updater/updaterdialog.h"
 #include "ui_updaterdialog.h"
 
+/*!
+ * Constructs UpdaterDialog.
+ * \param[in] downloading Whether to show a progress dialog.
+ */
 UpdaterDialog::UpdaterDialog(QWidget *parent, bool downloading) :
 	QDialog(parent),
 	ui(new Ui::UpdaterDialog)
@@ -47,17 +51,20 @@ UpdaterDialog::UpdaterDialog(QWidget *parent, bool downloading) :
 	}
 }
 
+/*! Destroys the UpdaterDialog object. */
 UpdaterDialog::~UpdaterDialog()
 {
 	delete ui;
 }
 
+/*! Sets current build version. */
 void UpdaterDialog::setCurrentVer(QString ver)
 {
 	ui->currentVerLabel->setText(
 		ui->currentVerLabel->text() + " " + ver);
 }
 
+/*! Sets new build version. */
 void UpdaterDialog::setNewVer(QString ver)
 {
 	ui->newVerLabel->setText(
@@ -65,18 +72,31 @@ void UpdaterDialog::setNewVer(QString ver)
 	ui->changeLogLabel->setText(tr("Change log is available at") + " <a href=\"" + _GITHUB_REPO + "/releases/tag/" + ver + "\">GitHub</a>");
 }
 
+/*! Updates progress bar of the progress dialog. */
 void UpdaterDialog::updateProgress(int percentage)
 {
 	ui->progressBar->setRange(0,100);
 	ui->progressBar->setValue(percentage);
 }
 
+/*!
+ * Connected from cancelButton->clicked().\n
+ * Aborts the download and emits cancelDownload().
+ *
+ * \see cancelDownload()
+ */
 void UpdaterDialog::abortDownload(void)
 {
 	emit cancelDownload();
 	close();
 }
 
+/*!
+ * Overrides QDialog#closeEvent().\n
+ * Aborts the download before closing the window.
+ *
+ * \see cancelDownload()
+ */
 void UpdaterDialog::closeEvent(QCloseEvent *event)
 {
 	emit cancelDownload();
