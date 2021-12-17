@@ -16,3 +16,9 @@ It works on Linux and Windows.
 
 ## Download
 Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typer/releases/latest) or [SourceForge](https://sourceforge.net/projects/open-typer/).
+
+## Screenshots
+![Main window (light)](main/main_window_light.png)
+![Main window (system dark)](main/main_window_system_dark.png)
+![Pack editor](main/pack_editor_system_dark.png)
+![Options](optionsWindow.png)
