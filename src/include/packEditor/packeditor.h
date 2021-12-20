@@ -69,6 +69,7 @@ class packEditor : public QDialog
 
 	protected:
 		void closeEvent(QCloseEvent *event);
+		void keyPressEvent(QKeyEvent *event);
 
 	private:
 		bool newFile;

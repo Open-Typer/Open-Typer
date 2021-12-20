@@ -208,3 +208,14 @@ void packEditor::closeEvent(QCloseEvent *event)
 	else
 		event->ignore();
 }
+
+/*!
+ * Overrides QDialog#keyPressEvent().\n
+ * Prevents escape key from closing the dialog.
+ */
+void packEditor::keyPressEvent(QKeyEvent *event)
+{
+	// Block Esc key
+	if(event->key() != Qt::Key_Escape)
+		QDialog::keyPressEvent(event);
+}
