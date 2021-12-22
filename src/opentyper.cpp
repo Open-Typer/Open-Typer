@@ -223,6 +223,7 @@ void OpenTyper::connectAll(void)
 QString OpenTyper::loadConfig(QString configName)
 {
 	// Returns config file name, which can be opened later.
+	customLevelLoaded=false;
 	QString configPath = "";
 	if(customConfig)
 		configPath = configName;
@@ -298,7 +299,6 @@ int OpenTyper::_line_count(QString str)
  */
 void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 {
-	customLevelLoaded=false;
 	// Update selected lesson
 	ui->lessonSelectionList->setCurrentIndex(lessonID-1);
 	// Get sublesson count
@@ -331,9 +331,12 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 	// Load length extension
 	levelLengthExtension = parser->exerciseLineLength(lessonID,sublessonID+sublessonListStart,levelID);
 	// Load level text
-	level = parser->exerciseText(lessonID,
-		sublessonID+sublessonListStart,
-		levelID);
+	if(customLevelLoaded)
+		level = customLevel;
+	else
+		level = parser->exerciseText(lessonID,
+			sublessonID+sublessonListStart,
+			levelID);
 	// Get lesson count
 	lessonCount = parser->lessonCount();
 	// Get level count (in current lesson)
@@ -438,6 +441,7 @@ void OpenTyper::repeatLevel(void)
  */
 void OpenTyper::nextLevel(void)
 {
+	customLevelLoaded=false;
 	if(currentLevel == levelCount)
 	{
 		if(currentSublesson == sublessonCount)
@@ -463,6 +467,7 @@ void OpenTyper::nextLevel(void)
 	 */
 void OpenTyper::previousLevel(void)
 {
+	customLevelLoaded=false;
 	if(currentLevel == 1)
 	{
 		if(currentSublesson == 1)
@@ -571,6 +576,7 @@ void OpenTyper::openExerciseFromFile(void)
 			else
 				level += " " + line;
 		}
+		customLevel = level;
 		customLevelLoaded=true;
 		levelFinalInit();
 	}

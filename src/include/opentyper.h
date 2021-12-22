@@ -91,6 +91,7 @@ private:
 	void setColors(void);
 	void updateTheme(void);
 	bool customLevelLoaded;
+	QString customLevel;
 	bool customConfig;
 	bool spaceNewline;
 	int errorPenalty;
