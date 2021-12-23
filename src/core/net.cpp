@@ -111,7 +111,7 @@ monitorClient::monitorClient(QObject *parent) :
  * \param[in] method Request method.
  * \param[in] data Request data.
  */
-QByteArray monitorClient::sendRequest(QString method, QList<QByteArray> data)
+QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data)
 {
 	socket->abort();
 	socket->connectToHost("localhost",57100);
@@ -127,7 +127,7 @@ QByteArray monitorClient::sendRequest(QString method, QList<QByteArray> data)
 		if(!ok)
 		{
 			socket->close();
-			return QByteArray();
+			return QList<QByteArray>();
 		}
 		// Wait for response
 		QTimer responseTimer;
@@ -142,13 +142,13 @@ QByteArray monitorClient::sendRequest(QString method, QList<QByteArray> data)
 		if(responseTimer.remainingTime() == -1)
 		{
 			errorOccurred(QAbstractSocket::SocketTimeoutError);
-			return QByteArray();
+			return QList<QByteArray>();
 		}
 		else
-			return response;
+			return readData(response);
 	}
 	else
-		return QByteArray();
+		return QList<QByteArray>();
 }
 
 /*!
