@@ -111,14 +111,19 @@ monitorClient::monitorClient(QObject *parent) :
  * \param[in] method Request method.
  * \param[in] data Request data.
  */
-QByteArray monitorClient::sendRequest(QString method, QByteArray data)
+QByteArray monitorClient::sendRequest(QString method, QList<QByteArray> data)
 {
 	socket->abort();
 	socket->connectToHost("localhost",57100);
 	if(socket->waitForConnected())
 	{
 		bool ok;
-		socket->write(convertData(&ok,{method.toUtf8(),data}));
+		QList<QByteArray> reqList;
+		reqList.clear();
+		reqList += method.toUtf8();
+		for(int i=0; i < data.count(); i++)
+			reqList += data[i];
+		socket->write(convertData(&ok,reqList));
 		if(!ok)
 		{
 			socket->close();
