@@ -210,3 +210,31 @@ QByteArray monitorClient::convertData(bool *ok, QList<QByteArray> input)
 		*ok = true;
 	return out;
 }
+
+/*! Returns a list of QByteArrays from the input QByteArray. */
+QList<QByteArray> monitorClient::readData(QByteArray input)
+{
+	QList<QByteArray> out;
+	out.clear();
+	quint16 dataSize, i2;
+	QByteArray dataSizeArr, data;
+	int i = 0;
+	while(i < input.count())
+	{
+		// Read data size
+		dataSizeArr.clear();
+		dataSizeArr += input[i];
+		dataSizeArr += input[i+1];
+		i += 2;
+		dataSize = dataSizeArr.toHex().toUInt(nullptr,16);
+		// Read data
+		data.clear();
+		for(i2=0; i2 < dataSize; i2++)
+		{
+			data += input[i];
+			i++;
+		}
+		out += data;
+	}
+	return out;
+}

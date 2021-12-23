@@ -119,6 +119,7 @@ class monitorClient : public QObject
 		QTcpSocket *socket;
 		QByteArray response;
 		QByteArray convertData(bool *ok, QList<QByteArray> input);
+		QList<QByteArray> readData(QByteArray input);
 
 	signals:
 		/*! A signal, which is emitted after readResponse() reads the response. \see readResponse() */
