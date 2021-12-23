@@ -183,8 +183,7 @@ void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
 	errBox.exec();
 }
 
-/*!
- * Converts list of QByteArrays to a single QByteArray, which can be used for a request. */
+/*! Converts list of QByteArrays to a single QByteArray, which can be used for a request. */
 QByteArray monitorClient::convertData(bool *ok, QList<QByteArray> input)
 {
 	QByteArray out;
@@ -199,13 +198,15 @@ QByteArray monitorClient::convertData(bool *ok, QList<QByteArray> input)
 			dataSize.prepend(QByteArray::fromHex("0"));
 		else if(sizeNum.size() > 4)
 		{
-			*ok = false;
+			if(ok != nullptr)
+				*ok = false;
 			return QByteArray();
 		}
 		out += dataSize;
 		// Data
 		out += input[i];
 	}
-	*ok = true;
+	if(ok != nullptr)
+		*ok = true;
 	return out;
 }
