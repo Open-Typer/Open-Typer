@@ -26,6 +26,10 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QDataStream>
+#include <QMessageBox>
+#include <QEventLoop>
+#include <QTimer>
 
 /*! \brief The Net class provides network functions. */
 class Net : public QObject
@@ -101,6 +105,28 @@ class Downloader : public QObject
 		QNetworkAccessManager m_WebCtrl;
 		QByteArray m_DownloadedData;
 		QNetworkReply *reply;
+};
+
+/*! \brief The monitorClient class is used to communicate with the class monitor server. */
+class monitorClient : public QObject
+{
+	Q_OBJECT
+	public:
+		explicit monitorClient(QObject *parent = nullptr);
+		QByteArray sendRequest(QString method, QByteArray data);
+
+	private:
+		QTcpSocket *socket;
+		QByteArray response;
+		QByteArray convertData(bool *ok, QList<QByteArray> input);
+
+	signals:
+		/*! A signal, which is emitted after readResponse() reads the response. \see readResponse() */
+		void responseReady();
+
+	private slots:
+		void readResponse(void);
+		void errorOccurred(QAbstractSocket::SocketError error);
 };
 
 #endif // NET_H

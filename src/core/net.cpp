@@ -95,3 +95,112 @@ bool Net::internetConnected()
 	sock->close();
 	return true;
 }
+
+/*! Constructs monitorClient. */
+monitorClient::monitorClient(QObject *parent) :
+	QObject(parent)
+{
+	socket = new QTcpSocket;
+	// Connections
+	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
+	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
+}
+
+/*!
+ * Sends a request and returns the response.\n
+ * \param[in] method Request method.
+ * \param[in] data Request data.
+ */
+QByteArray monitorClient::sendRequest(QString method, QByteArray data)
+{
+	socket->abort();
+	socket->connectToHost("localhost",57100);
+	if(socket->waitForConnected())
+	{
+		bool ok;
+		socket->write(convertData(&ok,{method.toUtf8(),data}));
+		if(!ok)
+		{
+			socket->close();
+			return QByteArray();
+		}
+		// Wait for response
+		QTimer responseTimer;
+		responseTimer.setSingleShot(true);
+		responseTimer.setInterval(5000); // Maximum wait time
+		QEventLoop reqLoop;
+		connect(&responseTimer,SIGNAL(timeout()),&reqLoop,SLOT(quit()));
+		connect(this,SIGNAL(responseReady()),&reqLoop,SLOT(quit()));
+		responseTimer.start();
+		reqLoop.exec();
+		socket->close();
+		if(responseTimer.remainingTime() == -1)
+		{
+			errorOccurred(QAbstractSocket::SocketTimeoutError);
+			return QByteArray();
+		}
+		else
+			return response;
+	}
+	else
+		return QByteArray();
+}
+
+/*!
+ * Connected from socket->readyRead().\n
+ * Reads the response and emits responseReady().
+ * \see responseReady()
+ */
+void monitorClient::readResponse(void)
+{
+	response = socket->readAll();
+	emit responseReady();
+}
+
+/*!
+ * Connected from socket->error().\n
+ * Displays connection error message.
+ */
+void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
+{
+	QMessageBox errBox;
+	errBox.setWindowTitle(tr("Error"));
+	errBox.setText(tr("Unable to connect to class monitor server."));
+	switch(error) {
+		case QAbstractSocket::SocketTimeoutError:
+			errBox.setInformativeText(tr("Connection timed out."));
+			break;
+		default:
+			errBox.setInformativeText(socket->errorString());
+			break;
+	}
+	errBox.setIcon(QMessageBox::Critical);
+	errBox.exec();
+}
+
+/*!
+ * Converts list of QByteArrays to a single QByteArray, which can be used for a request. */
+QByteArray monitorClient::convertData(bool *ok, QList<QByteArray> input)
+{
+	QByteArray out;
+	out.clear();
+	for(int i = 0; i < input.count(); i++)
+	{
+		QByteArray sizeNum, dataSize;
+		// Data size
+		sizeNum.setNum(input[i].size(),16);
+		dataSize = QByteArray::fromHex(sizeNum);
+		if(sizeNum.size() <= 2)
+			dataSize.prepend(QByteArray::fromHex("0"));
+		else if(sizeNum.size() > 4)
+		{
+			*ok = false;
+			return QByteArray();
+		}
+		out += dataSize;
+		// Data
+		out += input[i];
+	}
+	*ok = true;
+	return out;
+}
