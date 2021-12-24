@@ -146,7 +146,7 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0" alignment="Qt::AlignLeft|Qt::AlignBottom">
+             <item row="3" column="0" alignment="Qt::AlignLeft|Qt::AlignBottom">
               <widget class="QFrame" name="mainButtonsFrame">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
@@ -289,6 +289,29 @@
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <widget class="QPushButton" name="studentButton">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="toolTip">
+                   <string>Student options</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../res.qrc">
+                    <normaloff>:/res/images/user.png</normaloff>:/res/images/user.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>36</width>
+                    <height>36</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
                </layout>
               </widget>
              </item>
@@ -311,6 +334,13 @@
                </property>
                <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="studentLabel">
+               <property name="text">
+                <string notr="true"/>
                </property>
               </widget>
              </item>
