@@ -30,13 +30,13 @@ connectionOptions::connectionOptions(QWidget *parent) :
 	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	client = new monitorClient;
 	ui->IPEdit->setText(QHostAddress(client->serverAddress().toIPv4Address()).toString());
-	ui->portEdit->setText(QString::number(client->serverPort()));
+	ui->portEdit->setValue(client->serverPort());
 	ui->serverCheckBox->setChecked(client->enabled());
 	ui->testButton->setEnabled(client->enabled());
 	changeAddress();
 	// Connections
 	connect(ui->IPEdit,&QLineEdit::textChanged,this,&connectionOptions::changeAddress);
-	connect(ui->portEdit,&QLineEdit::textChanged,this,&connectionOptions::changeAddress);
+	connect(ui->portEdit,SIGNAL(valueChanged(int)),this,SLOT(changeAddress()));
 	connect(ui->serverCheckBox,SIGNAL(clicked(bool)),this,SLOT(changeServerState(bool)));
 	connect(ui->testButton,SIGNAL(clicked()),this,SLOT(testConnection()));
 }
