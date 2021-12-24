@@ -165,7 +165,7 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 		if(!ok)
 		{
 			socket->close();
-			return QList<QByteArray>();
+			return QList<QByteArray>({"requestError"});
 		}
 		// Wait for response
 		QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -185,13 +185,13 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 		if(responseTimer.remainingTime() == -1)
 		{
 			errorOccurred(QAbstractSocket::SocketTimeoutError);
-			return QList<QByteArray>();
+			return QList<QByteArray>({"timeout"});
 		}
 		else
 			return readData(response);
 	}
 	else
-		return QList<QByteArray>();
+		return QList<QByteArray>({"connectFailure"});
 }
 
 /*!
