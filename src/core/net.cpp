@@ -97,13 +97,20 @@ bool Net::internetConnected()
 }
 
 /*! Constructs monitorClient. */
-monitorClient::monitorClient(QObject *parent) :
+monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 	QObject(parent)
 {
 	socket = new QTcpSocket;
+	setErrorDialogs(errDialogs);
 	// Connections
 	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
 	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
+}
+
+/*! Enables or disables connection error dialogs. */
+void monitorClient::setErrorDialogs(bool errDialogs)
+{
+	errorDialogs = errDialogs;
 }
 
 /*! Returns server address. */
@@ -204,6 +211,8 @@ void monitorClient::readResponse(void)
  */
 void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
 {
+	if(!errorDialogs)
+		return;
 	QMessageBox errBox;
 	errBox.setWindowTitle(tr("Error"));
 	errBox.setText(tr("Unable to connect to class monitor server."));

@@ -116,7 +116,8 @@ class monitorClient : public QObject
 {
 	Q_OBJECT
 	public:
-		explicit monitorClient(QObject *parent = nullptr);
+		explicit monitorClient(bool errDialogs = true, QObject *parent = nullptr);
+		void setErrorDialogs(bool errDialogs);
 		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data, bool hang = true);
 		static QHostAddress serverAddress(void);
 		static quint16 serverPort(void);
@@ -124,6 +125,7 @@ class monitorClient : public QObject
 		bool available(bool hang = true);
 
 	private:
+		bool errorDialogs;
 		QTcpSocket *socket;
 		QByteArray response;
 		QByteArray convertData(bool *ok, QList<QByteArray> input);
