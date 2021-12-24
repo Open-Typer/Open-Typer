@@ -29,7 +29,10 @@
 #include <QDataStream>
 #include <QMessageBox>
 #include <QEventLoop>
+#include <QHostAddress>
+#include <QSettings>
 #include <QTimer>
+#include "core/utils.h"
 
 /*! \brief The Net class provides network functions. */
 class Net : public QObject
@@ -114,6 +117,10 @@ class monitorClient : public QObject
 	public:
 		explicit monitorClient(QObject *parent = nullptr);
 		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data, bool dialog = false);
+		static QHostAddress serverAddress(void);
+		static quint16 serverPort(void);
+		static bool enabled(void);
+		bool available(bool dialog = false);
 
 	private:
 		QTcpSocket *socket;

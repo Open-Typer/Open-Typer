@@ -106,6 +106,36 @@ monitorClient::monitorClient(QObject *parent) :
 	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
 }
 
+/*! Returns server address. */
+QHostAddress monitorClient::serverAddress(void)
+{
+	QSettings settings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
+	return QHostAddress(settings.value("server/address","127.0.0.1").toString());
+}
+
+/*! Returns server port. */
+quint16 monitorClient::serverPort(void)
+{
+	QSettings settings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
+	return settings.value("server/port","57100").toUInt();
+}
+
+/*! Returns true if class monitor server connection is enabled in the settings. */
+bool monitorClient::enabled(void)
+{
+	QSettings settings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
+	return settings.value("server/enabled","false").toBool();
+}
+
+/*! Returns true if class monitor server connection is enabled in the settings and the server is available. */
+bool monitorClient::available(bool dialog)
+{
+	if(enabled())
+		return (sendRequest("check",{},dialog).value(0) == "ok");
+	else
+		return false;
+}
+
 /*!
  * Sends a request and returns the response.\n
  * \param[in] method Request method.
