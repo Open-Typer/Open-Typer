@@ -113,7 +113,7 @@ class monitorClient : public QObject
 	Q_OBJECT
 	public:
 		explicit monitorClient(QObject *parent = nullptr);
-		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data);
+		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data, bool dialog = false);
 
 	private:
 		QTcpSocket *socket;

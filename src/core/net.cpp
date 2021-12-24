@@ -111,7 +111,7 @@ monitorClient::monitorClient(QObject *parent) :
  * \param[in] method Request method.
  * \param[in] data Request data.
  */
-QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data)
+QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data, bool dialog)
 {
 	socket->abort();
 	socket->connectToHost("localhost",57100);
@@ -133,11 +133,27 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 		QTimer responseTimer;
 		responseTimer.setSingleShot(true);
 		responseTimer.setInterval(5000); // Maximum wait time
-		QEventLoop reqLoop;
-		connect(&responseTimer,SIGNAL(timeout()),&reqLoop,SLOT(quit()));
-		connect(this,SIGNAL(responseReady()),&reqLoop,SLOT(quit()));
-		responseTimer.start();
-		reqLoop.exec();
+		if(dialog)
+		{
+			QMessageBox progressBox;
+			progressBox.setText(tr("Connecting..."));
+			progressBox.setStandardButtons(QMessageBox::NoButton);
+			progressBox.setWindowFlag(Qt::WindowMinimizeButtonHint,false);
+			progressBox.setWindowFlag(Qt::WindowMaximizeButtonHint,false);
+			progressBox.setWindowFlag(Qt::WindowCloseButtonHint,false);
+			connect(&responseTimer,SIGNAL(timeout()),&progressBox,SLOT(accept()));
+			connect(this,SIGNAL(responseReady()),&progressBox,SLOT(accept()));
+			responseTimer.start();
+			progressBox.exec();
+		}
+		else
+		{
+			QEventLoop reqLoop;
+			connect(&responseTimer,SIGNAL(timeout()),&reqLoop,SLOT(quit()));
+			connect(this,SIGNAL(responseReady()),&reqLoop,SLOT(quit()));
+			responseTimer.start();
+			reqLoop.exec();
+		}
 		socket->close();
 		if(responseTimer.remainingTime() == -1)
 		{
