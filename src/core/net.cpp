@@ -145,7 +145,7 @@ bool monitorClient::available(bool hang)
 QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data, bool hang)
 {
 	socket->abort();
-	socket->connectToHost("localhost",57100);
+	socket->connectToHost(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
 	if(socket->waitForConnected())
 	{
 		bool ok;
