@@ -166,7 +166,8 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 		if(dialog)
 		{
 			QMessageBox progressBox;
-			progressBox.setText(tr("Connecting..."));
+			progressBox.setText(tr("Please wait..."));
+			progressBox.setIcon(QMessageBox::Information);
 			progressBox.setStandardButtons(QMessageBox::NoButton);
 			progressBox.setWindowFlag(Qt::WindowMinimizeButtonHint,false);
 			progressBox.setWindowFlag(Qt::WindowMaximizeButtonHint,false);
