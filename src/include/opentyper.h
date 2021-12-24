@@ -64,6 +64,7 @@ private:
 	void connectAll(void);
 	QSettings *settings;
 	configParser *parser;
+	monitorClient *client;
 	QString loadConfig(QString configName);
 	void startLevel(int lesson, int sublesson, int level);
 	void levelFinalInit(void);

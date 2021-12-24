@@ -29,6 +29,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	ui->setupUi(this);
 	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	langMgr = new languageManager;
+	client = new monitorClient(false);
 	refreshAll(true);
 	// Connect signals to slots
 	connectAll();
@@ -119,6 +120,25 @@ void OpenTyper::refreshAll(bool setLang)
 	textViewMode = settings->value("main/textviewmode","0").toInt();
 	fullScreenPaper = ((textViewMode == 2) || (textViewMode == 3));
 	lineCountLimit = ((textViewMode == 1) || (textViewMode == 3));
+	// Class monitor client
+	if(client->available())
+	{
+		ui->studentButton->show();
+		ui->studentLabel->show();
+	}
+	else
+	{
+		ui->studentButton->hide();
+		ui->studentLabel->hide();
+	}
+	QList<QByteArray> response = client->sendRequest("get",{"username"});
+	if(response[0] == "ok")
+	{
+		QString username = response[1];
+		ui->studentLabel->setText(tr("Logged in as %1").arg(username));
+	}
+	else
+		ui->studentLabel->setText(tr("Not logged in."));
 	// Load config and start
 	QString configPath = loadConfig(configName);
 	if(configPath == NULL)
