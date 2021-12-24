@@ -22,6 +22,7 @@
 #define NET_H
 
 #include <QObject>
+#include <QApplication>
 #include <QByteArray>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QNetworkRequest>

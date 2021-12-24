@@ -160,6 +160,7 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 			return QList<QByteArray>();
 		}
 		// Wait for response
+		QApplication::setOverrideCursor(Qt::WaitCursor);
 		QTimer responseTimer;
 		responseTimer.setSingleShot(true);
 		responseTimer.setInterval(5000); // Maximum wait time
@@ -186,6 +187,7 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 			reqLoop.exec();
 		}
 		socket->close();
+		QApplication::restoreOverrideCursor();
 		if(responseTimer.remainingTime() == -1)
 		{
 			errorOccurred(QAbstractSocket::SocketTimeoutError);
