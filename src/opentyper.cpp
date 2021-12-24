@@ -30,6 +30,8 @@ OpenTyper::OpenTyper(QWidget *parent)
 	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	langMgr = new languageManager;
 	client = new monitorClient(false);
+	studentUsername = "";
+	studentPassword = "";
 	refreshAll(true);
 	// Connect signals to slots
 	connectAll();
@@ -121,24 +123,7 @@ void OpenTyper::refreshAll(bool setLang)
 	fullScreenPaper = ((textViewMode == 2) || (textViewMode == 3));
 	lineCountLimit = ((textViewMode == 1) || (textViewMode == 3));
 	// Class monitor client
-	if(client->available())
-	{
-		ui->studentButton->show();
-		ui->studentLabel->show();
-	}
-	else
-	{
-		ui->studentButton->hide();
-		ui->studentLabel->hide();
-	}
-	QList<QByteArray> response = client->sendRequest("get",{"username"});
-	if(response[0] == "ok")
-	{
-		QString username = response[1];
-		ui->studentLabel->setText(tr("Logged in as %1").arg(username));
-	}
-	else
-		ui->studentLabel->setText(tr("Not logged in."));
+	updateStudent();
 	// Load config and start
 	QString configPath = loadConfig(configName);
 	if(configPath == NULL)
@@ -181,6 +166,11 @@ void OpenTyper::connectAll(void)
 		SIGNAL(clicked()),
 		this,
 		SLOT(openEditor()));
+	// Student options button
+	connect(ui->studentButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(openStudentOptions()));
 	// Repeat exercise button
 	connect(ui->repeatButton,
 		SIGNAL(clicked()),
@@ -518,6 +508,68 @@ void OpenTyper::openOptions(void)
 	connect(optionsWin,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
 	optionsWin->exec();
 	refreshAll(true);
+}
+
+/*!
+ * Connected from studentButton->clicked().\n
+ * Opens student authentication dialog (studentOptions).
+ *
+ * \see studentOptions
+ */
+void OpenTyper::openStudentOptions(void)
+{
+	studentOptions dialog;
+	dialog.setStyleSheet(styleSheet());
+	if(dialog.exec() == QDialog::Accepted)
+	{
+		studentUsername = dialog.username;
+		studentPassword = dialog.password;
+		updateStudent();
+	}
+}
+
+void OpenTyper::updateStudent(void)
+{
+	if(client->available())
+	{
+		ui->studentButton->show();
+		ui->studentLabel->show();
+	}
+	else
+	{
+		ui->studentButton->hide();
+		ui->studentLabel->hide();
+	}
+	QList<QByteArray> response = client->sendRequest("get",{"username"});
+	if(response[0] == "ok")
+	{
+		if(studentUsername == "")
+			client->sendRequest("logout",{studentUsername.toUtf8()});
+		else
+		{
+			QString username = response[1];
+			ui->studentLabel->setText(tr("Logged in as %1").arg(username));
+			return;
+		}
+	}
+	else
+	{
+		if(studentUsername != "")
+		{
+			response = client->sendRequest("auth",{studentUsername.toUtf8(),studentPassword.toUtf8()});
+			if(response[0] == "ok")
+			{
+				updateStudent();
+				return;
+			}
+			else
+			{
+				studentUsername = "";
+				studentPassword = "";
+			}
+		}
+	}
+	ui->studentLabel->setText(tr("Not logged in."));
 }
 
 /*! Connected from lessonSelectionList.\n

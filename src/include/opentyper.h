@@ -38,6 +38,7 @@
 #include "paperconfigdialog.h"
 #include "packEditor/packeditor.h"
 #include "options/optionswindow.h"
+#include "options/studentoptions.h"
 #include "levelsummary.h"
 #include "timedialog.h"
 #include "core/configfile.h"
@@ -65,6 +66,8 @@ private:
 	QSettings *settings;
 	configParser *parser;
 	monitorClient *client;
+	QString studentUsername, studentPassword;
+	void updateStudent(void);
 	QString loadConfig(QString configName);
 	void startLevel(int lesson, int sublesson, int level);
 	void levelFinalInit(void);
@@ -108,6 +111,7 @@ private:
 private slots:
 	void keyPress(QKeyEvent *event);
 	void openOptions(void);
+	void openStudentOptions(void);
 	void openPack(void);
 	void repeatLevel(void);
 	void nextLevel(void);
