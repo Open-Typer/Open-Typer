@@ -43,6 +43,7 @@ void optionsWindow::setupList(void)
 	optionLabels += tr("Behavior");
 	optionLabels += tr("Keyboard");
 	optionLabels += tr("Customization");
+	optionLabels += tr("Connection");
 	ui->list->addItems(optionLabels);
 	ui->list->setCurrentRow(oldIndex);
 }
@@ -89,6 +90,14 @@ void optionsWindow::changeOptionWidget(int index)
 				options->setStyleSheet(styleSheet());
 				ui->currentOptions->setWidget(options);
 				options->init();
+			}
+			break;
+		case 4:
+			{
+				// Connection
+				connectionOptions *options = new connectionOptions;
+				options->setStyleSheet(styleSheet());
+				ui->currentOptions->setWidget(options);
 			}
 			break;
 	}
