@@ -117,11 +117,11 @@ class monitorClient : public QObject
 	Q_OBJECT
 	public:
 		explicit monitorClient(QObject *parent = nullptr);
-		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data, bool dialog = false);
+		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data, bool hang = true);
 		static QHostAddress serverAddress(void);
 		static quint16 serverPort(void);
 		static bool enabled(void);
-		bool available(bool dialog = false);
+		bool available(bool hang = true);
 
 	private:
 		QTcpSocket *socket;
