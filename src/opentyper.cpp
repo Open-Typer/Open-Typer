@@ -776,9 +776,19 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		{
 			levelInProgress=false;
 			lastTime = levelTimer.elapsed()/1000;
+			int speed = levelHits*(60/(levelTimer.elapsed()/1000.0));
+			int realSpeed = totalHits*(60/(levelTimer.elapsed()/1000.0));
+			int time = levelTimer.elapsed()/1000;
+			if((studentUsername != "") && !customLevelLoaded)
+			{
+				updateStudent();
+				client->sendRequest("put",
+					{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentSublesson),QByteArray::number(currentLevel),
+					QByteArray::number(realSpeed),QByteArray::number(levelMistakes),QByteArray::number(time)});
+			}
 			levelSummary msgBox;
-			msgBox.setTotalTime(levelTimer.elapsed()/1000);
-			msgBox.setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
+			msgBox.setTotalTime(time);
+			msgBox.setHits(speed);
 			msgBox.setMistakes(levelMistakes);
 			msgBox.setStyleSheet(styleSheet());
 			int ret = msgBox.exec();
