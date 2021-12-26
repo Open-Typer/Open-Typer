@@ -378,7 +378,6 @@ void OpenTyper::levelFinalInit(void)
 		level += '\n';
 	currentLine=0;
 	updateText();
-	adjustSize();
 	setColors();
 	levelPos=0;
 	displayPos=0;
@@ -906,66 +905,6 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	settings->setValue("theme/fontunderline",fontUnderline);
 }
 
-/*!
- * Gets the width of a QLabel with a text.\n
- * This function is obsolete and will be removed after the paper widget starts using layouts.
- * \see adjustSize
- */
-int OpenTyper::labelWidth(QLabel *targetLabel, QString labelText)
-{
-	// Checks every line and gets the best label width
-	int i, current, max=50, len;
-	QString line = "";
-	len = labelText.count();
-	for(i=0; i < len; i++)
-	{
-		if((labelText[i] == '\n') || (i+1 == len))
-		{
-			current = targetLabel->fontMetrics().boundingRect(line).width() +
-				targetLabel->font().pointSize() * 5;
-			if(current > max)
-				max = current;
-			line = "";
-		}
-		line += labelText[i];
-	}
-	return max;
-}
-
-/*! Adjusts the width of the paper widget. \see labelWidth*/
-void OpenTyper::adjustSize(void)
-{
-	// Adjust paper width
-	QSizePolicy paperPolicy = ui->paper->sizePolicy();
-	if(fullScreenPaper)
-	{
-		paperPolicy.setHorizontalPolicy(QSizePolicy::Minimum);
-		ui->paper->setSizePolicy(paperPolicy);
-		ui->paper->setMaximumWidth(QWIDGETSIZE_MAX);
-	}
-	else
-	{
-		int newWidth = labelWidth(ui->levelLabel,displayLevel);
-		ui->levelLabel->resize(newWidth,
-			ui->levelLabel->height());
-		ui->inputLabel->resize(newWidth,
-			ui->inputLabel->height());
-		paperPolicy.setHorizontalPolicy(QSizePolicy::Fixed);
-		ui->paper->setMinimumWidth(newWidth+20);
-		ui->paper->setMaximumWidth(ui->paper->minimumWidth());
-	}
-	// Adjust levelSpace, levelLabel and inputLabel height
-	int newHeight = _line_count(finalDisplayLevel) *
-		(ui->levelLabel->fontMetrics().capHeight()) * 2 + 60;
-	ui->levelSpace->setMinimumHeight(newHeight);
-	ui->levelLabel->resize(ui->levelLabel->width(),
-		newHeight);
-	ui->inputLabel->resize(ui->inputLabel->width(),
-		QWIDGETSIZE_MAX);
-	ui->mistakeLabel->resize(ui->mistakeLabel->width(),
-		QWIDGETSIZE_MAX);
-}
-
 /*! Sets custom colors (if they are set) or default colors. \see customizationOptions#setColors */
 void OpenTyper::setColors(void)
 {
@@ -1185,7 +1124,6 @@ void OpenTyper::zoomIn(void)
 	if(fontSize > 20)
 		fontSize = 20;
 	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
-	adjustSize();
 }
 
 /*! Connected from zoomOutButton.\n
@@ -1202,7 +1140,6 @@ void OpenTyper::zoomOut(void)
 	if(fontSize <= 0)
 		fontSize = 2;
 	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
-	adjustSize();
 }
 
 /*! Changes the operation mode.\n
