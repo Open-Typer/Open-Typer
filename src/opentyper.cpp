@@ -757,6 +757,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			}
 		}
 	}
+	ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	if(input.count() >= level.count())
 	{
