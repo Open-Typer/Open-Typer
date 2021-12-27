@@ -27,6 +27,10 @@ OpenTyper::OpenTyper(QWidget *parent)
 	, ui(new Ui::OpenTyper)
 {
 	ui->setupUi(this);
+	QGridLayout *inputLabelLayout = new QGridLayout(ui->inputLabel);
+	ui->mistakeLabel->setParent(ui->inputLabel);
+	inputLabelLayout->addWidget(ui->mistakeLabel);
+	inputLabelLayout->setContentsMargins(0,0,0,0);
 	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	langMgr = new languageManager;
 	client = new monitorClient(false);
