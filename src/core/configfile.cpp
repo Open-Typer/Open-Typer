@@ -318,7 +318,7 @@ QString configParser::initExercise(QString exercise, int lineLength)
 	bool first_word=true;
 	for(i=0; i < len; i++)
 	{
-		if((exercise[i] == ' ') || (i+1 >= len))
+		if(((exercise[i] == ' ') || (exercise[i] == '\n')) || (i+1 >= len))
 		{
 			if(i+1 >= len)
 				word += exercise[i];
@@ -333,9 +333,17 @@ QString configParser::initExercise(QString exercise, int lineLength)
 			first_word=false;
 			out += word;
 			word = "";
-			if(!first_word)
-				line_pos++;
-			line_pos=line_pos+len2;
+			if(exercise[i] == '\n')
+			{
+				out += '\n';
+				line_pos = 0;
+			}
+			else
+			{
+				if(!first_word)
+					line_pos++;
+				line_pos=line_pos+len2;
+			}
 		}
 		else
 			word += exercise[i];
@@ -519,8 +527,8 @@ QString configParser::exerciseRawText(const QString line)
 			i++;
 			if(i < line.count())
 			{
-				if(line[i] == '\n')
-					out += '\n';
+				if(line[i] == 'n')
+					out += "\\n";
 				else if(textReached)
 					out += line[i];
 			}
@@ -625,7 +633,24 @@ QString configParser::generateText(QString rawText, bool repeat, QString repeatT
 		}
 	}
 	else
-		return rawText;
+	{
+		QString out = "";
+		for(int i2=0; i2 < rawText.count(); i2++)
+		{
+			if(rawText[i2] == '\\')
+			{
+				i2++;
+				if(i2 < rawText.count())
+				{
+					if(rawText[i2] == 'n')
+						out += '\n';
+				}
+			}
+			else
+				out += rawText[i2];
+		}
+		return out;
+	}
 }
 
 /*!
