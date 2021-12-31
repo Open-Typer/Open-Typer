@@ -680,10 +680,15 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		secLoop->start(500);
 		levelInProgress=true;
 	}
-	if((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || spaceNewline) && (event->text() == level[levelPos]))) && !mistake)
+	QString keyText = event->text();
+	if((keyText == "'") && (displayLevel[displayPos] == "‘"))
+		keyText = "‘";
+	if((keyText == "‘") && (displayLevel[displayPos] == "'"))
+		keyText = "'";
+	if((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || spaceNewline) && (keyText == level[levelPos]))) && !mistake)
 	{
-		input += event->text();
-		displayInput += event->text();
+		input += keyText;
+		displayInput += keyText;
 		if(displayLevel[displayPos] == '\n')
 		{
 			displayInput += "<br>";
@@ -698,7 +703,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				ignoreMistakeLabelAppend=false;
 			else
 			{
-				mistakeLabelHtml += "<span style='color: rgba(0,0,0,0)'>" + event->text() + "</span>";
+				mistakeLabelHtml += "<span style='color: rgba(0,0,0,0)'>" + keyText + "</span>";
 				ui->mistakeLabel->setHtml(mistakeLabelHtml);
 			}
 		}
@@ -740,12 +745,12 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			{
 				ui->inputLabel->setHtml(displayInput);
 				QString errorAppend;
-				if(event->text() == " ")
+				if(keyText == " ")
 					errorAppend = "_";
 				else if((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))
 					errorAppend = "↵<br>";
 				else
-					errorAppend = event->text();
+					errorAppend = keyText;
 				ui->inputLabel->setHtml(displayInput + "<span style='color: red';'>" + errorAppend + "</span>");
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
