@@ -29,5 +29,6 @@
         <file>res/images/minus.png</file>
         <file>res/images/clock.png</file>
         <file>res/images/user.png</file>
+        <file>res/images/stats.png</file>
     </qresource>
 </RCC>
