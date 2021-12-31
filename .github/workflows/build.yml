@@ -59,7 +59,8 @@ jobs:
     - if: contains(matrix.os, 'windows')
       uses: montudor/action-zip@v1
       with:
-        args: zip -qq -r Open-Typer-win32.zip release/*
+        args: zip -qq -r Open-Typer-win32.zip release
+        working-directory: release
     ## Upload
     # Windows
     - if: contains(matrix.os, 'windows')
