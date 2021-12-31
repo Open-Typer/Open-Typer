@@ -57,7 +57,7 @@ jobs:
     ## Package
     # Windows
     - if: contains(matrix.os, 'windows')
-      uses: papeloto/action-zip@v1
+      uses: vimtor/action-zip@v1
       with:
         files: release/
         dest: Open-Typer-win32.zip
