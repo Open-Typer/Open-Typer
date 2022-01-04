@@ -561,7 +561,7 @@ void OpenTyper::updateStudent(void)
 			QString username = response[1];
 			ui->studentLabel->setText(tr("Logged in as %1").arg(username));
 			// TODO: Always show statsButton
-			if(customLevelLoaded)
+			if(customLevelLoaded || customConfig)
 				ui->statsButton->hide();
 			else
 				ui->statsButton->show();
@@ -803,7 +803,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			int speed = levelHits*(60/(levelTimer.elapsed()/1000.0));
 			int realSpeed = totalHits*(60/(levelTimer.elapsed()/1000.0));
 			int time = levelTimer.elapsed()/1000;
-			if((studentUsername != "") && !customLevelLoaded)
+			if((studentUsername != "") && !customLevelLoaded && !customConfig)
 			{
 				updateStudent();
 				client->sendRequest("put",
