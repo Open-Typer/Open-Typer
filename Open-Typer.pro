@@ -27,6 +27,7 @@ SOURCES += \
     src/levelsummary.cpp \
     src/options/connection.cpp \
     src/options/studentoptions.cpp \
+    src/statsdialog.cpp \
     src/timedialog.cpp \
     src/options/behavior.cpp \
     src/options/customization.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     src/include/levelsummary.h \
     src/include/options/connection.h \
     src/include/options/studentoptions.h \
+    src/include/statsdialog.h \
     src/include/timedialog.h \
     src/include/options/behavior.h \
     src/include/options/customization.h \
@@ -77,6 +79,7 @@ FORMS += \
     ui/options/keyboard.ui \
     ui/levelsummary.ui \
     ui/options/studentoptions.ui \
+    ui/statsdialog.ui \
     ui/timedialog.ui \
     ui/opentyper.ui \
     ui/options/optionswindow.ui \
