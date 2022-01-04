@@ -59,79 +59,78 @@ QT_END_NAMESPACE
 class OpenTyper : public QMainWindow
 {
 	Q_OBJECT
+	public:
+		OpenTyper(QWidget *parent = nullptr);
+		~OpenTyper();
 
-public:
-	OpenTyper(QWidget *parent = nullptr);
-	~OpenTyper();
+	private:
+		Ui::OpenTyper *ui;
+		languageManager *langMgr;
+		void connectAll(void);
+		QSettings *settings;
+		configParser *parser;
+		monitorClient *client;
+		QString studentUsername, studentPassword;
+		void updateStudent(void);
+		QString loadConfig(QString configName);
+		void startLevel(int lesson, int sublesson, int level);
+		void levelFinalInit(void);
+		void updateText(void);
+		QString level, displayLevel, finalDisplayLevel, input, displayInput, publicConfigName;
+		int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, currentLine, levelPos, displayPos, levelMistakes, totalHits, levelHits, levelLengthExtension;
+		int deadKeys;
+		int sublessonListStart;
+		QElapsedTimer levelTimer;
+		QTimer *secLoop;
+		bool levelInProgress, mistake, ignoreMistakeLabelAppend;
+		QString inputLabelHtml, mistakeLabelHtml;
+		int lastTime;
+		int _line_count(QString str);
+		Updater *versionHdw;
+		void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
+		int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
+		int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
+		int bgRedColor, bgGreenColor, bgBlueColor;
+		int paperRedColor, paperGreenColor, paperBlueColor;
+		int panelRedColor, panelGreenColor, panelBlueColor;
+		bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor, customPanelColor;
+		void setColors(void);
+		void updateTheme(void);
+		bool customLevelLoaded;
+		QString customLevel;
+		bool customConfig;
+		bool spaceNewline;
+		int errorPenalty;
+		bool fullScreenPaper, lineCountLimit;
+		int textViewMode;
+		QTranslator *translator;
+		void refreshAll(bool setLang);
+		void changeMode(int mode);
+		int currentMode;
+		int timedExHours, timedExMinutes, timedExSeconds;
+		bool timedExStarted;
 
-private:
-	Ui::OpenTyper *ui;
-	languageManager *langMgr;
-	void connectAll(void);
-	QSettings *settings;
-	configParser *parser;
-	monitorClient *client;
-	QString studentUsername, studentPassword;
-	void updateStudent(void);
-	QString loadConfig(QString configName);
-	void startLevel(int lesson, int sublesson, int level);
-	void levelFinalInit(void);
-	void updateText(void);
-	QString level, displayLevel, finalDisplayLevel, input, displayInput, publicConfigName;
-	int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentLevel, currentLine, levelPos, displayPos, levelMistakes, totalHits, levelHits, levelLengthExtension;
-	int deadKeys;
-	int sublessonListStart;
-	QElapsedTimer levelTimer;
-	QTimer *secLoop;
-	bool levelInProgress, mistake, ignoreMistakeLabelAppend;
-	QString inputLabelHtml, mistakeLabelHtml;
-	int lastTime;
-	int _line_count(QString str);
-	Updater *versionHdw;
-	void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
-	int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
-	int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
-	int bgRedColor, bgGreenColor, bgBlueColor;
-	int paperRedColor, paperGreenColor, paperBlueColor;
-	int panelRedColor, panelGreenColor, panelBlueColor;
-	bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor, customPanelColor;
-	void setColors(void);
-	void updateTheme(void);
-	bool customLevelLoaded;
-	QString customLevel;
-	bool customConfig;
-	bool spaceNewline;
-	int errorPenalty;
-	bool fullScreenPaper, lineCountLimit;
-	int textViewMode;
-	QTranslator *translator;
-	void refreshAll(bool setLang);
-	void changeMode(int mode);
-	int currentMode;
-	int timedExHours, timedExMinutes, timedExSeconds;
-	bool timedExStarted;
+	private slots:
+		void keyPress(QKeyEvent *event);
+		void openOptions(void);
+		void openStudentOptions(void);
+		void openPack(void);
+		void repeatLevel(void);
+		void nextLevel(void);
+		void previousLevel(void);
+		void updateCurrentTime(void);
+		void lessonSelectionListIndexChanged(int index);
+		void sublessonSelectionListIndexChanged(int index);
+		void levelSelectionListIndexChanged(int index);
+		void openExerciseFromFile(void);
+		void changeLanguage(int index);
+		void zoomIn(void);
+		void zoomOut(void);
+		void initTimedExercise(void);
+		void showExerciseStats(void);
 
-private slots:
-	void keyPress(QKeyEvent *event);
-	void openOptions(void);
-	void openStudentOptions(void);
-	void openPack(void);
-	void repeatLevel(void);
-	void nextLevel(void);
-	void previousLevel(void);
-	void updateCurrentTime(void);
-	void lessonSelectionListIndexChanged(int index);
-	void sublessonSelectionListIndexChanged(int index);
-	void levelSelectionListIndexChanged(int index);
-	void openExerciseFromFile(void);
-	void changeLanguage(int index);
-	void zoomIn(void);
-	void zoomOut(void);
-	void initTimedExercise(void);
-	void showExerciseStats(void);
-
-public slots:
-	void openEditor(void);
+	public slots:
+		void openEditor(void);
 };
 
 #endif // OPENTYPER_H
