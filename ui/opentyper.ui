@@ -813,6 +813,29 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="statsButton">
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="toolTip">
+             <string extracomment="The history (and stats) of this exercise">Exercise history</string>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/res/images/stats.png</normaloff>:/res/images/stats.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
