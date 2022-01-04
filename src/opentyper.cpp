@@ -407,6 +407,8 @@ void OpenTyper::levelFinalInit(void)
 	displayInput = "";
 	ui->inputLabel->setAcceptRichText(true);
 	ui->inputLabel->setHtml(displayInput);
+	// Update student session
+	updateStudent();
 }
 
 /*!
