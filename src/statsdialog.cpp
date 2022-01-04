@@ -27,6 +27,8 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	ui(new Ui::statsDialog)
 {
 	ui->setupUi(this);
+	ui->statsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui->statsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	// Load data
 	QList<QByteArray> response = client->sendRequest("get",{"resultcount",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise)});
 	if(response[0] != "ok")
