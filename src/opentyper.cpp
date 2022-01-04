@@ -253,7 +253,7 @@ QString OpenTyper::loadConfig(QString configName)
 	if(!parser->open(configPath))
 	{
 		QMessageBox errBox;
-		errBox.setText("Failed to read open pack " + configPath);
+		errBox.setText("Failed to open pack " + configPath);
 		errBox.setStyleSheet(styleSheet());
 		errBox.exec();
 		// Select default configuration
