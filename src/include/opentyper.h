@@ -2,7 +2,7 @@
  * opentyper.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +41,7 @@
 #include "options/studentoptions.h"
 #include "levelsummary.h"
 #include "timedialog.h"
+#include "statsdialog.h"
 #include "core/configfile.h"
 #include "core/utils.h"
 #include "core/packs.h"
@@ -123,6 +124,7 @@ private slots:
 	void zoomIn(void);
 	void zoomOut(void);
 	void initTimedExercise(void);
+	void showExerciseStats(void);
 
 public slots:
 	void openEditor(void);

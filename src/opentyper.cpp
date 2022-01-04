@@ -225,6 +225,11 @@ void OpenTyper::connectAll(void)
 		SIGNAL(clicked()),
 		this,
 		SLOT(initTimedExercise()));
+	// Stats button
+	connect(ui->statsButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(showExerciseStats()));
 	// Start timer
 	secLoop->start(500);
 }
@@ -553,6 +558,11 @@ void OpenTyper::updateStudent(void)
 		{
 			QString username = response[1];
 			ui->studentLabel->setText(tr("Logged in as %1").arg(username));
+			// TODO: Always show statsButton
+			if(customLevelLoaded)
+				ui->statsButton->hide();
+			else
+				ui->statsButton->show();
 			return;
 		}
 	}
@@ -574,6 +584,8 @@ void OpenTyper::updateStudent(void)
 		}
 	}
 	ui->studentLabel->setText(tr("Not logged in."));
+	// TODO: Always show statsButton
+	ui->statsButton->hide();
 }
 
 /*! Connected from lessonSelectionList.\n
@@ -1205,4 +1217,17 @@ void OpenTyper::initTimedExercise(void)
 			secLoop->start(500);
 		}
 	}
+}
+
+/*!
+ * Connected from statsButton->clicked().\n
+ * Opens statsDialog.
+ *
+ * \see statsDialog
+ */
+void OpenTyper::showExerciseStats(void)
+{
+	statsDialog dialog(client,publicConfigName,currentLesson,currentSublesson,currentLevel);
+	dialog.setStyleSheet(styleSheet());
+	dialog.exec();
 }
