@@ -14,7 +14,7 @@
    <string>Open-Typer Pack Editor</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res.qrc">
+   <iconset resource="../../res.qrc">
     <normaloff>:/res/images/packEditor.png</normaloff>:/res/images/packEditor.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -57,7 +57,7 @@
        <string notr="true"/>
       </property>
       <property name="icon">
-       <iconset resource="../res.qrc">
+       <iconset resource="../../res.qrc">
         <normaloff>:/res/images/new.png</normaloff>:/res/images/new.png</iconset>
       </property>
       <property name="iconSize">
@@ -105,7 +105,7 @@
        <string notr="true"/>
       </property>
       <property name="icon">
-       <iconset resource="../res.qrc">
+       <iconset resource="../../res.qrc">
         <normaloff>:/res/images/open.png</normaloff>:/res/images/open.png</iconset>
       </property>
       <property name="iconSize">
@@ -175,7 +175,7 @@
        <string notr="true"/>
       </property>
       <property name="icon">
-       <iconset resource="../res.qrc">
+       <iconset resource="../../res.qrc">
         <normaloff>:/res/images/close.png</normaloff>:/res/images/close.png</iconset>
       </property>
       <property name="iconSize">
@@ -201,7 +201,7 @@
        <string notr="true"/>
       </property>
       <property name="icon">
-       <iconset resource="../res.qrc">
+       <iconset resource="../../res.qrc">
         <normaloff>:/res/images/packEditor.png</normaloff>:/res/images/packEditor.png</iconset>
       </property>
       <property name="iconSize">
@@ -246,7 +246,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../res.qrc"/>
+  <include location="../../res.qrc"/>
  </resources>
  <connections/>
 </ui>
