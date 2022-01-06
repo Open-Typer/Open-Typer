@@ -2,7 +2,7 @@
  * net.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -100,11 +100,7 @@ bool Net::internetConnected()
 monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 	QObject(parent)
 {
-	socket = new QTcpSocket;
 	setErrorDialogs(errDialogs);
-	// Connections
-	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
-	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
 }
 
 /*! Enables or disables connection error dialogs. */
@@ -151,9 +147,17 @@ bool monitorClient::available(bool hang)
  */
 QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data, bool hang)
 {
-	socket->abort();
-	socket->connectToHost(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
-	if(socket->waitForConnected())
+	socket = new QSslSocket;
+	QFile *certFile = new QFile(":certs/server.pem");
+	certFile->open(QIODevice::ReadOnly | QIODevice::Text);
+	QSslCertificate cert(certFile);
+	socket->addCaCertificate(cert);
+	socket->setProtocol(QSsl::TlsV1_2);
+	socket->ignoreSslErrors({QSslError(QSslError::HostNameMismatch,cert)});
+	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
+	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
+	socket->connectToHostEncrypted(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
+	if(socket->waitForEncrypted())
 	{
 		bool ok;
 		QList<QByteArray> reqList;
