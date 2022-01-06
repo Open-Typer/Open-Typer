@@ -95,7 +95,8 @@ TRANSLATIONS += \
     lang/Open-Typer_de_DE.ts
 
 RESOURCES += \
-    res.qrc
+    res.qrc \
+    certs/certs.qrc
 
 RESOURCES += \
     dark-theme/dark-style.qrc \
