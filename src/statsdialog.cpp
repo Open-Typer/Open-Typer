@@ -41,6 +41,9 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	ui->statsTable->setHorizontalHeaderLabels({ tr("Speed"), tr("Mistakes"), tr("Time") });
 	int i, count = response[1].toInt();
 	ui->statsTable->setRowCount(count);
+	speedSeries = new QLineSeries;
+	mistakesSeries = new QLineSeries;
+	timeSeries = new QLineSeries;
 	QTableWidgetItem *item;
 	for(i=0; i < count; i++)
 	{
@@ -53,13 +56,44 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 		// Speed
 		item = new QTableWidgetItem(QString(response[1]));
 		ui->statsTable->setItem(i,0,item);
+		speedSeries->append(i,response[1].toInt());
 		// Mistakes
 		item = new QTableWidgetItem(QString(response[2]));
 		ui->statsTable->setItem(i,1,item);
+		mistakesSeries->append(i,response[1].toInt());
 		// Time
 		item = new QTableWidgetItem(QString(response[3]));
 		ui->statsTable->setItem(i,2,item);
+		timeSeries->append(i,response[1].toInt());
 	}
+	// Set up charts
+	// Speed
+	speedChart = new QChart;
+	QChartView *speedChartView = new QChartView(speedChart, ui->chartTab);
+	ui->chartTabLayout->addWidget(speedChartView);
+	speedChart->addSeries(speedSeries);
+	speedChart->legend()->hide();
+	speedChart->createDefaultAxes();
+	speedChart->axisY()->setMin(0);
+	speedChart->setTitle(tr("Speed"));
+	// Mistakes
+	mistakesChart = new QChart;
+	QChartView *mistakesChartView = new QChartView(mistakesChart, ui->chartTab);
+	ui->chartTabLayout->addWidget(mistakesChartView);
+	mistakesChart->addSeries(mistakesSeries);
+	mistakesChart->legend()->hide();
+	mistakesChart->createDefaultAxes();
+	mistakesChart->axisY()->setMin(0);
+	mistakesChart->setTitle(tr("Mistakes"));
+	// Time
+	timeChart = new QChart;
+	QChartView *timeChartView = new QChartView(timeChart, ui->chartTab);
+	ui->chartTabLayout->addWidget(timeChartView);
+	timeChart->addSeries(timeSeries);
+	timeChart->legend()->hide();
+	timeChart->createDefaultAxes();
+	timeChart->axisY()->setMin(0);
+	timeChart->setTitle(tr("Time"));
 	// Connections
 	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(accept()));
 }

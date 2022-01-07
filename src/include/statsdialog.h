@@ -22,7 +22,10 @@
 #define STATSDIALOG_H
 
 #include <QDialog>
+#include <QtCharts>
 #include "core/net.h"
+
+using namespace QtCharts;
 
 namespace Ui {
 	class statsDialog;
@@ -41,6 +44,8 @@ class statsDialog : public QDialog
 
 	private:
 		Ui::statsDialog *ui;
+		QChart *speedChart, *mistakesChart, *timeChart;
+		QLineSeries *speedSeries, *mistakesSeries, *timeSeries;
 };
 
 #endif // STATSDIALOG_H
