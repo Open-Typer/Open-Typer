@@ -25,6 +25,7 @@ jobs:
         arch: 'win32_mingw73'
         target: ${{ matrix.qt-target }}
         dir: '${{ github.workspace }}'
+        modules: 'qtcharts'
         setup-python: 'false'
     - if: contains(matrix.os, 'windows')
       name: Install 32-bit MinGW
@@ -40,6 +41,7 @@ jobs:
         host: 'linux'
         target: ${{ matrix.qt-target }}
         dir: '${{ github.workspace }}'
+        modules: 'qtcharts'
         setup-python: 'false'
     # MacOS
     - if: contains(matrix.os, 'macos')
@@ -50,6 +52,7 @@ jobs:
         host: 'mac'
         target: ${{ matrix.qt-target }}
         dir: '${{ github.workspace }}'
+        modules: 'qtcharts'
         setup-python: 'false'
     ## Build
     - run: source .ci/${{ matrix.os }}-build.sh
