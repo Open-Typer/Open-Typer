@@ -33,6 +33,8 @@
 #include <QHostAddress>
 #include <QSettings>
 #include <QTimer>
+#include <QTcpSocket>
+#include <QSslSocket>
 #include "core/utils.h"
 
 /*! \brief The Net class provides network functions. */
