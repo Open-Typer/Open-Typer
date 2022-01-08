@@ -60,11 +60,11 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 		// Mistakes
 		item = new QTableWidgetItem(QString(response[2]));
 		ui->statsTable->setItem(i,1,item);
-		mistakesSeries->append(i,response[1].toInt());
+		mistakesSeries->append(i,response[2].toInt());
 		// Time
 		item = new QTableWidgetItem(QString(response[3]));
 		ui->statsTable->setItem(i,2,item);
-		timeSeries->append(i,response[1].toInt());
+		timeSeries->append(i,response[3].toInt());
 	}
 	// Set up charts
 	// Speed
