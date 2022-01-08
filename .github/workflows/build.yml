@@ -134,16 +134,15 @@ jobs:
         cp *.svg ../online-app-deploy/
     - uses: actions/checkout@v2
       with:
-        repository: 'Open-Typer/online-app'
+        ref: 'gh-pages'
     - run: |
         mv ../online-app-deploy/* ./
         git add -A
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
-        git commit -m "deploy"
-    - name: Push to online-app
+        git commit -m "online app deploy"
+    - name: Push online-app
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.ONLINE_APP_TOKEN }}
-        repository: 'Open-Typer/online-app'
-        branch: master
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
