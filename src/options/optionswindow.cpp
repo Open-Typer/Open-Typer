@@ -2,7 +2,7 @@
  * optionswindow.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,7 +43,9 @@ void optionsWindow::setupList(void)
 	optionLabels += tr("Behavior");
 	optionLabels += tr("Keyboard");
 	optionLabels += tr("Customization");
+#ifndef Q_OS_WASM
 	optionLabels += tr("Connection");
+#endif
 	ui->list->addItems(optionLabels);
 	ui->list->setCurrentRow(oldIndex);
 }
