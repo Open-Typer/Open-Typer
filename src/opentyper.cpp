@@ -45,6 +45,12 @@ OpenTyper::OpenTyper(QWidget *parent)
 	new Updater();
 	#endif
 	#endif
+	// Disable features that don't work on wasm
+#ifdef Q_OS_WASM
+	ui->openPackButton->hide();
+	ui->openEditorButton->hide();
+	ui->openExerciseButton->hide();
+#endif // Q_OS_WASM
 }
 
 /*! Destroys the Open-Typer object. */
