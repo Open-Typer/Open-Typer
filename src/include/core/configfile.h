@@ -2,7 +2,7 @@
  * configfile.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,6 +25,9 @@
 #include <QFile>
 #include <QTextStream>
 #include <QString>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 #include "utils.h"
 
 // TODO: Add a link to pack file format documentation.
@@ -84,6 +87,20 @@ class configParser : public QObject
 		QString exerciseAttributes(const QString line);
 		QString exerciseRawText(const QString line);
 		QString generateText(QString rawText, bool repeat, QString repeatType, int repeatLimit);
+};
+
+/*! \brief The historyParser class provides functions for exercise history and statistics. */
+class historyParser : public QObject
+{
+	Q_OBJECT
+	public:
+		static int historySize(QString pack, int lesson, int sublesson, int exercise);
+		static QStringList historyEntry(QString pack, int lesson, int sublesson, int exercise, int entry);
+		static void addHistoryEntry(QString pack, int lesson, int sublesson, int exercise, QList<QVariant> entry);
+
+	private:
+		static QJsonDocument historyDocument(void);
+		static QJsonValue historyPackValue(QString pack);
 };
 
 #endif // CONFIGFILE_H
