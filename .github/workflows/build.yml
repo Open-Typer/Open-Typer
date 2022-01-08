@@ -117,4 +117,5 @@ jobs:
     - run: |
         qmake
         make
+        ls -la
       shell: bash
