@@ -78,6 +78,7 @@ void Downloader::cancelDownload(void)
 	reply->abort();
 }
 
+#ifndef Q_OS_WASM
 /*!
  * Returns true if an internet connection is available.\n
  * This functions pings 8.8.8.8 to check connection availability.
@@ -147,6 +148,13 @@ bool monitorClient::available(bool hang)
  */
 QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data, bool hang)
 {
+#ifdef Q_OS_WASM
+	socket = new QTcpSocket;
+	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
+	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
+	socket->connectToHost(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
+	bool connected = socket->waitForConnected();
+#else
 	socket = new QSslSocket;
 	QFile *certFile = new QFile(":certs/server.pem");
 	certFile->open(QIODevice::ReadOnly | QIODevice::Text);
@@ -157,7 +165,9 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
 	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
 	socket->connectToHostEncrypted(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
-	if(socket->waitForEncrypted())
+	bool connected = socket->waitForEncrypted();
+#endif
+	if(connected)
 	{
 		bool ok;
 		QList<QByteArray> reqList;
@@ -287,3 +297,4 @@ QList<QByteArray> monitorClient::readData(QByteArray input)
 	}
 	return out;
 }
+#endif // Q_OS_WINDOWS

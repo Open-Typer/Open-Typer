@@ -128,7 +128,11 @@ class monitorClient : public QObject
 
 	private:
 		bool errorDialogs;
+#ifdef Q_OS_WASM
+		QTcpSocket *socket;
+#else
 		QSslSocket *socket;
+#endif
 		QByteArray response;
 		QByteArray convertData(bool *ok, QList<QByteArray> input);
 		QList<QByteArray> readData(QByteArray input);
