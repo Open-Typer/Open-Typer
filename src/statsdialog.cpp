@@ -30,7 +30,11 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	ui->statsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->statsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	// Load data
-	QList<QByteArray> response = client->sendRequest("get",{"resultcount",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise)});
+	QList<QByteArray> response;
+	if(client == nullptr)
+		response = { "ok", QByteArray::number(historyParser::historySize(configName,lesson,sublesson,exercise)) };
+	else
+		response = client->sendRequest("get",{"resultcount",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise)});
 	if(response[0] != "ok")
 	{
 		QMetaObject::invokeMethod(this,"reject",Qt::QueuedConnection);
@@ -47,7 +51,15 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	QTableWidgetItem *item;
 	for(i=0; i < count; i++)
 	{
-		response = client->sendRequest("get",{"result",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise),QByteArray::number(i)});
+		if(client == nullptr)
+		{
+			response = { "ok" };
+			QStringList entry = historyParser::historyEntry(configName,lesson,sublesson,exercise,i);
+			for(int i2=0; i2 < entry.count(); i2++)
+				response += entry[i2].toUtf8();
+		}
+		else
+			response = client->sendRequest("get",{"result",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise),QByteArray::number(i)});
 		if(response[0] != "ok")
 		{
 			QMetaObject::invokeMethod(this,"reject",Qt::QueuedConnection);

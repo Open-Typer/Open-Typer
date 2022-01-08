@@ -24,6 +24,7 @@
 #include <QDialog>
 #include <QtCharts>
 #include "core/net.h"
+#include "core/configfile.h"
 
 using namespace QtCharts;
 
