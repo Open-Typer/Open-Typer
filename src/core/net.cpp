@@ -96,6 +96,7 @@ bool Net::internetConnected()
 	sock->close();
 	return true;
 }
+#endif // Q_OS_WASM
 
 /*! Constructs monitorClient. */
 monitorClient::monitorClient(bool errDialogs, QObject *parent) :
@@ -297,4 +298,3 @@ QList<QByteArray> monitorClient::readData(QByteArray input)
 	}
 	return out;
 }
-#endif // Q_OS_WINDOWS
