@@ -567,7 +567,7 @@ void OpenTyper::updateStudent(void)
 			QString username = response[1];
 			ui->studentLabel->setText(tr("Logged in as %1").arg(username));
 			// TODO: Always show statsButton
-			if(customLevelLoaded || customConfig)
+			if(customLevelLoaded || customConfig || (currentMode != 0))
 				ui->statsButton->hide();
 			else
 				ui->statsButton->show();
@@ -592,7 +592,7 @@ void OpenTyper::updateStudent(void)
 		}
 	}
 	ui->studentLabel->setText(tr("Not logged in."));
-	if(customLevelLoaded || customConfig)
+	if(customLevelLoaded || customConfig || (currentMode != 0))
 		ui->statsButton->hide();
 	else
 		ui->statsButton->show();
@@ -1196,6 +1196,7 @@ void OpenTyper::changeMode(int mode)
 			break;
 	}
 	currentMode = mode;
+	updateStudent();
 }
 
 /*! Connected from timedExerciseButton.\n
