@@ -138,7 +138,7 @@ jobs:
     - run: |
         mv ../online-app-deploy/* ./
         git add -A
-        git config user.name "adazem009"
+        git config user.name "GitHub Actions Bot"
         git config user.email "<>"
         git commit -m "deploy"
     - name: Push to online-app
