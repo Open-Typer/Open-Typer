@@ -130,6 +130,7 @@ jobs:
     - run: |
         mkdir -p ../online-app-deploy
         cp *.html ../online-app-deploy/
+        cp *.js ../online-app-deploy/
         cp *.wasm ../online-app-deploy/
         cp *.svg ../online-app-deploy/
     - uses: actions/checkout@v2
