@@ -592,8 +592,10 @@ void OpenTyper::updateStudent(void)
 		}
 	}
 	ui->studentLabel->setText(tr("Not logged in."));
-	// TODO: Always show statsButton
-	ui->statsButton->hide();
+	if(customLevelLoaded || customConfig)
+		ui->statsButton->hide();
+	else
+		ui->statsButton->show();
 }
 
 /*! Connected from lessonSelectionList.\n
@@ -816,6 +818,9 @@ void OpenTyper::keyPress(QKeyEvent *event)
 					{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentSublesson),QByteArray::number(currentLevel),
 					QByteArray::number(realSpeed),QByteArray::number(levelMistakes),QByteArray::number(time)});
 			}
+			else if(!customLevelLoaded && !customConfig)
+				historyParser::addHistoryEntry(publicConfigName,currentLesson,currentSublesson,currentLevel,
+					{QString::number(realSpeed),QString::number(levelMistakes),QString::number(time)});
 			levelSummary msgBox;
 			msgBox.setTotalTime(time);
 			msgBox.setHits(speed);
@@ -1235,7 +1240,13 @@ void OpenTyper::initTimedExercise(void)
  */
 void OpenTyper::showExerciseStats(void)
 {
-	statsDialog dialog(client,publicConfigName,currentLesson,currentSublesson,currentLevel);
-	dialog.setStyleSheet(styleSheet());
-	dialog.exec();
+	statsDialog *dialog;
+	if((studentUsername != ""))
+		dialog = new statsDialog(client,publicConfigName,currentLesson,currentSublesson,currentLevel);
+	else if(!customLevelLoaded && !customConfig)
+		dialog = new statsDialog(nullptr,publicConfigName,currentLesson,currentSublesson,currentLevel);
+	else
+		return;
+	dialog->setStyleSheet(styleSheet());
+	dialog->exec();
 }
