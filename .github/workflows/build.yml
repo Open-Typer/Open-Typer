@@ -107,6 +107,8 @@ jobs:
         dir: '${{ github.workspace }}'
         modules: 'qtcharts'
         setup-python: 'false'
+    ## Install emscripten
+    - uses: mymindstorm/setup-emsdk@v11
     ## Build
     #- run: source .ci/${{ matrix.os }}-build-wasm.sh
     - run: |
