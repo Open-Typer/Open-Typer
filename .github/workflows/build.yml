@@ -63,8 +63,8 @@ jobs:
     - if: contains(matrix.os, 'ubuntu')
       run: |
         source .ci/ubuntu-build.sh
-        mkdir -p debpkg/usr/bin
-        cp Open-Typer debpkg/usr/bin/
+        mkdir -p debpkg/usr/local/bin
+        cp Open-Typer debpkg/usr/local/bin/
         echo "libc6_version=$(dpkg -s libc6 | grep '^Version:' | cut -d' ' -f2 | cut -d'-' -f1)" >> $GITHUB_ENV
         echo "libstdcpp6_version=$(dpkg -s libstdc++6 | grep '^Version:' | cut -d' ' -f2 | cut -d'-' -f1)" >> $GITHUB_ENV
       shell: bash
