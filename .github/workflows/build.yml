@@ -109,7 +109,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: build-macos
-        path: '*.zip'
+        path: 'Open-Typer.app'
   wasm-build:
     runs-on: ${{ matrix.os }}-latest
     strategy:
