@@ -14,16 +14,6 @@ jobs:
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v2
-    - if: contains(matrix.os, 'ubuntu')
-      name: Cleanup pre-installed tools
-      run: |
-        # This is a fix for https://github.com/actions/virtual-environments/issues/1918
-        sudo rm -rf /usr/share/dotnet
-        sudo rm -rf /opt/ghc
-        sudo rm -rf "/usr/local/share/boost"
-        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-    - name: Get the latest tag
-      uses: "WyriHaximus/github-action-get-previous-tag@v1"
     ## Install Qt
     # Windows
     - if: contains(matrix.os, 'windows')
@@ -83,7 +73,7 @@ jobs:
         package: open-typer
         package_root: debpkg
         maintainer: adazem009
-        version: ${{ steps.previoustag.outputs.tag }}
+        version: '2.2.0'
         arch: 'amd64'
         depends: 'libc6 (>= ${{ env.libc6_version }}), libstdc++6 (>= ${{ env.libstdcpp6_version }}), libqt5core5a (>= ${{ matrix.qt-version }}), libqt5gui5 (>= ${{ matrix.qt-version }}), libqt5widgets5 (>= ${{ matrix.qt-version }}), libqt5network5 (>= ${{ matrix.qt-version }}), libqt5charts5 (>= ${{ matrix.qt-version }}), libssl1.1 (>= 1.1.0)'
         desc: 'Free and open source typing tutor program'
