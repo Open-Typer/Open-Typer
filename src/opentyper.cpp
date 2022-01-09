@@ -300,22 +300,6 @@ QString OpenTyper::loadConfig(QString configName)
 }
 
 /*!
- * Gets number of lines of a string.
- * Will be moved to stringUtils later.
- * \see stringUtils
- */
-int OpenTyper::_line_count(QString str)
-{
-	int out=0, i, len = str.count();
-	for(i=0; i < len; i++)
-	{
-		if((str[i] == '\n') || (i == len))
-			out++;
-	}
-	return out;
-}
-
-/*!
  * Initializes the specified exercise.
  * \param[in] lesson, sublesson, level Exercise location (lesson, sublesson and exercise ID).
  * \see loadConfig

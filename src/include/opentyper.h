@@ -85,7 +85,6 @@ class OpenTyper : public QMainWindow
 		bool levelInProgress, mistake, ignoreMistakeLabelAppend;
 		QString inputLabelHtml, mistakeLabelHtml;
 		int lastTime;
-		int _line_count(QString str);
 		Updater *versionHdw;
 		void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
 		int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
