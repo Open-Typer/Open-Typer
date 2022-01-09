@@ -68,7 +68,8 @@ jobs:
         echo "libc6_version=$(dpkg -s libc6 | grep '^Version:' | cut -d' ' -f2 | cut -d'-' -f1)" >> $GITHUB_ENV
         echo "libstdcpp6_version=$(dpkg -s libstdc++6 | grep '^Version:' | cut -d' ' -f2 | cut -d'-' -f1)" >> $GITHUB_ENV
       shell: bash
-    - uses: jiro4989/build-deb-action@v2
+    - if: contains(matrix.os, 'ubuntu')
+      uses: jiro4989/build-deb-action@v2
       with:
         package: open-typer
         package_root: debpkg
