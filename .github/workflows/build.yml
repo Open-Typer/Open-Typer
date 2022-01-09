@@ -67,8 +67,8 @@ jobs:
         source .ci/ubuntu-build.sh
         mkdir -p debpkg/usr/bin
         cp Open-Typer debpkg/usr/bin/
-        echo "libc6_version=$(dpkg -s libc6 | grep '^Version:' | cut -d' ' -f2)" >> $GITHUB_ENV
-        echo "libstdc++6_version=$(dpkg -s libstdc++6 | grep '^Version:' | cut -d' ' -f2)" >> $GITHUB_ENV
+        echo "libc6_version=$(dpkg -s libc6 | grep '^Version:' | cut -d' ' -f2 | cut -d'-' -f1)" >> $GITHUB_ENV
+        echo "libstdc++6_version=$(dpkg -s libstdc++6 | grep '^Version:' | cut -d' ' -f2 | cut -d'-' -f1)" >> $GITHUB_ENV
       shell: bash
     - uses: jiro4989/build-deb-action@v2
       with:
@@ -77,7 +77,7 @@ jobs:
         maintainer: adazem009
         version: ${{ steps.previoustag.outputs.tag }}
         arch: 'amd64'
-        depends: 'libc6 (>= ${{ libc6_version }}), libc6 (>= ${{ libstdc++6_version }}), libqt5core5a (>= ${{ matrix.qt-version }}), libqt5gui5 (>= ${{ matrix.qt-version }}), libqt5widgets5 (>= ${{ matrix.qt-version }}), libqt5network5 (>= ${{ matrix.qt-version }}), libqt5charts5 (>= ${{ matrix.qt-version }}), libssl1.1 (>= 1.1.0)'
+        depends: 'libc6 (>= ${{ env.libc6_version }}), libc6 (>= ${{ env.libstdc++6_version }}), libqt5core5a (>= ${{ matrix.qt-version }}), libqt5gui5 (>= ${{ matrix.qt-version }}), libqt5widgets5 (>= ${{ matrix.qt-version }}), libqt5network5 (>= ${{ matrix.qt-version }}), libqt5charts5 (>= ${{ matrix.qt-version }}), libssl1.1 (>= 1.1.0)'
         desc: 'Free and open source typing tutor program'
     # MacOS
     - if: contains(matrix.os, 'macos')
