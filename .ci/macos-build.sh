@@ -2,4 +2,4 @@
 
 .ci/common/build.sh macos
 
-cd Open-Typer.app
+macdeployqt Open-Typer.app -dmg
