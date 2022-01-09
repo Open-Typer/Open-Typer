@@ -14,14 +14,6 @@ jobs:
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v2
-    - if: contains(matrix.os, 'ubuntu')
-      name: Cleanup pre-installed tools
-      run: |
-        # This is a fix for https://github.com/actions/virtual-environments/issues/1918
-        sudo rm -rf /usr/share/dotnet
-        sudo rm -rf /opt/ghc
-        sudo rm -rf "/usr/local/share/boost"
-        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
     ## Install Qt
     # Windows
     - if: contains(matrix.os, 'windows')
