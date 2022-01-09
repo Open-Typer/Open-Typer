@@ -55,7 +55,17 @@ jobs:
         modules: 'qtcharts'
         setup-python: 'false'
     ## Build
-    - run: source .ci/${{ matrix.os }}-build.sh
+    # Windows
+    - if: contains(matrix.os, 'windows')
+      run: source .ci/windows-build.sh
+      shell: bash
+    # Ubuntu
+    - if: contains(matrix.os, 'ubuntu')
+      run: source .ci/ubuntu-build.sh
+      shell: bash
+    # MacOS
+    - if: contains(matrix.os, 'macos')
+      run: source .ci/macos-build.sh
       shell: bash
     ## Package
     # Windows
