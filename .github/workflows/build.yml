@@ -69,7 +69,7 @@ jobs:
         echo "libstdcpp6_version=$(dpkg -s libstdc++6 | grep '^Version:' | cut -d' ' -f2 | cut -d'-' -f1)" >> $GITHUB_ENV
       shell: bash
     - if: contains(matrix.os, 'ubuntu')
-      uses: adazem009/build-deb-action@master
+      uses: adazem009/build-deb-action@v2.5.1
       with:
         package: open-typer
         package_root: debpkg
