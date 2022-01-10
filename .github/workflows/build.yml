@@ -15,7 +15,7 @@ jobs:
         include:
           - os: ubuntu-18.04
             qt-version: '5.9.5'
-            mingw-version: 73
+            qt-target: 'desktop'
           - os: windows-latest
             qt-version: '5.12.8'
             mingw-version: 73
