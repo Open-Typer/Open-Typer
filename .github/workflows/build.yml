@@ -13,12 +13,6 @@ jobs:
         qt-version: ['5.12.8']
         qt-target: ['desktop']
         include:
-          - os: ubuntu-18.04
-            qt-version: '5.9.5'
-          - os: ubuntu-20.04
-            qt-version: '5.12.8'
-          - os: macos-latest
-            qt-version: '5.12.8'
           # MinGW versions
           - qt-version: '5.12.8'
             mingw-version: 73
