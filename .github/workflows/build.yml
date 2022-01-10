@@ -15,8 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: 'Get Previous tag'
-        id: previoustag
-        uses: WyriHaximus/github-action-get-previous-tag@v1
+      id: previoustag
+      uses: WyriHaximus/github-action-get-previous-tag@v1
     ## Install Qt
     # Windows
     - if: contains(matrix.os, 'windows')
