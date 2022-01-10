@@ -12,6 +12,11 @@ jobs:
         os: [ubuntu-18.04, ubuntu-20.04, windows-latest, macos-latest]
         qt-version: ['5.12.8', '5.9.5']
         qt-target: ['desktop']
+        include:
+          - qt-version: '5.12.8'
+            mingw-version: 73
+          - qt-version: '5.9.5'
+            mingw-version: 53
         exclude:
           - os: ubuntu-18.04
             qt-version: '5.12.8'
@@ -30,7 +35,7 @@ jobs:
       with:
         version: ${{ matrix.qt-version }}
         host: 'windows'
-        arch: 'win32_mingw73'
+        arch: 'win32_mingw${{ matrix.mingw-version }}'
         target: ${{ matrix.qt-target }}
         dir: '${{ github.workspace }}'
         modules: 'qtcharts'
