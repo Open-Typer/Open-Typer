@@ -77,11 +77,11 @@ jobs:
       id: debpkg
       uses: jiro4989/build-deb-action@v2
       with:
-        package: ${{ debpkg_package }}
+        package: ${{ env.package }}
         package_root: debpkg
         maintainer: adazem009
-        version: ${{ debpkg_version }}
-        arch: ${{ debpkg_arch }}
+        version: ${{ env.package_version }}
+        arch: ${{ env.package_arch }}
         depends: 'libc6 (>= ${{ env.libc6_version }}), libstdc++6 (>= ${{ env.libstdcpp6_version }}), libqt5core5a (>= ${{ matrix.qt-version }}), libqt5gui5 (>= ${{ matrix.qt-version }}), libqt5widgets5 (>= ${{ matrix.qt-version }}), libqt5network5 (>= ${{ matrix.qt-version }}), libqt5charts5 (>= ${{ matrix.qt-version }}), libssl1.1 (>= 1.1.0)'
         desc: 'Free and open source typing tutor program'
     - if: contains(matrix.os, 'ubuntu')
