@@ -85,7 +85,7 @@ jobs:
         echo "codename=$(lsb_release -cs)" >> $GITHUB_ENV
         echo "package=open-typer" >> $GITHUB_ENV
         PKG_VERSION=${{ steps.previoustag.outputs.tag }}
-        echo "package_version=" "${PKG_VERSION//v}">> $GITHUB_ENV
+        echo "package_version=${PKG_VERSION//v}" >> $GITHUB_ENV
         echo "package_arch=amd64" >> $GITHUB_ENV
       shell: bash
     - if: contains(matrix.os, 'ubuntu')
