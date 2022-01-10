@@ -99,8 +99,14 @@ bool keyboardUtils::isSpecialKey(QKeyEvent *event)
 	}
 }
 
+#if QT_VERSION <= QT_VERSION_CHECK(5, 10, 0)
+#define LAST_DEAD_KEY Qt::Key_Dead_Horn
+#else
+#define LAST_DEAD_KEY Qt::Key_Dead_Longsolidusoverlay
+#endif
+
 /*! Returns true if the key code belongs to a dead key. */
 bool keyboardUtils::isDeadKey(int key)
 {
-	return ((key >= Qt::Key_Dead_Grave) && (key <= Qt::Key_Dead_Longsolidusoverlay));
+	return ((key >= Qt::Key_Dead_Grave) && (key <= LAST_DEAD_KEY));
 }
