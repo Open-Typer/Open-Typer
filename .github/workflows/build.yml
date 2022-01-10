@@ -69,11 +69,10 @@ jobs:
         echo "libstdcpp6_version=$(dpkg -s libstdc++6 | grep '^Version:' | cut -d' ' -f2 | cut -d'-' -f1)" >> $GITHUB_ENV
         echo "distro=$(lsb_release -is | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
         echo "codename=$(lsb_release -cs)" >> $GITHUB_ENV
+        echo "package=open-typer" >> $GITHUB_ENV
+        echo "package_version=2.2.0" >> $GITHUB_ENV
+        echo "package_arch=amd64" >> $GITHUB_ENV
       shell: bash
-    - if: contains(matrix.os, 'ubuntu')
-      debpkg_package: open-typer
-      debpkg_version: '2.2.0'
-      debpkg_arch: amd64
     - if: contains(matrix.os, 'ubuntu')
       id: debpkg
       uses: jiro4989/build-deb-action@v2
@@ -86,7 +85,7 @@ jobs:
         depends: 'libc6 (>= ${{ env.libc6_version }}), libstdc++6 (>= ${{ env.libstdcpp6_version }}), libqt5core5a (>= ${{ matrix.qt-version }}), libqt5gui5 (>= ${{ matrix.qt-version }}), libqt5widgets5 (>= ${{ matrix.qt-version }}), libqt5network5 (>= ${{ matrix.qt-version }}), libqt5charts5 (>= ${{ matrix.qt-version }}), libssl1.1 (>= 1.1.0)'
         desc: 'Free and open source typing tutor program'
     - if: contains(matrix.os, 'ubuntu')
-      run: 'mv ${{ debpkg.file_name }} ${{ debpkg_package }}_${{ debpkg_version }}-0-${{ env.distro }}-${{ env.codename }}_${{ debpkg_arch }}.deb'
+      run: 'mv ${{ debpkg.file_name }} ${{ env.package }}_${{ env.package_version }}-0-${{ env.distro }}-${{ env.codename }}_${{ env.package_arch }}.deb'
     # MacOS
     - if: contains(matrix.os, 'macos')
       run: source .ci/macos-build.sh
