@@ -12,6 +12,16 @@ jobs:
         os: [ubuntu-18.04, ubuntu-20.04, windows-latest, macos-latest]
         qt-version: ['5.12.8']
         qt-target: ['desktop']
+        include:
+          - os: ubuntu-18.04
+            qt-version: '5.9.5'
+            mingw-version: 73
+          - os: windows-latest
+            qt-version: '5.12.8'
+            mingw-version: 73
+        exclude:
+         - os: ubuntu-18.04
+           qt-version: '5.12.8'
     steps:
     - uses: actions/checkout@v2
       with:
