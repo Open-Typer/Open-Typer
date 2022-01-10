@@ -101,9 +101,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: build-ubuntu
-        path: |
-          Open-Typer
-          *.deb
+        path: '*.deb'
     # MacOS
     - if: contains(matrix.os, 'macos')
       uses: actions/upload-artifact@v2
