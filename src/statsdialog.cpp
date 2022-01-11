@@ -86,7 +86,7 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	speedChart->addSeries(speedSeries);
 	speedChart->legend()->hide();
 	speedChart->createDefaultAxes();
-	speedChart->axisY()->setMin(0);
+	speedChart->axes(Qt::Vertical).value(0)->setMin(0);
 	speedChart->setTitle(tr("Speed"));
 	// Mistakes
 	mistakesChart = new QChart;
@@ -95,7 +95,7 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	mistakesChart->addSeries(mistakesSeries);
 	mistakesChart->legend()->hide();
 	mistakesChart->createDefaultAxes();
-	mistakesChart->axisY()->setMin(0);
+	mistakesChart->axes(Qt::Vertical).value(0)->setMin(0);
 	mistakesChart->setTitle(tr("Mistakes"));
 	// Time
 	timeChart = new QChart;
@@ -104,7 +104,7 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	timeChart->addSeries(timeSeries);
 	timeChart->legend()->hide();
 	timeChart->createDefaultAxes();
-	timeChart->axisY()->setMin(0);
+	timeChart->axes(Qt::Vertical).value(0)->setMin(0);
 	timeChart->setTitle(tr("Time"));
 	// Connections
 	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(accept()));
