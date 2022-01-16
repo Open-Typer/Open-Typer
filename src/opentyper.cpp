@@ -947,6 +947,9 @@ void OpenTyper::setColors(void)
 	QString levelLabelStyleSheet = "color: rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + "); margin: 0px; padding: 0px;";
 	ui->levelLabel->setStyleSheet(levelLabelStyleSheet);
 	ui->levelCurrentLineLabel->setStyleSheet(levelLabelStyleSheet);
+	QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
+	opacityEffect->setOpacity(0.5);
+	ui->levelLabel->setGraphicsEffect(opacityEffect);
 	// Set input text color
 	if(!customInputTextColor)
 	{
