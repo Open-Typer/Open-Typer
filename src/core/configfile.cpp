@@ -359,30 +359,25 @@ QString configParser::initExercise(QString exercise, int lineLength)
 QString configParser::initExercise(QString exercise, int lineLength, bool lineCountLimit, int currentLine)
 {
 	QString text = initExercise(exercise, lineLength);
-	if(lineCountLimit)
+	QString out = "";
+	int i, line = 0;
+	for(i=0; i < text.count(); i++)
 	{
-		QString out = "";
-		int i, line = 0;
-		for(i=0; i < text.count(); i++)
+		if(text[i] == '\n')
 		{
-			if(text[i] == '\n')
-			{
-				if((line >= currentLine) && (line+1 < currentLine+3))
-					out += text[i];
-				line++;
-			}
-			else
-			{
-				if((line >= currentLine) && (line < currentLine+3))
-					out += text[i];
-			}
-			if(line >= currentLine+3)
-				break;
+			if((line >= currentLine) && ((line+1 < currentLine+3) || !lineCountLimit))
+				out += text[i];
+			line++;
 		}
-		return out;
+		else
+		{
+			if((line >= currentLine) && ((line < currentLine+3) || !lineCountLimit))
+				out += text[i];
+		}
+		if((line >= currentLine+3) && lineCountLimit)
+			break;
 	}
-	else
-		return text;
+	return out;
 }
 
 /*! Implementation of exerciseRepeatBool() for a config string. */
