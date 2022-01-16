@@ -360,6 +360,7 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 	// Make lesson, sublesson and level info public
 	currentLesson=lessonID;
 	currentSublesson=sublessonID;
+	currentAbsoluteSublesson=sublessonID+sublessonListStart;
 	currentLevel=levelID;
 	// Init level
 	levelFinalInit();
@@ -799,11 +800,11 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			{
 				updateStudent();
 				client->sendRequest("put",
-					{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentSublesson),QByteArray::number(currentLevel),
+					{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentAbsoluteSublesson),QByteArray::number(currentLevel),
 					QByteArray::number(realSpeed),QByteArray::number(levelMistakes),QByteArray::number(time)});
 			}
 			else if(!customLevelLoaded && !customConfig)
-				historyParser::addHistoryEntry(publicConfigName,currentLesson,currentSublesson,currentLevel,
+				historyParser::addHistoryEntry(publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,
 					{QString::number(realSpeed),QString::number(levelMistakes),QString::number(time)});
 			levelSummary msgBox;
 			msgBox.setTotalTime(time);
@@ -1227,9 +1228,9 @@ void OpenTyper::showExerciseStats(void)
 {
 	statsDialog *dialog;
 	if((studentUsername != ""))
-		dialog = new statsDialog(client,publicConfigName,currentLesson,currentSublesson,currentLevel);
+		dialog = new statsDialog(client,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel);
 	else if(!customLevelLoaded && !customConfig)
-		dialog = new statsDialog(nullptr,publicConfigName,currentLesson,currentSublesson,currentLevel);
+		dialog = new statsDialog(nullptr,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel);
 	else
 		return;
 	dialog->setStyleSheet(styleSheet());
