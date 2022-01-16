@@ -275,7 +275,7 @@
           <item row="1" column="0">
            <widget class="QFrame" name="levelSpace">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -294,7 +294,7 @@
               <number>0</number>
              </property>
              <property name="leftMargin">
-              <number>2</number>
+              <number>6</number>
              </property>
              <property name="topMargin">
               <number>0</number>
