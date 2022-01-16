@@ -84,6 +84,7 @@ class OpenTyper : public QMainWindow
 		QTimer *secLoop;
 		bool levelInProgress, mistake, ignoreMistakeLabelAppend;
 		QString inputLabelHtml, mistakeLabelHtml;
+		QString inputTextHtml, mistakeTextHtml;
 		int lastTime;
 		Updater *versionHdw;
 		void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
@@ -100,8 +101,6 @@ class OpenTyper : public QMainWindow
 		bool customConfig;
 		bool spaceNewline;
 		int errorPenalty;
-		bool fullScreenPaper, lineCountLimit;
-		int textViewMode;
 		QTranslator *translator;
 		void refreshAll(bool setLang);
 		void changeMode(int mode);

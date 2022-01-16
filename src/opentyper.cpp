@@ -128,10 +128,6 @@ void OpenTyper::refreshAll(bool setLang)
 	spaceNewline = settings->value("main/spacenewline","true").toBool();
 	// Error penalty
 	errorPenalty = settings->value("main/errorpenalty","10").toInt();
-	// Text view mode
-	textViewMode = settings->value("main/textviewmode","0").toInt();
-	fullScreenPaper = ((textViewMode == 2) || (textViewMode == 3));
-	lineCountLimit = ((textViewMode == 1) || (textViewMode == 3));
 	// Class monitor client
 	updateStudent();
 	// Load config and start
@@ -389,12 +385,14 @@ void OpenTyper::levelFinalInit(void)
 	lastTime=0;
 	mistake=false;
 	ignoreMistakeLabelAppend=false;
+	mistakeTextHtml = "";
 	mistakeLabelHtml = "";
 	ui->mistakeLabel->setHtml(mistakeLabelHtml);
 	ui->currentTimeNumber->setText("0");
 	ui->currentMistakesNumber->setText("0");
 	// Init level input
 	input = "";
+	inputTextHtml = "";
 	displayInput = "";
 	ui->inputLabel->setAcceptRichText(true);
 	ui->inputLabel->setHtml(displayInput);
@@ -411,30 +409,25 @@ void OpenTyper::updateText(void)
 {
 	displayLevel = configParser::initExercise(level,levelLengthExtension);
 	// Process exercise text
-	if(lineCountLimit)
+	finalDisplayLevel = configParser::initExercise(level,levelLengthExtension,false,currentLine);
+	QString currentLineText = "";
+	QString remainingText = "";
+	int i, line = 0;
+	for(i=0; i < finalDisplayLevel.count(); i++)
 	{
-		finalDisplayLevel = configParser::initExercise(level,levelLengthExtension,lineCountLimit,currentLine);
-		QString finalText = "";
-		int i, line = 0;
-		for(i=0; i < finalDisplayLevel.count(); i++)
+		remainingText += finalDisplayLevel[i];
+		if((finalDisplayLevel[i] == '\n') || (i+1 >= finalDisplayLevel.count()))
 		{
-			if(finalDisplayLevel[i] == '\n')
+			if(line == 0)
 			{
-				finalText += "<br><span style=\"vertical-align: sub;\">";
-				line++;
+				currentLineText = remainingText;
+				remainingText = "";
 			}
-			else
-				finalText += finalDisplayLevel[i];
+			line++;
 		}
-		if(line > 0)
-			finalText += "</span>";
-		ui->levelLabel->setText(finalText);
 	}
-	else
-	{
-		finalDisplayLevel = displayLevel;
-		ui->levelLabel->setText(displayLevel);
-	}
+	ui->levelCurrentLineLabel->setText(currentLineText);
+	ui->levelLabel->setText(remainingText);
 }
 
 /*! Connected from repeatButton.\n
@@ -697,10 +690,13 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	{
 		input += keyText;
 		displayInput += keyText;
+		inputTextHtml += keyText;
 		if(displayLevel[displayPos] == '\n')
 		{
-			displayInput += "<br>";
-			mistakeLabelHtml += "<br>";
+			inputTextHtml += "<br>";
+			mistakeTextHtml += "<br>";
+			displayInput = "";
+			mistakeLabelHtml = "";
 			ui->mistakeLabel->setHtml(mistakeLabelHtml);
 			currentLine++;
 			updateText();
@@ -711,7 +707,9 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				ignoreMistakeLabelAppend=false;
 			else
 			{
-				mistakeLabelHtml += "<span style='color: rgba(0,0,0,0)'>" + keyText + "</span>";
+				QString mistakeLabelAppend = "<span style='color: rgba(0,0,0,0)'>" + keyText + "</span>";
+				mistakeTextHtml += mistakeLabelAppend;
+				mistakeLabelHtml += mistakeLabelAppend;
 				ui->mistakeLabel->setHtml(mistakeLabelHtml);
 			}
 		}
@@ -915,6 +913,7 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	mistakeLabelFont = newFont;
 	mistakeLabelFont.setUnderline(false);
 	// Update labels
+	ui->levelCurrentLineLabel->setFont(newFont);
 	ui->levelLabel->setFont(newFont);
 	ui->inputLabel->setFont(newFont);
 	ui->mistakeLabel->setFont(mistakeLabelFont);
@@ -936,16 +935,16 @@ void OpenTyper::setColors(void)
 	// Update theme
 	updateTheme();
 	// Set level text color
-	if(customLevelTextColor)
-		ui->levelLabel->setStyleSheet("color: rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + ")");
-	else
+	if(!customLevelTextColor)
 	{
 		// Default level text color
 		levelTextRedColor = 0;
 		levelTextGreenColor = 125;
 		levelTextBlueColor = 175;
-		ui->levelLabel->setStyleSheet("color: rgb(0, 125, 175)");
 	}
+	QString levelLabelStyleSheet = "color: rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + ")";
+	ui->levelLabel->setStyleSheet(levelLabelStyleSheet);
+	ui->levelCurrentLineLabel->setStyleSheet(levelLabelStyleSheet);
 	// Set input text color
 	if(customInputTextColor)
 		ui->inputLabel->setStyleSheet("color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")");
@@ -999,12 +998,6 @@ void OpenTyper::setColors(void)
 		bgRedColor = ui->mainFrame->palette().color(QPalette::Window).red();
 		bgGreenColor = ui->mainFrame->palette().color(QPalette::Window).green();
 		bgBlueColor = ui->mainFrame->palette().color(QPalette::Window).blue();
-		ui->centralwidget->setStyleSheet("");
-	}
-	// Disable background if full screen paper is enabled
-	if(fullScreenPaper)
-	{
-		ui->mainFrame->setStyleSheet("");
 		ui->centralwidget->setStyleSheet("");
 	}
 }
