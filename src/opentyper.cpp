@@ -942,20 +942,19 @@ void OpenTyper::setColors(void)
 		levelTextGreenColor = 125;
 		levelTextBlueColor = 175;
 	}
-	QString levelLabelStyleSheet = "color: rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + ")";
+	QString levelLabelStyleSheet = "color: rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + "); margin: 0px; padding: 2px;";
 	ui->levelLabel->setStyleSheet(levelLabelStyleSheet);
 	ui->levelCurrentLineLabel->setStyleSheet(levelLabelStyleSheet);
 	// Set input text color
-	if(customInputTextColor)
-		ui->inputLabel->setStyleSheet("color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")");
-	else
+	if(!customInputTextColor)
 	{
 		// Default input text color
 		inputTextRedColor = ui->inputLabel->palette().color(QPalette::Text).red();
 		inputTextGreenColor = ui->inputLabel->palette().color(QPalette::Text).green();
 		inputTextBlueColor = ui->inputLabel->palette().color(QPalette::Text).blue();
-		ui->inputLabel->setStyleSheet("color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")");
 	}
+	QString inputLabelStyleSheet = "color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + "); border-radius: 0px; padding: 2px;";
+	ui->inputLabel->setStyleSheet(inputLabelStyleSheet);
 	// Set paper color
 	if(customPaperColor)
 		ui->paper->setStyleSheet("#paper {background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");}");
