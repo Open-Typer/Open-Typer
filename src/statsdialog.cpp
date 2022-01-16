@@ -106,6 +106,25 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	timeChart->createDefaultAxes();
 	timeChart->axes(Qt::Vertical).value(0)->setMin(0);
 	timeChart->setTitle(tr("Time"));
+	// Load comparison data
+	if(client == nullptr)
+	{
+		ui->betterStudentsLabel->hide();
+		ui->worseStudentsLabel->hide();
+	}
+	else
+	{
+		response = client->sendRequest("get",{"betterstudents",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise)});
+		if(response[0] == "ok")
+			ui->betterStudentsLabel->setText(tr("Better students: %1").arg(QString(response[1])));
+		else
+			ui->betterStudentsLabel->hide();
+		response = client->sendRequest("get",{"worsestudents",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise)});
+		if(response[0] == "ok")
+			ui->worseStudentsLabel->setText(tr("Worse students: %1").arg(QString(response[1])));
+		else
+			ui->worseStudentsLabel->hide();
+	}
 	// Connections
 	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(accept()));
 }
