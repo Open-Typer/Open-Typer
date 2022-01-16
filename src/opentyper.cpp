@@ -422,6 +422,8 @@ void OpenTyper::updateText(void)
 			{
 				currentLineText = remainingText;
 				remainingText = "";
+				if(currentLineText[currentLineText.count()-1] == '\n')
+					currentLineText.remove(currentLineText.count()-1,1);
 			}
 			line++;
 		}
