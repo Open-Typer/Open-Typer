@@ -2,7 +2,7 @@
  * levelsummary.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,19 +42,17 @@ class levelSummary;
 class levelSummary : public QDialog
 {
 	Q_OBJECT
+	public:
+		explicit levelSummary(QWidget *parent = nullptr);
+		~levelSummary();
+		void showOK(void);
+		void setTotalTime(double time);
+		void setHitCount(int hits);
+		void setHits(int hits);
+		void setMistakes(int mistakes);
 
-public:
-	explicit levelSummary(QWidget *parent = nullptr);
-	~levelSummary();
-	void showOK(void);
-	void setTotalTime(double time);
-	void setHitCount(int hits);
-	void setHits(int hits);
-	void setMistakes(int mistakes);
-
-private:
-	Ui::levelSummary *ui;
-
+	private:
+		Ui::levelSummary *ui;
 };
 
 #endif // LEVELSUMMARY_H
