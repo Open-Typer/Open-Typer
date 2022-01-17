@@ -106,6 +106,16 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	timeChart->createDefaultAxes();
 	timeChart->axes(Qt::Vertical).value(0)->setMin(0);
 	timeChart->setTitle(tr("Time"));
+	// Set charts theme
+	QSettings settings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
+	QChart::ChartTheme theme;
+	if(settings.value("theme/theme","0").toInt() == 1)
+		theme = QChart::ChartThemeDark;
+	else
+		theme = QChart::ChartThemeLight;
+	speedChart->setTheme(theme);
+	mistakesChart->setTheme(theme);
+	timeChart->setTheme(theme);
 	// Load comparison data
 	if(client == nullptr)
 	{
