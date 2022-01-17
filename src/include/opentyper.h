@@ -107,6 +107,7 @@ class OpenTyper : public QMainWindow
 		int currentMode;
 		int timedExHours, timedExMinutes, timedExSeconds;
 		bool timedExStarted;
+		bool blockInput;
 
 	private slots:
 		void keyPress(QKeyEvent *event);

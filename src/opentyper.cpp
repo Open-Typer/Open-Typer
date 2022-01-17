@@ -407,6 +407,9 @@ void OpenTyper::levelFinalInit(void)
  */
 void OpenTyper::updateText(void)
 {
+	ui->levelCurrentLineLabel->show();
+	ui->textSeparationLine->show();
+	ui->levelLabel->show();
 	displayLevel = configParser::initExercise(level,levelLengthExtension);
 	// Process exercise text
 	finalDisplayLevel = configParser::initExercise(level,levelLengthExtension,false,currentLine);
@@ -428,8 +431,14 @@ void OpenTyper::updateText(void)
 			line++;
 		}
 	}
+	ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
+	ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
+	ui->inputLabel->setMinimumHeight(0);
+	ui->mistakeLabel->setMinimumHeight(0);
 	ui->levelCurrentLineLabel->setText(currentLineText);
 	ui->levelLabel->setText(remainingText);
+	((QGraphicsOpacityEffect*)ui->levelLabel->graphicsEffect())->setOpacity(0.5);
+	blockInput = false;
 }
 
 /*! Connected from repeatButton.\n
@@ -664,6 +673,8 @@ void OpenTyper::openExerciseFromFile(void)
  */
 void OpenTyper::keyPress(QKeyEvent *event)
 {
+	if(blockInput)
+		return;
 	if((currentMode == 1) && !timedExStarted)
 		return;
 	if(keyboardUtils::isDeadKey(event->key()))
@@ -740,6 +751,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				if(!ignoreMistakeLabelAppend)
 				{
 					mistakeLabelHtml += "_";
+					mistakeTextHtml += "_";
 					ui->mistakeLabel->setHtml(mistakeLabelHtml);
 				}
 				mistake=false;
@@ -771,6 +783,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	}
 	ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+	ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
+	ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
 	if(input.count() >= level.count())
 	{
 		if(currentMode == 1)
@@ -830,6 +844,30 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				else
 					currentLevel++;
 				customLevelLoaded=false;
+			}
+			else
+			{
+				if(msgBox.showSummary)
+				{
+					// Load saved text
+					ui->inputLabel->setHtml(inputTextHtml);
+					ui->mistakeLabel->setHtml(mistakeTextHtml);
+					// Set width
+					ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
+					ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
+					// Set height
+					ui->inputLabel->setMinimumHeight(ui->inputLabel->document()->size().height());
+					ui->mistakeLabel->setMinimumHeight(ui->mistakeLabel->document()->size().height());
+					// Move cursor to the end
+					ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+					ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+					// Hide other widgets
+					ui->levelCurrentLineLabel->hide();
+					ui->textSeparationLine->hide();
+					ui->levelLabel->setText(""); // Using hide() breaks the layout, it's better to set empty text
+					blockInput = true;
+					return;
+				}
 			}
 			if(customLevelLoaded)
 				levelFinalInit();
