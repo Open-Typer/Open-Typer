@@ -546,7 +546,6 @@ void OpenTyper::updateStudent(void)
 		{
 			QString username = response[1];
 			ui->studentLabel->setText(tr("Logged in as %1").arg(username));
-			// TODO: Always show statsButton
 			if(customLevelLoaded || customConfig || (currentMode != 0))
 				ui->statsButton->hide();
 			else
