@@ -2,7 +2,7 @@
  * levelsummary.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,9 +32,13 @@ levelSummary::levelSummary(QWidget *parent) :
 	ui->hitsLabel->hide();
 	ui->hpmLabel->hide();
 	ui->mistakesLabel->hide();
+	ui->showSummaryCheckBox->setChecked(false);
+	showSummary = ui->showSummaryCheckBox->isChecked();
+	// Connections
 	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
 	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
 	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(accept()));
+	connect(ui->showSummaryCheckBox,SIGNAL(toggled(bool)),this,SLOT(setShowSummary(bool)));
 }
 
 /*! Destroys the levelSummary object. */
@@ -85,4 +89,10 @@ void levelSummary::setMistakes(int mistakes)
 	ui->mistakesLabel->setText(
 		ui->mistakesLabel->text() + " " + QString::number(mistakes));
 	ui->mistakesLabel->show();
+}
+
+/*! Connected from showSummaryCheckBox->toggled(). */
+void levelSummary::setShowSummary(bool value)
+{
+	showSummary = value;
 }

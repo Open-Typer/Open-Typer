@@ -50,9 +50,13 @@ class levelSummary : public QDialog
 		void setHitCount(int hits);
 		void setHits(int hits);
 		void setMistakes(int mistakes);
+		bool showSummary;
 
 	private:
 		Ui::levelSummary *ui;
+
+	private slots:
+		void setShowSummary(bool value);
 };
 
 #endif // LEVELSUMMARY_H
