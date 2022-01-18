@@ -69,6 +69,9 @@
           <height>128</height>
          </size>
         </property>
+        <property name="movement">
+         <enum>QListView::Static</enum>
+        </property>
         <property name="flow">
          <enum>QListView::LeftToRight</enum>
         </property>
