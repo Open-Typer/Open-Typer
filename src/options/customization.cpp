@@ -67,6 +67,7 @@ customizationOptions::customizationOptions(QWidget *parent) :
 		QListWidgetItem *item = new QListWidgetItem(QIcon(":res/images/themes/" + themes[i]["icon"].toString()), themes[i]["name"].toString());
 		ui->themeList->addItem(item);
 	}
+	selectCurrentFullTheme();
 	// Font
 	setFont(settings->value("theme/font","Courier").toString(),
 		settings->value("theme/fontsize","14").toInt(),
@@ -196,6 +197,11 @@ void customizationOptions::init(void)
  */
 void customizationOptions::changeFullTheme(int index)
 {
+	if(index == -1)
+	{
+		selectCurrentFullTheme();
+		return;
+	}
 	QVariantMap themeMap = themes[index];
 	// Base theme
 	if(themeMap.contains("baseTheme"))
@@ -272,6 +278,18 @@ void customizationOptions::changeFullTheme(int index)
 	}
 	saveColorSettings();
 	setColors();
+	settings->setValue("theme/fulltheme",themeMap["id"]);
+}
+
+/*! Select currently set full theme. */
+void customizationOptions::selectCurrentFullTheme(void)
+{
+	QString id = settings->value("theme/fulltheme","default").toString();
+	for(int i=0; i < themes.count(); i++)
+	{
+		if(themes[i]["id"] == id)
+			ui->themeList->setCurrentRow(i);
+	}
 }
 
 /*! Sets exercise text font and saves it in the settings. \see OpenTyper#setFont */

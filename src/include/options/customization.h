@@ -57,6 +57,7 @@ class customizationOptions : public QWidget
 		int paperRedColor, paperGreenColor, paperBlueColor;
 		int panelRedColor, panelGreenColor, panelBlueColor;
 		bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor, customPanelColor;
+		void selectCurrentFullTheme(void);
 		void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
 		void saveColorSettings(void);
 		void setColors();
