@@ -2,7 +2,7 @@
  * paperconfigdialog.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,9 +28,9 @@ namespace Ui {
 }
 
 /*!
- * \brief The paperConfigDialog class is a dialog, which asks for line length.
+ * \brief The paperConfigDialog class is a dialog, which asks for exercise configuration.
  *
- * The dialog asks for line length, but it might be extended with more\n
+ * The dialog asks for line length and new line inclusion, but it might be extended with more\n
  * features in the future.
  *
  * \image html paperConfigDialog.png
@@ -40,6 +40,7 @@ namespace Ui {
  * paperConfigDialog myDialog;
  * myDialog.exec();
  * int length = myDialog.lineLength; // Line length
+ * bool includeNewLines = myDialog.includeNewLines; // New line inclusion
  * \endcode
  */
 class paperConfigDialog : public QDialog
@@ -49,6 +50,7 @@ Q_OBJECT
 		explicit paperConfigDialog(QWidget *parent = nullptr);
 		~paperConfigDialog();
 		int lineLength;
+		bool includeNewLines;
 	
 	private:
 		Ui::paperConfigDialog *ui;
@@ -56,6 +58,7 @@ Q_OBJECT
 	private slots:
 		void reject(void);
 		void updateLineLength(int value);
+		void setIncludeNewLines(bool value);
 };
 
 #endif // PAPERCONFIGDIALOG_H

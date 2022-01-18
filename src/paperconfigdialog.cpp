@@ -2,7 +2,7 @@
  * paperconfigdialog.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,10 +27,14 @@ paperConfigDialog::paperConfigDialog(QWidget *parent) :
 	ui(new Ui::paperConfigDialog)
 {
 	ui->setupUi(this);
+	// Connections
 	connect(ui->loadButton,SIGNAL(clicked()),this,SLOT(accept()));
 	connect(ui->lineLengthBox,SIGNAL(valueChanged(int)),this,SLOT(updateLineLength(int)));
-	// Set initial value
+	connect(ui->includeNewLinesCheckBox,SIGNAL(toggled(bool)),this,SLOT(setIncludeNewLines(bool)));
+	// Set initial values
 	updateLineLength(ui->lineLengthBox->value());
+	ui->includeNewLinesCheckBox->setChecked(true);
+	setIncludeNewLines(ui->includeNewLinesCheckBox->isChecked());
 }
 
 /*! Destroys the paperConfigDialog object. */
@@ -52,4 +56,13 @@ void paperConfigDialog::reject(void) { }
 void paperConfigDialog::updateLineLength(int value)
 {
 	lineLength = value;
+}
+
+/*!
+ * Connected from includeNewLinesCheckBox->toggled().\n
+ * Sets new line inclusion.
+ */
+void paperConfigDialog::setIncludeNewLines(bool value)
+{
+	includeNewLines = value;
 }
