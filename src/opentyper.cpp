@@ -545,7 +545,9 @@ void OpenTyper::updateStudent(void)
 	{
 		ui->studentButton->hide();
 		ui->studentLabel->hide();
-		if(!customLevelLoaded && !customConfig && (currentMode == 0))
+		if(customLevelLoaded || customConfig || (currentMode != 0))
+			ui->statsButton->hide();
+		else
 			ui->statsButton->show();
 		return;
 	}
