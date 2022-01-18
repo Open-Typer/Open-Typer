@@ -545,6 +545,9 @@ void OpenTyper::updateStudent(void)
 	{
 		ui->studentButton->hide();
 		ui->studentLabel->hide();
+		if(!customLevelLoaded && !customConfig && (currentMode == 0))
+			ui->statsButton->show();
+		return;
 	}
 	QList<QByteArray> response = client->sendRequest("get",{"username"});
 	if(response[0] == "ok")
