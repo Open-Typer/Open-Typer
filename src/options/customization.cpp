@@ -2,7 +2,7 @@
  * customization.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,6 +28,45 @@ customizationOptions::customizationOptions(QWidget *parent) :
 {
 	ui->setupUi(this);
 	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
+	ui->themeCustomizationFrame->hide();
+	// Built-in themes
+	themes.clear();
+	QVariantMap themeMap;
+	// Default
+	themeMap.clear();
+	themeMap.insert("name",tr("Default"));
+	themeMap.insert("id","default");
+	themeMap.insert("icon","default.png");
+	themes += themeMap;
+	// Dark
+	themeMap.clear();
+	themeMap.insert("name",tr("Dark"));
+	themeMap.insert("id","dark");
+	themeMap.insert("icon","dark.png");
+	themeMap.insert("baseTheme",1);
+	themes += themeMap;
+	// Light
+	themeMap.clear();
+	themeMap.insert("name",tr("Light"));
+	themeMap.insert("id","light");
+	themeMap.insert("icon","light.png");
+	themeMap.insert("baseTheme",2);
+	themes += themeMap;
+	// Green
+	themeMap.clear();
+	themeMap.insert("name",tr("Green"));
+	themeMap.insert("id","green");
+	themeMap.insert("icon","green.png");
+	themeMap.insert("baseTheme",2);
+	themeMap.insert("bgColor",qRgb(0,108,0));
+	themeMap.insert("panelColor",qRgb(175,175,175));
+	themes += themeMap;
+	// Load built-in themes
+	for(int i=0; i < themes.count(); i++)
+	{
+		QListWidgetItem *item = new QListWidgetItem(QIcon(":res/images/themes/" + themes[i]["icon"].toString()), themes[i]["name"].toString());
+		ui->themeList->addItem(item);
+	}
 	// Font
 	setFont(settings->value("theme/font","Courier").toString(),
 		settings->value("theme/fontsize","14").toInt(),
@@ -60,6 +99,12 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	panelRedColor = settings->value("theme/panelred","0").toInt();
 	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
 	panelBlueColor = settings->value("theme/panelblue","0").toInt();
+	// Connections
+	// Theme list
+	connect(ui->themeList,
+		SIGNAL(currentRowChanged(int)),
+		this,
+		SLOT(changeFullTheme(int)));
 	// Font selector
 	connect(ui->fontComboBox,
 		SIGNAL(currentFontChanged(QFont)),
@@ -142,6 +187,90 @@ customizationOptions::~customizationOptions()
 void customizationOptions::init(void)
 {
 	ui->themeBox->setCurrentIndex(settings->value("theme/theme","0").toInt());
+	setColors();
+}
+
+/*!
+ * Connected from themeList->currentRowChanged().\n
+ * Switches built-in theme.
+ */
+void customizationOptions::changeFullTheme(int index)
+{
+	QVariantMap themeMap = themes[index];
+	// Base theme
+	if(themeMap.contains("baseTheme"))
+		changeTheme(themeMap["baseTheme"].toInt());
+	else
+		changeTheme(0);
+	// Font
+	QString fontFamily;
+	int fontSize;
+	bool fontBold, fontItalic, fontUnderline;
+	if(themeMap.contains("font"))
+		fontFamily = themeMap["font"].toString();
+	else
+		fontFamily = "Courier";
+	if(themeMap.contains("fontSize"))
+		fontSize = themeMap["fontSize"].toInt();
+	else
+		fontSize = settings->value("theme/fontsize","14").toInt();
+	if(themeMap.contains("fontBold"))
+		fontBold = themeMap["fontBold"].toBool();
+	else
+		fontBold = false;
+	if(themeMap.contains("fontItalic"))
+		fontItalic = themeMap["fontItalic"].toBool();
+	else
+		fontItalic = false;
+	if(themeMap.contains("fontUnderline"))
+		fontUnderline = themeMap["fontUnderline"].toBool();
+	else
+		fontUnderline = false;
+	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
+	// Colors
+	resetTextColors();
+	if(themeMap.contains("levelTextColor"))
+	{
+		QRgb color = themeMap["levelTextColor"].toUInt();
+		levelTextRedColor = qRed(color);
+		levelTextGreenColor = qGreen(color);
+		levelTextBlueColor = qBlue(color);
+		customLevelTextColor = true;
+	}
+	if(themeMap.contains("inputTextColor"))
+	{
+		QRgb color = themeMap["inputTextColor"].toUInt();
+		inputTextRedColor = qRed(color);
+		inputTextGreenColor = qGreen(color);
+		inputTextBlueColor = qBlue(color);
+		customInputTextColor = true;
+	}
+	resetBgPaperColors();
+	if(themeMap.contains("bgColor"))
+	{
+		QRgb color = themeMap["bgColor"].toUInt();
+		bgRedColor = qRed(color);
+		bgGreenColor = qGreen(color);
+		bgBlueColor = qBlue(color);
+		customBgColor = true;
+	}
+	if(themeMap.contains("paperColor"))
+	{
+		QRgb color = themeMap["paperColor"].toUInt();
+		paperRedColor = qRed(color);
+		paperGreenColor = qGreen(color);
+		paperBlueColor = qBlue(color);
+		customPaperColor = true;
+	}
+	if(themeMap.contains("panelColor"))
+	{
+		QRgb color = themeMap["panelColor"].toUInt();
+		panelRedColor = qRed(color);
+		panelGreenColor = qGreen(color);
+		panelBlueColor = qBlue(color);
+		customPanelColor = true;
+	}
+	saveColorSettings();
 	setColors();
 }
 

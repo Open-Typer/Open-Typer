@@ -2,7 +2,7 @@
  * customization.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,6 +50,7 @@ class customizationOptions : public QWidget
 	private:
 		Ui::customizationOptions *ui;
 		QSettings *settings;
+		QVector<QVariantMap> themes;
 		int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
 		int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
 		int bgRedColor, bgGreenColor, bgBlueColor;
@@ -62,6 +63,7 @@ class customizationOptions : public QWidget
 		void updateTheme();
 
 	private slots:
+		void changeFullTheme(int index);
 		void changeFont(QFont font);
 		void changeFontSize(int size);
 		void setBoldText(void);
