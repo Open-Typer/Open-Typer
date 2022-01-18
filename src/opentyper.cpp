@@ -665,7 +665,12 @@ void OpenTyper::openExerciseFromFile(void)
 			if(level == "")
 				level = line;
 			else
-				level += " " + line;
+			{
+				if(pconfig.includeNewLines)
+					level += "\n" + line;
+				else
+					level += " " + line;
+			}
 		}
 		customLevel = level;
 		customLevelLoaded=true;
