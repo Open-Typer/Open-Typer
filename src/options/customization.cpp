@@ -536,6 +536,7 @@ void customizationOptions::setColors()
 	ui->previewFrame->setStyleSheet("background-color: " + bgStyleSheet);
 	// Set panel color
 	QString panelStyleSheet = "rgb(" + QString::number(panelRedColor) + ", " + QString::number(panelGreenColor) + ", " + QString::number(panelBlueColor) + ")";
+	ui->panelFrame->setStyleSheet("background-color: " + panelStyleSheet);
 	// Update color buttons
 	ui->levelTextColorButton->setStyleSheet("border: 2px solid gray; background-color: " + levelTextStyleSheet);
 	ui->inputTextColorButton->setStyleSheet("border: 2px solid gray; background-color: " + inputTextStyleSheet);
