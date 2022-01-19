@@ -89,41 +89,8 @@ void OpenTyper::refreshAll(bool setLang)
 	}
 	// Custom pack
 	customConfig = settings->value("main/customconfig","false").toBool();
-	// Font
-	setFont(settings->value("theme/font","Courier").toString(),
-		settings->value("theme/fontsize","14").toInt(),
-		settings->value("theme/fontbold","false").toBool(),
-		settings->value("theme/fontitalic","false").toBool(),
-		settings->value("theme/fontunderline","false").toBool());
-	// Colors
-	// Level text
-	customLevelTextColor = settings->value("theme/customleveltextcolor","false").toBool();
-	levelTextRedColor = settings->value("theme/leveltextred","0").toInt();
-	levelTextGreenColor = settings->value("theme/leveltextgreen","0").toInt();
-	levelTextBlueColor = settings->value("theme/leveltextblue","0").toInt();
-	// Input text
-	customInputTextColor = settings->value("theme/custominputtextcolor","false").toBool();
-	inputTextRedColor = settings->value("theme/inputtextred","0").toInt();
-	inputTextGreenColor = settings->value("theme/inputtextgreen","0").toInt();
-	inputTextBlueColor = settings->value("theme/inputtextblue","0").toInt();
-	// Background
-	customBgColor = settings->value("theme/custombgcolor","false").toBool();
-	bgRedColor = settings->value("theme/bgred","0").toInt();
-	bgGreenColor = settings->value("theme/bggreen","0").toInt();
-	bgBlueColor = settings->value("theme/bgblue","0").toInt();
-	// Paper
-	customPaperColor = settings->value("theme/custompapercolor","false").toBool();
-	paperRedColor = settings->value("theme/paperred","0").toInt();
-	paperGreenColor = settings->value("theme/papergreen","0").toInt();
-	paperBlueColor = settings->value("theme/paperblue","0").toInt();
-	// Panel
-	customPanelColor = settings->value("theme/custompanelcolor","false").toBool();
-	panelRedColor = settings->value("theme/panelred","0").toInt();
-	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
-	panelBlueColor = settings->value("theme/panelblue","0").toInt();
 	// Theme
-	updateTheme();
-	setColors();
+	loadTheme();
 	// Space new line
 	spaceNewline = settings->value("main/spacenewline","true").toBool();
 	// Error penalty
@@ -511,6 +478,7 @@ void OpenTyper::openOptions(void)
 	optionsWin->setStyleSheet(styleSheet());
 	optionsWin->init();
 	connect(optionsWin,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
+	connect(optionsWin,SIGNAL(themeChanged()),this,SLOT(loadTheme()));
 	optionsWin->exec();
 	refreshAll(true);
 }
@@ -945,6 +913,45 @@ void OpenTyper::updateCurrentTime(void)
 	}
 	else
 		ui->currentTimeNumber->setText(QString::number(time));
+	setColors();
+}
+
+/*! Loads theme from settings. */
+void OpenTyper::loadTheme(void)
+{
+	// Load font
+	setFont(settings->value("theme/font","Courier").toString(),
+		settings->value("theme/fontsize","14").toInt(),
+		settings->value("theme/fontbold","false").toBool(),
+		settings->value("theme/fontitalic","false").toBool(),
+		settings->value("theme/fontunderline","false").toBool());
+	// Load colors
+	// Level text
+	customLevelTextColor = settings->value("theme/customleveltextcolor","false").toBool();
+	levelTextRedColor = settings->value("theme/leveltextred","0").toInt();
+	levelTextGreenColor = settings->value("theme/leveltextgreen","0").toInt();
+	levelTextBlueColor = settings->value("theme/leveltextblue","0").toInt();
+	// Input text
+	customInputTextColor = settings->value("theme/custominputtextcolor","false").toBool();
+	inputTextRedColor = settings->value("theme/inputtextred","0").toInt();
+	inputTextGreenColor = settings->value("theme/inputtextgreen","0").toInt();
+	inputTextBlueColor = settings->value("theme/inputtextblue","0").toInt();
+	// Background
+	customBgColor = settings->value("theme/custombgcolor","false").toBool();
+	bgRedColor = settings->value("theme/bgred","0").toInt();
+	bgGreenColor = settings->value("theme/bggreen","0").toInt();
+	bgBlueColor = settings->value("theme/bgblue","0").toInt();
+	// Paper
+	customPaperColor = settings->value("theme/custompapercolor","false").toBool();
+	paperRedColor = settings->value("theme/paperred","0").toInt();
+	paperGreenColor = settings->value("theme/papergreen","0").toInt();
+	paperBlueColor = settings->value("theme/paperblue","0").toInt();
+	// Panel
+	customPanelColor = settings->value("theme/custompanelcolor","false").toBool();
+	panelRedColor = settings->value("theme/panelred","0").toInt();
+	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
+	panelBlueColor = settings->value("theme/panelblue","0").toInt();
+	// Load base theme
 	setColors();
 }
 

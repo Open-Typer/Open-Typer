@@ -110,6 +110,7 @@ class OpenTyper : public QMainWindow
 		bool blockInput;
 
 	private slots:
+		void loadTheme(void);
 		void keyPress(QKeyEvent *event);
 		void openOptions(void);
 		void openStudentOptions(void);
