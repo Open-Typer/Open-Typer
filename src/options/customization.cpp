@@ -117,11 +117,6 @@ customizationOptions::customizationOptions(QWidget *parent) :
 		SIGNAL(clicked()),
 		this,
 		SLOT(setUnderlineText()));
-	// Reset font button
-	connect(ui->fontResetButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(resetFont()));
 	// Change level text color button
 	connect(ui->levelTextColorButton,
 		SIGNAL(clicked()),
@@ -132,11 +127,6 @@ customizationOptions::customizationOptions(QWidget *parent) :
 		SIGNAL(clicked()),
 		this,
 		SLOT(changeInputTextColor()));
-	// Reset text color button
-	connect(ui->resetTextColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(resetTextColors()));
 	// Change background color button
 	connect(ui->bgColorButton,
 		SIGNAL(clicked()),
@@ -152,11 +142,6 @@ customizationOptions::customizationOptions(QWidget *parent) :
 		SIGNAL(clicked()),
 		this,
 		SLOT(changePanelColor()));
-	// Reset background, paper and panel color button
-	connect(ui->resetBgPaperColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(resetBgPaperColors()));
 	// Theme selector
 	connect(ui->themeBox,
 		SIGNAL(activated(int)),
@@ -496,22 +481,6 @@ void customizationOptions::setUnderlineText(void)
 		emit themeChanged();
 }
 
-/*!
- * Connected from fontResetButton->clicked().\n
- * Sets the default font.
- */
-void customizationOptions::resetFont(void)
-{
-	// Default font
-	setFont("Courier", 	// Family
-		14,		// Point size
-		false,		// Bold
-		false,		// Italic
-		false);	// Underline
-	if(!blockThemeSignal)
-		emit themeChanged();
-}
-
 /*! Saves all custom colors in the settings. */
 void customizationOptions::saveColorSettings(void)
 {
@@ -554,53 +523,13 @@ void customizationOptions::setColors()
 	// Update theme
 	updateTheme();
 	// Set level text color
-	if(customLevelTextColor)
-		ui->levelLabel->setStyleSheet("color: rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + ")");
-	else
-	{
-		// Default level text color
-		levelTextRedColor = 0;
-		levelTextGreenColor = 125;
-		levelTextBlueColor = 175;
-		ui->levelLabel->setStyleSheet("color: rgb(0, 125, 175)");
-	}
+	ui->levelLabel->setStyleSheet("color: rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + ")");
 	// Set input text color
-	if(customInputTextColor)
-		ui->inputLabel->setStyleSheet("color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")");
-	else
-	{
-		// Default input text color
-		inputTextRedColor = ui->inputLabel->palette().color(QPalette::Text).red();
-		inputTextGreenColor = ui->inputLabel->palette().color(QPalette::Text).green();
-		inputTextBlueColor = ui->inputLabel->palette().color(QPalette::Text).blue();
-		ui->inputLabel->setStyleSheet("color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")");
-	}
+	ui->inputLabel->setStyleSheet("color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")");
 	// Set paper color
-	if(customPaperColor)
-		ui->paper->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ")");
-	else
-	{
-		// Reset background color before setting paper color
-		ui->previewFrame->setStyleSheet("");
-		// Default paper color
-		paperRedColor = ui->paper->palette().color(QPalette::Base).red();
-		paperGreenColor = ui->paper->palette().color(QPalette::Base).green();
-		paperBlueColor = ui->paper->palette().color(QPalette::Base).blue();
-		ui->paper->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ")");
-		// Fix inputLabel automatically set background color
-		ui->inputLabel->setStyleSheet(
-			ui->inputLabel->styleSheet() + ";\nbackground-color: rgba(0,0,0,0)");
-	}
+	ui->paper->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ")");
 	// Set background color
-	if(customBgColor)
-		ui->previewFrame->setStyleSheet("background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ")");
-	else
-	{
-		// Default background color
-		bgRedColor = ui->previewFrame->palette().color(QPalette::Window).red();
-		bgGreenColor = ui->previewFrame->palette().color(QPalette::Window).green();
-		bgBlueColor = ui->previewFrame->palette().color(QPalette::Window).blue();
-	}
+	ui->previewFrame->setStyleSheet("background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ")");
 }
 
 /*! Loads the style sheet of the selected theme. \see OpenTyper#updateTheme */

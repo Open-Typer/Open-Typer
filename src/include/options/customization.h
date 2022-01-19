@@ -76,7 +76,6 @@ class customizationOptions : public QWidget
 		void setBoldText(void);
 		void setItalicText(void);
 		void setUnderlineText(void);
-		void resetFont(void);
 		void changeLevelTextColor(void);
 		void changeInputTextColor(void);
 		void resetTextColors(void);
