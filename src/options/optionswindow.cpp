@@ -28,6 +28,8 @@ optionsWindow::optionsWindow(QWidget *parent) :
 {
 	ui->setupUi(this);
 	setupList();
+	currentWidget = new QWidget(ui->currentOptions);
+	ui->currentOptionsLayout->addWidget(currentWidget);
 	// Connections
 	connect(ui->list,SIGNAL(currentRowChanged(int)),this,SLOT(changeOptionWidget(int)));
 }
@@ -59,51 +61,40 @@ optionsWindow::~optionsWindow()
 /*! Opens selected category. */
 void optionsWindow::changeOptionWidget(int index)
 {
+	QWidget *options = nullptr;
 	switch(index) {
 		case 0:
-			{
-				// Language
-				languageList *options = new languageList;
-				options->setStyleSheet(styleSheet());
-				connect(options,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
-				ui->currentOptions->setWidget(options);
-			}
+			// Language
+			options = new languageList;
+			connect(options,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
 			break;
 		case 1:
-			{
-				// Behavior
-				behaviorOptions *options = new behaviorOptions;
-				options->setStyleSheet(styleSheet());
-				ui->currentOptions->setWidget(options);
-			}
+			// Behavior
+			options = new behaviorOptions;
 			break;
 		case 2:
-			{
-				// Keyboard
-				keyboardOptions *options = new keyboardOptions;
-				options->setStyleSheet(styleSheet());
-				ui->currentOptions->setWidget(options);
-			}
+			// Keyboard
+			options = new keyboardOptions;
 			break;
 		case 3:
-			{
-				// Customization
-				customizationOptions *options = new customizationOptions;
-				options->setStyleSheet(styleSheet());
-				ui->currentOptions->setWidget(options);
-				options->init();
-				connect(options,&customizationOptions::themeChanged,this,&optionsWindow::changeTheme);
-			}
+			// Customization
+			options = new customizationOptions;
+			((customizationOptions*)options)->init();
+			connect((customizationOptions*)options,&customizationOptions::themeChanged,this,&optionsWindow::changeTheme);
 			break;
 		case 4:
-			{
-				// Connection
-				connectionOptions *options = new connectionOptions;
-				options->setStyleSheet(styleSheet());
-				ui->currentOptions->setWidget(options);
-			}
+			// Connection
+			options = new connectionOptions;
 			break;
 	}
+	if(options == nullptr)
+		return;
+	options->setParent(ui->currentOptions);
+	options->setStyleSheet(styleSheet());
+	ui->currentOptionsLayout->replaceWidget(currentWidget,options);
+	if(currentWidget != nullptr)
+		currentWidget->deleteLater();
+	currentWidget = options;
 }
 
 /*! Selects default category. */

@@ -50,6 +50,7 @@ class optionsWindow : public QDialog
 
 	private:
 		Ui::optionsWindow *ui;
+		QWidget *currentWidget = nullptr;
 		void setupList(void);
 
 	protected:
