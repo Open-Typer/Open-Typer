@@ -25,7 +25,7 @@
 #include <QSettings>
 #include <QFile>
 #include <QTextStream>
-#include <QDebug>
+#include <QPropertyAnimation>
 #include "options/optionswindow.h"
 #include "simplecolordialog.h"
 #include "core/utils.h"
@@ -69,7 +69,8 @@ class customizationOptions : public QWidget
 		void themeChanged();
 
 	private slots:
-		void changeFullTheme(int index);
+		void changeFullTheme(QListWidgetItem* item);
+		void goBack(void);
 		void changeFont(QFont font);
 		void changeFontSize(int size);
 		void setBoldText(void);

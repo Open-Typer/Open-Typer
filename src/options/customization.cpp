@@ -29,6 +29,7 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	ui->setupUi(this);
 	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	ui->themeCustomizationFrame->hide();
+	ui->themesFrame->show();
 	blockThemeSignal = true;
 	// Built-in themes
 	themes.clear();
@@ -62,6 +63,12 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	themeMap.insert("bgColor",qRgb(0,108,0));
 	themeMap.insert("panelColor",qRgb(175,175,175));
 	themes += themeMap;
+	// Custom
+	themeMap.clear();
+	themeMap.insert("name",tr("Custom"));
+	themeMap.insert("id","custom");
+	themeMap.insert("icon","custom.png");
+	themes += themeMap;
 	// Load built-in themes
 	for(int i=0; i < themes.count(); i++)
 	{
@@ -69,45 +76,22 @@ customizationOptions::customizationOptions(QWidget *parent) :
 		ui->themeList->addItem(item);
 	}
 	selectCurrentFullTheme();
-	// Font
-	setFont(settings->value("theme/font","Courier").toString(),
-		settings->value("theme/fontsize","14").toInt(),
-		settings->value("theme/fontbold","false").toBool(),
-		settings->value("theme/fontitalic","false").toBool(),
-		settings->value("theme/fontunderline","false").toBool());
-	// Colors
-	// Level text
-	customLevelTextColor = settings->value("theme/customleveltextcolor","false").toBool();
-	levelTextRedColor = settings->value("theme/leveltextred","0").toInt();
-	levelTextGreenColor = settings->value("theme/leveltextgreen","0").toInt();
-	levelTextBlueColor = settings->value("theme/leveltextblue","0").toInt();
-	// Input text
-	customInputTextColor = settings->value("theme/custominputtextcolor","false").toBool();
-	inputTextRedColor = settings->value("theme/inputtextred","0").toInt();
-	inputTextGreenColor = settings->value("theme/inputtextgreen","0").toInt();
-	inputTextBlueColor = settings->value("theme/inputtextblue","0").toInt();
-	// Background
-	customBgColor = settings->value("theme/custombgcolor","false").toBool();
-	bgRedColor = settings->value("theme/bgred","0").toInt();
-	bgGreenColor = settings->value("theme/bggreen","0").toInt();
-	bgBlueColor = settings->value("theme/bgblue","0").toInt();
-	// Paper
-	customPaperColor = settings->value("theme/custompapercolor","false").toBool();
-	paperRedColor = settings->value("theme/paperred","0").toInt();
-	paperGreenColor = settings->value("theme/papergreen","0").toInt();
-	paperBlueColor = settings->value("theme/paperblue","0").toInt();
-	// Panel
-	customPanelColor = settings->value("theme/custompanelcolor","false").toBool();
-	panelRedColor = settings->value("theme/panelred","0").toInt();
-	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
-	panelBlueColor = settings->value("theme/panelblue","0").toInt();
-	blockThemeSignal = false;
+	init();
 	// Connections
 	// Theme list
 	connect(ui->themeList,
-		SIGNAL(currentRowChanged(int)),
+		SIGNAL(itemClicked(QListWidgetItem*)),
 		this,
-		SLOT(changeFullTheme(int)));
+		SLOT(changeFullTheme(QListWidgetItem*)));
+	connect(ui->themeList,
+		SIGNAL(itemActivated(QListWidgetItem*)),
+		this,
+		SLOT(changeFullTheme(QListWidgetItem*)));
+	// Back button
+	connect(ui->backButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(goBack()));
 	// Font selector
 	connect(ui->fontComboBox,
 		SIGNAL(currentFontChanged(QFont)),
@@ -186,101 +170,169 @@ customizationOptions::~customizationOptions()
 	delete ui;
 }
 
-/*! Initializes widgets. */
+/*! Initializes widgets and loads settings. */
 void customizationOptions::init(void)
 {
 	ui->themeBox->setCurrentIndex(settings->value("theme/theme","0").toInt());
+	// Font
+	setFont(settings->value("theme/font","Courier").toString(),
+		settings->value("theme/fontsize","14").toInt(),
+		settings->value("theme/fontbold","false").toBool(),
+		settings->value("theme/fontitalic","false").toBool(),
+		settings->value("theme/fontunderline","false").toBool());
+	// Colors
+	// Level text
+	customLevelTextColor = settings->value("theme/customleveltextcolor","false").toBool();
+	levelTextRedColor = settings->value("theme/leveltextred","0").toInt();
+	levelTextGreenColor = settings->value("theme/leveltextgreen","0").toInt();
+	levelTextBlueColor = settings->value("theme/leveltextblue","0").toInt();
+	// Input text
+	customInputTextColor = settings->value("theme/custominputtextcolor","false").toBool();
+	inputTextRedColor = settings->value("theme/inputtextred","0").toInt();
+	inputTextGreenColor = settings->value("theme/inputtextgreen","0").toInt();
+	inputTextBlueColor = settings->value("theme/inputtextblue","0").toInt();
+	// Background
+	customBgColor = settings->value("theme/custombgcolor","false").toBool();
+	bgRedColor = settings->value("theme/bgred","0").toInt();
+	bgGreenColor = settings->value("theme/bggreen","0").toInt();
+	bgBlueColor = settings->value("theme/bgblue","0").toInt();
+	// Paper
+	customPaperColor = settings->value("theme/custompapercolor","false").toBool();
+	paperRedColor = settings->value("theme/paperred","0").toInt();
+	paperGreenColor = settings->value("theme/papergreen","0").toInt();
+	paperBlueColor = settings->value("theme/paperblue","0").toInt();
+	// Panel
+	customPanelColor = settings->value("theme/custompanelcolor","false").toBool();
+	panelRedColor = settings->value("theme/panelred","0").toInt();
+	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
+	panelBlueColor = settings->value("theme/panelblue","0").toInt();
+	blockThemeSignal = false;
 	setColors();
 }
 
 /*!
- * Connected from themeList->currentRowChanged().\n
+ * Connected from themeList->itemClicked() and themeList->itemActivated().\n
  * Switches built-in theme.
  */
-void customizationOptions::changeFullTheme(int index)
+void customizationOptions::changeFullTheme(QListWidgetItem* item)
 {
-	blockThemeSignal = true;
-	if(index == -1)
-	{
-		selectCurrentFullTheme();
-		return;
-	}
+	int index = ui->themeList->row(item);
 	QVariantMap themeMap = themes[index];
-	// Base theme
-	if(themeMap.contains("baseTheme"))
-		changeTheme(themeMap["baseTheme"].toInt());
-	else
-		changeTheme(0);
-	// Font
-	QString fontFamily;
-	int fontSize;
-	bool fontBold, fontItalic, fontUnderline;
-	if(themeMap.contains("font"))
-		fontFamily = themeMap["font"].toString();
-	else
-		fontFamily = "Courier";
-	if(themeMap.contains("fontSize"))
-		fontSize = themeMap["fontSize"].toInt();
-	else
-		fontSize = settings->value("theme/fontsize","14").toInt();
-	if(themeMap.contains("fontBold"))
-		fontBold = themeMap["fontBold"].toBool();
-	else
-		fontBold = false;
-	if(themeMap.contains("fontItalic"))
-		fontItalic = themeMap["fontItalic"].toBool();
-	else
-		fontItalic = false;
-	if(themeMap.contains("fontUnderline"))
-		fontUnderline = themeMap["fontUnderline"].toBool();
-	else
-		fontUnderline = false;
-	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
-	// Colors
-	resetTextColors();
-	if(themeMap.contains("levelTextColor"))
+	if(themeMap["id"].toString() == "custom")
 	{
-		QRgb color = themeMap["levelTextColor"].toUInt();
-		levelTextRedColor = qRed(color);
-		levelTextGreenColor = qGreen(color);
-		levelTextBlueColor = qBlue(color);
-		customLevelTextColor = true;
+		init();
+		ui->themeList->setResizeMode(QListView::Fixed);
+		QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themesFrame,"geometry");
+		QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themeCustomizationFrame,"geometry");
+		QEventLoop animLoop;
+		int oldWidth2 = geometry().width();
+		// Animation 1
+		animation1->setEasingCurve(QEasingCurve::InQuad);
+		QRect widgetGeometry = ui->themesFrame->geometry();
+		int oldWidth = widgetGeometry.width();
+		animation1->setDuration(128);
+		animation1->setStartValue(widgetGeometry);
+		widgetGeometry.setWidth(0);
+		animation1->setEndValue(widgetGeometry);
+		connect(animation1,&QPropertyAnimation::finished,&animLoop,&QEventLoop::quit);
+		animation1->start();
+		animLoop.exec(QEventLoop::ExcludeUserInputEvents);
+		ui->themesFrame->hide();
+		widgetGeometry = ui->themesFrame->geometry();
+		widgetGeometry.setWidth(oldWidth);
+		ui->themesFrame->setGeometry(widgetGeometry);
+		// Animation 2
+		animation2->setEasingCurve(QEasingCurve::OutQuad);
+		animation2->setDuration(128);
+		ui->themeCustomizationFrame->show();
+		widgetGeometry = ui->themeCustomizationFrame->geometry();
+		widgetGeometry.setX(oldWidth2);
+		animation2->setStartValue(widgetGeometry);
+		animation2->setEndValue(ui->themeCustomizationFrame->geometry());
+		connect(animation2,&QPropertyAnimation::finished,&animLoop,&QEventLoop::quit);
+		animation2->start();
+		animLoop.exec(QEventLoop::ExcludeUserInputEvents);
+		ui->themeList->setResizeMode(QListView::Adjust);
 	}
-	if(themeMap.contains("inputTextColor"))
+	else
 	{
-		QRgb color = themeMap["inputTextColor"].toUInt();
-		inputTextRedColor = qRed(color);
-		inputTextGreenColor = qGreen(color);
-		inputTextBlueColor = qBlue(color);
-		customInputTextColor = true;
+		blockThemeSignal = true;
+		// Base theme
+		if(themeMap.contains("baseTheme"))
+			changeTheme(themeMap["baseTheme"].toInt());
+		else
+			changeTheme(0);
+		// Font
+		QString fontFamily;
+		int fontSize;
+		bool fontBold, fontItalic, fontUnderline;
+		if(themeMap.contains("font"))
+			fontFamily = themeMap["font"].toString();
+		else
+			fontFamily = "Courier";
+		if(themeMap.contains("fontSize"))
+			fontSize = themeMap["fontSize"].toInt();
+		else
+			fontSize = settings->value("theme/fontsize","14").toInt();
+		if(themeMap.contains("fontBold"))
+			fontBold = themeMap["fontBold"].toBool();
+		else
+			fontBold = false;
+		if(themeMap.contains("fontItalic"))
+			fontItalic = themeMap["fontItalic"].toBool();
+		else
+			fontItalic = false;
+		if(themeMap.contains("fontUnderline"))
+			fontUnderline = themeMap["fontUnderline"].toBool();
+		else
+			fontUnderline = false;
+		setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
+		// Colors
+		resetTextColors();
+		if(themeMap.contains("levelTextColor"))
+		{
+			QRgb color = themeMap["levelTextColor"].toUInt();
+			levelTextRedColor = qRed(color);
+			levelTextGreenColor = qGreen(color);
+			levelTextBlueColor = qBlue(color);
+			customLevelTextColor = true;
+		}
+		if(themeMap.contains("inputTextColor"))
+		{
+			QRgb color = themeMap["inputTextColor"].toUInt();
+			inputTextRedColor = qRed(color);
+			inputTextGreenColor = qGreen(color);
+			inputTextBlueColor = qBlue(color);
+			customInputTextColor = true;
+		}
+		resetBgPaperColors();
+		if(themeMap.contains("bgColor"))
+		{
+			QRgb color = themeMap["bgColor"].toUInt();
+			bgRedColor = qRed(color);
+			bgGreenColor = qGreen(color);
+			bgBlueColor = qBlue(color);
+			customBgColor = true;
+		}
+		if(themeMap.contains("paperColor"))
+		{
+			QRgb color = themeMap["paperColor"].toUInt();
+			paperRedColor = qRed(color);
+			paperGreenColor = qGreen(color);
+			paperBlueColor = qBlue(color);
+			customPaperColor = true;
+		}
+		if(themeMap.contains("panelColor"))
+		{
+			QRgb color = themeMap["panelColor"].toUInt();
+			panelRedColor = qRed(color);
+			panelGreenColor = qGreen(color);
+			panelBlueColor = qBlue(color);
+			customPanelColor = true;
+		}
+		saveColorSettings();
+		setColors();
 	}
-	resetBgPaperColors();
-	if(themeMap.contains("bgColor"))
-	{
-		QRgb color = themeMap["bgColor"].toUInt();
-		bgRedColor = qRed(color);
-		bgGreenColor = qGreen(color);
-		bgBlueColor = qBlue(color);
-		customBgColor = true;
-	}
-	if(themeMap.contains("paperColor"))
-	{
-		QRgb color = themeMap["paperColor"].toUInt();
-		paperRedColor = qRed(color);
-		paperGreenColor = qGreen(color);
-		paperBlueColor = qBlue(color);
-		customPaperColor = true;
-	}
-	if(themeMap.contains("panelColor"))
-	{
-		QRgb color = themeMap["panelColor"].toUInt();
-		panelRedColor = qRed(color);
-		panelGreenColor = qGreen(color);
-		panelBlueColor = qBlue(color);
-		customPanelColor = true;
-	}
-	saveColorSettings();
-	setColors();
 	settings->setValue("theme/fulltheme",themeMap["id"]);
 	blockThemeSignal = false;
 	emit themeChanged();
@@ -295,6 +347,43 @@ void customizationOptions::selectCurrentFullTheme(void)
 		if(themes[i]["id"] == id)
 			ui->themeList->setCurrentRow(i);
 	}
+}
+
+/*!
+ * Connected from backButton->clicked().\n
+ * Returns to theme selection.
+ */
+void customizationOptions::goBack(void)
+{
+	ui->themeList->setResizeMode(QListView::Fixed);
+	QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themeCustomizationFrame,"geometry");
+	QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themesFrame,"geometry");
+	QEventLoop animLoop;
+	// Animation 1
+	animation1->setEasingCurve(QEasingCurve::InQuad);
+	QRect widgetGeometry = ui->themeCustomizationFrame->geometry();
+	animation1->setDuration(128);
+	animation1->setStartValue(widgetGeometry);
+	widgetGeometry.setX(geometry().width());
+	animation1->setEndValue(widgetGeometry);
+	connect(animation1,&QPropertyAnimation::finished,&animLoop,&QEventLoop::quit);
+	animation1->start();
+	animLoop.exec(QEventLoop::ExcludeUserInputEvents);
+	ui->themeCustomizationFrame->hide();
+	// Animation 2
+	animation2->setEasingCurve(QEasingCurve::OutQuad);
+	animation2->setDuration(128);
+	ui->themesFrame->show();
+	widgetGeometry = ui->themesFrame->geometry();
+	widgetGeometry.setWidth(0);
+	animation2->setStartValue(widgetGeometry);
+	animation2->setEndValue(ui->themesFrame->geometry());
+	connect(animation2,&QPropertyAnimation::finished,&animLoop,&QEventLoop::quit);
+	animation2->start();
+	animLoop.exec(QEventLoop::ExcludeUserInputEvents);
+	ui->themeList->setResizeMode(QListView::Adjust);
+	ui->themeList->reset();
+	selectCurrentFullTheme();
 }
 
 /*! Sets exercise text font and saves it in the settings. \see OpenTyper#setFont */
