@@ -206,8 +206,9 @@ void customizationOptions::init(void)
 	panelRedColor = settings->value("theme/panelred","0").toInt();
 	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
 	panelBlueColor = settings->value("theme/panelblue","0").toInt();
-	blockThemeSignal = false;
+	blockThemeSignal = true;
 	setColors();
+	blockThemeSignal = false;
 }
 
 /*!
