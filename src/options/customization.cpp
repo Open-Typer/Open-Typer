@@ -523,13 +523,25 @@ void customizationOptions::setColors()
 	// Update theme
 	updateTheme();
 	// Set level text color
-	ui->levelLabel->setStyleSheet("color: rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + ")");
+	QString levelTextStyleSheet = "rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + ")";
+	ui->levelLabel->setStyleSheet("color: " + levelTextStyleSheet);
 	// Set input text color
-	ui->inputLabel->setStyleSheet("color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")");
+	QString inputTextStyleSheet = "rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")";
+	ui->inputLabel->setStyleSheet("color: " + inputTextStyleSheet);
 	// Set paper color
-	ui->paper->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ")");
+	QString paperStyleSheet = "rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ")";
+	ui->paper->setStyleSheet("background-color: " + paperStyleSheet);
 	// Set background color
-	ui->previewFrame->setStyleSheet("background-color: rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ")");
+	QString bgStyleSheet = "rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ")";
+	ui->previewFrame->setStyleSheet("background-color: " + bgStyleSheet);
+	// Set panel color
+	QString panelStyleSheet = "rgb(" + QString::number(panelRedColor) + ", " + QString::number(panelGreenColor) + ", " + QString::number(panelBlueColor) + ")";
+	// Update color buttons
+	ui->levelTextColorButton->setStyleSheet("border: 2px solid gray; background-color: " + levelTextStyleSheet);
+	ui->inputTextColorButton->setStyleSheet("border: 2px solid gray; background-color: " + inputTextStyleSheet);
+	ui->paperColorButton->setStyleSheet("border: 2px solid gray; background-color: " + paperStyleSheet);
+	ui->bgColorButton->setStyleSheet("border: 2px solid gray; background-color: " + bgStyleSheet);
+	ui->panelColorButton->setStyleSheet("border: 2px solid gray; background-color: " + panelStyleSheet);
 }
 
 /*! Loads the style sheet of the selected theme. \see OpenTyper#updateTheme */
