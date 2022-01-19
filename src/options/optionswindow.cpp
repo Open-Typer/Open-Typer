@@ -92,6 +92,7 @@ void optionsWindow::changeOptionWidget(int index)
 				options->setStyleSheet(styleSheet());
 				ui->currentOptions->setWidget(options);
 				options->init();
+				connect(options,&customizationOptions::themeChanged,this,&optionsWindow::changeTheme);
 			}
 			break;
 		case 4:
@@ -118,6 +119,13 @@ void optionsWindow::init(void)
 void optionsWindow::changeLanguage(int index)
 {
 	emit languageChanged(index);
+}
+
+/*! Connected from customizationOptions::themeChanged(). */
+void optionsWindow::changeTheme(void)
+{
+	setStyleSheet(((customizationOptions*)sender())->styleSheet());
+	emit themeChanged();
 }
 
 /*! Overrides QWidget#changeEvent().
