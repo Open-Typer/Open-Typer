@@ -1003,6 +1003,9 @@ void OpenTyper::setColors(void)
 		levelTextRedColor = 0;
 		levelTextGreenColor = 125;
 		levelTextBlueColor = 175;
+		settings->setValue("theme/leveltextred",levelTextRedColor);
+		settings->setValue("theme/leveltextgreen",levelTextGreenColor);
+		settings->setValue("theme/leveltextblue",levelTextBlueColor);
 	}
 	QString levelLabelStyleSheet = "color: rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + "); margin: 0px; padding: 0px;";
 	ui->levelLabel->setStyleSheet(levelLabelStyleSheet);
@@ -1017,6 +1020,9 @@ void OpenTyper::setColors(void)
 		inputTextRedColor = ui->inputLabel->palette().color(QPalette::Text).red();
 		inputTextGreenColor = ui->inputLabel->palette().color(QPalette::Text).green();
 		inputTextBlueColor = ui->inputLabel->palette().color(QPalette::Text).blue();
+		settings->setValue("theme/inputtextred",inputTextRedColor);
+		settings->setValue("theme/inputtextgreen",inputTextGreenColor);
+		settings->setValue("theme/inputtextblue",inputTextBlueColor);
 	}
 	QString inputLabelStyleSheet = "color: rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + "); margin: 0px; padding: 0px;";
 	ui->inputLabel->setStyleSheet(inputLabelStyleSheet);
@@ -1031,6 +1037,9 @@ void OpenTyper::setColors(void)
 		paperRedColor = ui->paper->palette().color(QPalette::Base).red();
 		paperGreenColor = ui->paper->palette().color(QPalette::Base).green();
 		paperBlueColor = ui->paper->palette().color(QPalette::Base).blue();
+		settings->setValue("theme/paperred",paperRedColor);
+		settings->setValue("theme/papergreen",paperGreenColor);
+		settings->setValue("theme/paperblue",paperBlueColor);
 		ui->paper->setStyleSheet("#paper {background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");}");
 		// Fix inputLabel automatically set background color
 		ui->inputLabel->setStyleSheet(
@@ -1062,6 +1071,9 @@ void OpenTyper::setColors(void)
 		bgRedColor = ui->mainFrame->palette().color(QPalette::Window).red();
 		bgGreenColor = ui->mainFrame->palette().color(QPalette::Window).green();
 		bgBlueColor = ui->mainFrame->palette().color(QPalette::Window).blue();
+		settings->setValue("theme/bgred",bgRedColor);
+		settings->setValue("theme/bggreen",bgGreenColor);
+		settings->setValue("theme/bgblue",bgBlueColor);
 		ui->centralwidget->setStyleSheet("");
 	}
 }
