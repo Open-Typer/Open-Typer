@@ -197,6 +197,13 @@
               </property>
              </widget>
             </item>
+            <item row="0" column="1">
+             <widget class="QFontComboBox" name="fontComboBox">
+              <property name="focusPolicy">
+               <enum>Qt::StrongFocus</enum>
+              </property>
+             </widget>
+            </item>
             <item row="2" column="0">
              <widget class="QLabel" name="fontSizeLabel">
               <property name="font">
@@ -207,13 +214,6 @@
               </property>
               <property name="text">
                <string>Font size:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QFontComboBox" name="fontComboBox">
-              <property name="focusPolicy">
-               <enum>Qt::StrongFocus</enum>
               </property>
              </widget>
             </item>
@@ -304,45 +304,28 @@
               </property>
              </widget>
             </item>
-            <item row="9" column="0">
-             <widget class="QPushButton" name="fontResetButton">
-              <property name="focusPolicy">
-               <enum>Qt::StrongFocus</enum>
-              </property>
-              <property name="toolTip">
-               <string/>
-              </property>
-              <property name="text">
-               <string notr="true">Reset</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../../res.qrc">
-                <normaloff>:/res/images/reset.png</normaloff>:/res/images/reset.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>32</width>
-                <height>32</height>
-               </size>
-              </property>
-             </widget>
-            </item>
            </layout>
           </widget>
          </item>
          <item>
           <widget class="QFrame" name="colorsFrame">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
            </property>
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <layout class="QGridLayout" name="gridLayout_3">
-            <item row="0" column="0" colspan="3">
-             <widget class="QLabel" name="ColorsLabel">
+           <layout class="QFormLayout" name="formLayout_3">
+            <item row="2" column="0">
+             <widget class="QLabel" name="levelTextColorLabel">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -354,11 +337,11 @@
                </font>
               </property>
               <property name="text">
-               <string>Colors:</string>
+               <string>Exercise text color:</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
+            <item row="2" column="1">
              <widget class="QPushButton" name="levelTextColorButton">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -369,25 +352,31 @@
               <property name="focusPolicy">
                <enum>Qt::StrongFocus</enum>
               </property>
-              <property name="toolTip">
-               <string>Exercise text color</string>
-              </property>
               <property name="text">
                <string notr="true"/>
               </property>
-              <property name="icon">
-               <iconset resource="../../res.qrc">
-                <normaloff>:/res/images/extext_color.png</normaloff>:/res/images/extext_color.png</iconset>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="inputTextColorLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="iconSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Input text color:</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
+            <item row="3" column="1">
              <widget class="QPushButton" name="inputTextColorButton">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -398,26 +387,26 @@
               <property name="focusPolicy">
                <enum>Qt::StrongFocus</enum>
               </property>
-              <property name="toolTip">
-               <string>Input text color</string>
-              </property>
               <property name="text">
                <string notr="true"/>
               </property>
-              <property name="icon">
-               <iconset resource="../../res.qrc">
-                <normaloff>:/res/images/intext_color.png</normaloff>:/res/images/intext_color.png</iconset>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="bgColorLabel">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
               </property>
-              <property name="iconSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
+              <property name="text">
+               <string>Background color:</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="resetTextColorButton">
+            <item row="4" column="1">
+             <widget class="QPushButton" name="bgColorButton">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -427,123 +416,66 @@
               <property name="focusPolicy">
                <enum>Qt::StrongFocus</enum>
               </property>
-              <property name="toolTip">
-               <string>Reset</string>
-              </property>
               <property name="text">
                <string notr="true"/>
               </property>
-              <property name="icon">
-               <iconset resource="../../res.qrc">
-                <normaloff>:/res/images/reset.png</normaloff>:/res/images/reset.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>36</width>
-                <height>36</height>
-               </size>
-              </property>
              </widget>
             </item>
-            <item row="2" column="0" colspan="3">
-             <widget class="QFrame" name="colorsFrameSpacer">
-              <property name="frameShape">
-               <enum>QFrame::HLine</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QPushButton" name="bgColorButton">
-              <property name="focusPolicy">
-               <enum>Qt::StrongFocus</enum>
-              </property>
-              <property name="toolTip">
-               <string>Background color</string>
+            <item row="5" column="0">
+             <widget class="QLabel" name="paperColorLabel">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
               </property>
               <property name="text">
-               <string notr="true"/>
-              </property>
-              <property name="icon">
-               <iconset resource="../../res.qrc">
-                <normaloff>:/res/images/bg_color.png</normaloff>:/res/images/bg_color.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
+               <string>Paper color:</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item row="5" column="1">
              <widget class="QPushButton" name="paperColorButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="focusPolicy">
                <enum>Qt::StrongFocus</enum>
-              </property>
-              <property name="toolTip">
-               <string>Paper color</string>
               </property>
               <property name="text">
                <string notr="true"/>
               </property>
-              <property name="icon">
-               <iconset resource="../../res.qrc">
-                <normaloff>:/res/images/paper_color.png</normaloff>:/res/images/paper_color.png</iconset>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="panelColorLabel">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
               </property>
-              <property name="iconSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
+              <property name="text">
+               <string>Panel color:</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
+            <item row="6" column="1">
              <widget class="QPushButton" name="panelColorButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="focusPolicy">
                <enum>Qt::StrongFocus</enum>
               </property>
-              <property name="toolTip">
-               <string>Panel color</string>
-              </property>
               <property name="text">
                <string notr="true"/>
-              </property>
-              <property name="icon">
-               <iconset resource="../../res.qrc">
-                <normaloff>:/res/images/panel_color.png</normaloff>:/res/images/panel_color.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QPushButton" name="resetBgPaperColorButton">
-              <property name="focusPolicy">
-               <enum>Qt::StrongFocus</enum>
-              </property>
-              <property name="toolTip">
-               <string>Reset</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-              <property name="icon">
-               <iconset resource="../../res.qrc">
-                <normaloff>:/res/images/reset.png</normaloff>:/res/images/reset.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>36</width>
-                <height>36</height>
-               </size>
               </property>
              </widget>
             </item>
