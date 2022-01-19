@@ -29,6 +29,7 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	ui->setupUi(this);
 	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	ui->themeCustomizationFrame->hide();
+	blockThemeSignal = true;
 	// Built-in themes
 	themes.clear();
 	QVariantMap themeMap;
@@ -100,6 +101,7 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	panelRedColor = settings->value("theme/panelred","0").toInt();
 	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
 	panelBlueColor = settings->value("theme/panelblue","0").toInt();
+	blockThemeSignal = false;
 	// Connections
 	// Theme list
 	connect(ui->themeList,
@@ -197,6 +199,7 @@ void customizationOptions::init(void)
  */
 void customizationOptions::changeFullTheme(int index)
 {
+	blockThemeSignal = true;
 	if(index == -1)
 	{
 		selectCurrentFullTheme();
@@ -279,6 +282,8 @@ void customizationOptions::changeFullTheme(int index)
 	saveColorSettings();
 	setColors();
 	settings->setValue("theme/fulltheme",themeMap["id"]);
+	blockThemeSignal = false;
+	emit themeChanged();
 }
 
 /*! Select currently set full theme. */
@@ -317,6 +322,8 @@ void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBo
 	settings->setValue("theme/fontbold",fontBold);
 	settings->setValue("theme/fontitalic",fontItalic);
 	settings->setValue("theme/fontunderline",fontUnderline);
+	if(!blockThemeSignal)
+		emit themeChanged();
 }
 
 /*!
@@ -331,6 +338,8 @@ void customizationOptions::changeFont(QFont font)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	settings->setValue("theme/font",font.family());
+	if(!blockThemeSignal)
+		emit themeChanged();
 }
 
 /*!
@@ -345,6 +354,8 @@ void customizationOptions::changeFontSize(int size)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	settings->setValue("theme/fontsize",size);
+	if(!blockThemeSignal)
+		emit themeChanged();
 }
 
 /*!
@@ -359,6 +370,8 @@ void customizationOptions::setBoldText(void)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	settings->setValue("theme/fontbold",ui->boldTextBox->isChecked());
+	if(!blockThemeSignal)
+		emit themeChanged();
 }
 
 /*!
@@ -373,6 +386,8 @@ void customizationOptions::setItalicText(void)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	settings->setValue("theme/fontitalic",ui->italicTextBox->isChecked());
+	if(!blockThemeSignal)
+		emit themeChanged();
 }
 
 /*!
@@ -387,6 +402,8 @@ void customizationOptions::setUnderlineText(void)
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
 	settings->setValue("theme/fontunderline",ui->underlineTextBox->isChecked());
+	if(!blockThemeSignal)
+		emit themeChanged();
 }
 
 /*!
@@ -401,6 +418,8 @@ void customizationOptions::resetFont(void)
 		false,		// Bold
 		false,		// Italic
 		false);	// Underline
+	if(!blockThemeSignal)
+		emit themeChanged();
 }
 
 /*! Saves all custom colors in the settings. */
@@ -431,6 +450,8 @@ void customizationOptions::saveColorSettings(void)
 	settings->setValue("theme/panelred",panelRedColor);
 	settings->setValue("theme/panelgreen",panelGreenColor);
 	settings->setValue("theme/panelblue",panelBlueColor);
+	if(!blockThemeSignal)
+		emit themeChanged();
 }
 
 /*! Sets custom colors (if they are set) or default colors. \see OpenTyper#setColors */
@@ -540,7 +561,8 @@ void customizationOptions::updateTheme()
 			ui->paper->setStyleSheet("background-color: rgb(255, 255, 255)");
 			break;
 	}
-	parentWidget()->parentWidget()->parentWidget()->setStyleSheet(styleSheet());
+	if(!blockThemeSignal)
+		emit themeChanged();
 }
 
 /*!
@@ -700,6 +722,5 @@ void customizationOptions::resetBgPaperColors(void)
 void customizationOptions::changeTheme(int index)
 {
 	settings->setValue("theme/theme",index);
-	updateTheme();
 	setColors();
 }

@@ -51,6 +51,7 @@ class customizationOptions : public QWidget
 		Ui::customizationOptions *ui;
 		QSettings *settings;
 		QVector<QVariantMap> themes;
+		bool blockThemeSignal;
 		int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
 		int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
 		int bgRedColor, bgGreenColor, bgBlueColor;
@@ -62,6 +63,10 @@ class customizationOptions : public QWidget
 		void saveColorSettings(void);
 		void setColors();
 		void updateTheme();
+
+	signals:
+		/*! A signal, which is emitted when the theme changes. */
+		void themeChanged();
 
 	private slots:
 		void changeFullTheme(int index);
