@@ -76,7 +76,7 @@ class OpenTyper : public QMainWindow
 		void startLevel(int lesson, int sublesson, int level);
 		void levelFinalInit(void);
 		void updateText(void);
-		QString level, displayLevel, finalDisplayLevel, input, displayInput, publicConfigName;
+		QString level, displayLevel, finalDisplayLevel, input, displayInput, publicConfigName, oldConfigName;
 		int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentAbsoluteSublesson, currentLevel, currentLine, levelPos, displayPos, levelMistakes, totalHits, levelHits, levelLengthExtension;
 		int deadKeys;
 		int sublessonListStart;

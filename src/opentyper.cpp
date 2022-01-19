@@ -36,6 +36,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	client = new monitorClient(false);
 	studentUsername = "";
 	studentPassword = "";
+	oldConfigName = "";
 	refreshAll(true);
 	// Connect signals to slots
 	connectAll();
@@ -80,13 +81,15 @@ void OpenTyper::refreshAll(bool setLang)
 	// Set mode
 	changeMode(0);
 	// Config file (lesson pack) name
-	QString configName = settings->value("main/configfile","").toString(); // default: "" (empty QString)
+	QString configName = settings->value("main/configfile","").toString();
 	if(configName == "")
 	{
 		// No config file selected, use sk_SK-QWERTZ-B1
 		// TODO: Change this to en_US after a config for it is added.
 		configName = "sk_SK-QWERTZ-B1";
 	}
+	bool packChanged = (configName != oldConfigName);
+	oldConfigName = configName;
 	// Custom pack
 	customConfig = settings->value("main/customconfig","false").toBool();
 	// Theme
@@ -101,10 +104,13 @@ void OpenTyper::refreshAll(bool setLang)
 	QString configPath = loadConfig(configName);
 	if(configPath == NULL)
 		exit(1);
-	currentLesson = 1;
-	currentSublesson = 1;
-	currentLevel = 1;
-	repeatLevel();
+	if(packChanged)
+	{
+		currentLesson = 1;
+		currentSublesson = 1;
+		currentLevel = 1;
+		repeatLevel();
+	}
 }
 
 /*! Sets up all connections. */
@@ -1134,7 +1140,7 @@ void OpenTyper::openPack(void)
 		customConfig=true;
 		settings->setValue("main/customconfig",customConfig);
 		loadConfig(openFileName);
-		repeatLevel();
+		refreshAll(false);
 	}
 }
 
