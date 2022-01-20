@@ -101,11 +101,11 @@ void OpenTyper::refreshAll(bool setLang)
 	// Class monitor client
 	updateStudent();
 	// Load config and start
-	QString configPath = loadConfig(configName);
-	if(configPath == NULL)
-		exit(1);
 	if(packChanged)
 	{
+		QString configPath = loadConfig(configName);
+		if(configPath == NULL)
+			exit(1);
 		currentLesson = 1;
 		currentSublesson = 1;
 		currentLevel = 1;
