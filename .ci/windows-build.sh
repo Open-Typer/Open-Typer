@@ -10,3 +10,7 @@ mkdir openssl
 unzip openssl.zip -d ../openssl
 rm openssl.zip
 cp ../openssl/*/*.dll ./
+
+cd ../installer
+cp -r ../release ./packages/com.adazem009.Open-Typer/data
+binarycreator -c config/config.xml -p packages/ Open-Typer-installer.exe --include com.adazem009.Open-Typer
