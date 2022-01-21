@@ -42,7 +42,6 @@ jobs:
         dir: '${{ github.workspace }}'
         modules: 'qtcharts'
         setup-python: 'false'
-        tools: 'tools_ifw'
     - if: contains(matrix.os, 'windows')
       name: Install 32-bit MinGW
       uses: egor-tensin/setup-mingw@v2
