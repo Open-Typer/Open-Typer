@@ -404,11 +404,10 @@ void OpenTyper::updateText(void)
 			line++;
 		}
 	}
-	ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
-	ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
-	ui->inputLabel->setMinimumHeight(0);
-	ui->mistakeLabel->setMinimumHeight(0);
+	ui->inputLabel->setPlainText(displayLevel);
+	ui->levelCurrentLineLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
 	ui->levelCurrentLineLabel->setText(currentLineText);
+	ui->inputLabel->setHtml(displayInput);
 	ui->levelLabel->setText(remainingText);
 	((QGraphicsOpacityEffect*)ui->levelLabel->graphicsEffect())->setOpacity(0.5);
 	blockInput = false;
