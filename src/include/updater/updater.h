@@ -25,12 +25,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QProcess>
-#include "core/net.h"
-#include "version.h"
 #include "updaterdialog.h"
-
-#define _VERSION_H_URL "https://raw.githubusercontent.com/Open-Typer/Open-Typer/master/src/include/version.h"
-#define _GITHUB_REPO "https://github.com/Open-Typer/Open-Typer"
 
 /*!
  * \brief The Updater class is used to check for updates and download new versions of the program.
