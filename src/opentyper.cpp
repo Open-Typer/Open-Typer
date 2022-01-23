@@ -40,12 +40,10 @@ OpenTyper::OpenTyper(QWidget *parent)
 	refreshAll(true);
 	// Connect signals to slots
 	connectAll();
+#ifndef Q_OS_WASM
 	// Check for updates
-	#ifdef Q_OS_WINDOWS
-	#ifdef _WIN32
 	new Updater();
-	#endif
-	#endif
+#endif
 	// Disable features that don't work on wasm
 #ifdef Q_OS_WASM
 	ui->openPackButton->hide();
