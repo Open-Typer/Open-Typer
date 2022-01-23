@@ -91,16 +91,29 @@
         <source>Remaining time:</source>
         <translation>Verbleibende Zeit:</translation>
     </message>
+    <message>
+        <source>Exercise history</source>
+        <extracomment>The history (and stats) of this exercise</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Student options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Logged in as %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not logged in.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Revision</source>
         <translation>Revision</translation>
-    </message>
-    <message>
-        <source>Successfully updated.</source>
-        <translation>Erfolgreich geupdated.</translation>
     </message>
     <message>
         <source>Shift</source>
@@ -136,13 +149,6 @@
     </message>
 </context>
 <context>
-    <name>Updater</name>
-    <message>
-        <source>Error: No internet connection.</source>
-        <translation>Fehler: Keine Internet Verbindung.</translation>
-    </message>
-</context>
-<context>
     <name>UpdaterDialog</name>
     <message>
         <source>Update</source>
@@ -159,28 +165,12 @@ Would you like to download and install it?</source>
 Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
-        <source>Current version:</source>
-        <translation>Aktuelle Version:</translation>
-    </message>
-    <message>
-        <source>New version:</source>
-        <translation>Neue Version:</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
         <translation>Nein</translation>
-    </message>
-    <message>
-        <source>Change log is available at</source>
-        <translation>Change log is verfügbar unter</translation>
-    </message>
-    <message>
-        <source>Downloading update, please wait...</source>
-        <translation>Update herunterladen, bitte warte...</translation>
     </message>
 </context>
 <context>
@@ -258,6 +248,42 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
+    <name>connectionOptions</name>
+    <message>
+        <source>Server options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use class monitor server</source>
+        <extracomment>Do not translate class monitor</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection status:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>customizationOptions</name>
     <message>
         <source>Theme:</source>
@@ -274,10 +300,6 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Light</source>
         <translation>Hell</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation>Reset</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -304,28 +326,44 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Text Stil:</translation>
     </message>
     <message>
-        <source>Colors:</source>
-        <translation>Farben:</translation>
+        <source>Themes</source>
+        <translation>Themas</translation>
     </message>
     <message>
-        <source>Input text color</source>
-        <translation>Input Text Farbe</translation>
+        <source>Exercise text color:</source>
+        <translation>Aufgaben Text Farbe:</translation>
     </message>
     <message>
-        <source>Exercise text color</source>
-        <translation>Aufgaben Text Farbe</translation>
+        <source>Input text color:</source>
+        <translation>Input Text Farbe:</translation>
     </message>
     <message>
-        <source>Paper color</source>
-        <translation>Papier Farbe</translation>
+        <source>Background color:</source>
+        <translation>Hintergrund Farbe:</translation>
     </message>
     <message>
-        <source>Background color</source>
-        <translation>Hintergrund Farbe</translation>
+        <source>Paper color:</source>
+        <translation>Papier Farbe:</translation>
     </message>
     <message>
-        <source>Panel color</source>
-        <translation>Panel Farbe</translation>
+        <source>Panel color:</source>
+        <translation>Panel Farbe:</translation>
+    </message>
+    <message>
+        <source>Go back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Grün</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -384,6 +422,22 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>Total hits:</source>
         <translation>Gesamtschläge:</translation>
     </message>
+    <message>
+        <source>Show summary</source>
+        <extracomment>Show exercise summary after the dialog closes</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>monitorClient</name>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to connect to class monitor server.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>optionsWindow</name>
@@ -406,6 +460,10 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Behavior</source>
         <translation>Verhalten</translation>
+    </message>
+    <message>
+        <source>Connection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -578,6 +636,68 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Load</source>
         <translation>Laden</translation>
+    </message>
+    <message>
+        <source>Include new lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>statsDialog</name>
+    <message>
+        <source>Exercise history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Table</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mistakes</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Zeit</translation>
+    </message>
+    <message>
+        <source>Better students: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Worse students: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>studentOptions</name>
+    <message>
+        <source>Authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Student log in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Incorrect password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
