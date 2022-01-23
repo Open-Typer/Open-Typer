@@ -30,10 +30,10 @@ Updater::Updater(QObject *parent) :
 	QObject(parent)
 {
 	QFile maintenancetoolFile;
-	maintenancetoolFile.setFileName(QCoreApplication::applicationDirPath() + "/maintenancetool");
+	maintenancetoolFile.setFileName(QCoreApplication::applicationDirPath() + "/../maintenancetool");
 	if(!maintenancetoolFile.exists())
 	{
-		maintenancetoolFile.setFileName(QCoreApplication::applicationDirPath() + "/maintenancetool.exe");
+		maintenancetoolFile.setFileName(QCoreApplication::applicationDirPath() + "/../maintenancetool.exe");
 		if(!maintenancetoolFile.exists())
 		{
 			deleteLater();
