@@ -3,6 +3,7 @@
 PLATFORM=$1
 
 qmake
+lrelease *.pro
 if [[ "$PLATFORM" == "win32" ]]; then
 	mingw32-make.exe -j4
 elif [[ "$PLATFORM" == "win64" ]]; then
