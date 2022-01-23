@@ -10,24 +10,21 @@
     <height>225</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>327</width>
-    <height>225</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>327</width>
-    <height>225</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Update</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="4" column="1">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetFixedSize</enum>
+   </property>
+   <item row="2" column="1" alignment="Qt::AlignRight">
     <widget class="QFrame" name="buttonFrame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -44,6 +41,16 @@
       <number>0</number>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="yesButton">
+        <property name="text">
+         <string>Yes</string>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="noButton">
         <property name="text">
@@ -51,36 +58,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="yesButton">
-        <property name="text">
-         <string>Yes</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="cancelButton">
-        <property name="text">
-         <string>Cancel</string>
-        </property>
-       </widget>
-      </item>
      </layout>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="title">
-     <property name="font">
-      <font>
-       <pointsize>15</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Update available</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignHCenter|Qt::AlignTop</set>
-     </property>
     </widget>
    </item>
    <item row="1" column="1">
@@ -94,107 +72,24 @@ Would you like to download and install it?</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QFrame" name="versionComparisonFrame">
+   <item row="0" column="1">
+    <widget class="QLabel" name="title">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+     <property name="text">
+      <string>Update available</string>
      </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <property name="lineWidth">
-      <number>0</number>
-     </property>
-     <widget class="QLabel" name="currentVerLabel">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>10</y>
-        <width>311</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Current version:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="newVerLabel">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>30</y>
-        <width>309</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>New version:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="changeLogLabel">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>50</y>
-        <width>311</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::RichText</enum>
-      </property>
-      <property name="openExternalLinks">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QProgressBar" name="progressBar">
-     <property name="value">
-      <number>0</number>
-     </property>
-     <property name="format">
-      <string notr="true">%p%</string>
+     <property name="alignment">
+      <set>Qt::AlignHCenter|Qt::AlignTop</set>
      </property>
     </widget>
    </item>
