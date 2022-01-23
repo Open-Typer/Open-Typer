@@ -2,7 +2,7 @@
  * updaterdialog.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,8 +33,6 @@ class UpdaterDialog;
  * \brief The UpdaterDialog class is a dialog used for program updates.
  *
  * \image html UpdaterDialog.png
- * \n
- * \image html UpdaterDialogProgress.png
  *
  * \see Updater
  */
@@ -42,27 +40,11 @@ class UpdaterDialog : public QDialog
 {
 	Q_OBJECT
 	public:
-		explicit UpdaterDialog(QWidget *parent = nullptr, bool downloading = false);
+		explicit UpdaterDialog(QWidget *parent = nullptr);
 		~UpdaterDialog();
-		void setCurrentVer(QString ver);
-		void setNewVer(QString ver);
-
-	protected:
-		void closeEvent(QCloseEvent *event);
-
-	signals:
-		/*! A signal, which is emitted when the user cancels the download. */
-		void cancelDownload();
 
 	private:
 		Ui::UpdaterDialog *ui;
-		bool _downloading;
-
-	private slots:
-		void abortDownload(void);
-
-	public slots:
-		void updateProgress(int percentage);
 };
 
 #endif // UPDATERDIALOG_H

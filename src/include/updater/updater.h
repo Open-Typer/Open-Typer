@@ -2,7 +2,7 @@
  * updater.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,8 @@
 #define UPDATER_H
 
 #include <QCoreApplication>
-#include <QMessageBox>
-#include <QSaveFile>
 #include <QFile>
+#include <QFileInfo>
 #include <QProcess>
 #include "core/net.h"
 #include "version.h"
@@ -37,8 +36,6 @@
  * \brief The Updater class is used to check for updates and download new versions of the program.
  *
  * \see UpdaterDialog
- * \see Downloader
- * \see Net
  */
 class Updater : public QObject
 {
@@ -46,16 +43,6 @@ class Updater : public QObject
 	public:
 		explicit Updater(QObject *parent = nullptr);
 		virtual ~Updater();
-	
-	private:
-		Downloader *versionHdw;
-		QString versionH;
-		QString readVersion(const QString versionHeader);
-		Downloader *updatedProgram;
-	
-	private slots:
-		void initUpdate();
-		void overwriteExecutable(void);
 };
 
 #endif // UPDATER_H
