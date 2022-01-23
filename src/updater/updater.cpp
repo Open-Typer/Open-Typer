@@ -20,12 +20,7 @@
 
 #include "updater/updater.h"
 
-/*!
- * Constructs Updater and starts maintenance tool to check for updates.\n
- * Version header file URL is stored in the _VERSION_H_URL macro.
- *
- * \see initUpdate()
- */
+/*! Constructs Updater and starts maintenance tool to check for updates. */
 Updater::Updater(QObject *parent) :
 	QObject(parent)
 {
