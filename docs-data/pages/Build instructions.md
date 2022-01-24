@@ -1,4 +1,4 @@
-# Building for GNU/Linux
+# Build instructions
 
 **Install dependencies (Ubuntu):**
 
