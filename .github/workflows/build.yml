@@ -162,10 +162,7 @@ jobs:
         version: 1.39.8
         actions-cache-folder: 'emsdk-cache'
     ## Build
-    #- run: source .ci/${{ matrix.os }}-build-wasm.sh
-    - run: |
-        qmake
-        make
+    - run: source .ci/common/build.sh wasm
       shell: bash
     - uses: actions/upload-artifact@v2
       with:
