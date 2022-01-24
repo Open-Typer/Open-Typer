@@ -1,34 +1,17 @@
-**Note:** Building on Windows is not covered on this page, but the procedure is same as with any Qt project.
-
 # Building for GNU/Linux
 
 **Install dependencies (Ubuntu):**
 
-`sudo apt-get install gcc make build-essential qt5-qmake qtbase5-dev`
+`sudo apt-get install gcc make build-essential`
 
-## Building a standalone binary
+Install Qt using the installer and make sure all required modules are installed (see the .pro file).
+
+As of writing, Open-Typer (officially) supports Qt 5.9.5 up to 5.15.8.
 
 ```
 qmake
+lrelease *.pro
 make -j$(nproc --all)
 ```
 
-**Installation:**
-
-`sudo mv Open-Typer /usr/local/bin/`
-
-## Building a DEB package:
-
-`./build-deb.sh`
-
-**Installation**:
-
-`sudo dpkg -i open-typer*.deb`
-
-# Building for Windows
-
-Use the `winbuild.sh` script.
-
-It will download M Cross Environment and build Qt, so the first build will take a while.
-
-`./winbuild.sh`
+You may need to use the platform-specifc deploy tool to add shared libraries, for example `windeployqt` for Windows and `macdeployqt` for MacOS.
