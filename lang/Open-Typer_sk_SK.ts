@@ -211,7 +211,7 @@
         <location filename="../ui/updater/updaterdialog.ui" line="67"/>
         <source>There&apos;s a new update available.
 Would you like to download and install it?</source>
-        <translation>Je dostupná nová aktualizácia.
+        <translation>Je dostupná nová verzia.
 Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
 </context>
