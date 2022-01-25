@@ -268,7 +268,7 @@ QString OpenTyper::loadConfig(QString configName)
 
 /*!
  * Initializes the specified exercise.
- * \param[in] lesson, sublesson, level Exercise location (lesson, sublesson and exercise ID).
+ * \param[in] lessonID, sublessonID, levelID Exercise location (lesson, sublesson and exercise ID).
  * \see loadConfig
  * \see configParser
  * \see levelFinalInit
