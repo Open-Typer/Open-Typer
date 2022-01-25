@@ -74,6 +74,9 @@ class OpenTyper : public QMainWindow
 		void updateStudent(void);
 		QString loadConfig(QString configName);
 		void startLevel(int lesson, int sublesson, int level);
+		void updateLessonList(void);
+		void loadLesson(int lessonID, int sublessonID);
+		void loadSublesson(int levelID);
 		void levelFinalInit(void);
 		void updateText(void);
 		QString level, displayLevel, finalDisplayLevel, input, displayInput, publicConfigName, oldConfigName;

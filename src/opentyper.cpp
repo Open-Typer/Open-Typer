@@ -236,20 +236,7 @@ QString OpenTyper::loadConfig(QString configName)
 		return loadConfig(configName);
 	}
 	// Update lessonSelectionList widget
-	ui->lessonSelectionList->clear();
-	QStringList lessons;
-	QString _lessonDesc;
-	int i, count = parser->lessonCount();
-	for(i=1; i <= count; i++)
-	{
-		_lessonDesc = configParser::parseDesc(parser->lessonDesc(i));
-		if(_lessonDesc == "")
-			lessons += tr("Lesson") + " " + QString::number(i);
-		else
-			lessons += tr("Lesson") + " " + QString::number(i) +
-				" " + _lessonDesc;
-	}
-	ui->lessonSelectionList->addItems(lessons);
+	updateLessonList();
 	if(customConfig)
 		configName = configPath;
 	// Save selected config to settings
@@ -282,8 +269,59 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 	// Check if -1 (last sublesson in current lesson) was passed
 	if(sublessonID == -1)
 		sublessonID = sublessonCount;
-	// Update sublesson list
+	// Update sublesson and exercise lists
 	// This must happen before level loading!
+	loadLesson(lessonID,sublessonID);
+	// Check if -1 (last level in current sublesson) was passed
+	if(levelID == -1)
+		levelID = parser->exerciseCount(lessonID,sublessonID+sublessonListStart);
+	// Load length extension
+	levelLengthExtension = parser->exerciseLineLength(lessonID,sublessonID+sublessonListStart,levelID);
+	// Load level text
+	if(customLevelLoaded)
+		level = customLevel;
+	else
+		level = parser->exerciseText(lessonID,
+			sublessonID+sublessonListStart,
+			levelID);
+	// Get lesson count
+	lessonCount = parser->lessonCount();
+	// Get level count (in current lesson)
+	levelCount = parser->exerciseCount(lessonID,sublessonID+sublessonListStart);
+	// Update level list
+	loadSublesson(levelID);
+	// Make lesson, sublesson and level info public
+	currentLesson=lessonID;
+	currentSublesson=sublessonID;
+	currentAbsoluteSublesson=sublessonID+sublessonListStart;
+	currentLevel=levelID;
+	// Init level
+	levelFinalInit();
+}
+
+/*! Updates list of lessons. */
+void OpenTyper::updateLessonList(void)
+{
+	ui->lessonSelectionList->clear();
+	QStringList lessons;
+	QString _lessonDesc;
+	int i, count = parser->lessonCount();
+	for(i=1; i <= count; i++)
+	{
+		_lessonDesc = configParser::parseDesc(parser->lessonDesc(i));
+		if(_lessonDesc == "")
+			lessons += tr("Lesson") + " " + QString::number(i);
+		else
+			lessons += tr("Lesson") + " " + QString::number(i) +
+				" " + _lessonDesc;
+	}
+	ui->lessonSelectionList->addItems(lessons);
+}
+
+/*! Updates list of sublessons. */
+void OpenTyper::loadLesson(int lessonID, int sublessonID)
+{
+	// Sublessons
 	ui->sublessonSelectionList->clear();
 	QStringList sublessons;
 	sublessonListStart = 0;
@@ -299,38 +337,20 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 				sublessonListStart++;
 		}
 	}
-	// Check if -1 (last level in current sublesson) was passed
-	if(levelID == -1)
-		levelID = parser->exerciseCount(lessonID,sublessonID+sublessonListStart);
 	ui->sublessonSelectionList->addItems(sublessons);
 	ui->sublessonSelectionList->setCurrentIndex(sublessonID-1);
-	// Load length extension
-	levelLengthExtension = parser->exerciseLineLength(lessonID,sublessonID+sublessonListStart,levelID);
-	// Load level text
-	if(customLevelLoaded)
-		level = customLevel;
-	else
-		level = parser->exerciseText(lessonID,
-			sublessonID+sublessonListStart,
-			levelID);
-	// Get lesson count
-	lessonCount = parser->lessonCount();
-	// Get level count (in current lesson)
-	levelCount = parser->exerciseCount(lessonID,sublessonID+sublessonListStart);
-	// Update level list
+}
+
+/*! Updates list of exercises. */
+void OpenTyper::loadSublesson(int levelID)
+{
+	// Exercises
 	ui->levelSelectionList->clear();
 	QStringList levels;
 	for(int i=1; i <= levelCount; i++)
 		levels += tr("Exercise") + " " + QString::number(i);
 	ui->levelSelectionList->addItems(levels);
 	ui->levelSelectionList->setCurrentIndex(levelID-1);
-	// Make lesson, sublesson and level info public
-	currentLesson=lessonID;
-	currentSublesson=sublessonID;
-	currentAbsoluteSublesson=sublessonID+sublessonListStart;
-	currentLevel=levelID;
-	// Init level
-	levelFinalInit();
 }
 
 /*!
@@ -1195,6 +1215,9 @@ void OpenTyper::changeLanguage(int index)
 		QCoreApplication::installTranslator(translator);
 	ui->retranslateUi(this);
 	refreshAll(false);
+	updateLessonList();
+	loadLesson(currentLesson,currentSublesson);
+	loadSublesson(currentLevel);
 }
 
 /*! Connected from zoomInButton.\n
