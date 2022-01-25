@@ -91,49 +91,49 @@
         <translation>Otvoriť vlastný balík</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="247"/>
-        <location filename="../src/opentyper.cpp" line="249"/>
+        <location filename="../src/opentyper.cpp" line="313"/>
+        <location filename="../src/opentyper.cpp" line="315"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="324"/>
+        <location filename="../src/opentyper.cpp" line="351"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="533"/>
+        <location filename="../src/opentyper.cpp" line="553"/>
         <source>Logged in as %1</source>
         <translation>Prihlásený ako %1</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="558"/>
+        <location filename="../src/opentyper.cpp" line="578"/>
         <source>Not logged in.</source>
         <translation>Neprihlásený.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="603"/>
+        <location filename="../src/opentyper.cpp" line="623"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="603"/>
-        <location filename="../src/opentyper.cpp" line="1144"/>
+        <location filename="../src/opentyper.cpp" line="623"/>
+        <location filename="../src/opentyper.cpp" line="1164"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="612"/>
+        <location filename="../src/opentyper.cpp" line="632"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="626"/>
+        <location filename="../src/opentyper.cpp" line="646"/>
         <source>Could not open the file.</source>
         <translation>Nepodarilo sa otvoriť súbor.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="1144"/>
+        <location filename="../src/opentyper.cpp" line="1164"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
