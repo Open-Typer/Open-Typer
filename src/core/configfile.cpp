@@ -219,12 +219,16 @@ QString configParser::parseDesc(QString desc)
 		if(desc[i] == '%')
 		{
 			i++;
-			if(bracket)
+			if(bracket && (desc[i] != '%'))
 				out += '}';
 			if(desc[i] == 'r')
 				out += QObject::tr("Revision");
 			else if(desc[i] == '%')
+			{
 				out += '%';
+				if(bracket)
+					out += '}';
+			}
 			// %b is reserved (it's used to separate 2 sets)
 			if(desc[i] == 's')
 			{
