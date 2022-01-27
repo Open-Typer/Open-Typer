@@ -175,8 +175,8 @@ void keyboardWidget::setKeyColor(QColor color, QColor borderColor)
 	}
 }
 
-/*! Resets color of a key. */
-void keyboardWidget::resetKeyColor(QFrame *targetKey)
+/*! Resets color of a key and returns new color. */
+QColor keyboardWidget::resetKeyColor(QFrame *targetKey)
 {
 	if(keyColors.contains(targetKey))
 	{
@@ -194,7 +194,9 @@ void keyboardWidget::resetKeyColor(QFrame *targetKey)
 			"QFrame { background-color: rgb(" + QString::number(color.red()) + ", " + QString::number(color.green()) + ", " + QString::number(color.blue()) + "); border: 1px solid rgb(" +
 			QString::number(borderColor.red()) + ", " + QString::number(borderColor.green()) + ", " + QString::number(borderColor.blue()) + "); }" +
 			"QLabel { border: 0px; }");
+		return color;
 	}
+	return QColor();
 }
 
 /*! Loads a keyboard layout. */
@@ -227,10 +229,11 @@ void keyboardWidget::highlightKey(int keyCode)
 	if(keyCodes.contains(keyCode))
 	{
 		QFrame *targetKey = keys.key(keyCode);
+		QColor oldColor = resetKeyColor(targetKey);
 		QColor keyBgColor = QColor(0,175,255);
-		keyBgColor = QColor::fromRgb(keyBgColor.red() + (128-keyBgColor.red())/1.25,
-		keyBgColor.green() + (128-keyBgColor.green())/1.25,
-		keyBgColor.blue() + (128-keyBgColor.blue())/1.25);
+		keyBgColor = QColor::fromRgb(keyBgColor.red() + (oldColor.red()-keyBgColor.red())/1.2,
+		keyBgColor.green() + (oldColor.green()-keyBgColor.green())/1.2,
+		keyBgColor.blue() + (oldColor.blue()-keyBgColor.blue())/1.2);
 		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] +
 			"QFrame { background-color: rgb(" + QString::number(keyBgColor.red()) + ", " + QString::number(keyBgColor.green()) + ", " + QString::number(keyBgColor.blue()) + "); }");
 	}
