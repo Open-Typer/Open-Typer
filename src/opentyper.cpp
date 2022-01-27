@@ -378,7 +378,6 @@ void OpenTyper::levelFinalInit(void)
 		level += '\n';
 	currentLine=0;
 	updateText();
-	setColors();
 	levelPos=0;
 	displayPos=0;
 	levelMistakes=0;
