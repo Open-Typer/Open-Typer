@@ -61,7 +61,7 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	addKey("Alt",Qt::Key_Alt,75);
 	addKey("",Qt::Key_Space,475);
 	addKey("Alt",Qt::Key_AltGr,75);
-	addKey("Ctrl",Qt::Key_Control,103);
+	addKey("Ctrl",-3,103); // Qt doesn't recognize left and right control; -3 is a special code for right control
 }
 
 /*! Adds a key. */
