@@ -241,7 +241,7 @@ QPoint keyboardWidget::findKey(QString label)
 	QList<QLabel*> labels = keyLabels.values();
 	for(int i=0; i < labels.count(); i++)
 	{
-		if(labels[i]->text().contains(label))
+		if(labels[i]->text().contains(label,Qt::CaseInsensitive))
 		{
 			QFrame *targetKey = keyLabels.key(labels[i]);
 			QPair<int,int> keyPos = keyMap.key(targetKey);
