@@ -691,7 +691,15 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		return;
 	if((currentMode == 1) && !timedExStarted)
 		return;
-	ui->keyboardFrame->highlightKey(event->key());
+	int highlightID = event->key();
+	if((input.count() < level.count()) && (event->key() == Qt::Key_Shift))
+	{
+		QPoint keyPos = ui->keyboardFrame->findKey(QString(displayLevel[displayPos]));
+		keyboardWidget::Finger finger = ui->keyboardFrame->keyFinger(keyPos.x(),keyPos.y());
+		if(keyboardWidget::fingerHand(finger) == 0)
+			highlightID = -2;
+	}
+	ui->keyboardFrame->highlightKey(highlightID);
 	if(keyboardUtils::isDeadKey(event->key()))
 	{
 		deadKeys++;
@@ -900,6 +908,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 void OpenTyper::keyRelease(QKeyEvent *event)
 {
 	ui->keyboardFrame->dehighlightKey(event->key());
+	if(event->key() == Qt::Key_Shift)
+		ui->keyboardFrame->dehighlightKey(-2);
 }
 
 /*! Connected from secLoop.\n
