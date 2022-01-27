@@ -33,6 +33,7 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	keys.clear();
 	keyLabels.clear();
 	keyMap.clear();
+	keyTypes.clear();
 	keyBaseStyleSheets.clear();
 	keyColors.clear();
 	keyFingerColors.clear();
@@ -119,6 +120,7 @@ void keyboardWidget::addKey(QString keyLabelText, int keyCode, int keyMinimumWid
 	keyLabels.insert(newKey,keyLabel);
 	// Save the key
 	keys.insert(newKey,keyCode);
+	keyTypes.insert(newKey,0);
 }
 
 /*! Starts a new row. */
@@ -150,6 +152,7 @@ void keyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode
 	keys.insert(targetKeyFrame,keyCode);
 	keys.insert(targetKeyFrame,shiftKeyCode);
 	keyLabels[targetKeyFrame]->setText(keyLabelText);
+	keyTypes[targetKeyFrame] = 1;
 }
 
 /*! Sets color of all keys. */
@@ -468,7 +471,7 @@ QPoint keyboardWidget::findKey(QString label)
 	QList<QLabel*> labels = keyLabels.values();
 	for(int i=0; i < labels.count(); i++)
 	{
-		if(labels[i]->text().contains(label,Qt::CaseInsensitive))
+		if((labels[i]->text().contains(label,Qt::CaseInsensitive)) && (keyTypes[keyLabels.key(labels[i])] == 1))
 		{
 			QFrame *targetKey = keyLabels.key(labels[i]);
 			QPair<int,int> keyPos = keyMap.key(targetKey);

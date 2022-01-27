@@ -69,6 +69,7 @@ class keyboardWidget : public QFrame
 		QVBoxLayout *mainLayout;
 		QMultiMap<QFrame*,int> keys;
 		QMap<QFrame*,QLabel*> keyLabels;
+		QMap<QFrame*,int> keyTypes;
 		QMap<QPair<int,int>,QFrame*> keyMap;
 		int currentRow, currentColumn;
 		QHBoxLayout *currentRowLayout = nullptr;
