@@ -971,7 +971,6 @@ void OpenTyper::updateCurrentTime(void)
 	}
 	else
 		ui->currentTimeNumber->setText(QString::number(time));
-	setColors();
 }
 
 /*! Loads theme from settings. */
