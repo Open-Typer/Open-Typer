@@ -78,8 +78,8 @@ void keyboardWidget::addKey(QString keyLabelText, int keyCode, int keyMinimumWid
 	newKey->setFrameShape(QFrame::WinPanel);
 	newKey->setFrameStyle(QFrame::WinPanel | QFrame::Raised);
 	currentRowLayout->addWidget(newKey);
-	keyMap.insert(QPair<int,int>(currentRow,currentColumn),newKey);
-	currentRow++;
+	keyMap.insert(QPair<int,int>(currentColumn,currentRow),newKey);
+	currentColumn++;
 	// Create key label
 	QHBoxLayout *keyLayout = new QHBoxLayout(newKey);
 	QLabel *keyLabel = new QLabel(keyLabelText,newKey);
@@ -111,9 +111,9 @@ void keyboardWidget::nextRow(void)
 }
 
 /*! Adds a layout-specific key. */
-void keyboardWidget::registerKey(int row, int column, QString keyLabelText, int keyCode, int shiftKeyCode)
+void keyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode)
 {
-	QPair<int,int> keyPos = QPair<int,int>(row,column);
+	QPair<int,int> keyPos = QPair<int,int>(x,y);
 	if(!keyMap.contains(keyPos))
 		return;
 	QFrame *targetKeyFrame = keyMap[keyPos];

@@ -75,7 +75,7 @@ class keyboardWidget : public QFrame
 		QHBoxLayout *currentRowLayout = nullptr;
 		void addKey(QString keyLabelText = "", int keyCode = -1, int keyMinimumWidth = 50);
 		void nextRow(void);
-		void registerKey(int row, int column, QString keyLabelText, int keyCode, int shiftKeyCode);
+		void registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode);
 };
 
 #endif // KEYBOARDWIDGET_H
