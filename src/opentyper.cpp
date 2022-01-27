@@ -827,6 +827,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		}
 		else
 		{
+			keyRelease(event);
 			levelInProgress=false;
 			lastTime = levelTimer.elapsed()/1000;
 			int speed = levelHits*(60/(levelTimer.elapsed()/1000.0));
