@@ -383,6 +383,17 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 					break;
 			}
 			break;
+		case 4:
+			switch(keyPos.x()) {
+				case 2:
+					// TODO: Add an option to set left thumb finger for space bar
+					return Finger_RightThumb;
+					break;
+				default:
+					return Finger_Invalid;
+					break;
+			}
+			break;
 		default:
 			return Finger_Invalid;
 			break;
