@@ -104,6 +104,15 @@ void OpenTyper::refreshAll(bool setLang)
 		QString configPath = loadConfig(configName);
 		if(configPath == NULL)
 			exit(1);
+		// Set up keyboard widget
+		if(customConfig)
+			ui->keyboardFrame->hide();
+		else if(publicConfigName == "sk_SK-QWERTZ-B1")
+		{
+			ui->keyboardFrame->loadLayout(QLocale::Slovak,QLocale::Slovakia,"QWERTZ");
+			ui->keyboardFrame->show();
+		}
+		// Reset position
 		currentLesson = 1;
 		currentSublesson = 1;
 		currentLevel = 1;
@@ -128,6 +137,10 @@ void OpenTyper::connectAll(void)
 		SIGNAL(keyPressed(QKeyEvent*)),
 		this,
 		SLOT(keyPress(QKeyEvent*)));
+	connect(ui->inputLabel,
+		SIGNAL(keyReleased(QKeyEvent*)),
+		this,
+		SLOT(keyRelease(QKeyEvent*)));
 	// Options button
 	connect(ui->optionsButton,
 		SIGNAL(clicked()),
@@ -678,6 +691,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		return;
 	if((currentMode == 1) && !timedExStarted)
 		return;
+	ui->keyboardFrame->highlightKey(event->key());
 	if(keyboardUtils::isDeadKey(event->key()))
 	{
 		deadKeys++;
@@ -876,6 +890,16 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				repeatLevel();
 		}
 	}
+}
+
+/*!
+ * Connected from inputLabelWidget#keyReleased signal.\n
+ * Dehighlights keys on the virtual keyboard.
+ * \see keyboardWidget
+ */
+void OpenTyper::keyRelease(QKeyEvent *event)
+{
+	ui->keyboardFrame->dehighlightKey(event->key());
 }
 
 /*! Connected from secLoop.\n
@@ -1093,6 +1117,19 @@ void OpenTyper::setColors(void)
 		settings->setValue("theme/bgblue",bgBlueColor);
 		ui->centralwidget->setStyleSheet("");
 	}
+	// Set keyboard color
+	ui->keyboardFrame->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");");
+	QColor keyBorderColor = ui->mainFrame->palette().color(QPalette::Text);
+	keyBorderColor = QColor::fromRgb(keyBorderColor.red() + (128-keyBorderColor.red()),
+		keyBorderColor.green() + (128-keyBorderColor.green()),
+		keyBorderColor.blue() + (128-keyBorderColor.blue()));
+	QColor keyBgColor = palette().color(QPalette::Window);
+	keyBgColor = QColor::fromRgb(keyBgColor.red() + (128-keyBgColor.red())/10,
+		keyBgColor.green() + (128-keyBgColor.green())/10,
+		keyBgColor.blue() + (128-keyBgColor.blue())/10);
+	ui->keyboardFrame->setKeyStyleSheet("QFrame { border-radius: 5px; background-color: rgb(" +
+		QString::number(keyBgColor.red()) + ", " + QString::number(keyBgColor.green()) + ", " + QString::number(keyBgColor.blue()) + "); border: 1px solid rgb(" +
+		QString::number(keyBorderColor.red()) + ", " + QString::number(keyBorderColor.green()) + ", " + QString::number(keyBorderColor.blue()) + "); } QLabel { border: 0px; }");
 }
 
 /*! Loads the style sheet of the selected theme. \see customizationOptions#updateTheme */
