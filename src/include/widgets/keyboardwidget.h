@@ -30,7 +30,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
-#include <QGraphicsColorizeEffect>
 #include <QTimer>
 
 /*!
@@ -73,6 +72,8 @@ class keyboardWidget : public QFrame
 		QMap<QPair<int,int>,QFrame*> keyMap;
 		int currentRow, currentColumn;
 		QHBoxLayout *currentRowLayout = nullptr;
+		QMap<QFrame*,QString> keyBaseStyleSheets;
+		QString keyStyleSheet = "";
 		void addKey(QString keyLabelText = "", int keyCode = -1, int keyMinimumWidth = 50);
 		void nextRow(void);
 		void registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode);

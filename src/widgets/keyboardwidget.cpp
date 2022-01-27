@@ -33,6 +33,7 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	keys.clear();
 	keyLabels.clear();
 	keyMap.clear();
+	keyBaseStyleSheets.clear();
 	// Numeric row
 	nextRow();
 	for(int i=0; i < 13; i++)
@@ -77,6 +78,8 @@ void keyboardWidget::addKey(QString keyLabelText, int keyCode, int keyMinimumWid
 	newKey->setMinimumWidth(keyMinimumWidth);
 	newKey->setFrameShape(QFrame::WinPanel);
 	newKey->setFrameStyle(QFrame::WinPanel | QFrame::Raised);
+	keyBaseStyleSheets.insert(newKey,"");
+	newKey->setStyleSheet(keyBaseStyleSheets[newKey] + keyStyleSheet);
 	currentRowLayout->addWidget(newKey);
 	keyMap.insert(QPair<int,int>(currentColumn,currentRow),newKey);
 	currentColumn++;
@@ -127,9 +130,10 @@ void keyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode
 /*! Sets style sheet of all keys. */
 void keyboardWidget::setKeyStyleSheet(QString styleSheet)
 {
+	keyStyleSheet = styleSheet;
 	QList<QFrame*> keyList = keys.keys();
 	for(int i=0; i < keyList.count(); i++)
-		keyList[i]->setStyleSheet(styleSheet);
+		keyList[i]->setStyleSheet(keyBaseStyleSheets[keyList[i]] + keyStyleSheet);
 }
 
 /*! Loads a keyboard layout. */
@@ -162,7 +166,12 @@ void keyboardWidget::highlightKey(int keyCode)
 	if(keyCodes.contains(keyCode))
 	{
 		QFrame *targetKey = keys.key(keyCode);
-		targetKey->setGraphicsEffect(new QGraphicsColorizeEffect);
+		QColor keyBgColor = QColor(0,175,255);
+		keyBgColor = QColor::fromRgb(keyBgColor.red() + (128-keyBgColor.red())/1.25,
+		keyBgColor.green() + (128-keyBgColor.green())/1.25,
+		keyBgColor.blue() + (128-keyBgColor.blue())/1.25);
+		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] + keyStyleSheet +
+			"QFrame { background-color: rgb(" + QString::number(keyBgColor.red()) + ", " + QString::number(keyBgColor.green()) + ", " + QString::number(keyBgColor.blue()) + "); }");
 	}
 }
 
@@ -173,7 +182,7 @@ void keyboardWidget::dehighlightKey(int keyCode)
 	if(keyCodes.contains(keyCode))
 	{
 		QFrame *targetKey = keys.key(keyCode);
-		targetKey->setGraphicsEffect(nullptr);
+		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] + keyStyleSheet);
 	}
 }
 
