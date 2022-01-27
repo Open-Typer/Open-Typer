@@ -1,0 +1,307 @@
+{
+	"keys": [
+		{
+			"x": 0,
+			"y": 0,
+			"label": ";\n°",
+			"code": 59,
+			"shiftCode": 16781912
+		},
+		{
+			"x": 1,
+			"y": 0,
+			"label": "+\n1",
+			"code": 43,
+			"shiftCode": 49
+		},
+		{
+			"x": 2,
+			"y": 0,
+			"label": "ľ\n2",
+			"code": 317,
+			"shiftCode": 50
+		},
+		{
+			"x": 3,
+			"y": 0,
+			"label": "š\n3",
+			"code": 352,
+			"shiftCode": 51
+		},
+		{
+			"x": 4,
+			"y": 0,
+			"label": "č\n4",
+			"code": 268,
+			"shiftCode": 52
+		},
+		{
+			"x": 5,
+			"y": 0,
+			"label": "ť\n5",
+			"code": 356,
+			"shiftCode": 53
+		},
+		{
+			"x": 6,
+			"y": 0,
+			"label": "ž\n6",
+			"code": 381,
+			"shiftCode": 54
+		},
+		{
+			"x": 7,
+			"y": 0,
+			"label": "ý\n7",
+			"code": 221,
+			"shiftCode": 55
+		},
+		{
+			"x": 8,
+			"y": 0,
+			"label": "á\n8",
+			"code": 193,
+			"shiftCode": 56
+		},
+		{
+			"x": 9,
+			"y": 0,
+			"label": "í\n9",
+			"code": 205,
+			"shiftCode": 57
+		},
+		{
+			"x": 10,
+			"y": 0,
+			"label": "é\n0",
+			"code": 201,
+			"shiftCode": 48
+		},
+		{
+			"x": 11,
+			"y": 0,
+			"label": "=\n%",
+			"code": 61,
+			"shiftCode": 37
+		},
+		{
+			"x": 12,
+			"y": 0,
+			"label": "´\nˇ",
+			"code": 16781905,
+			"shiftCode": 16781914
+		},
+		{
+			"x": 1,
+			"y": 1,
+			"label": "Q",
+			"code": 81
+		},
+		{
+			"x": 2,
+			"y": 1,
+			"label": "W",
+			"code": 87
+		},
+		{
+			"x": 3,
+			"y": 1,
+			"label": "E",
+			"code": 69
+		},
+		{
+			"x": 4,
+			"y": 1,
+			"label": "R",
+			"code": 82
+		},
+		{
+			"x": 5,
+			"y": 1,
+			"label": "T",
+			"code": 84
+		},
+		{
+			"x": 6,
+			"y": 1,
+			"label": "Z",
+			"code": 90
+		},
+		{
+			"x": 7,
+			"y": 1,
+			"label": "U",
+			"code": 85
+		},
+		{
+			"x": 8,
+			"y": 1,
+			"label": "I",
+			"code": 73
+		},
+		{
+			"x": 9,
+			"y": 1,
+			"label": "O",
+			"code": 79
+		},
+		{
+			"x": 10,
+			"y": 1,
+			"label": "P",
+			"code": 80
+		},
+		{
+			"x": 11,
+			"y": 1,
+			"label": "ú\n/",
+			"code": 218,
+			"shiftCode": 47
+		},
+		{
+			"x": 12,
+			"y": 1,
+			"label": "ä\n(",
+			"code": 196,
+			"shiftCode": 40
+		},
+		{
+			"x": 1,
+			"y": 2,
+			"label": "A",
+			"code": 65
+		},
+		{
+			"x": 2,
+			"y": 2,
+			"label": "S",
+			"code": 83
+		},
+		{
+			"x": 3,
+			"y": 2,
+			"label": "D",
+			"code": 68
+		},
+		{
+			"x": 4,
+			"y": 2,
+			"label": "F",
+			"code": 70
+		},
+		{
+			"x": 5,
+			"y": 2,
+			"label": "G",
+			"code": 71
+		},
+		{
+			"x": 6,
+			"y": 2,
+			"label": "H",
+			"code": 72
+		},
+		{
+			"x": 7,
+			"y": 2,
+			"label": "J",
+			"code": 74
+		},
+		{
+			"x": 8,
+			"y": 2,
+			"label": "K",
+			"code": 75
+		},
+		{
+			"x": 9,
+			"y": 2,
+			"label": "L",
+			"code": 76
+		},
+		{
+			"x": 10,
+			"y": 2,
+			"label": "ô\n\"",
+			"code": 212,
+			"shiftCode": 34
+		},
+		{
+			"x": 11,
+			"y": 2,
+			"label": "§\n!",
+			"code": 167,
+			"shiftCode": 33
+		},
+		{
+			"x": 12,
+			"y": 2,
+			"label": "ň\n)",
+			"code": 327,
+			"shiftCode": 41
+		},
+		{
+			"x": 1,
+			"y": 3,
+			"label": "Y",
+			"code": 89
+		},
+		{
+			"x": 2,
+			"y": 3,
+			"label": "X",
+			"code": 88
+		},
+		{
+			"x": 3,
+			"y": 3,
+			"label": "C",
+			"code": 67
+		},
+		{
+			"x": 4,
+			"y": 3,
+			"label": "V",
+			"code": 86
+		},
+		{
+			"x": 5,
+			"y": 3,
+			"label": "B",
+			"code": 66
+		},
+		{
+			"x": 6,
+			"y": 3,
+			"label": "N",
+			"code": 78
+		},
+		{
+			"x": 7,
+			"y": 3,
+			"label": "M",
+			"code": 77
+		},
+		{
+			"x": 8,
+			"y": 3,
+			"label": ",\n?",
+			"code": 44,
+			"shiftCode": 63
+		},
+		{
+			"x": 9,
+			"y": 3,
+			"label": ".\n:",
+			"code": 46,
+			"shiftCode": 58
+		},
+		{
+			"x": 10,
+			"y": 3,
+			"label": "-\n_",
+			"code": 45,
+			"shiftCode": 95
+		}
+	]
+}

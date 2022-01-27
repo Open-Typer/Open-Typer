@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/res/keyboard-layouts">
+        <file>sk_SK-QWERTZ.json</file>
+    </qresource>
+</RCC>

@@ -98,7 +98,8 @@ TRANSLATIONS += \
 
 RESOURCES += \
     res.qrc \
-    certs/certs.qrc
+    certs/certs.qrc \
+    res/keyboard-layouts/layouts.qrc
 
 RESOURCES += \
     dark-theme/dark-style.qrc \
