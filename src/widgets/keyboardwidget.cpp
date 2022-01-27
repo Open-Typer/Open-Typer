@@ -233,6 +233,147 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 					break;
 			}
 			break;
+		case 1:
+			switch(keyPos.x()) {
+				case 0:
+					return Finger_LeftPinky;
+					break;
+				case 1:
+					return Finger_LeftPinky;
+					break;
+				case 2:
+					return Finger_LeftRing;
+					break;
+				case 3:
+					return Finger_LeftMiddle;
+					break;
+				case 4:
+					return Finger_LeftIndex;
+					break;
+				case 5:
+					return Finger_LeftIndex;
+					break;
+				case 6:
+					return Finger_RightIndex;
+					break;
+				case 7:
+					return Finger_RightIndex;
+					break;
+				case 8:
+					return Finger_RightMiddle;
+					break;
+				case 9:
+					return Finger_RightRing;
+					break;
+				case 10:
+					return Finger_RightPinky;
+					break;
+				case 11:
+					return Finger_RightPinky;
+					break;
+				case 12:
+					return Finger_RightPinky;
+					break;
+				default:
+					return Finger_Invalid;
+					break;
+			}
+			break;
+		case 2:
+			switch(keyPos.x()) {
+				case 0:
+					return Finger_LeftPinky;
+					break;
+				case 1:
+					return Finger_LeftPinky;
+					break;
+				case 2:
+					return Finger_LeftRing;
+					break;
+				case 3:
+					return Finger_LeftMiddle;
+					break;
+				case 4:
+					return Finger_LeftIndex;
+					break;
+				case 5:
+					return Finger_LeftIndex;
+					break;
+				case 6:
+					return Finger_RightIndex;
+					break;
+				case 7:
+					return Finger_RightIndex;
+					break;
+				case 8:
+					return Finger_RightMiddle;
+					break;
+				case 9:
+					return Finger_RightRing;
+					break;
+				case 10:
+					return Finger_RightPinky;
+					break;
+				case 11:
+					return Finger_RightPinky;
+					break;
+				case 12:
+					return Finger_RightPinky;
+					break;
+				case 13:
+					return Finger_RightPinky;
+					break;
+				default:
+					return Finger_Invalid;
+					break;
+			}
+			break;
+		case 3:
+			switch(keyPos.x()) {
+				case 0:
+					return Finger_LeftPinky;
+					break;
+				case 1:
+					return Finger_LeftPinky;
+					break;
+				case 2:
+					return Finger_LeftRing;
+					break;
+				case 3:
+					return Finger_LeftMiddle;
+					break;
+				case 4:
+					return Finger_LeftIndex;
+					break;
+				case 5:
+					return Finger_LeftIndex;
+					break;
+				case 6:
+					return Finger_RightIndex;
+					break;
+				case 7:
+					return Finger_RightIndex;
+					break;
+				case 8:
+					return Finger_RightMiddle;
+					break;
+				case 9:
+					return Finger_RightRing;
+					break;
+				case 10:
+					return Finger_RightPinky;
+					break;
+				case 11:
+					return Finger_RightPinky;
+					break;
+				case 12:
+					return Finger_RightPinky;
+					break;
+				default:
+					return Finger_Invalid;
+					break;
+			}
+			break;
 		default:
 			return Finger_Invalid;
 			break;
