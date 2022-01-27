@@ -1138,9 +1138,7 @@ void OpenTyper::setColors(void)
 	keyBgColor = QColor::fromRgb(keyBgColor.red() + (128-keyBgColor.red())/10,
 		keyBgColor.green() + (128-keyBgColor.green())/10,
 		keyBgColor.blue() + (128-keyBgColor.blue())/10);
-	ui->keyboardFrame->setKeyStyleSheet("QFrame { border-radius: 5px; background-color: rgb(" +
-		QString::number(keyBgColor.red()) + ", " + QString::number(keyBgColor.green()) + ", " + QString::number(keyBgColor.blue()) + "); border: 1px solid rgb(" +
-		QString::number(keyBorderColor.red()) + ", " + QString::number(keyBorderColor.green()) + ", " + QString::number(keyBorderColor.blue()) + "); } QLabel { border: 0px; }");
+	ui->keyboardFrame->setKeyColor(keyBgColor,keyBorderColor);
 }
 
 /*! Loads the style sheet of the selected theme. \see customizationOptions#updateTheme */
