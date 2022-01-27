@@ -47,6 +47,24 @@ class keyboardWidget : public QFrame
 		void loadLayout(QLocale::Language language, QLocale::Country country, QString variant);
 		void highlightKey(int keyCode);
 		void dehighlightKey(int keyCode);
+		
+		enum Finger {
+			Finger_Invalid = 0,
+			Finger_LeftPinky = -5,
+			Finger_LeftRing = -4,
+			Finger_LeftMiddle = -3,
+			Finger_LeftIndex = -2,
+			Finger_LeftThumb = -1,
+			Finger_RightThumb = 1,
+			Finger_RightIndex = 2,
+			Finger_RightMiddle = 3,
+			Finger_RightRing = 4,
+			Finger_RightPinky = 5
+		};
+		
+		Finger keyFinger(int keyX, int keyY);
+		QPoint findKey(QString label);
+		static int fingerHand(keyboardWidget::Finger finger);
 
 	private:
 		QVBoxLayout *mainLayout;

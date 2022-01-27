@@ -54,7 +54,7 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	addKey("⇧ Shift",Qt::Key_Shift,125);
 	for(int i=0; i < 10; i++)
 		addKey();
-	addKey("Shift ⇧",Qt::Key_Shift,156);
+	addKey("Shift ⇧",-2,156); // Qt doesn't recognize left and right shift; -2 is a special code for right shift
 	// Bottom row
 	nextRow();
 	addKey("Ctrl",Qt::Key_Control,75);
@@ -150,6 +150,7 @@ void keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 		}
 	}
 }
+
 /*! Highlights a key. */
 void keyboardWidget::highlightKey(int keyCode)
 {
@@ -170,4 +171,101 @@ void keyboardWidget::dehighlightKey(int keyCode)
 		QFrame *targetKey = keys.key(keyCode);
 		targetKey->setGraphicsEffect(nullptr);
 	}
+}
+
+/*! Returns the finger that should be used to press the key. */
+keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
+{
+	if(!keyMap.contains(QPair<int,int>(keyX,keyY)))
+		return Finger_Invalid;
+	QPoint keyPos(keyX,keyY);
+	switch(keyPos.y()) {
+		case 0:
+			switch(keyPos.x()) {
+				case 0:
+					return Finger_LeftPinky;
+					break;
+				case 1:
+					return Finger_LeftPinky;
+					break;
+				case 2:
+					return Finger_LeftPinky;
+					break;
+				case 3:
+					return Finger_LeftRing;
+					break;
+				case 4:
+					return Finger_LeftMiddle;
+					break;
+				case 5:
+					return Finger_LeftIndex;
+					break;
+				case 6:
+					return Finger_LeftIndex;
+					break;
+				case 7:
+					return Finger_RightIndex;
+					break;
+				case 8:
+					return Finger_RightIndex;
+					break;
+				case 9:
+					return Finger_RightMiddle;
+					break;
+				case 10:
+					return Finger_RightRing;
+					break;
+				case 11:
+					return Finger_RightPinky;
+					break;
+				case 12:
+					return Finger_RightPinky;
+					break;
+				case 13:
+					return Finger_RightPinky;
+					break;
+				default:
+					return Finger_Invalid;
+					break;
+			}
+			break;
+		default:
+			return Finger_Invalid;
+			break;
+	}
+}
+
+/*! Finds a key that contains label and returns its position. */
+QPoint keyboardWidget::findKey(QString label)
+{
+	QList<QLabel*> labels = keyLabels.values();
+	for(int i=0; i < labels.count(); i++)
+	{
+		if(labels[i]->text().contains(label))
+		{
+			QFrame *targetKey = keyLabels.key(labels[i]);
+			QPair<int,int> keyPos = keyMap.key(targetKey);
+			return QPoint(keyPos.first,keyPos.second);
+		}
+	}
+	return QPoint();
+}
+
+/*!
+ * Returns the hand of a finger.\n
+ * -1 - Invalid\n
+ * 0 - Left\n
+ * 1 - Right
+ */
+int keyboardWidget::fingerHand(keyboardWidget::Finger finger)
+{
+	if(finger == Finger_Invalid)
+		return -1;
+	else if((finger == Finger_LeftThumb) ||
+		(finger == Finger_LeftIndex) ||
+		(finger == Finger_LeftMiddle) ||
+		(finger == Finger_LeftRing) || 
+		(finger == Finger_LeftPinky))
+		return 0;
+	return 1;
 }
