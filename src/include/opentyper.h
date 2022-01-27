@@ -62,6 +62,7 @@ class OpenTyper : public QMainWindow
 	public:
 		OpenTyper(QWidget *parent = nullptr);
 		~OpenTyper();
+		void setColors(void);
 
 	private:
 		Ui::OpenTyper *ui;
@@ -97,7 +98,6 @@ class OpenTyper : public QMainWindow
 		int paperRedColor, paperGreenColor, paperBlueColor;
 		int panelRedColor, panelGreenColor, panelBlueColor;
 		bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor, customPanelColor;
-		void setColors(void);
 		void updateTheme(void);
 		bool customLevelLoaded;
 		QString customLevel;
