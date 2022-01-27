@@ -43,7 +43,8 @@ SOURCES += \
     src/opentyper.cpp \
     src/updater/updaterdialog.cpp \
     src/widgets/inputlabel.cpp \
-    src/widgets/languagelist.cpp
+    src/widgets/languagelist.cpp \
+    src/widgets/keyboardwidget.cpp
 
 HEADERS += \
     src/include/core/utils.h \
@@ -70,7 +71,8 @@ HEADERS += \
     src/include/version.h \
     src/include/opentyper.h \
     src/include/widgets/inputlabel.h \
-    src/include/widgets/languagelist.h
+    src/include/widgets/languagelist.h \
+    src/include/widgets/keyboardwidget.h
 
 FORMS += \
     ui/options/behavior.ui \
