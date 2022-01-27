@@ -146,6 +146,8 @@ void keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 		for(int i=0; i < layoutKeys.count(); i++)
 		{
 			QJsonObject layoutKey = layoutKeys[i].toObject();
+			if(!layoutKey.contains("shiftCode"))
+				layoutKey["shiftCode"] = -1;
 			registerKey(layoutKey["x"].toInt(),layoutKey["y"].toInt(),layoutKey["label"].toString(),layoutKey["code"].toInt(),layoutKey["shiftCode"].toInt());
 		}
 	}
