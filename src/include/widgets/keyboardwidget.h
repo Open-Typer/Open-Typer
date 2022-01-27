@@ -49,7 +49,7 @@ class keyboardWidget : public QFrame
 		
 		enum Finger {
 			Finger_Invalid = 0,
-			Finger_LeftPinky = -5,
+			Finger_LeftLittle = -5,
 			Finger_LeftRing = -4,
 			Finger_LeftMiddle = -3,
 			Finger_LeftIndex = -2,
@@ -58,7 +58,7 @@ class keyboardWidget : public QFrame
 			Finger_RightIndex = 2,
 			Finger_RightMiddle = 3,
 			Finger_RightRing = 4,
-			Finger_RightPinky = 5
+			Finger_RightLittle = 5
 		};
 		
 		static Finger keyFinger(int keyX, int keyY);

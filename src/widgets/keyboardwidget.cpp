@@ -95,8 +95,8 @@ void keyboardWidget::addKey(QString keyLabelText, int keyCode, int keyMinimumWid
 		case Finger_RightRing:
 			keyColor = QColor(0,100,255);
 			break;
-		case Finger_LeftPinky:
-		case Finger_RightPinky:
+		case Finger_LeftLittle:
+		case Finger_RightLittle:
 			keyColor = QColor(255,25,25);
 			break;
 		default:
@@ -258,13 +258,13 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 		case 0:
 			switch(keyPos.x()) {
 				case 0:
-					return Finger_LeftPinky;
+					return Finger_LeftLittle;
 					break;
 				case 1:
-					return Finger_LeftPinky;
+					return Finger_LeftLittle;
 					break;
 				case 2:
-					return Finger_LeftPinky;
+					return Finger_LeftLittle;
 					break;
 				case 3:
 					return Finger_LeftRing;
@@ -291,13 +291,13 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 					return Finger_RightRing;
 					break;
 				case 11:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				case 12:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				case 13:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				default:
 					return Finger_Invalid;
@@ -307,10 +307,10 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 		case 1:
 			switch(keyPos.x()) {
 				case 0:
-					return Finger_LeftPinky;
+					return Finger_LeftLittle;
 					break;
 				case 1:
-					return Finger_LeftPinky;
+					return Finger_LeftLittle;
 					break;
 				case 2:
 					return Finger_LeftRing;
@@ -337,13 +337,13 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 					return Finger_RightRing;
 					break;
 				case 10:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				case 11:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				case 12:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				default:
 					return Finger_Invalid;
@@ -353,10 +353,10 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 		case 2:
 			switch(keyPos.x()) {
 				case 0:
-					return Finger_LeftPinky;
+					return Finger_LeftLittle;
 					break;
 				case 1:
-					return Finger_LeftPinky;
+					return Finger_LeftLittle;
 					break;
 				case 2:
 					return Finger_LeftRing;
@@ -383,16 +383,16 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 					return Finger_RightRing;
 					break;
 				case 10:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				case 11:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				case 12:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				case 13:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				default:
 					return Finger_Invalid;
@@ -402,10 +402,10 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 		case 3:
 			switch(keyPos.x()) {
 				case 0:
-					return Finger_LeftPinky;
+					return Finger_LeftLittle;
 					break;
 				case 1:
-					return Finger_LeftPinky;
+					return Finger_LeftLittle;
 					break;
 				case 2:
 					return Finger_LeftRing;
@@ -432,13 +432,13 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 					return Finger_RightRing;
 					break;
 				case 10:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				case 11:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				case 12:
-					return Finger_RightPinky;
+					return Finger_RightLittle;
 					break;
 				default:
 					return Finger_Invalid;
@@ -492,7 +492,7 @@ int keyboardWidget::fingerHand(keyboardWidget::Finger finger)
 		(finger == Finger_LeftIndex) ||
 		(finger == Finger_LeftMiddle) ||
 		(finger == Finger_LeftRing) || 
-		(finger == Finger_LeftPinky))
+		(finger == Finger_LeftLittle))
 		return 0;
 	return 1;
 }
