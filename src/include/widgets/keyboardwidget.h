@@ -61,7 +61,7 @@ class keyboardWidget : public QFrame
 			Finger_RightPinky = 5
 		};
 		
-		Finger keyFinger(int keyX, int keyY);
+		static Finger keyFinger(int keyX, int keyY);
 		QPoint findKey(QString label);
 		static int fingerHand(keyboardWidget::Finger finger);
 

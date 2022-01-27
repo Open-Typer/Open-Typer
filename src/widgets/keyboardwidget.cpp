@@ -189,8 +189,6 @@ void keyboardWidget::dehighlightKey(int keyCode)
 /*! Returns the finger that should be used to press the key. */
 keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 {
-	if(!keyMap.contains(QPair<int,int>(keyX,keyY)))
-		return Finger_Invalid;
 	QPoint keyPos(keyX,keyY);
 	switch(keyPos.y()) {
 		case 0:
