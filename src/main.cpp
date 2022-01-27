@@ -32,5 +32,6 @@ int main(int argc, char *argv[])
 	OpenTyper w;
 	w.setWindowState(Qt::WindowMaximized);
 	w.show();
+	w.setColors();
 	return a.exec();
 }
