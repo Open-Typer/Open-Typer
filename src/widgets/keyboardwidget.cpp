@@ -34,6 +34,8 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	keyLabels.clear();
 	keyMap.clear();
 	keyBaseStyleSheets.clear();
+	keyColors.clear();
+	keyFingerColors.clear();
 	// Numeric row
 	nextRow();
 	for(int i=0; i < 13; i++)
@@ -78,8 +80,31 @@ void keyboardWidget::addKey(QString keyLabelText, int keyCode, int keyMinimumWid
 	newKey->setMinimumWidth(keyMinimumWidth);
 	newKey->setFrameShape(QFrame::WinPanel);
 	newKey->setFrameStyle(QFrame::WinPanel | QFrame::Raised);
-	keyBaseStyleSheets.insert(newKey,"");
-	newKey->setStyleSheet(keyBaseStyleSheets[newKey] + keyStyleSheet);
+	Finger finger = keyFinger(currentColumn,currentRow);
+	QColor keyColor(0,0,0);
+	switch(finger) {
+		case Finger_LeftIndex:
+		case Finger_RightIndex:
+			keyColor = QColor(255,255,0);
+			break;
+		case Finger_LeftMiddle:
+		case Finger_RightMiddle:
+			keyColor = QColor(100,255,0);
+			break;
+		case Finger_LeftRing:
+		case Finger_RightRing:
+			keyColor = QColor(0,100,255);
+			break;
+		case Finger_LeftPinky:
+		case Finger_RightPinky:
+			keyColor = QColor(255,25,25);
+			break;
+		default:
+			break;
+	}
+	keyBaseStyleSheets.insert(newKey,"QFrame { border-radius: 5px; }");
+	keyFingerColors.insert(newKey,keyColor);
+	newKey->setStyleSheet(keyBaseStyleSheets[newKey]);
 	currentRowLayout->addWidget(newKey);
 	keyMap.insert(QPair<int,int>(currentColumn,currentRow),newKey);
 	currentColumn++;
@@ -127,13 +152,49 @@ void keyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode
 	keyLabels[targetKeyFrame]->setText(keyLabelText);
 }
 
-/*! Sets style sheet of all keys. */
-void keyboardWidget::setKeyStyleSheet(QString styleSheet)
+/*! Sets color of all keys. */
+void keyboardWidget::setKeyColor(QColor color, QColor borderColor)
 {
-	keyStyleSheet = styleSheet;
 	QList<QFrame*> keyList = keys.keys();
 	for(int i=0; i < keyList.count(); i++)
-		keyList[i]->setStyleSheet(keyBaseStyleSheets[keyList[i]] + keyStyleSheet);
+	{
+		QColor fingerColor = keyFingerColors[keyList[i]];
+		QColor newColor = color;
+		if(!((fingerColor.red() == 0) && (fingerColor.green() == 0) && (fingerColor.blue() == 0)))
+		{
+			newColor = QColor::fromRgb(color.red() + (fingerColor.red()-color.red())/7.5,
+				color.green() + (fingerColor.green()-color.green())/7.5,
+				color.blue() + (fingerColor.blue()-color.blue())/7.5);
+		}
+		keyList[i]->setStyleSheet(keyBaseStyleSheets[keyList[i]]);
+		keyList[i]->setStyleSheet(keyBaseStyleSheets[keyList[i]] +
+			"QFrame { background-color: rgb(" + QString::number(newColor.red()) + ", " + QString::number(newColor.green()) + ", " + QString::number(newColor.blue()) + "); border: 1px solid rgb(" +
+			QString::number(borderColor.red()) + ", " + QString::number(borderColor.green()) + ", " + QString::number(borderColor.blue()) + "); }" +
+			"QLabel { border: 0px; }");
+		keyColors[keyList[i]] = QPair<QColor,QColor>(color,borderColor);
+	}
+}
+
+/*! Resets color of a key. */
+void keyboardWidget::resetKeyColor(QFrame *targetKey)
+{
+	if(keyColors.contains(targetKey))
+	{
+		QColor color = keyColors[targetKey].first;
+		QColor borderColor = keyColors[targetKey].second;
+		QColor fingerColor = keyFingerColors[targetKey];
+		if(!((fingerColor.red() == 0) && (fingerColor.green() == 0) && (fingerColor.blue() == 0)))
+		{
+			color = QColor::fromRgb(color.red() + (fingerColor.red()-color.red())/7.5,
+				color.green() + (fingerColor.green()-color.green())/7.5,
+				color.blue() + (fingerColor.blue()-color.blue())/7.5);
+		}
+		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey]);
+		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] +
+			"QFrame { background-color: rgb(" + QString::number(color.red()) + ", " + QString::number(color.green()) + ", " + QString::number(color.blue()) + "); border: 1px solid rgb(" +
+			QString::number(borderColor.red()) + ", " + QString::number(borderColor.green()) + ", " + QString::number(borderColor.blue()) + "); }" +
+			"QLabel { border: 0px; }");
+	}
 }
 
 /*! Loads a keyboard layout. */
@@ -170,7 +231,7 @@ void keyboardWidget::highlightKey(int keyCode)
 		keyBgColor = QColor::fromRgb(keyBgColor.red() + (128-keyBgColor.red())/1.25,
 		keyBgColor.green() + (128-keyBgColor.green())/1.25,
 		keyBgColor.blue() + (128-keyBgColor.blue())/1.25);
-		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] + keyStyleSheet +
+		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] +
 			"QFrame { background-color: rgb(" + QString::number(keyBgColor.red()) + ", " + QString::number(keyBgColor.green()) + ", " + QString::number(keyBgColor.blue()) + "); }");
 	}
 }
@@ -182,7 +243,7 @@ void keyboardWidget::dehighlightKey(int keyCode)
 	if(keyCodes.contains(keyCode))
 	{
 		QFrame *targetKey = keys.key(keyCode);
-		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] + keyStyleSheet);
+		resetKeyColor(targetKey);
 	}
 }
 

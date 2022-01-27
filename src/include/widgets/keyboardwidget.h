@@ -42,7 +42,7 @@ class keyboardWidget : public QFrame
 	Q_OBJECT
 	public:
 		explicit keyboardWidget(QWidget *parent = nullptr);
-		void setKeyStyleSheet(QString styleSheet);
+		void setKeyColor(QColor color, QColor borderColor);
 		void loadLayout(QLocale::Language language, QLocale::Country country, QString variant);
 		void highlightKey(int keyCode);
 		void dehighlightKey(int keyCode);
@@ -73,10 +73,12 @@ class keyboardWidget : public QFrame
 		int currentRow, currentColumn;
 		QHBoxLayout *currentRowLayout = nullptr;
 		QMap<QFrame*,QString> keyBaseStyleSheets;
-		QString keyStyleSheet = "";
+		QMap<QFrame*,QPair<QColor,QColor>> keyColors;
+		QMap<QFrame*,QColor> keyFingerColors;
 		void addKey(QString keyLabelText = "", int keyCode = -1, int keyMinimumWidth = 50);
 		void nextRow(void);
 		void registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode);
+		void resetKeyColor(QFrame *targetKey);
 };
 
 #endif // KEYBOARDWIDGET_H
