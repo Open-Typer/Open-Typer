@@ -116,6 +116,8 @@ void keyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode
 	QPair<int,int> keyPos = QPair<int,int>(x,y);
 	if(!keyMap.contains(keyPos))
 		return;
+	if(!keyLabelText.contains("\n"))
+		keyLabelText += "\n";
 	QFrame *targetKeyFrame = keyMap[keyPos];
 	keys.insert(targetKeyFrame,keyCode);
 	keys.insert(targetKeyFrame,shiftKeyCode);
