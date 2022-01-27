@@ -76,8 +76,6 @@ void OpenTyper::refreshAll(bool setLang)
 		else
 			changeLanguage(langMgr->boxItems.indexOf(settings->value("main/language","").toString()));
 	}
-	// Set mode
-	changeMode(0);
 	// Config file (lesson pack) name
 	QString configName = settings->value("main/configfile","").toString();
 	if(configName == "")
@@ -90,14 +88,16 @@ void OpenTyper::refreshAll(bool setLang)
 	oldConfigName = configName;
 	// Custom pack
 	customConfig = settings->value("main/customconfig","false").toBool();
-	// Theme
-	loadTheme();
 	// Space new line
 	spaceNewline = settings->value("main/spacenewline","true").toBool();
 	// Error penalty
 	errorPenalty = settings->value("main/errorpenalty","10").toInt();
 	// Class monitor client
 	updateStudent();
+	// Theme
+	loadTheme();
+	// Set mode
+	changeMode(0);
 	// Load config and start
 	if(packChanged)
 	{
@@ -105,13 +105,11 @@ void OpenTyper::refreshAll(bool setLang)
 		if(configPath == NULL)
 			exit(1);
 		// Set up keyboard widget
+		ui->keyboardFrame->show();
 		if(customConfig)
 			ui->keyboardFrame->hide();
 		else if(publicConfigName == "sk_SK-QWERTZ-B1")
-		{
 			ui->keyboardFrame->loadLayout(QLocale::Slovak,QLocale::Slovakia,"QWERTZ");
-			ui->keyboardFrame->show();
-		}
 		// Reset position
 		currentLesson = 1;
 		currentSublesson = 1;
