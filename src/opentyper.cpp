@@ -116,6 +116,11 @@ void OpenTyper::refreshAll(bool setLang)
 		currentLevel = 1;
 		repeatLevel();
 	}
+	else
+	{
+		updateLessonList();
+		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
+	}
 }
 
 /*! Sets up all connections. */
@@ -1257,7 +1262,6 @@ void OpenTyper::changeLanguage(int index)
 		QCoreApplication::installTranslator(translator);
 	ui->retranslateUi(this);
 	refreshAll(false);
-	updateLessonList();
 	loadLesson(currentLesson,currentSublesson);
 	loadSublesson(currentLevel);
 }
