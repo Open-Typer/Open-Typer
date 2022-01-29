@@ -24,6 +24,7 @@ SOURCES += \
     src/core/net.cpp \
     src/core/packs.cpp \
     src/core/language.cpp \
+    src/initialsetup.cpp \
     src/levelsummary.cpp \
     src/options/connection.cpp \
     src/options/studentoptions.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
     src/include/core/net.h \
     src/include/core/packs.h \
     src/include/core/language.h \
+    src/include/initialsetup.h \
     src/include/levelsummary.h \
     src/include/options/connection.h \
     src/include/options/studentoptions.h \
@@ -75,6 +77,7 @@ HEADERS += \
     src/include/widgets/keyboardwidget.h
 
 FORMS += \
+    ui/initialsetup.ui \
     ui/options/behavior.ui \
     ui/options/connection.ui \
     ui/options/customization.ui \
