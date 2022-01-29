@@ -43,7 +43,7 @@ class keyboardWidget : public QFrame
 	public:
 		explicit keyboardWidget(QWidget *parent = nullptr);
 		void setKeyColor(QColor color, QColor borderColor);
-		void loadLayout(QLocale::Language language, QLocale::Country country, QString variant);
+		bool loadLayout(QLocale::Language language, QLocale::Country country, QString variant);
 		void highlightKey(int keyCode);
 		void dehighlightKey(int keyCode);
 		

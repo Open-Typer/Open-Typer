@@ -203,7 +203,7 @@ QColor keyboardWidget::resetKeyColor(QFrame *targetKey)
 }
 
 /*! Loads a keyboard layout. */
-void keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country country, QString variant)
+bool keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country country, QString variant)
 {
 	if(variant == "")
 		variant = "QWERTY";
@@ -222,7 +222,9 @@ void keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 				layoutKey["shiftCode"] = -1;
 			registerKey(layoutKey["x"].toInt(),layoutKey["y"].toInt(),layoutKey["label"].toString(),layoutKey["code"].toInt(),layoutKey["shiftCode"].toInt());
 		}
+		return true;
 	}
+	return false;
 }
 
 /*! Highlights a key. */
