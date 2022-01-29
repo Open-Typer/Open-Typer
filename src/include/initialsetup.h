@@ -32,7 +32,11 @@ namespace Ui {
 	class initialSetup;
 }
 
-/*! \brief The initialSetup class is a dialog for initial program configuration. */
+/*!
+ * \brief The initialSetup class is a dialog for initial program configuration.
+ *
+ * \image html initialSetup.png
+ */
 class initialSetup : public QDialog
 {
 	Q_OBJECT
