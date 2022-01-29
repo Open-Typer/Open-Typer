@@ -80,9 +80,13 @@ void OpenTyper::refreshAll(bool setLang)
 	QString configName = settings->value("main/configfile","").toString();
 	if(configName == "")
 	{
-		// No config file selected, use sk_SK-QWERTZ-B1
-		// TODO: Change this to en_US after a config for it is added.
-		configName = "sk_SK-QWERTZ-B1";
+		initialSetup dialog;
+		if(dialog.exec() == QDialog::Rejected)
+		{
+			exit(0);
+			return;
+		}
+		configName = settings->value("main/configfile","").toString();
 	}
 	bool packChanged = (configName != oldConfigName);
 	oldConfigName = configName;
@@ -270,11 +274,11 @@ QString OpenTyper::loadConfig(QString configName)
 		errBox.setText("Failed to open pack " + configPath);
 		errBox.setStyleSheet(styleSheet());
 		errBox.exec();
-		// Select default configuration
-		configName = "sk_SK-QWERTZ-B1";
-		customConfig=false;
-		settings->setValue("main/customconfig",customConfig);
-		return loadConfig(configName);
+		// Reset pack
+		settings->setValue("main/configfile","");
+		settings->setValue("main/customconfig",false);
+		settings->sync();
+		exit(2);
 	}
 	// Update lessonSelectionList widget
 	updateLessonList();

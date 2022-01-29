@@ -31,6 +31,7 @@
 #include <QFileDialog>
 #include <QTextCursor>
 #include <QTranslator>
+#include "initialsetup.h"
 #include "widgets/inputlabel.h"
 #include "widgets/languagelist.h"
 #include "updater/updater.h"
