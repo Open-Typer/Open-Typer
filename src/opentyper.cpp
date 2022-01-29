@@ -105,11 +105,36 @@ void OpenTyper::refreshAll(bool setLang)
 		if(configPath == NULL)
 			exit(1);
 		// Set up keyboard widget
-		ui->keyboardFrame->show();
 		if(customConfig)
 			ui->keyboardFrame->hide();
-		else if(publicConfigName == "sk_SK-QWERTZ-B1")
-			ui->keyboardFrame->loadLayout(QLocale::Slovak,QLocale::Slovakia,"QWERTZ");
+		else
+		{
+			// language_COUNTRY-VARIANT-SUFFIX
+			QString localeStr = "", variant = "";
+			bool localeRead = false;
+			for(int i=0; i < publicConfigName.count(); i++)
+			{
+				if(publicConfigName[i] == "-")
+				{
+					if(localeRead)
+						break;
+					else
+						localeRead = true;
+				}
+				else
+				{
+					if(localeRead)
+						variant += publicConfigName[i];
+					else
+						localeStr += publicConfigName[i];
+				}
+			}
+			QLocale locale(localeStr);
+			if(ui->keyboardFrame->loadLayout(locale.language(),locale.country(),variant))
+				ui->keyboardFrame->show();
+			else
+				ui->keyboardFrame->hide();
+		}
 		// Reset position
 		currentLesson = 1;
 		currentSublesson = 1;
