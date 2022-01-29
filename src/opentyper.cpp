@@ -1123,10 +1123,10 @@ void OpenTyper::setColors(void)
 		settings->setValue("theme/papergreen",paperGreenColor);
 		settings->setValue("theme/paperblue",paperBlueColor);
 		ui->paper->setStyleSheet("#paper {background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");}");
-		// Fix inputLabel automatically set background color
-		ui->inputLabel->setStyleSheet(
-			ui->inputLabel->styleSheet() + ";\nbackground-color: rgba(0,0,0,0)");
 	}
+	// Fix inputLabel automatically set background color
+	ui->inputLabel->setStyleSheet(
+		ui->inputLabel->styleSheet() + ";\nbackground-color: rgba(0,0,0,0)");
 	ui->levelSpace->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");");
 	ui->typingSpace->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");");
 	// Set panel color
