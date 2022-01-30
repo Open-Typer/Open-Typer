@@ -84,7 +84,7 @@ customizationOptions::customizationOptions(QWidget *parent) :
 		this,
 		SLOT(changeFullTheme(QListWidgetItem*)));
 	connect(ui->themeList,
-		SIGNAL(itemActivated(QListWidgetItem*)),
+		SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
 		this,
 		SLOT(changeFullTheme(QListWidgetItem*)));
 	// Back button
@@ -158,6 +158,7 @@ customizationOptions::~customizationOptions()
 /*! Initializes widgets and loads settings. */
 void customizationOptions::init(void)
 {
+	blockThemeSignal = true;
 	ui->themeBox->setCurrentIndex(settings->value("theme/theme","0").toInt());
 	// Font
 	setFont(settings->value("theme/font","Courier").toString(),
@@ -191,7 +192,6 @@ void customizationOptions::init(void)
 	panelRedColor = settings->value("theme/panelred","0").toInt();
 	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
 	panelBlueColor = settings->value("theme/panelblue","0").toInt();
-	blockThemeSignal = true;
 	setColors();
 	blockThemeSignal = false;
 }
@@ -207,7 +207,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 	if(themeMap["id"].toString() == "custom")
 	{
 		init();
-		ui->themeList->setResizeMode(QListView::Fixed);
+		ui->themeList->hide();
 		QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themesFrame,"geometry");
 		QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themeCustomizationFrame,"geometry");
 		QEventLoop animLoop;
@@ -238,7 +238,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		connect(animation2,&QPropertyAnimation::finished,&animLoop,&QEventLoop::quit);
 		animation2->start();
 		animLoop.exec(QEventLoop::ExcludeUserInputEvents);
-		ui->themeList->setResizeMode(QListView::Adjust);
+		settings->setValue("theme/fulltheme",themeMap["id"]);
 	}
 	else
 	{
@@ -318,10 +318,10 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		}
 		saveColorSettings();
 		setColors();
+		settings->setValue("theme/fulltheme",themeMap["id"]);
+		blockThemeSignal = false;
+		emit themeChanged();
 	}
-	settings->setValue("theme/fulltheme",themeMap["id"]);
-	blockThemeSignal = false;
-	emit themeChanged();
 }
 
 /*! Select currently set full theme. */
@@ -341,7 +341,6 @@ void customizationOptions::selectCurrentFullTheme(void)
  */
 void customizationOptions::goBack(void)
 {
-	ui->themeList->setResizeMode(QListView::Fixed);
 	QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themeCustomizationFrame,"geometry");
 	QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themesFrame,"geometry");
 	QEventLoop animLoop;
@@ -368,7 +367,7 @@ void customizationOptions::goBack(void)
 	animation2->start();
 	animLoop.exec(QEventLoop::ExcludeUserInputEvents);
 	ui->themeList->setResizeMode(QListView::Adjust);
-	ui->themeList->reset();
+	ui->themeList->show();
 	selectCurrentFullTheme();
 }
 
@@ -655,7 +654,6 @@ void customizationOptions::resetTextColors(void)
 	customLevelTextColor = false;
 	customInputTextColor = false;
 	saveColorSettings();
-	setColors();
 }
 
 /*!
@@ -744,7 +742,6 @@ void customizationOptions::resetBgPaperColors(void)
 	customPaperColor = false;
 	customPanelColor = false;
 	saveColorSettings();
-	setColors();
 }
 
 /*!
