@@ -43,7 +43,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Choose a pack of lessons for your keyboard layout:</string>
+      <string>Choose a pack with lessons for your keyboard layout:</string>
      </property>
     </widget>
    </item>
