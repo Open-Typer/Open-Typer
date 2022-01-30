@@ -70,7 +70,6 @@ HEADERS += \
     src/include/simplecolordialog.h \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
-    src/include/version.h \
     src/include/opentyper.h \
     src/include/widgets/inputlabel.h \
     src/include/widgets/languagelist.h \
