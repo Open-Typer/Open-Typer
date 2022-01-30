@@ -755,4 +755,6 @@ void customizationOptions::changeTheme(int index)
 {
 	settings->setValue("theme/theme",index);
 	setColors();
+	if(!blockThemeSignal)
+		init();
 }
