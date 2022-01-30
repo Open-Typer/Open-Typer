@@ -219,9 +219,21 @@ bool keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 		for(int i=0; i < layoutKeys.count(); i++)
 		{
 			QJsonObject layoutKey = layoutKeys[i].toObject();
-			if(!layoutKey.contains("shiftCode"))
-				layoutKey["shiftCode"] = -1;
-			registerKey(layoutKey["x"].toInt(),layoutKey["y"].toInt(),layoutKey["label"].toString(),layoutKey["code"].toInt(),layoutKey["shiftCode"].toInt());
+			QStringList keyStrings = layoutKey["label"].toString().split('\n');
+			int keyCode = -1, shiftKeyCode = -1;
+			for(int i=0; i < keyStrings.count(); i++)
+			{
+				QKeySequence keySequence(keyStrings[i]);
+				switch(i) {
+					case 0:
+						keyCode = keySequence[0];
+						break;
+					case 1:
+						shiftKeyCode = keySequence[0];
+						break;
+				}
+			}
+			registerKey(layoutKey["x"].toInt(),layoutKey["y"].toInt(),layoutKey["label"].toString(),keyCode,shiftKeyCode);
 		}
 		return true;
 	}
