@@ -1008,9 +1008,9 @@ void OpenTyper::updateCurrentTime(void)
 void OpenTyper::loadTheme(void)
 {
 	// Load font
-	setFont(settings->value("theme/font","Courier").toString(),
-		settings->value("theme/fontsize","14").toInt(),
-		settings->value("theme/fontbold","false").toBool(),
+	setFont(settings->value("theme/font","Courier New").toString(),
+		settings->value("theme/fontsize","20").toInt(),
+		settings->value("theme/fontbold","true").toBool(),
 		settings->value("theme/fontitalic","false").toBool(),
 		settings->value("theme/fontunderline","false").toBool());
 	// Load colors
@@ -1310,9 +1310,9 @@ void OpenTyper::changeLanguage(int index)
  */
 void OpenTyper::zoomIn(void)
 {
-	QString fontFamily = settings->value("theme/font","Courier").toString();
-	int fontSize = settings->value("theme/fontsize","14").toInt()+2;
-	bool fontBold = settings->value("theme/fontbold","false").toBool();
+	QString fontFamily = settings->value("theme/font","Courier New").toString();
+	int fontSize = settings->value("theme/fontsize","20").toInt()+2;
+	bool fontBold = settings->value("theme/fontbold","true").toBool();
 	bool fontItalic = settings->value("theme/fontitalic","false").toBool();
 	bool fontUnderline = settings->value("theme/fontunderline","false").toBool();
 	if(fontSize > 20)
@@ -1326,9 +1326,9 @@ void OpenTyper::zoomIn(void)
  */
 void OpenTyper::zoomOut(void)
 {
-	QString fontFamily = settings->value("theme/font","Courier").toString();
-	int fontSize = settings->value("theme/fontsize","14").toInt()-2;
-	bool fontBold = settings->value("theme/fontbold","false").toBool();
+	QString fontFamily = settings->value("theme/font","Courier New").toString();
+	int fontSize = settings->value("theme/fontsize","20").toInt()-2;
+	bool fontBold = settings->value("theme/fontbold","true").toBool();
 	bool fontItalic = settings->value("theme/fontitalic","false").toBool();
 	bool fontUnderline = settings->value("theme/fontunderline","false").toBool();
 	if(fontSize <= 0)
