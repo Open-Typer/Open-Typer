@@ -187,41 +187,16 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>Exercise options</source>
         <translation>Aufgaben Optionen</translation>
     </message>
-    <message>
-        <source>View</source>
-        <extracomment>View mode options</extracomment>
-        <translation>Ansicht</translation>
-    </message>
-    <message>
-        <source>Text view mode:</source>
-        <translation>Textansichtsmodus:</translation>
-    </message>
-    <message>
-        <source>Paper, whole text (default)</source>
-        <comment>Shows the entire text on a paper</comment>
-        <translation>Papier, Kompletter Text (Standard)</translation>
-    </message>
-    <message>
-        <source>Paper, 3 lines</source>
-        <comment>Shows current 3 lines of the text on a paper</comment>
-        <translation>Papier, 3 Zeilen</translation>
-    </message>
-    <message>
-        <source>Full screen, whole text</source>
-        <comment>Shows the entire text</comment>
-        <translation>Voller Bildschirm, Kompletter Text</translation>
-    </message>
-    <message>
-        <source>Full screen, 3 lines</source>
-        <comment>Shows current 3 lines</comment>
-        <translation>Voller Bildschirm, 3 Zeilen</translation>
-    </message>
 </context>
 <context>
     <name>builtinPacks</name>
     <message>
         <source>Unknown pack</source>
         <translation>Unbekanntes Paket</translation>
+    </message>
+    <message>
+        <source>auto-generated</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -363,6 +338,21 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>initialSetup</name>
+    <message>
+        <source>Welcome to Open-Typer!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a pack with lessons for your keyboard layout:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
