@@ -80,6 +80,7 @@ void OpenTyper::refreshAll(bool setLang)
 	QString configName = settings->value("main/configfile","").toString();
 	if(configName == "")
 	{
+		loadTheme();
 		initialSetup dialog;
 		if(dialog.exec() == QDialog::Rejected)
 		{
