@@ -53,6 +53,7 @@ class customizationOptions : public QWidget
 		Ui::customizationOptions *ui;
 		QSettings *settings;
 		QVector<QVariantMap> themes;
+		QListWidgetItem *lastItem = nullptr;
 		bool blockThemeSignal;
 		int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
 		int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;

@@ -204,6 +204,9 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 {
 	int index = ui->themeList->row(item);
 	QVariantMap themeMap = themes[index];
+	if(item == lastItem)
+		return;
+	lastItem = item;
 	if(themeMap["id"].toString() == "custom")
 	{
 		init();
@@ -369,6 +372,7 @@ void customizationOptions::goBack(void)
 	ui->themeList->setResizeMode(QListView::Adjust);
 	ui->themeList->show();
 	selectCurrentFullTheme();
+	lastItem = nullptr;
 }
 
 /*! Sets exercise text font and saves it in the settings. \see OpenTyper#setFont */
