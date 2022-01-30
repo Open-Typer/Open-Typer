@@ -68,14 +68,6 @@ OpenTyper::~OpenTyper()
  */
 void OpenTyper::refreshAll(bool setLang)
 {
-	// Set language
-	if(setLang)
-	{
-		if(settings->value("main/language","").toString() == "")
-			changeLanguage(0);
-		else
-			changeLanguage(langMgr->boxItems.indexOf(settings->value("main/language","").toString()));
-	}
 	// Config file (lesson pack) name
 	QString configName = settings->value("main/configfile","").toString();
 	if(configName == "")
@@ -149,6 +141,14 @@ void OpenTyper::refreshAll(bool setLang)
 	{
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
+	}
+	// Set language
+	if(setLang)
+	{
+		if(settings->value("main/language","").toString() == "")
+			changeLanguage(0,false);
+		else
+			changeLanguage(langMgr->boxItems.indexOf(settings->value("main/language","").toString()),false);
 	}
 }
 
@@ -1285,9 +1285,10 @@ void OpenTyper::openEditor(void)
 /*! Connected from optionsWindow#languageChanged.\n
  * Retranslates the UI in the selected language.
  * \param[in] index Index of the selected language in the list of languages
+ * \param[in] enableRefresh Toggles call to refreshAll()
  * \see languageManager
  */
-void OpenTyper::changeLanguage(int index)
+void OpenTyper::changeLanguage(int index, bool enableRefresh)
 {
 	QLocale targetLocale;
 	if(index == 0)
@@ -1299,7 +1300,8 @@ void OpenTyper::changeLanguage(int index)
 	if(translator->load(targetLocale,QLatin1String("Open-Typer"),QLatin1String("_"),QLatin1String(":/res/lang")))
 		QCoreApplication::installTranslator(translator);
 	ui->retranslateUi(this);
-	refreshAll(false);
+	if(enableRefresh)
+		refreshAll(false);
 	loadLesson(currentLesson,currentSublesson);
 	loadSublesson(currentLevel);
 }
