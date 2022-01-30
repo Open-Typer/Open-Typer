@@ -3,305 +3,237 @@
 		{
 			"x": 0,
 			"y": 0,
-			"label": ";\n°",
-			"code": 59,
-			"shiftCode": 16781912
+			"label": ";\n°"
 		},
 		{
 			"x": 1,
 			"y": 0,
-			"label": "+\n1",
-			"code": 43,
-			"shiftCode": 49
+			"label": "+\n1"
 		},
 		{
 			"x": 2,
 			"y": 0,
-			"label": "ľ\n2",
-			"code": 317,
-			"shiftCode": 50
+			"label": "ľ\n2"
 		},
 		{
 			"x": 3,
 			"y": 0,
-			"label": "š\n3",
-			"code": 352,
-			"shiftCode": 51
+			"label": "š\n3"
 		},
 		{
 			"x": 4,
 			"y": 0,
-			"label": "č\n4",
-			"code": 268,
-			"shiftCode": 52
+			"label": "č\n4"
 		},
 		{
 			"x": 5,
 			"y": 0,
-			"label": "ť\n5",
-			"code": 356,
-			"shiftCode": 53
+			"label": "ť\n5"
 		},
 		{
 			"x": 6,
 			"y": 0,
-			"label": "ž\n6",
-			"code": 381,
-			"shiftCode": 54
+			"label": "ž\n6"
 		},
 		{
 			"x": 7,
 			"y": 0,
-			"label": "ý\n7",
-			"code": 221,
-			"shiftCode": 55
+			"label": "ý\n7"
 		},
 		{
 			"x": 8,
 			"y": 0,
-			"label": "á\n8",
-			"code": 193,
-			"shiftCode": 56
+			"label": "á\n8"
 		},
 		{
 			"x": 9,
 			"y": 0,
-			"label": "í\n9",
-			"code": 205,
-			"shiftCode": 57
+			"label": "í\n9"
 		},
 		{
 			"x": 10,
 			"y": 0,
-			"label": "é\n0",
-			"code": 201,
-			"shiftCode": 48
+			"label": "é\n0"
 		},
 		{
 			"x": 11,
 			"y": 0,
-			"label": "=\n%",
-			"code": 61,
-			"shiftCode": 37
+			"label": "=\n%"
 		},
 		{
 			"x": 12,
 			"y": 0,
-			"label": "´\nˇ",
-			"code": 16781905,
-			"shiftCode": 16781914
+			"label": "´\nˇ"
 		},
 		{
 			"x": 1,
 			"y": 1,
-			"label": "Q",
-			"code": 81
+			"label": "Q"
 		},
 		{
 			"x": 2,
 			"y": 1,
-			"label": "W",
-			"code": 87
+			"label": "W"
 		},
 		{
 			"x": 3,
 			"y": 1,
-			"label": "E",
-			"code": 69
+			"label": "E"
 		},
 		{
 			"x": 4,
 			"y": 1,
-			"label": "R",
-			"code": 82
+			"label": "R"
 		},
 		{
 			"x": 5,
 			"y": 1,
-			"label": "T",
-			"code": 84
+			"label": "T"
 		},
 		{
 			"x": 6,
 			"y": 1,
-			"label": "Y",
-			"code": 89
+			"label": "Y"
 		},
 		{
 			"x": 7,
 			"y": 1,
-			"label": "U",
-			"code": 85
+			"label": "U"
 		},
 		{
 			"x": 8,
 			"y": 1,
-			"label": "I",
-			"code": 73
+			"label": "I"
 		},
 		{
 			"x": 9,
 			"y": 1,
-			"label": "O",
-			"code": 79
+			"label": "O"
 		},
 		{
 			"x": 10,
 			"y": 1,
-			"label": "P",
-			"code": 80
+			"label": "P"
 		},
 		{
 			"x": 11,
 			"y": 1,
-			"label": "ú\n/",
-			"code": 218,
-			"shiftCode": 47
+			"label": "ú\n/"
 		},
 		{
 			"x": 12,
 			"y": 1,
-			"label": "ä\n(",
-			"code": 196,
-			"shiftCode": 40
+			"label": "ä\n("
 		},
 		{
 			"x": 1,
 			"y": 2,
-			"label": "A",
-			"code": 65
+			"label": "A"
 		},
 		{
 			"x": 2,
 			"y": 2,
-			"label": "S",
-			"code": 83
+			"label": "S"
 		},
 		{
 			"x": 3,
 			"y": 2,
-			"label": "D",
-			"code": 68
+			"label": "D"
 		},
 		{
 			"x": 4,
 			"y": 2,
-			"label": "F",
-			"code": 70
+			"label": "F"
 		},
 		{
 			"x": 5,
 			"y": 2,
-			"label": "G",
-			"code": 71
+			"label": "G"
 		},
 		{
 			"x": 6,
 			"y": 2,
-			"label": "H",
-			"code": 72
+			"label": "H"
 		},
 		{
 			"x": 7,
 			"y": 2,
-			"label": "J",
-			"code": 74
+			"label": "J"
 		},
 		{
 			"x": 8,
 			"y": 2,
-			"label": "K",
-			"code": 75
+			"label": "K"
 		},
 		{
 			"x": 9,
 			"y": 2,
-			"label": "L",
-			"code": 76
+			"label": "L"
 		},
 		{
 			"x": 10,
 			"y": 2,
-			"label": "ô\n\"",
-			"code": 212,
-			"shiftCode": 34
+			"label": "ô\n\""
 		},
 		{
 			"x": 11,
 			"y": 2,
-			"label": "§\n!",
-			"code": 167,
-			"shiftCode": 33
+			"label": "§\n!"
 		},
 		{
 			"x": 12,
 			"y": 2,
-			"label": "ň\n)",
-			"code": 327,
-			"shiftCode": 41
+			"label": "ň\n)"
 		},
 		{
 			"x": 1,
 			"y": 3,
-			"label": "Z",
-			"code": 90
+			"label": "Z"
 		},
 		{
 			"x": 2,
 			"y": 3,
-			"label": "X",
-			"code": 88
+			"label": "X"
 		},
 		{
 			"x": 3,
 			"y": 3,
-			"label": "C",
-			"code": 67
+			"label": "C"
 		},
 		{
 			"x": 4,
 			"y": 3,
-			"label": "V",
-			"code": 86
+			"label": "V"
 		},
 		{
 			"x": 5,
 			"y": 3,
-			"label": "B",
-			"code": 66
+			"label": "B"
 		},
 		{
 			"x": 6,
 			"y": 3,
-			"label": "N",
-			"code": 78
+			"label": "N"
 		},
 		{
 			"x": 7,
 			"y": 3,
-			"label": "M",
-			"code": 77
+			"label": "M"
 		},
 		{
 			"x": 8,
 			"y": 3,
-			"label": ",\n?",
-			"code": 44,
-			"shiftCode": 63
+			"label": "\n?"
 		},
 		{
 			"x": 9,
 			"y": 3,
-			"label": ".\n:",
-			"code": 46,
-			"shiftCode": 58
+			"label": ".\n:"
 		},
 		{
 			"x": 10,
 			"y": 3,
-			"label": "-\n_",
-			"code": 45,
-			"shiftCode": 95
+			"label": "-\n_"
 		}
 	]
 }
