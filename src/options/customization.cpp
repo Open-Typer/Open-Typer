@@ -161,9 +161,9 @@ void customizationOptions::init(void)
 	blockThemeSignal = true;
 	ui->themeBox->setCurrentIndex(settings->value("theme/theme","0").toInt());
 	// Font
-	setFont(settings->value("theme/font","Courier").toString(),
-		settings->value("theme/fontsize","14").toInt(),
-		settings->value("theme/fontbold","false").toBool(),
+	setFont(settings->value("theme/font","Courier New").toString(),
+		settings->value("theme/fontsize","20").toInt(),
+		settings->value("theme/fontbold","true").toBool(),
 		settings->value("theme/fontitalic","false").toBool(),
 		settings->value("theme/fontunderline","false").toBool());
 	// Colors
@@ -255,15 +255,15 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		if(themeMap.contains("font"))
 			fontFamily = themeMap["font"].toString();
 		else
-			fontFamily = "Courier";
+			fontFamily = "Courier New";
 		if(themeMap.contains("fontSize"))
 			fontSize = themeMap["fontSize"].toInt();
 		else
-			fontSize = settings->value("theme/fontsize","14").toInt();
+			fontSize = settings->value("theme/fontsize","20").toInt();
 		if(themeMap.contains("fontBold"))
 			fontBold = themeMap["fontBold"].toBool();
 		else
-			fontBold = false;
+			fontBold = true;
 		if(themeMap.contains("fontItalic"))
 			fontItalic = themeMap["fontItalic"].toBool();
 		else
