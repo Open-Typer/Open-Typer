@@ -1141,6 +1141,15 @@ void OpenTyper::setColors(void)
 			"); } QCheckBox { background-color: rgb(" +
 			QString::number(panelRedColor) + ", " + QString::number(panelGreenColor) + ", " + QString::number(panelBlueColor) + "); }");
 	}
+	else
+	{
+		panelRedColor = ui->controlFrame->palette().color(QPalette::Base).red();
+		panelGreenColor = ui->controlFrame->palette().color(QPalette::Base).green();
+		panelBlueColor = ui->controlFrame->palette().color(QPalette::Base).blue();
+		settings->setValue("theme/panelred",panelRedColor);
+		settings->setValue("theme/panelgreen",panelGreenColor);
+		settings->setValue("theme/panelblue",panelBlueColor);
+	}
 	// Set background color
 	if(customBgColor)
 	{
