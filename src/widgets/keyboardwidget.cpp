@@ -149,6 +149,7 @@ void keyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode
 	if(!keyLabelText.contains("\n"))
 		keyLabelText += "\n";
 	QFrame *targetKeyFrame = keyMap[keyPos];
+	keys.remove(targetKeyFrame);
 	keys.insert(targetKeyFrame,keyCode);
 	keys.insert(targetKeyFrame,shiftKeyCode);
 	keyLabels[targetKeyFrame]->setText(keyLabelText);
