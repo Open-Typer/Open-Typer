@@ -68,6 +68,14 @@ OpenTyper::~OpenTyper()
  */
 void OpenTyper::refreshAll(bool setLang)
 {
+	// Set language
+	if(setLang)
+	{
+		if(settings->value("main/language","").toString() == "")
+			changeLanguage(0,false,false);
+		else
+			changeLanguage(langMgr->boxItems.indexOf(settings->value("main/language","").toString()),false,false);
+	}
 	// Config file (lesson pack) name
 	QString configName = settings->value("main/configfile","").toString();
 	if(configName == "")
@@ -141,14 +149,6 @@ void OpenTyper::refreshAll(bool setLang)
 	{
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
-	}
-	// Set language
-	if(setLang)
-	{
-		if(settings->value("main/language","").toString() == "")
-			changeLanguage(0,false);
-		else
-			changeLanguage(langMgr->boxItems.indexOf(settings->value("main/language","").toString()),false);
 	}
 }
 
@@ -1286,9 +1286,10 @@ void OpenTyper::openEditor(void)
  * Retranslates the UI in the selected language.
  * \param[in] index Index of the selected language in the list of languages
  * \param[in] enableRefresh Toggles call to refreshAll()
+ * \param[in] enableListReload Toggles lesson and sublesson list reload
  * \see languageManager
  */
-void OpenTyper::changeLanguage(int index, bool enableRefresh)
+void OpenTyper::changeLanguage(int index, bool enableRefresh, bool enableListReload)
 {
 	QLocale targetLocale;
 	if(index == 0)
@@ -1302,8 +1303,11 @@ void OpenTyper::changeLanguage(int index, bool enableRefresh)
 	ui->retranslateUi(this);
 	if(enableRefresh)
 		refreshAll(false);
-	loadLesson(currentLesson,currentSublesson);
-	loadSublesson(currentLevel);
+	if(enableListReload)
+	{
+		loadLesson(currentLesson,currentSublesson);
+		loadSublesson(currentLevel);
+	}
 }
 
 /*! Connected from zoomInButton.\n

@@ -128,7 +128,7 @@ class OpenTyper : public QMainWindow
 		void sublessonSelectionListIndexChanged(int index);
 		void levelSelectionListIndexChanged(int index);
 		void openExerciseFromFile(void);
-		void changeLanguage(int index, bool enableRefresh = true);
+		void changeLanguage(int index, bool enableRefresh = true, bool enableListReload = true);
 		void zoomIn(void);
 		void zoomOut(void);
 		void initTimedExercise(void);
