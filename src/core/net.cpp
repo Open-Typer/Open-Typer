@@ -48,6 +48,12 @@ monitorClient::~monitorClient()
 	socket->close();
 }
 
+/*! Closes the connection. */
+void monitorClient::close(void)
+{
+	socket->close();
+}
+
 /*! Enables or disables connection error dialogs. */
 void monitorClient::setErrorDialogs(bool errDialogs)
 {

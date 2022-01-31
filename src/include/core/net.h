@@ -40,6 +40,7 @@ class monitorClient : public QObject
 	public:
 		explicit monitorClient(bool errDialogs = true, QObject *parent = nullptr);
 		~monitorClient();
+		void close(void);
 		void setErrorDialogs(bool errDialogs);
 		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data, bool hang = true);
 		static QHostAddress serverAddress(void);
