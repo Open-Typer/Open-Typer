@@ -2,7 +2,7 @@
  * studentoptions.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,6 +53,7 @@ void studentOptions::auth(void)
 	{
 		username = ui->usernameEdit->text();
 		password = ui->passwordEdit->text();
+		client->close();
 		accept();
 	}
 	else
@@ -68,4 +69,5 @@ void studentOptions::auth(void)
 		anim->setEndValue(animGeometry);
 		anim->start();
 	}
+	client->close();
 }
