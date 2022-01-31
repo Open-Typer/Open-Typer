@@ -73,7 +73,6 @@ class OpenTyper : public QMainWindow
 		configParser *parser;
 		monitorClient *client;
 		QString studentUsername, studentPassword;
-		void updateStudent(void);
 		QString loadConfig(QString configName);
 		void startLevel(int lesson, int sublesson, int level);
 		void updateLessonList(void);
@@ -132,6 +131,7 @@ class OpenTyper : public QMainWindow
 		void zoomIn(void);
 		void zoomOut(void);
 		void initTimedExercise(void);
+		void updateStudent(void);
 		void showExerciseStats(void);
 
 	public slots:

@@ -158,6 +158,11 @@ void OpenTyper::connectAll(void)
 {
 	// Create timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
+	// Client disconnected signal
+	connect(client,
+		SIGNAL(disconnected()),
+		this,
+		SLOT(updateStudent()));
 	// **Timers**
 	// Updates current time in seconds
 	connect(secLoop,
