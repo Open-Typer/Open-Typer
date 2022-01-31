@@ -78,7 +78,7 @@ class OpenTyper : public QMainWindow
 		void updateLessonList(void);
 		void loadLesson(int lessonID, int sublessonID);
 		void loadSublesson(int levelID);
-		void levelFinalInit(void);
+		void levelFinalInit(bool updateClient = true);
 		void updateText(void);
 		QString level, displayLevel, finalDisplayLevel, input, displayInput, publicConfigName, oldConfigName;
 		int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentAbsoluteSublesson, currentLevel, currentLine, levelPos, displayPos, levelMistakes, totalHits, levelHits, levelLengthExtension;
@@ -111,6 +111,7 @@ class OpenTyper : public QMainWindow
 		int timedExHours, timedExMinutes, timedExSeconds;
 		bool timedExStarted;
 		bool blockInput;
+		void loadText(QByteArray text, bool includeNewLines = false, bool updateStudent = true);
 
 	private slots:
 		void loadTheme(void);
@@ -133,6 +134,7 @@ class OpenTyper : public QMainWindow
 		void initTimedExercise(void);
 		void updateStudent(void);
 		void showExerciseStats(void);
+		void loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines);
 
 	public slots:
 		void openEditor(void);

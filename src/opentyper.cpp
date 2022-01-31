@@ -163,6 +163,11 @@ void OpenTyper::connectAll(void)
 		SIGNAL(disconnected()),
 		this,
 		SLOT(updateStudent()));
+	// Client exercise received signal
+	connect(client,
+		&monitorClient::exerciseReceived,
+		this,
+		&OpenTyper::loadReceivedExercise);
 	// **Timers**
 	// Updates current time in seconds
 	connect(secLoop,
@@ -409,7 +414,7 @@ void OpenTyper::loadSublesson(int levelID)
  * \see startLevel
  * \see updateText
  */
-void OpenTyper::levelFinalInit(void)
+void OpenTyper::levelFinalInit(bool updateClient)
 {
 	// Init level
 	if(currentMode == 1)
@@ -438,7 +443,8 @@ void OpenTyper::levelFinalInit(void)
 	ui->inputLabel->setAcceptRichText(true);
 	ui->inputLabel->setHtml(displayInput);
 	// Update student session
-	updateStudent();
+	if(updateClient)
+		updateStudent();
 }
 
 /*!
@@ -698,25 +704,31 @@ void OpenTyper::openExerciseFromFile(void)
 			errBox.exec();
 			return;
 		}
-		level = "";
-		QTextStream in(&exerciseFile);
-		while (!in.atEnd())
-		{
-			QString line = in.readLine();
-			if(level == "")
-				level = line;
-			else
-			{
-				if(pconfig.includeNewLines)
-					level += "\n" + line;
-				else
-					level += " " + line;
-			}
-		}
-		customLevel = level;
-		customLevelLoaded=true;
-		levelFinalInit();
+		loadText(exerciseFile.readAll(),pconfig.includeNewLines);
 	}
+}
+
+/*! Loads custom text. */
+void OpenTyper::loadText(QByteArray text, bool includeNewLines, bool updateClient)
+{
+	level = "";
+	QTextStream in(text);
+	while (!in.atEnd())
+	{
+		QString line = in.readLine();
+		if(level == "")
+			level = line;
+		else
+		{
+			if(includeNewLines)
+				level += "\n" + line;
+			else
+				level += " " + line;
+		}
+	}
+	customLevel = level;
+	customLevelLoaded=true;
+	levelFinalInit(updateClient);
 }
 
 /*! Connected from inputLabelWidget#keyPressed signal.\n
@@ -1420,4 +1432,11 @@ void OpenTyper::showExerciseStats(void)
 		return;
 	dialog->setStyleSheet(styleSheet());
 	dialog->exec();
+}
+
+/*! Connected from client->exerciseReceived(). */
+void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines)
+{
+	levelLengthExtension = lineLength;
+	loadText(text,includeNewLines,false);
 }
