@@ -38,6 +38,7 @@ monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 	socket->ignoreSslErrors({QSslError(QSslError::HostNameMismatch,cert)});
 #endif
 	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
+	connect(socket,&QAbstractSocket::disconnected,this,&monitorClient::disconnected);
 	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
 }
 
@@ -156,7 +157,6 @@ void monitorClient::readResponse(void)
  */
 void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
 {
-	emit disconnected();
 	if(!errorDialogs)
 		return;
 	QMessageBox errBox;
