@@ -39,6 +39,7 @@ class monitorClient : public QObject
 	Q_OBJECT
 	public:
 		explicit monitorClient(bool errDialogs = true, QObject *parent = nullptr);
+		~monitorClient();
 		void setErrorDialogs(bool errDialogs);
 		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data, bool hang = true);
 		static QHostAddress serverAddress(void);
@@ -54,12 +55,15 @@ class monitorClient : public QObject
 		QSslSocket *socket;
 #endif
 		QByteArray response;
+		bool connected;
 		QByteArray convertData(bool *ok, QList<QByteArray> input);
 		QList<QByteArray> readData(QByteArray input);
 
 	signals:
 		/*! A signal, which is emitted after readResponse() reads the response. \see readResponse() */
 		void responseReady();
+		/*! A signal, which is emitted when connection is lost. */
+		void disconnected();
 
 	private slots:
 		void readResponse(void);

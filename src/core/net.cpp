@@ -22,9 +22,29 @@
 
 /*! Constructs monitorClient. */
 monitorClient::monitorClient(bool errDialogs, QObject *parent) :
-	QObject(parent)
+	QObject(parent),
+	connected(false)
 {
 	setErrorDialogs(errDialogs);
+#ifdef Q_OS_WASM
+	socket = new QTcpSocket;
+#else
+	socket = new QSslSocket;
+	QFile *certFile = new QFile(":certs/server.pem");
+	certFile->open(QIODevice::ReadOnly | QIODevice::Text);
+	QSslCertificate cert(certFile);
+	socket->addCaCertificate(cert);
+	socket->setProtocol(QSsl::TlsV1_2);
+	socket->ignoreSslErrors({QSslError(QSslError::HostNameMismatch,cert)});
+#endif
+	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
+	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
+}
+
+/*! Destroys the monitorClient object. */
+monitorClient::~monitorClient()
+{
+	socket->close();
 }
 
 /*! Enables or disables connection error dialogs. */
@@ -71,25 +91,17 @@ bool monitorClient::available(bool hang)
  */
 QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data, bool hang)
 {
+	connected = (socket->state() == QAbstractSocket::ConnectedState);
+	if(!connected)
+	{
 #ifdef Q_OS_WASM
-	socket = new QTcpSocket;
-	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
-	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
-	socket->connectToHost(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
-	bool connected = socket->waitForConnected();
+		socket->connectToHost(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
+		connected = socket->waitForConnected();
 #else
-	socket = new QSslSocket;
-	QFile *certFile = new QFile(":certs/server.pem");
-	certFile->open(QIODevice::ReadOnly | QIODevice::Text);
-	QSslCertificate cert(certFile);
-	socket->addCaCertificate(cert);
-	socket->setProtocol(QSsl::TlsV1_2);
-	socket->ignoreSslErrors({QSslError(QSslError::HostNameMismatch,cert)});
-	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
-	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
-	socket->connectToHostEncrypted(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
-	bool connected = socket->waitForEncrypted();
+		socket->connectToHostEncrypted(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
+		connected = socket->waitForEncrypted();
 #endif
+	}
 	if(connected)
 	{
 		bool ok;
@@ -100,10 +112,7 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 			reqList += data[i];
 		socket->write(convertData(&ok,reqList));
 		if(!ok)
-		{
-			socket->close();
 			return QList<QByteArray>({"requestError"});
-		}
 		// Wait for response
 		QApplication::setOverrideCursor(Qt::WaitCursor);
 		QTimer responseTimer;
@@ -117,7 +126,6 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 			reqLoop.exec(QEventLoop::ExcludeUserInputEvents);
 		else
 			reqLoop.exec();
-		socket->close();
 		QApplication::restoreOverrideCursor();
 		if(responseTimer.remainingTime() == -1)
 		{
@@ -148,6 +156,7 @@ void monitorClient::readResponse(void)
  */
 void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
 {
+	emit disconnected();
 	if(!errorDialogs)
 		return;
 	QMessageBox errBox;
