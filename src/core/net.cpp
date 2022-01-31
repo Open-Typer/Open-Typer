@@ -23,7 +23,8 @@
 /*! Constructs monitorClient. */
 monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 	QObject(parent),
-	connected(false)
+	connected(false),
+	waitingForResponse(false)
 {
 	setErrorDialogs(errDialogs);
 #ifdef Q_OS_WASM
@@ -117,6 +118,7 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 		reqList += method.toUtf8();
 		for(int i=0; i < data.count(); i++)
 			reqList += data[i];
+		waitingForResponse = true;
 		socket->write(convertData(&ok,reqList));
 		if(!ok)
 			return QList<QByteArray>({"requestError"});
@@ -133,6 +135,7 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 			reqLoop.exec(QEventLoop::ExcludeUserInputEvents);
 		else
 			reqLoop.exec();
+		waitingForResponse = false;
 		QApplication::restoreOverrideCursor();
 		if(responseTimer.remainingTime() == -1)
 		{
@@ -148,13 +151,25 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 
 /*!
  * Connected from socket->readyRead().\n
- * Reads the response and emits responseReady().
+ * Reads the response and emits responseReady().\n
+ * If there isn't any request in progress, it reads the data as a signal.
  * \see responseReady()
  */
 void monitorClient::readResponse(void)
 {
-	response = socket->readAll();
-	emit responseReady();
+	if(waitingForResponse)
+	{
+		response = socket->readAll();
+		emit responseReady();
+	}
+	else
+	{
+		QList<QByteArray> signal = readData(socket->readAll());
+		if(signal.count() == 0)
+			return;
+		if((signal[0] == "loadExercise") && (signal.count() >= 4))
+			emit exerciseReceived(signal[1],signal[2].toInt(),(signal[3]=="true"));
+	}
 }
 
 /*!

@@ -56,7 +56,7 @@ class monitorClient : public QObject
 		QSslSocket *socket;
 #endif
 		QByteArray response;
-		bool connected;
+		bool connected, waitingForResponse;
 		QByteArray convertData(bool *ok, QList<QByteArray> input);
 		QList<QByteArray> readData(QByteArray input);
 
@@ -65,6 +65,8 @@ class monitorClient : public QObject
 		void responseReady();
 		/*! A signal, which is emitted when connection is lost. */
 		void disconnected();
+		/*! A signal, which is emitted when an exercise is received from the server. */
+		void exerciseReceived(QByteArray, int, bool);
 
 	private slots:
 		void readResponse(void);
