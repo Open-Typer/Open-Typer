@@ -226,10 +226,10 @@ bool keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 				QKeySequence keySequence(keyStrings[i]);
 				switch(i) {
 					case 0:
-						keyCode = keySequence[0];
+						shiftKeyCode = keySequence[0];
 						break;
 					case 1:
-						shiftKeyCode = keySequence[0];
+						keyCode = keySequence[0];
 						break;
 				}
 			}
