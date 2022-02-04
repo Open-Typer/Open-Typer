@@ -1,4 +1,5 @@
 [![Build](https://github.com/Open-Typer/Open-Typer/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Open-Typer/Open-Typer/actions/workflows/build.yml)
+![Downloads](https://get-badge.herokuapp.com/Open-Typer/Open-Typer/total)
 
 # Open-Typer
 Open-Typer is a free and open source software for typewriting training and education.
