@@ -10,9 +10,9 @@ It works on Linux and Windows.
 * Custom exercise (from a text file).
 * Timed exercises.
 * Multiple languages (still growing).
-* Customization (text font and size; colors; dark theme; view mode).
+* Customization (text font and size; colors; dark theme).
 * Automatic updates on Windows (shows a dialog window when a new update is found).
-* No installation required (will change in v2.2).
+* Can be used with Open-Typer Class Monitor to save student results on one computer.
 
 ## Download
 Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typer/releases/latest) or [SourceForge](https://sourceforge.net/projects/open-typer/).
