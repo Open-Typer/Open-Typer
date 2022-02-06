@@ -817,6 +817,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	{
 		if(mistake)
 		{
+			deadKeys = 0;
 			if(event->key() == Qt::Key_Backspace)
 			{
 				ui->inputLabel->setHtml(displayInput);
