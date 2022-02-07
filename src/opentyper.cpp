@@ -713,6 +713,7 @@ void OpenTyper::loadText(QByteArray text, bool includeNewLines, bool updateClien
 {
 	level = "";
 	QTextStream in(text);
+	in.setCodec("UTF-8");
 	while (!in.atEnd())
 	{
 		QString line = in.readLine();
