@@ -34,10 +34,6 @@ class levelSummary;
  * They're all optional and unset values will be hidden.
  *
  * \image html levelSummary.png
- *
- * The dialog supports 2 modes.\n
- * The first mode asks the user whether to continue to the next exercise or repeat it.\n
- * The second mode shows the summary with an OK button. It can be enabled by calling showOK().
  */
 class levelSummary : public QDialog
 {
@@ -45,18 +41,13 @@ class levelSummary : public QDialog
 	public:
 		explicit levelSummary(QWidget *parent = nullptr);
 		~levelSummary();
-		void showOK(void);
 		void setTotalTime(double time);
 		void setHitCount(int hits);
 		void setHits(int hits);
 		void setMistakes(int mistakes);
-		bool showSummary;
 
 	private:
 		Ui::levelSummary *ui;
-
-	private slots:
-		void setShowSummary(bool value);
 };
 
 #endif // LEVELSUMMARY_H

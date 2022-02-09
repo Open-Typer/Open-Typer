@@ -27,36 +27,18 @@ levelSummary::levelSummary(QWidget *parent) :
 	ui(new Ui::levelSummary)
 {
 	ui->setupUi(this);
-	ui->okButton->hide();
 	ui->timeLabel->hide();
 	ui->hitsLabel->hide();
 	ui->hpmLabel->hide();
 	ui->mistakesLabel->hide();
-	ui->showSummaryCheckBox->setChecked(false);
-	showSummary = ui->showSummaryCheckBox->isChecked();
 	// Connections
-	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
-	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
-	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(accept()));
-	connect(ui->showSummaryCheckBox,SIGNAL(toggled(bool)),this,SLOT(setShowSummary(bool)));
+	connect(ui->previewButton,SIGNAL(clicked()),this,SLOT(accept()));
 }
 
 /*! Destroys the levelSummary object. */
 levelSummary::~levelSummary()
 {
 	delete ui;
-}
-
-/*!
- * Hides the "continue to the next exercise" question and shows an OK button.
- * \image html levelSummaryOK.png
- */
-void levelSummary::showOK(void)
-{
-	ui->yesButton->hide();
-	ui->noButton->hide();
-	ui->questionLabel->hide();
-	ui->okButton->show();
 }
 
 /*! Sets and shows the exercise time. */
@@ -89,10 +71,4 @@ void levelSummary::setMistakes(int mistakes)
 	ui->mistakesLabel->setText(
 		ui->mistakesLabel->text() + " " + QString::number(mistakes));
 	ui->mistakesLabel->show();
-}
-
-/*! Connected from showSummaryCheckBox->toggled(). */
-void levelSummary::setShowSummary(bool value)
-{
-	showSummary = value;
 }
