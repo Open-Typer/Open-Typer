@@ -902,47 +902,24 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			int ret = msgBox.exec();
 			if(ret == QDialog::Accepted)
 			{
-				if(currentLevel == levelCount)
-				{
-					if(currentSublesson == sublessonCount)
-					{
-						if(currentLesson == lessonCount)
-							currentLesson=1;
-						else
-							currentLesson++;
-						currentSublesson=1;
-					}
-					else
-						currentSublesson++;
-					currentLevel=1;
-				}
-				else
-					currentLevel++;
-				customLevelLoaded=false;
-			}
-			else
-			{
-				if(msgBox.showSummary)
-				{
-					// Load saved text
-					ui->inputLabel->setHtml(inputTextHtml);
-					ui->mistakeLabel->setHtml(mistakeTextHtml);
-					// Set width
-					ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
-					ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
-					// Set height
-					ui->inputLabel->setMinimumHeight(ui->inputLabel->document()->size().height());
-					ui->mistakeLabel->setMinimumHeight(ui->mistakeLabel->document()->size().height());
-					// Move cursor to the end
-					ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
-					ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
-					// Hide other widgets
-					ui->levelCurrentLineLabel->hide();
-					ui->textSeparationLine->hide();
-					ui->levelLabel->setText(""); // Using hide() breaks the layout, it's better to set empty text
-					blockInput = true;
-					return;
-				}
+				// Load saved text
+				ui->inputLabel->setHtml(inputTextHtml);
+				ui->mistakeLabel->setHtml(mistakeTextHtml);
+				// Set width
+				ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
+				ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
+				// Set height
+				ui->inputLabel->setMinimumHeight(ui->inputLabel->document()->size().height());
+				ui->mistakeLabel->setMinimumHeight(ui->mistakeLabel->document()->size().height());
+				// Move cursor to the end
+				ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+				ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+				// Hide other widgets
+				ui->levelCurrentLineLabel->hide();
+				ui->textSeparationLine->hide();
+				ui->levelLabel->setText(""); // Using hide() breaks the layout, it's better to set empty text
+				blockInput = true;
+				return;
 			}
 			if(customLevelLoaded)
 				levelFinalInit();
@@ -994,7 +971,6 @@ void OpenTyper::updateCurrentTime(void)
 				msgBox.setHitCount(totalHits);
 				msgBox.setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
 				msgBox.setMistakes(levelMistakes);
-				msgBox.showOK();
 				msgBox.setStyleSheet(styleSheet());
 				msgBox.exec();
 				// Switch to default mode
