@@ -739,6 +739,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 {
 	if(blockInput)
 		return;
+	if(event->isAutoRepeat())
+		return;
 	if((currentMode == 1) && !timedExStarted)
 		return;
 	int highlightID = event->key();
