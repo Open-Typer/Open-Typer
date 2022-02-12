@@ -39,5 +39,7 @@
         <file>res/images/themes/dark.png</file>
         <file>res/images/themes/green.png</file>
         <file>res/images/back.png</file>
+        <file>res/images/up.png</file>
+        <file>res/images/down.png</file>
     </qresource>
 </RCC>
