@@ -31,6 +31,10 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QTimer>
+#include <QPushButton>
+#include <QPropertyAnimation>
+#include <QSettings>
+#include "core/utils.h"
 
 /*!
  * \brief The keyboardWidget class provides a simple virtual keyboard widget.
@@ -67,6 +71,9 @@ class keyboardWidget : public QFrame
 
 	private:
 		QVBoxLayout *mainLayout;
+		QFrame *keyboardFrame;
+		QVBoxLayout *keyboardLayout;
+		QPushButton *closeButton;
 		QMultiMap<QFrame*,int> keys;
 		QMap<QFrame*,QLabel*> keyLabels;
 		QMap<QFrame*,int> keyTypes;
@@ -80,6 +87,12 @@ class keyboardWidget : public QFrame
 		void nextRow(void);
 		void registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode);
 		QColor resetKeyColor(QFrame *targetKey);
+		bool keyboardVisible;
+		QSettings *settings;
+
+	public slots:
+		void toggleKeyboard(void);
+		void setKeyboardVisible(bool visible, bool changeVisibility = true);
 };
 
 #endif // KEYBOARDWIDGET_H

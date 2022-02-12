@@ -24,12 +24,20 @@
 keyboardWidget::keyboardWidget(QWidget *parent) :
 	QFrame(parent),
 	mainLayout(new QVBoxLayout(this)),
+	keyboardFrame(new QFrame(this)),
+	keyboardLayout(new QVBoxLayout(keyboardFrame)),
 	currentRow(-1),
-	currentColumn(0)
+	currentColumn(0),
+	keyboardVisible(true)
 {
+	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	mainLayout->setSizeConstraint(QLayout::SetFixedSize);
-	mainLayout->setSpacing(3);
+	mainLayout->setSpacing(0);
+	keyboardLayout->setSpacing(3);
 	mainLayout->setContentsMargins(0,0,0,0);
+	keyboardLayout->setContentsMargins(0,0,0,0);
+	keyboardFrame->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
+	mainLayout->addWidget(keyboardFrame);
 	keys.clear();
 	keyLabels.clear();
 	keyMap.clear();
@@ -37,6 +45,13 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	keyBaseStyleSheets.clear();
 	keyColors.clear();
 	keyFingerColors.clear();
+	// Close button
+	closeButton = new QPushButton(this);
+	setKeyboardVisible(settings->value("view/keyboardvisible","true").toBool());
+	closeButton->setIconSize(QSize(32,32));
+	mainLayout->addWidget(closeButton);
+	closeButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+	mainLayout->setAlignment(closeButton,Qt::AlignCenter);
 	// Numeric row
 	nextRow();
 	for(int i=0; i < 13; i++)
@@ -66,6 +81,8 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	addKey("",Qt::Key_Space,475);
 	addKey("Alt",Qt::Key_AltGr,75);
 	addKey("Ctrl",-3,103); // Qt doesn't recognize left and right control; -3 is a special code for right control
+	// Connections
+	connect(closeButton,&QPushButton::clicked,this,&keyboardWidget::toggleKeyboard);
 }
 
 /*! Adds a key. */
@@ -135,7 +152,7 @@ void keyboardWidget::nextRow(void)
 	currentRowLayout->setSizeConstraint(QLayout::SetFixedSize);
 	currentRowLayout->setSpacing(3);
 	currentRowLayout->setContentsMargins(0,0,0,0);
-	mainLayout->addWidget(currentRowFrame);
+	keyboardLayout->addWidget(currentRowFrame);
 	currentRow++;
 	currentColumn = 0;
 }
@@ -513,4 +530,59 @@ int keyboardWidget::fingerHand(keyboardWidget::Finger finger)
 		(finger == Finger_LeftLittle))
 		return 0;
 	return 1;
+}
+
+/*! Toggles keyboard visibility. */
+void keyboardWidget::toggleKeyboard(void)
+{
+	QPropertyAnimation *anim = new QPropertyAnimation(keyboardFrame,"geometry");
+	anim->setDuration(250);
+	setKeyboardVisible(!keyboardVisible,false);
+	if(keyboardVisible)
+	{
+		anim->setEasingCurve(QEasingCurve::OutCubic);
+		closeButton->setEnabled(false);
+		keyboardFrame->show();
+		keyboardFrame->adjustSize();
+		QRect rect = keyboardFrame->geometry();
+		QRect endRect = rect;
+		rect.setY(rect.height());
+		rect.setHeight(0);
+		keyboardFrame->setGeometry(rect);
+		anim->setStartValue(rect);
+		anim->setEndValue(endRect);
+		connect(anim,&QPropertyAnimation::finished, [this]() { closeButton->setEnabled(true); });
+	}
+	else
+	{
+		anim->setEasingCurve(QEasingCurve::InCubic);
+		QRect rect = keyboardFrame->geometry();
+		anim->setStartValue(rect);
+		rect.setY(rect.height());
+		rect.setHeight(0);
+		anim->setEndValue(rect);
+		closeButton->setEnabled(false);
+		connect(anim,&QPropertyAnimation::finished,keyboardFrame,&QWidget::hide);
+		connect(anim,&QPropertyAnimation::finished, [this]() { closeButton->hide(); closeButton->setEnabled(true); closeButton->show(); }); // hide and then show to prevent geometry glitches
+	}
+	anim->start();
+}
+
+/*! Sets keyboard visibility. */
+void keyboardWidget::setKeyboardVisible(bool visible, bool changeVisibility)
+{
+	settings->setValue("view/keyboardvisible",visible);
+	if(visible)
+	{
+		closeButton->setIcon(QIcon(":/res/images/down.png"));
+		closeButton->setToolTip(tr("Hide keyboard"));
+	}
+	else
+	{
+		closeButton->setIcon(QIcon(":/res/images/up.png"));
+		closeButton->setToolTip(tr("Show keyboard"));
+	}
+	if(changeVisibility)
+		keyboardFrame->setVisible(visible);
+	keyboardVisible = visible;
 }
