@@ -1166,7 +1166,7 @@ void OpenTyper::setColors(void)
 		ui->centralwidget->setStyleSheet("");
 	}
 	// Set keyboard color
-	ui->keyboardFrame->setStyleSheet("background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ");");
+	ui->keyboardFrame->setStyleSheet("QFrame { background-color: rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + "); }");
 	QColor keyBorderColor = ui->mainFrame->palette().color(QPalette::Text);
 	keyBorderColor = QColor::fromRgb(keyBorderColor.red() + (128-keyBorderColor.red()),
 		keyBorderColor.green() + (128-keyBorderColor.green()),
