@@ -19,201 +19,15 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
-    <number>9</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>9</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>9</number>
+    <number>0</number>
    </property>
    <item row="1" column="0">
-    <widget class="QFrame" name="mainMenuFrame">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>75</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::WinPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Sunken</enum>
-     </property>
-     <widget class="QPushButton" name="newFileButton">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>51</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="text">
-       <string notr="true"/>
-      </property>
-      <property name="icon">
-       <iconset resource="../../res.qrc">
-        <normaloff>:/res/images/new.png</normaloff>:/res/images/new.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>26</width>
-        <height>26</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QLabel" name="newFileLabel">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>50</y>
-        <width>71</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>New</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="openFileButton">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>10</y>
-        <width>51</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="text">
-       <string notr="true"/>
-      </property>
-      <property name="icon">
-       <iconset resource="../../res.qrc">
-        <normaloff>:/res/images/open.png</normaloff>:/res/images/open.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>36</width>
-        <height>36</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QLabel" name="openFileLabel">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>50</y>
-        <width>71</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Open</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="closeLabel">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>50</y>
-        <width>71</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Close</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="closeButton">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>10</y>
-        <width>51</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="text">
-       <string notr="true"/>
-      </property>
-      <property name="icon">
-       <iconset resource="../../res.qrc">
-        <normaloff>:/res/images/close.png</normaloff>:/res/images/close.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>36</width>
-        <height>36</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="openPrebuiltButton">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>10</y>
-        <width>51</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="text">
-       <string notr="true"/>
-      </property>
-      <property name="icon">
-       <iconset resource="../../res.qrc">
-        <normaloff>:/res/images/packEditor.png</normaloff>:/res/images/packEditor.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>36</width>
-        <height>36</height>
-       </size>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="2" column="0">
     <widget class="QTabWidget" name="fileTabWidget">
      <property name="documentMode">
       <bool>true</bool>
@@ -227,23 +41,47 @@
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="QLabel" name="titleLabel">
-     <property name="font">
-      <font>
-       <pointsize>16</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string>Pack editor</string>
-     </property>
+    <widget class="QMenuBar" name="menuBar">
+     <widget class="QMenu" name="menuFile">
+      <property name="title">
+       <string>File</string>
+      </property>
+      <addaction name="newFileAction"/>
+      <addaction name="openFileAction"/>
+      <addaction name="openPrebuiltAction"/>
+      <addaction name="separator"/>
+      <addaction name="saveAction"/>
+      <addaction name="saveAsAction"/>
+     </widget>
+     <addaction name="menuFile"/>
     </widget>
    </item>
   </layout>
+  <action name="newFileAction">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="openFileAction">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="openPrebuiltAction">
+   <property name="text">
+    <string>Open built-in pack</string>
+   </property>
+  </action>
+  <action name="saveAction">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="saveAsAction">
+   <property name="text">
+    <string>Save As...</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../../res.qrc"/>
