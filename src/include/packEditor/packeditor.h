@@ -80,6 +80,7 @@ class packEditor : public QDialog
 		void createNewFile(void);
 		void openFile(void);
 		void openPrebuilt(void);
+		void tabChanged(int index);
 		void closeTab(int id);
 };
 

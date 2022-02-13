@@ -34,6 +34,8 @@ packEditor::packEditor(QWidget *parent) :
 	connect(ui->openFileAction,SIGNAL(triggered()),this,SLOT(openFile()));
 	// Open built-in pack action
 	connect(ui->openPrebuiltAction,SIGNAL(triggered()),this,SLOT(openPrebuilt()));
+	// Tab change
+	connect(ui->fileTabWidget,SIGNAL(currentChanged(int)),this,SLOT(tabChanged(int)));
 	// Tab close button
 	connect(ui->fileTabWidget,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
 	// Default values
@@ -150,6 +152,22 @@ void packEditor::setFileName(QString newFileName, QWidget *sourceWidget)
 }
 
 /*!
+ * Connected from fileTabWidget->currentChanged().
+ */
+void packEditor::tabChanged(int index)
+{
+	disconnect(ui->saveAction,nullptr,nullptr,nullptr);
+	disconnect(ui->saveAsAction,nullptr,nullptr,nullptr);
+	ui->saveAction->setEnabled(ui->fileTabWidget->count() != 0);
+	ui->saveAsAction->setEnabled(ui->fileTabWidget->count() != 0);
+	if(index != -1)
+	{
+		connect(ui->saveAction,&QAction::triggered,(packView*)ui->fileTabWidget->widget(index),&packView::save);
+		connect(ui->saveAsAction,&QAction::triggered,(packView*)ui->fileTabWidget->widget(index),&packView::saveAs);
+	}
+}
+
+/*!
  * Connected from fileTabWidget->tabCloseRequested().\n
  * Closes a tab.
  * \see packView#closeFile()
@@ -157,7 +175,12 @@ void packEditor::setFileName(QString newFileName, QWidget *sourceWidget)
 void packEditor::closeTab(int id)
 {
 	if(((packView*)ui->fileTabWidget->widget(id))->closeFile())
+	{
 		ui->fileTabWidget->removeTab(id);
+		disconnect(ui->saveAction,nullptr,nullptr,nullptr);
+		disconnect(ui->saveAsAction,nullptr,nullptr,nullptr);
+		((packView*)ui->fileTabWidget->widget(id))->deleteLater();
+	}
 }
 
 /*! Closes all tabs. */
