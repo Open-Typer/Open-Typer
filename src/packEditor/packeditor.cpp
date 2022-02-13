@@ -2,7 +2,7 @@
  * packeditor.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,20 +28,20 @@ packEditor::packEditor(QWidget *parent) :
 {
 	ui->setupUi(this);
 	setWindowState(Qt::WindowMaximized);
-	// New file button
-	connect(ui->newFileButton,SIGNAL(clicked()),this,SLOT(createNewFile()));
-	// Open file button
-	connect(ui->openFileButton,SIGNAL(clicked()),this,SLOT(openFile()));
-	// Open built-in pack button
-	connect(ui->openPrebuiltButton,SIGNAL(clicked()),this,SLOT(openPrebuilt()));
-	// Close button
-	connect(ui->closeButton,SIGNAL(clicked()),this,SLOT(close()));
+	// New file action
+	connect(ui->newFileAction,SIGNAL(triggered()),this,SLOT(createNewFile()));
+	// Open file action
+	connect(ui->openFileAction,SIGNAL(triggered()),this,SLOT(openFile()));
+	// Open built-in pack action
+	connect(ui->openPrebuiltAction,SIGNAL(triggered()),this,SLOT(openPrebuilt()));
 	// Tab close button
 	connect(ui->fileTabWidget,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
 	// Default values
 	newFile=false;
 	fileID=0;
 	defaultFileName = tr("Unnamed") + ".typer";
+	// Create new pack
+	createNewFile();
 }
 
 /*! Destroys the packEditor object. */
@@ -117,17 +117,6 @@ void packEditor::openPrebuilt(void)
 	}
 }
 
-/*!
- * Connected from closeButton->clicked().\n
- * Closes the editor window.
- * \see closeAll()
- */
-void packEditor::close(void)
-{
-	if(closeAll())
-		done(0);
-}
-
 /*! Closes duplicate tabs. */
 void packEditor::fixDuplicates(void)
 {
@@ -171,7 +160,7 @@ void packEditor::closeTab(int id)
 		ui->fileTabWidget->removeTab(id);
 }
 
-/*! Closes all tabs. \see close()*/
+/*! Closes all tabs. */
 bool packEditor::closeAll(void)
 {
 	int count = ui->fileTabWidget->count();
@@ -198,7 +187,6 @@ bool packEditor::closeAll(void)
 /*!
  * Overrides QDialog#closeEvent().\n
  * Closes all tabs before closing the window.
- * \see close()
  * \see closeAll()
  */
 void packEditor::closeEvent(QCloseEvent *event)
