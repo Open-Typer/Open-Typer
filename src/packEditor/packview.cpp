@@ -2,7 +2,7 @@
  * packview.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,10 +27,6 @@ packView::packView(QWidget *parent, int fileID_arg) :
 	ui(new Ui::packView)
 {
 	ui->setupUi(this);
-	// Save button
-	connect(ui->saveButton,SIGNAL(clicked()),this,SLOT(save()));
-	// Save button
-	connect(ui->saveAsButton,SIGNAL(clicked()),this,SLOT(saveAs()));
 	// Add buttons
 	connect(ui->newLessonButton,SIGNAL(clicked()),this,SLOT(addLesson()));
 	connect(ui->newSublessonButton,SIGNAL(clicked()),this,SLOT(addSublesson()));
