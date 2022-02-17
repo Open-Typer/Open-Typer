@@ -90,6 +90,9 @@ class keyboardWidget : public QFrame
 		bool keyboardVisible;
 		QSettings *settings;
 
+	protected:
+		void changeEvent(QEvent *event);
+
 	public slots:
 		void toggleKeyboard(void);
 		void setKeyboardVisible(bool visible, bool changeVisibility = true);

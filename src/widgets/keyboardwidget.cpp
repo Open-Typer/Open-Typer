@@ -586,3 +586,15 @@ void keyboardWidget::setKeyboardVisible(bool visible, bool changeVisibility)
 		keyboardFrame->setVisible(visible);
 	keyboardVisible = visible;
 }
+
+/*! Overrides QWidget::changeEvent(). */
+void keyboardWidget::changeEvent(QEvent *event)
+{
+	if(event->type() == QEvent::LanguageChange)
+	{
+		setKeyboardVisible(keyboardVisible,false);
+		event->accept();
+	}
+	else
+		QWidget::changeEvent(event);
+}
