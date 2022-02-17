@@ -364,6 +364,17 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
+    <name>keyboardWidget</name>
+    <message>
+        <source>Hide keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>languageManager</name>
     <message>
         <source>System (default)</source>
@@ -381,10 +392,6 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Gesamtzeit:</translation>
     </message>
     <message>
-        <source>Would you like to continue to the next exercise?</source>
-        <translation>Möchtest du mit der nächsten Aufgabe weiter machen?</translation>
-    </message>
-    <message>
         <source>Hits per minute:</source>
         <translation>Schläge pro Minute:</translation>
     </message>
@@ -397,14 +404,6 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Fehler:</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation>Ja</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>Nein</translation>
-    </message>
-    <message>
         <source>seconds</source>
         <translation>Sekunden</translation>
     </message>
@@ -413,8 +412,7 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Gesamtschläge:</translation>
     </message>
     <message>
-        <source>Show summary</source>
-        <extracomment>Show exercise summary after the dialog closes</extracomment>
+        <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -471,14 +469,6 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation>Schließen</translation>
-    </message>
-    <message>
-        <source>Pack editor</source>
-        <translation>Packet Editor</translation>
-    </message>
-    <message>
         <source>Unnamed</source>
         <translation>Unbenannt</translation>
     </message>
@@ -489,6 +479,22 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>All files</source>
         <translation>Alle Dateien</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open built-in pack</source>
+        <translation type="unfinished">Built-In Packet öffnen</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Sichern</translation>
+    </message>
+    <message>
+        <source>Save As...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -527,10 +533,6 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Save</source>
         <translation>Sichern</translation>
-    </message>
-    <message>
-        <source>Save as</source>
-        <translation>Sichern als</translation>
     </message>
     <message>
         <source>Exercise options:</source>
