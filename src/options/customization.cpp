@@ -212,8 +212,6 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		init();
 		ui->themeList->hide();
 		QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themesFrame,"geometry");
-		QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themeCustomizationFrame,"geometry");
-		QEventLoop animLoop;
 		int oldWidth2 = geometry().width();
 		// Animation 1
 		animation1->setEasingCurve(QEasingCurve::InQuad);
@@ -223,25 +221,24 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		animation1->setStartValue(widgetGeometry);
 		widgetGeometry.setWidth(0);
 		animation1->setEndValue(widgetGeometry);
-		connect(animation1,&QPropertyAnimation::finished,&animLoop,&QEventLoop::quit);
 		animation1->start();
-		animLoop.exec(QEventLoop::ExcludeUserInputEvents);
-		ui->themesFrame->hide();
-		widgetGeometry = ui->themesFrame->geometry();
-		widgetGeometry.setWidth(oldWidth);
-		ui->themesFrame->setGeometry(widgetGeometry);
-		// Animation 2
-		animation2->setEasingCurve(QEasingCurve::OutQuad);
-		animation2->setDuration(128);
-		ui->themeCustomizationFrame->show();
-		widgetGeometry = ui->themeCustomizationFrame->geometry();
-		widgetGeometry.setX(oldWidth2);
-		animation2->setStartValue(widgetGeometry);
-		animation2->setEndValue(ui->themeCustomizationFrame->geometry());
-		connect(animation2,&QPropertyAnimation::finished,&animLoop,&QEventLoop::quit);
-		animation2->start();
-		animLoop.exec(QEventLoop::ExcludeUserInputEvents);
-		settings->setValue("theme/fulltheme",themeMap["id"]);
+		connect(animation1,&QPropertyAnimation::finished,this,[oldWidth, oldWidth2, themeMap, this]() {
+			ui->themesFrame->hide();
+			QRect widgetGeometry = ui->themesFrame->geometry();
+			widgetGeometry.setWidth(oldWidth);
+			ui->themesFrame->setGeometry(widgetGeometry);
+			// Animation 2
+			QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themeCustomizationFrame,"geometry");
+			animation2->setEasingCurve(QEasingCurve::OutQuad);
+			animation2->setDuration(128);
+			ui->themeCustomizationFrame->show();
+			widgetGeometry = ui->themeCustomizationFrame->geometry();
+			widgetGeometry.setX(oldWidth2);
+			animation2->setStartValue(widgetGeometry);
+			animation2->setEndValue(ui->themeCustomizationFrame->geometry());
+			animation2->start();
+			settings->setValue("theme/fulltheme",themeMap["id"]);
+		});
 	}
 	else
 	{
@@ -345,8 +342,6 @@ void customizationOptions::selectCurrentFullTheme(void)
 void customizationOptions::goBack(void)
 {
 	QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themeCustomizationFrame,"geometry");
-	QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themesFrame,"geometry");
-	QEventLoop animLoop;
 	// Animation 1
 	animation1->setEasingCurve(QEasingCurve::InQuad);
 	QRect widgetGeometry = ui->themeCustomizationFrame->geometry();
@@ -354,25 +349,26 @@ void customizationOptions::goBack(void)
 	animation1->setStartValue(widgetGeometry);
 	widgetGeometry.setX(geometry().width());
 	animation1->setEndValue(widgetGeometry);
-	connect(animation1,&QPropertyAnimation::finished,&animLoop,&QEventLoop::quit);
 	animation1->start();
-	animLoop.exec(QEventLoop::ExcludeUserInputEvents);
-	ui->themeCustomizationFrame->hide();
-	// Animation 2
-	animation2->setEasingCurve(QEasingCurve::OutQuad);
-	animation2->setDuration(128);
-	ui->themesFrame->show();
-	widgetGeometry = ui->themesFrame->geometry();
-	widgetGeometry.setWidth(0);
-	animation2->setStartValue(widgetGeometry);
-	animation2->setEndValue(ui->themesFrame->geometry());
-	connect(animation2,&QPropertyAnimation::finished,&animLoop,&QEventLoop::quit);
-	animation2->start();
-	animLoop.exec(QEventLoop::ExcludeUserInputEvents);
-	ui->themeList->setResizeMode(QListView::Adjust);
-	ui->themeList->show();
-	selectCurrentFullTheme();
-	lastItem = nullptr;
+	connect(animation1, &QPropertyAnimation::finished, this, [this]() {
+		ui->themeCustomizationFrame->hide();
+		// Animation 2
+		QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themesFrame,"geometry");
+		animation2->setEasingCurve(QEasingCurve::OutQuad);
+		animation2->setDuration(128);
+		ui->themesFrame->show();
+		QRect widgetGeometry = ui->themesFrame->geometry();
+		widgetGeometry.setWidth(0);
+		animation2->setStartValue(widgetGeometry);
+		animation2->setEndValue(ui->themesFrame->geometry());
+		animation2->start();
+		connect(animation2, &QPropertyAnimation::finished, this, [this]() {
+			ui->themeList->setResizeMode(QListView::Adjust);
+			ui->themeList->show();
+			selectCurrentFullTheme();
+			lastItem = nullptr;
+		});
+	});
 }
 
 /*! Sets exercise text font and saves it in the settings. \see OpenTyper#setFont */
