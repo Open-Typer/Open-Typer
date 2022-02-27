@@ -105,8 +105,8 @@ void OpenTyper::refreshAll(bool setLang)
 	if(packChanged)
 	{
 		QString configPath = loadConfig(configName);
-		if(configPath == NULL)
-			exit(1);
+		if(configPath == "")
+			return;
 		// Set up keyboard widget
 		if(customConfig)
 			ui->keyboardFrame->hide();
@@ -281,15 +281,9 @@ QString OpenTyper::loadConfig(QString configName)
 	parser = new configParser;
 	if(!parser->open(configPath))
 	{
-		QMessageBox errBox;
-		errBox.setText("Failed to open pack " + configPath);
-		errBox.setStyleSheet(styleSheet());
-		errBox.exec();
-		// Reset pack
 		settings->setValue("main/configfile","");
-		settings->setValue("main/customconfig",false);
-		settings->sync();
-		exit(2);
+		refreshAll(false);
+		return QString();
 	}
 	// Update lessonSelectionList widget
 	updateLessonList();
@@ -553,13 +547,14 @@ void OpenTyper::previousLevel(void)
  */
 void OpenTyper::openOptions(void)
 {
-	optionsWindow *optionsWin = new optionsWindow;
+	optionsWindow *optionsWin = new optionsWindow(this);
 	optionsWin->setStyleSheet(styleSheet());
 	optionsWin->init();
 	connect(optionsWin,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
 	connect(optionsWin,SIGNAL(themeChanged()),this,SLOT(loadTheme()));
-	optionsWin->exec();
-	refreshAll(true);
+	optionsWin->open();
+	optionsWin->setWindowModality(Qt::WindowModal);
+	connect(optionsWin, &QDialog::finished, this, [this]() { show(); refreshAll(false); });
 }
 
 /*!
@@ -570,14 +565,15 @@ void OpenTyper::openOptions(void)
  */
 void OpenTyper::openStudentOptions(void)
 {
-	studentOptions dialog;
-	dialog.setStyleSheet(styleSheet());
-	if(dialog.exec() == QDialog::Accepted)
-	{
-		studentUsername = dialog.username;
-		studentPassword = dialog.password;
+	studentOptions *dialog = new studentOptions(this);
+	dialog->setStyleSheet(styleSheet());
+	dialog->setWindowModality(Qt::WindowModal);
+	connect(dialog, &QDialog::accepted, this, [dialog,this]() {
+		studentUsername = dialog->username;
+		studentPassword = dialog->password;
 		updateStudent();
-	}
+	});
+	dialog->open();
 }
 
 /*! Updates student session. */
@@ -681,30 +677,38 @@ void OpenTyper::openExerciseFromFile(void)
 	{
 		// Get selected file
 		QString fileName = openDialog.selectedFiles()[0];
-		QFile exerciseFile(fileName);
-		if(exerciseFile.size() > 2048) // Maximum size
+		QFile *exerciseFile = new QFile(fileName);
+		if(exerciseFile->size() > 2048) // Maximum size
 		{
-			QMessageBox errBox;
-			errBox.setText(tr("This file is too large!"));
-			errBox.setStyleSheet(styleSheet());
-			errBox.exec();
+			QMessageBox *errBox = new QMessageBox(this);
+			errBox->setText(tr("This file is too large!"));
+			errBox->setStyleSheet(styleSheet());
+			errBox->setWindowModality(Qt::WindowModal);
+			errBox->open();
 			return;
 		}
 		// Show paper config dialog
-		paperConfigDialog pconfig;
-		pconfig.setStyleSheet(styleSheet());
-		pconfig.exec();
-		levelLengthExtension = pconfig.lineLength;
-		// Read selected file
-		if(!exerciseFile.open(QIODevice::ReadOnly | QIODevice::Text))
-		{
-			QMessageBox errBox;
-			errBox.setText(tr("Could not open the file."));
-			errBox.setStyleSheet(styleSheet());
-			errBox.exec();
-			return;
-		}
-		loadText(exerciseFile.readAll(),pconfig.includeNewLines);
+		paperConfigDialog *pconfig = new paperConfigDialog(this);
+		pconfig->setStyleSheet(styleSheet());
+		pconfig->setWindowModality(Qt::WindowModal);
+		connect(pconfig, &QDialog::accepted, this, [pconfig,exerciseFile,this]() {
+			levelLengthExtension = pconfig->lineLength;
+			// Read selected file
+			if(!exerciseFile->open(QIODevice::ReadOnly | QIODevice::Text))
+			{
+				QMessageBox *errBox = new QMessageBox(this);
+				errBox->setText(tr("Could not open the file."));
+				errBox->setStyleSheet(styleSheet());
+				errBox->setWindowModality(Qt::WindowModal);
+				errBox->open();
+				exerciseFile->deleteLater();
+				return;
+			}
+			loadText(exerciseFile->readAll(),pconfig->includeNewLines);
+			exerciseFile->close();
+			exerciseFile->deleteLater();
+		});
+		pconfig->open();
 	}
 }
 
@@ -896,14 +900,13 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			else if(!customLevelLoaded && !customConfig)
 				historyParser::addHistoryEntry(publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,
 					{QString::number(realSpeed),QString::number(levelMistakes),QString::number(time)});
-			levelSummary msgBox;
-			msgBox.setTotalTime(time);
-			msgBox.setHits(speed);
-			msgBox.setMistakes(levelMistakes);
-			msgBox.setStyleSheet(styleSheet());
-			int ret = msgBox.exec();
-			if(ret == QDialog::Accepted)
-			{
+			levelSummary *msgBox = new levelSummary(this);
+			msgBox->setTotalTime(time);
+			msgBox->setHits(speed);
+			msgBox->setMistakes(levelMistakes);
+			msgBox->setStyleSheet(styleSheet());
+			msgBox->setWindowModality(Qt::WindowModal);
+			connect(msgBox, &QDialog::accepted, this, [this]() {
 				// Load saved text
 				ui->inputLabel->setHtml(inputTextHtml);
 				ui->mistakeLabel->setHtml(mistakeTextHtml);
@@ -921,12 +924,14 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				ui->textSeparationLine->hide();
 				ui->levelLabel->setText(""); // Using hide() breaks the layout, it's better to set empty text
 				blockInput = true;
-				return;
-			}
-			if(customLevelLoaded)
-				levelFinalInit();
-			else
-				repeatLevel();
+			});
+			connect(msgBox, &QDialog::rejected, this, [this]() {
+				if(customLevelLoaded)
+					levelFinalInit();
+				else
+					repeatLevel();
+			});
+			msgBox->open();
 		}
 	}
 }
@@ -965,19 +970,42 @@ void OpenTyper::updateCurrentTime(void)
 		{
 			if(timedExStarted)
 			{
-				// Show summary
-				levelInProgress=false;
-				lastTime = levelTimer.elapsed()/1000;
-				levelSummary msgBox;
-				msgBox.setTotalTime(levelTimer.elapsed()/1000);
-				msgBox.setHitCount(totalHits);
-				msgBox.setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
-				msgBox.setMistakes(levelMistakes);
-				msgBox.setStyleSheet(styleSheet());
-				msgBox.exec();
-				// Switch to default mode
-				changeMode(0);
-				repeatLevel();
+				if(levelInProgress)
+				{
+					// Show summary
+					levelInProgress=false;
+					lastTime = levelTimer.elapsed()/1000;
+					levelSummary *msgBox = new levelSummary(this);
+					ui->timedExCountdownLabel->hide();
+					msgBox->setTotalTime(levelTimer.elapsed()/1000);
+					msgBox->setHitCount(totalHits);
+					msgBox->setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
+					msgBox->setMistakes(levelMistakes);
+					msgBox->setStyleSheet(styleSheet());
+					msgBox->setWindowModality(Qt::WindowModal);
+					connect(msgBox, &QDialog::accepted, this, [this]() {
+						// Load saved text
+						ui->inputLabel->setHtml(inputTextHtml);
+						ui->mistakeLabel->setHtml(mistakeTextHtml);
+						// Set width
+						ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
+						ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
+						// Set height
+						ui->inputLabel->setMinimumHeight(ui->inputLabel->document()->size().height());
+						ui->mistakeLabel->setMinimumHeight(ui->mistakeLabel->document()->size().height());
+						// Move cursor to the end
+						ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+						ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+						// Hide other widgets
+						ui->levelCurrentLineLabel->hide();
+						ui->textSeparationLine->hide();
+						ui->levelLabel->setText(""); // Using hide() breaks the layout, it's better to set empty text
+						blockInput = true;
+					});
+					connect(msgBox, &QDialog::rejected, this, [this]() { repeatLevel(); } );
+					connect(msgBox, &QDialog::finished, this, [this]() { changeMode(0);; } );
+					msgBox->open();
+				}
 			}
 			else
 			{
@@ -993,7 +1021,10 @@ void OpenTyper::updateCurrentTime(void)
 		{
 			time = levelTimer.elapsed()/1000;
 			limitTime.setHMS(timedExHours,timedExMinutes,timedExSeconds);
-			ui->timedExTime->setTime(limitTime.addSecs(time*(-1)));
+			if(levelInProgress)
+				ui->timedExTime->setTime(limitTime.addSecs(time*(-1)));
+			else
+				ui->timedExTime->setTime(QTime(0,0,0));
 		}
 		else
 			ui->timedExCountdownLabel->setText(QString::number(currentTime.second()));
@@ -1264,20 +1295,18 @@ void OpenTyper::openEditor(void)
 	// Close pack file
 	QString oldFileName = parser->fileName();
 	parser->close();
-	// Hide main window
-	hide();
 	// Open editor
-	packEditor editorWindow;
-	editorWindow.setWindowFlag(Qt::WindowMinimizeButtonHint,true);
-	editorWindow.setWindowFlag(Qt::WindowMaximizeButtonHint,true);
-	editorWindow.setStyleSheet(styleSheet());
-	editorWindow.init();
-	editorWindow.exec();
-	// Show main window
-	show();
-	activateWindow();
-	// Open pack file
-	parser->open(oldFileName);
+	packEditor *editorWindow = new packEditor;
+	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint,true);
+	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint,true);
+	editorWindow->setStyleSheet(styleSheet());
+	editorWindow->init();
+	editorWindow->setWindowModality(Qt::WindowModal);
+	connect(editorWindow, &QDialog::finished, this, [oldFileName,this]() {
+		// Open pack file
+		parser->open(oldFileName);
+	});
+	editorWindow->open();
 }
 
 /*! Connected from optionsWindow#languageChanged.\n
@@ -1374,12 +1403,12 @@ void OpenTyper::initTimedExercise(void)
 	}
 	else
 	{
-		timeDialog timeSelect;
-		if(timeSelect.exec() == QDialog::Accepted)
-		{
-			timedExHours = timeSelect.hours;
-			timedExMinutes = timeSelect.minutes;
-			timedExSeconds = timeSelect.seconds;
+		timeDialog *timeSelect = new timeDialog(this);
+		timeSelect->setWindowModality(Qt::WindowModal);
+		connect(timeSelect, &QDialog::accepted, this, [timeSelect,this]() {
+			timedExHours = timeSelect->hours;
+			timedExMinutes = timeSelect->minutes;
+			timedExSeconds = timeSelect->seconds;
 			timedExStarted = false;
 			changeMode(1);
 			ui->timedExCountdownLabel->setText("3");
@@ -1391,7 +1420,8 @@ void OpenTyper::initTimedExercise(void)
 			levelInProgress = true;
 			levelTimer.start();
 			secLoop->start(500);
-		}
+		});
+		timeSelect->open();
 	}
 }
 
@@ -1405,13 +1435,14 @@ void OpenTyper::showExerciseStats(void)
 {
 	statsDialog *dialog;
 	if((studentUsername != ""))
-		dialog = new statsDialog(client,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel);
+		dialog = new statsDialog(client,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,this);
 	else if(!customLevelLoaded && !customConfig)
-		dialog = new statsDialog(nullptr,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel);
+		dialog = new statsDialog(nullptr,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,this);
 	else
 		return;
 	dialog->setStyleSheet(styleSheet());
-	dialog->exec();
+	dialog->setWindowModality(Qt::WindowModal);
+	dialog->open();
 }
 
 /*! Connected from client->exerciseReceived(). */
