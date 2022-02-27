@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
 	OpenTyper w;
 	w.setWindowState(Qt::WindowMaximized);
-	w.show();
+	// Main window will get shown by itself
 	w.setColors();
 	return a.exec();
 }
