@@ -81,13 +81,11 @@ void OpenTyper::refreshAll(bool setLang)
 	if(configName == "")
 	{
 		loadTheme();
-		initialSetup dialog;
-		if(dialog.exec() == QDialog::Rejected)
-		{
-			exit(0);
-			return;
-		}
-		configName = settings->value("main/configfile","").toString();
+		initialSetup *dialog = new initialSetup;
+		dialog->show();
+		QMetaObject::invokeMethod(this,"hide",Qt::QueuedConnection);
+		connect(dialog, &QDialog::accepted, this, [this]() { show(); refreshAll(true); } );
+		return;
 	}
 	bool packChanged = (configName != oldConfigName);
 	oldConfigName = configName;
@@ -151,6 +149,8 @@ void OpenTyper::refreshAll(bool setLang)
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
 	}
+	if(!isVisible())
+		show();
 }
 
 /*! Sets up all connections. */
