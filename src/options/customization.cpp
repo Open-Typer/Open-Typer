@@ -604,20 +604,21 @@ void customizationOptions::updateTheme()
  */
 void customizationOptions::changeLevelTextColor(void)
 {
-	SimpleColorDialog colorDialog;
-	colorDialog.setColor(levelTextRedColor,
+	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
+	colorDialog->setColor(levelTextRedColor,
 		levelTextGreenColor,
 		levelTextBlueColor);
-	colorDialog.setStyleSheet(styleSheet());
-	if(colorDialog.exec() == QDialog::Accepted)
-	{
-		levelTextRedColor = colorDialog.redColor;
-		levelTextGreenColor = colorDialog.greenColor;
-		levelTextBlueColor = colorDialog.blueColor;
+	colorDialog->setStyleSheet(styleSheet());
+	colorDialog->setWindowModality(Qt::WindowModal);
+	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
+		levelTextRedColor = colorDialog->redColor;
+		levelTextGreenColor = colorDialog->greenColor;
+		levelTextBlueColor = colorDialog->blueColor;
 		customLevelTextColor = true;
 		saveColorSettings();
 		setColors();
-	}
+	});
+	colorDialog->open();
 }
 
 /*!
@@ -628,20 +629,21 @@ void customizationOptions::changeLevelTextColor(void)
  */
 void customizationOptions::changeInputTextColor(void)
 {
-	SimpleColorDialog colorDialog;
-	colorDialog.setColor(inputTextRedColor,
+	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
+	colorDialog->setColor(inputTextRedColor,
 		inputTextGreenColor,
 		inputTextBlueColor);
-	colorDialog.setStyleSheet(styleSheet());
-	if(colorDialog.exec() == QDialog::Accepted)
-	{
-		inputTextRedColor = colorDialog.redColor;
-		inputTextGreenColor = colorDialog.greenColor;
-		inputTextBlueColor = colorDialog.blueColor;
+	colorDialog->setStyleSheet(styleSheet());
+	colorDialog->setWindowModality(Qt::WindowModal);
+	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
+		inputTextRedColor = colorDialog->redColor;
+		inputTextGreenColor = colorDialog->greenColor;
+		inputTextBlueColor = colorDialog->blueColor;
 		customInputTextColor = true;
 		saveColorSettings();
 		setColors();
-	}
+	});
+	colorDialog->open();
 }
 
 /*!
@@ -665,20 +667,21 @@ void customizationOptions::resetTextColors(void)
  */
 void customizationOptions::changeBgColor(void)
 {
-	SimpleColorDialog colorDialog;
-	colorDialog.setColor(bgRedColor,
+	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
+	colorDialog->setColor(bgRedColor,
 		bgGreenColor,
 		bgBlueColor);
-	colorDialog.setStyleSheet(styleSheet());
-	if(colorDialog.exec() == QDialog::Accepted)
-	{
-		bgRedColor = colorDialog.redColor;
-		bgGreenColor = colorDialog.greenColor;
-		bgBlueColor = colorDialog.blueColor;
+	colorDialog->setStyleSheet(styleSheet());
+	colorDialog->setWindowModality(Qt::WindowModal);
+	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
+		bgRedColor = colorDialog->redColor;
+		bgGreenColor = colorDialog->greenColor;
+		bgBlueColor = colorDialog->blueColor;
 		customBgColor = true;
 		saveColorSettings();
 		setColors();
-	}
+	});
+	colorDialog->open();
 }
 
 /*!
@@ -690,20 +693,21 @@ void customizationOptions::changeBgColor(void)
  */
 void customizationOptions::changePaperColor(void)
 {
-	SimpleColorDialog colorDialog;
-	colorDialog.setColor(paperRedColor,
+	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
+	colorDialog->setColor(paperRedColor,
 		paperGreenColor,
 		paperBlueColor);
-	colorDialog.setStyleSheet(styleSheet());
-	if(colorDialog.exec() == QDialog::Accepted)
-	{
-		paperRedColor = colorDialog.redColor;
-		paperGreenColor = colorDialog.greenColor;
-		paperBlueColor = colorDialog.blueColor;
+	colorDialog->setStyleSheet(styleSheet());
+	colorDialog->setWindowModality(Qt::WindowModal);
+	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
+		paperRedColor = colorDialog->redColor;
+		paperGreenColor = colorDialog->greenColor;
+		paperBlueColor = colorDialog->blueColor;
 		customPaperColor = true;
 		saveColorSettings();
 		setColors();
-	}
+	});
+	colorDialog->open();
 }
 
 /*!
@@ -715,20 +719,21 @@ void customizationOptions::changePaperColor(void)
  */
 void customizationOptions::changePanelColor(void)
 {
-	SimpleColorDialog colorDialog;
-	colorDialog.setColor(panelRedColor,
+	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
+	colorDialog->setColor(panelRedColor,
 		panelGreenColor,
 		panelBlueColor);
-	colorDialog.setStyleSheet(styleSheet());
-	if(colorDialog.exec() == QDialog::Accepted)
-	{
-		panelRedColor = colorDialog.redColor;
-		panelGreenColor = colorDialog.greenColor;
-		panelBlueColor = colorDialog.blueColor;
+	colorDialog->setStyleSheet(styleSheet());
+	colorDialog->setWindowModality(Qt::WindowModal);
+	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
+		panelRedColor = colorDialog->redColor;
+		panelGreenColor = colorDialog->greenColor;
+		panelBlueColor = colorDialog->blueColor;
 		customPanelColor = true;
 		saveColorSettings();
 		setColors();
-	}
+	});
+	colorDialog->open();
 }
 
 /*!
