@@ -777,6 +777,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		keyText = "‘";
 	if((keyText == "‘") && (displayLevel[displayPos] == "'"))
 		keyText = "'";
+	if((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))
+		keyText = "\n";
 	if((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || spaceNewline) && (keyText == level[levelPos]))) && !mistake)
 	{
 		input += keyText;
