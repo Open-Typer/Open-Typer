@@ -1298,7 +1298,7 @@ void OpenTyper::openEditor(void)
 	QString oldFileName = parser->fileName();
 	parser->close();
 	// Open editor
-	packEditor *editorWindow = new packEditor;
+	packEditor *editorWindow = new packEditor(this);
 	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint,true);
 	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint,true);
 	editorWindow->setStyleSheet(styleSheet());
