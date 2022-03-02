@@ -73,8 +73,13 @@ class packEditor : public QDialog
 
 	private:
 		bool newFile;
-		bool closeAll(void);
+		bool allowClosing;
+		void closeAll(void);
 		QString defaultFileName;
+
+	signals:
+		/*! A signal, which is emitted when all tabs are closed by closeAll(). */
+		void allTabsClosed();
 
 	private slots:
 		void createNewFile(void);

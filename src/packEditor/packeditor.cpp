@@ -40,6 +40,7 @@ packEditor::packEditor(QWidget *parent) :
 	connect(ui->fileTabWidget,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
 	// Default values
 	newFile=false;
+	allowClosing = false;
 	fileID=0;
 	defaultFileName = tr("Unnamed") + ".typer";
 	// Create new pack
@@ -174,37 +175,40 @@ void packEditor::tabChanged(int index)
  */
 void packEditor::closeTab(int id)
 {
-	if(((packView*)ui->fileTabWidget->widget(id))->closeFile())
-	{
+	connect((packView*) ui->fileTabWidget->widget(id), &packView::closed, this, [id,this]() {
 		ui->fileTabWidget->removeTab(id);
 		disconnect(ui->saveAction,nullptr,nullptr,nullptr);
 		disconnect(ui->saveAsAction,nullptr,nullptr,nullptr);
-		((packView*)ui->fileTabWidget->widget(id))->deleteLater();
-	}
+		sender()->deleteLater();
+	});
+	connect((packView*) ui->fileTabWidget->widget(id), &packView::notClosed, this, [id,this]() {
+		disconnect(sender(),nullptr,nullptr,nullptr);
+	});
+	((packView*)ui->fileTabWidget->widget(id))->closeFile();
 }
 
 /*! Closes all tabs. */
-bool packEditor::closeAll(void)
+void packEditor::closeAll(void)
 {
 	int count = ui->fileTabWidget->count();
-	int i, closedCount=0, closedTabs[count];
+	int i;
 	for(i=0; i < count; i++)
 	{
-		if(((packView*)ui->fileTabWidget->widget(i))->closeFile())
-		{
-			closedTabs[closedCount] = i;
-			closedCount++;
-		}
-		else
-		{
-			for(i=0; i < closedCount; i++)
-				ui->fileTabWidget->removeTab(closedTabs[i]);
-			return false;
-		}
+		if(i+1 < count)
+			connect((packView*) ui->fileTabWidget->widget(i), &packView::closed, (packView*) ui->fileTabWidget->widget(i+1), &packView::closeFile);
+		if(i == 0)
+			((packView*) ui->fileTabWidget->widget(i))->closeFile();
+		connect((packView*) ui->fileTabWidget->widget(i), &packView::closed, this, [i,this]() {
+			ui->fileTabWidget->removeTab(i);
+		});
+		connect((packView*) ui->fileTabWidget->widget(i), &packView::notClosed, this, [this]() {
+			disconnect(sender(),nullptr,nullptr,nullptr);
+		});
+		if(i+1 >= count)
+			connect((packView*) ui->fileTabWidget->widget(i), &packView::closed, this, &packEditor::allTabsClosed);
 	}
-	for(i=0; i < closedCount; i++)
-		ui->fileTabWidget->removeTab(closedTabs[i]);
-	return true;
+	if(count == 0)
+		emit allTabsClosed();
 }
 
 /*!
@@ -214,10 +218,18 @@ bool packEditor::closeAll(void)
  */
 void packEditor::closeEvent(QCloseEvent *event)
 {
-	if(closeAll())
+	if(allowClosing)
+	{
 		event->accept();
-	else
-		event->ignore();
+		return;
+	}
+	disconnect(this,&packEditor::allTabsClosed,nullptr,nullptr);
+	connect(this, &packEditor::allTabsClosed, this, [this]() {
+		allowClosing = true;
+		close();
+	});
+	closeAll();
+	event->ignore();
 }
 
 /*!

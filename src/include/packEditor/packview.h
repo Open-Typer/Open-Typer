@@ -72,7 +72,6 @@ class packView : public QWidget
 		explicit packView(QWidget *parent = nullptr, int fileID_arg = 1);
 		~packView();
 		void openFile(QString path, bool newf, bool rdonly);
-		bool closeFile(void);
 		QString getFileName(void);
 
 	private:
@@ -88,7 +87,14 @@ class packView : public QWidget
 		void changeExercisePos(QString lessonDesc, int lesson, int sublesson, int level, int nlesson, int nsublesson, int nlevel);
 		bool skipBoxUpdates, skipTextUpdates, skipTextRefresh;
 
+	signals:
+		/*! A signal, which is emitted when the view closes. A closed view should be deleted. */
+		void closed();
+		/*! A signal, which is emitted when close operation is rejected in save dialog. */
+		void notClosed();
+
 	public slots:
+		void closeFile(void);
 		void save(void);
 		void saveAs(void);
 

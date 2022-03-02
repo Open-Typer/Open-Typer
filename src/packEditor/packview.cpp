@@ -92,11 +92,13 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 	parser = new configParser;
 	if(!parser->open(targetFileName))
 	{
-		QMessageBox errBox;
-		errBox.setText(tr("Write error"));
-		errBox.setStyleSheet(styleSheet());
-		errBox.exec();
-		exit(1);
+		QMessageBox *errBox = new QMessageBox(this);
+		errBox->setText(tr("Write error"));
+		errBox->setStyleSheet(styleSheet());
+		errBox->setWindowModality(Qt::WindowModal);
+		connect(errBox,&QDialog::finished,qApp,&QApplication::quit);
+		errBox->open();
+		return;
 	}
 	if(newFile)
 	{
@@ -127,38 +129,52 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 }
 
 /*! Closes opened file. */
-bool packView::closeFile(void)
+void packView::closeFile(void)
 {
 	parser->close();
-	if(!saved)
+	if(saved)
+	{
+		QFile::remove(targetFileName);
+		emit closed();
+	}
+	else
 	{
 		QFile saveQFile(saveFileName);
 		QFileInfo saveQFileInfo(saveQFile.fileName());
 		QString _saveFileName = saveQFileInfo.fileName();
-		QMessageBox notSavedBox;
-		notSavedBox.setText(tr("Save changes to") + " \"" + _saveFileName + "\" " + tr("before closing?"));
+		QMessageBox *notSavedBox = new QMessageBox(this);
+		notSavedBox->setText(tr("Save changes to") + " \"" + _saveFileName + "\" " + tr("before closing?"));
 		QPushButton *yesButton = new QPushButton(tr("Save"));
 		QPushButton *cancelButton = new QPushButton(tr("Cancel"));
 		QPushButton *noButton = new QPushButton(tr("Close without saving"));
-		notSavedBox.addButton(yesButton,QMessageBox::YesRole);
-		notSavedBox.addButton(cancelButton,QMessageBox::RejectRole);
-		notSavedBox.addButton(noButton,QMessageBox::NoRole);
-		notSavedBox.setIcon(QMessageBox::Warning);
-		notSavedBox.setStyleSheet(styleSheet());
-		int ret = notSavedBox.exec();
-		switch(ret) {
-			case 0:
+		notSavedBox->addButton(yesButton,QMessageBox::YesRole);
+		notSavedBox->addButton(cancelButton,QMessageBox::RejectRole);
+		notSavedBox->addButton(noButton,QMessageBox::NoRole);
+		notSavedBox->setIcon(QMessageBox::Warning);
+		notSavedBox->setStyleSheet(styleSheet());
+		notSavedBox->setWindowModality(Qt::WindowModal);
+		connect(notSavedBox, &QDialog::finished, this, [notSavedBox,yesButton,noButton,this]() {
+			if(notSavedBox->clickedButton() == yesButton)
+			{
 				save();
-				if(!saved)
-					return false;
-				break;
-			case 1:
-				return false;
-				break;
-		}
+				if(saved)
+				{
+					QFile::remove(targetFileName);
+					emit closed();
+				}
+				else
+					emit notClosed();
+			}
+			else if(notSavedBox->clickedButton() == noButton)
+			{
+				QFile::remove(targetFileName);
+				emit closed();
+			}
+			else
+				emit notClosed();
+		});
+		notSavedBox->open();
 	}
-	QFile::remove(targetFileName);
-	return true;
 }
 
 /*!
