@@ -220,7 +220,7 @@ void packEditor::closeEvent(QCloseEvent *event)
 {
 	if(allowClosing)
 	{
-		event->accept();
+		QDialog::closeEvent(event);
 		return;
 	}
 	disconnect(this,&packEditor::allTabsClosed,nullptr,nullptr);
