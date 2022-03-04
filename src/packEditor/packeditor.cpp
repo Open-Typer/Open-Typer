@@ -53,7 +53,7 @@ packEditor::~packEditor()
 	delete ui;
 }
 
-/*! Applies settings. Must be run before exec() or show(). */
+/*! Applies settings. Must be run before showing the window. */
 void packEditor::init(void)
 {
 	if(newFile)
@@ -107,17 +107,17 @@ void packEditor::openFile(void)
 /*! Opens a built-in pack in a new tab. \see packSelector */
 void packEditor::openPrebuilt(void)
 {
-	packSelector packSel;
-	packSel.setStyleSheet(styleSheet());
-	if(packSel.exec() == QDialog::Accepted)
-	{
-		QString newFileName = ":res/configs/" + packSel.selectedConfig();
+	packSelector *packSel = new packSelector(this);
+	packSel->setStyleSheet(styleSheet());
+	connect(packSel, &QDialog::accepted, this, [packSel,this]() {
+		QString newFileName = ":res/configs/" + packSel->selectedConfig();
 		fileID++;
 		packView *newTab = new packView(this,fileID);
 		ui->fileTabWidget->addTab(newTab,newFileName);
 		newTab->openFile(newFileName,false,true);
 		ui->fileTabWidget->setCurrentIndex(ui->fileTabWidget->count()-1);
-	}
+	});
+	packSel->open();
 }
 
 /*! Closes duplicate tabs. */
