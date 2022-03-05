@@ -44,12 +44,6 @@ OpenTyper::OpenTyper(QWidget *parent)
 	// Check for updates
 	new Updater();
 #endif
-	// Disable features that don't work on wasm
-#ifdef Q_OS_WASM
-	ui->openPackButton->hide();
-	ui->openEditorButton->hide();
-	ui->openExerciseButton->hide();
-#endif // Q_OS_WASM
 }
 
 /*! Destroys the Open-Typer object. */
@@ -264,13 +258,13 @@ void OpenTyper::connectAll(void)
 }
 
 /*!
- * Opens a pack file using configParser.
+ * Opens a pack file using configParser and returns the file name of the pack file.
  * \param[in] configName If there's a custom pack opened, configName represents the absolute path to the pack. Otherwise, it represents the built-in pack name.
+ * \param[in] packContent If it's not empty, a QBuffer with pack content is created and configParser treats it as a regular file.
  * \see configParser
  */
-QString OpenTyper::loadConfig(QString configName)
+QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
 {
-	// Returns config file name, which can be opened later.
 	customLevelLoaded=false;
 	QString configPath = "";
 	if(customConfig)
@@ -278,13 +272,27 @@ QString OpenTyper::loadConfig(QString configName)
 	else
 		configPath = ":/res/configs/" + configName;
 	// Open selected config
-	parser = new configParser;
-	if(!parser->open(configPath))
+	if(parser == nullptr)
+		parser = new configParser;
+	if(!parser->bufferOpened())
+		parser->close();
+	if(packContent == "")
 	{
-		settings->setValue("main/configfile","");
-		refreshAll(false);
-		return QString();
+		bool bufferOpened = parser->bufferOpened();
+		bool openSuccess;
+		if(bufferOpened && customConfig)
+			openSuccess = true;
+		else
+			openSuccess = parser->open(configPath);
+		if(!openSuccess && !bufferOpened)
+		{
+			settings->setValue("main/configfile","");
+			refreshAll(false);
+			return QString();
+		}
 	}
+	else
+		parser->loadToBuffer(packContent);
 	// Update lessonSelectionList widget
 	updateLessonList();
 	if(customConfig)
@@ -669,47 +677,32 @@ void OpenTyper::levelSelectionListIndexChanged(int index)
  */
 void OpenTyper::openExerciseFromFile(void)
 {
-	// Show file dialog
-	QFileDialog openDialog;
-	openDialog.setFileMode(QFileDialog::AnyFile);
-	openDialog.setNameFilter(tr("Text files") + " (*.txt)" + ";;" + tr("All files") + " (*)");
-	if(openDialog.exec())
-	{
-		// Get selected file
-		QString fileName = openDialog.selectedFiles()[0];
-		QFile *exerciseFile = new QFile(fileName);
-		if(exerciseFile->size() > 2048) // Maximum size
+	auto fileContentReady = [this](const QString &fileName, const QByteArray &fileContent) {
+		if(!fileName.isEmpty())
 		{
-			QMessageBox *errBox = new QMessageBox(this);
-			errBox->setText(tr("This file is too large!"));
-			errBox->setStyleSheet(styleSheet());
-			errBox->setWindowModality(Qt::WindowModal);
-			errBox->open();
-			return;
-		}
-		// Show paper config dialog
-		paperConfigDialog *pconfig = new paperConfigDialog(this);
-		pconfig->setStyleSheet(styleSheet());
-		pconfig->setWindowModality(Qt::WindowModal);
-		connect(pconfig, &QDialog::accepted, this, [pconfig,exerciseFile,this]() {
-			levelLengthExtension = pconfig->lineLength;
-			// Read selected file
-			if(!exerciseFile->open(QIODevice::ReadOnly | QIODevice::Text))
+			if(fileContent.size() > 2048) // Maximum size
 			{
 				QMessageBox *errBox = new QMessageBox(this);
-				errBox->setText(tr("Could not open the file."));
+				errBox->setText(tr("This file is too large!"));
 				errBox->setStyleSheet(styleSheet());
 				errBox->setWindowModality(Qt::WindowModal);
 				errBox->open();
-				exerciseFile->deleteLater();
-				return;
 			}
-			loadText(exerciseFile->readAll(),pconfig->includeNewLines);
-			exerciseFile->close();
-			exerciseFile->deleteLater();
-		});
-		pconfig->open();
-	}
+			else
+			{
+				// Show paper config dialog
+				paperConfigDialog *pconfig = new paperConfigDialog(this);
+				pconfig->setStyleSheet(styleSheet());
+				pconfig->setWindowModality(Qt::WindowModal);
+				connect(pconfig, &QDialog::accepted, this, [pconfig,fileContent,this]() {
+					levelLengthExtension = pconfig->lineLength;
+					loadText(fileContent,pconfig->includeNewLines);
+				});
+				pconfig->open();
+			}
+		}
+	};
+	QFileDialog::getOpenFileContent(tr("Text files") + " (*.txt)" + ";;" + tr("All files") + " (*)",  fileContentReady);
 }
 
 /*! Loads custom text. */
@@ -1275,18 +1268,16 @@ void OpenTyper::updateTheme(void)
  */
 void OpenTyper::openPack(void)
 {
-	QFileDialog openDialog;
-	openDialog.setFileMode(QFileDialog::AnyFile);
-	openDialog.setNameFilter(tr("Open-Typer pack files") + " (*.typer)" + ";;" + tr("All files") + " (*)");
-	if(openDialog.exec())
-	{
-		// Get selected file
-		QString openFileName = openDialog.selectedFiles()[0];
-		customConfig=true;
-		settings->setValue("main/customconfig",customConfig);
-		loadConfig(openFileName);
-		refreshAll(false);
-	}
+	auto fileContentReady = [this](const QString &fileName, const QByteArray &fileContent) {
+		if(!fileName.isEmpty())
+		{
+			customConfig=true;
+			settings->setValue("main/customconfig",customConfig);
+			loadConfig(fileName, fileContent);
+			refreshAll(false);
+		}
+	};
+	QFileDialog::getOpenFileContent(tr("Open-Typer pack files") + " (*.typer)" + ";;" + tr("All files") + " (*)",  fileContentReady);
 }
 
 /*! Connected from openEditorButton.\n

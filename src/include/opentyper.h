@@ -70,10 +70,10 @@ class OpenTyper : public QMainWindow
 		languageManager *langMgr;
 		void connectAll(void);
 		QSettings *settings;
-		configParser *parser;
+		configParser *parser = nullptr;
 		monitorClient *client;
 		QString studentUsername, studentPassword;
-		QString loadConfig(QString configName);
+		QString loadConfig(QString configName, QByteArray packContent = "");
 		void startLevel(int lesson, int sublesson, int level);
 		void updateLessonList(void);
 		void loadLesson(int lessonID, int sublessonID);
