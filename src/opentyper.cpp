@@ -556,7 +556,6 @@ void OpenTyper::previousLevel(void)
 void OpenTyper::openOptions(void)
 {
 	optionsWindow *optionsWin = new optionsWindow(this);
-	optionsWin->setStyleSheet(styleSheet());
 	optionsWin->init();
 	connect(optionsWin,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
 	connect(optionsWin,SIGNAL(themeChanged()),this,SLOT(loadTheme()));
@@ -574,7 +573,6 @@ void OpenTyper::openOptions(void)
 void OpenTyper::openStudentOptions(void)
 {
 	studentOptions *dialog = new studentOptions(this);
-	dialog->setStyleSheet(styleSheet());
 	dialog->setWindowModality(Qt::WindowModal);
 	connect(dialog, &QDialog::accepted, this, [dialog,this]() {
 		studentUsername = dialog->username;
@@ -684,7 +682,6 @@ void OpenTyper::openExerciseFromFile(void)
 			{
 				QMessageBox *errBox = new QMessageBox(this);
 				errBox->setText(tr("This file is too large!"));
-				errBox->setStyleSheet(styleSheet());
 				errBox->setWindowModality(Qt::WindowModal);
 				errBox->open();
 			}
@@ -692,7 +689,6 @@ void OpenTyper::openExerciseFromFile(void)
 			{
 				// Show paper config dialog
 				paperConfigDialog *pconfig = new paperConfigDialog(this);
-				pconfig->setStyleSheet(styleSheet());
 				pconfig->setWindowModality(Qt::WindowModal);
 				connect(pconfig, &QDialog::accepted, this, [pconfig,fileContent,this]() {
 					levelLengthExtension = pconfig->lineLength;
@@ -909,7 +905,6 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			msgBox->setTotalTime(time);
 			msgBox->setHits(speed);
 			msgBox->setMistakes(levelMistakes);
-			msgBox->setStyleSheet(styleSheet());
 			msgBox->setWindowModality(Qt::WindowModal);
 			connect(msgBox, &QDialog::accepted, this, [this]() {
 				// Load saved text
@@ -986,7 +981,6 @@ void OpenTyper::updateCurrentTime(void)
 					msgBox->setHitCount(totalHits);
 					msgBox->setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
 					msgBox->setMistakes(levelMistakes);
-					msgBox->setStyleSheet(styleSheet());
 					msgBox->setWindowModality(Qt::WindowModal);
 					connect(msgBox, &QDialog::accepted, this, [this]() {
 						// Load saved text
@@ -1223,7 +1217,7 @@ void OpenTyper::updateTheme(void)
 	switch(settings->value("theme/theme","0").toInt()) {
 		case 0:
 			// System (default)
-			setStyleSheet("");
+			qApp->setStyleSheet("");
 			paperStyleSheet = "background-color: rgb(" +
 				QString::number(palette().color(QPalette::Base).red()) + ", " +
 				QString::number(palette().color(QPalette::Base).green()) + ", " +
@@ -1242,7 +1236,7 @@ void OpenTyper::updateTheme(void)
 			{
 				darkSheet.open(QFile::ReadOnly | QFile::Text);
 				QTextStream ts(&darkSheet);
-				setStyleSheet(ts.readAll());
+				qApp->setStyleSheet(ts.readAll());
 			}
 			else
 			{
@@ -1260,7 +1254,7 @@ void OpenTyper::updateTheme(void)
 			{
 				lightSheet.open(QFile::ReadOnly | QFile::Text);
 				QTextStream ts(&lightSheet);
-				setStyleSheet(ts.readAll());
+				qApp->setStyleSheet(ts.readAll());
 			}
 			else
 			{
@@ -1312,7 +1306,6 @@ void OpenTyper::openEditor(void)
 	packEditor *editorWindow = new packEditor(this);
 	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint,true);
 	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint,true);
-	editorWindow->setStyleSheet(styleSheet());
 	editorWindow->init();
 	editorWindow->setWindowModality(Qt::WindowModal);
 	connect(editorWindow, &QDialog::finished, this, [oldFileName,this]() {
@@ -1453,7 +1446,6 @@ void OpenTyper::showExerciseStats(void)
 		dialog = new statsDialog(nullptr,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,this);
 	else
 		return;
-	dialog->setStyleSheet(styleSheet());
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
 }
