@@ -108,7 +108,6 @@ void packEditor::openFile(void)
 void packEditor::openPrebuilt(void)
 {
 	packSelector *packSel = new packSelector(this);
-	packSel->setStyleSheet(styleSheet());
 	connect(packSel, &QDialog::accepted, this, [packSel,this]() {
 		QString newFileName = ":res/configs/" + packSel->selectedConfig();
 		fileID++;

@@ -94,7 +94,6 @@ void packView::openFile(QString path, bool newf, bool rdonly)
 	{
 		QMessageBox *errBox = new QMessageBox(this);
 		errBox->setText(tr("Write error"));
-		errBox->setStyleSheet(styleSheet());
 		errBox->setWindowModality(Qt::WindowModal);
 		connect(errBox,&QDialog::finished,qApp,&QApplication::quit);
 		errBox->open();
@@ -151,7 +150,6 @@ void packView::closeFile(void)
 		notSavedBox->addButton(cancelButton,QMessageBox::RejectRole);
 		notSavedBox->addButton(noButton,QMessageBox::NoRole);
 		notSavedBox->setIcon(QMessageBox::Warning);
-		notSavedBox->setStyleSheet(styleSheet());
 		notSavedBox->setWindowModality(Qt::WindowModal);
 		connect(notSavedBox, &QDialog::finished, this, [notSavedBox,yesButton,noButton,this]() {
 			if(notSavedBox->clickedButton() == yesButton)
