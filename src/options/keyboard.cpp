@@ -69,7 +69,6 @@ void keyboardOptions::openEditor(void)
 	packEditor *editorWindow = new packEditor(this);
 	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint,true);
 	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint,true);
-	editorWindow->setStyleSheet(styleSheet());
 	editorWindow->init();
 	editorWindow->setWindowModality(Qt::WindowModal);
 	editorWindow->show();
