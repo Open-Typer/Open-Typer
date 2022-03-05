@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QFile>
+#include <QBuffer>
 #include <QTextStream>
 #include <QString>
 #include <QJsonDocument>
@@ -56,6 +57,8 @@ class configParser : public QObject
 		static const int defaultRepeatLimit = 128;
 		static const int defaultLineLength = 60;
 		bool open(const QString fileName);
+		void loadToBuffer(const QByteArray content);
+		bool bufferOpened(void);
 		void close(void);
 		QString fileName(void);
 		int lessonCount(void);
@@ -77,6 +80,8 @@ class configParser : public QObject
 
 	private:
 		QFile *configFile;
+		QBuffer *configBuffer;
+		QIODevice *currentDevice;
 		bool reopen(QIODevice::OpenMode mode);
 		int exerciseID(const QString line, const int part);
 		QString lineOf(int lesson, int sublesson, int exercise);

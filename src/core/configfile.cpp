@@ -25,6 +25,8 @@ configParser::configParser(QObject *parent) :
 	QObject(parent)
 {
 	configFile = new QFile;
+	configBuffer = new QBuffer;
+	currentDevice = configFile;
 }
 
 /*!
@@ -34,18 +36,36 @@ configParser::configParser(QObject *parent) :
  */
 bool configParser::open(const QString fileName)
 {
-	configFile->close();
+	currentDevice->close();
 	configFile->setFileName(fileName);
+	currentDevice = configFile;
 	return configFile->open(QIODevice::ReadOnly | QIODevice::Text);
+}
+
+/*! Closes opened file and loads pack content to the buffer. */
+void configParser::loadToBuffer(const QByteArray content)
+{
+	close();
+	configBuffer->open(QBuffer::WriteOnly);
+	configBuffer->write(content);
+	configBuffer->close();
+	configBuffer->open(QIODevice::ReadOnly);
+	currentDevice = configBuffer;
+}
+
+/*! Returns true if there's a buffer opened. */
+bool configParser::bufferOpened(void)
+{
+	return (currentDevice != configFile);
 }
 
 /*!
  * configParser provides read and write support.
- * The pack file is opened for reading by default,
+ * The pack file or buffer is opened for reading by default,
  * so it must be reopened for writing while performing
  * write operations.\n
  *
- * This function reopens the opened file in a new mode.\n
+ * This function reopens the opened file or buffer in a new mode.\n
  * Returns true if successful.
  *
  * \param[in] mode Open mode, like in the QIODevice#open() function.
@@ -54,29 +74,35 @@ bool configParser::open(const QString fileName)
  */
 bool configParser::reopen(QIODevice::OpenMode mode)
 {
-	if(configFile->fileName() == "")
-		return false;
-	configFile->close();
-	return configFile->open(mode);
+	if(currentDevice == configFile)
+	{
+		if(configFile->fileName() == "")
+			return false;
+	}
+	currentDevice->close();
+	return currentDevice->open(mode);
 }
 
-/*! Closes the opened pack file. */
+/*! Closes the opened pack file or buffer. */
 void configParser::close(void)
 {
-	configFile->close();
+	currentDevice->close();
 }
 
 /*! Returns the file name of the opened pack file. */
 QString configParser::fileName(void)
 {
-	return configFile->fileName();
+	if(currentDevice == configFile)
+		return configFile->fileName();
+	else
+		return QString();
 }
 
-/*! Returns the number of lessons in the pack file. */
+/*! Returns the number of lessons in the pack file or buffer. */
 int configParser::lessonCount(void)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
+	currentDevice->seek(0);
+	QTextStream fileStream(currentDevice);
 	fileStream.setCodec("UTF-8");
 	QList<int> lessonIDs;
 	while(!fileStream.atEnd())
@@ -96,8 +122,8 @@ int configParser::lessonCount(void)
  */
 int configParser::sublessonCount(int lesson)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
+	currentDevice->seek(0);
+	QTextStream fileStream(currentDevice);
 	fileStream.setCodec("UTF-8");
 	QList<int> sublessonIDs;
 	while(!fileStream.atEnd())
@@ -117,8 +143,8 @@ int configParser::sublessonCount(int lesson)
 /*! Returns the number of exercises in a sublesson. */
 int configParser::exerciseCount(int lesson, int sublesson)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
+	currentDevice->seek(0);
+	QTextStream fileStream(currentDevice);
 	fileStream.setCodec("UTF-8");
 	QList<int> exerciseIDs;
 	while(!fileStream.atEnd())
@@ -139,11 +165,11 @@ int configParser::exerciseCount(int lesson, int sublesson)
 	return exerciseIDs.count();
 }
 
-/*! Returns the line the exercise is located in the pack file. */
+/*! Returns the line the exercise is located in the pack file or buffer. */
 int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
+	currentDevice->seek(0);
+	QTextStream fileStream(currentDevice);
 	fileStream.setCodec("UTF-8");
 	int lineID = 0;
 	while(!fileStream.atEnd())
@@ -183,8 +209,8 @@ int configParser::exerciseLineLength(int lesson, int sublesson, int exercise)
 /*! Returns the description of a lesson (what new characters are learned in it). */
 QString configParser::lessonDesc(int lesson)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
+	currentDevice->seek(0);
+	QTextStream fileStream(currentDevice);
 	fileStream.setCodec("UTF-8");
 	while(!fileStream.atEnd())
 	{
@@ -587,8 +613,8 @@ int configParser::exerciseID(const QString line, const int part)
 /*! Returns line string of the exercise. */
 QString configParser::lineOf(int lesson, int sublesson, int exercise)
 {
-	configFile->seek(0);
-	QTextStream fileStream(configFile);
+	currentDevice->seek(0);
+	QTextStream fileStream(currentDevice);
 	fileStream.setCodec("UTF-8");
 	while(!fileStream.atEnd())
 	{
@@ -671,15 +697,15 @@ bool configParser::addExercise(int lesson, int sublesson, int exercise, bool rep
 	if(!reopen(QIODevice::Append | QIODevice::Text))
 		return false;
 	// Add exercise line
-	configFile->write(QString(QString::number(lesson) + "." + QString::number(sublesson) + "." + QString::number(exercise) + ":").toUtf8());
+	currentDevice->write(QString(QString::number(lesson) + "." + QString::number(sublesson) + "." + QString::number(exercise) + ":").toUtf8());
 	if(repeat)
-		configFile->write("1");
+		currentDevice->write("1");
 	else
-		configFile->write("0");
-	configFile->write(QString("," + repeatType + ";" + QString::number(repeatLimit) + "," + QString::number(lineLength)).toUtf8());
+		currentDevice->write("0");
+	currentDevice->write(QString("," + repeatType + ";" + QString::number(repeatLimit) + "," + QString::number(lineLength)).toUtf8());
 	if(desc != "")
-		configFile->write(QString("," + desc).toUtf8());
-	configFile->write(QString(" " + rawText + '\n').toUtf8());
+		currentDevice->write(QString("," + desc).toUtf8());
+	currentDevice->write(QString(" " + rawText + '\n').toUtf8());
 	// Reopen for reading
 	if(!reopen(QIODevice::ReadOnly | QIODevice::Text)) // This shouldn't happen
 		return false;
