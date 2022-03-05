@@ -90,7 +90,6 @@ void optionsWindow::changeOptionWidget(int index)
 	if(options == nullptr)
 		return;
 	options->setParent(ui->currentOptions);
-	options->setStyleSheet(styleSheet());
 	ui->currentOptionsLayout->replaceWidget(currentWidget,options);
 	if(currentWidget != nullptr)
 		currentWidget->deleteLater();
@@ -115,7 +114,6 @@ void optionsWindow::changeLanguage(int index)
 /*! Connected from customizationOptions::themeChanged(). */
 void optionsWindow::changeTheme(void)
 {
-	setStyleSheet(((customizationOptions*)sender())->styleSheet());
 	emit themeChanged();
 }
 
