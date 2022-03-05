@@ -553,7 +553,7 @@ void customizationOptions::updateTheme()
 	switch(settings->value("theme/theme","0").toInt()) {
 		case 0:
 			// System (default)
-			setStyleSheet("");
+			qApp->setStyleSheet("");
 			paperStyleSheet = (char*) malloc(128);
 			sprintf(paperStyleSheet,"background-color: rgb(%d,%d,%d)",
 				palette().color(QPalette::Base).red(),
@@ -567,7 +567,7 @@ void customizationOptions::updateTheme()
 			{
 				darkSheet.open(QFile::ReadOnly | QFile::Text);
 				QTextStream ts(&darkSheet);
-				setStyleSheet(ts.readAll());
+				qApp->setStyleSheet(ts.readAll());
 			}
 			else
 			{
@@ -583,7 +583,7 @@ void customizationOptions::updateTheme()
 			{
 				lightSheet.open(QFile::ReadOnly | QFile::Text);
 				QTextStream ts(&lightSheet);
-				setStyleSheet(ts.readAll());
+				qApp->setStyleSheet(ts.readAll());
 			}
 			else
 			{
@@ -608,7 +608,6 @@ void customizationOptions::changeLevelTextColor(void)
 	colorDialog->setColor(levelTextRedColor,
 		levelTextGreenColor,
 		levelTextBlueColor);
-	colorDialog->setStyleSheet(styleSheet());
 	colorDialog->setWindowModality(Qt::WindowModal);
 	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
 		levelTextRedColor = colorDialog->redColor;
@@ -633,7 +632,6 @@ void customizationOptions::changeInputTextColor(void)
 	colorDialog->setColor(inputTextRedColor,
 		inputTextGreenColor,
 		inputTextBlueColor);
-	colorDialog->setStyleSheet(styleSheet());
 	colorDialog->setWindowModality(Qt::WindowModal);
 	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
 		inputTextRedColor = colorDialog->redColor;
@@ -671,7 +669,6 @@ void customizationOptions::changeBgColor(void)
 	colorDialog->setColor(bgRedColor,
 		bgGreenColor,
 		bgBlueColor);
-	colorDialog->setStyleSheet(styleSheet());
 	colorDialog->setWindowModality(Qt::WindowModal);
 	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
 		bgRedColor = colorDialog->redColor;
@@ -697,7 +694,6 @@ void customizationOptions::changePaperColor(void)
 	colorDialog->setColor(paperRedColor,
 		paperGreenColor,
 		paperBlueColor);
-	colorDialog->setStyleSheet(styleSheet());
 	colorDialog->setWindowModality(Qt::WindowModal);
 	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
 		paperRedColor = colorDialog->redColor;
@@ -723,7 +719,6 @@ void customizationOptions::changePanelColor(void)
 	colorDialog->setColor(panelRedColor,
 		panelGreenColor,
 		panelBlueColor);
-	colorDialog->setStyleSheet(styleSheet());
 	colorDialog->setWindowModality(Qt::WindowModal);
 	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
 		panelRedColor = colorDialog->redColor;
