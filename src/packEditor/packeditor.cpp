@@ -181,7 +181,7 @@ void packEditor::closeTab(int id)
 		disconnect(ui->saveAsAction,nullptr,nullptr,nullptr);
 		sender()->deleteLater();
 	});
-	connect((packView*) ui->fileTabWidget->widget(id), &packView::notClosed, this, [id,this]() {
+	connect((packView*) ui->fileTabWidget->widget(id), &packView::notClosed, this, [this]() {
 		disconnect(sender(),nullptr,nullptr,nullptr);
 	});
 	((packView*)ui->fileTabWidget->widget(id))->closeFile();
