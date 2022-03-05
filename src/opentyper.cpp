@@ -702,7 +702,17 @@ void OpenTyper::openExerciseFromFile(void)
 			}
 		}
 	};
-	QFileDialog::getOpenFileContent(tr("Text files") + " (*.txt)" + ";;" + tr("All files") + " (*)",  fileContentReady);
+#ifdef Q_OS_WASM
+	QFileDialog::getOpenFileContent(QString(),  fileContentReady);
+#else
+	QString fileName = QFileDialog::getOpenFileName(this, QString(), QString(), tr("Text files") + " (*.txt)" + ";;" + tr("All files") + " (*)");
+	if(fileName != "")
+	{
+		QFile file(fileName);
+		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+			fileContentReady(fileName, file.readAll());
+	}
+#endif
 }
 
 /*! Loads custom text. */
@@ -1277,7 +1287,17 @@ void OpenTyper::openPack(void)
 			refreshAll(false);
 		}
 	};
-	QFileDialog::getOpenFileContent(tr("Open-Typer pack files") + " (*.typer)" + ";;" + tr("All files") + " (*)",  fileContentReady);
+#ifdef Q_OS_WASM
+	QFileDialog::getOpenFileContent(QString(),  fileContentReady);
+#else
+	QString fileName = QFileDialog::getOpenFileName(this, QString(), QString(), tr("Open-Typer pack files") + " (*.typer)" + ";;" + tr("All files") + " (*)");
+	if(fileName != "")
+	{
+		QFile file(fileName);
+		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+			fileContentReady(fileName, file.readAll());
+	}
+#endif
 }
 
 /*! Connected from openEditorButton.\n
