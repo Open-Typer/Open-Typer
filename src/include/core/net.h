@@ -42,11 +42,11 @@ class monitorClient : public QObject
 		~monitorClient();
 		void close(void);
 		void setErrorDialogs(bool errDialogs);
-		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data, bool hang = true);
+		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data);
 		static QHostAddress serverAddress(void);
 		static quint16 serverPort(void);
 		static bool enabled(void);
-		bool available(bool hang = true);
+		bool available(void);
 
 	private:
 		bool errorDialogs;

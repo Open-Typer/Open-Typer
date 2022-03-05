@@ -83,10 +83,10 @@ bool monitorClient::enabled(void)
 }
 
 /*! Returns true if class monitor server connection is enabled in the settings and the server is available. */
-bool monitorClient::available(bool hang)
+bool monitorClient::available(void)
 {
 	if(enabled())
-		return (sendRequest("check",{},hang).value(0) == "ok");
+		return (sendRequest("check",{}).value(0) == "ok");
 	else
 		return false;
 }
@@ -95,9 +95,8 @@ bool monitorClient::available(bool hang)
  * Sends a request and returns the response.\n
  * \param[in] method Request method.
  * \param[in] data Request data.
- * \param[in] hang Whether to block user input events while waiting for response.
  */
-QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data, bool hang)
+QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data)
 {
 	connected = (socket->state() == QAbstractSocket::ConnectedState);
 	if(!connected)
@@ -124,20 +123,10 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 			return QList<QByteArray>({"requestError"});
 		// Wait for response
 		QApplication::setOverrideCursor(Qt::WaitCursor);
-		QTimer responseTimer;
-		responseTimer.setSingleShot(true);
-		responseTimer.setInterval(5000); // Maximum wait time
-		QEventLoop reqLoop;
-		connect(&responseTimer,SIGNAL(timeout()),&reqLoop,SLOT(quit()));
-		connect(this,SIGNAL(responseReady()),&reqLoop,SLOT(quit()));
-		responseTimer.start();
-		if(hang)
-			reqLoop.exec(QEventLoop::ExcludeUserInputEvents);
-		else
-			reqLoop.exec();
+		bool readStatus = socket->waitForReadyRead(5000);
 		waitingForResponse = false;
 		QApplication::restoreOverrideCursor();
-		if(responseTimer.remainingTime() == -1)
+		if(!readStatus)
 		{
 			errorOccurred(QAbstractSocket::SocketTimeoutError);
 			return QList<QByteArray>({"timeout"});
