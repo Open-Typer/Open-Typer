@@ -51,7 +51,6 @@ class initialSetup : public QDialog
 	private slots:
 		void finish(void);
 		void loadList(void);
-		void changeTheme(void);
 };
 
 #endif // INITIALSETUP_H

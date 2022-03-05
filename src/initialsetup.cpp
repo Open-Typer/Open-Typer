@@ -29,12 +29,10 @@ initialSetup::initialSetup(QWidget *parent) :
 	ui->setupUi(this);
 	loadList();
 	customizationOptions *options = new customizationOptions(ui->themeFrame);
-	setStyleSheet(options->styleSheet());
 	ui->customizationLayout->addWidget(options);
 	// Connections
 	connect(ui->okButton,&QPushButton::clicked,this,&initialSetup::finish);
 	connect(ui->showAllLayoutsCheckBox,&QCheckBox::stateChanged,this,&initialSetup::loadList);
-	connect(options,&customizationOptions::themeChanged,this,&initialSetup::changeTheme);
 }
 
 /*! Destroys the initialSetup object. */
@@ -102,10 +100,4 @@ void initialSetup::loadList(void)
 		ui->showAllLayoutsCheckBox->hide();
 		loadList();
 	}
-}
-
-/*! Updates the theme. */
-void initialSetup::changeTheme(void)
-{
-	setStyleSheet(((QWidget*)sender())->styleSheet());
 }
