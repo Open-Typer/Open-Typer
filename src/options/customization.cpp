@@ -161,7 +161,7 @@ void customizationOptions::init(void)
 	blockThemeSignal = true;
 	ui->themeBox->setCurrentIndex(settings->value("theme/theme","0").toInt());
 	// Font
-	setFont(settings->value("theme/font","Courier New").toString(),
+	setFont(settings->value("theme/font","").toString(),
 		settings->value("theme/fontsize","20").toInt(),
 		settings->value("theme/fontbold","true").toBool(),
 		settings->value("theme/fontitalic","false").toBool(),
@@ -255,7 +255,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		if(themeMap.contains("font"))
 			fontFamily = themeMap["font"].toString();
 		else
-			fontFamily = "Courier New";
+			fontFamily = "";
 		if(themeMap.contains("fontSize"))
 			fontSize = themeMap["fontSize"].toInt();
 		else
@@ -376,7 +376,13 @@ void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBo
 {
 	QFont newFont, mistakeLabelFont;
 	// Set font
+	newFont.setStyleHint(QFont::TypeWriter);
+	newFont.setFixedPitch(true);
+	if(fontFamily == "")
+		fontFamily = "Courier New";
 	newFont.setFamily(fontFamily);
+	if(!newFont.exactMatch())
+		fontFamily = newFont.defaultFamily();
 	newFont.setPointSize(fontSize);
 	newFont.setBold(fontBold);
 	newFont.setItalic(fontItalic);
