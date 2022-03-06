@@ -2,6 +2,8 @@
     <qresource prefix="/res/keyboard-layouts">
         <file>sk_SK-QWERTZ.json</file>
         <file>sk_SK-QWERTY.json</file>
+        <file>cs_CZ-QWERTZ.json</file>
+        <file>cs_CZ-QWERTY.json</file>
         <file>en_US-default.json</file>
     </qresource>
 </RCC>
