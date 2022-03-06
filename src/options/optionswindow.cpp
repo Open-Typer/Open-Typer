@@ -79,7 +79,6 @@ void optionsWindow::changeOptionWidget(int index)
 		case 3:
 			// Customization
 			options = new customizationOptions;
-			((customizationOptions*)options)->init();
 			connect((customizationOptions*)options,&customizationOptions::themeChanged,this,&optionsWindow::changeTheme);
 			break;
 		case 4:
