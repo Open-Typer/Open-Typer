@@ -775,11 +775,12 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		keyText = "'";
 	if((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))
 		keyText = "\n";
+	QString convertedKeyText = keyText.toHtmlEscaped();
 	if((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || spaceNewline) && (keyText == level[levelPos]))) && !mistake)
 	{
 		input += keyText;
-		displayInput += keyText;
-		inputTextHtml += keyText;
+		displayInput += convertedKeyText;
+		inputTextHtml += convertedKeyText;
 		if(displayLevel[displayPos] == '\n')
 		{
 			inputTextHtml += "<br>";
@@ -847,7 +848,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				else if((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))
 					errorAppend = "↵<br>";
 				else
-					errorAppend = keyText;
+					errorAppend = convertedKeyText;
 				ui->inputLabel->setHtml(displayInput + "<span style='color: red';'>" + errorAppend + "</span>");
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
