@@ -739,7 +739,7 @@ p, li { white-space: pre-wrap; }
                    <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="toolTip">
-                   <string>Open custom pack</string>
+                   <string>Open</string>
                   </property>
                   <property name="text">
                    <string notr="true"/>
