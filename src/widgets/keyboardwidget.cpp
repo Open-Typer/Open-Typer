@@ -49,6 +49,7 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	closeButton = new QPushButton(this);
 	setKeyboardVisible(settings->value("view/keyboardvisible","true").toBool());
 	closeButton->setIconSize(QSize(32,32));
+	closeButton->setFocusPolicy(Qt::NoFocus);
 	mainLayout->addWidget(closeButton);
 	closeButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
 	mainLayout->setAlignment(closeButton,Qt::AlignCenter);
