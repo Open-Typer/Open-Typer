@@ -1034,7 +1034,7 @@ void OpenTyper::updateCurrentTime(void)
 void OpenTyper::loadTheme(void)
 {
 	// Load font
-	setFont(settings->value("theme/font","Courier New").toString(),
+	setFont(settings->value("theme/font","").toString(),
 		settings->value("theme/fontsize","20").toInt(),
 		settings->value("theme/fontbold","true").toBool(),
 		settings->value("theme/fontitalic","false").toBool(),
@@ -1074,7 +1074,13 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 {
 	QFont newFont, mistakeLabelFont;
 	// Set font
+	newFont.setStyleHint(QFont::TypeWriter);
+	newFont.setFixedPitch(true);
+	if(fontFamily == "")
+		fontFamily = "Courier New";
 	newFont.setFamily(fontFamily);
+	if(!newFont.exactMatch())
+		fontFamily = newFont.defaultFamily();
 	newFont.setPointSize(fontSize);
 	newFont.setBold(fontBold);
 	newFont.setItalic(fontItalic);
@@ -1347,7 +1353,7 @@ void OpenTyper::changeLanguage(int index, bool enableRefresh, bool enableListRel
  */
 void OpenTyper::zoomIn(void)
 {
-	QString fontFamily = settings->value("theme/font","Courier New").toString();
+	QString fontFamily = settings->value("theme/font","").toString();
 	int fontSize = settings->value("theme/fontsize","20").toInt()+2;
 	bool fontBold = settings->value("theme/fontbold","true").toBool();
 	bool fontItalic = settings->value("theme/fontitalic","false").toBool();
@@ -1363,7 +1369,7 @@ void OpenTyper::zoomIn(void)
  */
 void OpenTyper::zoomOut(void)
 {
-	QString fontFamily = settings->value("theme/font","Courier New").toString();
+	QString fontFamily = settings->value("theme/font","").toString();
 	int fontSize = settings->value("theme/fontsize","20").toInt()-2;
 	bool fontBold = settings->value("theme/fontbold","true").toBool();
 	bool fontItalic = settings->value("theme/fontitalic","false").toBool();
