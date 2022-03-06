@@ -76,10 +76,6 @@
         <translation>Diese Datei ist zu groß!</translation>
     </message>
     <message>
-        <source>Could not open the file.</source>
-        <translation>Konnte die Datei nicht öffnen.</translation>
-    </message>
-    <message>
         <source>Open-Typer pack files</source>
         <translation>Open-Typer packet Dateien</translation>
     </message>
@@ -107,6 +103,10 @@
     <message>
         <source>Not logged in.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Öffnen</translation>
     </message>
 </context>
 <context>
@@ -486,11 +486,11 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Open built-in pack</source>
-        <translation type="unfinished">Built-In Packet öffnen</translation>
+        <translation>Built-In Packet öffnen</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Sichern</translation>
+        <translation>Sichern</translation>
     </message>
     <message>
         <source>Save As...</source>
