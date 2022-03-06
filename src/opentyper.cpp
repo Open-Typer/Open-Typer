@@ -31,6 +31,13 @@ OpenTyper::OpenTyper(QWidget *parent)
 	ui->mistakeLabel->setParent(ui->inputLabel);
 	inputLabelLayout->addWidget(ui->mistakeLabel);
 	inputLabelLayout->setContentsMargins(0,0,0,0);
+	QMenu *openMenu = new QMenu(ui->openButton);
+	QAction *openExerciseAction = openMenu->addAction(tr("Open custom exercise"));
+	QAction *openPackAction = openMenu->addAction(tr("Open custom pack"));
+	connect(openExerciseAction, &QAction::triggered, this, &OpenTyper::openExerciseFromFile);
+	connect(openPackAction, &QAction::triggered, this, &OpenTyper::openPack);
+	ui->openButton->setMenu(openMenu);
+	connect(ui->openButton, &QToolButton::clicked, openExerciseAction, &QAction::triggered);
 	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	langMgr = new languageManager;
 	client = new monitorClient(false);
@@ -183,11 +190,6 @@ void OpenTyper::connectAll(void)
 		SIGNAL(clicked()),
 		this,
 		SLOT(openOptions()));
-	// Open pack button
-	connect(ui->openPackButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(openPack()));
 	// Open editor button
 	connect(ui->openEditorButton,
 		SIGNAL(clicked()),
@@ -228,11 +230,6 @@ void OpenTyper::connectAll(void)
 		SIGNAL(activated(int)),
 		this,
 		SLOT(levelSelectionListIndexChanged(int)));
-	// Open exercise from file button
-	connect(ui->openExerciseButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(openExerciseFromFile()));
 	// Zoom in button
 	connect(ui->zoomInButton,
 		SIGNAL(clicked()),
