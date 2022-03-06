@@ -381,6 +381,9 @@ p, li { white-space: pre-wrap; }
                <property name="text">
                 <string notr="true">remaining text</string>
                </property>
+               <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+               </property>
                <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
                </property>
@@ -521,6 +524,9 @@ p, li { white-space: pre-wrap; }
                </property>
                <property name="text">
                 <string notr="true">current line</string>
+               </property>
+               <property name="textFormat">
+                <enum>Qt::PlainText</enum>
                </property>
                <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
