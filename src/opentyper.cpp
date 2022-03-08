@@ -1358,8 +1358,8 @@ void OpenTyper::zoomIn(void)
 	bool fontBold = settings->value("theme/fontbold","true").toBool();
 	bool fontItalic = settings->value("theme/fontitalic","false").toBool();
 	bool fontUnderline = settings->value("theme/fontunderline","false").toBool();
-	if(fontSize > 20)
-		fontSize = 20;
+	if(fontSize > 24)
+		fontSize = 24;
 	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
 }
 
