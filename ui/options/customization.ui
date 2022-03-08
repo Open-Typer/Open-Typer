@@ -229,7 +229,7 @@
                <number>2</number>
               </property>
               <property name="maximum">
-               <number>20</number>
+               <number>24</number>
               </property>
               <property name="singleStep">
                <number>2</number>
