@@ -477,6 +477,8 @@ void OpenTyper::updateText(void)
 			line++;
 		}
 	}
+	ui->inputLabel->setMinimumHeight(0);
+	ui->mistakeLabel->setMinimumHeight(0);
 	ui->inputLabel->setPlainText(displayLevel);
 	ui->levelCurrentLineLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
 	ui->levelCurrentLineLabel->setText(currentLineText);
