@@ -381,7 +381,8 @@ void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBo
 	if(fontFamily == "")
 		fontFamily = "Courier New";
 	newFont.setFamily(fontFamily);
-	if(!newFont.exactMatch())
+	QFontDatabase fontDB;
+	if(!fontDB.families().contains(fontFamily))
 		fontFamily = newFont.defaultFamily();
 	newFont.setPointSize(fontSize);
 	newFont.setBold(fontBold);
