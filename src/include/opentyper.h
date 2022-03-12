@@ -92,11 +92,7 @@ class OpenTyper : public QMainWindow
 		int lastTime;
 		Updater *versionHdw;
 		void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
-		int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
-		int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
-		int bgRedColor, bgGreenColor, bgBlueColor;
-		int paperRedColor, paperGreenColor, paperBlueColor;
-		int panelRedColor, panelGreenColor, panelBlueColor;
+		QColor levelTextColor, inputTextColor, bgColor, paperColor, panelColor;
 		bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor, customPanelColor;
 		void updateTheme(void);
 		bool customLevelLoaded;
