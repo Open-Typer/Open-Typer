@@ -9,8 +9,8 @@ Install Qt using the installer and make sure all required modules are installed 
 As of writing, Open-Typer (officially) supports Qt 5.9.5 up to 5.15.8.
 
 ```
-qmake
 lrelease *.pro
+qmake
 make -j$(nproc --all)
 ```
 
