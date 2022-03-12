@@ -27,7 +27,6 @@ connectionOptions::connectionOptions(QWidget *parent) :
 	ui(new Ui::connectionOptions)
 {
 	ui->setupUi(this);
-	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	client = new monitorClient;
 	ui->IPEdit->setText(QHostAddress(client->serverAddress().toIPv4Address()).toString());
 	ui->portEdit->setValue(client->serverPort());
@@ -53,8 +52,8 @@ connectionOptions::~connectionOptions()
  */
 void connectionOptions::changeAddress(void)
 {
-	settings->setValue("server/address",ui->IPEdit->text());
-	settings->setValue("server/port",ui->portEdit->text());
+	settings.setValue("server/address",ui->IPEdit->text());
+	settings.setValue("server/port",ui->portEdit->text());
 	ui->statusValueLabel->setText(tr("Unknown"));
 }
 
@@ -64,7 +63,7 @@ void connectionOptions::changeAddress(void)
  */
 void connectionOptions::changeServerState(bool enable)
 {
-	settings->setValue("server/enabled",enable);
+	settings.setValue("server/enabled",enable);
 	ui->testButton->setEnabled(enable);
 	if(enable)
 		emit testConnection();
