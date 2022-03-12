@@ -41,6 +41,7 @@ SOURCES += \
     src/simplecolordialog.cpp \
     src/updater/updater.cpp \
     src/main.cpp \
+    src/global.cpp \
     src/opentyper.cpp \
     src/updater/updaterdialog.cpp \
     src/widgets/inputlabel.cpp \
@@ -70,6 +71,7 @@ HEADERS += \
     src/include/simplecolordialog.h \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
+    src/include/global.h \
     src/include/opentyper.h \
     src/include/widgets/inputlabel.h \
     src/include/widgets/languagelist.h \
