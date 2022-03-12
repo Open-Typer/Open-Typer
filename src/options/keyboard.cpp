@@ -2,7 +2,7 @@
  * keyboard.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,10 +44,9 @@ keyboardOptions::keyboardOptions(QWidget *parent) :
 	}
 	ui->packList->addItems(items);
 	// Get current pack
-	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	// TODO: Detect default config
-	if(!settings->value("main/customconfig","false").toBool())
-		ui->packList->setCurrentItem(ui->packList->item(rawItems.indexOf(settings->value("main/configfile","sk_SK-QWERTZ-B1").toString())));
+	if(!settings.value("main/customconfig","false").toBool())
+		ui->packList->setCurrentItem(ui->packList->item(rawItems.indexOf(settings.value("main/configfile","sk_SK-QWERTZ-B1").toString())));
 	// Connections
 	connect(ui->editorButton,SIGNAL(clicked()),this,SLOT(openEditor()));
 	connect(ui->packList,SIGNAL(currentRowChanged(int)),this,SLOT(changePack(int)));
@@ -80,6 +79,6 @@ void keyboardOptions::openEditor(void)
  */
 void keyboardOptions::changePack(int index)
 {
-	settings->setValue("main/configfile",rawItems[index]);
-	settings->setValue("main/customconfig","false");
+	settings.setValue("main/configfile",rawItems[index]);
+	settings.setValue("main/customconfig","false");
 }

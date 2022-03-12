@@ -2,7 +2,7 @@
  * keyboard.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@
 #include <QWidget>
 #include <QListWidget>
 #include <QDirIterator>
-#include <QSettings>
 #include "options/optionswindow.h"
 #include "packEditor/packeditor.h"
 #include "core/utils.h"
@@ -48,7 +47,6 @@ class keyboardOptions : public QWidget
 
 	private:
 		Ui::keyboardOptions *ui;
-		QSettings *settings;
 		QStringList rawItems;
 
 	private slots:
