@@ -28,14 +28,13 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 {
 	ui->setupUi(this);
 	// Load settings
-	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	// Space bar newline
-	if(settings->value("main/spacenewline","true").toBool())
+	if(settings.value("main/spacenewline","true").toBool())
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Checked);
 	else
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
 	// Error penalty
-	ui->errorPenaltyBox->setValue(settings->value("main/errorpenalty","10").toInt());
+	ui->errorPenaltyBox->setValue(settings.value("main/errorpenalty","10").toInt());
 	// Connect
 	// Space bar newline checkbox
 	connect(ui->spaceNewlineCheckBox,SIGNAL(clicked(bool)),this,SLOT(setSpaceNewline(bool)));
@@ -56,9 +55,9 @@ behaviorOptions::~behaviorOptions()
 void behaviorOptions::setSpaceNewline(bool value)
 {
 	if(value)
-		settings->setValue("main/spacenewline","true");
+		settings.setValue("main/spacenewline","true");
 	else
-		settings->setValue("main/spacenewline","false");
+		settings.setValue("main/spacenewline","false");
 }
 
 /*!
@@ -67,5 +66,5 @@ void behaviorOptions::setSpaceNewline(bool value)
  */
 void behaviorOptions::setErrorPenalty(int value)
 {
-	settings->setValue("main/errorpenalty",value);
+	settings.setValue("main/errorpenalty",value);
 }
