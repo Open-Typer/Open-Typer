@@ -27,10 +27,10 @@
 #include <QMessageBox>
 #include <QEventLoop>
 #include <QHostAddress>
-#include <QSettings>
 #include <QTimer>
 #include <QTcpSocket>
 #include <QSslSocket>
+#include "global.h"
 #include "core/utils.h"
 
 /*! \brief The monitorClient class is used to communicate with the class monitor server. */
