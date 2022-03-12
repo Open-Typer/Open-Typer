@@ -33,7 +33,7 @@
 #include <QTimer>
 #include <QPushButton>
 #include <QPropertyAnimation>
-#include <QSettings>
+#include "global.h"
 #include "core/utils.h"
 
 /*!
@@ -88,7 +88,6 @@ class keyboardWidget : public QFrame
 		void registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode);
 		QColor resetKeyColor(QFrame *targetKey);
 		bool keyboardVisible;
-		QSettings *settings;
 
 	protected:
 		void changeEvent(QEvent *event);
