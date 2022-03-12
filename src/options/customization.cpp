@@ -76,7 +76,6 @@ customizationOptions::customizationOptions(QWidget *parent) :
 		ui->themeList->addItem(item);
 	}
 	selectCurrentFullTheme();
-	init();
 	// Connections
 	// Theme list
 	connect(ui->themeList,
@@ -160,12 +159,6 @@ void customizationOptions::init(void)
 {
 	blockThemeSignal = true;
 	ui->themeBox->setCurrentIndex(settings->value("theme/theme","0").toInt());
-	// Font
-	setFont(settings->value("theme/font","").toString(),
-		settings->value("theme/fontsize","20").toInt(),
-		settings->value("theme/fontbold","true").toBool(),
-		settings->value("theme/fontitalic","false").toBool(),
-		settings->value("theme/fontunderline","false").toBool());
 	// Colors
 	// Level text
 	customLevelTextColor = settings->value("theme/customleveltextcolor","false").toBool();
@@ -193,6 +186,12 @@ void customizationOptions::init(void)
 	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
 	panelBlueColor = settings->value("theme/panelblue","0").toInt();
 	setColors();
+	// Font
+	setFont(settings->value("theme/font","").toString(),
+		settings->value("theme/fontsize","20").toInt(),
+		settings->value("theme/fontbold","true").toBool(),
+		settings->value("theme/fontitalic","false").toBool(),
+		settings->value("theme/fontunderline","false").toBool());
 	blockThemeSignal = false;
 }
 
@@ -331,7 +330,10 @@ void customizationOptions::selectCurrentFullTheme(void)
 	for(int i=0; i < themes.count(); i++)
 	{
 		if(themes[i]["id"] == id)
+		{
 			ui->themeList->setCurrentRow(i);
+			break;
+		}
 	}
 }
 
