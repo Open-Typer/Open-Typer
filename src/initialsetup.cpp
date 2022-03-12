@@ -44,7 +44,6 @@ initialSetup::~initialSetup()
 /*! Saves settings and closes the dialog. */
 void initialSetup::finish(void)
 {
-	QSettings settings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	settings.setValue("main/configfile",rawItems[ui->packList->currentRow()]);
 	settings.setValue("main/customconfig",false);
 	accept();
