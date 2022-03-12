@@ -22,7 +22,6 @@
 #define CUSTOMIZATION_H
 
 #include <QWidget>
-#include <QSettings>
 #include <QFile>
 #include <QTextStream>
 #include <QPropertyAnimation>
@@ -51,7 +50,6 @@ class customizationOptions : public QWidget
 
 	private:
 		Ui::customizationOptions *ui;
-		QSettings *settings;
 		QVector<QVariantMap> themes;
 		QListWidgetItem *lastItem = nullptr;
 		bool blockThemeSignal;

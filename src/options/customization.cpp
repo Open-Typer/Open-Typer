@@ -27,7 +27,6 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	ui(new Ui::customizationOptions)
 {
 	ui->setupUi(this);
-	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	ui->themeCustomizationFrame->hide();
 	ui->themesFrame->show();
 	blockThemeSignal = true;
@@ -158,40 +157,40 @@ customizationOptions::~customizationOptions()
 void customizationOptions::init(void)
 {
 	blockThemeSignal = true;
-	ui->themeBox->setCurrentIndex(settings->value("theme/theme","0").toInt());
+	ui->themeBox->setCurrentIndex(settings.value("theme/theme","0").toInt());
 	// Colors
 	// Level text
-	customLevelTextColor = settings->value("theme/customleveltextcolor","false").toBool();
-	levelTextRedColor = settings->value("theme/leveltextred","0").toInt();
-	levelTextGreenColor = settings->value("theme/leveltextgreen","0").toInt();
-	levelTextBlueColor = settings->value("theme/leveltextblue","0").toInt();
+	customLevelTextColor = settings.value("theme/customleveltextcolor","false").toBool();
+	levelTextRedColor = settings.value("theme/leveltextred","0").toInt();
+	levelTextGreenColor = settings.value("theme/leveltextgreen","0").toInt();
+	levelTextBlueColor = settings.value("theme/leveltextblue","0").toInt();
 	// Input text
-	customInputTextColor = settings->value("theme/custominputtextcolor","false").toBool();
-	inputTextRedColor = settings->value("theme/inputtextred","0").toInt();
-	inputTextGreenColor = settings->value("theme/inputtextgreen","0").toInt();
-	inputTextBlueColor = settings->value("theme/inputtextblue","0").toInt();
+	customInputTextColor = settings.value("theme/custominputtextcolor","false").toBool();
+	inputTextRedColor = settings.value("theme/inputtextred","0").toInt();
+	inputTextGreenColor = settings.value("theme/inputtextgreen","0").toInt();
+	inputTextBlueColor = settings.value("theme/inputtextblue","0").toInt();
 	// Background
-	customBgColor = settings->value("theme/custombgcolor","false").toBool();
-	bgRedColor = settings->value("theme/bgred","0").toInt();
-	bgGreenColor = settings->value("theme/bggreen","0").toInt();
-	bgBlueColor = settings->value("theme/bgblue","0").toInt();
+	customBgColor = settings.value("theme/custombgcolor","false").toBool();
+	bgRedColor = settings.value("theme/bgred","0").toInt();
+	bgGreenColor = settings.value("theme/bggreen","0").toInt();
+	bgBlueColor = settings.value("theme/bgblue","0").toInt();
 	// Paper
-	customPaperColor = settings->value("theme/custompapercolor","false").toBool();
-	paperRedColor = settings->value("theme/paperred","0").toInt();
-	paperGreenColor = settings->value("theme/papergreen","0").toInt();
-	paperBlueColor = settings->value("theme/paperblue","0").toInt();
+	customPaperColor = settings.value("theme/custompapercolor","false").toBool();
+	paperRedColor = settings.value("theme/paperred","0").toInt();
+	paperGreenColor = settings.value("theme/papergreen","0").toInt();
+	paperBlueColor = settings.value("theme/paperblue","0").toInt();
 	// Panel
-	customPanelColor = settings->value("theme/custompanelcolor","false").toBool();
-	panelRedColor = settings->value("theme/panelred","0").toInt();
-	panelGreenColor = settings->value("theme/panelgreen","0").toInt();
-	panelBlueColor = settings->value("theme/panelblue","0").toInt();
+	customPanelColor = settings.value("theme/custompanelcolor","false").toBool();
+	panelRedColor = settings.value("theme/panelred","0").toInt();
+	panelGreenColor = settings.value("theme/panelgreen","0").toInt();
+	panelBlueColor = settings.value("theme/panelblue","0").toInt();
 	setColors();
 	// Font
-	setFont(settings->value("theme/font","").toString(),
-		settings->value("theme/fontsize","20").toInt(),
-		settings->value("theme/fontbold","true").toBool(),
-		settings->value("theme/fontitalic","false").toBool(),
-		settings->value("theme/fontunderline","false").toBool());
+	setFont(settings.value("theme/font","").toString(),
+		settings.value("theme/fontsize","20").toInt(),
+		settings.value("theme/fontbold","true").toBool(),
+		settings.value("theme/fontitalic","false").toBool(),
+		settings.value("theme/fontunderline","false").toBool());
 	blockThemeSignal = false;
 }
 
@@ -236,7 +235,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 			animation2->setStartValue(widgetGeometry);
 			animation2->setEndValue(ui->themeCustomizationFrame->geometry());
 			animation2->start();
-			settings->setValue("theme/fulltheme",themeMap["id"]);
+			settings.setValue("theme/fulltheme",themeMap["id"]);
 		});
 	}
 	else
@@ -258,7 +257,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		if(themeMap.contains("fontSize"))
 			fontSize = themeMap["fontSize"].toInt();
 		else
-			fontSize = settings->value("theme/fontsize","20").toInt();
+			fontSize = settings.value("theme/fontsize","20").toInt();
 		if(themeMap.contains("fontBold"))
 			fontBold = themeMap["fontBold"].toBool();
 		else
@@ -317,7 +316,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		}
 		saveColorSettings();
 		setColors();
-		settings->setValue("theme/fulltheme",themeMap["id"]);
+		settings.setValue("theme/fulltheme",themeMap["id"]);
 		blockThemeSignal = false;
 		emit themeChanged();
 	}
@@ -326,7 +325,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 /*! Select currently set full theme. */
 void customizationOptions::selectCurrentFullTheme(void)
 {
-	QString id = settings->value("theme/fulltheme","default").toString();
+	QString id = settings.value("theme/fulltheme","default").toString();
 	for(int i=0; i < themes.count(); i++)
 	{
 		if(themes[i]["id"] == id)
@@ -400,11 +399,11 @@ void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBo
 	ui->levelLabel->setFont(newFont);
 	ui->inputLabel->setFont(newFont);
 	// Save settings
-	settings->setValue("theme/font",fontFamily);
-	settings->setValue("theme/fontsize",fontSize);
-	settings->setValue("theme/fontbold",fontBold);
-	settings->setValue("theme/fontitalic",fontItalic);
-	settings->setValue("theme/fontunderline",fontUnderline);
+	settings.setValue("theme/font",fontFamily);
+	settings.setValue("theme/fontsize",fontSize);
+	settings.setValue("theme/fontbold",fontBold);
+	settings.setValue("theme/fontitalic",fontItalic);
+	settings.setValue("theme/fontunderline",fontUnderline);
 	if(!blockThemeSignal)
 		emit themeChanged();
 }
@@ -420,7 +419,7 @@ void customizationOptions::changeFont(QFont font)
 	oldFont.setFamily(font.family());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	settings->setValue("theme/font",font.family());
+	settings.setValue("theme/font",font.family());
 	if(!blockThemeSignal)
 		emit themeChanged();
 }
@@ -436,7 +435,7 @@ void customizationOptions::changeFontSize(int size)
 	oldFont.setPointSize(size);
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	settings->setValue("theme/fontsize",size);
+	settings.setValue("theme/fontsize",size);
 	if(!blockThemeSignal)
 		emit themeChanged();
 }
@@ -452,7 +451,7 @@ void customizationOptions::setBoldText(void)
 	oldFont.setBold(ui->boldTextBox->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	settings->setValue("theme/fontbold",ui->boldTextBox->isChecked());
+	settings.setValue("theme/fontbold",ui->boldTextBox->isChecked());
 	if(!blockThemeSignal)
 		emit themeChanged();
 }
@@ -468,7 +467,7 @@ void customizationOptions::setItalicText(void)
 	oldFont.setItalic(ui->italicTextBox->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	settings->setValue("theme/fontitalic",ui->italicTextBox->isChecked());
+	settings.setValue("theme/fontitalic",ui->italicTextBox->isChecked());
 	if(!blockThemeSignal)
 		emit themeChanged();
 }
@@ -484,7 +483,7 @@ void customizationOptions::setUnderlineText(void)
 	oldFont.setUnderline(ui->underlineTextBox->isChecked());
 	ui->levelLabel->setFont(oldFont);
 	ui->inputLabel->setFont(oldFont);
-	settings->setValue("theme/fontunderline",ui->underlineTextBox->isChecked());
+	settings.setValue("theme/fontunderline",ui->underlineTextBox->isChecked());
 	if(!blockThemeSignal)
 		emit themeChanged();
 }
@@ -493,30 +492,30 @@ void customizationOptions::setUnderlineText(void)
 void customizationOptions::saveColorSettings(void)
 {
 	// Level text
-	settings->setValue("theme/customleveltextcolor",customLevelTextColor);
-	settings->setValue("theme/leveltextred",levelTextRedColor);
-	settings->setValue("theme/leveltextgreen",levelTextGreenColor);
-	settings->setValue("theme/leveltextblue",levelTextBlueColor);
+	settings.setValue("theme/customleveltextcolor",customLevelTextColor);
+	settings.setValue("theme/leveltextred",levelTextRedColor);
+	settings.setValue("theme/leveltextgreen",levelTextGreenColor);
+	settings.setValue("theme/leveltextblue",levelTextBlueColor);
 	// Input text
-	settings->setValue("theme/custominputtextcolor",customInputTextColor);
-	settings->setValue("theme/inputtextred",inputTextRedColor);
-	settings->setValue("theme/inputtextgreen",inputTextGreenColor);
-	settings->setValue("theme/inputtextblue",inputTextBlueColor);
+	settings.setValue("theme/custominputtextcolor",customInputTextColor);
+	settings.setValue("theme/inputtextred",inputTextRedColor);
+	settings.setValue("theme/inputtextgreen",inputTextGreenColor);
+	settings.setValue("theme/inputtextblue",inputTextBlueColor);
 	// Background
-	settings->setValue("theme/custombgcolor",customBgColor);
-	settings->setValue("theme/bgred",bgRedColor);
-	settings->setValue("theme/bggreen",bgGreenColor);
-	settings->setValue("theme/bgblue",bgBlueColor);
+	settings.setValue("theme/custombgcolor",customBgColor);
+	settings.setValue("theme/bgred",bgRedColor);
+	settings.setValue("theme/bggreen",bgGreenColor);
+	settings.setValue("theme/bgblue",bgBlueColor);
 	// Paper
-	settings->setValue("theme/custompapercolor",customPaperColor);
-	settings->setValue("theme/paperred",paperRedColor);
-	settings->setValue("theme/papergreen",paperGreenColor);
-	settings->setValue("theme/paperblue",paperBlueColor);
+	settings.setValue("theme/custompapercolor",customPaperColor);
+	settings.setValue("theme/paperred",paperRedColor);
+	settings.setValue("theme/papergreen",paperGreenColor);
+	settings.setValue("theme/paperblue",paperBlueColor);
 	// Panel
-	settings->setValue("theme/custompanelcolor",customPanelColor);
-	settings->setValue("theme/panelred",panelRedColor);
-	settings->setValue("theme/panelgreen",panelGreenColor);
-	settings->setValue("theme/panelblue",panelBlueColor);
+	settings.setValue("theme/custompanelcolor",customPanelColor);
+	settings.setValue("theme/panelred",panelRedColor);
+	settings.setValue("theme/panelgreen",panelGreenColor);
+	settings.setValue("theme/panelblue",panelBlueColor);
 	if(!blockThemeSignal)
 		emit themeChanged();
 }
@@ -559,7 +558,7 @@ void customizationOptions::updateTheme()
 	QFile darkSheet(":/dark-theme/style.qss");
 	QFile lightSheet(":/light-theme/style.qss");
 	char *paperStyleSheet;
-	switch(settings->value("theme/theme","0").toInt()) {
+	switch(settings.value("theme/theme","0").toInt()) {
 		case 0:
 			// System (default)
 			qApp->setStyleSheet("");
@@ -759,7 +758,7 @@ void customizationOptions::resetBgPaperColors(void)
  */
 void customizationOptions::changeTheme(int index)
 {
-	settings->setValue("theme/theme",index);
+	settings.setValue("theme/theme",index);
 	setColors();
 	if(!blockThemeSignal)
 		init();
