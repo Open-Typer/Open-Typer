@@ -2,7 +2,7 @@
  * languagelist.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 
 #include <QWidget>
 #include <QListWidget>
-#include <QSettings>
+#include "global.h"
 #include "core/utils.h"
 #include "core/language.h"
 
@@ -45,7 +45,6 @@ class languageList : public QListWidget
 		
 	private:
 		languageManager *langMgr;
-		QSettings *settings;
 
 	signals:
 		/*!
