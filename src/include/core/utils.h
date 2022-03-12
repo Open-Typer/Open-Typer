@@ -2,7 +2,7 @@
  * utils.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@
 #include <QString>
 #include <QStandardPaths>
 #include <QKeyEvent>
-#include <QSettings>
 
 /*! \brief The stringUtils class contains functions related to strings. */
 class stringUtils
