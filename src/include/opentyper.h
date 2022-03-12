@@ -24,7 +24,6 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QMessageBox>
-#include <QSettings>
 #include <QDialog>
 #include <QTimer>
 #include <QElapsedTimer>
@@ -69,7 +68,6 @@ class OpenTyper : public QMainWindow
 		Ui::OpenTyper *ui;
 		languageManager *langMgr;
 		void connectAll(void);
-		QSettings *settings;
 		configParser *parser = nullptr;
 		monitorClient *client;
 		QString studentUsername, studentPassword;

@@ -38,7 +38,6 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(openPackAction, &QAction::triggered, this, &OpenTyper::openPack);
 	ui->openButton->setMenu(openMenu);
 	connect(ui->openButton, &QToolButton::clicked, openExerciseAction, &QAction::triggered);
-	settings = new QSettings(fileUtils::mainSettingsLocation(),QSettings::IniFormat);
 	langMgr = new languageManager;
 	client = new monitorClient(false);
 	studentUsername = "";
@@ -72,13 +71,13 @@ void OpenTyper::refreshAll(bool setLang)
 	// Set language
 	if(setLang)
 	{
-		if(settings->value("main/language","").toString() == "")
+		if(settings.value("main/language","").toString() == "")
 			changeLanguage(0,false,false);
 		else
-			changeLanguage(langMgr->boxItems.indexOf(settings->value("main/language","").toString()),false,false);
+			changeLanguage(langMgr->boxItems.indexOf(settings.value("main/language","").toString()),false,false);
 	}
 	// Config file (lesson pack) name
-	QString configName = settings->value("main/configfile","").toString();
+	QString configName = settings.value("main/configfile","").toString();
 	if(configName == "")
 	{
 		loadTheme();
@@ -91,11 +90,11 @@ void OpenTyper::refreshAll(bool setLang)
 	bool packChanged = (configName != oldConfigName);
 	oldConfigName = configName;
 	// Custom pack
-	customConfig = settings->value("main/customconfig","false").toBool();
+	customConfig = settings.value("main/customconfig","false").toBool();
 	// Space new line
-	spaceNewline = settings->value("main/spacenewline","true").toBool();
+	spaceNewline = settings.value("main/spacenewline","true").toBool();
 	// Error penalty
-	errorPenalty = settings->value("main/errorpenalty","10").toInt();
+	errorPenalty = settings.value("main/errorpenalty","10").toInt();
 	// Class monitor client
 	updateStudent();
 	// Theme
@@ -283,7 +282,7 @@ QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
 			openSuccess = parser->open(configPath);
 		if(!openSuccess && !bufferOpened)
 		{
-			settings->setValue("main/configfile","");
+			settings.setValue("main/configfile","");
 			refreshAll(false);
 			return QString();
 		}
@@ -295,7 +294,7 @@ QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
 	if(customConfig)
 		configName = configPath;
 	// Save selected config to settings
-	settings->setValue("main/configfile",configName);
+	settings.setValue("main/configfile",configName);
 	if(customConfig)
 	{
 		QFile configQFile(configName);
@@ -1036,37 +1035,37 @@ void OpenTyper::updateCurrentTime(void)
 void OpenTyper::loadTheme(void)
 {
 	// Load font
-	setFont(settings->value("theme/font","").toString(),
-		settings->value("theme/fontsize","20").toInt(),
-		settings->value("theme/fontbold","true").toBool(),
-		settings->value("theme/fontitalic","false").toBool(),
-		settings->value("theme/fontunderline","false").toBool());
+	setFont(settings.value("theme/font","").toString(),
+		settings.value("theme/fontsize","20").toInt(),
+		settings.value("theme/fontbold","true").toBool(),
+		settings.value("theme/fontitalic","false").toBool(),
+		settings.value("theme/fontunderline","false").toBool());
 	// Load colors
 	// Level text
-	customLevelTextColor = settings->value("theme/customleveltextcolor","false").toBool();
-	levelTextColor.setRgb(settings->value("theme/leveltextred","0").toInt(),
-		settings->value("theme/leveltextgreen","0").toInt(),
-		settings->value("theme/leveltextblue","0").toInt());
+	customLevelTextColor = settings.value("theme/customleveltextcolor","false").toBool();
+	levelTextColor.setRgb(settings.value("theme/leveltextred","0").toInt(),
+		settings.value("theme/leveltextgreen","0").toInt(),
+		settings.value("theme/leveltextblue","0").toInt());
 	// Input text
-	customInputTextColor = settings->value("theme/custominputtextcolor","false").toBool();
-	inputTextColor.setRgb(settings->value("theme/inputtextred","0").toInt(),
-		settings->value("theme/inputtextgreen","0").toInt(),
-		settings->value("theme/inputtextblue","0").toInt());
+	customInputTextColor = settings.value("theme/custominputtextcolor","false").toBool();
+	inputTextColor.setRgb(settings.value("theme/inputtextred","0").toInt(),
+		settings.value("theme/inputtextgreen","0").toInt(),
+		settings.value("theme/inputtextblue","0").toInt());
 	// Background
-	customBgColor = settings->value("theme/custombgcolor","false").toBool();
-	bgColor.setRgb(settings->value("theme/bgred","0").toInt(),
-		settings->value("theme/bggreen","0").toInt(),
-		settings->value("theme/bgblue","0").toInt());
+	customBgColor = settings.value("theme/custombgcolor","false").toBool();
+	bgColor.setRgb(settings.value("theme/bgred","0").toInt(),
+		settings.value("theme/bggreen","0").toInt(),
+		settings.value("theme/bgblue","0").toInt());
 	// Paper
-	customPaperColor = settings->value("theme/custompapercolor","false").toBool();
-	paperColor.setRgb(settings->value("theme/paperred","0").toInt(),
-		settings->value("theme/papergreen","0").toInt(),
-		settings->value("theme/paperblue","0").toInt());
+	customPaperColor = settings.value("theme/custompapercolor","false").toBool();
+	paperColor.setRgb(settings.value("theme/paperred","0").toInt(),
+		settings.value("theme/papergreen","0").toInt(),
+		settings.value("theme/paperblue","0").toInt());
 	// Panel
-	customPanelColor = settings->value("theme/custompanelcolor","false").toBool();
-	panelColor.setRgb(settings->value("theme/panelred","0").toInt(),
-		settings->value("theme/panelgreen","0").toInt(),
-		settings->value("theme/panelblue","0").toInt());
+	customPanelColor = settings.value("theme/custompanelcolor","false").toBool();
+	panelColor.setRgb(settings.value("theme/panelred","0").toInt(),
+		settings.value("theme/panelgreen","0").toInt(),
+		settings.value("theme/panelblue","0").toInt());
 	// Load base theme
 	setColors();
 }
@@ -1097,11 +1096,11 @@ void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fo
 	ui->inputLabel->setFont(newFont);
 	ui->mistakeLabel->setFont(mistakeLabelFont);
 	// Save settings
-	settings->setValue("theme/font",fontFamily);
-	settings->setValue("theme/fontsize",fontSize);
-	settings->setValue("theme/fontbold",fontBold);
-	settings->setValue("theme/fontitalic",fontItalic);
-	settings->setValue("theme/fontunderline",fontUnderline);
+	settings.setValue("theme/font",fontFamily);
+	settings.setValue("theme/fontsize",fontSize);
+	settings.setValue("theme/fontbold",fontBold);
+	settings.setValue("theme/fontitalic",fontItalic);
+	settings.setValue("theme/fontunderline",fontUnderline);
 }
 
 /*! Sets custom colors (if they are set) or default colors. \see customizationOptions#setColors */
@@ -1118,9 +1117,9 @@ void OpenTyper::setColors(void)
 	{
 		// Default level text color
 		levelTextColor.setRgb(0, 125, 175);
-		settings->setValue("theme/leveltextred",levelTextColor.red());
-		settings->setValue("theme/leveltextgreen",levelTextColor.green());
-		settings->setValue("theme/leveltextblue",levelTextColor.blue());
+		settings.setValue("theme/leveltextred",levelTextColor.red());
+		settings.setValue("theme/leveltextgreen",levelTextColor.green());
+		settings.setValue("theme/leveltextblue",levelTextColor.blue());
 	}
 	QString levelLabelStyleSheet = "color: rgb(" + QString::number(levelTextColor.red()) + ", " + QString::number(levelTextColor.green()) + ", " + QString::number(levelTextColor.blue()) + "); margin: 0px; padding: 0px;";
 	ui->levelLabel->setStyleSheet(levelLabelStyleSheet);
@@ -1133,9 +1132,9 @@ void OpenTyper::setColors(void)
 	{
 		// Default input text color
 		inputTextColor = ui->inputLabel->palette().color(QPalette::Text);
-		settings->setValue("theme/inputtextred",inputTextColor.red());
-		settings->setValue("theme/inputtextgreen",inputTextColor.green());
-		settings->setValue("theme/inputtextblue",inputTextColor.blue());
+		settings.setValue("theme/inputtextred",inputTextColor.red());
+		settings.setValue("theme/inputtextgreen",inputTextColor.green());
+		settings.setValue("theme/inputtextblue",inputTextColor.blue());
 	}
 	QString inputLabelStyleSheet = "color: rgb(" + QString::number(inputTextColor.red()) + ", " + QString::number(inputTextColor.green()) + ", " + QString::number(inputTextColor.blue()) + "); margin: 0px; padding: 0px;";
 	ui->inputLabel->setStyleSheet(inputLabelStyleSheet);
@@ -1148,9 +1147,9 @@ void OpenTyper::setColors(void)
 		ui->mainFrame->setStyleSheet("");
 		// Default paper color
 		paperColor = ui->paper->palette().color(QPalette::Base);
-		settings->setValue("theme/paperred",paperColor.red());
-		settings->setValue("theme/papergreen",paperColor.green());
-		settings->setValue("theme/paperblue",paperColor.blue());
+		settings.setValue("theme/paperred",paperColor.red());
+		settings.setValue("theme/papergreen",paperColor.green());
+		settings.setValue("theme/paperblue",paperColor.blue());
 		ui->paper->setStyleSheet("#paper {background-color: rgb(" + QString::number(paperColor.red()) + ", " + QString::number(paperColor.green()) + ", " + QString::number(paperColor.blue()) + ");}");
 	}
 	// Fix inputLabel automatically set background color
@@ -1170,9 +1169,9 @@ void OpenTyper::setColors(void)
 	else
 	{
 		panelColor = ui->controlFrame->palette().color(QPalette::Base);
-		settings->setValue("theme/panelred",panelColor.red());
-		settings->setValue("theme/panelgreen",panelColor.green());
-		settings->setValue("theme/panelblue",panelColor.blue());
+		settings.setValue("theme/panelred",panelColor.red());
+		settings.setValue("theme/panelgreen",panelColor.green());
+		settings.setValue("theme/panelblue",panelColor.blue());
 	}
 	// Set background color
 	if(customBgColor)
@@ -1184,9 +1183,9 @@ void OpenTyper::setColors(void)
 	{
 		// Default background color
 		bgColor = ui->mainFrame->palette().color(QPalette::Window);
-		settings->setValue("theme/bgred",bgColor.red());
-		settings->setValue("theme/bggreen",bgColor.green());
-		settings->setValue("theme/bgblue",bgColor.blue());
+		settings.setValue("theme/bgred",bgColor.red());
+		settings.setValue("theme/bggreen",bgColor.green());
+		settings.setValue("theme/bgblue",bgColor.blue());
 		ui->centralwidget->setStyleSheet("");
 	}
 	// Set keyboard color
@@ -1208,7 +1207,7 @@ void OpenTyper::updateTheme(void)
 	QFile darkSheet(":/dark-theme/style.qss");
 	QFile lightSheet(":/light-theme/style.qss");
 	QString paperStyleSheet, panelStyleSheet;
-	switch(settings->value("theme/theme","0").toInt()) {
+	switch(settings.value("theme/theme","0").toInt()) {
 		case 0:
 			// System (default)
 			qApp->setStyleSheet("");
@@ -1270,7 +1269,7 @@ void OpenTyper::openPack(void)
 		if(!fileName.isEmpty())
 		{
 			customConfig=true;
-			settings->setValue("main/customconfig",customConfig);
+			settings.setValue("main/customconfig",customConfig);
 			loadConfig(fileName, fileContent);
 			refreshAll(false);
 		}
@@ -1343,11 +1342,11 @@ void OpenTyper::changeLanguage(int index, bool enableRefresh, bool enableListRel
  */
 void OpenTyper::zoomIn(void)
 {
-	QString fontFamily = settings->value("theme/font","").toString();
-	int fontSize = settings->value("theme/fontsize","20").toInt()+2;
-	bool fontBold = settings->value("theme/fontbold","true").toBool();
-	bool fontItalic = settings->value("theme/fontitalic","false").toBool();
-	bool fontUnderline = settings->value("theme/fontunderline","false").toBool();
+	QString fontFamily = settings.value("theme/font","").toString();
+	int fontSize = settings.value("theme/fontsize","20").toInt()+2;
+	bool fontBold = settings.value("theme/fontbold","true").toBool();
+	bool fontItalic = settings.value("theme/fontitalic","false").toBool();
+	bool fontUnderline = settings.value("theme/fontunderline","false").toBool();
 	if(fontSize > 24)
 		fontSize = 24;
 	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
@@ -1359,11 +1358,11 @@ void OpenTyper::zoomIn(void)
  */
 void OpenTyper::zoomOut(void)
 {
-	QString fontFamily = settings->value("theme/font","").toString();
-	int fontSize = settings->value("theme/fontsize","20").toInt()-2;
-	bool fontBold = settings->value("theme/fontbold","true").toBool();
-	bool fontItalic = settings->value("theme/fontitalic","false").toBool();
-	bool fontUnderline = settings->value("theme/fontunderline","false").toBool();
+	QString fontFamily = settings.value("theme/font","").toString();
+	int fontSize = settings.value("theme/fontsize","20").toInt()-2;
+	bool fontBold = settings.value("theme/fontbold","true").toBool();
+	bool fontItalic = settings.value("theme/fontitalic","false").toBool();
+	bool fontUnderline = settings.value("theme/fontunderline","false").toBool();
 	if(fontSize <= 0)
 		fontSize = 2;
 	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
