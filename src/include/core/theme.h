@@ -93,7 +93,14 @@ class themeEngine : public QObject
 		static Style style(void);
 		void setStyle(Style newStyle);
 		void updateStyle(void);
-		
+		// Theme
+		int theme(void);
+		void setTheme(int index);
+		QString themeName(int index);
+		QList<QVariantMap> themeList(void);
+
+	private:
+		QList<QVariantMap> themes;
 
 	signals:
 		/*! A signal, which is emitted when the font changes. */
@@ -124,6 +131,8 @@ class themeEngine : public QObject
 		void panelColorChanged();
 		/*! A signal, which is emitted when the application style changes. */
 		void styleChanged();
+		/*! A signal, which is emitted when the application theme changes. */
+		void themeChanged();
 };
 
 extern themeEngine globalThemeEngine;

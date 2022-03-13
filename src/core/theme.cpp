@@ -26,6 +26,42 @@ themeEngine globalThemeEngine;
 themeEngine::themeEngine(QWidget *parent) :
 	QObject(parent)
 {
+	QVariantMap themeMap;
+	// Default
+	themeMap.clear();
+	themeMap.insert("name",tr("Default"));
+	themeMap.insert("id","default");
+	themeMap.insert("icon","default.png");
+	themes += themeMap;
+	// Dark
+	themeMap.clear();
+	themeMap.insert("name",tr("Dark"));
+	themeMap.insert("id","dark");
+	themeMap.insert("icon","dark.png");
+	themeMap.insert("style",1);
+	themes += themeMap;
+	// Light
+	themeMap.clear();
+	themeMap.insert("name",tr("Light"));
+	themeMap.insert("id","light");
+	themeMap.insert("icon","light.png");
+	themeMap.insert("style",2);
+	themes += themeMap;
+	// Green
+	themeMap.clear();
+	themeMap.insert("name",tr("Green"));
+	themeMap.insert("id","green");
+	themeMap.insert("icon","green.png");
+	themeMap.insert("style",2);
+	themeMap.insert("bgColor",qRgb(0,108,0));
+	themeMap.insert("panelColor",qRgb(175,175,175));
+	themes += themeMap;
+	// Custom
+	themeMap.clear();
+	themeMap.insert("name",tr("Custom"));
+	themeMap.insert("id","custom");
+	themeMap.insert("icon","custom.png");
+	themes += themeMap;
 	// Connections
 	connect(this, &themeEngine::fontBoldChanged, this, &themeEngine::fontStyleChanged);
 	connect(this, &themeEngine::fontItalicChanged, this, &themeEngine::fontStyleChanged);
@@ -451,4 +487,112 @@ void themeEngine::setStyle(themeEngine::Style newStyle)
 void themeEngine::updateStyle(void)
 {
 	setStyle((themeEngine::Style) settings.value("theme/theme","0").toInt());
+}
+
+/*! Returns current application theme. */
+int themeEngine::theme(void)
+{
+	QString id = settings.value("theme/fulltheme","default").toString();
+	for(int i=0; i < themes.count(); i++)
+	{
+		if(themes[i]["id"].toString() == id)
+			return i;
+	}
+	return 0;
+}
+#include <QDebug>
+/*! Sets application theme. */
+void themeEngine::setTheme(int index)
+{
+	blockSignals(true);
+	if(themeName(index) != "custom")
+	{
+		QVariantMap themeMap = themes[index];
+		// Style
+		if(themeMap.contains("style"))
+			setStyle((Style) themeMap["style"].toInt());
+		else
+			setStyle(SystemStyle);
+		// Font
+		QString fontFamily;
+		int fontSize;
+		bool fontBold, fontItalic, fontUnderline;
+		if(themeMap.contains("font"))
+			fontFamily = themeMap["font"].toString();
+		else
+			fontFamily = "";
+		if(themeMap.contains("fontSize"))
+			fontSize = themeMap["fontSize"].toInt();
+		else
+			fontSize = 20;
+		if(themeMap.contains("fontBold"))
+			fontBold = themeMap["fontBold"].toBool();
+		else
+			fontBold = true;
+		if(themeMap.contains("fontItalic"))
+			fontItalic = themeMap["fontItalic"].toBool();
+		else
+			fontItalic = false;
+		if(themeMap.contains("fontUnderline"))
+			fontUnderline = themeMap["fontUnderline"].toBool();
+		else
+			fontUnderline = false;
+		setFontFamily(fontFamily);
+		setFontSize(fontSize);
+		setFontBold(fontBold);
+		setFontItalic(fontItalic);
+		setFontUnderline(fontUnderline);
+		// Colors
+		if(themeMap.contains("exerciseTextColor"))
+		{
+			QRgb color = themeMap["levelTextColor"].toUInt();
+			setExerciseTextColor(QColor(color));
+		}
+		else
+			resetExerciseTextColor();
+		if(themeMap.contains("inputTextColor"))
+		{
+			QRgb color = themeMap["inputTextColor"].toUInt();
+			setInputTextColor(QColor(color));
+		}
+		else
+			resetInputTextColor();
+		if(themeMap.contains("bgColor"))
+		{
+			QRgb color = themeMap["bgColor"].toUInt();
+			setBgColor(QColor(color));
+		}
+		else
+			resetBgColor();
+		if(themeMap.contains("paperColor"))
+		{
+			QRgb color = themeMap["paperColor"].toUInt();
+			setPaperColor(QColor(color));
+		}
+		else
+			resetPaperColor();
+		if(themeMap.contains("panelColor"))
+		{
+			QRgb color = themeMap["panelColor"].toUInt();
+			setPanelColor(QColor(color));
+		}
+		else
+			resetPanelColor();
+	}
+	settings.setValue("theme/fulltheme", themeName(index));
+	blockSignals(false);
+	if(themeName(index) != "custom")
+		emit themeChanged();
+}
+
+/*! Returns the name of the theme. */
+QString themeEngine::themeName(int index)
+{
+	return themes[index]["id"].toString();
+}
+
+/*! Returns list of themes. */
+QList<QVariantMap> themeEngine::themeList(void)
+{
+	return themes;
 }
