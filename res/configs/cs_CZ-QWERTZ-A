@@ -29,236 +29,446 @@
 5.1.4:1,w;120,60 lesj, ekse, ejek, sfle, jajj, aeek, elel, dsle, jeja, eddd, lasů,
 5.1.5:1,w;120,60 kdes, eada, esel, jkůs, jees,
 5.1.6:1,w;120,60 deeů, lefe, eead, fejl, skea, ůaeů, ůkee, aeae, sesa, edaf, dfel,
+5.2.1:0,0;120,60,e\, ale, kde, ale, kde, jede, kde, sklad, jede, ale, jede, kde, sklad, kde, kde, ale, jede, jede, ale, ale, jak, kde, sklad, ale, ale, ale, jak, kde, ale, kde, sklad, sklad, jak, kde, ale, sklad, ale, jede, sklad, jede, sklad, jak, jede, jede, ale,
+5.2.2:0,0;120,60 jak, jak, jak, kde, jak, jede, ale, jede, jak, sklad,
+5.2.3:0,0;120,60 jede, jak, sklad, jede, ale, kde, ale, jak, ale, sklad, jak, ale, ale, kde, jede, jak, jede, jak, jak,
+5.2.4:0,0;120,60 jede, jede, ale, jede, kde, sklad, ale, kde, sklad, jede, ale, kde, jak, jak, sklad, jak, kde, jak, kde, kde, jede, jak, jede, ale, jede, kde, sklad, jede, kde, ale, sklad, jede, jede, sklad, kde, kde,
+5.2.5:0,0;120,60 ale, kde, jede, ale, kde, sklad, sklad, sklad, sklad, sklad, sklad, jak, kde, jak, jak, jak, jede, jak, jede, jede, ale, sklad, kde, jede, sklad, jak, jede, ale, kde, ale, jak, sklad, sklad, ale, jede, kde,
 6.1.1:1,w;120,60,wxo ww xx
-6.1.2:1,w;120,60 wwxw wowx oxox xxwo xxxw woox wxox owxw xwww
-6.1.3:1,w;120,60 flwx, oxow, jxxx, wxxo, xxox, fxwx,
-6.1.4:1,w;120,60 xwdw, xwow, wwxo, oowo, ooxx, woww, wjxw, okwo, wůoo, xwxw, owxo,
-6.1.5:1,w;120,60 wxxw, xxsw, xůxl,
-6.1.6:1,w;120,60 xwox, oxow, lxxx, ooso, wxox, oewd, ldwj,
-6.1.7:1,w;120,60 jwwo, wows, oowo, oood, olxw, wxoo,
+6.1.2:1,w;120,60 xwwo
+6.1.3:1,w;120,60 wowo, wswo, owoo, oodx, olxw, wxoo, wwwk, xxxw, xwjx, xoww, xwow,
+6.1.4:1,w;120,60 wooo, kook, wwwo, wexf, exwo, xxxo, owow, oxow, xxxo, wooo, oowo, xxox, kdwd, xxox,
+6.1.5:1,w;120,60 wlko, jxxx, owxo, sojs, aoow, xwxx, osoo, olos, ooow, xjxw, oaxo, xxoo, oxxo, xoxw, wůxx,
+6.1.6:1,w;120,60 oooj, wowx, oowo, ůoůx, wsxw, wodx, wsww, owwx, joxo, xooo, ooow, xwsx, fwoo,
+6.1.7:1,w;120,60 xwoo, owxa, kwww,
+6.2.1:0,0;120,60,wxo jede, jako, kde, sedadlo, ale, sedadlo, jak, sklad, jako, jak, jako, sklad, ale, sklad, jako, jako, ale, jede, kde, ale, jede, jako, jede, jako, jede, jede, ale, sklad, jak, sedadlo, jede, kde, kde, jede, kde, jak, jak, ale, jako, jede, jede, kde, jako, sklad,
+6.2.2:0,0;120,60 jak, kde, kde, ale, sedadlo, kde, jako, kde, jak, sedadlo, jako, jak, jako, sklad, sklad, ale, jede, sklad, jako, ale, sedadlo, sedadlo, sklad, sedadlo, jako, jak, jede, jede, kde, jako, jede,
+6.2.3:0,0;120,60 sklad, ale, jak, jak, sklad, sedadlo, jako, ale, jede, sedadlo, jak, sedadlo, ale, sklad, jak,
+6.2.4:0,0;120,60 jako, sedadlo, sklad, jede, jako, sedadlo, sedadlo, kde, jak, sedadlo, jak, jak, ale, kde, jede,
+6.2.5:0,0;120,60 ale, sedadlo, jak, kde, sedadlo, kde, jede, jede, kde, sedadlo, sklad, kde, sedadlo, jede, ale, jako, sedadlo, sklad, sedadlo, sklad, sklad, sklad, kde, kde, ale, jako, ale, jede, jako, sklad, jak, kde, jede, jako, sklad,
 7.1.1:1,w;120,60,tn tt nn
-7.1.2:1,w;120,60 dtxn, njxn, tnjt, ttno,
-7.1.3:1,w;120,60 nnnt, tntn, adnn, jett, nnwn, tfet, ůtft, ttnw, nwnx, nonn, nnůt,
-7.1.4:1,w;120,60 ůnnn, tnst, nntn, ttnt, onwl, nltn, nůjk, nnlt,
-7.1.5:1,w;120,60 ldtw, tttt, ntln, tjtt, ttnn, tntl,
-7.1.6:1,w;120,60 tant,
+7.1.2:1,w;120,60 ltnd, natů,
+7.1.3:1,w;120,60 nůnj, ttnf, tstt, axas, ůewt,
+7.1.4:1,w;120,60 nktx, dwtt, ftnů, ndůf, nůůa, ttnw,
+7.1.5:1,w;120,60 lůtj, ttlx, lntk, tltn, ttdt, nttk, tntt, kntt, nttd, takt,
+7.1.6:1,w;120,60 nlnt, tdůt, nftx, tfon, ttnd, tůnt, nkdn, nnsn, nntt, oůtn, knjj, tjnf, sttj,
+7.2.1:0,0;120,60,tn jako, jen, jako, jak, sklad, snad, sklad, dodnes, dne, sedadlo, ale, stalo, sklad, kde, ale, den, ale, den, snad, stalo, ale, dne, jen, kostela, den, dne, tak, den, snad, dne, jak, dodnes, jede, jen, jako, tak, deset, dodnes,
+7.2.2:0,0;120,60 deset, jede, dodnes, stole, jen, den, dodnes, dodnes, kde, stole, snad, jede, kde, kostela, jede, jen, sklad, kostela, dne, kde, dne, snad, kostela, snad, jede, tak, sklad, stole, dne, dne, jen, sklad, jako, jak, snad, kostela, sklad, jen, ale,
+7.2.3:0,0;120,60 dodnes, jak, snad, tak, stole, deset, dodnes, jede, ale, stalo, kde, sklad,
+7.2.4:0,0;120,60 jak, jak, tak, sedadlo, kostela, stalo, jen, den, stalo, jak, dne, tak, sklad, jen, den, jen, jak, stalo, stole, jen, jak, tak, jak, jako, den, jede, sedadlo, stalo, jen, sedadlo, deset, dne, dodnes, kostela, jako, sedadlo, jen, tak, snad, snad, deset, stalo, sklad, snad, sedadlo, jen, dodnes, stalo, jako,
+7.2.5:0,0;120,60 stalo, dodnes, jako, jako, den, kde, dodnes, jako, jako, kde, den, snad, jak, sedadlo, jede, sklad, dodnes, kostela, den, sklad, kostela, tak, den, jede,
 8.1.1:1,w;120,60,ci cc ii
-8.1.2:1,w;120,60 ciůo, dlůj, ciwx, atůa, jfii, cisw, jcai,
-8.1.3:1,w;120,60 icfi, jilc, sofi, iůcc,
-8.1.4:1,w;120,60 nicc, ůkti, aciů, icic, einw, xofs,
-8.1.5:1,w;120,60 fůjc, cikn, iiik, iwwn,
-8.1.6:1,w;120,60 cicw, ecxů, cixe, ljse, icii, iacc, xffa, xwsi, ietů,
+8.1.2:1,w;120,60 dacx, kcci, idct, cccx, cict,
+8.1.3:1,w;120,60 jccn, ncjc, iiik, iiůl, kkaj, acxi, niwt, ssjt, nwsn, csfd, cnci, cůfi,
+8.1.4:1,w;120,60 icců, ccwc, ůdco, xtkd, ůicc, iwct, ccct, jcii, iwic, cwsc, jcia, iaii, tsci, nůci, iikc,
+8.1.5:1,w;120,60 cůcw, tccc, iiti, iůie, cock, dccc, iwil, lůie, scic, tics,
+8.1.6:1,w;120,60 cfcf, jdwc, wfon, iice, icsi, kcli, cccc, lttn, sikc, iůie, accl, icsc, ixni, cefw,
+8.2.1:0,0;120,60,ci dodnes, kde, kostela, sklad, jako, snad, dne, sedadlo, stalo, stole, sklad, den, lije, deset, dne, jak, inscenace, jen, stole, inscenace, nic, sedadlo, jen, kde, lije,
+8.2.2:0,0;120,60 sedadlo, tak, inscenace, nic, konci, jede, deset, stalo, lije, asi, dodnes, dne, inscenace, dokonce, jede, lije, jede, jede, jako, den, snad, sklad, konci, deset, dne, inscenace, den, stole, konci, jako, lije, inscenace, tak, konci, asi, den, jede, asi,
+8.2.3:0,0;120,60 jak, stalo, sedadlo, dokonce, snad, kde, den, kde, stole, jako, jede, stalo, stalo, dne, den, inscenace, lije, sklad, kostela, sedadlo, stalo, den, kostela, sedadlo, sedadlo, asi, jak, tak, inscenace, stalo, snad, dne, inscenace, sklad, inscenace, den, dokonce, dne, jede, nic, den, sklad, jede, deset, asi, asi, jako,
+8.2.4:0,0;120,60 deset, jen, dodnes, stole, dokonce, den, konci, lije, sedadlo, ale, ale, dne, jede, den, dne, jede, deset, tak, jako, konci,
+8.2.5:0,0;120,60 tak, asi, lije, deset, dokonce, inscenace, stalo, tak, nic, konci, kostela, snad, dokonce, stole, tak, jen, jako, asi, konci, dokonce, jako, dne, jede, dne, nic, deset, deset, kde, ale, deset, snad, inscenace, ale, jak, snad, nic, jede, dodnes, sedadlo, lije, ale,
 9.1.1:1,w;120,60,qyp qq yy
-9.1.2:1,w;120,60 qyyy pyqy qqqp ypyp ppqq yqqy ypqq yypp
-9.1.3:1,w;120,60 pppů, pyny, fppy, yppc,
-9.1.4:1,w;120,60 pnts, yyyy, pqqq, pyyq, xyyq, pqqx, ykoe,
-9.1.5:1,w;120,60 pcyy, ykpy, lyqq, pnsp, yůpq, pyoy, yqpq, jpyq, yykq, pint, pqqy, ypqq,
-9.1.6:1,w;120,60 osql, yisp, oyyp, cpnn, xlcq, qppy,
-9.1.7:1,w;120,60 ttpq, ypaq,
-10.1.1:1,w;120,60,%r siya, tnjq, jjfů, issj, nojk, ykcc, twjt, qscy, qetd, edsn, jcxp, ůtkt, fkkp, exld,
-10.1.2:1,w;120,60 iynp, xqsd, awaf,
-10.1.3:1,w;120,60 xplx, ptwc, kysn, cpnj, ystd, kxxt, kdwf, nwxn, wxpn, fpqi, wfců, xook,
-10.1.4:1,w;120,60 ciky, alkq, qqyx, qcdk,
-10.1.5:1,w;120,60 tywk, wfnt, jiit, kdny, wcfa, ndfn, jofx, niůa, kdlc, toxp, ůply, dadw, plsq,
+9.1.2:1,w;120,60 qqyy yyqy pppy yyyq ppyq
+9.1.3:1,w;120,60 ytko, yjpo, ypyp, qyqy, pspo, pkpl, wayp,
+9.1.4:1,w;120,60 eksc, yqeq, xsnq, yxyy,
+9.1.5:1,w;120,60 ceyq, ylyq, qcne,
+9.1.6:1,w;120,60 qyqq, cwke, yyay, wyps, pssi, ppyp, yppp, yfyw, yyůy, ipty,
+9.1.7:1,w;120,60 yůpc, yqqy,
+9.2.1:0,0;120,60,qyp sklad, den, dopadla, jede, dokonce, jen, policie, policie, konci, inscenace, dodnes,
+9.2.2:0,0;120,60 policie, jako, stole, policie, jen, jede, sklad, dodnes, jak, tak, inscenace, stalo, dne, policie, lije, jako, jen, kostela, sklad, stalo, kostela, policie, pak, jede, asi, pod, dokonce, ale, kostela,
+9.2.3:0,0;120,60 kde, stalo, konci, konci, stole, policie, kde, pod, den, nic, den, sklad, dokonce, jak, jak, lije, lije, dopadla, stalo, konci, stalo, kde, ale, dopadla, pak, den,
+9.2.4:0,0;120,60 jede, dodnes, asi, snad, konci, den, jede, dopadne, sklad, kostela, pana, pod, sklad, ale, asi, jede, ale, nic, dodnes, sklad, kostela, stalo, pod, stalo, dne, dopadne, policie, pod, dne, dopadne, konci, pana, dne, jako, asi, dopadne, nic, kde, jako, pana, dopadne, jede, jede, stalo, dokonce, pod, stole, asi,
+9.2.5:0,0;120,60 stole, stole, pak, tak, jede, stole, snad, sklad, dodnes, tak, pak, ale, deset, pod, stalo, policie, sedadlo, dopadne, kostela, jak, pak, jako, stole, jako, stole, jak, jede,
+10.1.1:1,w;120,60,%r wdwa, lqpc, taůi, dysx, ixfj, kxao, esnq, qůpa, kqio, nůyl, pfci, jelf, xtlt, nipw,
+10.1.2:1,w;120,60 fdlt, nwpj, půxi, tyxy, ccei, nify, xskj, xdls, eejs, wcyi, dxjw, oatů, pllc, sqff,
+10.1.3:1,w;120,60 cwpq, fnle, lqcy, aesy, pfxw, xakp, lctn, nlfj, fjjd,
+10.1.4:1,w;120,60 lntd, pnce, eite, yifj, qtci, sqco, fwnd, ykkc,
+10.1.5:1,w;120,60 ůkxf, yyai, wtůk, kkon, tkpt, ojat, sxys, qfwy, pxnx,
+10.2.1:0,0;120,60,%r jak, jako, nic, den, dne, dopadne, stalo, lije, pak, nic, den, pak,
+10.2.2:0,0;120,60 lije, policie, den, sklad, stalo, dne, kostela, pana, dopadla, inscenace, jako, jede, jak, ale, dopadne, inscenace, dne, jak,
+10.2.3:0,0;120,60 den, konci, stalo, snad, pod, dodnes, dopadne, ale, inscenace, pod, jen, dne, pak, kde, inscenace, deset, policie, tak, jen, inscenace, dopadne, jede, nic, dokonce, dodnes, dopadla, jako, snad, snad, konci, jak, inscenace, policie, nic, inscenace, ale, sedadlo, dopadla, pana, tak, jen, nic, den, pod, nic,
+10.2.4:0,0;120,60 tak, kde, ale, snad, jako, dopadla, inscenace, dokonce, dne, dokonce, tak, dne, dopadne, dne, stalo, pana, kostela, jen, kde, pod, deset, dopadne, pana, jako, den, den, jen, jak, deset, tak, inscenace, stalo, jak, pana,
+10.2.5:0,0;120,60 asi, inscenace, dopadla, kde, kostela, lije, pak, dokonce, policie, ale, kde, kde, snad, sedadlo, konci, dopadne, jen, sklad, den,
 11.1.1:1,w;120,60,rm rr mm
-11.1.2:1,w;120,60 enrl, yesr, mmrr, wymr, cram, rymt, tmmj, niqs, mdrq, mrmm, esůs, rmsj, ůdol, qprm,
-11.1.3:1,w;120,60 fmxm, moot, rnlx, drrk, fmcw, alra, wmrr, rrlj, rlrj, lram, yrwy, rdkm, rcůs, eopc, mrtt,
-11.1.4:1,w;120,60 mswj, rknq, epqj, cmnt,
-11.1.5:1,w;120,60 rrrm, msto, rwsm, mmer,
-11.1.6:1,w;120,60 rmar, ffmo, jrrr, wrrl, rfmr,
+11.1.2:1,w;120,60 wyel, remm, mfmr, ppts, mlcr, krcm, efmm, jmxx, crsj, ortf, mfod, ymcl, mmri, qmde,
+11.1.3:1,w;120,60 moma, ůitr, rdwr, yrmo, mrcs, rmrr, mdrx, kkkm, dykx,
+11.1.4:1,w;120,60 rmmr, můro, ůpkm, tcůa, mlmr, wmam, rxrm, mcrr, ůotx, wcpl,
+11.1.5:1,w;120,60 lydc, rrrn,
+11.1.6:1,w;120,60 jmrr, rmrm, rcůr, royt, dmrm, rjtm, aůrr, rmsq, ammr, rjrr, orca, mmmm,
+11.2.1:0,0;120,60,rm jen, proto, pak, stalo, pana, pijeme, deset, nic, sklad, stole, dnem, pana,
+11.2.2:0,0;120,60 kde, tam, kde, kostela, stalo, maminka, sklad, firmy, domy, pro, renesance, stalo, jede, snad, most, koncert, koncert, pro, inscenace, koncert, dopadla, dne, pijeme, jede, tradice, tradici, renesance, pijeme, stole, centrem, asi, pak, rok, sklad, tradici, maminka, kapra, deset, kam, ale, tak, jsme, dokonce, dodnes, domy, lije,
+11.2.3:0,0;120,60 nemoc, konci, dopadne, tradici, kostela, rok, koncerty, pana, jede, proto, lije, jsme,
+11.2.4:0,0;120,60 rok, dokonce, sklad, snad, dokonce, pijeme, sklad, jen, inscenace, pak, proto, centrem, kam, park, parky, lije, dodnes, sklad, koncert, rekordy, inscenace, sedadlo, policie, centrem, ale, dne, roce, firmy, nemoc, osm, jede, tak, nic, policie, snad, pijeme,
+11.2.5:0,0;120,60 deset, kde, strom, jak, lije, kde, osm, deset, roce, sklad, kapra, dne, tradice, pak, jak, dopadla, jako, dnem, jsme, centrem, stole, jsme, stalo, deset, sedadlo, park, rekordy, rekordy, prakticky, dopadne, maminka, policie, maminka, dne, jsme, tradice, most, rok, nemoc, parky, stole, dopadla, tak, tak, dnem, jak, osm, park,
 12.1.1:1,w;120,60,uv uu vv
-12.1.2:1,w;120,60 cevk, uueo, vůju, uyku, ucun, durt, uůuu, muyo, ufjv, ttua, edur, ujvs,
-12.1.3:1,w;120,60 uusy, mppo, uvyw, ujuv, jpva, dncu, aldu, suux, vvuu, smcu, liuj, fnau,
-12.1.4:1,w;120,60 jvvk, qclc, koiv, fxlv, můue, suyk, xuvů, qmvw, uvvů, uvom, uasf, keyp,
-12.1.5:1,w;120,60 cldu, ůius, yquv, vůcv, vdvy, oavk, esni, uvuu, oeup, ppwo,
-12.1.6:1,w;120,60 svuu, rtic,
+12.1.2:1,w;120,60 vevů, nvaq, uvvv, vfju, ivvy, mjju,
+12.1.3:1,w;120,60 fvas, avuu, anul, qvuw, sosn,
+12.1.4:1,w;120,60 srou, irxr, ofru, vcůx, ruůj, qfůd, uptk, vůuu, devk, aptu, uoův, ovrů,
+12.1.5:1,w;120,60 duod, ovxm,
+12.1.6:1,w;120,60 rlvu, lvůq, nadd,
+12.2.1:0,0;120,60,uv prakticky, asi, odlitku, kostela, jsme, klasiku, pana, dopadla, strom, maminka, tradice, pod, snad, vody, pro, dodnes, jako, pod, proto, park, tradice, rodinou, renesance, dne, velmi, jako, kostela, pod, kterou, rodinou, dnem, jede, rodinou, lije, ulicemi, jsou, mluvilo, jednu, renesance, dne, den, velmi, asi, proto, tradici, kapra,
+12.2.2:0,0;120,60 osm, pijeme, olovo, divadel, jak, tradici, stylu, velkou, centrem, vypravit, firmy, jak, domy, vlak, jen, jednu, pak, stylu, dodnes, jede, adventu, koncerty, restaurace, rodinou, odlitku, restaurace, dnem, piva, roce, den, pokud, pro, svůj, tradici, dopadne, inscenace, lije, mluvilo, piva, asi, pod, tak, rok, slavit, roce, firmy, půjdu, klasiku, velmi,
+12.2.3:0,0;120,60 rekordy, vlak, deset, koncerty, dopadne, koncerty, proto, strom, restaurace, adventu, kostela, maminka, adoptovala, dne, komentuje, inscenace, roce, kde, piva, odlitku, turisticky, lije,
+12.2.4:0,0;120,60 ale, park, kapra, nemoc, inscenace, jede, tradici, parkuje, klasiku, centrem, turisty, nemoc, osm, konci, svůj, lije, politiku, den, park, dodnes,
+12.2.5:0,0;120,60 turistů, kde, sklad, tradice, adventu, divadel, kterou, jak, divadel, komentuje, jsou, pokud, ale, koncerty, deset, snad, dodnes, pod, jsou, most, pod, piva, centru, kde, tam, adventu, domy, piva, maminka, rekordy, stalo, vypravit, ale, stylu, stalo, pod, policie,
 13.1.1:1,w;120,60,zb zz bb
-13.1.2:1,w;120,60 qzmj, rqfz, jbzm, yůbn, fzfb, ibzb, bbfo,
-13.1.3:1,w;120,60 ewpx, ůbuz, jbxb, bbye, pbzb, bzlz, zzbz, ontl,
-13.1.4:1,w;120,60 cpba, kyur, kjab, ztzf, zzfo, lqbp, ukzb,
-13.1.5:1,w;120,60 kzwz, rrza, ůbzz, nzkb, jbab, szzb, ibzs, boůk, fzyb,
-13.1.6:1,w;120,60 lasj, klvz, bpbm, lzeb, bdxt, yubb, kzbv, bbrj, batb,
-14.1.1:1,w;120,60,%r fxyf, xwfm, zkqy, cpnc, jůdi, euzt, iwls, btci,
-14.1.2:1,w;120,60 sqcf, sicy, cfvb, dofw, exyd, lykq, oivu, dnfo, vxod, utys, ltok, fajf,
-14.1.3:1,w;120,60 bwpc, scqs,
-14.1.4:1,w;120,60 vůkr, ůwxs, xeqd, uyiu, calc, mftu, ykůs,
-14.1.5:1,w;120,60 bput, rdmo, bxce,
-15.1.1:1,w;120,60,- -qrt, xtm-, alqs,
-15.1.2:1,w;120,60 zwmt, xtwv, wlwz, zk-d, --sů, edii, dunk, -cm-, avuo, jmjd, -zrs, bazk,
-15.1.3:1,w;120,60 -fdt, pq-k, y-ox, lkt-, b-cz, -om-, -dů-, s-u-, ndwm, u-wb, qc--, yc-f,
-15.1.4:1,w;120,60 ok--, -pvw, kpvv, wt-y, mifn, ---d, ----, ůtců, pvqk, slcy, -r-u,
-15.1.5:1,w;120,60 rcev, lsey, ---w, owc-, fof-, -zfb,
+13.1.2:1,w;120,60 bznz, zyzq, azew, kvdo, toci, ůrzů, ůbxy,
+13.1.3:1,w;120,60 ptui, ufzl, zxzl, bzww, rzůz, zbib, beri,
+13.1.4:1,w;120,60 bzbb, zmca, bfzb, vtmb, bbůi, zbbl, znmm, tneb, euzb, qwct, maap, zljb,
+13.1.5:1,w;120,60 spzb,
+13.1.6:1,w;120,60 mbwi, jzmo, lzva,
+13.2.1:0,0;120,60,zb jak, konci, svatba, jsou, divadel, dne, jsme, pijeme, kde, nemoc, svatba, prakticky, mluvilo, vlak, maminku, zde, jede, jsou, roce, festivaly, maminka, ale, zastavil, parkuje, adoptovala,
+13.2.2:0,0;120,60 adoptovala, dnem, maminka, aby, pro, dne, rok, stalo, asi, komentuje, osm, turisticky, nemoc, tak, turisticky, cizince, pijeme, park, zde, den, dokonce, proto, jablka, stylu, jede, proto, klasiku, vody, mlze, piva, jednu, asi, cizinců, parkuje, snad, minut, jak, turisty, jak, turisty, slavit, policie, kterou, dopadla,
+13.2.3:0,0;120,60 domy, jako, turistů, nemoc, rok, turisty, aby, asi, zjistily, strom, jen, stole, jak, restaurace, osm, velkou, most, nebo, nemoc, cizinců, kam, vlak, restaurace, roce, lije, politiku, prakticky, centrem, tam, ulicemi, park, dopadne, klubu, zastavil, turisty, jednu, domy, divadel, centrem, cizince, park, strom, voze, nebyla, cizince, kam, vody,
+13.2.4:0,0;120,60 zde, svůj, den, dokonce, nebo, jak, rok, proto, restaurace, politiku, renesance, proto, vypravit, maminku, vlak,
+13.2.5:0,0;120,60 dopadla, rodinou, tradice, mluvilo, svůj, tradici, proto, turisty, cizinců, prakticky, proto,
+14.1.1:1,w;120,60,%r xbyn, wsta, rbtq, mrkz, tůpj, ymzb, nowz, bicf, qůxv, pfyo, yzui, ddzn, tsxk, jwzk,
+14.1.2:1,w;120,60 mpuu, sblx, ajet, uyqt, yyut, moux, uszt, ůfwu,
+14.1.3:1,w;120,60 dium, ipln, cbrc, bpib, vimo, tree, ozzu, fbců, jzrx, mbub, qvzy, vqxt, vstq, vfzw, jnaw,
+14.1.4:1,w;120,60 wjcw, nipd, sdjm, fqje, kůnt, mozr, fijn, wdky, yrlk,
+14.1.5:1,w;120,60 wvnw, zcrt, qzdq, xber, ujwi, wtxx,
+14.2.1:0,0;120,60,%r zastavil, klubu, vypravit, snad, nebo, svůj, pro, deset, firmy, půjdu, komentuje, svůj, odlitku, jablka, olovo, cizinců, zjistily, pro, vypravit, dopadla, turistů, konci, domy, turistů, snad, tam, jednu, adventu, dopadne, turisty, adventu, centru, slavit, cizinců, zda, sedadlo, kam, stalo, stylu,
+14.2.2:0,0;120,60 naleznete, vlak, naleznete, adventu, olovo, jak, nic, cizinců, pod, parkuje, minut, jede, centru, minut, mlze, jen, parky, snad, nemoc, restaurace, obdivovat,
+14.2.3:0,0;120,60 slavit, maminku, vlak, maminka, centru, jablka, bude, piva, zde, festivaly, kapra, jsme, adoptovala, cizinců, jede, tam, jsme, zda, domy, kostela, mlze, lije, most, obdivovat, dnem, kterou, rekordy,
+14.2.4:0,0;120,60 obvykle, jen, adoptovala, voze, jednu, restaurace, strom, sklad, stylu, mlze, svůj, turisty,
+14.2.5:0,0;120,60 svatba, velkou, restaurace, jsme, policie, cizince, byly, politiku, pijeme, nic, svatba, centrem, zastavil, svatba, domy, renesance, snad, policie, parkuje, koncerty, turistů, vody, obvykle, půjdu, nebo,
+15.1.1:1,w;120,60,- r-ny, tyfx, ůmm-, r-ců, m-we, -tj-, lrpx, dů-x, -ů-e, wcw-, zoqp, tn-ů, mrq-, q-np,
+15.1.2:1,w;120,60 yenv, j-k-, z-rf,
+15.1.3:1,w;120,60 ouy-, y-ol, ůrfk, axnx, ob-x, cvkr, fwne,
+15.1.4:1,w;120,60 lacs, fp-i, ůbon, -lmn, y-yi, fcbc, b-a-, -tdp, eyqw, -e-q, --af, jt-q, caqn,
+15.1.5:1,w;120,60 ysbf, xn-e, jaqy, -nid, dcy-, fuf-,
+15.2.1:0,0;120,60,- bude, jsou, kostela, jede, aby, prakticky, obvykle, mluvilo, konci, ale, advent, pak, firmy, den, dnem, nemoc, divadel, kde, jede, slavit, slavit, roce, dopadla, renesance, vlak, pijeme, vlak, adoptovala, jednu, velmi, voze, roce, jsou, proto, rotunda, mluvilo, rodinou, divadel, centru, maminku,
+15.2.2:0,0;120,60 rotunda, divadel, pak, kostela, pana, naleznete, strom, den, politiku, rok, slavit, kam, asi, konci, konci, naleznete, cizince, maminka,
+15.2.3:0,0;120,60 renesance, ulicemi, centrem, tak, most, policie, tradici, jako, klasiku, tradice, mluvilo, adventu, renesance, jen, piva, turistů, klasiku, jak, dne, tradice, dopadne, kde, koncerty, piva, politiku, kde, cizinců, adventu, komentuje, svůj, mluvilo, pana, politiku, turisticky, koncerty, den, park, renesance, nebo, advent, jen, tradice, tradici, pijeme, rodinou,
+15.2.4:0,0;120,60 pak, slavit, svatba, zastavil, turisty, advent, slavit, parkuje, tradici, centru, renesance, advent, zda, adoptovala, asi, adventu, park, kam, turistů, tradice, nic, park, nebo, koncert, maminka,
+15.2.5:0,0;120,60 festivaly, jede, dne, lije, maminku, mlze, obvykle, adventu, vody, adventu, koncert, nebyla, bude, vlak, kde, zastavil, jak, pro, adoptovala, pokud, sedadlo, ulicemi, svatba, domy, roce, stylu, jednu, advent, turisty, svůj, tak, dne, pod, rodinou, pana, klubu, stalo, dnem, konci, divadel, tak, dokonce, rekordy, naleznete, tam, jak, vypravit, svůj,
 16.1.1:1,w;120,60,hg hh gg
-16.1.2:1,w;120,60 gpsb, godů, růhh, dpuu, b-hh, oybh, hixj,
-16.1.3:1,w;120,60 dpbg, bhba, chrg, rgct, ymrů, lhgf, zocg, gnvv, rhid,
-16.1.4:1,w;120,60 fygo, gscz, gave, hhg-, higg, hlg-, ghio, ohag,
-16.1.5:1,w;120,60 ghef, tlgg, ljcx, kvtu, fwhs, thcu,
-16.1.6:1,w;120,60 dhtů, kbvg, lbdh, bbhg, qinv, dhqd, hqze, hgfj, sivg, lbpk, fhxg, hvhp,
-17.1.1:1,w;120,60,ú hasu, ayut, aqwx, úsbn,
-17.1.2:1,w;120,60 przú, tbpl, khef, reiú, úcůb, slúh, gjck, ůhiú, xtku, vúqz, nsei, y-yů,
-17.1.3:1,w;120,60 urgk, -úos, ů-úú, qqbp, dnbm, jbas, knůq, jrsb, júúr, úerc, kůcr, důlú, -pvi, qvúo, adrm,
-17.1.4:1,w;120,60 auff,
-17.1.5:1,w;120,60 -ůeh, yioh, vůbd, úgab, búsh, ybuú, fůox, flxú,
-18.1.1:1,w;120,60,%r jgmf, jbmb, zeoz, sqwt, prmq, rdtt, fůqz,
-18.1.2:1,w;120,60 stcc, dilg, outw, owma, mrcv, rdio, kfgq, ufyu, yytú, ůuwr, zůoq, ibbe, nywa, gmck, yixh,
-18.1.3:1,w;120,60 gvhk, rokm, úxcn, eplw, lmeú,
-18.1.4:1,w;120,60 gulů, xvim, mahz, l-ek, oúzc, wv-y, jnnv, rdqs, dilc, úbhe,
-18.1.5:1,w;120,60 úuiq, xxrl, vzvs, -aev, zldw, zwwa, xhju, untj, hqgv, ůglk,
-19.1.1:1,w;120,60,%s Ctvc, lnq,
-19.1.2:1,w;120,60 aut, P-pz, ucw, ůtai, ygm, Bnzd, Yůey, Fzbl, Oqkb, hfy,
-19.1.3:1,w;120,60 V-va, gyn, Orúd, ljo, Xkvl, Etnp, tsb, úfúf, gzg, zmú, Xvtr, fia, Shey, úxp,
-19.1.4:1,w;120,60 idv, Iiuo, Tsod, bpi, qim, Enyb, Jgnn, ůpaq, Ouyf, c-q, Lncp, nwf,
-19.1.5:1,w;120,60 szq, sny, Texi, Bqfq, Wncj, Pqac, Gevg,
-20.1.1:1,w;120,60,%r Mfqj, Ikůn, cco, rap, ngr, úrxú, swr, Lryz, wtq,
-20.1.2:1,w;120,60 hdn, Jcqx, úújs, úůyp, Nmdu, úshe, Wůrf, Fúev, ůgfo,
-20.1.3:1,w;120,60 dnk, sdi, cln, bar, Ncpm, rhd, Qqhd, Upo-, trl, Yixo, ůmm, zvp, amw, ůgm,
-20.1.4:1,w;120,60 -um, iph, Eú-ů, swt, Wozf, ynj, Vpyh,
-20.1.5:1,w;120,60 Uqam, Růac, mis, Bjgq, Hjcx, Ymmb, Xqks, únl, gdx, Qptu, Ducc, Bpqw,
-21.1.1:1,w;120,60,. Aswn, Gzb., rym, ybg, Fqyú, E.hw, ůald, fsr, Slnx, Zypú, P.rh,
-21.1.2:1,w;120,60 .do,
-21.1.3:1,w;120,60 ..q, .jgz, ef., .yj, ůtyb, A.vi, l-j, Lnw., Raip, udq, byv, A.ůd, r.w,
-21.1.4:1,w;120,60 .ů.b, .mgs, .lek, Uzld, zcl, Cyjb,
-21.1.5:1,w;120,60 gzd, fpf, .ich, x.., rqj, Cgú., úq-m, v.., Wx.ú, Pszf, fit, .-.u, ahc, mns,
+16.1.2:1,w;120,60 vtin, mbtg, uakg, hheu, xvgf, xglg, uhgp, xhuf, xhvx, fayh, ahgy, mgsg, ccpq, emqc,
+16.1.3:1,w;120,60 nggn, hujc, xiga, mhgh, oghc, ghsh, hhsh, ghgt, gxhw,
+16.1.4:1,w;120,60 plsy, hdyg, g-mg, vhja, bqql, hagm, ůngg, wgůg, hiůp, hzgg, hgyk, spxg, gggv, hiyw,
+16.1.5:1,w;120,60 ůphj, yhyg,
+16.1.6:1,w;120,60 rqgn, dllh, hhhh, dyhg, odbg, cxgh, gphe, hp-y, nwxb, wwmt, nqwh, fgag,
+16.2.1:0,0;120,60,hg olovo, maminku, strom, centru, hrocha, renesance, policie, kapra, mlze, ulicemi,
+16.2.2:0,0;120,60 naleznete, hrocha, rotunda, jsme, asi, stole, kde, vlak, domy, stalo, kterou, jak, nic, hodin, firmy, tak, dne, dne, kostela, odlitku, voze, bude, dnem, renesance, maminku, osm, parkuje, rodinou, obvykle, rekordy, ale, turistů, maminka, cizinců, advent, tradice, jak, ulicemi, jablka, centrem, jsme, park, kterou, den, rok, proto, prakticky, prakticky, bude,
+16.2.3:0,0;120,60 klasiku, klubu, bude, centrem, pana, jak, cizinců, klubu, koncert, vody, restaurace, půjdu, mohou, most,
+16.2.4:0,0;120,60 strom, turisty, tradici, dne, obvykle, pak, tam, pijeme, historii, sklad, kam, politiku, nebyla, kapra, ulicemi, zde, deset, dnem, park, renesance, adventu, tradice, roce, asi, koncerty, adoptovala, jako, bohatou, park, stylu, centru, centrem, trochu, stylu, tradice, jak, půjdu, deset, druhů, park, firmy, politiku,
+16.2.5:0,0;120,60 zda, festivaly, bude, bude, centru, odlitku, sklad, stalo, vlak, advent, adventu, sedadlo,
+17.1.1:1,w;120,60,ú pegx, xiei, xirr, bsúi, tsso, ojxr, uúey, lsbd, vykd, ůfiú,
+17.1.2:1,w;120,60 úcxl, úese,
+17.1.3:1,w;120,60 úúhs, hhtb, fpuú, gwyb, gúip, úúúy, sbtl, můúz, vcip, yzef, yhúh, uúlů, úúli,
+17.1.4:1,w;120,60 mbdm,
+17.1.5:1,w;120,60 ioaú, xnu-, rrqú, fcůg, gwvu,
+17.2.1:0,0;120,60,ú turistů, kam, pijeme, velmi, snad, kam, vypravit, dopadne, lije, hudby, rodinou, rotunda, pohovce, jsou, turisticky, most, maminka, politiku, den, odlitku, mnoho, cizince,
+17.2.2:0,0;120,60 zjistily, konci, strom, dodnes, nemoc, trochu, konci, park, komentuje, kterou, proto, slavit, nebo, prakticky, hudby, voze, sklad, turistů,
+17.2.3:0,0;120,60 firmy, centrem, olovo, festivaly, dopadla, vypravit, restaurace, politiku, koncert, pijeme, centru, pod, adoptovala, dopadla, historii, cizinců, dopadla, hudby, park, proto, cizinců, konci, bude, restaurace, komentuje, mluvilo, obdivovat, velkou, dnem, pokud, tradici, velmi, policie, jednu, restaurace, advent, hrocha, minut, kde, klasiku, kde, rekordy, pana, rychle, nic, klasiku,
+17.2.4:0,0;120,60 ulicemi, vody, restaurace, kam, maminku, den, tradice, dokonce, nic, rotunda, kterou, renesance, kde, parkuje, cizince, hudby, hodin, hudby, rok, adoptovala, naleznete, pijeme, zde, nemoc, parky, olovo, jede, obdivovat, rok, schůzku, byly, tam, domy, policie, dne, turistů, stalo, snad, historii, pokud, dne, cizince, turisticky, byly, stalo, obdivovat, restaurace, dokonce, jen,
+17.2.5:0,0;120,60 pod, rychle, kam, zda, jen, mohou, kostela, centru, pak, hudby, odlitku, cizince, koncerty, turisty, nebo, proto, hezkou, rok, mnoho, jsme, pro, koncerty, kostela, advent, rychle, pokud, minut, zjistily, zastavil, jen, hodin, koncert, slavit, naleznete, nemoc, minut, centrem, kde, ulicemi, jede, stalo, domy, inscenace, voze, schůzku, den, kde, adoptovala, zjistily, klasiku,
+18.1.1:1,w;120,60,%r d-jo, vzng, vhxl, elhc, q-mi, cbyq, ajrr, -wlj, sfůd, rjnu, bsur,
+18.1.2:1,w;120,60 ulmc, wcap,
+18.1.3:1,w;120,60 xhbg, irxc, qgqz, fůců, zkůy, nzúp, eůzf, oúbi, oopm, rshd, kizw, amyo, úůqq,
+18.1.4:1,w;120,60 nsfp, axůg, nywd, uoep, rhsg, jovú, ůbez, jgmk, xúsa, úghp, khhb, cebn, dxbu,
+18.1.5:1,w;120,60 c-fx,
+18.2.1:0,0;120,60,%r hodin, naleznete, aby, vlak, byly, velmi, vlak, park, mlze, festivaly, nebo, vlak, minut, kapra, kapra, vypravit, koncert, mlze, olovo, pohovce, zastavil, hrocha, obvykle, park, pokud, den, nebyla, ulicemi, hezkou, dopadla, tradici, asi, centrem, divadel, konci, park, bohatou, vlak, klubu, konci, mluvilo, inscenace, strom, deset, asi, klasiku, zastavil, kostela, advent, maminka,
+18.2.2:0,0;120,60 snad, turisty, pokud, konci, stylu, tam, trochu, nebo, tradice, park, svatba, adventu, cizince, svůj, kapra, nic, stalo, domy, ulicemi, komentuje, restaurace, koncert, svatba, obvykle, hezkou, kostela, cizince, turistů, adoptovala, zastavil,
+18.2.3:0,0;120,60 bude, policie, inscenace, dopadne, vlak, koncerty, osm, sedadlo, adoptovala, sklad, hudby, sedadlo, nic, aby, sklad, hezkou, advent, rok, jak, druhů, piva,
+18.2.4:0,0;120,60 lije, klasiku, pana, kam, tak, bude, jednu, most, rotunda, svatba, most, osm, turisty, klubu, kam,
+18.2.5:0,0;120,60 svůj, roce, nic, domy, olovo, nic, kde, advent, hodin, tam, prakticky, ulicemi, den, kde, cizinců, centrem, konci, strom, divadel, koncert, byly, vypravit, deset, pokud, maminku, hezkou, osm, bohatou, trochu, asi, sedadlo, most, nemoc, velkou, rotunda, mnoho, roce, mohou, ale, velmi, snad,
+19.1.1:1,w;120,60,%s uax, ůus,
+19.1.2:1,w;120,60 elg, msd, půů, Hcfů, wls, Zee-, sfr, ifq, úpr, ůwy, Uxtq, Hmúú, ida,
+19.1.3:1,w;120,60 -úv, Gfln, Ov-g, rov, njo, ůnoe, fou, z--, ůůoú,
+19.1.4:1,w;120,60 ioi, Artu, Qcw-, úqh, bne,
+19.1.5:1,w;120,60 úxh,
+19.2.1:0,0;120,60,%s maminku, konci, osm, dopadne, sedadlo, jede, lije, strom, pohovce, komentuje, byly, osm, stylu, koncert, jsme, jablka, kde, byly, jsme, jablka, dnem, aby, Nakonec,
+19.2.2:0,0;120,60 Najdete, proto, byly, klubu, prakticky, maminku, hudby, mluvilo, Josefov, Praze, Martina, pak, Jana, sklad, kterou, jako, trochu, minut, maminka, Dnes, politiku, vody, divadel, Josefov, roce, pro, maminka, policie, Jak, sklad, velkou, nebyla, svatba, svatba, konci, koncerty,
+19.2.3:0,0;120,60 park, naleznete, kapra, dodnes, komentuje, historii, Martina, rok, lije, policie, aby, tradice, mnoho, lije, turistů, jede, Prahou, Praze, zda, stole, svůj, rok, klubu, maminku, cizinců, dne, mohou, adventu, politiku, adventu, firmy, adoptovala,
+19.2.4:0,0;120,60 park, tak, vody, turistů, nebo, kam, festivaly, konci, svatba, zastavil, nic, Brna, zda, Jakuba, zda, Vltava, dokonce, hezkou, obvykle, olovo, pijeme, mnoho, pro, rotunda, koncerty, Praha, adoptovala, voze, jsme, jsou, most, Obvykle, Praze, rekordy, Pan, odlitku, Jana, turisty, trochu, inscenace, cizinců, dodnes, restaurace, dne, maminku, tak,
+19.2.5:0,0;120,60 pana, dopadla, roce, jednu, sklad, olovo, prakticky, divadel, pohovce, advent, ulicemi, cizinců, Jakuba, pijeme, divadel, proto, turisticky,
+20.1.1:1,w;120,60,%r úweů, zxl, iq-, eis, uuy, glz, wmg,
+20.1.2:1,w;120,60 gxl, yin, rhd, Vnmb, Qqlr,
+20.1.3:1,w;120,60 csd,
+20.1.4:1,w;120,60 Ichs,
+20.1.5:1,w;120,60 Oojú, Sqjz,
+20.2.1:0,0;120,60,%r turisticky, cizinců, jsou, parkuje, asi, hodin, vody, jednu, stole, svatba, naleznete, Brna, komentuje, den, firmy, svatba, minut, Evropy, jablka, bohatou, pod, jen, Ryby, olovo, stylu, kostela, adoptovala, prakticky, turisty, Brna, hrocha, Martina, strom, centru, inscenace, hudby, centrem, aby, hezkou, pokud, centrem, adventu, politiku,
+20.2.2:0,0;120,60 kam, zastavil, pohovce, Jakuba, hodin, Pan, rychle, bohatou, dokonce, parky, minut, centrem, ale, turistů, tak, kde,
+20.2.3:0,0;120,60 restaurace, pak, osm, rychle, klasiku, Vltava, advent, Jakuba, kapra, klasiku, stalo, svůj, nebo, Obvykle, kterou, nebo, Vltava, Dnes, jablka, pana,
+20.2.4:0,0;120,60 nemoc, jak, hodin, kostela, zastavil, restaurace, advent, kostela, den, půjdu, ale, Najdete, dnem, rychle, proto, turisticky, jen, turisticky, dopadla, pohovce, kam, vody, mluvilo, kterou, svatba, komentuje, rodinou, Praze, rodinou, mluvilo, Obvykle, parky, konci, jablka, koncerty, obdivovat, rekordy,
+20.2.5:0,0;120,60 vypravit, Prahou, centru, inscenace, voze, Vltava, inscenace, advent, lije, snad, Jak, jednu, dokonce, bude, snad, adoptovala, rychle, odlitku, ZOO, centrem, bohatou,
+21.1.1:1,w;120,60,. ú.fx, Eyit, -.id, q.s, Ub.., ..z., tůn, mfk, kre, -x.x,
+21.1.2:1,w;120,60 dpc, Nmgm, Jskk, qcu, .qq, Btns, nyf,
+21.1.3:1,w;120,60 Emmu, hvů, ckw, oci, E.rů, k.z, A.pc, qu., dry, Wq.k, vhb, Ju.r,
+21.1.4:1,w;120,60 wka, mz., Bfůr, spm, N..r, .-ůů, V.l-, rúq,
+21.1.5:1,w;120,60 tvx, .f.z, .elk, J-.b, Gt-y, mi., Svxc,
+21.2.1:0,0;120,60,. druhů, nebyla, centrem, mlze, trochu, dokonce, centru, nebyla, parky, půjdu, adventu, rotunda, mlze, firmy, parkuje, velmi, domy, Jana, Karlův, jednu, zde, nebo, Jana, restaurace, Jana, schůzku, vypravit, festivaly, zde, tak, domy, osm, zjistily, sedadlo, koncerty, koncerty, hudby, obdivovat, strom, klasiku, strom, jablka, minut,
+21.2.2:0,0;120,60 odlitku, mluvilo, zjistily, adventu, festivaly, jako, Josefov, policie, zde, park, voze, jsou, mlze, Jana, cizince, nebo, centrem, Pan, pijeme, dopadne, politiku, komentuje, tam, turisty, tradici, jablka, centrem, Najdete, hrocha,
+21.2.3:0,0;120,60 parkuje, obdivovat, parky, jako, tradice, den, jsou, festivaly, parkuje, park, konci, deset, kam, voze, zde, hodin,
+21.2.4:0,0;120,60 renesance, pana, vody, olovo, zda, mluvilo, kam, divadel, rok, cizinců, Ryby, stylu, obdivovat, mluvilo, rotunda, mlze, jako, rychle, centrem, strom, zastavil, hodin, stalo, zjistily, rekordy, Jakuba, Najdete, restaurace, jede, zda, rok, mohou, jsou, firmy,
+21.2.5:0,0;120,60 jednu, domy, koncert, ale, tam, dodnes, Josefov, turisty, osm, den, půjdu, Obvykle, Prahou, Brna, lije, tak, mlze, Josefov, renesance, jede, klasiku, zjistily, jsou, ZOO, maminku, piva, Evropy, ale, renesance, maminku, Dnes, turisty, dopadla, parky, historii, den, Martina, Ryby, pro, tak,
 22.1.1:1,w;120,60,ýř ýý řř
-22.1.2:1,w;120,60 řbdb, Gz.k, .lř, řlb, ýřg, řřp, řts, vtý, owh, Hřpe, t-c, úpb,
-22.1.3:1,w;120,60 pek, Ryýý, ýřř, úýřm,
-22.1.4:1,w;120,60 Yřoř, ůýv, Výřj, ýým., Qbt., ýhto, úir, mmq, údř, řtůý, Iřeř, ýadj, eeu, Izýý, Gpýř,
-22.1.5:1,w;120,60 Esqq, .ýzo, Yýůy, řýýř, řxw, soz,
-22.1.6:1,w;120,60 ůaxř, ařy, ůdqf, ýůýř, řpýp, řýr, zaý, rtů, cýý, Lqřm, Lýý., řx-c, efq, Htjy, Nřoh,
-23.1.1:1,w;120,60,á ůsá,
-23.1.2:1,w;120,60 Zgw., ráy, ásbá, ááqt, mjů, átx, á.md, o-c,
-23.1.3:1,w;120,60 Haáu, áýnh, -xlc,
-23.1.4:1,w;120,60 fmz, áá-v, Vrr., Wářc, tjá, áho, áoů, Cdýe, f-s, Tfvf, Exi-, Zrjá, áýáá, Zyfc, Smms,
-23.1.5:1,w;120,60 ákwx, Xvyz, mqá, aáá, Qnqř, fuz, czk,
+22.1.2:1,w;120,60 řýpr,
+22.1.3:1,w;120,60 jgy, ýpvl, zmý, řřlt, řdrú, řzř., ýcúw, qřy, Sumw, ýh-s, Sřřý, ýdř, Uýnb, pfj, Iwme,
+22.1.4:1,w;120,60 řvřc, Jrýx, Oxůř, úuzř,
+22.1.5:1,w;120,60 Nřqú,
+22.1.6:1,w;120,60 ýýce, řřmú, týv, Hýbý, ýýů, prř, Dcuc, Vuaz, rrq, křý, Rmgk, ýřmx,
+22.2.1:0,0;120,60,ýř Jakuba, piva, jak, Evropy, olovo, pijeme, Praze, inscenace, aby, klubu, trochu, konci, politiku, piva, Nakonec, Jakuba, slavit, dodnes, roce, jsme, klasiku, kam, pokud, Jakuba, Josefov, zjistily, parky, pokud, soustředit, turistů, Brna, slavit, svůj, rodinou, velmi, zjistily, hrocha, různých, velkou, rok, vody, komentuje, nebo, jako, bramborový, prakticky,
+22.2.2:0,0;120,60 svými, bramborový, turisticky, jednu, pijeme, kostela, řekne, Středem, zde, Nakonec, aby, pod, roce, hrocha, parkuje, jako, divadel, zda, aby, nebo, jablka, adoptovala,
+22.2.3:0,0;120,60 ZOO, být, rekordy, komentuje, snad, piva, adventu, tak, festivaly, výhledem, piva, pro, pod, minut, roce, undergroundový, úzkými, být,
+22.2.4:0,0;120,60 komentuje, piva, hodin, restaurace, velký, Brna, festivaly, asi, turisticky, zde, snad, centru, veganských, mluvilo, obdivovat, vypravit, turistů, koncerty, svatba, mlze, voze, komentuje, vlak, pana, vody, Pan, jede, řekne, vyhořel, firmy, koncert, vlak, tam, domy, cizince, velmi, který,
+22.2.5:0,0;120,60 bude, firmy, úzkými, deset, stalo, restaurace, jen, svatba, mnoho, advent, restaurace, deset, prakticky, zjistily, vody, vody, významným, lije, různých, koncert, nemoc, slavit, mnoho, ale, osm, parky, výhledem, historii, stylu, sedadlo, stalo, prakticky, obvykle, voze, který, zda, jako, bohatou, dokonce, park, ZOO,
+23.1.1:1,w;120,60,á áýee, ýáe, ová, áydá, zy-, lpá, řáýs, Vlu., sý-, ajz, zfá, ááaý, ař-, ůr-k, ýbu,
+23.1.2:1,w;120,60 ápjq, mál, qko, ýwái, Qánř, řbe, .nys, řv.ř, tmc, ýqvá, ál-, tgá,
+23.1.3:1,w;120,60 áih, Yýáp, .řá, -ztj, Tá-ř, sfi, qzo, Hhwu, yřj, Sáoa, Cmůd, Reáá, ááa, Zpýj, Vááá,
+23.1.4:1,w;120,60 wác, X.zt, .úag, růř, úřáw, Hios,
+23.1.5:1,w;120,60 Oááh, Júám, Akdd, áqá, Zváá, áhvd, ááp., ákái, Máir, úzwa, áfáá,
+23.2.1:0,0;120,60,á Jana, turisty, rotunda, ukázali, Jak, Dále, tam, Praha, hrocha, Praze, dnem, zpráv, politiku, jak, křivými, pohádek, podává, tak, různých, advent, velmi, politiku, desátý, prakticky, tak, koncerty, park, byly, rotunda, zda, posloucháme, mexických, vyhořel, veganských, roce, svůj, Najdete, rána, láká, velkou, zprávu, rodinou, pro, bohatou, politiku, krásnými, inscenace, zda, Evropy,
+23.2.2:0,0;120,60 ulicemi, obdivovat, patnáct, Málokdo, týdny, svátkem, mystická, desátý, Novák, mluvilo, proto, undergroundový, den, rána, komentuje, vyhořel, adventu, být, voze, koncert, nebyla, zda, dopadla, ale, minut, mnoho, řeka, Novák, turisty, jen, být, mluvilo, rád, historii, kterou, připravených, Ryby, rodinou, Nakonec, dál, dálnice, strom, zjistily, adoptovala, festivaly,
+23.2.3:0,0;120,60 Dnes, ulicemi, architektonických, Novák, firmy, restaurace, správná, Prahou, roce, mohou, dávno, undergroundový, festivaly, velkou, strom, turistů, voze, dnem, divadel, ozdobený, rychle, ale, podává, strom, zpráv, maminku, Dále, řekne,
+23.2.4:0,0;120,60 výhledem, rotunda, den, rodinou, Nováka, pokud, svými, dnem, stole, odlitku,
+23.2.5:0,0;120,60 Nakonec, Novák, podává, prasátko, jaký, stylu, Nováka, Vánoce, snad, pohádek, historii, domy, rotunda, veganských, mluvilo, Nováka, trochu, osm, tak, restaurace, jsme, kostela, připravených, zprávy, Prahou, deset, jednu,
 24.1.1:1,w;120,60,čí čč íí
-24.1.2:1,w;120,60 řtv, fag, Iččí, část, kčt, ůmlí, rčv, E-kk, črfx, ůíká, ííčj,
-24.1.3:1,w;120,60 Rksa, íčsč, íúqd, říůh, íčp, ííúč, -acf, shn, íčn, íjíí, Klač, píz, jíy, ýgzs,
-24.1.4:1,w;120,60 čpčc, říú, č-í, kíl, Wvnk, Háín, Ywčr, řpf,
-24.1.5:1,w;120,60 wčs, Ozíb, íčzc,
-24.1.6:1,w;120,60 eut, áuns, íídr, ínčg, ífčh, áči, lqu, čmíh, úbýá, ččín, ččíí, íxvh, -íu,
+24.1.2:1,w;120,60 ůúůk, gn-, .ul, ákča, íiůí, zíč, ýzíá, zbm, ččpc, Xuub, ihy, íííc, Hrřý, íeu,
+24.1.3:1,w;120,60 sčč, čf-č, Zxgí, řčgz, íčás, Třys, bpů, čok, ínč,
+24.1.4:1,w;120,60 ásík, eb., ícx, číbl, čdi, -ům, Hůfr, íám-, úrl,
+24.1.5:1,w;120,60 euí, Wýig, Bční, Pčkí, Nýsč, Aám-, Htwo, úyyh, .čřx, včá,
+24.1.6:1,w;120,60 ýdíp, úaeč, Lohř, úímm, ípáč,
+24.2.1:0,0;120,60,čí přírodu, vyhořel, rád, maminka, nebyla, rodinou, cizinců, vybaví, večer, začínají, plánuje, kam, řekne, výhledem, původní, nosí, cizinců, zjistily, mezinárodní, vánoční, obdivovat, Rozkrajují, renesance, svými, hrají, večeře, nosí, hrají, Málokdo, stromeček, prakticky, prasátko, pár, zajímá, most, sledováním, televizní, najít, stylu, koupím, jaký,
+24.2.2:0,0;120,60 rozkvetlý, jak, vybaví, Pan, významným, parkuje, řízek, vypravit, Vltava, nejí, uliček,
+24.2.3:0,0;120,60 zjistily, památek, nadílce, most, být, zprávu, rok, vdají, dárky, konci, undergroundový, rád, vlak, svůj, zastavil, přírodu, cizinců, místa, líbí, lehčí, mají, vdají, vdají, večeře, Čechách,
+24.2.4:0,0;120,60 kterou, kteří, jsme, schůzku, maminku, historii, zimní, Prahou, Čech, dopadla, restaurace, chodí, zajímá, sklad, začínají, jako, Například, mluvilo, podává, Martina, komentuje, brazilských, řadu, klasiku, Martina, dechberoucí, firmy, fandíte, nosí, hrají, festivaly, restaurací, kde, turistů, Evropy, rozčiluje, jsou, kostela, jsou, česká, půvabná, zprávu, minut, den, zdraví, hází,
+24.2.5:0,0;120,60 koncert, místo, období, Praha, svátkem, zimní, Evropy, zpráv, dnem, cizince, stojí, koupím, parkuje, výhledem, televizní, adventním, uliček, stylu, policie, osm, dopadla, krásu, inscenace,
 25.1.1:1,w;120,60,šé šš éé
-25.1.2:1,w;120,60 écé, aéi,
-25.1.3:1,w;120,60 Lšew,
-25.1.4:1,w;120,60 ůbtc, ššms, ýéoů,
-25.1.5:1,w;120,60 šhx, Tcia, Bwéé, řd-y, tiš, šohd, ůwre, Féw.,
-25.1.6:1,w;120,60 č-r-, pey, šeé., doa, šbux, lýt, éxr., Qmšý, .úg, šřnš, šémq, Xýéq, ýúšš,
-26.1.1:1,w;120,60,%r Jjbš, áůn, Hi-ů, Sgvf, lis, n.z, zíi, Všwx, hfy, íšpi, jfé, úeá,
-26.1.2:1,w;120,60 Hivi, .qí, ů-b, fám, yůf, lqy, řbtl, ýísk, řýz,
-26.1.3:1,w;120,60 Fby., Rbgt, Skyr, dnb, šféý, čyh, írjá,
-26.1.4:1,w;120,60 ůyw., Půju, réo,
-26.1.5:1,w;120,60 ýdůk, nnx, řew, Ytcč, ídto, ůjb, fát, v-ř, bfh, Troč, Jgyh, r-i, Zůic, šdů,
-27.1.1:1,w;120,60,ě úěvé, Kícú, ůěéo,
-27.1.2:1,w;120,60 ícms, ěcíw, Uhúp, árý, Pošě, Ebnz, Oěoú, ůdě,
-27.1.3:1,w;120,60 Ev-t, Zkqt, ěhěl, wěě, Yijě, čtqě, ýcěn,
-27.1.4:1,w;120,60 nbu, Ruví, Hýbx, osě, áětě, ě-j, ptú, bcn, ěčo, edw, ěčís, Soíu, ůfěf,
-27.1.5:1,w;120,60 Kqhj, ajo, Nhěq, équa, Xban, Eyúg, š.ě,
-28.1.1:1,w;120,60,ž ššvž,
-28.1.2:1,w;120,60 žlžž, žlžu, žžůž, Ežbž, žwřz, úfžž, Sljž, Wcyl, čaík, bvž,
-28.1.3:1,w;120,60 íwzp, žeh, úxžf, š.tv, mlf, žmuž, š.ý-, aže, htq, Iaqý, ždéž, šiec,
-28.1.4:1,w;120,60 bws, Sauž, .sžq, msž, .ěpž, úžžú,
-28.1.5:1,w;120,60 Jšiz, řdtž, čkbe, Nžžú, žiž, čzýf, úřyí, ýžhq, ůrcž, ž-qc, útk, Qhýž,
-29.1.1:1,w;120,60,%r Kkíř, lzr, lja, Pgjh, Zwči, qtn, Rééc, Cvmš, úezv, úabv, Inlv, Fejé, txg,
-29.1.2:1,w;120,60 ýgs, ždxw, ěcha, Uhs-, Odmo, .ča., Nbdů, íkej, Qéví, .vwě,
-29.1.3:1,w;120,60 Axét, Ujčq, Zůzv, č--, ptd, Ryqš, Zůřj, aád,
-29.1.4:1,w;120,60 Fýřj, xqr, č.c, Ežéá, ook, Wyěé,
-29.1.5:1,w;120,60 řéob, Iktč, yžq, ěxk., wj-, křv, šma,
+25.1.2:1,w;120,60 ščéi, éýí, éešo, bcy, ýššé, kxe, řčúč,
+25.1.3:1,w;120,60 égýl, Uůtm, Wůqu,
+25.1.4:1,w;120,60 éfrš, éšeb, kié, éáé, sba, éx.e, Fšúd, íšúš, čér, éaůš, élíp, úéf, čéa, úwůé, gšf,
+25.1.5:1,w;120,60 Ou.m, šššš, Qšcf, nšš, jie, Réxo, íéiq, ésmč, Ooxx, ůáv, éímů, éfr, šéae, íšuá, šmí,
+25.1.6:1,w;120,60 řřfg, šzék, Wúéé, šůčř,
+25.2.1:0,0;120,60,šé čekal, půlnoční, policie, půjdu, Středem, hlavní, velkou, advent, Dnešní, kterému, kapra, kapra,
+25.2.2:0,0;120,60 prasátko, kteří, mystická, krásu, zastavil, festivaly, piva, minut, nám, jeskyní, dálnice, uliček, především, patnáct, Škoda, fontánami, zájem, ulicemi, období, období, turisticky, všechny, den, zapalují, svíčku, schůzku, domy, asi, parkuje, Vltava, prasátko, místa, ozdobený, maminka, koláč, nadílce, znamená, Ryby, pijeme, svatého, své, parkuje, týdny, jídelním, mexických, politiku, italské, kterému, kterou, zda,
+25.2.3:0,0;120,60 dveřím, Martina, svatba, obdivovat, fandíte, chodí, Ryby, kočky, večeře, bude, vína, rodinou, sklad, Češi, všechny, architektonických,
+25.2.4:0,0;120,60 pohovce, nebo, naleznete, Novák, přírodu, velmi, Ryby, ranného, dárky, mohou, strom, naleznete, Večer, pana, Tatínek, centru, minut, znamená, poničena, svátkem, jsou, rád, roce, navštívit, večer, historii, jako, parky, mystická, Čechách, deset, italských, nejí, řekne, láká, čínských, protéká, mystická,
+25.2.5:0,0;120,60 rodinou, vyhořel, setkáváním, vína, zastavil, původní, vdají, válkami, bramborový, svátkem, období, peče, vypravit, zájem, Novák, mezinárodní, večer, kteří, Brna, cizince, byly, Obvykle,
+26.1.1:1,w;120,60,%r ýxšt, lhl, Fvzz, íez, Uxku, řenř, tzx, abw,
+26.1.2:1,w;120,60 éfhí, Diwu, Lůqu, Kečm, Růúú, gs-, isá, ůy-, íoíy, Tjál, éšo, Ntůí, íeáu, -z-ů,
+26.1.3:1,w;120,60 ýýv, Eúbf, ý.vš,
+26.1.4:1,w;120,60 řméš, ýkmá, úr.š, E.ýi, íčrn,
+26.1.5:1,w;120,60 Gnvm, Ueby, oxí, Jxwč, Gt-f, ísym, Votl, Nšaa,
+26.2.1:0,0;120,60,%r Martina, stojí, hrají, most, před, Všechno, přichází, adventu, nebo, rok, kteří, kávu, rychle, brazilských, Češi, protéká, piva, nové, minut, domy, bude, kterému, mohou,
+26.2.2:0,0;120,60 jsme, různých, zpráv, Petřín, inscenace, jeskyní, Brna, salát, současnosti, ošklivé, polévka, cukroví, Josefov, den, obdivovat, Petřín, Nováka, díváme, slavit, svařeného, zajímá, stále, Petřín, krásu, Grébovku, její, politiku, vánoční, pak, zastavil, hudby, Pan, roce, Nováka, volebních, zpráv, jen, kde, adventu, turisty, Jak,
+26.2.3:0,0;120,60 stromeček, najít, dnem, nic, svařeného, křivými, Vltava, turisticky, líbat, nám, hlavní, Novák, zjistily, díváme, které, hlavní, Najdete,
+26.2.4:0,0;120,60 kostela, ranného, Škoda, českou, maminku, olovo, Ryby, třeba, přemýšlí, Josefov, Nováka, tak, Dnes, desátý, trochu, pod, pana, festivaly, lehčí, den,
+26.2.5:0,0;120,60 rád, hrocha, koupím, čekal, uliček, hází, ošklivé, Petřín, čaj, Večer, Dnešní, půjdu, Hradčany, hrají, rodinou, zprávu, pod, půvabná, Petřín, významným, vypůjčit, zda, soustředit, třeba, nástupišti, dál, Jak, lupiče, architektonických, domácí, pro, politiku, punče, řízek, pohádek, undergroundový, přinést, poničena,
+27.1.1:1,w;120,60,ě Iúqě, .řdě, ffá, ěwiů,
+27.1.2:1,w;120,60 ěnvě, ěmím, Lěxů, zvč, Ařaw, áiug, Uříb, Yěb-, áěúh, ýys,
+27.1.3:1,w;120,60 mmb, ěuge, ůqýu, ěěho, zěš, Pspg, ěěk, tá., Rrtč, Jíkg, ěde, l-., ýěqq, yvm,
+27.1.4:1,w;120,60 ěytr,
+27.1.5:1,w;120,60 ěaa., rhz, Tn-ě, tpě, ěyak, wůě,
+27.2.1:0,0;120,60,ě restaurace, mši, měl, období, neméně, maminku, naleznete, Večer, dárky, Josefov, domácí, veganských, jednu, řízek, její, zde, méně, večeři, zajímavosti, neméně, komentuje, měl, začínají, pijeme, zájem, svatba, bohaté, měl, bude, velký, turistů, dějiny, mlze, renesance, nic, most, němčině, světě, které, jednu, parky, druhů, zastavil, vlak, čeká, nové,
+27.2.2:0,0;120,60 maminku, znamená, pár, své, mládě, vybaví, světě, divadel, nám, turisty, výsledcích, konci, zlaté,
+27.2.3:0,0;120,60 hlavní, zajímavosti, asi, stole, Dnešní, bohatou, Středem, svůj, Dnes, května, jsme, vína, rok, punče, svými, Večer, které, kávu, nástupišti, večeři, pak, nic, Škoda, pár, nástupišti,
+27.2.4:0,0;120,60 zpráv, byly, parky, podobě, výstavy, Jakuba, pohádek, schůzku, vypravit, byly, punče, cizince, deset, tradici, vody, Grébovku, podobě, vody, vyhořel, Pan, bohatou, Jakuba, mají, Dnešní, vánoční, architektonických, která, domy, druhů, přírodu, jen, ozdobený, Večer, stojí,
+27.2.5:0,0;120,60 někdy, dívky, plánuje, ukázali, Dozvěděli, Najdete, najít, jsme, město, stromeček, dechberoucí, května, kulturním, nového, domy, svařeného, Vltava,
+28.1.1:1,w;120,60,ž cf., řž-, .tqk, bož, ěžžv, žžu,
+28.1.2:1,w;120,60 Uéáč, ývmb, žžo, áf-x, Vqžž, bcn, dré,
+28.1.3:1,w;120,60 žtav, Fgjž, řju, V.gf, žth,
+28.1.4:1,w;120,60 kčr, géž, áewú, žouž, nšž, ííá, Dékc, Pčéu, ůžs, Bůřq, idf, Pýšě,
+28.1.5:1,w;120,60 ořá, tjd, T-rp, žjee, Ráoz, dsř, ždžu, Nkůg, ážžl, tuí, šeyi, ižg, V-žs, Qůup,
+28.2.1:0,0;120,60,ž Večer, nemoc, ZOO, park, bramborový, tam, Málokdo, protéká, kostela, pyšní, večeře, možné, koncert, rybí, svařeného, Praze, koláč, lije, Václavské, Václavské, Václavské, hlavní, hrocha, čas, čas, pak, světa, českou, zimní, hrají, stavbě,
+28.2.2:0,0;120,60 jaký, minut, obvykle, svobodné, fontánami, česká, Během, fontánami, renesance, současnosti, nového, podobě, Všechno, Rozkrajují, kam, které, hodin, díváme, stole, křivými, být, rekordy, zprávy, snad, park, maminka, odlitku, pod, válkami, festivaly, řízek, nemůže, řeka, hvězdička, druhů, ukázali, sklad, křivými, Večer, úzkými, advent, bohaté, tak, mládě, zde, poničena, česká, přemýšlí, bramborový,
+28.2.3:0,0;120,60 fandíte, Dále, kterému, navštěvovaná, který, turistů, Nejstarší, Nejstarší, domácí, najít, klubu, klasiku, turisty, Obvykle, vypravit, Štědrým, lehčí, svůj, roce, naleznete, čínských, její, podává, proto, další, hází,
+28.2.4:0,0;120,60 jsme, minut, zpráv, méně, křížek, Rozkrajují, pracovní, dodnes, maminka, přichází, večeře, park, různých, něco, adoptovala, velkou, různých, ZOO, Brně, Čechách, fontánami, zájem, mnoho, česká, dokonce, renesance, křížek, nemůže,
+28.2.5:0,0;120,60 Možná, rekordy, vína, velký, zdraví, výhledem, slavit, českou, Štědrým, pak, Dnešní, posloucháme, kde, jednu, maminka, Staroměstské, firmy, bramborový, koupím,
+29.1.1:1,w;120,60,%r pei, .né, ěýúr, Rjác, iám,
+29.1.2:1,w;120,60 Atýg, ž-rw, wžy, šar, ýfpč, .řm, eee, ýsu, tín, žséz, újk, qof,
+29.1.3:1,w;120,60 yy-, áčcá, vct, Tjíb, álúu, wb-, Ggřa, hjl, šiaá, Izek, tsx, mžč, ý.pk, Wxéf, řříč,
+29.1.4:1,w;120,60 Rlfb, Zzxč, úúy, ýgú, .še, Nxxt, čúgf, čěe-, čfyý,
+29.1.5:1,w;120,60 šiůd, eůz, Gzáo, čů.w,
+29.2.1:0,0;120,60,%r svátkem, parky, svůj, nového, procházely, vlak, těším, českou, autonehodě, nosí, pár, osm, Prahou, Město, odlitku,
+29.2.2:0,0;120,60 pracují, užít, ale, adventní, tradičně, hladovějící, koláč, její, půlnoční, lidé, Pan, zpoždění, příštím, historii, domácí, Novák, zapalují, svatba, Čechy, hodin, kde, kteří, domy, byly, řízek, klubu, neděli, turisticky, odlitku, kávu, nám, najít, pod, Ryby, střevícem, města, deset, sledováním, den, Nakonec, května, snad, zajímavosti, brazilských,
+29.2.3:0,0;120,60 třeba, vážné, vody, kapra, sledováním, půlnoční, čekal, týdny, nic, stále, Staroměstské, protéká, památek, turisticky, stavbě, svařeného,
+29.2.4:0,0;120,60 celého, právě, dnem, Praha, dějiny, dopadla, jídelním, podává, křížek, Například, přinést, pohádek, fontánami, Například, dechberoucí, navštívit, koláč, dobré, pak, advent, zpráv, století,
+29.2.5:0,0;120,60 bramborový, památek, nadílce, původní, Město, sedíme, politiku, dál, května, podstatně, užívat, hvězdička, zajímavosti, rodiči, Každou, jsme, vážné, Večer, řeka, přáteli, Nakonec, město, desátý, posloucháme, mládě, dodržují, dne, mši, správná, místa, hlavní, velmi, jak, klubu, kterému, jablka, nebo, rána, místa, jede, navštívit, Dozvěděli,
 30.1.1:1,w;120,60,ďó ďď óó
-30.1.2:1,w;120,60 ýsď, mďy, žq.ó,
-30.1.3:1,w;120,60 ďďe-, ěokó, ěďíi, ďzsě, ďeďď, ýzjp, óóbé, ďhďi, éóďy, Lókó, Aěfó, úkdď,
-30.1.4:1,w;120,60 .ďó, ěóu., žýwď, p-ó, ó-ž.,
-30.1.5:1,w;120,60 ďéř-, óýrl, čgóz, ďópý, -iřď,
-30.1.6:1,w;120,60 ócóó, ďďóm, óóóv, ómcz, šin, ďůík, eeď, óóěď,
-31.1.1:1,w;120,60,%r eoď, ěéěů, Uúů., řoď,
-31.1.2:1,w;120,60 Hůfš, éůq, gqř, šěďď, Dsfq, Kórr,
-31.1.3:1,w;120,60 Lřěu, Kbko, .ái, ólyt, ěwy, ěu., ébae, ókš,
-31.1.4:1,w;120,60 szq, úxq-, ř-h, řžoú, Míél, ýcm, Mfau, azl, úje, ďkůr, ěááe, áqcá, Núza,
-31.1.5:1,w;120,60 gjd, Sorř, žiú, ó-iz, Sczw, Wxýě, fěd, žií, ůžf, ósjx, évúm, ždye, Eoxv,
+30.1.2:1,w;120,60 uro, óáú, Rppp, Emmž, ďěm., ďeď, ďóv, Qófh, Lówb,
+30.1.3:1,w;120,60 óóó-, řuůy, ďžóq, óžďz, Cyqď, Ebcj, Lgďk, ďbw,
+30.1.4:1,w;120,60 Cďoř, Zpjz,
+30.1.5:1,w;120,60 ďeqá, žruó, ásžq, znř, řqs, Lu-ď, á.o, šélě,
+30.1.6:1,w;120,60 óďďn, řažu, ůřď, íďýz, vďi, móů, ěďďú, Dbeí, ééé, Efúí, Aďóú, óď-w, óqbd, Ačoj,
+30.2.1:0,0;120,60,ďó zjistily, výstavy, nemoc, architektonických, něco, pak, domy, výhledem, rekordy, půlnoční, jsou, některé, zlaté, hrají, peče, jsou, vdají, výhledem, která, dveřím, tradici, úzkými, koncert, strom, prakticky, hodin, mnoho, velkou, večer, svátkem, Všechno, Škoda, špatně, nám, brazilských, uviděl,
+30.2.2:0,0;120,60 Vánoce, střevícem, předpovídá, ulicemi, adventní, jablka, mohou, především, užít, italských, byly, byly, nosí, výhledem, Středem, krásu, ale, čínských, mohou, žije, díváme, festivaly, která, výstavy, nástupišti, Ježíšek, italských,
+30.2.3:0,0;120,60 zajímavosti, Všechno, dnem, Ryby, mohou, nejvýznamnějším, které, pracují, přichází, renesance, Grébovku, televizních, hrají, Češi, hvězdička, historii, města, Čech, hudby, Každou, špičkou, polévka, můžete, několik, italské, svařeného,
+30.2.4:0,0;120,60 Vánoce, svými, fontánami, Staroměstské, který, koupím, cizinců, chodí, téměř, voze, kromě, náměstí, Večer, centrem, konci, jsme, Evropy, zprávy,
+30.2.5:0,0;120,60 stavbě, domácí, přáteli, vypůjčit, světové, zimní, Grébovku, kulturním, nadílce, turistů, svými,
+31.1.1:1,w;120,60,%r účúí, včv,
+31.1.2:1,w;120,60 nlz, Ucůx, jwg, E.óů, ďšb, Egmh, žóčý, óno,
+31.1.3:1,w;120,60 ď.gp, Vbnh, L-vď, íěíá, Cowě, ěýré, íýýn, škbi, xmý, Lcoú, ářné, ičl, ůó-i, Oěiž,
+31.1.4:1,w;120,60 Fžóa, ďvrž, šte., Dčwý, Uéún, ýpác,
+31.1.5:1,w;120,60 dx-, újřo, Sřyo, Apvu, ívěe, žóóc, Hďšm, Llqe, mýá, Coíu, pzh, R-ói, Hkrů,
+31.2.1:0,0;120,60,%r velmi, vyhlíží, rekordy, komentuje, rána, pár, centrem, půlnoční, půlnoční, zapalují, střevícem, Ježíšek, mlze, klasiku, sledováním, bohaté, každá, užívat, lidé, nejkrásnější, dobré, Rozkrajují, pak, hodin, stejně, koupím, května, děje, Nováka, který, fontánami, stravě, televizních, rád, rádi, jen, rozčiluje, hezkou, půvabná, Například, odlitku, mystická, Město, Když, mají, Ostravě, další,
+31.2.2:0,0;120,60 pohovce, světě, dobré, vlak, konci, plánuje, historii, Středem, klasiku, autonehodě, můžeme, historii, rodinou,
+31.2.3:0,0;120,60 zimní, rád, lije, lupiče, mezinárodní, dálnice, protéká, čínských, křivými, dění, Když, velkou, Nováka, náměstí, znamená, stojí, čínských, bohaté, čeká, bude, roce, rotunda, stravě, můžete, volebních, zapalují, rádi, desátý, dnem, advent, můžeme, večer,
+31.2.4:0,0;120,60 nové, turisticky, zprávu, sklad, možné, půvabná, čaj, advent, pocházejí, undergroundový, Štědrým, Večer, politiku, své, Dnes, televizní, maminku, sedadlo, ranného, maminku, dění, věci, konci, zajímavosti, Jana, Málokdo, řízek, děje, středověku, půjdu, velký, zajímá,
+31.2.5:0,0;120,60 líbí, téměř, všechny, být, díváme, mši, rodinou, Evropy, dodržují, turisticky, stojí, pár, architektonických, Obvykle, Ostravě, zájem, svými, významným, stylu, uliček, dálnice, rok, večeři, pro, nadílce, kulturním, rybí, křížek, rádi, všechny, špičkou, olovo, undergroundový, festivaly, rodiči, nadílce, den, láká, polévka, komentuje, snad, různých, tradičně,
 32.1.1:1,w;120,60,?! ?? !!
-32.1.2:1,w;120,60 rvj, T!?ž, coú, Yhfe, ?čě?, tpu, éyt, ůé?ž, !r!, Q-ěz, !fř-, p.ú, Qeép, éě!í, B!vq,
-32.1.3:1,w;120,60 Eéfc, Qěfú, C?ék, ěgvu, úh!a,
-32.1.4:1,w;120,60 Mvsy, rsj, nyá, íěwn, ?in!, éě!?,
-32.1.5:1,w;120,60 six, Qgřď, !?ó?, zé?, !ox, ?ďr, mae, í!u?, !ld, M-ek,
-32.1.6:1,w;120,60 ágnc, ?kh, ďoi?, ?bpg, !mš, Gogk,
+32.1.2:1,w;120,60 ďhén, žp??, ó!ór, ?.?, š-g, ůyy?, ř!p?, řmůě, !kí, Cs.č, ěeyu, ý?w, cý!, Xý?p, lj?,
+32.1.3:1,w;120,60 t?ď, ?q-?, u!í, s?á, máv, ýčůé, Mvž-, ??a?, ?p?l, i?p, vóá, Q!!c,
+32.1.4:1,w;120,60 !?jq, nb?, úýř?, !xďó, úúo, Cb!í, Bú!ý, éůú, éí!j,
+32.1.5:1,w;120,60 !?!é, ú!a, !u?ď, ěkzu, Ug?ů, ?!z, c?č, áu.d, výa,
+32.1.6:1,w;120,60 ó!žn, dýb, u?e, T!bv, ařp, Izlš, ďén!, ýos, ??ss, B?ó?, !umv, O!oq,
+32.2.1:0,0;120,60,?! druhů, užívat, prasátko, park, firmy, skvělá, maminka, jako, několik, tradici, večeře,
+32.2.2:0,0;120,60 chodí, mládě, nádraží, architektonických, dávno, štědrovečerní, jako, navštívit, Všechno, nejkrásnější, ošklivé, přemýšlí, zajímavé, velký, právě, klasiku, každou, možné, Jakuba, pak, vybaví, turisty, něco, odlitku, domácí, stojí, Hradčany, tak, Praha, místo, undergroundový, původní, také, naleznete,
+32.2.3:0,0;120,60 čaj, válkami, Vyšehradě, maminka, chodí, stověžaté, dál, salát, vyhlíží, místa, svobodné, můžeme, řekne, nejí, restaurací, adventním, tradičně, lehčí, nebezpečného, navštěvovaná, lehčí, dějiny, pokud, trochu, dokonce, štěstí, hladovějící, aby, tam, Ostravě, česká, znamená, Josefov,
+32.2.4:0,0;120,60 brazilských, večeře, své, Obvykle, špatně, krásnými, svatba, Najdete, koncerty, stromeček, užívat,
+32.2.5:0,0;120,60 nebo, Evropy, něco, tak, čínských, protéká, kulturním, obdivovat, rádi, památek, nebo, čínských, jen, kapra, Praze, schůzku, kostela, některé, sedadlo, Ježíšek, minut, obvykle, večer, nejkrásnější, italských, Dnešní, dál, slunného, restaurací, Vyšehradě, ZOO, Jak, zajímá, pohádek, světě, Najdete, vypůjčit, centru, několik, střevíc, prasátko, podstatně, čeká, stejně, lupiče, osm, různých,
 33.1.1:1,w;120,60,:\; :: ;;
-33.1.2:1,w;120,60 Még:, óačř, ůa!n, Ymtt; s!u, ď?g!, ďbdk; žksc; Půo!; :::; Puví; ďžyf, Duuy; :ř:,
-33.1.3:1,w;120,60 hgz, :mgř; Eltm; ?:m:; č:fz, žólž, čj:, vzu, šžv, éa!, écu; :xš, Rre?, ýeua;
-33.1.4:1,w;120,60 :žůř, :lě:; :ívů; taá, řa:; Vh:s, I!éě; -č:; vé-, :no, á:čř, Rgod, U-td; l:l; Hžuž,
-33.1.5:1,w;120,60 ddw; Cwjn; Knzš, ávv, :a!ú; c:c, D:ýě; wrž; Rn!í; Nvšú;
-33.1.6:1,w;120,60 ěpyb; ďěc, ýu.r; dě:; H-g!, ívyď, řk:e, :mo; a:u; íh:n, vři; .-fs,
-34.1.1:1,w;120,60,%r rfu; awá, řmmr, ěnjr; čotv,
-34.1.2:1,w;120,60 xxu; fze, cýy, ěxzď, řgqf; zwi; úžók, úkáě, ůuóy, Z.ďc, ..v; cím, řóuř, ájúg; čbpw,
-34.1.3:1,w;120,60 iíi, Ogču; Pmcc; T-gý, žh!ě, Id!b; ďmos; H-w.; íšsu; ěxeď, Q-aó; řml; Xáěm, ýáqj, ýrmy;
-34.1.4:1,w;120,60 Qhmh, š::ó, w!h, ókor, ía-ó; ci!; Kytu; řa., :hh; Ftry, ntp, ízxq;
-34.1.5:1,w;120,60 Foýů;
+33.1.2:1,w;120,60 V.fi, ódpč, M:nš; Obbs, H.sz, féu; :hž, cáč; ěac, čn:, :ihd;
+33.1.3:1,w;120,60 ř!j; :nlj; ůý:r, žk:, Cúďm; U!zě; P:ě:;
+33.1.4:1,w;120,60 plď; ó:-ž; ůtčk, Mg?w; ýýbj, :oď, éq:q; ioj, řúřp, óů?; í:o?;
+33.1.5:1,w;120,60 :tř:, :iw:; ěóai; ůušy; Kr?m; Féíh; Xšxv,
+33.1.6:1,w;120,60 é:bs; Opq!; Kvýz; ž:-š, šříl, ďij:; čějl, b.v; úágn; ésěó; ěůbz; W!ž!, :fhi;
+33.2.1:0,0;120,60,:\; nejkrásnější; střevíc; posloucháme, Štědrým, Jana, tam; zajímavosti, století, poničena; kteří, popíjením, dodržují; vlak; dechberoucí; vypůjčit, celého, den; Když, firmy; soustředit, cizinců, pak, Každou; svařeného; dodnes, zájem; jídelním, Ještě, střevíc; zjistily, jako, díváme, rok; rána, nadílce; tradici;
+33.2.2:0,0;120,60 významným, tradici, rybí, nám; právě, dveřím; říká; Vltava, května; svobodné; pár; salát; nám; velmi;
+33.2.3:0,0;120,60 věci, svatého; italské; zdraví; Najdete, pohádek, angličtině; rychle, kam; křivými; tradičně; Evropy; adventu, Josefov, chodí, mnoho, architektonických,
+33.2.4:0,0;120,60 lehčí; přinést, hudby; Vyšehradě, rozkvetlý, zdraví, konci, místo; Najdete; stavbě; dál, dopadla; sledováním; Prahou, snad; centrem; pracovní; Nováka, líbí, město, mnozí, světa; prakticky; dechberoucí, která; pracují, advent, každou, štědrovečerní, Například; dál, něco, hvězdička; výhledem, nádraží, restaurace, různých; byly; jen; vína; připravených, stalo, dávno, úsměvné, hudby; Večer, dveřím,
+33.2.5:0,0;120,60 angličtině, salát, tráví; desátý; pracují; řízek, stravě, výstavy; parníku, stalo, rozkvetlý, Josefov; Večer; původní; neméně, užít, můžeme, vypravit, zajímavosti; právě, olovo; vyhořel, památek, knedlíky; mezinárodní, jaký, velký; čtyři, knedlíky; inscenace, stravě, úsměvné, nemoc; firmy, památek, aby, zde;
+34.1.1:1,w;120,60,%r d!s; úxčý, óoí!, !řt, Eóíó; qřf, Xřěo; ř!ůú;
+34.1.2:1,w;120,60 luo, ýttš, řty; ?.p, uhh; Cč!t, ů-úe, žóón; ?uíc; .-á, bču; áfs, ýkyř, dcg; fwx,
+34.1.3:1,w;120,60 žža-, zcř, Q.ié, ďyáá; útř; Kébř, Mjů.; Vvjj; Eevi; Př??, Eóak; ávnč, ďub, leh, účgě,
+34.1.4:1,w;120,60 Pwoy;
+34.1.5:1,w;120,60 ůůfb, ěpžp; ěmú-; qáá; uóz, tčj, !zjn; !uí, Tumv, Zá!o; mwg, Slca; éjý?; ěénž; Mmgp,
+34.2.1:0,0;120,60,%r mají; přáteli, řekne, rodinou, turistů, najít; před; méně; její, svobodné, pod; přinést, půlnoční; Novák; Málokdo; divadel; dálnice; popíjením, Vánoce; kromě, kromě; svůj; rodiči, prasátko; fontánami; plánuje; fontánami,
+34.2.2:0,0;120,60 prakticky; svíčku, být, schůzku, brazilských; italské, svými; adoptovala; piva, dopadla; večeři, soustředit; stavbě, Čechách; Město, televizní, láká, ulicemi; štěstí; naštěstí; Martina; peče, řízek, zajímavé, navštívit; pokud,
+34.2.3:0,0;120,60 deset, proto, veganských; navštěvovaná, znamená; volebních; svými, rozkvetlý, pak, přírodu, nadílce; Například, minut,
+34.2.4:0,0;120,60 válkami, Václavské, minut; Prahou; líbí, architektonických, renesance, svobodné, neděli, Staroměstské; jaký; středověku; hodin; nejkrásnější, místa, špičkou, dálnice, brazilských, stravě, němčině; říká, klubu; celého; najít, stejně; kterému, vánoční; především, koncerty, fandíte, cizince; kteří; voze, zlaté; poničena; hudby; líbat, ranného; týdny; pohovce, umělou; aby, jaký, divadel,
+34.2.5:0,0;120,60 plánuje; něco; Češi; divadel, užít; velkou, každou, proto, deset; stromeček; nic; Štědrý; salát;
 35.1.1:1,w;120,60,öüä öö üü
-35.1.2:1,w;120,60 öääö üäüü äüüä äöüü üöüü öüöä äüöü ööäü öäöü öüää
-35.1.3:1,w;120,60 üiüš, U?üp; hüä; Käčs; Xäüf; ?cöx, Jpýä, ůöré, äóďe; áöiv, Xg-ö,
-35.1.4:1,w;120,60 Uižu, äřš, áwrý, Xiäö, áoóö; öřf;
-35.1.5:1,w;120,60 üötž; öq-ü; üwäö; ülmü;
-35.1.6:1,w;120,60 šöí, ýdö; äüíž; üčyo;
-35.1.7:1,w;120,60 óömx, Ksb?; übiö; Züé!; Tnöó, öíxa;
-36.1.1:1,w;120,60," !.řů, ädéó; st!; í"qo; äžóg; a"á, Kbäu; óu!h, fuf, pzé; óblj, .ay, Qč"é; Kůr";
-36.1.2:1,w;120,60 Wo::, ě"cč; utů, řkjí, Q"fo, "u.c, ?d"ů, ázóp, kt.; ä"é:; jcr; áxü-; ln", óq"á; žu:e;
-36.1.3:1,w;120,60 črrs; Oxöx, xgj; Fíóh; :pi;
-36.1.4:1,w;120,60 Vč"v, s"", éhpy, üeáv; Aóüý; äěc"; í.i, ezé; -né, ž!ga;
-36.1.5:1,w;120,60 Z"ke; ďk?m; Eý-i; !j?ú,
+35.1.2:1,w;120,60 äüüü ääöö ööäü ääöü üöüä öäüä üüöü äüää äööö äüäö öääü
+35.1.3:1,w;120,60 üáu, ýö:ü; öxyä, Esžä; äxoi; äönü, Käaý; ždm, öükö, Nödm;
+35.1.4:1,w;120,60 Qüüq, üöüä, -öž; rcs; úhá,
+35.1.5:1,w;120,60 ä?dö; éüül; řlk; ü:i, ääůš; üytä, ö:óí; Cläö, -äöd; upu, üöäü, Vssö,
+35.1.6:1,w;120,60 Köäz, ö-z!, öeäw, öíüp, üřfj,
+35.1.7:1,w;120,60 óbža; ?öää, üšhř; ížz:; žää, ä?dü; íúök, öeäů; ďh-l; üüáh; Göäb; üdg,
+35.2.1:0,0;120,60,öüä řadu, odlitku; Dnes, předpovídá, němčině; mládě, snad, znamená; sklad, velkou,
+35.2.2:0,0;120,60 cukroví; světové; dívky; mlze, úzkými, Možná; centru, fandíte, dál; kteří; rybí; večeře; správná, jaký, které; fontánami, nebyla; kávu, strom, rozkvetlý,
+35.2.3:0,0;120,60 sedíme, klubu; Josefov; procházely; tradičně; Jakuba; středověku; výstavy; jako; procházely, rodiči, období; především, významným; které, možné; dávno; cizinců, adoptovala, Josefov; sedadlo; řeka, adventu, špatně; rekordy, ulicemi; popíjením; turistů,
+35.2.4:0,0;120,60 sledováním, tradičně, láká; Ostravě, čaj; půvabná; díváme, předpovídá; svíčku, česká, zprávy, Nejstarší, Obvykle, parníku, proto; Dnes; firmy; každou; možné, města, naleznete, patnáct, pohádek, plánuje; svobodné; Grébovku; vypravit; správná, turisty, ranného, firmy, střevíc, Dozvěděli, vánoční, Češi, ukázali, mládě, Nejstarší, neděli, uliček, přírodu; televizní, náměstí, její, nic; parníku, řízek; Štědrým;
+35.2.5:0,0;120,60 dobré, slavit, Rozkrajují; restaurací; nástupišti, bude, kulturním; večer, zajímavosti, tradičně, velmi, vyhořel; město, mši; domácí, nejvýznamnějším, stavbě, volebních, díváme; kterou, období; nadílce, řeka; stole, výhledem; restaurací; stylu, rodinou, hudby, koncerty, zprávy; řeka; českou, nebo, můžete, skvělá, pro, vážné, centrem, loďku; punče; poničena; vánoční, Vyšehradě;
+36.1.1:1,w;120,60," šlw; "w.x; shg, F?gý; žzb"; žkďv, čöě, Krsl; ccý; č?"é, Kwóč;
+36.1.2:1,w;120,60 bb"; ákřď; ďvýe; uvf, Bošú, áep; ěéq; áöa"; "x.w; č""; áms, "čí,
+36.1.3:1,w;120,60 P"wu; čpč, ú"uí; ú"s:, Khtú, ü"ä, I-mš; ögáú,
+36.1.4:1,w;120,60 fét, ě:"c; ěxřě; vns; .ič; "??z; "č"ú; pa", Yamó, znó; .bc;
+36.1.5:1,w;120,60 ď??ý, qf!; "šjů, kýě; Izwí, diř,
+36.2.1:0,0;120,60," nejí; být, správná; něco; místa, Češi; strom, velký, setkáváním; dnem;
+36.2.2:0,0;120,60 advent, také, strom, podobě, policie, maminka; popíjením; Nejstarší, Jak, sedadlo, obdivovat; Ježíšek, večer, dne, kam, vyhlíží, koláč; knedlíky; její, koncert; hodin; nic, světové, jeskyní; dávno, Obvykle, půjdu, parkuje; hlavní, rozčiluje, svatého, rok; Vyšehradě, stalo, vidíte, Brně; Tatínek, televizních; Vltava; zde, popíjením, undergroundový; pro, polévka; vážné, dávno, Štědrý;
+36.2.3:0,0;120,60 nového; dívky; různých, advent, adoptovala, setkáváním, tam; před, proto; Možná; svůj, půvabná; Nováka; jeskyní; domácí; rychle; Evropy; středověku; vyhlíží, loďku, Petřín, náměstí, dálnice, angličtině, rádi,
+36.2.4:0,0;120,60 líbat, stavbě, světa; vyhořel; úzkými, politiku; peče; správná, festivaly, ranného, brazilských; centrem; světa; snad; televizních; restaurací; které; začínají, vidíte, jídelním; kterému, krásné; předpovídá, obvykle, patnáct;
+36.2.5:0,0;120,60 města, neméně; Najdete, fandíte; Během; renesance, Štědrý, nového, vdají, Během; večeři, někdy; dveřím; soustředit; užívat, nového, výsledcích, svatba, adventním, vdají, výstavy, kde; Brna, místo; pár, pocházejí; vypůjčit; líbí; sedíme; právě; výhledem; slunného; nástupišti, podstatně, žije; Češi, střevícem, mluvilo, Staroměstském; Ježíšek; soustředit,
 37.1.1:1,w;120,60,()/ (( ))
-37.1.2:1,w;120,60 /))( /)( ((( ))// (()/ /)// )/) /)/ /// (//)
-37.1.3:1,w;120,60 Zlb), Yď/k; šp(; )íao; öoud; ?(ú, .u/p; Sůuf, áza; (áž,
-37.1.4:1,w;120,60 ráč, (k(w, )/)i; (šu, U)(ý, W)p(; B)x?; .qb(; :ä);
-37.1.5:1,w;120,60 í)ě, ý(s; ýú!:; (ó((; q)l, sii, )/ó, ö)m; /ěi); (öy; včj, ?žěy, rüt; šeg/, (.)(,
-37.1.6:1,w;120,60 éúuf; /üď, go:; (íuů, kfo; c/c; řčzc, ü.t, úna, äm));
-37.1.7:1,w;120,60 ýžé(; ülkp, ž?kh; feř; žč(.; áfď!, Qíp), (/(á; áš/(; zhj, -o?, /ů/ä, jmö, (ktv;
-38.1.1:1,w;120,60,_ _úž/, dor, ě-üq, dsf, ůdä, .il; )dů/; (čl_, _öď?,
-38.1.2:1,w;120,60 j_(, ígžř, Tí)ä, úkvž; Tru_, Rrwb, !_qz, úžeš,
-38.1.3:1,w;120,60 zn), öřp,
-38.1.4:1,w;120,60 ý?í";
-38.1.5:1,w;120,60 F/kk, _rzě, ü_ců; žäps; íy!, J/xo; _wwm, í-kq; ž(r, _c.;
-39.1.1:1,w;120,60,%r öífp, uig, Gs_a, Q.jg, üód; -e!j; yzž, Wöíz, šföl, öjčd; pdc; egq,
-39.1.2:1,w;120,60 Pesn; hďh, Cme/; kás; ďúü), Hhfu; ďuwě; yrw; Zn)ü,
-39.1.3:1,w;120,60 Ián/, f/ú; ádá; ušz, gay; ěůy/; C_(x;
-39.1.4:1,w;120,60 ěýůí, ďýá?, Tďiü; Ačöü, plú, ái.., íg..; ý/kb, Húí"; čxh., "bó-, úwrs, ě_z;
-39.1.5:1,w;120,60 /éi, mx/; řöřá, séě, Snvů, řt.; Nwuř, ě_)!; orn, ?"?ü, ůójď; pmk, upí,
+37.1.2:1,w;120,60 ()(/ ((/ /)/(
+37.1.3:1,w;120,60 )/)), ó(ďý, )pěx; ře/, čřs, lví, řü/; !óá;
+37.1.4:1,w;120,60 (íúč, ä/öe, /)/ú, /u(f; ()ů(; äérä, /(j;
+37.1.5:1,w;120,60 /jj/; xll; !()!,
+37.1.6:1,w;120,60 é?ä; Eyä/, šě?/; F)xš; ýkl/, ///í; ě/)ů; xkt, )/kb, zv/, Ousú; :ďa, !(ö(, ýč(;
+37.1.7:1,w;120,60 :tč, Ma)ö, ö)z., )nun; (žz, /x/, )ý), k!ů; lq(, .y(;
+37.2.1:0,0;120,60,()/ Město, Hradčany; současnosti, aby, restaurací; nebo; dopadne; konci, Nakonec; Čech; skvělá, Nakonec; naštěstí; týdny, obvykle, divadel; čekal, Tatínek, mohou, stromeček,
+37.2.2:0,0;120,60 výrazně; rekordy; cukroví, rád, jen; úzkými, divadel; kočky, dál, těším, kulturním; svatého; podobě, dopadne, pár; nejvíc; kam, vlak, město, soustředit, užívat; Vltava; zpráv, zajímavosti, nebyla; polévka; Když, Jak;
+37.2.3:0,0;120,60 kávu, které; nosí; štědrovečerní, krásné; Václavské, Večer, líbí, rána, kterému, nejkrásnější,
+37.2.4:0,0;120,60 hlavní; dne, dívky, domácí, lidé, salát; cizinců; bude, velkou; fontánami; nám; nádraží; řeka, štěstí; cukroví, bude; maminku, světě, její; kde, křížek, mystická; adventní, především;
+37.2.5:0,0;120,60 parníku, dodržují, parníku, divadel; nosí, punče; restaurace, stojí; česká; dějiny, mají, dárky; před, němčině; inscenace; kterou, Dozvěděli; její, špatně; strom, rodinou, desátý, naleznete; tradici; zlaté; setkáváním; pocházejí; Ještě, Ryby; patnáct; naštěstí, Evropy, adventní,
+38.1.1:1,w;120,60,_ čmá/; Qú_p; üaá, úgf", čfg; ?o-a,
+38.1.2:1,w;120,60 čä)l, Honv; x_m, __í, :xůď, ďä", čgj_; I_šu; úř_d,
+38.1.3:1,w;120,60 ďöb(,
+38.1.4:1,w;120,60 líř, ě_n; n/e; :j:d; _vyů; mu_, /xk; "áóv, S__b, tšz, "žyx; Eďeé; žf); čvůs;
+38.1.5:1,w;120,60 óz_ů, _pv, -.c; ó_t?;
+38.2.1:0,0;120,60,_ rodinou; současnosti; mystická; hudby, schůzku; nebyla, dál; kávu, dnem, Vltava; dění, prasátko;
+38.2.2:0,0;120,60 Večer, přírodu, nejí, dechberoucí; zjistily; Štědrým, komentuje; Evropy, navštívit, někdy, most; vína, bramborový; špatně; zajímavé; turisticky, května, aby, restaurací; také, jablka; druhů,
+38.2.3:0,0;120,60 mezinárodní, Nakonec, Dozvěděli, zpráv, Pražané; mají, vlak; lehčí; kteří, Praze; užívat, začínají; čas, dívky; Jak, náměstí, navštěvovaná, dívky, fandíte; adoptovala; nemoc, Prahou; stalo; Brně;
+38.2.4:0,0;120,60 dávno; Novák; křivými, Středem, dálnice, minut; několik, domácí; nic; večeře; hladovějící; zprávy; chodí; mezinárodní, nového; řadu, pár; velkou; dnem, která, Během, některé; Češi; vína, fandíte, stále, zjistily; proto, Možná, hudby, lije; nádraží; čas, večer; svíčku, nám; voze, velmi,
+38.2.5:0,0;120,60 ulicemi, půvabná; restaurace; Praze, večeři, vážné; maminku, svařeného, velký, divadel; kteří; vyhořel, televizních; parky, ukázali, večer; štědrovečerní; nejvíc, Vánoce; svátkem; ošklivé, být, adventním; autonehodě; Středem; hlavní, dopadla, přichází; Vánoce, dodnes; hrají, stojí, půvabná,
+39.1.1:1,w;120,60,%r ?éóž; ů.oě; ú!ým, šga-; ö!dq, ď_řp, věž; řwv/; ďjřq; "(rž; -ü"; ěůqö;
+39.1.2:1,w;120,60 á:.c; eíe, óř_x; Uxúz, Ož_r;
+39.1.3:1,w;120,60 áüqí, áěóá, qir; čägř; :vó; řvr?; ú_ďů,
+39.1.4:1,w;120,60 íásg; čřát, ?qx, J!aš, Pbíü; Wlug,
+39.1.5:1,w;120,60 úx:b; áďč, üěům, _.pď; ágó; číšú, Ti/š, l(ž, ěäcü;
+39.2.1:0,0;120,60,%r domácí; Málokdo, můžete; Novák; hrají, dnem; turisticky; Rozkrajují; slunného; hvězdička, nosí, památek, pohádek, Škoda; Praha, rodiči; inscenace, Novák; kapra, dálnice; krásné; peče, inscenace, odlitku, pracovní, sledováním; celého, Češi, štěstí; Štědrý, osm, dějiny; nebyla; líbat; můžeme; Petřín; restaurace; koupím, úzkými; pracují; naštěstí; měl,
+39.2.2:0,0;120,60 rád, připravených, některé, znamená; poničena; dodržují; dějiny, kávu, sledováním, jsme; nebo, stále, hodin, stravě, Češi, procházely,
+39.2.3:0,0;120,60 rok; dveřím; jaký, pár; připravených; kromě, řízek, Josefov; Ostravě, nové, někdy; své; Čech, Pražané, nosí, parkuje, Jana; schůzku, hezkou; hvězdička; lehčí, neméně; pracují; Škoda, zastavil; její, adoptovala, tak, rána; druhů; architektonických; Jak; místa; Martina, nádraží, tradici, pod; každou, čínských, Staroměstské, Tatínek; dobré; Praha; stále; kromě, mohou;
+39.2.4:0,0;120,60 mši; úzkými, Jana; italské, kterému; Štědrým, stravě; parníku, Všechno, Nakonec; říká; hudby, velký, dodnes; hlavní, předpovídá; hrají, adventní; krásné; nadílce, rychle; kterému; procházely; dveřím; bohatou, Adventní; Vánoce; trochu; Štědrým;
+39.2.5:0,0;120,60 dálnice, mlze; podává; Ryby, brazilských; kostela; undergroundový, kterému, Nakonec; Praze, turistů; třeba; Všechno, tradici, pyšní; památek, pár, možné, dnem; líbat, turistů; Každou, festivaly, třeba, hrocha,
 40.1.1:1,w;120,60,58§ 55 88
-40.1.2:1,w;120,60 8885 §585 85§8 §55§ 5§§5
-40.1.3:1,w;120,60 H85k,
-40.1.4:1,w;120,60 5lpü,
-40.1.5:1,w;120,60 5)n5; Kědů; 5xgš, 8§58; (ó?ü; !?.h, _5m; 5558; Jóčý, 8p5á, ýh/á;
-40.1.6:1,w;120,60 jáw, Bzžý, öě88; j5:; 8nbj, Rj)f; ü!§; 8a88; §wbb, í§äý; §ě8§, 5zo, émý, L5ó5,
-40.1.7:1,w;120,60 Yz?5, 5)čé, 8qq,
+40.1.2:1,w;120,60 §85 585 5§88 5855
+40.1.3:1,w;120,60 §§x; yy§;
+40.1.4:1,w;120,60 §5.§, Nůxn; áxqb; /8"é, §óut; ď-k; :a!, §tu8, §mä, Bh8a, v88;
+40.1.5:1,w;120,60 čuíč, r:í, :8(g, ä§8q;
+40.1.6:1,w;120,60 N85m; Gcuc; )§§8; ?§)o; 8ú)t; 8k5; évp,
+40.1.7:1,w;120,60 ?nlč, ď(8l; §rqů; šř§x, §é85;
+40.2.1:0,0;120,60,58§ zimní; loďku, byly, zimní, turisty, užívat, Každou, naleznete; cizinců, mají, Dále, Štědrým, zajímavé; soustředit; čtyři; svátkem, loďku; úsměvné, zájem; dějiny; turisty; každou,
+40.2.2:0,0;120,60 láká, Štědrý, každá, jen; Vyšehradě, nebyla, ošklivé; pocházejí; Dále; deset; koncerty; uviděl; svařeného, tradici; dějiny; pohádek; vybaví;
+40.2.3:0,0;120,60 půjdu; italské; snad; televizní, kterou, vody, svými, Štědrý; Ostravě, brazilských, čeká; původní, Štědrým; klubu, televizní; setkáváním; díváme; polévka; hezkou, sedadlo, jen, čas, půjdu, Například, středověku; Jak; náměstí, ošklivé;
+40.2.4:0,0;120,60 komentuje; salát, veganských, schůzku; město, peče, dávno, fontánami, nebezpečného, stravě, žije; minut, adventu, jak; stojí; řekne; koupím, Evropy, Čechách, podstatně, stověžaté, zapalují; jsou, koláč, zájem, Josefov, rozčiluje, mnoho; dokonce, schůzku, zajímavé;
+40.2.5:0,0;120,60 posloucháme; Hradčany, posloucháme; dveřím; ulicemi; rána, hezkou; schůzku, světa; most; pocházejí;
 41.1.1:1,w;120,60,49%% 44 99
-41.1.2:1,w;120,60 9%9 %4%%
-41.1.3:1,w;120,60 R5%x; §4y%; M4sm, _q%, ůvt, %ó4, ď%e,
-41.1.4:1,w;120,60 (%4; K/4%, ýzü; %fo, .p44; ?"§; 95%é; 4ú9(; V(%:; %4%l, Kř8é, ?žmě, L9vů, l%4, ötü%,
-41.1.5:1,w;120,60 Zyěř;
-41.1.6:1,w;120,60 Tv%ó, šq", óäau, Z4á%, _%o; t%:; pz"; F9)5, 4id, Hbčů,
-41.1.7:1,w;120,60 _zmm, óuj9; ú9w; ýéďv; é"ó9; b94, .9y; Jšéx; X4!o; tiö,
+41.1.2:1,w;120,60 %4% 9%99 %%49 %%4% %494 4%4 %44 4%44 %444 %999 944 4%9
+41.1.3:1,w;120,60 šül, 4č%ö, xvř;
+41.1.4:1,w;120,60 %ýí%, :üäf, %vší, éa%, ü%(t, rď4, .ca-, Z%/ř, %x8; Dčüh; (%xý;
+41.1.5:1,w;120,60 %ž%x; Gje9, Ln(9; %5tc; ä4o; ďp%§, üv%_; Cyöx, Eš%f; ďgkj; ö(é; sj9, 8ö%, ?g"_,
+41.1.6:1,w;120,60 sú9, X_%b; 45ě,
+41.1.7:1,w;120,60 9čj, üw4; /lě?; 44h; hó4, úu"ž, h/e, S4mü; H%cg, %!9,
+41.2.1:0,0;120,60,49%% můžeme, dění, přáteli, pana, architektonických; Nejstarší, zda; politiku; přinést, hrají, uliček, pro, řekne, Tatínek, výstavy, něco; který, konci; domy; posloucháme; rychle; přichází; láká; hlavní; veganských; velký; policie, vyhořel, Karlův; přáteli; Město; hodin, právě; adventní;
+41.2.2:0,0;120,60 čaj, těším, krásu; bramborový, undergroundový, řadu, kteří, němčině; právě, parky, němčině; štědrovečerní; středověku; svůj, celého, Když; stověžaté; obdivovat; Martina, užít, veganských; vážné, centrem; rodiči; každá; místa; obdivovat, Novák, každý; mlze; tam, zdraví, připravených, dál, říká, ošklivé; čtyři; zda; českou, nejí, nadílce; zimní; Během; parky, štědrovečerní, křivými; stejně, policie; nebyla,
+41.2.3:0,0;120,60 restaurací; bude, roce; památek, válkami; jsou, proto; Dále; místo, maminka; Jak; rok, dálnice; piva; Málokdo; rovněž, mohou; advent; dálnice, jeskyní, byly; kterému, parníku,
+41.2.4:0,0;120,60 rána, kromě; Novák, vypravit, strom, světě; naleznete, nám; knedlíky, čeká, parky; pod; Nakonec, Nejstarší, vážné; užít; odlitku, Vyšehradě; peče, týdny; dne, řeka, lidé, ukázali; klubu, vypravit, adoptovala; svíčku; památek; který, nejkrásnější; Karlův; stole, mnozí; pohovce, most; parníku; zda, fontánami; zpráv, slavit; Nakonec;
+41.2.5:0,0;120,60 Jak; piva, zde, ranného; mládě; deset; stalo, přírodu; nového; Každou, Ostravě; můžeme; stověžaté, neděli, parkuje; rozčiluje, řadu; ZOO; večeře; přemýšlí, italské; rádi; krásu; čeká; rodiči, nám; nosí; dopadne, Hradčany; osm, pana; Město, pijeme; pro, tak; parky, Například, líbí, vypůjčit, zastavil; mši, Brně; Staroměstském; zjistily; Pan,
 42.1.1:1,w;120,60,30 33 00
-42.1.2:1,w;120,60 óžzé, e:3;
-42.1.3:1,w;120,60 :cý, §ě00, 0%0, ít§, 4jyš; !äk, ü03p; %:0á; cř?, 9z4;
-42.1.4:1,w;120,60 üyžď, ?§3, Or%9, Hu3:, t3a; ůůn3; 3?m0; E"jf; ěét8, yr., .v33, üřóv, y0u; /ů0, š%s,
-42.1.5:1,w;120,60 N0e!; ó0žx, awj, j0?; ögqg, oöř; úa0x, S/ý3, 0§.(, řl3"; ém0; zfw; éčřř; E0jf;
-42.1.6:1,w;120,60 éu)9; évm.; y!8, úv43; ék3h; í3we, ýöe!; "čö; 33ö, ú(0, v30, E3äf; 0úůo; éůú; íís,
+42.1.2:1,w;120,60 a)n; A8ät, óébn, E0é0; öírď; Wtďd; kú§,
+42.1.3:1,w;120,60 §nh; hq-, V--ú; á:8f,
+42.1.4:1,w;120,60 Cůnc, wüž, o"č, Szn/; ?0ý3; _áč); čěž.; ý93ů, Oyďó,
+42.1.5:1,w;120,60 :ccb; 3(wi; ř/w-, zp., řüfc,
+42.1.6:1,w;120,60 .ůaó, Zje%, üäé; ůaiä,
+42.2.1:0,0;120,60,30 Staroměstské; mezinárodní, světové, nejí; vánoční; stověžaté, němčině; každou, klubu; něco; Adventní; prakticky; zlaté, Staroměstské, světě, láká, vybaví, méně; Brna; někdy; dopadne, pohádek, krásu, byly; prakticky; parníku; ZOO; televizní; dveřím; před; slavit, jak; fontánami; advent; loďku, nejí, kterému; kterou; rotunda; Pražané, dopadla;
+42.2.2:0,0;120,60 dál; kočky; města, pro, kostela, Dozvěděli; Středem; dějiny, koncerty, tam, loďku; čtyři; dívky; Ostravě, půvabná; připravených; výrazně, předpovídá; prakticky, Čech; město, zajímá; voze; svátkem, vypravit; Dozvěděli; sklad, odlitku, dechberoucí, adoptovala; její, trochu; čaj; původní; dodnes,
+42.2.3:0,0;120,60 kapra; Večer; olovo; Adventní, Dozvěděli; střevíc, zastavil; stejně; domácí, turistů; aby, původní; válkami; parkuje; stromeček; roce, světě, večer; pijeme; inscenace, mají, Václavské, zapalují; inscenace, inscenace; Pan; ulicemi; autonehodě, zastavil, Město;
+42.2.4:0,0;120,60 věci, nejvíc, koláč; zpoždění; svařeného; úzkými; turisty, líbí, řadu; dění; měl, vody; pijeme; turisty; Josefov, výstavy, Ještě;
+42.2.5:0,0;120,60 neděli, svíčku; Například, místo; přinést, trochu; Novák, festivaly; Brně; lehčí, komentuje, zpoždění; Například, rád; jsme, chodí, rádi, tráví, zimní, nového, pracují; vypravit; loďku, hvězdička, Město; tak; večer; nadílce; ozdobený; pracují; advent, cukroví, přáteli; láká, rychle, nového; salát; střevícem; koláč; mají, sedadlo, úsměvné; stověžaté; Petřín,
 43.1.1:1,w;120,60,1+= 11 ++
-43.1.2:1,w;120,60 ++1 =1= +11= ==++ 1=+
-43.1.3:1,w;120,60 šük, v:5; óčmz; ýs-+; Xo=ö; =!äd; 1l-; q3+; 4=ž, +e-1, +:č, +)1o, =(=; F.1", Ib+z,
-43.1.4:1,w;120,60 ě8q; o.á; §1ee; "sl§;
-43.1.5:1,w;120,60 óó+h; ůaó, "0ď=; úy=+, +q1, ü=č+; j+5,
-43.1.6:1,w;120,60 äců; 9)úé, t=j, jč!, xbr; Cssa; ů+=4,
-43.1.7:1,w;120,60 =nw; =1ďi, Q9é§; öä1-, +1én, yů+; ö%k1; ž+%1, 11vx;
+43.1.2:1,w;120,60 11++
+43.1.3:1,w;120,60 §b/4, ž=g+; 5ö-u, ek+, d11;
+43.1.4:1,w;120,60 W%fh, S"48; =řuú, ébc_,
+43.1.5:1,w;120,60 üt?g; ==m; Q+cu, Ry=0, =4ä); "0j; 4á_!, ++.:; 0cs, §1.+, §k?;
+43.1.6:1,w;120,60 =_-, 1mš, §it; ž+"1; =+v; ž11j; L=č+, §1x;
+43.1.7:1,w;120,60 á=u;
+43.2.1:0,0;120,60,1+= čínských; Čech; televizní; slavit, čeká; prakticky; kterou, dívky; půvabná, Najdete, Dnes,
+43.2.2:0,0;120,60 pohovce; Praha; rotunda; neděli; různých; lupiče, vypůjčit; zde, byly; pohovce, asi; zajímavé, komentuje; setkáváním, výstavy, restaurace, podává, krásné; současnosti; přírodu; adventním, Jakuba, chodí; věci; svobodné, Václavské;
+43.2.3:0,0;120,60 mohou; všechny, někdy, rána, přinést; posloucháme, cizince, koncert, konci; jeskyní, zajímá; být, Novák, začínají, komentuje; tradici; peče; dívky; restaurací; které, pocházejí; kterému, ozdobený; Petřín; policie; dne; pokud; různých, vážné; vybaví, svými, vdají, inscenace; také, nejvýznamnějším, která; půlnoční,
+43.2.4:0,0;120,60 kterému; mají; stromeček; nejkrásnější, slunného, být; města; prakticky, Praze; žije, nemoc; prakticky, historii; nebo, veganských; stalo; advent, domácí, štěstí, turistů, procházely, Rozkrajují, dechberoucí; pokud, hlavní, Jakuba, volebních; další, mnoho, ukázali, svatba, Město;
+43.2.5:0,0;120,60 asi, dál, historii, koláč; světě; Nakonec, Štědrý; vína, Čech, výstavy; Dále, sedíme, pohovce; střevíc; loďku, pokud; stavbě; žije, téměř, bohaté, Hradčany, pijeme; štěstí, současnosti, dárky; každý; dívky, být, kapra; někdy; řízek; firmy, schůzku; mši, celého, odlitku, vidíte; světa; které; parkuje; tradičně, čaj, vyhořel; zpoždění; naleznete; stalo; Ryby, Nejstarší;
 44.1.1:1,w;120,60,67 66 77
-44.1.2:1,w;120,60 36e_, (čx, R!6ž, r%í, sds; r8í; ďqď=, ö7h; č+h7; !ě76; §47!, "ů!, šč__,
-44.1.3:1,w;120,60 7x6; ?76q; :šč, 8q_č, F6??, 996, q-x, ř."q; 65(, dy7,
-44.1.4:1,w;120,60 sšá; Y66q, Girx, Q67o, 41h; /brh, 1íuž, 76m; Uáú6; 76k§;
-44.1.5:1,w;120,60 )76; b_m, =4cz, ke+, 6k"_,
-44.1.6:1,w;120,60 úff3; aaw, I87x, 4č:, ág-_; u!n, 7og, šrjr, ü+sr, ú8úú, W7?ď, 60/, l7ü, Pr6l; t4l,
-45.1.1:1,w;120,60,2 :žö5,
-45.1.2:1,w;120,60 řxbg; čoq; S-4x,
-45.1.3:1,w;120,60 écq6, Dpůp, A85a; z2č, F(9ď, A!=1, íř23,
-45.1.4:1,w;120,60 ót2.; -ú(f; 22lk; 2qö, ")§k, itř, Evoi, =úě2; íxti, _6ů=,
-45.1.5:1,w;120,60 ědú, Ut(l,
-46.1.1:1,w;120,60,%r (.s, :.ď), óžb, évöd, (ápř; Je7é, jd8;
-46.1.2:1,w;120,60 Ojx?; ď%:ě,
-46.1.3:1,w;120,60 žilz; ámaů; úúq; ě_dx; _.v, "w6ý; ü%g, ú:cš; äřiú; Q§0j; tn/; í5f6, äyüv, /0?ö;
-46.1.4:1,w;120,60 óejm, žbso, l)v; žě§; ejö, ä7x; %oy;
-46.1.5:1,w;120,60 7hj; wqd, Qúzů; é.)ů; 7ü§a; n=1, l7á; V4ch, Nuzb, C(gc,
+44.1.2:1,w;120,60 6ď.ď, ůoí), _rl", 7ůg?; 31jk; /pü, =hy, 5(§-, 07ři, ůůbö; or6, c7); .(w, ýi-, dří,
+44.1.3:1,w;120,60 éc77, (ab., L6yg; u6", !%v, 0sö, B1s7, /c7, š§j), éďn; Z7öř, !63e; ó9e; ki6,
+44.1.4:1,w;120,60 óck/, -s-6; =9yd, 6úč6, üw7, 75řä, čžó; ě)61; 7t6,
+44.1.5:1,w;120,60 Nlě7, p07; ěvt+, í6"y, üďiř; 077, %§db; 7z6; Hl%_; zč4; räů,
+44.1.6:1,w;120,60 Gé67; 67áa, Ax7ó; ü67d, jtř, 7í4.; +n§%; 08ü; O7g6; G7éě, .6jů; M7éí, 4yw"; 6vs; x-m;
+44.2.1:0,0;120,60,67 Vltava, Dále, ošklivé; nejvíc, turistů; velký; svobodné; výstavy; vody, dokonce; díváme; bude; turisticky, vypůjčit; lije; deset, náměstí; festivaly; Pražané, stromeček, Praha; polévka, zdraví, domácí, koncert; pana, neméně, každý; užít; Josefov;
+44.2.2:0,0;120,60 Všechno; trochu, ranného, stalo; přemýšlí, dnem, olovo; velkou; Grébovku; podstatně, Nováka; významným; krásu; brazilských, město, restaurací; líbí; některé, bramborový, kterou, svařeného; Každou, rotunda, italské, rovněž, Jakuba; téměř; druhů; nic, italských, Petřín; svařeného; těším; hlavní; válkami; jídelním; salát, nemoc; deset; adventním; čaj; zpoždění; brazilských; němčině; dál; bramborový; Ryby, dopadla; piva; sklad;
+44.2.3:0,0;120,60 Ježíšek, dne, Karlův; vdají; tradičně; správná, čaj, stromeček, italských; středověku; jednu, mnozí; děje, měl, olovo, některé, naštěstí, náměstí; tradičně; dívky, mezinárodní; svatého; štěstí; rodinou; pyšní; vypůjčit, obvykle, Grébovku, koupím, maminka; kávu; Středem; líbí; fontánami, českou; tak; koncerty, neméně; nemůže, Obvykle, zastavil,
+44.2.4:0,0;120,60 obdivovat, patnáct, fandíte; autonehodě; Staroměstské; zajímavosti, dění, čeká, rovněž; rodiči; koupím, adventu, punče;
+44.2.5:0,0;120,60 bramborový; vdají; dnem; fandíte; polévka, pana, Během, výrazně; nebo, dávno; vypůjčit, slunného; neméně; přemýšlí; naleznete;
+45.1.1:1,w;120,60,2 lnä, )nžt; gm", §dóč; :v?s, 2ür; ý§ě%, éó7k, ú2pe; !áj; q7k,
+45.1.2:1,w;120,60 2ř_m, č.a;
+45.1.3:1,w;120,60 Xq2%, Huló, S2l2, 6xsb; řx:2; é2n; I)ör, k2z,
+45.1.4:1,w;120,60 ý-(č, +q)ú, ž2uř; Kxó2; .!s2, §63l; G22v, 6s?9;
+45.1.5:1,w;120,60 /xú§; c7.; U+9.,
+45.2.1:0,0;120,60,2 prasátko; volebních; hladovějící; bohatou; mezinárodní; řízek; současnosti; krásné; celého; celého, Čechy; tradice, Dále; pocházejí, přáteli, procházely, každá; Praha; zde, nejvíc, přemýšlí, Například, pokud; znamená; obdivovat, rána; století; přemýšlí; především, pijeme, hrocha, procházely; nejvíc; kulturním, stále, dnem, skvělá, vypůjčit; Praha; Vyšehradě, obvykle; Každou, rozkvetlý; vidíte;
+45.2.2:0,0;120,60 osm; řadu, čaj; byly; Brně; ošklivé, Rozkrajují; štědrovečerní, inscenace, mlze; českou; nebezpečného, nebo, řízek, Dnešní, osm; Všechno; Každou; podává; světa, kávu, inscenace; stravě, špatně, posloucháme; mají, původní, nemůže, půjdu; Čechy, zastavil, advent, krásu, Nejstarší; rychle, Jak; špičkou, chodí, vody;
+45.2.3:0,0;120,60 lehčí, zprávu; čas; prasátko; Staroměstském, cizinců; restaurace; Tatínek; svými, dokonce; salát; angličtině; bohaté; nosí, kterému; zimní; svůj, aby; Například, hlavní; strom; zda; neméně; zda; vybaví; Vltava, naštěstí, piva; věci, hází; podobě, salát; nejvýznamnějším, vyhořel; hrocha; voze, českou; někdy, Praha, ozdobený; kočky, restaurací; výrazně, slavit, undergroundový, slunného, koupím, roce, zajímá;
+45.2.4:0,0;120,60 kde; undergroundový; všechny, Ostravě; nám, maminka, centru; nosí, ale; schůzku; velmi; velký; řadu; polévka, díváme, května, přáteli, které, pijeme; město; sedadlo, rána; jako, Adventní; svatba, hází, schůzku, policie; schůzku; půvabná; krásné; Nakonec, nejvýznamnějším, žije; advent; kapra, přáteli; děje; možné; láká, kapra, pod; bohaté, lehčí; především; kterou; politiku; současnosti, minut; hází,
+45.2.5:0,0;120,60 láká; soustředit; hudby, zdraví, nemůže, nemůže, inscenace, sedadlo; Ještě; minut, dopadne, setkáváním; bramborový, mluvilo; nebyla, krásnými, vína, stojí, dárky; výstavy, Středem; Brna; adoptovala, mluvilo, veganských; stověžaté, těším; světové, město; půlnoční, přírodu, nové, Vltava, renesance, dopadla; cukroví, rodinou, uliček; obdivovat; nebyla, lidé;
+46.1.1:1,w;120,60,%r 2év; -iád, í+n.; 8múm; %53y; 45vx; §6ph, =c6); =et; §7üv, ě1-, žělp;
+46.1.2:1,w;120,60 =ďc, g!b; šř(g, öfew; +iä"; ägp3, áéfü, §2ď6;
+46.1.3:1,w;120,60 ýeě; ::c, rf3; Yxsř; é4+t,
+46.1.4:1,w;120,60 Q-=í, %ki3; pů(; ú.:í, 7_t(, Gö"b; ák9a,
+46.1.5:1,w;120,60 ů=vd, 8öy, %ázü; 1gá, (üý; Wó-c; Ao7ů; §?ys; äj?3; ívv; íývp, Lé10; síš;
+46.2.1:0,0;120,60,%r zapalují, díváme; Nejstarší, komentuje, Ostravě, výrazně, ukázali; Novák, Evropy; pohovce; lupiče; Večer, proto;
+46.2.2:0,0;120,60 Nakonec; Tatínek; restaurací; ošklivé; můžete; přichází, válkami, adventním; jeskyní; rozčiluje, Josefov, zpoždění, Josefov; štědrovečerní, deset, parníku; podstatně, turisticky; zpoždění, Petřín; svůj; Petřín; stavbě, můžete, půlnoční; Štědrým, rodinou; svými; hází, politiku, rok; volebních, Staroměstské; čeká; inscenace; adventním, poničena; zimní; ulicemi; města; mystická; dívky,
+46.2.3:0,0;120,60 Dnešní, zastavil, hází; deset; mluvilo, klasiku, pak; domy; popíjením; Ježíšek, plánuje; kterému; klubu; navštívit, Evropy; Češi, protéká, úzkými, Vyšehradě, nebyla, piva, sedadlo, firmy; ukázali, stravě, rodinou; přemýšlí; bude, uviděl; krásu, výsledcích;
+46.2.4:0,0;120,60 zpoždění, klasiku; historii; která; její; vyhlíží, téměř, díváme, velký; dodnes, televizní, Čech, jaký; vyhlíží; štěstí; peče, svařeného, dál, zlaté; válkami, vyhořel, zjistily; zlaté, dárky; domácí; piva, stravě; také; stylu, setkáváním; klubu, česká; stověžaté,
+46.2.5:0,0;120,60 rozčiluje, týdny, svatba; podobě; rodinou, fandíte, kočky; domy, ZOO, domácí; strom, podobě, stále, křížek, přichází; italské, navštěvovaná; Nováka, rotunda, televizní; sedadlo, zda, měl; začínají, Málokdo; procházely, inscenace, užívat; také; Ostravě; pohovce; stále, Středem;
