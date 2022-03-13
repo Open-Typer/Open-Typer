@@ -30,45 +30,8 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	ui->themeCustomizationFrame->hide();
 	ui->themesFrame->show();
 	updateFont();
-	// Built-in themes
-	themes.clear();
-	QVariantMap themeMap;
-	// Default
-	themeMap.clear();
-	themeMap.insert("name",tr("Default"));
-	themeMap.insert("id","default");
-	themeMap.insert("icon","default.png");
-	themes += themeMap;
-	// Dark
-	themeMap.clear();
-	themeMap.insert("name",tr("Dark"));
-	themeMap.insert("id","dark");
-	themeMap.insert("icon","dark.png");
-	themeMap.insert("baseTheme",1);
-	themes += themeMap;
-	// Light
-	themeMap.clear();
-	themeMap.insert("name",tr("Light"));
-	themeMap.insert("id","light");
-	themeMap.insert("icon","light.png");
-	themeMap.insert("baseTheme",2);
-	themes += themeMap;
-	// Green
-	themeMap.clear();
-	themeMap.insert("name",tr("Green"));
-	themeMap.insert("id","green");
-	themeMap.insert("icon","green.png");
-	themeMap.insert("baseTheme",2);
-	themeMap.insert("bgColor",qRgb(0,108,0));
-	themeMap.insert("panelColor",qRgb(175,175,175));
-	themes += themeMap;
-	// Custom
-	themeMap.clear();
-	themeMap.insert("name",tr("Custom"));
-	themeMap.insert("id","custom");
-	themeMap.insert("icon","custom.png");
-	themes += themeMap;
 	// Load built-in themes
+	QList<QVariantMap> themes = globalThemeEngine.themeList();
 	for(int i=0; i < themes.count(); i++)
 	{
 		QListWidgetItem *item = new QListWidgetItem(QIcon(":res/images/themes/" + themes[i]["icon"].toString()), themes[i]["name"].toString());
@@ -170,11 +133,10 @@ void customizationOptions::init(void)
 void customizationOptions::changeFullTheme(QListWidgetItem* item)
 {
 	int index = ui->themeList->row(item);
-	QVariantMap themeMap = themes[index];
 	if(item == lastItem)
 		return;
 	lastItem = item;
-	if(themeMap["id"].toString() == "custom")
+	if(globalThemeEngine.themeName(index) == "custom")
 	{
 		init();
 		ui->themeList->hide();
@@ -189,7 +151,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		widgetGeometry.setWidth(0);
 		animation1->setEndValue(widgetGeometry);
 		animation1->start();
-		connect(animation1,&QPropertyAnimation::finished,this,[oldWidth, oldWidth2, themeMap, this]() {
+		connect(animation1,&QPropertyAnimation::finished,this,[oldWidth, oldWidth2, index, this]() {
 			ui->themesFrame->hide();
 			QRect widgetGeometry = ui->themesFrame->geometry();
 			widgetGeometry.setWidth(oldWidth);
@@ -204,79 +166,14 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 			animation2->setStartValue(widgetGeometry);
 			animation2->setEndValue(ui->themeCustomizationFrame->geometry());
 			animation2->start();
-			settings.setValue("theme/fulltheme",themeMap["id"]);
+			globalThemeEngine.setTheme(index);
 		});
 	}
 	else
 	{
-		globalThemeEngine.blockSignals(true);
-		// Base theme
-		if(themeMap.contains("baseTheme"))
-			changeTheme(themeMap["baseTheme"].toInt());
-		else
-			changeTheme(0);
-		// Font
-		QString fontFamily;
-		int fontSize;
-		bool fontBold, fontItalic, fontUnderline;
-		if(themeMap.contains("font"))
-			fontFamily = themeMap["font"].toString();
-		else
-			fontFamily = "";
-		if(themeMap.contains("fontSize"))
-			fontSize = themeMap["fontSize"].toInt();
-		else
-			fontSize = 20;
-		if(themeMap.contains("fontBold"))
-			fontBold = themeMap["fontBold"].toBool();
-		else
-			fontBold = true;
-		if(themeMap.contains("fontItalic"))
-			fontItalic = themeMap["fontItalic"].toBool();
-		else
-			fontItalic = false;
-		if(themeMap.contains("fontUnderline"))
-			fontUnderline = themeMap["fontUnderline"].toBool();
-		else
-			fontUnderline = false;
-		globalThemeEngine.setFontFamily(fontFamily);
-		globalThemeEngine.setFontSize(fontSize);
-		globalThemeEngine.setFontBold(fontBold);
-		globalThemeEngine.setFontItalic(fontItalic);
-		globalThemeEngine.setFontUnderline(fontUnderline);
+		globalThemeEngine.setTheme(index);
 		updateFont();
-		// Colors
-		resetTextColors();
-		if(themeMap.contains("levelTextColor"))
-		{
-			QRgb color = themeMap["levelTextColor"].toUInt();
-			globalThemeEngine.setExerciseTextColor(QColor(color));
-		}
-		if(themeMap.contains("inputTextColor"))
-		{
-			QRgb color = themeMap["inputTextColor"].toUInt();
-			globalThemeEngine.setInputTextColor(QColor(color));
-		}
-		resetBgPaperColors();
-		if(themeMap.contains("bgColor"))
-		{
-			QRgb color = themeMap["bgColor"].toUInt();
-			globalThemeEngine.setBgColor(QColor(color));
-		}
-		if(themeMap.contains("paperColor"))
-		{
-			QRgb color = themeMap["paperColor"].toUInt();
-			globalThemeEngine.setPaperColor(QColor(color));
-		}
-		if(themeMap.contains("panelColor"))
-		{
-			QRgb color = themeMap["panelColor"].toUInt();
-			globalThemeEngine.setPanelColor(QColor(color));
-		}
 		setColors();
-		settings.setValue("theme/fulltheme",themeMap["id"]);
-		globalThemeEngine.blockSignals(false);
-		emit globalThemeEngine.styleChanged();
 	}
 }
 
@@ -284,6 +181,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 void customizationOptions::selectCurrentFullTheme(void)
 {
 	QString id = settings.value("theme/fulltheme","default").toString();
+	QList<QVariantMap> themes = globalThemeEngine.themeList();
 	for(int i=0; i < themes.count(); i++)
 	{
 		if(themes[i]["id"] == id)

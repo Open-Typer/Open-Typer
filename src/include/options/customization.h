@@ -51,7 +51,6 @@ class customizationOptions : public QWidget
 
 	private:
 		Ui::customizationOptions *ui;
-		QVector<QVariantMap> themes;
 		QListWidgetItem *lastItem = nullptr;
 		void selectCurrentFullTheme(void);
 		void updateFont(void);
