@@ -254,6 +254,7 @@ void OpenTyper::connectAll(void)
 	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
 	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
 	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
+	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &OpenTyper::loadTheme);
 	// Start timer
 	secLoop->start(500);
 }
@@ -561,7 +562,6 @@ void OpenTyper::openOptions(void)
 	optionsWindow *optionsWin = new optionsWindow(this);
 	optionsWin->init();
 	connect(optionsWin,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
-	connect(optionsWin,SIGNAL(themeChanged()),this,SLOT(loadTheme()));
 	optionsWin->open();
 	optionsWin->setWindowModality(Qt::WindowModal);
 	connect(optionsWin, &QDialog::finished, this, [this]() { show(); refreshAll(false); });
