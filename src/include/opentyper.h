@@ -63,7 +63,6 @@ class OpenTyper : public QMainWindow
 	public:
 		OpenTyper(QWidget *parent = nullptr);
 		~OpenTyper();
-		void setColors(void);
 
 	private:
 		Ui::OpenTyper *ui;
@@ -91,6 +90,7 @@ class OpenTyper : public QMainWindow
 		int lastTime;
 		Updater *versionHdw;
 		themeEngine localThemeEngine;
+		void setColors(void);
 		bool customLevelLoaded;
 		QString customLevel;
 		bool customConfig;
