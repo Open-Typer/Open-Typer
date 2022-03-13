@@ -140,7 +140,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Theme:</string>
+               <string>Style:</string>
               </property>
              </widget>
             </item>
