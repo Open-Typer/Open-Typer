@@ -261,10 +261,6 @@ Möchtest du es herunterladen und installieren?</translation>
 <context>
     <name>customizationOptions</name>
     <message>
-        <source>Theme:</source>
-        <translation>Thema:</translation>
-    </message>
-    <message>
         <source>System (default)</source>
         <translation>System (Standard)</translation>
     </message>
@@ -329,31 +325,23 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Default</source>
-        <translation>Standard</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation>Grün</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <source>Style:</source>
+        <translation>Stil:</translation>
     </message>
 </context>
 <context>
     <name>initialSetup</name>
     <message>
         <source>Welcome to Open-Typer!</source>
-        <translation type="unfinished"></translation>
+        <translation>Willkommen bei Open-Typer!</translation>
     </message>
     <message>
         <source>Show all</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeigen alles</translation>
     </message>
     <message>
         <source>Choose a pack with lessons for your keyboard layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie ein Paket mit Lektionen für Ihr Tastaturlayout:</translation>
     </message>
 </context>
 <context>
@@ -367,11 +355,11 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>keyboardWidget</name>
     <message>
         <source>Hide keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Verstecken die Tastatur</translation>
     </message>
     <message>
         <source>Show keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeigen die Tastatur</translation>
     </message>
 </context>
 <context>
@@ -413,18 +401,18 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorschau</translation>
     </message>
 </context>
 <context>
     <name>monitorClient</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Unable to connect to class monitor server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Verbindung zum Class Monitor Server kann nicht hergestellt werden.</translation>
     </message>
 </context>
 <context>
@@ -451,7 +439,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindung</translation>
     </message>
 </context>
 <context>
@@ -482,7 +470,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>Open built-in pack</source>
@@ -494,7 +482,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichern als...</translation>
     </message>
 </context>
 <context>
@@ -631,26 +619,26 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Include new lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Enthalten neue Zeilen</translation>
     </message>
 </context>
 <context>
     <name>statsDialog</name>
     <message>
         <source>Exercise history</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabe Verlauf</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabelle</translation>
     </message>
     <message>
         <source>Charts</source>
-        <translation type="unfinished"></translation>
+        <translation>die Diagramme</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <source>Mistakes</source>
@@ -662,11 +650,11 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Better students: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bessere Studenten: %1</translation>
     </message>
     <message>
         <source>Worse students: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlechter Studenten: %1</translation>
     </message>
 </context>
 <context>
@@ -689,6 +677,29 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Incorrect password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>themeEngine</name>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation type="unfinished">Dunkel</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="unfinished">Hell</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation type="unfinished">Grün</translation>
+    </message>
+    <message>
+        <source>Custom</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
