@@ -99,6 +99,8 @@ void OpenTyper::refreshAll(bool setLang)
 	// Class monitor client
 	updateStudent();
 	// Theme
+	if(!isVisible())
+		show();
 	loadTheme();
 	// Set mode
 	changeMode(0);
@@ -150,8 +152,6 @@ void OpenTyper::refreshAll(bool setLang)
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
 	}
-	if(!isVisible())
-		show();
 }
 
 /*! Sets up all connections. */
