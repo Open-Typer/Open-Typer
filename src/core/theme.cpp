@@ -215,7 +215,7 @@ bool themeEngine::customExerciseTextColor(void)
 	return settings.value("theme/customleveltextcolor","false").toBool();
 }
 
-/* Returns exercise text color. */
+/*! Returns exercise text color. */
 QColor themeEngine::exerciseTextColor(void)
 {
 	return QColor(settings.value("theme/leveltextred", "0").toInt(),
@@ -223,7 +223,7 @@ QColor themeEngine::exerciseTextColor(void)
 		settings.value("theme/leveltextblue", "0").toInt());
 }
 
-/* Sets exercise text color. */
+/*! Sets exercise text color. */
 void themeEngine::setExerciseTextColor(QColor color)
 {
 	settings.setValue("theme/leveltextred", color.red());
@@ -233,14 +233,14 @@ void themeEngine::setExerciseTextColor(QColor color)
 	emit exerciseTextColorChanged();
 }
 
-/* Resets exercise text color. */
+/*! Resets exercise text color. */
 void themeEngine::resetExerciseTextColor(void)
 {
 	setExerciseTextColor(QColor(0, 125, 175));
 	settings.setValue("theme/customleveltextcolor",false);
 }
 
-/* Returns exercise text style sheet. */
+/*! Returns exercise text style sheet. */
 QString themeEngine::exerciseTextStyleSheet(void)
 {
 	return "QWidget { color: rgb(" +
@@ -256,7 +256,7 @@ bool themeEngine::customInputTextColor(void)
 	return settings.value("theme/custominputtextcolor","false").toBool();
 }
 
-/* Returns input text color. */
+/*! Returns input text color. */
 QColor themeEngine::inputTextColor(void)
 {
 	return QColor(settings.value("theme/inputtextred", "0").toInt(),
@@ -264,7 +264,7 @@ QColor themeEngine::inputTextColor(void)
 		settings.value("theme/inputtextblue", "0").toInt());
 }
 
-/* Sets input text color. */
+/*! Sets input text color. */
 void themeEngine::setInputTextColor(QColor color)
 {
 	settings.setValue("theme/inputtextred", color.red());
@@ -274,7 +274,7 @@ void themeEngine::setInputTextColor(QColor color)
 	emit inputTextColorChanged();
 }
 
-/* Resets input text color. */
+/*! Resets input text color. */
 void themeEngine::resetInputTextColor(void)
 {
 	QPalette palette;
@@ -286,7 +286,7 @@ void themeEngine::resetInputTextColor(void)
 	settings.setValue("theme/custominputtextcolor",false);
 }
 
-/* Returns input text style sheet. */
+/*! Returns input text style sheet. */
 QString themeEngine::inputTextStyleSheet(void)
 {
 	return "QWidget { color: rgb(" +
@@ -302,7 +302,7 @@ bool themeEngine::customBgColor(void)
 	return settings.value("theme/custombgcolor","false").toBool();
 }
 
-/* Returns background color. */
+/*! Returns background color. */
 QColor themeEngine::bgColor(void)
 {
 	return QColor(settings.value("theme/bgred", "0").toInt(),
@@ -310,7 +310,7 @@ QColor themeEngine::bgColor(void)
 		settings.value("theme/bgblue", "0").toInt());
 }
 
-/* Sets background color. */
+/*! Sets background color. */
 void themeEngine::setBgColor(QColor color)
 {
 	settings.setValue("theme/bgred", color.red());
@@ -320,7 +320,7 @@ void themeEngine::setBgColor(QColor color)
 	emit bgColorChanged();
 }
 
-/* Resets background color. */
+/*! Resets background color. */
 void themeEngine::resetBgColor(void)
 {
 	QPalette palette;
@@ -332,7 +332,7 @@ void themeEngine::resetBgColor(void)
 	settings.setValue("theme/custombgcolor",false);
 }
 
-/* Returns background style sheet. */
+/*! Returns background style sheet. */
 QString themeEngine::bgStyleSheet(void)
 {
 	return "QFrame, #centralwidget { background-color: rgb(" +
@@ -347,7 +347,7 @@ bool themeEngine::customPaperColor(void)
 	return settings.value("theme/custompapercolor","false").toBool();
 }
 
-/* Returns paper color. */
+/*! Returns paper color. */
 QColor themeEngine::paperColor(void)
 {
 	return QColor(settings.value("theme/paperred", "0").toInt(),
@@ -355,7 +355,7 @@ QColor themeEngine::paperColor(void)
 		settings.value("theme/paperblue", "0").toInt());
 }
 
-/* Sets paper color. */
+/*! Sets paper color. */
 void themeEngine::setPaperColor(QColor color)
 {
 	settings.setValue("theme/paperred", color.red());
@@ -365,7 +365,7 @@ void themeEngine::setPaperColor(QColor color)
 	emit paperColorChanged();
 }
 
-/* Resets paper color. */
+/*! Resets paper color. */
 void themeEngine::resetPaperColor(void)
 {
 	switch(style()) {
@@ -387,7 +387,7 @@ void themeEngine::resetPaperColor(void)
 	settings.setValue("theme/custompapercolor",false);
 }
 
-/* Returns paper style sheet. */
+/*! Returns paper style sheet. */
 QString themeEngine::paperStyleSheet(void)
 {
 	return "QFrame { background-color: rgb(" +
@@ -402,7 +402,7 @@ bool themeEngine::customPanelColor(void)
 	return settings.value("theme/custompanelcolor","false").toBool();
 }
 
-/* Returns panel color. */
+/*! Returns panel color. */
 QColor themeEngine::panelColor(void)
 {
 	return QColor(settings.value("theme/panelred", "0").toInt(),
@@ -410,7 +410,7 @@ QColor themeEngine::panelColor(void)
 		settings.value("theme/panelblue", "0").toInt());
 }
 
-/* Sets panel color. */
+/*! Sets panel color. */
 void themeEngine::setPanelColor(QColor color)
 {
 	settings.setValue("theme/panelred", color.red());
@@ -420,7 +420,7 @@ void themeEngine::setPanelColor(QColor color)
 	emit panelColorChanged();
 }
 
-/* Resets panel color. */
+/*! Resets panel color. */
 void themeEngine::resetPanelColor(void)
 {
 	switch(style()) {
@@ -442,7 +442,7 @@ void themeEngine::resetPanelColor(void)
 	settings.setValue("theme/custompanelcolor",false);
 }
 
-/* Returns panel style sheet. */
+/*! Returns panel style sheet. */
 QString themeEngine::panelStyleSheet(void)
 {
 	return "QFrame { background-color: rgb(" +
