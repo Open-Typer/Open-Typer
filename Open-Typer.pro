@@ -24,6 +24,7 @@ SOURCES += \
     src/core/net.cpp \
     src/core/packs.cpp \
     src/core/language.cpp \
+    src/core/theme.cpp \
     src/initialsetup.cpp \
     src/levelsummary.cpp \
     src/options/connection.cpp \
@@ -54,6 +55,7 @@ HEADERS += \
     src/include/core/net.h \
     src/include/core/packs.h \
     src/include/core/language.h \
+    src/include/core/theme.h \
     src/include/initialsetup.h \
     src/include/levelsummary.h \
     src/include/options/connection.h \
