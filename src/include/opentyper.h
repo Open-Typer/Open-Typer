@@ -46,6 +46,7 @@
 #include "core/utils.h"
 #include "core/packs.h"
 #include "core/language.h"
+#include "core/theme.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class OpenTyper; }
@@ -89,10 +90,7 @@ class OpenTyper : public QMainWindow
 		QString inputTextHtml, mistakeTextHtml;
 		int lastTime;
 		Updater *versionHdw;
-		void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
-		QColor levelTextColor, inputTextColor, bgColor, paperColor, panelColor;
-		bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor, customPanelColor;
-		void updateTheme(void);
+		themeEngine localThemeEngine;
 		bool customLevelLoaded;
 		QString customLevel;
 		bool customConfig;
@@ -109,6 +107,7 @@ class OpenTyper : public QMainWindow
 
 	private slots:
 		void loadTheme(void);
+		void updateFont(void);
 		void keyPress(QKeyEvent *event);
 		void keyRelease(QKeyEvent *event);
 		void openOptions(void);

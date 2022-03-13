@@ -38,6 +38,7 @@ OpenTyper::OpenTyper(QWidget *parent)
 	connect(openPackAction, &QAction::triggered, this, &OpenTyper::openPack);
 	ui->openButton->setMenu(openMenu);
 	connect(ui->openButton, &QToolButton::clicked, openExerciseAction, &QAction::triggered);
+	localThemeEngine.setParent(this);
 	langMgr = new languageManager;
 	client = new monitorClient(false);
 	studentUsername = "";
@@ -249,6 +250,10 @@ void OpenTyper::connectAll(void)
 		SIGNAL(clicked()),
 		this,
 		SLOT(showExerciseStats()));
+	// Theme engine
+	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
+	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
+	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
 	// Start timer
 	secLoop->start(500);
 }
@@ -1034,163 +1039,64 @@ void OpenTyper::updateCurrentTime(void)
 /*! Loads theme from settings. */
 void OpenTyper::loadTheme(void)
 {
+	// Load style
+	localThemeEngine.updateStyle();
 	// Load font
-	setFont(settings.value("theme/font","").toString(),
-		settings.value("theme/fontsize","20").toInt(),
-		settings.value("theme/fontbold","true").toBool(),
-		settings.value("theme/fontitalic","false").toBool(),
-		settings.value("theme/fontunderline","false").toBool());
+	updateFont();
 	// Load colors
-	// Level text
-	customLevelTextColor = settings.value("theme/customleveltextcolor","false").toBool();
-	levelTextColor.setRgb(settings.value("theme/leveltextred","0").toInt(),
-		settings.value("theme/leveltextgreen","0").toInt(),
-		settings.value("theme/leveltextblue","0").toInt());
-	// Input text
-	customInputTextColor = settings.value("theme/custominputtextcolor","false").toBool();
-	inputTextColor.setRgb(settings.value("theme/inputtextred","0").toInt(),
-		settings.value("theme/inputtextgreen","0").toInt(),
-		settings.value("theme/inputtextblue","0").toInt());
-	// Background
-	customBgColor = settings.value("theme/custombgcolor","false").toBool();
-	bgColor.setRgb(settings.value("theme/bgred","0").toInt(),
-		settings.value("theme/bggreen","0").toInt(),
-		settings.value("theme/bgblue","0").toInt());
-	// Paper
-	customPaperColor = settings.value("theme/custompapercolor","false").toBool();
-	paperColor.setRgb(settings.value("theme/paperred","0").toInt(),
-		settings.value("theme/papergreen","0").toInt(),
-		settings.value("theme/paperblue","0").toInt());
-	// Panel
-	customPanelColor = settings.value("theme/custompanelcolor","false").toBool();
-	panelColor.setRgb(settings.value("theme/panelred","0").toInt(),
-		settings.value("theme/panelgreen","0").toInt(),
-		settings.value("theme/panelblue","0").toInt());
-	// Load base theme
 	setColors();
 }
 
-/*! Sets exercise text font and saves it in the settings. \see customizationOptions#setFont */
-void OpenTyper::setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline)
+/*! Updates text font. */
+void OpenTyper::updateFont(void)
 {
-	QFont newFont, mistakeLabelFont;
-	// Set font
-	newFont.setStyleHint(QFont::TypeWriter);
-	newFont.setFixedPitch(true);
-	if(fontFamily == "")
-		fontFamily = "Courier New";
-	newFont.setFamily(fontFamily);
-	QFontDatabase fontDB;
-	if(!fontDB.families().contains(fontFamily))
-		fontFamily = newFont.defaultFamily();
-	newFont.setPointSize(fontSize);
-	newFont.setBold(fontBold);
-	newFont.setItalic(fontItalic);
-	newFont.setUnderline(fontUnderline);
-	// mistakeLabel cannot have underlined font enabled
-	mistakeLabelFont = newFont;
-	mistakeLabelFont.setUnderline(false);
+	QFont newFont = themeEngine::font();
+	QFont mistakeLabelFont = themeEngine::errorFont();
 	// Update labels
 	ui->levelCurrentLineLabel->setFont(newFont);
 	ui->levelLabel->setFont(newFont);
 	ui->inputLabel->setFont(newFont);
 	ui->mistakeLabel->setFont(mistakeLabelFont);
-	// Save settings
-	settings.setValue("theme/font",fontFamily);
-	settings.setValue("theme/fontsize",fontSize);
-	settings.setValue("theme/fontbold",fontBold);
-	settings.setValue("theme/fontitalic",fontItalic);
-	settings.setValue("theme/fontunderline",fontUnderline);
 }
 
-/*! Sets custom colors (if they are set) or default colors. \see customizationOptions#setColors */
+/*! Sets custom colors (if they are set) or default colors. */
 void OpenTyper::setColors(void)
 {
-	// Reset style sheets
-	ui->inputLabel->setStyleSheet("");
-	ui->mainFrame->setStyleSheet("");
-	ui->paper->setStyleSheet("");
-	// Update theme
-	updateTheme();
-	// Set level text color
-	if(!customLevelTextColor)
-	{
-		// Default level text color
-		levelTextColor.setRgb(0, 125, 175);
-		settings.setValue("theme/leveltextred",levelTextColor.red());
-		settings.setValue("theme/leveltextgreen",levelTextColor.green());
-		settings.setValue("theme/leveltextblue",levelTextColor.blue());
-	}
-	QString levelLabelStyleSheet = "color: rgb(" + QString::number(levelTextColor.red()) + ", " + QString::number(levelTextColor.green()) + ", " + QString::number(levelTextColor.blue()) + "); margin: 0px; padding: 0px;";
+	// Set exercise text color
+	if(!themeEngine::customExerciseTextColor())
+		localThemeEngine.resetExerciseTextColor();
+	QString levelLabelStyleSheet = themeEngine::exerciseTextStyleSheet();
 	ui->levelLabel->setStyleSheet(levelLabelStyleSheet);
 	ui->levelCurrentLineLabel->setStyleSheet(levelLabelStyleSheet);
 	QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
 	opacityEffect->setOpacity(0.5);
 	ui->levelLabel->setGraphicsEffect(opacityEffect);
 	// Set input text color
-	if(!customInputTextColor)
-	{
-		// Default input text color
-		inputTextColor = ui->inputLabel->palette().color(QPalette::Text);
-		settings.setValue("theme/inputtextred",inputTextColor.red());
-		settings.setValue("theme/inputtextgreen",inputTextColor.green());
-		settings.setValue("theme/inputtextblue",inputTextColor.blue());
-	}
-	QString inputLabelStyleSheet = "color: rgb(" + QString::number(inputTextColor.red()) + ", " + QString::number(inputTextColor.green()) + ", " + QString::number(inputTextColor.blue()) + "); margin: 0px; padding: 0px;";
-	ui->inputLabel->setStyleSheet(inputLabelStyleSheet);
-	// Set paper color
-	if(customPaperColor)
-		ui->paper->setStyleSheet("#paper {background-color: rgb(" + QString::number(paperColor.red()) + ", " + QString::number(paperColor.green()) + ", " + QString::number(paperColor.blue()) + ");}");
-	else
-	{
-		// Reset background color before setting paper color
-		ui->mainFrame->setStyleSheet("");
-		// Default paper color
-		paperColor = ui->paper->palette().color(QPalette::Base);
-		settings.setValue("theme/paperred",paperColor.red());
-		settings.setValue("theme/papergreen",paperColor.green());
-		settings.setValue("theme/paperblue",paperColor.blue());
-		ui->paper->setStyleSheet("#paper {background-color: rgb(" + QString::number(paperColor.red()) + ", " + QString::number(paperColor.green()) + ", " + QString::number(paperColor.blue()) + ");}");
-	}
-	// Fix inputLabel automatically set background color
-	ui->inputLabel->setStyleSheet(
-		ui->inputLabel->styleSheet() + ";\nbackground-color: rgba(0,0,0,0)");
-	ui->levelSpace->setStyleSheet("background-color: rgb(" + QString::number(paperColor.red()) + ", " + QString::number(paperColor.green()) + ", " + QString::number(paperColor.blue()) + ");");
-	ui->typingSpace->setStyleSheet("background-color: rgb(" + QString::number(paperColor.red()) + ", " + QString::number(paperColor.green()) + ", " + QString::number(paperColor.blue()) + ");");
-	// Set panel color
-	if(customPanelColor)
-	{
-		ui->controlFrame->setStyleSheet("QFrame { background-color: rgb(" +
-			QString::number(panelColor.red()) + ", " + QString::number(panelColor.green()) + ", " + QString::number(panelColor.blue()) +
-			"); } QCheckBox { background-color: rgb(" +
-			QString::number(panelColor.red()) + ", " + QString::number(panelColor.green()) + ", " + QString::number(panelColor.blue()) + "); }");
-		ui->bottomPanel->setStyleSheet(ui->controlFrame->styleSheet());
-	}
-	else
-	{
-		panelColor = ui->controlFrame->palette().color(QPalette::Base);
-		settings.setValue("theme/panelred",panelColor.red());
-		settings.setValue("theme/panelgreen",panelColor.green());
-		settings.setValue("theme/panelblue",panelColor.blue());
-	}
+	if(!themeEngine::customInputTextColor())
+		localThemeEngine.resetInputTextColor();
+	ui->inputLabel->setStyleSheet(themeEngine::inputTextStyleSheet());
 	// Set background color
-	if(customBgColor)
-	{
-		ui->mainFrame->setStyleSheet("#mainFrame {background-color: rgb(" + QString::number(bgColor.red()) + ", " + QString::number(bgColor.green()) + ", " + QString::number(bgColor.blue()) + ");}");
-		ui->centralwidget->setStyleSheet("#centralwidget {background-color: rgb(" + QString::number(bgColor.red()) + ", " + QString::number(bgColor.green()) + ", " + QString::number(bgColor.blue()) + ");}");
-	}
-	else
-	{
-		// Default background color
-		bgColor = ui->mainFrame->palette().color(QPalette::Window);
-		settings.setValue("theme/bgred",bgColor.red());
-		settings.setValue("theme/bggreen",bgColor.green());
-		settings.setValue("theme/bgblue",bgColor.blue());
-		ui->centralwidget->setStyleSheet("");
-	}
+	if(!themeEngine::customBgColor())
+		localThemeEngine.resetBgColor();
+	ui->centralwidget->setStyleSheet(themeEngine::bgStyleSheet());
+	// Set paper color
+	if(!themeEngine::customPaperColor())
+		localThemeEngine.resetPaperColor();
+	ui->paper->setStyleSheet(themeEngine::paperStyleSheet());
+	QColor lineColor = palette().color(QPalette::Window);
+	ui->textSeparationLine->setStyleSheet("QFrame { background-color: rgb(" +
+		QString::number(lineColor.red()) + "," + 
+		QString::number(lineColor.green()) + "," +
+		QString::number(lineColor.blue()) +
+		"); }");
+	// Set panel color
+	if(!themeEngine::customPanelColor())
+		localThemeEngine.resetPanelColor();
+	QString panelStyleSheet = themeEngine::panelStyleSheet();
+	ui->controlFrame->setStyleSheet(panelStyleSheet);
+	ui->bottomPanel->setStyleSheet(panelStyleSheet);
 	// Set keyboard color
-	ui->keyboardFrame->setStyleSheet("QFrame { background-color: rgb(" + QString::number(paperColor.red()) + ", " + QString::number(paperColor.green()) + ", " + QString::number(paperColor.blue()) + "); }");
-	QColor keyBorderColor = ui->mainFrame->palette().color(QPalette::Text);
+	QColor keyBorderColor = palette().color(QPalette::Text);
 	keyBorderColor = QColor::fromRgb(keyBorderColor.red() + (128-keyBorderColor.red()),
 		keyBorderColor.green() + (128-keyBorderColor.green()),
 		keyBorderColor.blue() + (128-keyBorderColor.blue()));
@@ -1199,65 +1105,6 @@ void OpenTyper::setColors(void)
 		keyBgColor.green() + (128-keyBgColor.green())/10,
 		keyBgColor.blue() + (128-keyBgColor.blue())/10);
 	ui->keyboardFrame->setKeyColor(keyBgColor,keyBorderColor);
-}
-
-/*! Loads the style sheet of the selected theme. \see customizationOptions#updateTheme */
-void OpenTyper::updateTheme(void)
-{
-	QFile darkSheet(":/dark-theme/style.qss");
-	QFile lightSheet(":/light-theme/style.qss");
-	QString paperStyleSheet, panelStyleSheet;
-	switch(settings.value("theme/theme","0").toInt()) {
-		case 0:
-			// System (default)
-			qApp->setStyleSheet("");
-			paperStyleSheet = "background-color: rgb(" +
-				QString::number(palette().color(QPalette::Base).red()) + ", " +
-				QString::number(palette().color(QPalette::Base).green()) + ", " +
-				QString::number(palette().color(QPalette::Base).blue()) + ")";
-			panelStyleSheet = "background-color: rgb(" +
-				QString::number(palette().color(QPalette::Midlight).red()) + ", " +
-				QString::number(palette().color(QPalette::Midlight).green()) + ", " +
-				QString::number(palette().color(QPalette::Midlight).blue()) + ")";
-			ui->paper->setStyleSheet(paperStyleSheet);
-			ui->controlFrame->setStyleSheet("QFrame { " + QString(panelStyleSheet) + "; }");
-			ui->bottomPanel->setStyleSheet("QFrame { " + QString(panelStyleSheet) + "; }");
-			break;
-		case 1:
-			// Dark
-			if(darkSheet.exists())
-			{
-				darkSheet.open(QFile::ReadOnly | QFile::Text);
-				QTextStream ts(&darkSheet);
-				qApp->setStyleSheet(ts.readAll());
-			}
-			else
-			{
-				printf("D: Failed to open dark style\n");
-				darkSheet.open(QFile::ReadOnly | QFile::Text);
-				qDebug() << darkSheet.errorString();
-			}
-			ui->paper->setStyleSheet("#paper {background-color: rgb(15, 25, 35);}");
-			ui->controlFrame->setStyleSheet("QFrame { background-color: rgb(20, 33, 47); }");
-			ui->bottomPanel->setStyleSheet("QFrame { background-color: rgb(20, 33, 47); }");
-			break;
-		case 2:
-			// Light
-			if(lightSheet.exists())
-			{
-				lightSheet.open(QFile::ReadOnly | QFile::Text);
-				QTextStream ts(&lightSheet);
-				qApp->setStyleSheet(ts.readAll());
-			}
-			else
-			{
-				printf("D: Failed to open light style\n");
-			}
-			ui->paper->setStyleSheet("background-color: rgb(255, 255, 255)");
-			ui->controlFrame->setStyleSheet("QFrame { background-color: rgb(255,255,255); }");
-			ui->bottomPanel->setStyleSheet("QFrame { background-color: rgb(255,255,255); }");
-			break;
-	}
 }
 
 /*! Connected from openPackButton.\n
@@ -1342,14 +1189,8 @@ void OpenTyper::changeLanguage(int index, bool enableRefresh, bool enableListRel
  */
 void OpenTyper::zoomIn(void)
 {
-	QString fontFamily = settings.value("theme/font","").toString();
-	int fontSize = settings.value("theme/fontsize","20").toInt()+2;
-	bool fontBold = settings.value("theme/fontbold","true").toBool();
-	bool fontItalic = settings.value("theme/fontitalic","false").toBool();
-	bool fontUnderline = settings.value("theme/fontunderline","false").toBool();
-	if(fontSize > 24)
-		fontSize = 24;
-	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
+	localThemeEngine.increaseFontSize(2);
+	updateFont();
 }
 
 /*! Connected from zoomOutButton.\n
@@ -1358,14 +1199,8 @@ void OpenTyper::zoomIn(void)
  */
 void OpenTyper::zoomOut(void)
 {
-	QString fontFamily = settings.value("theme/font","").toString();
-	int fontSize = settings.value("theme/fontsize","20").toInt()-2;
-	bool fontBold = settings.value("theme/fontbold","true").toBool();
-	bool fontItalic = settings.value("theme/fontitalic","false").toBool();
-	bool fontUnderline = settings.value("theme/fontunderline","false").toBool();
-	if(fontSize <= 0)
-		fontSize = 2;
-	setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
+	localThemeEngine.increaseFontSize(-2);
+	updateFont();
 }
 
 /*! Changes the operation mode.\n
