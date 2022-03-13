@@ -63,13 +63,10 @@ class optionsWindow : public QDialog
 		 * \see languageList
 		 */
 		void languageChanged(int index);
-		/*! A signal, which is emitted when the theme changes. */
-		void themeChanged();
 
 	private slots:
 		void changeOptionWidget(int index);
 		void changeLanguage(int);
-		void changeTheme(void);
 };
 
 #endif // OPTIONSWINDOW_H

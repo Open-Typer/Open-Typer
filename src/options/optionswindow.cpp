@@ -79,7 +79,6 @@ void optionsWindow::changeOptionWidget(int index)
 		case 3:
 			// Customization
 			options = new customizationOptions;
-			connect((customizationOptions*)options,&customizationOptions::themeChanged,this,&optionsWindow::changeTheme);
 			break;
 		case 4:
 			// Connection
@@ -108,12 +107,6 @@ void optionsWindow::init(void)
 void optionsWindow::changeLanguage(int index)
 {
 	emit languageChanged(index);
-}
-
-/*! Connected from customizationOptions::themeChanged(). */
-void optionsWindow::changeTheme(void)
-{
-	emit themeChanged();
 }
 
 /*! Overrides QWidget#changeEvent().
