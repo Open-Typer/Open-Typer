@@ -28,6 +28,7 @@
 #include "options/optionswindow.h"
 #include "simplecolordialog.h"
 #include "core/utils.h"
+#include "core/theme.h"
 
 namespace Ui {
 	class customizationOptions;
@@ -52,22 +53,9 @@ class customizationOptions : public QWidget
 		Ui::customizationOptions *ui;
 		QVector<QVariantMap> themes;
 		QListWidgetItem *lastItem = nullptr;
-		bool blockThemeSignal;
-		int levelTextRedColor, levelTextGreenColor, levelTextBlueColor;
-		int inputTextRedColor, inputTextGreenColor, inputTextBlueColor;
-		int bgRedColor, bgGreenColor, bgBlueColor;
-		int paperRedColor, paperGreenColor, paperBlueColor;
-		int panelRedColor, panelGreenColor, panelBlueColor;
-		bool customLevelTextColor, customInputTextColor, customBgColor, customPaperColor, customPanelColor;
 		void selectCurrentFullTheme(void);
-		void setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline);
-		void saveColorSettings(void);
+		void updateFont(void);
 		void setColors();
-		void updateTheme();
-
-	signals:
-		/*! A signal, which is emitted when the theme changes. */
-		void themeChanged();
 
 	private slots:
 		void changeFullTheme(QListWidgetItem* item);

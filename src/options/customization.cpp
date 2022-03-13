@@ -29,7 +29,7 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	ui->setupUi(this);
 	ui->themeCustomizationFrame->hide();
 	ui->themesFrame->show();
-	blockThemeSignal = true;
+	updateFont();
 	// Built-in themes
 	themes.clear();
 	QVariantMap themeMap;
@@ -156,42 +156,11 @@ customizationOptions::~customizationOptions()
 /*! Initializes widgets and loads settings. */
 void customizationOptions::init(void)
 {
-	blockThemeSignal = true;
-	ui->themeBox->setCurrentIndex(settings.value("theme/theme","0").toInt());
+	ui->themeBox->setCurrentIndex((int) themeEngine::style());
 	// Colors
-	// Level text
-	customLevelTextColor = settings.value("theme/customleveltextcolor","false").toBool();
-	levelTextRedColor = settings.value("theme/leveltextred","0").toInt();
-	levelTextGreenColor = settings.value("theme/leveltextgreen","0").toInt();
-	levelTextBlueColor = settings.value("theme/leveltextblue","0").toInt();
-	// Input text
-	customInputTextColor = settings.value("theme/custominputtextcolor","false").toBool();
-	inputTextRedColor = settings.value("theme/inputtextred","0").toInt();
-	inputTextGreenColor = settings.value("theme/inputtextgreen","0").toInt();
-	inputTextBlueColor = settings.value("theme/inputtextblue","0").toInt();
-	// Background
-	customBgColor = settings.value("theme/custombgcolor","false").toBool();
-	bgRedColor = settings.value("theme/bgred","0").toInt();
-	bgGreenColor = settings.value("theme/bggreen","0").toInt();
-	bgBlueColor = settings.value("theme/bgblue","0").toInt();
-	// Paper
-	customPaperColor = settings.value("theme/custompapercolor","false").toBool();
-	paperRedColor = settings.value("theme/paperred","0").toInt();
-	paperGreenColor = settings.value("theme/papergreen","0").toInt();
-	paperBlueColor = settings.value("theme/paperblue","0").toInt();
-	// Panel
-	customPanelColor = settings.value("theme/custompanelcolor","false").toBool();
-	panelRedColor = settings.value("theme/panelred","0").toInt();
-	panelGreenColor = settings.value("theme/panelgreen","0").toInt();
-	panelBlueColor = settings.value("theme/panelblue","0").toInt();
 	setColors();
 	// Font
-	setFont(settings.value("theme/font","").toString(),
-		settings.value("theme/fontsize","20").toInt(),
-		settings.value("theme/fontbold","true").toBool(),
-		settings.value("theme/fontitalic","false").toBool(),
-		settings.value("theme/fontunderline","false").toBool());
-	blockThemeSignal = false;
+	updateFont();
 }
 
 /*!
@@ -240,7 +209,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 	}
 	else
 	{
-		blockThemeSignal = true;
+		globalThemeEngine.blockSignals(true);
 		// Base theme
 		if(themeMap.contains("baseTheme"))
 			changeTheme(themeMap["baseTheme"].toInt());
@@ -257,7 +226,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		if(themeMap.contains("fontSize"))
 			fontSize = themeMap["fontSize"].toInt();
 		else
-			fontSize = settings.value("theme/fontsize","20").toInt();
+			fontSize = 20;
 		if(themeMap.contains("fontBold"))
 			fontBold = themeMap["fontBold"].toBool();
 		else
@@ -270,55 +239,44 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 			fontUnderline = themeMap["fontUnderline"].toBool();
 		else
 			fontUnderline = false;
-		setFont(fontFamily,fontSize,fontBold,fontItalic,fontUnderline);
+		globalThemeEngine.setFontFamily(fontFamily);
+		globalThemeEngine.setFontSize(fontSize);
+		globalThemeEngine.setFontBold(fontBold);
+		globalThemeEngine.setFontItalic(fontItalic);
+		globalThemeEngine.setFontUnderline(fontUnderline);
+		updateFont();
 		// Colors
 		resetTextColors();
 		if(themeMap.contains("levelTextColor"))
 		{
 			QRgb color = themeMap["levelTextColor"].toUInt();
-			levelTextRedColor = qRed(color);
-			levelTextGreenColor = qGreen(color);
-			levelTextBlueColor = qBlue(color);
-			customLevelTextColor = true;
+			globalThemeEngine.setExerciseTextColor(QColor(color));
 		}
 		if(themeMap.contains("inputTextColor"))
 		{
 			QRgb color = themeMap["inputTextColor"].toUInt();
-			inputTextRedColor = qRed(color);
-			inputTextGreenColor = qGreen(color);
-			inputTextBlueColor = qBlue(color);
-			customInputTextColor = true;
+			globalThemeEngine.setInputTextColor(QColor(color));
 		}
 		resetBgPaperColors();
 		if(themeMap.contains("bgColor"))
 		{
 			QRgb color = themeMap["bgColor"].toUInt();
-			bgRedColor = qRed(color);
-			bgGreenColor = qGreen(color);
-			bgBlueColor = qBlue(color);
-			customBgColor = true;
+			globalThemeEngine.setBgColor(QColor(color));
 		}
 		if(themeMap.contains("paperColor"))
 		{
 			QRgb color = themeMap["paperColor"].toUInt();
-			paperRedColor = qRed(color);
-			paperGreenColor = qGreen(color);
-			paperBlueColor = qBlue(color);
-			customPaperColor = true;
+			globalThemeEngine.setPaperColor(QColor(color));
 		}
 		if(themeMap.contains("panelColor"))
 		{
 			QRgb color = themeMap["panelColor"].toUInt();
-			panelRedColor = qRed(color);
-			panelGreenColor = qGreen(color);
-			panelBlueColor = qBlue(color);
-			customPanelColor = true;
+			globalThemeEngine.setPanelColor(QColor(color));
 		}
-		saveColorSettings();
 		setColors();
 		settings.setValue("theme/fulltheme",themeMap["id"]);
-		blockThemeSignal = false;
-		emit themeChanged();
+		globalThemeEngine.blockSignals(false);
+		emit globalThemeEngine.styleChanged();
 	}
 }
 
@@ -372,40 +330,18 @@ void customizationOptions::goBack(void)
 	});
 }
 
-/*! Sets exercise text font and saves it in the settings. \see OpenTyper#setFont */
-void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBold, bool fontItalic, bool fontUnderline)
+/*! Updates text font. */
+void customizationOptions::updateFont(void)
 {
-	QFont newFont, mistakeLabelFont;
-	// Set font
-	newFont.setStyleHint(QFont::TypeWriter);
-	newFont.setFixedPitch(true);
-	if(fontFamily == "")
-		fontFamily = "Courier New";
-	newFont.setFamily(fontFamily);
-	QFontDatabase fontDB;
-	if(!fontDB.families().contains(fontFamily))
-		fontFamily = newFont.defaultFamily();
-	newFont.setPointSize(fontSize);
-	newFont.setBold(fontBold);
-	newFont.setItalic(fontItalic);
-	newFont.setUnderline(fontUnderline);
-	// Update input widgets
+	QFont newFont = themeEngine::font();
 	ui->fontComboBox->setCurrentFont(newFont);
-	ui->fontSizeBox->setValue(fontSize);
-	ui->boldTextBox->setChecked(fontBold);
-	ui->italicTextBox->setChecked(fontItalic);
-	ui->underlineTextBox->setChecked(fontUnderline);
+	ui->fontSizeBox->setValue(newFont.pointSize());
+	ui->boldTextBox->setChecked(newFont.bold());
+	ui->italicTextBox->setChecked(newFont.italic());
+	ui->underlineTextBox->setChecked(newFont.underline());
 	// Update labels
 	ui->levelLabel->setFont(newFont);
 	ui->inputLabel->setFont(newFont);
-	// Save settings
-	settings.setValue("theme/font",fontFamily);
-	settings.setValue("theme/fontsize",fontSize);
-	settings.setValue("theme/fontbold",fontBold);
-	settings.setValue("theme/fontitalic",fontItalic);
-	settings.setValue("theme/fontunderline",fontUnderline);
-	if(!blockThemeSignal)
-		emit themeChanged();
 }
 
 /*!
@@ -415,13 +351,8 @@ void customizationOptions::setFont(QString fontFamily, int fontSize, bool fontBo
  */
 void customizationOptions::changeFont(QFont font)
 {
-	QFont oldFont = ui->levelLabel->font();
-	oldFont.setFamily(font.family());
-	ui->levelLabel->setFont(oldFont);
-	ui->inputLabel->setFont(oldFont);
-	settings.setValue("theme/font",font.family());
-	if(!blockThemeSignal)
-		emit themeChanged();
+	globalThemeEngine.setFontFamily(font.family());
+	updateFont();
 }
 
 /*!
@@ -431,13 +362,8 @@ void customizationOptions::changeFont(QFont font)
  */
 void customizationOptions::changeFontSize(int size)
 {
-	QFont oldFont = ui->levelLabel->font();
-	oldFont.setPointSize(size);
-	ui->levelLabel->setFont(oldFont);
-	ui->inputLabel->setFont(oldFont);
-	settings.setValue("theme/fontsize",size);
-	if(!blockThemeSignal)
-		emit themeChanged();
+	globalThemeEngine.setFontSize(size);
+	updateFont();
 }
 
 /*!
@@ -447,161 +373,72 @@ void customizationOptions::changeFontSize(int size)
  */
 void customizationOptions::setBoldText(void)
 {
-	QFont oldFont = ui->levelLabel->font();
-	oldFont.setBold(ui->boldTextBox->isChecked());
-	ui->levelLabel->setFont(oldFont);
-	ui->inputLabel->setFont(oldFont);
-	settings.setValue("theme/fontbold",ui->boldTextBox->isChecked());
-	if(!blockThemeSignal)
-		emit themeChanged();
+	globalThemeEngine.setFontBold(ui->boldTextBox->isChecked());
+	updateFont();
 }
 
 /*!
  * Connected from italicTextBox->clicked().\n
- * Switches bold text based on the value of italicTextBox.
+ * Switches italic text based on the value of italicTextBox.
  * \see setFont()
  */
 void customizationOptions::setItalicText(void)
 {
-	QFont oldFont = ui->levelLabel->font();
-	oldFont.setItalic(ui->italicTextBox->isChecked());
-	ui->levelLabel->setFont(oldFont);
-	ui->inputLabel->setFont(oldFont);
-	settings.setValue("theme/fontitalic",ui->italicTextBox->isChecked());
-	if(!blockThemeSignal)
-		emit themeChanged();
+	globalThemeEngine.setFontItalic(ui->italicTextBox->isChecked());
+	updateFont();
 }
 
 /*!
  * Connected from underlineTextBox->clicked().\n
- * Switches bold text based on the value of underlineTextBox.
+ * Switches text underline based on the value of underlineTextBox.
  * \see setFont()
  */
 void customizationOptions::setUnderlineText(void)
 {
-	QFont oldFont = ui->levelLabel->font();
-	oldFont.setUnderline(ui->underlineTextBox->isChecked());
-	ui->levelLabel->setFont(oldFont);
-	ui->inputLabel->setFont(oldFont);
-	settings.setValue("theme/fontunderline",ui->underlineTextBox->isChecked());
-	if(!blockThemeSignal)
-		emit themeChanged();
+	globalThemeEngine.setFontUnderline(ui->underlineTextBox->isChecked());
+	updateFont();
 }
 
-/*! Saves all custom colors in the settings. */
-void customizationOptions::saveColorSettings(void)
-{
-	// Level text
-	settings.setValue("theme/customleveltextcolor",customLevelTextColor);
-	settings.setValue("theme/leveltextred",levelTextRedColor);
-	settings.setValue("theme/leveltextgreen",levelTextGreenColor);
-	settings.setValue("theme/leveltextblue",levelTextBlueColor);
-	// Input text
-	settings.setValue("theme/custominputtextcolor",customInputTextColor);
-	settings.setValue("theme/inputtextred",inputTextRedColor);
-	settings.setValue("theme/inputtextgreen",inputTextGreenColor);
-	settings.setValue("theme/inputtextblue",inputTextBlueColor);
-	// Background
-	settings.setValue("theme/custombgcolor",customBgColor);
-	settings.setValue("theme/bgred",bgRedColor);
-	settings.setValue("theme/bggreen",bgGreenColor);
-	settings.setValue("theme/bgblue",bgBlueColor);
-	// Paper
-	settings.setValue("theme/custompapercolor",customPaperColor);
-	settings.setValue("theme/paperred",paperRedColor);
-	settings.setValue("theme/papergreen",paperGreenColor);
-	settings.setValue("theme/paperblue",paperBlueColor);
-	// Panel
-	settings.setValue("theme/custompanelcolor",customPanelColor);
-	settings.setValue("theme/panelred",panelRedColor);
-	settings.setValue("theme/panelgreen",panelGreenColor);
-	settings.setValue("theme/panelblue",panelBlueColor);
-	if(!blockThemeSignal)
-		emit themeChanged();
-}
-
-/*! Sets custom colors (if they are set) or default colors. \see OpenTyper#setColors */
+/*! Sets custom colors (if they are set) or default colors. */
 void customizationOptions::setColors()
 {
-	// Reset style sheets
-	ui->inputLabel->setStyleSheet("");
-	ui->previewFrame->setStyleSheet("");
-	ui->paper->setStyleSheet("");
-	// Update theme
-	updateTheme();
-	// Set level text color
-	QString levelTextStyleSheet = "rgb(" + QString::number(levelTextRedColor) + ", " + QString::number(levelTextGreenColor) + ", " + QString::number(levelTextBlueColor) + ")";
-	ui->levelLabel->setStyleSheet("color: " + levelTextStyleSheet);
+	// Set exercise text color
+	ui->levelLabel->setStyleSheet(themeEngine::exerciseTextStyleSheet());
 	// Set input text color
-	QString inputTextStyleSheet = "rgb(" + QString::number(inputTextRedColor) + ", " + QString::number(inputTextGreenColor) + ", " + QString::number(inputTextBlueColor) + ")";
-	ui->inputLabel->setStyleSheet("color: " + inputTextStyleSheet);
-	// Set paper color
-	QString paperStyleSheet = "rgb(" + QString::number(paperRedColor) + ", " + QString::number(paperGreenColor) + ", " + QString::number(paperBlueColor) + ")";
-	ui->paper->setStyleSheet("background-color: " + paperStyleSheet);
+	ui->inputLabel->setStyleSheet(themeEngine::inputTextStyleSheet());
 	// Set background color
-	QString bgStyleSheet = "rgb(" + QString::number(bgRedColor) + ", " + QString::number(bgGreenColor) + ", " + QString::number(bgBlueColor) + ")";
-	ui->previewFrame->setStyleSheet("background-color: " + bgStyleSheet);
+	ui->previewFrame->setStyleSheet(themeEngine::bgStyleSheet());
+	// Set paper color
+	ui->paper->setStyleSheet(themeEngine::paperStyleSheet());
 	// Set panel color
-	QString panelStyleSheet = "rgb(" + QString::number(panelRedColor) + ", " + QString::number(panelGreenColor) + ", " + QString::number(panelBlueColor) + ")";
-	ui->panelFrame->setStyleSheet("background-color: " + panelStyleSheet);
+	ui->panelFrame->setStyleSheet(themeEngine::panelStyleSheet());
 	// Update color buttons
-	ui->levelTextColorButton->setStyleSheet("border: 2px solid gray; background-color: " + levelTextStyleSheet);
-	ui->inputTextColorButton->setStyleSheet("border: 2px solid gray; background-color: " + inputTextStyleSheet);
-	ui->paperColorButton->setStyleSheet("border: 2px solid gray; background-color: " + paperStyleSheet);
-	ui->bgColorButton->setStyleSheet("border: 2px solid gray; background-color: " + bgStyleSheet);
-	ui->panelColorButton->setStyleSheet("border: 2px solid gray; background-color: " + panelStyleSheet);
-}
-
-/*! Loads the style sheet of the selected theme. \see OpenTyper#updateTheme */
-void customizationOptions::updateTheme()
-{
-	QFile darkSheet(":/dark-theme/style.qss");
-	QFile lightSheet(":/light-theme/style.qss");
-	char *paperStyleSheet;
-	switch(settings.value("theme/theme","0").toInt()) {
-		case 0:
-			// System (default)
-			qApp->setStyleSheet("");
-			paperStyleSheet = (char*) malloc(128);
-			sprintf(paperStyleSheet,"background-color: rgb(%d,%d,%d)",
-				palette().color(QPalette::Base).red(),
-				palette().color(QPalette::Base).green(),
-				palette().color(QPalette::Base).blue());
-			ui->paper->setStyleSheet(paperStyleSheet);
-			break;
-		case 1:
-			// Dark
-			if(darkSheet.exists())
-			{
-				darkSheet.open(QFile::ReadOnly | QFile::Text);
-				QTextStream ts(&darkSheet);
-				qApp->setStyleSheet(ts.readAll());
-			}
-			else
-			{
-				printf("D: Failed to open dark style\n");
-				darkSheet.open(QFile::ReadOnly | QFile::Text);
-				qDebug() << darkSheet.errorString();
-			}
-			ui->paper->setStyleSheet("background-color: rgb(15, 25, 35)");
-			break;
-		case 2:
-			// Light
-			if(lightSheet.exists())
-			{
-				lightSheet.open(QFile::ReadOnly | QFile::Text);
-				QTextStream ts(&lightSheet);
-				qApp->setStyleSheet(ts.readAll());
-			}
-			else
-			{
-				printf("D: Failed to open light style\n");
-			}
-			ui->paper->setStyleSheet("background-color: rgb(255, 255, 255)");
-			break;
-	}
-	if(!blockThemeSignal)
-		emit themeChanged();
+	QColor exTextColor = themeEngine::exerciseTextColor();
+	QColor inTextColor = themeEngine::inputTextColor();
+	QColor bgColor = themeEngine::bgColor();
+	QColor paperColor = themeEngine::paperColor();
+	QColor panelColor = themeEngine::panelColor();
+	QString styleSheetPart = "border: 2px solid gray; background-color: rgb(";
+	ui->levelTextColorButton->setStyleSheet(styleSheetPart +
+		QString::number(exTextColor.red()) + ", " +
+		QString::number(exTextColor.green()) + ", " +
+		QString::number(exTextColor.blue()) + ");");
+	ui->inputTextColorButton->setStyleSheet(styleSheetPart +
+		QString::number(inTextColor.red()) + ", " +
+		QString::number(inTextColor.green()) + ", " +
+		QString::number(inTextColor.blue()) + ");");
+	ui->bgColorButton->setStyleSheet(styleSheetPart +
+		QString::number(bgColor.red()) + ", " +
+		QString::number(bgColor.green()) + ", " +
+		QString::number(bgColor.blue()) + ");");
+	ui->paperColorButton->setStyleSheet(styleSheetPart +
+		QString::number(paperColor.red()) + ", " +
+		QString::number(paperColor.green()) + ", " +
+		QString::number(paperColor.blue()) + ");");
+	ui->panelColorButton->setStyleSheet(styleSheetPart +
+		QString::number(panelColor.red()) + ", " +
+		QString::number(panelColor.green()) + ", " +
+		QString::number(panelColor.blue()) + ");");
 }
 
 /*!
@@ -613,16 +450,11 @@ void customizationOptions::updateTheme()
 void customizationOptions::changeLevelTextColor(void)
 {
 	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
-	colorDialog->setColor(levelTextRedColor,
-		levelTextGreenColor,
-		levelTextBlueColor);
+	QColor color = themeEngine::exerciseTextColor();
+	colorDialog->setColor(color.red(), color.green(), color.blue());
 	colorDialog->setWindowModality(Qt::WindowModal);
 	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
-		levelTextRedColor = colorDialog->redColor;
-		levelTextGreenColor = colorDialog->greenColor;
-		levelTextBlueColor = colorDialog->blueColor;
-		customLevelTextColor = true;
-		saveColorSettings();
+		globalThemeEngine.setExerciseTextColor(QColor(colorDialog->redColor, colorDialog->greenColor, colorDialog->blueColor));
 		setColors();
 	});
 	colorDialog->open();
@@ -637,16 +469,11 @@ void customizationOptions::changeLevelTextColor(void)
 void customizationOptions::changeInputTextColor(void)
 {
 	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
-	colorDialog->setColor(inputTextRedColor,
-		inputTextGreenColor,
-		inputTextBlueColor);
+	QColor color = themeEngine::inputTextColor();
+	colorDialog->setColor(color.red(), color.green(), color.blue());
 	colorDialog->setWindowModality(Qt::WindowModal);
 	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
-		inputTextRedColor = colorDialog->redColor;
-		inputTextGreenColor = colorDialog->greenColor;
-		inputTextBlueColor = colorDialog->blueColor;
-		customInputTextColor = true;
-		saveColorSettings();
+		globalThemeEngine.setInputTextColor(QColor(colorDialog->redColor, colorDialog->greenColor, colorDialog->blueColor));
 		setColors();
 	});
 	colorDialog->open();
@@ -658,10 +485,8 @@ void customizationOptions::changeInputTextColor(void)
  */
 void customizationOptions::resetTextColors(void)
 {
-	// There's no need to set RGB values because they're defined in setColors()
-	customLevelTextColor = false;
-	customInputTextColor = false;
-	saveColorSettings();
+	globalThemeEngine.resetExerciseTextColor();
+	globalThemeEngine.resetInputTextColor();
 }
 
 /*!
@@ -674,16 +499,11 @@ void customizationOptions::resetTextColors(void)
 void customizationOptions::changeBgColor(void)
 {
 	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
-	colorDialog->setColor(bgRedColor,
-		bgGreenColor,
-		bgBlueColor);
+	QColor color = themeEngine::bgColor();
+	colorDialog->setColor(color.red(), color.green(), color.blue());
 	colorDialog->setWindowModality(Qt::WindowModal);
 	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
-		bgRedColor = colorDialog->redColor;
-		bgGreenColor = colorDialog->greenColor;
-		bgBlueColor = colorDialog->blueColor;
-		customBgColor = true;
-		saveColorSettings();
+		globalThemeEngine.setBgColor(QColor(colorDialog->redColor, colorDialog->greenColor, colorDialog->blueColor));
 		setColors();
 	});
 	colorDialog->open();
@@ -699,16 +519,11 @@ void customizationOptions::changeBgColor(void)
 void customizationOptions::changePaperColor(void)
 {
 	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
-	colorDialog->setColor(paperRedColor,
-		paperGreenColor,
-		paperBlueColor);
+	QColor color = themeEngine::paperColor();
+	colorDialog->setColor(color.red(), color.green(), color.blue());
 	colorDialog->setWindowModality(Qt::WindowModal);
 	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
-		paperRedColor = colorDialog->redColor;
-		paperGreenColor = colorDialog->greenColor;
-		paperBlueColor = colorDialog->blueColor;
-		customPaperColor = true;
-		saveColorSettings();
+		globalThemeEngine.setPaperColor(QColor(colorDialog->redColor, colorDialog->greenColor, colorDialog->blueColor));
 		setColors();
 	});
 	colorDialog->open();
@@ -724,16 +539,11 @@ void customizationOptions::changePaperColor(void)
 void customizationOptions::changePanelColor(void)
 {
 	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
-	colorDialog->setColor(panelRedColor,
-		panelGreenColor,
-		panelBlueColor);
+	QColor color = themeEngine::panelColor();
+	colorDialog->setColor(color.red(), color.green(), color.blue());
 	colorDialog->setWindowModality(Qt::WindowModal);
 	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
-		panelRedColor = colorDialog->redColor;
-		panelGreenColor = colorDialog->greenColor;
-		panelBlueColor = colorDialog->blueColor;
-		customPanelColor = true;
-		saveColorSettings();
+		globalThemeEngine.setPanelColor(QColor(colorDialog->redColor, colorDialog->greenColor, colorDialog->blueColor));
 		setColors();
 	});
 	colorDialog->open();
@@ -745,11 +555,9 @@ void customizationOptions::changePanelColor(void)
  */
 void customizationOptions::resetBgPaperColors(void)
 {
-	// There's no need to set RGB values because they're defined in setColors()
-	customBgColor = false;
-	customPaperColor = false;
-	customPanelColor = false;
-	saveColorSettings();
+	globalThemeEngine.resetBgColor();
+	globalThemeEngine.resetPaperColor();
+	globalThemeEngine.resetPanelColor();
 }
 
 /*!
@@ -758,8 +566,6 @@ void customizationOptions::resetBgPaperColors(void)
  */
 void customizationOptions::changeTheme(int index)
 {
-	settings.setValue("theme/theme",index);
+	globalThemeEngine.setStyle((themeEngine::Style) index);
 	setColors();
-	if(!blockThemeSignal)
-		init();
 }
