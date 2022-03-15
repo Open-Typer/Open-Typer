@@ -48,6 +48,7 @@ class keyboardOptions : public QWidget
 	private:
 		Ui::keyboardOptions *ui;
 		QStringList rawItems;
+		QSettings settings;
 
 	private slots:
 		void openEditor(void);

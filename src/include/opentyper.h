@@ -66,6 +66,7 @@ class OpenTyper : public QMainWindow
 
 	private:
 		Ui::OpenTyper *ui;
+		QSettings settings;
 		languageManager *langMgr;
 		void connectAll(void);
 		configParser *parser = nullptr;

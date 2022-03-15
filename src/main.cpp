@@ -19,8 +19,7 @@
  */
 
 #include <QApplication>
-#include <QLabel>
-#include <QMessageBox>
+#include <QSettings>
 #include "opentyper.h"
 
 int main(int argc, char *argv[])

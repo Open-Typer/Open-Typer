@@ -46,6 +46,7 @@ class initialSetup : public QDialog
 	private:
 		Ui::initialSetup *ui;
 		QStringList rawItems;
+		QSettings settings;
 
 	private slots:
 		void finish(void);

@@ -24,7 +24,8 @@
 /*! Constructs connectionOptions. */
 connectionOptions::connectionOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::connectionOptions)
+	ui(new Ui::connectionOptions),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	client = new monitorClient;

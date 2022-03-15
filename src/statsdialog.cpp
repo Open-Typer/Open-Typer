@@ -24,7 +24,8 @@
 /*! Constructs statsDialog. */
 statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::statsDialog)
+	ui(new Ui::statsDialog),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	ui->statsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);

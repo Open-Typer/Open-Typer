@@ -23,7 +23,7 @@
 
 #include <QWidget>
 #include <QListWidget>
-#include "global.h"
+#include <QSettings>
 #include "core/utils.h"
 #include "core/language.h"
 
@@ -45,6 +45,7 @@ class languageList : public QListWidget
 		
 	private:
 		languageManager *langMgr;
+		QSettings settings;
 
 	signals:
 		/*!

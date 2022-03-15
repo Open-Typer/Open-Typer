@@ -30,7 +30,7 @@
 #include <QTimer>
 #include <QTcpSocket>
 #include <QSslSocket>
-#include "global.h"
+#include <QSettings>
 #include "core/utils.h"
 
 /*! \brief The monitorClient class is used to communicate with the class monitor server. */
@@ -59,6 +59,7 @@ class monitorClient : public QObject
 		bool connected, waitingForResponse;
 		QByteArray convertData(bool *ok, QList<QByteArray> input);
 		QList<QByteArray> readData(QByteArray input);
+		QSettings settings;
 
 	signals:
 		/*! A signal, which is emitted after readResponse() reads the response. \see readResponse() */

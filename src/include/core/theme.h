@@ -28,7 +28,9 @@
 #include <QFontDatabase>
 #include <QColor>
 #include <QPalette>
-#include "global.h"
+#include <QSettings>
+#include <QFile>
+#include "core/utils.h"
 
 /*! \brief The themeEngine class provides theme functions. */
 class themeEngine : public QObject
@@ -101,6 +103,7 @@ class themeEngine : public QObject
 
 	private:
 		QList<QVariantMap> themes;
+		QSettings settings;
 
 	signals:
 		/*! A signal, which is emitted when the font changes. */

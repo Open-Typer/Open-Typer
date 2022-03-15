@@ -22,7 +22,7 @@
 #define BEHAVIOR_H
 
 #include <QWidget>
-#include "global.h"
+#include <QSettings>
 #include "core/utils.h"
 
 namespace Ui {
@@ -43,6 +43,7 @@ class behaviorOptions : public QWidget
 
 	private:
 		Ui::behaviorOptions *ui;
+		QSettings settings;
 
 	private slots:
 		void setSpaceNewline(bool value);

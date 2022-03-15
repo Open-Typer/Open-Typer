@@ -22,9 +22,10 @@
 #include "ui_opentyper.h"
 
 /*! Constructs the main window. */
-OpenTyper::OpenTyper(QWidget *parent)
-	: QMainWindow(parent)
-	, ui(new Ui::OpenTyper)
+OpenTyper::OpenTyper(QWidget *parent) :
+	QMainWindow(parent),
+	ui(new Ui::OpenTyper),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	QGridLayout *inputLabelLayout = new QGridLayout(ui->inputLabel);

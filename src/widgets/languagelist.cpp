@@ -22,7 +22,8 @@
 
 /*! Constructs languageList. */
 languageList::languageList(QWidget *parent) :
-	QListWidget(parent)
+	QListWidget(parent),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	clear();
 	langMgr = new languageManager;

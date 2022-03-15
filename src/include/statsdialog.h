@@ -47,6 +47,7 @@ class statsDialog : public QDialog
 		Ui::statsDialog *ui;
 		QChart *speedChart, *mistakesChart, *timeChart;
 		QLineSeries *speedSeries, *mistakesSeries, *timeSeries;
+		QSettings settings;
 };
 
 #endif // STATSDIALOG_H

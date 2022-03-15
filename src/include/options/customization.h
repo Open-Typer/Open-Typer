@@ -55,6 +55,7 @@ class customizationOptions : public QWidget
 		void selectCurrentFullTheme(void);
 		void updateFont(void);
 		void setColors();
+		QSettings settings;
 
 	private slots:
 		void changeFullTheme(QListWidgetItem* item);

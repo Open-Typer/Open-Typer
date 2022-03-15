@@ -24,7 +24,8 @@
 /*! Constructs customizationOptions. */
 customizationOptions::customizationOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::customizationOptions)
+	ui(new Ui::customizationOptions),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	ui->themeCustomizationFrame->hide();

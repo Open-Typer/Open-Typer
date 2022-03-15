@@ -46,6 +46,7 @@ class connectionOptions : public QWidget
 	private:
 		Ui::connectionOptions *ui;
 		monitorClient *client;
+		QSettings settings;
 
 	private slots:
 		void changeAddress(void);

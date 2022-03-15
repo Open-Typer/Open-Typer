@@ -24,7 +24,8 @@
 /*! Constructs behaviorOptions. */
 behaviorOptions::behaviorOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::behaviorOptions)
+	ui(new Ui::behaviorOptions),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	// Load settings

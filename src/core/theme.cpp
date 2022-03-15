@@ -24,7 +24,8 @@ themeEngine globalThemeEngine;
 
 /*! Constructs themeEngine. */
 themeEngine::themeEngine(QWidget *parent) :
-	QObject(parent)
+	QObject(parent),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	QVariantMap themeMap;
 	// Default
@@ -79,6 +80,7 @@ themeEngine::themeEngine(QWidget *parent) :
 /*! Returns selected font. */
 QFont themeEngine::font(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QFont _font;
 	_font.setStyleHint(QFont::TypeWriter);
 	_font.setFixedPitch(true);
@@ -212,12 +214,14 @@ void themeEngine::setFontUnderline(bool value)
 /*! Returns true if there's a custom exercise text color set. */
 bool themeEngine::customExerciseTextColor(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("theme/customleveltextcolor","false").toBool();
 }
 
 /*! Returns exercise text color. */
 QColor themeEngine::exerciseTextColor(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QColor(settings.value("theme/leveltextred", "0").toInt(),
 		settings.value("theme/leveltextgreen", "0").toInt(),
 		settings.value("theme/leveltextblue", "0").toInt());
@@ -253,12 +257,14 @@ QString themeEngine::exerciseTextStyleSheet(void)
 /*! Returns true if there's a custom input text color set. */
 bool themeEngine::customInputTextColor(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("theme/custominputtextcolor","false").toBool();
 }
 
 /*! Returns input text color. */
 QColor themeEngine::inputTextColor(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QColor(settings.value("theme/inputtextred", "0").toInt(),
 		settings.value("theme/inputtextgreen", "0").toInt(),
 		settings.value("theme/inputtextblue", "0").toInt());
@@ -299,12 +305,14 @@ QString themeEngine::inputTextStyleSheet(void)
 /*! Returns true if there's a custom background color set. */
 bool themeEngine::customBgColor(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("theme/custombgcolor","false").toBool();
 }
 
 /*! Returns background color. */
 QColor themeEngine::bgColor(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QColor(settings.value("theme/bgred", "0").toInt(),
 		settings.value("theme/bggreen", "0").toInt(),
 		settings.value("theme/bgblue", "0").toInt());
@@ -344,12 +352,14 @@ QString themeEngine::bgStyleSheet(void)
 /*! Returns true if there's a custom paper color set. */
 bool themeEngine::customPaperColor(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("theme/custompapercolor","false").toBool();
 }
 
 /*! Returns paper color. */
 QColor themeEngine::paperColor(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QColor(settings.value("theme/paperred", "0").toInt(),
 		settings.value("theme/papergreen", "0").toInt(),
 		settings.value("theme/paperblue", "0").toInt());
@@ -399,12 +409,14 @@ QString themeEngine::paperStyleSheet(void)
 /*! Returns true if there's a custom panel color set. */
 bool themeEngine::customPanelColor(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("theme/custompanelcolor","false").toBool();
 }
 
 /*! Returns panel color. */
 QColor themeEngine::panelColor(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QColor(settings.value("theme/panelred", "0").toInt(),
 		settings.value("theme/panelgreen", "0").toInt(),
 		settings.value("theme/panelblue", "0").toInt());
@@ -454,6 +466,7 @@ QString themeEngine::panelStyleSheet(void)
 /*! Returns current application style. */
 themeEngine::Style themeEngine::style(void)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return (themeEngine::Style) settings.value("theme/theme","0").toInt();
 }
 
@@ -500,7 +513,7 @@ int themeEngine::theme(void)
 	}
 	return 0;
 }
-#include <QDebug>
+
 /*! Sets application theme. */
 void themeEngine::setTheme(int index)
 {

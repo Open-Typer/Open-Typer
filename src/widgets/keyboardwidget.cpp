@@ -28,7 +28,8 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	keyboardLayout(new QVBoxLayout(keyboardFrame)),
 	currentRow(-1),
 	currentColumn(0),
-	keyboardVisible(true)
+	keyboardVisible(true),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 	mainLayout->setSpacing(0);

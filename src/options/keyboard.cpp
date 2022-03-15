@@ -24,7 +24,8 @@
 /*! Constructs keyboardOptions object. */
 keyboardOptions::keyboardOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::keyboardOptions)
+	ui(new Ui::keyboardOptions),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	// Load packs
