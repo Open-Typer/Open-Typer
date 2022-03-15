@@ -63,7 +63,6 @@ OpenTyper::~OpenTyper()
  * \param[in] setLang Whether to set the display language.
  * \see changeLanguage
  * \see changeMode
- * \see updateTheme
  * \see setColors
  * \see repeatLevel
  */
