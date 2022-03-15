@@ -1040,10 +1040,10 @@ void OpenTyper::loadTheme(void)
 {
 	// Load style
 	localThemeEngine.updateStyle();
-	// Load font
-	updateFont();
 	// Load colors
 	setColors();
+	// Load font
+	updateFont();
 }
 
 /*! Updates text font. */
