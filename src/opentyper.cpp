@@ -559,6 +559,7 @@ void OpenTyper::previousLevel(void)
  */
 void OpenTyper::openOptions(void)
 {
+	settings.sync();
 	optionsWindow *optionsWin = new optionsWindow(this);
 	optionsWin->init();
 	connect(optionsWin,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
