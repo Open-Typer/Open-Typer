@@ -103,7 +103,6 @@ class themeEngine : public QObject
 
 	private:
 		QList<QVariantMap> themes;
-		QSettings settings;
 
 	signals:
 		/*! A signal, which is emitted when the font changes. */
