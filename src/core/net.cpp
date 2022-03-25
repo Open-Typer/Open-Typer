@@ -32,9 +32,9 @@ monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 	socket = new QTcpSocket;
 #else
 	socket = new QSslSocket;
-	QFile *certFile = new QFile(":certs/server.pem");
-	certFile->open(QIODevice::ReadOnly | QIODevice::Text);
-	QSslCertificate cert(certFile);
+	QFile certFile(":certs/server.pem");
+	certFile.open(QIODevice::ReadOnly | QIODevice::Text);
+	QSslCertificate cert(&certFile);
 	socket->addCaCertificate(cert);
 	socket->setProtocol(QSsl::TlsV1_2);
 	socket->ignoreSslErrors({QSslError(QSslError::HostNameMismatch,cert)});
