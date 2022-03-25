@@ -67,10 +67,10 @@ class OpenTyper : public QMainWindow
 	private:
 		Ui::OpenTyper *ui;
 		QSettings settings;
-		languageManager *langMgr;
+		languageManager langMgr;
 		void connectAll(void);
-		configParser *parser = nullptr;
-		monitorClient *client;
+		configParser parser;
+		monitorClient client;
 		QString studentUsername, studentPassword;
 		QString loadConfig(QString configName, QByteArray packContent = "");
 		void startLevel(int lesson, int sublesson, int level);
@@ -92,15 +92,15 @@ class OpenTyper : public QMainWindow
 		Updater *versionHdw;
 		themeEngine localThemeEngine;
 		void setColors(void);
-		bool customLevelLoaded;
+		bool customLevelLoaded = false;
 		QString customLevel;
-		bool customConfig;
+		bool customConfig = false;
 		bool spaceNewline;
 		int errorPenalty;
-		QTranslator *translator;
+		QTranslator translator;
 		void refreshAll(bool setLang);
 		void changeMode(int mode);
-		int currentMode;
+		int currentMode = 0;
 		int timedExHours, timedExMinutes, timedExSeconds;
 		bool timedExStarted;
 		bool blockInput;

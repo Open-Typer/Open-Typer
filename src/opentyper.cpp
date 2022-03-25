@@ -40,8 +40,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	ui->openButton->setMenu(openMenu);
 	connect(ui->openButton, &QToolButton::clicked, openExerciseAction, &QAction::triggered);
 	localThemeEngine.setParent(this);
-	langMgr = new languageManager;
-	client = new monitorClient(false);
+	client.setErrorDialogs(false);
 	studentUsername = "";
 	studentPassword = "";
 	oldConfigName = "";
@@ -75,7 +74,7 @@ void OpenTyper::refreshAll(bool setLang)
 		if(settings.value("main/language","").toString() == "")
 			changeLanguage(0,false,false);
 		else
-			changeLanguage(langMgr->boxItems.indexOf(settings.value("main/language","").toString()),false,false);
+			changeLanguage(langMgr.boxItems.indexOf(settings.value("main/language","").toString()),false,false);
 	}
 	// Config file (lesson pack) name
 	QString configName = settings.value("main/configfile","").toString();
@@ -160,12 +159,12 @@ void OpenTyper::connectAll(void)
 	// Create timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
 	// Client disconnected signal
-	connect(client,
+	connect(&client,
 		SIGNAL(disconnected()),
 		this,
 		SLOT(updateStudent()));
 	// Client exercise received signal
-	connect(client,
+	connect(&client,
 		&monitorClient::exerciseReceived,
 		this,
 		&OpenTyper::loadReceivedExercise);
@@ -274,18 +273,16 @@ QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
 	else
 		configPath = ":/res/configs/" + configName;
 	// Open selected config
-	if(parser == nullptr)
-		parser = new configParser;
-	if(!parser->bufferOpened())
-		parser->close();
+	if(!parser.bufferOpened())
+		parser.close();
 	if(packContent == "")
 	{
-		bool bufferOpened = parser->bufferOpened();
+		bool bufferOpened = parser.bufferOpened();
 		bool openSuccess;
 		if(bufferOpened && customConfig)
 			openSuccess = true;
 		else
-			openSuccess = parser->open(configPath);
+			openSuccess = parser.open(configPath);
 		if(!openSuccess && !bufferOpened)
 		{
 			settings.setValue("main/configfile","");
@@ -294,7 +291,7 @@ QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
 		}
 	}
 	else
-		parser->loadToBuffer(packContent);
+		parser.loadToBuffer(packContent);
 	// Update lessonSelectionList widget
 	updateLessonList();
 	if(customConfig)
@@ -325,7 +322,7 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 	// Update selected lesson
 	ui->lessonSelectionList->setCurrentIndex(lessonID-1);
 	// Get sublesson count
-	sublessonCount = parser->sublessonCount(lessonID);
+	sublessonCount = parser.sublessonCount(lessonID);
 	// Check if -1 (last sublesson in current lesson) was passed
 	if(sublessonID == -1)
 		sublessonID = sublessonCount;
@@ -334,20 +331,20 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 	loadLesson(lessonID,sublessonID);
 	// Check if -1 (last level in current sublesson) was passed
 	if(levelID == -1)
-		levelID = parser->exerciseCount(lessonID,sublessonID+sublessonListStart);
+		levelID = parser.exerciseCount(lessonID,sublessonID+sublessonListStart);
 	// Load length extension
-	levelLengthExtension = parser->exerciseLineLength(lessonID,sublessonID+sublessonListStart,levelID);
+	levelLengthExtension = parser.exerciseLineLength(lessonID,sublessonID+sublessonListStart,levelID);
 	// Load level text
 	if(customLevelLoaded)
 		level = customLevel;
 	else
-		level = parser->exerciseText(lessonID,
+		level = parser.exerciseText(lessonID,
 			sublessonID+sublessonListStart,
 			levelID);
 	// Get lesson count
-	lessonCount = parser->lessonCount();
+	lessonCount = parser.lessonCount();
 	// Get level count (in current lesson)
-	levelCount = parser->exerciseCount(lessonID,sublessonID+sublessonListStart);
+	levelCount = parser.exerciseCount(lessonID,sublessonID+sublessonListStart);
 	// Update level list
 	loadSublesson(levelID);
 	// Make lesson, sublesson and level info public
@@ -365,10 +362,10 @@ void OpenTyper::updateLessonList(void)
 	ui->lessonSelectionList->clear();
 	QStringList lessons;
 	QString _lessonDesc;
-	int i, count = parser->lessonCount();
+	int i, count = parser.lessonCount();
 	for(i=1; i <= count; i++)
 	{
-		_lessonDesc = configParser::parseDesc(parser->lessonDesc(i));
+		_lessonDesc = configParser::parseDesc(parser.lessonDesc(i));
 		if(_lessonDesc == "")
 			lessons += tr("Lesson") + " " + QString::number(i);
 		else
@@ -388,7 +385,7 @@ void OpenTyper::loadLesson(int lessonID, int sublessonID)
 	int i, i2=0;
 	for(i=1; i <= sublessonCount+i2; i++)
 	{
-		if(parser->exerciseCount(lessonID,i) > 0)
+		if(parser.exerciseCount(lessonID,i) > 0)
 			sublessons += configParser::sublessonName(i);
 		else
 		{
@@ -589,7 +586,7 @@ void OpenTyper::openStudentOptions(void)
 /*! Updates student session. */
 void OpenTyper::updateStudent(void)
 {
-	if(client->available())
+	if(client.available())
 	{
 		ui->studentButton->show();
 		ui->studentLabel->show();
@@ -604,11 +601,11 @@ void OpenTyper::updateStudent(void)
 			ui->statsButton->show();
 		return;
 	}
-	QList<QByteArray> response = client->sendRequest("get",{"username"});
+	QList<QByteArray> response = client.sendRequest("get",{"username"});
 	if(response[0] == "ok")
 	{
 		if(studentUsername == "")
-			client->sendRequest("logout",{studentUsername.toUtf8()});
+			client.sendRequest("logout",{studentUsername.toUtf8()});
 		else
 		{
 			QString username = response[1];
@@ -624,7 +621,7 @@ void OpenTyper::updateStudent(void)
 	{
 		if(studentUsername != "")
 		{
-			response = client->sendRequest("auth",{studentUsername.toUtf8(),studentPassword.toUtf8()});
+			response = client.sendRequest("auth",{studentUsername.toUtf8(),studentPassword.toUtf8()});
 			if(response[0] == "ok")
 			{
 				updateStudent();
@@ -899,7 +896,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			if((studentUsername != "") && !customLevelLoaded && !customConfig)
 			{
 				updateStudent();
-				client->sendRequest("put",
+				client.sendRequest("put",
 					{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentAbsoluteSublesson),QByteArray::number(currentLevel),
 					QByteArray::number(realSpeed),QByteArray::number(levelMistakes),QByteArray::number(time)});
 			}
@@ -1141,8 +1138,8 @@ void OpenTyper::openPack(void)
 void OpenTyper::openEditor(void)
 {
 	// Close pack file
-	QString oldFileName = parser->fileName();
-	parser->close();
+	QString oldFileName = parser.fileName();
+	parser.close();
 	// Open editor
 	packEditor *editorWindow = new packEditor(this);
 	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint,true);
@@ -1151,7 +1148,7 @@ void OpenTyper::openEditor(void)
 	editorWindow->setWindowModality(Qt::WindowModal);
 	connect(editorWindow, &QDialog::finished, this, [oldFileName,this]() {
 		// Open pack file
-		parser->open(oldFileName);
+		parser.open(oldFileName);
 	});
 	editorWindow->open();
 }
@@ -1169,11 +1166,10 @@ void OpenTyper::changeLanguage(int index, bool enableRefresh, bool enableListRel
 	if(index == 0)
 		targetLocale = QLocale::system();
 	else
-		targetLocale = QLocale(langMgr->supportedLanguages[index-1],langMgr->supportedCountries[index-1]);
-	QCoreApplication::removeTranslator(translator);
-	translator = new QTranslator();
-	if(translator->load(targetLocale,QLatin1String("Open-Typer"),QLatin1String("_"),QLatin1String(":/res/lang")))
-		QCoreApplication::installTranslator(translator);
+		targetLocale = QLocale(langMgr.supportedLanguages[index-1],langMgr.supportedCountries[index-1]);
+	QCoreApplication::removeTranslator(&translator);
+	if(translator.load(targetLocale,QLatin1String("Open-Typer"),QLatin1String("_"),QLatin1String(":/res/lang")))
+		QCoreApplication::installTranslator(&translator);
 	ui->retranslateUi(this);
 	if(enableRefresh)
 		refreshAll(false);
@@ -1270,7 +1266,7 @@ void OpenTyper::showExerciseStats(void)
 {
 	statsDialog *dialog;
 	if((studentUsername != ""))
-		dialog = new statsDialog(client,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,this);
+		dialog = new statsDialog(&client,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,this);
 	else if(!customLevelLoaded && !customConfig)
 		dialog = new statsDialog(nullptr,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,this);
 	else
@@ -1279,7 +1275,7 @@ void OpenTyper::showExerciseStats(void)
 	dialog->open();
 }
 
-/*! Connected from client->exerciseReceived(). */
+/*! Connected from client.exerciseReceived(). */
 void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines)
 {
 	levelLengthExtension = lineLength;
