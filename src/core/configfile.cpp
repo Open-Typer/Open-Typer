@@ -24,9 +24,7 @@
 configParser::configParser(QObject *parent) :
 	QObject(parent)
 {
-	configFile = new QFile;
-	configBuffer = new QBuffer;
-	currentDevice = configFile;
+	currentDevice = &configFile;
 }
 
 /*!
@@ -37,26 +35,26 @@ configParser::configParser(QObject *parent) :
 bool configParser::open(const QString fileName)
 {
 	currentDevice->close();
-	configFile->setFileName(fileName);
-	currentDevice = configFile;
-	return configFile->open(QIODevice::ReadOnly | QIODevice::Text);
+	configFile.setFileName(fileName);
+	currentDevice = &configFile;
+	return configFile.open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
 /*! Closes opened file and loads pack content to the buffer. */
 void configParser::loadToBuffer(const QByteArray content)
 {
 	close();
-	configBuffer->open(QBuffer::WriteOnly);
-	configBuffer->write(content);
-	configBuffer->close();
-	configBuffer->open(QIODevice::ReadOnly);
-	currentDevice = configBuffer;
+	configBuffer.open(QBuffer::WriteOnly);
+	configBuffer.write(content);
+	configBuffer.close();
+	configBuffer.open(QIODevice::ReadOnly);
+	currentDevice = &configBuffer;
 }
 
 /*! Returns true if there's a buffer opened. */
 bool configParser::bufferOpened(void)
 {
-	return (currentDevice != configFile);
+	return (currentDevice != &configFile);
 }
 
 /*!
@@ -74,9 +72,9 @@ bool configParser::bufferOpened(void)
  */
 bool configParser::reopen(QIODevice::OpenMode mode)
 {
-	if(currentDevice == configFile)
+	if(currentDevice == &configFile)
 	{
-		if(configFile->fileName() == "")
+		if(configFile.fileName() == "")
 			return false;
 	}
 	currentDevice->close();
@@ -92,8 +90,8 @@ void configParser::close(void)
 /*! Returns the file name of the opened pack file. */
 QString configParser::fileName(void)
 {
-	if(currentDevice == configFile)
-		return configFile->fileName();
+	if(currentDevice == &configFile)
+		return configFile.fileName();
 	else
 		return QString();
 }

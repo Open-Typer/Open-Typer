@@ -79,8 +79,8 @@ class configParser : public QObject
 		bool addExercise(int lesson, int sublesson, int exercise, bool repeat, QString repeatType, int repeatLimit, int lineLength, QString desc, QString rawText);
 
 	private:
-		QFile *configFile;
-		QBuffer *configBuffer;
+		QFile configFile;
+		QBuffer configBuffer;
 		QIODevice *currentDevice;
 		bool reopen(QIODevice::OpenMode mode);
 		int exerciseID(const QString line, const int part);
