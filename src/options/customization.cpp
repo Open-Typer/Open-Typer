@@ -151,7 +151,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 		animation1->setStartValue(widgetGeometry);
 		widgetGeometry.setWidth(0);
 		animation1->setEndValue(widgetGeometry);
-		animation1->start();
+		animation1->start(QAbstractAnimation::DeleteWhenStopped);
 		connect(animation1,&QPropertyAnimation::finished,this,[oldWidth, oldWidth2, index, this]() {
 			ui->themesFrame->hide();
 			QRect widgetGeometry = ui->themesFrame->geometry();
@@ -166,7 +166,7 @@ void customizationOptions::changeFullTheme(QListWidgetItem* item)
 			widgetGeometry.setX(oldWidth2);
 			animation2->setStartValue(widgetGeometry);
 			animation2->setEndValue(ui->themeCustomizationFrame->geometry());
-			animation2->start();
+			animation2->start(QAbstractAnimation::DeleteWhenStopped);
 			globalThemeEngine.setTheme(index);
 		});
 	}
@@ -207,7 +207,7 @@ void customizationOptions::goBack(void)
 	animation1->setStartValue(widgetGeometry);
 	widgetGeometry.setX(geometry().width());
 	animation1->setEndValue(widgetGeometry);
-	animation1->start();
+	animation1->start(QAbstractAnimation::DeleteWhenStopped);
 	connect(animation1, &QPropertyAnimation::finished, this, [this]() {
 		ui->themeCustomizationFrame->hide();
 		// Animation 2
@@ -219,7 +219,7 @@ void customizationOptions::goBack(void)
 		widgetGeometry.setWidth(0);
 		animation2->setStartValue(widgetGeometry);
 		animation2->setEndValue(ui->themesFrame->geometry());
-		animation2->start();
+		animation2->start(QAbstractAnimation::DeleteWhenStopped);
 		connect(animation2, &QPropertyAnimation::finished, this, [this]() {
 			ui->themeList->setResizeMode(QListView::Adjust);
 			ui->themeList->show();
