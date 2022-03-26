@@ -44,7 +44,7 @@ class languageList : public QListWidget
 		QLocale::Country country(int index);
 		
 	private:
-		languageManager *langMgr;
+		languageManager langMgr;
 		QSettings settings;
 
 	signals:
