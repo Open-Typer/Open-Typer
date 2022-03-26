@@ -90,7 +90,7 @@
     <message>
         <source>Exercise history</source>
         <extracomment>The history (and stats) of this exercise</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aufgabe Verlauf</translation>
     </message>
     <message>
         <source>Student options</source>

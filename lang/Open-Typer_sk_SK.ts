@@ -86,54 +86,54 @@
         <translation>Podlekcia:</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="35"/>
+        <location filename="../src/opentyper.cpp" line="36"/>
         <source>Open custom exercise</source>
         <translation>Otvoriť vlastné cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="36"/>
+        <location filename="../src/opentyper.cpp" line="37"/>
         <source>Open custom pack</source>
         <translation>Otvoriť vlastný balík</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="373"/>
-        <location filename="../src/opentyper.cpp" line="375"/>
+        <location filename="../src/opentyper.cpp" line="370"/>
+        <location filename="../src/opentyper.cpp" line="372"/>
         <source>Lesson</source>
         <translation>Lekcia</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="411"/>
+        <location filename="../src/opentyper.cpp" line="408"/>
         <source>Exercise</source>
         <translation>Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="614"/>
+        <location filename="../src/opentyper.cpp" line="612"/>
         <source>Logged in as %1</source>
         <translation>Prihlásený ako %1</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="639"/>
+        <location filename="../src/opentyper.cpp" line="637"/>
         <source>Not logged in.</source>
         <translation>Neprihlásený.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="707"/>
+        <location filename="../src/opentyper.cpp" line="705"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="707"/>
-        <location filename="../src/opentyper.cpp" line="1127"/>
+        <location filename="../src/opentyper.cpp" line="705"/>
+        <location filename="../src/opentyper.cpp" line="1125"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="687"/>
+        <location filename="../src/opentyper.cpp" line="685"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="1127"/>
+        <location filename="../src/opentyper.cpp" line="1125"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
@@ -141,12 +141,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/core/configfile.cpp" line="251"/>
+        <location filename="../src/core/configfile.cpp" line="249"/>
         <source>Revision</source>
         <translation>Opakovanie</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="266"/>
+        <location filename="../src/core/configfile.cpp" line="264"/>
         <source>Shift</source>
         <comment>Shift key</comment>
         <translation>Shift</translation>
@@ -241,7 +241,7 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>automaticky generované</translation>
     </message>
     <message>
-        <location filename="../src/core/packs.cpp" line="41"/>
+        <location filename="../src/core/packs.cpp" line="45"/>
         <source>Unknown pack</source>
         <translation>Neznámy balík</translation>
     </message>
@@ -249,27 +249,27 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
 <context>
     <name>configParser</name>
     <message>
-        <location filename="../src/core/configfile.cpp" line="294"/>
+        <location filename="../src/core/configfile.cpp" line="292"/>
         <source>Touch</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="297"/>
+        <location filename="../src/core/configfile.cpp" line="295"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="300"/>
+        <location filename="../src/core/configfile.cpp" line="298"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="303"/>
+        <location filename="../src/core/configfile.cpp" line="301"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="306"/>
+        <location filename="../src/core/configfile.cpp" line="304"/>
         <source>Sublesson</source>
         <translation>Podlekcia</translation>
     </message>
@@ -435,12 +435,12 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
 <context>
     <name>keyboardWidget</name>
     <message>
-        <location filename="../src/widgets/keyboardwidget.cpp" line="578"/>
+        <location filename="../src/widgets/keyboardwidget.cpp" line="579"/>
         <source>Hide keyboard</source>
         <translation>Skryť klávesnicu</translation>
     </message>
     <message>
-        <location filename="../src/widgets/keyboardwidget.cpp" line="583"/>
+        <location filename="../src/widgets/keyboardwidget.cpp" line="584"/>
         <source>Show keyboard</source>
         <translation>Zobraziť klávesnicu</translation>
     </message>
@@ -499,12 +499,12 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
 <context>
     <name>monitorClient</name>
     <message>
-        <location filename="../src/core/net.cpp" line="170"/>
+        <location filename="../src/core/net.cpp" line="175"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../src/core/net.cpp" line="171"/>
+        <location filename="../src/core/net.cpp" line="176"/>
         <source>Unable to connect to class monitor server.</source>
         <translation>Nepodarilo sa spojiť so serverom class monitor.</translation>
     </message>
@@ -517,27 +517,27 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Možnosti</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="44"/>
+        <location filename="../src/options/optionswindow.cpp" line="42"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="45"/>
+        <location filename="../src/options/optionswindow.cpp" line="43"/>
         <source>Behavior</source>
         <translation>Správanie</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="46"/>
+        <location filename="../src/options/optionswindow.cpp" line="44"/>
         <source>Keyboard</source>
         <translation>Klávesnica</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="47"/>
+        <location filename="../src/options/optionswindow.cpp" line="45"/>
         <source>Customization</source>
         <translation>Prispôsobenie</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="49"/>
+        <location filename="../src/options/optionswindow.cpp" line="47"/>
         <source>Connection</source>
         <translation>Pripojenie</translation>
     </message>
@@ -783,30 +783,30 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Grafy</translation>
     </message>
     <message>
-        <location filename="../src/statsdialog.cpp" line="45"/>
-        <location filename="../src/statsdialog.cpp" line="90"/>
+        <location filename="../src/statsdialog.cpp" line="46"/>
+        <location filename="../src/statsdialog.cpp" line="91"/>
         <source>Speed</source>
         <translation>Rýchlosť</translation>
     </message>
     <message>
-        <location filename="../src/statsdialog.cpp" line="45"/>
-        <location filename="../src/statsdialog.cpp" line="99"/>
+        <location filename="../src/statsdialog.cpp" line="46"/>
+        <location filename="../src/statsdialog.cpp" line="100"/>
         <source>Mistakes</source>
         <translation>Chyby</translation>
     </message>
     <message>
-        <location filename="../src/statsdialog.cpp" line="45"/>
-        <location filename="../src/statsdialog.cpp" line="108"/>
+        <location filename="../src/statsdialog.cpp" line="46"/>
+        <location filename="../src/statsdialog.cpp" line="109"/>
         <source>Time</source>
         <translation>Čas</translation>
     </message>
     <message>
-        <location filename="../src/statsdialog.cpp" line="128"/>
+        <location filename="../src/statsdialog.cpp" line="129"/>
         <source>Better students: %1</source>
         <translation>Lepší študenti: %1</translation>
     </message>
     <message>
-        <location filename="../src/statsdialog.cpp" line="133"/>
+        <location filename="../src/statsdialog.cpp" line="134"/>
         <source>Worse students: %1</source>
         <translation>Horší študenti: %1</translation>
     </message>
