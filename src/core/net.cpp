@@ -48,6 +48,7 @@ monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 monitorClient::~monitorClient()
 {
 	socket->close();
+	socket->deleteLater();
 }
 
 /*! Closes the connection. */
