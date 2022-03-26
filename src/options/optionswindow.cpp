@@ -28,8 +28,6 @@ optionsWindow::optionsWindow(QWidget *parent) :
 {
 	ui->setupUi(this);
 	setupList();
-	currentWidget = new QWidget(ui->currentOptions);
-	ui->currentOptionsLayout->addWidget(currentWidget);
 	// Connections
 	connect(ui->list,SIGNAL(currentRowChanged(int)),this,SLOT(changeOptionWidget(int)));
 }
@@ -88,10 +86,13 @@ void optionsWindow::changeOptionWidget(int index)
 	if(options == nullptr)
 		return;
 	options->setParent(ui->currentOptions);
-	ui->currentOptionsLayout->replaceWidget(currentWidget,options);
 	if(currentWidget != nullptr)
+	{
+		ui->currentOptionsLayout->removeWidget(currentWidget);
 		currentWidget->deleteLater();
+	}
 	currentWidget = options;
+	ui->currentOptionsLayout->addWidget(currentWidget);
 }
 
 /*! Selects default category. */
