@@ -45,7 +45,7 @@ class connectionOptions : public QWidget
 
 	private:
 		Ui::connectionOptions *ui;
-		monitorClient *client;
+		monitorClient client;
 		QSettings settings;
 
 	private slots:

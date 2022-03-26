@@ -28,11 +28,10 @@ connectionOptions::connectionOptions(QWidget *parent) :
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
-	client = new monitorClient;
-	ui->IPEdit->setText(QHostAddress(client->serverAddress().toIPv4Address()).toString());
-	ui->portEdit->setValue(client->serverPort());
-	ui->serverCheckBox->setChecked(client->enabled());
-	ui->testButton->setEnabled(client->enabled());
+	ui->IPEdit->setText(QHostAddress(client.serverAddress().toIPv4Address()).toString());
+	ui->portEdit->setValue(client.serverPort());
+	ui->serverCheckBox->setChecked(client.enabled());
+	ui->testButton->setEnabled(client.enabled());
 	changeAddress();
 	// Connections
 	connect(ui->IPEdit,&QLineEdit::textChanged,this,&connectionOptions::changeAddress);
@@ -78,10 +77,10 @@ void connectionOptions::testConnection(void)
 {
 	ui->statusValueLabel->setText("...");
 	ui->testButton->setEnabled(false);
-	if(client->available())
+	if(client.available())
 		ui->statusValueLabel->setText("OK");
 	else
 		ui->statusValueLabel->setText(tr("Failed to connect"));
-	client->close();
+	client.close();
 	ui->testButton->setEnabled(true);
 }
