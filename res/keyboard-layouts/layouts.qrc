@@ -5,5 +5,7 @@
         <file>cs_CZ-QWERTZ.json</file>
         <file>cs_CZ-QWERTY.json</file>
         <file>en_US-default.json</file>
+        <file>de_DE-QWERTZ.json</file>
+        <file>de_DE-QWERTY.json</file>
     </qresource>
 </RCC>
