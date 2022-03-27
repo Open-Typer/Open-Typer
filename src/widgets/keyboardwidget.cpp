@@ -242,12 +242,17 @@ bool keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 			for(int i=0; i < keyStrings.count(); i++)
 			{
 				QKeySequence keySequence(keyStrings[i]);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+				int code = keySequence[0].key();
+#else
+				int code = keySequence[0];
+#endif
 				switch(i) {
 					case 0:
-						shiftKeyCode = keySequence[0];
+						shiftKeyCode = code;
 						break;
 					case 1:
-						keyCode = keySequence[0];
+						keyCode = code;
 						break;
 				}
 			}
