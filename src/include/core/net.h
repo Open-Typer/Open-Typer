@@ -31,6 +31,8 @@
 #include <QTcpSocket>
 #include <QSslSocket>
 #include <QSettings>
+#include <QFile>
+#include <QSslConfiguration>
 #include "core/utils.h"
 
 /*! \brief The monitorClient class is used to communicate with the class monitor server. */

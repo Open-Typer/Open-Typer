@@ -35,13 +35,23 @@ monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 	QFile certFile(":certs/server.pem");
 	certFile.open(QIODevice::ReadOnly | QIODevice::Text);
 	QSslCertificate cert(&certFile);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	QSslConfiguration sslConfig = socket->sslConfiguration();
+	sslConfig.addCaCertificate(cert);
+	socket->setSslConfiguration(sslConfig);
+#else
 	socket->addCaCertificate(cert);
+#endif
 	socket->setProtocol(QSsl::TlsV1_2);
 	socket->ignoreSslErrors({QSslError(QSslError::HostNameMismatch,cert)});
-#endif
+#endif // Q_OS_WASM
 	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
 	connect(socket,&QAbstractSocket::disconnected,this,&monitorClient::disconnected);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	connect(socket, &QAbstractSocket::errorOccurred, this, &monitorClient::errorOccurred);
+#else
 	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
+#endif
 }
 
 /*! Destroys the monitorClient object. */
