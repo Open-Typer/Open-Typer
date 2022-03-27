@@ -716,8 +716,8 @@ void OpenTyper::openExerciseFromFile(void)
 void OpenTyper::loadText(QByteArray text, bool includeNewLines, bool updateClient)
 {
 	level = "";
-	QTextStream in(text);
-	in.setCodec("UTF-8");
+	QBuffer in(&text);
+	in.open(QBuffer::ReadOnly | QBuffer::Text);
 	while (!in.atEnd())
 	{
 		QString line = in.readLine();
