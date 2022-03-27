@@ -26,7 +26,9 @@
 #include "core/net.h"
 #include "core/configfile.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
 using namespace QtCharts;
+#endif
 
 namespace Ui {
 	class statsDialog;
