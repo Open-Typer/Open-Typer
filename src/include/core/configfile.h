@@ -24,7 +24,6 @@
 #include <QObject>
 #include <QFile>
 #include <QBuffer>
-#include <QTextStream>
 #include <QString>
 #include <QJsonDocument>
 #include <QJsonObject>

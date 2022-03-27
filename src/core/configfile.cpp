@@ -100,12 +100,10 @@ QString configParser::fileName(void)
 int configParser::lessonCount(void)
 {
 	currentDevice->seek(0);
-	QTextStream fileStream(currentDevice);
-	fileStream.setCodec("UTF-8");
 	QList<int> lessonIDs;
-	while(!fileStream.atEnd())
+	while(!currentDevice->atEnd())
 	{
-		QString line = fileStream.readLine();
+		QString line = QString(currentDevice->readLine()).remove('\n');
 		int lessonID = exerciseID(line,1);
 		if(!lessonIDs.contains(lessonID))
 			lessonIDs += lessonID;
@@ -121,12 +119,10 @@ int configParser::lessonCount(void)
 int configParser::sublessonCount(int lesson)
 {
 	currentDevice->seek(0);
-	QTextStream fileStream(currentDevice);
-	fileStream.setCodec("UTF-8");
 	QList<int> sublessonIDs;
-	while(!fileStream.atEnd())
+	while(!currentDevice->atEnd())
 	{
-		QString line = fileStream.readLine();
+		QString line = QString(currentDevice->readLine()).remove('\n');
 		int lessonID = exerciseID(line,1);
 		if(lessonID == lesson)
 		{
@@ -142,12 +138,10 @@ int configParser::sublessonCount(int lesson)
 int configParser::exerciseCount(int lesson, int sublesson)
 {
 	currentDevice->seek(0);
-	QTextStream fileStream(currentDevice);
-	fileStream.setCodec("UTF-8");
 	QList<int> exerciseIDs;
-	while(!fileStream.atEnd())
+	while(!currentDevice->atEnd())
 	{
-		QString line = fileStream.readLine();
+		QString line = QString(currentDevice->readLine()).remove('\n');
 		int lessonID = exerciseID(line,1);
 		if(lessonID == lesson)
 		{
@@ -167,13 +161,11 @@ int configParser::exerciseCount(int lesson, int sublesson)
 int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 {
 	currentDevice->seek(0);
-	QTextStream fileStream(currentDevice);
-	fileStream.setCodec("UTF-8");
 	int lineID = 0;
-	while(!fileStream.atEnd())
+	while(!currentDevice->atEnd())
 	{
 		lineID++;
-		QString line = fileStream.readLine();
+		QString line = QString(currentDevice->readLine()).remove('\n');
 		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
 			return lineID;
 	}
@@ -208,11 +200,9 @@ int configParser::exerciseLineLength(int lesson, int sublesson, int exercise)
 QString configParser::lessonDesc(int lesson)
 {
 	currentDevice->seek(0);
-	QTextStream fileStream(currentDevice);
-	fileStream.setCodec("UTF-8");
-	while(!fileStream.atEnd())
+	while(!currentDevice->atEnd())
 	{
-		QString line = fileStream.readLine();
+		QString line = QString(currentDevice->readLine()).remove('\n');
 		if(exerciseID(line,1) == lesson)
 		{
 			QString out = exerciseAttribute(exerciseAttributes(line),2);
@@ -612,11 +602,9 @@ int configParser::exerciseID(const QString line, const int part)
 QString configParser::lineOf(int lesson, int sublesson, int exercise)
 {
 	currentDevice->seek(0);
-	QTextStream fileStream(currentDevice);
-	fileStream.setCodec("UTF-8");
-	while(!fileStream.atEnd())
+	while(!currentDevice->atEnd())
 	{
-		QString line = fileStream.readLine();
+		QString line = QString(currentDevice->readLine()).remove('\n');
 		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
 			return line;
 	}
