@@ -75,7 +75,7 @@ void initialSetup::loadList(void)
 			QString localeStr = "";
 			for(int i2=0; i2 < rawItems[i].count(); i2++)
 			{
-				if(rawItems[i][i2] == "-")
+				if(rawItems[i][i2] == '-')
 					break;
 				else
 					localeStr += rawItems[i][i2];
