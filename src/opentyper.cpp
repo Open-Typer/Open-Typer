@@ -119,7 +119,7 @@ void OpenTyper::refreshAll(bool setLang)
 			bool localeRead = false;
 			for(int i=0; i < publicConfigName.count(); i++)
 			{
-				if(publicConfigName[i] == "-")
+				if(publicConfigName[i] == '-')
 				{
 					if(localeRead)
 						break;
@@ -773,9 +773,9 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		levelInProgress=true;
 	}
 	QString keyText = event->text();
-	if((keyText == "'") && (displayLevel[displayPos] == "‘"))
+	if((keyText == "'") && (displayLevel[displayPos] == QString("‘")))
 		keyText = "‘";
-	if((keyText == "‘") && (displayLevel[displayPos] == "'"))
+	if((keyText == "‘") && (displayLevel[displayPos] == '\''))
 		keyText = "'";
 	if((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))
 		keyText = "\n";
