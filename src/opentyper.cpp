@@ -85,7 +85,6 @@ OpenTyper::~OpenTyper()
 
 /*! Initializes the program and loads all settings.
  * \param[in] setLang Whether to set the display language.
- * \see changeLanguage
  * \see changeMode
  * \see setColors
  * \see repeatLevel
@@ -96,9 +95,9 @@ void OpenTyper::refreshAll(bool setLang)
 	if(setLang)
 	{
 		if(settings.value("main/language","").toString() == "")
-			changeLanguage(0,false,false);
+			langMgr.setLanguage(-1);
 		else
-			changeLanguage(langMgr.boxItems.indexOf(settings.value("main/language","").toString()),false,false);
+			langMgr.setLanguage(langMgr.boxItems.indexOf(settings.value("main/language","").toString()) - 1);
 	}
 	// Config file (lesson pack) name
 	QString configName = settings.value("main/configfile","").toString();
@@ -478,7 +477,6 @@ void OpenTyper::openOptions(void)
 	settings.sync();
 	optionsWindow *optionsWin = new optionsWindow(this);
 	optionsWin->init();
-	connect(optionsWin,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
 	optionsWin->open();
 	optionsWin->setWindowModality(Qt::WindowModal);
 	connect(optionsWin, &QDialog::finished, this, [this]() { show(); refreshAll(false); });
@@ -1072,31 +1070,22 @@ void OpenTyper::openEditor(void)
 	editorWindow->open();
 }
 
-/*! Connected from optionsWindow#languageChanged.\n
- * Retranslates the UI in the selected language.
- * \param[in] index Index of the selected language in the list of languages
- * \param[in] enableRefresh Toggles call to refreshAll()
- * \param[in] enableListReload Toggles lesson and sublesson list reload
- * \see languageManager
+/*! Overrides QWidget#changeEvent().
+ * Retranslates UI when the display language changes.
  */
-void OpenTyper::changeLanguage(int index, bool enableRefresh, bool enableListReload)
+void OpenTyper::changeEvent(QEvent *event)
 {
-	QLocale targetLocale;
-	if(index == 0)
-		targetLocale = QLocale::system();
-	else
-		targetLocale = QLocale(langMgr.supportedLanguages[index-1],langMgr.supportedCountries[index-1]);
-	QCoreApplication::removeTranslator(&translator);
-	if(translator.load(targetLocale,QLatin1String("Open-Typer"),QLatin1String("_"),QLatin1String(":/res/lang")))
-		QCoreApplication::installTranslator(&translator);
-	ui->retranslateUi(this);
-	if(enableRefresh)
-		refreshAll(false);
-	if(enableListReload)
+	if(event->type() == QEvent::LanguageChange)
 	{
+		ui->retranslateUi(this);
+		localThemeEngine.updateStyle();
+		updateLessonList();
+		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
 		loadLesson(currentLesson,currentSublesson);
 		loadSublesson(currentLevel);
 	}
+	else
+		QWidget::changeEvent(event);
 }
 
 /*! Connected from zoomInButton.\n

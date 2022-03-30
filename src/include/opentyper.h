@@ -105,6 +105,9 @@ class OpenTyper : public QMainWindow
 		bool blockInput;
 		void loadText(QByteArray text, bool includeNewLines = false, bool updateStudent = true);
 
+	protected:
+		void changeEvent(QEvent *event);
+
 	private slots:
 		void loadTheme(void);
 		void updateFont(void);
@@ -121,7 +124,6 @@ class OpenTyper : public QMainWindow
 		void sublessonSelectionListIndexChanged(int index);
 		void levelSelectionListIndexChanged(int index);
 		void openExerciseFromFile(void);
-		void changeLanguage(int index, bool enableRefresh = true, bool enableListReload = true);
 		void zoomIn(void);
 		void zoomOut(void);
 		void initTimedExercise(void);
