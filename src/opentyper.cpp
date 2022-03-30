@@ -48,7 +48,6 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	// Connections
 	connect(&client, SIGNAL(disconnected()), this, SLOT(updateStudent()));
 	connect(&client, &monitorClient::exerciseReceived, this, &OpenTyper::loadReceivedExercise);
-	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
 	connect(ui->inputLabel, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(keyPress(QKeyEvent*)));
 	connect(ui->inputLabel, SIGNAL(keyReleased(QKeyEvent*)), this, SLOT(keyRelease(QKeyEvent*)));
 	connect(ui->optionsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
@@ -70,6 +69,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &OpenTyper::loadTheme);
 	// Start timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
+	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
 	secLoop->start(500);
 #ifndef Q_OS_WASM
 	// Check for updates
