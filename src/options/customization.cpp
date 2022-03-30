@@ -40,75 +40,20 @@ customizationOptions::customizationOptions(QWidget *parent) :
 	}
 	selectCurrentFullTheme();
 	// Connections
-	// Theme list
-	connect(ui->themeList,
-		SIGNAL(itemClicked(QListWidgetItem*)),
-		this,
-		SLOT(changeFullTheme(QListWidgetItem*)));
-	connect(ui->themeList,
-		SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
-		this,
-		SLOT(changeFullTheme(QListWidgetItem*)));
-	// Back button
-	connect(ui->backButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(goBack()));
-	// Font selector
-	connect(ui->fontComboBox,
-		SIGNAL(currentFontChanged(QFont)),
-		this,
-		SLOT(changeFont(QFont)));
-	// Font size box
-	connect(ui->fontSizeBox,
-		SIGNAL(valueChanged(int)),
-		this,
-		SLOT(changeFontSize(int)));
-	// Bold text button
-	connect(ui->boldTextBox,
-		SIGNAL(clicked()),
-		this,
-		SLOT(setBoldText()));
-	// Italic text button
-	connect(ui->italicTextBox,
-		SIGNAL(clicked()),
-		this,
-		SLOT(setItalicText()));
-	// Underline text button
-	connect(ui->underlineTextBox,
-		SIGNAL(clicked()),
-		this,
-		SLOT(setUnderlineText()));
-	// Change level text color button
-	connect(ui->levelTextColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(changeLevelTextColor()));
-	// Change input text color button
-	connect(ui->inputTextColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(changeInputTextColor()));
-	// Change background color button
-	connect(ui->bgColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(changeBgColor()));
-	// Change paper color button
-	connect(ui->paperColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(changePaperColor()));
-	// Change panel color button
-	connect(ui->panelColorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(changePanelColor()));
-	// Theme selector
-	connect(ui->themeBox,
-		SIGNAL(activated(int)),
-		this,
-		SLOT(changeTheme(int)));
+	connect(ui->themeList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(changeFullTheme(QListWidgetItem*)));
+	connect(ui->themeList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(changeFullTheme(QListWidgetItem*)));
+	connect(ui->backButton, SIGNAL(clicked()), this, SLOT(goBack()));
+	connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), this, SLOT(changeFont(QFont)));
+	connect(ui->fontSizeBox, SIGNAL(valueChanged(int)), this, SLOT(changeFontSize(int)));
+	connect(ui->boldTextBox, SIGNAL(clicked()), this, SLOT(setBoldText()));
+	connect(ui->italicTextBox, SIGNAL(clicked()), this, SLOT(setItalicText()));
+	connect(ui->underlineTextBox, SIGNAL(clicked()), this, SLOT(setUnderlineText()));
+	connect(ui->levelTextColorButton, SIGNAL(clicked()), this, SLOT(changeLevelTextColor()));
+	connect(ui->inputTextColorButton, SIGNAL(clicked()), this, SLOT(changeInputTextColor()));
+	connect(ui->bgColorButton, SIGNAL(clicked()), this, SLOT(changeBgColor()));
+	connect(ui->paperColorButton, SIGNAL(clicked()), this, SLOT(changePaperColor()));
+	connect(ui->panelColorButton, SIGNAL(clicked()), this, SLOT(changePanelColor()));
+	connect(ui->themeBox, SIGNAL(activated(int)), this, SLOT(changeTheme(int)));
 }
 
 /*! Destroys the customizationOptions object. */
