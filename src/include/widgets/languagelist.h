@@ -47,13 +47,6 @@ class languageList : public QListWidget
 		languageManager langMgr;
 		QSettings settings;
 
-	signals:
-		/*!
-		 * A signal, which is emitted on language change.
-		 * \param[out] index The index in languageList.
-		 */
-		void languageChanged(int index);
-
 	private slots:
 		void changeLanguage(int index);
 };

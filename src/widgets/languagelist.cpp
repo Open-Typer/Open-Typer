@@ -48,5 +48,5 @@ void languageList::changeLanguage(int index)
 		settings.setValue("main/language","");
 	else
 		settings.setValue("main/language",langMgr.boxItems[index]);
-	emit languageChanged(index);
+	langMgr.setLanguage(index-1);
 }
