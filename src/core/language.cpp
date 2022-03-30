@@ -2,7 +2,7 @@
  * language.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@
  */
 
 #include "core/language.h"
+
+QVector<QTranslator*> translators;
 
 /*! Constructs languageManager. */
 languageManager::languageManager(QObject *parent) :
@@ -45,3 +47,25 @@ languageManager::languageManager(QObject *parent) :
 
 /*! Destroys the languageManager object. */
 languageManager::~languageManager() { }
+
+/*! Changes the application language. */
+void languageManager::setLanguage(int index)
+{
+	QLocale targetLocale;
+	if(index == -1)
+		targetLocale = QLocale::system();
+	else
+		targetLocale = QLocale(supportedLanguages[index], supportedCountries[index]);
+	for(int i=0; i < translators.count(); i++)
+	{
+		QCoreApplication::removeTranslator(translators[i]);
+		translators[i]->deleteLater();
+	}
+	translators.clear();
+	QTranslator *translator = new QTranslator;
+	if(translator->load(targetLocale, "Open-Typer", "_", ":/res/lang"))
+	{
+		QCoreApplication::installTranslator(translator);
+		translators += translator;
+	}
+}

@@ -2,7 +2,7 @@
  * language.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +23,11 @@
 
 #include <QObject>
 #include <QLocale>
+#include <QVector>
+#include <QTranslator>
+#include <QCoreApplication>
+
+extern QVector<QTranslator*> translators;
 
 /*!
  * \brief The languageManager class provides a list of supported languages.
@@ -42,6 +47,7 @@ class languageManager : public QObject
 	public:
 		explicit languageManager(QObject *parent = nullptr);
 		virtual ~languageManager();
+		void setLanguage(int index);
 		QList<QLocale::Language> supportedLanguages;
 		QList<QLocale::Country> supportedCountries;
 		QStringList boxItems;
