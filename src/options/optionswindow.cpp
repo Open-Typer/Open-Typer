@@ -64,7 +64,6 @@ void optionsWindow::changeOptionWidget(int index)
 		case 0:
 			// Language
 			options = new languageList;
-			connect(options,SIGNAL(languageChanged(int)),this,SLOT(changeLanguage(int)));
 			break;
 		case 1:
 			// Behavior
@@ -99,15 +98,6 @@ void optionsWindow::changeOptionWidget(int index)
 void optionsWindow::init(void)
 {
 	ui->list->setCurrentRow(0);
-}
-
-/*!
- * Connected from languageList#languageChanged().\n
- * Emits languageChanged() signal so that parent windows can retranslate the UI.
- */
-void optionsWindow::changeLanguage(int index)
-{
-	emit languageChanged(index);
 }
 
 /*! Overrides QWidget#changeEvent().
