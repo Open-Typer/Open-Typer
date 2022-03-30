@@ -68,7 +68,6 @@ class OpenTyper : public QMainWindow
 		Ui::OpenTyper *ui;
 		QSettings settings;
 		languageManager langMgr;
-		void connectAll(void);
 		configParser parser;
 		monitorClient client;
 		QString studentUsername, studentPassword;

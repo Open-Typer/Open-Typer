@@ -45,8 +45,32 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	studentPassword = "";
 	oldConfigName = "";
 	refreshAll(true);
-	// Connect signals to slots
-	connectAll();
+	// Connections
+	connect(&client, SIGNAL(disconnected()), this, SLOT(updateStudent()));
+	connect(&client, &monitorClient::exerciseReceived, this, &OpenTyper::loadReceivedExercise);
+	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
+	connect(ui->inputLabel, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(keyPress(QKeyEvent*)));
+	connect(ui->inputLabel, SIGNAL(keyReleased(QKeyEvent*)), this, SLOT(keyRelease(QKeyEvent*)));
+	connect(ui->optionsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
+	connect(ui->openEditorButton, SIGNAL(clicked()), this, SLOT(openEditor()));
+	connect(ui->studentButton, SIGNAL(clicked()), this, SLOT(openStudentOptions()));
+	connect(ui->repeatButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
+	connect(ui->nextButton, SIGNAL(clicked()), this, SLOT(nextLevel()));
+	connect(ui->previousButton, SIGNAL(clicked()), this, SLOT(previousLevel()));
+	connect(ui->lessonSelectionList, SIGNAL(activated(int)), this, SLOT(lessonSelectionListIndexChanged(int)));
+	connect(ui->sublessonSelectionList, SIGNAL(activated(int)), this, SLOT(sublessonSelectionListIndexChanged(int)));
+	connect(ui->levelSelectionList, SIGNAL(activated(int)), this, SLOT(levelSelectionListIndexChanged(int)));
+	connect(ui->zoomInButton, SIGNAL(clicked()), this, SLOT(zoomIn()));
+	connect(ui->zoomOutButton, SIGNAL(clicked()), this, SLOT(zoomOut()));
+	connect(ui->timedExerciseButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
+	connect(ui->statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
+	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
+	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
+	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
+	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &OpenTyper::loadTheme);
+	// Start timer (used to update currentTimeNumber every second)
+	secLoop = new QTimer(this);
+	secLoop->start(500);
 #ifndef Q_OS_WASM
 	// Check for updates
 	new Updater();
@@ -151,111 +175,6 @@ void OpenTyper::refreshAll(bool setLang)
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
 	}
-}
-
-/*! Sets up all connections. */
-void OpenTyper::connectAll(void)
-{
-	// Create timer (used to update currentTimeNumber every second)
-	secLoop = new QTimer(this);
-	// Client disconnected signal
-	connect(&client,
-		SIGNAL(disconnected()),
-		this,
-		SLOT(updateStudent()));
-	// Client exercise received signal
-	connect(&client,
-		&monitorClient::exerciseReceived,
-		this,
-		&OpenTyper::loadReceivedExercise);
-	// **Timers**
-	// Updates current time in seconds
-	connect(secLoop,
-		SIGNAL(timeout()),
-		this,
-		SLOT(updateCurrentTime()));
-	// **Widgets**
-	// inputLabel
-	connect(ui->inputLabel,
-		SIGNAL(keyPressed(QKeyEvent*)),
-		this,
-		SLOT(keyPress(QKeyEvent*)));
-	connect(ui->inputLabel,
-		SIGNAL(keyReleased(QKeyEvent*)),
-		this,
-		SLOT(keyRelease(QKeyEvent*)));
-	// Options button
-	connect(ui->optionsButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(openOptions()));
-	// Open editor button
-	connect(ui->openEditorButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(openEditor()));
-	// Student options button
-	connect(ui->studentButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(openStudentOptions()));
-	// Repeat exercise button
-	connect(ui->repeatButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(repeatLevel()));
-	// Next exercise button
-	connect(ui->nextButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(nextLevel()));
-	// Previous exercise button
-	connect(ui->previousButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(previousLevel()));
-	// List of lessons
-	connect(ui->lessonSelectionList,
-		SIGNAL(activated(int)),
-		this,
-		SLOT(lessonSelectionListIndexChanged(int)));
-	// List of sub lessons
-	connect(ui->sublessonSelectionList,
-		SIGNAL(activated(int)),
-		this,
-		SLOT(sublessonSelectionListIndexChanged(int)));
-	// List of levels
-	connect(ui->levelSelectionList,
-		SIGNAL(activated(int)),
-		this,
-		SLOT(levelSelectionListIndexChanged(int)));
-	// Zoom in button
-	connect(ui->zoomInButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(zoomIn()));
-	// Zoom out button
-	connect(ui->zoomOutButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(zoomOut()));
-	// Timed exercise button
-	connect(ui->timedExerciseButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(initTimedExercise()));
-	// Stats button
-	connect(ui->statsButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(showExerciseStats()));
-	// Theme engine
-	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
-	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
-	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
-	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &OpenTyper::loadTheme);
-	// Start timer
-	secLoop->start(500);
 }
 
 /*!
