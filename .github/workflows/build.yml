@@ -81,7 +81,7 @@ jobs:
         source .ci/ubuntu-build.sh
         cp -r res/linux-release debpkg
         mkdir -p debpkg/usr/local/bin
-        cp Open-Typer debpkg/usr/local/bin/
+        cp Open-Typer debpkg/usr/local/bin/open-typer
         echo "libc6_version=$(dpkg -s libc6 | grep '^Version:' | cut -d' ' -f2 | cut -d'-' -f1)" >> $GITHUB_ENV
         echo "distro=$(lsb_release -is | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
         echo "codename=$(lsb_release -cs)" >> $GITHUB_ENV
