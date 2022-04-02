@@ -89,12 +89,11 @@
     </message>
     <message>
         <source>Exercise history</source>
-        <extracomment>The history (and stats) of this exercise</extracomment>
-        <translation type="unfinished">Aufgabe Verlauf</translation>
+        <translation>Aufgabe Verlauf</translation>
     </message>
     <message>
         <source>Student options</source>
-        <translation type="unfinished"></translation>
+        <translation>Student Optionen</translation>
     </message>
     <message>
         <source>Logged in as %1</source>
@@ -107,6 +106,22 @@
     <message>
         <source>Open</source>
         <translation>Öffnen</translation>
+    </message>
+    <message>
+        <source>Close loaded exercise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generate text from error words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reversed text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You don&apos;t have any error words.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -380,10 +395,6 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Gesamtzeit:</translation>
     </message>
     <message>
-        <source>Hits per minute:</source>
-        <translation>Schläge pro Minute:</translation>
-    </message>
-    <message>
         <source>Exercise completed</source>
         <translation>Aufgaben abgeschlossen</translation>
     </message>
@@ -396,12 +407,20 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Sekunden</translation>
     </message>
     <message>
-        <source>Total hits:</source>
-        <translation>Gesamtschläge:</translation>
-    </message>
-    <message>
         <source>Preview</source>
         <translation>Vorschau</translation>
+    </message>
+    <message>
+        <source>Number of net hits per minute:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total number of hits:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of gross hits per minute:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -684,19 +703,19 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>themeEngine</name>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Standard</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation type="unfinished">Dunkel</translation>
+        <translation>Dunkel</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished">Hell</translation>
+        <translation>Hell</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished">Grün</translation>
+        <translation>Grün</translation>
     </message>
     <message>
         <source>Custom</source>
