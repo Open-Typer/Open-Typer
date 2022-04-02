@@ -398,6 +398,12 @@ QString configParser::initExercise(QString exercise, int lineLength, bool lineCo
 	return out;
 }
 
+/*! Generates text without line wrapping nor repeating. */
+QString configParser::initText(QString rawText)
+{
+	return generateText(rawText, false, "", 0);
+}
+
 /*! Implementation of exerciseRepeatBool() for a config string. */
 bool configParser::exerciseRepeatBool(const QString config)
 {

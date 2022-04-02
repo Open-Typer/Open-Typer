@@ -75,6 +75,7 @@ class configParser : public QObject
 		QString exerciseText(int lesson, int sublesson, int exercise);
 		static QString initExercise(QString exercise, int lineLength);
 		static QString initExercise(QString exercise, int lineLength, bool lineCountLimit, int currentLine);
+		static QString initText(QString rawText);
 		bool addExercise(int lesson, int sublesson, int exercise, bool repeat, QString repeatType, int repeatLimit, int lineLength, QString desc, QString rawText);
 
 	private:
@@ -90,7 +91,7 @@ class configParser : public QObject
 		QString exerciseAttribute(const QString config, const int id);
 		QString exerciseAttributes(const QString line);
 		QString exerciseRawText(const QString line);
-		QString generateText(QString rawText, bool repeat, QString repeatType, int repeatLimit);
+		static QString generateText(QString rawText, bool repeat, QString repeatType, int repeatLimit);
 };
 
 /*! \brief The historyParser class provides functions for exercise history and statistics. */
