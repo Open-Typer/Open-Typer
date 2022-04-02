@@ -66,6 +66,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->zoomInButton, SIGNAL(clicked()), this, SLOT(zoomIn()));
 	connect(ui->zoomOutButton, SIGNAL(clicked()), this, SLOT(zoomOut()));
 	connect(ui->timedExerciseButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
+	connect(ui->stopTimedExButton, &QPushButton::clicked, ui->timedExerciseButton, &QPushButton::clicked);
 	connect(ui->statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
 	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
 	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
