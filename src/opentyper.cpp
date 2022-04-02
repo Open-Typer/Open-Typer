@@ -569,6 +569,7 @@ void OpenTyper::lessonSelectionListIndexChanged(int index)
 	currentLesson = index+1;
 	currentSublesson = 1;
 	currentLevel = 1;
+	customLevelLoaded = false;
 	repeatLevel();
 }
 
@@ -579,6 +580,7 @@ void OpenTyper::sublessonSelectionListIndexChanged(int index)
 {
 	currentSublesson = index+1;
 	currentLevel = 1;
+	customLevelLoaded = false;
 	repeatLevel();
 }
 
@@ -588,6 +590,7 @@ void OpenTyper::sublessonSelectionListIndexChanged(int index)
 void OpenTyper::levelSelectionListIndexChanged(int index)
 {
 	currentLevel = index+1;
+	customLevelLoaded = false;
 	repeatLevel();
 }
 
