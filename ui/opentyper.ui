@@ -550,6 +550,57 @@
               </widget>
              </item>
              <item>
+              <widget class="QFrame" name="exerciseOptionsFrame">
+               <property name="frameShape">
+                <enum>QFrame::WinPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <property name="lineWidth">
+                <number>3</number>
+               </property>
+               <property name="midLineWidth">
+                <number>3</number>
+               </property>
+               <layout class="QGridLayout" name="gridLayout">
+                <item row="1" column="0">
+                 <widget class="QPushButton" name="errorWordsButton">
+                  <property name="toolTip">
+                   <string>Generate text from error words</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../res.qrc">
+                    <normaloff>:/res/images/errorWords.png</normaloff>:/res/images/errorWords.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>36</width>
+                    <height>36</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <spacer name="tmpSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
               <widget class="QFrame" name="trainingFrame4">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -570,20 +621,6 @@
                 <number>3</number>
                </property>
                <layout class="QGridLayout" name="gridLayout_3">
-                <item row="1" column="0">
-                 <widget class="QLabel" name="currentTimeLabel">
-                  <property name="text">
-                   <string>Time:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QLabel" name="currentMistakesNumber">
-                  <property name="text">
-                   <string notr="true">0</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="2" column="0">
                  <widget class="QLabel" name="currentMistakesLabel">
                   <property name="text">
@@ -595,6 +632,20 @@
                  <widget class="QLabel" name="currentTimeNumber">
                   <property name="text">
                    <string notr="true">0</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLabel" name="currentMistakesNumber">
+                  <property name="text">
+                   <string notr="true">0</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="currentTimeLabel">
+                  <property name="text">
+                   <string>Time:</string>
                   </property>
                  </widget>
                 </item>
