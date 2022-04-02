@@ -32,6 +32,7 @@ class stringUtils
 	public:
 		static int wordCount(QString str);
 		static QString word(QString str, int id);
+		static QString wordAt(QString str, int index);
 };
 
 /*! \brief The fileUtils class contains functions for file or directory paths. */

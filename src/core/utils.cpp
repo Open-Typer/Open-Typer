@@ -56,6 +56,28 @@ QString stringUtils::word(QString str, int id)
 	return "";
 }
 
+/*! Returns the word at index. */
+QString stringUtils::wordAt(QString str, int index)
+{
+	if(str[index] == ' ')
+		return "";
+	QString currentWord = "";
+	for(int i=0; i < str.count(); i++)
+	{
+		if((str[i] == ' ') || (i+1 >= str.count()))
+		{
+			if(i+1 >= str.count())
+				currentWord += str[i];
+			if(i > index)
+				return currentWord;
+			currentWord = "";
+		}
+		else
+			currentWord += str[i];
+	}
+	return "";
+}
+
 /*!
  * Returns the path to the program configuration directory.\n
  * For example: <tt>/home/user/.config/Open-Typer</tt>
