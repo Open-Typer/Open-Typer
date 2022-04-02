@@ -34,5 +34,6 @@
         <file>res/images/up.png</file>
         <file>res/images/down.png</file>
         <file>res/images/errorWords.png</file>
+        <file>res/images/reversedExercise.png</file>
     </qresource>
 </RCC>
