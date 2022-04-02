@@ -104,6 +104,7 @@ class OpenTyper : public QMainWindow
 		bool timedExStarted;
 		bool blockInput;
 		void loadText(QByteArray text, bool includeNewLines = false, bool updateStudent = true);
+		void endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes);
 
 	protected:
 		void changeEvent(QEvent *event);

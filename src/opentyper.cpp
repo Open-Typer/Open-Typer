@@ -658,11 +658,7 @@ void OpenTyper::loadText(QByteArray text, bool includeNewLines, bool updateClien
  */
 void OpenTyper::keyPress(QKeyEvent *event)
 {
-	if(blockInput)
-		return;
-	if(event->isAutoRepeat())
-		return;
-	if((currentMode == 1) && !timedExStarted)
+	if(blockInput || event->isAutoRepeat() || ((currentMode == 1) && !timedExStarted))
 		return;
 	int highlightID = event->key();
 	if((input.count() < level.count()) && (event->key() == Qt::Key_Shift))
@@ -697,7 +693,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	if((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))
 		keyText = "\n";
 	QString convertedKeyText = keyText.toHtmlEscaped();
-	if((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || spaceNewline) && (keyText == level[levelPos]))) && !mistake)
+	if(( ((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) ||
+		(((displayLevel[displayPos] != '\n') || spaceNewline) && (keyText == level[levelPos]))) && !mistake)
 	{
 		input += keyText;
 		displayInput += convertedKeyText;
@@ -708,7 +705,6 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			mistakeTextHtml += "<br>";
 			displayInput = "";
 			mistakeLabelHtml = "";
-			ui->mistakeLabel->setHtml(mistakeLabelHtml);
 			currentLine++;
 			updateText();
 		}
@@ -721,10 +717,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				QString mistakeLabelAppend = "<span style='color: rgba(0,0,0,0)'>" + keyText + "</span>";
 				mistakeTextHtml += mistakeLabelAppend;
 				mistakeLabelHtml += mistakeLabelAppend;
-				ui->mistakeLabel->setHtml(mistakeLabelHtml);
 			}
 		}
-		ui->inputLabel->setHtml(displayInput);
 		levelPos++;
 		displayPos++;
 		totalHits++;
@@ -747,12 +741,10 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			deadKeys = 0;
 			if(event->key() == Qt::Key_Backspace)
 			{
-				ui->inputLabel->setHtml(displayInput);
 				if(!ignoreMistakeLabelAppend)
 				{
 					mistakeLabelHtml += "_";
 					mistakeTextHtml += "_";
-					ui->mistakeLabel->setHtml(mistakeLabelHtml);
 				}
 				mistake=false;
 				ignoreMistakeLabelAppend=true;
@@ -762,7 +754,6 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		{
 			if(!keyboardUtils::isSpecialKey(event))
 			{
-				ui->inputLabel->setHtml(displayInput);
 				QString errorAppend;
 				if(keyText == " ")
 					errorAppend = "_";
@@ -781,12 +772,16 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			}
 		}
 	}
+	if(!mistake)
+		ui->inputLabel->setHtml(displayInput);
+	ui->mistakeLabel->setHtml(mistakeLabelHtml);
 	ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
 	ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
 	if(input.count() >= level.count())
 	{
+		keyRelease(event);
 		if(currentMode == 1)
 		{
 			currentLine=0;
@@ -803,56 +798,67 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			ui->inputLabel->setHtml(displayInput);
 		}
 		else
-		{
-			keyRelease(event);
-			levelInProgress=false;
-			lastTime = levelTimer.elapsed()/1000;
-			int speed = levelHits*(60/(levelTimer.elapsed()/1000.0));
-			int realSpeed = totalHits*(60/(levelTimer.elapsed()/1000.0));
-			int time = levelTimer.elapsed()/1000;
-			if((studentUsername != "") && !customLevelLoaded && !customConfig)
-			{
-				updateStudent();
-				client.sendRequest("put",
-					{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentAbsoluteSublesson),QByteArray::number(currentLevel),
-					QByteArray::number(realSpeed),QByteArray::number(levelMistakes),QByteArray::number(time)});
-			}
-			else if(!customLevelLoaded && !customConfig)
-				historyParser::addHistoryEntry(publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,
-					{QString::number(realSpeed),QString::number(levelMistakes),QString::number(time)});
-			levelSummary *msgBox = new levelSummary(this);
-			msgBox->setTotalTime(time);
-			msgBox->setHits(speed);
-			msgBox->setMistakes(levelMistakes);
-			msgBox->setWindowModality(Qt::WindowModal);
-			connect(msgBox, &QDialog::accepted, this, [this]() {
-				// Load saved text
-				ui->inputLabel->setHtml(inputTextHtml);
-				ui->mistakeLabel->setHtml(mistakeTextHtml);
-				// Set width
-				ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
-				ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
-				// Set height
-				ui->inputLabel->setMinimumHeight(ui->inputLabel->document()->size().height());
-				ui->mistakeLabel->setMinimumHeight(ui->mistakeLabel->document()->size().height());
-				// Move cursor to the end
-				ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
-				ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
-				// Hide other widgets
-				ui->levelCurrentLineLabel->hide();
-				ui->textSeparationLine->hide();
-				ui->levelLabel->setText(""); // Using hide() breaks the layout, it's better to set empty text
-				blockInput = true;
-			});
-			connect(msgBox, &QDialog::rejected, this, [this]() {
-				if(customLevelLoaded)
-					levelFinalInit();
-				else
-					repeatLevel();
-			});
-			msgBox->open();
-		}
+			endExercise(true, true, false, true, true);
 	}
+}
+
+/*! Ends the exercise by (optionally) saving the results and showing the levelSummary dialog. */
+void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes)
+{
+	levelInProgress=false;
+	lastTime = levelTimer.elapsed()/1000;
+	int netHits = levelHits*(60/(levelTimer.elapsed()/1000.0));
+	int grossHits = totalHits*(60/(levelTimer.elapsed()/1000.0));
+	int time = levelTimer.elapsed()/1000;
+	if((studentUsername != "") && !customLevelLoaded && !customConfig)
+	{
+		updateStudent();
+		client.sendRequest("put",
+			{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentAbsoluteSublesson),QByteArray::number(currentLevel),
+			QByteArray::number(grossHits),QByteArray::number(levelMistakes),QByteArray::number(time)});
+	}
+	else if(!customLevelLoaded && !customConfig)
+		historyParser::addHistoryEntry(publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,
+			{QString::number(grossHits),QString::number(levelMistakes),QString::number(time)});
+	levelSummary *msgBox = new levelSummary(this);
+	if(showNetHits)
+		msgBox->setNetHits(netHits);
+	if(showGrossHits)
+		msgBox->setGrossHits(grossHits);
+	if(showTime)
+		msgBox->setTotalTime(time);
+	if(showTotalHits)
+		msgBox->setTotalHits(totalHits);
+	if(showMistakes)
+	msgBox->setMistakes(levelMistakes);
+	msgBox->setWindowModality(Qt::WindowModal);
+	connect(msgBox, &QDialog::accepted, this, [this]() {
+		// Load saved text
+		ui->inputLabel->setHtml(inputTextHtml);
+		ui->mistakeLabel->setHtml(mistakeTextHtml);
+		// Set width
+		ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
+		ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
+		// Set height
+		ui->inputLabel->setMinimumHeight(ui->inputLabel->document()->size().height());
+		ui->mistakeLabel->setMinimumHeight(ui->mistakeLabel->document()->size().height());
+		// Move cursor to the end
+		ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+		ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+		// Hide other widgets
+		ui->levelCurrentLineLabel->hide();
+		ui->textSeparationLine->hide();
+		ui->levelLabel->setText(""); // Using hide() breaks the layout, it's better to set empty text
+		blockInput = true;
+	});
+	connect(msgBox, &QDialog::rejected, this, [this]() {
+		if(customLevelLoaded)
+			levelFinalInit();
+		else
+			repeatLevel();
+	});
+	connect(msgBox, &QDialog::finished, this, [this]() { changeMode(0); });
+	msgBox->open();
 }
 
 /*!
@@ -891,38 +897,8 @@ void OpenTyper::updateCurrentTime(void)
 			{
 				if(levelInProgress)
 				{
-					// Show summary
-					levelInProgress=false;
-					lastTime = levelTimer.elapsed()/1000;
-					levelSummary *msgBox = new levelSummary(this);
 					ui->timedExCountdownLabel->hide();
-					msgBox->setTotalTime(levelTimer.elapsed()/1000);
-					msgBox->setHitCount(totalHits);
-					msgBox->setHits(levelHits*(60/(levelTimer.elapsed()/1000.0)));
-					msgBox->setMistakes(levelMistakes);
-					msgBox->setWindowModality(Qt::WindowModal);
-					connect(msgBox, &QDialog::accepted, this, [this]() {
-						// Load saved text
-						ui->inputLabel->setHtml(inputTextHtml);
-						ui->mistakeLabel->setHtml(mistakeTextHtml);
-						// Set width
-						ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
-						ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
-						// Set height
-						ui->inputLabel->setMinimumHeight(ui->inputLabel->document()->size().height());
-						ui->mistakeLabel->setMinimumHeight(ui->mistakeLabel->document()->size().height());
-						// Move cursor to the end
-						ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
-						ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
-						// Hide other widgets
-						ui->levelCurrentLineLabel->hide();
-						ui->textSeparationLine->hide();
-						ui->levelLabel->setText(""); // Using hide() breaks the layout, it's better to set empty text
-						blockInput = true;
-					});
-					connect(msgBox, &QDialog::rejected, this, [this]() { repeatLevel(); } );
-					connect(msgBox, &QDialog::finished, this, [this]() { changeMode(0);; } );
-					msgBox->open();
+					endExercise(true, true, true, true, true);
 				}
 			}
 			else
