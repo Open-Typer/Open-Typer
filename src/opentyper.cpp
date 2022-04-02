@@ -645,7 +645,7 @@ void OpenTyper::loadText(QByteArray text, bool includeNewLines, bool updateClien
 	in.open(QBuffer::ReadOnly | QBuffer::Text);
 	while (!in.atEnd())
 	{
-		QString line = in.readLine();
+		QString line = QString(in.readLine()).remove('\n');
 		if(level == "")
 			level = line;
 		else
