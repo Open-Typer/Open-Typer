@@ -55,6 +55,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->openEditorButton, SIGNAL(clicked()), this, SLOT(openEditor()));
 	connect(ui->studentButton, SIGNAL(clicked()), this, SLOT(openStudentOptions()));
 	connect(ui->repeatButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
+	connect(ui->closeCustomExButton, &QPushButton::clicked, this, [this](){ customLevelLoaded = false; repeatLevel(); });
 	connect(ui->nextButton, SIGNAL(clicked()), this, SLOT(nextLevel()));
 	connect(ui->previousButton, SIGNAL(clicked()), this, SLOT(previousLevel()));
 	connect(ui->lessonSelectionList, SIGNAL(activated(int)), this, SLOT(lessonSelectionListIndexChanged(int)));
@@ -358,6 +359,7 @@ void OpenTyper::levelFinalInit(bool updateClient)
 	ui->mistakeLabel->setHtml(mistakeLabelHtml);
 	ui->currentTimeNumber->setText("0");
 	ui->currentMistakesNumber->setText("0");
+	ui->closeCustomExButton->setVisible(customLevelLoaded);
 	// Init level input
 	input = "";
 	inputTextHtml = "";
