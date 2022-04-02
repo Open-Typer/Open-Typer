@@ -17,6 +17,9 @@ jobs:
           - os: windows-latest
             qt-version: '5.12.8'
             mingw-version: 73
+        exclude:
+          - os: windows-latest
+            qt-version: '5.9.5'
     steps:
     - uses: actions/checkout@v2
       with:
