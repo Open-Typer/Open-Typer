@@ -107,6 +107,7 @@ class OpenTyper : public QMainWindow
 		void endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes);
 		QStringList errorWords;
 		void loadErrorWords(void);
+		void loadReversedText(void);
 
 	protected:
 		void changeEvent(QEvent *event);

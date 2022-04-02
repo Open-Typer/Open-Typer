@@ -61,6 +61,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->sublessonSelectionList, SIGNAL(activated(int)), this, SLOT(sublessonSelectionListIndexChanged(int)));
 	connect(ui->levelSelectionList, SIGNAL(activated(int)), this, SLOT(levelSelectionListIndexChanged(int)));
 	connect(ui->errorWordsButton, &QPushButton::clicked, this, &OpenTyper::loadErrorWords);
+	connect(ui->reversedTextButton, &QPushButton::clicked, this, &OpenTyper::loadReversedText);
 	connect(ui->zoomInButton, SIGNAL(clicked()), this, SLOT(zoomIn()));
 	connect(ui->zoomOutButton, SIGNAL(clicked()), this, SLOT(zoomOut()));
 	connect(ui->timedExerciseButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
@@ -691,6 +692,15 @@ void OpenTyper::loadErrorWords(void)
 			usedWords.clear();
 	}
 	loadText(outputWords.join(" ").toUtf8());
+}
+
+/*! Generates reversed text. */
+void OpenTyper::loadReversedText(void)
+{
+	QString newText = "";
+	for(int i = level.count()-1; i >= 0; i--)
+		newText += level[i];
+	loadText(newText.toUtf8(), true);
 }
 
 /*! Connected from inputLabelWidget#keyPressed signal.\n
