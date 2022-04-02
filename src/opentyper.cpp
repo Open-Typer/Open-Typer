@@ -44,6 +44,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	studentUsername = "";
 	studentPassword = "";
 	oldConfigName = "";
+	errorWords.clear();
 	refreshAll(true);
 	// Connections
 	connect(&client, SIGNAL(disconnected()), this, SLOT(updateStudent()));
@@ -59,6 +60,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->lessonSelectionList, SIGNAL(activated(int)), this, SLOT(lessonSelectionListIndexChanged(int)));
 	connect(ui->sublessonSelectionList, SIGNAL(activated(int)), this, SLOT(sublessonSelectionListIndexChanged(int)));
 	connect(ui->levelSelectionList, SIGNAL(activated(int)), this, SLOT(levelSelectionListIndexChanged(int)));
+	connect(ui->errorWordsButton, &QPushButton::clicked, this, &OpenTyper::loadErrorWords);
 	connect(ui->zoomInButton, SIGNAL(clicked()), this, SLOT(zoomIn()));
 	connect(ui->zoomOutButton, SIGNAL(clicked()), this, SLOT(zoomOut()));
 	connect(ui->timedExerciseButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
@@ -653,6 +655,44 @@ void OpenTyper::loadText(QByteArray text, bool includeNewLines, bool updateClien
 	levelFinalInit(updateClient);
 }
 
+/*! Generates text from error words. */
+void OpenTyper::loadErrorWords(void)
+{
+	if(errorWords.count() == 0)
+	{
+		QMessageBox *msgBox = new QMessageBox(this);
+		msgBox->setWindowModality(Qt::WindowModal);
+		msgBox->setText(tr("You don't have any error words."));
+		msgBox->setIcon(QMessageBox::Information);
+		msgBox->open();
+		return;
+	}
+	int wordCount = 25;
+	if(errorWords.count() > wordCount)
+		wordCount += errorWords.count() - wordCount;
+	QStringList usedWords, outputWords;
+	usedWords.clear();
+	outputWords.clear();
+	for(int i=0; i < wordCount; i++)
+	{
+		QString word;
+		do {
+			int index;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+			index = QRandomGenerator::global()->bounded(0, errorWords.count());
+#else
+			index = qrand() % errorWords.count();
+#endif
+			word = errorWords[index];
+		} while(usedWords.contains(word));
+		usedWords += word;
+		outputWords += word;
+		if(usedWords.count() == errorWords.count())
+			usedWords.clear();
+	}
+	loadText(outputWords.join(" ").toUtf8());
+}
+
 /*! Connected from inputLabelWidget#keyPressed signal.\n
  * Handles all key presses, counts hits, displays typed characters and counts mistakes.
  */
@@ -681,6 +721,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		return;
 	if((levelPos == 0) && !levelInProgress)
 	{
+		errorWords.clear();
 		levelTimer.start();
 		secLoop->start(500);
 		levelInProgress=true;
@@ -765,6 +806,9 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 				mistake=true;
+				QString errorWord = stringUtils::wordAt(level, levelPos);
+				if((errorWord != "") && !errorWords.contains(errorWord))
+					errorWords += errorWord;
 				deadKeys = 0;
 				levelHits -= errorPenalty;
 				if(levelHits < 0)
