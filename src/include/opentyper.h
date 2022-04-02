@@ -103,7 +103,7 @@ class OpenTyper : public QMainWindow
 		int timedExHours, timedExMinutes, timedExSeconds;
 		bool timedExStarted;
 		bool blockInput;
-		void loadText(QByteArray text, bool includeNewLines = false, bool updateStudent = true);
+		void loadText(QByteArray text, bool includeNewLines = false, bool updateClient = true);
 		void endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes);
 
 	protected:
