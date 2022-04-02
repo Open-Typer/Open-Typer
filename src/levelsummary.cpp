@@ -29,7 +29,8 @@ levelSummary::levelSummary(QWidget *parent) :
 	ui->setupUi(this);
 	ui->timeLabel->hide();
 	ui->hitsLabel->hide();
-	ui->hpmLabel->hide();
+	ui->netHitsLabel->hide();
+	ui->grossHitsLabel->hide();
 	ui->mistakesLabel->hide();
 	// Connections
 	connect(ui->previewButton,SIGNAL(clicked()),this,SLOT(accept()));
@@ -50,19 +51,27 @@ void levelSummary::setTotalTime(double time)
 }
 
 /*! Sets and shows the total number of hits (excluding error penalty). */
-void levelSummary::setHitCount(int hits)
+void levelSummary::setTotalHits(int hits)
 {
 	ui->hitsLabel->setText(
 		ui->hitsLabel->text() + " " + QString::number(hits));
 	ui->hitsLabel->show();
 }
 
-/*! Sets and shows the number of hits per minute. */
-void levelSummary::setHits(int hits)
+/*! Sets and shows the number of net hits per minute. */
+void levelSummary::setNetHits(int hits)
 {
-	ui->hpmLabel->setText(
-		ui->hpmLabel->text() + " " + QString::number(hits));
-	ui->hpmLabel->show();
+	ui->netHitsLabel->setText(
+		ui->netHitsLabel->text() + " " + QString::number(hits));
+	ui->netHitsLabel->show();
+}
+
+/*! Sets and shows the number of gross hits per minute. */
+void levelSummary::setGrossHits(int hits)
+{
+	ui->grossHitsLabel->setText(
+		ui->grossHitsLabel->text() + " " + QString::number(hits));
+	ui->grossHitsLabel->show();
 }
 
 /*! Sets and shows the number of mistakes */

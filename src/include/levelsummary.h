@@ -42,8 +42,9 @@ class levelSummary : public QDialog
 		explicit levelSummary(QWidget *parent = nullptr);
 		~levelSummary();
 		void setTotalTime(double time);
-		void setHitCount(int hits);
-		void setHits(int hits);
+		void setTotalHits(int hits);
+		void setNetHits(int hits);
+		void setGrossHits(int hits);
 		void setMistakes(int mistakes);
 
 	private:
