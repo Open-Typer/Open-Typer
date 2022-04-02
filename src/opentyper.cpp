@@ -702,8 +702,9 @@ void OpenTyper::loadErrorWords(void)
 /*! Generates reversed text. */
 void OpenTyper::loadReversedText(void)
 {
+	QString oldText = configParser::initText(level);
 	QString newText = "";
-	for(int i = level.count()-1; i >= 0; i--)
+	for(int i = oldText.count()-1; i >= 0; i--)
 		newText += level[i];
 	loadText(newText.toUtf8(), true);
 }
