@@ -16,6 +16,7 @@ jobs:
         include:
           - os: windows-latest
             qt-version: '5.12.8'
+            qt-target: 'desktop'
             mingw-version: 73
         exclude:
           - os: windows-latest
