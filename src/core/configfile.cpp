@@ -99,6 +99,8 @@ QString configParser::fileName(void)
 /*! Returns the number of lessons in the pack file or buffer. */
 int configParser::lessonCount(void)
 {
+	if(!currentDevice->isReadable())
+		return 0;
 	currentDevice->seek(0);
 	QList<int> lessonIDs;
 	while(!currentDevice->atEnd())
@@ -118,6 +120,8 @@ int configParser::lessonCount(void)
  */
 int configParser::sublessonCount(int lesson)
 {
+	if(!currentDevice->isReadable())
+		return 0;
 	currentDevice->seek(0);
 	QList<int> sublessonIDs;
 	while(!currentDevice->atEnd())
@@ -137,6 +141,8 @@ int configParser::sublessonCount(int lesson)
 /*! Returns the number of exercises in a sublesson. */
 int configParser::exerciseCount(int lesson, int sublesson)
 {
+	if(!currentDevice->isReadable())
+		return 0;
 	currentDevice->seek(0);
 	QList<int> exerciseIDs;
 	while(!currentDevice->atEnd())
@@ -160,6 +166,8 @@ int configParser::exerciseCount(int lesson, int sublesson)
 /*! Returns the line the exercise is located in the pack file or buffer. */
 int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 {
+	if(!currentDevice->isReadable())
+		return -1;
 	currentDevice->seek(0);
 	int lineID = 0;
 	while(!currentDevice->atEnd())
@@ -199,6 +207,8 @@ int configParser::exerciseLineLength(int lesson, int sublesson, int exercise)
 /*! Returns the description of a lesson (what new characters are learned in it). */
 QString configParser::lessonDesc(int lesson)
 {
+	if(!currentDevice->isReadable())
+		return "";
 	currentDevice->seek(0);
 	while(!currentDevice->atEnd())
 	{
@@ -607,6 +617,8 @@ int configParser::exerciseID(const QString line, const int part)
 /*! Returns line string of the exercise. */
 QString configParser::lineOf(int lesson, int sublesson, int exercise)
 {
+	if(!currentDevice->isReadable())
+		return "";
 	currentDevice->seek(0);
 	while(!currentDevice->atEnd())
 	{
