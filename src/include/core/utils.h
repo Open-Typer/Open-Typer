@@ -33,6 +33,7 @@ class stringUtils
 		static int wordCount(QString str);
 		static QString word(QString str, int id);
 		static QString wordAt(QString str, int index);
+		static QString longestCommonSubsequence(QString source, QString target);
 };
 
 /*! \brief The fileUtils class contains functions for file or directory paths. */

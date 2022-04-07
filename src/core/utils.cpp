@@ -78,6 +78,48 @@ QString stringUtils::wordAt(QString str, int index)
 	return "";
 }
 
+/*! Returns the longest common subsequence of source and target string. */
+QString stringUtils::longestCommonSubsequence(QString source, QString target)
+{
+	/*
+	* References:
+	* https://www.geeksforgeeks.org/printing-longest-common-subsequence/
+	* https://nasauber.de/blog/2019/levenshtein-distance-and-longest-common-subsequence-in-qt/
+	*/
+	QMap<int, QMap<int, int>> l;
+	for (int i = 0; i <= source.count(); i++)
+	{
+		for (int j = 0; j <= target.count(); j++)
+		{
+			if (i == 0 || j == 0)
+				l[i][j] = 0;
+			else if (source.at(i - 1) == target.at(j - 1))
+				l[i][j] = l[i - 1][j - 1] + 1;
+			else
+				l[i][j] = std::max(l[i - 1][j], l[i][j - 1]);
+		}
+	}
+	int i = source.count();
+	int j = target.count();
+	int index = l[source.count()][target.count()];
+	QString longestCommonSubsequence;
+	while (i > 0 && j > 0)
+	{
+		if (source.at(i - 1) == target.at(j - 1))
+		{
+			longestCommonSubsequence[index - 1] = source.at(i - 1);
+			i--;
+			j--;
+			index--;
+		}
+		else if (l[i - 1][j] > l[i][j - 1])
+			i--;
+		else
+			j--;
+	}
+	return longestCommonSubsequence;
+}
+
 /*!
  * Returns the path to the program configuration directory.\n
  * For example: <tt>/home/user/.config/Open-Typer</tt>
