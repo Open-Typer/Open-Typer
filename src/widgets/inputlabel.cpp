@@ -22,10 +22,11 @@
 
 /*! Constructs inputLabelWidget. */
 inputLabelWidget::inputLabelWidget(QWidget *parent) :
-	QTextEdit(parent)
+	textView(parent)
 {
 	parentWidget = parent;
 	setAttribute(Qt::WA_InputMethodEnabled,true);
+	setHorizontalAdjust(false);
 }
 
 /*! Destroys the inputLabelWidget object. */
