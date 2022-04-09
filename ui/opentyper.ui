@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1538</width>
-    <height>700</height>
+    <height>754</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -610,29 +610,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="1">
-                 <widget class="QPushButton" name="timedExerciseButton">
-                  <property name="focusPolicy">
-                   <enum>Qt::NoFocus</enum>
-                  </property>
-                  <property name="toolTip">
-                   <string>Timed exercise</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true"/>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../res.qrc">
-                    <normaloff>:/res/images/clock.png</normaloff>:/res/images/clock.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>36</width>
-                    <height>36</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
                 <item row="1" column="0">
                  <widget class="QPushButton" name="errorWordsButton">
                   <property name="focusPolicy">
@@ -679,6 +656,73 @@
                   </property>
                  </widget>
                 </item>
+                <item row="0" column="1">
+                 <widget class="QPushButton" name="timedExerciseButton">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="toolTip">
+                   <string>Timed exercise</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../res.qrc">
+                    <normaloff>:/res/images/clock.png</normaloff>:/res/images/clock.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>36</width>
+                    <height>36</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="exerciseChecksFrame">
+               <property name="frameShape">
+                <enum>QFrame::WinPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <property name="lineWidth">
+                <number>3</number>
+               </property>
+               <property name="midLineWidth">
+                <number>3</number>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_2">
+                <item>
+                 <widget class="QCheckBox" name="correctMistakesCheckBox">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="text">
+                   <string extracomment="Whether to correct mistakes while typing">Correct mistakes</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="exerciseChecksSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
                </layout>
               </widget>
              </item>
@@ -703,20 +747,6 @@
                 <number>3</number>
                </property>
                <layout class="QGridLayout" name="gridLayout_3">
-                <item row="2" column="0">
-                 <widget class="QLabel" name="currentMistakesLabel">
-                  <property name="text">
-                   <string>Mistakes:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QLabel" name="currentTimeNumber">
-                  <property name="text">
-                   <string notr="true">0</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="2" column="1">
                  <widget class="QLabel" name="currentMistakesNumber">
                   <property name="text">
@@ -724,10 +754,10 @@
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="currentTimeLabel">
+                <item row="2" column="0">
+                 <widget class="QLabel" name="currentMistakesLabel">
                   <property name="text">
-                   <string>Time:</string>
+                   <string>Mistakes:</string>
                   </property>
                  </widget>
                 </item>
@@ -741,6 +771,20 @@
                   </property>
                   <property name="text">
                    <string>Current state:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="currentTimeNumber">
+                  <property name="text">
+                   <string notr="true">0</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="currentTimeLabel">
+                  <property name="text">
+                   <string>Time:</string>
                   </property>
                  </widget>
                 </item>
@@ -905,191 +949,114 @@
        <number>0</number>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="3" column="0">
-        <widget class="QFrame" name="typingSpace">
+       <item row="1" column="0">
+        <widget class="QScrollArea" name="currentLineArea">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(0,0,0,0); border: none;</string>
+         </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Plain</enum>
          </property>
-         <layout class="QGridLayout" name="gridLayout_7">
-          <property name="leftMargin">
-           <number>0</number>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QAbstractScrollArea::AdjustIgnored</enum>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <widget class="QWidget" name="currentLineAreaContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>178</width>
+            <height>95</height>
+           </rect>
           </property>
-          <property name="topMargin">
-           <number>0</number>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item row="2" column="0">
-           <widget class="inputLabelWidget" name="inputLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>Courier</family>
-              <pointsize>14</pointsize>
-             </font>
-            </property>
-            <property name="cursor" stdset="0">
-             <cursorShape>IBeamCursor</cursorShape>
-            </property>
-            <property name="mouseTracking">
-             <bool>false</bool>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::StrongFocus</enum>
-            </property>
-            <property name="contextMenuPolicy">
-             <enum>Qt::NoContextMenu</enum>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::WinPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="sizeAdjustPolicy">
-             <enum>QAbstractScrollArea::AdjustToContents</enum>
-            </property>
-            <property name="undoRedoEnabled">
-             <bool>false</bool>
-            </property>
-            <property name="lineWrapMode">
-             <enum>QTextEdit::NoWrap</enum>
-            </property>
-            <property name="html">
-             <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Courier'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="textInteractionFlags">
-             <set>Qt::TextSelectableByKeyboard</set>
-            </property>
-            <property name="text" stdset="0">
-             <string notr="true">input text</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="levelLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>Courier</family>
-              <pointsize>14</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(0, 125, 175);</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <property name="text">
-             <string notr="true">remaining text</string>
-            </property>
-            <property name="textFormat">
-             <enum>Qt::PlainText</enum>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-            </property>
-            <property name="textInteractionFlags">
-             <set>Qt::NoTextInteraction</set>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QTextEdit" name="mistakeLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>Courier</family>
-              <pointsize>14</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="cursor" stdset="0">
-             <cursorShape>IBeamCursor</cursorShape>
-            </property>
-            <property name="mouseTracking">
-             <bool>false</bool>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(215, 71, 15);</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="sizeAdjustPolicy">
-             <enum>QAbstractScrollArea::AdjustToContents</enum>
-            </property>
-            <property name="undoRedoEnabled">
-             <bool>false</bool>
-            </property>
-            <property name="lineWrapMode">
-             <enum>QTextEdit::NoWrap</enum>
-            </property>
-            <property name="html">
-             <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Courier'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="textInteractionFlags">
-             <set>Qt::NoTextInteraction</set>
-            </property>
-            <property name="text" stdset="0">
-             <string notr="true"/>
-            </property>
-           </widget>
-          </item>
-         </layout>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="textView" name="levelCurrentLineLabel">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="mouseTracking">
+              <bool>false</bool>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="contextMenuPolicy">
+              <enum>Qt::NoContextMenu</enum>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="verticalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::AdjustToContents</enum>
+             </property>
+             <property name="undoRedoEnabled">
+              <bool>false</bool>
+             </property>
+             <property name="lineWrapMode">
+              <enum>QTextEdit::NoWrap</enum>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::NoTextInteraction</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
        <item row="2" column="0">
@@ -1099,16 +1066,21 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QFrame" name="levelSpace">
+       <item row="4" column="0">
+        <widget class="QLabel" name="levelLabel">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="cursor">
-          <cursorShape>IBeamCursor</cursorShape>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 125, 175);</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -1116,63 +1088,21 @@ p, li { white-space: pre-wrap; }
          <property name="frameShadow">
           <enum>QFrame::Plain</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_11">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>6</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="levelCurrentLineLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>Courier</family>
-              <pointsize>14</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(0, 125, 175);</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <property name="text">
-             <string notr="true">current line</string>
-            </property>
-            <property name="textFormat">
-             <enum>Qt::PlainText</enum>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-            </property>
-            <property name="textInteractionFlags">
-             <set>Qt::NoTextInteraction</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <property name="text">
+          <string notr="true">remaining text</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
         </widget>
        </item>
-       <item row="4" column="0" alignment="Qt::AlignHCenter">
+       <item row="5" column="0" alignment="Qt::AlignHCenter">
         <widget class="keyboardWidget" name="keyboardFrame">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -1186,6 +1116,200 @@ p, li { white-space: pre-wrap; }
          <property name="frameShadow">
           <enum>QFrame::Plain</enum>
          </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QScrollArea" name="typingSpace">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAsNeeded</enum>
+         </property>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QAbstractScrollArea::AdjustToContents</enum>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <widget class="QWidget" name="typingSpaceContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>178</width>
+            <height>238</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(0,0,0,0);</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="inputLabelWidget" name="inputLabel">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+              </font>
+             </property>
+             <property name="cursor" stdset="0">
+              <cursorShape>IBeamCursor</cursorShape>
+             </property>
+             <property name="mouseTracking">
+              <bool>false</bool>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="contextMenuPolicy">
+              <enum>Qt::NoContextMenu</enum>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="verticalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::AdjustToContents</enum>
+             </property>
+             <property name="undoRedoEnabled">
+              <bool>false</bool>
+             </property>
+             <property name="lineWrapMode">
+              <enum>QTextEdit::NoWrap</enum>
+             </property>
+             <property name="html">
+              <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Courier';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::TextSelectableByKeyboard</set>
+             </property>
+             <property name="text" stdset="0">
+              <string notr="true">input text</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="textView" name="mistakeLabel">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="mouseTracking">
+              <bool>false</bool>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(215, 71, 15);</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="verticalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::AdjustToContents</enum>
+             </property>
+             <property name="undoRedoEnabled">
+              <bool>false</bool>
+             </property>
+             <property name="lineWrapMode">
+              <enum>QTextEdit::NoWrap</enum>
+             </property>
+             <property name="html">
+              <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Courier';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::NoTextInteraction</set>
+             </property>
+             <property name="text" stdset="0">
+              <string notr="true"/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
       </layout>
@@ -1320,6 +1444,11 @@ p, li { white-space: pre-wrap; }
    <extends>QFrame</extends>
    <header>widgets/keyboardwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>textView</class>
+   <extends>QTextEdit</extends>
+   <header>widgets/textview.h</header>
   </customwidget>
  </customwidgets>
  <resources>
