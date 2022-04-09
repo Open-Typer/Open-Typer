@@ -80,7 +80,9 @@ class OpenTyper : public QMainWindow
 		void updateText(void);
 		QString level, displayLevel, finalDisplayLevel, input, displayInput, publicConfigName, oldConfigName;
 		int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentAbsoluteSublesson, currentLevel, currentLine, levelPos, displayPos, levelMistakes, totalHits, levelHits, levelLengthExtension;
+		int lineCount, linePos;
 		int deadKeys;
+		QVector<QPair<QString,int>> recordedCharacters;
 		int sublessonListStart;
 		QElapsedTimer levelTimer;
 		QTimer *secLoop;

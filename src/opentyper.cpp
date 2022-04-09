@@ -32,6 +32,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	ui->mistakeLabel->setParent(ui->inputLabel);
 	inputLabelLayout->addWidget(ui->mistakeLabel);
 	inputLabelLayout->setContentsMargins(0,0,0,0);
+	inputLabelLayout->setAlignment(ui->mistakeLabel, Qt::AlignLeft | Qt::AlignTop);
 	QMenu *openMenu = new QMenu(ui->openButton);
 	QAction *openExerciseAction = openMenu->addAction(tr("Open custom exercise"));
 	QAction *openPackAction = openMenu->addAction(tr("Open custom pack"));
@@ -343,13 +344,16 @@ void OpenTyper::levelFinalInit(bool updateClient)
 	// Init level
 	if(currentMode == 1)
 		level += '\n';
+	ui->exerciseChecksFrame->setEnabled(true);
 	currentLine=0;
 	updateText();
 	levelPos=0;
 	displayPos=0;
+	linePos = 0;
 	levelMistakes=0;
 	totalHits=0;
 	levelHits=0;
+	recordedCharacters.clear();
 	deadKeys=0;
 	levelInProgress=false;
 	lastTime=0;
@@ -379,10 +383,14 @@ void OpenTyper::levelFinalInit(bool updateClient)
  */
 void OpenTyper::updateText(void)
 {
-	ui->levelCurrentLineLabel->show();
+	ui->currentLineArea->show();
+	ui->inputLabel->setFocusPolicy(Qt::StrongFocus);
+	ui->typingSpace->setFocusPolicy(Qt::NoFocus);
+	ui->typingSpace->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	ui->textSeparationLine->show();
 	ui->levelLabel->show();
 	displayLevel = configParser::initExercise(level,levelLengthExtension);
+	lineCount = displayLevel.count('\n');
 	// Process exercise text
 	finalDisplayLevel = configParser::initExercise(level,levelLengthExtension,false,currentLine);
 	QString currentLineText = "";
@@ -403,14 +411,13 @@ void OpenTyper::updateText(void)
 			line++;
 		}
 	}
-	ui->inputLabel->setMinimumHeight(0);
-	ui->mistakeLabel->setMinimumHeight(0);
 	ui->inputLabel->setPlainText(displayLevel);
-	ui->levelCurrentLineLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
 	ui->levelCurrentLineLabel->setText(currentLineText);
-	ui->inputLabel->setHtml(displayInput);
+	ui->centralwidget->layout()->activate();
+	ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;"));
 	ui->levelLabel->setText(remainingText);
 	((QGraphicsOpacityEffect*)ui->levelLabel->graphicsEffect())->setOpacity(0.5);
+	updateFont();
 	blockInput = false;
 }
 
@@ -739,6 +746,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	if((levelPos == 0) && !levelInProgress)
 	{
 		errorWords.clear();
+		ui->exerciseChecksFrame->setEnabled(false);
 		levelTimer.start();
 		secLoop->start(500);
 		levelInProgress=true;
@@ -750,47 +758,83 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		keyText = "'";
 	if((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))
 		keyText = "\n";
-	QString convertedKeyText = keyText.toHtmlEscaped();
-	if(( ((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) ||
-		(((displayLevel[displayPos] != '\n') || spaceNewline) && (keyText == level[levelPos]))) && !mistake)
+	QString convertedKeyText = keyText.toHtmlEscaped().replace(" ", "&nbsp;");
+	convertedKeyText.replace(" ", "&nbsp;");
+	bool correctChar = (( ((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) ||
+		(((displayLevel[displayPos] != '\n') || spaceNewline) && (keyText == level[levelPos]))) && !mistake);
+	if(correctChar || !ui->correctMistakesCheckBox->isChecked())
 	{
-		input += keyText;
-		displayInput += convertedKeyText;
-		inputTextHtml += convertedKeyText;
-		if(displayLevel[displayPos] == '\n')
+		if(event->key() == Qt::Key_Backspace)
 		{
-			inputTextHtml += "<br>";
-			mistakeTextHtml += "<br>";
-			displayInput = "";
-			mistakeLabelHtml = "";
-			currentLine++;
-			updateText();
+			input = input.remove(input.count()-1, 1);
+			QString plainText = displayInput;
+			if(plainText.count() == 0)
+			{
+				if(currentLine == 0)
+					displayInput = plainText.remove(plainText.count()-1, 1);
+				else if(input.count() > 0)
+				{
+					displayInput = input.split('\n').last();
+					currentLine--;
+					linePos = 0;
+					updateText();
+				}
+			}
+			else
+				displayInput = plainText.remove(plainText.count()-1, 1);
+			if(input.count() > 0)
+			{
+				levelPos--;
+				displayPos--;
+				linePos--;
+			}
+			plainText = QTextDocumentFragment::fromHtml(inputTextHtml).toPlainText();
+			inputTextHtml = plainText.remove(plainText.count()-1, 1).toHtmlEscaped().replace(" ", "&nbsp;");
+			inputTextHtml.replace("\n","<br>");
+			recordedCharacters.remove(recordedCharacters.count()-1);
 		}
 		else
 		{
-			if(ignoreMistakeLabelAppend)
-				ignoreMistakeLabelAppend=false;
+			if((((keyText == "\n") || ((keyText == " ") && spaceNewline)) && (displayLevel[displayPos] == "\n")) || (keyText == "\n"))
+			{
+				inputTextHtml += "<br>";
+				mistakeTextHtml += "<br>";
+				displayInput = "";
+				linePos = 0;
+				mistakeLabelHtml = "";
+				keyText = "\n";
+				convertedKeyText = "";
+				currentLine++;
+				updateText();
+			}
 			else
 			{
-				QString mistakeLabelAppend = "<span style='color: rgba(0,0,0,0)'>" + keyText + "</span>";
-				mistakeTextHtml += mistakeLabelAppend;
-				mistakeLabelHtml += mistakeLabelAppend;
+				if(ignoreMistakeLabelAppend)
+					ignoreMistakeLabelAppend=false;
+				else
+				{
+					QString mistakeLabelAppend = "<span style='color: rgba(0,0,0,0)'>" + keyText + "</span>";
+					mistakeTextHtml += mistakeLabelAppend;
+					mistakeLabelHtml += mistakeLabelAppend;
+				}
+				displayInput += keyText;
+				linePos++;
 			}
+			input += keyText;
+			inputTextHtml += convertedKeyText;
+			levelPos++;
+			displayPos++;
+			int charHits = 1;
+			// Count modifier keys
+			if(event->modifiers() != Qt::NoModifier)
+				charHits++;
+			// Count dead keys
+			charHits += deadKeys;
+			totalHits += charHits;
+			levelHits += charHits;
+			recordedCharacters += QPair<QString,int>(keyText, charHits);
+			deadKeys = 0;
 		}
-		levelPos++;
-		displayPos++;
-		totalHits++;
-		levelHits++;
-		// Count modifier keys
-		if(event->modifiers() != Qt::NoModifier)
-		{
-			totalHits++;
-			levelHits++;
-		}
-		// Count dead keys
-		totalHits += deadKeys;
-		levelHits += deadKeys;
-		deadKeys = 0;
 	}
 	else
 	{
@@ -819,7 +863,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 					errorAppend = "↵<br>";
 				else
 					errorAppend = convertedKeyText;
-				ui->inputLabel->setHtml(displayInput + "<span style='color: red';'>" + errorAppend + "</span>");
+				ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;") + "<span style='color: red';'>" + errorAppend + "</span>");
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 				mistake=true;
@@ -834,13 +878,13 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		}
 	}
 	if(!mistake)
-		ui->inputLabel->setHtml(displayInput);
+		ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;"));
 	ui->mistakeLabel->setHtml(mistakeLabelHtml);
 	ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
-	ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
-	ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
-	if(input.count() >= level.count())
+	ui->typingSpace->setFixedHeight(ui->inputLabel->document()->size().height());
+	ui->typingSpace->ensureWidgetVisible(ui->inputLabel);
+	if(((displayPos >= displayLevel.count()) && ui->correctMistakesCheckBox->isChecked()) || (currentLine >= lineCount+1))
 	{
 		keyRelease(event);
 		if(currentMode == 1)
@@ -849,6 +893,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			updateText();
 			levelPos=0;
 			displayPos=0;
+			linePos = 0;
 			deadKeys=0;
 			mistake=false;
 			ignoreMistakeLabelAppend=false;
@@ -867,6 +912,51 @@ void OpenTyper::keyPress(QKeyEvent *event)
 void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes)
 {
 	levelInProgress=false;
+	if(!ui->correctMistakesCheckBox->isChecked())
+	{
+		QString lcs = stringUtils::longestCommonSubsequence(displayLevel, input);
+		totalHits = 0;
+		mistakeTextHtml = "";
+		int inputPos = 0, exPos = 0;
+		for(int i=0; i < lcs.count(); i++)
+		{
+			if((lcs[i] != displayLevel[exPos]) && (lcs[i] != input[inputPos]))
+			{
+				// Changed character
+				levelMistakes++;
+				mistakeTextHtml += "_";
+				inputPos += 1;
+				exPos += 1;
+				i--;
+			}
+			else if(lcs[i] != displayLevel[exPos])
+			{
+				// Deleted character
+				levelMistakes++;
+				mistakeTextHtml += "_";
+				inputPos += 1;
+				exPos += 2;
+			}
+			else if(lcs[i] != input[inputPos])
+			{
+				// Added character
+				levelMistakes++;
+				mistakeTextHtml += "_<span style='color: rgba(0,0,0,0)'>" + QString(input[inputPos+1]).toHtmlEscaped().replace(" ", "&nbsp;") + "</span>";
+				inputPos += 2;
+				exPos += 1;
+			}
+			else
+			{
+				totalHits += recordedCharacters[inputPos].second;
+				mistakeTextHtml += "<span style='color: rgba(0,0,0,0)'>" + QString(input[inputPos]).toHtmlEscaped().replace(" ", "&nbsp;") + "</span>";
+				inputPos++;
+				exPos++;
+			}
+		}
+		levelHits = totalHits - (levelMistakes * errorPenalty);
+		mistakeTextHtml.replace("\n","<br>");
+		ui->currentMistakesNumber->setText(QString::number(levelMistakes));
+	}
 	lastTime = levelTimer.elapsed()/1000;
 	int netHits = levelHits*(60/(levelTimer.elapsed()/1000.0));
 	int grossHits = totalHits*(60/(levelTimer.elapsed()/1000.0));
@@ -897,19 +987,17 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		// Load saved text
 		ui->inputLabel->setHtml(inputTextHtml);
 		ui->mistakeLabel->setHtml(mistakeTextHtml);
-		// Set width
-		ui->inputLabel->setMinimumWidth(ui->inputLabel->document()->size().width());
-		ui->mistakeLabel->setMinimumWidth(ui->mistakeLabel->document()->size().width());
-		// Set height
-		ui->inputLabel->setMinimumHeight(ui->inputLabel->document()->size().height());
-		ui->mistakeLabel->setMinimumHeight(ui->mistakeLabel->document()->size().height());
 		// Move cursor to the end
 		ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 		ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 		// Hide other widgets
-		ui->levelCurrentLineLabel->hide();
+		ui->currentLineArea->hide();
 		ui->textSeparationLine->hide();
 		ui->levelLabel->setText(""); // Using hide() breaks the layout, it's better to set empty text
+		ui->inputLabel->setFocusPolicy(Qt::NoFocus);
+		ui->typingSpace->setFocusPolicy(Qt::StrongFocus);
+		ui->typingSpace->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+		updateFont();
 		blockInput = true;
 	});
 	connect(msgBox, &QDialog::rejected, this, [this]() {
@@ -1009,6 +1097,20 @@ void OpenTyper::updateFont(void)
 	ui->levelLabel->setFont(newFont);
 	ui->inputLabel->setFont(newFont);
 	ui->mistakeLabel->setFont(mistakeLabelFont);
+	int scrollBarWidth = ui->typingSpace->verticalScrollBar()->size().width();
+	ui->currentLineArea->setFixedSize(ui->levelCurrentLineLabel->document()->size().toSize() + QSize(scrollBarWidth, 0));
+	if(ui->currentLineArea->isVisible())
+	{
+		ui->typingSpace->setMinimumWidth(0);
+		ui->typingSpace->setMaximumWidth(QWIDGETSIZE_MAX);
+		ui->typingSpace->setFixedHeight(ui->inputLabel->document()->size().height());
+	}
+	else
+	{
+		ui->typingSpace->setMinimumHeight(0);
+		ui->typingSpace->setMaximumHeight(QWIDGETSIZE_MAX);
+		ui->typingSpace->setFixedWidth(ui->inputLabel->document()->size().width() + scrollBarWidth*2);
+	}
 }
 
 /*! Sets custom colors (if they are set) or default colors. */
