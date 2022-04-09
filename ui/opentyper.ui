@@ -989,8 +989,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>268</width>
-            <height>95</height>
+            <width>168</width>
+            <height>83</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -1122,8 +1122,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>268</width>
-            <height>204</height>
+            <width>168</width>
+            <height>227</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1142,7 +1142,7 @@
            <property name="bottomMargin">
             <number>0</number>
            </property>
-           <item>
+           <item alignment="Qt::AlignTop">
             <widget class="textView" name="levelLabel">
              <property name="focusPolicy">
               <enum>Qt::NoFocus</enum>
@@ -1211,8 +1211,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>268</width>
-            <height>238</height>
+            <width>168</width>
+            <height>227</height>
            </rect>
           </property>
           <property name="sizePolicy">
