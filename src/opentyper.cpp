@@ -388,7 +388,7 @@ void OpenTyper::updateText(void)
 	ui->typingSpace->setFocusPolicy(Qt::NoFocus);
 	ui->typingSpace->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	ui->textSeparationLine->show();
-	ui->levelLabel->show();
+	ui->remainingTextArea->show();
 	displayLevel = configParser::initExercise(level,levelLengthExtension);
 	lineCount = displayLevel.count('\n');
 	// Process exercise text
@@ -993,7 +993,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		// Hide other widgets
 		ui->currentLineArea->hide();
 		ui->textSeparationLine->hide();
-		ui->levelLabel->setText(""); // Using hide() breaks the layout, it's better to set empty text
+		ui->remainingTextArea->hide();
 		ui->inputLabel->setFocusPolicy(Qt::NoFocus);
 		ui->typingSpace->setFocusPolicy(Qt::StrongFocus);
 		ui->typingSpace->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
