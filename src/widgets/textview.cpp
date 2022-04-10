@@ -84,3 +84,9 @@ void textView::wheelEvent(QWheelEvent *event)
 {
 	event->accept();
 }
+
+/*! Overrides QTextEdit#mouseMoveEvent(). */
+void textView::mouseMoveEvent(QMouseEvent *event)
+{
+	event->accept();
+}

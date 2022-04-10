@@ -49,6 +49,7 @@ class textView : public QTextEdit
 	protected:
 		void changeEvent(QEvent *event);
 		void wheelEvent(QWheelEvent *event);
+		void mouseMoveEvent(QMouseEvent *event);
 };
 
 #endif // TEXTVIEW_H
