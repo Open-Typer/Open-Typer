@@ -42,6 +42,7 @@
 #include "levelsummary.h"
 #include "timedialog.h"
 #include "statsdialog.h"
+#include "exportdialog.h"
 #include "core/configfile.h"
 #include "core/utils.h"
 #include "core/packs.h"
@@ -90,6 +91,7 @@ class OpenTyper : public QMainWindow
 		QString inputLabelHtml, mistakeLabelHtml;
 		QString inputTextHtml, mistakeTextHtml;
 		int lastTime;
+		double lastTimeF;
 		Updater *versionHdw;
 		themeEngine localThemeEngine;
 		void setColors(void);
@@ -110,6 +112,7 @@ class OpenTyper : public QMainWindow
 		QStringList errorWords;
 		void loadErrorWords(void);
 		void loadReversedText(void);
+		void exportText(void);
 
 	protected:
 		void changeEvent(QEvent *event);

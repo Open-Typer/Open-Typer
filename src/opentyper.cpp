@@ -69,6 +69,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->timedExerciseButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
 	connect(ui->stopTimedExButton, &QPushButton::clicked, ui->timedExerciseButton, &QPushButton::clicked);
 	connect(ui->statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
+	connect(ui->exportButton, &QPushButton::clicked, this, &OpenTyper::exportText);
 	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
 	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
 	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
@@ -389,6 +390,7 @@ void OpenTyper::updateText(void)
 	ui->typingSpace->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	ui->textSeparationLine->show();
 	ui->remainingTextArea->show();
+	ui->exportButton->hide();
 	displayLevel = configParser::initExercise(level,levelLengthExtension);
 	lineCount = displayLevel.count('\n');
 	// Process exercise text
@@ -899,7 +901,6 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			ignoreMistakeLabelAppend=false;
 			mistakeLabelHtml = "";
 			ui->mistakeLabel->setHtml(mistakeLabelHtml);
-			input = "";
 			displayInput = "";
 			ui->inputLabel->setHtml(displayInput);
 		}
@@ -958,6 +959,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 	}
 	lastTime = levelTimer.elapsed()/1000;
+	lastTimeF = levelTimer.elapsed()/1000.0;
 	int netHits = levelHits*(60/(levelTimer.elapsed()/1000.0));
 	int grossHits = totalHits*(60/(levelTimer.elapsed()/1000.0));
 	int time = levelTimer.elapsed()/1000;
@@ -984,6 +986,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	msgBox->setMistakes(levelMistakes);
 	msgBox->setWindowModality(Qt::WindowModal);
 	connect(msgBox, &QDialog::accepted, this, [this]() {
+		ui->exportButton->show();
 		// Load saved text
 		ui->inputLabel->setHtml(inputTextHtml);
 		ui->mistakeLabel->setHtml(mistakeTextHtml);
@@ -1327,4 +1330,23 @@ void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool inclu
 {
 	levelLengthExtension = lineLength;
 	loadText(text,includeNewLines,false);
+}
+
+/*!
+ * Opens exportDialog.
+ *
+ * \see exportDialog
+ */
+void OpenTyper::exportText(void)
+{
+	QVariantMap result;
+	result["grossHits"] = totalHits;
+	result["netHits"] = levelHits;
+	result["netHitsPerMinute"] = (double) levelHits*(60.0/lastTimeF);
+	result["mistakes"] = levelMistakes;
+	result["penalty"] = errorPenalty;
+	exportDialog *dialog = new exportDialog(input, result, this);
+	dialog->setWindowModality(Qt::WindowModal);
+	dialog->open();
+	dialog->showMaximized();
 }
