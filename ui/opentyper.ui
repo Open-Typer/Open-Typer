@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1538</width>
-    <height>889</height>
+    <height>774</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1123,7 +1123,7 @@
             <x>0</x>
             <y>0</y>
             <width>168</width>
-            <height>227</height>
+            <height>83</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1212,7 +1212,7 @@
             <x>0</x>
             <y>0</y>
             <width>168</width>
-            <height>227</height>
+            <height>216</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -1377,6 +1377,19 @@ p, li { white-space: pre-wrap; }
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="0" column="0" alignment="Qt::AlignHCenter">
+        <widget class="QPushButton" name="exportButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Export</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
