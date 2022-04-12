@@ -1,4 +1,7 @@
-QT       += core gui charts
+QT += core gui charts network
+!wasm {
+	QT += printsupport
+}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -43,6 +46,7 @@ SOURCES += \
     src/updater/updater.cpp \
     src/main.cpp \
     src/opentyper.cpp \
+    src/exportdialog.cpp \
     src/updater/updaterdialog.cpp \
     src/widgets/inputlabel.cpp \
     src/widgets/textview.cpp \
@@ -74,6 +78,7 @@ HEADERS += \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
     src/include/opentyper.h \
+    src/include/exportdialog.h \
     src/include/widgets/inputlabel.h \
     src/include/widgets/textview.h \
     src/include/widgets/languagelist.h \
@@ -90,6 +95,7 @@ FORMS += \
     ui/statsdialog.ui \
     ui/timedialog.ui \
     ui/opentyper.ui \
+    ui/exportdialog.ui \
     ui/options/optionswindow.ui \
     ui/packEditor/packeditor.ui \
     ui/packEditor/packselector.ui \
@@ -112,8 +118,6 @@ RESOURCES += \
     light-theme/light-style.qrc
 
 win32:RC_ICONS += res/images/icon.ico
-
-QT += network
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
