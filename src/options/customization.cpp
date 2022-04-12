@@ -293,15 +293,12 @@ void customizationOptions::setColors()
  */
 void customizationOptions::changeLevelTextColor(void)
 {
-	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
-	QColor color = themeEngine::exerciseTextColor();
-	colorDialog->setColor(color.red(), color.green(), color.blue());
-	colorDialog->setWindowModality(Qt::WindowModal);
-	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
-		globalThemeEngine.setExerciseTextColor(QColor(colorDialog->redColor, colorDialog->greenColor, colorDialog->blueColor));
+	QColor newColor = QColorDialog::getColor(globalThemeEngine.exerciseTextColor());
+	if(newColor.isValid())
+	{
+		globalThemeEngine.setExerciseTextColor(newColor);
 		setColors();
-	});
-	colorDialog->open();
+	}
 }
 
 /*!
@@ -312,15 +309,12 @@ void customizationOptions::changeLevelTextColor(void)
  */
 void customizationOptions::changeInputTextColor(void)
 {
-	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
-	QColor color = themeEngine::inputTextColor();
-	colorDialog->setColor(color.red(), color.green(), color.blue());
-	colorDialog->setWindowModality(Qt::WindowModal);
-	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
-		globalThemeEngine.setInputTextColor(QColor(colorDialog->redColor, colorDialog->greenColor, colorDialog->blueColor));
+	QColor newColor = QColorDialog::getColor(globalThemeEngine.inputTextColor());
+	if(newColor.isValid())
+	{
+		globalThemeEngine.setInputTextColor(newColor);
 		setColors();
-	});
-	colorDialog->open();
+	}
 }
 
 /*!
@@ -342,15 +336,12 @@ void customizationOptions::resetTextColors(void)
  */
 void customizationOptions::changeBgColor(void)
 {
-	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
-	QColor color = themeEngine::bgColor();
-	colorDialog->setColor(color.red(), color.green(), color.blue());
-	colorDialog->setWindowModality(Qt::WindowModal);
-	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
-		globalThemeEngine.setBgColor(QColor(colorDialog->redColor, colorDialog->greenColor, colorDialog->blueColor));
+	QColor newColor = QColorDialog::getColor(globalThemeEngine.bgColor());
+	if(newColor.isValid())
+	{
+		globalThemeEngine.setBgColor(newColor);
 		setColors();
-	});
-	colorDialog->open();
+	}
 }
 
 /*!
@@ -362,15 +353,12 @@ void customizationOptions::changeBgColor(void)
  */
 void customizationOptions::changePaperColor(void)
 {
-	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
-	QColor color = themeEngine::paperColor();
-	colorDialog->setColor(color.red(), color.green(), color.blue());
-	colorDialog->setWindowModality(Qt::WindowModal);
-	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
-		globalThemeEngine.setPaperColor(QColor(colorDialog->redColor, colorDialog->greenColor, colorDialog->blueColor));
+	QColor newColor = QColorDialog::getColor(globalThemeEngine.paperColor());
+	if(newColor.isValid())
+	{
+		globalThemeEngine.setPaperColor(newColor);
 		setColors();
-	});
-	colorDialog->open();
+	}
 }
 
 /*!
@@ -382,15 +370,12 @@ void customizationOptions::changePaperColor(void)
  */
 void customizationOptions::changePanelColor(void)
 {
-	SimpleColorDialog *colorDialog = new SimpleColorDialog(this);
-	QColor color = themeEngine::panelColor();
-	colorDialog->setColor(color.red(), color.green(), color.blue());
-	colorDialog->setWindowModality(Qt::WindowModal);
-	connect(colorDialog, &QDialog::accepted, this, [colorDialog,this]() {
-		globalThemeEngine.setPanelColor(QColor(colorDialog->redColor, colorDialog->greenColor, colorDialog->blueColor));
+	QColor newColor = QColorDialog::getColor(globalThemeEngine.panelColor());
+	if(newColor.isValid())
+	{
+		globalThemeEngine.setPanelColor(newColor);
 		setColors();
-	});
-	colorDialog->open();
+	}
 }
 
 /*!

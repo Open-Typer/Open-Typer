@@ -25,8 +25,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QPropertyAnimation>
+#include <QColorDialog>
 #include "options/optionswindow.h"
-#include "simplecolordialog.h"
 #include "core/utils.h"
 #include "core/theme.h"
 
