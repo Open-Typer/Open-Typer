@@ -293,12 +293,13 @@ void customizationOptions::setColors()
  */
 void customizationOptions::changeLevelTextColor(void)
 {
-	QColor newColor = QColorDialog::getColor(globalThemeEngine.exerciseTextColor());
-	if(newColor.isValid())
-	{
-		globalThemeEngine.setExerciseTextColor(newColor);
+	QColorDialog *colorDialog = new QColorDialog(globalThemeEngine.exerciseTextColor(), this);
+	colorDialog->setWindowModality(Qt::WindowModal);
+	connect(colorDialog, &QDialog::accepted, this, [colorDialog, this]() {
+		globalThemeEngine.setExerciseTextColor(colorDialog->selectedColor());
 		setColors();
-	}
+	});
+	colorDialog->open();
 }
 
 /*!
@@ -309,12 +310,13 @@ void customizationOptions::changeLevelTextColor(void)
  */
 void customizationOptions::changeInputTextColor(void)
 {
-	QColor newColor = QColorDialog::getColor(globalThemeEngine.inputTextColor());
-	if(newColor.isValid())
-	{
-		globalThemeEngine.setInputTextColor(newColor);
+	QColorDialog *colorDialog = new QColorDialog(globalThemeEngine.inputTextColor(), this);
+	colorDialog->setWindowModality(Qt::WindowModal);
+	connect(colorDialog, &QDialog::accepted, this, [colorDialog, this]() {
+		globalThemeEngine.setInputTextColor(colorDialog->selectedColor());
 		setColors();
-	}
+	});
+	colorDialog->open();
 }
 
 /*!
@@ -336,12 +338,13 @@ void customizationOptions::resetTextColors(void)
  */
 void customizationOptions::changeBgColor(void)
 {
-	QColor newColor = QColorDialog::getColor(globalThemeEngine.bgColor());
-	if(newColor.isValid())
-	{
-		globalThemeEngine.setBgColor(newColor);
+	QColorDialog *colorDialog = new QColorDialog(globalThemeEngine.bgColor(), this);
+	colorDialog->setWindowModality(Qt::WindowModal);
+	connect(colorDialog, &QDialog::accepted, this, [colorDialog, this]() {
+		globalThemeEngine.setBgColor(colorDialog->selectedColor());
 		setColors();
-	}
+	});
+	colorDialog->open();
 }
 
 /*!
@@ -353,12 +356,13 @@ void customizationOptions::changeBgColor(void)
  */
 void customizationOptions::changePaperColor(void)
 {
-	QColor newColor = QColorDialog::getColor(globalThemeEngine.paperColor());
-	if(newColor.isValid())
-	{
-		globalThemeEngine.setPaperColor(newColor);
+	QColorDialog *colorDialog = new QColorDialog(globalThemeEngine.paperColor(), this);
+	colorDialog->setWindowModality(Qt::WindowModal);
+	connect(colorDialog, &QDialog::accepted, this, [colorDialog, this]() {
+		globalThemeEngine.setPaperColor(colorDialog->selectedColor());
 		setColors();
-	}
+	});
+	colorDialog->open();
 }
 
 /*!
@@ -370,12 +374,13 @@ void customizationOptions::changePaperColor(void)
  */
 void customizationOptions::changePanelColor(void)
 {
-	QColor newColor = QColorDialog::getColor(globalThemeEngine.panelColor());
-	if(newColor.isValid())
-	{
-		globalThemeEngine.setPanelColor(newColor);
+	QColorDialog *colorDialog = new QColorDialog(globalThemeEngine.panelColor(), this);
+	colorDialog->setWindowModality(Qt::WindowModal);
+	connect(colorDialog, &QDialog::accepted, this, [colorDialog, this]() {
+		globalThemeEngine.setPanelColor(colorDialog->selectedColor());
 		setColors();
-	}
+	});
+	colorDialog->open();
 }
 
 /*!
