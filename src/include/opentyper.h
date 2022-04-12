@@ -34,7 +34,6 @@
 #include "widgets/inputlabel.h"
 #include "widgets/languagelist.h"
 #include "updater/updater.h"
-#include "simplecolordialog.h"
 #include "paperconfigdialog.h"
 #include "packEditor/packeditor.h"
 #include "options/optionswindow.h"

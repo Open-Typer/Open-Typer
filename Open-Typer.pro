@@ -42,7 +42,6 @@ SOURCES += \
     src/packEditor/packview.cpp \
     src/packEditor/packselector.cpp \
     src/paperconfigdialog.cpp \
-    src/simplecolordialog.cpp \
     src/updater/updater.cpp \
     src/main.cpp \
     src/opentyper.cpp \
@@ -74,7 +73,6 @@ HEADERS += \
     src/include/packEditor/packview.h \
     src/include/packEditor/packselector.h \
     src/include/paperconfigdialog.h \
-    src/include/simplecolordialog.h \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
     src/include/opentyper.h \
@@ -101,7 +99,6 @@ FORMS += \
     ui/packEditor/packselector.ui \
     ui/packEditor/packview.ui \
     ui/paperconfigdialog.ui \
-    ui/simplecolordialog.ui \
     ui/updater/updaterdialog.ui
 
 TRANSLATIONS += \
