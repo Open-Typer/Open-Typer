@@ -287,8 +287,7 @@ void customizationOptions::setColors()
 
 /*!
  * Connected from levelTextColorButton->clicked().\n
- * Opens SimpleColorDialog and sets exercise text color.
- * \see SimpleColorDialog
+ * Opens QColorDialog and sets exercise text color.
  * \see changeInputTextColor()
  */
 void customizationOptions::changeLevelTextColor(void)
@@ -304,8 +303,7 @@ void customizationOptions::changeLevelTextColor(void)
 
 /*!
  * Connected from inputTextColorButton->clicked().\n
- * Opens SimpleColorDialog and sets input text color.
- * \see SimpleColorDialog
+ * Opens QColorDialog and sets input text color.
  * \see changeLevelTextColor()
  */
 void customizationOptions::changeInputTextColor(void)
@@ -331,8 +329,7 @@ void customizationOptions::resetTextColors(void)
 
 /*!
  * Connected from bgColorButton->clicked().\n
- * Opens SimpleColorDialog and sets background color.
- * \see SimpleColorDialog
+ * Opens QColorDialog and sets background color.
  * \see changePaperColor()
  * \see changePanelColor()
  */
@@ -349,8 +346,7 @@ void customizationOptions::changeBgColor(void)
 
 /*!
  * Connected from paperColorButton->clicked().\n
- * Opens SimpleColorDialog and sets paper color.
- * \see SimpleColorDialog
+ * Opens QColorDialog and sets paper color.
  * \see changeBgColor()
  * \see changePanelColor()
  */
@@ -367,8 +363,7 @@ void customizationOptions::changePaperColor(void)
 
 /*!
  * Connected from panelColorButton->clicked().\n
- * Opens SimpleColorDialog and sets panel color.
- * \see SimpleColorDialog
+ * Opens QColorDialog and sets panel color.
  * \see changeBgColor()
  * \see changePaperColor()
  */
