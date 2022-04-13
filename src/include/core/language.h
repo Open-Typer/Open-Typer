@@ -26,6 +26,7 @@
 #include <QVector>
 #include <QTranslator>
 #include <QCoreApplication>
+#include <QLibraryInfo>
 
 extern QVector<QTranslator*> translators;
 

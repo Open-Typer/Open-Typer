@@ -68,4 +68,10 @@ void languageManager::setLanguage(int index)
 		QCoreApplication::installTranslator(translator);
 		translators += translator;
 	}
+	translator = new QTranslator;
+	if(translator->load(targetLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qtbase_"))
+	{
+		QCoreApplication::installTranslator(translator);
+		translators += translator;
+	}
 }
