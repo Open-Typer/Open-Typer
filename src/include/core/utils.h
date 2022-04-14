@@ -33,6 +33,7 @@ class stringUtils
 		static int wordCount(QString str);
 		static QString word(QString str, int id);
 		static QString wordAt(QString str, int index);
+		static QList<QVariant> longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target);
 		static QString longestCommonSubsequence(QString source, QString target);
 };
 

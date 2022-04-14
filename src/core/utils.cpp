@@ -78,8 +78,8 @@ QString stringUtils::wordAt(QString str, int index)
 	return "";
 }
 
-/*! Returns the longest common subsequence of source and target string. */
-QString stringUtils::longestCommonSubsequence(QString source, QString target)
+/*! Returns the longest common subsequence of source and target list. */
+QList<QVariant> stringUtils::longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target)
 {
 	/*
 	* References:
@@ -102,11 +102,17 @@ QString stringUtils::longestCommonSubsequence(QString source, QString target)
 	int i = source.count();
 	int j = target.count();
 	int index = l[source.count()][target.count()];
-	QString longestCommonSubsequence;
+	QList<QVariant> longestCommonSubsequence;
 	while (i > 0 && j > 0)
 	{
 		if (source.at(i - 1) == target.at(j - 1))
 		{
+			if(index - 1 >= longestCommonSubsequence.count())
+			{
+				int count = index - longestCommonSubsequence.count();
+				for(int i2=0; i2 < count; i2++)
+					longestCommonSubsequence.append(QVariant());
+			}
 			longestCommonSubsequence[index - 1] = source.at(i - 1);
 			i--;
 			j--;
@@ -118,6 +124,22 @@ QString stringUtils::longestCommonSubsequence(QString source, QString target)
 			j--;
 	}
 	return longestCommonSubsequence;
+}
+
+/*! Returns the longest common subsequence of source and target string. */
+QString stringUtils::longestCommonSubsequence(QString source, QString target)
+{
+	QList<QVariant> sourceList, targetList;
+	int i;
+	for(i=0; i < source.count(); i++)
+		sourceList += QString(source[i]);
+	for(i=0; i < target.count(); i++)
+		targetList += QString(target[i]);
+	QList<QVariant> lcs = longestCommonSubsequence(sourceList, targetList);
+	QString out = "";
+	for(i=0; i < lcs.count(); i++)
+		out += lcs[i].toString();
+	return out;
 }
 
 /*!
