@@ -917,44 +917,18 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	levelInProgress=false;
 	if(!ui->correctMistakesCheckBox->isChecked())
 	{
-		QString lcs = stringUtils::longestCommonSubsequence(displayLevel, input);
-		totalHits = 0;
+		auto mistakes = stringUtils::findMistakes(displayLevel, input, recordedCharacters, &totalHits);
+		levelMistakes = mistakes.count();
+		QMap<int, QVariantMap*> mistakesMap;
+		for(int i=0; i < mistakes.count(); i++)
+			mistakesMap[mistakes[i]["pos"].toInt()] = &mistakes[i];
 		mistakeTextHtml = "";
-		int inputPos = 0, exPos = 0;
-		for(int i=0; i < lcs.count(); i++)
+		for(int i=0; i < input.count(); i++)
 		{
-			if((lcs[i] != displayLevel[exPos]) && (lcs[i] != input[inputPos]))
-			{
-				// Changed character
-				levelMistakes++;
+			if(mistakesMap.contains(i))
 				mistakeTextHtml += "_";
-				inputPos += 1;
-				exPos += 1;
-				i--;
-			}
-			else if(lcs[i] != displayLevel[exPos])
-			{
-				// Deleted character
-				levelMistakes++;
-				mistakeTextHtml += "_";
-				inputPos += 1;
-				exPos += 2;
-			}
-			else if(lcs[i] != input[inputPos])
-			{
-				// Added character
-				levelMistakes++;
-				mistakeTextHtml += "_<span style='color: rgba(0,0,0,0)'>" + QString(input[inputPos+1]).toHtmlEscaped().replace(" ", "&nbsp;") + "</span>";
-				inputPos += 2;
-				exPos += 1;
-			}
 			else
-			{
-				totalHits += recordedCharacters[inputPos].second;
-				mistakeTextHtml += "<span style='color: rgba(0,0,0,0)'>" + QString(input[inputPos]).toHtmlEscaped().replace(" ", "&nbsp;") + "</span>";
-				inputPos++;
-				exPos++;
-			}
+				mistakeTextHtml += "<span style='color: rgba(0,0,0,0)'>" + QString(input[i]).toHtmlEscaped().replace(" ", "&nbsp;") + "</span>";
 		}
 		levelHits = totalHits - (levelMistakes * errorPenalty);
 		mistakeTextHtml.replace("\n","<br>");
