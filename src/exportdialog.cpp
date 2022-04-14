@@ -146,6 +146,7 @@ void exportDialog::updateTable(void)
 /*! Prints the result. */
 void exportDialog::printResult(void)
 {
+#ifndef Q_OS_WASM
 	// Set up printer
 	QPrinter *printer = new QPrinter(QPrinter::HighResolution);
 	QPrintDialog *dialog = new QPrintDialog(printer, this);
@@ -183,4 +184,5 @@ void exportDialog::printResult(void)
 		painter.end();
 		delete printer;
 	});
+#endif // Q_OS_WASM
 }
