@@ -888,6 +888,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	ui->typingSpace->ensureWidgetVisible(ui->inputLabel);
 	if(((displayPos >= displayLevel.count()) && ui->correctMistakesCheckBox->isChecked()) || (currentLine >= lineCount+1))
 	{
+		if(currentLine >= lineCount+1)
+			input.remove(input.count()-2, 2);
 		keyRelease(event);
 		if(currentMode == 1)
 		{
