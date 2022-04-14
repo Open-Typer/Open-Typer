@@ -280,6 +280,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			{
 				int wordStart = pos;
 				auto diff = compareStrings(differences[i]->value("previous").toString(), inputWords[i], &recordedCharacters, &hits, &pos);
+				pos--;
 				for(int i2=0; i2 < diff.count(); i2++)
 				{
 					QVariantMap currentMap = diff[i2];
