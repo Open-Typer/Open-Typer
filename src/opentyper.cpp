@@ -355,6 +355,7 @@ void OpenTyper::levelFinalInit(bool updateClient)
 	totalHits=0;
 	levelHits=0;
 	recordedCharacters.clear();
+	recordedMistakes.clear();
 	deadKeys=0;
 	levelInProgress=false;
 	lastTime=0;
@@ -858,10 +859,23 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		{
 			if(!keyboardUtils::isSpecialKey(event))
 			{
+				QList<QVariantMap> mistakesToRemove;
+				for(int i=0; i < recordedMistakes.count(); i++)
+				{
+					if(recordedMistakes[i]["pos"] == displayPos)
+						mistakesToRemove += recordedMistakes[i];
+				}
+				for(int i=0; i < mistakesToRemove.count(); i++)
+					recordedMistakes.removeAll(mistakesToRemove[i]);
+				QVariantMap currentMistake;
+				currentMistake["pos"] = displayPos;
+				currentMistake["previous"] = keyText;
+				currentMistake["type"] = "change";
+				recordedMistakes += currentMistake;
 				QString errorAppend;
 				if(keyText == " ")
 					errorAppend = "_";
-				else if((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))
+				else if(keyText == "\n")
 					errorAppend = "↵<br>";
 				else
 					errorAppend = convertedKeyText;
@@ -917,11 +931,11 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	levelInProgress=false;
 	if(!ui->correctMistakesCheckBox->isChecked())
 	{
-		auto mistakes = stringUtils::findMistakes(displayLevel, input, recordedCharacters, &totalHits);
-		levelMistakes = mistakes.count();
+		recordedMistakes = stringUtils::findMistakes(displayLevel, input, recordedCharacters, &totalHits);
+		levelMistakes = recordedMistakes.count();
 		QMap<int, QVariantMap*> mistakesMap;
-		for(int i=0; i < mistakes.count(); i++)
-			mistakesMap[mistakes[i]["pos"].toInt()] = &mistakes[i];
+		for(int i=0; i < recordedMistakes.count(); i++)
+			mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
 		mistakeTextHtml = "";
 		for(int i=0; i < input.count(); i++)
 		{
@@ -1321,7 +1335,7 @@ void OpenTyper::exportText(void)
 	result["netHitsPerMinute"] = (double) levelHits*(60.0/lastTimeF);
 	result["mistakes"] = levelMistakes;
 	result["penalty"] = errorPenalty;
-	exportDialog *dialog = new exportDialog(input, result, this);
+	exportDialog *dialog = new exportDialog(input, result, recordedMistakes, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
 	dialog->showMaximized();

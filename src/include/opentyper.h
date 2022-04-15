@@ -83,6 +83,7 @@ class OpenTyper : public QMainWindow
 		int lineCount, linePos;
 		int deadKeys;
 		QVector<QPair<QString,int>> recordedCharacters;
+		QList<QVariantMap> recordedMistakes;
 		int sublessonListStart;
 		QElapsedTimer levelTimer;
 		QTimer *secLoop;
