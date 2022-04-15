@@ -22,15 +22,52 @@
 #include "ui_exportdialog.h"
 
 /*! Constructs exportDialog. */
-exportDialog::exportDialog(QString text, QVariantMap result, QWidget *parent) :
+exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> mistakes, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::exportDialog),
 	inputText(text),
-	performanceResult(result)
+	performanceResult(result),
+	recordedMistakes(mistakes)
 {
 	ui->setupUi(this);
 	// Set input text
-	QString exportHtml = inputText.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>");
+	QString finalText = "<body>";
+	QStringList lines = inputText.split('\n');
+	int longestLineLength = 0;
+	for(int i=0; i < lines.count(); i++)
+	{
+		if(lines[i].count() > longestLineLength)
+			longestLineLength = lines[i].count();
+	}
+	QMap<int, QVariantMap*> mistakesMap;
+	for(int i=0; i < recordedMistakes.count(); i++)
+		mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
+	int pos = 0;
+	for(int i=0; i < lines.count(); i++)
+	{
+		if(i > 0)
+		{
+			pos++;
+			finalText += "<br>";
+		}
+		QString line = lines[i];
+		int lineMistakes = 0;
+		for(int i2=0; i2 < line.count(); i2++)
+		{
+			QString append = QString(line[i2]).toHtmlEscaped().replace(" ", "&nbsp;");
+			if(mistakesMap.contains(pos))
+			{
+				lineMistakes++;
+				finalText += "<u>" + append + "</u>";
+			}
+			else
+				finalText += append;
+			pos++;
+		}
+		finalText += QString("&nbsp;").repeated(longestLineLength - line.count() + 4) + QString("/").repeated(lineMistakes);
+	}
+	finalText += "</body>";
+	QString exportHtml = finalText;
 	ui->exportText->setHtml(exportHtml);
 	// Set font
 	QFont textFont = themeEngine::font();
@@ -160,8 +197,10 @@ void exportDialog::printResult(void)
 		painter.begin(printer);
 		painter.setFont(ui->exportText->font());
 		QTextDocument *document = ui->exportText->document()->clone();
+		document->documentLayout()->setPaintDevice(printer);
+		document->setDefaultStyleSheet("body { color: black; }");
 		int fontHeight = QFontMetrics(painter.font(), printer).height();
-		QStringList lines = inputText.split('\n');
+		QStringList lines = document->toHtml().split("<br>");
 		int relativeLine = 0, page = 0;
 		for(int i=0; i < lines.count(); i++)
 		{
@@ -171,10 +210,13 @@ void exportDialog::printResult(void)
 				relativeLine = 0;
 				page++;
 			}
-			document->setPlainText(lines[i]);
-			painter.drawText(QPointF(0, fontHeight*relativeLine), lines[i]);
+			document->setHtml(lines[i]);
+			painter.resetTransform();
+			painter.translate(0, fontHeight*relativeLine);
+			document->drawContents(&painter);
 			relativeLine++;
 		}
+		painter.resetTransform();
 		double scale = printer->pageRect(QPrinter::DevicePixel).width() / double(ui->exportTable->width());
 		painter.scale(scale, scale);
 		int tablePos = (printer->pageRect(QPrinter::DevicePixel).height() - (ui->exportTable->height()*scale)) / scale;

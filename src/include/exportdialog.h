@@ -30,6 +30,7 @@
 #endif // Q_OS_WASM
 
 #include <QPainter>
+#include <QAbstractTextDocumentLayout>
 #include "core/theme.h"
 
 namespace Ui {
@@ -45,13 +46,14 @@ class exportDialog : public QDialog
 {
 	Q_OBJECT
 	public:
-		explicit exportDialog(QString text, QVariantMap result, QWidget *parent = nullptr);
+		explicit exportDialog(QString text, QVariantMap result, QList<QVariantMap> mistakes, QWidget *parent = nullptr);
 		~exportDialog();
 
 	private:
 		Ui::exportDialog *ui;
 		QString inputText;
 		QVariantMap performanceResult;
+		QList<QVariantMap> recordedMistakes;
 
 	private slots:
 		void updateTable(void);
