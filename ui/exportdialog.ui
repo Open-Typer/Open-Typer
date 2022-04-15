@@ -14,9 +14,6 @@
    <string>Export text</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="sizeConstraint">
-    <enum>QLayout::SetMinimumSize</enum>
-   </property>
    <item>
     <widget class="QFrame" name="toolBar">
      <property name="frameShape">
