@@ -350,6 +350,7 @@ void OpenTyper::levelFinalInit(bool updateClient)
 	updateText();
 	levelPos=0;
 	displayPos=0;
+	absolutePos = 0;
 	linePos = 0;
 	levelMistakes=0;
 	totalHits=0;
@@ -789,6 +790,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			{
 				levelPos--;
 				displayPos--;
+				absolutePos--;
 				linePos--;
 			}
 			plainText = QTextDocumentFragment::fromHtml(inputTextHtml).toPlainText();
@@ -809,6 +811,21 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				convertedKeyText = "";
 				currentLine++;
 				updateText();
+				if((currentMode == 1) && (currentLine >= lineCount-1))
+				{
+					currentLine=0;
+					updateText();
+					levelPos=-1;
+					displayPos=-1;
+					linePos = -1;
+					deadKeys=0;
+					mistake=false;
+					ignoreMistakeLabelAppend=false;
+					mistakeLabelHtml = "";
+					ui->mistakeLabel->setHtml(mistakeLabelHtml);
+					displayInput = "";
+					ui->inputLabel->setHtml(displayInput);
+				}
 			}
 			else
 			{
@@ -827,6 +844,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			inputTextHtml += convertedKeyText;
 			levelPos++;
 			displayPos++;
+			absolutePos++;
 			int charHits = 1;
 			// Count modifier keys
 			if(event->modifiers() != Qt::NoModifier)
@@ -862,13 +880,13 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				QList<QVariantMap> mistakesToRemove;
 				for(int i=0; i < recordedMistakes.count(); i++)
 				{
-					if(recordedMistakes[i]["pos"] == displayPos)
+					if(recordedMistakes[i]["pos"] == absolutePos)
 						mistakesToRemove += recordedMistakes[i];
 				}
 				for(int i=0; i < mistakesToRemove.count(); i++)
 					recordedMistakes.removeAll(mistakesToRemove[i]);
 				QVariantMap currentMistake;
-				currentMistake["pos"] = displayPos;
+				currentMistake["pos"] = absolutePos;
 				currentMistake["previous"] = keyText;
 				currentMistake["type"] = "change";
 				recordedMistakes += currentMistake;
@@ -905,23 +923,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		if(currentLine >= lineCount+1)
 			input.remove(input.count()-2, 2);
 		keyRelease(event);
-		if(currentMode == 1)
-		{
-			currentLine=0;
-			updateText();
-			levelPos=0;
-			displayPos=0;
-			linePos = 0;
-			deadKeys=0;
-			mistake=false;
-			ignoreMistakeLabelAppend=false;
-			mistakeLabelHtml = "";
-			ui->mistakeLabel->setHtml(mistakeLabelHtml);
-			displayInput = "";
-			ui->inputLabel->setHtml(displayInput);
-		}
-		else
-			endExercise(true, true, false, true, true);
+		endExercise(true, true, false, true, true);
 	}
 }
 
@@ -931,7 +933,34 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	levelInProgress=false;
 	if(!ui->correctMistakesCheckBox->isChecked())
 	{
+		if(currentMode == 1)
+		{
+			QString newText = "";
+			if(displayLevel.count() > 0)
+			{
+				int pos = 0;
+				for(int i=0; i < levelTimer.elapsed()/1000.0 * 30; i++)
+				{
+					newText += displayLevel[pos];
+					pos++;
+					if(pos >= displayLevel.count())
+					{
+						newText.remove(newText.count()-1, 1);
+						pos = 0;
+					}
+				}
+			}
+			displayLevel = newText;
+		}
 		recordedMistakes = stringUtils::findMistakes(displayLevel, input, recordedCharacters, &totalHits);
+		QList<QVariantMap> mistakesToRemove;
+		for(int i=0; i < recordedMistakes.count(); i++)
+		{
+			if(recordedMistakes[i]["pos"].toInt() >= input.count())
+				mistakesToRemove += recordedMistakes[i];
+		}
+		for(int i=0; i < mistakesToRemove.count(); i++)
+			recordedMistakes.removeAll(mistakesToRemove[i]);
 		levelMistakes = recordedMistakes.count();
 		QMap<int, QVariantMap*> mistakesMap;
 		for(int i=0; i < recordedMistakes.count(); i++)
