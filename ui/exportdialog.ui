@@ -213,8 +213,9 @@
 	padding: 0px;
 }
 
-QTableWidget::item:hover {
+QWidget::item:hover {
 	background-color:  white;
+	color: black;
 }</string>
             </property>
             <property name="frameShape">
