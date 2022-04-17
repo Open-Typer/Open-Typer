@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1538</width>
-    <height>774</height>
+    <height>796</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1059,14 +1059,7 @@
          </widget>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="Line" name="textSeparationLine">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0" alignment="Qt::AlignHCenter">
+       <item row="5" column="0" alignment="Qt::AlignHCenter">
         <widget class="keyboardWidget" name="keyboardFrame">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -1079,6 +1072,13 @@
          </property>
          <property name="frameShadow">
           <enum>QFrame::Plain</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="Line" name="textSeparationLine">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -1123,7 +1123,7 @@
             <x>0</x>
             <y>0</y>
             <width>168</width>
-            <height>83</height>
+            <height>129</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1166,6 +1166,19 @@
            </item>
           </layout>
          </widget>
+        </widget>
+       </item>
+       <item row="0" column="0" alignment="Qt::AlignHCenter">
+        <widget class="QPushButton" name="exportButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Export</string>
+         </property>
         </widget>
        </item>
        <item row="3" column="0">
@@ -1360,35 +1373,6 @@ p, li { white-space: pre-wrap; }
            </item>
           </layout>
          </widget>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <spacer name="paperSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Preferred</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="0" alignment="Qt::AlignHCenter">
-        <widget class="QPushButton" name="exportButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Export</string>
-         </property>
         </widget>
        </item>
       </layout>
