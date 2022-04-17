@@ -33,6 +33,10 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	inputLabelLayout->addWidget(ui->mistakeLabel);
 	inputLabelLayout->setContentsMargins(0,0,0,0);
 	inputLabelLayout->setAlignment(ui->mistakeLabel, Qt::AlignLeft | Qt::AlignTop);
+	QVBoxLayout *remainingTextAreaLayout = new QVBoxLayout(ui->remainingTextArea);
+	ui->keyboardFrame->setParent(ui->remainingTextArea);
+	remainingTextAreaLayout->addWidget(ui->keyboardFrame);
+	remainingTextAreaLayout->setAlignment(ui->keyboardFrame, Qt::AlignHCenter | Qt::AlignBottom);
 	QMenu *openMenu = new QMenu(ui->openButton);
 	QAction *openExerciseAction = openMenu->addAction(tr("Open custom exercise"));
 	QAction *openPackAction = openMenu->addAction(tr("Open custom pack"));
