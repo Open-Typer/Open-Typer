@@ -296,10 +296,9 @@ void OpenTyper::updateLessonList(void)
 	{
 		_lessonDesc = configParser::parseDesc(parser.lessonDesc(i));
 		if(_lessonDesc == "")
-			lessons += tr("Lesson") + " " + QString::number(i);
+			lessons += configParser::lessonTr(i);
 		else
-			lessons += tr("Lesson") + " " + QString::number(i) +
-				" " + _lessonDesc;
+			lessons += configParser::lessonTr(i) + " " + _lessonDesc;
 	}
 	ui->lessonSelectionList->addItems(lessons);
 }
@@ -334,7 +333,7 @@ void OpenTyper::loadSublesson(int levelID)
 	ui->levelSelectionList->clear();
 	QStringList levels;
 	for(int i=1; i <= levelCount; i++)
-		levels += tr("Exercise") + " " + QString::number(i);
+		levels += configParser::sublessonTr(i);
 	ui->levelSelectionList->addItems(levels);
 	ui->levelSelectionList->setCurrentIndex(levelID-1);
 }
