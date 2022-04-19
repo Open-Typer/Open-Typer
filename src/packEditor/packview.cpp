@@ -207,10 +207,9 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		else
 			_lessonDesc = configParser::parseDesc(parser->lessonDesc(i));
 		if(_lessonDesc == "")
-			lessons += tr("Lesson") + " " + QString::number(i);
+			lessons += configParser::lessonTr(i);
 		else
-			lessons += tr("Lesson") + " " + QString::number(i) +
-				" " + _lessonDesc;
+			lessons += configParser::lessonTr(i) + " " + _lessonDesc;
 	}
 	ui->lessonSelectionBox->addItems(lessons);
 	if(newLesson)
@@ -252,7 +251,7 @@ void packView::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 	ui->exerciseSelectionBox->clear();
 	QStringList exercises;
 	for(i=1; i <= exerciseCount; i++)
-		exercises += tr("Exercise") + " " + QString::number(i);
+		exercises += configParser::exerciseTr(i);
 	ui->exerciseSelectionBox->addItems(exercises);
 	if(newExercise)
 		oldExercise = ui->exerciseSelectionBox->count()-1;
