@@ -301,9 +301,27 @@ QString configParser::sublessonName(int id)
 			return tr("Text");
 			break;
 		default:
-			return tr("Sublesson") + " " + QString::number(id);
+			return sublessonTr(id);
 			break;
 	}
+}
+
+/*! Returns translated "Lesson (id)" string. */
+QString configParser::lessonTr(int id)
+{
+	return tr("Lesson %1").arg(QString::number(id));
+}
+
+/*! Returns translated "Sublesson (id)" string. */
+QString configParser::sublessonTr(int id)
+{
+	return tr("Sublesson %1").arg(QString::number(id));
+}
+
+/*! Returns translated "Exercise (id)" string. */
+QString configParser::exerciseTr(int id)
+{
+	return tr("Exercise %1").arg(QString::number(id));
 }
 
 /*!

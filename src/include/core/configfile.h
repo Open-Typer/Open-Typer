@@ -71,6 +71,9 @@ class configParser : public QObject
 		QString lessonDesc(int lesson);
 		static QString parseDesc(QString desc);
 		static QString sublessonName(int id);
+		static QString lessonTr(int id);
+		static QString sublessonTr(int id);
+		static QString exerciseTr(int id);
 		QString exerciseRawText(int lesson, int sublesson, int exercise);
 		QString exerciseText(int lesson, int sublesson, int exercise);
 		static QString initExercise(QString exercise, int lineLength);
