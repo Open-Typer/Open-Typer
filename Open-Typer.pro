@@ -47,6 +47,7 @@ SOURCES += \
     src/main.cpp \
     src/opentyper.cpp \
     src/exportdialog.cpp \
+    src/server/adminselector.cpp \
     src/updater/updaterdialog.cpp \
     src/widgets/inputlabel.cpp \
     src/widgets/textview.cpp \
@@ -79,6 +80,7 @@ HEADERS += \
     src/include/updater/updaterdialog.h \
     src/include/opentyper.h \
     src/include/exportdialog.h \
+    src/include/server/adminselector.h \
     src/include/widgets/inputlabel.h \
     src/include/widgets/textview.h \
     src/include/widgets/languagelist.h \
@@ -96,6 +98,7 @@ FORMS += \
     ui/timedialog.ui \
     ui/opentyper.ui \
     ui/exportdialog.ui \
+    ui/server/adminselector.ui \
     ui/options/optionswindow.ui \
     ui/packEditor/packeditor.ui \
     ui/packEditor/packselector.ui \
