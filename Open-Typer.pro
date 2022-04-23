@@ -108,6 +108,7 @@ TRANSLATIONS += \
 RESOURCES += \
     res.qrc \
     certs/certs.qrc \
+    res/images/class-icons/class-icons.qrc \
     res/keyboard-layouts/layouts.qrc
 
 RESOURCES += \
