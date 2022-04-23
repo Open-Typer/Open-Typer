@@ -21,6 +21,7 @@
 #include <QApplication>
 #include <QSettings>
 #include "opentyper.h"
+#include "core/database.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +29,8 @@ int main(int argc, char *argv[])
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 	QApplication a(argc, argv);
+	if(!dbMgr.status())
+		dbMgr.open();
 	// Set icon
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
 	OpenTyper w;
