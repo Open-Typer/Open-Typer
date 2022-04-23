@@ -1,6 +1,6 @@
 QT += core gui charts network
 !wasm {
-	QT += printsupport
+	QT += printsupport sql
 }
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -24,6 +24,7 @@ INCLUDEPATH += \
 SOURCES += \
     src/core/utils.cpp \
     src/core/configfile.cpp \
+    src/core/database.cpp \
     src/core/net.cpp \
     src/core/packs.cpp \
     src/core/language.cpp \
@@ -55,6 +56,7 @@ SOURCES += \
 HEADERS += \
     src/include/core/utils.h \
     src/include/core/configfile.h \
+    src/include/core/database.h \
     src/include/core/net.h \
     src/include/core/packs.h \
     src/include/core/language.h \
