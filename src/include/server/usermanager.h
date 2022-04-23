@@ -32,7 +32,7 @@ namespace Ui {
 }
 
 /*!
- * \brief the userManager class is a widget for user management, used by MonitorWindow.
+ * \brief the userManager class is a widget for user management.
  *
  * \image html userManager.png
  */
