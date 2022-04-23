@@ -37,7 +37,7 @@ namespace Ui {
 }
 
 /*!
- * \brief The classControls class is a widget for class management, used by MonitorWindow.
+ * \brief The classControls class is a widget for class management.
  *
  * \image html classControls.png
  */
