@@ -215,6 +215,21 @@ QList<int> databaseManager::userIDs(void)
 #endif
 }
 
+/*! Finds user by nickname. */
+int databaseManager::findUser(QString nickname)
+{
+#ifdef Q_OS_WASM
+	return 0;
+#else
+	QSqlQuery query;
+	query.exec("SELECT id FROM user WHERE nickname = " + quotesEnclosed(nickname));
+	if(query.next())
+		return query.value(0).toInt();
+	else
+		return 0;
+#endif
+}
+
 /*! Returns list of student IDs in the given class. */
 QList<int> databaseManager::studentIDs(int classID)
 {
@@ -629,6 +644,80 @@ QList<QVariantMap> databaseManager::historyEntries(int classID, int userID, QStr
 	}
 	return out;
 #endif
+}
+
+/*! Adds an entry to the exercise history. */
+void databaseManager::addHistoryEntry(int classID, int userID, QString pack, int lesson, int sublesson, int exercise, QVariantMap record)
+{
+#ifndef Q_OS_WASM
+	QSqlQuery query;
+	query.exec(QString("INSERT INTO exercise_result (user, class, upload_time, pack, lesson, sublesson, exercise, speed, mistakes, duration) VALUES (%1, %2, CURRENT_TIMESTAMP, %3, %4, %5, %6, %7, %8, %9)").arg(QString::number(userID),
+		QString::number(classID), quotesEnclosed(pack), QString::number(lesson), QString::number(sublesson), QString::number(exercise),
+		QString::number(record["speed"].toInt()), QString::number(record["mistakes"].toInt()), QString::number(record["duration"].toInt())));
+#endif
+}
+
+/*!
+ * Returns number of better or worse students based on their average number of points.\n
+ * The number of points for each entry is speed - mistakes*10.
+ */
+int databaseManager::compareWithStudents(int classID, int studentID, QString pack, int lesson, int sublesson, int exercise, bool better)
+{
+#ifdef Q_OS_WASM
+	return 0;
+#else
+	int out = 0;
+	QList<int> recordedStudents, students = studentIDs(classID);
+	for(int i=0; i < students.count(); i++)
+	{
+		QSqlQuery query;
+		query.exec(QString("SELECT * FROM exercise_result WHERE user = %1 AND class = %2 AND pack = %3 AND lesson = %4 AND sublesson = %5 AND exercise = %6").arg(QString::number(students[i]), QString::number(classID), quotesEnclosed(pack), QString::number(lesson), QString::number(sublesson), QString::number(exercise)));
+		int count = 0;
+		while(query.next())
+			count++;
+		if(count > 0)
+			recordedStudents += students[i];
+	}
+	QList<QVariantMap> entries = historyEntries(classID, studentID, pack, lesson, sublesson, exercise);
+	int count = entries.count();
+	QList<int> points;
+	points.clear();
+	int sum = 0;
+	for(int i2=0; i2 < count; i2++)
+	{
+		QVariantMap entry = entries[i2];
+		int pointCount = entry["speed"].toInt() - entry["mistakes"].toInt()*10;
+		points += pointCount;
+		sum += pointCount;
+	}
+	int myAvgPoints = sum / count;
+	for(int i=0; i < recordedStudents.count(); i++)
+	{
+		entries = historyEntries(classID, recordedStudents[i], pack, lesson, sublesson, exercise);
+		count = entries.count();
+		points.clear();
+		sum = 0;
+		for(int i2=0; i2 < count; i2++)
+		{
+			QVariantMap entry = entries[i2];
+			int pointCount = entry["speed"].toInt() - entry["mistakes"].toInt()*10;
+			points += pointCount;
+			sum += pointCount;
+		}
+		int avgPoints = sum / count;
+		if(better)
+		{
+			if(avgPoints > myAvgPoints)
+				out++;
+		}
+		else
+		{
+			if(avgPoints < myAvgPoints)
+				out++;
+		}
+	}
+	return out;
+#endif // Q_OS_WASM
 }
 
 /*! Returns the given string enclosed by quotes compatible with SQLite (special characters are automatically escaped). */

@@ -57,6 +57,7 @@ class databaseManager : public QObject
 		QStringList teacherNames(void);
 		QStringList administratorNames(void);
 		QList<int> userIDs(void);
+		int findUser(QString nickname);
 		QList<int> studentIDs(int classID);
 		QList<int> teacherIDs(void);
 		QList<int> administratorIDs(void);
@@ -84,6 +85,9 @@ class databaseManager : public QObject
 		QList<int> recordedExercises(int classID, QString pack, int lesson, int sublesson);
 		QList<int> studentExercises(int classID, int userID, QString pack, int lesson, int sublesson);
 		QList<QVariantMap> historyEntries(int classID, int userID, QString pack, int lesson, int sublesson, int exercise);
+		void addHistoryEntry(int classID, int userID, QString pack, int lesson, int sublesson, int exercise, QVariantMap record);
+		int compareWithStudents(int classID, int studentID, QString pack, int lesson, int sublesson, int exercise, bool better);
+		int activeClass = 0;
 
 	private:
 		bool openStatus = false;
