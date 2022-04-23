@@ -272,8 +272,10 @@ bool databaseManager::auth(int userID, QString password)
 #ifdef Q_OS_WASM
 	return false;
 #else
+	bool silent = true;
 	if(password == "")
 	{
+		silent = false;
 		QInputDialog dialog;
 		dialog.setLabelText(tr("Password for user %1:").arg(userName(userID)));
 		dialog.setInputMode(QInputDialog::TextInput);
@@ -299,7 +301,7 @@ bool databaseManager::auth(int userID, QString password)
 			userLoginID = userID;
 			return true;
 		}
-		else
+		else if(!silent)
 			QMessageBox::warning(nullptr, QString(), tr("Incorrect password!"));
 		return false;
 #endif
