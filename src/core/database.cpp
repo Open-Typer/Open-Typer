@@ -612,7 +612,7 @@ QList<int> databaseManager::studentExercises(int classID, int userID, QString pa
 QList<QVariantMap> databaseManager::historyEntries(int classID, int userID, QString pack, int lesson, int sublesson, int exercise)
 {
 #ifdef Q_OS_WASM
-	return QList<QVariantMap>;
+	return QList<QVariantMap>();
 #else
 	QSqlQuery query;
 	query.exec(QString("SELECT * FROM exercise_result WHERE class = %1 AND user = %2 AND pack = %3 AND lesson = %4 AND sublesson = %5 AND exercise = %6 ORDER BY upload_time ASC").arg(QString::number(classID), QString::number(userID), quotesEnclosed(pack), QString::number(lesson), QString::number(sublesson), QString::number(exercise)));
