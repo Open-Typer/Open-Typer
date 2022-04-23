@@ -24,7 +24,11 @@ INCLUDEPATH += \
 SOURCES += \
     src/core/utils.cpp \
     src/core/configfile.cpp \
-    src/core/database.cpp \
+    src/core/database.cpp
+!wasm {
+    SOURCES += src/core/server.cpp
+}
+SOURCES += \
     src/core/net.cpp \
     src/core/packs.cpp \
     src/core/language.cpp \
@@ -65,7 +69,11 @@ SOURCES += \
 HEADERS += \
     src/include/core/utils.h \
     src/include/core/configfile.h \
-    src/include/core/database.h \
+    src/include/core/database.h
+!wasm {
+    HEADERS += src/include/core/server.h
+}
+HEADERS += \
     src/include/core/net.h \
     src/include/core/packs.h \
     src/include/core/language.h \
