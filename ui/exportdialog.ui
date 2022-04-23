@@ -32,7 +32,7 @@
          <string notr="true"/>
         </property>
         <property name="icon">
-         <iconset resource="../../../../../../mnt/files/SYNC/dev/Qt/Open-Typer/res.qrc">
+         <iconset resource="../res.qrc">
           <normaloff>:/res/images/print.png</normaloff>:/res/images/print.png</iconset>
         </property>
         <property name="iconSize">
@@ -310,7 +310,7 @@ QWidget::item:hover {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../../../mnt/files/SYNC/dev/Qt/Open-Typer/res.qrc"/>
+  <include location="../res.qrc"/>
  </resources>
  <connections/>
 </ui>
