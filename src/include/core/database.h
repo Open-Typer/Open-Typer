@@ -22,6 +22,7 @@
 #define DATABASE_H
 
 #include <QObject>
+#include <QVariantMap>
 
 #ifndef Q_OS_WASM
 #include <QSqlDatabase>
