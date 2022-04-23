@@ -53,6 +53,7 @@ SOURCES += \
     src/server/serversetup.cpp \
     src/server/classedit.cpp \
     src/server/studentedit.cpp \
+    src/server/widgets/servermanager.cpp \
     src/server/widgets/classcontrols.cpp \
     src/server/widgets/studentdetails.cpp \
     src/updater/updaterdialog.cpp \
@@ -93,6 +94,7 @@ HEADERS += \
     src/include/server/serversetup.h \
     src/include/server/classedit.h \
     src/include/server/studentedit.h \
+    src/include/server/widgets/servermanager.h \
     src/include/server/widgets/classcontrols.h \
     src/include/server/widgets/studentdetails.h \
     src/include/widgets/inputlabel.h \
@@ -118,6 +120,7 @@ FORMS += \
     ui/server/serversetup.ui \
     ui/server/classedit.ui \
     ui/server/studentedit.ui \
+    ui/server/widgets/servermanager.ui \
     ui/server/widgets/classcontrols.ui \
     ui/server/widgets/studentdetails.ui \
     ui/options/optionswindow.ui \
