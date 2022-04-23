@@ -207,6 +207,7 @@ void serverManager::openClass(void)
 		else
 			ui->classControlsLayout->addWidget(controlsWidget);
 		connect(controlsWidget, &classControls::detailsClicked, this, &serverManager::openDetails);
+		dbMgr.activeClass = classes[selected];
 		init();
 	}
 }
