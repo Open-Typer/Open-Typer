@@ -24,6 +24,9 @@
 #include <QWidget>
 #include "core/utils.h"
 #include "core/net.h"
+#ifndef Q_OS_WASM
+#include "core/server.h"
+#endif // Q_OS_WASM
 
 namespace Ui {
 	class connectionOptions;
@@ -49,8 +52,10 @@ class connectionOptions : public QWidget
 		QSettings settings;
 
 	private slots:
+		void refresh(void);
+		void changeMode(void);
 		void changeAddress(void);
-		void changeServerState(bool enable);
+		void changeClientState(bool enable);
 		void testConnection(void);
 };
 

@@ -28,15 +28,14 @@ connectionOptions::connectionOptions(QWidget *parent) :
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
-	ui->IPEdit->setText(QHostAddress(client.serverAddress().toIPv4Address()).toString());
-	ui->portEdit->setValue(client.serverPort());
-	ui->serverCheckBox->setChecked(client.enabled());
-	ui->testButton->setEnabled(client.enabled());
+	refresh();
 	changeAddress();
 	// Connections
 	connect(ui->IPEdit,&QLineEdit::textChanged,this,&connectionOptions::changeAddress);
 	connect(ui->portEdit,SIGNAL(valueChanged(int)),this,SLOT(changeAddress()));
-	connect(ui->serverCheckBox,SIGNAL(clicked(bool)),this,SLOT(changeServerState(bool)));
+	connect(ui->clientButton, &QRadioButton::toggled, this, &connectionOptions::changeMode);
+	connect(ui->serverButton, &QRadioButton::toggled, this, &connectionOptions::changeMode);
+	connect(ui->clientCheckBox, SIGNAL(clicked(bool)), this, SLOT(changeClientState(bool)));
 	connect(ui->testButton,SIGNAL(clicked()),this,SLOT(testConnection()));
 }
 
@@ -44,6 +43,51 @@ connectionOptions::connectionOptions(QWidget *parent) :
 connectionOptions::~connectionOptions()
 {
 	delete ui;
+}
+
+/*! Reloads settings. */
+void connectionOptions::refresh(void)
+{
+#ifndef Q_OS_WASM
+	int mode = settings.value("server/mode", 2).toInt();
+	bool serverMode = (mode == 1);
+	if(serverMode)
+	{
+		if(!serverPtr)
+			serverPtr = new monitorServer;
+		ui->serverButton->setChecked(true);
+		ui->clientCheckBox->setChecked(false);
+	}
+	else
+	{
+		ui->clientButton->setChecked(true);
+		if(serverPtr)
+			serverPtr->deleteLater();
+	}
+	ui->IPLabel->setVisible(!serverMode);
+	ui->IPEdit->setVisible(!serverMode);
+	ui->clientCheckBox->setVisible(!serverMode);
+	ui->testButton->setVisible(!serverMode);
+	ui->statusLabel->setVisible(!serverMode);
+	ui->statusValueLabel->setVisible(!serverMode);
+#endif // Q_OS_WASM
+	ui->IPEdit->setText(QHostAddress(client.serverAddress().toIPv4Address()).toString());
+	ui->portEdit->setValue(client.serverPort());
+	ui->clientCheckBox->setChecked(client.enabled());
+	ui->testButton->setEnabled(client.enabled());
+}
+
+/*! Changes the mode (client or server). */
+void connectionOptions::changeMode(void)
+{
+	if(ui->serverButton->isChecked())
+	{
+		settings.setValue("server/mode", 1);
+		ui->clientCheckBox->setChecked(false);
+	}
+	else
+		settings.setValue("server/mode", 2);
+	refresh();
 }
 
 /*!
@@ -54,14 +98,23 @@ void connectionOptions::changeAddress(void)
 {
 	settings.setValue("server/address",ui->IPEdit->text());
 	settings.setValue("server/port",ui->portEdit->text());
+	settings.sync();
+#ifndef Q_OS_WASM
+	if((settings.value("server/mode", 2).toInt() == 1) && serverPtr)
+	{
+		serverPtr->close();
+		serverPtr->deleteLater();
+		serverPtr = new monitorServer;
+	}
+#endif // Q_OS_WASM
 	ui->statusValueLabel->setText(tr("Unknown"));
 }
 
 /*!
- * Connected from serverCheckBox->clicked().\n
- * Enables or disables class monitor server connection.
+ * Connected from clientCheckBox->clicked().\n
+ * Enables or disables client.
  */
-void connectionOptions::changeServerState(bool enable)
+void connectionOptions::changeClientState(bool enable)
 {
 	settings.setValue("server/enabled",enable);
 	ui->testButton->setEnabled(enable);
