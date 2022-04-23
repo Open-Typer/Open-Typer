@@ -47,6 +47,7 @@ SOURCES += \
     src/main.cpp \
     src/opentyper.cpp \
     src/exportdialog.cpp \
+    src/server/useredit.cpp \
     src/server/adminselector.cpp \
     src/server/serversetup.cpp \
     src/server/classedit.cpp \
@@ -83,6 +84,7 @@ HEADERS += \
     src/include/updater/updaterdialog.h \
     src/include/opentyper.h \
     src/include/exportdialog.h \
+    src/include/server/useredit.h \
     src/include/server/adminselector.h \
     src/include/server/serversetup.h \
     src/include/server/classedit.h \
@@ -104,6 +106,7 @@ FORMS += \
     ui/timedialog.ui \
     ui/opentyper.ui \
     ui/exportdialog.ui \
+    ui/server/useredit.ui \
     ui/server/adminselector.ui \
     ui/server/serversetup.ui \
     ui/server/classedit.ui \
