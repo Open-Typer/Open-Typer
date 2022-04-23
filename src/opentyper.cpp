@@ -92,6 +92,10 @@ OpenTyper::OpenTyper(QWidget *parent) :
 OpenTyper::~OpenTyper()
 {
 	delete ui;
+#ifndef Q_OS_WASM
+	if(serverPtr)
+		serverPtr->deleteLater();
+#endif // Q_OS_WASM
 }
 
 /*! Initializes the program and loads all settings.
@@ -110,6 +114,16 @@ void OpenTyper::refreshAll(bool setLang)
 		else
 			langMgr.setLanguage(langMgr.boxItems.indexOf(settings.value("main/language","").toString()) - 1);
 	}
+#ifndef Q_OS_WASM
+	// Start or stop server
+	if(settings.value("server/mode", 2).toInt() == 1)
+	{
+		if(!serverPtr)
+			serverPtr = new monitorServer;
+	}
+	else if(serverPtr)
+		serverPtr->deleteLater();
+#endif // Q_OS_WASM
 	// Config file (lesson pack) name
 	QString configName = settings.value("main/configfile","").toString();
 	if(configName == "")

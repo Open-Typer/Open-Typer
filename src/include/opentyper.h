@@ -47,6 +47,9 @@
 #include "core/packs.h"
 #include "core/language.h"
 #include "core/theme.h"
+#ifndef Q_OS_WASM
+#include "core/server.h"
+#endif // Q_OS_WASM
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class OpenTyper; }
