@@ -242,6 +242,12 @@ void monitorServer::sendSignal(QByteArray name, QList<QByteArray> data, QList<QB
 	}
 }
 
+/*! Returns true if the given student is logged in. */
+bool monitorServer::isLoggedIn(QString username)
+{
+	return sessions.values().contains(username);
+}
+
 /*! Converts list of QByteArrays to a single QByteArray, which can be used for a response or signal. */
 QByteArray monitorServer::convertData(bool *ok, QList<QByteArray> input)
 {
