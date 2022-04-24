@@ -397,6 +397,7 @@ void OpenTyper::levelFinalInit(bool updateClient)
 	if(currentMode == 1)
 		level += '\n';
 	ui->exerciseChecksFrame->setEnabled(true);
+	preview = false;
 	currentLine=0;
 	updateText();
 	levelPos=0;
@@ -1063,6 +1064,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	msgBox->setWindowModality(Qt::WindowModal);
 	connect(msgBox, &QDialog::accepted, this, [this]() {
 		ui->exportButton->show();
+		preview = true;
 		// Load saved text
 		ui->inputLabel->setHtml(inputTextHtml);
 		ui->mistakeLabel->setHtml(mistakeTextHtml);
@@ -1178,9 +1180,17 @@ void OpenTyper::updateFont(void)
 	ui->mistakeLabel->setFont(mistakeLabelFont);
 	int scrollBarWidth = ui->typingSpace->verticalScrollBar()->size().width();
 	ui->currentLineArea->setFixedSize(ui->levelCurrentLineLabel->document()->size().toSize() + QSize(scrollBarWidth, 0));
-	if(ui->currentLineArea->isVisible())
+	bool visible1 = ui->currentLineArea->isVisible();
+	bool visible2 = ui->remainingTextArea->isVisible();
+	ui->currentLineArea->show();
+	ui->remainingTextArea->show();
+	ui->typingSpace->setFixedWidth(std::max(ui->levelCurrentLineLabel->document()->size().toSize().width()+12,
+		std::max(ui->levelLabel->document()->size().toSize().width()+12,
+		ui->keyboardFrame->width()+12)));
+	ui->currentLineArea->setVisible(visible1);
+	ui->remainingTextArea->setVisible(visible2);
+	if(!preview)
 	{
-		ui->typingSpace->setMinimumWidth(0);
 		ui->typingSpace->setMaximumWidth(QWIDGETSIZE_MAX);
 		ui->typingSpace->setFixedHeight(ui->inputLabel->document()->size().height());
 	}

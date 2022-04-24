@@ -117,6 +117,7 @@ class OpenTyper : public QMainWindow
 		void loadErrorWords(void);
 		void loadReversedText(void);
 		void exportText(void);
+		bool preview = false;
 
 	protected:
 		void changeEvent(QEvent *event);
