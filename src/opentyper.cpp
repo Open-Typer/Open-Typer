@@ -383,6 +383,9 @@ void OpenTyper::loadSublesson(int levelID)
 void OpenTyper::levelFinalInit(bool updateClient)
 {
 	// Init level
+	publicPos::currentLesson = currentLesson;
+	publicPos::currentSublesson = currentAbsoluteSublesson;
+	publicPos::currentExercise = currentLevel;
 	if(currentMode == 1)
 		level += '\n';
 	ui->exerciseChecksFrame->setEnabled(true);
