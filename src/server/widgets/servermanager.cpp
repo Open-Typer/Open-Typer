@@ -231,5 +231,6 @@ void serverManager::removeClass(void)
 	{
 		dbMgr.removeClass(selectedClass);
 		init();
+		openClass();
 	}
 }
