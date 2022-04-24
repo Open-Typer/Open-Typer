@@ -33,6 +33,7 @@
 #include "initialsetup.h"
 #include "widgets/inputlabel.h"
 #include "widgets/languagelist.h"
+#include "server/widgets/servermanager.h"
 #include "updater/updater.h"
 #include "paperconfigdialog.h"
 #include "packEditor/packeditor.h"

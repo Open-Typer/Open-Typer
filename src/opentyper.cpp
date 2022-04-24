@@ -120,9 +120,32 @@ void OpenTyper::refreshAll(bool setLang)
 	{
 		if(!serverPtr)
 			serverPtr = new monitorServer;
+		ui->serverFrame->show();
+		if(serverPtr->isListening())
+		{
+			if(ui->serverFrameLayout->count() == 0)
+			{
+				serverManager *serverManagerWidget = new serverManager(ui->serverFrame);
+				ui->serverFrameLayout->addWidget(serverManagerWidget);
+				connect(serverManagerWidget, &serverManager::widgetExpanded, this, [this]() { ui->paper->hide(); ui->controlFrame->setEnabled(false); ui->bottomPanel->setEnabled(false); });
+				connect(serverManagerWidget, &serverManager::widgetCollapsed, this, [this]() { ui->paper->show(); ui->controlFrame->setEnabled(true); ui->bottomPanel->setEnabled(true); });
+			}
+		}
+		else
+		{
+			ui->serverFrame->hide();
+			if(ui->serverFrameLayout->count() > 0)
+				ui->serverFrameLayout->itemAt(0)->widget()->close();
+		}
 	}
-	else if(serverPtr)
-		serverPtr->deleteLater();
+	else
+	{
+		if(serverPtr)
+			serverPtr->deleteLater();
+		ui->serverFrame->hide();
+		if(ui->serverFrameLayout->count() > 0)
+			ui->serverFrameLayout->itemAt(0)->widget()->close();
+	}
 #endif // Q_OS_WASM
 	// Config file (lesson pack) name
 	QString configName = settings.value("main/configfile","").toString();
@@ -1188,6 +1211,7 @@ void OpenTyper::setColors(void)
 	QString panelStyleSheet = themeEngine::panelStyleSheet();
 	ui->controlFrame->setStyleSheet(panelStyleSheet);
 	ui->bottomPanel->setStyleSheet(panelStyleSheet);
+	ui->serverFrame->setStyleSheet(panelStyleSheet);
 	// Set keyboard color
 	QColor keyBorderColor = palette().color(QPalette::Text);
 	keyBorderColor = QColor::fromRgb(keyBorderColor.red() + (128-keyBorderColor.red()),
