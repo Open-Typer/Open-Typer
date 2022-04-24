@@ -284,33 +284,38 @@ void classControls::refreshCharts(void)
 void classControls::loadExercise(void)
 {
 #ifndef Q_OS_WASM
-	QString fileName = QFileDialog::getOpenFileName(this);
-	if(!fileName.isNull())
+	QList<int> students, allStudents = dbMgr.studentIDs(classID);
+	for(int i=0; i < allStudents.count(); i++)
 	{
-		QFile file(fileName);
-		if(file.size() > 2048) // Maximum size
-		{
-			QMessageBox errBox;
-			errBox.setText(tr("This file is too large!"));
-			errBox.setStyleSheet(styleSheet());
-			errBox.exec();
-			return;
-		}
-		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
-		{
-			paperConfigDialog dialog;
-			dialog.setStyleSheet(styleSheet());
-			dialog.exec();
-			QList<QByteArray> usernames;
-			usernames.clear();
-			QList<int> students = dbMgr.studentIDs(classID);
-			for(int i=0; i < students.count(); i++)
-				usernames += dbMgr.userNickname(students[i]).toUtf8();
-			QByteArray includeNewLines = "false";
-			if(dialog.includeNewLines)
-				includeNewLines = "true";
-			serverPtr->sendSignal("loadExercise", { file.readAll(), QByteArray::number(dialog.lineLength), includeNewLines }, usernames);
-		}
+		if(serverPtr->isLoggedIn(dbMgr.userNickname(allStudents[i])))
+			students += allStudents[i];
+	}
+	loadExerciseDialog dialog(students);
+	if(dialog.exec() == QDialog::Accepted)
+	{
+		QList<QByteArray> usernames;
+		auto selectedStudents = dialog.selectedStudents();
+		for(int i=0; i < selectedStudents.count(); i++)
+			usernames += dbMgr.userNickname(selectedStudents[i]).toUtf8();
+		QByteArray includeNewLines = "false", correctMistakes = "false", lockUi = "false", hideText = "false";
+		if(dialog.includeNewLines())
+			includeNewLines = "true";
+		if(dialog.correctMistakes())
+			correctMistakes = "true";
+		if(dialog.lockUi())
+			lockUi = "true";
+		if(dialog.hideText())
+			hideText = "true";
+		serverPtr->sendSignal("loadExercise", {
+			dialog.exerciseText().toUtf8(),
+			QByteArray::number(dialog.lineLength()),
+			includeNewLines,
+			QByteArray::number(dialog.mode()),
+			QByteArray::number(QTime(0, 0, 0).secsTo(dialog.timeLimit())),
+			correctMistakes,
+			lockUi,
+			hideText
+		}, usernames);
 	}
 #endif // Q_OS_WASM
 }
