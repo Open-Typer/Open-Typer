@@ -69,7 +69,7 @@ class monitorClient : public QObject
 		/*! A signal, which is emitted when connection is lost. */
 		void disconnected();
 		/*! A signal, which is emitted when an exercise is received from the server. */
-		void exerciseReceived(QByteArray, int, bool);
+		void exerciseReceived(QByteArray, int, bool, int, int, bool, bool, bool);
 
 	private slots:
 		void readResponse(void);

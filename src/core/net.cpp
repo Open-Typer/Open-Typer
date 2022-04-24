@@ -171,8 +171,8 @@ void monitorClient::readResponse(void)
 	else
 	{
 		QList<QByteArray> signal = readData(receivedData);
-		if((signal.count() >= 4) && (signal[0] == "loadExercise"))
-			emit exerciseReceived(signal[1],signal[2].toInt(),(signal[3]=="true"));
+		if((signal.count() >= 9) && (signal[0] == "loadExercise"))
+			emit exerciseReceived(signal[1], signal[2].toInt(), (signal[3]=="true"), signal[4].toInt(), signal[5].toInt(), (signal[6]=="true"), (signal[7]=="true"), (signal[8]=="true"));
 	}
 	receivedData = "";
 }
