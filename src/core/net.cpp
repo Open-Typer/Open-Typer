@@ -159,19 +159,22 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
  */
 void monitorClient::readResponse(void)
 {
+	receivedData += socket->readAll();
+	if(receivedData.back() != ';')
+		return;
+	receivedData.remove(receivedData.count()-1, 1);
 	if(waitingForResponse)
 	{
-		response = socket->readAll();
+		response = receivedData;
 		emit responseReady();
 	}
 	else
 	{
-		QList<QByteArray> signal = readData(socket->readAll());
-		if(signal.count() == 0)
-			return;
-		if((signal[0] == "loadExercise") && (signal.count() >= 4))
+		QList<QByteArray> signal = readData(receivedData);
+		if((signal.count() >= 4) && (signal[0] == "loadExercise"))
 			emit exerciseReceived(signal[1],signal[2].toInt(),(signal[3]=="true"));
 	}
+	receivedData = "";
 }
 
 /*!

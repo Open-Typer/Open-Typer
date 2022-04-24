@@ -57,7 +57,7 @@ class monitorClient : public QObject
 #else
 		QSslSocket *socket;
 #endif
-		QByteArray response;
+		QByteArray response, receivedData = "";
 		bool connected, waitingForResponse;
 		QByteArray convertData(bool *ok, QList<QByteArray> input);
 		QList<QByteArray> readData(QByteArray input);
