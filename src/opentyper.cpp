@@ -79,6 +79,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 		ui->remainingTextArea->setVisible(!checked);
 		ui->textSeparationLine->setVisible(!checked);
 		ui->paperSpacer->setVisible(checked);
+		updateText();
 	});
 	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
 	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
@@ -467,10 +468,11 @@ void OpenTyper::updateText(void)
 			line++;
 		}
 	}
-	ui->inputLabel->setPlainText(displayLevel);
-	ui->levelCurrentLineLabel->setText(currentLineText);
+	if(ui->hideTextCheckBox->isChecked())
+		ui->levelCurrentLineLabel->setPlainText(displayLevel);
+	else
+		ui->levelCurrentLineLabel->setText(currentLineText);
 	ui->centralwidget->layout()->activate();
-	ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;"));
 	ui->levelLabel->setText(remainingText);
 	((QGraphicsOpacityEffect*)ui->levelLabel->graphicsEffect())->setOpacity(0.5);
 	updateFont();
@@ -880,9 +882,15 @@ void OpenTyper::keyPress(QKeyEvent *event)
 					mistake=false;
 					ignoreMistakeLabelAppend=false;
 					mistakeLabelHtml = "";
-					ui->mistakeLabel->setHtml(mistakeLabelHtml);
+					if(ui->hideTextCheckBox->isChecked())
+						ui->mistakeLabel->setHtml(mistakeTextHtml);
+					else
+						ui->mistakeLabel->setHtml(mistakeLabelHtml);
 					displayInput = "";
-					ui->inputLabel->setHtml(displayInput);
+					if(ui->hideTextCheckBox->isChecked())
+						ui->inputLabel->setHtml(input);
+					else
+						ui->inputLabel->setHtml(displayInput);
 				}
 			}
 			else
@@ -955,7 +963,10 @@ void OpenTyper::keyPress(QKeyEvent *event)
 					errorAppend = "↵<br>";
 				else
 					errorAppend = convertedKeyText;
-				ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;") + "<span style='color: red';'>" + errorAppend + "</span>");
+				if(ui->hideTextCheckBox->isChecked())
+					ui->inputLabel->setHtml(input.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>") + "<span style='color: red';'>" + errorAppend + "</span>");
+				else
+					ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>") + "<span style='color: red';'>" + errorAppend + "</span>");
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 				mistake=true;
@@ -970,8 +981,16 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		}
 	}
 	if(!mistake)
-		ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;"));
-	ui->mistakeLabel->setHtml(mistakeLabelHtml);
+	{
+		if(ui->hideTextCheckBox->isChecked())
+			ui->inputLabel->setHtml(input.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>"));
+		else
+			ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>"));
+	}
+	if(ui->hideTextCheckBox->isChecked())
+		ui->mistakeLabel->setHtml(mistakeTextHtml);
+	else
+		ui->mistakeLabel->setHtml(mistakeLabelHtml);
 	ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	ui->typingSpace->setFixedHeight(ui->inputLabel->document()->size().height());
