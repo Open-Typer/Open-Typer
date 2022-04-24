@@ -30,6 +30,10 @@
 #include <QJsonArray>
 #include "utils.h"
 
+namespace publicPos {
+	extern int currentLesson, currentSublesson, currentExercise;
+}
+
 // TODO: Add a link to pack file format documentation.
 /*!
  * \brief The configParser class provides functions for the pack file format.

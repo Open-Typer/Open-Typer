@@ -20,6 +20,10 @@
 
 #include "core/configfile.h"
 
+namespace publicPos {
+	int currentLesson = 0, currentSublesson = 0, currentExercise = 0;
+}
+
 /*! Constructs configParser. */
 configParser::configParser(QObject *parent) :
 	QObject(parent)
