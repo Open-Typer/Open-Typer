@@ -265,6 +265,8 @@ QByteArray monitorServer::convertData(bool *ok, QList<QByteArray> input)
 		// Data
 		out += input[i];
 	}
+	// Termination byte
+	out += ";";
 	if(ok != nullptr)
 		*ok = true;
 	return out;
