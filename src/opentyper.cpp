@@ -76,16 +76,13 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->exportButton, &QPushButton::clicked, this, &OpenTyper::exportText);
 	connect(ui->hideTextCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
 		ui->currentLineArea->setVisible(!checked);
-		ui->remainingTextArea->setVisible(!checked);
 		ui->textSeparationLine->setVisible(!checked);
-		ui->paperSpacer->setVisible(checked);
 		updateText();
 	});
 	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
 	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
 	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
 	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &OpenTyper::loadTheme);
-	ui->paperSpacer->hide();
 	// Start timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
 	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
@@ -480,7 +477,7 @@ void OpenTyper::updateText(void)
 	{
 		ui->currentLineArea->hide();
 		ui->textSeparationLine->hide();
-		ui->remainingTextArea->hide();
+		ui->levelLabel->setPlainText("");
 	}
 	blockInput = false;
 }
@@ -993,7 +990,6 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		ui->mistakeLabel->setHtml(mistakeLabelHtml);
 	ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
-	ui->typingSpace->setFixedHeight(ui->inputLabel->document()->size().height());
 	ui->typingSpace->ensureWidgetVisible(ui->inputLabel);
 	if(((displayPos >= displayLevel.count()) && ui->correctMistakesCheckBox->isChecked()) || (currentLine >= lineCount+1))
 	{
@@ -1069,6 +1065,14 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	else if(!customLevelLoaded && !customConfig)
 		historyParser::addHistoryEntry(publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,
 			{QString::number(grossHits),QString::number(levelMistakes),QString::number(time)});
+	if(uploadResult)
+	{
+		ui->correctMistakesCheckBox->setChecked(correctMistakesOld);
+		ui->hideTextCheckBox->setChecked(hideTextOld);
+		if(isFullScreen())
+			showMaximized();
+		// TODO: Upload result
+	}
 	levelSummary *msgBox = new levelSummary(this);
 	if(showNetHits)
 		msgBox->setNetHits(netHits);
@@ -1199,25 +1203,17 @@ void OpenTyper::updateFont(void)
 	ui->mistakeLabel->setFont(mistakeLabelFont);
 	int scrollBarWidth = ui->typingSpace->verticalScrollBar()->size().width();
 	ui->currentLineArea->setFixedSize(ui->levelCurrentLineLabel->document()->size().toSize() + QSize(scrollBarWidth, 0));
-	bool visible1 = ui->currentLineArea->isVisible();
-	bool visible2 = ui->remainingTextArea->isVisible();
-	ui->currentLineArea->show();
-	ui->remainingTextArea->show();
 	ui->typingSpace->setFixedWidth(std::max(ui->levelCurrentLineLabel->document()->size().toSize().width()+12,
 		std::max(ui->levelLabel->document()->size().toSize().width()+12,
 		ui->keyboardFrame->width()+12)));
-	ui->currentLineArea->setVisible(visible1);
-	ui->remainingTextArea->setVisible(visible2);
+	ui->typingSpace->setMinimumHeight(0);
+	ui->typingSpace->setMaximumHeight(ui->inputLabel->document()->size().height() * 2);
 	if(!preview)
-	{
 		ui->typingSpace->setMaximumWidth(QWIDGETSIZE_MAX);
-		ui->typingSpace->setFixedHeight(ui->inputLabel->document()->size().height());
-	}
 	else
 	{
-		ui->typingSpace->setMinimumHeight(0);
-		ui->typingSpace->setMaximumHeight(QWIDGETSIZE_MAX);
 		ui->typingSpace->setFixedWidth(ui->inputLabel->document()->size().width() + scrollBarWidth*2);
+		ui->typingSpace->setMaximumHeight(QWIDGETSIZE_MAX);
 	}
 }
 
@@ -1359,7 +1355,7 @@ void OpenTyper::zoomOut(void)
 /*! Changes the operation mode.\n
  * Supported modes are default (0) and timed exercise mode (1).
  */
-void OpenTyper::changeMode(int mode)
+void OpenTyper::changeMode(int mode, bool enableStudentUpdate)
 {
 	switch(mode) {
 		case 0:
@@ -1374,7 +1370,8 @@ void OpenTyper::changeMode(int mode)
 			break;
 	}
 	currentMode = mode;
-	updateStudent();
+	if(enableStudentUpdate)
+		updateStudent();
 }
 
 /*! Connected from timedExerciseButton.\n
@@ -1432,10 +1429,38 @@ void OpenTyper::showExerciseStats(void)
 }
 
 /*! Connected from client.exerciseReceived(). */
-void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines)
+void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText)
 {
+	changeMode(mode, false);
 	levelLengthExtension = lineLength;
 	loadText(text,includeNewLines,false);
+	if(mode == 1)
+	{
+		ui->timedExCountdownLabel->setText("3");
+		QTime exTime = QTime(0, 0, 0).addSecs(time);
+		timedExHours = exTime.hour();
+		timedExMinutes = exTime.minute();
+		timedExSeconds = exTime.second();
+		timedExStarted = false;
+		ui->timedExTime->setTime(exTime);
+		ui->timedExTime->hide();
+		ui->timedExCountdownLabel->show();
+		ui->timedExRemainingLabel->hide();
+		levelFinalInit();
+		levelInProgress = true;
+		levelTimer.start();
+		secLoop->start(500);
+	}
+	correctMistakesOld = ui->correctMistakesCheckBox->isChecked();
+	hideTextOld = ui->hideTextCheckBox->isChecked();
+	ui->correctMistakesCheckBox->setChecked(correctMistakes);
+	ui->hideTextCheckBox->setChecked(hideText);
+	if(lockUi)
+	{
+		ui->controlFrame->setEnabled(false);
+		showFullScreen();
+	}
+	uploadResult = true;
 }
 
 /*!

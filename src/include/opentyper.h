@@ -106,7 +106,7 @@ class OpenTyper : public QMainWindow
 		int errorPenalty;
 		QTranslator translator;
 		void refreshAll(bool setLang);
-		void changeMode(int mode);
+		void changeMode(int mode, bool enableStudentUpdate = true);
 		int currentMode = 0;
 		int timedExHours, timedExMinutes, timedExSeconds;
 		bool timedExStarted;
@@ -117,7 +117,7 @@ class OpenTyper : public QMainWindow
 		void loadErrorWords(void);
 		void loadReversedText(void);
 		void exportText(void);
-		bool preview = false;
+		bool preview = false, uploadResult = false, correctMistakesOld = true, hideTextOld = false;
 
 	protected:
 		void changeEvent(QEvent *event);
@@ -143,7 +143,7 @@ class OpenTyper : public QMainWindow
 		void initTimedExercise(void);
 		void updateStudent(void);
 		void showExerciseStats(void);
-		void loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines);
+		void loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
 
 	public slots:
 		void openEditor(void);
