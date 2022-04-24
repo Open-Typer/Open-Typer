@@ -77,21 +77,27 @@ bool serverManager::init(void)
 	while(icons.hasNext())
 		iconNames += icons.next();
 	iconNames.sort();
+	int oldClass = 0, currentIndex = ui->classBox->currentIndex();
+	if(currentIndex > 0)
+		oldClass = classes[currentIndex-1];
 	disableClassOpening = true;
 	ui->classBox->clear();
+	ui->classBox->addItem(tr("No class selected"), "Displayed in the class selection combo box.");
 	classes = dbMgr.classIDs(true);
 	for(int i = 0; i < classes.count(); i++)
 	{
 		ui->classBox->addItem(dbMgr.className(classes[i]));
-		ui->classBox->setItemIcon(i, QIcon(iconNames[dbMgr.classIcon(classes[i])]));
+		ui->classBox->setItemIcon(i+1, QIcon(iconNames[dbMgr.classIcon(classes[i])]));
 	}
+	if(oldClass != 0)
+		ui->classBox->setCurrentIndex(classes.indexOf(oldClass)+1);
 	disableClassOpening = false;
-	if(classes.count() == 0)
+	if((classes.count() == 0) || (ui->classBox->currentIndex() == 0))
 	{
-		ui->classBox->hide();
+		if(classes.count() == 0)
+			ui->classBox->hide();
 		ui->removeClassButton->setEnabled(false);
 		ui->toggleButton->setEnabled(false);
-		openClass();
 		collapse();
 	}
 	else
@@ -178,10 +184,15 @@ void serverManager::changeSchoolName(void)
 /*! Opens classEdit and creates a class. */
 void serverManager::addClass(void)
 {
-	classEdit *dialog = new classEdit(true, 1, this);
-	dialog->setWindowModality(Qt::WindowModal);
-	dialog->open();
-	connect(dialog, &QDialog::finished, this, &serverManager::init);
+	adminSelector *selectDialog = new adminSelector(this);
+	selectDialog->setWindowModality(Qt::WindowModal);
+	selectDialog->open();
+	connect(selectDialog, &QDialog::accepted, this, [selectDialog, this]() {
+		classEdit *dialog = new classEdit(true, 1, this);
+		dialog->setWindowModality(Qt::WindowModal);
+		dialog->open();
+		connect(dialog, &QDialog::finished, this, [this]() { init(); openClass(); });
+	});
 }
 
 /*! Opens selected class */
@@ -189,33 +200,38 @@ void serverManager::openClass(void)
 {
 	if(disableClassOpening)
 		return;
-	int selected = ui->classBox->currentIndex();
+	int selected = ui->classBox->currentIndex()-1;
 	if(selected == -1)
 		ui->classControlsFrame->hide();
 	else
 	{
-		ui->classControlsFrame->setVisible(expanded);
-		dbMgr.updateClassTimestamp(classes[selected]);
-		classControls *controlsWidget = new classControls(classes[selected], ui->classControlsFrame);
-		if(ui->classControlsLayout->count() > 0)
+		if(dbMgr.auth(dbMgr.classOwner(classes[selected])))
 		{
-			QWidget *oldWidget = ui->classControlsLayout->itemAt(0)->widget();
-			disconnect(oldWidget, nullptr, nullptr, nullptr);
-			ui->classControlsLayout->replaceWidget(oldWidget, controlsWidget);
-			oldWidget->close();
+			ui->classControlsFrame->setVisible(expanded);
+			dbMgr.updateClassTimestamp(classes[selected]);
+			classControls *controlsWidget = new classControls(classes[selected], ui->classControlsFrame);
+			if(ui->classControlsLayout->count() > 0)
+			{
+				QWidget *oldWidget = ui->classControlsLayout->itemAt(0)->widget();
+				disconnect(oldWidget, nullptr, nullptr, nullptr);
+				ui->classControlsLayout->replaceWidget(oldWidget, controlsWidget);
+				oldWidget->close();
+			}
+			else
+				ui->classControlsLayout->addWidget(controlsWidget);
+			connect(controlsWidget, &classControls::detailsClicked, this, &serverManager::openDetails);
+			dbMgr.activeClass = classes[selected];
 		}
 		else
-			ui->classControlsLayout->addWidget(controlsWidget);
-		connect(controlsWidget, &classControls::detailsClicked, this, &serverManager::openDetails);
-		dbMgr.activeClass = classes[selected];
-		init();
+			ui->classBox->setCurrentIndex(0);
 	}
+	init();
 }
 
 /*! Opens student details. \see studentDetails */
 void serverManager::openDetails(int studentID)
 {
-	studentDetails *detailsWidget = new studentDetails(classes[ui->classBox->currentIndex()], studentID, ui->classControlsFrame);
+	studentDetails *detailsWidget = new studentDetails(classes[ui->classBox->currentIndex()-1], studentID, ui->classControlsFrame);
 	QWidget *oldWidget = ui->classControlsLayout->itemAt(0)->widget();
 	disconnect(oldWidget, nullptr, nullptr, nullptr);
 	ui->classControlsLayout->replaceWidget(oldWidget, detailsWidget);
@@ -226,11 +242,14 @@ void serverManager::openDetails(int studentID)
 /*! Removes selected class. */
 void serverManager::removeClass(void)
 {
-	int selectedClass = classes[ui->classBox->currentIndex()];
+	int selectedClass = classes[ui->classBox->currentIndex()-1];
 	if(QMessageBox::question(this, QString(), tr("Are you sure you want to remove class %1?").arg(dbMgr.className(selectedClass))) == QMessageBox::Yes)
 	{
-		dbMgr.removeClass(selectedClass);
-		init();
-		openClass();
+		if(dbMgr.auth(dbMgr.loginID()))
+		{
+			dbMgr.removeClass(selectedClass);
+			init();
+			openClass();
+		}
 	}
 }
