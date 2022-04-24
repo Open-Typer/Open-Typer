@@ -370,7 +370,7 @@ void OpenTyper::loadSublesson(int levelID)
 	ui->levelSelectionList->clear();
 	QStringList levels;
 	for(int i=1; i <= levelCount; i++)
-		levels += configParser::sublessonTr(i);
+		levels += configParser::exerciseTr(i);
 	ui->levelSelectionList->addItems(levels);
 	ui->levelSelectionList->setCurrentIndex(levelID-1);
 }
