@@ -160,7 +160,7 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 void monitorClient::readResponse(void)
 {
 	receivedData += socket->readAll();
-	if(receivedData.back() != ';')
+	if(receivedData[receivedData.count()-1] != ';')
 		return;
 	receivedData.remove(receivedData.count()-1, 1);
 	if(waitingForResponse)
