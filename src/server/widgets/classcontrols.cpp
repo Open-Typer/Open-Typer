@@ -308,7 +308,7 @@ void classControls::loadExercise(void)
 			QByteArray includeNewLines = "false";
 			if(dialog.includeNewLines)
 				includeNewLines = "true";
-			//serverPtr->sendSignal("loadExercise", { file.readAll(), QByteArray::number(dialog.lineLength), includeNewLines }, usernames);
+			serverPtr->sendSignal("loadExercise", { file.readAll(), QByteArray::number(dialog.lineLength), includeNewLines }, usernames);
 		}
 	}
 }
