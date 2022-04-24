@@ -471,7 +471,7 @@ void themeEngine::resetPanelColor(void)
 /*! Returns panel style sheet. */
 QString themeEngine::panelStyleSheet(void)
 {
-	return "QFrame { background-color: rgb(" +
+	return "QFrame, QCheckBox, QTabWidget QWidget { background-color: rgb(" +
 		QString::number(panelColor().red()) + ", " +
 		QString::number(panelColor().green()) + ", " +
 		QString::number(panelColor().blue()) + ");}";
