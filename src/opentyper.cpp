@@ -74,10 +74,17 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->stopTimedExButton, &QPushButton::clicked, ui->timedExerciseButton, &QPushButton::clicked);
 	connect(ui->statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
 	connect(ui->exportButton, &QPushButton::clicked, this, &OpenTyper::exportText);
+	connect(ui->hideTextCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
+		ui->currentLineArea->setVisible(!checked);
+		ui->remainingTextArea->setVisible(!checked);
+		ui->textSeparationLine->setVisible(!checked);
+		ui->paperSpacer->setVisible(checked);
+	});
 	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
 	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
 	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
 	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &OpenTyper::loadTheme);
+	ui->paperSpacer->hide();
 	// Start timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
 	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
@@ -222,6 +229,7 @@ void OpenTyper::refreshAll(bool setLang)
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
 	}
+	updateText();
 }
 
 /*!
@@ -465,6 +473,12 @@ void OpenTyper::updateText(void)
 	ui->levelLabel->setText(remainingText);
 	((QGraphicsOpacityEffect*)ui->levelLabel->graphicsEffect())->setOpacity(0.5);
 	updateFont();
+	if(ui->hideTextCheckBox->isChecked())
+	{
+		ui->currentLineArea->hide();
+		ui->textSeparationLine->hide();
+		ui->remainingTextArea->hide();
+	}
 	blockInput = false;
 }
 
