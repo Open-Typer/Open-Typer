@@ -32,6 +32,8 @@ studentEdit::studentEdit(bool newStudent, int class_id, int id, QWidget *parent)
 	{
 		setWindowTitle(tr("New student"));
 		ui->resetPasswordButton->hide();
+		ui->usernameLabel->hide();
+		ui->usernameEdit->hide();
 	}
 	else
 	{
@@ -44,10 +46,7 @@ studentEdit::studentEdit(bool newStudent, int class_id, int id, QWidget *parent)
 	creatingNewStudent = newStudent;
 	passwordReset = false;
 	if(creatingNewStudent)
-	{
 		userID = 0;
-		ui->usernameEdit->hide();
-	}
 	else
 		userID = id;
 	verify();
