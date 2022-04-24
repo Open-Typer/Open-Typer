@@ -283,6 +283,7 @@ void classControls::refreshCharts(void)
  */
 void classControls::loadExercise(void)
 {
+#ifndef Q_OS_WASM
 	QString fileName = QFileDialog::getOpenFileName(this);
 	if(!fileName.isNull())
 	{
@@ -311,4 +312,5 @@ void classControls::loadExercise(void)
 			serverPtr->sendSignal("loadExercise", { file.readAll(), QByteArray::number(dialog.lineLength), includeNewLines }, usernames);
 		}
 	}
+#endif // Q_OS_WASM
 }

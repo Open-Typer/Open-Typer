@@ -27,7 +27,9 @@
 #include "paperconfigdialog.h"
 #include "core/database.h"
 #include "core/configfile.h"
+#ifndef Q_OS_WASM
 #include "core/server.h"
+#endif // Q_OS_WASM
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
 using namespace QtCharts;
