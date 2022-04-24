@@ -429,6 +429,19 @@ unsigned long long databaseManager::classTimestamp(int classID)
 #endif
 }
 
+/*! Returns the owner of the class */
+int databaseManager::classOwner(int classID)
+{
+#ifdef Q_OS_WASM
+	return 0;
+#else
+	QSqlQuery query;
+	query.exec(QString("SELECT user FROM users INNER JOIN user ON user.id = users.user AND users.class = %1 AND user.role != %2").arg(QString::number(classID), QString::number(Role_Student)));
+	query.next();
+	return query.value(0).toInt();
+#endif
+}
+
 /*! Returns list of classes. */
 QStringList databaseManager::classNames(bool sort)
 {

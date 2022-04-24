@@ -70,6 +70,7 @@ class databaseManager : public QObject
 		QString className(int classID);
 		int classIcon(int classID);
 		unsigned long long classTimestamp(int classID);
+		int classOwner(int classID);
 		QStringList classNames(bool sort = false);
 		QList<int> classIDs(bool sort = false);
 		void addClass(QString name, int owner, int icon);
