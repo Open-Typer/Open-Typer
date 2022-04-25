@@ -202,7 +202,10 @@ void serverManager::openClass(void)
 		return;
 	int selected = ui->classBox->currentIndex()-1;
 	if(selected == -1)
+	{
 		ui->classControlsFrame->hide();
+		dbMgr.activeClass = 0;
+	}
 	else
 	{
 		if(dbMgr.auth(dbMgr.classOwner(classes[selected])))
