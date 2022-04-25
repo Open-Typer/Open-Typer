@@ -29,7 +29,6 @@ serverManager::serverManager(QWidget *parent) :
 	ui->setupUi(this);
 	init();
 	collapse();
-	openClass();
 	// Connections
 	connect(ui->toggleButton, &QToolButton::clicked, this, [this]() {
 		if(expanded)
