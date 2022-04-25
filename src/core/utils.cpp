@@ -197,7 +197,7 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 		}
 		else
 		{
-			if(recordedCharacters && hits && inputPos)
+			if(recordedCharacters && (*inputPos < recordedCharacters->count()) && hits && inputPos)
 			{
 				*hits += recordedCharacters->at(*inputPos).second;
 				*inputPos += 1;
@@ -271,7 +271,8 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			nextWord = inputWords[inputWords.count()-1];
 		if((i > 0) && (inputWords[i] != "\n") && (nextWord != "\n"))
 		{
-			hits += recordedCharacters[pos].second;
+			if(pos < recordedCharacters.count())
+				hits += recordedCharacters[pos].second;
 			pos++;
 		}
 		if(differences.contains(i))
@@ -310,7 +311,8 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 		{
 			for(int i2=0; i2 < inputWords[i].count(); i2++)
 			{
-				hits += recordedCharacters[pos].second;
+				if(pos < recordedCharacters.count())
+					hits += recordedCharacters[pos].second;
 				pos++;
 			}
 		}
