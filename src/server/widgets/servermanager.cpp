@@ -93,8 +93,7 @@ bool serverManager::init(void)
 	disableClassOpening = false;
 	if((classes.count() == 0) || (ui->classBox->currentIndex() == 0))
 	{
-		if(classes.count() == 0)
-			ui->classBox->hide();
+		ui->classBox->setVisible(classes.count() != 0);
 		ui->removeClassButton->setEnabled(false);
 		ui->toggleButton->setEnabled(false);
 		collapse();
