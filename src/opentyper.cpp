@@ -1047,7 +1047,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 			else
 				mistakeTextHtml += "<span style='color: rgba(0,0,0,0)'>" + QString(input[i]).toHtmlEscaped().replace(" ", "&nbsp;") + "</span>";
 		}
-		levelHits = totalHits - (levelMistakes * errorPenalty);
+		levelHits = std::max(0, totalHits - (levelMistakes * errorPenalty));
 		mistakeTextHtml.replace("\n","<br>");
 		ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 	}
