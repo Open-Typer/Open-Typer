@@ -466,10 +466,7 @@ void OpenTyper::updateText(void)
 			line++;
 		}
 	}
-	if(ui->hideTextCheckBox->isChecked())
-		ui->levelCurrentLineLabel->setPlainText(displayLevel);
-	else
-		ui->levelCurrentLineLabel->setText(currentLineText);
+	ui->levelCurrentLineLabel->setText(currentLineText);
 	ui->centralwidget->layout()->activate();
 	ui->levelLabel->setText(remainingText);
 	((QGraphicsOpacityEffect*)ui->levelLabel->graphicsEffect())->setOpacity(0.5);
@@ -1203,9 +1200,11 @@ void OpenTyper::updateFont(void)
 	ui->inputLabel->setFont(newFont);
 	ui->mistakeLabel->setFont(mistakeLabelFont);
 	int scrollBarWidth = ui->typingSpace->verticalScrollBar()->size().width();
-	ui->currentLineArea->setFixedSize(ui->levelCurrentLineLabel->document()->size().toSize() + QSize(scrollBarWidth, 0));
-	ui->typingSpace->setFixedWidth(std::max(ui->levelCurrentLineLabel->document()->size().toSize().width()+12,
-		std::max(ui->levelLabel->document()->size().toSize().width()+12,
+	QTextDocument *tmpDoc = ui->levelCurrentLineLabel->document()->clone(this);
+	ui->currentLineArea->setFixedSize(tmpDoc->size().toSize() + QSize(scrollBarWidth, 0));
+	tmpDoc->setPlainText(displayLevel);
+	ui->typingSpace->setFixedWidth(std::max(tmpDoc->size().toSize().width()+12,
+		std::max(tmpDoc->size().toSize().width()+12,
 		ui->keyboardFrame->width()+12)));
 	ui->typingSpace->setMinimumHeight(0);
 	ui->typingSpace->setMaximumHeight(ui->inputLabel->document()->size().height() * 2);
