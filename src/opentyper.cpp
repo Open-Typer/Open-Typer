@@ -131,6 +131,7 @@ void OpenTyper::refreshAll(bool setLang)
 			if(ui->serverFrameLayout->count() == 0)
 			{
 				serverManager *serverManagerWidget = new serverManager(ui->serverFrame);
+				serverManagerWidget->setAttribute(Qt::WA_DeleteOnClose);
 				ui->serverFrameLayout->addWidget(serverManagerWidget);
 				connect(serverManagerWidget, &serverManager::widgetExpanded, this, [this]() { ui->paper->hide(); ui->controlFrame->setEnabled(false); ui->bottomPanel->setEnabled(false); });
 				connect(serverManagerWidget, &serverManager::widgetCollapsed, this, [this]() { ui->paper->show(); ui->controlFrame->setEnabled(true); ui->bottomPanel->setEnabled(true); });
