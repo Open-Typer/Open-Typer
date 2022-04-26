@@ -25,6 +25,7 @@
 #include <QString>
 #include <QStandardPaths>
 #include <QKeyEvent>
+#include <QDir>
 
 /*! \brief The stringUtils class contains functions related to strings. */
 class stringUtils

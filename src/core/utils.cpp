@@ -328,7 +328,10 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
  */
 QString fileUtils::configLocation(void)
 {
-	return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
+	QString path = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
+	QDir dir;
+	dir.mkpath(path);
+	return path;
 }
 
 /*! Returns the path to the main configuration file, currently \c config.ini in the program configuration directory. */
