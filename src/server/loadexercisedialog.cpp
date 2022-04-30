@@ -186,7 +186,7 @@ void loadExerciseDialog::openFile(void)
 	if(!newFileName.isNull())
 	{
 		QFile file(newFileName);
-		if(file.size() > 2048) // Maximum size
+		if(file.size() > 8192) // Maximum size
 		{
 			QMessageBox::critical(this, QString(), tr("This file is too large!"));
 			return;
