@@ -671,7 +671,7 @@ void OpenTyper::openExerciseFromFile(void)
 	auto fileContentReady = [this](const QString &fileName, const QByteArray &fileContent) {
 		if(!fileName.isEmpty())
 		{
-			if(fileContent.size() > 2048) // Maximum size
+			if(fileContent.size() > 8192) // Maximum size
 			{
 				QMessageBox *errBox = new QMessageBox(this);
 				errBox->setText(tr("This file is too large!"));
