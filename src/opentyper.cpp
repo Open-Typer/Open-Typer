@@ -314,6 +314,12 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 		level = parser.exerciseText(lessonID,
 			sublessonID+sublessonListStart,
 			levelID);
+	if(uploadResult)
+	{
+		if(studentUsername != "")
+			client.sendRequest("put", {"abortExercise"});
+		uploadResult = false;
+	}
 	// Get lesson count
 	lessonCount = parser.lessonCount();
 	// Get level count (in current lesson)
@@ -1069,7 +1075,26 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		ui->hideTextCheckBox->setChecked(hideTextOld);
 		if(isFullScreen())
 			showMaximized();
-		// TODO: Upload result
+		if(studentUsername != "")
+		{
+			updateStudent();
+			client.sendRequest("put", {"clearRecordedMistakes"});
+			for(int i=0; i < recordedMistakes.count(); i++)
+			{
+				QVariantMap character = recordedMistakes[i];
+				QStringList keys = character.keys();
+				QList<QByteArray> list = {"recordedMistake"};
+				for(int j=0; j < keys.count(); j++)
+				{
+					list += keys[j].toUtf8();
+					list += character[keys[j]].toString().toUtf8();
+				}
+				client.sendRequest("put", list);
+			}
+			client.sendRequest("put",
+				{"monitorResult", input.toUtf8(), QByteArray::number(totalHits), QByteArray::number(levelHits), QByteArray::number((double) levelHits*(60.0/lastTimeF)), QByteArray::number(levelMistakes)});
+		}
+		uploadResult = false;
 	}
 	levelSummary *msgBox = new levelSummary(this);
 	if(showNetHits)
