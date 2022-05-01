@@ -33,7 +33,7 @@ exerciseProgressDialog::exerciseProgressDialog(QList<int> students, QWidget *par
 	// Connections
 	connect(serverPtr, &monitorServer::resultUploaded, this, &exerciseProgressDialog::loadResult);
 	connect(serverPtr, &monitorServer::exerciseAborted, this, &exerciseProgressDialog::abortExercise);
-	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &QDialog::accept);
+	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &QDialog::close);
 }
 
 /*! Destroys the exerciseProgressDialog object. */
@@ -90,7 +90,7 @@ void exerciseProgressDialog::setupTable(void)
 			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("In progress...")));
 		// Mark
 		QString mark = "-";
-		if(results[students[i]].contains("mark"))
+		if(results.contains(students[i]) && results[students[i]].contains("mark"))
 			mark = QString::number(results[students[i]]["mark"].toInt());
 		item = new QTableWidgetItem(mark);
 		ui->studentsTable->setItem(i, 3, item);
@@ -122,4 +122,19 @@ void exerciseProgressDialog::abortExercise(int userID)
 		return;
 	abortList[userID] = true;
 	setupTable();
+}
+
+/*! Overrides QDialog#closeEvent(). */
+void exerciseProgressDialog::closeEvent(QCloseEvent *event)
+{
+	if(results.keys().count() != exerciseStudents.count())
+	{
+		QMessageBox::StandardButton button = QMessageBox::question(this, QString(), tr("Some students have not finished yet."), QMessageBox::Discard | QMessageBox::Cancel);
+		if(button == QMessageBox::Discard)
+			event->accept();
+		else
+			event->ignore();
+	}
+	else
+		event->accept();
 }

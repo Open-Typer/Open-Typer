@@ -53,6 +53,9 @@ class exerciseProgressDialog : public QDialog
 		QMap<int, QList<QVariantMap>> recordedMistakeLists;
 		void setupTable(void);
 
+	protected:
+		void closeEvent(QCloseEvent *event);
+
 	private slots:
 		void loadResult(int userID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes);
 		void abortExercise(int userID);
