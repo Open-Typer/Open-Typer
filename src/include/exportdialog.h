@@ -65,6 +65,8 @@ class exportDialog : public QDialog
 
 	private slots:
 		void updateTable(void);
+
+	public slots:
 		void printResult(void);
 };
 

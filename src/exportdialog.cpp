@@ -185,28 +185,31 @@ void exportDialog::printResult(void)
 {
 #ifndef Q_OS_WASM
 	// Set up printer
-	QPrinter *printer = new QPrinter(QPrinter::HighResolution);
-	QPrintDialog *dialog = new QPrintDialog(printer, this);
-	dialog->setWindowTitle(tr("Print result"));
-	dialog->setWindowModality(Qt::WindowModal);
-	dialog->open();
-	connect(dialog, &QDialog::accepted, this, [printer, this]() {
+	QPrinter printer(QPrinter::HighResolution);
+	QPrintDialog dialog(&printer);
+	dialog.setWindowTitle(tr("Print result"));
+	if(dialog.exec() == QDialog::Accepted)
+	{
+		bool visibility = isVisible();
+		show();
+		ui->exportTable->adjustSize();
+		adjustSize();
 		// Print
-		printer->setPageMargins(QMarginsF(25, 25, 15, 25), QPageLayout::Millimeter);
+		printer.setPageMargins(QMarginsF(25, 25, 15, 25), QPageLayout::Millimeter);
 		QPainter painter;
-		painter.begin(printer);
+		painter.begin(&printer);
 		painter.setFont(ui->exportText->font());
 		QTextDocument *document = ui->exportText->document()->clone();
-		document->documentLayout()->setPaintDevice(printer);
+		document->documentLayout()->setPaintDevice(&printer);
 		document->setDefaultStyleSheet("body { color: black; }");
-		int fontHeight = QFontMetrics(painter.font(), printer).height();
+		int fontHeight = QFontMetrics(painter.font(), &printer).height();
 		QStringList lines = document->toHtml().split("<br>");
 		int relativeLine = 0, page = 0;
 		for(int i=0; i < lines.count(); i++)
 		{
-			if(fontHeight*relativeLine > printer->pageRect(QPrinter::DevicePixel).height())
+			if(fontHeight*relativeLine > printer.pageRect(QPrinter::DevicePixel).height())
 			{
-				printer->newPage();
+				printer.newPage();
 				relativeLine = 0;
 				page++;
 			}
@@ -217,15 +220,15 @@ void exportDialog::printResult(void)
 			relativeLine++;
 		}
 		painter.resetTransform();
-		double scale = printer->pageRect(QPrinter::DevicePixel).width() / double(ui->exportTable->width());
+		double scale = printer.pageRect(QPrinter::DevicePixel).width() / double(ui->exportTable->width());
 		painter.scale(scale, scale);
-		int tablePos = (printer->pageRect(QPrinter::DevicePixel).height() - (ui->exportTable->height()*scale)) / scale;
+		int tablePos = (printer.pageRect(QPrinter::DevicePixel).height() - (ui->exportTable->height()*scale)) / scale;
 		if(((fontHeight*relativeLine) / scale > tablePos) || (page == 0))
-			printer->newPage();
+			printer.newPage();
 		ui->exportTable->render(&painter, QPoint(0, tablePos));
 		painter.end();
-		delete printer;
-	});
+		setVisible(visibility);
+	}
 #endif // Q_OS_WASM
 }
 
