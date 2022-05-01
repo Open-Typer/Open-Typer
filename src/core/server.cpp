@@ -110,6 +110,14 @@ void monitorServer::sendResponse(void)
 	QList<QByteArray> requestList = readData(request);
 	if(sessions.contains(clientSocket) && !studentAuthAvailable(sessions[clientSocket]))
 		sessions.remove(clientSocket);
+	QList<QSslSocket*> socketsToRemove;
+	for(int i=0; i < exerciseSockets.count(); i++)
+	{
+		if(!sessions.contains(exerciseSockets[i]))
+			socketsToRemove += exerciseSockets[i];
+	}
+	for(int i=0; i < socketsToRemove.count(); i++)
+		exerciseSockets.removeAll(socketsToRemove[i]);
 	if((requestList[0] == "auth") && (requestList.count() >= 3))
 	{
 		if(studentAuthAvailable(requestList[1]))
@@ -266,6 +274,7 @@ void monitorServer::sendResponse(void)
 			{
 				emit resultUploaded(dbMgr.findUser(sessions[clientSocket]), recordedMistakes[clientSocket], requestList[2], requestList[3].toInt(), requestList[4].toInt(), requestList[5].toDouble(), requestList[6].toInt());
 				recordedMistakes[clientSocket].clear();
+				exerciseSockets.removeAll(clientSocket);
 				clientSocket->write(convertData({"ok"}));
 			}
 			else
