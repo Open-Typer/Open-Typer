@@ -316,7 +316,7 @@ void classControls::loadExercise(void)
 			lockUi,
 			hideText
 		}, usernames);
-		exerciseProgressDialog *progressDialog = new exerciseProgressDialog(selectedStudents, this);
+		exerciseProgressDialog *progressDialog = new exerciseProgressDialog(classID, selectedStudents, this);
 		progressDialog->show();
 	}
 #endif // Q_OS_WASM
