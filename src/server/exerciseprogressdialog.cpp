@@ -56,6 +56,12 @@ void exerciseProgressDialog::setupTable(void)
 		if(abortList[keys[i]] && !students.contains(keys[i]))
 			students += keys[i];
 	}
+	keys = results.keys();
+	for(int i=0; i < keys.count(); i++)
+	{
+		if(!students.contains(keys[i]))
+			students += keys[i];
+	}
 	ui->studentsTable->setRowCount(students.count());
 	for(int i=0; i < students.count(); i++)
 	{
