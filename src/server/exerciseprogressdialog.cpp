@@ -35,6 +35,7 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> students,
 	// Connections
 	connect(serverPtr, &monitorServer::resultUploaded, this, &exerciseProgressDialog::loadResult);
 	connect(serverPtr, &monitorServer::exerciseAborted, this, &exerciseProgressDialog::abortExercise);
+	connect(ui->printButton, &QPushButton::clicked, this, &exerciseProgressDialog::printAll);
 	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &QDialog::close);
 }
 
@@ -47,23 +48,12 @@ exerciseProgressDialog::~exerciseProgressDialog()
 /*! Loads the students. */
 void exerciseProgressDialog::setupTable(void)
 {
+	ui->printButton->setEnabled(results.keys().count() == exerciseStudents.count());
 	ui->studentsTable->clearContents();
 	ui->studentsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->studentsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	// Rows
-	QList<int> students = serverPtr->runningExerciseStudents();
-	auto keys = abortList.keys();
-	for(int i=0; i < keys.count(); i++)
-	{
-		if(abortList[keys[i]] && !students.contains(keys[i]))
-			students += keys[i];
-	}
-	keys = results.keys();
-	for(int i=0; i < keys.count(); i++)
-	{
-		if(!students.contains(keys[i]))
-			students += keys[i];
-	}
+	QList<int> students = exerciseStudents;
 	ui->studentsTable->setRowCount(students.count());
 	for(int i=0; i < students.count(); i++)
 	{
@@ -149,4 +139,39 @@ void exerciseProgressDialog::closeEvent(QCloseEvent *event)
 	}
 	else
 		event->accept();
+}
+
+/*! Prints all results. */
+void exerciseProgressDialog::printAll(void)
+{
+	for(int i=0; i < exerciseStudents.count(); i++)
+	{
+		while(true)
+		{
+			exportDialog dialog(inputTexts[exerciseStudents[i]], results[exerciseStudents[i]], recordedMistakeLists[exerciseStudents[i]], this);
+			dialog.setStudentName(dbMgr.userName(exerciseStudents[i]));
+			dialog.setClassName(ui->classEdit->text());
+			dialog.setNumber(ui->numberEdit->text());
+			if(results[exerciseStudents[i]].contains("mark"))
+				dialog.setMark(results[exerciseStudents[i]]["mark"].toString());
+			QMessageBox msgBox;
+			msgBox.setText(tr("Printing result of student %1...").arg(dbMgr.userName(exerciseStudents[i])));
+			QPushButton *printButton = msgBox.addButton(tr("Print"), QMessageBox::YesRole);
+			QPushButton *nextButton;
+			if(i < exerciseStudents.count()-1)
+				nextButton = msgBox.addButton(tr("Next student"), QMessageBox::NoRole);
+			else
+				nextButton = msgBox.addButton(QMessageBox::Close);
+			msgBox.exec();
+			if(msgBox.clickedButton() == printButton)
+			{
+				dialog.printResult();
+				dialog.close();
+			}
+			else if(msgBox.clickedButton() == nextButton)
+				break;
+			else
+				break;
+		}
+	}
 }

@@ -59,6 +59,7 @@ class exerciseProgressDialog : public QDialog
 	private slots:
 		void loadResult(int userID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes);
 		void abortExercise(int userID);
+		void printAll(void);
 };
 
 #endif // EXERCISEPROGRESSDIALOG_H
