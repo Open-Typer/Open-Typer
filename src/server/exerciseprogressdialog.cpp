@@ -48,7 +48,7 @@ exerciseProgressDialog::~exerciseProgressDialog()
 /*! Loads the students. */
 void exerciseProgressDialog::setupTable(void)
 {
-	ui->printButton->setEnabled(results.keys().count() == exerciseStudents.count());
+	ui->printButton->setEnabled(results.keys().count() + abortList.values().count(true) != exerciseStudents.count());
 	ui->studentsTable->clearContents();
 	ui->studentsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->studentsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
@@ -129,7 +129,7 @@ void exerciseProgressDialog::abortExercise(int userID)
 /*! Overrides QDialog#closeEvent(). */
 void exerciseProgressDialog::closeEvent(QCloseEvent *event)
 {
-	if(results.keys().count() != exerciseStudents.count())
+	if(results.keys().count() + abortList.values().count(true) != exerciseStudents.count())
 	{
 		QMessageBox::StandardButton button = QMessageBox::question(this, QString(), tr("Some students have not finished yet."), QMessageBox::Discard | QMessageBox::Cancel);
 		if(button == QMessageBox::Discard)
@@ -148,6 +148,8 @@ void exerciseProgressDialog::printAll(void)
 	{
 		while(true)
 		{
+			if(abortList.contains(exerciseStudents[i]) && abortList[exerciseStudents[i]])
+				continue;
 			exportDialog dialog(inputTexts[exerciseStudents[i]], results[exerciseStudents[i]], recordedMistakeLists[exerciseStudents[i]], this);
 			dialog.setStudentName(dbMgr.userName(exerciseStudents[i]));
 			dialog.setClassName(ui->classEdit->text());
