@@ -27,6 +27,7 @@ monitorServer::monitorServer(bool silent, QObject *parent) :
 	QTcpServer(parent),
 	clientSockets(),
 	sessions(),
+	exerciseSockets(),
 	m_sslLocalCertificate(),
 	m_sslPrivateKey(),
 	m_sslProtocol(QSsl::UnknownProtocol)
@@ -93,6 +94,8 @@ void monitorServer::disconnectClient(void)
 {
 	QSslSocket *clientSocket = (QSslSocket*) sender();
 	clientSockets.removeAll(clientSocket);
+	exerciseSockets.removeAll(clientSocket);
+	emit exerciseAborted(dbMgr.findUser(sessions[clientSocket]));
 	clientSocket->deleteLater();
 }
 
@@ -216,6 +219,69 @@ void monitorServer::sendResponse(void)
 			else
 				clientSocket->write(convertData({"fail"}));
 		}
+		else if(requestList[1] == "clearRecordedMistakes")
+		{
+			if(sessions.contains(clientSocket))
+			{
+				if(!recordedMistakes.contains(clientSocket))
+					recordedMistakes[clientSocket] = QList<QVariantMap>();
+				recordedMistakes[clientSocket].clear();
+				clientSocket->write(convertData({"ok"}));
+			}
+			else
+				clientSocket->write(convertData({"fail"}));
+		}
+		else if(requestList[1] == "recordedMistake")
+		{
+			if(sessions.contains(clientSocket))
+			{
+				if(!recordedMistakes.contains(clientSocket))
+					recordedMistakes[clientSocket] = QList<QVariantMap>();
+				if(requestList.count() % 2 != 0)
+					clientSocket->write(convertData({"fail"}));
+				else
+				{
+					QVariantMap map;
+					for(int i=2; i < (requestList.count()-2)/2; i++)
+					{
+						// Key
+						QString key = requestList[i];
+						i++;
+						// Value
+						if(key == "pos")
+							map[key] = requestList[i].toInt();
+						else
+							map[key] = QString(requestList[i]);
+					}
+					recordedMistakes[clientSocket].append(map);
+					clientSocket->write(convertData({"ok"}));
+				}
+			}
+			else
+				clientSocket->write(convertData({"fail"}));
+		}
+		else if((requestList[1] == "monitorResult") && (requestList.count() >= 6))
+		{
+			if(sessions.contains(clientSocket) && recordedMistakes.contains(clientSocket))
+			{
+				emit resultUploaded(dbMgr.findUser(sessions[clientSocket]), recordedMistakes[clientSocket], requestList[2], requestList[3].toInt(), requestList[4].toInt(), requestList[5].toDouble(), requestList[6].toInt());
+				recordedMistakes[clientSocket].clear();
+				clientSocket->write(convertData({"ok"}));
+			}
+			else
+				clientSocket->write(convertData({"fail"}));
+		}
+		else if(requestList[1] == "abortExercise")
+		{
+			if(sessions.contains(clientSocket))
+			{
+				exerciseSockets.removeAll(clientSocket);
+				emit exerciseAborted(dbMgr.findUser(sessions[clientSocket]));
+				clientSocket->write(convertData({"ok"}));
+			}
+			else
+				clientSocket->write(convertData({"fail"}));
+		}
 		else
 			clientSocket->write(convertData({"fail"}));
 	}
@@ -234,10 +300,14 @@ void monitorServer::sendSignal(QByteArray name, QList<QByteArray> data, QList<QB
 	QByteArray finalData = convertData(rawData);
 	for(int i=0; i < clientSockets.count(); i++)
 	{
-		if(sessions.contains(clientSockets[i]))
+		if(sessions.contains(clientSockets[i]) && usernames.contains(sessions[clientSockets[i]].toUtf8()))
 		{
-			if(usernames.contains(sessions[clientSockets[i]].toUtf8()))
+			if(!((name == "loadExercise") && exerciseSockets.contains(clientSockets[i])))
+			{
+				if(name == "loadExercise")
+					exerciseSockets += clientSockets[i];
 				clientSockets[i]->write(finalData);
+			}
 		}
 	}
 }
@@ -246,6 +316,15 @@ void monitorServer::sendSignal(QByteArray name, QList<QByteArray> data, QList<QB
 bool monitorServer::isLoggedIn(QString username)
 {
 	return sessions.values().contains(username);
+}
+
+/*! Returns list of students with an exercise in progress. */
+QList<int> monitorServer::runningExerciseStudents(void)
+{
+	QList<int> out;
+	for(int i=0; i < exerciseSockets.count(); i++)
+		out += dbMgr.findUser(sessions.value(exerciseSockets[i]));
+	return out;
 }
 
 /*! Converts list of QByteArrays to a single QByteArray, which can be used for a response or signal. */

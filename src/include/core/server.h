@@ -44,6 +44,7 @@ class monitorServer : public QTcpServer
 		static QHostAddress address(void);
 		void sendSignal(QByteArray name, QList<QByteArray> data, QList<QByteArray> usernames);
 		bool isLoggedIn(QString username);
+		QList<int> runningExerciseStudents(void);
 		const QSslCertificate &getSslLocalCertificate() const;
 		const QSslKey &getSslPrivateKey() const;
 		QSsl::SslProtocol getSslProtocol() const;
@@ -55,6 +56,12 @@ class monitorServer : public QTcpServer
 
 	protected:
 		void incomingConnection(qintptr socketDescriptor);
+
+	signals:
+		/*! A signal, which is emitted, when a student uploads a monitored exercise result. */
+		void resultUploaded(int, QList<QVariantMap>, QString, int, int, double, int);
+		/*! A signal, which is emitted, when a student aborts a monitored exercise. */
+		void exerciseAborted(int);
 
 	private slots:
 		void acceptConnection(void);
@@ -68,6 +75,8 @@ class monitorServer : public QTcpServer
 		QList<QByteArray> readData(QByteArray input);
 		bool studentAuthAvailable(QString nickname);
 		QMap<QSslSocket*,QString> sessions; /*!< Stores student sessions (socket, username). */
+		QList<QSslSocket*> exerciseSockets;
+		QMap<QSslSocket*, QList<QVariantMap>> recordedMistakes;
 		QSslCertificate m_sslLocalCertificate;
 		QSslKey m_sslPrivateKey;
 		QSsl::SslProtocol m_sslProtocol;
