@@ -228,3 +228,51 @@ void exportDialog::printResult(void)
 	});
 #endif // Q_OS_WASM
 }
+
+/*! Sets the student name. */
+void exportDialog::setStudentName(QString name)
+{
+	ui->nameEdit->setText(name);
+}
+
+/*! Returns the student name. */
+QString exportDialog::studentName(void)
+{
+	return ui->nameEdit->text();
+}
+
+/*! Sets the class name. */
+void exportDialog::setClassName(QString name)
+{
+	ui->classEdit->setText(name);
+}
+
+/*! Returns the class name. */
+QString exportDialog::className(void)
+{
+	return ui->classEdit->text();
+}
+
+/*! Sets the exercise number. */
+void exportDialog::setNumber(QString number)
+{
+	ui->numberEdit->setText(number);
+}
+
+/*! Returns the exercise number. */
+QString exportDialog::number(void)
+{
+	return ui->numberEdit->text();
+}
+
+/*! Sets the mark. */
+void exportDialog::setMark(QString mark)
+{
+	ui->markEdit->setText(mark);
+}
+
+/*! Returns the mark. */
+QString exportDialog::mark(void)
+{
+	return ui->markEdit->text();
+}

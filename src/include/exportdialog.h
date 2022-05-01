@@ -48,6 +48,14 @@ class exportDialog : public QDialog
 	public:
 		explicit exportDialog(QString text, QVariantMap result, QList<QVariantMap> mistakes, QWidget *parent = nullptr);
 		~exportDialog();
+		void setStudentName(QString name);
+		QString studentName(void);
+		void setClassName(QString name);
+		QString className(void);
+		void setNumber(QString number);
+		QString number(void);
+		void setMark(QString mark);
+		QString mark(void);
 
 	private:
 		Ui::exportDialog *ui;
