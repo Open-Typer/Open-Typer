@@ -41,7 +41,7 @@ class exerciseProgressDialog : public QDialog
 {
 	Q_OBJECT
 	public:
-		explicit exerciseProgressDialog(QList<int> students, QWidget *parent = nullptr);
+		explicit exerciseProgressDialog(int classID, QList<int> students, QWidget *parent = nullptr);
 		~exerciseProgressDialog();
 
 	private:

@@ -22,12 +22,14 @@
 #include "ui_exerciseprogressdialog.h"
 
 /*! Constructs exerciseProgressDialog. */
-exerciseProgressDialog::exerciseProgressDialog(QList<int> students, QWidget *parent) :
+exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> students, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::exerciseProgressDialog),
 	exerciseStudents(students)
 {
 	ui->setupUi(this);
+	if(students.count() > 0)
+		ui->classEdit->setText(dbMgr.className(classID));
 	// Load students
 	setupTable();
 	// Connections
@@ -80,10 +82,20 @@ void exerciseProgressDialog::setupTable(void)
 			ui->studentsTable->setCellWidget(i, 2, button);
 			connect(button, &QPushButton::clicked, this, [this, students, i]() {
 				exportDialog *dialog = new exportDialog(inputTexts[students[i]], results[students[i]], recordedMistakeLists[students[i]], this);
+				dialog->setStudentName(dbMgr.userName(students[i]));
+				dialog->setClassName(ui->classEdit->text());
+				dialog->setNumber(ui->numberEdit->text());
+				if(results[students[i]].contains("mark"))
+					dialog->setMark(results[students[i]]["mark"].toString());
 				dialog->setWindowModality(Qt::WindowModal);
 				dialog->open();
 				dialog->showMaximized();
-				connect(dialog, &QDialog::finished, this, &exerciseProgressDialog::setupTable);
+				connect(dialog, &QDialog::finished, this, [this, dialog, students, i]() {
+					ui->classEdit->setText(dialog->className());
+					ui->numberEdit->setText(dialog->number());
+					results[students[i]]["mark"] = dialog->mark();
+					setupTable();
+				});
 			});
 		}
 		else
@@ -91,7 +103,7 @@ void exerciseProgressDialog::setupTable(void)
 		// Mark
 		QString mark = "-";
 		if(results.contains(students[i]) && results[students[i]].contains("mark"))
-			mark = QString::number(results[students[i]]["mark"].toInt());
+			mark = results[students[i]]["mark"].toString();
 		item = new QTableWidgetItem(mark);
 		ui->studentsTable->setItem(i, 3, item);
 	}
