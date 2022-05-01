@@ -284,10 +284,10 @@ void classControls::refreshCharts(void)
 void classControls::loadExercise(void)
 {
 #ifndef Q_OS_WASM
-	QList<int> students, allStudents = dbMgr.studentIDs(classID);
+	QList<int> students, allStudents = dbMgr.studentIDs(classID), occupiedStudents = serverPtr->runningExerciseStudents();
 	for(int i=0; i < allStudents.count(); i++)
 	{
-		if(serverPtr->isLoggedIn(dbMgr.userNickname(allStudents[i])))
+		if(serverPtr->isLoggedIn(dbMgr.userNickname(allStudents[i])) && !occupiedStudents.contains(allStudents[i]))
 			students += allStudents[i];
 	}
 	loadExerciseDialog dialog(students);
@@ -316,6 +316,8 @@ void classControls::loadExercise(void)
 			lockUi,
 			hideText
 		}, usernames);
+		exerciseProgressDialog *progressDialog = new exerciseProgressDialog(selectedStudents, this);
+		progressDialog->show();
 	}
 #endif // Q_OS_WASM
 }
