@@ -33,8 +33,10 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> students,
 	// Load students
 	setupTable();
 	// Connections
+#ifndef Q_OS_WASM
 	connect(serverPtr, &monitorServer::resultUploaded, this, &exerciseProgressDialog::loadResult);
 	connect(serverPtr, &monitorServer::exerciseAborted, this, &exerciseProgressDialog::abortExercise);
+#endif // Q_OS_WASM
 	connect(ui->printButton, &QPushButton::clicked, this, &exerciseProgressDialog::printAll);
 	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &QDialog::close);
 }

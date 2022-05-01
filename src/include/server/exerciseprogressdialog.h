@@ -26,8 +26,11 @@
 #include <QMap>
 #include <QPushButton>
 #include "exportdialog.h"
-#include "core/server.h"
 #include "core/database.h"
+#ifndef Q_OS_WASM
+#include "core/server.h"
+#endif // Q_OS_WASM
+
 
 namespace Ui {
 	class exerciseProgressDialog;
