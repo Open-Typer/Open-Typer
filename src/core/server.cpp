@@ -94,6 +94,7 @@ void monitorServer::disconnectClient(void)
 {
 	QSslSocket *clientSocket = (QSslSocket*) sender();
 	clientSockets.removeAll(clientSocket);
+	sessions.remove(clientSocket);
 	exerciseSockets.removeAll(clientSocket);
 	emit exerciseAborted(dbMgr.findUser(sessions[clientSocket]));
 	clientSocket->deleteLater();
