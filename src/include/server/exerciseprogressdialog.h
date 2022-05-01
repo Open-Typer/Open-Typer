@@ -25,6 +25,7 @@
 #include <QUuid>
 #include <QMap>
 #include <QPushButton>
+#include <QMessageBox>
 #include "exportdialog.h"
 #include "core/database.h"
 #ifndef Q_OS_WASM
