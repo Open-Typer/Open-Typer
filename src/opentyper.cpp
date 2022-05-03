@@ -1472,7 +1472,7 @@ void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool inclu
 		ui->timedExTime->hide();
 		ui->timedExCountdownLabel->show();
 		ui->timedExRemainingLabel->hide();
-		levelFinalInit();
+		levelFinalInit(false);
 		levelInProgress = true;
 		levelTimer.start();
 		secLoop->start(500);
