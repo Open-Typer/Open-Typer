@@ -95,6 +95,7 @@ void monitorServer::disconnectClient(void)
 	QSslSocket *clientSocket = (QSslSocket*) sender();
 	clientSockets.removeAll(clientSocket);
 	sessions.remove(clientSocket);
+	emit loggedInStudentsChanged();
 	exerciseSockets.removeAll(clientSocket);
 	emit exerciseAborted(dbMgr.findUser(sessions[clientSocket]));
 	clientSocket->deleteLater();
@@ -127,6 +128,7 @@ void monitorServer::sendResponse(void)
 			if((requestList[2] != "") && dbMgr.auth(userID, requestList[2]))
 			{
 				sessions.insert(clientSocket,requestList[1]);
+				emit loggedInStudentsChanged();
 				clientSocket->write(convertData({"ok"}));
 			}
 			else
@@ -138,6 +140,7 @@ void monitorServer::sendResponse(void)
 	else if(requestList[0] == "logout")
 	{
 		sessions.remove(clientSocket);
+		emit loggedInStudentsChanged();
 		clientSocket->write(convertData({"ok"}));
 	}
 	else if(requestList[0] == "check")
