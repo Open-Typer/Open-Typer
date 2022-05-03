@@ -116,10 +116,10 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 	{
 #ifdef Q_OS_WASM
 		socket->connectToHost(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
-		connected = socket->waitForConnected();
+		connected = socket->waitForConnected(100);
 #else
 		socket->connectToHostEncrypted(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
-		connected = socket->waitForEncrypted();
+		connected = socket->waitForEncrypted(100);
 #endif
 	}
 	if(connected)
