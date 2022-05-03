@@ -63,7 +63,9 @@ classControls::classControls(int openClassID, QWidget *parent) :
 	connect(ui->sublessonBox,SIGNAL(activated(int)),this,SLOT(refreshCharts()));
 	connect(ui->exerciseBox,SIGNAL(activated(int)),this,SLOT(refreshCharts()));
 	connect(ui->refreshButton,SIGNAL(clicked()),this,SLOT(refreshCharts()));
+#ifndef Q_OS_WASM
 	connect(serverPtr, &monitorServer::loggedInStudentsChanged, this, &classControls::setupTable);
+#endif // Q_OS_WASM
 }
 
 /*! Destroys the classControls object. */
@@ -95,8 +97,10 @@ void classControls::setupTable(void)
 		ui->studentsTable->setItem(i, 1, item);
 		// Status
 		QString status = tr("Offline");
+#ifndef Q_OS_WASM
 		if(serverPtr->isLoggedIn(dbMgr.userNickname(students[i])))
 			status = tr("Online");
+#endif // Q_OS_WASM
 		item = new QTableWidgetItem(status);
 		ui->studentsTable->setItem(i, 2, item);
 	}
