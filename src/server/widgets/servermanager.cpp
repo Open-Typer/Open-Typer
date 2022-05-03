@@ -194,7 +194,7 @@ void serverManager::addClass(void)
 }
 
 /*! Opens selected class */
-void serverManager::openClass(void)
+void serverManager::openClass(bool auth)
 {
 	if(disableClassOpening)
 		return;
@@ -206,7 +206,7 @@ void serverManager::openClass(void)
 	}
 	else
 	{
-		if(dbMgr.auth(dbMgr.classOwner(classes[selected])))
+		if(!auth || dbMgr.auth(dbMgr.classOwner(classes[selected])))
 		{
 			ui->classControlsFrame->setVisible(expanded);
 			dbMgr.updateClassTimestamp(classes[selected]);
@@ -237,7 +237,7 @@ void serverManager::openDetails(int studentID)
 	disconnect(oldWidget, nullptr, nullptr, nullptr);
 	ui->classControlsLayout->replaceWidget(oldWidget, detailsWidget);
 	oldWidget->close();
-	connect(detailsWidget, &studentDetails::backClicked, this, &serverManager::openClass);
+	connect(detailsWidget, &studentDetails::backClicked, this, [this](){ openClass(false); });
 }
 
 /*! Removes selected class. */
