@@ -144,7 +144,7 @@
       <enum>QFrame::Raised</enum>
      </property>
      <property name="text">
-      <string>Incorrect password</string>
+      <string notr="true"/>
      </property>
     </widget>
    </item>
