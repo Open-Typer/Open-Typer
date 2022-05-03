@@ -1074,7 +1074,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		ui->correctMistakesCheckBox->setChecked(correctMistakesOld);
 		ui->hideTextCheckBox->setChecked(hideTextOld);
 		if(isFullScreen())
-			showMaximized();
+			showNormal();
 		if(studentUsername != "")
 		{
 			updateStudent();
@@ -1094,6 +1094,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 			client.sendRequest("put",
 				{"monitorResult", input.toUtf8(), QByteArray::number(totalHits), QByteArray::number(levelHits), QByteArray::number((double) levelHits*(60.0/lastTimeF)), QByteArray::number(levelMistakes)});
 		}
+		ui->controlFrame->setEnabled(true);
 		uploadResult = false;
 	}
 	levelSummary *msgBox = new levelSummary(this);
