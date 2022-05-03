@@ -49,7 +49,8 @@ void studentOptions::auth(void)
 	requestData.clear();
 	requestData += ui->usernameEdit->text().toUtf8();
 	requestData += ui->passwordEdit->text().toUtf8();
-	if(client->sendRequest("auth",requestData).value(0) == "ok")
+	auto response = client->sendRequest("auth",requestData);
+	if(response[0] == "ok")
 	{
 		username = ui->usernameEdit->text();
 		password = ui->passwordEdit->text();
@@ -58,6 +59,10 @@ void studentOptions::auth(void)
 	}
 	else
 	{
+		if(response[1] == "password")
+			ui->errorLabel->setText(tr("Incorrect password"));
+		else
+			ui->errorLabel->setText(tr("Your class is closed or the user does not exist"));
 		ui->errorLabel->show();
 		int labelWidth = ui->errorLabel->geometry().width();
 		ui->errorLabel->adjustSize();
