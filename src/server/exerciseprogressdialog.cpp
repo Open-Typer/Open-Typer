@@ -50,7 +50,7 @@ exerciseProgressDialog::~exerciseProgressDialog()
 /*! Loads the students. */
 void exerciseProgressDialog::setupTable(void)
 {
-	ui->printButton->setEnabled(results.keys().count() + abortList.values().count(true) != exerciseStudents.count());
+	ui->printButton->setEnabled(results.keys().count() + abortList.values().count(true) == exerciseStudents.count());
 	ui->studentsTable->clearContents();
 	ui->studentsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->studentsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
