@@ -63,6 +63,7 @@ classControls::classControls(int openClassID, QWidget *parent) :
 	connect(ui->sublessonBox,SIGNAL(activated(int)),this,SLOT(refreshCharts()));
 	connect(ui->exerciseBox,SIGNAL(activated(int)),this,SLOT(refreshCharts()));
 	connect(ui->refreshButton,SIGNAL(clicked()),this,SLOT(refreshCharts()));
+	connect(serverPtr, &monitorServer::loggedInStudentsChanged, this, &classControls::setupTable);
 }
 
 /*! Destroys the classControls object. */
@@ -79,19 +80,25 @@ void classControls::setupTable(void)
 	ui->studentsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->studentsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	// Columns
-	ui->studentsTable->setColumnCount(2);
-	ui->studentsTable->setHorizontalHeaderLabels({ tr("Full name"), tr("Username") });
+	ui->studentsTable->setColumnCount(3);
+	ui->studentsTable->setHorizontalHeaderLabels({ tr("Full name"), tr("Username"), tr("Status", "Online/offline status") });
 	// Rows
 	QList<int> students = dbMgr.studentIDs(classID);
 	ui->studentsTable->setRowCount(students.count());
 	for(int i=0; i < students.count(); i++)
 	{
 		// Full name
-		QTableWidgetItem *nameItem = new QTableWidgetItem(dbMgr.userName(students[i]));
-		ui->studentsTable->setItem(i,0,nameItem);
+		QTableWidgetItem *item = new QTableWidgetItem(dbMgr.userName(students[i]));
+		ui->studentsTable->setItem(i, 0, item);
 		// Username
-		QTableWidgetItem *usernameItem = new QTableWidgetItem(dbMgr.userNickname(students[i]));
-		ui->studentsTable->setItem(i,1,usernameItem);
+		item = new QTableWidgetItem(dbMgr.userNickname(students[i]));
+		ui->studentsTable->setItem(i, 1, item);
+		// Status
+		QString status = tr("Offline");
+		if(serverPtr->isLoggedIn(dbMgr.userNickname(students[i])))
+			status = tr("Online");
+		item = new QTableWidgetItem(status);
+		ui->studentsTable->setItem(i, 2, item);
 	}
 }
 

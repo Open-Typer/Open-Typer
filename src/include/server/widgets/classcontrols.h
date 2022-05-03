@@ -57,7 +57,6 @@ class classControls : public QWidget
 		Ui::classControls *ui;
 		int classID;
 		QChart *speedChart, *mistakesChart, *timeChart;
-		void setupTable(void);
 
 	protected:
 		void changeEvent(QEvent *event);
@@ -67,6 +66,7 @@ class classControls : public QWidget
 		void detailsClicked(int);
 
 	private slots:
+		void setupTable(void);
 		void verify(void);
 		void addStudent(void);
 		void removeStudent(void);
