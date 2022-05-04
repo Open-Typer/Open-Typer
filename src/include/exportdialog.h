@@ -26,7 +26,7 @@
 
 #ifndef Q_OS_WASM
 #include <QPrinter>
-#include <QPrintDialog>
+#include <QPrintPreviewDialog>
 #endif // Q_OS_WASM
 
 #include <QPainter>
