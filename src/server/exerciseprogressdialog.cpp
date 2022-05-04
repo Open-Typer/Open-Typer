@@ -148,34 +148,31 @@ void exerciseProgressDialog::printAll(void)
 {
 	for(int i=0; i < exerciseStudents.count(); i++)
 	{
-		while(true)
+		if(abortList.contains(exerciseStudents[i]) && abortList[exerciseStudents[i]])
+			continue;
+		exportDialog dialog(inputTexts[exerciseStudents[i]], results[exerciseStudents[i]], recordedMistakeLists[exerciseStudents[i]], this);
+		dialog.setStudentName(dbMgr.userName(exerciseStudents[i]));
+		dialog.setClassName(ui->classEdit->text());
+		dialog.setNumber(ui->numberEdit->text());
+		if(results[exerciseStudents[i]].contains("mark"))
+			dialog.setMark(results[exerciseStudents[i]]["mark"].toString());
+		QMessageBox msgBox;
+		msgBox.setText(tr("Printing result of student %1...").arg(dbMgr.userName(exerciseStudents[i])));
+		QPushButton *printButton = msgBox.addButton(tr("Print"), QMessageBox::YesRole);
+		QPushButton *nextButton;
+		if(i < exerciseStudents.count()-1)
+			nextButton = msgBox.addButton(tr("Next student"), QMessageBox::NoRole);
+		else
+			nextButton = msgBox.addButton(QMessageBox::Close);
+		msgBox.exec();
+		if(msgBox.clickedButton() == printButton)
 		{
-			if(abortList.contains(exerciseStudents[i]) && abortList[exerciseStudents[i]])
-				continue;
-			exportDialog dialog(inputTexts[exerciseStudents[i]], results[exerciseStudents[i]], recordedMistakeLists[exerciseStudents[i]], this);
-			dialog.setStudentName(dbMgr.userName(exerciseStudents[i]));
-			dialog.setClassName(ui->classEdit->text());
-			dialog.setNumber(ui->numberEdit->text());
-			if(results[exerciseStudents[i]].contains("mark"))
-				dialog.setMark(results[exerciseStudents[i]]["mark"].toString());
-			QMessageBox msgBox;
-			msgBox.setText(tr("Printing result of student %1...").arg(dbMgr.userName(exerciseStudents[i])));
-			QPushButton *printButton = msgBox.addButton(tr("Print"), QMessageBox::YesRole);
-			QPushButton *nextButton;
-			if(i < exerciseStudents.count()-1)
-				nextButton = msgBox.addButton(tr("Next student"), QMessageBox::NoRole);
-			else
-				nextButton = msgBox.addButton(QMessageBox::Close);
-			msgBox.exec();
-			if(msgBox.clickedButton() == printButton)
-			{
-				dialog.printResult();
-				dialog.close();
-			}
-			else if(msgBox.clickedButton() == nextButton)
-				break;
-			else
-				break;
+			dialog.printResult();
+			dialog.close();
 		}
+		else if(msgBox.clickedButton() == nextButton)
+			break;
+		else
+			break;
 	}
 }
