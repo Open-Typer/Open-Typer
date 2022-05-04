@@ -190,9 +190,12 @@ void exportDialog::printResult(void)
 	QPrintPreviewDialog dialog(&printer);
 	connect(&dialog, &QPrintPreviewDialog::paintRequested, this, [this, printerPtr]() {
 		bool visibility = isVisible();
-		show();
-		ui->exportTable->adjustSize();
-		adjustSize();
+		if(!visibility)
+		{
+			show();
+			ui->exportTable->adjustSize();
+			adjustSize();
+		}
 		// Print
 		printerPtr->setPageMargins(QMarginsF(25, 25, 15, 25), QPageLayout::Millimeter);
 		QPainter painter;
