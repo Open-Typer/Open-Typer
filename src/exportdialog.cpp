@@ -206,28 +206,43 @@ void exportDialog::printResult(void)
 		document->setDefaultStyleSheet("body { color: black; }");
 		int fontHeight = QFontMetrics(painter.font(), printerPtr).height();
 		QStringList lines = document->toHtml().split("<br>");
-		int relativeLine = 0, page = 0;
+		int relativeLine = 0, page = 0, fromPage = printerPtr->fromPage()-1, toPage = printerPtr->toPage()-1;
 		for(int i=0; i < lines.count(); i++)
 		{
+			int rangeEnd = toPage;
+			if(rangeEnd == -1)
+				rangeEnd = page+1;
 			if(fontHeight*relativeLine > printerPtr->pageRect(QPrinter::DevicePixel).height())
 			{
-				printerPtr->newPage();
+				if(((page+1 >= fromPage) && (page+1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
+					printerPtr->newPage();
 				relativeLine = 0;
 				page++;
 			}
 			document->setHtml(lines[i]);
-			painter.resetTransform();
-			painter.translate(0, fontHeight*relativeLine);
-			document->drawContents(&painter);
+			if((page >= fromPage) && (page <= rangeEnd))
+			{
+				painter.resetTransform();
+				painter.translate(0, fontHeight*relativeLine);
+				document->drawContents(&painter);
+			}
 			relativeLine++;
 		}
 		painter.resetTransform();
 		double scale = printerPtr->pageRect(QPrinter::DevicePixel).width() / double(ui->exportTable->width());
 		painter.scale(scale, scale);
 		int tablePos = (printerPtr->pageRect(QPrinter::DevicePixel).height() - (ui->exportTable->height()*scale)) / scale;
+		int rangeEnd = toPage;
+		if(rangeEnd == -1)
+			rangeEnd = page+1;
 		if(((fontHeight*relativeLine) / scale > tablePos) || (page == 0))
-			printerPtr->newPage();
-		ui->exportTable->render(&painter, QPoint(0, tablePos));
+		{
+			if(((page+1 >= fromPage) && (page+1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
+				printerPtr->newPage();
+			page++;
+		}
+		if((page >= fromPage) && (page <= rangeEnd))
+			ui->exportTable->render(&painter, QPoint(0, tablePos));
 		painter.end();
 		setVisible(visibility);
 	});
