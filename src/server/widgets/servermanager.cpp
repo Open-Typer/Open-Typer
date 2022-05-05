@@ -113,6 +113,11 @@ bool serverManager::init(void)
 /*! Opens userManager. */
 void serverManager::openUserManager(void)
 {
+	if(exerciseProgressDialogConfig::dialogCount > 0)
+	{
+		showCloseExercisesMessage();
+		return;
+	}
 	adminSelector *selectDialog = new adminSelector(this);
 	selectDialog->setWindowModality(Qt::WindowModal);
 	selectDialog->open();
@@ -185,6 +190,11 @@ void serverManager::changeSchoolName(void)
 /*! Opens classEdit and creates a class. */
 void serverManager::addClass(void)
 {
+	if(exerciseProgressDialogConfig::dialogCount > 0)
+	{
+		showCloseExercisesMessage();
+		return;
+	}
 	classEdit *dialog = new classEdit(true, 1, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
@@ -200,6 +210,11 @@ void serverManager::addClass(void)
 /*! Opens selected class */
 void serverManager::openClass(bool auth)
 {
+	if(exerciseProgressDialogConfig::dialogCount > 0)
+	{
+		showCloseExercisesMessage();
+		return;
+	}
 	if(disableClassOpening)
 		return;
 	int selected = ui->classBox->currentIndex()-1;
@@ -247,6 +262,11 @@ void serverManager::openDetails(int studentID)
 /*! Removes selected class. */
 void serverManager::removeClass(void)
 {
+	if(exerciseProgressDialogConfig::dialogCount > 0)
+	{
+		showCloseExercisesMessage();
+		return;
+	}
 	int selectedClass = classes[ui->classBox->currentIndex()-1];
 	if(QMessageBox::question(this, QString(), tr("Are you sure you want to remove class %1?").arg(dbMgr.className(selectedClass))) == QMessageBox::Yes)
 	{
@@ -262,9 +282,20 @@ void serverManager::removeClass(void)
 /*! Edits selected class. */
 void serverManager::editClass(void)
 {
+	if(exerciseProgressDialogConfig::dialogCount > 0)
+	{
+		showCloseExercisesMessage();
+		return;
+	}
 	int selectedClass = classes[ui->classBox->currentIndex()-1];
 	classEdit *dialog = new classEdit(false, 1, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
 	connect(dialog, &QDialog::accepted, this, [this]() { init(); openClass(false); });
+}
+
+/*! Shows a warning about opened exerciseProgressDialog dialogs. */
+void serverManager::showCloseExercisesMessage(void)
+{
+	QMessageBox::warning(this, QString(), tr("Close opened windows first."));
 }

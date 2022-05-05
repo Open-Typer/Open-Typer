@@ -70,6 +70,7 @@ class serverManager : public QWidget
 		void openDetails(int studentID);
 		void removeClass(void);
 		void editClass(void);
+		void showCloseExercisesMessage(void);
 };
 
 #endif // SERVERMANAGER_H
