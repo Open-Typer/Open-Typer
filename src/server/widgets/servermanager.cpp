@@ -41,6 +41,7 @@ serverManager::serverManager(QWidget *parent) :
 	connect(ui->addClassButton, &QToolButton::clicked, this, &serverManager::addClass);
 	connect(ui->classBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &serverManager::openClass);
 	connect(ui->removeClassButton, &QToolButton::clicked, this, &serverManager::removeClass);
+	connect(ui->editClassButton, &QToolButton::clicked, this, &serverManager::editClass);
 }
 
 /*! Destroys serverManager. */
@@ -95,6 +96,7 @@ bool serverManager::init(void)
 	{
 		ui->classBox->setVisible(classes.count() != 0);
 		ui->removeClassButton->setEnabled(false);
+		ui->editClassButton->setEnabled(false);
 		ui->toggleButton->setEnabled(false);
 		collapse();
 	}
@@ -102,6 +104,7 @@ bool serverManager::init(void)
 	{
 		ui->classBox->show();
 		ui->removeClassButton->setEnabled(true);
+		ui->editClassButton->setEnabled(true);
 		ui->toggleButton->setEnabled(true);
 	}
 	return ret;
@@ -254,4 +257,14 @@ void serverManager::removeClass(void)
 			openClass();
 		}
 	}
+}
+
+/*! Edits selected class. */
+void serverManager::editClass(void)
+{
+	int selectedClass = classes[ui->classBox->currentIndex()-1];
+	classEdit *dialog = new classEdit(false, 1, this);
+	dialog->setWindowModality(Qt::WindowModal);
+	dialog->open();
+	connect(dialog, &QDialog::accepted, this, [this]() { init(); openClass(false); });
 }
