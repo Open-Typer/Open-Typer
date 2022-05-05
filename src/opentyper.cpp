@@ -404,7 +404,6 @@ void OpenTyper::levelFinalInit(bool updateClient)
 	ui->exerciseChecksFrame->setEnabled(true);
 	preview = false;
 	currentLine=0;
-	updateText();
 	levelPos=0;
 	displayPos=0;
 	absolutePos = 0;
@@ -431,6 +430,7 @@ void OpenTyper::levelFinalInit(bool updateClient)
 	displayInput = "";
 	ui->inputLabel->setAcceptRichText(true);
 	ui->inputLabel->setHtml(displayInput);
+	updateText();
 	// Update student session
 	if(updateClient)
 		updateStudent();
