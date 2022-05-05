@@ -86,6 +86,16 @@
           </widget>
          </item>
          <item>
+          <widget class="QToolButton" name="changeSchoolNameButton">
+           <property name="toolTip">
+            <string>Change school name</string>
+           </property>
+           <property name="text">
+            <string>Change school name</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QLineEdit" name="schoolName">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -118,10 +128,20 @@
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="changeSchoolNameButton">
-           <property name="toolTip">
-            <string>Change school name</string>
+          <widget class="QComboBox" name="classBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QComboBox::AdjustToContents</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="editClassButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -134,19 +154,6 @@
              <width>32</width>
              <height>32</height>
             </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="classBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="sizeAdjustPolicy">
-            <enum>QComboBox::AdjustToContents</enum>
            </property>
           </widget>
          </item>
