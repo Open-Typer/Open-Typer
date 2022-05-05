@@ -32,6 +32,9 @@
 #include "core/server.h"
 #endif // Q_OS_WASM
 
+namespace exerciseProgressDialogConfig {
+	extern int dialogCount;
+}
 
 namespace Ui {
 	class exerciseProgressDialog;

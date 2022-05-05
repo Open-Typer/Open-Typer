@@ -21,12 +21,17 @@
 #include "server/exerciseprogressdialog.h"
 #include "ui_exerciseprogressdialog.h"
 
+namespace exerciseProgressDialogConfig {
+	int dialogCount = 0;
+}
+
 /*! Constructs exerciseProgressDialog. */
 exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> students, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::exerciseProgressDialog),
 	exerciseStudents(students)
 {
+	exerciseProgressDialogConfig::dialogCount++;
 	ui->setupUi(this);
 	if(students.count() > 0)
 		ui->classEdit->setText(dbMgr.className(classID));
@@ -45,6 +50,7 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> students,
 exerciseProgressDialog::~exerciseProgressDialog()
 {
 	delete ui;
+	exerciseProgressDialogConfig::dialogCount--;
 }
 
 /*! Loads the students. */
