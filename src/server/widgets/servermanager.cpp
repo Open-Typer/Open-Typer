@@ -182,14 +182,15 @@ void serverManager::changeSchoolName(void)
 /*! Opens classEdit and creates a class. */
 void serverManager::addClass(void)
 {
-	adminSelector *selectDialog = new adminSelector(this);
-	selectDialog->setWindowModality(Qt::WindowModal);
-	selectDialog->open();
-	connect(selectDialog, &QDialog::accepted, this, [selectDialog, this]() {
-		classEdit *dialog = new classEdit(true, 1, this);
-		dialog->setWindowModality(Qt::WindowModal);
-		dialog->open();
-		connect(dialog, &QDialog::finished, this, [this]() { init(); openClass(); });
+	classEdit *dialog = new classEdit(true, 1, this);
+	dialog->setWindowModality(Qt::WindowModal);
+	dialog->open();
+	connect(dialog, &QDialog::accepted, this, [this]() {
+		init();
+		disableClassOpening = true;
+		ui->classBox->setCurrentIndex(1);
+		disableClassOpening = false;
+		openClass(false);
 	});
 }
 
