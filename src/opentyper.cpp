@@ -1059,16 +1059,19 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	int netHits = levelHits*(60/(levelTimer.elapsed()/1000.0));
 	int grossHits = totalHits*(60/(levelTimer.elapsed()/1000.0));
 	int time = levelTimer.elapsed()/1000;
-	if((studentUsername != "") && !customLevelLoaded && !customConfig)
+	if(!customLevelLoaded && !customConfig && ui->correctMistakesCheckBox->isChecked())
 	{
-		updateStudent();
-		client.sendRequest("put",
-			{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentAbsoluteSublesson),QByteArray::number(currentLevel),
-			QByteArray::number(grossHits),QByteArray::number(levelMistakes),QByteArray::number(time)});
+		if(studentUsername != "")
+		{
+			updateStudent();
+			client.sendRequest("put",
+				{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentAbsoluteSublesson),QByteArray::number(currentLevel),
+				QByteArray::number(grossHits),QByteArray::number(levelMistakes),QByteArray::number(time)});
+		}
+		else
+			historyParser::addHistoryEntry(publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,
+				{QString::number(grossHits),QString::number(levelMistakes),QString::number(time)});
 	}
-	else if(!customLevelLoaded && !customConfig)
-		historyParser::addHistoryEntry(publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,
-			{QString::number(grossHits),QString::number(levelMistakes),QString::number(time)});
 	if(uploadResult)
 	{
 		ui->correctMistakesCheckBox->setChecked(correctMistakesOld);
