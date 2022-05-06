@@ -287,7 +287,6 @@ void serverManager::editClass(void)
 		showCloseExercisesMessage();
 		return;
 	}
-	int selectedClass = classes[ui->classBox->currentIndex()-1];
 	classEdit *dialog = new classEdit(false, 1, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
