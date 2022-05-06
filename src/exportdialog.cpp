@@ -201,7 +201,7 @@ void exportDialog::printResult(void)
 		QPainter painter;
 		painter.begin(printerPtr);
 		painter.setFont(ui->exportText->font());
-		QTextDocument *document = ui->exportText->document()->clone();
+		QTextDocument *document = ui->exportText->document()->clone(this);
 		document->documentLayout()->setPaintDevice(printerPtr);
 		document->setDefaultStyleSheet("body { color: black; }");
 		int fontHeight = QFontMetrics(painter.font(), printerPtr).height();
