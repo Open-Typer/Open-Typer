@@ -31,6 +31,7 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> students,
 	ui(new Ui::exerciseProgressDialog),
 	exerciseStudents(students)
 {
+	setAttribute(Qt::WA_DeleteOnClose);
 	exerciseProgressDialogConfig::dialogCount++;
 	ui->setupUi(this);
 	if(students.count() > 0)
