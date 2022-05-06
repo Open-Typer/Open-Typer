@@ -48,7 +48,7 @@ void textView::updateWidgetSize(void)
 	QTextDocument *targetDocument;
 	if(toPlainText() == "")
 	{
-		targetDocument = document()->clone();
+		targetDocument = document()->clone(this);
 		targetDocument->setPlainText("A");
 	}
 	else
