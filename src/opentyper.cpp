@@ -998,7 +998,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	if(((displayPos >= displayLevel.count()) && ui->correctMistakesCheckBox->isChecked()) || (currentLine >= lineCount+1))
 	{
 		if(currentLine >= lineCount+1)
-			input.remove(input.count()-2, 2);
+			input.remove(input.count()-1, 1);
 		keyRelease(event);
 		endExercise(true, true, false, true, true);
 	}
