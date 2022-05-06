@@ -146,8 +146,6 @@ void serverManager::collapse(void)
 /*! Shows class controls. */
 void serverManager::expand(void)
 {
-	if(!init())
-		return;
 	ui->toggleButton->setIcon(QIcon(":/res/images/down.png"));
 	if(expanded)
 		return;
@@ -210,11 +208,15 @@ void serverManager::addClass(void)
 /*! Opens selected class */
 void serverManager::openClass(bool auth)
 {
-	if(exerciseProgressDialogConfig::dialogCount > 0)
+	if((exerciseProgressDialogConfig::dialogCount > 0) && !disableClassOpening)
 	{
 		showCloseExercisesMessage();
+		disableClassOpening = true;
+		ui->classBox->setCurrentIndex(lastClassBoxIndex);
+		disableClassOpening = false;
 		return;
 	}
+	lastClassBoxIndex = ui->classBox->currentIndex();
 	if(disableClassOpening)
 		return;
 	int selected = ui->classBox->currentIndex()-1;

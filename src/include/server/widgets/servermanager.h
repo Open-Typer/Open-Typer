@@ -50,6 +50,7 @@ class serverManager : public QWidget
 		bool expanded = true;
 		QList<int> classes;
 		bool disableClassOpening = false;
+		int lastClassBoxIndex = -1;
 
 	signals:
 		/*! A signal, which is emitted when the widget is collapsed. */
