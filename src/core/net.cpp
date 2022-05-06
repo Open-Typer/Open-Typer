@@ -57,14 +57,14 @@ monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 /*! Destroys the monitorClient object. */
 monitorClient::~monitorClient()
 {
-	socket->close();
+	socket->disconnectFromHost();
 	socket->deleteLater();
 }
 
 /*! Closes the connection. */
 void monitorClient::close(void)
 {
-	socket->close();
+	socket->disconnectFromHost();
 }
 
 /*! Enables or disables connection error dialogs. */
