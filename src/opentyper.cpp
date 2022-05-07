@@ -73,6 +73,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->timedExerciseButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
 	connect(ui->stopTimedExButton, &QPushButton::clicked, ui->timedExerciseButton, &QPushButton::clicked);
 	connect(ui->statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
+	connect(ui->printButton, &QPushButton::clicked, this, &OpenTyper::printText);
 	connect(ui->exportButton, &QPushButton::clicked, this, &OpenTyper::exportText);
 	connect(ui->hideTextCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
 		ui->currentLineArea->setVisible(!checked);
@@ -590,10 +591,7 @@ void OpenTyper::updateStudent(void)
 	{
 		ui->studentButton->hide();
 		ui->studentLabel->hide();
-		if(customLevelLoaded || customConfig || (currentMode != 0))
-			ui->statsButton->hide();
-		else
-			ui->statsButton->show();
+		ui->statsButton->setEnabled(!customLevelLoaded && !customConfig && (currentMode == 0));
 		return;
 	}
 	QList<QByteArray> response = client.sendRequest("get",{"username"});
@@ -605,10 +603,7 @@ void OpenTyper::updateStudent(void)
 		{
 			QString username = response[1];
 			ui->studentLabel->setText(tr("Logged in as %1").arg(username));
-			if(customLevelLoaded || customConfig || (currentMode != 0))
-				ui->statsButton->hide();
-			else
-				ui->statsButton->show();
+			ui->statsButton->setEnabled(!customLevelLoaded && !customConfig && (currentMode == 0));
 			return;
 		}
 	}
@@ -630,10 +625,7 @@ void OpenTyper::updateStudent(void)
 		}
 	}
 	ui->studentLabel->setText(tr("Not logged in."));
-	if(customLevelLoaded || customConfig || (currentMode != 0))
-		ui->statsButton->hide();
-	else
-		ui->statsButton->show();
+	ui->statsButton->setEnabled(!customLevelLoaded && !customConfig && (currentMode == 0));
 }
 
 /*! Connected from lessonSelectionList.\n
@@ -1509,4 +1501,61 @@ void OpenTyper::exportText(void)
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
 	dialog->showMaximized();
+}
+
+/*! Prints the exercise text. */
+void OpenTyper::printText(void)
+{
+	#ifndef Q_OS_WASM
+	// Set up printer
+	QPrinter printer(QPrinter::HighResolution);
+	QPrinter *printerPtr = &printer;
+	QPrintPreviewDialog dialog(&printer);
+	connect(&dialog, &QPrintPreviewDialog::paintRequested, this, [this, printerPtr]() {
+		// Print
+		printerPtr->setPageMargins(QMarginsF(25, 25, 15, 25), QPageLayout::Millimeter);
+		QPainter painter;
+		painter.begin(printerPtr);
+		QFont font = ui->levelLabel->font();
+		painter.setFont(font);
+		QTextDocument *document = ui->levelLabel->document()->clone(this);
+		document->setHtml(QString("<body><u>%1, %2, %3</u><br><br>%4</body>").arg(configParser::lessonTr(publicPos::currentLesson),
+			configParser::sublessonTr(publicPos::currentSublesson),
+			configParser::exerciseTr(publicPos::currentExercise),
+			displayLevel.toHtmlEscaped().replace("\n", "<br>")));
+		font.setPointSize(50);
+		document->setDefaultFont(font);
+		document->documentLayout()->setPaintDevice(printerPtr);
+		document->setDefaultStyleSheet("body { color: black; }");
+		document->setPageSize(printerPtr->pageRect(QPrinter::DevicePixel).size());
+		double scale = printerPtr->pageRect(QPrinter::DevicePixel).width() / double(document->size().width());
+		int fontHeight = QFontMetrics(painter.font(), printerPtr).height();
+		QStringList lines = document->toHtml().split("<br>");
+		int relativeLine = 0, page = 0, fromPage = printerPtr->fromPage()-1, toPage = printerPtr->toPage()-1;
+		for(int i=0; i < lines.count(); i++)
+		{
+			int rangeEnd = toPage;
+			if(rangeEnd == -1)
+				rangeEnd = page+1;
+			if(fontHeight*relativeLine > printerPtr->pageRect(QPrinter::DevicePixel).height())
+			{
+				if(((page+1 >= fromPage) && (page+1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
+					printerPtr->newPage();
+				relativeLine = 0;
+				page++;
+			}
+			document->setHtml(lines[i]);
+			if((page >= fromPage) && (page <= rangeEnd))
+			{
+				painter.resetTransform();
+				painter.scale(scale, scale);
+				painter.translate(0, fontHeight*relativeLine);
+				document->drawContents(&painter);
+			}
+			relativeLine++;
+		}
+		painter.end();
+	});
+	dialog.exec();
+#endif // Q_OS_WASM
 }
