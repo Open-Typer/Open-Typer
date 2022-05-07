@@ -67,6 +67,7 @@ class databaseManager : public QObject
 		void addStudentToClass(int userID, int classID);
 		void editUser(int userID, QString name, Role role, QString password = "", QString nickname = QString());
 		void removeUser(int userID);
+		void removeStudentFromClass(int userID, int classID);
 		QString className(int classID);
 		int classIcon(int classID);
 		unsigned long long classTimestamp(int classID);

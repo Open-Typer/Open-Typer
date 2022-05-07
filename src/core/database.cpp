@@ -391,6 +391,19 @@ void databaseManager::removeUser(int userID)
 #endif
 }
 
+/*! Removes the student from the given class. */
+void databaseManager::removeStudentFromClass(int userID, int classID)
+{
+#ifndef Q_OS_WASM
+	QSqlQuery query;
+	if(userRole(userID) == Role_Student)
+	{
+		query.exec(QString("DELETE FROM users WHERE user = %1 AND class = %2").arg(QString::number(userID), QString::number(classID)));
+		removeOrphanedStudents();
+	}
+#endif
+}
+
 /*! Returns the name of the class. */
 QString databaseManager::className(int classID)
 {
