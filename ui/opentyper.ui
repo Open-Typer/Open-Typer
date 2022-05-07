@@ -587,7 +587,7 @@
                 <number>3</number>
                </property>
                <layout class="QGridLayout" name="gridLayout">
-                <item row="0" column="0">
+                <item row="0" column="1">
                  <widget class="QPushButton" name="statsButton">
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
@@ -610,20 +610,20 @@
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="0">
-                 <widget class="QPushButton" name="errorWordsButton">
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="timedExerciseButton">
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="toolTip">
-                   <string>Generate text from error words</string>
+                   <string>Timed exercise</string>
                   </property>
                   <property name="text">
                    <string notr="true"/>
                   </property>
                   <property name="icon">
                    <iconset resource="../res.qrc">
-                    <normaloff>:/res/images/errorWords.png</normaloff>:/res/images/errorWords.png</iconset>
+                    <normaloff>:/res/images/clock.png</normaloff>:/res/images/clock.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -633,7 +633,7 @@
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="1">
+                <item row="1" column="2">
                  <widget class="QPushButton" name="reversedTextButton">
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
@@ -656,20 +656,40 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="1">
-                 <widget class="QPushButton" name="timedExerciseButton">
+                <item row="1" column="1">
+                 <widget class="QPushButton" name="errorWordsButton">
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="toolTip">
-                   <string>Timed exercise</string>
+                   <string>Generate text from error words</string>
                   </property>
                   <property name="text">
                    <string notr="true"/>
                   </property>
                   <property name="icon">
                    <iconset resource="../res.qrc">
-                    <normaloff>:/res/images/clock.png</normaloff>:/res/images/clock.png</iconset>
+                    <normaloff>:/res/images/errorWords.png</normaloff>:/res/images/errorWords.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>36</width>
+                    <height>36</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <widget class="QPushButton" name="printButton">
+                  <property name="toolTip">
+                   <string>Print exercise text</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../res.qrc">
+                    <normaloff>:/res/images/print.png</normaloff>:/res/images/print.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
