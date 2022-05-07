@@ -83,7 +83,7 @@
       <item row="4" column="0">
        <widget class="QCheckBox" name="clientCheckBox">
         <property name="text">
-         <string extracomment="Do not translate class monitor">Enable client</string>
+         <string>Enable client</string>
         </property>
        </widget>
       </item>
