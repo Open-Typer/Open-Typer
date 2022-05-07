@@ -156,7 +156,7 @@ void classControls::removeStudent(void)
 	confirmDialog.setIcon(QMessageBox::Question);
 	confirmDialog.exec();
 	if(confirmDialog.clickedButton() == yesButton)
-		dbMgr.removeUser(studentID);
+		dbMgr.removeStudentFromClass(studentID, classID);
 	else if(confirmDialog.clickedButton() == noButton)
 		return;
 	setupTable();
