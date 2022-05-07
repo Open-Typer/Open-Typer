@@ -82,7 +82,7 @@ bool serverManager::init(void)
 		oldClass = classes[currentIndex-1];
 	disableClassOpening = true;
 	ui->classBox->clear();
-	ui->classBox->addItem(tr("No class selected"), "Displayed in the class selection combo box.");
+	ui->classBox->addItem(tr("No class selected", "Displayed in the class selection combo box."));
 	classes = dbMgr.classIDs(true);
 	for(int i = 0; i < classes.count(); i++)
 	{
