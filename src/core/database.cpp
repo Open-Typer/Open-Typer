@@ -350,7 +350,7 @@ void databaseManager::addStudentToClass(int userID, int classID)
 #ifndef Q_OS_WASM
 	QSqlQuery query;
 	if(userRole(userID) == Role_Student)
-		query.exec(QString("INSERT INTO users (user, class) VALUES (%1, %2)").arg(QString::number(userID, classID)));
+		query.exec(QString("INSERT INTO users (user, class) VALUES (%1, %2)").arg(QString::number(userID), QString::number(classID)));
 #endif
 }
 
