@@ -59,7 +59,7 @@ class exportDialog : public QDialog
 
 	private:
 		Ui::exportDialog *ui;
-		QString inputText;
+		QString inputText, exportHtml;
 		QVariantMap performanceResult;
 		QList<QVariantMap> recordedMistakes;
 

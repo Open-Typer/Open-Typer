@@ -31,7 +31,7 @@ exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 {
 	ui->setupUi(this);
 	// Set input text
-	QString finalText = "<body>";
+	QString finalText = "";
 	QStringList lines = inputText.split('\n');
 	int longestLineLength = 0;
 	for(int i=0; i < lines.count(); i++)
@@ -66,8 +66,7 @@ exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 		}
 		finalText += QString("&nbsp;").repeated(longestLineLength - line.count() + 4) + QString("/").repeated(lineMistakes);
 	}
-	finalText += "</body>";
-	QString exportHtml = finalText;
+	exportHtml = finalText;
 	ui->exportText->setHtml(exportHtml);
 	// Set font
 	QFont textFont = themeEngine::font();
@@ -199,21 +198,21 @@ void exportDialog::printResult(void)
 		document->documentLayout()->setPaintDevice(printerPtr);
 		document->setDefaultStyleSheet("body { color: black; }");
 		int fontHeight = QFontMetrics(painter.font(), printerPtr).height();
-		QStringList lines = document->toHtml().split("<br>");
+		QStringList lines = exportHtml.split("<br>");
 		int relativeLine = 0, page = 0, fromPage = printerPtr->fromPage()-1, toPage = printerPtr->toPage()-1;
 		for(int i=0; i < lines.count(); i++)
 		{
 			int rangeEnd = toPage;
 			if(rangeEnd == -1)
 				rangeEnd = page+1;
-			if(fontHeight*relativeLine > printerPtr->pageRect(QPrinter::DevicePixel).height())
+			if(fontHeight*(relativeLine+1) > printerPtr->pageRect(QPrinter::DevicePixel).height())
 			{
 				if(((page+1 >= fromPage) && (page+1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
 					printerPtr->newPage();
 				relativeLine = 0;
 				page++;
 			}
-			document->setHtml(lines[i]);
+			document->setHtml("<body>" + lines[i] + "</body>");
 			if((page >= fromPage) && (page <= rangeEnd))
 			{
 				painter.resetTransform();
