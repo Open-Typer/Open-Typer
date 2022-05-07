@@ -44,11 +44,14 @@ class studentEdit : public QDialog
 		Ui::studentEdit *ui;
 		bool creatingNewStudent, passwordReset;
 		int classID, userID;
+		QList<int> classes, students;
 
 	private slots:
 		void verify(void);
 		void resetPassword(void);
 		void finish(void);
+		void switchMode(void);
+		void openClass(void);
 };
 
 #endif // STUDENTEDIT_H

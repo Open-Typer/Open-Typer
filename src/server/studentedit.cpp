@@ -49,6 +49,19 @@ studentEdit::studentEdit(bool newStudent, int class_id, int id, QWidget *parent)
 		userID = 0;
 	else
 		userID = id;
+	classes = dbMgr.classIDs();
+	QList<int> classesToRemove;
+	classesToRemove += classID;
+	for(int i=0; i < classes.count(); i++)
+	{
+		if(dbMgr.studentIDs(classes[i]).count() == 0)
+			classesToRemove += classes[i];
+	}
+	for(int i=0; i < classesToRemove.count(); i++)
+		classes.removeAll(classesToRemove[i]);
+	ui->classBox->clear();
+	for(int i=0; i < classes.count(); i++)
+		ui->classBox->addItem(dbMgr.className(classes[i]));
 	verify();
 	// Connections
 	connect(ui->nameEdit,&QLineEdit::textChanged,this,&studentEdit::verify);
@@ -56,6 +69,17 @@ studentEdit::studentEdit(bool newStudent, int class_id, int id, QWidget *parent)
 	connect(ui->repeatPasswordEdit,&QLineEdit::textChanged,this,&studentEdit::verify);
 	connect(ui->resetPasswordButton,SIGNAL(clicked()),this,SLOT(resetPassword()));
 	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(finish()));
+	connect(ui->classBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &studentEdit::openClass);
+	connect(ui->newStudentButton, &QRadioButton::toggled, this, &studentEdit::switchMode);
+	connect(ui->existingStudentButton, &QRadioButton::toggled, this, &studentEdit::switchMode);
+	ui->newStudentButton->setChecked(true);
+	if(!creatingNewStudent || (classes.count() == 0))
+	{
+		ui->newStudentButton->hide();
+		ui->existingStudentButton->hide();
+	}
+	else
+		openClass();
 }
 
 /*! Destroys the studentEdit object. */
@@ -72,32 +96,35 @@ void studentEdit::verify(void)
 {
 	ui->okButton->setEnabled(false);
 	// Check name
-	if(ui->nameEdit->text() == "")
-		return;
-	// Set username
-	QString name = ui->nameEdit->text();
-	QString username;
-	if(creatingNewStudent)
-		username = "_";
-	else
-		username = QString::number(userID) + "_";
-	for(int i=0; i < name.count(); i++)
+	if(ui->newStudentButton->isChecked())
 	{
-		if(name[i] == ' ')
-			username += ".";
-		else if(name[i].toLatin1() > 0)
-			username += name[i].toLower();
+		if(ui->nameEdit->text() == "")
+			return;
+		// Set username
+		QString name = ui->nameEdit->text();
+		QString username;
+		if(creatingNewStudent)
+			username = "_";
 		else
-			username += "-";
-	}
-	ui->usernameEdit->setText(username);
-	if(creatingNewStudent || passwordReset)
-	{
-		// Check password
-		if(ui->passwordEdit->text() == "")
-			return;
-		if(ui->passwordEdit->text() != ui->repeatPasswordEdit->text())
-			return;
+			username = QString::number(userID) + "_";
+		for(int i=0; i < name.count(); i++)
+		{
+			if(name[i] == ' ')
+				username += ".";
+			else if(name[i].toLatin1() > 0)
+				username += name[i].toLower();
+			else
+				username += "-";
+		}
+		ui->usernameEdit->setText(username);
+		if(creatingNewStudent || passwordReset)
+		{
+			// Check password
+			if(ui->passwordEdit->text() == "")
+				return;
+			if(ui->passwordEdit->text() != ui->repeatPasswordEdit->text())
+				return;
+		}
 	}
 	// Everything is correct
 	ui->okButton->setEnabled(true);
@@ -124,7 +151,12 @@ void studentEdit::resetPassword(void)
 void studentEdit::finish(void)
 {
 	if(creatingNewStudent)
-		dbMgr.addUser(ui->nameEdit->text(), databaseManager::Role_Student, ui->passwordEdit->text(), ui->usernameEdit->text(), classID);
+	{
+		if(ui->newStudentButton->isChecked())
+			dbMgr.addUser(ui->nameEdit->text(), databaseManager::Role_Student, ui->passwordEdit->text(), ui->usernameEdit->text(), classID);
+		else
+			dbMgr.addStudentToClass(students[ui->studentBox->currentIndex()], classID);
+	}
 	else
 	{
 		if(passwordReset)
@@ -133,4 +165,29 @@ void studentEdit::finish(void)
 			dbMgr.editUser(userID, ui->nameEdit->text(), databaseManager::Role_Student, "", ui->usernameEdit->text());
 	}
 	accept();
+}
+
+/*! Changes the mode (new student, existing student). */
+void studentEdit::switchMode(void)
+{
+	if(ui->newStudentButton->isChecked())
+	{
+		ui->newStudentForm->show();
+		ui->existingStudentForm->hide();
+	}
+	else
+	{
+		ui->existingStudentForm->show();
+		ui->newStudentForm->hide();
+	}
+}
+
+/*! Opens the selected class. */
+void studentEdit::openClass(void)
+{
+	int selected = classes[ui->classBox->currentIndex()];
+	students = dbMgr.studentIDs(selected);
+	ui->studentBox->clear();
+	for(int i=0; i < students.count(); i++)
+		ui->studentBox->addItem(dbMgr.userName(students[i]) + " (" + dbMgr.userNickname(students[i]) + ")");
 }
