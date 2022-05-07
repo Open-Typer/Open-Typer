@@ -50,32 +50,53 @@
         <translation>Nasledujúce cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="642"/>
+        <location filename="../ui/opentyper.ui" line="665"/>
         <source>Generate text from error words</source>
         <translation>Generovať text z chybných slov</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="665"/>
+        <location filename="../ui/opentyper.ui" line="642"/>
         <source>Reversed text</source>
         <translation>Obrátený text</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="730"/>
+        <location filename="../ui/opentyper.ui" line="685"/>
+        <source>Print exercise text</source>
+        <translation>Tlačiť text cvičenia</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="726"/>
+        <source>Correct mistakes</source>
+        <extracomment>Whether to correct mistakes while typing</extracomment>
+        <translation>Opravovať chyby</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="739"/>
+        <source>Hide exercise text</source>
+        <translation>Skryť text cvičenia</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="817"/>
         <source>Time:</source>
         <translation>Čas:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="709"/>
+        <location filename="../ui/opentyper.ui" line="991"/>
+        <source>Export</source>
+        <translation>Exportovať</translation>
+    </message>
+    <message>
+        <location filename="../ui/opentyper.ui" line="790"/>
         <source>Mistakes:</source>
         <translation>Počet chýb:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="743"/>
+        <location filename="../ui/opentyper.ui" line="803"/>
         <source>Current state:</source>
         <translation>Stav:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="836"/>
+        <location filename="../ui/opentyper.ui" line="869"/>
         <source>Remaining time:</source>
         <translation>Zostávajúci čas:</translation>
     </message>
@@ -100,59 +121,48 @@
         <translation>Podlekcia:</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="36"/>
+        <location filename="../src/opentyper.cpp" line="41"/>
         <source>Open custom exercise</source>
         <translation>Otvoriť vlastné cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="37"/>
+        <location filename="../src/opentyper.cpp" line="42"/>
         <source>Open custom pack</source>
         <translation>Otvoriť vlastný balík</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="292"/>
-        <location filename="../src/opentyper.cpp" line="294"/>
-        <source>Lesson</source>
-        <translation>Lekcia</translation>
-    </message>
-    <message>
-        <location filename="../src/opentyper.cpp" line="330"/>
-        <source>Exercise</source>
-        <translation>Cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../src/opentyper.cpp" line="534"/>
+        <location filename="../src/opentyper.cpp" line="605"/>
         <source>Logged in as %1</source>
         <translation>Prihlásený ako %1</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="559"/>
+        <location filename="../src/opentyper.cpp" line="627"/>
         <source>Not logged in.</source>
         <translation>Neprihlásený.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="630"/>
+        <location filename="../src/opentyper.cpp" line="695"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="630"/>
-        <location filename="../src/opentyper.cpp" line="1078"/>
+        <location filename="../src/opentyper.cpp" line="695"/>
+        <location filename="../src/opentyper.cpp" line="1307"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="610"/>
+        <location filename="../src/opentyper.cpp" line="675"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="671"/>
+        <location filename="../src/opentyper.cpp" line="736"/>
         <source>You don&apos;t have any error words.</source>
         <translation>Nemáte žiadne chybné slová.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="1078"/>
+        <location filename="../src/opentyper.cpp" line="1307"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
@@ -160,48 +170,15 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/core/configfile.cpp" line="239"/>
+        <location filename="../src/core/configfile.cpp" line="253"/>
         <source>Revision</source>
         <translation>Opakovanie</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="254"/>
+        <location filename="../src/core/configfile.cpp" line="268"/>
         <source>Shift</source>
         <comment>Shift key</comment>
         <translation>Shift</translation>
-    </message>
-</context>
-<context>
-    <name>SimpleColorDialog</name>
-    <message>
-        <location filename="../ui/simplecolordialog.ui" line="26"/>
-        <source>Color selection</source>
-        <translation>Výber farby</translation>
-    </message>
-    <message>
-        <location filename="../ui/simplecolordialog.ui" line="323"/>
-        <source>Choose a color</source>
-        <translation>Vyberte farbu</translation>
-    </message>
-    <message>
-        <location filename="../ui/simplecolordialog.ui" line="65"/>
-        <source>Quick selection:</source>
-        <translation>Rýchly výber:</translation>
-    </message>
-    <message>
-        <location filename="../ui/simplecolordialog.ui" line="513"/>
-        <source>Apply</source>
-        <translation>Použiť</translation>
-    </message>
-    <message>
-        <location filename="../ui/simplecolordialog.ui" line="523"/>
-        <source>Cancel</source>
-        <translation>Zrušiť</translation>
-    </message>
-    <message>
-        <location filename="../ui/simplecolordialog.ui" line="360"/>
-        <source>Advanced:</source>
-        <translation>Rozšírené:</translation>
     </message>
 </context>
 <context>
@@ -232,6 +209,19 @@
 Would you like to download and install it?</source>
         <translation>Je dostupná nová verzia.
 Prajete si ju stiahnuť a nainštalovať?</translation>
+    </message>
+</context>
+<context>
+    <name>adminSelector</name>
+    <message>
+        <location filename="../ui/server/adminselector.ui" line="14"/>
+        <source>Administrator accounts</source>
+        <translation>Administrátorské účty</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/adminselector.ui" line="72"/>
+        <source>Log in as:</source>
+        <translation>Prihlásiť sa ako:</translation>
     </message>
 </context>
 <context>
@@ -266,73 +256,249 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
 </context>
 <context>
+    <name>classControls</name>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="30"/>
+        <source>Students</source>
+        <translation>Študenti</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="103"/>
+        <source>Add student</source>
+        <translation>Pridať študenta</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="123"/>
+        <source>Remove student</source>
+        <translation>Odstrániť študenta</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="143"/>
+        <source>Edit student</source>
+        <translation>Upraviť študenta</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="170"/>
+        <source>Details</source>
+        <translation>Podrobnosti</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="197"/>
+        <source>Overview</source>
+        <translation>Prehľad</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="230"/>
+        <source>Pack:</source>
+        <translation>Balík:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="247"/>
+        <source>Lesson:</source>
+        <translation>Lekcia:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="284"/>
+        <source>Exercise:</source>
+        <translation>Cvičenie:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="291"/>
+        <source>Sublesson:</source>
+        <translation>Podlekcia:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="307"/>
+        <source>Refresh</source>
+        <translation>Obnoviť</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/classcontrols.ui" line="362"/>
+        <source>Load exercise</source>
+        <translation>Načítať cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="46"/>
+        <source>Speed</source>
+        <translation>Rýchlosť</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="48"/>
+        <source>Mistakes</source>
+        <translation>Chyby</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="50"/>
+        <source>Time</source>
+        <translation>Čas</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="86"/>
+        <source>Full name</source>
+        <translation>Celé meno</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="86"/>
+        <source>Username</source>
+        <translation>Používateľské meno</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="86"/>
+        <source>Status</source>
+        <comment>Online/offline status</comment>
+        <translation>Stav</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="99"/>
+        <source>Offline</source>
+        <translation>Neaktívny</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="102"/>
+        <source>Online</source>
+        <translation>Aktívny</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="151"/>
+        <source>Confirm</source>
+        <translation>Potvrdiť</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="152"/>
+        <source>Are you sure you want to remove student</source>
+        <translation>Ste si istý, že chcete vymazať študenta</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="153"/>
+        <source>This will remove whole training history of the student!</source>
+        <translation>Táto akcia zmaže celú históriu tréningu študenta!</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="154"/>
+        <source>Yes</source>
+        <translation>Áno</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/classcontrols.cpp" line="155"/>
+        <source>No</source>
+        <translation>Nie</translation>
+    </message>
+</context>
+<context>
+    <name>classEdit</name>
+    <message>
+        <location filename="../ui/server/classedit.ui" line="32"/>
+        <source>Class name:</source>
+        <translation>Názov triedy:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/classedit.ui" line="46"/>
+        <source>Owner:</source>
+        <translation>Vlastník:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/classedit.ui" line="138"/>
+        <source>Icon:</source>
+        <translation>Ikona:</translation>
+    </message>
+    <message>
+        <location filename="../src/server/classedit.cpp" line="47"/>
+        <source>New class</source>
+        <translation>Nová trieda</translation>
+    </message>
+    <message>
+        <location filename="../src/server/classedit.cpp" line="50"/>
+        <source>Edit class</source>
+        <translation>Upraviť triedu</translation>
+    </message>
+</context>
+<context>
     <name>configParser</name>
     <message>
-        <location filename="../src/core/configfile.cpp" line="282"/>
+        <location filename="../src/core/configfile.cpp" line="296"/>
         <source>Touch</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="285"/>
+        <location filename="../src/core/configfile.cpp" line="299"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="288"/>
+        <location filename="../src/core/configfile.cpp" line="302"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="291"/>
+        <location filename="../src/core/configfile.cpp" line="305"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../src/core/configfile.cpp" line="294"/>
-        <source>Sublesson</source>
-        <translation>Podlekcia</translation>
+        <location filename="../src/core/configfile.cpp" line="316"/>
+        <source>Lesson %1</source>
+        <translation>Lekcia %1</translation>
+    </message>
+    <message>
+        <location filename="../src/core/configfile.cpp" line="322"/>
+        <source>Sublesson %1</source>
+        <translation>Podlekcia %1</translation>
+    </message>
+    <message>
+        <location filename="../src/core/configfile.cpp" line="328"/>
+        <source>Exercise %1</source>
+        <translation>Cvičenie %1</translation>
     </message>
 </context>
 <context>
     <name>connectionOptions</name>
     <message>
-        <location filename="../ui/options/connection.ui" line="47"/>
+        <location filename="../ui/options/connection.ui" line="26"/>
         <source>Server options</source>
         <translation>Možnosti servera</translation>
     </message>
     <message>
-        <location filename="../ui/options/connection.ui" line="53"/>
+        <location filename="../ui/options/connection.ui" line="32"/>
         <source>IP address:</source>
         <translation>Adresa IP:</translation>
     </message>
     <message>
-        <location filename="../ui/options/connection.ui" line="67"/>
+        <location filename="../ui/options/connection.ui" line="46"/>
         <source>Port:</source>
         <translation>Port:</translation>
     </message>
     <message>
-        <location filename="../ui/options/connection.ui" line="74"/>
-        <source>Use class monitor server</source>
-        <extracomment>Do not translate class monitor</extracomment>
-        <translation>Používať server class monitor</translation>
+        <location filename="../ui/options/connection.ui" line="72"/>
+        <source>Server mode</source>
+        <translation>Režim servera</translation>
     </message>
     <message>
-        <location filename="../ui/options/connection.ui" line="81"/>
+        <location filename="../ui/options/connection.ui" line="79"/>
+        <source>Client mode</source>
+        <translation>Režim klienta</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/connection.ui" line="86"/>
+        <source>Enable client</source>
+        <translation>Povoliť klienta</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/connection.ui" line="93"/>
         <source>Test connection</source>
         <translation>Vyskúšať spojenie</translation>
     </message>
     <message>
-        <location filename="../ui/options/connection.ui" line="88"/>
+        <location filename="../ui/options/connection.ui" line="100"/>
         <source>Connection status:</source>
         <translation>Stav spojenia:</translation>
     </message>
     <message>
-        <location filename="../src/options/connection.cpp" line="57"/>
+        <location filename="../src/options/connection.cpp" line="110"/>
         <source>Unknown</source>
         <translation>Neznámy</translation>
     </message>
     <message>
-        <location filename="../src/options/connection.cpp" line="83"/>
+        <location filename="../src/options/connection.cpp" line="136"/>
         <source>Failed to connect</source>
         <translation>Nepodarilo sa pripojiť</translation>
     </message>
@@ -423,6 +589,229 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <location filename="../ui/options/customization.ui" line="251"/>
         <source>Text style:</source>
         <translation>Štýl textu:</translation>
+    </message>
+</context>
+<context>
+    <name>databaseManager</name>
+    <message>
+        <location filename="../src/core/database.cpp" line="94"/>
+        <source>Couldn&apos;t open the database.</source>
+        <translation>Nepodarilo sa otvoriť databázu.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/database.cpp" line="112"/>
+        <source>Teacher</source>
+        <comment>Teacher user role</comment>
+        <translation>Učiteľ</translation>
+    </message>
+    <message>
+        <location filename="../src/core/database.cpp" line="113"/>
+        <source>Administrator</source>
+        <comment>Administrator user role</comment>
+        <translation>Administrátor</translation>
+    </message>
+    <message>
+        <location filename="../src/core/database.cpp" line="115"/>
+        <source>Student</source>
+        <comment>Student user role</comment>
+        <translation>Študent</translation>
+    </message>
+    <message>
+        <location filename="../src/core/database.cpp" line="295"/>
+        <source>Password for user %1:</source>
+        <translation>Heslo používateľa %1:</translation>
+    </message>
+    <message>
+        <location filename="../src/core/database.cpp" line="320"/>
+        <source>Incorrect password!</source>
+        <translation>Nesprávne heslo!</translation>
+    </message>
+</context>
+<context>
+    <name>exerciseProgressDialog</name>
+    <message>
+        <location filename="../ui/server/exerciseprogressdialog.ui" line="14"/>
+        <location filename="../ui/server/exerciseprogressdialog.ui" line="33"/>
+        <source>Exercise results</source>
+        <translation>Výsledky cvičenia</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/exerciseprogressdialog.ui" line="58"/>
+        <source>Print all</source>
+        <translation>Tlačiť všetko</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/exerciseprogressdialog.ui" line="96"/>
+        <source>Class:</source>
+        <translation>Trieda:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/exerciseprogressdialog.ui" line="110"/>
+        <source>Number:</source>
+        <translation>Číslo:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/exerciseprogressdialog.ui" line="146"/>
+        <source>Full name</source>
+        <translation>Celé meno</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/exerciseprogressdialog.ui" line="151"/>
+        <source>Username</source>
+        <translation>Používateľské meno</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/exerciseprogressdialog.ui" line="156"/>
+        <source>Result</source>
+        <translation>Výsledok</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/exerciseprogressdialog.ui" line="161"/>
+        <source>Mark</source>
+        <translation>Známka</translation>
+    </message>
+    <message>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="77"/>
+        <source>Aborted</source>
+        <translation>Zrušené</translation>
+    </message>
+    <message>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="80"/>
+        <source>View</source>
+        <translation>Zobraziť</translation>
+    </message>
+    <message>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="101"/>
+        <source>In progress...</source>
+        <translation>Prebieha...</translation>
+    </message>
+    <message>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="143"/>
+        <source>Some students have not finished yet.</source>
+        <translation>Niektorí študenti ešte neskončili.</translation>
+    </message>
+    <message>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="167"/>
+        <source>Printing result of student %1...</source>
+        <translation>Tlačiť výsledok študenta %1...</translation>
+    </message>
+    <message>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="168"/>
+        <source>Print</source>
+        <translation>Tlačiť</translation>
+    </message>
+    <message>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="171"/>
+        <source>Next student</source>
+        <translation>Ďalší študent</translation>
+    </message>
+</context>
+<context>
+    <name>exportDialog</name>
+    <message>
+        <location filename="../ui/exportdialog.ui" line="14"/>
+        <source>Export text</source>
+        <translation>Exportovať text</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportdialog.ui" line="29"/>
+        <source>Print</source>
+        <translation>Tlačiť</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportdialog.ui" line="61"/>
+        <source>Name:</source>
+        <translation>Meno:</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportdialog.ui" line="78"/>
+        <source>Class:</source>
+        <translation>Trieda:</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportdialog.ui" line="92"/>
+        <source>Number:</source>
+        <translation>Číslo:</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportdialog.ui" line="106"/>
+        <source>Mark:</source>
+        <translation>Známka:</translation>
+    </message>
+    <message>
+        <location filename="../ui/exportdialog.ui" line="296"/>
+        <source>Close</source>
+        <translation>Zavrieť</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="116"/>
+        <source>Typewriting performance result</source>
+        <translation>Hodnotenie strojopisného výkonu</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="121"/>
+        <source>Name: %1</source>
+        <translation>Meno: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="125"/>
+        <source>Class: %1</source>
+        <translation>Trieda: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="129"/>
+        <source>Date: %1</source>
+        <translation>Dátum: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="133"/>
+        <source>Number: %1</source>
+        <translation>Číslo: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="137"/>
+        <source>Number of gross hits</source>
+        <translation>Počet hrubých úderov</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="142"/>
+        <source>Number of mistakes</source>
+        <translation>Počet chýb</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="145"/>
+        <source>Mistake penalty</source>
+        <translation>Penalizácia chyby</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="148"/>
+        <source>Number of penalty hits</source>
+        <translation>Počet trestných úderov</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="152"/>
+        <source>Number of net hits</source>
+        <translation>Počet čistých úderov</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="155"/>
+        <source>Number of net hits per minute</source>
+        <translation>Počet čistých úderov za minútu</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="160"/>
+        <source>Inaccuracy</source>
+        <translation>Nepresnosť</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="164"/>
+        <source>Achieved performance</source>
+        <translation>Dosiahnutý výkon</translation>
+    </message>
+    <message>
+        <location filename="../src/exportdialog.cpp" line="167"/>
+        <source>Mark</source>
+        <translation>Známka</translation>
     </message>
 </context>
 <context>
@@ -521,16 +910,118 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
 </context>
 <context>
+    <name>loadExerciseDialog</name>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="14"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="36"/>
+        <source>Load exercise</source>
+        <translation>Načítať cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="46"/>
+        <source>Source</source>
+        <translation>Zdroj</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="52"/>
+        <source>Selected exercise (%1)</source>
+        <translation>Vybrané cvičenie (%1)</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="62"/>
+        <source>From file</source>
+        <translation>Zo súboru</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="90"/>
+        <source>Browse</source>
+        <translation>Prehľadávať</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="97"/>
+        <source>(no file selected)</source>
+        <translation>(žiadny súbor)</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="143"/>
+        <source>Line length:</source>
+        <translation>Dĺžka riadka:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="163"/>
+        <source>Include new lines</source>
+        <translation>Zahrnúť nové riadky</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="176"/>
+        <source>Options</source>
+        <translation>Možnosti</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="209"/>
+        <source>Mode:</source>
+        <translation>Režim:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="223"/>
+        <source>Default</source>
+        <translation>Predvolený</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="228"/>
+        <source>Time limited</source>
+        <translation>Na čas</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="236"/>
+        <source>Time limit:</source>
+        <translation>Časový limit:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="274"/>
+        <source>Correct mistakes</source>
+        <translation>Opravovať chyby</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="284"/>
+        <source>Lock user interface</source>
+        <translation>Uzamknúť používateľské rozhranie</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="294"/>
+        <source>Hide text</source>
+        <translation>Skryť text</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/loadexercisedialog.ui" line="304"/>
+        <source>Target students</source>
+        <translation>Cieľoví študenti</translation>
+    </message>
+    <message>
+        <location filename="../src/server/loadexercisedialog.cpp" line="191"/>
+        <source>This file is too large!</source>
+        <translation>Tento súbor je príliš veľký!</translation>
+    </message>
+</context>
+<context>
     <name>monitorClient</name>
     <message>
-        <location filename="../src/core/net.cpp" line="185"/>
+        <location filename="../src/core/net.cpp" line="189"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../src/core/net.cpp" line="186"/>
+        <location filename="../src/core/net.cpp" line="190"/>
         <source>Unable to connect to class monitor server.</source>
         <translation>Nepodarilo sa spojiť so serverom class monitor.</translation>
+    </message>
+</context>
+<context>
+    <name>monitorServer</name>
+    <message>
+        <location filename="../src/core/server.cpp" line="44"/>
+        <source>Unable to start server on port %1.</source>
+        <translation>Nepodarilo sa spustiť server na porte %1.</translation>
     </message>
 </context>
 <context>
@@ -730,38 +1221,27 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Zavrieť bez uloženia</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="210"/>
-        <location filename="../src/packEditor/packview.cpp" line="212"/>
-        <source>Lesson</source>
-        <translation>Lekcia</translation>
-    </message>
-    <message>
-        <location filename="../src/packEditor/packview.cpp" line="240"/>
+        <location filename="../src/packEditor/packview.cpp" line="239"/>
         <source>empty</source>
         <translation>prázdna</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="255"/>
-        <source>Exercise</source>
-        <translation>Cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../src/packEditor/packview.cpp" line="357"/>
+        <location filename="../src/packEditor/packview.cpp" line="356"/>
         <source>New exercise</source>
         <translation>Nové cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="524"/>
+        <location filename="../src/packEditor/packview.cpp" line="523"/>
         <source>Text length:</source>
         <translation>Dĺžka textu:</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="708"/>
+        <location filename="../src/packEditor/packview.cpp" line="707"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/packview.cpp" line="708"/>
+        <location filename="../src/packEditor/packview.cpp" line="707"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
@@ -787,6 +1267,69 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <location filename="../ui/paperconfigdialog.ui" line="95"/>
         <source>Include new lines</source>
         <translation>Zahrnúť nové riadky</translation>
+    </message>
+</context>
+<context>
+    <name>serverManager</name>
+    <message>
+        <location filename="../ui/server/widgets/servermanager.ui" line="68"/>
+        <source>Users</source>
+        <translation>Používatelia</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/servermanager.ui" line="91"/>
+        <location filename="../ui/server/widgets/servermanager.ui" line="94"/>
+        <source>Change school name</source>
+        <translation>Zmeniť názov školy</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/servermanager.ui" line="163"/>
+        <source>Create class</source>
+        <translation>Vytoriť triedu</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/servermanager.cpp" line="85"/>
+        <source>No class selected</source>
+        <comment>Displayed in the class selection combo box.</comment>
+        <translation>Žiadna trieda otvorená</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/servermanager.cpp" line="273"/>
+        <source>Are you sure you want to remove class %1?</source>
+        <translation>Ste si istý, že chcete vymazať triedu %1?</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/servermanager.cpp" line="301"/>
+        <source>Close opened windows first.</source>
+        <translation>Najprv zatvorte otvorené okná.</translation>
+    </message>
+</context>
+<context>
+    <name>serverSetup</name>
+    <message>
+        <location filename="../ui/server/serversetup.ui" line="14"/>
+        <source>Server setup</source>
+        <translation>Nastavenie servera</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/serversetup.ui" line="29"/>
+        <source>School name:</source>
+        <translation>Názov školy:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/serversetup.ui" line="43"/>
+        <source>Administrator name:</source>
+        <translation>Meno administrátora:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/serversetup.ui" line="57"/>
+        <source>Administrator password:</source>
+        <translation>Heslo administrátora:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/serversetup.ui" line="84"/>
+        <source>Repeat password:</source>
+        <translation>Opakovať heslo:</translation>
     </message>
 </context>
 <context>
@@ -836,6 +1379,132 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
 </context>
 <context>
+    <name>studentDetails</name>
+    <message>
+        <location filename="../ui/server/widgets/studentdetails.ui" line="47"/>
+        <source>Pack:</source>
+        <translation>Balík:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/studentdetails.ui" line="64"/>
+        <source>Lesson:</source>
+        <translation>Lekcia:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/studentdetails.ui" line="81"/>
+        <source>Exercise:</source>
+        <translation>Cvičenie:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/studentdetails.ui" line="98"/>
+        <source>Sublesson:</source>
+        <translation>Podlekcia:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/studentdetails.ui" line="133"/>
+        <source>Refresh</source>
+        <translation>Obnoviť</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/studentdetails.ui" line="144"/>
+        <source>Table</source>
+        <translation>Tabuľka</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/studentdetails.ui" line="176"/>
+        <source>Charts</source>
+        <translation>Grafy</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/studentdetails.ui" line="203"/>
+        <source>No information available for this student.</source>
+        <translation>Pre tohto študenta nie sú dostupné žiadne informácie.</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/widgets/studentdetails.ui" line="246"/>
+        <source>Go back</source>
+        <translation>Späť</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/studentdetails.cpp" line="53"/>
+        <location filename="../src/server/widgets/studentdetails.cpp" line="163"/>
+        <source>Speed</source>
+        <translation>Rýchlosť</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/studentdetails.cpp" line="57"/>
+        <location filename="../src/server/widgets/studentdetails.cpp" line="163"/>
+        <source>Mistakes</source>
+        <translation>Chyby</translation>
+    </message>
+    <message>
+        <location filename="../src/server/widgets/studentdetails.cpp" line="61"/>
+        <location filename="../src/server/widgets/studentdetails.cpp" line="163"/>
+        <source>Time</source>
+        <translation>Čas</translation>
+    </message>
+</context>
+<context>
+    <name>studentEdit</name>
+    <message>
+        <location filename="../ui/server/studentedit.ui" line="23"/>
+        <source>Add new student</source>
+        <translation>Pridať nového študenta</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/studentedit.ui" line="30"/>
+        <source>Add existing student</source>
+        <translation>Pridať existujúceho študenta</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/studentedit.ui" line="46"/>
+        <source>Full name:</source>
+        <extracomment>Student full name</extracomment>
+        <translation>Celé meno:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/studentedit.ui" line="60"/>
+        <source>Username:</source>
+        <extracomment>Student username</extracomment>
+        <translation>Používateľské meno:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/studentedit.ui" line="87"/>
+        <source>Password:</source>
+        <translation>Heslo:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/studentedit.ui" line="94"/>
+        <source>Repeat password:</source>
+        <translation>Opakovať heslo:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/studentedit.ui" line="128"/>
+        <source>Reset</source>
+        <translation>Vytvoriť nové</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/studentedit.ui" line="160"/>
+        <source>Class:</source>
+        <translation>Trieda:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/studentedit.ui" line="174"/>
+        <source>Student:</source>
+        <translation>Študent:</translation>
+    </message>
+    <message>
+        <location filename="../src/server/studentedit.cpp" line="33"/>
+        <source>New student</source>
+        <translation>Nový študent</translation>
+    </message>
+    <message>
+        <location filename="../src/server/studentedit.cpp" line="40"/>
+        <source>Edit student</source>
+        <translation>Upraviť študenta</translation>
+    </message>
+</context>
+<context>
     <name>studentOptions</name>
     <message>
         <location filename="../ui/options/studentoptions.ui" line="14"/>
@@ -858,9 +1527,14 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Heslo:</translation>
     </message>
     <message>
-        <location filename="../ui/options/studentoptions.ui" line="147"/>
+        <location filename="../src/options/studentoptions.cpp" line="63"/>
         <source>Incorrect password</source>
         <translation>Nesprávne heslo</translation>
+    </message>
+    <message>
+        <location filename="../src/options/studentoptions.cpp" line="65"/>
+        <source>Your class is closed or the user does not exist</source>
+        <translation>Vaša trieda je zatvorená alebo používateľ neexistuje</translation>
     </message>
 </context>
 <context>
@@ -907,6 +1581,92 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <location filename="../ui/timedialog.ui" line="112"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
+    </message>
+</context>
+<context>
+    <name>userEdit</name>
+    <message>
+        <location filename="../ui/server/useredit.ui" line="75"/>
+        <source>User name:</source>
+        <translation>Meno používateľa:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/useredit.ui" line="89"/>
+        <source>Role:</source>
+        <translation>Rola:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/useredit.ui" line="99"/>
+        <source>Password:</source>
+        <translation>Heslo:</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/useredit.ui" line="133"/>
+        <source>Reset</source>
+        <translation>Vytvoriť nové</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/useredit.ui" line="153"/>
+        <source>Repeat password:</source>
+        <translation>Opakovať heslo:</translation>
+    </message>
+    <message>
+        <location filename="../src/server/useredit.cpp" line="35"/>
+        <source>New user</source>
+        <translation>Nový používateľ</translation>
+    </message>
+    <message>
+        <location filename="../src/server/useredit.cpp" line="40"/>
+        <source>Edit user</source>
+        <translation>Upraviť používateľa</translation>
+    </message>
+</context>
+<context>
+    <name>userManager</name>
+    <message>
+        <location filename="../ui/server/usermanager.ui" line="83"/>
+        <source>Add user</source>
+        <translation>Pridať používateľa</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/usermanager.ui" line="103"/>
+        <source>Remove user</source>
+        <translation>Odstrániť používateľa</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/usermanager.ui" line="123"/>
+        <source>Edit user</source>
+        <translation>Upraviť používateľa</translation>
+    </message>
+    <message>
+        <location filename="../ui/server/usermanager.ui" line="159"/>
+        <source>Users</source>
+        <translation>Používatelia</translation>
+    </message>
+    <message>
+        <location filename="../src/server/usermanager.cpp" line="95"/>
+        <source>Confirm</source>
+        <translation>Potvrdiť</translation>
+    </message>
+    <message>
+        <location filename="../src/server/usermanager.cpp" line="96"/>
+        <source>Are you sure you want to remove user</source>
+        <translation>Ste si istý, že chcete vymazať používateľa</translation>
+    </message>
+    <message>
+        <location filename="../src/server/usermanager.cpp" line="97"/>
+        <source>This will remove all classes the user owns!</source>
+        <translation>Táto akcia zmaže všetky triedy, ktoré tento používateľ vlastní!</translation>
+    </message>
+    <message>
+        <location filename="../src/server/usermanager.cpp" line="98"/>
+        <source>Yes</source>
+        <translation>Áno</translation>
+    </message>
+    <message>
+        <location filename="../src/server/usermanager.cpp" line="99"/>
+        <source>No</source>
+        <translation>Nie</translation>
     </message>
 </context>
 </TS>

@@ -56,14 +56,6 @@
         <translation>Aktueller Status:</translation>
     </message>
     <message>
-        <source>Lesson</source>
-        <translation>Lektion</translation>
-    </message>
-    <message>
-        <source>Exercise</source>
-        <translation>Aufgabe</translation>
-    </message>
-    <message>
         <source>Text files</source>
         <translation>Text Dateien</translation>
     </message>
@@ -123,6 +115,23 @@
         <source>You don&apos;t have any error words.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Correct mistakes</source>
+        <extracomment>Whether to correct mistakes while typing</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print exercise text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide exercise text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -134,33 +143,6 @@
         <source>Shift</source>
         <comment>Shift key</comment>
         <translation>Shift</translation>
-    </message>
-</context>
-<context>
-    <name>SimpleColorDialog</name>
-    <message>
-        <source>Color selection</source>
-        <translation>Farb Auswahl</translation>
-    </message>
-    <message>
-        <source>Quick selection:</source>
-        <translation>Schnelle Auswahl:</translation>
-    </message>
-    <message>
-        <source>Choose a color</source>
-        <translation>Wähle eine Farbe</translation>
-    </message>
-    <message>
-        <source>Advanced:</source>
-        <translation>Fortgeschritten:</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Anwenden</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
@@ -186,6 +168,17 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>No</source>
         <translation>Nein</translation>
+    </message>
+</context>
+<context>
+    <name>adminSelector</name>
+    <message>
+        <source>Administrator accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log in as:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -215,6 +208,133 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
+    <name>classControls</name>
+    <message>
+        <source>Students</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add student</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove student</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit student</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pack:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lesson:</source>
+        <translation type="unfinished">Lektion:</translation>
+    </message>
+    <message>
+        <source>Exercise:</source>
+        <translation type="unfinished">Aufgabe:</translation>
+    </message>
+    <message>
+        <source>Sublesson:</source>
+        <translation type="unfinished">Unter Lektion:</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load exercise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed</source>
+        <translation type="unfinished">Tempo</translation>
+    </message>
+    <message>
+        <source>Mistakes</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished">Zeit</translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <comment>Online/offline status</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to remove student</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This will remove whole training history of the student!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Nein</translation>
+    </message>
+</context>
+<context>
+    <name>classEdit</name>
+    <message>
+        <source>Class name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Owner:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New class</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit class</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>configParser</name>
     <message>
         <source>Touch</source>
@@ -233,8 +353,16 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Text</translation>
     </message>
     <message>
-        <source>Sublesson</source>
-        <translation>Unter Lektion</translation>
+        <source>Lesson %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sublesson %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exercise %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -252,11 +380,6 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Use class monitor server</source>
-        <extracomment>Do not translate class monitor</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Test connection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -270,6 +393,18 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Failed to connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Client mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable client</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -342,6 +477,186 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Style:</source>
         <translation>Stil:</translation>
+    </message>
+</context>
+<context>
+    <name>databaseManager</name>
+    <message>
+        <source>Couldn&apos;t open the database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Teacher</source>
+        <comment>Teacher user role</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Administrator</source>
+        <comment>Administrator user role</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Student</source>
+        <comment>Student user role</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password for user %1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Incorrect password!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>exerciseProgressDialog</name>
+    <message>
+        <source>Exercise results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Class:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In progress...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some students have not finished yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing result of student %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next student</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>exportDialog</name>
+    <message>
+        <source>Export text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Class:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mark:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Typewriting performance result</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Class: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of gross hits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of mistakes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mistake penalty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of penalty hits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of net hits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of net hits per minute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inaccuracy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Achieved performance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mark</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -424,6 +739,81 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
+    <name>loadExerciseDialog</name>
+    <message>
+        <source>Load exercise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected exercise (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>From file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(no file selected)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line length:</source>
+        <translation type="unfinished">Zeilen Länge:</translation>
+    </message>
+    <message>
+        <source>Include new lines</source>
+        <translation type="unfinished">Enthalten neue Zeilen</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Optionen</translation>
+    </message>
+    <message>
+        <source>Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <source>Time limited</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time limit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correct mistakes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lock user interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Target students</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file is too large!</source>
+        <translation type="unfinished">Diese Datei ist zu groß!</translation>
+    </message>
+</context>
+<context>
     <name>monitorClient</name>
     <message>
         <source>Error</source>
@@ -432,6 +822,13 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Unable to connect to class monitor server.</source>
         <translation>Die Verbindung zum Class Monitor Server kann nicht hergestellt werden.</translation>
+    </message>
+</context>
+<context>
+    <name>monitorServer</name>
+    <message>
+        <source>Unable to start server on port %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -594,16 +991,8 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Ohne speichern schließen</translation>
     </message>
     <message>
-        <source>Lesson</source>
-        <translation>Lektion</translation>
-    </message>
-    <message>
         <source>empty</source>
         <translation>Leer</translation>
-    </message>
-    <message>
-        <source>Exercise</source>
-        <translation>Aufgabe</translation>
     </message>
     <message>
         <source>New exercise</source>
@@ -642,6 +1031,57 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
+    <name>serverManager</name>
+    <message>
+        <source>Users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change school name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create class</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to remove class %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close opened windows first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No class selected</source>
+        <comment>Displayed in the class selection combo box.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>serverSetup</name>
+    <message>
+        <source>Server setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>School name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Administrator name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Administrator password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>statsDialog</name>
     <message>
         <source>Exercise history</source>
@@ -677,6 +1117,106 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
+    <name>studentDetails</name>
+    <message>
+        <source>Pack:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lesson:</source>
+        <translation type="unfinished">Lektion:</translation>
+    </message>
+    <message>
+        <source>Exercise:</source>
+        <translation type="unfinished">Aufgabe:</translation>
+    </message>
+    <message>
+        <source>Sublesson:</source>
+        <translation type="unfinished">Unter Lektion:</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Table</source>
+        <translation type="unfinished">Tabelle</translation>
+    </message>
+    <message>
+        <source>Charts</source>
+        <translation type="unfinished">die Diagramme</translation>
+    </message>
+    <message>
+        <source>No information available for this student.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed</source>
+        <translation type="unfinished">Tempo</translation>
+    </message>
+    <message>
+        <source>Mistakes</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished">Zeit</translation>
+    </message>
+</context>
+<context>
+    <name>studentEdit</name>
+    <message>
+        <source>Add new student</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add existing student</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name:</source>
+        <extracomment>Student full name</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username:</source>
+        <extracomment>Student username</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Class:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Student:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New student</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit student</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>studentOptions</name>
     <message>
         <source>Authentication</source>
@@ -696,6 +1236,10 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Incorrect password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your class is closed or the user does not exist</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -735,6 +1279,76 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
+    </message>
+</context>
+<context>
+    <name>userEdit</name>
+    <message>
+        <source>User name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Role:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit user</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>userManager</name>
+    <message>
+        <source>Add user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to remove user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This will remove all classes the user owns!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Nein</translation>
     </message>
 </context>
 </TS>
