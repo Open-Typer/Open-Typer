@@ -387,6 +387,7 @@ void databaseManager::removeUser(int userID)
 	if(userRole(userID) != Role_Student)
 		query.exec(QString("DELETE FROM class WHERE id IN (SELECT id FROM class INNER JOIN users ON users.user = %1 AND users.class = class.id)").arg(QString::number(userID)));
 	query.exec("DELETE FROM user WHERE id = " + QString::number(userID));
+	removeOrphanedStudents();
 #endif
 }
 
@@ -515,6 +516,7 @@ void databaseManager::removeClass(int classID)
 #ifndef Q_OS_WASM
 	QSqlQuery query;
 	query.exec(QString("DELETE FROM class WHERE id = %1").arg(QString::number(classID)));
+	removeOrphanedStudents();
 #endif
 }
 
@@ -730,6 +732,23 @@ int databaseManager::compareWithStudents(int classID, int studentID, QString pac
 		}
 	}
 	return out;
+#endif // Q_OS_WASM
+}
+
+/*! Removes orphaned students. */
+void databaseManager::removeOrphanedStudents(void)
+{
+#ifndef Q_OS_WASM
+	QSqlQuery query1;
+	query1.exec(QString("SELECT id FROM user WHERE role = %1").arg(QString::number(Role_Student)));
+	while(query1.next())
+	{
+		QSqlQuery query2;
+		int id = query1.value(0).toInt();
+		query2.exec("SELECT user FROM users WHERE user = " + QString::number(id));
+		if(!query2.next()) // This student is not a member of any class
+			removeUser(id);
+	}
 #endif // Q_OS_WASM
 }
 

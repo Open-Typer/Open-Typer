@@ -93,6 +93,7 @@ class databaseManager : public QObject
 	private:
 		bool openStatus = false;
 		int userLoginID = -1;
+		void removeOrphanedStudents(void);
 		QString quotesEnclosed(QString str);
 };
 
