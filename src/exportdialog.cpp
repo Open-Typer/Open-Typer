@@ -74,15 +74,15 @@ exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 	textFont.setPointSize(12);
 	ui->exportText->setFont(textFont);
 	// Fill table
-	ui->exportTable->setRowCount(10);
+	ui->exportTable->setRowCount(8);
 	ui->exportTable->setColumnCount(4);
 	ui->exportTable->setSpan(0, 0, 1, 4);
 	ui->exportTable->setSpan(2, 2, 2, 1);
 	ui->exportTable->setSpan(2, 3, 2, 1);
-	ui->exportTable->setSpan(4, 2, 4, 1);
-	ui->exportTable->setSpan(4, 3, 4, 1);
-	ui->exportTable->setSpan(8, 2, 2, 1);
-	ui->exportTable->setSpan(8, 3, 2, 1);
+	ui->exportTable->setSpan(4, 2, 2, 1);
+	ui->exportTable->setSpan(4, 3, 2, 1);
+	ui->exportTable->setSpan(6, 2, 2, 1);
+	ui->exportTable->setSpan(6, 3, 2, 1);
 	updateTable();
 	// Connections
 	connect(ui->printButton, &QToolButton::clicked, this, &exportDialog::printResult);
@@ -133,35 +133,29 @@ void exportDialog::updateTable(void)
 	item = new QTableWidgetItem(tr("Number: %1").arg(ui->numberEdit->text()));
 	item->setFont(boldFont2);
 	ui->exportTable->setItem(1, 3, item);
-	// Number of hits in finished lines
-	ui->exportTable->setItem(2, 0, new QTableWidgetItem(tr("Number of hits in finished lines")));
-	ui->exportTable->setItem(2, 1, new QTableWidgetItem(QString::number(performanceResult["finishedLinesHits"].toInt())));
-	// Number of hits in unfinished lines
-	ui->exportTable->setItem(3, 0, new QTableWidgetItem(tr("Number of hits in unfinished lines")));
-	ui->exportTable->setItem(3, 1, new QTableWidgetItem(QString::number(performanceResult["unfinishedLinesHits"].toInt())));
 	// Number of gross hits
 	item = new QTableWidgetItem(tr("Number of gross hits"));
 	item->setFont(boldFont2);
-	ui->exportTable->setItem(4, 0, item);
-	ui->exportTable->setItem(4, 1, new QTableWidgetItem(QString::number(performanceResult["grossHits"].toInt())));
+	ui->exportTable->setItem(2, 0, item);
+	ui->exportTable->setItem(2, 1, new QTableWidgetItem(QString::number(performanceResult["grossHits"].toInt())));
 	// Number of mistakes
-	ui->exportTable->setItem(5, 0, new QTableWidgetItem(tr("Number of mistakes")));
-	ui->exportTable->setItem(5, 1, new QTableWidgetItem(QString::number(performanceResult["mistakes"].toInt())));
+	ui->exportTable->setItem(3, 0, new QTableWidgetItem(tr("Number of mistakes")));
+	ui->exportTable->setItem(3, 1, new QTableWidgetItem(QString::number(performanceResult["mistakes"].toInt())));
 	// Mistake penalty
-	ui->exportTable->setItem(6, 0, new QTableWidgetItem(tr("Mistake penalty")));
-	ui->exportTable->setItem(6, 1, new QTableWidgetItem(QString::number(performanceResult["penalty"].toInt())));
+	ui->exportTable->setItem(4, 0, new QTableWidgetItem(tr("Mistake penalty")));
+	ui->exportTable->setItem(4, 1, new QTableWidgetItem(QString::number(performanceResult["penalty"].toInt())));
 	// Number of penalty hits
-	ui->exportTable->setItem(7, 0, new QTableWidgetItem(tr("Number of penalty hits")));
+	ui->exportTable->setItem(5, 0, new QTableWidgetItem(tr("Number of penalty hits")));
 	int penaltyHits = performanceResult["penalty"].toInt() * performanceResult["mistakes"].toInt();
-	ui->exportTable->setItem(7, 1, new QTableWidgetItem(QString::number(penaltyHits)));
+	ui->exportTable->setItem(5, 1, new QTableWidgetItem(QString::number(penaltyHits)));
 	// Number of net hits
-	ui->exportTable->setItem(8, 0, new QTableWidgetItem(tr("Number of net hits")));
-	ui->exportTable->setItem(8, 1, new QTableWidgetItem(QString::number(performanceResult["netHits"].toInt())));
+	ui->exportTable->setItem(6, 0, new QTableWidgetItem(tr("Number of net hits")));
+	ui->exportTable->setItem(6, 1, new QTableWidgetItem(QString::number(performanceResult["netHits"].toInt())));
 	// Number of net hits per minute
 	item = new QTableWidgetItem(tr("Number of net hits per minute"));
 	item->setFont(boldFont2);
-	ui->exportTable->setItem(9, 0, item);
-	ui->exportTable->setItem(9, 1, new QTableWidgetItem(QString::number(performanceResult["netHitsPerMinute"].toDouble())));
+	ui->exportTable->setItem(7, 0, item);
+	ui->exportTable->setItem(7, 1, new QTableWidgetItem(QString::number(performanceResult["netHitsPerMinute"].toDouble())));
 	// Inaccuracy
 	ui->exportTable->setItem(2, 2, new QTableWidgetItem(tr("Inaccuracy")));
 	double inaccuracy = (performanceResult["mistakes"].toInt() * 100.0) / (double) performanceResult["grossHits"].toInt();
@@ -173,8 +167,8 @@ void exportDialog::updateTable(void)
 	item = new QTableWidgetItem(tr("Mark"));
 	item->setFont(boldFont);
 	item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-	ui->exportTable->setItem(8, 2, item);
-	ui->exportTable->setItem(8, 3, new QTableWidgetItem(ui->markEdit->text()));
+	ui->exportTable->setItem(6, 2, item);
+	ui->exportTable->setItem(6, 3, new QTableWidgetItem(ui->markEdit->text()));
 	// Adjust size
 	ui->exportTable->resizeColumnsToContents();
 	ui->exportTable->resizeRowsToContents();
