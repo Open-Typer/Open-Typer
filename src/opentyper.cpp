@@ -1343,6 +1343,8 @@ void OpenTyper::changeEvent(QEvent *event)
 	if(event->type() == QEvent::LanguageChange)
 	{
 		ui->retranslateUi(this);
+		if(settings.value("main/configfile", "").toString() == "")
+			return;
 		localThemeEngine.updateStyle();
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
