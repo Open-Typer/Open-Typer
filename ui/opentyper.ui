@@ -681,6 +681,9 @@
                 </item>
                 <item row="0" column="3">
                  <widget class="QPushButton" name="printButton">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
                   <property name="toolTip">
                    <string>Print exercise text</string>
                   </property>
@@ -1360,7 +1363,7 @@ p, li { white-space: pre-wrap; }
             <x>0</x>
             <y>0</y>
             <width>168</width>
-            <height>129</height>
+            <height>121</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
