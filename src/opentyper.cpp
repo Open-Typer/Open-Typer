@@ -1000,6 +1000,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes)
 {
 	levelInProgress=false;
+	input.replace("‘", "'");
+	displayLevel.replace("‘", "'");
 	if(!ui->correctMistakesCheckBox->isChecked())
 	{
 		if(currentMode == 1)
