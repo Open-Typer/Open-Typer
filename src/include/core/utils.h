@@ -38,7 +38,7 @@ class stringUtils
 		static QString longestCommonSubsequence(QString source, QString target);
 		static QList<QVariantMap> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<QPair<QString,int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
 		static QList<QVariantMap> compareStrings(QString source, QString target, QVector<QPair<QString,int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
-		static QList<QVariantMap> findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits = nullptr);
+		static QList<QVariantMap> findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
 };
 
 /*! \brief The fileUtils class contains functions for file or directory paths. */

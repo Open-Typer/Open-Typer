@@ -222,7 +222,7 @@ QList<QVariantMap> stringUtils::compareStrings(QString source, QString target, Q
 }
 
 /*! Compares input text with exercise text and finds mistakes. */
-QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits)
+QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits, QStringList *errorWords)
 {
 	QList<QVariantMap> out;
 	int i;
@@ -263,6 +263,8 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 		else
 			differences[wordDiff[i]["pos"].toInt()] = &wordDiff[i];
 	}
+	if(errorWords)
+		errorWords->clear();
 	int pos = 0, hits = 0;
 	for(i=0; i < inputWords.count(); i++)
 	{
@@ -277,6 +279,8 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 		}
 		if(differences.contains(i))
 		{
+			if(errorWords)
+				errorWords->append(differences[i]->value("previous").toString());
 			if(differences[i]->value("type").toString() == "change")
 			{
 				int wordStart = pos;
