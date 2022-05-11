@@ -78,8 +78,14 @@ QString stringUtils::wordAt(QString str, int index)
 	return "";
 }
 
-/*! Returns the longest common subsequence of source and target list. */
-QList<QVariant> stringUtils::longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target)
+/*! Returns the length of the longest common subsequence of source and target list. */
+int stringUtils::lcsLen(QList<QVariant> source, QList<QVariant> target)
+{
+	QMap<int, QMap<int, int>> table;
+	return lcsLen(source, target, &table);
+}
+
+int stringUtils::lcsLen(QList<QVariant> source, QList<QVariant> target, QMap<int, QMap<int, int>> *lcsTable)
 {
 	/*
 	* References:
@@ -99,9 +105,18 @@ QList<QVariant> stringUtils::longestCommonSubsequence(QList<QVariant> source, QL
 				l[i][j] = std::max(l[i - 1][j], l[i][j - 1]);
 		}
 	}
+	*lcsTable = l;
+	return l[source.count()][target.count()];
+}
+
+/*! Returns the longest common subsequence of source and target list. */
+QList<QVariant> stringUtils::longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target)
+{
+	QMap<int, QMap<int, int>> l;
+	lcsLen(source, target, &l);
 	int i = source.count();
 	int j = target.count();
-	int index = l[source.count()][target.count()];
+	int index = l[i][j];
 	QList<QVariant> longestCommonSubsequence;
 	while (i > 0 && j > 0)
 	{
@@ -126,6 +141,81 @@ QList<QVariant> stringUtils::longestCommonSubsequence(QList<QVariant> source, QL
 	return longestCommonSubsequence;
 }
 
+/*! Returns all longest common subsequences of source and target list. */
+QList<QList<QVariant>> stringUtils::findAllLcs(QList<QVariant> source, QList<QVariant> target)
+{
+	/* References:
+	 * https://kalkicode.com/print-longest-common-subsequence
+	 */
+	int n1 = source.size();
+	int n2 = target.size();
+	int length = lcsLen(source, target);
+	QList<QList<QVariant>> out;
+	if(length > 0)
+	{
+		bool visit[n1];
+		for(int i = 0; i < std::max(n1, n2); ++i) // a buffer overflow fix to the original source code
+			visit[i] = false;
+		findAllLcs(source, target, visit, n1, n2, 0, 0, 0, length, &out);
+	}
+	return out;
+}
+
+bool stringUtils::findAllLcs(QList<QVariant> s1, QList<QVariant> s2, bool visit[], int n1, int n2, int i, int j, int k, int length, QList<QList<QVariant>> *out)
+{
+	/* References:
+	 * https://kalkicode.com/print-longest-common-subsequence
+	 */
+	if(i == n1 || j == n2)
+		return false;
+	else if(s1[i] == s2[j])
+	{
+		visit[i] = true;
+		if(k + 1 == length)
+		{
+			QList<QVariant> currentLcs;
+			for(int i = 0; i < n1; ++i)
+			{
+				if(visit[i])
+					currentLcs += s1[i];
+			}
+			out->append(currentLcs);
+			visit[i] = false;
+			return true;
+		}
+		else
+			findAllLcs(s1, s2, visit, n1, n2, i + 1, j + 1, k + 1, length, out);
+		visit[i] = false;
+	}
+	else
+	{
+		if(findAllLcs(s1, s2, visit, n1, n2, i + 1, j, k, length, out) || findAllLcs(s1, s2, visit, n1, n2, i, j + 1, k, length, out))
+			return true;
+	}
+	return false;
+}
+
+/*! Returns all longest common subsequences of source and target string. */
+QStringList stringUtils::findAllLcs(QString source, QString target)
+{
+	QList<QVariant> sourceList, targetList;
+	int i;
+	for(i=0; i < source.count(); i++)
+		sourceList += QString(source[i]);
+	for(i=0; i < target.count(); i++)
+		targetList += QString(target[i]);
+	QList<QList<QVariant>> outList = findAllLcs(sourceList, targetList);
+	QStringList out;
+	for(i=0; i < outList.count(); i++)
+	{
+		QString currentStr;
+		for(int j=0; j < outList[i].count(); j++)
+			currentStr += outList[i][j].toString();
+		out += currentStr;
+	}
+	return out;
+}
+
 /*! Returns the longest common subsequence of source and target string. */
 QString stringUtils::longestCommonSubsequence(QString source, QString target)
 {
@@ -146,7 +236,8 @@ QString stringUtils::longestCommonSubsequence(QString source, QString target)
 QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVariant> target, QVector<QPair<QString,int>> *recordedCharacters, int *hits, int *inputPos)
 {
 	QList<QVariantMap> out;
-	QList<QVariant> lcs = longestCommonSubsequence(source, target);
+	auto lcsList = findAllLcs(source, target);
+	auto lcs = lcsList[lcsList.count()-1];
 	int sourcePos = 0, targetPos = 0;
 	int count = std::max(lcs.count(), target.count());
 	for(int i=0; i < count; i++)

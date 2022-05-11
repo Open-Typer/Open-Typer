@@ -36,9 +36,16 @@ class stringUtils
 		static QString wordAt(QString str, int index);
 		static QList<QVariant> longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target);
 		static QString longestCommonSubsequence(QString source, QString target);
+		static QList<QList<QVariant>> findAllLcs(QList<QVariant> source, QList<QVariant> target);
+		static QStringList findAllLcs(QString source, QString target);
 		static QList<QVariantMap> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<QPair<QString,int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
 		static QList<QVariantMap> compareStrings(QString source, QString target, QVector<QPair<QString,int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
 		static QList<QVariantMap> findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
+
+	private:
+		static int lcsLen(QList<QVariant> source, QList<QVariant> target);
+		static int lcsLen(QList<QVariant> source, QList<QVariant> target, QMap<int, QMap<int, int>> *lcsTable);
+		static bool findAllLcs(QList<QVariant> s1, QList<QVariant> s2, bool visit[], int n1, int n2, int i, int j, int k, int length, QList<QList<QVariant>> *out);
 };
 
 /*! \brief The fileUtils class contains functions for file or directory paths. */
