@@ -1023,7 +1023,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 			}
 			displayLevel = newText;
 		}
-		recordedMistakes = stringUtils::findMistakes(displayLevel, input, recordedCharacters, &totalHits);
+		recordedMistakes = stringUtils::findMistakes(displayLevel, input, recordedCharacters, &totalHits, &errorWords);
 		QList<QVariantMap> mistakesToRemove;
 		for(int i=0; i < recordedMistakes.count(); i++)
 		{
