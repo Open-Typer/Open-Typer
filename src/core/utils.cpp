@@ -285,11 +285,12 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			{
 				int wordStart = pos;
 				auto diff = compareStrings(differences[i]->value("previous").toString(), inputWords[i], &recordedCharacters, &hits, &pos);
-				pos--;
 				for(int i2=0; i2 < diff.count(); i2++)
 				{
 					QVariantMap currentMap = diff[i2];
 					currentMap["pos"] = wordStart + currentMap["pos"].toInt();
+					if(currentMap["type"].toString() != "deletion")
+						pos--;
 					diff[i2] = currentMap;
 				}
 				out += diff;
@@ -308,7 +309,6 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 				out += currentMap;
 				pos += inputWords[i].count();
 				// TODO: Should we count hits in added words?
-				pos += inputWords[i].count();
 			}
 		}
 		else if(inputWords[i] != "\n")
