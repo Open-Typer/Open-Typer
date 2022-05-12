@@ -51,7 +51,7 @@ class monitorClient : public QObject
 		bool available(void);
 
 	private:
-		bool errorDialogs;
+		bool errorDialogs, legacy = false;
 #ifdef Q_OS_WASM
 		QTcpSocket *socket;
 #else

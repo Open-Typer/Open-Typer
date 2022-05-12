@@ -112,6 +112,7 @@ bool monitorClient::available(void)
 QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data)
 {
 	connected = (socket->state() == QAbstractSocket::ConnectedState);
+	bool wasConnected = connected;
 	if(!connected)
 	{
 #ifdef Q_OS_WASM
@@ -124,6 +125,12 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 	}
 	if(connected)
 	{
+		if(!wasConnected)
+		{
+			// Detect legacy server
+			legacy = true;
+			sendRequest("check", {});
+		}
 		bool ok;
 		QList<QByteArray> reqList;
 		reqList.clear();
@@ -160,9 +167,12 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 void monitorClient::readResponse(void)
 {
 	receivedData += socket->readAll();
-	if(receivedData[receivedData.count()-1] != ';')
+	if(receivedData[receivedData.count()-1] == ';')
+		legacy = false;
+	else if(!legacy)
 		return;
-	receivedData.remove(receivedData.count()-1, 1);
+	if(!legacy)
+		receivedData.remove(receivedData.count()-1, 1);
 	if(waitingForResponse)
 	{
 		response = receivedData;
@@ -171,8 +181,13 @@ void monitorClient::readResponse(void)
 	else
 	{
 		QList<QByteArray> signal = readData(receivedData);
-		if((signal.count() >= 9) && (signal[0] == "loadExercise"))
-			emit exerciseReceived(signal[1], signal[2].toInt(), (signal[3]=="true"), signal[4].toInt(), signal[5].toInt(), (signal[6]=="true"), (signal[7]=="true"), (signal[8]=="true"));
+		if(signal[0] == "loadExercise")
+		{
+			if(signal.count() >= 9)
+				emit exerciseReceived(signal[1], signal[2].toInt(), (signal[3]=="true"), signal[4].toInt(), signal[5].toInt(), (signal[6]=="true"), (signal[7]=="true"), (signal[8]=="true"));
+			else if(signal.count() >= 4)
+				emit exerciseReceived(signal[1], signal[2].toInt(), (signal[3]=="true"), 0, 0, true, false, false);
+		}
 	}
 	receivedData = "";
 }
