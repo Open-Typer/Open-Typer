@@ -60,43 +60,43 @@
         <translation>Obrátený text</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="685"/>
+        <location filename="../ui/opentyper.ui" line="688"/>
         <source>Print exercise text</source>
         <translation>Tlačiť text cvičenia</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="726"/>
+        <location filename="../ui/opentyper.ui" line="729"/>
         <source>Correct mistakes</source>
         <extracomment>Whether to correct mistakes while typing</extracomment>
         <translation>Opravovať chyby</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="739"/>
+        <location filename="../ui/opentyper.ui" line="742"/>
         <source>Hide exercise text</source>
         <translation>Skryť text cvičenia</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="817"/>
+        <location filename="../ui/opentyper.ui" line="820"/>
         <source>Time:</source>
         <translation>Čas:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="991"/>
+        <location filename="../ui/opentyper.ui" line="994"/>
         <source>Export</source>
         <translation>Exportovať</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="790"/>
+        <location filename="../ui/opentyper.ui" line="793"/>
         <source>Mistakes:</source>
         <translation>Počet chýb:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="803"/>
+        <location filename="../ui/opentyper.ui" line="806"/>
         <source>Current state:</source>
         <translation>Stav:</translation>
     </message>
     <message>
-        <location filename="../ui/opentyper.ui" line="869"/>
+        <location filename="../ui/opentyper.ui" line="872"/>
         <source>Remaining time:</source>
         <translation>Zostávajúci čas:</translation>
     </message>
@@ -131,38 +131,38 @@
         <translation>Otvoriť vlastný balík</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="605"/>
+        <location filename="../src/opentyper.cpp" line="610"/>
         <source>Logged in as %1</source>
         <translation>Prihlásený ako %1</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="627"/>
+        <location filename="../src/opentyper.cpp" line="632"/>
         <source>Not logged in.</source>
         <translation>Neprihlásený.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="695"/>
+        <location filename="../src/opentyper.cpp" line="700"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="695"/>
-        <location filename="../src/opentyper.cpp" line="1307"/>
+        <location filename="../src/opentyper.cpp" line="700"/>
+        <location filename="../src/opentyper.cpp" line="1314"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="675"/>
+        <location filename="../src/opentyper.cpp" line="680"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="736"/>
+        <location filename="../src/opentyper.cpp" line="741"/>
         <source>You don&apos;t have any error words.</source>
         <translation>Nemáte žiadne chybné slová.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="1307"/>
+        <location filename="../src/opentyper.cpp" line="1314"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
@@ -493,12 +493,12 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Stav spojenia:</translation>
     </message>
     <message>
-        <location filename="../src/options/connection.cpp" line="110"/>
+        <location filename="../src/options/connection.cpp" line="116"/>
         <source>Unknown</source>
         <translation>Neznámy</translation>
     </message>
     <message>
-        <location filename="../src/options/connection.cpp" line="136"/>
+        <location filename="../src/options/connection.cpp" line="142"/>
         <source>Failed to connect</source>
         <translation>Nepodarilo sa pripojiť</translation>
     </message>
@@ -744,72 +744,72 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Zavrieť</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="116"/>
+        <location filename="../src/exportdialog.cpp" line="115"/>
         <source>Typewriting performance result</source>
         <translation>Hodnotenie strojopisného výkonu</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="121"/>
+        <location filename="../src/exportdialog.cpp" line="120"/>
         <source>Name: %1</source>
         <translation>Meno: %1</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="125"/>
+        <location filename="../src/exportdialog.cpp" line="124"/>
         <source>Class: %1</source>
         <translation>Trieda: %1</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="129"/>
+        <location filename="../src/exportdialog.cpp" line="128"/>
         <source>Date: %1</source>
         <translation>Dátum: %1</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="133"/>
+        <location filename="../src/exportdialog.cpp" line="132"/>
         <source>Number: %1</source>
         <translation>Číslo: %1</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="137"/>
+        <location filename="../src/exportdialog.cpp" line="136"/>
         <source>Number of gross hits</source>
         <translation>Počet hrubých úderov</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="142"/>
+        <location filename="../src/exportdialog.cpp" line="141"/>
         <source>Number of mistakes</source>
         <translation>Počet chýb</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="145"/>
+        <location filename="../src/exportdialog.cpp" line="144"/>
         <source>Mistake penalty</source>
         <translation>Penalizácia chyby</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="148"/>
+        <location filename="../src/exportdialog.cpp" line="147"/>
         <source>Number of penalty hits</source>
         <translation>Počet trestných úderov</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="152"/>
+        <location filename="../src/exportdialog.cpp" line="151"/>
         <source>Number of net hits</source>
         <translation>Počet čistých úderov</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="155"/>
+        <location filename="../src/exportdialog.cpp" line="154"/>
         <source>Number of net hits per minute</source>
         <translation>Počet čistých úderov za minútu</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="160"/>
+        <location filename="../src/exportdialog.cpp" line="159"/>
         <source>Inaccuracy</source>
         <translation>Nepresnosť</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="164"/>
+        <location filename="../src/exportdialog.cpp" line="163"/>
         <source>Achieved performance</source>
         <translation>Dosiahnutý výkon</translation>
     </message>
     <message>
-        <location filename="../src/exportdialog.cpp" line="167"/>
+        <location filename="../src/exportdialog.cpp" line="166"/>
         <source>Mark</source>
         <translation>Známka</translation>
     </message>
@@ -1006,12 +1006,12 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
 <context>
     <name>monitorClient</name>
     <message>
-        <location filename="../src/core/net.cpp" line="189"/>
+        <location filename="../src/core/net.cpp" line="204"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../src/core/net.cpp" line="190"/>
+        <location filename="../src/core/net.cpp" line="205"/>
         <source>Unable to connect to class monitor server.</source>
         <translation>Nepodarilo sa spojiť so serverom class monitor.</translation>
     </message>

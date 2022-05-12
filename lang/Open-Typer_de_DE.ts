@@ -89,11 +89,11 @@
     </message>
     <message>
         <source>Logged in as %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingeloggt als %1</translation>
     </message>
     <message>
         <source>Not logged in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht eingeloggt.</translation>
     </message>
     <message>
         <source>Open</source>
@@ -101,36 +101,36 @@
     </message>
     <message>
         <source>Close loaded exercise</source>
-        <translation type="unfinished"></translation>
+        <translation>Geladene Aufgabe schließen</translation>
     </message>
     <message>
         <source>Generate text from error words</source>
-        <translation type="unfinished"></translation>
+        <translation>Text aus Fehlerwörtern generieren</translation>
     </message>
     <message>
         <source>Reversed text</source>
-        <translation type="unfinished"></translation>
+        <translation>Umkehrtext</translation>
     </message>
     <message>
         <source>You don&apos;t have any error words.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben keine Fehlerwörter.</translation>
     </message>
     <message>
         <source>Correct mistakes</source>
         <extracomment>Whether to correct mistakes while typing</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Fehler korrigieren</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportieren</translation>
     </message>
     <message>
         <source>Print exercise text</source>
-        <translation type="unfinished"></translation>
+        <translation>Übungstext drucken</translation>
     </message>
     <message>
         <source>Hide exercise text</source>
-        <translation type="unfinished"></translation>
+        <translation>Übungstext verstecken</translation>
     </message>
 </context>
 <context>
@@ -204,7 +204,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>auto-generated</source>
-        <translation type="unfinished"></translation>
+        <translation>automatisch generiert</translation>
     </message>
 </context>
 <context>
@@ -354,58 +354,58 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Lesson %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lektion %1</translation>
     </message>
     <message>
         <source>Sublesson %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unter Lektion %1</translation>
     </message>
     <message>
         <source>Exercise %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabe %1</translation>
     </message>
 </context>
 <context>
     <name>connectionOptions</name>
     <message>
         <source>Server options</source>
-        <translation type="unfinished"></translation>
+        <translation>Server Optionen</translation>
     </message>
     <message>
         <source>IP address:</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Adresse:</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Port:</translation>
     </message>
     <message>
         <source>Test connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindung testen</translation>
     </message>
     <message>
         <source>Connection status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungsstatus:</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter</translation>
     </message>
     <message>
         <source>Failed to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindung fehlgeschlagen</translation>
     </message>
     <message>
         <source>Server mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Server-Modus</translation>
     </message>
     <message>
         <source>Client mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Client-Modus</translation>
     </message>
     <message>
         <source>Enable client</source>
-        <translation type="unfinished"></translation>
+        <translation>Client aktivieren</translation>
     </message>
 </context>
 <context>
@@ -472,7 +472,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Go back</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurück gehen</translation>
     </message>
     <message>
         <source>Style:</source>
@@ -483,7 +483,7 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>databaseManager</name>
     <message>
         <source>Couldn&apos;t open the database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Datenbank konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <source>Teacher</source>
@@ -727,15 +727,15 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Number of net hits per minute:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl Nettoschläge pro Minute:</translation>
     </message>
     <message>
         <source>Total number of hits:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamtzahl der Schläge:</translation>
     </message>
     <message>
         <source>Number of gross hits per minute:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der Bruttoschläge pro Minute:</translation>
     </message>
 </context>
 <context>
@@ -766,15 +766,15 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Line length:</source>
-        <translation type="unfinished">Zeilen Länge:</translation>
+        <translation>Zeilen Länge:</translation>
     </message>
     <message>
         <source>Include new lines</source>
-        <translation type="unfinished">Enthalten neue Zeilen</translation>
+        <translation>Enthalten neue Zeilen</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Optionen</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>Mode:</source>
@@ -782,7 +782,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Standard</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <source>Time limited</source>
@@ -810,7 +810,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>This file is too large!</source>
-        <translation type="unfinished">Diese Datei ist zu groß!</translation>
+        <translation>Diese Datei ist zu groß!</translation>
     </message>
 </context>
 <context>
@@ -1124,15 +1124,15 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Lesson:</source>
-        <translation type="unfinished">Lektion:</translation>
+        <translation>Lektion:</translation>
     </message>
     <message>
         <source>Exercise:</source>
-        <translation type="unfinished">Aufgabe:</translation>
+        <translation>Aufgabe:</translation>
     </message>
     <message>
         <source>Sublesson:</source>
-        <translation type="unfinished">Unter Lektion:</translation>
+        <translation>Unter Lektion:</translation>
     </message>
     <message>
         <source>Refresh</source>
@@ -1140,11 +1140,11 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation type="unfinished">Tabelle</translation>
+        <translation>Tabelle</translation>
     </message>
     <message>
         <source>Charts</source>
-        <translation type="unfinished">die Diagramme</translation>
+        <translation>die Diagramme</translation>
     </message>
     <message>
         <source>No information available for this student.</source>
@@ -1156,15 +1156,15 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation type="unfinished">Tempo</translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <source>Mistakes</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished">Zeit</translation>
+        <translation>Zeit</translation>
     </message>
 </context>
 <context>
@@ -1263,7 +1263,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerdefiniert</translation>
     </message>
 </context>
 <context>
@@ -1344,11 +1344,11 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Nein</translation>
+        <translation>Nein</translation>
     </message>
 </context>
 </TS>
