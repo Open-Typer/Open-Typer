@@ -38,6 +38,7 @@ class themeEngine : public QObject
 	Q_OBJECT
 	public:
 		themeEngine(QObject *parent = nullptr);
+		void updateThemeList(void);
 
 		enum Style {
 			SystemStyle = 0,

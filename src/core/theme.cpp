@@ -26,6 +26,25 @@ themeEngine globalThemeEngine;
 themeEngine::themeEngine(QObject *parent) :
 	QObject(parent)
 {
+	updateThemeList();
+	// Connections
+	connect(this, &themeEngine::fontBoldChanged, this, &themeEngine::fontStyleChanged);
+	connect(this, &themeEngine::fontItalicChanged, this, &themeEngine::fontStyleChanged);
+	connect(this, &themeEngine::fontUnderlineChanged, this, &themeEngine::fontStyleChanged);
+	connect(this, &themeEngine::fontFamilyChanged, this, &themeEngine::fontChanged);
+	connect(this, &themeEngine::fontSizeChanged, this, &themeEngine::fontChanged);
+	connect(this, &themeEngine::fontStyleChanged, this, &themeEngine::fontChanged);
+	connect(this, &themeEngine::exerciseTextColorChanged, this, &themeEngine::colorChanged);
+	connect(this, &themeEngine::inputTextColorChanged, this, &themeEngine::colorChanged);
+	connect(this, &themeEngine::bgColorChanged, this, &themeEngine::colorChanged);
+	connect(this, &themeEngine::paperColorChanged, this, &themeEngine::colorChanged);
+	connect(this, &themeEngine::panelColorChanged, this, &themeEngine::colorChanged);
+}
+
+/*! Regenerates the list of themes. */
+void themeEngine::updateThemeList(void)
+{
+	themes.clear();
 	QVariantMap themeMap;
 	// Default
 	themeMap.clear();
@@ -62,18 +81,6 @@ themeEngine::themeEngine(QObject *parent) :
 	themeMap.insert("id","custom");
 	themeMap.insert("icon","custom.png");
 	themes += themeMap;
-	// Connections
-	connect(this, &themeEngine::fontBoldChanged, this, &themeEngine::fontStyleChanged);
-	connect(this, &themeEngine::fontItalicChanged, this, &themeEngine::fontStyleChanged);
-	connect(this, &themeEngine::fontUnderlineChanged, this, &themeEngine::fontStyleChanged);
-	connect(this, &themeEngine::fontFamilyChanged, this, &themeEngine::fontChanged);
-	connect(this, &themeEngine::fontSizeChanged, this, &themeEngine::fontChanged);
-	connect(this, &themeEngine::fontStyleChanged, this, &themeEngine::fontChanged);
-	connect(this, &themeEngine::exerciseTextColorChanged, this, &themeEngine::colorChanged);
-	connect(this, &themeEngine::inputTextColorChanged, this, &themeEngine::colorChanged);
-	connect(this, &themeEngine::bgColorChanged, this, &themeEngine::colorChanged);
-	connect(this, &themeEngine::paperColorChanged, this, &themeEngine::colorChanged);
-	connect(this, &themeEngine::panelColorChanged, this, &themeEngine::colorChanged);
 }
 
 /*! Returns selected font. */
