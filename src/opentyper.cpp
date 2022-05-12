@@ -1352,6 +1352,7 @@ void OpenTyper::changeEvent(QEvent *event)
 		ui->retranslateUi(this);
 		if(settings.value("main/configfile", "").toString() == "")
 			return;
+		globalThemeEngine.updateThemeList();
 		localThemeEngine.updateStyle();
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
