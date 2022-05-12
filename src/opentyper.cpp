@@ -1112,7 +1112,9 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	msgBox->setMistakes(levelMistakes);
 	msgBox->setWindowModality(Qt::WindowModal);
 	connect(msgBox, &QDialog::accepted, this, [this]() {
-		ui->exportButton->show();
+		// TODO: Enable exportButton after v3.5.0
+#pragma message "Enable exportButton after v3.5.0"
+		//ui->exportButton->show();
 		preview = true;
 		// Load saved text
 		ui->inputLabel->setHtml(inputTextHtml);
