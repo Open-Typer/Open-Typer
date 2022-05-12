@@ -1528,8 +1528,8 @@ void OpenTyper::printText(void)
 		QFont font = ui->levelLabel->font();
 		painter.setFont(font);
 		QTextDocument *document = ui->levelLabel->document()->clone(this);
-		document->setHtml(QString("<body><u>%1, %2, %3</u><br><br>%4</body>").arg(configParser::lessonTr(publicPos::currentLesson),
-			configParser::sublessonTr(publicPos::currentSublesson),
+		document->setHtml(QString("<body><u>%1 / %2 / %3</u><br><br>%4</body>").arg(configParser::lessonTr(publicPos::currentLesson),
+			configParser::sublessonName(publicPos::currentSublesson),
 			configParser::exerciseTr(publicPos::currentExercise),
 			displayLevel.toHtmlEscaped().replace("\n", "<br>")));
 		font.setPointSize(50);
