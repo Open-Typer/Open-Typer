@@ -59,7 +59,7 @@ void studentOptions::auth(void)
 	}
 	else
 	{
-		if(response[1] == "password")
+		if(response.count() <= 1 || response[1] == "password")
 			ui->errorLabel->setText(tr("Incorrect password"));
 		else
 			ui->errorLabel->setText(tr("Your class is closed or the user does not exist"));
