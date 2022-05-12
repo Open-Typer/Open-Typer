@@ -23,7 +23,7 @@
 themeEngine globalThemeEngine;
 
 /*! Constructs themeEngine. */
-themeEngine::themeEngine(QWidget *parent) :
+themeEngine::themeEngine(QObject *parent) :
 	QObject(parent)
 {
 	QVariantMap themeMap;

@@ -37,7 +37,7 @@ class themeEngine : public QObject
 {
 	Q_OBJECT
 	public:
-		themeEngine(QWidget *parent = nullptr);
+		themeEngine(QObject *parent = nullptr);
 
 		enum Style {
 			SystemStyle = 0,
