@@ -28,12 +28,6 @@ connectionOptions::connectionOptions(QWidget *parent) :
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
-	// TODO: Remove this block after v3.5.0
-#pragma message "Enable beta features after v3.5.0"
-	{
-		ui->serverButton->hide();
-		ui->clientButton->hide();
-	}
 	refresh();
 	changeAddress();
 	// Connections
