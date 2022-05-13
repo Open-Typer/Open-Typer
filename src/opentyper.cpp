@@ -50,11 +50,6 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	studentPassword = "";
 	oldConfigName = "";
 	errorWords.clear();
-	// TODO: Remove this block after v3.5.0
-#pragma message "Enable beta features after v3.5.0"
-	{
-		ui->exerciseChecksFrame->hide();
-	}
 	refreshAll(true);
 	// Connections
 	connect(&client, SIGNAL(disconnected()), this, SLOT(updateStudent()));
