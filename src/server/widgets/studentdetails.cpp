@@ -98,6 +98,7 @@ void studentDetails::refresh(void)
 		ui->exerciseFrame->hide();
 		ui->statsFrame->hide();
 		ui->noInfoFrame->show();
+		return;
 	}
 	else
 	{
