@@ -28,7 +28,8 @@
 #include <QCoreApplication>
 #include <QLibraryInfo>
 
-extern QVector<QTranslator*> translators;
+extern QTranslator *translator1;
+extern QTranslator *translator2;
 
 /*!
  * \brief The languageManager class provides a list of supported languages.

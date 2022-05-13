@@ -20,7 +20,8 @@
 
 #include "core/language.h"
 
-QVector<QTranslator*> translators;
+QTranslator *translator1 = nullptr;
+QTranslator *translator2 = nullptr;
 
 /*! Constructs languageManager. */
 languageManager::languageManager(QObject *parent) :
@@ -56,22 +57,16 @@ void languageManager::setLanguage(int index)
 		targetLocale = QLocale::system();
 	else
 		targetLocale = QLocale(supportedLanguages[index], supportedCountries[index]);
-	for(int i=0; i < translators.count(); i++)
+	if(!translator1)
 	{
-		QCoreApplication::removeTranslator(translators[i]);
-		translators[i]->deleteLater();
+		translator1 = new QTranslator(qApp);
+		QCoreApplication::installTranslator(translator1);
 	}
-	translators.clear();
-	QTranslator *translator = new QTranslator;
-	if(translator->load(targetLocale, "Open-Typer", "_", ":/res/lang"))
+	if(!translator2)
 	{
-		QCoreApplication::installTranslator(translator);
-		translators += translator;
+		translator2 = new QTranslator(qApp);
+		QCoreApplication::installTranslator(translator2);
 	}
-	translator = new QTranslator;
-	if(translator->load(targetLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qtbase_"))
-	{
-		QCoreApplication::installTranslator(translator);
-		translators += translator;
-	}
+	translator1->load(targetLocale, "Open-Typer", "_", ":/res/lang");
+	translator2->load(targetLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qtbase_");
 }
