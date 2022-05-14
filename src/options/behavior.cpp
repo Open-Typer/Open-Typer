@@ -36,11 +36,19 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
 	// Error penalty
 	ui->errorPenaltyBox->setValue(settings.value("main/errorpenalty","10").toInt());
+	// Updates
+#ifdef Q_OS_WIN
+	ui->updatesCheckBox->setChecked(settings.value("main/updatechecks", true).toBool());
+#else
+	ui->updatesBox->hide();
+#endif // Q_OS_WIN
 	// Connect
 	// Space bar newline checkbox
 	connect(ui->spaceNewlineCheckBox,SIGNAL(clicked(bool)),this,SLOT(setSpaceNewline(bool)));
 	// Error penalty box
 	connect(ui->errorPenaltyBox,SIGNAL(valueChanged(int)),this,SLOT(setErrorPenalty(int)));
+	// Updates check box
+	connect(ui->updatesCheckBox, &QCheckBox::toggled, this, [this](bool checked) { settings.setValue("main/updatechecks", checked); });
 }
 
 /*! Destroys the behaviorOptions object. */
