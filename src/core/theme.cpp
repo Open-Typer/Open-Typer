@@ -75,6 +75,15 @@ void themeEngine::updateThemeList(void)
 	themeMap.insert("bgColor",qRgb(0,108,0));
 	themeMap.insert("panelColor",qRgb(175,175,175));
 	themes += themeMap;
+	// Light blue
+	themeMap.clear();
+	themeMap.insert("name", tr("Light blue"));
+	themeMap.insert("id", "light_blue");
+	themeMap.insert("icon", "light_blue.png");
+	themeMap.insert("style", 2);
+	themeMap.insert("bgColor", qRgb(153, 221, 252));
+	themeMap.insert("panelColor", qRgb(230, 246, 255));
+	themes += themeMap;
 	// Custom
 	themeMap.clear();
 	themeMap.insert("name",tr("Custom"));
