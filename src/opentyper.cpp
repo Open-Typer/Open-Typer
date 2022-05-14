@@ -90,7 +90,8 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	secLoop->start(500);
 #ifndef Q_OS_WASM
 	// Check for updates
-	new Updater();
+	if(settings.value("main/updatechecks", true).toBool())
+		new Updater();
 #endif
 }
 
