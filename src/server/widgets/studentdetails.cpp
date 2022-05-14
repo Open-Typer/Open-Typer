@@ -235,5 +235,10 @@ void studentDetails::changeEvent(QEvent *event)
 {
 	if(event->type() == QEvent::StyleChange)
 		refreshCharts();
+	else if(event->type() == QEvent::LanguageChange)
+	{
+		ui->retranslateUi(this);
+		refreshTable();
+	}
 	QWidget::changeEvent(event);
 }
