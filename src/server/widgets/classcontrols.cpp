@@ -112,6 +112,11 @@ void classControls::changeEvent(QEvent *event)
 {
 	if(event->type() == QEvent::StyleChange)
 		refreshCharts();
+	else if(event->type() == QEvent::LanguageChange)
+	{
+		ui->retranslateUi(this);
+		setupTable();
+	}
 	QWidget::changeEvent(event);
 }
 
