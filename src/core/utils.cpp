@@ -237,7 +237,7 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 {
 	QList<QVariantMap> out;
 	auto lcsList = findAllLcs(source, target);
-	auto lcs = lcsList[lcsList.count()-1];
+	auto lcs = lcsList.count() > 0 ? lcsList[lcsList.count()-1] : QList<QVariant>();
 	int sourcePos = 0, targetPos = 0;
 	int count = std::max(lcs.count(), target.count());
 	for(int i=0; i < count; i++)
