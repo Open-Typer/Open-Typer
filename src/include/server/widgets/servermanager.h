@@ -52,6 +52,9 @@ class serverManager : public QWidget
 		bool disableClassOpening = false;
 		int lastClassBoxIndex = -1;
 
+	protected:
+		void changeEvent(QEvent *event);
+
 	signals:
 		/*! A signal, which is emitted when the widget is collapsed. */
 		void widgetCollapsed();

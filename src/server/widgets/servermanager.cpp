@@ -298,3 +298,11 @@ void serverManager::showCloseExercisesMessage(void)
 {
 	QMessageBox::warning(this, QString(), tr("Close opened windows first."));
 }
+
+/*! Overrides QWidget#changeEvent(). */
+void serverManager::changeEvent(QEvent *event)
+{
+	if(event->type() == QEvent::LanguageChange)
+		ui->retranslateUi(this);
+	QWidget::changeEvent(event);
+}
