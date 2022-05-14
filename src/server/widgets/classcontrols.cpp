@@ -72,7 +72,10 @@ classControls::classControls(int openClassID, QWidget *parent) :
 classControls::~classControls()
 {
 	delete ui;
-	disconnect(serverPtr, nullptr, nullptr, nullptr);
+#ifndef Q_OS_WASM
+	if(serverPtr)
+		disconnect(serverPtr, nullptr, nullptr, nullptr);
+#endif
 }
 
 
