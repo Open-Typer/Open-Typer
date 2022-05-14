@@ -232,15 +232,13 @@ void serverManager::openClass(bool auth)
 			ui->classControlsFrame->setVisible(expanded);
 			dbMgr.updateClassTimestamp(classes[selected]);
 			classControls *controlsWidget = new classControls(classes[selected], ui->classControlsFrame);
+			controlsWidget->setAttribute(Qt::WA_DeleteOnClose);
 			if(ui->classControlsLayout->count() > 0)
 			{
 				QWidget *oldWidget = ui->classControlsLayout->itemAt(0)->widget();
-				disconnect(oldWidget, nullptr, nullptr, nullptr);
-				ui->classControlsLayout->replaceWidget(oldWidget, controlsWidget);
 				oldWidget->close();
 			}
-			else
-				ui->classControlsLayout->addWidget(controlsWidget);
+			ui->classControlsLayout->addWidget(controlsWidget);
 			connect(controlsWidget, &classControls::detailsClicked, this, &serverManager::openDetails);
 			dbMgr.activeClass = classes[selected];
 		}
@@ -254,10 +252,10 @@ void serverManager::openClass(bool auth)
 void serverManager::openDetails(int studentID)
 {
 	studentDetails *detailsWidget = new studentDetails(classes[ui->classBox->currentIndex()-1], studentID, ui->classControlsFrame);
+	detailsWidget->setAttribute(Qt::WA_DeleteOnClose);
 	QWidget *oldWidget = ui->classControlsLayout->itemAt(0)->widget();
-	disconnect(oldWidget, nullptr, nullptr, nullptr);
-	ui->classControlsLayout->replaceWidget(oldWidget, detailsWidget);
 	oldWidget->close();
+	ui->classControlsLayout->addWidget(detailsWidget);
 	connect(detailsWidget, &studentDetails::backClicked, this, [this](){ openClass(false); });
 }
 
