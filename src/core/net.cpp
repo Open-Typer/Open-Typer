@@ -115,12 +115,20 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 	bool wasConnected = connected;
 	if(!connected)
 	{
+		// Check if the port is open using QTcpServer
+		QTcpServer tmpServer(this);
+		if(tmpServer.listen(QHostAddress::Any, serverPort()))
+		{
+			// The port is closed
+			tmpServer.close();
+			return QList<QByteArray>({"connectFailure"});
+		}
 #ifdef Q_OS_WASM
 		socket->connectToHost(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
-		connected = socket->waitForConnected(100);
+		connected = socket->waitForConnected(1000);
 #else
 		socket->connectToHostEncrypted(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
-		connected = socket->waitForEncrypted(100);
+		connected = socket->waitForEncrypted(1000);
 #endif
 	}
 	if(connected)
