@@ -197,7 +197,11 @@ void exportDialog::printResult(void)
 		QTextDocument *document = ui->exportText->document()->clone(this);
 		document->documentLayout()->setPaintDevice(printerPtr);
 		document->setDefaultStyleSheet("body { color: black; }");
-		int fontHeight = QFontMetrics(painter.font(), printerPtr).height();
+		QFont font = document->defaultFont();
+		font.setPointSize(50);
+		document->setDefaultFont(font);
+		double textScale = printerPtr->pageRect(QPrinter::DevicePixel).width() / double(document->size().width());
+		int fontHeight = QFontMetrics(font, printerPtr).height();
 		QStringList lines = exportHtml.split("<br>");
 		int relativeLine = 0, page = 0, fromPage = printerPtr->fromPage()-1, toPage = printerPtr->toPage()-1;
 		for(int i=0; i < lines.count(); i++)
@@ -216,6 +220,7 @@ void exportDialog::printResult(void)
 			if((page >= fromPage) && (page <= rangeEnd))
 			{
 				painter.resetTransform();
+				painter.scale(textScale, textScale);
 				painter.translate(0, fontHeight*relativeLine);
 				document->drawContents(&painter);
 			}
