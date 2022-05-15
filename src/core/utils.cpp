@@ -296,6 +296,19 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			{
 				int wordStart = pos;
 				auto diff = compareStrings(differences[i]->value("previous").toString(), inputWords[i], &recordedCharacters, &hits, &pos);
+				QList<QVariantMap> toRemove;
+				// Ensure there's max. one mistake per 6 characters
+				int lastMistakePos = -1;
+				for(int i2=0; i2 < diff.count(); i2++)
+				{
+					if((lastMistakePos != -1) && (diff[i2]["pos"].toInt() / 6 == lastMistakePos / 6))
+						toRemove += diff[i2];
+					else
+						lastMistakePos = diff[i2]["pos"].toInt();
+				}
+				for(int i2=0; i2 < toRemove.count(); i2++)
+					diff.removeAll(toRemove[i2]);
+				// Translate mistake position
 				for(int i2=0; i2 < diff.count(); i2++)
 				{
 					QVariantMap currentMap = diff[i2];
