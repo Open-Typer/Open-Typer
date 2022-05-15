@@ -116,24 +116,20 @@ QList<QVariant> stringUtils::longestCommonSubsequence(QList<QVariant> source, QL
 	lcsLen(source, target, &l);
 	int i = source.count();
 	int j = target.count();
-	int index = l[i][j];
 	QList<QVariant> longestCommonSubsequence;
 	while (i > 0 && j > 0)
 	{
-		if (source.at(i - 1) == target.at(j - 1))
+		if(i == 0)
+			j--;
+		else if(j == 0)
+			i--;
+		else if (source.at(i - 1) == target.at(j - 1))
 		{
-			if(index - 1 >= longestCommonSubsequence.count())
-			{
-				int count = index - longestCommonSubsequence.count();
-				for(int i2=0; i2 < count; i2++)
-					longestCommonSubsequence.append(QVariant());
-			}
-			longestCommonSubsequence[index - 1] = source.at(i - 1);
+			longestCommonSubsequence.prepend(source.at(i-1));
 			i--;
 			j--;
-			index--;
 		}
-		else if (l[i - 1][j] > l[i][j - 1])
+		else if (l[i][j] == l[i-1][j])
 			i--;
 		else
 			j--;
