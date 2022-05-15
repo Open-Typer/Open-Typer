@@ -308,7 +308,8 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 	if(levelID == -1)
 		levelID = parser.exerciseCount(lessonID,sublessonID+sublessonListStart);
 	// Load length extension
-	levelLengthExtension = parser.exerciseLineLength(lessonID,sublessonID+sublessonListStart,levelID);
+	if(!customLevelLoaded)
+		levelLengthExtension = parser.exerciseLineLength(lessonID,sublessonID+sublessonListStart,levelID);
 	// Load level text
 	if(customLevelLoaded)
 		level = customLevel;
