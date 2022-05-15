@@ -209,7 +209,7 @@ void exportDialog::printResult(void)
 			int rangeEnd = toPage;
 			if(rangeEnd == -1)
 				rangeEnd = page+1;
-			if(fontHeight*(relativeLine+1) > printerPtr->pageRect(QPrinter::DevicePixel).height())
+			if(fontHeight*textScale*(relativeLine+1) > printerPtr->pageRect(QPrinter::DevicePixel).height())
 			{
 				if(((page+1 >= fromPage) && (page+1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
 					printerPtr->newPage();
