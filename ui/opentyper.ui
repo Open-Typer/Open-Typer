@@ -117,154 +117,181 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_7">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
-              <widget class="QLabel" name="title">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>13</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-               <property name="text">
-                <string notr="true">Open-Typer</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="studentLabel">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string notr="true"/>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="mainButtonsFrame">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
+              <widget class="QFrame" name="optionsFrameContents">
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
                <property name="frameShadow">
                 <enum>QFrame::Plain</enum>
                </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_6">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
+               <layout class="QVBoxLayout" name="verticalLayout_8">
                 <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
                  <number>0</number>
                 </property>
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QPushButton" name="optionsButton">
+                 <widget class="QLabel" name="title">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
-                  <property name="focusPolicy">
-                   <enum>Qt::NoFocus</enum>
+                  <property name="font">
+                   <font>
+                    <pointsize>13</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
                   </property>
-                  <property name="toolTip">
-                   <string>Options</string>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="text">
+                   <string notr="true">Open-Typer</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="studentLabel">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
                   <property name="text">
                    <string notr="true"/>
                   </property>
-                  <property name="icon">
-                   <iconset resource="../res.qrc">
-                    <normaloff>:/res/images/options.png</normaloff>:/res/images/options.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>36</width>
-                    <height>36</height>
-                   </size>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="openButton">
+                 <widget class="QFrame" name="mainButtonsFrame">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
-                  <property name="toolTip">
-                   <string>Open custom text</string>
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
                   </property>
-                  <property name="text">
-                   <string/>
+                  <property name="frameShadow">
+                   <enum>QFrame::Plain</enum>
                   </property>
-                  <property name="icon">
-                   <iconset resource="../res.qrc">
-                    <normaloff>:/res/images/open.png</normaloff>:/res/images/open.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>36</width>
-                    <height>36</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="printButton">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="toolTip">
-                   <string>Print</string>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../res.qrc">
-                    <normaloff>:/res/images/print.png</normaloff>:/res/images/print.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>36</width>
-                    <height>36</height>
-                   </size>
-                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="optionsButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="focusPolicy">
+                      <enum>Qt::NoFocus</enum>
+                     </property>
+                     <property name="toolTip">
+                      <string>Options</string>
+                     </property>
+                     <property name="text">
+                      <string notr="true"/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../res.qrc">
+                       <normaloff>:/res/images/options.png</normaloff>:/res/images/options.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>36</width>
+                       <height>36</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="openButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="toolTip">
+                      <string>Open custom text</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../res.qrc">
+                       <normaloff>:/res/images/open.png</normaloff>:/res/images/open.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>36</width>
+                       <height>36</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="printButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="toolTip">
+                      <string>Print</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../res.qrc">
+                       <normaloff>:/res/images/print.png</normaloff>:/res/images/print.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>36</width>
+                       <height>36</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -349,6 +376,15 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QGridLayout" name="gridLayout_5">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
                 <item row="8" column="0" alignment="Qt::AlignBottom">
                  <widget class="QLabel" name="navigationFrameTitle">
                   <property name="sizePolicy">
@@ -395,13 +431,7 @@
                    <enum>QFrame::Plain</enum>
                   </property>
                   <layout class="QGridLayout" name="gridLayout">
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
                    <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
                     <number>0</number>
                    </property>
                    <property name="bottomMargin">
@@ -651,194 +681,221 @@
                 <number>3</number>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_6">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
                 <item>
-                 <widget class="QFrame" name="exOptionsButtonsFrame">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
+                 <widget class="QFrame" name="exerciseOptionsFrameContents">
                   <property name="frameShape">
                    <enum>QFrame::NoFrame</enum>
                   </property>
                   <property name="frameShadow">
                    <enum>QFrame::Plain</enum>
                   </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout">
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_9">
                    <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
                     <number>0</number>
                    </property>
                    <property name="bottomMargin">
                     <number>0</number>
                    </property>
                    <item>
-                    <widget class="QPushButton" name="statsButton">
+                    <widget class="QFrame" name="exOptionsButtonsFrame">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
                      </property>
-                     <property name="toolTip">
-                      <string comment="exercise history">Exercise history</string>
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
                      </property>
-                     <property name="text">
-                      <string/>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
                      </property>
-                     <property name="icon">
-                      <iconset resource="../res.qrc">
-                       <normaloff>:/res/images/stats.png</normaloff>:/res/images/stats.png</iconset>
-                     </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>32</width>
-                       <height>32</height>
-                      </size>
-                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QPushButton" name="statsButton">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="toolTip">
+                         <string comment="exercise history">Exercise history</string>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="../res.qrc">
+                          <normaloff>:/res/images/stats.png</normaloff>:/res/images/stats.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>32</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="timedExerciseButton">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="toolTip">
+                         <string>Timed exercise</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="../res.qrc">
+                          <normaloff>:/res/images/clock.png</normaloff>:/res/images/clock.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>32</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="errorWordsButton">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="focusPolicy">
+                         <enum>Qt::NoFocus</enum>
+                        </property>
+                        <property name="toolTip">
+                         <string>Generate text from error words</string>
+                        </property>
+                        <property name="text">
+                         <string notr="true"/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="../res.qrc">
+                          <normaloff>:/res/images/errorWords.png</normaloff>:/res/images/errorWords.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>32</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="reversedTextButton">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="focusPolicy">
+                         <enum>Qt::NoFocus</enum>
+                        </property>
+                        <property name="toolTip">
+                         <string comment="reverse text button">Reverse text</string>
+                        </property>
+                        <property name="text">
+                         <string notr="true"/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="../res.qrc">
+                          <normaloff>:/res/images/reversedExercise.png</normaloff>:/res/images/reversedExercise.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>32</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="timedExerciseButton">
+                    <widget class="QFrame" name="exerciseChecksFrame">
                      <property name="sizePolicy">
-                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
                      </property>
-                     <property name="toolTip">
-                      <string>Timed exercise</string>
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
                      </property>
-                     <property name="icon">
-                      <iconset resource="../res.qrc">
-                       <normaloff>:/res/images/clock.png</normaloff>:/res/images/clock.png</iconset>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
                      </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>32</width>
-                       <height>32</height>
-                      </size>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="errorWordsButton">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="focusPolicy">
-                      <enum>Qt::NoFocus</enum>
-                     </property>
-                     <property name="toolTip">
-                      <string>Generate text from error words</string>
-                     </property>
-                     <property name="text">
-                      <string notr="true"/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../res.qrc">
-                       <normaloff>:/res/images/errorWords.png</normaloff>:/res/images/errorWords.png</iconset>
-                     </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>32</width>
-                       <height>32</height>
-                      </size>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="reversedTextButton">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="focusPolicy">
-                      <enum>Qt::NoFocus</enum>
-                     </property>
-                     <property name="toolTip">
-                      <string comment="reverse text button">Reverse text</string>
-                     </property>
-                     <property name="text">
-                      <string notr="true"/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../res.qrc">
-                       <normaloff>:/res/images/reversedExercise.png</normaloff>:/res/images/reversedExercise.png</iconset>
-                     </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>32</width>
-                       <height>32</height>
-                      </size>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QFrame" name="exerciseChecksFrame">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::NoFrame</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Plain</enum>
-                  </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_2">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QCheckBox" name="correctMistakesCheckBox">
-                     <property name="focusPolicy">
-                      <enum>Qt::NoFocus</enum>
-                     </property>
-                     <property name="text">
-                      <string comment="correct mistakes" extracomment="Whether to correct mistakes while typing">Correct mistakes</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="hideTextCheckBox">
-                     <property name="focusPolicy">
-                      <enum>Qt::NoFocus</enum>
-                     </property>
-                     <property name="text">
-                      <string comment="hide text">Hide exercise text</string>
-                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_2">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QCheckBox" name="correctMistakesCheckBox">
+                        <property name="focusPolicy">
+                         <enum>Qt::NoFocus</enum>
+                        </property>
+                        <property name="text">
+                         <string comment="correct mistakes" extracomment="Whether to correct mistakes while typing">Correct mistakes</string>
+                        </property>
+                        <property name="checked">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="hideTextCheckBox">
+                        <property name="focusPolicy">
+                         <enum>Qt::NoFocus</enum>
+                        </property>
+                        <property name="text">
+                         <string comment="hide text">Hide exercise text</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                   </layout>
@@ -899,46 +956,16 @@
                 <number>3</number>
                </property>
                <layout class="QGridLayout" name="gridLayout_3">
-                <item row="1" column="0">
-                 <widget class="QLabel" name="currentMistakesLabel">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string>Mistakes:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="currentTimeLabel">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string>Time:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QLabel" name="currentMistakesNumber">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string notr="true">0</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0" colspan="2">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item row="4" column="0" colspan="2">
                  <widget class="QLabel" name="stateFrameTitle">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -969,31 +996,88 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="1">
-                 <widget class="QLabel" name="currentTimeNumber">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                <item row="3" column="0">
+                 <widget class="QFrame" name="stateFrameContents">
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
                   </property>
-                  <property name="text">
-                   <string notr="true">0</string>
+                  <property name="frameShadow">
+                   <enum>QFrame::Plain</enum>
                   </property>
+                  <layout class="QGridLayout" name="gridLayout_4">
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="currentMistakesLabel">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Mistakes:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QLabel" name="currentMistakesNumber">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string notr="true">0</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QLabel" name="currentTimeNumber">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string notr="true">0</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="currentTimeLabel">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Time:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <spacer name="verticalSpacer">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
                  </widget>
-                </item>
-                <item row="2" column="0" colspan="2">
-                 <spacer name="verticalSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
                 </item>
                </layout>
               </widget>
@@ -1046,60 +1130,15 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QGridLayout" name="gridLayout_6">
-                <item row="1" column="0" colspan="2">
-                 <widget class="QTimeEdit" name="timedExTime">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="frame">
-                   <bool>false</bool>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                  <property name="readOnly">
-                   <bool>true</bool>
-                  </property>
-                  <property name="buttonSymbols">
-                   <enum>QAbstractSpinBox::NoButtons</enum>
-                  </property>
-                  <property name="keyboardTracking">
-                   <bool>false</bool>
-                  </property>
-                  <property name="displayFormat">
-                   <string notr="true">mm:ss</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="2">
-                 <widget class="QPushButton" name="stopTimedExButton">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="focusPolicy">
-                   <enum>Qt::NoFocus</enum>
-                  </property>
-                  <property name="text">
-                   <string notr="true"/>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../res.qrc">
-                    <normaloff>:/res/images/closeCustom.png</normaloff>:/res/images/closeCustom.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>30</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
                 <item row="3" column="0" colspan="3">
                  <widget class="QLabel" name="trainingPackNameLabel_5">
                   <property name="sizePolicy">
@@ -1131,29 +1170,101 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="0" colspan="3">
-                 <widget class="QLabel" name="timedExCountdownLabel">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                <item row="2" column="0" colspan="3">
+                 <widget class="QFrame" name="timedExControlFrameContents">
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
                   </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>30</pointsize>
-                    <weight>75</weight>
-                    <italic>false</italic>
-                    <bold>true</bold>
-                    <underline>false</underline>
-                   </font>
+                  <property name="frameShadow">
+                   <enum>QFrame::Plain</enum>
                   </property>
-                  <property name="text">
-                   <string notr="true">0</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
+                  <layout class="QGridLayout" name="gridLayout_7">
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item row="1" column="0">
+                    <widget class="QTimeEdit" name="timedExTime">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="frame">
+                      <bool>false</bool>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="readOnly">
+                      <bool>true</bool>
+                     </property>
+                     <property name="buttonSymbols">
+                      <enum>QAbstractSpinBox::NoButtons</enum>
+                     </property>
+                     <property name="keyboardTracking">
+                      <bool>false</bool>
+                     </property>
+                     <property name="displayFormat">
+                      <string notr="true">mm:ss</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QPushButton" name="stopTimedExButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="focusPolicy">
+                      <enum>Qt::NoFocus</enum>
+                     </property>
+                     <property name="text">
+                      <string notr="true"/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../res.qrc">
+                       <normaloff>:/res/images/closeCustom.png</normaloff>:/res/images/closeCustom.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>30</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0" colspan="2">
+                    <widget class="QLabel" name="timedExCountdownLabel">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>30</pointsize>
+                       <weight>75</weight>
+                       <italic>false</italic>
+                       <bold>true</bold>
+                       <underline>false</underline>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string notr="true">0</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -1246,7 +1357,7 @@
             <x>0</x>
             <y>0</y>
             <width>168</width>
-            <height>102</height>
+            <height>108</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1935,7 +2046,7 @@ p, li { white-space: pre-wrap; }
      <normaloff>:/res/images/stats.png</normaloff>:/res/images/stats.png</iconset>
    </property>
    <property name="text">
-    <string>Exercise History</string>
+    <string>Exercise history</string>
    </property>
   </action>
   <action name="actionPrint">
