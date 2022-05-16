@@ -145,9 +145,7 @@ class OpenTyper : public QMainWindow
 		void showExerciseStats(void);
 		void loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
 		void printText(void);
-
-	public slots:
-		void openEditor(void);
+		void openEditor(bool newFile = true);
 };
 
 #endif // OPENTYPER_H

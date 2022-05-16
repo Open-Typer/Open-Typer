@@ -37,13 +37,6 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	ui->keyboardFrame->setParent(ui->remainingTextArea);
 	remainingTextAreaLayout->addWidget(ui->keyboardFrame);
 	remainingTextAreaLayout->setAlignment(ui->keyboardFrame, Qt::AlignHCenter | Qt::AlignBottom);
-	QMenu *openMenu = new QMenu(ui->openButton);
-	QAction *openExerciseAction = openMenu->addAction(tr("Open custom exercise"));
-	QAction *openPackAction = openMenu->addAction(tr("Open custom pack"));
-	connect(openExerciseAction, &QAction::triggered, this, &OpenTyper::openExerciseFromFile);
-	connect(openPackAction, &QAction::triggered, this, &OpenTyper::openPack);
-	ui->openButton->setMenu(openMenu);
-	connect(ui->openButton, &QToolButton::clicked, openExerciseAction, &QAction::triggered);
 	localThemeEngine.setParent(this);
 	client.setErrorDialogs(false);
 	studentUsername = "";
@@ -54,11 +47,33 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	// Connections
 	connect(&client, SIGNAL(disconnected()), this, SLOT(updateStudent()));
 	connect(&client, &monitorClient::exerciseReceived, this, &OpenTyper::loadReceivedExercise);
+	// File menu
+	connect(ui->actionOpenText, &QAction::triggered, this, &OpenTyper::openExerciseFromFile);
+	connect(ui->actionOpenPack, &QAction::triggered, this, &OpenTyper::openPack);
+	connect(ui->actionNewPack, &QAction::triggered, this, [this]() { openEditor(); });
+	connect(ui->actionPrint, &QAction::triggered, ui->printButton, &QPushButton::clicked);
+	// View menu
+	connect(ui->actionViewNavigation, &QAction::toggled, ui->navigationFrame, &QWidget::setVisible);
+	connect(ui->actionViewExOptions, &QAction::toggled, ui->exerciseOptionsFrame, &QWidget::setVisible);
+	connect(ui->actionViewState, &QAction::toggled, ui->stateFrame, &QWidget::setVisible);
+	// Student menu
+	connect(ui->actionLogIn, &QAction::triggered, this, &OpenTyper::openStudentOptions);
+	// Exercise menu
+	connect(ui->actionStats, &QAction::triggered, ui->statsButton, &QPushButton::clicked);
+	connect(ui->actionTimedEx, &QAction::triggered, ui->timedExerciseButton, &QPushButton::clicked);
+	connect(ui->actionErrorWords, &QAction::triggered, ui->errorWordsButton, &QPushButton::clicked);
+	connect(ui->actionReverseText, &QAction::triggered, ui->reversedTextButton, &QPushButton::clicked);
+	connect(ui->actionCorrectMistakes, &QAction::toggled, ui->correctMistakesCheckBox, &QCheckBox::setChecked);
+	connect(ui->correctMistakesCheckBox, &QCheckBox::toggled, ui->actionCorrectMistakes, &QAction::setChecked);
+	connect(ui->actionHideText, &QAction::toggled, ui->hideTextCheckBox, &QCheckBox::setChecked);
+	connect(ui->hideTextCheckBox, &QCheckBox::toggled, ui->actionHideText, &QAction::setChecked);
+	// Settings menu
+	connect(ui->actionPreferences, &QAction::triggered, ui->optionsButton, &QPushButton::clicked);
+	// Widgets
 	connect(ui->inputLabel, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(keyPress(QKeyEvent*)));
 	connect(ui->inputLabel, SIGNAL(keyReleased(QKeyEvent*)), this, SLOT(keyRelease(QKeyEvent*)));
 	connect(ui->optionsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
-	connect(ui->openEditorButton, SIGNAL(clicked()), this, SLOT(openEditor()));
-	connect(ui->studentButton, SIGNAL(clicked()), this, SLOT(openStudentOptions()));
+	connect(ui->openButton, &QPushButton::clicked, this, &OpenTyper::openExerciseFromFile);
 	connect(ui->repeatButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
 	connect(ui->closeCustomExButton, &QPushButton::clicked, this, [this](){ customLevelLoaded = false; repeatLevel(); });
 	connect(ui->nextButton, SIGNAL(clicked()), this, SLOT(nextLevel()));
@@ -80,6 +95,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 		ui->textSeparationLine->setVisible(!checked);
 		updateText();
 	});
+	// Theme engine
 	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
 	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
 	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
@@ -585,15 +601,14 @@ void OpenTyper::openStudentOptions(void)
 void OpenTyper::updateStudent(void)
 {
 	if(client.available())
-	{
-		ui->studentButton->show();
-		ui->studentLabel->show();
-	}
+		ui->actionLogIn->setEnabled(true);
 	else
 	{
-		ui->studentButton->hide();
-		ui->studentLabel->hide();
-		ui->statsButton->setEnabled(!customLevelLoaded && !customConfig && (currentMode == 0));
+		ui->actionLogIn->setEnabled(false);
+		ui->studentLabel->setText("");
+		bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
+		ui->statsButton->setEnabled(enableStats);
+		ui->actionStats->setEnabled(enableStats);
 		return;
 	}
 	QList<QByteArray> response = client.sendRequest("get",{"username"});
@@ -605,7 +620,9 @@ void OpenTyper::updateStudent(void)
 		{
 			QString username = response[1];
 			ui->studentLabel->setText(tr("Logged in as %1").arg(username));
-			ui->statsButton->setEnabled(!customLevelLoaded && !customConfig && (currentMode == 0));
+			bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
+			ui->statsButton->setEnabled(enableStats);
+			ui->actionStats->setEnabled(enableStats);
 			return;
 		}
 	}
@@ -627,7 +644,9 @@ void OpenTyper::updateStudent(void)
 		}
 	}
 	ui->studentLabel->setText(tr("Not logged in."));
-	ui->statsButton->setEnabled(!customLevelLoaded && !customConfig && (currentMode == 0));
+	bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
+	ui->statsButton->setEnabled(enableStats);
+	ui->actionStats->setEnabled(enableStats);
 }
 
 /*! Connected from lessonSelectionList.\n
@@ -1182,7 +1201,6 @@ void OpenTyper::updateCurrentTime(void)
 				timedExStarted = true;
 				levelTimer.start();
 				secLoop->start(500);
-				ui->timedExRemainingLabel->show();
 				ui->timedExTime->show();
 				ui->timedExCountdownLabel->hide();
 			}
@@ -1279,6 +1297,7 @@ void OpenTyper::setColors(void)
 	ui->controlFrame->setStyleSheet(panelStyleSheet);
 	ui->bottomPanel->setStyleSheet(panelStyleSheet);
 	ui->serverFrame->setStyleSheet(panelStyleSheet);
+	ui->menuBar->setStyleSheet(panelStyleSheet);
 	// Set keyboard color
 	QColor keyBorderColor = palette().color(QPalette::Text);
 	keyBorderColor = QColor::fromRgb(keyBorderColor.red() + (128-keyBorderColor.red()),
@@ -1321,16 +1340,24 @@ void OpenTyper::openPack(void)
 /*! Connected from openEditorButton.\n
  * Opens the editor.
  */
-void OpenTyper::openEditor(void)
+void OpenTyper::openEditor(bool newFile)
 {
 	// Close pack file
 	QString oldFileName = parser.fileName();
 	parser.close();
 	// Open editor
-	packEditor *editorWindow = new packEditor(this);
+	packEditor *editorWindow;
+	if(newFile)
+		editorWindow = new packEditor(this);
+	else
+	{
+		if(customConfig)
+			editorWindow = new packEditor(settings.value("main/configfile").toString(), this);
+		else
+			editorWindow = new packEditor(parser.fileName());
+	}
 	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint,true);
 	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint,true);
-	editorWindow->init();
 	editorWindow->setWindowModality(Qt::WindowModal);
 	connect(editorWindow, &QDialog::finished, this, [oldFileName,this]() {
 		// Open pack file
@@ -1427,7 +1454,6 @@ void OpenTyper::initTimedExercise(void)
 			ui->timedExTime->setTime(QTime(timedExHours,timedExMinutes,timedExSeconds));
 			ui->timedExTime->hide();
 			ui->timedExCountdownLabel->show();
-			ui->timedExRemainingLabel->hide();
 			levelFinalInit();
 			levelInProgress = true;
 			levelTimer.start();
@@ -1473,7 +1499,6 @@ void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool inclu
 		ui->timedExTime->setTime(exTime);
 		ui->timedExTime->hide();
 		ui->timedExCountdownLabel->show();
-		ui->timedExRemainingLabel->hide();
 		levelFinalInit(false);
 		levelInProgress = true;
 		levelTimer.start();
