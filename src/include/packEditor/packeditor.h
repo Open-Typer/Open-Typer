@@ -59,12 +59,10 @@ class packEditor : public QDialog
 	Q_OBJECT
 	public:
 		explicit packEditor(QWidget *parent = nullptr);
+		packEditor(QString fileName, QWidget *parent = nullptr);
 		~packEditor();
 		Ui::packEditor *ui;
-		void init(void);
-		void setNewFile(bool value);
-		void setFileName(QString newFileName, QWidget *sourceWidget);
-		void fixDuplicates(void);
+		void openFile(QString fileName, bool readOnly = false);
 		int fileID;
 
 	protected:
@@ -74,7 +72,9 @@ class packEditor : public QDialog
 	private:
 		bool newFile;
 		bool allowClosing;
+		void init(void);
 		void closeAll(void);
+		void fixDuplicates(void);
 		QString defaultFileName;
 
 	signals:

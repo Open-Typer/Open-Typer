@@ -21,13 +21,35 @@
 #include "packEditor/packeditor.h"
 #include "ui_packeditor.h"
 
-/*! Constructs packEditor. */
+/*! Constructs packEditor and creates a new file. */
 packEditor::packEditor(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::packEditor)
 {
+	init();
+	// Create new pack
+	createNewFile();
+}
+
+/*! Constructs packEditor and openes the given file. */
+packEditor::packEditor(QString fileName, QWidget *parent) :
+	QDialog(parent),
+	ui(new Ui::packEditor)
+{
+	init();
+	// Open the given file
+	openFile(fileName);
+}
+
+/*! Sets up UI. */
+void packEditor::init(void)
+{
 	ui->setupUi(this);
 	setWindowState(Qt::WindowMaximized);
+	newFile = false;
+	allowClosing = false;
+	fileID = 0;
+	defaultFileName = tr("Unnamed") + ".typer";
 	// New file action
 	connect(ui->newFileAction,SIGNAL(triggered()),this,SLOT(createNewFile()));
 	// Open file action
@@ -38,34 +60,12 @@ packEditor::packEditor(QWidget *parent) :
 	connect(ui->fileTabWidget,SIGNAL(currentChanged(int)),this,SLOT(tabChanged(int)));
 	// Tab close button
 	connect(ui->fileTabWidget,SIGNAL(tabCloseRequested(int)),this,SLOT(closeTab(int)));
-	// Default values
-	newFile=false;
-	allowClosing = false;
-	fileID=0;
-	defaultFileName = tr("Unnamed") + ".typer";
-	// Create new pack
-	createNewFile();
 }
 
 /*! Destroys the packEditor object. */
 packEditor::~packEditor()
 {
 	delete ui;
-}
-
-/*! Applies settings. Must be run before showing the window. */
-void packEditor::init(void)
-{
-	if(newFile)
-	{
-		createNewFile();
-	}
-}
-
-/*! Enables creation of new file when the editor starts. \see createNewFile() */
-void packEditor::setNewFile(bool value)
-{
-	newFile = value;
 }
 
 /*!
@@ -79,11 +79,12 @@ void packEditor::createNewFile(void)
 	QString newFileName = defaultFileName;
 	packView *newTab = new packView(this,fileID);
 	ui->fileTabWidget->addTab(newTab,newFileName);
+	QTabWidget *tabWidget = ui->fileTabWidget;
+	connect(newTab, &packView::fileNameChanged, tabWidget, [tabWidget, newTab](QString fileName) { tabWidget->setTabText(tabWidget->indexOf(newTab), fileName); });
 	newTab->openFile(newFileName,true,false);
 }
 
 /*!
- * Connected from openFileButton->clicked().\n
  * Opens a file in a new tab.
  */
 void packEditor::openFile(void)
@@ -92,15 +93,22 @@ void packEditor::openFile(void)
 	openDialog.setFileMode(QFileDialog::AnyFile);
 	openDialog.setNameFilter(tr("Open-Typer pack files") + " (*.typer)" + ";;" + tr("All files") + " (*)");
 	if(openDialog.exec())
-	{
-		// Get selected file
-		QString newFileName = openDialog.selectedFiles()[0];
-		fileID++;
-		packView *newTab = new packView(this,fileID);
-		ui->fileTabWidget->addTab(newTab,newFileName);
-		newTab->openFile(newFileName,false,false);
-		ui->fileTabWidget->setCurrentIndex(ui->fileTabWidget->count()-1);
-	}
+		openFile(openDialog.selectedFiles()[0]);
+	fixDuplicates();
+}
+
+/*!
+ * Opens the given file in a new tab.
+ */
+void packEditor::openFile(QString fileName, bool readOnly)
+{
+	fileID++;
+	packView *newTab = new packView(this,fileID);
+	ui->fileTabWidget->addTab(newTab, fileName);
+	QTabWidget *tabWidget = ui->fileTabWidget;
+	connect(newTab, &packView::fileNameChanged, tabWidget, [tabWidget, newTab](QString fileName) { tabWidget->setTabText(tabWidget->indexOf(newTab), fileName); });
+	newTab->openFile(fileName, false, readOnly);
+	ui->fileTabWidget->setCurrentIndex(ui->fileTabWidget->count()-1);
 	fixDuplicates();
 }
 
@@ -109,12 +117,7 @@ void packEditor::openPrebuilt(void)
 {
 	packSelector *packSel = new packSelector(this);
 	connect(packSel, &QDialog::accepted, this, [packSel,this]() {
-		QString newFileName = ":res/configs/" + packSel->selectedConfig();
-		fileID++;
-		packView *newTab = new packView(this,fileID);
-		ui->fileTabWidget->addTab(newTab,newFileName);
-		newTab->openFile(newFileName,false,true);
-		ui->fileTabWidget->setCurrentIndex(ui->fileTabWidget->count()-1);
+		openFile(":res/configs/" + packSel->selectedConfig(), true);
 	});
 	packSel->open();
 }
@@ -141,14 +144,6 @@ void packEditor::fixDuplicates(void)
 			}
 		}
 	}
-}
-
-/*! Used by packView to set the tab text. \see packView */
-void packEditor::setFileName(QString newFileName, QWidget *sourceWidget)
-{
-	ui->fileTabWidget->setTabText(
-		ui->fileTabWidget->indexOf(sourceWidget),
-		newFileName);
 }
 
 /*!
