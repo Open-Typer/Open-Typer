@@ -39,6 +39,7 @@
         <file>res/images/reversedExercise.png</file>
         <file>res/images/print.png</file>
         <file>res/images/edit.png</file>
+        <file>res/images/new.png</file>
         <file>res/images/add.png</file>
         <file>res/images/paper.png</file>
     </qresource>
