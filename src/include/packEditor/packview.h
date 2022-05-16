@@ -40,8 +40,6 @@ namespace Ui {
  * \image html packView.png
  *
  * packEditor uses this widget for tab content.\n
- * packView should be used only in packEditor (it communicates with its tab widget).
- * This might change in future.\n
  *
  * Creating a new file:
  * \code
@@ -92,6 +90,8 @@ class packView : public QWidget
 		void closed();
 		/*! A signal, which is emitted when close operation is rejected in save dialog. */
 		void notClosed();
+		/*! A signal, which is emitted when the file name changes. */
+		void fileNameChanged(QString);
 
 	public slots:
 		void closeFile(void);

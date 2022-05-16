@@ -306,10 +306,7 @@ void packView::updateTabTitle(void)
 	QFile saveQFile(saveFileName);
 	QFileInfo saveQFileInfo(saveQFile.fileName());
 	QString _saveFileName = saveQFileInfo.fileName();
-	if(saved)
-		((packEditor*)(editorWindow))->setFileName(_saveFileName,(QWidget*)this);
-	else
-		((packEditor*)(editorWindow))->setFileName(_saveFileName + "*",(QWidget*)this);
+	emit fileNameChanged(saved ? _saveFileName : _saveFileName + "*");
 }
 
 /*!
