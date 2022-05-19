@@ -81,8 +81,8 @@ void themeEngine::updateThemeList(void)
 	themeMap.insert("id", "light_blue");
 	themeMap.insert("icon", "light_blue.png");
 	themeMap.insert("style", 2);
-	themeMap.insert("bgColor", qRgb(153, 221, 252));
-	themeMap.insert("panelColor", qRgb(230, 246, 255));
+	themeMap.insert("bgColor", qRgb(228, 245, 255));
+	themeMap.insert("panelColor", qRgb(180, 229, 255));
 	themes += themeMap;
 	// Custom
 	themeMap.clear();
