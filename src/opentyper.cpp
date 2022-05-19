@@ -1528,6 +1528,7 @@ void OpenTyper::exportText(void)
 	result["netHitsPerMinute"] = (double) levelHits*(60.0/lastTimeF);
 	result["mistakes"] = levelMistakes;
 	result["penalty"] = errorPenalty;
+	result["time"] = lastTimeF/60.0;
 	exportDialog *dialog = new exportDialog(input, result, recordedMistakes, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
