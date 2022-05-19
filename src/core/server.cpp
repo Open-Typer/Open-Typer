@@ -272,11 +272,11 @@ void monitorServer::sendResponse(void)
 			else
 				clientSocket->write(convertData({"fail"}));
 		}
-		else if((requestList[1] == "monitorResult") && (requestList.count() >= 6))
+		else if((requestList[1] == "monitorResult") && (requestList.count() >= 7))
 		{
 			if(sessions.contains(clientSocket) && recordedMistakes.contains(clientSocket))
 			{
-				emit resultUploaded(dbMgr.findUser(sessions[clientSocket]), recordedMistakes[clientSocket], requestList[2], requestList[3].toInt(), requestList[4].toInt(), requestList[5].toDouble(), requestList[6].toInt());
+				emit resultUploaded(dbMgr.findUser(sessions[clientSocket]), recordedMistakes[clientSocket], requestList[2], requestList[3].toInt(), requestList[4].toInt(), requestList[5].toDouble(), requestList[6].toInt(), requestList[7].toDouble());
 				recordedMistakes[clientSocket].clear();
 				exerciseSockets.removeAll(clientSocket);
 				clientSocket->write(convertData({"ok"}));

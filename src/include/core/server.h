@@ -59,7 +59,7 @@ class monitorServer : public QTcpServer
 
 	signals:
 		/*! A signal, which is emitted, when a student uploads a monitored exercise result. */
-		void resultUploaded(int, QList<QVariantMap>, QString, int, int, double, int);
+		void resultUploaded(int, QList<QVariantMap>, QString, int, int, double, int, double);
 		/*! A signal, which is emitted, when a student aborts a monitored exercise. */
 		void exerciseAborted(int);
 		/*! A signal, which is emitted, when a student logs in/out. */
