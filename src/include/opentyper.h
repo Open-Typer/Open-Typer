@@ -105,7 +105,7 @@ class OpenTyper : public QMainWindow
 		bool spaceNewline;
 		int errorPenalty;
 		QTranslator translator;
-		void refreshAll(bool setLang);
+		void refreshAll(void);
 		void changeMode(int mode, bool enableStudentUpdate = true);
 		int currentMode = 0;
 		int timedExHours, timedExMinutes, timedExSeconds;

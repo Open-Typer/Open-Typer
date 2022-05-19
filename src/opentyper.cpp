@@ -43,7 +43,25 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	studentPassword = "";
 	oldConfigName = "";
 	errorWords.clear();
-	refreshAll(true);
+	// Set language
+	if(settings.value("main/language","").toString() == "")
+		langMgr.setLanguage(-1);
+	else
+		langMgr.setLanguage(langMgr.boxItems.indexOf(settings.value("main/language","").toString()) - 1);
+	ui->retranslateUi(this);
+	// Theme
+	QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
+	ui->levelLabel->setGraphicsEffect(opacityEffect);
+	if(!isVisible())
+		show();
+	loadTheme();
+	refreshAll();
+	// Client
+	updateStudent();
+	// Set mode
+	changeMode(0);
+	// Load text
+	updateText();
 	// Connections
 	connect(&client, SIGNAL(disconnected()), this, SLOT(updateStudent()));
 	connect(&client, &monitorClient::exerciseReceived, this, &OpenTyper::loadReceivedExercise);
@@ -122,21 +140,12 @@ OpenTyper::~OpenTyper()
 }
 
 /*! Initializes the program and loads all settings.
- * \param[in] setLang Whether to set the display language.
  * \see changeMode
  * \see setColors
  * \see repeatLevel
  */
-void OpenTyper::refreshAll(bool setLang)
+void OpenTyper::refreshAll(void)
 {
-	// Set language
-	if(setLang)
-	{
-		if(settings.value("main/language","").toString() == "")
-			langMgr.setLanguage(-1);
-		else
-			langMgr.setLanguage(langMgr.boxItems.indexOf(settings.value("main/language","").toString()) - 1);
-	}
 #ifndef Q_OS_WASM
 	// Start or stop server
 	if(settings.value("server/mode", 2).toInt() == 1)
@@ -179,7 +188,7 @@ void OpenTyper::refreshAll(bool setLang)
 		initialSetup *dialog = new initialSetup;
 		dialog->show();
 		QMetaObject::invokeMethod(this,"hide",Qt::QueuedConnection);
-		connect(dialog, &QDialog::accepted, this, [this]() { show(); refreshAll(true); } );
+		connect(dialog, &QDialog::accepted, this, [this]() { show(); refreshAll(); } );
 		return;
 	}
 	bool packChanged = (configName != oldConfigName);
@@ -190,14 +199,6 @@ void OpenTyper::refreshAll(bool setLang)
 	spaceNewline = settings.value("main/spacenewline","true").toBool();
 	// Error penalty
 	errorPenalty = settings.value("main/errorpenalty","10").toInt();
-	// Class monitor client
-	updateStudent();
-	// Theme
-	if(!isVisible())
-		show();
-	loadTheme();
-	// Set mode
-	changeMode(0);
 	// Load config and start
 	if(packChanged)
 	{
@@ -246,7 +247,6 @@ void OpenTyper::refreshAll(bool setLang)
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
 	}
-	updateText();
 }
 
 /*!
@@ -277,7 +277,7 @@ QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
 		if(!openSuccess && !bufferOpened)
 		{
 			settings.setValue("main/configfile","");
-			refreshAll(false);
+			refreshAll();
 			return QString();
 		}
 	}
@@ -576,7 +576,7 @@ void OpenTyper::openOptions(void)
 	optionsWin->init();
 	optionsWin->open();
 	optionsWin->setWindowModality(Qt::WindowModal);
-	connect(optionsWin, &QDialog::finished, this, [this]() { show(); refreshAll(false); });
+	connect(optionsWin, &QDialog::finished, this, [this]() { show(); refreshAll(); });
 }
 
 /*!
@@ -1269,9 +1269,6 @@ void OpenTyper::setColors(void)
 	QString levelLabelStyleSheet = themeEngine::exerciseTextStyleSheet();
 	ui->levelLabel->setStyleSheet(levelLabelStyleSheet);
 	ui->levelCurrentLineLabel->setStyleSheet(levelLabelStyleSheet);
-	QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
-	opacityEffect->setOpacity(0.5);
-	ui->levelLabel->setGraphicsEffect(opacityEffect);
 	// Set input text color
 	if(!themeEngine::customInputTextColor())
 		localThemeEngine.resetInputTextColor();
@@ -1321,7 +1318,7 @@ void OpenTyper::openPack(void)
 			customConfig=true;
 			settings.setValue("main/customconfig",customConfig);
 			loadConfig(fileName, fileContent);
-			refreshAll(false);
+			refreshAll();
 		}
 	};
 #ifdef Q_OS_WASM
