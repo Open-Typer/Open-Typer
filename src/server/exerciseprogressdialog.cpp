@@ -109,7 +109,7 @@ void exerciseProgressDialog::setupTable(void)
 }
 
 /*! Loads the uploaded result. */
-void exerciseProgressDialog::loadResult(int userID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes)
+void exerciseProgressDialog::loadResult(int userID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes, double time)
 {
 	if(!exerciseStudents.contains(userID))
 		return;
@@ -120,6 +120,7 @@ void exerciseProgressDialog::loadResult(int userID, QList<QVariantMap> recordedM
 	result["netHitsPerMinute"] = netHitsPerMinute;
 	result["mistakes"] = mistakes;
 	result["penalty"] = settings.value("main/errorpenalty","10").toInt();
+	result["time"] = time;
 	results[userID] = result;
 	inputTexts[userID] = inputText;
 	recordedMistakeLists[userID] = recordedMistakes;
