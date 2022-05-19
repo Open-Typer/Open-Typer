@@ -1128,6 +1128,8 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	msgBox->setMistakes(levelMistakes);
 	msgBox->setWindowModality(Qt::WindowModal);
 	connect(msgBox, &QDialog::accepted, this, [this]() {
+		changeMode(0);
+		ui->exerciseChecksFrame->setEnabled(false);
 		ui->exportButton->show();
 		preview = true;
 		// Load saved text
@@ -1147,12 +1149,12 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		blockInput = true;
 	});
 	connect(msgBox, &QDialog::rejected, this, [this]() {
+		changeMode(0);
 		if(customLevelLoaded)
 			levelFinalInit();
 		else
 			repeatLevel();
 	});
-	connect(msgBox, &QDialog::finished, this, [this]() { changeMode(0); });
 	msgBox->open();
 }
 
