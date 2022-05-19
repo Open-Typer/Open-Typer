@@ -73,15 +73,15 @@ exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 	textFont.setPointSize(12);
 	ui->exportText->setFont(textFont);
 	// Fill table
-	ui->exportTable->setRowCount(8);
+	ui->exportTable->setRowCount(9);
 	ui->exportTable->setColumnCount(4);
 	ui->exportTable->setSpan(0, 0, 1, 4);
 	ui->exportTable->setSpan(2, 2, 2, 1);
 	ui->exportTable->setSpan(2, 3, 2, 1);
 	ui->exportTable->setSpan(4, 2, 2, 1);
 	ui->exportTable->setSpan(4, 3, 2, 1);
-	ui->exportTable->setSpan(6, 2, 2, 1);
-	ui->exportTable->setSpan(6, 3, 2, 1);
+	ui->exportTable->setSpan(6, 2, 3, 1);
+	ui->exportTable->setSpan(6, 3, 3, 1);
 	updateTable();
 	// Connections
 	connect(ui->printButton, &QToolButton::clicked, this, &exportDialog::printResult);
@@ -150,11 +150,14 @@ void exportDialog::updateTable(void)
 	// Number of net hits
 	ui->exportTable->setItem(6, 0, new QTableWidgetItem(tr("Number of net hits")));
 	ui->exportTable->setItem(6, 1, new QTableWidgetItem(QString::number(performanceResult["netHits"].toInt())));
+	// Time
+	ui->exportTable->setItem(7, 0, new QTableWidgetItem(tr("Time (min)", "How many minutes the exercise took")));
+	ui->exportTable->setItem(7, 1, new QTableWidgetItem(QString::number(performanceResult["time"].toDouble(), 'g', 2)));
 	// Number of net hits per minute
 	item = new QTableWidgetItem(tr("Number of net hits per minute"));
 	item->setFont(boldFont2);
-	ui->exportTable->setItem(7, 0, item);
-	ui->exportTable->setItem(7, 1, new QTableWidgetItem(QString::number(performanceResult["netHitsPerMinute"].toDouble())));
+	ui->exportTable->setItem(8, 0, item);
+	ui->exportTable->setItem(8, 1, new QTableWidgetItem(QString::number(performanceResult["netHitsPerMinute"].toDouble())));
 	// Inaccuracy
 	ui->exportTable->setItem(2, 2, new QTableWidgetItem(tr("Inaccuracy")));
 	double inaccuracy = (performanceResult["mistakes"].toInt() * 100.0) / (double) performanceResult["grossHits"].toInt();
