@@ -886,6 +886,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				keyText = "\n";
 				convertedKeyText = "";
 				currentLine++;
+				ignoreMistakeLabelAppend = false;
 				updateText();
 				if((currentMode == 1) && (currentLine >= lineCount-1))
 				{
@@ -896,7 +897,6 @@ void OpenTyper::keyPress(QKeyEvent *event)
 					linePos = -1;
 					deadKeys=0;
 					mistake=false;
-					ignoreMistakeLabelAppend=false;
 					mistakeLabelHtml = "";
 					if(ui->hideTextCheckBox->isChecked())
 						ui->mistakeLabel->setHtml(mistakeTextHtml);
