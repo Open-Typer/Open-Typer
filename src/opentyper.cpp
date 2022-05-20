@@ -29,6 +29,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 {
 	ui->setupUi(this);
 	QGridLayout *inputLabelLayout = new QGridLayout(ui->inputLabel);
+	ui->mistakeLabel->setHorizontalAdjust(false);
 	ui->mistakeLabel->setParent(ui->inputLabel);
 	inputLabelLayout->addWidget(ui->mistakeLabel);
 	inputLabelLayout->setContentsMargins(0,0,0,0);
@@ -844,6 +845,11 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		(((displayLevel[displayPos] != '\n') || spaceNewline) && (keyText == level[levelPos]))) && !mistake);
 	if(correctChar || !ui->correctMistakesCheckBox->isChecked())
 	{
+		if(!mistake && ignoreMistakeLabelAppend)
+		{
+			mistakeLabelHtml += "_";
+			mistakeTextHtml += "_";
+		}
 		if(event->key() == Qt::Key_Backspace)
 		{
 			input = input.remove(input.count()-1, 1);
@@ -946,11 +952,6 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			deadKeys = 0;
 			if(event->key() == Qt::Key_Backspace)
 			{
-				if(!ignoreMistakeLabelAppend)
-				{
-					mistakeLabelHtml += "_";
-					mistakeTextHtml += "_";
-				}
 				mistake=false;
 				ignoreMistakeLabelAppend=true;
 			}
@@ -973,6 +974,12 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				currentMistake["type"] = "change";
 				recordedMistakes += currentMistake;
 				QString errorAppend;
+				if(ignoreMistakeLabelAppend)
+				{
+					QTextCursor cursor = ui->mistakeLabel->textCursor();
+					cursor.deletePreviousChar();
+					ui->mistakeLabel->setTextCursor(cursor);
+				}
 				if(keyText == " ")
 					errorAppend = "_";
 				else if(keyText == "\n")
@@ -980,9 +987,9 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				else
 					errorAppend = convertedKeyText;
 				if(ui->hideTextCheckBox->isChecked())
-					ui->inputLabel->setHtml(input.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>") + "<span style='color: red';'>" + errorAppend + "</span>");
+					ui->inputLabel->setHtml(input.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>") + "<span style='color: red;'>" + errorAppend + "</span>");
 				else
-					ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>") + "<span style='color: red';'>" + errorAppend + "</span>");
+					ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>") + "<span style='color: red;'>" + errorAppend + "</span>");
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 				mistake=true;
@@ -1003,11 +1010,19 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		else
 			ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>"));
 	}
+	QString mistakeLabelFinal;
 	if(ui->hideTextCheckBox->isChecked())
-		ui->mistakeLabel->setHtml(mistakeTextHtml);
+		mistakeLabelFinal = mistake ? mistakeTextHtml + "&nbsp;" : mistakeTextHtml;
 	else
-		ui->mistakeLabel->setHtml(mistakeLabelHtml);
-	ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+		mistakeLabelFinal = mistake ? mistakeLabelHtml + "&nbsp;" : mistakeLabelHtml;
+	if(!mistake && ignoreMistakeLabelAppend)
+		mistakeLabelFinal += "_";
+	ui->mistakeLabel->setHtml(mistakeLabelFinal);
+	ui->mistakeLabel->setFixedWidth(ui->inputLabel->width());
+	if(mistake)
+		ui->mistakeLabel->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
+	else
+		ui->mistakeLabel->moveCursor(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
 	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 	ui->typingSpace->ensureWidgetVisible(ui->inputLabel);
 	if(((displayPos >= displayLevel.count()) && ui->correctMistakesCheckBox->isChecked()) || (currentLine >= lineCount+1))
@@ -1137,6 +1152,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		// Load saved text
 		ui->inputLabel->setHtml(inputTextHtml);
 		ui->mistakeLabel->setHtml(mistakeTextHtml);
+		ui->mistakeLabel->setFixedWidth(ui->mistakeLabel->document()->size().width());
 		// Move cursor to the end
 		ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
 		ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
