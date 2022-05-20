@@ -68,7 +68,6 @@ class serverManager : public QWidget
 	private slots:
 		bool init(void);
 		void openUserManager(void);
-		void changeSchoolName(void);
 		void addClass(void);
 		void openClass(bool auth = true);
 		void openDetails(int studentID);

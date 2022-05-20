@@ -37,7 +37,6 @@ serverManager::serverManager(QWidget *parent) :
 			expand();
 	});
 	connect(ui->usersButton, &QToolButton::clicked, this, &serverManager::openUserManager);
-	connect(ui->changeSchoolNameButton, &QToolButton::clicked, this, &serverManager::changeSchoolName);
 	connect(ui->addClassButton, &QToolButton::clicked, this, &serverManager::addClass);
 	connect(ui->classBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &serverManager::openClass);
 	connect(ui->removeClassButton, &QToolButton::clicked, this, &serverManager::removeClass);
@@ -54,15 +53,6 @@ serverManager::~serverManager()
 bool serverManager::init(void)
 {
 	bool ret = true;
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	if(settings.contains("server/schoolname"))
-	{
-		if(settings.value("server/schoolname").toString() == "")
-			settings.setValue("server/schoolname", "?");
-		ui->schoolName->setText(settings.value("server/schoolname").toString());
-	}
-	else
-		ui->schoolName->setText("");
 	if(dbMgr.administratorIDs().count() == 0)
 	{
 		serverSetup *dialog = new serverSetup(this);
@@ -152,37 +142,6 @@ void serverManager::expand(void)
 	expanded = true;
 	ui->classControlsFrame->show();
 	emit widgetExpanded();
-}
-
-/*! Allows the user to change school name. */
-void serverManager::changeSchoolName(void)
-{
-	ui->schoolName->setReadOnly(false);
-	ui->schoolName->setFocus();
-	ui->schoolName->setSelection(0, ui->schoolName->text().count());
-	ui->changeSchoolNameButton->setEnabled(false);
-	connect(qApp, &QApplication::focusChanged, this, [this](QWidget *old) {
-		if(old == ui->schoolName)
-		{
-			ui->schoolName->setReadOnly(true);
-			if(ui->schoolName->text() != "")
-			{
-				adminSelector *selectDialog = new adminSelector(this);
-				selectDialog->setWindowModality(Qt::WindowModal);
-				selectDialog->open();
-				connect(selectDialog, &QDialog::finished, this, [selectDialog, this]() {
-					if((selectDialog->result() == QDialog::Accepted) && dbMgr.auth(selectDialog->userID))
-					{
-						QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-						settings.setValue("server/schoolname", ui->schoolName->text());
-					}
-					ui->changeSchoolNameButton->setEnabled(true);
-					init();
-				});
-			}
-		}
-		qApp->disconnect(this);
-	});
 }
 
 /*! Opens classEdit and creates a class. */

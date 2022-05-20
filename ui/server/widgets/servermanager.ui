@@ -86,46 +86,17 @@
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="changeSchoolNameButton">
-           <property name="toolTip">
-            <string>Change school name</string>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
-           <property name="text">
-            <string>Change school name</string>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="schoolName">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: transparent;</string>
-           </property>
-           <property name="maxLength">
-            <number>64</number>
-           </property>
-           <property name="frame">
-            <bool>false</bool>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
+          </spacer>
          </item>
          <item>
           <widget class="QComboBox" name="classBox">
@@ -142,6 +113,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="editClassButton">
+           <property name="toolTip">
+            <string>Edit the class</string>
+           </property>
            <property name="text">
             <string notr="true"/>
            </property>
@@ -182,6 +156,9 @@
       </item>
       <item>
        <widget class="QToolButton" name="removeClassButton">
+        <property name="toolTip">
+         <string>Remove the class</string>
+        </property>
         <property name="text">
          <string notr="true"/>
         </property>

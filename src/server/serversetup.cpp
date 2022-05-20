@@ -28,11 +28,8 @@ serverSetup::serverSetup(QWidget *parent) :
 {
 	ui->setupUi(this);
 	ui->gridLayout->setSizeConstraint(QLayout::SetFixedSize);
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	ui->schoolNameEdit->setText(settings.value("server/schoolname", "").toString());
 	verify();
 	// Connections
-	connect(ui->schoolNameEdit,&QLineEdit::textChanged,this,&serverSetup::verify);
 	connect(ui->adminNameEdit,&QLineEdit::textChanged,this,&serverSetup::verify);
 	connect(ui->adminPasswordEdit,&QLineEdit::textChanged,this,&serverSetup::verify);
 	connect(ui->repeatPasswordEdit,&QLineEdit::textChanged,this,&serverSetup::verify);
@@ -51,9 +48,6 @@ serverSetup::~serverSetup()
 void serverSetup::verify(void)
 {
 	ui->okButton->setEnabled(false);
-	// Check school name
-	if(ui->schoolNameEdit->text() == "")
-		return;
 	// Check administrator name
 	if(ui->adminNameEdit->text() == "")
 		return;
@@ -73,7 +67,6 @@ void serverSetup::verify(void)
 void serverSetup::save(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	settings.setValue("server/schoolname", ui->schoolNameEdit->text());
 	dbMgr.addUser(ui->adminNameEdit->text(), databaseManager::Role_Administrator, ui->adminPasswordEdit->text());
 	accept();
 }
