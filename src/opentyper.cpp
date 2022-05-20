@@ -1553,9 +1553,12 @@ void OpenTyper::printText(void)
 		QFont font = ui->levelLabel->font();
 		painter.setFont(font);
 		QTextDocument *document = ui->levelLabel->document()->clone(this);
-		document->setHtml(QString("<body><u>%1 / %2 / %3</u><br><br>%4</body>").arg(configParser::lessonTr(publicPos::currentLesson),
-			configParser::sublessonName(publicPos::currentSublesson),
-			configParser::exerciseTr(publicPos::currentExercise),
+		QString title = "";
+		if(!customLevelLoaded)
+			title = QString("<u>%1 / %2 / %3</u><br><br>").arg(configParser::lessonTr(publicPos::currentLesson),
+				configParser::sublessonName(publicPos::currentSublesson),
+				configParser::exerciseTr(publicPos::currentExercise));
+		document->setHtml(QString("<body>%1%2</body>").arg(title,
 			displayLevel.toHtmlEscaped().replace("\n", "<br>")));
 		font.setPointSize(50);
 		document->setDefaultFont(font);
