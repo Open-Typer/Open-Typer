@@ -122,11 +122,13 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	secLoop = new QTimer(this);
 	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
 	secLoop->start(500);
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	ui->printButton->hide();
+#else
 	// Check for updates
 	if(settings.value("main/updatechecks", true).toBool())
 		new Updater();
-#endif
+#endif // Q_OS_WASM
 }
 
 /*! Destroys the Open-Typer object. */
