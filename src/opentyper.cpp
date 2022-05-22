@@ -1044,11 +1044,13 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	{
 		if(currentMode == 1)
 		{
+			QMap<int, QList<QVariantMap>> attempts;
 			QString newText = "";
+			int minValue = -1, minId = -1;
 			if(displayLevel.count() > 0)
 			{
-				int pos = 0;
-				for(int i=0; i < levelTimer.elapsed()/1000.0 * 30; i++)
+				int pos = 0, count = levelTimer.elapsed()/1000.0 * 10;
+				for(int i=0; i < count; i++)
 				{
 					newText += displayLevel[pos];
 					pos++;
@@ -1057,20 +1059,40 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 						newText.remove(newText.count()-1, 1);
 						pos = 0;
 					}
+					if((i % std::max(displayLevel.count(), input.count()) == 0) || (i == displayLevel.count()-1) || (i+1 >= count))
+					{
+						attempts[i] = stringUtils::findMistakes(newText, input, recordedCharacters, &totalHits, &errorWords);
+						if((minValue == -1) || (attempts[i].count() < minValue))
+						{
+							minValue = attempts[i].count();
+							minId = i;
+						}
+					}
 				}
+				if(minId == -1)
+					recordedMistakes = QList<QVariantMap>();
+				else
+					recordedMistakes = attempts[minId];
 			}
-			displayLevel = newText;
+			else
+				recordedMistakes = QList<QVariantMap>();
 		}
-		recordedMistakes = stringUtils::findMistakes(displayLevel, input, recordedCharacters, &totalHits, &errorWords);
+		else
+			recordedMistakes = stringUtils::findMistakes(displayLevel, input, recordedCharacters, &totalHits, &errorWords);
 		QList<QVariantMap> mistakesToRemove;
+		levelMistakes = 0;
 		for(int i=0; i < recordedMistakes.count(); i++)
 		{
 			if(recordedMistakes[i]["pos"].toInt() >= input.count())
 				mistakesToRemove += recordedMistakes[i];
+			else
+			{
+				if(!(recordedMistakes[i].contains("disable") && recordedMistakes[i]["disable"].toBool()))
+					levelMistakes++;
+			}
 		}
 		for(int i=0; i < mistakesToRemove.count(); i++)
 			recordedMistakes.removeAll(mistakesToRemove[i]);
-		levelMistakes = recordedMistakes.count();
 		QMap<int, QVariantMap*> mistakesMap;
 		for(int i=0; i < recordedMistakes.count(); i++)
 			mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
