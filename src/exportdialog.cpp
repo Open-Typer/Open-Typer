@@ -57,7 +57,9 @@ exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 			QString append = QString(line[i2]).toHtmlEscaped().replace(" ", "&nbsp;");
 			if(mistakesMap.contains(pos))
 			{
-				lineMistakes++;
+				QVariantMap* currentMistake = mistakesMap[pos];
+				if(!(currentMistake->contains("disable") && currentMistake->value("disable").toBool()))
+					lineMistakes++;
 				finalText += "<u>" + append + "</u>";
 			}
 			else
