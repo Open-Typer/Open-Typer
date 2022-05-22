@@ -159,7 +159,7 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 	QList<QVariantMap> out;
 	auto lcs = longestCommonSubsequence(source, target);
 	int sourcePos = 0, targetPos = 0;
-	int count = std::max(lcs.count(), target.count());
+	int count = std::max(source.count(), target.count());
 	for(int i=0; i < count; i++)
 	{
 		QVariant subseq, sourceSubseq, targetSubseq;
@@ -232,6 +232,42 @@ QList<QVariantMap> stringUtils::compareStrings(QString source, QString target, Q
 	return compareLists(sourceList, targetList, recordedCharacters, hits, inputPos);
 }
 
+/*! Splits each word by punctuation marks. */
+QStringList stringUtils::splitWordsByPunct(QStringList source)
+{
+	QStringList out;
+	for(int i=0; i < source.count(); i++)
+	{
+		QString part = "";
+		bool ignore = (source[i].count() > 0);
+		for(int j=0; j < source[i].count(); j++)
+		{
+			if(source[i][j].isPunct())
+			{
+				if(!ignore)
+					out += part;
+				ignore = true;
+				part = "";
+				if(j == 0)
+					out += " ";
+				out += QString(source[i][j]);
+				if(j+1 == source[i].count())
+					out += " ";
+			}
+			else
+			{
+				part += source[i][j];
+				ignore = false;
+			}
+		}
+		if(ignore)
+			ignore = false;
+		else
+			out += part;
+	}
+	return out;
+}
+
 /*! Compares input text with exercise text and finds mistakes. */
 QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits, QStringList *errorWords)
 {
@@ -248,12 +284,14 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			exerciseWords += "\n";
 		exerciseWords += exerciseLines[i].split(' ');
 	}
+	exerciseWords = splitWordsByPunct(exerciseWords);
 	for(i=0; i < inputLines.count(); i++)
 	{
 		if(i > 0)
 			inputWords += "\n";
 		inputWords += inputLines[i].split(' ');
 	}
+	inputWords = splitWordsByPunct(inputWords);
 	// Compare word lists
 	QList<QVariant> sourceList, targetList;
 	for(i=0; i < exerciseWords.count(); i++)
@@ -284,10 +322,18 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			nextWord = inputWords[inputWords.count()-1];
 		if((i > 0) && (inputWords[i] != "\n") && (nextWord != "\n"))
 		{
-			if(pos < recordedCharacters.count())
+			if((inputWords[i] != " ") && (pos < recordedCharacters.count()))
 				hits += recordedCharacters[pos].second;
 			pos++;
 		}
+		if(inputWords[i][0].isPunct())
+			pos--;
+		else if((i > 0) && (inputWords[i-1] == " "))
+			pos--;
+		if(inputWords[i] == " ")
+			pos--;
+		else if(((i > 0) && inputWords[i-1][0].isPunct()) && !inputWords[i][0].isPunct())
+			pos--;
 		if(differences.contains(i))
 		{
 			if(errorWords)
@@ -302,7 +348,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 				for(int i2=0; i2 < diff.count(); i2++)
 				{
 					if((lastMistakePos != -1) && (diff[i2]["pos"].toInt() / 6 == lastMistakePos / 6))
-						toRemove += diff[i2];
+						diff[i2].insert("disable", true);
 					else
 						lastMistakePos = diff[i2]["pos"].toInt();
 				}
@@ -312,6 +358,8 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 				for(int i2=0; i2 < diff.count(); i2++)
 				{
 					QVariantMap currentMap = diff[i2];
+					if((currentMap["type"].toString() == "deletion") && (currentMap["previous"].toString() == " "))
+						currentMap["pos"] = currentMap["pos"].toInt() - 1;
 					currentMap["pos"] = wordStart + currentMap["pos"].toInt();
 					if(currentMap["type"].toString() != "deletion")
 						pos--;
@@ -322,16 +370,59 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			else if(differences[i]->value("type").toString() == "deletion")
 			{
 				QVariantMap currentMap = *differences[i];
-				currentMap["pos"] = pos;
+				currentMap["pos"] = pos > 0 && !inputWords[i][0].isPunct() ? pos-1 : pos;
 				out += currentMap;
 				pos += inputWords[i].count();
 			}
 			else if(differences[i]->value("type").toString() == "addition")
 			{
-				QVariantMap currentMap = *differences[i];
-				currentMap["pos"] = pos;
-				out += currentMap;
-				pos += inputWords[i].count();
+				int k = i, previousPos = -1;
+				bool disable = false;
+				do {
+					if(k > i)
+					{
+						pos++;
+						if(inputWords[k][0].isPunct())
+							pos--;
+						else if((k > 0) && (inputWords[k-1] == " "))
+							pos--;
+						if(inputWords[k] == " ")
+							pos--;
+						else if(((k > 0) && inputWords[k-1][0].isPunct()) && !inputWords[k][0].isPunct())
+							pos--;
+						for(int l=0; l < pos - previousPos; l++)
+						{
+							QVariantMap currentMap = *differences[k];
+							currentMap["pos"] = previousPos+l;
+							currentMap["disable"] = disable;
+							disable = true;
+							out += currentMap;
+						}
+					}
+					if(inputWords[k].count() == 0)
+					{
+						QVariantMap currentMap = *differences[k];
+						currentMap["pos"] = pos;
+						currentMap["disable"] = disable;
+						disable = true;
+						out += currentMap;
+					}
+					else
+					{
+						for(int j=0; j < inputWords[k].count(); j++)
+						{
+							QVariantMap currentMap = *differences[k];
+							currentMap["pos"] = pos;
+							currentMap["disable"] = disable;
+							disable = true;
+							out += currentMap;
+							pos++;
+						}
+					}
+					previousPos = pos;
+					k++;
+				} while((differences.contains(k)) && (differences[k]->value("type").toString() == "addition"));
+				i = k-1;
 				// TODO: Should we count hits in added words?
 			}
 		}

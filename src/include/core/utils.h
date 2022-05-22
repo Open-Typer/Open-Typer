@@ -43,6 +43,7 @@ class stringUtils
 	private:
 		static int lcsLen(QList<QVariant> source, QList<QVariant> target);
 		static int lcsLen(QList<QVariant> source, QList<QVariant> target, QMap<int, QMap<int, int>> *lcsTable);
+		static QStringList splitWordsByPunct(QStringList source);
 };
 
 /*! \brief The fileUtils class contains functions for file or directory paths. */
