@@ -874,11 +874,11 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				displayPos--;
 				absolutePos--;
 				linePos--;
-				plainText = QTextDocumentFragment::fromHtml(inputTextHtml).toPlainText();
-				inputTextHtml = plainText.remove(plainText.count()-1, 1).toHtmlEscaped().replace(" ", "&nbsp;");
-				inputTextHtml.replace("\n","<br>");
 				recordedCharacters.remove(recordedCharacters.count()-1);
 			}
+			plainText = QTextDocumentFragment::fromHtml(inputTextHtml).toPlainText();
+			inputTextHtml = plainText.remove(plainText.count()-1, 1).toHtmlEscaped().replace(" ", "&nbsp;");
+			inputTextHtml.replace("\n","<br>");
 		}
 		else
 		{
