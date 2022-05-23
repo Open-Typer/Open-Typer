@@ -1100,9 +1100,10 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		for(int i=0; i < input.count(); i++)
 		{
 			if(mistakesMap.contains(i))
-				mistakeTextHtml += "<u>&nbsp;</u>";
-			else
-				mistakeTextHtml += input[i] == '\n' ? "<br>" : "&nbsp;";
+				mistakeTextHtml += "<u>";
+			mistakeTextHtml += input[i] == '\n' ? "<br>" : "&nbsp;";
+			if(mistakesMap.contains(i))
+				mistakeTextHtml += "</u>";
 		}
 		levelHits = std::max(0, totalHits - (levelMistakes * errorPenalty));
 		mistakeTextHtml.replace("\n","<br>");
