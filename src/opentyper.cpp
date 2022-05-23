@@ -1285,6 +1285,7 @@ void OpenTyper::updateFont(void)
 	ui->levelLabel->setFont(newFont);
 	ui->inputLabel->setFont(newFont);
 	ui->mistakeLabel->setFont(mistakeLabelFont);
+	ui->mistakeLabel->setFixedWidth(ui->mistakeLabel->document()->size().width());
 	int scrollBarWidth = ui->typingSpace->verticalScrollBar()->size().width();
 	QTextDocument *tmpDoc = ui->levelCurrentLineLabel->document()->clone(this);
 	ui->currentLineArea->setFixedSize(tmpDoc->size().toSize() + QSize(scrollBarWidth, 0));
