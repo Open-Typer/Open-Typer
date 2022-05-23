@@ -254,7 +254,7 @@ void monitorServer::sendResponse(void)
 				else
 				{
 					QVariantMap map;
-					for(int i=2; i < (requestList.count()-2)/2; i++)
+					for(int i=2; i < requestList.count(); i++)
 					{
 						// Key
 						QString key = requestList[i];
