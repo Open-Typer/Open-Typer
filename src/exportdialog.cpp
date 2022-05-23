@@ -45,21 +45,22 @@ exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 	int pos = 0;
 	for(int i=0; i < lines.count(); i++)
 	{
-		if(i > 0)
-		{
-			pos++;
-			finalText += "<br>";
-		}
 		QString line = lines[i];
 		int lineMistakes = 0;
-		for(int i2=0; i2 < line.count(); i2++)
+		for(int i2=0; i2 <= line.count(); i2++)
 		{
-			QString append = QString(line[i2]).toHtmlEscaped().replace(" ", "&nbsp;");
+			QString append;
+			if(i2 < line.count())
+				append = QString(line[i2]).toHtmlEscaped().replace(" ", "&nbsp;");
+			else
+				append = "";
 			if(mistakesMap.contains(pos))
 			{
 				QVariantMap* currentMistake = mistakesMap[pos];
 				if(!(currentMistake->contains("disable") && currentMistake->value("disable").toBool()))
 					lineMistakes++;
+				if(append == "")
+					append.prepend("&nbsp;");
 				finalText += "<u>" + append + "</u>";
 			}
 			else
@@ -67,6 +68,7 @@ exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 			pos++;
 		}
 		finalText += QString("&nbsp;").repeated(longestLineLength - line.count() + 4) + QString("/").repeated(lineMistakes);
+		finalText += "<br>";
 	}
 	exportHtml = finalText;
 	ui->exportText->setHtml(exportHtml);
