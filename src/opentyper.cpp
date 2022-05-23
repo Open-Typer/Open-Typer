@@ -1336,7 +1336,7 @@ void OpenTyper::setColors(void)
 	QString panelStyleSheet = themeEngine::panelStyleSheet();
 	ui->controlFrame->setStyleSheet(panelStyleSheet);
 	ui->bottomPanel->setStyleSheet(panelStyleSheet);
-	ui->serverFrame->setStyleSheet(panelStyleSheet);
+	ui->serverFrame->setStyleSheet(qApp->styleSheet());
 	ui->menuBar->setStyleSheet(panelStyleSheet);
 	// Set keyboard color
 	QColor keyBorderColor = palette().color(QPalette::Text);
