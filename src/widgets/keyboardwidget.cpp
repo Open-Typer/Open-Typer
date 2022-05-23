@@ -38,6 +38,7 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	keyboardLayout->setContentsMargins(0,0,0,0);
 	keyboardFrame->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
 	mainLayout->addWidget(keyboardFrame);
+	keyboardFrame->installEventFilter(this);
 	keys.clear();
 	keyLabels.clear();
 	keyMap.clear();
@@ -603,4 +604,17 @@ void keyboardWidget::changeEvent(QEvent *event)
 	}
 	else
 		QWidget::changeEvent(event);
+}
+
+/*! Overrides QFrame::eventFilter(). */
+bool keyboardWidget::eventFilter(QObject *obj, QEvent *event)
+{
+	if(obj == keyboardFrame)
+	{
+		if(event->type() == QEvent::Show)
+			emit visibilityChanged(true);
+		else if(event->type() == QEvent::Hide)
+			emit visibilityChanged(false);
+	}
+	return QFrame::eventFilter(obj, event);
 }

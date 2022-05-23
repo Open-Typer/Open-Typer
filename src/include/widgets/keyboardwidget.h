@@ -92,6 +92,11 @@ class keyboardWidget : public QFrame
 
 	protected:
 		void changeEvent(QEvent *event);
+		bool eventFilter(QObject *obj, QEvent *event);
+
+	signals:
+		/*! A signal, which is emitted when the keyboard visibility changes. */
+		void visibilityChanged(bool);
 
 	public slots:
 		void toggleKeyboard(void);
