@@ -57,8 +57,6 @@ OpenTyper::OpenTyper(QWidget *parent) :
 		show();
 	loadTheme();
 	refreshAll();
-	// Client
-	updateStudent();
 	// Set mode
 	changeMode(0);
 	// Load text
@@ -250,6 +248,8 @@ void OpenTyper::refreshAll(void)
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
 	}
+	// Client
+	updateStudent();
 }
 
 /*!
