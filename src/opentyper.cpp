@@ -1100,7 +1100,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		for(int i=0; i < input.count(); i++)
 		{
 			if(mistakesMap.contains(i))
-				mistakeTextHtml += "<u>";
+				mistakeTextHtml += input[i] == '\n' ? "<u>&nbsp;</u>" : "<u>";
 			mistakeTextHtml += input[i] == '\n' ? "<br>" : "&nbsp;";
 			if(mistakesMap.contains(i))
 				mistakeTextHtml += "</u>";
