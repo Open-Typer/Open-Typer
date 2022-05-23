@@ -921,7 +921,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 					ignoreMistakeLabelAppend=false;
 				else
 				{
-					QString mistakeLabelAppend = "<span style='color: rgba(0,0,0,0)'>" + keyText + "</span>";
+					QString mistakeLabelAppend = keyText == "\n" ? "<br>" : "&nbsp;";
 					mistakeTextHtml += mistakeLabelAppend;
 					mistakeLabelHtml += mistakeLabelAppend;
 				}
@@ -1100,9 +1100,9 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		for(int i=0; i < input.count(); i++)
 		{
 			if(mistakesMap.contains(i))
-				mistakeTextHtml += "_";
+				mistakeTextHtml += "<u>&nbsp;</u>";
 			else
-				mistakeTextHtml += "<span style='color: rgba(0,0,0,0)'>" + QString(input[i]).toHtmlEscaped().replace(" ", "&nbsp;") + "</span>";
+				mistakeTextHtml += input[i] == '\n' ? "<br>" : "&nbsp;";
 		}
 		levelHits = std::max(0, totalHits - (levelMistakes * errorPenalty));
 		mistakeTextHtml.replace("\n","<br>");
