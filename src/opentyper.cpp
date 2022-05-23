@@ -112,6 +112,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 		ui->textSeparationLine->setVisible(!checked);
 		updateText();
 	});
+	connect(ui->keyboardFrame, &keyboardWidget::visibilityChanged, this, &OpenTyper::updateFont);
 	// Theme engine
 	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
 	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
