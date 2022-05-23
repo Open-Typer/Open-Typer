@@ -967,6 +967,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 					if(recordedMistakes[i]["pos"] == absolutePos)
 						mistakesToRemove += recordedMistakes[i];
 				}
+				levelMistakes -= mistakesToRemove.count();
 				for(int i=0; i < mistakesToRemove.count(); i++)
 					recordedMistakes.removeAll(mistakesToRemove[i]);
 				QVariantMap currentMistake;
