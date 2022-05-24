@@ -843,7 +843,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	QString convertedKeyText = keyText.toHtmlEscaped().replace(" ", "&nbsp;");
 	convertedKeyText.replace(" ", "&nbsp;");
 	bool correctChar = (( ((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) ||
-		(((displayLevel[displayPos] != '\n') || spaceNewline) && (keyText == level[levelPos]))) && !mistake);
+		(((displayLevel[displayPos] != '\n') || (spaceNewline && !ui->correctMistakesCheckBox->isChecked())) && (keyText == level[levelPos]))) && !mistake);
 	if(correctChar || !ui->correctMistakesCheckBox->isChecked())
 	{
 		if(!mistake && ignoreMistakeLabelAppend)
