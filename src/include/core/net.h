@@ -45,6 +45,8 @@ class monitorClient : public QObject
 		~monitorClient();
 		void close(void);
 		void setErrorDialogs(bool errDialogs);
+		bool fullMode(void);
+		bool isPaired(void);
 		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data);
 		static QHostAddress serverAddress(void);
 		static quint16 serverPort(void);

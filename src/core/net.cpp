@@ -87,12 +87,11 @@ quint16 monitorClient::serverPort(void)
 	return settings.value("server/port","57100").toUInt();
 }
 
-/*! Returns true if class monitor server connection is enabled in the settings. */
+/*! Returns true if server is enabled in the settings. */
 bool monitorClient::enabled(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	return settings.value("server/enabled","false").toBool() &&
-		(settings.value("server/mode", 2).toInt() == 2);
+	return (settings.value("server/mode", 2).toInt() == 2);
 }
 
 /*! Returns true if class monitor server connection is enabled in the settings and the server is available. */
@@ -102,6 +101,25 @@ bool monitorClient::available(void)
 		return (sendRequest("check",{}).value(0) == "ok");
 	else
 		return false;
+}
+
+/*! Returns true if full mode is enabled on the server. */
+bool monitorClient::fullMode(void)
+{
+	auto response = sendRequest("get", { "serverMode" });
+	if(response[0] == "ok")
+		return (response[1] == "full");
+	else
+		return false;
+}
+
+/*! Returns true if this device is paired with the server or full mode is enabled. */
+bool monitorClient::isPaired(void)
+{
+	if(fullMode())
+		return true;
+	return (sendRequest("get", { "paired" }).value(0) == "ok");
+	
 }
 
 /*!
