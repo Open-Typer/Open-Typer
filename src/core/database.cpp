@@ -43,8 +43,10 @@ bool databaseManager::open(void)
 		QStringList tables = db.tables();
 		if(!(
 			(tables.contains("user")) &&
+			(tables.contains("users")) &&
 			(tables.contains("class")) &&
-			(tables.contains("exercise_result"))
+			(tables.contains("exercise_result")) &&
+			(tables.contains("device"))
 		))
 		{
 			QSqlQuery query;
@@ -86,6 +88,11 @@ bool databaseManager::open(void)
 				QString("duration INT NOT NULL,") +
 				QString("FOREIGN KEY (user) REFERENCES user(id) ON DELETE CASCADE,") +
 				QString("FOREIGN KEY (class) REFERENCES class(id) ON DELETE CASCADE)"));
+			// device
+			query.exec(QString("CREATE TABLE device (") +
+				QString("id INTEGER PRIMARY KEY NOT NULL,") +
+				QString("ip_address VARCHAR(15) NOT NULL UNIQUE,") +
+				QString("name VARCHAR(20) NOT NULL)"));
 		}
 		QSqlQuery query;
 		query.exec("PRAGMA foreign_keys=on"); // required for foreign keys
@@ -763,6 +770,86 @@ void databaseManager::removeOrphanedStudents(void)
 			removeUser(id);
 	}
 #endif // Q_OS_WASM
+}
+
+/*! Returns list of paired device IDs. */
+QList<int> databaseManager::deviceIDs(void)
+{
+#ifdef Q_OS_WASM
+	return QList<int>();
+#else
+	QSqlQuery query;
+	query.exec("SELECT id FROM device");
+	QList<int> out;
+	while(query.next())
+		out += query.value(0).toInt();
+	return out;
+#endif
+}
+
+/*! Returns list of paired device IPv4 addresses. */
+QList<QHostAddress> databaseManager::deviceAddresses(void)
+{
+#ifdef Q_OS_WASM
+	return QList<QHostAddress>();
+#else
+	QSqlQuery query;
+	query.exec("SELECT ip_address FROM device");
+	QList<QHostAddress> out;
+	while(query.next())
+		out += QHostAddress(query.value(0).toString());
+	return out;
+#endif
+}
+
+/*! Returns the IPv4 address of the given device. */
+QHostAddress databaseManager::deviceAddress(int deviceID)
+{
+#ifdef Q_OS_WASM
+	return QHostAddress();
+#else
+	QSqlQuery query;
+	query.exec("SELECT ip_address FROM device WHERE id = " + QString::number(deviceID));
+	query.next();
+	return QHostAddress(query.value(0).toString());
+#endif
+}
+
+/*! Returns the name of the given device. */
+QString databaseManager::deviceName(int deviceID)
+{
+#ifdef Q_OS_WASM
+	return QString();
+#else
+	QSqlQuery query;
+	query.exec("SELECT name FROM device WHERE id = " + QString::number(deviceID));
+	query.next();
+	return query.value(0).toString();
+#endif
+}
+
+/*! Finds device by IPv4 address. */
+int databaseManager::findDevice(QHostAddress address)
+{
+#ifdef Q_OS_WASM
+	return 0;
+#else
+	QSqlQuery query;
+	query.exec("SELECT id FROM device WHERE ip_address = " + quotesEnclosed(QHostAddress(address.toIPv4Address()).toString()));
+	if(query.next())
+		return query.value(0).toInt();
+	else
+		return 0;
+#endif
+}
+
+/*! Adds a new device. */
+void databaseManager::addDevice(QString name, QHostAddress address)
+{
+#ifndef Q_OS_WASM
+	QSqlQuery query;
+	query.exec(QString("INSERT INTO device (name, ip_address) VALUES (%1, %2)").arg(quotesEnclosed(name), quotesEnclosed(QHostAddress(address.toIPv4Address()).toString())));
+#endif
 }
 
 /*! Returns the given string enclosed by quotes compatible with SQLite (special characters are automatically escaped). */

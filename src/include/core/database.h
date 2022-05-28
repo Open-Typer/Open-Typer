@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QVariantMap>
+#include <QHostAddress>
 
 #ifndef Q_OS_WASM
 #include <QSqlDatabase>
@@ -89,6 +90,12 @@ class databaseManager : public QObject
 		QList<QVariantMap> historyEntries(int classID, int userID, QString pack, int lesson, int sublesson, int exercise);
 		void addHistoryEntry(int classID, int userID, QString pack, int lesson, int sublesson, int exercise, QVariantMap record);
 		int compareWithStudents(int classID, int studentID, QString pack, int lesson, int sublesson, int exercise, bool better);
+		QList<int> deviceIDs(void);
+		QList<QHostAddress> deviceAddresses(void);
+		QHostAddress deviceAddress(int deviceID);
+		QString deviceName(int deviceID);
+		int findDevice(QHostAddress address);
+		void addDevice(QString name, QHostAddress address);
 		int activeClass = 0;
 
 	private:
