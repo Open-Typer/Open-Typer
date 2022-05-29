@@ -43,8 +43,11 @@ class monitorServer : public QTcpServer
 		static quint16 port(void);
 		static QHostAddress address(void);
 		void sendSignal(QByteArray name, QList<QByteArray> data, QList<QByteArray> usernames);
+		void sendSignal(QByteArray name, QList<QByteArray> data, QList<QHostAddress> addresses);
 		bool isLoggedIn(QString username);
+		bool isConnected(QHostAddress address);
 		QList<int> runningExerciseStudents(void);
+		QString deviceStudentName(int deviceID);
 		const QSslCertificate &getSslLocalCertificate() const;
 		const QSslKey &getSslPrivateKey() const;
 		QSsl::SslProtocol getSslProtocol() const;
@@ -64,6 +67,8 @@ class monitorServer : public QTcpServer
 		void exerciseAborted(int);
 		/*! A signal, which is emitted, when a student logs in/out. */
 		void loggedInStudentsChanged();
+		/*! A signal, which is emitted, when a device connects or disconnects (works only in easy mode). */
+		void connectedDevicesChanged();
 
 	private slots:
 		void acceptConnection(void);
@@ -82,6 +87,8 @@ class monitorServer : public QTcpServer
 		QSslCertificate m_sslLocalCertificate;
 		QSslKey m_sslPrivateKey;
 		QSsl::SslProtocol m_sslProtocol;
+		QSettings settings;
+		QMap<int, QString> deviceStudentNames;
 };
 
 extern QPointer<monitorServer> serverPtr;

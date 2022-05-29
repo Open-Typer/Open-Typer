@@ -30,7 +30,8 @@ monitorServer::monitorServer(bool silent, QObject *parent) :
 	exerciseSockets(),
 	m_sslLocalCertificate(),
 	m_sslPrivateKey(),
-	m_sslProtocol(QSsl::UnknownProtocol)
+	m_sslProtocol(QSsl::UnknownProtocol),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	setSslLocalCertificate(":certs/server.pem");
 	setSslPrivateKey(":certs/server.key");
@@ -87,6 +88,8 @@ void monitorServer::acceptConnection(void)
 	connect(clientSocket,&QIODevice::readyRead,this,&monitorServer::sendResponse);
 	connect(clientSocket,&QAbstractSocket::disconnected,this,&monitorServer::disconnectClient);
 	clientSockets += clientSocket;
+	if(!settings.value("server/fullmode", false).toBool())
+		emit connectedDevicesChanged();
 }
 
 /*! Connected from QAbstractSocket::disconnected(). */
@@ -99,6 +102,8 @@ void monitorServer::disconnectClient(void)
 	exerciseSockets.removeAll(clientSocket);
 	emit exerciseAborted(dbMgr.findUser(sessions[clientSocket]));
 	clientSocket->deleteLater();
+	if(!settings.value("server/fullmode", false).toBool())
+		emit connectedDevicesChanged();
 }
 
 /*!
@@ -120,138 +125,161 @@ void monitorServer::sendResponse(void)
 	}
 	for(int i=0; i < socketsToRemove.count(); i++)
 		exerciseSockets.removeAll(socketsToRemove[i]);
-	if((requestList[0] == "auth") && (requestList.count() >= 3))
+	if(requestList[0] == "check")
 	{
-		if(studentAuthAvailable(requestList[1]))
-		{
-			int userID = dbMgr.findUser(requestList[1]);
-			if((requestList[2] != "") && dbMgr.auth(userID, requestList[2]))
-			{
-				sessions.insert(clientSocket,requestList[1]);
-				emit loggedInStudentsChanged();
-				clientSocket->write(convertData({"ok"}));
-			}
-			else
-				clientSocket->write(convertData({"fail", "password"}));
-		}
-		else
-			clientSocket->write(convertData({"fail", "inactive_class"}));
-	}
-	else if(requestList[0] == "logout")
-	{
-		sessions.remove(clientSocket);
-		emit loggedInStudentsChanged();
 		clientSocket->write(convertData({"ok"}));
+		return;
 	}
-	else if(requestList[0] == "check")
-		clientSocket->write(convertData({"ok"}));
-	else if((requestList[0] == "get") && (requestList.count() >= 2))
+	if(settings.value("server/fullmode", false).toBool())
 	{
-		if(requestList[1] == "username")
+		if((requestList[0] == "auth") && (requestList.count() >= 3))
 		{
-			if(sessions.contains(clientSocket))
+			if(studentAuthAvailable(requestList[1]))
 			{
-				QString username = sessions.value(clientSocket);
-				clientSocket->write(convertData({"ok",username.toUtf8()}));
+				int userID = dbMgr.findUser(requestList[1]);
+				if((requestList[2] != "") && dbMgr.auth(userID, requestList[2]))
+				{
+					sessions.insert(clientSocket,requestList[1]);
+					emit loggedInStudentsChanged();
+					clientSocket->write(convertData({"ok"}));
+				}
+				else
+					clientSocket->write(convertData({"fail", "password"}));
 			}
 			else
-				clientSocket->write(convertData({"fail"}));
+				clientSocket->write(convertData({"fail", "inactive_class"}));
+			return;
 		}
-		else if((requestList[1] == "resultcount") && (requestList.count() >= 6))
+		else if(requestList[0] == "logout")
 		{
-			if(sessions.contains(clientSocket))
-			{
-				QString username = sessions.value(clientSocket);
-				int studentID = dbMgr.findUser(username);
-				clientSocket->write(convertData({"ok", QByteArray::number(dbMgr.historyEntries(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt()).count())}));
-			}
-			else
-				clientSocket->write(convertData({"fail"}));
+			sessions.remove(clientSocket);
+			emit loggedInStudentsChanged();
+			clientSocket->write(convertData({"ok"}));
+			return;
 		}
-		else if((requestList[1] == "result") && (requestList.count() >= 7))
+		else if((requestList[0] == "get") && (requestList.count() >= 2))
 		{
-			if(sessions.contains(clientSocket))
+			if(requestList[1] == "username")
 			{
-				QString username = sessions.value(clientSocket);
-				int studentID = dbMgr.findUser(username);
-				QVariantMap entry = dbMgr.historyEntries(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt()).at(requestList[6].toInt());
-				QList<QByteArray> responseList;
-				responseList.clear();
-				responseList += "ok";
-				responseList += QByteArray::number(entry["speed"].toInt());
-				responseList += QByteArray::number(entry["mistakes"].toInt());
-				responseList += QByteArray::number(entry["duration"].toInt());
-				clientSocket->write(convertData(responseList));
+				if(sessions.contains(clientSocket))
+				{
+					QString username = sessions.value(clientSocket);
+					clientSocket->write(convertData({"ok",username.toUtf8()}));
+					return;
+				}
 			}
-			else
-				clientSocket->write(convertData({"fail"}));
+			else if((requestList[1] == "resultcount") && (requestList.count() >= 6))
+			{
+				if(sessions.contains(clientSocket))
+				{
+					QString username = sessions.value(clientSocket);
+					int studentID = dbMgr.findUser(username);
+					clientSocket->write(convertData({"ok", QByteArray::number(dbMgr.historyEntries(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt()).count())}));
+					return;
+				}
+			}
+			else if((requestList[1] == "result") && (requestList.count() >= 7))
+			{
+				if(sessions.contains(clientSocket))
+				{
+					QString username = sessions.value(clientSocket);
+					int studentID = dbMgr.findUser(username);
+					QVariantMap entry = dbMgr.historyEntries(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt()).at(requestList[6].toInt());
+					QList<QByteArray> responseList;
+					responseList.clear();
+					responseList += "ok";
+					responseList += QByteArray::number(entry["speed"].toInt());
+					responseList += QByteArray::number(entry["mistakes"].toInt());
+					responseList += QByteArray::number(entry["duration"].toInt());
+					clientSocket->write(convertData(responseList));
+					return;
+				}
+			}
+			else if((requestList[1] == "betterstudents") && (requestList.count() >= 6))
+			{
+				if(sessions.contains(clientSocket))
+				{
+					QString username = sessions.value(clientSocket);
+					int studentID = dbMgr.findUser(username);
+					int betterStudents = dbMgr.compareWithStudents(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt(), true);
+					clientSocket->write(convertData({"ok",QByteArray::number(betterStudents)}));
+					return;
+				}
+			}
+			else if((requestList[1] == "worsestudents") && (requestList.count() >= 6))
+			{
+				if(sessions.contains(clientSocket))
+				{
+					QString username = sessions.value(clientSocket);
+					int studentID = dbMgr.findUser(username);
+					int worseStudents = dbMgr.compareWithStudents(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt(), false);
+					clientSocket->write(convertData({"ok",QByteArray::number(worseStudents)}));
+					return;
+				}
+			}
 		}
-		else if((requestList[1] == "betterstudents") && (requestList.count() >= 6))
+		else if((requestList[0] == "put") && (requestList.count() >= 2))
 		{
-			if(sessions.contains(clientSocket))
+			if((requestList[1] == "result") && (requestList.count() >= 9))
 			{
-				QString username = sessions.value(clientSocket);
-				int studentID = dbMgr.findUser(username);
-				int betterStudents = dbMgr.compareWithStudents(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt(), true);
-				clientSocket->write(convertData({"ok",QByteArray::number(betterStudents)}));
+				if(sessions.contains(clientSocket))
+				{
+					QString username = sessions.value(clientSocket);
+					int studentID = dbMgr.findUser(username);
+					QVariantMap resultData;
+					resultData["speed"] = requestList[6];
+					resultData["mistakes"] = requestList[7];
+					resultData["duration"] = requestList[8];
+					dbMgr.addHistoryEntry(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt(), resultData);
+					clientSocket->write(convertData({"ok"}));
+					return;
+				}
 			}
-			else
-				clientSocket->write(convertData({"fail"}));
 		}
-		else if((requestList[1] == "worsestudents") && (requestList.count() >= 6))
+	}
+	else
+	{
+		bool paired = dbMgr.deviceAddresses().contains(QHostAddress(clientSocket->peerAddress().toIPv4Address()));
+		if((requestList[0] == "get") && (requestList.count() >= 2))
 		{
-			if(sessions.contains(clientSocket))
+			if(requestList[1] == "paired")
 			{
-				QString username = sessions.value(clientSocket);
-				int studentID = dbMgr.findUser(username);
-				int worseStudents = dbMgr.compareWithStudents(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt(), false);
-				clientSocket->write(convertData({"ok",QByteArray::number(worseStudents)}));
+				if(paired)
+				{
+					clientSocket->write(convertData({"ok"}));
+					return;
+				}
 			}
-			else
-				clientSocket->write(convertData({"fail"}));
 		}
-		else
-			clientSocket->write(convertData({"fail"}));
+	}
+	if((requestList[0] == "get") && (requestList.count() >= 2))
+	{
+		if(requestList[1] == "serverMode")
+		{
+			clientSocket->write(convertData({ "ok", settings.value("server/fullmode", false).toBool() ? "full" : "easy" }));
+			return;
+		}
 	}
 	else if((requestList[0] == "put") && (requestList.count() >= 2))
 	{
-		if((requestList[1] == "result") && (requestList.count() >= 9))
+		if(requestList[1] == "clearRecordedMistakes")
 		{
-			if(sessions.contains(clientSocket))
-			{
-				QString username = sessions.value(clientSocket);
-				int studentID = dbMgr.findUser(username);
-				QVariantMap resultData;
-				resultData["speed"] = requestList[6];
-				resultData["mistakes"] = requestList[7];
-				resultData["duration"] = requestList[8];
-				dbMgr.addHistoryEntry(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt(), resultData);
-				clientSocket->write(convertData({"ok"}));
-			}
-			else
-				clientSocket->write(convertData({"fail"}));
-		}
-		else if(requestList[1] == "clearRecordedMistakes")
-		{
-			if(sessions.contains(clientSocket))
+			if(settings.value("server/fullmode", false).toBool() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
 			{
 				if(!recordedMistakes.contains(clientSocket))
 					recordedMistakes[clientSocket] = QList<QVariantMap>();
 				recordedMistakes[clientSocket].clear();
 				clientSocket->write(convertData({"ok"}));
+				return;
 			}
-			else
-				clientSocket->write(convertData({"fail"}));
 		}
 		else if(requestList[1] == "recordedMistake")
 		{
-			if(sessions.contains(clientSocket))
+			if(settings.value("server/fullmode", false).toBool() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
 			{
 				if(!recordedMistakes.contains(clientSocket))
 					recordedMistakes[clientSocket] = QList<QVariantMap>();
-				if(requestList.count() % 2 != 0)
-					clientSocket->write(convertData({"fail"}));
-				else
+				if(requestList.count() % 2 == 0)
 				{
 					QVariantMap map;
 					for(int i=2; i < requestList.count(); i++)
@@ -267,39 +295,44 @@ void monitorServer::sendResponse(void)
 					}
 					recordedMistakes[clientSocket].append(map);
 					clientSocket->write(convertData({"ok"}));
+					return;
 				}
 			}
-			else
-				clientSocket->write(convertData({"fail"}));
 		}
 		else if((requestList[1] == "monitorResult") && (requestList.count() >= 7))
 		{
-			if(sessions.contains(clientSocket) && recordedMistakes.contains(clientSocket))
+			if(settings.value("server/fullmode", false).toBool() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
 			{
-				emit resultUploaded(dbMgr.findUser(sessions[clientSocket]), recordedMistakes[clientSocket], requestList[2], requestList[3].toInt(), requestList[4].toInt(), requestList[5].toDouble(), requestList[6].toInt(), requestList[7].toDouble());
-				recordedMistakes[clientSocket].clear();
-				exerciseSockets.removeAll(clientSocket);
-				clientSocket->write(convertData({"ok"}));
+				int id;
+				if(sessions.contains(clientSocket))
+					id = dbMgr.findUser(sessions[clientSocket]);
+				else
+					id = dbMgr.findDevice(QHostAddress(clientSocket->peerAddress().toIPv4Address()));
+				if(recordedMistakes.contains(clientSocket))
+				{
+					emit resultUploaded(id, recordedMistakes[clientSocket], requestList[2], requestList[3].toInt(), requestList[4].toInt(), requestList[5].toDouble(), requestList[6].toInt(), requestList[7].toDouble());
+					recordedMistakes[clientSocket].clear();
+					exerciseSockets.removeAll(clientSocket);
+					clientSocket->write(convertData({"ok"}));
+					return;
+				}
 			}
-			else
-				clientSocket->write(convertData({"fail"}));
 		}
 		else if(requestList[1] == "abortExercise")
 		{
-			if(sessions.contains(clientSocket))
+			if(settings.value("server/fullmode", false).toBool() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
 			{
 				exerciseSockets.removeAll(clientSocket);
-				emit exerciseAborted(dbMgr.findUser(sessions[clientSocket]));
-				clientSocket->write(convertData({"ok"}));
+				if(sessions.contains(clientSocket))
+					emit exerciseAborted(dbMgr.findUser(sessions[clientSocket]));
+				else if(!settings.value("server/fullmode", false).toBool())
+					emit exerciseAborted(dbMgr.findDevice(QHostAddress(clientSocket->peerAddress().toIPv4Address())));
 			}
-			else
-				clientSocket->write(convertData({"fail"}));
+			clientSocket->write(convertData({"ok"}));
+			return;
 		}
-		else
-			clientSocket->write(convertData({"fail"}));
 	}
-	else
-		clientSocket->write(convertData({"fail"}));
+	clientSocket->write(convertData({"fail"}));
 }
 
 /*! Sends a signal to clients with username from a list. */
@@ -325,10 +358,45 @@ void monitorServer::sendSignal(QByteArray name, QList<QByteArray> data, QList<QB
 	}
 }
 
+/*! Sends a signal to clients with address from a list. */
+void monitorServer::sendSignal(QByteArray name, QList<QByteArray> data, QList<QHostAddress> addresses)
+{
+	QList<QByteArray> rawData;
+	rawData.clear();
+	rawData += name;
+	for(int i=0; i < data.count(); i++)
+		rawData += data[i];
+	QByteArray finalData = convertData(rawData);
+	for(int i=0; i < clientSockets.count(); i++)
+	{
+		QHostAddress address(clientSockets[i]->peerAddress().toIPv4Address());
+		if(addresses.contains(address) && (dbMgr.findDevice(address) != 0))
+		{
+			if(!((name == "loadExercise") && exerciseSockets.contains(clientSockets[i])))
+			{
+				if(name == "loadExercise")
+					exerciseSockets += clientSockets[i];
+				clientSockets[i]->write(finalData);
+			}
+		}
+	}
+}
+
 /*! Returns true if the given student is logged in. */
 bool monitorServer::isLoggedIn(QString username)
 {
 	return sessions.values().contains(username);
+}
+
+/*! Returns true if the given device is online. */
+bool monitorServer::isConnected(QHostAddress address)
+{
+	for(int i=0; i < clientSockets.count(); i++)
+	{
+		if(QHostAddress(clientSockets[i]->peerAddress().toIPv4Address()) == QHostAddress(address.toIPv4Address()))
+			return true;
+	}
+	return false;
 }
 
 /*! Returns list of students with an exercise in progress. */
@@ -338,6 +406,15 @@ QList<int> monitorServer::runningExerciseStudents(void)
 	for(int i=0; i < exerciseSockets.count(); i++)
 		out += dbMgr.findUser(sessions.value(exerciseSockets[i]));
 	return out;
+}
+
+/*! Returns the name entered by student on the given device. */
+QString monitorServer::deviceStudentName(int deviceID)
+{
+	if(deviceStudentNames.contains(deviceID))
+		return deviceStudentNames[deviceID];
+	else
+		return "";
 }
 
 /*! Converts list of QByteArrays to a single QByteArray, which can be used for a response or signal. */
