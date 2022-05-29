@@ -54,8 +54,8 @@ class connectionOptions : public QWidget
 	private slots:
 		void refresh(void);
 		void changeMode(void);
+		void setFullMode(bool enable);
 		void changeAddress(void);
-		void changeClientState(bool enable);
 		void testConnection(void);
 };
 

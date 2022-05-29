@@ -35,7 +35,7 @@ connectionOptions::connectionOptions(QWidget *parent) :
 	connect(ui->portEdit,SIGNAL(valueChanged(int)),this,SLOT(changeAddress()));
 	connect(ui->clientButton, &QRadioButton::toggled, this, &connectionOptions::changeMode);
 	connect(ui->serverButton, &QRadioButton::toggled, this, &connectionOptions::changeMode);
-	connect(ui->clientCheckBox, SIGNAL(clicked(bool)), this, SLOT(changeClientState(bool)));
+	connect(ui->fullModeCheckBox, &QCheckBox::toggled, this, &connectionOptions::setFullMode);
 	connect(ui->testButton,SIGNAL(clicked()),this,SLOT(testConnection()));
 }
 
@@ -56,24 +56,24 @@ void connectionOptions::refresh(void)
 		if(!serverPtr)
 			serverPtr = new monitorServer;
 		ui->serverButton->setChecked(true);
-		ui->clientCheckBox->setChecked(false);
+		ui->fullModeCheckBox->show();
+		ui->fullModeCheckBox->setChecked(settings.value("server/fullmode", false).toBool());
 	}
 	else
 	{
 		ui->clientButton->setChecked(true);
+		ui->fullModeCheckBox->hide();
 		if(serverPtr)
 			serverPtr->deleteLater();
 	}
 	ui->IPLabel->setVisible(!serverMode);
 	ui->IPEdit->setVisible(!serverMode);
-	ui->clientCheckBox->setVisible(!serverMode);
 	ui->testButton->setVisible(!serverMode);
 	ui->statusLabel->setVisible(!serverMode);
 	ui->statusValueLabel->setVisible(!serverMode);
 #endif // Q_OS_WASM
 	ui->IPEdit->setText(QHostAddress(client.serverAddress().toIPv4Address()).toString());
 	ui->portEdit->setValue(client.serverPort());
-	ui->clientCheckBox->setChecked(client.enabled());
 	ui->testButton->setEnabled(client.enabled());
 }
 
@@ -81,13 +81,16 @@ void connectionOptions::refresh(void)
 void connectionOptions::changeMode(void)
 {
 	if(ui->serverButton->isChecked())
-	{
 		settings.setValue("server/mode", 1);
-		ui->clientCheckBox->setChecked(false);
-	}
 	else
 		settings.setValue("server/mode", 2);
 	refresh();
+}
+
+/*! Toggles full mode. */
+void connectionOptions::setFullMode(bool enable)
+{
+	settings.setValue("server/fullmode", enable);
 }
 
 /*!
@@ -110,27 +113,12 @@ void connectionOptions::changeAddress(void)
 	ui->statusValueLabel->setText(tr("Unknown"));
 }
 
-/*!
- * Connected from clientCheckBox->clicked().\n
- * Enables or disables client.
- */
-void connectionOptions::changeClientState(bool enable)
-{
-	settings.setValue("server/enabled",enable);
-	ui->testButton->setEnabled(enable);
-	if(enable)
-		emit testConnection();
-}
-
-/*!
- * Connected from testButton->clicked().\n
- * Tests server connection.
- */
+/*! Tests server connection. */
 void connectionOptions::testConnection(void)
 {
 	ui->statusValueLabel->setText("...");
 	ui->testButton->setEnabled(false);
-	if(client.available())
+	if(client.available() && client.isPaired())
 		ui->statusValueLabel->setText("OK");
 	else
 		ui->statusValueLabel->setText(tr("Failed to connect"));
