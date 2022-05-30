@@ -41,7 +41,8 @@ class loadExerciseDialog : public QDialog
 {
 	Q_OBJECT
 	public:
-		explicit loadExerciseDialog(QList<int> availableStudents, QWidget *parent = nullptr);
+		explicit loadExerciseDialog(QList<int> availableTargets, QWidget *parent = nullptr);
+		loadExerciseDialog(QWidget *parent = nullptr);
 		~loadExerciseDialog();
 		QString exerciseText(void);
 		int lineLength(void);
@@ -51,16 +52,19 @@ class loadExerciseDialog : public QDialog
 		bool correctMistakes(void);
 		bool lockUi(void);
 		bool hideText(void);
-		QList<int> selectedStudents(void);
+		QList<int> selectedTargets(void);
 
 	private:
 		Ui::loadExerciseDialog *ui;
+		void init(void);
 		QString fileName = "";
-		QMap<int, QCheckBox*> students;
+		QList<int> m_targets;
+		QMap<int, QCheckBox*> targets;
 		QSettings settings;
 		QString m_exerciseText = "";
 		int m_lineLength = 0;
 		bool m_includeNewLines = false;
+		bool local = false;
 
 	private slots:
 		void verify(void);

@@ -22,10 +22,27 @@
 #include "ui_loadexercisedialog.h"
 
 /*! Constructs loadExerciseDialog. */
-loadExerciseDialog::loadExerciseDialog(QList<int> availableStudents, QWidget *parent) :
+loadExerciseDialog::loadExerciseDialog(QList<int> availableTargets, QWidget *parent) :
+	QDialog(parent),
+	ui(new Ui::loadExerciseDialog),
+	m_targets(availableTargets),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+{
+	init();
+}
+
+/*! Constructs loadExerciseDialog for use on the local computer. */
+loadExerciseDialog::loadExerciseDialog(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::loadExerciseDialog),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+{
+	local = true;
+	init();
+}
+
+/*! Initializes the dialog. */
+void loadExerciseDialog::init(void)
 {
 	ui->setupUi(this);
 	changeSource();
@@ -49,14 +66,24 @@ loadExerciseDialog::loadExerciseDialog(QList<int> availableStudents, QWidget *pa
 		m_lineLength = parser.exerciseLineLength(publicPos::currentLesson, publicPos::currentSublesson, publicPos::currentExercise);
 		m_includeNewLines = true;
 	}
-	// Set up targets
-	for(int i=0; i < availableStudents.count(); i++)
+	if(local)
+		ui->targetBox->hide();
+	else
 	{
-		QCheckBox *checkBox = new QCheckBox(dbMgr.userName(availableStudents[i]), ui->targetBox);
-		ui->targetLayout->addWidget(checkBox);
-		checkBox->setChecked(true);
-		connect(checkBox, &QCheckBox::toggled, this, &loadExerciseDialog::verify);
-		students[availableStudents[i]] = checkBox;
+		// Set up targets
+		for(int i=0; i < m_targets.count(); i++)
+		{
+			QString name;
+			if(settings.value("server/fullmode", false).toBool())
+				name = dbMgr.userName(m_targets[i]);
+			else
+				name = dbMgr.deviceName(m_targets[i]);
+			QCheckBox *checkBox = new QCheckBox(name, ui->targetBox);
+			ui->targetLayout->addWidget(checkBox);
+			checkBox->setChecked(true);
+			connect(checkBox, &QCheckBox::toggled, this, &loadExerciseDialog::verify);
+			targets[m_targets[i]] = checkBox;
+		}
 	}
 	verify();
 	// Connections
@@ -140,14 +167,14 @@ bool loadExerciseDialog::hideText(void)
 	return ui->hideTextCheckBox->isChecked();
 }
 
-/*! Returns list of selected students. */
-QList<int> loadExerciseDialog::selectedStudents(void)
+/*! Returns list of selected targets. */
+QList<int> loadExerciseDialog::selectedTargets(void)
 {
 	QList<int> out;
-	auto keys = students.keys();
+	auto keys = targets.keys();
 	for(int i=0; i < keys.count(); i++)
 	{
-		if(students[keys[i]]->isChecked())
+		if(targets[keys[i]]->isChecked())
 			out += keys[i];
 	}
 	return out;
@@ -159,15 +186,18 @@ void loadExerciseDialog::verify(void)
 	bool enable = true;
 	if(ui->fromFileButton->isChecked() && (fileName == ""))
 		enable = false;
-	int count = 0;
-	auto keys = students.keys();
-	for(int i=0; i < keys.count(); i++)
+	if(!local)
 	{
-		if(students[keys[i]]->isChecked())
-			count++;
+		int count = 0;
+		auto keys = targets.keys();
+		for(int i=0; i < keys.count(); i++)
+		{
+			if(targets[keys[i]]->isChecked())
+				count++;
+		}
+		if(count == 0)
+			enable = false;
 	}
-	if(count == 0)
-		enable = false;
 	ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(enable);
 }
 
