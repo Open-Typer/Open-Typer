@@ -57,6 +57,7 @@ SOURCES += \
     src/server/serversetup.cpp \
     src/server/classedit.cpp \
     src/server/studentedit.cpp \
+    src/server/deviceedit.cpp \
     src/server/loadexercisedialog.cpp \
     src/server/exerciseprogressdialog.cpp \
     src/server/widgets/servermanager.cpp \
@@ -104,6 +105,7 @@ HEADERS += \
     src/include/server/serversetup.h \
     src/include/server/classedit.h \
     src/include/server/studentedit.h \
+    src/include/server/deviceedit.h \
     src/include/server/loadexercisedialog.h \
     src/include/server/exerciseprogressdialog.h \
     src/include/server/widgets/servermanager.h \
@@ -132,6 +134,7 @@ FORMS += \
     ui/server/serversetup.ui \
     ui/server/classedit.ui \
     ui/server/studentedit.ui \
+    ui/server/deviceedit.ui \
     ui/server/loadexercisedialog.ui \
     ui/server/exerciseprogressdialog.ui \
     ui/server/widgets/servermanager.ui \
