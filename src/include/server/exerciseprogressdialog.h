@@ -48,12 +48,13 @@ class exerciseProgressDialog : public QDialog
 {
 	Q_OBJECT
 	public:
-		explicit exerciseProgressDialog(int classID, QList<int> students, QWidget *parent = nullptr);
+		explicit exerciseProgressDialog(int classID, QList<int> targets, QWidget *parent = nullptr);
 		~exerciseProgressDialog();
 
 	private:
 		Ui::exerciseProgressDialog *ui;
-		QList<int> exerciseStudents;
+		QList<int> exerciseTargets;
+		QMap<int, QString> names;
 		QMap<int, QVariantMap> results;
 		QMap<int, QString> inputTexts;
 		QMap<int, bool> abortList;
@@ -64,8 +65,8 @@ class exerciseProgressDialog : public QDialog
 		void closeEvent(QCloseEvent *event);
 
 	private slots:
-		void loadResult(int userID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes, double time);
-		void abortExercise(int userID);
+		void loadResult(int targetID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes, double time);
+		void abortExercise(int targetID);
 		void printAll(void);
 };
 

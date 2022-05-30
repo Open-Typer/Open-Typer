@@ -26,17 +26,17 @@ namespace exerciseProgressDialogConfig {
 }
 
 /*! Constructs exerciseProgressDialog. */
-exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> students, QWidget *parent) :
+exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::exerciseProgressDialog),
-	exerciseStudents(students)
+	exerciseTargets(targets)
 {
 	setAttribute(Qt::WA_DeleteOnClose);
 	exerciseProgressDialogConfig::dialogCount++;
 	ui->setupUi(this);
-	if(students.count() > 0)
+	if(targets.count() > 0)
 		ui->classEdit->setText(dbMgr.className(classID));
-	// Load students
+	// Load targets
 	setupTable();
 	// Connections
 #ifndef Q_OS_WASM
@@ -54,45 +54,58 @@ exerciseProgressDialog::~exerciseProgressDialog()
 	exerciseProgressDialogConfig::dialogCount--;
 }
 
-/*! Loads the students. */
+/*! Loads the targets. */
 void exerciseProgressDialog::setupTable(void)
 {
-	ui->printButton->setEnabled(results.keys().count() + abortList.values().count(true) == exerciseStudents.count());
+	ui->printButton->setEnabled(results.keys().count() + abortList.values().count(true) == exerciseTargets.count());
 	ui->studentsTable->clearContents();
 	ui->studentsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->studentsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	bool fullMode = settings.value("server/fullmode", false).toBool();
 	// Rows
-	QList<int> students = exerciseStudents;
-	ui->studentsTable->setRowCount(students.count());
-	for(int i=0; i < students.count(); i++)
+	QList<int> targets = exerciseTargets;
+	ui->studentsTable->setRowCount(targets.count());
+	for(int i=0; i < targets.count(); i++)
 	{
+		QString name;
 		// Full name
-		QTableWidgetItem *item = new QTableWidgetItem(dbMgr.userName(students[i]));
+		if(fullMode)
+			name = dbMgr.userName(targets[i]);
+#ifndef Q_OS_WASM
+		else
+			name = serverPtr->deviceStudentName(targets[i]);
+#endif // Q_OS_WASM
+		QTableWidgetItem *item = new QTableWidgetItem(name);
 		ui->studentsTable->setItem(i, 0, item);
 		// Username
-		item = new QTableWidgetItem(dbMgr.userNickname(students[i]));
+		if(fullMode)
+			name = dbMgr.userNickname(targets[i]);
+		else
+			name = dbMgr.deviceName(targets[i]);
+		item = new QTableWidgetItem(name);
 		ui->studentsTable->setItem(i, 1, item);
 		// Result
-		if(abortList.contains(students[i]) && abortList[students[i]])
+		if(abortList.contains(targets[i]) && abortList[targets[i]])
 			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("Aborted")));
-		else if(results.contains(students[i]))
+		else if(results.contains(targets[i]))
 		{
 			QPushButton *button = new QPushButton(tr("View"), this);
 			ui->studentsTable->setCellWidget(i, 2, button);
-			connect(button, &QPushButton::clicked, this, [this, students, i]() {
-				exportDialog *dialog = new exportDialog(inputTexts[students[i]], results[students[i]], recordedMistakeLists[students[i]], this);
-				dialog->setStudentName(dbMgr.userName(students[i]));
+			connect(button, &QPushButton::clicked, this, [this, targets, i]() {
+				exportDialog *dialog = new exportDialog(inputTexts[targets[i]], results[targets[i]], recordedMistakeLists[targets[i]], this);
+				dialog->setStudentName(dbMgr.userName(targets[i]));
 				dialog->setClassName(ui->classEdit->text());
 				dialog->setNumber(ui->numberEdit->text());
-				if(results[students[i]].contains("mark"))
-					dialog->setMark(results[students[i]]["mark"].toString());
+				if(results[targets[i]].contains("mark"))
+					dialog->setMark(results[targets[i]]["mark"].toString());
 				dialog->setWindowModality(Qt::WindowModal);
 				dialog->open();
 				dialog->showMaximized();
-				connect(dialog, &QDialog::finished, this, [this, dialog, students, i]() {
+				connect(dialog, &QDialog::finished, this, [this, dialog, targets, i]() {
 					ui->classEdit->setText(dialog->className());
 					ui->numberEdit->setText(dialog->number());
-					results[students[i]]["mark"] = dialog->mark();
+					results[targets[i]]["mark"] = dialog->mark();
 					setupTable();
 				});
 			});
@@ -101,17 +114,17 @@ void exerciseProgressDialog::setupTable(void)
 			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("In progress...")));
 		// Mark
 		QString mark = "-";
-		if(results.contains(students[i]) && results[students[i]].contains("mark"))
-			mark = results[students[i]]["mark"].toString();
+		if(results.contains(targets[i]) && results[targets[i]].contains("mark"))
+			mark = results[targets[i]]["mark"].toString();
 		item = new QTableWidgetItem(mark);
 		ui->studentsTable->setItem(i, 3, item);
 	}
 }
 
 /*! Loads the uploaded result. */
-void exerciseProgressDialog::loadResult(int userID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes, double time)
+void exerciseProgressDialog::loadResult(int targetID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes, double time)
 {
-	if(!exerciseStudents.contains(userID))
+	if(!exerciseTargets.contains(targetID))
 		return;
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QVariantMap result;
@@ -121,16 +134,16 @@ void exerciseProgressDialog::loadResult(int userID, QList<QVariantMap> recordedM
 	result["mistakes"] = mistakes;
 	result["penalty"] = settings.value("main/errorpenalty","10").toInt();
 	result["time"] = time;
-	results[userID] = result;
-	inputTexts[userID] = inputText;
-	recordedMistakeLists[userID] = recordedMistakes;
+	results[targetID] = result;
+	inputTexts[targetID] = inputText;
+	recordedMistakeLists[targetID] = recordedMistakes;
 	setupTable();
 }
 
 /*! Aborts the given student's exercise. */
 void exerciseProgressDialog::abortExercise(int userID)
 {
-	if(!exerciseStudents.contains(userID))
+	if(!exerciseTargets.contains(userID))
 		return;
 	abortList[userID] = true;
 	setupTable();
@@ -139,9 +152,9 @@ void exerciseProgressDialog::abortExercise(int userID)
 /*! Overrides QDialog#closeEvent(). */
 void exerciseProgressDialog::closeEvent(QCloseEvent *event)
 {
-	if(results.keys().count() + abortList.values().count(true) != exerciseStudents.count())
+	if(results.keys().count() + abortList.values().count(true) != exerciseTargets.count())
 	{
-		QMessageBox::StandardButton button = QMessageBox::question(this, QString(), tr("Some students have not finished yet."), QMessageBox::Discard | QMessageBox::Cancel);
+		QMessageBox::StandardButton button = QMessageBox::question(this, QString(), tr("Some targets have not finished yet."), QMessageBox::Discard | QMessageBox::Cancel);
 		if(button == QMessageBox::Discard)
 			event->accept();
 		else
@@ -154,21 +167,21 @@ void exerciseProgressDialog::closeEvent(QCloseEvent *event)
 /*! Prints all results. */
 void exerciseProgressDialog::printAll(void)
 {
-	for(int i=0; i < exerciseStudents.count(); i++)
+	for(int i=0; i < exerciseTargets.count(); i++)
 	{
-		if(abortList.contains(exerciseStudents[i]) && abortList[exerciseStudents[i]])
+		if(abortList.contains(exerciseTargets[i]) && abortList[exerciseTargets[i]])
 			continue;
-		exportDialog dialog(inputTexts[exerciseStudents[i]], results[exerciseStudents[i]], recordedMistakeLists[exerciseStudents[i]], this);
-		dialog.setStudentName(dbMgr.userName(exerciseStudents[i]));
+		exportDialog dialog(inputTexts[exerciseTargets[i]], results[exerciseTargets[i]], recordedMistakeLists[exerciseTargets[i]], this);
+		dialog.setStudentName(dbMgr.userName(exerciseTargets[i]));
 		dialog.setClassName(ui->classEdit->text());
 		dialog.setNumber(ui->numberEdit->text());
-		if(results[exerciseStudents[i]].contains("mark"))
-			dialog.setMark(results[exerciseStudents[i]]["mark"].toString());
+		if(results[exerciseTargets[i]].contains("mark"))
+			dialog.setMark(results[exerciseTargets[i]]["mark"].toString());
 		QMessageBox msgBox;
-		msgBox.setText(tr("Printing result of student %1...").arg(dbMgr.userName(exerciseStudents[i])));
+		msgBox.setText(tr("Printing result of student %1...").arg(dbMgr.userName(exerciseTargets[i])));
 		QPushButton *printButton = msgBox.addButton(tr("Print"), QMessageBox::YesRole);
 		QPushButton *nextButton;
-		if(i < exerciseStudents.count()-1)
+		if(i < exerciseTargets.count()-1)
 			nextButton = msgBox.addButton(tr("Next student"), QMessageBox::NoRole);
 		else
 			nextButton = msgBox.addButton(QMessageBox::Close);
