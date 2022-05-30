@@ -852,6 +852,24 @@ void databaseManager::addDevice(QString name, QHostAddress address)
 #endif
 }
 
+/*! Edits the given device. */
+void databaseManager::editDevice(int deviceID, QString name, QHostAddress address)
+{
+#ifndef Q_OS_WASM
+	QSqlQuery query;
+	query.exec(QString("UPDATE device SET name = %1, ip_address = %2 WHERE id = %3").arg(quotesEnclosed(name), quotesEnclosed(QHostAddress(address.toIPv4Address()).toString()), QString::number(deviceID)));
+#endif
+}
+
+/*! Removes the given device. */
+void databaseManager::removeDevice(int deviceID)
+{
+#ifndef Q_OS_WASM
+	QSqlQuery query;
+	query.exec(QString("DELETE FROM device WHERE id = %1").arg(QString::number(deviceID)));
+#endif
+}
+
 /*! Returns the given string enclosed by quotes compatible with SQLite (special characters are automatically escaped). */
 QString databaseManager::quotesEnclosed(QString str)
 {

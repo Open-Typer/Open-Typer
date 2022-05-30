@@ -96,6 +96,8 @@ class databaseManager : public QObject
 		QString deviceName(int deviceID);
 		int findDevice(QHostAddress address);
 		void addDevice(QString name, QHostAddress address);
+		void editDevice(int deviceID, QString name, QHostAddress address);
+		void removeDevice(int deviceID);
 		int activeClass = 0;
 
 	private:
