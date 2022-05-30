@@ -52,6 +52,7 @@ class classControls : public QWidget
 	public:
 		explicit classControls(int openClassID, QWidget *parent = nullptr);
 		~classControls();
+		static void startExercise(loadExerciseDialog *dialog);
 
 	private:
 		Ui::classControls *ui;

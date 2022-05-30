@@ -312,32 +312,50 @@ void classControls::loadExercise(void)
 	}
 	loadExerciseDialog dialog(students);
 	if(dialog.exec() == QDialog::Accepted)
+		startExercise(&dialog);
+#endif // Q_OS_WASM
+}
+
+/*! Starts the exercise loaded by the dialog. */
+void classControls::startExercise(loadExerciseDialog *dialog)
+{
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	bool fullMode = settings.value("server/fullmode", false).toBool();
+	QList<QByteArray> usernames;
+	QList<QHostAddress> addresses;
+	auto selectedTargets = dialog->selectedTargets();
+	for(int i=0; i < selectedTargets.count(); i++)
 	{
-		QList<QByteArray> usernames;
-		auto selectedStudents = dialog.selectedStudents();
-		for(int i=0; i < selectedStudents.count(); i++)
-			usernames += dbMgr.userNickname(selectedStudents[i]).toUtf8();
-		QByteArray includeNewLines = "false", correctMistakes = "false", lockUi = "false", hideText = "false";
-		if(dialog.includeNewLines())
-			includeNewLines = "true";
-		if(dialog.correctMistakes())
-			correctMistakes = "true";
-		if(dialog.lockUi())
-			lockUi = "true";
-		if(dialog.hideText())
-			hideText = "true";
-		serverPtr->sendSignal("loadExercise", {
-			dialog.exerciseText().toUtf8(),
-			QByteArray::number(dialog.lineLength()),
-			includeNewLines,
-			QByteArray::number(dialog.mode()),
-			QByteArray::number(QTime(0, 0, 0).secsTo(dialog.timeLimit())),
-			correctMistakes,
-			lockUi,
-			hideText
-		}, usernames);
-		exerciseProgressDialog *progressDialog = new exerciseProgressDialog(classID, selectedStudents, this);
-		progressDialog->show();
+		if(fullMode)
+			usernames += dbMgr.userNickname(selectedTargets[i]).toUtf8();
+		else
+			addresses += dbMgr.deviceAddress(selectedTargets[i]);
 	}
+	QByteArray includeNewLines = "false", correctMistakes = "false", lockUi = "false", hideText = "false";
+	if(dialog->includeNewLines())
+		includeNewLines = "true";
+	if(dialog->correctMistakes())
+		correctMistakes = "true";
+	if(dialog->lockUi())
+		lockUi = "true";
+	if(dialog->hideText())
+		hideText = "true";
+#ifndef Q_OS_WASM
+	QList<QByteArray> signalArgs = {
+		dialog->exerciseText().toUtf8(),
+		QByteArray::number(dialog->lineLength()),
+		includeNewLines,
+		QByteArray::number(dialog->mode()),
+		QByteArray::number(QTime(0, 0, 0).secsTo(dialog->timeLimit())),
+		correctMistakes,
+		lockUi,
+		hideText
+	};
+	if(fullMode)
+		serverPtr->sendSignal("loadExercise", signalArgs, usernames);
+	else
+		serverPtr->sendSignal("loadExercise", signalArgs, addresses);
+	exerciseProgressDialog *progressDialog = new exerciseProgressDialog(dbMgr.activeClass, selectedTargets);
+	progressDialog->show();
 #endif // Q_OS_WASM
 }
