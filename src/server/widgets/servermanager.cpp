@@ -24,9 +24,12 @@
 /*! Constructs serverManager. */
 serverManager::serverManager(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::serverManager)
+	ui(new Ui::serverManager),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
+	ui->editDeviceButton->setEnabled(false);
+	ui->removeDeviceButton->setEnabled(false);	
 	init();
 	collapse();
 	// Connections
@@ -41,6 +44,16 @@ serverManager::serverManager(QWidget *parent) :
 	connect(ui->classBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &serverManager::openClass);
 	connect(ui->removeClassButton, &QToolButton::clicked, this, &serverManager::removeClass);
 	connect(ui->editClassButton, &QToolButton::clicked, this, &serverManager::editClass);
+	connect(ui->deviceList, &QListWidget::currentRowChanged, this, [this](int currentRow) {
+		ui->editDeviceButton->setEnabled(currentRow != -1);
+		ui->removeDeviceButton->setEnabled(currentRow != -1);
+	});
+	connect(ui->addDeviceButton, &QToolButton::clicked, this, &serverManager::addDevice);
+	connect(ui->editDeviceButton, &QToolButton::clicked, this, &serverManager::editDevice);
+	connect(ui->removeDeviceButton, &QToolButton::clicked, this, &serverManager::removeDevice);
+#ifndef Q_OS_WASM
+	connect(serverPtr, &monitorServer::connectedDevicesChanged, this, &serverManager::loadDevices);
+#endif // Q_OS_WASM
 }
 
 /*! Destroys serverManager. */
@@ -53,51 +66,86 @@ serverManager::~serverManager()
 bool serverManager::init(void)
 {
 	bool ret = true;
-	if(dbMgr.administratorIDs().count() == 0)
+	fullMode = settings.value("server/fullmode", false).toBool();
+	if(fullMode)
 	{
-		serverSetup *dialog = new serverSetup(this);
-		dialog->setWindowModality(Qt::WindowModal);
-		dialog->open();
-		connect(dialog, &QDialog::rejected, this, [this]() { ui->mainControlsFrame->setEnabled(false); });
-		connect(dialog, &QDialog::accepted, this, [this]() { ui->mainControlsFrame->setEnabled(true); });
-		ret = false;
-	}
-	QDirIterator icons(":/class-icons",QDirIterator::NoIteratorFlags);
-	QStringList iconNames;
-	while(icons.hasNext())
-		iconNames += icons.next();
-	iconNames.sort();
-	int oldClass = 0, currentIndex = ui->classBox->currentIndex();
-	if(currentIndex > 0)
-		oldClass = classes[currentIndex-1];
-	disableClassOpening = true;
-	ui->classBox->clear();
-	ui->classBox->addItem(tr("No class selected", "Displayed in the class selection combo box."));
-	classes = dbMgr.classIDs(true);
-	for(int i = 0; i < classes.count(); i++)
-	{
-		ui->classBox->addItem(dbMgr.className(classes[i]));
-		ui->classBox->setItemIcon(i+1, QIcon(iconNames[dbMgr.classIcon(classes[i])]));
-	}
-	if(oldClass != 0)
-		ui->classBox->setCurrentIndex(classes.indexOf(oldClass)+1);
-	disableClassOpening = false;
-	if((classes.count() == 0) || (ui->classBox->currentIndex() == 0))
-	{
-		ui->classBox->setVisible(classes.count() != 0);
-		ui->removeClassButton->setEnabled(false);
-		ui->editClassButton->setEnabled(false);
-		ui->toggleButton->setEnabled(false);
-		collapse();
+		ui->easyControlsFrame->hide();
+		ui->easyModeControls->hide();
+		ui->mainControlsFrame->show();
+		ui->classControlsFrame->show();
+		if(dbMgr.administratorIDs().count() == 0)
+		{
+			serverSetup *dialog = new serverSetup(this);
+			dialog->setWindowModality(Qt::WindowModal);
+			dialog->open();
+			connect(dialog, &QDialog::rejected, this, [this]() { ui->mainControlsFrame->setEnabled(false); });
+			connect(dialog, &QDialog::accepted, this, [this]() { ui->mainControlsFrame->setEnabled(true); });
+			ret = false;
+		}
+		QDirIterator icons(":/class-icons",QDirIterator::NoIteratorFlags);
+		QStringList iconNames;
+		while(icons.hasNext())
+			iconNames += icons.next();
+		iconNames.sort();
+		int oldClass = 0, currentIndex = ui->classBox->currentIndex();
+		if(currentIndex > 0)
+			oldClass = classes[currentIndex-1];
+		disableClassOpening = true;
+		ui->classBox->clear();
+		ui->classBox->addItem(tr("No class selected", "Displayed in the class selection combo box."));
+		classes = dbMgr.classIDs(true);
+		for(int i = 0; i < classes.count(); i++)
+		{
+			ui->classBox->addItem(dbMgr.className(classes[i]));
+			ui->classBox->setItemIcon(i+1, QIcon(iconNames[dbMgr.classIcon(classes[i])]));
+		}
+		if(oldClass != 0)
+			ui->classBox->setCurrentIndex(classes.indexOf(oldClass)+1);
+		disableClassOpening = false;
+		if((classes.count() == 0) || (ui->classBox->currentIndex() == 0))
+		{
+			ui->classBox->setVisible(classes.count() != 0);
+			ui->removeClassButton->setEnabled(false);
+			ui->editClassButton->setEnabled(false);
+			ui->toggleButton->setEnabled(false);
+			collapse();
+		}
+		else
+		{
+			ui->classBox->show();
+			ui->removeClassButton->setEnabled(true);
+			ui->editClassButton->setEnabled(true);
+			ui->toggleButton->setEnabled(true);
+		}
+		return ret;
 	}
 	else
 	{
-		ui->classBox->show();
-		ui->removeClassButton->setEnabled(true);
-		ui->editClassButton->setEnabled(true);
+		ui->mainControlsFrame->hide();
+		ui->classControlsFrame->hide();
+		ui->easyControlsFrame->show();
+		ui->easyModeControls->show();
 		ui->toggleButton->setEnabled(true);
+		loadDevices();
+		return true;
 	}
-	return ret;
+}
+
+/*! Loads list of devices. */
+void serverManager::loadDevices(void)
+{
+	QList<int> devices = dbMgr.deviceIDs();
+	ui->deviceList->clear();
+#ifndef Q_OS_WASM
+	for(int i=0; i < devices.count(); i++)
+	{
+		QString text = dbMgr.deviceName(devices[i]) + " (" + dbMgr.deviceAddress(devices[i]).toString() + ") [";
+		text += serverPtr->isConnected(dbMgr.deviceAddress(devices[i])) ? tr("online") : tr("offline");
+		text += "]";
+		new QListWidgetItem(QIcon(":class-icons/icon10.png"), text, ui->deviceList);
+	}
+#endif // Q_OS_WASM
+	ui->deviceList->setCurrentRow(-1);
 }
 
 /*! Opens userManager. */
@@ -129,7 +177,10 @@ void serverManager::collapse(void)
 	if(!expanded)
 		return;
 	expanded = false;
-	ui->classControlsFrame->hide();
+	if(fullMode)
+		ui->classControlsFrame->hide();
+	else
+		ui->easyModeControls->hide();
 	emit widgetCollapsed();
 }
 
@@ -140,7 +191,10 @@ void serverManager::expand(void)
 	if(expanded)
 		return;
 	expanded = true;
-	ui->classControlsFrame->show();
+	if(fullMode)
+		ui->classControlsFrame->show();
+	else
+		ui->easyModeControls->show();
 	emit widgetExpanded();
 }
 
@@ -188,7 +242,10 @@ void serverManager::openClass(bool auth)
 	{
 		if(!auth || dbMgr.auth(dbMgr.classOwner(classes[selected])))
 		{
-			ui->classControlsFrame->setVisible(expanded);
+			if(fullMode)
+				ui->classControlsFrame->setVisible(expanded);
+			else
+				ui->easyModeControls->setVisible(expanded);
 			dbMgr.updateClassTimestamp(classes[selected]);
 			classControls *controlsWidget = new classControls(classes[selected], ui->classControlsFrame);
 			controlsWidget->setAttribute(Qt::WA_DeleteOnClose);
@@ -264,4 +321,44 @@ void serverManager::changeEvent(QEvent *event)
 	if(event->type() == QEvent::LanguageChange)
 		ui->retranslateUi(this);
 	QWidget::changeEvent(event);
+}
+
+/*! Opens deviceEdit and adds a device. */
+void serverManager::addDevice(void)
+{
+	deviceEdit dialog(0, this);
+	if(dialog.exec() == QDialog::Accepted)
+		loadDevices();
+}
+
+/*! Opens deviceEdit and edits selected device. */
+void serverManager::editDevice(void)
+{
+	if(exerciseProgressDialogConfig::dialogCount > 0)
+	{
+		showCloseExercisesMessage();
+		return;
+	}
+	deviceEdit dialog(ui->deviceList->currentRow() + 1, this);
+	if(dialog.exec() == QDialog::Accepted)
+		loadDevices();
+}
+
+/*! Removes selected device. */
+void serverManager::removeDevice(void)
+{
+	if(exerciseProgressDialogConfig::dialogCount > 0)
+	{
+		showCloseExercisesMessage();
+		return;
+	}
+	int selected = ui->deviceList->currentRow() + 1;
+	if(selected > 0)
+	{
+		if(QMessageBox::question(this, QString(), tr("Are you sure you want to remove device %1?").arg(dbMgr.deviceName(selected))) == QMessageBox::Yes)
+		{
+			dbMgr.removeDevice(selected);
+			loadDevices();
+		}
+	}
 }

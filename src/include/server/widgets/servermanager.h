@@ -26,6 +26,7 @@
 #include "server/adminselector.h"
 #include "server/serversetup.h"
 #include "server/classedit.h"
+#include "server/deviceedit.h"
 #include "server/widgets/classcontrols.h"
 #include "server/widgets/studentdetails.h"
 
@@ -51,6 +52,8 @@ class serverManager : public QWidget
 		QList<int> classes;
 		bool disableClassOpening = false;
 		int lastClassBoxIndex = -1;
+		QSettings settings;
+		bool fullMode;
 
 	protected:
 		void changeEvent(QEvent *event);
@@ -62,11 +65,12 @@ class serverManager : public QWidget
 		void widgetExpanded();
 
 	public slots:
+		bool init(void);
 		void collapse(void);
 		void expand(void);
 
 	private slots:
-		bool init(void);
+		void loadDevices(void);
 		void openUserManager(void);
 		void addClass(void);
 		void openClass(bool auth = true);
@@ -74,6 +78,9 @@ class serverManager : public QWidget
 		void removeClass(void);
 		void editClass(void);
 		void showCloseExercisesMessage(void);
+		void addDevice(void);
+		void editDevice(void);
+		void removeDevice(void);
 };
 
 #endif // SERVERMANAGER_H
