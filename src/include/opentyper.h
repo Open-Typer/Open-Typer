@@ -117,7 +117,7 @@ class OpenTyper : public QMainWindow
 		void loadErrorWords(void);
 		void loadReversedText(void);
 		void exportText(void);
-		bool preview = false, uploadResult = false, correctMistakesOld = true, hideTextOld = false;
+		bool preview = false, uploadResult = false, testLoaded = false, correctMistakesOld = true, hideTextOld = false;
 
 	protected:
 		void changeEvent(QEvent *event);
@@ -144,8 +144,10 @@ class OpenTyper : public QMainWindow
 		void updateStudent(void);
 		void showExerciseStats(void);
 		void loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
+		void startReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText, bool upload);
 		void printText(void);
 		void openEditor(bool newFile = true);
+		void startTest(void);
 };
 
 #endif // OPENTYPER_H

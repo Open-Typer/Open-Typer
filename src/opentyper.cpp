@@ -75,6 +75,8 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->actionViewState, &QAction::toggled, ui->stateFrame, &QWidget::setVisible);
 	// Student menu
 	connect(ui->actionLogIn, &QAction::triggered, this, &OpenTyper::openStudentOptions);
+	// Tools menu
+	connect(ui->actionTypingTest, &QAction::triggered, ui->testButton, &QPushButton::clicked);
 	// Exercise menu
 	connect(ui->actionStats, &QAction::triggered, ui->statsButton, &QPushButton::clicked);
 	connect(ui->actionTimedEx, &QAction::triggered, ui->timedExerciseButton, &QPushButton::clicked);
@@ -107,6 +109,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
 	connect(ui->printButton, &QPushButton::clicked, this, &OpenTyper::printText);
 	connect(ui->exportButton, &QPushButton::clicked, this, &OpenTyper::exportText);
+	connect(ui->testButton, &QPushButton::clicked, this, &OpenTyper::startTest);
 	connect(ui->hideTextCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
 		ui->currentLineArea->setVisible(!checked);
 		ui->textSeparationLine->setVisible(!checked);
@@ -164,6 +167,13 @@ void OpenTyper::refreshAll(void)
 				ui->serverFrameLayout->addWidget(serverManagerWidget);
 				connect(serverManagerWidget, &serverManager::widgetExpanded, this, [this]() { ui->paper->hide(); ui->controlFrame->setEnabled(false); ui->bottomPanel->setEnabled(false); });
 				connect(serverManagerWidget, &serverManager::widgetCollapsed, this, [this]() { ui->paper->show(); ui->controlFrame->setEnabled(true); ui->bottomPanel->setEnabled(true); });
+			}
+			else
+			{
+				serverManager *serverManagerWidget = (serverManager*) ui->serverFrameLayout->itemAt(0)->widget();
+				serverManagerWidget->init();
+				serverManagerWidget->expand();
+				serverManagerWidget->collapse();
 			}
 		}
 		else
@@ -339,7 +349,7 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 			levelID);
 	if(uploadResult)
 	{
-		if(studentUsername != "")
+		if((studentUsername != "") || (!settings.value("server/fullmode", false).toBool() && client.isPaired()))
 			client.sendRequest("put", {"abortExercise"});
 		uploadResult = false;
 	}
@@ -1129,13 +1139,13 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 			historyParser::addHistoryEntry(publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,
 				{QString::number(grossHits),QString::number(levelMistakes),QString::number(time)});
 	}
-	if(uploadResult)
+	if(testLoaded)
 	{
 		ui->correctMistakesCheckBox->setChecked(correctMistakesOld);
 		ui->hideTextCheckBox->setChecked(hideTextOld);
 		if(isFullScreen())
 			showNormal();
-		if(studentUsername != "")
+		if(uploadResult && ((studentUsername != "") || (!settings.value("server/fullmode", false).toBool() && client.isPaired())))
 		{
 			updateStudent();
 			client.sendRequest("put", {"clearRecordedMistakes"});
@@ -1155,7 +1165,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 				{"monitorResult", input.toUtf8(), QByteArray::number(totalHits), QByteArray::number(levelHits), QByteArray::number((double) levelHits*(60.0/lastTimeF)), QByteArray::number(levelMistakes), QByteArray::number(lastTimeF/60.0)});
 		}
 		ui->controlFrame->setEnabled(true);
-		uploadResult = false;
+		testLoaded = false;
 	}
 	levelSummary *msgBox = new levelSummary(this);
 	if(showNetHits)
@@ -1528,6 +1538,12 @@ void OpenTyper::showExerciseStats(void)
 /*! Connected from client.exerciseReceived(). */
 void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText)
 {
+	startReceivedExercise(text, lineLength, includeNewLines, mode, time, correctMistakes, lockUi, hideText, true);
+}
+
+/*! Starts received exercise or a local typing test. */
+void OpenTyper::startReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText, bool upload)
+{
 	changeMode(mode, false);
 	levelLengthExtension = lineLength;
 	loadText(text,includeNewLines,false);
@@ -1556,7 +1572,8 @@ void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool inclu
 		ui->controlFrame->setEnabled(false);
 		showFullScreen();
 	}
-	uploadResult = true;
+	testLoaded = true;
+	uploadResult = upload;
 }
 
 /*!
@@ -1637,4 +1654,48 @@ void OpenTyper::printText(void)
 	});
 	dialog.exec();
 #endif // Q_OS_WASM
+}
+
+/*! Starts typing test. */
+void OpenTyper::startTest(void)
+{
+	loadExerciseDialog *dialog;
+#ifdef Q_OS_WASM
+	dialog = new loadExerciseDialog(this);
+#else
+	bool fullMode = settings.value("server/fullmode", false).toBool();
+	if(serverPtr && serverPtr->isListening() && (!fullMode || (dbMgr.activeClass != 0)))
+	{
+		QList<int> targets;
+		if(fullMode)
+			targets = dbMgr.studentIDs(dbMgr.activeClass);
+		else
+			targets = dbMgr.deviceIDs();
+		QList<int> onlineTargets, occupiedTargets = serverPtr->runningExerciseStudents();
+		for(int i=0; i < targets.count(); i++)
+		{
+			if(fullMode)
+			{
+				if(serverPtr->isLoggedIn(dbMgr.userNickname(targets[i])) && !occupiedTargets.contains(targets[i]))
+					onlineTargets += targets[i];
+			}
+			else if(serverPtr->isConnected(dbMgr.deviceAddress(targets[i])))
+				onlineTargets += targets[i];
+		}
+		dialog = new loadExerciseDialog(onlineTargets, this);
+	}
+	else
+		dialog = new loadExerciseDialog(this);
+#endif // Q_OS_WASM
+	dialog->setWindowModality(Qt::WindowModal);
+	dialog->open();
+	connect(dialog, &QDialog::accepted, this, [this, dialog]() {
+#ifndef Q_OS_WASM
+		if(serverPtr && serverPtr->isListening())
+			classControls::startExercise(dialog);
+		else
+#endif // Q_OS_WASM
+			startReceivedExercise(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
+				dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText(), false);
+	});
 }

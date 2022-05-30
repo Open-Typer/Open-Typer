@@ -297,6 +297,26 @@
                      </property>
                     </widget>
                    </item>
+                   <item>
+                    <widget class="QPushButton" name="testButton">
+                     <property name="focusPolicy">
+                      <enum>Qt::NoFocus</enum>
+                     </property>
+                     <property name="toolTip">
+                      <string>Typing test</string>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../res.qrc">
+                       <normaloff>:/res/images/paper.png</normaloff>:/res/images/paper.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>36</width>
+                       <height>36</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
                   </layout>
                  </widget>
                 </item>
@@ -1955,9 +1975,16 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="actionPreferences"/>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionTypingTest"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
    <addaction name="menuStudent"/>
+   <addaction name="menuTools"/>
    <addaction name="menuExercise"/>
    <addaction name="menuSettings"/>
   </widget>
@@ -2101,6 +2128,15 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>State</string>
+   </property>
+  </action>
+  <action name="actionTypingTest">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/res/images/paper.png</normaloff>:/res/images/paper.png</iconset>
+   </property>
+   <property name="text">
+    <string>Typing test</string>
    </property>
   </action>
  </widget>
