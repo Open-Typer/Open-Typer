@@ -3,7 +3,7 @@
 curl -o openssl.zip -LJO https://github.com/CristiFati/Prebuilt-Binaries/raw/master/OpenSSL/v1.1.1/OpenSSL-1.1.1f-Win-pc032.zip
 mkdir ../openssl
 unzip openssl.zip -d ../openssl
-mv ../openssl/* C:/OpenSSL
+mv ../openssl/OpenSSL/OpenSSL/* C:/OpenSSL
 rm openssl.zip
 find C:/OpenSSL/lib -depth -name "*.lib" -exec sh -c 'f="{}"; mv -- "$f" "${f%.lib}.a"' \;
 source .ci/common/build.sh win32
