@@ -625,11 +625,11 @@ void OpenTyper::updateStudent(void)
 		ui->actionStats->setEnabled(enableStats);
 		return;
 	}
-	QList<QByteArray> response = client.sendRequest("get",{"username"});
+	QStringList response = client.sendRequest("get",{"username"});
 	if(response[0] == "ok")
 	{
 		if(studentUsername == "")
-			client.sendRequest("logout",{studentUsername.toUtf8()});
+			client.sendRequest("logout",{studentUsername});
 		else
 		{
 			QString username = response[1];
@@ -644,7 +644,7 @@ void OpenTyper::updateStudent(void)
 	{
 		if(studentUsername != "")
 		{
-			response = client.sendRequest("auth",{studentUsername.toUtf8(),studentPassword.toUtf8()});
+			response = client.sendRequest("auth",{studentUsername,studentPassword});
 			if(response[0] == "ok")
 			{
 				updateStudent();
@@ -1153,16 +1153,16 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 			{
 				QVariantMap character = recordedMistakes[i];
 				QStringList keys = character.keys();
-				QList<QByteArray> list = {"recordedMistake"};
+				QStringList list = {"recordedMistake"};
 				for(int j=0; j < keys.count(); j++)
 				{
-					list += keys[j].toUtf8();
-					list += character[keys[j]].toString().toUtf8();
+					list += keys[j];
+					list += character[keys[j]].toString();
 				}
 				client.sendRequest("put", list);
 			}
 			client.sendRequest("put",
-				{"monitorResult", input.toUtf8(), QByteArray::number(totalHits), QByteArray::number(levelHits), QByteArray::number((double) levelHits*(60.0/lastTimeF)), QByteArray::number(levelMistakes), QByteArray::number(lastTimeF/60.0)});
+				{"monitorResult", input, QString::number(totalHits), QString::number(levelHits), QString::number((double) levelHits*(60.0/lastTimeF)), QString::number(levelMistakes), QString::number(lastTimeF/60.0)});
 		}
 		ui->controlFrame->setEnabled(true);
 		testLoaded = false;
