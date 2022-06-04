@@ -341,7 +341,7 @@ void classControls::startExercise(loadExerciseDialog *dialog)
 	if(dialog->hideText())
 		hideText = "true";
 #ifndef Q_OS_WASM
-	QList<QByteArray> signalArgs = {
+	QStringList signalArgs = {
 		dialog->exerciseText().toUtf8(),
 		QByteArray::number(dialog->lineLength()),
 		includeNewLines,
