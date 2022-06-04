@@ -31,11 +31,11 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	ui->statsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->statsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	// Load data
-	QList<QByteArray> response;
+	QStringList response;
 	if(client == nullptr)
-		response = { "ok", QByteArray::number(historyParser::historySize(configName,lesson,sublesson,exercise)) };
+		response = QStringList({ QString("ok"), QString::number(historyParser::historySize(configName,lesson,sublesson,exercise)) });
 	else
-		response = client->sendRequest("get",{"resultcount",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise)});
+		response = client->sendRequest("get",{"resultcount",configName.toUtf8(),QString::number(lesson),QString::number(sublesson),QString::number(exercise)});
 	if(response[0] != "ok")
 	{
 		QMetaObject::invokeMethod(this,"reject",Qt::QueuedConnection);
@@ -54,13 +54,13 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	{
 		if(client == nullptr)
 		{
-			response = { "ok" };
+			response = QStringList({ "ok" });
 			QStringList entry = historyParser::historyEntry(configName,lesson,sublesson,exercise,i);
 			for(int i2=0; i2 < entry.count(); i2++)
 				response += entry[i2].toUtf8();
 		}
 		else
-			response = client->sendRequest("get",{"result",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise),QByteArray::number(i)});
+			response = client->sendRequest("get",{"result",configName.toUtf8(),QString::number(lesson),QString::number(sublesson),QString::number(exercise),QString::number(i)});
 		if(response[0] != "ok")
 		{
 			QMetaObject::invokeMethod(this,"reject",Qt::QueuedConnection);
@@ -124,12 +124,12 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	}
 	else
 	{
-		response = client->sendRequest("get",{"betterstudents",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise)});
+		response = client->sendRequest("get",{"betterstudents",configName.toUtf8(),QString::number(lesson),QString::number(sublesson),QString::number(exercise)});
 		if(response[0] == "ok")
 			ui->betterStudentsLabel->setText(tr("Better students: %1").arg(QString(response[1])));
 		else
 			ui->betterStudentsLabel->hide();
-		response = client->sendRequest("get",{"worsestudents",configName.toUtf8(),QByteArray::number(lesson),QByteArray::number(sublesson),QByteArray::number(exercise)});
+		response = client->sendRequest("get",{"worsestudents",configName.toUtf8(),QString::number(lesson),QString::number(sublesson),QString::number(exercise)});
 		if(response[0] == "ok")
 			ui->worseStudentsLabel->setText(tr("Worse students: %1").arg(QString(response[1])));
 		else
