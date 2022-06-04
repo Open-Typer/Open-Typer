@@ -1,7 +1,7 @@
 #!/bin/bash
 
 curl -o openssl.zip https://github.com/CristiFati/Prebuilt-Binaries/raw/master/OpenSSL/v1.1.1/OpenSSL-1.1.1f-Win-pc032.zip
-mkdir C:/OpenSSL
+mkdir ../openssl
 unzip openssl.zip -d ../openssl
 mv ../openssl/* C:/OpenSSL
 rm openssl.zip
