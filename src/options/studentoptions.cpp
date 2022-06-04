@@ -45,10 +45,10 @@ studentOptions::~studentOptions()
  */
 void studentOptions::auth(void)
 {
-	QList<QByteArray> requestData;
+	QStringList requestData;
 	requestData.clear();
-	requestData += ui->usernameEdit->text().toUtf8();
-	requestData += ui->passwordEdit->text().toUtf8();
+	requestData += ui->usernameEdit->text();
+	requestData += ui->passwordEdit->text();
 	auto response = client->sendRequest("auth",requestData);
 	if(response[0] == "ok")
 	{
