@@ -157,6 +157,15 @@ void monitorServer::sendResponse(QString message)
 					return;
 				}
 			}
+			else if(requestList[1] == "name")
+			{
+				if(sessions.contains(clientSocket))
+				{
+					QString username = sessions.value(clientSocket);
+					clientSocket->sendTextMessage(convertData({ "ok", dbMgr.userName(dbMgr.findUser(username)) }));
+					return;
+				}
+			}
 			else if((requestList[1] == "resultcount") && (requestList.count() >= 6))
 			{
 				if(sessions.contains(clientSocket))
