@@ -5,11 +5,12 @@ source .ci/common/build.sh win32
 cd release
 rm -f *.o *.cpp *.h
 windeployqt Open-Typer.exe
-curl -o openssl.zip https://deac-fra.dl.sourceforge.net/project/openssl-for-windows/OpenSSL-1.1.1h_win32.zip
-mkdir openssl
+curl -o openssl.zip https://github.com/CristiFati/Prebuilt-Binaries/raw/master/OpenSSL/v1.1.1/OpenSSL-1.1.1f-Win-pc032.zip
+mkdir C:/OpenSSL
 unzip openssl.zip -d ../openssl
+mv ../openssl/* C:/OpenSSL
 rm openssl.zip
-cp ../openssl/*/*.dll ./
+cp C:/OpenSSL/bin/*.dll ./
 
 # Installer - does not work in CI right now...
 #cd ../installer
