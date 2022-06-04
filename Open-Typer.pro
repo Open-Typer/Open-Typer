@@ -1,6 +1,7 @@
 QT += core gui charts network websockets
 !wasm {
 	QT += printsupport sql
+	LIBS += -lssl -lcrypto
 }
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -20,6 +21,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += \
     src/include
+
+win32 {
+    INCLUDEPATH += C:/OpenSSL/include
+}
 
 SOURCES += \
     src/core/utils.cpp \
