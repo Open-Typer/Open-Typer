@@ -28,12 +28,10 @@
 #include <QEventLoop>
 #include <QHostAddress>
 #include <QTimer>
-#include <QTcpSocket>
-#include <QSslSocket>
+#include <QWebSocket>
 #include <QSettings>
 #include <QFile>
-#include <QSslConfiguration>
-#include <QTcpServer>
+#include <QWebSocketServer>
 #include "core/utils.h"
 
 /*! \brief The monitorClient class is used to communicate with the class monitor server. */
@@ -42,12 +40,11 @@ class monitorClient : public QObject
 	Q_OBJECT
 	public:
 		explicit monitorClient(bool errDialogs = true, QObject *parent = nullptr);
-		~monitorClient();
 		void close(void);
 		void setErrorDialogs(bool errDialogs);
 		bool fullMode(void);
 		bool isPaired(void);
-		QList<QByteArray> sendRequest(QString method, QList<QByteArray> data);
+		QStringList sendRequest(QString method, QStringList data);
 		static QHostAddress serverAddress(void);
 		static quint16 serverPort(void);
 		static bool enabled(void);
@@ -55,15 +52,11 @@ class monitorClient : public QObject
 
 	private:
 		bool errorDialogs, legacy = false;
-#ifdef Q_OS_WASM
-		QTcpSocket *socket;
-#else
-		QSslSocket *socket;
-#endif
-		QByteArray response, receivedData = "";
+		QWebSocket socket;
+		QString response, receivedData = "";
 		bool connected, waitingForResponse;
-		QByteArray convertData(bool *ok, QList<QByteArray> input);
-		QList<QByteArray> readData(QByteArray input);
+		QString convertData(bool *ok, QStringList input);
+		QStringList readData(QString input);
 		QSettings settings;
 
 	signals:
@@ -75,8 +68,9 @@ class monitorClient : public QObject
 		void exerciseReceived(QByteArray, int, bool, int, int, bool, bool, bool);
 
 	private slots:
-		void readResponse(void);
+		void readResponse(QString message);
 		void errorOccurred(QAbstractSocket::SocketError error);
+		void sslErrorsOccurred(const QList<QSslError> &errors);
 };
 
 #endif // NET_H

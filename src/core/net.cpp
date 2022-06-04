@@ -28,43 +28,15 @@ monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	setErrorDialogs(errDialogs);
-#ifdef Q_OS_WASM
-	socket = new QTcpSocket;
-#else
-	socket = new QSslSocket;
-	QFile certFile(":certs/server.pem");
-	certFile.open(QIODevice::ReadOnly | QIODevice::Text);
-	QSslCertificate cert(&certFile);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-	QSslConfiguration sslConfig = socket->sslConfiguration();
-	sslConfig.addCaCertificate(cert);
-	socket->setSslConfiguration(sslConfig);
-#else
-	socket->addCaCertificate(cert);
-#endif
-	socket->setProtocol(QSsl::TlsV1_2);
-	socket->ignoreSslErrors({QSslError(QSslError::HostNameMismatch,cert)});
-#endif // Q_OS_WASM
-	connect(socket,&QIODevice::readyRead,this,&monitorClient::readResponse);
-	connect(socket,&QAbstractSocket::disconnected,this,&monitorClient::disconnected);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-	connect(socket, &QAbstractSocket::errorOccurred, this, &monitorClient::errorOccurred);
-#else
-	connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this,&monitorClient::errorOccurred);
-#endif
-}
-
-/*! Destroys the monitorClient object. */
-monitorClient::~monitorClient()
-{
-	socket->disconnectFromHost();
-	socket->deleteLater();
+	connect(&socket, &QWebSocket::textMessageReceived, this, &monitorClient::readResponse);
+	connect(&socket, &QWebSocket::disconnected, this, &monitorClient::disconnected);
+	connect(&socket, QOverload<const QList<QSslError>&>::of(&QWebSocket::sslErrors), this, &monitorClient::sslErrorsOccurred);
 }
 
 /*! Closes the connection. */
 void monitorClient::close(void)
 {
-	socket->disconnectFromHost();
+	socket.close();
 }
 
 /*! Enables or disables connection error dialogs. */
@@ -127,27 +99,28 @@ bool monitorClient::isPaired(void)
  * \param[in] method Request method.
  * \param[in] data Request data.
  */
-QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> data)
+QStringList monitorClient::sendRequest(QString method, QStringList data)
 {
-	connected = (socket->state() == QAbstractSocket::ConnectedState);
+	connected = (socket.state() == QAbstractSocket::ConnectedState);
 	bool wasConnected = connected;
 	if(!connected)
 	{
-		// Check if the port is open using QTcpServer
-		QTcpServer tmpServer(this);
+		// Check if the port is open using QWebSocketServer
+		QWebSocketServer tmpServer("Open-Typer", QWebSocketServer::NonSecureMode, this);
 		if(tmpServer.listen(QHostAddress::Any, serverPort()))
 		{
 			// The port is closed
 			tmpServer.close();
-			return QList<QByteArray>({"connectFailure"});
+			return {"connectFailure"};
 		}
-#ifdef Q_OS_WASM
-		socket->connectToHost(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
-		connected = socket->waitForConnected(1000);
-#else
-		socket->connectToHostEncrypted(QHostAddress(serverAddress().toIPv4Address()).toString(),serverPort());
-		connected = socket->waitForEncrypted(1000);
-#endif
+		QTimer timer;
+		QEventLoop eventLoop;
+		connect(&socket, &QWebSocket::connected, &eventLoop, &QEventLoop::quit);
+		connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
+		timer.start(5000);
+		socket.open(QUrl("wss://" + QHostAddress(serverAddress().toIPv4Address()).toString() + ":" + QString::number(serverPort())));
+		eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+		connected = (socket.state() == QAbstractSocket::ConnectedState);
 	}
 	if(connected)
 	{
@@ -158,41 +131,47 @@ QList<QByteArray> monitorClient::sendRequest(QString method, QList<QByteArray> d
 			sendRequest("check", {});
 		}
 		bool ok;
-		QList<QByteArray> reqList;
+		QStringList reqList;
 		reqList.clear();
-		reqList += method.toUtf8();
-		for(int i=0; i < data.count(); i++)
-			reqList += data[i];
+		reqList += method;
+		reqList += data;
 		waitingForResponse = true;
-		socket->write(convertData(&ok,reqList));
+		QTimer timer;
+		timer.setSingleShot(true);
+		QEventLoop eventLoop;
+		connect(this, &monitorClient::responseReady, &eventLoop, &QEventLoop::quit);
+		connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
+		timer.start(5000);
+		socket.sendTextMessage(convertData(&ok,reqList));
 		if(!ok)
-			return QList<QByteArray>({"requestError"});
+			return {"requestError"};
 		// Wait for response
 		QApplication::setOverrideCursor(Qt::WaitCursor);
-		bool readStatus = socket->waitForReadyRead(5000);
+		eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+		bool readStatus = timer.isActive();
 		waitingForResponse = false;
 		QApplication::restoreOverrideCursor();
 		if(!readStatus)
 		{
 			errorOccurred(QAbstractSocket::SocketTimeoutError);
-			return QList<QByteArray>({"timeout"});
+			return {"timeout"};
 		}
 		else
 			return readData(response);
 	}
 	else
-		return QList<QByteArray>({"connectFailure"});
+		return {"connectFailure"};
 }
 
 /*!
- * Connected from socket->readyRead().\n
+ * Connected from socket->textMessageReceived().\n
  * Reads the response and emits responseReady().\n
  * If there isn't any request in progress, it reads the data as a signal.
  * \see responseReady()
  */
-void monitorClient::readResponse(void)
+void monitorClient::readResponse(QString message)
 {
-	receivedData += socket->readAll();
+	receivedData += message;
 	if(receivedData[receivedData.count()-1] == ';')
 		legacy = false;
 	else if(!legacy)
@@ -206,13 +185,13 @@ void monitorClient::readResponse(void)
 	}
 	else
 	{
-		QList<QByteArray> signal = readData(receivedData);
+		QStringList signal = readData(receivedData);
 		if(signal[0] == "loadExercise")
 		{
 			if(signal.count() >= 9)
-				emit exerciseReceived(signal[1], signal[2].toInt(), (signal[3]=="true"), signal[4].toInt(), signal[5].toInt(), (signal[6]=="true"), (signal[7]=="true"), (signal[8]=="true"));
+				emit exerciseReceived(signal[1].toUtf8(), signal[2].toInt(), (signal[3]=="true"), signal[4].toInt(), signal[5].toInt(), (signal[6]=="true"), (signal[7]=="true"), (signal[8]=="true"));
 			else if(signal.count() >= 4)
-				emit exerciseReceived(signal[1], signal[2].toInt(), (signal[3]=="true"), 0, 0, true, false, false);
+				emit exerciseReceived(signal[1].toUtf8(), signal[2].toInt(), (signal[3]=="true"), 0, 0, true, false, false);
 		}
 	}
 	receivedData = "";
@@ -234,32 +213,41 @@ void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
 			errBox.setInformativeText("Connection timed out.");
 			break;
 		default:
-			errBox.setInformativeText(socket->errorString());
+			errBox.setInformativeText(socket.errorString());
 			break;
 	}
 	errBox.setIcon(QMessageBox::Critical);
 	errBox.exec();
 }
 
-/*! Converts list of QByteArrays to a single QByteArray, which can be used for a request. */
-QByteArray monitorClient::convertData(bool *ok, QList<QByteArray> input)
+/*!
+ * Ignores SSL errors.
+ */
+void monitorClient::sslErrorsOccurred(const QList<QSslError> &errors)
 {
-	QByteArray out;
+	Q_UNUSED(errors);
+	// Reason for ignoring SSL errors: The server generates random certificate and key when it starts.
+	QSslCertificate cert = errors[0].certificate();
+	if(errors.count() == 2 && errors.contains(QSslError(QSslError::HostNameMismatch, cert)) && errors.contains(QSslError(QSslError::SelfSignedCertificate, cert)))
+		socket.ignoreSslErrors();
+}
+
+/*! Converts list of QStrings to a single QString, which can be used for a request. */
+QString monitorClient::convertData(bool *ok, QStringList input)
+{
+	QString out;
 	out.clear();
 	for(int i = 0; i < input.count(); i++)
 	{
-		QByteArray sizeNum, dataSize;
 		// Data size
-		sizeNum.setNum(input[i].size(),16);
-		dataSize = QByteArray::fromHex(sizeNum);
-		if(sizeNum.size() <= 2)
-			dataSize.prepend(QByteArray::fromHex("0"));
-		else if(sizeNum.size() > 4)
+		QString dataSize = QString::number(input[i].size());
+		if(dataSize.count() > 10)
 		{
 			if(ok != nullptr)
 				*ok = false;
 			return QByteArray();
 		}
+		dataSize.prepend(QString("0").repeated(10 - dataSize.count()));
 		out += dataSize;
 		// Data
 		out += input[i];
@@ -269,22 +257,27 @@ QByteArray monitorClient::convertData(bool *ok, QList<QByteArray> input)
 	return out;
 }
 
-/*! Returns a list of QByteArrays from the input QByteArray. */
-QList<QByteArray> monitorClient::readData(QByteArray input)
+/*! Returns a list of QStrings from the input QString. */
+QStringList monitorClient::readData(QString input)
 {
-	QList<QByteArray> out;
+	QStringList out;
 	out.clear();
 	quint16 dataSize, i2;
-	QByteArray dataSizeArr, data;
+	QString dataSizeStr, data;
 	int i = 0;
 	while(i < input.count())
 	{
 		// Read data size
-		dataSizeArr.clear();
-		dataSizeArr += input[i];
-		dataSizeArr += input[i+1];
-		i += 2;
-		dataSize = dataSizeArr.toHex().toUInt(nullptr,16);
+		dataSizeStr.clear();
+		int j;
+		for(j=0; j < 10; j++)
+		{
+			if(i + j >= input.count())
+				break;
+			dataSizeStr += input[i + j];
+		}
+		i += j;
+		dataSize = dataSizeStr.toInt();
 		// Read data
 		data.clear();
 		for(i2=0; i2 < dataSize; i2++)
