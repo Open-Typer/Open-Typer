@@ -3,6 +3,9 @@ QT += core gui charts network websockets
 	QT += printsupport sql
 	LIBS += -lssl -lcrypto
 }
+macx {
+    LIBS += -L/usr/local/Cellar/openssl@1.1/1.1.1o/lib
+}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
