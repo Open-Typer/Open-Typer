@@ -1,4 +1,4 @@
-QT += core gui charts network
+QT += core gui charts network websockets
 !wasm {
 	QT += printsupport sql
 }
