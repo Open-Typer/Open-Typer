@@ -23,39 +23,32 @@
 
 #include <QObject>
 #include <QSettings>
-#include <QTcpServer>
-#include <QTcpSocket>
-#include <QSslSocket>
+#include <QWebSocketServer>
+#include <QWebSocket>
 #include <QNetworkInterface>
-#include <QTimer>
 #include <QSslCertificate>
 #include <QSslKey>
 #include <QPointer>
+#include <openssl/evp.h>
+#include <openssl/rsa.h>
+#include <openssl/x509.h>
+#include <openssl/pem.h>
 #include "core/database.h"
 
-/*! \brief The monitorServer class is a QTcpServer that is used to communicate with Open-Typer clients. */
-class monitorServer : public QTcpServer
+/*! \brief The monitorServer class is a QWebSocketServer that is used to communicate with Open-Typer clients. */
+class monitorServer : public QWebSocketServer
 {
 	Q_OBJECT
 	public:
 		explicit monitorServer(bool silent = false, QObject *parent = nullptr);
-		~monitorServer();
 		static quint16 port(void);
 		static QHostAddress address(void);
-		void sendSignal(QByteArray name, QList<QByteArray> data, QList<QByteArray> usernames);
-		void sendSignal(QByteArray name, QList<QByteArray> data, QList<QHostAddress> addresses);
+		void sendSignal(QByteArray name, QStringList data, QList<QByteArray> usernames);
+		void sendSignal(QByteArray name, QStringList data, QList<QHostAddress> addresses);
 		bool isLoggedIn(QString username);
 		bool isConnected(QHostAddress address);
 		QList<int> runningExerciseStudents(void);
 		QString deviceStudentName(int deviceID);
-		const QSslCertificate &getSslLocalCertificate() const;
-		const QSslKey &getSslPrivateKey() const;
-		QSsl::SslProtocol getSslProtocol() const;
-		void setSslLocalCertificate(const QSslCertificate &certificate);
-		bool setSslLocalCertificate(const QString &path, QSsl::EncodingFormat format = QSsl::Pem);
-		void setSslPrivateKey(const QSslKey &key);
-		bool setSslPrivateKey(const QString &fileName, QSsl::KeyAlgorithm algorithm = QSsl::Rsa, QSsl::EncodingFormat format = QSsl::Pem, const QByteArray &passPhrase = QByteArray());
-		void setSslProtocol(QSsl::SslProtocol protocol);
 
 	protected:
 		void incomingConnection(qintptr socketDescriptor);
@@ -73,20 +66,18 @@ class monitorServer : public QTcpServer
 	private slots:
 		void acceptConnection(void);
 		void disconnectClient(void);
-		void sendResponse(void);
+		void sendResponse(QString message);
 
 	private:
-		QList<QSslSocket*> clientSockets;
-		QByteArray convertData(bool *ok, QList<QByteArray> input);
-		QByteArray convertData(QList<QByteArray> input);
-		QList<QByteArray> readData(QByteArray input);
+		QList<QWebSocket*> clientSockets;
+		QString convertData(bool *ok, QStringList input);
+		QString convertData(QStringList input);
+		QStringList readData(QString input);
 		bool studentAuthAvailable(QString nickname);
-		QMap<QSslSocket*,QString> sessions; /*!< Stores student sessions (socket, username). */
-		QList<QSslSocket*> exerciseSockets;
-		QMap<QSslSocket*, QList<QVariantMap>> recordedMistakes;
-		QSslCertificate m_sslLocalCertificate;
-		QSslKey m_sslPrivateKey;
-		QSsl::SslProtocol m_sslProtocol;
+		void generateRandomCertKey(void);
+		QMap<QWebSocket*,QString> sessions; /*!< Stores student sessions (socket, username). */
+		QList<QWebSocket*> exerciseSockets;
+		QMap<QWebSocket*, QList<QVariantMap>> recordedMistakes;
 		QSettings settings;
 		QMap<int, QString> deviceStudentNames;
 };

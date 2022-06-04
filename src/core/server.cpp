@@ -24,18 +24,13 @@ QPointer<monitorServer> serverPtr = nullptr;
 
 /*! Constructs monitorServer. */
 monitorServer::monitorServer(bool silent, QObject *parent) :
-	QTcpServer(parent),
+	QWebSocketServer("Open-Typer", QWebSocketServer::SecureMode, parent),
 	clientSockets(),
 	sessions(),
 	exerciseSockets(),
-	m_sslLocalCertificate(),
-	m_sslPrivateKey(),
-	m_sslProtocol(QSsl::UnknownProtocol),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
-	setSslLocalCertificate(":certs/server.pem");
-	setSslPrivateKey(":certs/server.key");
-	setSslProtocol(QSsl::TlsV1_2);
+	generateRandomCertKey();
 	if(!listen(QHostAddress::Any,port()))
 	{
 		if(!silent)
@@ -49,12 +44,8 @@ monitorServer::monitorServer(bool silent, QObject *parent) :
 		}
 		return;
 	}
-}
-
-/*! Destroys the monitorServer object. */
-monitorServer::~monitorServer()
-{
-	close();
+	// Connections
+	connect(this, &QWebSocketServer::newConnection, this, &monitorServer::acceptConnection);
 }
 
 /*! Returns the IP address of the network interface. */
@@ -77,25 +68,24 @@ quint16 monitorServer::port(void)
 }
 
 /*!
- * Connected from QSslSocket::encrypted().\n
  * Accepts a new connection.
  *
  * \see sendResponse()
  */
 void monitorServer::acceptConnection(void)
 {
-	QSslSocket *clientSocket = dynamic_cast<QSslSocket*>(nextPendingConnection());
-	connect(clientSocket,&QIODevice::readyRead,this,&monitorServer::sendResponse);
-	connect(clientSocket,&QAbstractSocket::disconnected,this,&monitorServer::disconnectClient);
+	QWebSocket *clientSocket = nextPendingConnection();
+	connect(clientSocket, &QWebSocket::textMessageReceived, this, &monitorServer::sendResponse);
+	connect(clientSocket, &QWebSocket::disconnected, this, &monitorServer::disconnectClient);
 	clientSockets += clientSocket;
 	if(!settings.value("server/fullmode", false).toBool())
 		emit connectedDevicesChanged();
 }
 
-/*! Connected from QAbstractSocket::disconnected(). */
+/*! Connected from QWebSocket::disconnected(). */
 void monitorServer::disconnectClient(void)
 {
-	QSslSocket *clientSocket = (QSslSocket*) sender();
+	QWebSocket *clientSocket = (QWebSocket*) sender();
 	clientSockets.removeAll(clientSocket);
 	sessions.remove(clientSocket);
 	emit loggedInStudentsChanged();
@@ -107,17 +97,16 @@ void monitorServer::disconnectClient(void)
 }
 
 /*!
- * Connected from QIODevice::readyRead().\n
+ * Connected from QWebSocket::binaryMessageReceived().\n
  * Sends a response back to the client.
  */
-void monitorServer::sendResponse(void)
+void monitorServer::sendResponse(QString message)
 {
-	QSslSocket *clientSocket = (QSslSocket*) sender();
-	QByteArray request = clientSocket->readAll();
-	QList<QByteArray> requestList = readData(request);
+	QWebSocket *clientSocket = (QWebSocket*) sender();
+	QStringList requestList = readData(message.toUtf8());
 	if(sessions.contains(clientSocket) && !studentAuthAvailable(sessions[clientSocket]))
 		sessions.remove(clientSocket);
-	QList<QSslSocket*> socketsToRemove;
+	QList<QWebSocket*> socketsToRemove;
 	for(int i=0; i < exerciseSockets.count(); i++)
 	{
 		if(!sessions.contains(exerciseSockets[i]))
@@ -127,7 +116,7 @@ void monitorServer::sendResponse(void)
 		exerciseSockets.removeAll(socketsToRemove[i]);
 	if(requestList[0] == "check")
 	{
-		clientSocket->write(convertData({"ok"}));
+		clientSocket->sendTextMessage(convertData({"ok"}));
 		return;
 	}
 	if(settings.value("server/fullmode", false).toBool())
@@ -141,20 +130,20 @@ void monitorServer::sendResponse(void)
 				{
 					sessions.insert(clientSocket,requestList[1]);
 					emit loggedInStudentsChanged();
-					clientSocket->write(convertData({"ok"}));
+					clientSocket->sendTextMessage(convertData({"ok"}));
 				}
 				else
-					clientSocket->write(convertData({"fail", "password"}));
+					clientSocket->sendTextMessage(convertData({"fail", "password"}));
 			}
 			else
-				clientSocket->write(convertData({"fail", "inactive_class"}));
+				clientSocket->sendTextMessage(convertData({"fail", "inactive_class"}));
 			return;
 		}
 		else if(requestList[0] == "logout")
 		{
 			sessions.remove(clientSocket);
 			emit loggedInStudentsChanged();
-			clientSocket->write(convertData({"ok"}));
+			clientSocket->sendTextMessage(convertData({"ok"}));
 			return;
 		}
 		else if((requestList[0] == "get") && (requestList.count() >= 2))
@@ -164,7 +153,7 @@ void monitorServer::sendResponse(void)
 				if(sessions.contains(clientSocket))
 				{
 					QString username = sessions.value(clientSocket);
-					clientSocket->write(convertData({"ok",username.toUtf8()}));
+					clientSocket->sendTextMessage(convertData({"ok",username.toUtf8()}));
 					return;
 				}
 			}
@@ -174,7 +163,7 @@ void monitorServer::sendResponse(void)
 				{
 					QString username = sessions.value(clientSocket);
 					int studentID = dbMgr.findUser(username);
-					clientSocket->write(convertData({"ok", QByteArray::number(dbMgr.historyEntries(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt()).count())}));
+					clientSocket->sendTextMessage(convertData({"ok", QByteArray::number(dbMgr.historyEntries(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt()).count())}));
 					return;
 				}
 			}
@@ -185,13 +174,13 @@ void monitorServer::sendResponse(void)
 					QString username = sessions.value(clientSocket);
 					int studentID = dbMgr.findUser(username);
 					QVariantMap entry = dbMgr.historyEntries(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt()).at(requestList[6].toInt());
-					QList<QByteArray> responseList;
+					QStringList responseList;
 					responseList.clear();
 					responseList += "ok";
-					responseList += QByteArray::number(entry["speed"].toInt());
-					responseList += QByteArray::number(entry["mistakes"].toInt());
-					responseList += QByteArray::number(entry["duration"].toInt());
-					clientSocket->write(convertData(responseList));
+					responseList += QString::number(entry["speed"].toInt());
+					responseList += QString::number(entry["mistakes"].toInt());
+					responseList += QString::number(entry["duration"].toInt());
+					clientSocket->sendTextMessage(convertData(responseList));
 					return;
 				}
 			}
@@ -202,7 +191,7 @@ void monitorServer::sendResponse(void)
 					QString username = sessions.value(clientSocket);
 					int studentID = dbMgr.findUser(username);
 					int betterStudents = dbMgr.compareWithStudents(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt(), true);
-					clientSocket->write(convertData({"ok",QByteArray::number(betterStudents)}));
+					clientSocket->sendTextMessage(convertData({"ok",QByteArray::number(betterStudents)}));
 					return;
 				}
 			}
@@ -213,7 +202,7 @@ void monitorServer::sendResponse(void)
 					QString username = sessions.value(clientSocket);
 					int studentID = dbMgr.findUser(username);
 					int worseStudents = dbMgr.compareWithStudents(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt(), false);
-					clientSocket->write(convertData({"ok",QByteArray::number(worseStudents)}));
+					clientSocket->sendTextMessage(convertData({"ok",QByteArray::number(worseStudents)}));
 					return;
 				}
 			}
@@ -231,7 +220,7 @@ void monitorServer::sendResponse(void)
 					resultData["mistakes"] = requestList[7];
 					resultData["duration"] = requestList[8];
 					dbMgr.addHistoryEntry(dbMgr.activeClass, studentID, QString(requestList[2]), requestList[3].toInt(), requestList[4].toInt(), requestList[5].toInt(), resultData);
-					clientSocket->write(convertData({"ok"}));
+					clientSocket->sendTextMessage(convertData({"ok"}));
 					return;
 				}
 			}
@@ -246,7 +235,7 @@ void monitorServer::sendResponse(void)
 			{
 				if(paired)
 				{
-					clientSocket->write(convertData({"ok"}));
+					clientSocket->sendTextMessage(convertData({"ok"}));
 					return;
 				}
 			}
@@ -256,7 +245,7 @@ void monitorServer::sendResponse(void)
 	{
 		if(requestList[1] == "serverMode")
 		{
-			clientSocket->write(convertData({ "ok", settings.value("server/fullmode", false).toBool() ? "full" : "easy" }));
+			clientSocket->sendTextMessage(convertData({ "ok", settings.value("server/fullmode", false).toBool() ? "full" : "easy" }));
 			return;
 		}
 	}
@@ -269,7 +258,7 @@ void monitorServer::sendResponse(void)
 				if(!recordedMistakes.contains(clientSocket))
 					recordedMistakes[clientSocket] = QList<QVariantMap>();
 				recordedMistakes[clientSocket].clear();
-				clientSocket->write(convertData({"ok"}));
+				clientSocket->sendTextMessage(convertData({"ok"}));
 				return;
 			}
 		}
@@ -294,7 +283,7 @@ void monitorServer::sendResponse(void)
 							map[key] = QString(requestList[i]);
 					}
 					recordedMistakes[clientSocket].append(map);
-					clientSocket->write(convertData({"ok"}));
+					clientSocket->sendTextMessage(convertData({"ok"}));
 					return;
 				}
 			}
@@ -313,7 +302,7 @@ void monitorServer::sendResponse(void)
 					emit resultUploaded(id, recordedMistakes[clientSocket], requestList[2], requestList[3].toInt(), requestList[4].toInt(), requestList[5].toDouble(), requestList[6].toInt(), requestList[7].toDouble());
 					recordedMistakes[clientSocket].clear();
 					exerciseSockets.removeAll(clientSocket);
-					clientSocket->write(convertData({"ok"}));
+					clientSocket->sendTextMessage(convertData({"ok"}));
 					return;
 				}
 			}
@@ -328,22 +317,22 @@ void monitorServer::sendResponse(void)
 				else if(!settings.value("server/fullmode", false).toBool())
 					emit exerciseAborted(dbMgr.findDevice(QHostAddress(clientSocket->peerAddress().toIPv4Address())));
 			}
-			clientSocket->write(convertData({"ok"}));
+			clientSocket->sendTextMessage(convertData({"ok"}));
 			return;
 		}
 	}
-	clientSocket->write(convertData({"fail"}));
+	clientSocket->sendTextMessage(convertData({"fail"}));
 }
 
 /*! Sends a signal to clients with username from a list. */
-void monitorServer::sendSignal(QByteArray name, QList<QByteArray> data, QList<QByteArray> usernames)
+void monitorServer::sendSignal(QByteArray name, QStringList data, QList<QByteArray> usernames)
 {
-	QList<QByteArray> rawData;
+	QStringList rawData;
 	rawData.clear();
 	rawData += name;
 	for(int i=0; i < data.count(); i++)
 		rawData += data[i];
-	QByteArray finalData = convertData(rawData);
+	QString finalData = convertData(rawData);
 	for(int i=0; i < clientSockets.count(); i++)
 	{
 		if(sessions.contains(clientSockets[i]) && usernames.contains(sessions[clientSockets[i]].toUtf8()))
@@ -352,21 +341,21 @@ void monitorServer::sendSignal(QByteArray name, QList<QByteArray> data, QList<QB
 			{
 				if(name == "loadExercise")
 					exerciseSockets += clientSockets[i];
-				clientSockets[i]->write(finalData);
+				clientSockets[i]->sendTextMessage(finalData);
 			}
 		}
 	}
 }
 
 /*! Sends a signal to clients with address from a list. */
-void monitorServer::sendSignal(QByteArray name, QList<QByteArray> data, QList<QHostAddress> addresses)
+void monitorServer::sendSignal(QByteArray name, QStringList data, QList<QHostAddress> addresses)
 {
-	QList<QByteArray> rawData;
+	QStringList rawData;
 	rawData.clear();
 	rawData += name;
 	for(int i=0; i < data.count(); i++)
 		rawData += data[i];
-	QByteArray finalData = convertData(rawData);
+	QString finalData = convertData(rawData);
 	for(int i=0; i < clientSockets.count(); i++)
 	{
 		QHostAddress address(clientSockets[i]->peerAddress().toIPv4Address());
@@ -376,7 +365,7 @@ void monitorServer::sendSignal(QByteArray name, QList<QByteArray> data, QList<QH
 			{
 				if(name == "loadExercise")
 					exerciseSockets += clientSockets[i];
-				clientSockets[i]->write(finalData);
+				clientSockets[i]->sendTextMessage(finalData);
 			}
 		}
 	}
@@ -417,25 +406,22 @@ QString monitorServer::deviceStudentName(int deviceID)
 		return "";
 }
 
-/*! Converts list of QByteArrays to a single QByteArray, which can be used for a response or signal. */
-QByteArray monitorServer::convertData(bool *ok, QList<QByteArray> input)
+/*! Converts list of QStrings to a single QString, which can be used for a response or signal. */
+QString monitorServer::convertData(bool *ok, QStringList input)
 {
-	QByteArray out;
+	QString out;
 	out.clear();
 	for(int i = 0; i < input.count(); i++)
 	{
-		QByteArray sizeNum, dataSize;
 		// Data size
-		sizeNum.setNum(input[i].size(),16);
-		dataSize = QByteArray::fromHex(sizeNum);
-		if(sizeNum.size() <= 2)
-			dataSize.prepend(QByteArray::fromHex("0"));
-		else if(sizeNum.size() > 4)
+		QString dataSize = QString::number(input[i].size());
+		if(dataSize.count() > 10)
 		{
 			if(ok != nullptr)
 				*ok = false;
 			return QByteArray();
 		}
+		dataSize.prepend(QString("0").repeated(10 - dataSize.count()));
 		out += dataSize;
 		// Data
 		out += input[i];
@@ -448,27 +434,32 @@ QByteArray monitorServer::convertData(bool *ok, QList<QByteArray> input)
 }
 
 /*! Implementation of convertData() without status boolean. */
-QByteArray monitorServer::convertData(QList<QByteArray> input)
+QString monitorServer::convertData(QStringList input)
 {
 	return convertData(nullptr,input);
 }
 
-/*! Returns a list of QByteArrays from the input QByteArray. */
-QList<QByteArray> monitorServer::readData(QByteArray input)
+/*! Returns a list of QStrings from the input QString. */
+QStringList monitorServer::readData(QString input)
 {
-	QList<QByteArray> out;
+	QStringList out;
 	out.clear();
 	quint16 dataSize, i2;
-	QByteArray dataSizeArr, data;
+	QString dataSizeStr, data;
 	int i = 0;
 	while(i < input.count())
 	{
 		// Read data size
-		dataSizeArr.clear();
-		dataSizeArr += input[i];
-		dataSizeArr += input[i+1];
-		i += 2;
-		dataSize = dataSizeArr.toHex().toUInt(nullptr,16);
+		dataSizeStr.clear();
+		int j;
+		for(j=0; j < 10; j++)
+		{
+			if(i + j >= input.count())
+				break;
+			dataSizeStr += input[i + j];
+		}
+		i += j;
+		dataSize = dataSizeStr.toInt();
 		// Read data
 		data.clear();
 		for(i2=0; i2 < dataSize; i2++)
@@ -493,71 +484,81 @@ bool monitorServer::studentAuthAvailable(QString nickname)
 	return false;
 }
 
-/*! Overrides QTcpServer#incomingConnection(). */
-void monitorServer::incomingConnection(qintptr socketDescriptor)
+/*! Generates and sets random SSL key and certificate. */
+void monitorServer::generateRandomCertKey(void)
 {
-	QSslSocket *sslSocket = new QSslSocket(this);
-	sslSocket->setSocketDescriptor(socketDescriptor);
-	sslSocket->setLocalCertificate(m_sslLocalCertificate);
-	sslSocket->setPrivateKey(m_sslPrivateKey);
-	sslSocket->setProtocol(m_sslProtocol);
-	addPendingConnection(sslSocket);
-	sslSocket->startServerEncryption();
-	connect(sslSocket,&QSslSocket::encrypted,this,&monitorServer::acceptConnection);
-}
-
-/*! Returns local SSL certificate. */
-const QSslCertificate &monitorServer::getSslLocalCertificate() const
-{
-	return m_sslLocalCertificate;
-}
-
-/*! Returns SSL private key. */
-const QSslKey &monitorServer::getSslPrivateKey() const
-{
-	return m_sslPrivateKey;
-}
-
-/*! Returns the SSL protocol that is currently set. */
-QSsl::SslProtocol monitorServer::getSslProtocol() const
-{
-	return m_sslProtocol;
-}
-
-/*! Sets local SSL certificate. */
-void monitorServer::setSslLocalCertificate(const QSslCertificate &certificate)
-{
-	m_sslLocalCertificate = certificate;
-}
-
-/*! Sets local SSL certificate from path. */
-bool monitorServer::setSslLocalCertificate(const QString &path, QSsl::EncodingFormat format)
-{
-	QFile certificateFile(path);
-	if(!certificateFile.open(QIODevice::ReadOnly))
-		return false;
-	m_sslLocalCertificate = QSslCertificate(certificateFile.readAll(),format);
-	return true;
-}
-
-/*! Sets SSL private key. */
-void monitorServer::setSslPrivateKey(const QSslKey &key)
-{
-	m_sslPrivateKey = key;
-}
-
-/*! Sets SSL private key from a file. */
-bool monitorServer::setSslPrivateKey(const QString &fileName, QSsl::KeyAlgorithm algorithm, QSsl::EncodingFormat format, const QByteArray &passPhrase)
-{
-	QFile keyFile(fileName);
-	if(!keyFile.open(QIODevice::ReadOnly))
-		return false;
-	m_sslPrivateKey = QSslKey(keyFile.readAll(),algorithm,format,QSsl::PrivateKey,passPhrase);
-	return true;
-}
-
-/*! Sets SSL protocol. */
-void monitorServer::setSslProtocol(QSsl::SslProtocol protocol)
-{
-	m_sslProtocol = protocol;
+	EVP_PKEY * pkey = nullptr;
+	RSA * rsa = nullptr;
+	X509 * x509 = nullptr;
+	X509_NAME * name = nullptr;
+	BIO * bp_public = nullptr, * bp_private = nullptr;
+	const char * buffer = nullptr;
+	long size;
+	pkey = EVP_PKEY_new();
+	q_check_ptr(pkey);
+	rsa = RSA_generate_key(2048, RSA_F4, nullptr, nullptr);
+	q_check_ptr(rsa);
+	EVP_PKEY_assign_RSA(pkey, rsa);
+	x509 = X509_new();
+	q_check_ptr(x509);
+	ASN1_INTEGER_set(X509_get_serialNumber(x509), 1);
+	X509_gmtime_adj(X509_get_notBefore(x509), 0);
+	X509_gmtime_adj(X509_get_notAfter(x509), 31536000L);
+	X509_set_pubkey(x509, pkey);
+	name = X509_get_subject_name(x509);
+	q_check_ptr(name);
+	X509_NAME_add_entry_by_txt(name, "C", MBSTRING_ASC, (unsigned char *)"US", -1, -1, 0);
+	X509_NAME_add_entry_by_txt(name, "O", MBSTRING_ASC, (unsigned char *)"Open-Typer", -1, -1, 0);
+	X509_NAME_add_entry_by_txt(name, "CN", MBSTRING_ASC, (unsigned char *)"Open-Typer", -1, -1, 0);
+	X509_set_issuer_name(x509, name);
+	X509_sign(x509, pkey, EVP_sha1());
+	bp_private = BIO_new(BIO_s_mem());
+	q_check_ptr(bp_private);
+	int ret = PEM_write_bio_PrivateKey(bp_private, pkey, nullptr, nullptr, 0, nullptr, nullptr);
+	if(ret != 1)
+	{
+		EVP_PKEY_free(pkey);
+		X509_free(x509);
+		BIO_free_all(bp_private);
+		QString errorMessage = QString("PEM_write_bio_PrivateKey exited with code %1").arg(QString::number(ret));
+		QMessageBox::critical(nullptr, "Error", errorMessage);
+		return;
+	}
+	bp_public = BIO_new(BIO_s_mem());
+	q_check_ptr(bp_public);
+	ret = PEM_write_bio_X509(bp_public, x509);
+	if(ret != 1)
+	{
+		EVP_PKEY_free(pkey);
+		X509_free(x509);
+		BIO_free_all(bp_public);
+		BIO_free_all(bp_private);
+		QString errorMessage = QString("PEM_write_bio_X509 exited with code %1").arg(QString::number(ret));
+		QMessageBox::critical(nullptr, "Error", errorMessage);
+		return;
+	}
+	size = BIO_get_mem_data(bp_public, &buffer);
+	q_check_ptr(buffer);
+	QSslConfiguration sslConfig;
+	sslConfig.setLocalCertificate(QSslCertificate(QByteArray(buffer, size)));
+	if(sslConfig.localCertificate().isNull())
+	{
+		QString errorMessage = "Failed to generate a random certificate";
+		QMessageBox::critical(nullptr, "Error", errorMessage);
+		return;
+	}
+	size = BIO_get_mem_data(bp_private, &buffer);
+	q_check_ptr(buffer);
+	sslConfig.setPrivateKey(QSslKey(QByteArray(buffer, size), QSsl::Rsa));
+	if(sslConfig.privateKey().isNull())
+	{
+		QString errorMessage = "Failed to generate a random private key";
+		QMessageBox::critical(nullptr, "Error", errorMessage);
+		return;
+	}
+	setSslConfiguration(sslConfig);
+	EVP_PKEY_free(pkey);
+	X509_free(x509);
+	BIO_free_all(bp_public);
+	BIO_free_all(bp_private);
 }
