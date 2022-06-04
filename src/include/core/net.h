@@ -70,7 +70,9 @@ class monitorClient : public QObject
 	private slots:
 		void readResponse(QString message);
 		void errorOccurred(QAbstractSocket::SocketError error);
+#ifndef Q_OS_WASM
 		void sslErrorsOccurred(const QList<QSslError> &errors);
+#endif // Q_OS_WASM
 };
 
 #endif // NET_H

@@ -30,7 +30,9 @@ monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 	setErrorDialogs(errDialogs);
 	connect(&socket, &QWebSocket::textMessageReceived, this, &monitorClient::readResponse);
 	connect(&socket, &QWebSocket::disconnected, this, &monitorClient::disconnected);
+#ifndef Q_OS_WASM
 	connect(&socket, QOverload<const QList<QSslError>&>::of(&QWebSocket::sslErrors), this, &monitorClient::sslErrorsOccurred);
+#endif // Q_OS_WASM
 }
 
 /*! Closes the connection. */
@@ -220,6 +222,7 @@ void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
 	errBox.exec();
 }
 
+#ifndef Q_OS_WASM
 /*!
  * Ignores SSL errors.
  */
@@ -231,6 +234,7 @@ void monitorClient::sslErrorsOccurred(const QList<QSslError> &errors)
 	if(errors.count() == 2 && errors.contains(QSslError(QSslError::HostNameMismatch, cert)) && errors.contains(QSslError(QSslError::SelfSignedCertificate, cert)))
 		socket.ignoreSslErrors();
 }
+#endif // Q_OS_WASM
 
 /*! Converts list of QStrings to a single QString, which can be used for a request. */
 QString monitorClient::convertData(bool *ok, QStringList input)
