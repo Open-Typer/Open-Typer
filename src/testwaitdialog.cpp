@@ -28,6 +28,10 @@ testWaitDialog::testWaitDialog(monitorClient *client, QWidget *parent) :
 	m_client(client)
 {
 	ui->setupUi(this);
+	ui->textArea->hide();
+	QFont font = themeEngine::font();
+	font.setPointSize(12);
+	ui->textLabel->setFont(themeEngine::font());
 	// Connections
 	connect(ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &testWaitDialog::close);
 	connect(ui->nameEdit, &QLineEdit::textChanged, this, [this](QString text) { m_client->sendRequest("put", { "name", text }); });
@@ -61,6 +65,16 @@ bool testWaitDialog::nameReadOnly(void)
 void testWaitDialog::setNameReadOnly(bool readOnly)
 {
 	ui->nameEdit->setReadOnly(readOnly);
+}
+
+/*! Sets the exercise text. */
+void testWaitDialog::setText(QString text)
+{
+	ui->textArea->show();
+	ui->textLabel->setText(text);
+	QTimer::singleShot( 0, this, [this]() {
+		ui->textArea->setFixedWidth(ui->textLabel->width() + ui->textArea->verticalScrollBar()->width()*2);
+	});
 }
 
 /*! Overrides QDialog::closeEvent(). */

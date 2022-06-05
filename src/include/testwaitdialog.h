@@ -25,7 +25,9 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QScrollBar>
 #include "core/net.h"
+#include "core/theme.h"
 
 namespace Ui {
 	class testWaitDialog;
@@ -45,6 +47,7 @@ class testWaitDialog : public QDialog
 		void setName(QString name);
 		bool nameReadOnly(void);
 		void setNameReadOnly(bool readOnly);
+		void setText(QString text);
 
 	private:
 		Ui::testWaitDialog *ui;
