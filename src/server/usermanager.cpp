@@ -93,7 +93,7 @@ void userManager::removeUser(void)
 	int userID = dbMgr.teacherIDs().value(ui->userList->currentRow());
 	QMessageBox confirmDialog;
 	confirmDialog.setWindowTitle(tr("Confirm"));
-	confirmDialog.setText(tr("Are you sure you want to remove user") + " " + dbMgr.userName(userID) + "?");
+	confirmDialog.setText(tr("Are you sure you want to remove user %1?").arg(dbMgr.userName(userID)));
 	confirmDialog.setInformativeText(tr("This will remove all classes the user owns!"));
 	QPushButton *yesButton = confirmDialog.addButton(tr("Yes"),QMessageBox::YesRole);
 	QPushButton *noButton = confirmDialog.addButton(tr("No"),QMessageBox::NoRole);
