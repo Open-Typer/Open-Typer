@@ -48,7 +48,7 @@ class exerciseProgressDialog : public QDialog
 {
 	Q_OBJECT
 	public:
-		explicit exerciseProgressDialog(int classID, QList<int> targets, QWidget *parent = nullptr);
+		explicit exerciseProgressDialog(int classID, QList<int> targets, QString exerciseText, int lineLength, bool includeNewLines, int mode, int timeLimitSecs, bool correctMistakes, bool lockUi, bool hideText, QWidget *parent = nullptr);
 		~exerciseProgressDialog();
 
 	private:
@@ -59,12 +59,18 @@ class exerciseProgressDialog : public QDialog
 		QMap<int, QString> inputTexts;
 		QMap<int, bool> abortList;
 		QMap<int, QList<QVariantMap>> recordedMistakeLists;
-		void setupTable(void);
+		QString m_exerciseText;
+		int m_lineLength;
+		bool m_includeNewLines;
+		int m_mode, m_timeLimit;
+		bool m_correctMistakes, m_lockUi, m_hideText;
+		bool started = false;
 
 	protected:
 		void closeEvent(QCloseEvent *event);
 
 	private slots:
+		void setupTable(void);
 		void loadResult(int targetID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes, double time);
 		void abortExercise(int targetID);
 		void printAll(void);

@@ -26,10 +26,18 @@ namespace exerciseProgressDialogConfig {
 }
 
 /*! Constructs exerciseProgressDialog. */
-exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, QWidget *parent) :
+exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, QString exerciseText, int lineLength, bool includeNewLines, int mode, int timeLimitSecs, bool correctMistakes, bool lockUi, bool hideText, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::exerciseProgressDialog),
-	exerciseTargets(targets)
+	exerciseTargets(targets),
+	m_exerciseText(exerciseText),
+	m_lineLength(lineLength),
+	m_includeNewLines(includeNewLines),
+	m_mode(mode),
+	m_timeLimit(timeLimitSecs),
+	m_correctMistakes(correctMistakes),
+	m_lockUi(lockUi),
+	m_hideText(hideText)
 {
 	setAttribute(Qt::WA_DeleteOnClose);
 	exerciseProgressDialogConfig::dialogCount++;
@@ -42,6 +50,46 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, 
 #ifndef Q_OS_WASM
 	connect(serverPtr, &monitorServer::resultUploaded, this, &exerciseProgressDialog::loadResult);
 	connect(serverPtr, &monitorServer::exerciseAborted, this, &exerciseProgressDialog::abortExercise);
+	connect(serverPtr, &monitorServer::deviceConfigurationChanged, this, &exerciseProgressDialog::setupTable);
+	connect(ui->startButton, &QToolButton::clicked, this, [this]() {
+		QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+		bool fullMode = settings.value("server/fullmode", false).toBool();
+		QList<QByteArray> usernames;
+		QList<QHostAddress> addresses;
+		for(int i=0; i < exerciseTargets.count(); i++)
+		{
+			if(fullMode)
+				usernames += dbMgr.userNickname(exerciseTargets[i]).toUtf8();
+			else
+				addresses += dbMgr.deviceAddress(exerciseTargets[i]);
+		}
+		QByteArray includeNewLines = "false", correctMistakes = "false", lockUi = "false", hideText = "false";
+		if(m_includeNewLines)
+			includeNewLines = "true";
+		if(m_correctMistakes)
+			correctMistakes = "true";
+		if(m_lockUi)
+			lockUi = "true";
+		if(m_hideText)
+			hideText = "true";
+		QStringList signalArgs = {
+			m_exerciseText,
+			QString::number(m_lineLength),
+			includeNewLines,
+			QString::number(m_mode),
+			QString::number(m_timeLimit),
+			correctMistakes,
+			lockUi,
+			hideText
+		};
+		if(fullMode)
+			serverPtr->sendSignal("loadExercise", signalArgs, usernames);
+		else
+			serverPtr->sendSignal("loadExercise", signalArgs, addresses);
+		ui->startButton->hide();
+		started = true;
+		setupTable();
+	});
 #endif // Q_OS_WASM
 	connect(ui->printButton, &QPushButton::clicked, this, &exerciseProgressDialog::printAll);
 	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &QDialog::close);
@@ -110,6 +158,8 @@ void exerciseProgressDialog::setupTable(void)
 				});
 			});
 		}
+		else if(!started)
+			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("Waiting...")));
 		else
 			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("In progress...")));
 		// Mark
