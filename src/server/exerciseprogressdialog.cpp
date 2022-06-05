@@ -58,10 +58,13 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, 
 		QList<QHostAddress> addresses;
 		for(int i=0; i < exerciseTargets.count(); i++)
 		{
-			if(fullMode)
-				usernames += dbMgr.userNickname(exerciseTargets[i]).toUtf8();
-			else
-				addresses += dbMgr.deviceAddress(exerciseTargets[i]);
+			if(!(abortList.contains(exerciseTargets[i]) && abortList[exerciseTargets[i]]))
+			{
+				if(fullMode)
+					usernames += dbMgr.userNickname(exerciseTargets[i]).toUtf8();
+				else
+					addresses += dbMgr.deviceAddress(exerciseTargets[i]);
+			}
 		}
 		QByteArray includeNewLines = "false", correctMistakes = "false", lockUi = "false", hideText = "false";
 		if(m_includeNewLines)
