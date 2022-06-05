@@ -1145,7 +1145,10 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		ui->correctMistakesCheckBox->setChecked(correctMistakesOld);
 		ui->hideTextCheckBox->setChecked(hideTextOld);
 		if(isFullScreen())
+		{
 			showNormal();
+			restoreGeometry(oldGeometry);
+		}
 		if(uploadResult && ((studentUsername != "") || (!settings.value("server/fullmode", false).toBool() && client.isPaired())))
 		{
 			updateStudent();
@@ -1573,6 +1576,7 @@ void OpenTyper::startReceivedExercise(QByteArray text, int lineLength, bool incl
 	if(lockUi)
 	{
 		ui->controlFrame->setEnabled(false);
+		oldGeometry = saveGeometry();
 		showFullScreen();
 	}
 	testLoaded = true;

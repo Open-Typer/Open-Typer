@@ -120,6 +120,7 @@ class OpenTyper : public QMainWindow
 		void exportText(void);
 		bool preview = false, uploadResult = false, testLoaded = false, correctMistakesOld = true, hideTextOld = false;
 		testWaitDialog *waitDialog = nullptr;
+		QByteArray oldGeometry;
 
 	protected:
 		void changeEvent(QEvent *event);
