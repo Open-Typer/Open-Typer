@@ -1,0 +1,83 @@
+/*
+ * testwaitdialog.cpp
+ * This file is part of Open-Typer
+ *
+ * Copyright (C) 2022 - adazem009
+ *
+ * Open-Typer is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Open-Typer is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "testwaitdialog.h"
+#include "ui_testwaitdialog.h"
+
+/*! Constructs testWaitDialog. */
+testWaitDialog::testWaitDialog(monitorClient *client, QWidget *parent) :
+	QDialog(parent),
+	ui(new Ui::testWaitDialog),
+	m_client(client)
+{
+	ui->setupUi(this);
+	// Connections
+	connect(ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &testWaitDialog::close);
+	connect(ui->nameEdit, &QLineEdit::textChanged, this, [this](QString text) { m_client->sendRequest("put", { "name", text }); });
+}
+
+/*! Destroys the testWaitDialog object. */
+testWaitDialog::~testWaitDialog()
+{
+	delete ui;
+}
+
+/*! Returns the user name. */
+QString testWaitDialog::name(void)
+{
+	return ui->nameEdit->text();
+}
+
+/*! Sets the user name. */
+void testWaitDialog::setName(QString name)
+{
+	ui->nameEdit->setText(name);
+}
+
+/*! Returns true if the user name is read-only. */
+bool testWaitDialog::nameReadOnly(void)
+{
+	return ui->nameEdit->isReadOnly();
+}
+
+/*! Toggles user name edit read-only option. */
+void testWaitDialog::setNameReadOnly(bool readOnly)
+{
+	ui->nameEdit->setReadOnly(readOnly);
+}
+
+/*! Overrides QDialog::closeEvent(). */
+void testWaitDialog::closeEvent(QCloseEvent *event)
+{
+	QMessageBox *question = new QMessageBox(this);
+	question->setWindowModality(Qt::WindowModal);
+	question->setText(tr("Are you sure?"));
+	question->setIcon(QMessageBox::Question);
+	question->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	connect(question, &QDialog::finished, this, [this, question]() {
+		if(question->result() == QMessageBox::Yes)
+		{
+			m_client->sendRequest("put", {"abortExercise"});
+			reject();
+		}
+	});
+	question->open();
+	event->ignore();
+}

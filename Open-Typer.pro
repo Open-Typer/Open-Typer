@@ -51,6 +51,7 @@ SOURCES += \
     src/options/studentoptions.cpp \
     src/statsdialog.cpp \
     src/timedialog.cpp \
+    src/testwaitdialog.cpp \
     src/options/behavior.cpp \
     src/options/customization.cpp \
     src/options/keyboard.cpp \
@@ -99,6 +100,7 @@ HEADERS += \
     src/include/options/studentoptions.h \
     src/include/statsdialog.h \
     src/include/timedialog.h \
+    src/include/testwaitdialog.h \
     src/include/options/behavior.h \
     src/include/options/customization.h \
     src/include/options/keyboard.h \
@@ -138,6 +140,7 @@ FORMS += \
     ui/options/studentoptions.ui \
     ui/statsdialog.ui \
     ui/timedialog.ui \
+    ui/testwaitdialog.ui \
     ui/opentyper.ui \
     ui/exportdialog.ui \
     ui/server/usermanager.ui \
