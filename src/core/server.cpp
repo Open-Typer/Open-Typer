@@ -428,6 +428,12 @@ QString monitorServer::deviceStudentName(int deviceID)
 		return "";
 }
 
+/*! Sets the student name of the given device. */
+void monitorServer::setDeviceStudentName(int deviceID, QString name)
+{
+	deviceStudentNames[deviceID] = name;
+}
+
 /*! Converts list of QStrings to a single QString, which can be used for a response or signal. */
 QString monitorServer::convertData(bool *ok, QStringList input)
 {

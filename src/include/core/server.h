@@ -49,6 +49,7 @@ class monitorServer : public QWebSocketServer
 		bool isConnected(QHostAddress address);
 		QList<int> runningExerciseStudents(void);
 		QString deviceStudentName(int deviceID);
+		void setDeviceStudentName(int deviceID, QString name);
 
 	protected:
 		void incomingConnection(qintptr socketDescriptor);
