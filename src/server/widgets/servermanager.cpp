@@ -51,9 +51,6 @@ serverManager::serverManager(QWidget *parent) :
 	connect(ui->addDeviceButton, &QToolButton::clicked, this, &serverManager::addDevice);
 	connect(ui->editDeviceButton, &QToolButton::clicked, this, &serverManager::editDevice);
 	connect(ui->removeDeviceButton, &QToolButton::clicked, this, &serverManager::removeDevice);
-#ifndef Q_OS_WASM
-	connect(serverPtr, &monitorServer::connectedDevicesChanged, this, &serverManager::loadDevices);
-#endif // Q_OS_WASM
 }
 
 /*! Destroys serverManager. */
@@ -65,6 +62,9 @@ serverManager::~serverManager()
 /*! Initializes server manager. */
 bool serverManager::init(void)
 {
+#ifndef Q_OS_WASM
+	connect(serverPtr, &monitorServer::connectedDevicesChanged, this, &serverManager::loadDevices);
+#endif // Q_OS_WASM
 	bool ret = true;
 	fullMode = settings.value("server/fullmode", false).toBool();
 	if(fullMode)
