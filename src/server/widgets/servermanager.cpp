@@ -72,7 +72,8 @@ bool serverManager::init(void)
 		ui->easyControlsFrame->hide();
 		ui->easyModeControls->hide();
 		ui->mainControlsFrame->show();
-		ui->classControlsFrame->show();
+		if(expanded)
+			ui->classControlsFrame->show();
 		if(dbMgr.administratorIDs().count() == 0)
 		{
 			serverSetup *dialog = new serverSetup(this);
