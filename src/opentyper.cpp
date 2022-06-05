@@ -1717,9 +1717,9 @@ void OpenTyper::startTest(void)
 #endif // Q_OS_WASM
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
-	connect(dialog, &QDialog::accepted, this, [this, dialog]() {
+	connect(dialog, &QDialog::accepted, this, [this, dialog, fullMode]() {
 #ifndef Q_OS_WASM
-		if(serverPtr && serverPtr->isListening() && (dbMgr.activeClass != 0))
+		if(serverPtr && serverPtr->isListening() && (!fullMode || (dbMgr.activeClass != 0)))
 			classControls::startExercise(dialog);
 		else
 #endif // Q_OS_WASM
