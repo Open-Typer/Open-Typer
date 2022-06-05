@@ -1169,6 +1169,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 				{"monitorResult", input, QString::number(totalHits), QString::number(levelHits), QString::number((double) levelHits*(60.0/lastTimeF)), QString::number(levelMistakes), QString::number(lastTimeF/60.0)});
 		}
 		ui->controlFrame->setEnabled(true);
+		ui->menuBar->setEnabled(true);
 		testLoaded = false;
 	}
 	levelSummary *msgBox = new levelSummary(this);
@@ -1576,6 +1577,7 @@ void OpenTyper::startReceivedExercise(QByteArray text, int lineLength, bool incl
 	if(lockUi)
 	{
 		ui->controlFrame->setEnabled(false);
+		ui->menuBar->setEnabled(false);
 		oldGeometry = saveGeometry();
 		showFullScreen();
 	}
