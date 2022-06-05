@@ -43,6 +43,7 @@
 #include "timedialog.h"
 #include "statsdialog.h"
 #include "exportdialog.h"
+#include "testwaitdialog.h"
 #include "core/configfile.h"
 #include "core/utils.h"
 #include "core/packs.h"
@@ -118,6 +119,7 @@ class OpenTyper : public QMainWindow
 		void loadReversedText(void);
 		void exportText(void);
 		bool preview = false, uploadResult = false, testLoaded = false, correctMistakesOld = true, hideTextOld = false;
+		testWaitDialog *waitDialog = nullptr;
 
 	protected:
 		void changeEvent(QEvent *event);
@@ -145,6 +147,7 @@ class OpenTyper : public QMainWindow
 		void showExerciseStats(void);
 		void loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
 		void startReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText, bool upload);
+		void waitForReceivedExercise(QString text, int lineLength, bool includeNewLines);
 		void printText(void);
 		void openEditor(bool newFile = true);
 		void startTest(void);

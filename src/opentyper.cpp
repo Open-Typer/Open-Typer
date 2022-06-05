@@ -64,6 +64,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	// Connections
 	connect(&client, SIGNAL(disconnected()), this, SLOT(updateStudent()));
 	connect(&client, &monitorClient::exerciseReceived, this, &OpenTyper::loadReceivedExercise);
+	connect(&client, &monitorClient::initExReceived, this, &OpenTyper::waitForReceivedExercise);
 	// File menu
 	connect(ui->actionOpenText, &QAction::triggered, this, &OpenTyper::openExerciseFromFile);
 	connect(ui->actionOpenPack, &QAction::triggered, this, &OpenTyper::openPack);
@@ -1538,6 +1539,9 @@ void OpenTyper::showExerciseStats(void)
 /*! Connected from client.exerciseReceived(). */
 void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText)
 {
+	if(waitDialog)
+		waitDialog->accept();
+	waitDialog = nullptr;
 	startReceivedExercise(text, lineLength, includeNewLines, mode, time, correctMistakes, lockUi, hideText, true);
 }
 
@@ -1574,6 +1578,25 @@ void OpenTyper::startReceivedExercise(QByteArray text, int lineLength, bool incl
 	}
 	testLoaded = true;
 	uploadResult = upload;
+}
+
+/*! Opens testWaitDialog and waits until the received exercise starts. */
+void OpenTyper::waitForReceivedExercise(QString text, int lineLength, bool includeNewLines)
+{
+	waitDialog = new testWaitDialog(&client, this);
+	QString name = "";
+	if(settings.value("server/fullmode", false).toBool())
+	{
+		QStringList response = client.sendRequest("get", { "name" });
+		name = response.count() > 0 ? response[0] : "";
+		waitDialog->setNameReadOnly(true);
+	}
+	waitDialog->setName(name);
+	waitDialog->setWindowModality(Qt::WindowModal);
+	waitDialog->setAttribute(Qt::WA_DeleteOnClose);
+	testWaitDialog *dialogPtr = waitDialog;
+	connect(dialogPtr, &QDialog::finished, this, [this]() { waitDialog = nullptr; });
+	waitDialog->open();
 }
 
 /*!
