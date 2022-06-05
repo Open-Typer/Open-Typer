@@ -118,6 +118,7 @@ void connectionOptions::testConnection(void)
 {
 	ui->statusValueLabel->setText("...");
 	ui->testButton->setEnabled(false);
+	client.enableClient();
 	if(client.available() && client.isPaired())
 		ui->statusValueLabel->setText("OK");
 	else
