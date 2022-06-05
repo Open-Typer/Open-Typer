@@ -117,7 +117,13 @@ exerciseProgressDialog::~exerciseProgressDialog()
 /*! Loads the targets. */
 void exerciseProgressDialog::setupTable(void)
 {
-	ui->printButton->setEnabled(results.keys().count() + abortList.values().count(true) == exerciseTargets.count());
+	int abortCount = abortList.values().count(true);
+	for(int i=0; i < abortList.keys().count(); i++)
+	{
+		if(results.contains(abortList[abortList.keys().at(i)]))
+			abortCount--;
+	}
+	ui->printButton->setEnabled(results.keys().count() + abortCount == exerciseTargets.count());
 	ui->studentsTable->clearContents();
 	ui->studentsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->studentsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
@@ -215,7 +221,13 @@ void exerciseProgressDialog::abortExercise(int userID)
 /*! Overrides QDialog#closeEvent(). */
 void exerciseProgressDialog::closeEvent(QCloseEvent *event)
 {
-	if(results.keys().count() + abortList.values().count(true) != exerciseTargets.count())
+	int abortCount = abortList.values().count(true);
+	for(int i=0; i < abortList.keys().count(); i++)
+	{
+		if(results.contains(abortList[abortList.keys().at(i)]))
+			abortCount--;
+	}
+	if(results.keys().count() + abortCount != exerciseTargets.count())
 	{
 		QMessageBox::StandardButton button = QMessageBox::question(this, QString(), tr("Some targets have not finished yet."), QMessageBox::Discard | QMessageBox::Cancel);
 		if(button == QMessageBox::Discard)
@@ -232,7 +244,7 @@ void exerciseProgressDialog::printAll(void)
 {
 	for(int i=0; i < exerciseTargets.count(); i++)
 	{
-		if(abortList.contains(exerciseTargets[i]) && abortList[exerciseTargets[i]])
+		if(abortList.contains(exerciseTargets[i]) && abortList[exerciseTargets[i]] && !results.contains(exerciseTargets[i]))
 			continue;
 		exportDialog dialog(inputTexts[exerciseTargets[i]], results[exerciseTargets[i]], recordedMistakeLists[exerciseTargets[i]], this);
 		dialog.setStudentName(dbMgr.userName(exerciseTargets[i]));
