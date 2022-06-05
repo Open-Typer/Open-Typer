@@ -62,6 +62,8 @@ class monitorServer : public QWebSocketServer
 		void loggedInStudentsChanged();
 		/*! A signal, which is emitted, when a device connects or disconnects (works only in easy mode). */
 		void connectedDevicesChanged();
+		/*! A signal, which is emitted, when a device changes its configuration (student name, etc..; works only in easy mode). \see deviceStudentName() */
+		void deviceConfigurationChanged();
 
 	private slots:
 		void acceptConnection(void);

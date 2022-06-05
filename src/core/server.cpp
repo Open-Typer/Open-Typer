@@ -249,6 +249,19 @@ void monitorServer::sendResponse(QString message)
 				}
 			}
 		}
+		else if((requestList[0] == "put") && (requestList.count() >= 2))
+		{
+			if((requestList[1] == "name") && requestList.count() >= 3)
+			{
+				if(paired)
+				{
+					deviceStudentNames[dbMgr.findDevice(clientSocket->peerAddress())] = requestList[2];
+					clientSocket->sendTextMessage(convertData({"ok"}));
+					emit deviceConfigurationChanged();
+					return;
+				}
+			}
+		}
 	}
 	if((requestList[0] == "get") && (requestList.count() >= 2))
 	{
