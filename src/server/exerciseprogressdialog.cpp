@@ -44,6 +44,15 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, 
 	ui->setupUi(this);
 	if(targets.count() > 0)
 		ui->classEdit->setText(dbMgr.className(classID));
+#ifndef Q_OS_WASM
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	if(settings.value("server/fullmode", false).toBool())
+	{
+		// Clear old student names
+		for(int i=0; i < exerciseTargets.count(); i++)
+			serverPtr->setDeviceStudentName(exerciseTargets[i], "");
+	}
+#endif // Q_OS_WASM
 	// Load targets
 	setupTable();
 	// Connections
