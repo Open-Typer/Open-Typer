@@ -127,11 +127,12 @@ void exerciseProgressDialog::setupTable(void)
 		QTableWidgetItem *item = new QTableWidgetItem(name);
 		ui->studentsTable->setItem(i, 0, item);
 		// Username
+		QString username;
 		if(fullMode)
-			name = dbMgr.userNickname(targets[i]);
+			username = dbMgr.userNickname(targets[i]);
 		else
-			name = dbMgr.deviceName(targets[i]);
-		item = new QTableWidgetItem(name);
+			username = dbMgr.deviceName(targets[i]);
+		item = new QTableWidgetItem(username);
 		ui->studentsTable->setItem(i, 1, item);
 		// Result
 		if(abortList.contains(targets[i]) && abortList[targets[i]])
@@ -140,9 +141,9 @@ void exerciseProgressDialog::setupTable(void)
 		{
 			QPushButton *button = new QPushButton(tr("View"), this);
 			ui->studentsTable->setCellWidget(i, 2, button);
-			connect(button, &QPushButton::clicked, this, [this, targets, i]() {
+			connect(button, &QPushButton::clicked, this, [this, targets, i, name]() {
 				exportDialog *dialog = new exportDialog(inputTexts[targets[i]], results[targets[i]], recordedMistakeLists[targets[i]], this);
-				dialog->setStudentName(dbMgr.userName(targets[i]));
+				dialog->setStudentName(name);
 				dialog->setClassName(ui->classEdit->text());
 				dialog->setNumber(ui->numberEdit->text());
 				if(results[targets[i]].contains("mark"))
