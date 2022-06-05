@@ -1693,10 +1693,10 @@ void OpenTyper::printText(void)
 void OpenTyper::startTest(void)
 {
 	loadExerciseDialog *dialog;
+	bool fullMode = settings.value("server/fullmode", false).toBool();
 #ifdef Q_OS_WASM
 	dialog = new loadExerciseDialog(this);
 #else
-	bool fullMode = settings.value("server/fullmode", false).toBool();
 	if(serverPtr && serverPtr->isListening() && (!fullMode || (dbMgr.activeClass != 0)))
 	{
 		QList<int> targets;
