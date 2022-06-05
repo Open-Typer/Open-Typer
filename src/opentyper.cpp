@@ -1589,7 +1589,7 @@ void OpenTyper::startReceivedExercise(QByteArray text, int lineLength, bool incl
 }
 
 /*! Opens testWaitDialog and waits until the received exercise starts. */
-void OpenTyper::waitForReceivedExercise(QString text, int lineLength, bool includeNewLines)
+void OpenTyper::waitForReceivedExercise(QString text, int lineLength)
 {
 	waitDialog = new testWaitDialog(&client, this);
 	if(text != "")

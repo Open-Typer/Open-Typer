@@ -148,7 +148,7 @@ class OpenTyper : public QMainWindow
 		void showExerciseStats(void);
 		void loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
 		void startReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText, bool upload);
-		void waitForReceivedExercise(QString text, int lineLength, bool includeNewLines);
+		void waitForReceivedExercise(QString text, int lineLength);
 		void printText(void);
 		void openEditor(bool newFile = true);
 		void startTest(void);
