@@ -342,20 +342,16 @@ void classControls::startExercise(loadExerciseDialog *dialog)
 		hideText = "true";
 #ifndef Q_OS_WASM
 	QStringList signalArgs = {
-		dialog->exerciseText().toUtf8(),
-		QByteArray::number(dialog->lineLength()),
-		includeNewLines,
-		QByteArray::number(dialog->mode()),
-		QByteArray::number(QTime(0, 0, 0).secsTo(dialog->timeLimit())),
-		correctMistakes,
-		lockUi,
-		hideText
+		dialog->exerciseText(),
+		QString::number(dialog->lineLength()),
+		includeNewLines
 	};
 	if(fullMode)
-		serverPtr->sendSignal("loadExercise", signalArgs, usernames);
+		serverPtr->sendSignal("initExercise", signalArgs, usernames);
 	else
-		serverPtr->sendSignal("loadExercise", signalArgs, addresses);
-	exerciseProgressDialog *progressDialog = new exerciseProgressDialog(dbMgr.activeClass, selectedTargets);
+		serverPtr->sendSignal("initExercise", signalArgs, addresses);
+	exerciseProgressDialog *progressDialog = new exerciseProgressDialog(dbMgr.activeClass, selectedTargets, dialog->exerciseText(), dialog->lineLength(), dialog->includeNewLines(),
+		dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText());
 	progressDialog->show();
 #endif // Q_OS_WASM
 }
