@@ -45,6 +45,7 @@ class monitorClient : public QObject
 		void setErrorDialogs(bool errDialogs);
 		bool fullMode(void);
 		bool isPaired(void);
+		void enableClient(void);
 		QStringList sendRequest(QString method, QStringList data);
 		static QHostAddress serverAddress(void);
 		static quint16 serverPort(void);
@@ -59,6 +60,7 @@ class monitorClient : public QObject
 		QString convertData(bool *ok, QStringList input);
 		QStringList readData(QString input);
 		QSettings settings;
+		bool clientDisabled = false;
 
 	signals:
 		/*! A signal, which is emitted after readResponse() reads the response. \see readResponse() */

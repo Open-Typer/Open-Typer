@@ -30,6 +30,7 @@ monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 	setErrorDialogs(errDialogs);
 	connect(&socket, &QWebSocket::textMessageReceived, this, &monitorClient::readResponse);
 	connect(&socket, &QWebSocket::disconnected, this, &monitorClient::disconnected);
+	connect(&socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error), this, &monitorClient::errorOccurred);
 #ifndef Q_OS_WASM
 	connect(&socket, QOverload<const QList<QSslError>&>::of(&QWebSocket::sslErrors), this, &monitorClient::sslErrorsOccurred);
 #endif // Q_OS_WASM
@@ -103,6 +104,13 @@ bool monitorClient::isPaired(void)
 	
 }
 
+/*! Enables client again after connection failure. */
+void monitorClient::enableClient(void)
+{
+	clientDisabled = false;
+	settings.setValue("main/clientdisabled", clientDisabled);
+}
+
 /*!
  * Sends a request and returns the response.\n
  * \param[in] method Request method.
@@ -110,21 +118,22 @@ bool monitorClient::isPaired(void)
  */
 QStringList monitorClient::sendRequest(QString method, QStringList data)
 {
+	clientDisabled = settings.value("main/clientdisabled", false).toBool();
+	if(clientDisabled)
+		return {"clientDisabled"};
 	connected = (socket.state() == QAbstractSocket::ConnectedState);
 	bool wasConnected = connected;
 	if(!connected)
 	{
-		// Check if the port is open using QWebSocketServer
-		QWebSocketServer tmpServer("Open-Typer", QWebSocketServer::NonSecureMode, this);
-		if(tmpServer.listen(QHostAddress::Any, serverPort()))
-		{
-			// The port is closed
-			tmpServer.close();
-			return {"connectFailure"};
-		}
 		QTimer timer;
 		QEventLoop eventLoop;
 		connect(&socket, &QWebSocket::connected, &eventLoop, &QEventLoop::quit);
+		QEventLoop *eventLoopPtr = &eventLoop;
+		connect(&socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error), this, [this, eventLoopPtr]() {
+			eventLoopPtr->quit();
+			clientDisabled = true;
+			settings.setValue("main/clientdisabled", clientDisabled);
+		});
 		connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
 		timer.start(5000);
 		socket.open(QUrl("wss://" + QHostAddress(serverAddress().toIPv4Address()).toString() + ":" + QString::number(serverPort())));
@@ -133,6 +142,7 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 	}
 	if(connected)
 	{
+		enableClient();
 		if(!wasConnected)
 		{
 			// Detect legacy server
