@@ -1152,7 +1152,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 			showNormal();
 			restoreGeometry(oldGeometry);
 		}
-		if(uploadResult && ((studentUsername != "") || (!settings.value("server/fullmode", false).toBool() && client.isPaired())))
+		if(uploadResult && ((studentUsername != "") || (!client.fullMode() && client.isPaired())))
 		{
 			updateStudent();
 			client.sendRequest("put", {"clearRecordedMistakes"});
@@ -1595,7 +1595,7 @@ void OpenTyper::waitForReceivedExercise(QString text, int lineLength)
 	if(text != "")
 		waitDialog->setText(configParser::initExercise(text, lineLength));
 	QString name = "";
-	if(settings.value("server/fullmode", false).toBool())
+	if(client.fullMode())
 	{
 		QStringList response = client.sendRequest("get", { "name" });
 		name = response.count() > 0 ? response[0] : "";
