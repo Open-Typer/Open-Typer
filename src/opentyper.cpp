@@ -1591,6 +1591,8 @@ void OpenTyper::startReceivedExercise(QByteArray text, int lineLength, bool incl
 void OpenTyper::waitForReceivedExercise(QString text, int lineLength, bool includeNewLines)
 {
 	waitDialog = new testWaitDialog(&client, this);
+	if(text != "")
+		waitDialog->setText(configParser::initExercise(text, lineLength));
 	QString name = "";
 	if(settings.value("server/fullmode", false).toBool())
 	{
