@@ -147,9 +147,7 @@ void exerciseProgressDialog::setupTable(void)
 		item = new QTableWidgetItem(username);
 		ui->studentsTable->setItem(i, 1, item);
 		// Result
-		if(abortList.contains(targets[i]) && abortList[targets[i]])
-			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("Aborted")));
-		else if(results.contains(targets[i]))
+		if(results.contains(targets[i]))
 		{
 			QPushButton *button = new QPushButton(tr("View"), this);
 			ui->studentsTable->setCellWidget(i, 2, button);
@@ -171,6 +169,8 @@ void exerciseProgressDialog::setupTable(void)
 				});
 			});
 		}
+		else if(abortList.contains(targets[i]) && abortList[targets[i]])
+			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("Aborted")));
 		else if(!started)
 			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("Waiting...")));
 		else
