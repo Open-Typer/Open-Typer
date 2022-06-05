@@ -42,5 +42,6 @@
         <file>res/images/new.png</file>
         <file>res/images/add.png</file>
         <file>res/images/paper.png</file>
+        <file>res/images/start.png</file>
     </qresource>
 </RCC>
