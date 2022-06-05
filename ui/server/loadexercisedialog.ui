@@ -295,6 +295,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QCheckBox" name="textPreviewCheckBox">
+        <property name="text">
+         <string>Allow text preview before starting the exercise</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

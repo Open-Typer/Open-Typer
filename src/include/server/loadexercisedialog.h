@@ -52,6 +52,7 @@ class loadExerciseDialog : public QDialog
 		bool correctMistakes(void);
 		bool lockUi(void);
 		bool hideText(void);
+		bool allowTextPreview(void);
 		QList<int> selectedTargets(void);
 
 	private:

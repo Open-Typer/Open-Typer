@@ -67,7 +67,10 @@ void loadExerciseDialog::init(void)
 		m_includeNewLines = true;
 	}
 	if(local)
+	{
+		ui->textPreviewCheckBox->hide();
 		ui->targetBox->hide();
+	}
 	else
 	{
 		// Set up targets
@@ -165,6 +168,12 @@ bool loadExerciseDialog::lockUi(void)
 bool loadExerciseDialog::hideText(void)
 {
 	return ui->hideTextCheckBox->isChecked();
+}
+
+/*! Returns true if the user has allowed exercise text preview. */
+bool loadExerciseDialog::allowTextPreview(void)
+{
+	return ui->textPreviewCheckBox->isChecked();
 }
 
 /*! Returns list of selected targets. */
