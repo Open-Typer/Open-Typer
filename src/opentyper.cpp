@@ -128,6 +128,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	secLoop->start(500);
 #ifdef Q_OS_WASM
 	ui->printButton->hide();
+	ui->actionPrint->setEnabled(false);
 #else
 	// Check for updates
 	if(settings.value("main/updatechecks", true).toBool())
