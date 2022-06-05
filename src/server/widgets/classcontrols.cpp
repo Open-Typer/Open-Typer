@@ -342,7 +342,7 @@ void classControls::startExercise(loadExerciseDialog *dialog)
 		hideText = "true";
 #ifndef Q_OS_WASM
 	QStringList signalArgs = {
-		dialog->exerciseText(),
+		dialog->allowTextPreview() ? dialog->exerciseText() : "",
 		QString::number(dialog->lineLength()),
 		includeNewLines
 	};
