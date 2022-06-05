@@ -343,8 +343,7 @@ void classControls::startExercise(loadExerciseDialog *dialog)
 #ifndef Q_OS_WASM
 	QStringList signalArgs = {
 		dialog->allowTextPreview() ? dialog->exerciseText() : "",
-		QString::number(dialog->lineLength()),
-		includeNewLines
+		QString::number(dialog->lineLength())
 	};
 	if(fullMode)
 		serverPtr->sendSignal("initExercise", signalArgs, usernames);
