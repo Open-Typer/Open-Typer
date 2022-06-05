@@ -188,6 +188,11 @@ void monitorClient::readResponse(QString message)
 	else
 	{
 		QStringList signal = readData(receivedData);
+		if(signal[0] == "initExercise")
+		{
+			if(signal.count() >= 4)
+				emit initExReceived(signal[1], signal[2].toInt(), (signal[3]=="true"));
+		}
 		if(signal[0] == "loadExercise")
 		{
 			if(signal.count() >= 9)
