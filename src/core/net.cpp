@@ -35,6 +35,13 @@ monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 #endif // Q_OS_WASM
 }
 
+/*! Destroys the monitorClient object. */
+monitorClient::~monitorClient()
+{
+	// Disconnect everything from socket because the connections cause segfaults
+	disconnect(&socket, nullptr, nullptr, nullptr);
+}
+
 /*! Closes the connection. */
 void monitorClient::close(void)
 {

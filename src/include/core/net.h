@@ -40,6 +40,7 @@ class monitorClient : public QObject
 	Q_OBJECT
 	public:
 		explicit monitorClient(bool errDialogs = true, QObject *parent = nullptr);
+		~monitorClient();
 		void close(void);
 		void setErrorDialogs(bool errDialogs);
 		bool fullMode(void);
