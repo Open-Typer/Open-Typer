@@ -383,9 +383,9 @@ void monitorServer::sendSignal(QByteArray name, QStringList data, QList<QHostAdd
 		QHostAddress address(clientSockets[i]->peerAddress().toIPv4Address());
 		if(addresses.contains(address) && (dbMgr.findDevice(address) != 0))
 		{
-			if(!((name == "loadExercise") && exerciseSockets.contains(clientSockets[i])))
+			if(!((name == "initExercise") && exerciseSockets.contains(clientSockets[i])))
 			{
-				if(name == "loadExercise")
+				if((name == "initExercise") && !exerciseSockets.contains(clientSockets[i]))
 					exerciseSockets += clientSockets[i];
 				clientSockets[i]->sendTextMessage(finalData);
 			}
