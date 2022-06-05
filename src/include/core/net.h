@@ -60,7 +60,7 @@ class monitorClient : public QObject
 		QString convertData(bool *ok, QStringList input);
 		QStringList readData(QString input);
 		QSettings settings;
-		bool clientDisabled = false;
+		bool clientDisabled = false, connecting = false;
 
 	signals:
 		/*! A signal, which is emitted after readResponse() reads the response. \see readResponse() */

@@ -125,19 +125,22 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 	bool wasConnected = connected;
 	if(!connected)
 	{
+		connecting = true;
 		QTimer timer;
 		QEventLoop eventLoop;
 		connect(&socket, &QWebSocket::connected, &eventLoop, &QEventLoop::quit);
 		QEventLoop *eventLoopPtr = &eventLoop;
 		connect(&socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error), this, [this, eventLoopPtr]() {
-			eventLoopPtr->quit();
 			clientDisabled = true;
 			settings.setValue("main/clientdisabled", clientDisabled);
+			if(connecting)
+				eventLoopPtr->quit();
 		});
 		connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
 		timer.start(5000);
 		socket.open(QUrl("wss://" + QHostAddress(serverAddress().toIPv4Address()).toString() + ":" + QString::number(serverPort())));
 		eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+		connecting = false;
 		connected = (socket.state() == QAbstractSocket::ConnectedState);
 	}
 	if(connected)
