@@ -46,7 +46,7 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, 
 		ui->classEdit->setText(dbMgr.className(classID));
 #ifndef Q_OS_WASM
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	if(settings.value("server/fullmode", false).toBool())
+	if(!settings.value("server/fullmode", false).toBool())
 	{
 		// Clear old student names
 		for(int i=0; i < exerciseTargets.count(); i++)
