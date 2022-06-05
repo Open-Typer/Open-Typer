@@ -1713,7 +1713,7 @@ void OpenTyper::startTest(void)
 	dialog->open();
 	connect(dialog, &QDialog::accepted, this, [this, dialog]() {
 #ifndef Q_OS_WASM
-		if(serverPtr && serverPtr->isListening())
+		if(serverPtr && serverPtr->isListening() && (dbMgr.activeClass != 0))
 			classControls::startExercise(dialog);
 		else
 #endif // Q_OS_WASM
