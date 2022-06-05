@@ -67,7 +67,7 @@ class monitorClient : public QObject
 		/*! A signal, which is emitted when a started exercise is received from the server. */
 		void exerciseReceived(QByteArray, int, bool, int, int, bool, bool, bool);
 		/*! A signal, which is emitted when an exercise is received from the server. */
-		void initExReceived(QString, int, bool);
+		void initExReceived(QString, int);
 
 	private slots:
 		void readResponse(QString message);
