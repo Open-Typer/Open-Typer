@@ -432,6 +432,7 @@ QString monitorServer::deviceStudentName(int deviceID)
 void monitorServer::setDeviceStudentName(int deviceID, QString name)
 {
 	deviceStudentNames[deviceID] = name;
+	emit deviceConfigurationChanged();
 }
 
 /*! Converts list of QStrings to a single QString, which can be used for a response or signal. */
