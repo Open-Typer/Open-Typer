@@ -130,13 +130,15 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 		QEventLoop eventLoop;
 		connect(&socket, &QWebSocket::connected, &eventLoop, &QEventLoop::quit);
 		QEventLoop *eventLoopPtr = &eventLoop;
-		connect(&socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error), this, [this, eventLoopPtr]() {
+		auto errorSlot = [this, eventLoopPtr]() {
 			clientDisabled = true;
 			settings.setValue("main/clientdisabled", clientDisabled);
 			if(connecting)
 				eventLoopPtr->quit();
-		});
+		};
+		connect(&socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error), this, errorSlot);
 		connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
+		connect(&timer, &QTimer::timeout, this, errorSlot);
 		timer.start(5000);
 		socket.open(QUrl("wss://" + QHostAddress(serverAddress().toIPv4Address()).toString() + ":" + QString::number(serverPort())));
 		eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
