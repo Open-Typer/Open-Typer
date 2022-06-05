@@ -615,7 +615,7 @@ void OpenTyper::openStudentOptions(void)
 /*! Updates student session. */
 void OpenTyper::updateStudent(void)
 {
-	if(client.available())
+	if(client.available() && client.sendRequest("get", { "serverMode" }).at(1) == "full")
 		ui->actionLogIn->setEnabled(true);
 	else
 	{
