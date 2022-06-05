@@ -143,6 +143,8 @@ OpenTyper::~OpenTyper()
 	if(serverPtr)
 		serverPtr->deleteLater();
 #endif // Q_OS_WASM
+	if(testLoaded && uploadResult && client.available())
+		client.sendRequest("put", {"abortExercise"});
 }
 
 /*! Initializes the program and loads all settings.
