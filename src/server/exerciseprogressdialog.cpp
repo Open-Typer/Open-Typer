@@ -274,9 +274,7 @@ void exerciseProgressDialog::printAll(void)
 			dialog.printResult();
 			dialog.close();
 		}
-		else if(msgBox.clickedButton() == nextButton)
-			break;
-		else
+		else if(msgBox.clickedButton() != nextButton)
 			break;
 	}
 }
