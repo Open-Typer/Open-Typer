@@ -29,7 +29,7 @@ testWaitDialog::testWaitDialog(monitorClient *client, QWidget *parent) :
 {
 	ui->setupUi(this);
 	ui->textArea->hide();
-	QFont font = themeEngine::font();
+	font = themeEngine::font();
 	font.setPointSize(12);
 	ui->textLabel->setFont(themeEngine::font());
 	// Connections
@@ -72,9 +72,12 @@ void testWaitDialog::setText(QString text)
 {
 	ui->textArea->show();
 	ui->textLabel->setText(text);
-	QTimer::singleShot( 0, this, [this]() {
-		ui->textArea->setFixedWidth(ui->textLabel->width() + ui->textArea->verticalScrollBar()->width()*2);
-	});
+	QFontMetrics fontMetrics = ui->textLabel->fontMetrics();
+	int width = 0;
+	QStringList lines = text.split("\n");
+	for(int i=0; i < lines.count(); i++)
+		width = std::max(width, fontMetrics.boundingRect(lines[i]).width());
+	ui->textArea->setFixedWidth(width + ui->textArea->verticalScrollBar()->width());
 }
 
 /*! Overrides QDialog::closeEvent(). */

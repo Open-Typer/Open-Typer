@@ -52,6 +52,7 @@ class testWaitDialog : public QDialog
 	private:
 		Ui::testWaitDialog *ui;
 		monitorClient *m_client;
+		QFont font;
 
 	protected:
 		void closeEvent(QCloseEvent *event);
