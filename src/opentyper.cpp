@@ -50,12 +50,9 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	else
 		langMgr.setLanguage(langMgr.boxItems.indexOf(settings.value("main/language","").toString()) - 1);
 	ui->retranslateUi(this);
-	// Theme
+	// Opacity effect
 	QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
 	ui->levelLabel->setGraphicsEffect(opacityEffect);
-	if(!isVisible())
-		show();
-	loadTheme();
 	refreshAll();
 	// Set mode
 	changeMode(0);
@@ -122,6 +119,11 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
 	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
 	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &OpenTyper::loadTheme);
+	// Theme
+	// TODO: Restore old window state
+	if(!isVisible())
+		showMaximized();
+	loadTheme();
 	// Start timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
 	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
