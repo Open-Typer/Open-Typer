@@ -121,6 +121,7 @@ class OpenTyper : public QMainWindow
 		bool preview = false, uploadResult = false, testLoaded = false, correctMistakesOld = true, hideTextOld = false;
 		testWaitDialog *waitDialog = nullptr;
 		QByteArray oldGeometry;
+		bool firstRun = false;
 
 	protected:
 		void changeEvent(QEvent *event);

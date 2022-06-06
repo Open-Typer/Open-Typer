@@ -121,7 +121,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &OpenTyper::loadTheme);
 	// Theme
 	// TODO: Restore old window state
-	if(!isVisible())
+	if(!isVisible() && !firstRun)
 		showMaximized();
 	loadTheme();
 	// Start timer (used to update currentTimeNumber every second)
@@ -202,11 +202,12 @@ void OpenTyper::refreshAll(void)
 	QString configName = settings.value("main/configfile","").toString();
 	if(configName == "")
 	{
+		firstRun = true;
 		loadTheme();
 		initialSetup *dialog = new initialSetup;
 		dialog->show();
 		QMetaObject::invokeMethod(this,"hide",Qt::QueuedConnection);
-		connect(dialog, &QDialog::accepted, this, [this]() { show(); refreshAll(); } );
+		connect(dialog, &QDialog::accepted, this, [this]() { showMaximized(); refreshAll(); } );
 		return;
 	}
 	bool packChanged = (configName != oldConfigName);
