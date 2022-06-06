@@ -247,13 +247,21 @@ void exerciseProgressDialog::printAll(void)
 		if(abortList.contains(exerciseTargets[i]) && abortList[exerciseTargets[i]] && !results.contains(exerciseTargets[i]))
 			continue;
 		exportDialog dialog(inputTexts[exerciseTargets[i]], results[exerciseTargets[i]], recordedMistakeLists[exerciseTargets[i]], this);
-		dialog.setStudentName(dbMgr.userName(exerciseTargets[i]));
+		QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+		QString name;
+		if(settings.value("server/fullmode", false).toBool())
+			name = dbMgr.userName(exerciseTargets[i]);
+#ifndef Q_OS_WASM
+		else
+			name = serverPtr->deviceStudentName(exerciseTargets[i]);
+#endif // Q_OS_WASM
+		dialog.setStudentName(name);
 		dialog.setClassName(ui->classEdit->text());
 		dialog.setNumber(ui->numberEdit->text());
 		if(results[exerciseTargets[i]].contains("mark"))
 			dialog.setMark(results[exerciseTargets[i]]["mark"].toString());
 		QMessageBox msgBox;
-		msgBox.setText(tr("Printing result of student %1...").arg(dbMgr.userName(exerciseTargets[i])));
+		msgBox.setText(tr("Printing result of student %1...").arg(name));
 		QPushButton *printButton = msgBox.addButton(tr("Print"), QMessageBox::YesRole);
 		QPushButton *nextButton;
 		if(i < exerciseTargets.count()-1)
