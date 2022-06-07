@@ -129,7 +129,13 @@ OpenTyper::OpenTyper(QWidget *parent) :
 		restoreGeometry(settings.value("main/windowGeometry").toByteArray());
 	}
 	else if(!isVisible() && !firstRun)
+	{
+#ifdef Q_OS_WASM
+		show();
+#else
 		QMetaObject::invokeMethod(this, "showMaximized", Qt::QueuedConnection);
+#endif // Q_OS_WASM
+	}
 	if(!isVisible() && !firstRun)
 		show();
 	loadTheme();
@@ -218,7 +224,11 @@ void OpenTyper::refreshAll(void)
 		initialSetup *dialog = new initialSetup;
 		dialog->show();
 		QMetaObject::invokeMethod(this,"hide",Qt::QueuedConnection);
+#ifdef Q_OS_WASM
+		connect(dialog, &QDialog::accepted, this, [this]() { show(); refreshAll(); } );
+#else
 		connect(dialog, &QDialog::accepted, this, [this]() { showMaximized(); refreshAll(); } );
+#endif // Q_OS_WASM
 		return;
 	}
 	bool packChanged = (configName != oldConfigName);
