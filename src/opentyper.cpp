@@ -120,9 +120,15 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
 	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &OpenTyper::loadTheme);
 	// Theme
-	// TODO: Restore old window state
+	if(settings.contains("main/windowState") && settings.contains("main/windowGeometry"))
+	{
+		restoreState(settings.value("main/windowState").toByteArray());
+		restoreGeometry(settings.value("main/windowGeometry").toByteArray());
+	}
+	else if(!isVisible() && !firstRun)
+		QMetaObject::invokeMethod(this, "showMaximized", Qt::QueuedConnection);
 	if(!isVisible() && !firstRun)
-		showMaximized();
+		show();
 	loadTheme();
 	// Start timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
@@ -148,6 +154,8 @@ OpenTyper::~OpenTyper()
 #endif // Q_OS_WASM
 	if(testLoaded && uploadResult && client.available())
 		client.sendRequest("put", {"abortExercise"});
+	settings.setValue("main/windowState", saveState());
+	settings.setValue("main/windowGeometry", saveGeometry());
 }
 
 /*! Initializes the program and loads all settings.
