@@ -44,6 +44,9 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	studentPassword = "";
 	oldConfigName = "";
 	errorWords.clear();
+#ifdef Q_OS_WASM
+	settings.setValue("main/clientdisabled", true);
+#endif // Q_OS_WASM
 	// Set language
 	if(settings.value("main/language","").toString() == "")
 		langMgr.setLanguage(-1);
