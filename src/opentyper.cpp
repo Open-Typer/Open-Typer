@@ -364,7 +364,7 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 			levelID);
 	if(uploadResult)
 	{
-		if((studentUsername != "") || (!settings.value("server/fullmode", false).toBool() && client.isPaired()))
+		if((studentUsername != "") || (!client.fullMode() && client.isPaired()))
 			client.sendRequest("put", {"abortExercise"});
 		uploadResult = false;
 	}
