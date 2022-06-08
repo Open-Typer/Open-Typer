@@ -69,11 +69,11 @@ quint16 monitorClient::serverPort(void)
 	return settings.value("server/port","57100").toUInt();
 }
 
-/*! Returns true if server is enabled in the settings. */
+/*! Returns true if client is enabled in the settings. */
 bool monitorClient::enabled(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	return (settings.value("server/mode", 2).toInt() == 2);
+	return (settings.value("main/networkEnabled", false).toBool() && (settings.value("server/mode", 2).toInt() == 2));
 }
 
 /*! Returns true if class monitor server connection is enabled in the settings and the server is available. */
