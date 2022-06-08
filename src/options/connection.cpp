@@ -31,6 +31,7 @@ connectionOptions::connectionOptions(QWidget *parent) :
 	refresh();
 	changeAddress();
 	// Connections
+	connect(ui->networkOptionsCheckBox, &QCheckBox::toggled, this,  &connectionOptions::toggleNetworkOptions);
 	connect(ui->IPEdit,&QLineEdit::textChanged,this,&connectionOptions::changeAddress);
 	connect(ui->portEdit,SIGNAL(valueChanged(int)),this,SLOT(changeAddress()));
 	connect(ui->clientButton, &QRadioButton::toggled, this, &connectionOptions::changeMode);
@@ -72,10 +73,21 @@ void connectionOptions::refresh(void)
 	ui->statusLabel->setVisible(!serverMode);
 	ui->statusValueLabel->setVisible(!serverMode);
 #endif // Q_OS_WASM
+	bool networkEnabled = settings.value("main/networkEnabled", false).toBool();
+	ui->networkOptionsCheckBox->setChecked(networkEnabled);
+	ui->networkOptions->setEnabled(networkEnabled);
 	ui->IPEdit->setText(QHostAddress(client.serverAddress().toIPv4Address()).toString());
 	ui->portEdit->setValue(client.serverPort());
 	ui->testButton->setEnabled(client.enabled());
 }
+
+/*! Toggles network options. */
+void connectionOptions::toggleNetworkOptions(bool checked)
+{
+	settings.setValue("main/networkEnabled", checked);
+	refresh();
+}
+
 
 /*! Changes the mode (client or server). */
 void connectionOptions::changeMode(void)

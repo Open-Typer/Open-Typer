@@ -53,6 +53,7 @@ class connectionOptions : public QWidget
 
 	private slots:
 		void refresh(void);
+		void toggleNetworkOptions(bool checked);
 		void changeMode(void);
 		void setFullMode(bool enable);
 		void changeAddress(void);

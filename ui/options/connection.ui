@@ -15,7 +15,14 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QGroupBox" name="serverOptions">
+    <widget class="QCheckBox" name="networkOptionsCheckBox">
+     <property name="text">
+      <string>Enable network options</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="networkOptions">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -23,7 +30,7 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Server options</string>
+      <string>Network options</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
@@ -66,35 +73,35 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="4" column="0">
        <widget class="QRadioButton" name="serverButton">
         <property name="text">
-         <string>Server mode</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QRadioButton" name="clientButton">
-        <property name="text">
-         <string>Client mode</string>
+         <string>Server</string>
         </property>
        </widget>
       </item>
       <item row="7" column="0">
+       <widget class="QRadioButton" name="clientButton">
+        <property name="text">
+         <string>Client</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
        <widget class="QLabel" name="statusLabel">
         <property name="text">
          <string>Connection status:</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="1">
+      <item row="10" column="1">
        <widget class="QLabel" name="statusValueLabel">
         <property name="text">
          <string notr="true"/>
         </property>
        </widget>
       </item>
-      <item row="3" column="0" colspan="2">
+      <item row="6" column="0" colspan="2">
        <widget class="QCheckBox" name="fullModeCheckBox">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -107,7 +114,7 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
+      <item row="8" column="0">
        <widget class="QPushButton" name="testButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -117,6 +124,19 @@
         </property>
         <property name="text">
          <string extracomment="A button for pairing">Test connection</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Mode:</string>
         </property>
        </widget>
       </item>
