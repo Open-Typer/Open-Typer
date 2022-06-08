@@ -127,6 +127,7 @@ QStringList databaseManager::roles(bool includeStudentRole)
 QString databaseManager::userName(int userID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(userID);
 	return QString();
 #else
 	QSqlQuery query;
@@ -140,6 +141,7 @@ QString databaseManager::userName(int userID)
 QString databaseManager::userNickname(int userID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(userID);
 	return QString();
 #else
 	QSqlQuery query;
@@ -153,6 +155,7 @@ QString databaseManager::userNickname(int userID)
 databaseManager::Role databaseManager::userRole(int userID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(userID);
 	return Role_Invalid;
 #else
 	QSqlQuery query;
@@ -226,6 +229,7 @@ QList<int> databaseManager::userIDs(void)
 int databaseManager::findUser(QString nickname)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(nickname);
 	return 0;
 #else
 	QSqlQuery query;
@@ -241,6 +245,7 @@ int databaseManager::findUser(QString nickname)
 QList<int> databaseManager::studentIDs(int classID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
 	return QList<int>();
 #else
 	QSqlQuery query;
@@ -292,6 +297,8 @@ int databaseManager::loginID(void)
 bool databaseManager::auth(int userID, QString password)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(userID);
+	Q_UNUSED(password);
 	return false;
 #else
 	bool silent = true;
@@ -332,7 +339,13 @@ bool databaseManager::auth(int userID, QString password)
 /*! Adds a user. */
 void databaseManager::addUser(QString name, databaseManager::Role role, QString password, QString nickname, int classID)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(name);
+	Q_UNUSED(role);
+	Q_UNUSED(password);
+	Q_UNUSED(nickname);
+	Q_UNUSED(classID);
+#else
 	QCryptographicHash hash(QCryptographicHash::Sha256);
 	hash.addData(password.toUtf8());
 	QString passwordStr = QString(hash.result().toHex());
@@ -354,7 +367,10 @@ void databaseManager::addUser(QString name, databaseManager::Role role, QString 
 /*! Adds a student to the given class. */
 void databaseManager::addStudentToClass(int userID, int classID)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(userID);
+	Q_UNUSED(classID);
+#else
 	QSqlQuery query;
 	if(userRole(userID) == Role_Student)
 		query.exec(QString("INSERT INTO users (user, class) VALUES (%1, %2)").arg(QString::number(userID), QString::number(classID)));
@@ -364,7 +380,13 @@ void databaseManager::addStudentToClass(int userID, int classID)
 /*! Edits a user. */
 void databaseManager::editUser(int userID, QString name, databaseManager::Role role, QString password, QString nickname)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(userID);
+	Q_UNUSED(name);
+	Q_UNUSED(role);
+	Q_UNUSED(password);
+	Q_UNUSED(nickname);
+#else
 	QCryptographicHash hash(QCryptographicHash::Sha256);
 	hash.addData(password.toUtf8());
 	QString passwordStr = QString(hash.result().toHex());
@@ -389,7 +411,9 @@ void databaseManager::editUser(int userID, QString name, databaseManager::Role r
 /*! Removes a user. */
 void databaseManager::removeUser(int userID)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(userID);
+#else
 	QSqlQuery query;
 	if(userRole(userID) != Role_Student)
 		query.exec(QString("DELETE FROM class WHERE id IN (SELECT id FROM class INNER JOIN users ON users.user = %1 AND users.class = class.id)").arg(QString::number(userID)));
@@ -401,7 +425,10 @@ void databaseManager::removeUser(int userID)
 /*! Removes the student from the given class. */
 void databaseManager::removeStudentFromClass(int userID, int classID)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(userID);
+	Q_UNUSED(classID);
+#else
 	QSqlQuery query;
 	if(userRole(userID) == Role_Student)
 	{
@@ -415,6 +442,7 @@ void databaseManager::removeStudentFromClass(int userID, int classID)
 QString databaseManager::className(int classID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
 	return QString();
 #else
 	QSqlQuery query;
@@ -428,6 +456,7 @@ QString databaseManager::className(int classID)
 int databaseManager::classIcon(int classID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
 	return 0;
 #else
 	QSqlQuery query;
@@ -441,6 +470,7 @@ int databaseManager::classIcon(int classID)
 unsigned long long databaseManager::classTimestamp(int classID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
 	return 0;
 #else
 	QSqlQuery query;
@@ -454,6 +484,7 @@ unsigned long long databaseManager::classTimestamp(int classID)
 int databaseManager::classOwner(int classID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
 	return 0;
 #else
 	QSqlQuery query;
@@ -467,6 +498,7 @@ int databaseManager::classOwner(int classID)
 QStringList databaseManager::classNames(bool sort)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(sort);
 	return QStringList();
 #else
 	QSqlQuery query;
@@ -485,6 +517,7 @@ QStringList databaseManager::classNames(bool sort)
 QList<int> databaseManager::classIDs(bool sort)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(sort);
 	return QList<int>();
 #else
 	QSqlQuery query;
@@ -502,7 +535,11 @@ QList<int> databaseManager::classIDs(bool sort)
 /*! Adds a class. */
 void databaseManager::addClass(QString name, int owner, int icon)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(name);
+	Q_UNUSED(owner);
+	Q_UNUSED(icon);
+#else
 	QSqlQuery query;
 	query.exec(QString("INSERT INTO class (name, icon, used_time) VALUES ('', %1, CURRENT_TIMESTAMP)").arg(QString::number(icon)));
 	query.exec(QString("INSERT INTO users (user, class) VALUES (%1, (SELECT id FROM class WHERE name = ''))").arg(QString::number(owner)));
@@ -514,7 +551,12 @@ void databaseManager::addClass(QString name, int owner, int icon)
 /*! Edits a class. */
 void databaseManager::editClass(int classID, QString name, int owner, int icon)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(name);
+	Q_UNUSED(owner);
+	Q_UNUSED(icon);
+#else
 	QSqlQuery query;
 	query.exec(QString("UPDATE class SET name = %1, icon = %2 WHERE id = %3").arg(quotesEnclosed(name), QString::number(icon), QString::number(classID)));
 	query.exec(QString("UPDATE users SET user = %1 WHERE user = (SELECT user FROM users INNER JOIN class INNER JOIN user ON class.id = %2 AND users.class = %2 AND user.id = users.user AND (user.role = 0 OR user.role = 1))").arg(QString::number(owner), QString::number(classID)));
@@ -524,7 +566,9 @@ void databaseManager::editClass(int classID, QString name, int owner, int icon)
 /*! Updates the timestamp of the class. */
 void databaseManager::updateClassTimestamp(int classID)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+#else
 	QSqlQuery query;
 	query.exec("UPDATE class SET used_time = CURRENT_TIMESTAMP WHERE id = " + QString::number(classID));
 #endif
@@ -533,7 +577,9 @@ void databaseManager::updateClassTimestamp(int classID)
 /*! Removes a class. */
 void databaseManager::removeClass(int classID)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+#else
 	QSqlQuery query;
 	query.exec(QString("DELETE FROM class WHERE id = %1").arg(QString::number(classID)));
 	removeOrphanedStudents();
@@ -544,6 +590,7 @@ void databaseManager::removeClass(int classID)
 QStringList databaseManager::recordedPacks(int classID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
 	return QStringList();
 #else
 	QSqlQuery query;
@@ -559,6 +606,8 @@ QStringList databaseManager::recordedPacks(int classID)
 QStringList databaseManager::studentPacks(int classID, int userID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(userID);
 	return QStringList();
 #else
 	QSqlQuery query;
@@ -574,6 +623,8 @@ QStringList databaseManager::studentPacks(int classID, int userID)
 QList<int> databaseManager::recordedLessons(int classID, QString pack)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(pack);
 	return QList<int>();
 #else
 	QSqlQuery query;
@@ -589,6 +640,9 @@ QList<int> databaseManager::recordedLessons(int classID, QString pack)
 QList<int> databaseManager::studentLessons(int classID, int userID, QString pack)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(userID);
+	Q_UNUSED(pack);
 	return QList<int>();
 #else
 	QSqlQuery query;
@@ -604,6 +658,9 @@ QList<int> databaseManager::studentLessons(int classID, int userID, QString pack
 QList<int> databaseManager::recordedSublessons(int classID, QString pack, int lesson)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(pack);
+	Q_UNUSED(lesson);
 	return QList<int>();
 #else
 	QSqlQuery query;
@@ -619,6 +676,10 @@ QList<int> databaseManager::recordedSublessons(int classID, QString pack, int le
 QList<int> databaseManager::studentSublessons(int classID, int userID, QString pack, int lesson)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(userID);
+	Q_UNUSED(pack);
+	Q_UNUSED(lesson);
 	return QList<int>();
 #else
 	QSqlQuery query;
@@ -634,6 +695,10 @@ QList<int> databaseManager::studentSublessons(int classID, int userID, QString p
 QList<int> databaseManager::recordedExercises(int classID, QString pack, int lesson, int sublesson)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(pack);
+	Q_UNUSED(lesson);
+	Q_UNUSED(sublesson);
 	return QList<int>();
 #else
 	QSqlQuery query;
@@ -649,6 +714,11 @@ QList<int> databaseManager::recordedExercises(int classID, QString pack, int les
 QList<int> databaseManager::studentExercises(int classID, int userID, QString pack, int lesson, int sublesson)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(userID);
+	Q_UNUSED(pack);
+	Q_UNUSED(lesson);
+	Q_UNUSED(sublesson);
 	return QList<int>();
 #else
 	QSqlQuery query;
@@ -664,6 +734,12 @@ QList<int> databaseManager::studentExercises(int classID, int userID, QString pa
 QList<QVariantMap> databaseManager::historyEntries(int classID, int userID, QString pack, int lesson, int sublesson, int exercise)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(userID);
+	Q_UNUSED(pack);
+	Q_UNUSED(lesson);
+	Q_UNUSED(sublesson);
+	Q_UNUSED(exercise);
 	return QList<QVariantMap>();
 #else
 	QSqlQuery query;
@@ -684,7 +760,15 @@ QList<QVariantMap> databaseManager::historyEntries(int classID, int userID, QStr
 /*! Adds an entry to the exercise history. */
 void databaseManager::addHistoryEntry(int classID, int userID, QString pack, int lesson, int sublesson, int exercise, QVariantMap record)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(userID);
+	Q_UNUSED(pack);
+	Q_UNUSED(lesson);
+	Q_UNUSED(sublesson);
+	Q_UNUSED(exercise);
+	Q_UNUSED(record);
+#else
 	QSqlQuery query;
 	query.exec(QString("INSERT INTO exercise_result (user, class, upload_time, pack, lesson, sublesson, exercise, speed, mistakes, duration) VALUES (%1, %2, CURRENT_TIMESTAMP, %3, %4, %5, %6, %7, %8, %9)").arg(QString::number(userID),
 		QString::number(classID), quotesEnclosed(pack), QString::number(lesson), QString::number(sublesson), QString::number(exercise),
@@ -699,6 +783,13 @@ void databaseManager::addHistoryEntry(int classID, int userID, QString pack, int
 int databaseManager::compareWithStudents(int classID, int studentID, QString pack, int lesson, int sublesson, int exercise, bool better)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(classID);
+	Q_UNUSED(studentID);
+	Q_UNUSED(pack);
+	Q_UNUSED(lesson);
+	Q_UNUSED(sublesson);
+	Q_UNUSED(exercise);
+	Q_UNUSED(better);
 	return 0;
 #else
 	int out = 0;
@@ -806,6 +897,7 @@ QList<QHostAddress> databaseManager::deviceAddresses(void)
 QHostAddress databaseManager::deviceAddress(int deviceID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(deviceID);
 	return QHostAddress();
 #else
 	QSqlQuery query;
@@ -819,6 +911,7 @@ QHostAddress databaseManager::deviceAddress(int deviceID)
 QString databaseManager::deviceName(int deviceID)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(deviceID);
 	return QString();
 #else
 	QSqlQuery query;
@@ -832,6 +925,7 @@ QString databaseManager::deviceName(int deviceID)
 int databaseManager::findDevice(QHostAddress address)
 {
 #ifdef Q_OS_WASM
+	Q_UNUSED(address);
 	return 0;
 #else
 	QSqlQuery query;
@@ -846,7 +940,10 @@ int databaseManager::findDevice(QHostAddress address)
 /*! Adds a new device. */
 void databaseManager::addDevice(QString name, QHostAddress address)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(name);
+	Q_UNUSED(address);
+#else
 	QSqlQuery query;
 	query.exec(QString("INSERT INTO device (name, ip_address) VALUES (%1, %2)").arg(quotesEnclosed(name), quotesEnclosed(QHostAddress(address.toIPv4Address()).toString())));
 #endif
@@ -855,7 +952,11 @@ void databaseManager::addDevice(QString name, QHostAddress address)
 /*! Edits the given device. */
 void databaseManager::editDevice(int deviceID, QString name, QHostAddress address)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(deviceID);
+	Q_UNUSED(name);
+	Q_UNUSED(address);
+#else
 	QSqlQuery query;
 	query.exec(QString("UPDATE device SET name = %1, ip_address = %2 WHERE id = %3").arg(quotesEnclosed(name), quotesEnclosed(QHostAddress(address.toIPv4Address()).toString()), QString::number(deviceID)));
 #endif
@@ -864,7 +965,9 @@ void databaseManager::editDevice(int deviceID, QString name, QHostAddress addres
 /*! Removes the given device. */
 void databaseManager::removeDevice(int deviceID)
 {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+	Q_UNUSED(deviceID);
+#else
 	QSqlQuery query;
 	query.exec(QString("DELETE FROM device WHERE id = %1").arg(QString::number(deviceID)));
 #endif
