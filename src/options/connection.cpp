@@ -131,10 +131,25 @@ void connectionOptions::testConnection(void)
 	ui->statusValueLabel->setText("...");
 	ui->testButton->setEnabled(false);
 	client.enableClient();
-	if(client.available() && client.isPaired())
+	bool available = client.available(), paired = false;
+	if(available)
+		paired = client.isPaired();
+	if(client.available() && paired)
 		ui->statusValueLabel->setText("OK");
 	else
+	{
 		ui->statusValueLabel->setText(tr("Failed to connect"));
+		if(available && !paired)
+		{
+			QMessageBox *pairMsg = new QMessageBox(QMessageBox::Critical, tr("Error"), tr("Please allow the following address on the server:"), QMessageBox::Ok, this);
+			QString address = monitorClient::localAddress().toString();
+			if(monitorClient::serverAddress() == QHostAddress(QHostAddress::LocalHost))
+				address = QHostAddress(QHostAddress::LocalHost).toString();
+			pairMsg->setInformativeText(address);
+			pairMsg->setWindowModality(Qt::WindowModal);
+			pairMsg->open();
+		}
+	}
 	client.close();
 	ui->testButton->setEnabled(true);
 }
