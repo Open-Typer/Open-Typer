@@ -32,6 +32,7 @@
 #include <QSettings>
 #include <QFile>
 #include <QWebSocketServer>
+#include <QNetworkInterface>
 #include "core/utils.h"
 
 /*! \brief The monitorClient class is used to communicate with the class monitor server. */
@@ -49,6 +50,7 @@ class monitorClient : public QObject
 		QStringList sendRequest(QString method, QStringList data);
 		static QHostAddress serverAddress(void);
 		static quint16 serverPort(void);
+		static QHostAddress localAddress(void);
 		static bool enabled(void);
 		bool available(void);
 

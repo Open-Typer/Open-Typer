@@ -69,6 +69,18 @@ quint16 monitorClient::serverPort(void)
 	return settings.value("server/port","57100").toUInt();
 }
 
+/*! Returns the local IP address, e. g. 192.168.0.100. */
+QHostAddress monitorClient::localAddress(void)
+{
+	QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
+	for(QHostAddress address: addresses)
+	{
+		if((address.protocol() == QAbstractSocket::IPv4Protocol) && !address.isLoopback())
+			return address;
+	}
+	return QHostAddress(QHostAddress::Null);
+}
+
 /*! Returns true if client is enabled in the settings. */
 bool monitorClient::enabled(void)
 {
