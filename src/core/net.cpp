@@ -72,12 +72,14 @@ quint16 monitorClient::serverPort(void)
 /*! Returns the local IP address, e. g. 192.168.0.100. */
 QHostAddress monitorClient::localAddress(void)
 {
+#ifndef Q_OS_WASM
 	QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
 	for(QHostAddress address: addresses)
 	{
 		if((address.protocol() == QAbstractSocket::IPv4Protocol) && !address.isLoopback())
 			return address;
 	}
+#endif // Q_OS_WASM
 	return QHostAddress(QHostAddress::Null);
 }
 
