@@ -22,6 +22,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+# Version and revision
+win32 {
+	GIT_LOCATION = $$system(where git)
+}
+!win32 {
+	GIT_LOCATION = $$system(which git)
+}
+!isEmpty(GIT_LOCATION) {
+	DEFINES += BUILD_VERSION=\\\"$$system(git describe --tags --abbrev=0)\\\"
+	DEFINES += BUILD_REVISION=\\\"$$system(git rev-parse --short HEAD)\\\"
+}
+
 INCLUDEPATH += \
     src/include
 
