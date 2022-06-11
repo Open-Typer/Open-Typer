@@ -153,6 +153,7 @@ class OpenTyper : public QMainWindow
 		void printText(void);
 		void openEditor(bool newFile = true);
 		void startTest(void);
+		void showAboutDialog(void);
 };
 
 #endif // OPENTYPER_H

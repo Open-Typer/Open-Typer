@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>972</width>
+    <width>1000</width>
     <height>778</height>
    </rect>
   </property>
@@ -1909,7 +1909,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>972</width>
+     <width>1000</width>
      <height>30</height>
     </rect>
    </property>
@@ -1981,12 +1981,22 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="actionTypingTest"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionDocs"/>
+    <addaction name="separator"/>
+    <addaction name="actionAboutProgram"/>
+    <addaction name="actionAboutQt"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
    <addaction name="menuStudent"/>
    <addaction name="menuTools"/>
    <addaction name="menuExercise"/>
    <addaction name="menuSettings"/>
+   <addaction name="menuHelp"/>
   </widget>
   <action name="actionOpenText">
    <property name="icon">
@@ -2137,6 +2147,27 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Typing test</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="text">
+    <string>About Qt...</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutQtRole</enum>
+   </property>
+  </action>
+  <action name="actionAboutProgram">
+   <property name="text">
+    <string>About program...</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
+   </property>
+  </action>
+  <action name="actionDocs">
+   <property name="text">
+    <string>Online documentation</string>
    </property>
   </action>
  </widget>

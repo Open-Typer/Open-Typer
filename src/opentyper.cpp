@@ -89,6 +89,10 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->hideTextCheckBox, &QCheckBox::toggled, ui->actionHideText, &QAction::setChecked);
 	// Settings menu
 	connect(ui->actionPreferences, &QAction::triggered, ui->optionsButton, &QPushButton::clicked);
+	// Help menu
+	connect(ui->actionDocs, &QAction::triggered, this, [this]() { QDesktopServices::openUrl(QUrl("https://open-typer.github.io/Open-Typer")); });
+	connect(ui->actionAboutProgram, &QAction::triggered, this, &OpenTyper::showAboutDialog);
+	connect(ui->actionAboutQt, &QAction::triggered, this, [this]() { QMessageBox::aboutQt(this); });
 	// Widgets
 	connect(ui->inputLabel, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(keyPress(QKeyEvent*)));
 	connect(ui->inputLabel, SIGNAL(keyReleased(QKeyEvent*)), this, SLOT(keyRelease(QKeyEvent*)));
@@ -1755,4 +1759,27 @@ void OpenTyper::startTest(void)
 			startReceivedExercise(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
 				dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText(), false);
 	});
+}
+
+/*! Shows about program dialog. */
+void OpenTyper::showAboutDialog(void)
+{
+	QString buildDate = __DATE__;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	QString buildYear = buildDate.sliced(7, 4);
+#else
+	QString buildYear = buildDate.mid(7, 4);
+#endif
+	QMessageBox::about(this, QString(),
+		"<b>Open-Typer</b><br><br>" +
+#ifdef BUILD_VERSION
+		tr("Version: %1").arg(QCoreApplication::applicationVersion()) + "<br>" +
+#endif // BUILD_VERSION
+#ifdef BUILD_REVISION
+		tr("Revision: %1").arg(BUILD_REVISION) + "<br>" +
+#endif // BUILD_REVISION
+		tr("Source code: %1").arg("<a href=\"https://github.com/Open-Typer/Open-Typer\">https://github.com/Open-Typer/Open-Typer</a>") + "<br><br>" +
+		QString("Copyright © %1-%2 %3").arg("2021", buildYear, "adazem009") + "<br>" +
+		tr("Published with the GNU General Public License.")
+	);
 }
