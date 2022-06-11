@@ -179,7 +179,7 @@ void OpenTyper::refreshAll(void)
 	if(settings.value("main/networkEnabled", false).toBool() && (settings.value("server/mode", 2).toInt() == 1))
 	{
 		if(!serverPtr)
-			serverPtr = new monitorServer;
+			serverPtr = new monitorServer(true, this);
 		ui->serverFrame->show();
 		if(serverPtr->isListening())
 		{
