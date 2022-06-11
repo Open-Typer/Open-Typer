@@ -29,6 +29,9 @@ int main(int argc, char *argv[])
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 	QApplication a(argc, argv);
+#ifdef BUILD_VERSION
+	QCoreApplication::setApplicationVersion(BUILD_VERSION);
+#endif // BUILD_VERSION
 	if(!dbMgr.status())
 		dbMgr.open();
 	// Set icon
