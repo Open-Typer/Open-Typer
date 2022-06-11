@@ -1,7 +1,7 @@
 QT += core gui charts network websockets
 !wasm {
-	QT += printsupport sql
-	LIBS += -lssl -lcrypto
+    QT += printsupport sql
+    LIBS += -lssl -lcrypto
 }
 macx {
     LIBS += -L/usr/local/Cellar/openssl@1.1/1.1.1o/lib
@@ -24,14 +24,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 # Version and revision
 win32 {
-	GIT_LOCATION = $$system(where git)
+    GIT_LOCATION = $$system(where git)
 }
 !win32 {
-	GIT_LOCATION = $$system(which git)
+    GIT_LOCATION = $$system(which git)
 }
 !isEmpty(GIT_LOCATION) {
-	DEFINES += BUILD_VERSION=\\\"$$system(git describe --tags --abbrev=0)\\\"
-	DEFINES += BUILD_REVISION=\\\"$$system(git rev-parse --short HEAD)\\\"
+    DEFINES += BUILD_VERSION=\\\"$$system(git describe --tags --abbrev=0)\\\"
+    DEFINES += BUILD_REVISION=\\\"$$system(git rev-parse --short HEAD)\\\"
 }
 
 INCLUDEPATH += \
