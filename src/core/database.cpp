@@ -133,6 +133,7 @@ QString databaseManager::userName(int userID)
 	QSqlQuery query;
 	query.exec("SELECT name FROM user WHERE id = " + QString::number(userID));
 	query.next();
+	Q_ASSERT(query.value(0).isValid());
 	return query.value(0).toString();
 #endif
 }
@@ -147,6 +148,7 @@ QString databaseManager::userNickname(int userID)
 	QSqlQuery query;
 	query.exec("SELECT nickname FROM user WHERE id = " + QString::number(userID));
 	query.next();
+	Q_ASSERT(query.value(0).isValid());
 	return query.value(0).toString();
 #endif
 }
@@ -161,6 +163,7 @@ databaseManager::Role databaseManager::userRole(int userID)
 	QSqlQuery query;
 	query.exec("SELECT role FROM user WHERE id = " + QString::number(userID));
 	query.next();
+	Q_ASSERT(query.value(0).isValid());
 	return (Role) query.value(0).toInt();
 #endif
 }
@@ -175,7 +178,10 @@ QStringList databaseManager::userNames(void)
 	query.exec("SELECT name FROM user");
 	QStringList out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toString();
+	}
 	return out;
 #endif
 }
@@ -190,7 +196,10 @@ QStringList databaseManager::teacherNames(void)
 	query.exec("SELECT name FROM user WHERE role = " + QString::number(Role_Teacher) + " OR role = " + QString::number(Role_Administrator));
 	QStringList out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toString();
+	}
 	return out;
 #endif
 }
@@ -205,7 +214,10 @@ QStringList databaseManager::administratorNames(void)
 	query.exec("SELECT name FROM user WHERE role = " + QString::number(Role_Administrator));
 	QStringList out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toString();
+	}
 	return out;
 #endif
 }
@@ -220,7 +232,10 @@ QList<int> databaseManager::userIDs(void)
 	query.exec("SELECT id FROM user");
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -235,7 +250,10 @@ int databaseManager::findUser(QString nickname)
 	QSqlQuery query;
 	query.exec("SELECT id FROM user WHERE nickname = " + quotesEnclosed(nickname));
 	if(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		return query.value(0).toInt();
+	}
 	else
 		return 0;
 #endif
@@ -252,7 +270,10 @@ QList<int> databaseManager::studentIDs(int classID)
 	query.exec(QString("SELECT id FROM user INNER JOIN users ON users.user = user.id AND users.class = %1 AND user.role = %2").arg(QString::number(classID), QString::number(Role_Student)));
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -267,7 +288,10 @@ QList<int> databaseManager::teacherIDs(void)
 	query.exec("SELECT id FROM user WHERE role = " + QString::number(Role_Teacher) + " OR role = " + QString::number(Role_Administrator));
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -282,7 +306,10 @@ QList<int> databaseManager::administratorIDs(void)
 	query.exec("SELECT id FROM user WHERE role = " + QString::number(Role_Administrator));
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -325,6 +352,7 @@ bool databaseManager::auth(int userID, QString password)
 		query.exec("SELECT password FROM user WHERE id = " + QString::number(userID));
 		QStringList out;
 		query.next();
+		Q_ASSERT(query.value(0).isValid());
 		if(query.value(0).toString().toUtf8() == hash.result().toHex())
 		{
 			userLoginID = userID;
@@ -346,20 +374,26 @@ void databaseManager::addUser(QString name, databaseManager::Role role, QString 
 	Q_UNUSED(nickname);
 	Q_UNUSED(classID);
 #else
+	bool result;
 	QCryptographicHash hash(QCryptographicHash::Sha256);
 	hash.addData(password.toUtf8());
 	QString passwordStr = QString(hash.result().toHex());
 	QSqlQuery query;
 	if((role == Role_Teacher) || (role == Role_Administrator))
 	{
-		query.exec(QString("INSERT INTO user (name, nickname, password, role) VALUES (%1, '', %2, %3)").arg(quotesEnclosed(name), quotesEnclosed(passwordStr), QString::number(role)));
-		query.exec("UPDATE user SET nickname = 'teacher_' || (SELECT id FROM user WHERE nickname = '') WHERE nickname = ''");
+		result = query.exec(QString("INSERT INTO user (name, nickname, password, role) VALUES (%1, '', %2, %3)").arg(quotesEnclosed(name), quotesEnclosed(passwordStr), QString::number(role)));
+		Q_ASSERT(result);
+		result = query.exec("UPDATE user SET nickname = 'teacher_' || (SELECT id FROM user WHERE nickname = '') WHERE nickname = ''");
+		Q_ASSERT(result);
 	}
 	else
 	{
-		query.exec(QString("INSERT INTO user (name, nickname, password, role) VALUES (%1, '', %2, %3)").arg(quotesEnclosed(name), quotesEnclosed(passwordStr), QString::number(role)));
-		query.exec(QString("INSERT INTO users (user, class) VALUES ((SELECT id FROM user WHERE nickname = ''), %1)").arg(QString::number(classID)));
-		query.exec(QString("UPDATE user SET nickname = (SELECT id FROM user WHERE nickname = '') || %1 WHERE nickname = ''").arg(quotesEnclosed(nickname)));
+		result = query.exec(QString("INSERT INTO user (name, nickname, password, role) VALUES (%1, '', %2, %3)").arg(quotesEnclosed(name), quotesEnclosed(passwordStr), QString::number(role)));
+		Q_ASSERT(result);
+		result = query.exec(QString("INSERT INTO users (user, class) VALUES ((SELECT id FROM user WHERE nickname = ''), %1)").arg(QString::number(classID)));
+		Q_ASSERT(result);
+		result = query.exec(QString("UPDATE user SET nickname = (SELECT id FROM user WHERE nickname = '') || %1 WHERE nickname = ''").arg(quotesEnclosed(nickname)));
+		Q_ASSERT(result);
 	}
 #endif
 }
@@ -373,7 +407,10 @@ void databaseManager::addStudentToClass(int userID, int classID)
 #else
 	QSqlQuery query;
 	if(userRole(userID) == Role_Student)
-		query.exec(QString("INSERT INTO users (user, class) VALUES (%1, %2)").arg(QString::number(userID), QString::number(classID)));
+	{
+		bool result = query.exec(QString("INSERT INTO users (user, class) VALUES (%1, %2)").arg(QString::number(userID), QString::number(classID)));
+		Q_ASSERT(result);
+	}
 #endif
 }
 
@@ -387,6 +424,7 @@ void databaseManager::editUser(int userID, QString name, databaseManager::Role r
 	Q_UNUSED(password);
 	Q_UNUSED(nickname);
 #else
+	bool result;
 	QCryptographicHash hash(QCryptographicHash::Sha256);
 	hash.addData(password.toUtf8());
 	QString passwordStr = QString(hash.result().toHex());
@@ -394,16 +432,28 @@ void databaseManager::editUser(int userID, QString name, databaseManager::Role r
 	if((role == Role_Teacher) || (role == Role_Administrator))
 	{
 		if(password == "")
-			query.exec(QString("UPDATE user SET name = %1, role = %2 WHERE id = %3").arg(quotesEnclosed(name), QString::number(role), QString::number(userID)));
+		{
+			result = query.exec(QString("UPDATE user SET name = %1, role = %2 WHERE id = %3").arg(quotesEnclosed(name), QString::number(role), QString::number(userID)));
+			Q_ASSERT(result);
+		}
 		else
-			query.exec(QString("UPDATE user SET name = %1, password = %2, role = %3 WHERE id = %4").arg(quotesEnclosed(name), quotesEnclosed(passwordStr), QString::number(role), QString::number(userID)));
+		{
+			result = query.exec(QString("UPDATE user SET name = %1, password = %2, role = %3 WHERE id = %4").arg(quotesEnclosed(name), quotesEnclosed(passwordStr), QString::number(role), QString::number(userID)));
+			Q_ASSERT(result);
+		}
 	}
 	else
 	{
 		if(password == "")
-			query.exec(QString("UPDATE user SET name = %1, nickname = %2, role = %3 WHERE id = %4").arg(quotesEnclosed(name), quotesEnclosed(nickname), QString::number(role), QString::number(userID)));
+		{
+			result = query.exec(QString("UPDATE user SET name = %1, nickname = %2, role = %3 WHERE id = %4").arg(quotesEnclosed(name), quotesEnclosed(nickname), QString::number(role), QString::number(userID)));
+			Q_ASSERT(result);
+		}
 		else
-			query.exec(QString("UPDATE user SET name = %1, nickname = %2, password = %3, role = %4 WHERE id = %5").arg(quotesEnclosed(name), quotesEnclosed(nickname), quotesEnclosed(passwordStr), QString::number(role), QString::number(userID)));
+		{
+			result = query.exec(QString("UPDATE user SET name = %1, nickname = %2, password = %3, role = %4 WHERE id = %5").arg(quotesEnclosed(name), quotesEnclosed(nickname), quotesEnclosed(passwordStr), QString::number(role), QString::number(userID)));
+			Q_ASSERT(result);
+		}
 	}
 #endif
 }
@@ -414,10 +464,15 @@ void databaseManager::removeUser(int userID)
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
 #else
+	bool result;
 	QSqlQuery query;
 	if(userRole(userID) != Role_Student)
-		query.exec(QString("DELETE FROM class WHERE id IN (SELECT id FROM class INNER JOIN users ON users.user = %1 AND users.class = class.id)").arg(QString::number(userID)));
-	query.exec("DELETE FROM user WHERE id = " + QString::number(userID));
+	{
+		result = query.exec(QString("DELETE FROM class WHERE id IN (SELECT id FROM class INNER JOIN users ON users.user = %1 AND users.class = class.id)").arg(QString::number(userID)));
+		Q_ASSERT(result);
+	}
+	result = query.exec("DELETE FROM user WHERE id = " + QString::number(userID));
+	Q_ASSERT(result);
 	removeOrphanedStudents();
 #endif
 }
@@ -432,7 +487,8 @@ void databaseManager::removeStudentFromClass(int userID, int classID)
 	QSqlQuery query;
 	if(userRole(userID) == Role_Student)
 	{
-		query.exec(QString("DELETE FROM users WHERE user = %1 AND class = %2").arg(QString::number(userID), QString::number(classID)));
+		bool result = query.exec(QString("DELETE FROM users WHERE user = %1 AND class = %2").arg(QString::number(userID), QString::number(classID)));
+		Q_ASSERT(result);
 		removeOrphanedStudents();
 	}
 #endif
@@ -448,6 +504,7 @@ QString databaseManager::className(int classID)
 	QSqlQuery query;
 	query.exec("SELECT name FROM class WHERE id = " + QString::number(classID));
 	query.next();
+	Q_ASSERT(query.value(0).isValid());
 	return query.value(0).toString();
 #endif
 }
@@ -462,6 +519,7 @@ int databaseManager::classIcon(int classID)
 	QSqlQuery query;
 	query.exec("SELECT icon FROM class WHERE id = " + QString::number(classID));
 	query.next();
+	Q_ASSERT(query.value(0).isValid());
 	return query.value(0).toInt();
 #endif
 }
@@ -476,6 +534,7 @@ unsigned long long databaseManager::classTimestamp(int classID)
 	QSqlQuery query;
 	query.exec("SELECT strftime(\"%s\", used_time) FROM class WHERE id = " + QString::number(classID));
 	query.next();
+	Q_ASSERT(query.value(0).isValid());
 	return query.value(0).toULongLong();
 #endif
 }
@@ -490,6 +549,7 @@ int databaseManager::classOwner(int classID)
 	QSqlQuery query;
 	query.exec(QString("SELECT user FROM users INNER JOIN user ON user.id = users.user AND users.class = %1 AND user.role != %2").arg(QString::number(classID), QString::number(Role_Student)));
 	query.next();
+	Q_ASSERT(query.value(0).isValid());
 	return query.value(0).toInt();
 #endif
 }
@@ -508,7 +568,10 @@ QStringList databaseManager::classNames(bool sort)
 		query.exec("SELECT name FROM class");
 	QStringList out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toString();
+	}
 	return out;
 #endif
 }
@@ -527,7 +590,10 @@ QList<int> databaseManager::classIDs(bool sort)
 		query.exec("SELECT id FROM class");
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -540,11 +606,14 @@ void databaseManager::addClass(QString name, int owner, int icon)
 	Q_UNUSED(owner);
 	Q_UNUSED(icon);
 #else
+	bool result;
 	QSqlQuery query;
-	query.exec(QString("INSERT INTO class (name, icon, used_time) VALUES ('', %1, CURRENT_TIMESTAMP)").arg(QString::number(icon)));
-	query.exec(QString("INSERT INTO users (user, class) VALUES (%1, (SELECT id FROM class WHERE name = ''))").arg(QString::number(owner)));
-	query.exec(QString("UPDATE class SET name = %1 WHERE name = ''").arg(quotesEnclosed(name)));
-	
+	result = query.exec(QString("INSERT INTO class (name, icon, used_time) VALUES ('', %1, CURRENT_TIMESTAMP)").arg(QString::number(icon)));
+	Q_ASSERT(result);
+	result = query.exec(QString("INSERT INTO users (user, class) VALUES (%1, (SELECT id FROM class WHERE name = ''))").arg(QString::number(owner)));
+	Q_ASSERT(result);
+	result = query.exec(QString("UPDATE class SET name = %1 WHERE name = ''").arg(quotesEnclosed(name)));
+	Q_ASSERT(result);
 #endif
 }
 
@@ -557,9 +626,12 @@ void databaseManager::editClass(int classID, QString name, int owner, int icon)
 	Q_UNUSED(owner);
 	Q_UNUSED(icon);
 #else
+	bool result;
 	QSqlQuery query;
-	query.exec(QString("UPDATE class SET name = %1, icon = %2 WHERE id = %3").arg(quotesEnclosed(name), QString::number(icon), QString::number(classID)));
-	query.exec(QString("UPDATE users SET user = %1 WHERE user = (SELECT user FROM users INNER JOIN class INNER JOIN user ON class.id = %2 AND users.class = %2 AND user.id = users.user AND (user.role = 0 OR user.role = 1))").arg(QString::number(owner), QString::number(classID)));
+	result = query.exec(QString("UPDATE class SET name = %1, icon = %2 WHERE id = %3").arg(quotesEnclosed(name), QString::number(icon), QString::number(classID)));
+	Q_ASSERT(result);
+	result = query.exec(QString("UPDATE users SET user = %1 WHERE user = (SELECT user FROM users INNER JOIN class INNER JOIN user ON class.id = %2 AND users.class = %2 AND user.id = users.user AND (user.role = 0 OR user.role = 1))").arg(QString::number(owner), QString::number(classID)));
+	Q_ASSERT(result);
 #endif
 }
 
@@ -570,7 +642,8 @@ void databaseManager::updateClassTimestamp(int classID)
 	Q_UNUSED(classID);
 #else
 	QSqlQuery query;
-	query.exec("UPDATE class SET used_time = CURRENT_TIMESTAMP WHERE id = " + QString::number(classID));
+	bool result = query.exec("UPDATE class SET used_time = CURRENT_TIMESTAMP WHERE id = " + QString::number(classID));
+	Q_ASSERT(result);
 #endif
 }
 
@@ -581,7 +654,8 @@ void databaseManager::removeClass(int classID)
 	Q_UNUSED(classID);
 #else
 	QSqlQuery query;
-	query.exec(QString("DELETE FROM class WHERE id = %1").arg(QString::number(classID)));
+	bool result = query.exec(QString("DELETE FROM class WHERE id = %1").arg(QString::number(classID)));
+	Q_ASSERT(result);
 	removeOrphanedStudents();
 #endif
 }
@@ -597,7 +671,10 @@ QStringList databaseManager::recordedPacks(int classID)
 	query.exec("SELECT DISTINCT pack FROM exercise_result WHERE class = " + QString::number(classID));
 	QStringList out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toString();
+	}
 	return out;
 #endif
 }
@@ -614,7 +691,10 @@ QStringList databaseManager::studentPacks(int classID, int userID)
 	query.exec(QString("SELECT DISTINCT pack FROM exercise_result WHERE class = %1 AND user = %2").arg(QString::number(classID), QString::number(userID)));
 	QStringList out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toString();
+	}
 	return out;
 #endif
 }
@@ -631,7 +711,10 @@ QList<int> databaseManager::recordedLessons(int classID, QString pack)
 	query.exec(QString("SELECT DISTINCT lesson FROM exercise_result WHERE class = %1 AND pack = %2").arg(QString::number(classID), quotesEnclosed(pack)));
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -649,7 +732,10 @@ QList<int> databaseManager::studentLessons(int classID, int userID, QString pack
 	query.exec(QString("SELECT DISTINCT lesson FROM exercise_result WHERE class = %1 AND user = %2 AND pack = %3").arg(QString::number(classID), QString::number(userID), quotesEnclosed(pack)));
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -667,7 +753,10 @@ QList<int> databaseManager::recordedSublessons(int classID, QString pack, int le
 	query.exec(QString("SELECT DISTINCT sublesson FROM exercise_result WHERE class = %1 AND pack = %2 AND lesson = %3").arg(QString::number(classID), quotesEnclosed(pack), QString::number(lesson)));
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -686,7 +775,10 @@ QList<int> databaseManager::studentSublessons(int classID, int userID, QString p
 	query.exec(QString("SELECT DISTINCT sublesson FROM exercise_result WHERE class = %1 AND user = %2 AND pack = %3 AND lesson = %4").arg(QString::number(classID), QString::number(userID), quotesEnclosed(pack), QString::number(lesson)));
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -705,7 +797,10 @@ QList<int> databaseManager::recordedExercises(int classID, QString pack, int les
 	query.exec(QString("SELECT DISTINCT exercise FROM exercise_result WHERE class = %1 AND pack = %2 AND lesson = %3 AND sublesson = %4").arg(QString::number(classID), quotesEnclosed(pack), QString::number(lesson), QString::number(sublesson)));
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -725,7 +820,10 @@ QList<int> databaseManager::studentExercises(int classID, int userID, QString pa
 	query.exec(QString("SELECT DISTINCT exercise FROM exercise_result WHERE class = %1 AND user = %2 AND pack = %3 AND lesson = %4 AND sublesson = %5").arg(QString::number(classID), QString::number(userID), quotesEnclosed(pack), QString::number(lesson), QString::number(sublesson)));
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -748,6 +846,9 @@ QList<QVariantMap> databaseManager::historyEntries(int classID, int userID, QStr
 	while(query.next())
 	{
 		QVariantMap entry;
+		Q_ASSERT(query.value("speed").isValid());
+		Q_ASSERT(query.value("mistakes").isValid());
+		Q_ASSERT(query.value("duration").isValid());
 		entry["speed"] = query.value("speed").toInt();
 		entry["mistakes"] = query.value("mistakes").toInt();
 		entry["duration"] = query.value("duration").toInt();
@@ -770,9 +871,10 @@ void databaseManager::addHistoryEntry(int classID, int userID, QString pack, int
 	Q_UNUSED(record);
 #else
 	QSqlQuery query;
-	query.exec(QString("INSERT INTO exercise_result (user, class, upload_time, pack, lesson, sublesson, exercise, speed, mistakes, duration) VALUES (%1, %2, CURRENT_TIMESTAMP, %3, %4, %5, %6, %7, %8, %9)").arg(QString::number(userID),
+	bool result = query.exec(QString("INSERT INTO exercise_result (user, class, upload_time, pack, lesson, sublesson, exercise, speed, mistakes, duration) VALUES (%1, %2, CURRENT_TIMESTAMP, %3, %4, %5, %6, %7, %8, %9)").arg(QString::number(userID),
 		QString::number(classID), quotesEnclosed(pack), QString::number(lesson), QString::number(sublesson), QString::number(exercise),
 		QString::number(record["speed"].toInt()), QString::number(record["mistakes"].toInt()), QString::number(record["duration"].toInt())));
+	Q_ASSERT(result);
 #endif
 }
 
@@ -855,6 +957,7 @@ void databaseManager::removeOrphanedStudents(void)
 	while(query1.next())
 	{
 		QSqlQuery query2;
+		Q_ASSERT(query1.value(0).isValid());
 		int id = query1.value(0).toInt();
 		query2.exec("SELECT user FROM users WHERE user = " + QString::number(id));
 		if(!query2.next()) // This student is not a member of any class
@@ -873,7 +976,10 @@ QList<int> databaseManager::deviceIDs(void)
 	query.exec("SELECT id FROM device");
 	QList<int> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += query.value(0).toInt();
+	}
 	return out;
 #endif
 }
@@ -888,7 +994,10 @@ QList<QHostAddress> databaseManager::deviceAddresses(void)
 	query.exec("SELECT ip_address FROM device");
 	QList<QHostAddress> out;
 	while(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		out += QHostAddress(query.value(0).toString());
+	}
 	return out;
 #endif
 }
@@ -903,6 +1012,7 @@ QHostAddress databaseManager::deviceAddress(int deviceID)
 	QSqlQuery query;
 	query.exec("SELECT ip_address FROM device WHERE id = " + QString::number(deviceID));
 	query.next();
+	Q_ASSERT(query.value(0).isValid());
 	return QHostAddress(query.value(0).toString());
 #endif
 }
@@ -917,6 +1027,7 @@ QString databaseManager::deviceName(int deviceID)
 	QSqlQuery query;
 	query.exec("SELECT name FROM device WHERE id = " + QString::number(deviceID));
 	query.next();
+	Q_ASSERT(query.value(0).isValid());
 	return query.value(0).toString();
 #endif
 }
@@ -931,7 +1042,10 @@ int databaseManager::findDevice(QHostAddress address)
 	QSqlQuery query;
 	query.exec("SELECT id FROM device WHERE ip_address = " + quotesEnclosed(QHostAddress(address.toIPv4Address()).toString()));
 	if(query.next())
+	{
+		Q_ASSERT(query.value(0).isValid());
 		return query.value(0).toInt();
+	}
 	else
 		return 0;
 #endif
@@ -945,7 +1059,8 @@ void databaseManager::addDevice(QString name, QHostAddress address)
 	Q_UNUSED(address);
 #else
 	QSqlQuery query;
-	query.exec(QString("INSERT INTO device (name, ip_address) VALUES (%1, %2)").arg(quotesEnclosed(name), quotesEnclosed(QHostAddress(address.toIPv4Address()).toString())));
+	bool result = query.exec(QString("INSERT INTO device (name, ip_address) VALUES (%1, %2)").arg(quotesEnclosed(name), quotesEnclosed(QHostAddress(address.toIPv4Address()).toString())));
+	Q_ASSERT(result);
 #endif
 }
 
@@ -958,7 +1073,8 @@ void databaseManager::editDevice(int deviceID, QString name, QHostAddress addres
 	Q_UNUSED(address);
 #else
 	QSqlQuery query;
-	query.exec(QString("UPDATE device SET name = %1, ip_address = %2 WHERE id = %3").arg(quotesEnclosed(name), quotesEnclosed(QHostAddress(address.toIPv4Address()).toString()), QString::number(deviceID)));
+	bool result = query.exec(QString("UPDATE device SET name = %1, ip_address = %2 WHERE id = %3").arg(quotesEnclosed(name), quotesEnclosed(QHostAddress(address.toIPv4Address()).toString()), QString::number(deviceID)));
+	Q_ASSERT(result);
 #endif
 }
 
@@ -969,7 +1085,8 @@ void databaseManager::removeDevice(int deviceID)
 	Q_UNUSED(deviceID);
 #else
 	QSqlQuery query;
-	query.exec(QString("DELETE FROM device WHERE id = %1").arg(QString::number(deviceID)));
+	bool result = query.exec(QString("DELETE FROM device WHERE id = %1").arg(QString::number(deviceID)));
+	Q_ASSERT(result);
 #endif
 }
 
