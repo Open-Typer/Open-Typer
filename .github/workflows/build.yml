@@ -162,7 +162,7 @@ jobs:
     - uses: mymindstorm/setup-emsdk@v11
       with:
         version: 1.39.8
-        actions-cache-folder: 'emsdk-cache'
+        actions-cache-folder: 'emsdk-cache1'
     ## Build
     - run: source .ci/common/build.sh wasm
       shell: bash
