@@ -32,6 +32,8 @@ testWaitDialog::testWaitDialog(monitorClient *client, QWidget *parent) :
 	font = themeEngine::font();
 	font.setPointSize(12);
 	ui->textLabel->setFont(themeEngine::font());
+	// Disable focus of cancel button so that it doesn't react to return/enter key
+	ui->buttonBox->button(QDialogButtonBox::Cancel)->setFocusPolicy(Qt::NoFocus);
 	// Connections
 	connect(ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &testWaitDialog::close);
 	connect(ui->nameEdit, &QLineEdit::textChanged, this, [this](QString text) { m_client->sendRequest("put", { "name", text }); });
