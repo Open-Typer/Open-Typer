@@ -163,13 +163,44 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 	for(int i=0; i < count; i++)
 	{
 		QVariant subseq, sourceSubseq, targetSubseq;
+		bool lcsSrc = false, lcsTarget = false;
 		if(i < lcs.count())
+		{
 			subseq = lcs[i];
-		if(sourcePos < source.count())
-			sourceSubseq = source[sourcePos];
-		if(targetPos < target.count())
-			targetSubseq = target[targetPos];
-		if((subseq != sourceSubseq) && (subseq != targetSubseq))
+			if(sourcePos < source.count())
+			{
+				sourceSubseq = source[sourcePos];
+				lcsSrc = (subseq == sourceSubseq);
+			}
+			if(targetPos < target.count())
+			{
+				targetSubseq = target[targetPos];
+				lcsTarget = (subseq == targetSubseq);
+			}
+		}
+		else
+		{
+			lcsSrc = true;
+			lcsTarget = true;
+			if(sourcePos < source.count())
+			{
+				sourceSubseq = source[sourcePos];
+				lcsSrc = false;
+			}
+			if(targetPos < target.count())
+			{
+				targetSubseq = target[targetPos];
+				lcsTarget = false;
+			}
+			if((lcsSrc && !lcsTarget) || (!lcsSrc && lcsTarget))
+				i++;
+			if(sourcePos >= source.count() && targetPos >= target.count())
+			{
+				lcsSrc = true;
+				lcsTarget = true;
+			}
+		}
+		if(!lcsSrc && !lcsTarget)
 		{
 			// Changed character
 			QVariantMap diff;
@@ -183,7 +214,7 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 			sourcePos++;
 			i--;
 		}
-		else if(subseq != sourceSubseq)
+		else if(!lcsSrc)
 		{
 			// Deleted character
 			QVariantMap diff;
@@ -194,7 +225,7 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 			sourcePos++;
 			i--;
 		}
-		else if(subseq != targetSubseq)
+		else if(!lcsTarget)
 		{
 			// Added character
 			QVariantMap diff;
