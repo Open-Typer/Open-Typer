@@ -146,6 +146,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	// Start timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
 	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
+	connect(&timedExTimer, &QTimer::timeout, this, &OpenTyper::updateCurrentTime);
 	secLoop->start(500);
 #ifdef Q_OS_WASM
 	ui->printButton->hide();
@@ -1074,6 +1075,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		if(currentLine >= lineCount+1)
 			input.remove(input.count()-1, 1);
 		keyRelease(event);
+		lastTime = levelTimer.elapsed()/1000;
+		lastTimeF = levelTimer.elapsed()/1000.0;
 		endExercise(true, true, false, true, true);
 	}
 }
@@ -1153,8 +1156,6 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		mistakeTextHtml.replace("\n","<br>");
 		ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 	}
-	lastTime = levelTimer.elapsed()/1000;
-	lastTimeF = levelTimer.elapsed()/1000.0;
 	int netHits = levelHits*(60/(levelTimer.elapsed()/1000.0));
 	int grossHits = totalHits*(60/(levelTimer.elapsed()/1000.0));
 	int time = levelTimer.elapsed()/1000;
@@ -1284,6 +1285,8 @@ void OpenTyper::updateCurrentTime(void)
 				if(levelInProgress)
 				{
 					ui->timedExCountdownLabel->hide();
+					lastTime = levelTimer.elapsed()/1000;
+					lastTimeF = levelTimer.elapsed()/1000.0;
 					endExercise(true, true, true, true, true);
 				}
 			}
@@ -1291,6 +1294,9 @@ void OpenTyper::updateCurrentTime(void)
 			{
 				timedExStarted = true;
 				levelTimer.start();
+				timedExTimer.setSingleShot(true);
+				limitTime.setHMS(timedExHours,timedExMinutes,timedExSeconds);
+				timedExTimer.start(QTime(0, 0, 0).msecsTo(limitTime));
 				secLoop->start(500);
 				ui->timedExTime->show();
 				ui->timedExCountdownLabel->hide();

@@ -91,7 +91,7 @@ class OpenTyper : public QMainWindow
 		QList<QVariantMap> recordedMistakes;
 		int sublessonListStart;
 		QElapsedTimer levelTimer;
-		QTimer *secLoop;
+		QTimer *secLoop, timedExTimer;
 		bool levelInProgress, mistake, ignoreMistakeLabelAppend;
 		QString inputLabelHtml, mistakeLabelHtml;
 		QString inputTextHtml, mistakeTextHtml;
