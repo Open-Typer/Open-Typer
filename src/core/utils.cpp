@@ -207,6 +207,7 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 			diff["pos"] = targetPos;
 			diff["type"] = "change";
 			diff["previous"] = sourceSubseq;
+			diff["previousPos"] = sourcePos;
 			out += diff;
 			targetPos++;
 			if(inputPos)
@@ -221,6 +222,7 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 			diff["pos"] = targetPos;
 			diff["type"] = "deletion";
 			diff["previous"] = sourceSubseq;
+			diff["previousPos"] = sourcePos;
 			out += diff;
 			sourcePos++;
 			i--;
