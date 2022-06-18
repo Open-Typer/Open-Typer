@@ -301,6 +301,59 @@ QStringList stringUtils::splitWordsByPunct(QStringList source)
 	return out;
 }
 
+/*! Recursively generates a diff list from source and target word list. */
+QMap<int, QVariantMap> stringUtils::generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList)
+{
+	// Compare word lists
+	QList<QVariant> sourceList, targetList;
+	for(int i=0; i < sourceWords->count(); i++)
+		sourceList += sourceWords->at(i);
+	for(int i=0; i < targetWords->count(); i++)
+		targetList += targetWords->at(i);
+	QList<QVariantMap> wordDiff = compareLists(sourceList, targetList);
+	QMap<int, QVariantMap> differences;
+	QList<int> newMergeList;
+	if(mergeList == nullptr || !mergeList)
+		mergeList = &newMergeList;
+	for(int i=0; i < wordDiff.count(); i++)
+	{
+		if(mergeList->contains(wordDiff[i]["pos"].toInt()))
+			wordDiff[i]["merged"] = true;
+		// If current diff is a change and the next one is a deletion or a change,
+		// there might be a "deleted space" between the 2 words.
+		if((i < wordDiff.count()-1) && (wordDiff[i+1]["pos"].toInt() == wordDiff[i]["pos"].toInt()+1) && !mergeList->contains(wordDiff[i]["pos"].toInt()))
+		{
+			QVariantMap *currentDiff = &wordDiff[i];
+			QVariantMap *nextDiff = &wordDiff[i+1];
+			QString type1 = currentDiff->value("type").toString();
+			QString type2 = nextDiff->value("type").toString();
+			QString newWord = currentDiff->value("previous").toString() + " " + nextDiff->value("previous").toString();
+			int count1 = compareStrings(newWord, targetWords->at(currentDiff->value("pos").toInt())).count();
+			int count2 = compareStrings(currentDiff->value("previous").toString(), targetWords->at(currentDiff->value("pos").toInt())).count();
+			if((type1 == "change") && ((type2 == "deletion") || ((type2 == "change") && (count1 < count2))))
+			{
+				// old_word1[space]old_word2
+				currentDiff->insert("previous", newWord);
+				currentDiff->insert("merged", true);
+				sourceWords->replace(currentDiff->value("previousPos").toInt(), newWord);
+				sourceWords->removeAt(currentDiff->value("previousPos").toInt() + 1);
+				mergeList->append(currentDiff->value("pos").toInt());
+				return generateDiffList(sourceWords, targetWords, mergeList);
+			}
+		}
+		if(differences.contains(wordDiff[i]["pos"].toInt()))
+		{
+			QVariantMap currentMap = differences[wordDiff[i]["pos"].toInt()];
+			if(currentMap.contains("previous"))
+				currentMap["previous"] = currentMap["previous"].toString() + " " + wordDiff[i]["previous"].toString();
+			differences[wordDiff[i]["pos"].toInt()] = currentMap;
+		}
+		else
+			differences[wordDiff[i]["pos"].toInt()] = wordDiff[i];
+	}
+	return differences;
+}
+
 /*! Compares input text with exercise text and finds mistakes. */
 QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits, QStringList *errorWords)
 {
@@ -325,26 +378,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 		inputWords += inputLines[i].split(' ');
 	}
 	inputWords = splitWordsByPunct(inputWords);
-	// Compare word lists
-	QList<QVariant> sourceList, targetList;
-	for(i=0; i < exerciseWords.count(); i++)
-		sourceList += exerciseWords[i];
-	for(i=0; i < inputWords.count(); i++)
-		targetList += inputWords[i];
-	QList<QVariantMap> wordDiff = compareLists(sourceList, targetList);
-	QMap<int, QVariantMap*> differences;
-	for(i=0; i < wordDiff.count(); i++)
-	{
-		if(differences.contains(wordDiff[i]["pos"].toInt()))
-		{
-			QVariantMap currentMap = *(differences[wordDiff[i]["pos"].toInt()]);
-			if(currentMap.contains("previous"))
-				currentMap["previous"] = currentMap["previous"].toString() + " " + wordDiff[i]["previous"].toString();
-			*(differences[wordDiff[i]["pos"].toInt()]) = currentMap;
-		}
-		else
-			differences[wordDiff[i]["pos"].toInt()] = &wordDiff[i];
-	}
+	auto differences = generateDiffList(&exerciseWords, &inputWords);
 	if(errorWords)
 		errorWords->clear();
 	int pos = 0, hits = 0;
@@ -370,11 +404,11 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 		if(differences.contains(i))
 		{
 			if(errorWords)
-				errorWords->append(differences[i]->value("previous").toString());
-			if(differences[i]->value("type").toString() == "change")
+				errorWords->append(differences[i]["previous"].toString());
+			if(differences[i]["type"].toString() == "change")
 			{
 				int wordStart = pos;
-				auto diff = compareStrings(differences[i]->value("previous").toString(), inputWords[i], &recordedCharacters, &hits, &pos);
+				auto diff = compareStrings(differences[i]["previous"].toString(), inputWords[i], &recordedCharacters, &hits, &pos);
 				QList<QVariantMap> toRemove;
 				// Ensure there's max. one mistake per 6 characters
 				int lastMistakePos = -1;
@@ -387,27 +421,28 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 				}
 				for(int i2=0; i2 < toRemove.count(); i2++)
 					diff.removeAll(toRemove[i2]);
+				bool merged = (differences[i].contains("merged") && differences[i]["merged"].toBool());
 				// Translate mistake position
 				for(int i2=0; i2 < diff.count(); i2++)
 				{
 					QVariantMap currentMap = diff[i2];
-					if((currentMap["type"].toString() == "deletion") && (currentMap["previous"].toString() == " "))
+					if((currentMap["type"].toString() == "deletion") && (currentMap["previous"].toString() == " ") && !merged)
 						currentMap["pos"] = currentMap["pos"].toInt() - 1;
 					currentMap["pos"] = wordStart + currentMap["pos"].toInt();
-					if(currentMap["type"].toString() != "deletion")
+					if((currentMap["type"].toString() != "deletion") || (merged && currentMap["type"].toString() == "deletion"))
 						pos--;
 					diff[i2] = currentMap;
 				}
 				out += diff;
 			}
-			else if(differences[i]->value("type").toString() == "deletion")
+			else if(differences[i]["type"].toString() == "deletion")
 			{
-				QVariantMap currentMap = *differences[i];
+				QVariantMap currentMap = differences[i];
 				currentMap["pos"] = pos > 0 && !inputWords[i][0].isPunct() ? pos-1 : pos;
 				out += currentMap;
 				pos += inputWords[i].count();
 			}
-			else if(differences[i]->value("type").toString() == "addition")
+			else if(differences[i]["type"].toString() == "addition")
 			{
 				int k = i, previousPos = -1;
 				bool disable = false;
@@ -425,7 +460,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 							pos--;
 						for(int l=0; l < pos - previousPos; l++)
 						{
-							QVariantMap currentMap = *differences[k];
+							QVariantMap currentMap = differences[k];
 							currentMap["pos"] = previousPos+l;
 							currentMap["disable"] = disable;
 							disable = true;
@@ -434,7 +469,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 					}
 					if(inputWords[k].count() == 0)
 					{
-						QVariantMap currentMap = *differences[k];
+						QVariantMap currentMap = differences[k];
 						currentMap["pos"] = pos;
 						currentMap["disable"] = disable;
 						disable = true;
@@ -444,7 +479,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 					{
 						for(int j=0; j < inputWords[k].count(); j++)
 						{
-							QVariantMap currentMap = *differences[k];
+							QVariantMap currentMap = differences[k];
 							currentMap["pos"] = pos;
 							currentMap["disable"] = disable;
 							disable = true;
@@ -454,7 +489,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 					}
 					previousPos = pos;
 					k++;
-				} while((differences.contains(k)) && (differences[k]->value("type").toString() == "addition"));
+				} while((differences.contains(k)) && (differences[k]["type"].toString() == "addition"));
 				i = k-1;
 				// TODO: Should we count hits in added words?
 			}
