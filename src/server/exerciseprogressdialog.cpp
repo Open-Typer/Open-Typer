@@ -198,7 +198,33 @@ void exerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QString exerciseText = configParser::initExercise(m_exerciseText, m_lineLength);
 	int grossHits, mistakes;
-	recordedMistakeLists[targetID] = stringUtils::validateExercise(exerciseText, inputText, recordedCharacters, &grossHits, &mistakes, nullptr, (m_mode == 1), m_timeLimit);
+	if(m_correctMistakes)
+	{
+		// A simple string comparison can be used here,
+		// because there are only "change" diffs.
+		Q_ASSERT(exerciseText.count() >= inputText.count());
+		if(exerciseText.count() >= inputText.count())
+		{
+			QList<QVariantMap> recordedMistakes;
+			for(int i=0; i < inputText.count(); i++)
+			{
+				if(exerciseText[i] != inputText[i])
+				{
+					QVariantMap mistakeMap;
+					mistakeMap["pos"] = i;
+					mistakeMap["previous"] = QString(exerciseText[i]);
+					recordedMistakes += mistakeMap;
+				}
+			}
+			mistakes = recordedMistakes.count();
+			recordedMistakeLists[targetID] = recordedMistakes;
+		}
+		else
+			recordedMistakeLists[targetID] = {};
+		grossHits = recordedCharacters.count();
+	}
+	else
+		recordedMistakeLists[targetID] = stringUtils::validateExercise(exerciseText, inputText, recordedCharacters, &grossHits, &mistakes, nullptr, (m_mode == 1), m_timeLimit);
 	qreal exerciseTime = m_mode == 1 ? m_timeLimit : time;
 	int netHits = std::max(0, grossHits - mistakes * settings.value("main/errorpenalty","10").toInt());
 	qreal netHitsPerMinute = netHits * (60 / exerciseTime);
