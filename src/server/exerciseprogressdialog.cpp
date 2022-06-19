@@ -191,21 +191,26 @@ void exerciseProgressDialog::setupTable(void)
 }
 
 /*! Loads the uploaded result. */
-void exerciseProgressDialog::loadResult(int targetID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes, double time)
+void exerciseProgressDialog::loadResult(int targetID, QString inputText, QVector<QPair<QString, int>> recordedCharacters, qreal time)
 {
 	if(!exerciseTargets.contains(targetID))
 		return;
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QString exerciseText = configParser::initExercise(m_exerciseText, m_lineLength);
+	int grossHits, mistakes;
+	recordedMistakeLists[targetID] = stringUtils::validateExercise(exerciseText, inputText, recordedCharacters, &grossHits, &mistakes, nullptr, (m_mode == 1), m_timeLimit);
+	qreal exerciseTime = m_mode == 1 ? m_timeLimit : time;
+	int netHits = std::max(0, grossHits - mistakes * settings.value("main/errorpenalty","10").toInt());
+	qreal netHitsPerMinute = netHits * (60 / exerciseTime);
 	QVariantMap result;
 	result["grossHits"] = grossHits;
 	result["netHits"] = netHits;
 	result["netHitsPerMinute"] = netHitsPerMinute;
 	result["mistakes"] = mistakes;
 	result["penalty"] = settings.value("main/errorpenalty","10").toInt();
-	result["time"] = time;
+	result["time"] = exerciseTime / 60.0;
 	results[targetID] = result;
 	inputTexts[targetID] = inputText;
-	recordedMistakeLists[targetID] = recordedMistakes;
 	setupTable();
 }
 

@@ -28,6 +28,7 @@
 #include <QMessageBox>
 #include "exportdialog.h"
 #include "core/database.h"
+#include "core/configfile.h"
 #ifndef Q_OS_WASM
 #include "core/server.h"
 #endif // Q_OS_WASM
@@ -71,7 +72,7 @@ class exerciseProgressDialog : public QDialog
 
 	private slots:
 		void setupTable(void);
-		void loadResult(int targetID, QList<QVariantMap> recordedMistakes, QString inputText, int grossHits, int netHits, double netHitsPerMinute, int mistakes, double time);
+		void loadResult(int targetID, QString inputText, QVector<QPair<QString, int>> recordedCharacters, qreal time);
 		void abortExercise(int targetID);
 		void printAll(void);
 };
