@@ -509,6 +509,64 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 	return out;
 }
 
+/*! Validates a typing test. */
+QList<QVariantMap> stringUtils::validateExercise(QString exerciseText, QString inputText, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords, bool timed, int timeSecs)
+{
+	QList<QVariantMap> recordedMistakes;
+	if(timed)
+	{
+		QMap<int, QList<QVariantMap>> attempts;
+		QString newText = "";
+		int minValue = -1, minId = -1;
+		if(exerciseText.count() > 0)
+		{
+			int pos = 0, count = timeSecs * 10;
+			for(int i=0; i < count; i++)
+			{
+				newText += exerciseText[pos];
+				pos++;
+				if(pos >= exerciseText.count())
+				{
+					newText.remove(newText.count()-1, 1);
+					pos = 0;
+				}
+				if((i % std::max(exerciseText.count(), inputText.count()) == 0) || (i == exerciseText.count()-1) || (i+1 >= count))
+				{
+					attempts[i] = stringUtils::findMistakes(newText, inputText, recordedCharacters, totalHits, errorWords);
+					if((minValue == -1) || (attempts[i].count() < minValue))
+					{
+						minValue = attempts[i].count();
+						minId = i;
+					}
+				}
+			}
+			if(minId == -1)
+				recordedMistakes = QList<QVariantMap>();
+			else
+				recordedMistakes = attempts[minId];
+		}
+		else
+			recordedMistakes = QList<QVariantMap>();
+	}
+	else
+		recordedMistakes = stringUtils::findMistakes(exerciseText, inputText, recordedCharacters, totalHits, errorWords);
+	QList<QVariantMap> mistakesToRemove;
+	*mistakeCount = 0;
+	for(int i=0; i < recordedMistakes.count(); i++)
+	{
+		if(recordedMistakes[i]["pos"].toInt() >= inputText.count())
+			mistakesToRemove += recordedMistakes[i];
+		else
+		{
+			if(!(recordedMistakes[i].contains("disable") && recordedMistakes[i]["disable"].toBool()))
+				*mistakeCount = (*mistakeCount) + 1;
+		}
+	}
+	for(int i=0; i < mistakesToRemove.count(); i++)
+		recordedMistakes.removeAll(mistakesToRemove[i]);
+	return recordedMistakes;
+}
+
 /*!
  * Returns the path to the program configuration directory.\n
  * For example: <tt>/home/user/.config/Open-Typer</tt>
