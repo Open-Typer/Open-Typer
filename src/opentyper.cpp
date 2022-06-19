@@ -1087,25 +1087,30 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	levelInProgress=false;
 	input.replace("‘", "'");
 	displayLevel.replace("‘", "'");
-	if(!ui->correctMistakesCheckBox->isChecked())
+	if(ui->correctMistakesCheckBox->isChecked())
+	{
+		input = stringUtils::addMistakes(input, recordedMistakes);
+		inputTextHtml = input.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>");
+	}
+	else
 	{
 		recordedMistakes = stringUtils::validateExercise(displayLevel, input, recordedCharacters, &totalHits, &levelMistakes, &errorWords, (currentMode == 1), lastTimeF);
-		QMap<int, QVariantMap*> mistakesMap;
-		for(int i=0; i < recordedMistakes.count(); i++)
-			mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
-		mistakeTextHtml = "";
-		for(int i=0; i < input.count(); i++)
-		{
-			if(mistakesMap.contains(i))
-				mistakeTextHtml += input[i] == '\n' ? "<u>&nbsp;</u>" : "<u>";
-			mistakeTextHtml += input[i] == '\n' ? "<br>" : "&nbsp;";
-			if(mistakesMap.contains(i))
-				mistakeTextHtml += "</u>";
-		}
 		levelHits = std::max(0, totalHits - (levelMistakes * errorPenalty));
-		mistakeTextHtml.replace("\n","<br>");
 		ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 	}
+	QMap<int, QVariantMap*> mistakesMap;
+	for(int i=0; i < recordedMistakes.count(); i++)
+		mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
+	mistakeTextHtml = "";
+	for(int i=0; i < input.count(); i++)
+	{
+		if(mistakesMap.contains(i))
+			mistakeTextHtml += input[i] == '\n' ? "<u>&nbsp;</u>" : "<u>";
+		mistakeTextHtml += input[i] == '\n' ? "<br>" : "&nbsp;";
+		if(mistakesMap.contains(i))
+			mistakeTextHtml += "</u>";
+	}
+	mistakeTextHtml.replace("\n","<br>");
 	int netHits = levelHits*(60/(levelTimer.elapsed()/1000.0));
 	int grossHits = totalHits*(60/(levelTimer.elapsed()/1000.0));
 	int time = levelTimer.elapsed()/1000;
