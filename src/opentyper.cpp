@@ -1229,8 +1229,8 @@ void OpenTyper::updateCurrentTime(void)
 				if(levelInProgress)
 				{
 					ui->timedExCountdownLabel->hide();
-					lastTime = levelTimer.elapsed()/1000;
-					lastTimeF = levelTimer.elapsed()/1000.0;
+					lastTime = QTime(0, 0, 0).secsTo(limitTime);
+					lastTimeF = QTime(0, 0, 0).msecsTo(limitTime)/1000.0;
 					endExercise(true, true, true, true, true);
 				}
 			}
