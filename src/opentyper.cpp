@@ -1134,21 +1134,15 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		if(uploadResult && ((studentUsername != "") || (!client.fullMode() && client.isPaired())))
 		{
 			updateStudent();
-			client.sendRequest("put", {"clearRecordedMistakes"});
-			for(int i=0; i < recordedMistakes.count(); i++)
+			QStringList list = {"recordedCharacters"};
+			for(int i=0; i < recordedCharacters.count(); i++)
 			{
-				QVariantMap character = recordedMistakes[i];
-				QStringList keys = character.keys();
-				QStringList list = {"recordedMistake"};
-				for(int j=0; j < keys.count(); j++)
-				{
-					list += keys[j];
-					list += character[keys[j]].toString();
-				}
-				client.sendRequest("put", list);
+				QPair<QString, int> character = recordedCharacters[i];
+				list += character.first;
+				list += QString::number(character.second);
 			}
-			client.sendRequest("put",
-				{"monitorResult", input, QString::number(totalHits), QString::number(levelHits), QString::number((double) levelHits*(60.0/lastTimeF)), QString::number(levelMistakes), QString::number(lastTimeF/60.0)});
+			client.sendRequest("put", list);
+			client.sendRequest("put", {"testResult", input, QString::number(lastTimeF)});
 		}
 		ui->controlFrame->setEnabled(true);
 		ui->menuBar->setEnabled(true);
