@@ -56,7 +56,7 @@ class monitorServer : public QWebSocketServer
 
 	signals:
 		/*! A signal, which is emitted, when a student uploads a monitored exercise result. */
-		void resultUploaded(int, QList<QVariantMap>, QString, int, int, double, int, double);
+		void resultUploaded(int, QString, QVector<QPair<QString, int>>, qreal);
 		/*! A signal, which is emitted, when a student aborts a monitored exercise. */
 		void exerciseAborted(int);
 		/*! A signal, which is emitted, when a student logs in/out. */
@@ -80,7 +80,7 @@ class monitorServer : public QWebSocketServer
 		void generateRandomCertKey(void);
 		QMap<QWebSocket*,QString> sessions; /*!< Stores student sessions (socket, username). */
 		QList<QWebSocket*> exerciseSockets;
-		QMap<QWebSocket*, QList<QVariantMap>> recordedMistakes;
+		QMap<QWebSocket*, QVector<QPair<QString, int>>> recordedCharacters;
 		QSettings settings;
 		QMap<int, QString> deviceStudentNames;
 };

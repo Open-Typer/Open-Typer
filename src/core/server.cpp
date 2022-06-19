@@ -273,44 +273,31 @@ void monitorServer::sendResponse(QString message)
 	}
 	else if((requestList[0] == "put") && (requestList.count() >= 2))
 	{
-		if(requestList[1] == "clearRecordedMistakes")
+		if(requestList[1] == "recordedCharacters")
 		{
 			if(settings.value("server/fullmode", false).toBool() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
 			{
-				if(!recordedMistakes.contains(clientSocket))
-					recordedMistakes[clientSocket] = QList<QVariantMap>();
-				recordedMistakes[clientSocket].clear();
-				clientSocket->sendTextMessage(convertData({"ok"}));
-				return;
-			}
-		}
-		else if(requestList[1] == "recordedMistake")
-		{
-			if(settings.value("server/fullmode", false).toBool() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
-			{
-				if(!recordedMistakes.contains(clientSocket))
-					recordedMistakes[clientSocket] = QList<QVariantMap>();
+				if(!recordedCharacters.contains(clientSocket))
+					recordedCharacters[clientSocket] = QVector<QPair<QString, int>>();
+				recordedCharacters[clientSocket].clear();
 				if(requestList.count() % 2 == 0)
 				{
-					QVariantMap map;
 					for(int i=2; i < requestList.count(); i++)
 					{
-						// Key
-						QString key = requestList[i];
+						QPair<QString, int> character;
+						// Text
+						character.first = requestList[i];
 						i++;
-						// Value
-						if(key == "pos")
-							map[key] = requestList[i].toInt();
-						else
-							map[key] = QString(requestList[i]);
+						// Key code
+						character.second = requestList[i].toInt();
+						recordedCharacters[clientSocket].append(character);
 					}
-					recordedMistakes[clientSocket].append(map);
 					clientSocket->sendTextMessage(convertData({"ok"}));
 					return;
 				}
 			}
 		}
-		else if((requestList[1] == "monitorResult") && (requestList.count() >= 7))
+		else if((requestList[1] == "testResult") && (requestList.count() >= 4))
 		{
 			if(settings.value("server/fullmode", false).toBool() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
 			{
@@ -319,14 +306,10 @@ void monitorServer::sendResponse(QString message)
 					id = dbMgr.findUser(sessions[clientSocket]);
 				else
 					id = dbMgr.findDevice(QHostAddress(clientSocket->peerAddress().toIPv4Address()));
-				if(recordedMistakes.contains(clientSocket))
-				{
-					emit resultUploaded(id, recordedMistakes[clientSocket], requestList[2], requestList[3].toInt(), requestList[4].toInt(), requestList[5].toDouble(), requestList[6].toInt(), requestList[7].toDouble());
-					recordedMistakes[clientSocket].clear();
-					exerciseSockets.removeAll(clientSocket);
-					clientSocket->sendTextMessage(convertData({"ok"}));
-					return;
-				}
+				emit resultUploaded(id, requestList[2], recordedCharacters[clientSocket], requestList[3].toDouble());
+				exerciseSockets.removeAll(clientSocket);
+				clientSocket->sendTextMessage(convertData({"ok"}));
+				return;
 			}
 		}
 		else if(requestList[1] == "abortExercise")
