@@ -567,6 +567,23 @@ QList<QVariantMap> stringUtils::validateExercise(QString exerciseText, QString i
 	return recordedMistakes;
 }
 
+/*! Adds mistakes to an exercise with mistake correction enabled. */
+QString stringUtils::addMistakes(QString exerciseText, QList<QVariantMap> recordedMistakes)
+{
+	QMap<int, QVariantMap*> mistakesMap;
+	for(int i=0; i < recordedMistakes.count(); i++)
+		mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
+	QString out;
+	for(int i=0; i < exerciseText.count(); i++)
+	{
+		if(mistakesMap.contains(i))
+			out += mistakesMap[i]->value("previous").toString();
+		else
+			out += exerciseText[i];
+	}
+	return out;
+}
+
 /*!
  * Returns the path to the program configuration directory.\n
  * For example: <tt>/home/user/.config/Open-Typer</tt>
