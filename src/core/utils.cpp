@@ -225,6 +225,8 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 			diff["previousPos"] = sourcePos;
 			out += diff;
 			sourcePos++;
+			if(inputPos)
+				*inputPos -= 1;
 			i--;
 		}
 		else if(!lcsTarget)
