@@ -576,12 +576,12 @@ QString stringUtils::addMistakes(QString exerciseText, QList<QVariantMap> record
 	for(int i=0; i < recordedMistakes.count(); i++)
 		mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
 	QString out;
-	for(int i=0; i < exerciseText.count(); i++)
+	for(int i=0; i <= exerciseText.count(); i++)
 	{
 		if(mistakesMap.contains(i))
 			out += mistakesMap[i]->value("previous").toString();
 		else
-			out += exerciseText[i];
+			out += i < exerciseText.count() ? QString(exerciseText[i]) : QString();
 	}
 	return out;
 }
