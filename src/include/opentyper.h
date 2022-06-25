@@ -97,7 +97,6 @@ class OpenTyper : public QMainWindow
 		QString inputTextHtml, mistakeTextHtml;
 		int lastTime;
 		double lastTimeF;
-		Updater *versionHdw;
 		themeEngine localThemeEngine;
 		void setColors(void);
 		bool customLevelLoaded = false;
