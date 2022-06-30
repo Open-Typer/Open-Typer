@@ -55,7 +55,7 @@ class monitorClient : public QObject
 		bool available(void);
 
 	private:
-		bool errorDialogs, legacy = false;
+		bool errorDialogs;
 		QWebSocket socket;
 		QString response, receivedData = "";
 		bool connected, waitingForResponse;

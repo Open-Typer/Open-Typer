@@ -136,7 +136,6 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 	if(clientDisabled)
 		return {"clientDisabled"};
 	connected = (socket.state() == QAbstractSocket::ConnectedState);
-	bool wasConnected = connected;
 	if(!connected)
 	{
 		connecting = true;
@@ -162,12 +161,6 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 	if(connected)
 	{
 		enableClient();
-		if(!wasConnected)
-		{
-			// Detect legacy server
-			legacy = true;
-			sendRequest("check", {});
-		}
 		bool ok;
 		QStringList reqList;
 		reqList.clear();
@@ -210,12 +203,9 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 void monitorClient::readResponse(QString message)
 {
 	receivedData += message;
-	if(receivedData[receivedData.count()-1] == ';')
-		legacy = false;
-	else if(!legacy)
+	if(receivedData[receivedData.count()-1] != ';')
 		return;
-	if(!legacy)
-		receivedData.remove(receivedData.count()-1, 1);
+	receivedData.remove(receivedData.count()-1, 1);
 	if(waitingForResponse)
 	{
 		response = receivedData;
@@ -233,8 +223,6 @@ void monitorClient::readResponse(QString message)
 		{
 			if(signal.count() >= 9)
 				emit exerciseReceived(signal[1].toUtf8(), signal[2].toInt(), (signal[3]=="true"), signal[4].toInt(), signal[5].toInt(), (signal[6]=="true"), (signal[7]=="true"), (signal[8]=="true"));
-			else if(signal.count() >= 4)
-				emit exerciseReceived(signal[1].toUtf8(), signal[2].toInt(), (signal[3]=="true"), 0, 0, true, false, false);
 		}
 	}
 	receivedData = "";
