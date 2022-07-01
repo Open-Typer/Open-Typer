@@ -41,10 +41,6 @@ win32 {
     INCLUDEPATH += C:/OpenSSL/include
 }
 
-macx {
-    INCLUDEPATH += /usr/local/Cellar/openssl@1.1/1.1.1o/include
-}
-
 SOURCES += \
     src/core/utils.cpp \
     src/core/configfile.cpp \
