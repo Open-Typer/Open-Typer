@@ -476,7 +476,6 @@ void OpenTyper::levelFinalInit(bool updateClient)
 	linePos = 0;
 	levelMistakes=0;
 	totalHits=0;
-	levelHits=0;
 	recordedCharacters.clear();
 	recordedMistakes.clear();
 	deadKeys=0;
@@ -984,7 +983,6 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			// Count dead keys
 			charHits += deadKeys;
 			totalHits += charHits;
-			levelHits += charHits;
 			recordedCharacters += QPair<QString,int>(keyText, charHits);
 			deadKeys = 0;
 		}
@@ -1042,9 +1040,6 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				if((errorWord != "") && !errorWords.contains(errorWord))
 					errorWords += errorWord;
 				deadKeys = 0;
-				levelHits -= errorPenalty;
-				if(levelHits < 0)
-					levelHits = 0;
 			}
 		}
 	}
@@ -1095,7 +1090,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	else
 	{
 		recordedMistakes = stringUtils::validateExercise(displayLevel, input, recordedCharacters, &totalHits, &levelMistakes, &errorWords, (currentMode == 1), lastTimeF);
-		levelHits = std::max(0, totalHits - (levelMistakes * errorPenalty));
+		netHits = std::max(0, totalHits - (levelMistakes * errorPenalty));
 		ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 	}
 	QMap<int, QVariantMap*> mistakesMap;
@@ -1111,8 +1106,9 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 			mistakeTextHtml += "</u>";
 	}
 	mistakeTextHtml.replace("\n","<br>");
-	int netHits = levelHits*(60/(levelTimer.elapsed()/1000.0));
-	int grossHits = totalHits*(60/(levelTimer.elapsed()/1000.0));
+	netHits = std::max(0, totalHits - levelMistakes * settings.value("main/errorpenalty","10").toInt());
+	int netHitsPerMinute = netHits*(60/(levelTimer.elapsed()/1000.0));
+	int grossHitsPerMinute = totalHits*(60/(levelTimer.elapsed()/1000.0));
 	int time = levelTimer.elapsed()/1000;
 	if(!customLevelLoaded && !customConfig && ui->correctMistakesCheckBox->isChecked())
 	{
@@ -1121,11 +1117,11 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 			updateStudent();
 			client.sendRequest("put",
 				{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentAbsoluteSublesson),QByteArray::number(currentLevel),
-				QByteArray::number(grossHits),QByteArray::number(levelMistakes),QByteArray::number(time)});
+				QByteArray::number(grossHitsPerMinute),QByteArray::number(levelMistakes),QByteArray::number(time)});
 		}
 		else
 			historyParser::addHistoryEntry(publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,
-				{QString::number(grossHits),QString::number(levelMistakes),QString::number(time)});
+				{QString::number(grossHitsPerMinute),QString::number(levelMistakes),QString::number(time)});
 	}
 	if(testLoaded)
 	{
@@ -1155,9 +1151,9 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	}
 	levelSummary *msgBox = new levelSummary(this);
 	if(showNetHits)
-		msgBox->setNetHits(netHits);
+		msgBox->setNetHits(netHitsPerMinute);
 	if(showGrossHits)
-		msgBox->setGrossHits(grossHits);
+		msgBox->setGrossHits(grossHitsPerMinute);
 	if(showTime)
 		msgBox->setTotalTime(time);
 	if(showTotalHits)
@@ -1601,8 +1597,8 @@ void OpenTyper::exportText(void)
 {
 	QVariantMap result;
 	result["grossHits"] = totalHits;
-	result["netHits"] = levelHits;
-	result["netHitsPerMinute"] = (double) levelHits*(60.0/lastTimeF);
+	result["netHits"] = netHits;
+	result["netHitsPerMinute"] = (double) netHits*(60.0/lastTimeF);
 	result["mistakes"] = levelMistakes;
 	result["penalty"] = errorPenalty;
 	result["time"] = lastTimeF/60.0;

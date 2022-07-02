@@ -84,7 +84,7 @@ class OpenTyper : public QMainWindow
 		void levelFinalInit(bool updateClient = true);
 		void updateText(void);
 		QString level, displayLevel, finalDisplayLevel, input, displayInput, publicConfigName, oldConfigName;
-		int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentAbsoluteSublesson, currentLevel, currentLine, levelPos, displayPos, levelMistakes, totalHits, levelHits, levelLengthExtension;
+		int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentAbsoluteSublesson, currentLevel, currentLine, levelPos, displayPos, levelMistakes, totalHits, netHits, levelLengthExtension;
 		int lineCount, linePos, absolutePos;
 		int deadKeys;
 		QVector<QPair<QString,int>> recordedCharacters;
