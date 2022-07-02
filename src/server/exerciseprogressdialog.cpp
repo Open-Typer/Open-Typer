@@ -221,7 +221,9 @@ void exerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 		}
 		else
 			recordedMistakeLists[targetID] = {};
-		grossHits = recordedCharacters.count();
+		grossHits = 0;
+		for(int i=0; i < recordedCharacters.count(); i++)
+			grossHits += recordedCharacters[i].second;
 	}
 	else
 		recordedMistakeLists[targetID] = stringUtils::validateExercise(exerciseText, inputText, recordedCharacters, &grossHits, &mistakes, nullptr, (m_mode == 1), m_timeLimit);
