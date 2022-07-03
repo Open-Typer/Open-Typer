@@ -1,3 +1,5 @@
+TARGET = open-typer
+
 QT += core gui charts network websockets
 !wasm {
     QT += printsupport sql
