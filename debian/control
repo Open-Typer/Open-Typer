@@ -1,0 +1,13 @@
+Source: open-typer
+Section: education
+Priority: optional
+Maintainer: adazem009 <adazem.009.games@gmail.com>
+Build-Depends: debhelper (>= 10), build-essential, g++, qt5-default, qttools5-dev-tools, qtbase5-dev, libqt5charts5-dev, libqt5websockets5-dev
+Standards-Version: 4.4.1
+Homepage: <insert the upstream URL, if relevant>
+Vcs-Git: https://github.com/Open-Typer/Open-Typer.git
+
+Package: open-typer
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Free and open source typing tutor

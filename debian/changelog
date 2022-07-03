@@ -1,0 +1,5 @@
+open-typer (3.5.0) bionic; urgency=medium
+
+  * Initial release for Ubuntu PPA.
+
+ -- adazem009 <adazem.009.games@gmail.com>  Sun, 03 Jul 2022 09:25:45 +0200
