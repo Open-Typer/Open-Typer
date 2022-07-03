@@ -75,33 +75,8 @@ jobs:
       shell: bash
     # Ubuntu
     - if: contains(matrix.os, 'ubuntu')
-      run: |
-        source .ci/ubuntu-build.sh
-        cp -r res/linux-release debpkg
-        mkdir -p debpkg/usr/local/bin
-        cp Open-Typer debpkg/usr/local/bin/open-typer
-        echo "libc6_version=$(dpkg -s libc6 | grep '^Version:' | cut -d' ' -f2 | cut -d'-' -f1)" >> $GITHUB_ENV
-        echo "distro=$(lsb_release -is | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-        echo "codename=$(lsb_release -cs)" >> $GITHUB_ENV
-        echo "package=open-typer" >> $GITHUB_ENV
-        PKG_VERSION=${{ steps.previoustag.outputs.tag }}
-        echo "package_version=${PKG_VERSION//v}" >> $GITHUB_ENV
-        echo "package_arch=amd64" >> $GITHUB_ENV
+      run: source .ci/ubuntu-build.sh
       shell: bash
-    - if: contains(matrix.os, 'ubuntu')
-      id: debpkg
-      uses: jiro4989/build-deb-action@v2
-      with:
-        package: ${{ env.package }}
-        package_root: debpkg
-        maintainer: adazem009
-        version: ${{ env.package_version }}
-        arch: ${{ env.package_arch }}
-        depends: 'libc6 (>= ${{ env.libc6_version }}), libstdc++6 (>= 5), libqt5core5a (>= ${{ matrix.qt-version }}), libqt5gui5 (>= ${{ matrix.qt-version }}), libqt5widgets5 (>= ${{ matrix.qt-version }}), libqt5network5 (>= ${{ matrix.qt-version }}), libqt5charts5 (>= ${{ matrix.qt-version }}), libqt5websockets5 (>= ${{ matrix.qt-version }}), libssl1.1 (>= 1.1.0)'
-        desc: 'Free and open source typing tutor program'
-    - if: contains(matrix.os, 'ubuntu')
-      name: Set deb package name according to distribution
-      run: 'mv ${{ steps.debpkg.outputs.file_name }} ${{ env.package }}_${{ env.package_version }}-0-${{ env.distro }}-${{ env.codename }}_${{ env.package_arch }}.deb'
     # MacOS
     - if: contains(matrix.os, 'macos')
       run: source .ci/macos-build.sh
@@ -127,7 +102,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: build-ubuntu
-        path: '*.deb'
+        path: 'open-typer'
     # MacOS
     - if: contains(matrix.os, 'macos')
       uses: actions/upload-artifact@v2
