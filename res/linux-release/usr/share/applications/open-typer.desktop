@@ -1,7 +1,7 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=Open-Typer
-Exec=/usr/local/bin/open-typer %U
+Exec=/usr/bin/open-typer %U
 Terminal=false
 Type=Application
 Icon=open-typer
