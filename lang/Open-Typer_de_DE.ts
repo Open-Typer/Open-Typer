@@ -189,6 +189,38 @@
         <source>Tools</source>
         <translation>Werkzeuge</translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation>Hilfe</translation>
+    </message>
+    <message>
+        <source>About Qt...</source>
+        <translation>Über Qt...</translation>
+    </message>
+    <message>
+        <source>About program...</source>
+        <translation>Über Programm...</translation>
+    </message>
+    <message>
+        <source>Online documentation</source>
+        <translation>Online Dokumentation</translation>
+    </message>
+    <message>
+        <source>Version: %1</source>
+        <translation>Version: %1</translation>
+    </message>
+    <message>
+        <source>Revision: %1</source>
+        <translation>Revision: %1</translation>
+    </message>
+    <message>
+        <source>Source code: %1</source>
+        <translation>Quellcode: %1</translation>
+    </message>
+    <message>
+        <source>Published with the GNU General Public License.</source>
+        <translation>Veröffentlicht unter der GNU General Public License.</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -438,7 +470,7 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>connectionOptions</name>
     <message>
         <source>Server options</source>
-        <translation>Server Optionen</translation>
+        <translation type="vanished">Server Optionen</translation>
     </message>
     <message>
         <source>IP address:</source>
@@ -467,15 +499,43 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Server mode</source>
-        <translation>Server-Modus</translation>
+        <translation type="vanished">Server-Modus</translation>
     </message>
     <message>
         <source>Client mode</source>
-        <translation>Client-Modus</translation>
+        <translation type="vanished">Client-Modus</translation>
     </message>
     <message>
         <source>Full mode (teacher and student accounts, exercise history)</source>
         <translation>Vollmodus (Lehrer- und Studentkonten, Aufgabe Verlauf)</translation>
+    </message>
+    <message>
+        <source>Enable network options</source>
+        <translation>Netzwerkoptionen aktivieren</translation>
+    </message>
+    <message>
+        <source>Network options</source>
+        <translation>Netzwerkoptionen</translation>
+    </message>
+    <message>
+        <source>Server</source>
+        <translation>Server</translation>
+    </message>
+    <message>
+        <source>Client</source>
+        <translation>Klient</translation>
+    </message>
+    <message>
+        <source>Mode:</source>
+        <translation>Modus:</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <source>Please allow the following address on the server:</source>
+        <translation>Bitte erlauben Sie die folgende Adresse auf dem Server:</translation>
     </message>
 </context>
 <context>
@@ -1004,11 +1064,11 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Sichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>Save As...</source>
-        <translation>Sichern als...</translation>
+        <translation>Speichern unter...</translation>
     </message>
 </context>
 <context>
@@ -1046,7 +1106,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Sichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>Exercise options:</source>
@@ -1086,7 +1146,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Save changes to</source>
-        <translation>Änderungen Sichern als</translation>
+        <translation>Änderungen speichern als</translation>
     </message>
     <message>
         <source>before closing?</source>
