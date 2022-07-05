@@ -1084,7 +1084,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	displayLevel.replace("‘", "'");
 	if(ui->correctMistakesCheckBox->isChecked())
 	{
-		input = stringUtils::addMistakes(input, recordedMistakes);
+		input = stringUtils::addMistakes(input, &recordedMistakes);
 		inputTextHtml = input.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>");
 	}
 	else
