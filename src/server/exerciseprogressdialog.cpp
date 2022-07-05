@@ -202,25 +202,25 @@ void exerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 	{
 		// A simple string comparison can be used here,
 		// because there are only "change" diffs.
-		Q_ASSERT(exerciseText.count() >= inputText.count());
-		if(exerciseText.count() >= inputText.count())
+		QList<QVariantMap> recordedMistakes;
+		int srcPos = 0;
+		for(int targetPos=0; targetPos < inputText.count(); targetPos++)
 		{
-			QList<QVariantMap> recordedMistakes;
-			for(int i=0; i < inputText.count(); i++)
+			if(srcPos >= exerciseText.count() || targetPos >= inputText.count())
+				break;
+			if(exerciseText[srcPos] != inputText[targetPos])
 			{
-				if(exerciseText[i] != inputText[i])
-				{
-					QVariantMap mistakeMap;
-					mistakeMap["pos"] = i;
-					mistakeMap["previous"] = QString(exerciseText[i]);
-					recordedMistakes += mistakeMap;
-				}
+				QVariantMap mistakeMap;
+				mistakeMap["pos"] = targetPos;
+				mistakeMap["previous"] = QString(exerciseText[srcPos]);
+				recordedMistakes += mistakeMap;
+				if(exerciseText[srcPos] == '\n')
+					targetPos++;
 			}
-			mistakes = recordedMistakes.count();
-			recordedMistakeLists[targetID] = recordedMistakes;
+			srcPos++;
 		}
-		else
-			recordedMistakeLists[targetID] = {};
+		mistakes = recordedMistakes.count();
+		recordedMistakeLists[targetID] = recordedMistakes;
 		grossHits = 0;
 		for(int i=0; i < recordedCharacters.count(); i++)
 			grossHits += recordedCharacters[i].second;
