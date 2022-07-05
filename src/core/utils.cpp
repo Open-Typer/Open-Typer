@@ -570,16 +570,28 @@ QList<QVariantMap> stringUtils::validateExercise(QString exerciseText, QString i
 }
 
 /*! Adds mistakes to an exercise with mistake correction enabled. */
-QString stringUtils::addMistakes(QString exerciseText, QList<QVariantMap> recordedMistakes)
+QString stringUtils::addMistakes(QString exerciseText, QList<QVariantMap> *recordedMistakes)
 {
-	QMap<int, QVariantMap*> mistakesMap;
-	for(int i=0; i < recordedMistakes.count(); i++)
-		mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
+	Q_ASSERT(recordedMistakes);
+	QMap<int, int> mistakesMap;
+	for(int i=0; i < recordedMistakes->count(); i++)
+		mistakesMap[recordedMistakes->at(i).value("pos").toInt()] = i;
+	int delta = 0;
 	QString out;
 	for(int i=0; i <= exerciseText.count(); i++)
 	{
 		if(mistakesMap.contains(i))
-			out += mistakesMap[i]->value("previous").toString();
+		{
+			QVariantMap currentMap = recordedMistakes->at(mistakesMap[i]);
+			out += currentMap["previous"].toString();
+			currentMap["pos"] = currentMap["pos"].toInt() + delta;
+			if(exerciseText[i] == '\n')
+			{
+				out += "\n";
+				delta++;
+			}
+			recordedMistakes->replace(mistakesMap[i], currentMap);
+		}
 		else
 			out += i < exerciseText.count() ? QString(exerciseText[i]) : QString();
 	}

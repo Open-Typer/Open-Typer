@@ -40,7 +40,7 @@ class stringUtils
 		static QList<QVariantMap> compareStrings(QString source, QString target, QVector<QPair<QString,int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
 		static QList<QVariantMap> findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
 		static QList<QVariantMap> validateExercise(QString exerciseText, QString inputText, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords = nullptr, bool timed = false, int timeSecs = 0);
-		static QString addMistakes(QString exerciseText, QList<QVariantMap> recordedMistakes);
+		static QString addMistakes(QString exerciseText, QList<QVariantMap> *recordedMistakes);
 
 	private:
 		static int lcsLen(QList<QVariant> source, QList<QVariant> target);
