@@ -129,7 +129,8 @@ QList<QVariant> stringUtils::longestCommonSubsequence(QList<QVariant> source, QL
 			i--;
 			j--;
 		}
-		else if (l[i][j] == l[i-1][j])
+		//else if (l[i][j] == l[i-1][j])
+		else if (l[i - 1][j] > l[i][j - 1]) // This method works better for switched characters (e. g. abcd -> acbd)
 			i--;
 		else
 			j--;
