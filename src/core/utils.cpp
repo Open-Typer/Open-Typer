@@ -432,11 +432,10 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 					if((currentMap["type"].toString() == "deletion") && (currentMap["previous"].toString() == " ") && !merged)
 						currentMap["pos"] = currentMap["pos"].toInt() - 1;
 					currentMap["pos"] = wordStart + currentMap["pos"].toInt();
-					if((currentMap["type"].toString() != "deletion") || (merged && currentMap["type"].toString() == "deletion"))
-						pos--;
 					diff[i2] = currentMap;
 				}
 				out += diff;
+				pos = wordStart + inputWords[i].count();
 			}
 			else if(differences[i]["type"].toString() == "deletion")
 			{
