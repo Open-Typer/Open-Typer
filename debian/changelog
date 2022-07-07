@@ -1,3 +1,15 @@
+open-typer (4.0.0ubuntu3) jammy; urgency=emergency
+
+  * Removed qt5-default from build dependencies.
+
+ -- adazem009 <adazem.009.games@gmail.com>  Thu, 07 Jul 2022 14:47:36 +0200
+
+open-typer (4.0.0ubuntu2) jammy; urgency=emergency
+
+  * Rebuilt the package on Ubuntu 22.04 to fix libssl dependency.
+
+ -- adazem009 <adazem.009.games@gmail.com>  Thu, 07 Jul 2022 14:23:30 +0200
+
 open-typer (4.0.0ubuntu1) bionic; urgency=low
 
   * Added git to build dependencies (fixes version and revision in about program dialog).
