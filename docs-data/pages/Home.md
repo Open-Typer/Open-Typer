@@ -15,7 +15,17 @@ It works on Linux and Windows.
 * Can be used with Open-Typer Class Monitor to save student results on one computer.
 
 ## Download
-Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typer/releases/latest) or [SourceForge](https://sourceforge.net/projects/open-typer/).
+Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typer/releases/latest) or [SourceForge](https://sourceforge.net/projects/open-typer/) or follow platform-specific instructions below.
+### Ubuntu
+Use the following commands to install Open-Typer from the PPA:
+
+```bash
+sudo add-apt-repository ppa:adazem009/open-typer
+
+sudo apt update
+
+sudo apt insall -y open-typer
+```
 
 ## Screenshots
 ![Main window (light)](main/main_window_light.png)
