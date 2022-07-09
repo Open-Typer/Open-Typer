@@ -61,6 +61,7 @@ class configParser : public QObject
 		static const int defaultLineLength = 60;
 		bool open(const QString fileName);
 		void loadToBuffer(const QByteArray content);
+		QByteArray data(void);
 		bool bufferOpened(void);
 		void close(void);
 		QString fileName(void);

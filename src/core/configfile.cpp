@@ -55,6 +55,12 @@ void configParser::loadToBuffer(const QByteArray content)
 	currentDevice = &configBuffer;
 }
 
+/*! Returns current data in the opened file or buffer. */
+QByteArray configParser::data(void)
+{
+	return currentDevice->readAll();
+}
+
 /*! Returns true if there's a buffer opened. */
 bool configParser::bufferOpened(void)
 {
