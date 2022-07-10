@@ -1,9 +1,11 @@
 #!/usr/bin/make -f
 
+build: export QT_SELECT = qt5
 build:
 	lrelease *.pro
 	dh $@
 
+build-arch: export QT_SELECT = qt5
 build-arch:
 	lrelease *.pro
 	dh $@
