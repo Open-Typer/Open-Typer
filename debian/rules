@@ -4,5 +4,9 @@ build:
 	lrelease *.pro
 	dh $@
 
+build-arch:
+	lrelease *.pro
+	dh $@
+
 %:
 	dh $@
