@@ -48,6 +48,7 @@ bool configParser::open(const QString fileName)
 void configParser::loadToBuffer(const QByteArray content)
 {
 	close();
+	configBuffer.setData(nullptr);
 	configBuffer.open(QBuffer::WriteOnly);
 	configBuffer.write(content);
 	configBuffer.close();
