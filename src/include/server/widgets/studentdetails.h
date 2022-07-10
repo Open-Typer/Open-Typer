@@ -25,6 +25,7 @@
 #include <QtCharts>
 #include "core/database.h"
 #include "core/configfile.h"
+#include "core/packs.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
 using namespace QtCharts;

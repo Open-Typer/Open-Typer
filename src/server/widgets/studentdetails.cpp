@@ -92,7 +92,9 @@ void studentDetails::refresh(void)
 	oldE = ui->exerciseBox->currentIndex();
 	// Packs
 	ui->packBox->clear();
-	ui->packBox->addItems(dbMgr.studentPacks(classID, studentID));
+	QStringList packs = dbMgr.studentPacks(classID, studentID);
+	for(int i=0; i < packs.count(); i++)
+		ui->packBox->addItem(builtinPacks::packName(packs[i]));
 	if(ui->packBox->count() == 0)
 	{
 		ui->exerciseFrame->hide();
@@ -111,7 +113,7 @@ void studentDetails::refresh(void)
 	ui->packBox->setCurrentIndex(oldP);
 	// Lessons
 	ui->lessonBox->clear();
-	QList<int> lessons = dbMgr.studentLessons(classID, studentID, ui->packBox->currentText());
+	QList<int> lessons = dbMgr.studentLessons(classID, studentID, packs[oldP]);
 	for(int i=0; i < lessons.count(); i++)
 		ui->lessonBox->addItem(configParser::lessonTr(lessons[i]));
 	if(oldL == -1)
@@ -119,7 +121,7 @@ void studentDetails::refresh(void)
 	ui->lessonBox->setCurrentIndex(oldL);
 	// Sublessons
 	ui->sublessonBox->clear();
-	QList<int> sublessons = dbMgr.studentSublessons(classID, studentID, ui->packBox->currentText(),
+	QList<int> sublessons = dbMgr.studentSublessons(classID, studentID, packs[oldP],
 		lessons[ui->lessonBox->currentIndex()]);
 	for(int i=0; i < sublessons.count(); i++)
 		ui->sublessonBox->addItem(configParser::sublessonName(sublessons[i]));
@@ -128,7 +130,7 @@ void studentDetails::refresh(void)
 	ui->sublessonBox->setCurrentIndex(oldS);
 	// Exercise
 	ui->exerciseBox->clear();
-	QList<int> exercises = dbMgr.studentExercises(classID, studentID, ui->packBox->currentText(),
+	QList<int> exercises = dbMgr.studentExercises(classID, studentID, packs[oldP],
 		lessons[ui->lessonBox->currentIndex()],
 		sublessons[ui->sublessonBox->currentIndex()]);
 	for(int i=0; i < exercises.count(); i++)
