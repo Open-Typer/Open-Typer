@@ -22,8 +22,8 @@
 #define PACKEDITOR_H
 
 #include <QDialog>
-#include <QCloseEvent>
-#include "packEditor/packview.h"
+#include <QMessageBox>
+#include <QFileDialog>
 #include "packEditor/packselector.h"
 #include "core/configfile.h"
 
@@ -36,57 +36,70 @@ namespace Ui {
  *
  * \image html packEditor.png
  *
- * Usage example:
+ * packEditor uses this widget for tab content.\n
+ *
+ * Creating a new file:
  * \code
- * packEditor editorWindow;
- * editorWindow.init();
- * editorWindow.exec();
+ * packEditor editor;
  * \endcode
  *
- * It is possible to create a new file when the editor starts:
+ * Opening existing file:
  * \code
- * editorWindow.setNewFile(true);
- * editorWindow.init();
- * editorWindow.exec();
+ * editor.openFile(fileName, false, false)
  * \endcode
- * Note that init() must be run for the settings to take effect.
  *
- * \see packView
- * \see packSelector
+ * Opening existing file read-only:
+ * \code
+ * editor.openFile(fileName, false, true)
+ * \endcode
  */
 class packEditor : public QDialog
 {
 	Q_OBJECT
 	public:
 		explicit packEditor(QWidget *parent = nullptr);
-		packEditor(QString fileName, QWidget *parent = nullptr);
 		~packEditor();
-		Ui::packEditor *ui;
-		void openFile(QString fileName, bool readOnly = false);
-		int fileID;
-
-	protected:
-		void closeEvent(QCloseEvent *event);
-		void keyPressEvent(QKeyEvent *event);
+		void openFile(QString path, bool newf, bool rdonly);
+		QString getFileName(void);
 
 	private:
-		bool newFile;
-		bool allowClosing;
-		void init(void);
-		void closeAll(void);
-		void fixDuplicates(void);
-		QString defaultFileName;
+		Ui::packEditor *ui;
+		QWidget *editorWindow;
+		configParser parser;
+		QString saveFileName;
+		void openPrebuilt(void);
+		void openFile(void);
+		void refreshUi(bool newLesson, bool newSublesson, bool newExercise);
+		void updateTitle(void);
+		bool newFile, readOnly, saved;
+		void deleteExerciseLine(int lesson, int sublesson, int level);
+		void changeExercisePos(QString lessonDesc, int lesson, int sublesson, int level, int nlesson, int nsublesson, int nlevel);
+		bool skipBoxUpdates, skipTextUpdates, skipTextRefresh;
 
-	signals:
-		/*! A signal, which is emitted when all tabs are closed by closeAll(). */
-		void allTabsClosed();
+	protected:
+		void closeEvent(QCloseEvent *event) override;
+
+	public slots:
+		void createNewFile(void);
+		void closeFile(bool createNew = false, bool open = false, bool openPrebuiltPack = false);
+		void save(void);
+		void saveAs(void);
 
 	private slots:
-		void createNewFile(void);
-		void openFile(void);
-		void openPrebuilt(void);
-		void tabChanged(int index);
-		void closeTab(int id);
+		void addLesson(void);
+		void addSublesson(void);
+		void addExercise(void);
+		void removeExercise(void);
+		void changeLessonDesc(const QString rawLessonDesc);
+		void setRevisionLesson(void);
+		void updateText(void);
+		void restoreText(void);
+		void switchLesson(void);
+		void switchSublesson(void);
+		void switchExercise(void);
+		void changeRepeating(int index);
+		void changeRepeatLength(int limitExt);
+		void changeLineLength(int lengthExt);
 };
 
 #endif // PACKEDITOR_H

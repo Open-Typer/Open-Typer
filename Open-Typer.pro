@@ -64,7 +64,6 @@ SOURCES += \
     src/options/keyboard.cpp \
     src/options/optionswindow.cpp \
     src/packEditor/packeditor.cpp \
-    src/packEditor/packview.cpp \
     src/packEditor/packselector.cpp \
     src/paperconfigdialog.cpp \
     src/updater/updater.cpp \
@@ -113,7 +112,6 @@ HEADERS += \
     src/include/options/keyboard.h \
     src/include/options/optionswindow.h \
     src/include/packEditor/packeditor.h \
-    src/include/packEditor/packview.h \
     src/include/packEditor/packselector.h \
     src/include/paperconfigdialog.h \
     src/include/updater/updater.h \
@@ -165,7 +163,6 @@ FORMS += \
     ui/options/optionswindow.ui \
     ui/packEditor/packeditor.ui \
     ui/packEditor/packselector.ui \
-    ui/packEditor/packview.ui \
     ui/paperconfigdialog.ui \
     ui/updater/updaterdialog.ui
 
