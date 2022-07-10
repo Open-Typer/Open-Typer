@@ -66,7 +66,6 @@ class packEditor : public QDialog
 	private:
 		Ui::packEditor *ui;
 		QSettings settings;
-		QWidget *editorWindow;
 		configParser parser;
 		QString saveFileName;
 		void openPrebuilt(void);

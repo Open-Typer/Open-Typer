@@ -62,7 +62,6 @@ packEditor::packEditor(QWidget *parent) :
 	skipBoxUpdates=false;
 	skipTextUpdates=false;
 	skipTextRefresh=false;
-	editorWindow = parent;
 }
 
 /*! Destroys the packEditor object. */
