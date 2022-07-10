@@ -24,6 +24,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QSettings>
 #include "packEditor/packselector.h"
 #include "core/configfile.h"
 
@@ -64,6 +65,7 @@ class packEditor : public QDialog
 
 	private:
 		Ui::packEditor *ui;
+		QSettings settings;
 		QWidget *editorWindow;
 		configParser parser;
 		QString saveFileName;

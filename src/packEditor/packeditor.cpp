@@ -24,9 +24,14 @@
 /*! Constructs packEditor and creates a new file. */
 packEditor::packEditor(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::packEditor)
+	ui(new Ui::packEditor),
+	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
+	if(settings.contains("main/editorGeometry"))
+		restoreGeometry(settings.value("main/editorGeometry").toByteArray());
+	else
+		setWindowState(Qt::WindowMaximized);
 	// File menu
 	connect(ui->newFileAction, &QAction::triggered, this, [this]() { closeFile(true); }); // closeFile() will create a new file because createNew = true
 	connect(ui->openFileAction, &QAction::triggered, this, [this]() { closeFile(false, true); }); // closeFile() will open the file because open = true
@@ -158,7 +163,10 @@ void packEditor::closeFile(bool createNew, bool open, bool openPrebuiltPack)
 		else if(openPrebuiltPack)
 			openPrebuilt();
 		else
+		{
+			settings.setValue("main/editorGeometry", saveGeometry());
 			accept();
+		}
 	}
 	else
 	{
@@ -188,7 +196,10 @@ void packEditor::closeFile(bool createNew, bool open, bool openPrebuiltPack)
 				else if(openPrebuiltPack)
 					openPrebuilt();
 				else
+				{
+					settings.setValue("main/editorGeometry", saveGeometry());
 					accept();
+				}
 			}
 		});
 		notSavedBox->open();
