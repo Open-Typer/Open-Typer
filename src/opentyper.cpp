@@ -68,7 +68,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	// File menu
 	connect(ui->actionOpenText, &QAction::triggered, this, &OpenTyper::openExerciseFromFile);
 	connect(ui->actionOpenPack, &QAction::triggered, this, &OpenTyper::openPack);
-	connect(ui->actionNewPack, &QAction::triggered, this, [this]() { openEditor(); });
+	connect(ui->actionNewPack, &QAction::triggered, this, &OpenTyper::openEditor);
 	connect(ui->actionPrint, &QAction::triggered, ui->printButton, &QPushButton::clicked);
 	// View menu
 	connect(ui->actionViewNavigation, &QAction::toggled, ui->navigationFrame, &QWidget::setVisible);
@@ -1380,22 +1380,14 @@ void OpenTyper::openPack(void)
 /*! Connected from openEditorButton.\n
  * Opens the editor.
  */
-void OpenTyper::openEditor(bool newFile)
+void OpenTyper::openEditor(void)
 {
 	// Close pack file
 	QString oldFileName = parser.fileName();
 	parser.close();
 	// Open editor
 	packEditor *editorWindow;
-	if(newFile)
-		editorWindow = new packEditor(this);
-	else
-	{
-		if(customConfig)
-			editorWindow = new packEditor(settings.value("main/configfile").toString(), this);
-		else
-			editorWindow = new packEditor(parser.fileName());
-	}
+	editorWindow = new packEditor(this);
 	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint,true);
 	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint,true);
 	editorWindow->setWindowModality(Qt::WindowModal);

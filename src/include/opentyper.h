@@ -150,7 +150,7 @@ class OpenTyper : public QMainWindow
 		void startReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText, bool upload);
 		void waitForReceivedExercise(QString text, int lineLength);
 		void printText(void);
-		void openEditor(bool newFile = true);
+		void openEditor(void);
 		void startTest(void);
 		void showAboutDialog(void);
 };
