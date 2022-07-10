@@ -392,10 +392,6 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Bestätigen</translation>
     </message>
     <message>
-        <source>Are you sure you want to remove student</source>
-        <translation type="obsolete">Sind Sie sicher, dass Sie Student 1 entfernen möchten?</translation>
-    </message>
-    <message>
         <source>This will remove whole training history of the student!</source>
         <translation>Dadurch wird die gesamte Trainingsverlauf des Students entfernt!</translation>
     </message>
@@ -469,10 +465,6 @@ Möchtest du es herunterladen und installieren?</translation>
 <context>
     <name>connectionOptions</name>
     <message>
-        <source>Server options</source>
-        <translation type="vanished">Server Optionen</translation>
-    </message>
-    <message>
         <source>IP address:</source>
         <translation>IP Adresse:</translation>
     </message>
@@ -496,14 +488,6 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Failed to connect</source>
         <translation>Verbindung fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Server mode</source>
-        <translation type="vanished">Server-Modus</translation>
-    </message>
-    <message>
-        <source>Client mode</source>
-        <translation type="vanished">Client-Modus</translation>
     </message>
     <message>
         <source>Full mode (teacher and student accounts, exercise history)</source>
@@ -1070,43 +1054,29 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>Save As...</source>
         <translation>Speichern unter...</translation>
     </message>
-</context>
-<context>
-    <name>packSelector</name>
     <message>
-        <source>Open built-in pack</source>
-        <translation>Built-In Packet öffnen</translation>
-    </message>
-    <message>
-        <source>Choose built-in pack:</source>
-        <translation>Built-In Packet auswählen:</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <source>Load</source>
-        <translation>Laden</translation>
-    </message>
-</context>
-<context>
-    <name>packView</name>
-    <message>
-        <source>Lesson:</source>
-        <translation>Lektion:</translation>
+        <source>Sublesson:</source>
+        <translation>Unter Lektion:</translation>
     </message>
     <message>
         <source>Exercise:</source>
         <translation>Aufgabe:</translation>
     </message>
     <message>
-        <source>Sublesson:</source>
-        <translation>Unter Lektion:</translation>
+        <source>Lesson:</source>
+        <translation>Lektion:</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation>Speichern</translation>
+        <source>Lesson options:</source>
+        <translation>Lektions Optionen:</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation>Beschreibung:</translation>
+    </message>
+    <message>
+        <source>Revision</source>
+        <translation>Revision</translation>
     </message>
     <message>
         <source>Exercise options:</source>
@@ -1127,22 +1097,6 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Line length:</source>
         <translation>Zeilen Länge:</translation>
-    </message>
-    <message>
-        <source>Lesson options:</source>
-        <translation>Lektions Optionen:</translation>
-    </message>
-    <message>
-        <source>Description:</source>
-        <translation>Beschreibung:</translation>
-    </message>
-    <message>
-        <source>Revision</source>
-        <translation>Revision</translation>
-    </message>
-    <message>
-        <source>Write error</source>
-        <translation>Schreib Fehler</translation>
     </message>
     <message>
         <source>Save changes to</source>
@@ -1172,13 +1126,24 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>Text length:</source>
         <translation>Text länge:</translation>
     </message>
+</context>
+<context>
+    <name>packSelector</name>
     <message>
-        <source>Open-Typer pack files</source>
-        <translation>Open-Typer Paket Dateien</translation>
+        <source>Open built-in pack</source>
+        <translation>Built-In Packet öffnen</translation>
     </message>
     <message>
-        <source>All files</source>
-        <translation>Alle Dateien</translation>
+        <source>Choose built-in pack:</source>
+        <translation>Built-In Packet auswählen:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>Load</source>
+        <translation>Laden</translation>
     </message>
 </context>
 <context>
