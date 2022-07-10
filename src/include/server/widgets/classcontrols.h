@@ -29,6 +29,7 @@
 #include "paperconfigdialog.h"
 #include "core/database.h"
 #include "core/configfile.h"
+#include "core/packs.h"
 #ifndef Q_OS_WASM
 #include "core/server.h"
 #endif // Q_OS_WASM

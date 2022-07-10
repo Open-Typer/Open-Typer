@@ -208,7 +208,8 @@ void classControls::refreshCharts(void)
 	// Packs
 	ui->packBox->clear();
 	QStringList packs = dbMgr.recordedPacks(classID);
-	ui->packBox->addItems(packs);
+	for(int i=0; i < packs.count(); i++)
+		ui->packBox->addItem(builtinPacks::packName(packs[i]));
 	if(ui->packBox->count() == 0)
 	{
 		ui->exerciseFrame->hide();
@@ -227,7 +228,7 @@ void classControls::refreshCharts(void)
 	ui->packBox->setCurrentIndex(oldP);
 	// Lessons
 	ui->lessonBox->clear();
-	QList<int> lessons = dbMgr.recordedLessons(classID, ui->packBox->currentText());
+	QList<int> lessons = dbMgr.recordedLessons(classID, packs[oldP]);
 	for(int i=0; i < lessons.count(); i++)
 		ui->lessonBox->addItem(configParser::lessonTr(lessons[i]));
 	if(oldL == -1)
@@ -235,7 +236,7 @@ void classControls::refreshCharts(void)
 	ui->lessonBox->setCurrentIndex(oldL);
 	// Sublessons
 	ui->sublessonBox->clear();
-	QList<int> sublessons = dbMgr.recordedSublessons(classID, ui->packBox->currentText(),
+	QList<int> sublessons = dbMgr.recordedSublessons(classID, packs[oldP],
 			lessons[ui->lessonBox->currentIndex()]);
 	for(int i=0; i < sublessons.count(); i++)
 		ui->sublessonBox->addItem(configParser::sublessonName(sublessons[i]));
@@ -244,7 +245,7 @@ void classControls::refreshCharts(void)
 	ui->sublessonBox->setCurrentIndex(oldS);
 	// Exercises
 	ui->exerciseBox->clear();
-	QList<int> exercises = dbMgr.recordedExercises(classID, ui->packBox->currentText(),
+	QList<int> exercises = dbMgr.recordedExercises(classID, packs[oldP],
 			lessons[ui->lessonBox->currentIndex()],
 			sublessons[ui->sublessonBox->currentIndex()]);
 	for(int i=0; i < exercises.count(); i++)
