@@ -811,18 +811,22 @@ void OpenTyper::loadErrorWords(void)
 	QStringList usedWords, outputWords;
 	usedWords.clear();
 	outputWords.clear();
+	int index;
 	for(int i=0; i < wordCount; i++)
 	{
 		QString word;
-		do {
-			int index;
+		if(i % 5 == 0)
+		{
+			do {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-			index = QRandomGenerator::global()->bounded(0, errorWords.count());
+				index = QRandomGenerator::global()->bounded(0, errorWords.count());
 #else
-			index = qrand() % errorWords.count();
+				index = qrand() % errorWords.count();
 #endif
-			word = errorWords[index];
-		} while(usedWords.contains(word));
+				word = errorWords[index];
+			} while(usedWords.contains(word));
+		}
+		word = errorWords[index];
 		usedWords += word;
 		outputWords += word;
 		if(usedWords.count() == errorWords.count())
