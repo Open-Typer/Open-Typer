@@ -101,7 +101,9 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: build-ubuntu
-        path: 'open-typer'
+        path: |
+          'open-typer'
+          *.AppImage
     # MacOS
     - if: contains(matrix.os, 'macos')
       uses: actions/upload-artifact@v2
