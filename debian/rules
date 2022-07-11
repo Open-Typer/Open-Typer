@@ -11,4 +11,8 @@ build-arch:
 	dh $@
 
 %:
+	if [ -d .git ]; then \
+	echo `git describe --tags --abbrev=0` > version; \
+	echo `git rev-parse --short HEAD` > revision; \
+	fi
 	dh $@
