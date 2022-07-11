@@ -28,7 +28,12 @@ win32 {
 !win32 {
     GIT_LOCATION = $$system(which git)
 }
-!isEmpty(GIT_LOCATION) {
+isEmpty(GIT_LOCATION) | !exists(.git) {
+    exists(version) : exists(revision) {
+        DEFINES += BUILD_VERSION=\\\"$$cat(version)\\\"
+        DEFINES += BUILD_REVISION=\\\"$$cat(revision)\\\"
+    }
+} else {
     DEFINES += BUILD_VERSION=\\\"$$system(git describe --tags --abbrev=0)\\\"
     DEFINES += BUILD_REVISION=\\\"$$system(git rev-parse --short HEAD)\\\"
 }
