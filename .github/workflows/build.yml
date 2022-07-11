@@ -74,6 +74,15 @@ jobs:
       run: source .ci/windows-build.sh
       shell: bash
     # Ubuntu
+    - if: contains(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags/v')
+      name: Import GPG key
+      uses: crazy-max/ghaction-import-gpg@v5
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+        passphrase: ${{ secrets.GPG_PASSPHRASE }}
+    - if: contains(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags/v')
+      run: source .ci/ubuntu-ppa.sh
+      shell: bash
     - if: contains(matrix.os, 'ubuntu')
       run: source .ci/ubuntu-build.sh
       shell: bash
