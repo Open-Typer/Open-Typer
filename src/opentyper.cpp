@@ -1573,7 +1573,7 @@ void OpenTyper::waitForReceivedExercise(QString text, int lineLength)
 	if(client.fullMode())
 	{
 		QStringList response = client.sendRequest("get", { "name" });
-		name = response.count() > 0 ? response[0] : "";
+		name = response.count() > 1 ? response[1] : "";
 		waitDialog->setNameReadOnly(true);
 	}
 	waitDialog->setName(name);
