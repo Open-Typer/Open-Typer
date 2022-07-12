@@ -64,6 +64,10 @@ lang/*.qm
 *.Debug
 *.Release
 
+# AppImage files
+AppDir/
+*.AppImage
+
 # Python byte code
 *.pyc
 
