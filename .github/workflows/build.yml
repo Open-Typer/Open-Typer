@@ -41,6 +41,14 @@ jobs:
         dir: '${{ github.workspace }}'
         modules: 'qtcharts'
         setup-python: 'false'
+    - if: contains(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags/v')
+      name: Install Qt IFW
+      run: |
+        curl -o aqt.exe -L https://github.com/miurahr/aqtinstall/releases/download/Continuous/aqt.exe
+        ./aqt.exe install-tool windows desktop tools_ifw
+        mv Tools ..
+        export PATH=$PATH:$(echo ${pwd}/../Tools/QtInstallerFramework/*/bin)
+      shell: bash
     - if: contains(matrix.os, 'windows')
       name: Install 32-bit MinGW
       uses: egor-tensin/setup-mingw@v2
@@ -61,7 +69,10 @@ jobs:
     ## Build
     # Windows
     - if: contains(matrix.os, 'windows')
-      run: source .ci/windows-build.sh
+      run: |
+        cp .ci/common/add-credentials.sh ..
+        cp .ci/windows-repo.sh ..
+        source .ci/windows-build.sh
       shell: bash
     # Ubuntu
     - if: contains(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags/v')
@@ -85,8 +96,18 @@ jobs:
     - if: contains(matrix.os, 'windows')
       uses: vimtor/action-zip@v1
       with:
-        files: release/
-        dest: Open-Typer-win32.zip
+        files: ../release/
+        dest: ../Open-Typer-win32.zip
+    - if: contains(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags/v')
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ github.repository_owner }}/installer
+        fetch-depth: 0
+        token: ${{ secrets.PUSH_TOKEN }}
+    - if: contains(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags/v')
+      name: Build installer and repository for Windows
+      run: source ../windows-repo.sh ${{ github.repository_owner }}/installer ${{ secrets.PUSH_TOKEN }} ${{ steps.previoustag.outputs.tag }}
+      shell: bash
     ## Upload
     # Windows
     - if: contains(matrix.os, 'windows')
@@ -95,7 +116,7 @@ jobs:
         name: build-windows
         path: |
           *.zip
-          installer/*.exe
+          *.exe
     # Ubuntu
     - if: contains(matrix.os, 'ubuntu')
       uses: actions/upload-artifact@v2
