@@ -21,4 +21,3 @@ git push
 mv ../release/* packages/com.adazem009.opentyper/data/Open-Typer
 ./build.sh $(echo ../Tools/QtInstallerFramework/*/bin/binarycreator.exe) $(echo ../Tools/QtInstallerFramework/*/bin/repogen.exe)
 git push -f --set-upstream origin repository
-mv ../*.zip .
