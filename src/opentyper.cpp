@@ -811,7 +811,7 @@ void OpenTyper::loadErrorWords(void)
 	QStringList usedWords, outputWords;
 	usedWords.clear();
 	outputWords.clear();
-	int index;
+	int index = 0;
 	for(int i=0; i < wordCount; i++)
 	{
 		QString word;
