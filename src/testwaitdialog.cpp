@@ -28,6 +28,7 @@ testWaitDialog::testWaitDialog(monitorClient *client, QWidget *parent) :
 	m_client(client)
 {
 	ui->setupUi(this);
+	ui->nameEdit->setEnabled(!client->fullMode());
 	ui->textArea->hide();
 	font = themeEngine::font();
 	font.setPointSize(12);
