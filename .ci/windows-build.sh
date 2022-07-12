@@ -11,8 +11,5 @@ cd release
 rm -f *.o *.cpp *.h
 windeployqt Open-Typer.exe
 cp C:/OpenSSL/bin/*.dll ./
-
-# Installer - does not work in CI right now...
-#cd ../installer
-#cp -r ../release ./packages/com.adazem009.Open-Typer/data
-#binarycreator -c config/config.xml -p packages/ Open-Typer-installer.exe --include com.adazem009.Open-Typer
+cd ..
+mv release ../
