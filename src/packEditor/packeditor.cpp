@@ -173,7 +173,7 @@ void packEditor::closeFile(bool createNew, bool open, bool openPrebuiltPack)
 		QFileInfo saveQFileInfo(saveQFile.fileName());
 		QString _saveFileName = saveQFileInfo.fileName();
 		QMessageBox *notSavedBox = new QMessageBox(this);
-		notSavedBox->setText(tr("Save changes to") + " \"" + _saveFileName + "\" " + tr("before closing?"));
+		notSavedBox->setText(tr("Save changes to \"%1\" before closing?").arg(_saveFileName));
 		QPushButton *yesButton = new QPushButton(tr("Save"));
 		QPushButton *cancelButton = new QPushButton(tr("Cancel"));
 		QPushButton *noButton = new QPushButton(tr("Close without saving"));
