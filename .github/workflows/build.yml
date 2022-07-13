@@ -11,16 +11,16 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, windows-latest, macos-latest]
-        qt-version: ['5.9.5']
+        qt-version: ['5.15.2']
         qt-target: ['desktop']
         include:
           - os: windows-latest
-            qt-version: '5.12.8'
+            qt-version: '5.15.2'
             qt-target: 'desktop'
-            mingw-version: 73
+            mingw-version: 81
         exclude:
           - os: windows-latest
-            qt-version: '5.9.5'
+            qt-version: '5.15.2'
     steps:
     - uses: actions/checkout@v2
       with:
@@ -160,12 +160,12 @@ jobs:
         dir: '${{ github.workspace }}'
         modules: 'qtcharts'
         setup-python: 'false'
-    ## Install emscripten
+    # Install emscripten
     - uses: mymindstorm/setup-emsdk@v11
       with:
         version: 1.39.8
         actions-cache-folder: 'emsdk-cache1'
-    ## Build
+    # Build
     - run: source .ci/common/build.sh wasm
       shell: bash
     - uses: actions/upload-artifact@v2
