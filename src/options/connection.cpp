@@ -43,6 +43,8 @@ connectionOptions::connectionOptions(QWidget *parent) :
 /*! Destroys the connectionOptions object. */
 connectionOptions::~connectionOptions()
 {
+	if(settings.value("main/networkEnabled", false).toBool() && (settings.value("server/mode", 2).toInt() == 2))
+		testConnection(true);
 	delete ui;
 }
 
@@ -126,10 +128,11 @@ void connectionOptions::changeAddress(void)
 }
 
 /*! Tests server connection. */
-void connectionOptions::testConnection(void)
+void connectionOptions::testConnection(bool silent)
 {
 	ui->statusValueLabel->setText("...");
 	ui->testButton->setEnabled(false);
+	client.setErrorDialogs(!silent);
 	client.enableClient();
 	bool available = client.available(), paired = false;
 	if(available)

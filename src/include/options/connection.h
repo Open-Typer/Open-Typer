@@ -57,7 +57,7 @@ class connectionOptions : public QWidget
 		void changeMode(void);
 		void setFullMode(bool enable);
 		void changeAddress(void);
-		void testConnection(void);
+		void testConnection(bool silent = false);
 };
 
 #endif // CONNECTION_H
