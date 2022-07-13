@@ -219,10 +219,15 @@ void monitorClient::readResponse(QString message)
 			if(signal.count() >= 3)
 				emit initExReceived(signal[1], signal[2].toInt());
 		}
-		if(signal[0] == "loadExercise")
+		else if(signal[0] == "loadExercise")
 		{
 			if(signal.count() >= 9)
 				emit exerciseReceived(signal[1].toUtf8(), signal[2].toInt(), (signal[3]=="true"), signal[4].toInt(), signal[5].toInt(), (signal[6]=="true"), (signal[7]=="true"), (signal[8]=="true"));
+		}
+		else if(signal[0] == "changeName")
+		{
+			if(signal.count() >= 1)
+				emit studentNameChanged(signal[1]);
 		}
 	}
 	receivedData = "";
