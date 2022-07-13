@@ -27,6 +27,7 @@ optionsWindow::optionsWindow(QWidget *parent) :
 	ui(new Ui::optionsWindow)
 {
 	ui->setupUi(this);
+	setAttribute(Qt::WA_DeleteOnClose, true);
 	setupList();
 	// Connections
 	connect(ui->list,SIGNAL(currentRowChanged(int)),this,SLOT(changeOptionWidget(int)));
