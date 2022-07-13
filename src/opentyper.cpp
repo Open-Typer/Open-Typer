@@ -90,7 +90,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	// Settings menu
 	connect(ui->actionPreferences, &QAction::triggered, ui->optionsButton, &QPushButton::clicked);
 	// Help menu
-	connect(ui->actionDocs, &QAction::triggered, this, [this]() { QDesktopServices::openUrl(QUrl("https://open-typer.github.io/Open-Typer")); });
+	connect(ui->actionDocs, &QAction::triggered, this, []() { QDesktopServices::openUrl(QUrl("https://open-typer.github.io/Open-Typer")); });
 	connect(ui->actionAboutProgram, &QAction::triggered, this, &OpenTyper::showAboutDialog);
 	connect(ui->actionAboutQt, &QAction::triggered, this, [this]() { QMessageBox::aboutQt(this); });
 	// Widgets
