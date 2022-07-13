@@ -134,6 +134,8 @@ jobs:
       with:
         name: build-macos
         path: '*.dmg'
+
+  # WebAssembly
   wasm-build:
     runs-on: ${{ matrix.os }}-latest
     strategy:
@@ -195,3 +197,29 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: gh-pages
+
+  # Release
+  release:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build, wasm-build]
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Download Ubuntu packages from Launchpad
+      run: |
+        ./.ci/ubuntu-ppa-wait.sh
+        ./.ci/ubuntu-ppa-download.sh
+        ls
+      shell: bash
+    - name: Download artifacts
+      uses: actions/download-artifact@v3
+    - name: Create release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "build-windows/*.exe,*.deb"
+        name: "Open-Typer ${{ github.event.ref }}"
+        owner: ${{ github.event.pusher.name }}
+        draft: true
+        token: ${{ secrets.GITHUB_TOKEN }}
