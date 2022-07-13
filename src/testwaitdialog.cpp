@@ -38,6 +38,11 @@ testWaitDialog::testWaitDialog(monitorClient *client, QWidget *parent) :
 	// Connections
 	connect(ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &testWaitDialog::close);
 	connect(ui->nameEdit, &QLineEdit::textChanged, this, [this](QString text) { m_client->sendRequest("put", { "name", text }); });
+	connect(client, &monitorClient::studentNameChanged, this, [this](QString name) {
+		// When the name changes on server side, disable editing on client side
+		ui->nameEdit->setEnabled(false);
+		ui->nameEdit->setText(name);
+	});
 }
 
 /*! Destroys the testWaitDialog object. */
