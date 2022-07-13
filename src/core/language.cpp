@@ -53,7 +53,7 @@ languageManager::~languageManager() { }
 void languageManager::setLanguage(int index)
 {
 	QLocale targetLocale;
-	if(index == -1)
+	if(index < 0)
 		targetLocale = QLocale::system();
 	else
 		targetLocale = QLocale(supportedLanguages[index], supportedCountries[index]);
