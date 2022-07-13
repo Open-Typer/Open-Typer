@@ -105,6 +105,7 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, 
 #endif // Q_OS_WASM
 	connect(ui->printButton, &QPushButton::clicked, this, &exerciseProgressDialog::printAll);
 	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &QDialog::close);
+	connect(ui->studentsTable, &QTableWidget::cellChanged, this, &exerciseProgressDialog::uploadChangedName);
 }
 
 /*! Destroys the exerciseProgressDialog object. */
@@ -117,6 +118,8 @@ exerciseProgressDialog::~exerciseProgressDialog()
 /*! Loads the targets. */
 void exerciseProgressDialog::setupTable(void)
 {
+	loadingTable = true;
+	targetMap.clear();
 	int abortCount = abortList.values().count(true);
 	for(int i=0; i < abortList.keys().count(); i++)
 	{
@@ -144,6 +147,7 @@ void exerciseProgressDialog::setupTable(void)
 #endif // Q_OS_WASM
 		QTableWidgetItem *item = new QTableWidgetItem(name);
 		ui->studentsTable->setItem(i, 0, item);
+		targetMap[item] = targets[i];
 		// Username
 		QString username;
 		if(fullMode)
@@ -152,6 +156,7 @@ void exerciseProgressDialog::setupTable(void)
 			username = dbMgr.deviceName(targets[i]);
 		item = new QTableWidgetItem(username);
 		ui->studentsTable->setItem(i, 1, item);
+		item->setFlags(item->flags() & ~Qt::ItemIsEditable);
 		// Result
 		if(results.contains(targets[i]))
 		{
@@ -175,19 +180,26 @@ void exerciseProgressDialog::setupTable(void)
 				});
 			});
 		}
-		else if(abortList.contains(targets[i]) && abortList[targets[i]])
-			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("Aborted")));
-		else if(!started)
-			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("Waiting...")));
 		else
-			ui->studentsTable->setItem(i, 2, new QTableWidgetItem(tr("In progress...")));
+		{
+			if(abortList.contains(targets[i]) && abortList[targets[i]])
+				item = new QTableWidgetItem(tr("Aborted"));
+			else if(!started)
+				item = new QTableWidgetItem(tr("Waiting..."));
+			else
+				item = new QTableWidgetItem(tr("In progress..."));
+			ui->studentsTable->setItem(i, 2, item);
+			item->setFlags(item->flags() & ~Qt::ItemIsEditable);
+		}
 		// Mark
 		QString mark = "-";
 		if(results.contains(targets[i]) && results[targets[i]].contains("mark"))
 			mark = results[targets[i]]["mark"].toString();
 		item = new QTableWidgetItem(mark);
 		ui->studentsTable->setItem(i, 3, item);
+		item->setFlags(item->flags() & ~Qt::ItemIsEditable);
 	}
+	loadingTable = false;
 }
 
 /*! Loads the uploaded result. */
@@ -310,4 +322,19 @@ void exerciseProgressDialog::printAll(void)
 		else if(msgBox.clickedButton() != nextButton)
 			break;
 	}
+}
+
+/*! Uploads a changed name to the student. */
+void exerciseProgressDialog::uploadChangedName(int row, int column)
+{
+	if(column != 0 || loadingTable)
+		return;
+	auto item = ui->studentsTable->item(row, column);
+#ifndef Q_OS_WASM
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	if(settings.value("server/fullmode", false).toBool())
+		serverPtr->sendSignal("changeName", { item->text() }, { dbMgr.userNickname(targetMap[item]).toUtf8() });
+	else
+		serverPtr->sendSignal("changeName", { item->text() }, { dbMgr.deviceAddress(targetMap[item]) });
+#endif // Q_OS_WASM
 }

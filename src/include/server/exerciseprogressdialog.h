@@ -22,7 +22,7 @@
 #define EXERCISEPROGRESSDIALOG_H
 
 #include <QDialog>
-#include <QUuid>
+#include <QTableWidgetItem>
 #include <QMap>
 #include <QPushButton>
 #include <QMessageBox>
@@ -60,12 +60,13 @@ class exerciseProgressDialog : public QDialog
 		QMap<int, QString> inputTexts;
 		QMap<int, bool> abortList;
 		QMap<int, QList<QVariantMap>> recordedMistakeLists;
+		QMap<QTableWidgetItem*, int> targetMap;
 		QString m_exerciseText;
 		int m_lineLength;
 		bool m_includeNewLines;
 		int m_mode, m_timeLimit;
 		bool m_correctMistakes, m_lockUi, m_hideText;
-		bool started = false;
+		bool started = false, loadingTable = false;
 
 	protected:
 		void closeEvent(QCloseEvent *event);
@@ -75,6 +76,7 @@ class exerciseProgressDialog : public QDialog
 		void loadResult(int targetID, QString inputText, QVector<QPair<QString, int>> recordedCharacters, qreal time);
 		void abortExercise(int targetID);
 		void printAll(void);
+		void uploadChangedName(int row, int column);
 };
 
 #endif // EXERCISEPROGRESSDIALOG_H
