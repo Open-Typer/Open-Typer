@@ -79,6 +79,7 @@ class packEditor : public QDialog
 
 	protected:
 		void closeEvent(QCloseEvent *event) override;
+		void keyPressEvent(QKeyEvent *event) override;
 
 	public slots:
 		void createNewFile(void);
