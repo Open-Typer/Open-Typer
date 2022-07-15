@@ -106,3 +106,14 @@ void testWaitDialog::closeEvent(QCloseEvent *event)
 	question->open();
 	event->ignore();
 }
+
+/*!
+ * Overrides QDialog#keyPressEvent().\n
+ * Prevents escape key from closing the dialog.
+ */
+void testWaitDialog::keyPressEvent(QKeyEvent *event)
+{
+	// Block Esc key
+	if(event->key() != Qt::Key_Escape)
+		QDialog::keyPressEvent(event);
+}

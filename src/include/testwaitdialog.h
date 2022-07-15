@@ -56,6 +56,7 @@ class testWaitDialog : public QDialog
 
 	protected:
 		void closeEvent(QCloseEvent *event);
+		void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // TESTWAITDIALOG_H
