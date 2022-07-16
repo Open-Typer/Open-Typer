@@ -70,7 +70,6 @@ jobs:
     # Windows
     - if: contains(matrix.os, 'windows')
       run: |
-        cp .ci/common/add-credentials.sh ..
         cp .ci/windows-repo.sh ..
         source .ci/windows-build.sh
       shell: bash
