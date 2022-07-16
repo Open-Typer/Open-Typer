@@ -508,7 +508,20 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 	}
 	if(totalHits)
 		*totalHits = hits;
-	return out;
+	// Merge mistakes with the same position
+	QMap<int, QVariantMap*> mistakesMap;
+	for(int i=0; i < out.count(); i++)
+	{
+		int pos = out[i]["pos"].toInt();
+		if(mistakesMap.contains(pos))
+			mistakesMap[pos]->insert("previous", mistakesMap[pos]->value("previous").toString() + out[i]["previous"].toString());
+		else
+			mistakesMap[pos] = &out[i];
+	}
+	QList<QVariantMap> finalList;
+	for(int i=0; i < mistakesMap.keys().count(); i++)
+		finalList.append(*mistakesMap[mistakesMap.keys().at(i)]);
+	return finalList;
 }
 
 /*! Validates a typing test. */
