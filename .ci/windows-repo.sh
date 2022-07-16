@@ -3,10 +3,9 @@
 ### This script generates an installer and a Qt Installer Framework repository and uploads it
 git config --global user.name "GitHub Actions Bot"
 git config --global user.email "<>"
-../add-credentials.sh ${1} ${2}
 
 part1='/<Version>/c\\t<Version>'
-VERSION=${3//v}
+VERSION=${1//v}
 part2='<\/Version>'
 part3='/<ReleaseDate>/c\\t<ReleaseDate>'
 part4='<\/ReleaseDate>'
