@@ -387,10 +387,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 	int pos = 0, hits = 0;
 	for(i=0; i < inputWords.count(); i++)
 	{
-		QString nextWord = "";
-		if(i < inputWords.count())
-			nextWord = inputWords[inputWords.count()-1];
-		if((i > 0) && (inputWords[i] != "\n") && (nextWord != "\n"))
+		if((i > 0) && (inputWords[i] != "\n"))
 		{
 			if((inputWords[i] != " ") && (pos < recordedCharacters.count()))
 				hits += recordedCharacters[pos].second;
