@@ -105,7 +105,7 @@ jobs:
         token: ${{ secrets.PUSH_TOKEN }}
     - if: contains(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags/v')
       name: Build installer and repository for Windows
-      run: source ../windows-repo.sh ${{ github.repository_owner }}/installer ${{ secrets.PUSH_TOKEN }} ${{ steps.previoustag.outputs.tag }}
+      run: source ../windows-repo.sh ${{ steps.previoustag.outputs.tag }}
       shell: bash
     - if: contains(matrix.os, 'windows')
       run: mv ../*.zip .
