@@ -348,7 +348,14 @@ QMap<int, QVariantMap> stringUtils::generateDiffList(QStringList *sourceWords, Q
 		{
 			QVariantMap currentMap = differences[wordDiff[i]["pos"].toInt()];
 			if(currentMap.contains("previous"))
-				currentMap["previous"] = currentMap["previous"].toString() + " " + wordDiff[i]["previous"].toString();
+			{
+				QString previous = wordDiff[i]["previous"].toString();
+				currentMap["tmp_previous"] = previous;
+				if((previous == " ") || previous[0].isPunct() || (currentMap["tmp_previous"].toString() == " "))
+					currentMap["previous"] = currentMap["previous"].toString() + previous;
+				else
+					currentMap["previous"] = currentMap["previous"].toString() + " " + previous;
+			}
 			differences[wordDiff[i]["pos"].toInt()] = currentMap;
 		}
 		else
@@ -438,6 +445,14 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			{
 				QVariantMap currentMap = differences[i];
 				currentMap["pos"] = pos > 0 && !inputWords[i][0].isPunct() ? pos-1 : pos;
+				QString previous = currentMap["previous"].toString();
+				if((i > 0) && (previous != " ") && !previous[0].isPunct())
+				{
+					if(inputWords[i-1] == "\n")
+						currentMap["previous"] = previous.prepend("\n");
+					else
+						currentMap["previous"] = previous.prepend(" ");
+				}
 				out += currentMap;
 				pos += inputWords[i].count();
 			}
