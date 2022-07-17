@@ -1087,10 +1087,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	input.replace("‘", "'");
 	displayLevel.replace("‘", "'");
 	if(ui->correctMistakesCheckBox->isChecked())
-	{
 		input = stringUtils::addMistakes(input, &recordedMistakes);
-		inputTextHtml = input.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>");
-	}
 	else
 	{
 		recordedMistakes = stringUtils::validateExercise(displayLevel, input, recordedCharacters, &totalHits, &levelMistakes, &errorWords, (currentMode == 1), lastTimeF);
@@ -1100,16 +1097,89 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	QMap<int, QVariantMap*> mistakesMap;
 	for(int i=0; i < recordedMistakes.count(); i++)
 		mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
+	inputTextHtml = "";
+	QStringList lines = input.split("\n");
+	int pos = 0, delta = 0;
 	mistakeTextHtml = "";
-	for(int i=0; i < input.count(); i++)
+	for(int i=0; i < lines.count(); i++)
 	{
-		if(mistakesMap.contains(i))
-			mistakeTextHtml += input[i] == '\n' ? "<u>&nbsp;</u>" : "<u>";
-		mistakeTextHtml += input[i] == '\n' ? "<br>" : "&nbsp;";
-		if(mistakesMap.contains(i))
-			mistakeTextHtml += "</u>";
+		QString addLine = lines[i].toHtmlEscaped().replace(" ", "&nbsp;");
+		inputTextHtml += "<span style=\"color: rgba(0, 0, 0, 0);\">" + addLine + "</span><br>";
+		// Add line with correct characters
+		int oldPos = pos;
+		int count = lines[i].count();
+		for(int j=0; j <= lines[i].count(); j++)
+		{
+			QString inputChar;
+			if(j < count)
+				inputChar = QString(input[pos]).toHtmlEscaped().replace(" ", "&nbsp;");
+			else
+				inputChar = "&nbsp;";
+			if(mistakesMap.contains(pos))
+			{
+				QString correct;
+				if(ui->correctMistakesCheckBox->isChecked())
+					correct = displayLevel[pos - delta];
+				else
+					correct = mistakesMap[pos]->value("previous").toString();
+				QString type = mistakesMap[pos]->value("type").toString();
+				if(type == "deletion")
+				{
+					mistakeTextHtml += correct.split("\n").at(0).toHtmlEscaped().replace(" ", "&nbsp;");
+					inputTextHtml += QString("&nbsp;").repeated(correct.split("\n").at(0).count());
+				}
+				else
+					mistakeTextHtml += correct.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "&nbsp;");
+				if(type == "change")
+				{
+					if(correct == "\n")
+						delta++;
+				}
+				else
+					mistakeTextHtml += "&nbsp;";
+				inputTextHtml += inputChar;
+			}
+			else if(j < count)
+			{
+				mistakeTextHtml += "<span style=\"color: rgba(0, 0, 0, 0);\">" + QString(input[pos]).toHtmlEscaped().replace(" ", "&nbsp;") + "</span>";
+				inputTextHtml += inputChar;
+			}
+			if(j < count)
+				pos++;
+		}
+		inputTextHtml += "<br>";
+		// Add line with underlined mistakes
+		mistakeTextHtml += "<br>";
+		pos = oldPos;
+		for(int j=0; j <= count; j++)
+		{
+			QString append = "&nbsp;";
+			if(mistakesMap.contains(pos))
+			{
+				QString correct;
+				if(ui->correctMistakesCheckBox->isChecked())
+					correct = displayLevel[pos];
+				else
+					correct = mistakesMap[pos]->value("previous").toString();
+				if((mistakesMap[pos]->value("type").toString() == "deletion") && correct.contains("\n"))
+					mistakeTextHtml += "<u>&nbsp;";
+				else
+					mistakeTextHtml += "<u>" + QString("&nbsp;").repeated(std::max(1, correct.count()));
+			}
+			else if(j < count)
+				mistakeTextHtml += "<span style=\"color: rgba(0, 0, 0, 0);\">" + QString(input[pos]).toHtmlEscaped().replace(" ", "&nbsp;") + "</span>";
+			if(mistakesMap.contains(pos))
+			{
+				mistakeTextHtml += "</u>";
+				if(mistakesMap[pos]->value("type").toString() == "deletion")
+					mistakeTextHtml += "&nbsp;";
+			}
+			if(j < count)
+				pos++;
+		}
+		mistakeTextHtml += "<br>";
+		pos++;
 	}
-	mistakeTextHtml.replace("\n","<br>");
 	netHits = std::max(0, totalHits - levelMistakes * settings.value("main/errorpenalty","10").toInt());
 	int netHitsPerMinute = netHits*(60/(levelTimer.elapsed()/1000.0));
 	int grossHitsPerMinute = totalHits*(60/(levelTimer.elapsed()/1000.0));
