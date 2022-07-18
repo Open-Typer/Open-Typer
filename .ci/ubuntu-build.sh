@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Install Qt (use build dependencies from debian/control)
-sudo apt install -y devscripts equivs &&
-sudo mk-build-deps --install debian/control &&
+#sudo apt install -y devscripts equivs &&
+#sudo mk-build-deps --install debian/control &&
+# TODO: Enable these commands after Ubuntu 18.04 reaches EOL
 
 # Build
 export QT_SELECT=qt5
