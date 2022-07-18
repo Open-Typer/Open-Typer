@@ -63,7 +63,7 @@ class databaseManager : public QObject
 		QList<int> teacherIDs(void);
 		QList<int> administratorIDs(void);
 		int loginID(void);
-		bool auth(int userID, QString password = "");
+		bool auth(int userID, QString password = "", bool forceDialogs = false);
 		void addUser(QString name, Role role, QString password, QString nickname = QString(), int classID = 0);
 		void addStudentToClass(int userID, int classID);
 		void editUser(int userID, QString name, Role role, QString password = "", QString nickname = QString());

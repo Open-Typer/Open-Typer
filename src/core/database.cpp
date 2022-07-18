@@ -321,7 +321,7 @@ int databaseManager::loginID(void)
 }
 
 /*! Opens an authentication dialog logs in as the given user. */
-bool databaseManager::auth(int userID, QString password)
+bool databaseManager::auth(int userID, QString password, bool forceDialogs)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
@@ -343,7 +343,11 @@ bool databaseManager::auth(int userID, QString password)
 		}
 	}
 	else
+	{
+		if(forceDialogs)
+			silent = false;
 		goto validate;
+	}
 	return false;
 	validate:
 		QCryptographicHash hash(QCryptographicHash::Sha256);
