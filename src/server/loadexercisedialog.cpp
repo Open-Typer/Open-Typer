@@ -124,7 +124,7 @@ QString loadExerciseDialog::exerciseText(void)
 int loadExerciseDialog::lineLength(void)
 {
 	if(ui->fromFileButton->isChecked())
-		return ui->lineLengthBox->value();
+		return configParser::defaultLineLength;
 	else if(ui->selectedExButton->isChecked())
 		return m_lineLength;
 	return 0;
@@ -134,7 +134,7 @@ int loadExerciseDialog::lineLength(void)
 bool loadExerciseDialog::includeNewLines(void)
 {
 	if(ui->fromFileButton->isChecked())
-		return ui->includeNewLinesCheckBox->isChecked();
+		return true;
 	else if(ui->selectedExButton->isChecked())
 		return m_includeNewLines;
 	return false;
@@ -214,7 +214,6 @@ void loadExerciseDialog::verify(void)
 void loadExerciseDialog::changeSource(void)
 {
 	ui->selectedFileWidget->setEnabled(ui->fromFileButton->isChecked());
-	ui->fileConfigWidget->setEnabled(ui->fromFileButton->isChecked());
 	verify();
 }
 
