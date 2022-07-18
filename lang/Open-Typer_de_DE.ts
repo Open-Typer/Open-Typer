@@ -915,14 +915,6 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>(keine Datei ausgewählt)</translation>
     </message>
     <message>
-        <source>Line length:</source>
-        <translation>Zeilen Länge:</translation>
-    </message>
-    <message>
-        <source>Include new lines</source>
-        <translation>Enthalten neue Zeilen</translation>
-    </message>
-    <message>
         <source>Options</source>
         <translation>Optionen</translation>
     </message>
@@ -1099,14 +1091,6 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Zeilen Länge:</translation>
     </message>
     <message>
-        <source>Save changes to</source>
-        <translation>Änderungen speichern als</translation>
-    </message>
-    <message>
-        <source>before closing?</source>
-        <translation>bevor schließen?</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
@@ -1126,6 +1110,10 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>Text length:</source>
         <translation>Text länge:</translation>
     </message>
+    <message>
+        <source>Save changes to &quot;%1&quot; before closing?</source>
+        <translation>Änderungen speichern als &quot;%1&quot; bevor schließen?</translation>
+    </message>
 </context>
 <context>
     <name>packSelector</name>
@@ -1144,25 +1132,6 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Load</source>
         <translation>Laden</translation>
-    </message>
-</context>
-<context>
-    <name>paperConfigDialog</name>
-    <message>
-        <source>Size preferences</source>
-        <translation>Größen präferenzen</translation>
-    </message>
-    <message>
-        <source>Line length:</source>
-        <translation>Zeilen Länge:</translation>
-    </message>
-    <message>
-        <source>Load</source>
-        <translation>Laden</translation>
-    </message>
-    <message>
-        <source>Include new lines</source>
-        <translation>Enthalten neue Zeilen</translation>
     </message>
 </context>
 <context>

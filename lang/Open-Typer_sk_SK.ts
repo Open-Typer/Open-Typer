@@ -240,33 +240,33 @@
         <translation>Neprihlásený.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="762"/>
+        <location filename="../src/opentyper.cpp" line="756"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="762"/>
-        <location filename="../src/opentyper.cpp" line="1370"/>
+        <location filename="../src/opentyper.cpp" line="756"/>
+        <location filename="../src/opentyper.cpp" line="1438"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="1719"/>
+        <location filename="../src/opentyper.cpp" line="1787"/>
         <source>Version: %1</source>
         <translation>Verzia: %1</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="1722"/>
+        <location filename="../src/opentyper.cpp" line="1790"/>
         <source>Revision: %1</source>
         <translation>Revízia: %1</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="1724"/>
+        <location filename="../src/opentyper.cpp" line="1792"/>
         <source>Source code: %1</source>
         <translation>Zdrojový kód: %1</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="1726"/>
+        <location filename="../src/opentyper.cpp" line="1794"/>
         <source>Published with the GNU General Public License.</source>
         <translation>Publikované s licenciou GNU General Public License.</translation>
     </message>
@@ -276,12 +276,12 @@
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="803"/>
+        <location filename="../src/opentyper.cpp" line="797"/>
         <source>You don&apos;t have any error words.</source>
         <translation>Nemáte žiadne chybné slová.</translation>
     </message>
     <message>
-        <location filename="../src/opentyper.cpp" line="1370"/>
+        <location filename="../src/opentyper.cpp" line="1438"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
@@ -633,22 +633,22 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Stav spojenia:</translation>
     </message>
     <message>
-        <location filename="../src/options/connection.cpp" line="125"/>
+        <location filename="../src/options/connection.cpp" line="127"/>
         <source>Unknown</source>
         <translation>Neznámy</translation>
     </message>
     <message>
-        <location filename="../src/options/connection.cpp" line="141"/>
+        <location filename="../src/options/connection.cpp" line="144"/>
         <source>Failed to connect</source>
         <translation>Nepodarilo sa pripojiť</translation>
     </message>
     <message>
-        <location filename="../src/options/connection.cpp" line="144"/>
+        <location filename="../src/options/connection.cpp" line="147"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../src/options/connection.cpp" line="144"/>
+        <location filename="../src/options/connection.cpp" line="147"/>
         <source>Please allow the following address on the server:</source>
         <translation>Povoľte, prosím, nasledujúcu adresu na serveri:</translation>
     </message>
@@ -772,7 +772,7 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Heslo používateľa %1:</translation>
     </message>
     <message>
-        <location filename="../src/core/database.cpp" line="362"/>
+        <location filename="../src/core/database.cpp" line="366"/>
         <source>Incorrect password!</source>
         <translation>Nesprávne heslo!</translation>
     </message>
@@ -854,42 +854,42 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Známka</translation>
     </message>
     <message>
-        <location filename="../src/server/exerciseprogressdialog.cpp" line="179"/>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="186"/>
         <source>Aborted</source>
         <translation>Zrušené</translation>
     </message>
     <message>
-        <location filename="../src/server/exerciseprogressdialog.cpp" line="158"/>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="163"/>
         <source>View</source>
         <translation>Zobraziť</translation>
     </message>
     <message>
-        <location filename="../src/server/exerciseprogressdialog.cpp" line="181"/>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="188"/>
         <source>Waiting...</source>
         <translation>Čakajúci...</translation>
     </message>
     <message>
-        <location filename="../src/server/exerciseprogressdialog.cpp" line="183"/>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="190"/>
         <source>In progress...</source>
         <translation>Prebieha...</translation>
     </message>
     <message>
-        <location filename="../src/server/exerciseprogressdialog.cpp" line="265"/>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="277"/>
         <source>Some targets have not finished yet.</source>
         <translation>Niektoré ciele ešte nedokončili.</translation>
     </message>
     <message>
-        <location filename="../src/server/exerciseprogressdialog.cpp" line="297"/>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="309"/>
         <source>Printing result of student %1...</source>
         <translation>Tlačiť výsledok študenta %1...</translation>
     </message>
     <message>
-        <location filename="../src/server/exerciseprogressdialog.cpp" line="298"/>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="310"/>
         <source>Print</source>
         <translation>Tlačiť</translation>
     </message>
     <message>
-        <location filename="../src/server/exerciseprogressdialog.cpp" line="301"/>
+        <location filename="../src/server/exerciseprogressdialog.cpp" line="313"/>
         <source>Next student</source>
         <translation>Ďalší študent</translation>
     </message>
@@ -1137,67 +1137,57 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>(žiadny súbor)</translation>
     </message>
     <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="143"/>
-        <source>Line length:</source>
-        <translation>Dĺžka riadka:</translation>
-    </message>
-    <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="163"/>
-        <source>Include new lines</source>
-        <translation>Zahrnúť nové riadky</translation>
-    </message>
-    <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="176"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="110"/>
         <source>Options</source>
         <translation>Možnosti</translation>
     </message>
     <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="209"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="143"/>
         <source>Mode:</source>
         <translation>Režim:</translation>
     </message>
     <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="223"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="157"/>
         <source>Default</source>
         <translation>Predvolený</translation>
     </message>
     <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="228"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="162"/>
         <source>Time limited</source>
         <translation>Na čas</translation>
     </message>
     <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="236"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="170"/>
         <source>Time limit:</source>
         <translation>Časový limit:</translation>
     </message>
     <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="274"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="208"/>
         <source>Correct mistakes</source>
         <translation>Opravovať chyby</translation>
     </message>
     <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="284"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="218"/>
         <source>Lock user interface</source>
         <translation>Uzamknúť používateľské rozhranie</translation>
     </message>
     <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="294"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="228"/>
         <source>Hide text</source>
         <translation>Skryť text</translation>
     </message>
     <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="301"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="235"/>
         <source>Allow text preview before starting the exercise</source>
         <translation>Povoliť náhľad textu pred začiatkom cvičenia</translation>
     </message>
     <message>
-        <location filename="../ui/server/loadexercisedialog.ui" line="311"/>
+        <location filename="../ui/server/loadexercisedialog.ui" line="245"/>
         <source>Target students</source>
         <translation>Cieľoví študenti</translation>
     </message>
     <message>
-        <location filename="../src/server/loadexercisedialog.cpp" line="230"/>
+        <location filename="../src/server/loadexercisedialog.cpp" line="229"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
@@ -1205,12 +1195,12 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
 <context>
     <name>monitorClient</name>
     <message>
-        <location filename="../src/core/net.cpp" line="240"/>
+        <location filename="../src/core/net.cpp" line="245"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../src/core/net.cpp" line="241"/>
+        <location filename="../src/core/net.cpp" line="246"/>
         <source>Unable to connect to class monitor server.</source>
         <translation>Nepodarilo sa spojiť so serverom class monitor.</translation>
     </message>
@@ -1231,27 +1221,27 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Možnosti</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="42"/>
+        <location filename="../src/options/optionswindow.cpp" line="43"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="43"/>
+        <location filename="../src/options/optionswindow.cpp" line="44"/>
         <source>Behavior</source>
         <translation>Správanie</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="44"/>
+        <location filename="../src/options/optionswindow.cpp" line="45"/>
         <source>Keyboard</source>
         <translation>Klávesnica</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="45"/>
+        <location filename="../src/options/optionswindow.cpp" line="46"/>
         <source>Customization</source>
         <translation>Prispôsobenie</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="47"/>
+        <location filename="../src/options/optionswindow.cpp" line="48"/>
         <source>Connection</source>
         <translation>Pripojenie</translation>
     </message>
@@ -1356,13 +1346,8 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
     <message>
         <location filename="../src/packEditor/packeditor.cpp" line="176"/>
-        <source>Save changes to</source>
-        <translation>Uložiť zmeny súboru</translation>
-    </message>
-    <message>
-        <location filename="../src/packEditor/packeditor.cpp" line="176"/>
-        <source>before closing?</source>
-        <translation>pred zavretím?</translation>
+        <source>Save changes to &quot;%1&quot; before closing?</source>
+        <translation>Uložiť zmeny súboru &quot;%1&quot; pred zavretím?</translation>
     </message>
     <message>
         <location filename="../src/packEditor/packeditor.cpp" line="178"/>
@@ -1421,29 +1406,6 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <location filename="../ui/packEditor/packselector.ui" line="92"/>
         <source>Load</source>
         <translation>Načítať</translation>
-    </message>
-</context>
-<context>
-    <name>paperConfigDialog</name>
-    <message>
-        <location filename="../ui/paperconfigdialog.ui" line="17"/>
-        <source>Size preferences</source>
-        <translation>Nastavenia veľkosti</translation>
-    </message>
-    <message>
-        <location filename="../ui/paperconfigdialog.ui" line="44"/>
-        <source>Line length:</source>
-        <translation>Dĺžka riadka:</translation>
-    </message>
-    <message>
-        <location filename="../ui/paperconfigdialog.ui" line="85"/>
-        <source>Load</source>
-        <translation>Načítať</translation>
-    </message>
-    <message>
-        <location filename="../ui/paperconfigdialog.ui" line="95"/>
-        <source>Include new lines</source>
-        <translation>Zahrnúť nové riadky</translation>
     </message>
 </context>
 <context>
@@ -1761,7 +1723,7 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Počkajte, prosím, kým sa cvičenie začne.</translation>
     </message>
     <message>
-        <location filename="../src/testwaitdialog.cpp" line="90"/>
+        <location filename="../src/testwaitdialog.cpp" line="96"/>
         <source>Are you sure?</source>
         <translation>Ste si istý?</translation>
     </message>
