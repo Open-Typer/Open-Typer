@@ -114,7 +114,7 @@ void classEdit::updateOwner(const QString name)
 void classEdit::finish(void)
 {
 	int owner = dbMgr.teacherIDs().value(ui->ownerBox->currentIndex());
-	if(dbMgr.auth(owner, ui->passwordEdit->text()))
+	if(dbMgr.auth(owner, ui->passwordEdit->text(), true))
 	{
 		if(creatingNewClass)
 			dbMgr.addClass(ui->nameEdit->text(), owner, ui->iconList->currentRow());
