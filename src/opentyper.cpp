@@ -745,14 +745,8 @@ void OpenTyper::openExerciseFromFile(void)
 			}
 			else
 			{
-				// Show paper config dialog
-				paperConfigDialog *pconfig = new paperConfigDialog(this);
-				pconfig->setWindowModality(Qt::WindowModal);
-				connect(pconfig, &QDialog::accepted, this, [pconfig,fileContent,this]() {
-					levelLengthExtension = pconfig->lineLength;
-					loadText(fileContent,pconfig->includeNewLines);
-				});
-				pconfig->open();
+				levelLengthExtension = configParser::defaultLineLength;
+				loadText(fileContent, true);
 			}
 		}
 	};

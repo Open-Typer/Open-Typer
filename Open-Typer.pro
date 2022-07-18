@@ -70,7 +70,6 @@ SOURCES += \
     src/options/optionswindow.cpp \
     src/packEditor/packeditor.cpp \
     src/packEditor/packselector.cpp \
-    src/paperconfigdialog.cpp \
     src/updater/updater.cpp \
     src/main.cpp \
     src/opentyper.cpp \
@@ -118,7 +117,6 @@ HEADERS += \
     src/include/options/optionswindow.h \
     src/include/packEditor/packeditor.h \
     src/include/packEditor/packselector.h \
-    src/include/paperconfigdialog.h \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
     src/include/opentyper.h \
@@ -168,7 +166,6 @@ FORMS += \
     ui/options/optionswindow.ui \
     ui/packEditor/packeditor.ui \
     ui/packEditor/packselector.ui \
-    ui/paperconfigdialog.ui \
     ui/updater/updaterdialog.ui
 
 TRANSLATIONS += \
