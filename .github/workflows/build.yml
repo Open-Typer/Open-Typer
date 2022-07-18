@@ -62,7 +62,6 @@ jobs:
         version: ${{ matrix.qt-version }}
         host: 'linux'
         target: ${{ matrix.qt-target }}
-        dir: '${{ github.workspace }}'
         modules: 'qtcharts'
         setup-python: 'false'
     # MacOS
