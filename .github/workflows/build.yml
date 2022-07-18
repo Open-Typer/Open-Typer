@@ -227,7 +227,7 @@ jobs:
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "build-windows/*.exe,*.deb"
+        artifacts: "build-windows/*.exe,build-ubuntu/*.AppImage,*.deb"
         name: "Open-Typer ${{ github.event.ref }}"
         owner: ${{ github.event.pusher.name }}
         draft: true
