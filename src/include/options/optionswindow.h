@@ -22,6 +22,7 @@
 #define OPTIONSWINDOW_H
 
 #include <QDialog>
+#include <QPushButton>
 #include "options/behavior.h"
 #include "options/keyboard.h"
 #include "options/customization.h"
