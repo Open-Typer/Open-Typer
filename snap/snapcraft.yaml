@@ -1,0 +1,28 @@
+name: open-typer
+version: '<version>' # the build script will replace the version
+title: Open-Typer
+summary: Open-Typer Snap
+description: Free and open source typing tutor program
+base: core18
+confinement: devmode
+parts:
+  open-typer:
+    plugin: qmake
+    source: 'https://github.com/Open-Typer/Open-Typer/archive/refs/tags/v<version>.tar.gz' # the build script will replace the version
+    build-packages: [qttools5-dev-tools, libssl-dev, libqt5charts5-dev, libqt5websockets5-dev]
+    stage-packages: [libqt5charts5, libqt5websockets5, libqt5printsupport5, libqt5sql5, libqt5sql5-sqlite]
+    override-build: |
+      QT_SELECT=qt5 lrelease *.pro
+      snapcraftctl build
+      set -ex
+apps:
+  open-typer:
+    common-id: org.adazem009.open-typer.desktop
+    command: open-typer
+    extensions:
+      - kde-neon
+    plugs:
+      - home
+      - network
+      - network-bind
+      - cups-control
