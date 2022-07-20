@@ -31,6 +31,7 @@ optionsWindow::optionsWindow(QWidget *parent) :
 	setupList();
 	// Connections
 	connect(ui->list,SIGNAL(currentRowChanged(int)),this,SLOT(changeOptionWidget(int)));
+	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &optionsWindow::accept);
 }
 
 /*! Sets up list of categories. */
