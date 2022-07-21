@@ -12,6 +12,8 @@ parts:
     build-packages: [qttools5-dev-tools, libssl-dev, libqt5charts5-dev, libqt5websockets5-dev]
     stage-packages: [libqt5charts5, libqt5websockets5, libqt5printsupport5, libqt5sql5, libqt5sql5-sqlite]
     override-build: |
+      echo "<version>" > version
+      echo "<revision>" > revision
       QT_SELECT=qt5 lrelease *.pro
       snapcraftctl build
       set -ex
