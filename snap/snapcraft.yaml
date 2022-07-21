@@ -4,7 +4,7 @@ title: Open-Typer
 summary: Open-Typer Snap
 description: Free and open source typing tutor program
 base: core18
-confinement: devmode
+confinement: strict
 parts:
   open-typer:
     plugin: qmake
