@@ -1,0 +1,41 @@
+name: Update documentation
+
+on:
+  push:
+    branches: [ master ]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup environment
+      run: |
+        sed -i -e '/^#/d' .github/config.env
+        sed -i -e '/^$/d' .github/config.env
+        cat .github/config.env >> "${GITHUB_ENV}"
+    - uses: actions/checkout@v3
+      with:
+        repository: ${{ github.repository_owner }}/${{ env.docs_repo }}
+        token: ${{ secrets.PUSH_TOKEN }}
+        path: docs-repo
+    - if: env.build_docs == 1
+      name: Build docs
+      uses: mattnotmitt/doxygen-action@v1.1.0
+      with:
+        doxyfile-path: "./Doxyfile"
+        working-directory: "."
+    - if: env.build_docs == 1 && env.deploy_docs == 1
+      name: Deploy
+      run: |
+        cd docs-repo
+        git checkout --orphan new-branch
+        sudo chown -R $(whoami):$(whoami) ../docs
+        mv ../docs/* ./
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+        git add -A
+        git commit -m "Upload docs"
+        git branch -D master
+        git branch -m master
+        git push -f origin master
