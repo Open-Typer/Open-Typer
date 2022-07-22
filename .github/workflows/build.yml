@@ -25,30 +25,30 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: 'Get Previous tag'
-      id: previoustag
-      uses: WyriHaximus/github-action-get-previous-tag@v1
+    - name: Setup environment
+      run: |
+        sed -i -e '/^#/d' .github/config.env
+        sed -i -e '/^$/d' .github/config.env
+        cat .github/config.env >> "${GITHUB_ENV}"
+      shell: bash
+    - name: Get OS name
+      run: |
+        IFS='-'
+        read -a arr <<< ${{ matrix.os }}
+        echo "os_name=${arr[0]}" >> "${GITHUB_ENV}"
+      shell: bash
     ## Install Qt
     # Windows
     - if: contains(matrix.os, 'windows')
-      name: Install Qt
+      name: Install Qt (Windows)
       uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt-version }}
         host: 'windows'
         arch: 'win32_mingw${{ matrix.mingw-version }}'
         target: ${{ matrix.qt-target }}
-        dir: '${{ github.workspace }}'
         modules: 'qtcharts'
         setup-python: 'false'
-    - if: contains(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags/v')
-      name: Install Qt IFW
-      run: |
-        curl -o aqt.exe -L https://github.com/miurahr/aqtinstall/releases/download/Continuous/aqt.exe
-        ./aqt.exe install-tool windows desktop tools_ifw
-        mv Tools ..
-        export PATH=$PATH:$(echo ${pwd}/../Tools/QtInstallerFramework/*/bin)
-      shell: bash
     - if: contains(matrix.os, 'windows')
       name: Install 32-bit MinGW
       uses: egor-tensin/setup-mingw@v2
@@ -56,7 +56,7 @@ jobs:
         platform: i686
     # Ubuntu
     - if: contains(matrix.os, 'ubuntu')
-      name: Install Qt
+      name: Install Qt (Ubuntu)
       uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt-version }}
@@ -66,111 +66,61 @@ jobs:
         setup-python: 'false'
     # MacOS
     - if: contains(matrix.os, 'macos')
-      name: Install Qt
+      name: Install Qt (macOS)
       uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt-version }}
         host: 'mac'
         target: ${{ matrix.qt-target }}
-        dir: '${{ github.workspace }}'
         modules: 'qtcharts'
         setup-python: 'false'
     ## Build
-    # Windows
-    - if: contains(matrix.os, 'windows')
-      run: |
-        cp .ci/windows-repo.sh ..
-        source .ci/windows-build.sh
-      shell: bash
-    # Ubuntu
-    - if: contains(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags/v')
-      name: Import GPG key
-      uses: crazy-max/ghaction-import-gpg@v5
-      with:
-        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-        passphrase: ${{ secrets.GPG_PASSPHRASE }}
-    - if: contains(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags/v')
-      run: source .ci/ubuntu-ppa.sh
-      shell: bash
-    - if: contains(matrix.os, 'ubuntu')
-      run: source .ci/ubuntu-build.sh
-      shell: bash
-    # MacOS
-    - if: contains(matrix.os, 'macos')
-      run: source .ci/macos-build.sh
+    - name: Build
+      run: .ci/${{ env.os_name }}-build.sh
       shell: bash
     ## Package
     # Windows
     - if: contains(matrix.os, 'windows')
+      name: Package (Windows)
       uses: vimtor/action-zip@v1
       with:
         files: ../release/
-        dest: ../Open-Typer-win32.zip
-    - if: contains(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags/v')
-      uses: actions/checkout@v3
-      with:
-        repository: ${{ github.repository_owner }}/installer
-        fetch-depth: 0
-        token: ${{ secrets.PUSH_TOKEN }}
-    - if: contains(matrix.os, 'windows') && startsWith(github.ref, 'refs/tags/v')
-      name: Build installer and repository for Windows
-      run: source ../windows-repo.sh ${{ steps.previoustag.outputs.tag }}
-      shell: bash
-    - if: contains(matrix.os, 'windows')
-      run: mv ../*.zip .
-      shell: bash
+        dest: ${{ env.app_name }}-win32.zip
     ## Upload
-    # Windows
-    - if: contains(matrix.os, 'windows')
+    - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: build-windows
+        name: build-${{ env.os_name }}
         path: |
+          ${{ env.executable_name }}
           *.zip
-          *.exe
-    # Ubuntu
-    - if: contains(matrix.os, 'ubuntu')
-      uses: actions/upload-artifact@v2
-      with:
-        name: build-ubuntu
-        path: |
-          'open-typer'
           *.AppImage
-          *.zsync
-    # MacOS
-    - if: contains(matrix.os, 'macos')
-      uses: actions/upload-artifact@v2
-      with:
-        name: build-macos
-        path: '*.dmg'
+          *.dmg
 
   # WebAssembly
   wasm-build:
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu]
         qt-version: ['5.15.2']
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    ## Install Qt
-    # Ubuntu
-    - if: contains(matrix.os, 'ubuntu')
-      name: Install Qt
+    # Install Qt
+    - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt-version }}
         host: 'linux'
         arch: 'wasm_32'
         target: ${{ matrix.qt-target }}
-        dir: '${{ github.workspace }}'
         modules: 'qtcharts'
         setup-python: 'false'
     # Install emscripten
-    - uses: mymindstorm/setup-emsdk@v11
+    - name: Install emscripten
+      uses: mymindstorm/setup-emsdk@v11
       with:
         version: 1.39.8
         actions-cache-folder: 'emsdk-cache1'
@@ -185,50 +135,3 @@ jobs:
           *.js
           *.wasm
           *.svg
-    ## Deploy
-    - run: |
-        mkdir -p ../online-app-deploy
-        cp *.html ../online-app-deploy/
-        cp *.js ../online-app-deploy/
-        cp *.wasm ../online-app-deploy/
-        cp *.svg ../online-app-deploy/
-    - uses: actions/checkout@v2
-      with:
-        ref: 'gh-pages'
-    - run: |
-        mv ../online-app-deploy/* ./
-        git add -A
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
-        git commit -m "online app deploy"
-    - name: Push online-app
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: gh-pages
-
-  # Release
-  release:
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: [build, wasm-build]
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Download Ubuntu packages from Launchpad
-      run: |
-        ./.ci/ubuntu-ppa-wait.sh
-        ./.ci/ubuntu-ppa-download.sh
-        ls
-      shell: bash
-    - name: Download artifacts
-      uses: actions/download-artifact@v3
-    - name: Create release
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: "build-windows/*.exe,build-ubuntu/*.AppImage,build-ubuntu/*.zsync,*.deb"
-        name: "Open-Typer ${{ github.ref_name }}"
-        owner: ${{ github.event.pusher.name }}
-        draft: true
-        token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,234 @@
+name: Release
+
+on:
+  push:
+    tags: '*'
+
+jobs:
+  build-release:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, windows-latest]
+        qt-version: ['5.15.2']
+        qt-target: ['desktop']
+        include:
+          - os: windows-latest
+            qt-version: '5.15.2'
+            qt-target: 'desktop'
+            mingw-version: 81
+        exclude:
+          - os: windows-latest
+            qt-version: '5.15.2'
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Setup environment
+      run: |
+        sed -i -e '/^#/d' .github/config.env
+        sed -i -e '/^$/d' .github/config.env
+        cat .github/config.env >> "${GITHUB_ENV}"
+      shell: bash
+    - if: env.build_on_new_tags != 1
+      name: Cancel if build on new tags is disabled
+      uses: andymckay/cancel-action@0.2
+    - name: 'Get Previous tag'
+      id: previoustag
+      uses: WyriHaximus/github-action-get-previous-tag@v1
+    - name: Save previous tag
+      run: echo previous_tag=${{ steps.previoustag.outputs.tag }} >> "${GITHUB_ENV}"
+      shell: bash
+    - name: Get OS name
+      run: |
+        IFS='-'
+        read -a arr <<< ${{ matrix.os }}
+        echo "os_name=${arr[0]}" >> "${GITHUB_ENV}"
+      shell: bash
+    ## Install Qt
+    # Windows
+    - if: contains(matrix.os, 'windows')
+      name: Install Qt (Windows)
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: ${{ matrix.qt-version }}
+        host: 'windows'
+        arch: 'win32_mingw${{ matrix.mingw-version }}'
+        target: ${{ matrix.qt-target }}
+        modules: 'qtcharts'
+        setup-python: 'false'
+    - if: contains(matrix.os, 'windows')
+      name: Install Qt IFW (Windows)
+      run: |
+        curl -o aqt.exe -L https://github.com/miurahr/aqtinstall/releases/download/Continuous/aqt.exe
+        ./aqt.exe install-tool windows desktop tools_ifw
+        mv Tools ..
+        echo ${pwd}/../Tools/QtInstallerFramework/*/bin >> "${GITHUB_PATH}"
+      shell: bash
+    - if: contains(matrix.os, 'windows')
+      name: Install 32-bit MinGW
+      uses: egor-tensin/setup-mingw@v2
+      with:
+        platform: i686
+    # Ubuntu
+    - if: contains(matrix.os, 'ubuntu')
+      name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: ${{ matrix.qt-version }}
+        host: 'linux'
+        target: ${{ matrix.qt-target }}
+        modules: 'qtcharts'
+        setup-python: 'false'
+    # MacOS
+    #- if: contains(matrix.os, 'macos')
+    #  name: Install Qt
+    #  uses: jurplel/install-qt-action@v2
+    #  with:
+    #    version: ${{ matrix.qt-version }}
+    #    host: 'mac'
+    #    target: ${{ matrix.qt-target }}
+    #    modules: 'qtcharts'
+    #    setup-python: 'false'
+    ## Build
+    - if: contains(matrix.os, 'windows')
+      name: Build (Windows)
+      run: |
+        cp .ci/windows-repo.sh ..
+        .ci/windows-build.sh
+      shell: bash
+    - if: contains(matrix.os, 'ubuntu')
+      name: Build (Ubuntu)
+      run: .ci/ubuntu-build.sh
+      shell: bash
+    ## Update Windows repository
+    - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1
+      name: Get installer configuration
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ github.repository_owner }}/${{ env.windows_installer_repo }}
+        fetch-depth: 0
+        token: ${{ secrets.PUSH_TOKEN }}
+    - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1
+      name: Build installer and repository for Windows
+      run: ../windows-repo.sh
+      shell: bash
+    ## Upload artifacts
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-${{ env.os_name }}
+        path: |
+          *.exe
+          *.AppImage
+          *.dmg
+    - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
+      name: Import GPG key
+      id: gpgkey
+      uses: crazy-max/ghaction-import-gpg@v5
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+        passphrase: ${{ secrets.GPG_PASSPHRASE }}
+    - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
+      name: Save GPG info
+      run: |
+        echo gpg_name=${{ steps.gpgkey.outputs.name }} >> "${GITHUB_ENV}"
+        echo gpg_email=${{ steps.gpgkey.outputs.email }} >> "${GITHUB_ENV}"
+      shell: bash
+    - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
+      name: Upload source packages to PPA
+      run: .ci/ubuntu-ppa.sh
+      shell: bash
+
+  # WebAssembly
+  wasm-build-release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        qt-version: ['5.15.2']
+        qt-target: ['desktop']
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    # Install Qt
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: ${{ matrix.qt-version }}
+        host: 'linux'
+        arch: 'wasm_32'
+        target: ${{ matrix.qt-target }}
+        modules: 'qtcharts'
+        setup-python: 'false'
+    # Install emscripten
+    - uses: mymindstorm/setup-emsdk@v11
+      with:
+        version: 1.39.8
+        actions-cache-folder: 'emsdk-cache1'
+    # Build
+    - run: source .ci/common/build.sh wasm
+      shell: bash
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build-wasm
+        path: |
+          *.html
+          *.js
+          *.wasm
+          *.svg
+
+  # Release
+  release:
+    runs-on: ubuntu-latest
+    needs: [build-release, wasm-build-release]
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup environment
+      run: |
+        sed -i -e '/^#/d' .github/config.env
+        sed -i -e '/^$/d' .github/config.env
+        cat .github/config.env >> "${GITHUB_ENV}"
+      shell: bash
+    - uses: actions/checkout@v3
+      with:
+        repository: ${{ github.repository_owner }}/${{ env.online_app_repo }}
+        fetch-depth: 0
+        token: ${{ secrets.PUSH_TOKEN }}
+        path: online-app
+    - if: env.upload_to_ppa == 1
+      name: Download Ubuntu packages from Launchpad
+      run: |
+        ./.ci/ubuntu-ppa-wait.sh
+        ./.ci/ubuntu-ppa-download.sh
+        ls
+      shell: bash
+    - name: Download artifacts
+      uses: actions/download-artifact@v3
+    - if: env.upload_online_app == 1
+      name: Upload online app
+      run: |
+        cd online-app
+        git checkout --orphan new-branch
+        mv ../build-wasm/* ./
+        rm -f index.html
+        ln -s ${{ env.executable_name }}.html index.html
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+        git add -A
+        git commit -m "Add new release files"
+        git branch -D master
+        git branch -m master
+        git push -f origin master
+      shell: bash
+    - if: env.create_release == 1
+      name: Create release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "build-windows/*.exe,build-ubuntu/*.AppImage,build-ubuntu/*.zsync,*.deb"
+        name: "${{ env.app_name }} ${{ github.ref_name }}"
+        owner: ${{ github.event.pusher.name }}
+        draft: true
+        token: ${{ secrets.GITHUB_TOKEN }}
