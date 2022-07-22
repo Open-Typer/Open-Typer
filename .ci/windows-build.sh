@@ -9,7 +9,7 @@ find C:/OpenSSL/lib -depth -name "*.lib" -exec sh -c 'f="{}"; mv -- "$f" "${f%.l
 source .ci/common/build.sh win32
 cd release
 rm -f *.o *.cpp *.h
-windeployqt Open-Typer.exe
+windeployqt ${executable_name}.exe
 cp C:/OpenSSL/bin/*.dll ./
 cd ..
 mv release ../

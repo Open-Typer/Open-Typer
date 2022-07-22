@@ -5,18 +5,24 @@ git config --global user.name "GitHub Actions Bot"
 git config --global user.email "<>"
 
 part1='/<Version>/c\\t<Version>'
-VERSION=${1//v}
+VERSION=${previous_tag//v}
 part2='<\/Version>'
 part3='/<ReleaseDate>/c\\t<ReleaseDate>'
 part4='<\/ReleaseDate>'
 sed -i -e "${part1}${VERSION}${part2}" config/config.xml
-sed -i -e "${part1}${VERSION}${part2}" packages/com.adazem009.opentyper/meta/package.xml
-sed -i -e "${part3}$(date +'%Y-%m-%d')${part4}" packages/com.adazem009.opentyper/meta/package.xml
-git add config/config.xml
-git add packages/com.adazem009.opentyper/meta/package.xml
-git diff --quiet HEAD || git commit -m "Release Open-Typer v${VERSION}"
-git push
+sed -i -e "${part1}${VERSION}${part2}" packages/${windows_app_name}/meta/package.xml
+sed -i -e "${part3}$(date +'%Y-%m-%d')${part4}" packages/${windows_app_name}/meta/package.xml
 
-mv ../release/* packages/com.adazem009.opentyper/data/Open-Typer
+if (( $update_windows_installer == 1 )); then
+	git add config/config.xml
+	git add packages/${windows_app_name}/meta/package.xml
+	git diff --quiet HEAD || git commit -m "Release ${app_name} v${VERSION}"
+	git push
+fi
+
+mv ../release/* packages/${windows_app_name}/data/${app_name}
 ./build.sh $(echo ../Tools/QtInstallerFramework/*/bin/binarycreator.exe) $(echo ../Tools/QtInstallerFramework/*/bin/repogen.exe)
-git push -f --set-upstream origin repository
+
+if (( $update_windows_repository == 1 )); then
+	git push -f --set-upstream origin repository
+fi

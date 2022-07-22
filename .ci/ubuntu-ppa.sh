@@ -1,22 +1,22 @@
 #!/bin/bash
 
-sudo apt install -y devscripts dput equivs
-sudo mk-build-deps --install debian/control
+sudo apt install -y devscripts dput debhelper
 
 CHANNELS=( bionic focal jammy )
 VERSION=`git describe --tags --abbrev=0`
 VERSION=${VERSION//v}
 CURRENT_DIR=`pwd`
+rm -rf AppDir *.AppImage
 
 for CHANNEL in "${CHANNELS[@]}"; do
-echo "open-typer (${VERSION}~${CHANNEL}) ${CHANNEL}; urgency=medium
+echo "${ppa_package_name} (${VERSION}~${CHANNEL}) ${CHANNEL}; urgency=medium
 
   * New upstream release.
 
- -- adazem009 <adazem.009.games@gmail.com>  $(date +'%a, %d %b %Y %T %z')
+ -- ${gpg_name} <${gpg_email}>  $(date +'%a, %d %b %Y %T %z')
 " > debian/changelog
-debuild -S
+debuild -S -d
 cd ..
-dput ppa:adazem009/open-typer *${CHANNEL}_source.changes
+dput ppa:${launchpad_name}/${ppa_name} *${CHANNEL}_source.changes
 cd "${CURRENT_DIR}"
 done

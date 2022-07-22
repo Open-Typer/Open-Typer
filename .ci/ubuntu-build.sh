@@ -16,6 +16,6 @@ chmod +x linuxdeployqt-continuous-x86_64.AppImage &&
 mkdir -p AppDir/usr/bin &&
 mkdir -p AppDir/usr/lib &&
 cp -r res/linux-release/usr/share AppDir/usr/share &&
-cp open-typer AppDir/usr/bin/
-./linuxdeployqt-continuous-x86_64.AppImage AppDir/usr/share/applications/open-typer.desktop -updateinformation="zsync|https://github.com/Open-Typer/Open-Typer/releases/latest/download/Open-Typer-x86_64.AppImage.zsync" -appimage &&
+cp "$executable_name" AppDir/usr/bin/
+./linuxdeployqt-continuous-x86_64.AppImage AppDir/usr/share/applications/*.desktop -updateinformation="zsync|${appimage_zsync_url}" -appimage &&
 rm linuxdeployqt-continuous-x86_64.AppImage

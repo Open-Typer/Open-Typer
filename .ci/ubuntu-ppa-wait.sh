@@ -4,7 +4,7 @@
 VERSION=`git describe --tags --abbrev=0`
 VERSION=${VERSION//v}
 while true; do
-	./.ci/common/get-build-status.py $VERSION
+	./.ci/common/get-build-status.py $launchpad_name $ppa_name $ppa_package_name $VERSION
 	code=$?
 	echo "Build state: $code (0 == success)"
 	if (( code == 0 )); then
