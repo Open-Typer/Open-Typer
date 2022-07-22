@@ -326,6 +326,7 @@ bool databaseManager::auth(int userID, QString password, bool forceDialogs)
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
 	Q_UNUSED(password);
+	Q_UNUSED(forceDialogs);
 	return false;
 #else
 	bool silent = true;
