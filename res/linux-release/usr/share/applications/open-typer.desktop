@@ -4,6 +4,6 @@ Name=Open-Typer
 Exec=/usr/bin/open-typer %U
 Terminal=false
 Type=Application
-Icon=open-typer
+Icon=/usr/share/pixmaps/open-typer.png
 Comment=Typewriting tutor application
 Categories=Education;
