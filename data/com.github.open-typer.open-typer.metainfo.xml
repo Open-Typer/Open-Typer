@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+	<id>com.github.open-typer.open-typer</id>
+	<launchable type="desktop-id">open-typer.desktop</launchable>
+	<name>Open-Typer</name>
+	<summary>Free and open source typing tutor program</summary>
+	<project_license>GPL-3.0+</project_license>
+	<categories>
+		<category>Education</category>
+	</categories>
+	<provides>
+	​	<binary>open-typer</binary>
+	​</provides>
+	​<developer_name>adazem009</developer_name>
+	<screenshots>
+	​	<screenshot type="default">
+	​		<caption>Open-Typer main window</caption>
+	​		<image type="source">https://raw.githubusercontent.com/Open-Typer/Open-Typer/master/docs-data/res/images/main/main_window_light.png</image>
+	​	</screenshot>
+	​</screenshots>
+	<url type="homepage">https://open-typer.sourceforge.io</url>
+	<url type="bugtracker">https://github.com/Open-Typer/Open-Typer/issues</url>
+​</component>
