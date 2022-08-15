@@ -2,7 +2,7 @@
 
 sudo apt install -y devscripts dput debhelper
 
-CHANNELS=( bionic focal jammy )
+CHANNELS=( $(./.ci/common/get-supported-releases.py) )
 VERSION=`git describe --tags --abbrev=0`
 VERSION=${VERSION//v}
 CURRENT_DIR=`pwd`
