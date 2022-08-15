@@ -12,6 +12,7 @@
         <file>res/configs/en_US-default-A</file>
         <file>res/configs/de_DE-QWERTZ-A</file>
         <file>res/configs/de_DE-QWERTY-A</file>
+        <file>res/images/splash.png</file>
         <file>res/images/repeat.png</file>
         <file>res/images/closeCustom.png</file>
         <file>res/images/next.png</file>
