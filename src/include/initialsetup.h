@@ -23,7 +23,7 @@
 
 #include <QDialog>
 #include <QDirIterator>
-#include "options/customization.h"
+#include "options/appearance.h"
 #include "core/packs.h"
 #include "core/utils.h"
 

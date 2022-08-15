@@ -65,7 +65,7 @@ SOURCES += \
     src/timedialog.cpp \
     src/testwaitdialog.cpp \
     src/options/behavior.cpp \
-    src/options/customization.cpp \
+    src/options/appearance.cpp \
     src/options/keyboard.cpp \
     src/options/optionswindow.cpp \
     src/packEditor/packeditor.cpp \
@@ -112,7 +112,7 @@ HEADERS += \
     src/include/timedialog.h \
     src/include/testwaitdialog.h \
     src/include/options/behavior.h \
-    src/include/options/customization.h \
+    src/include/options/appearance.h \
     src/include/options/keyboard.h \
     src/include/options/optionswindow.h \
     src/include/packEditor/packeditor.h \
@@ -142,7 +142,7 @@ FORMS += \
     ui/initialsetup.ui \
     ui/options/behavior.ui \
     ui/options/connection.ui \
-    ui/options/customization.ui \
+    ui/options/appearance.ui \
     ui/options/keyboard.ui \
     ui/levelsummary.ui \
     ui/options/studentoptions.ui \

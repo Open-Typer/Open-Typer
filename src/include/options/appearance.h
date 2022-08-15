@@ -1,5 +1,5 @@
 /*
- * customization.h
+ * appearance.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CUSTOMIZATION_H
-#define CUSTOMIZATION_H
+#ifndef APPEARANCE_H
+#define APPEARANCE_H
 
 #include <QWidget>
 #include <QFile>
@@ -31,26 +31,26 @@
 #include "core/theme.h"
 
 namespace Ui {
-	class customizationOptions;
+	class appearanceOptions;
 }
 
 /*!
- * \brief The customizationOptions class is the customization category in the options.
- * \image html customizationOptions.png
+ * \brief The appearanceOptions class is the customization category in the options.
+ * \image html appearanceOptions.png
  * \n
- * \image html customizationOptions2.png
+ * \image html appearanceOptions2.png
  * \see optionsWindow
  */
-class customizationOptions : public QWidget
+class appearanceOptions : public QWidget
 {
 	Q_OBJECT
 	public:
-		explicit customizationOptions(QWidget *parent = nullptr);
-		~customizationOptions();
+		explicit appearanceOptions(QWidget *parent = nullptr);
+		~appearanceOptions();
 		void init(void);
 
 	private:
-		Ui::customizationOptions *ui;
+		Ui::appearanceOptions *ui;
 		QListWidgetItem *lastItem = nullptr;
 		void selectCurrentFullTheme(void);
 		void updateFont(void);

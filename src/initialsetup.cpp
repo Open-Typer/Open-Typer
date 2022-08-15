@@ -29,7 +29,7 @@ initialSetup::initialSetup(QWidget *parent) :
 {
 	ui->setupUi(this);
 	loadList();
-	customizationOptions *options = new customizationOptions(ui->themeFrame);
+	appearanceOptions *options = new appearanceOptions(ui->themeFrame);
 	ui->customizationLayout->addWidget(options);
 	// Connections
 	connect(ui->okButton,&QPushButton::clicked,this,&initialSetup::finish);

@@ -45,7 +45,7 @@ void optionsWindow::setupList(void)
 	optionLabels += tr("Language");
 	optionLabels += tr("Behavior");
 	optionLabels += tr("Keyboard");
-	optionLabels += tr("Customization");
+	optionLabels += tr("Appearance");
 #ifndef Q_OS_WASM
 	optionLabels += tr("Connection");
 #endif
@@ -77,8 +77,8 @@ void optionsWindow::changeOptionWidget(int index)
 			options = new keyboardOptions;
 			break;
 		case 3:
-			// Customization
-			options = new customizationOptions;
+			// Appearance
+			options = new appearanceOptions;
 			break;
 		case 4:
 			// Connection
