@@ -367,6 +367,7 @@ QMap<int, QVariantMap> stringUtils::generateDiffList(QStringList *sourceWords, Q
 /*! Compares input text with exercise text and finds mistakes. */
 QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits, QStringList *errorWords)
 {
+	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QList<QVariantMap> out;
 	int i;
 	// Split lines
@@ -416,18 +417,19 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			{
 				int wordStart = pos;
 				auto diff = compareStrings(differences[i]["previous"].toString(), inputWords[i], &recordedCharacters, &hits, &pos);
-				QList<QVariantMap> toRemove;
-				// Ensure there's max. one mistake per 6 characters
-				int lastMistakePos = -1;
-				for(int i2=0; i2 < diff.count(); i2++)
+				// Ensure there's max. one mistake per n characters (depends on settings)
+				if(settings.value("main/mistakelimit", true).toBool())
 				{
-					if((lastMistakePos != -1) && (diff[i2]["pos"].toInt() / 6 == lastMistakePos / 6))
-						diff[i2].insert("disable", true);
-					else
-						lastMistakePos = diff[i2]["pos"].toInt();
+					int charCount = settings.value("main/mistakechars", 6).toInt();
+					int lastMistakePos = -1;
+					for(int i2=0; i2 < diff.count(); i2++)
+					{
+						if((lastMistakePos != -1) && (diff[i2]["pos"].toInt() / charCount == lastMistakePos / charCount))
+							diff[i2].insert("disable", true);
+						else
+							lastMistakePos = diff[i2]["pos"].toInt();
+					}
 				}
-				for(int i2=0; i2 < toRemove.count(); i2++)
-					diff.removeAll(toRemove[i2]);
 				bool merged = (differences[i].contains("merged") && differences[i]["merged"].toBool());
 				// Translate mistake position
 				for(int i2=0; i2 < diff.count(); i2++)
