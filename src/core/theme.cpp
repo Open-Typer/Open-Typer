@@ -46,11 +46,8 @@ void themeEngine::updateThemeList(void)
 {
 	themes.clear();
 	QVariantMap themeMap;
-	// Default
+	// Default (obsolete)
 	themeMap.clear();
-	themeMap.insert("name",tr("Default"));
-	themeMap.insert("id","default");
-	themeMap.insert("icon","default.png");
 	themes += themeMap;
 	// Dark
 	themeMap.clear();
