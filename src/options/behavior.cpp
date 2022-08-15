@@ -40,7 +40,7 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 	bool mistakeLimit = settings.value("main/mistakelimit", true).toBool();
 	ui->mistakeLimitCheckBox->setChecked(mistakeLimit);
 	ui->mistakeCharsBox->setEnabled(mistakeLimit);
-	ui->mistakeCharsBox->setValue(settings.value("main/mistakelimit", 6).toInt());
+	ui->mistakeCharsBox->setValue(settings.value("main/mistakechars", 6).toInt());
 	// Updates
 #ifdef Q_OS_WIN
 	ui->updatesCheckBox->setChecked(settings.value("main/updatechecks", true).toBool());
