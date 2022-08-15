@@ -77,7 +77,7 @@ appearanceOptions::~appearanceOptions()
 /*! Initializes widgets and loads settings. */
 void appearanceOptions::init(void)
 {
-	ui->themeBox->setCurrentIndex((int) themeEngine::style());
+	ui->themeBox->setCurrentIndex((int) (themeEngine::style() - 1));
 	// Colors
 	setColors();
 	// Font
@@ -452,6 +452,6 @@ void appearanceOptions::resetBgPaperColors(void)
  */
 void appearanceOptions::changeTheme(int index)
 {
-	globalThemeEngine.setStyle((themeEngine::Style) index);
+	globalThemeEngine.setStyle((themeEngine::Style) (index + 1));
 	setColors();
 }
