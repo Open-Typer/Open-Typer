@@ -41,6 +41,8 @@ appearanceOptions::appearanceOptions(QWidget *parent) :
 	for(int i=0; i < themes.count(); i++)
 	{
 		QListWidgetItem *item = new QListWidgetItem(QIcon(":res/images/themes/" + themes[i]["icon"].toString()), themes[i]["name"].toString());
+		if(i == 0)
+			item->setFlags(item->flags() & ~Qt::ItemIsEnabled); // block interaction with obsolete "default" theme
 		ui->themeList->addItem(item);
 	}
 	selectCurrentFullTheme();
@@ -131,6 +133,8 @@ void appearanceOptions::updateSimpleTheme(void)
 void appearanceOptions::changeFullTheme(QListWidgetItem* item)
 {
 	int index = ui->themeList->row(item);
+	if(index == 0) // block obsolete "default" theme
+		return;
 	if(item == lastItem)
 		return;
 	lastItem = item;
