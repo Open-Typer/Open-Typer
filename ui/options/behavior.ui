@@ -55,13 +55,6 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="Line" name="line1">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
