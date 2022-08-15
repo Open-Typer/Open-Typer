@@ -48,6 +48,8 @@ class behaviorOptions : public QWidget
 	private slots:
 		void setSpaceNewline(bool value);
 		void setErrorPenalty(int value);
+		void toggleMistakeLimit(bool checked);
+		void setMistakeChars(int value);
 };
 
 #endif // BEHAVIOR_H

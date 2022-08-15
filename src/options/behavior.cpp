@@ -36,6 +36,11 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
 	// Error penalty
 	ui->errorPenaltyBox->setValue(settings.value("main/errorpenalty","10").toInt());
+	// Mistake limit
+	bool mistakeLimit = settings.value("main/mistakelimit", true).toBool();
+	ui->mistakeLimitCheckBox->setChecked(mistakeLimit);
+	ui->mistakeCharsBox->setEnabled(mistakeLimit);
+	ui->mistakeCharsBox->setValue(settings.value("main/mistakelimit", 6).toInt());
 	// Updates
 #ifdef Q_OS_WIN
 	ui->updatesCheckBox->setChecked(settings.value("main/updatechecks", true).toBool());
@@ -47,6 +52,10 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 	connect(ui->spaceNewlineCheckBox,SIGNAL(clicked(bool)),this,SLOT(setSpaceNewline(bool)));
 	// Error penalty box
 	connect(ui->errorPenaltyBox,SIGNAL(valueChanged(int)),this,SLOT(setErrorPenalty(int)));
+	// Mistake limit check box
+	connect(ui->mistakeLimitCheckBox, &QCheckBox::toggled, this, &behaviorOptions::toggleMistakeLimit);
+	// Mistake characters box
+	connect(ui->mistakeCharsBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &behaviorOptions::setMistakeChars);
 	// Updates check box
 	connect(ui->updatesCheckBox, &QCheckBox::toggled, this, [this](bool checked) { settings.setValue("main/updatechecks", checked); });
 }
@@ -76,4 +85,21 @@ void behaviorOptions::setSpaceNewline(bool value)
 void behaviorOptions::setErrorPenalty(int value)
 {
 	settings.setValue("main/errorpenalty",value);
+}
+
+/*!
+ * Toggles mistake limit.
+ */
+void behaviorOptions::toggleMistakeLimit(bool checked)
+{
+	settings.setValue("main/mistakelimit", checked);
+	ui->mistakeCharsBox->setEnabled(checked);
+}
+
+/*!
+ * Sets number of characters with max. 1 mistake.
+ */
+void behaviorOptions::setMistakeChars(int value)
+{
+	settings.setValue("main/mistakechars", value);
 }
