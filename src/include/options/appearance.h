@@ -48,6 +48,7 @@ class appearanceOptions : public QWidget
 		explicit appearanceOptions(QWidget *parent = nullptr);
 		~appearanceOptions();
 		void init(void);
+		void hideModeSelector(void);
 
 	private:
 		Ui::appearanceOptions *ui;

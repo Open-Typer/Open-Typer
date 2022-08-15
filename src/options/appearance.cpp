@@ -84,6 +84,12 @@ void appearanceOptions::init(void)
 	updateFont();
 }
 
+/*! Hides mode selector (simple and advanced mode). */
+void appearanceOptions::hideModeSelector(void)
+{
+	ui->modeSelectWidget->hide();
+}
+
 /*! Toggles advanced theme mode. */
 void appearanceOptions::changeThemeMode(bool advanced)
 {
