@@ -52,12 +52,15 @@ class appearanceOptions : public QWidget
 	private:
 		Ui::appearanceOptions *ui;
 		QListWidgetItem *lastItem = nullptr;
+		void updateSimpleTheme(void);
 		void selectCurrentFullTheme(void);
 		void updateFont(void);
 		void setColors();
 		QSettings settings;
 
 	private slots:
+		void changeThemeMode(bool advanced);
+		void setSimpleTheme(int theme);
 		void changeFullTheme(QListWidgetItem* item);
 		void goBack(void);
 		void changeFont(QFont font);

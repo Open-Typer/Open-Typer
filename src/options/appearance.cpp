@@ -30,6 +30,11 @@ appearanceOptions::appearanceOptions(QWidget *parent) :
 	ui->setupUi(this);
 	ui->themeCustomizationFrame->hide();
 	ui->themesFrame->show();
+	bool advancedMode = settings.value("theme/advancedtheme", false).toBool();
+	ui->simpleModeButton->setChecked(!advancedMode);
+	ui->advancedModeButton->setChecked(advancedMode);
+	ui->advancedControls->setVisible(advancedMode);
+	ui->simpleControls->setVisible(!advancedMode);
 	updateFont();
 	// Load built-in themes
 	QList<QVariantMap> themes = globalThemeEngine.themeList();
@@ -40,6 +45,9 @@ appearanceOptions::appearanceOptions(QWidget *parent) :
 	}
 	selectCurrentFullTheme();
 	// Connections
+	connect(ui->advancedModeButton, &QPushButton::toggled, this, &appearanceOptions::changeThemeMode);
+	connect(ui->lightThemeButton, &QPushButton::clicked, this, [this](bool checked){ setSimpleTheme(checked ? 0 : 1); });
+	connect(ui->darkThemeButton, &QPushButton::clicked, this, [this](bool checked){ setSimpleTheme(checked ? 1 : 0); });
 	connect(ui->themeList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(changeFullTheme(QListWidgetItem*)));
 	connect(ui->themeList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(changeFullTheme(QListWidgetItem*)));
 	connect(ui->backButton, SIGNAL(clicked()), this, SLOT(goBack()));
@@ -54,6 +62,8 @@ appearanceOptions::appearanceOptions(QWidget *parent) :
 	connect(ui->paperColorButton, SIGNAL(clicked()), this, SLOT(changePaperColor()));
 	connect(ui->panelColorButton, SIGNAL(clicked()), this, SLOT(changePanelColor()));
 	connect(ui->themeBox, SIGNAL(activated(int)), this, SLOT(changeTheme(int)));
+	// Set up simple themes
+	updateSimpleTheme();
 }
 
 /*! Destroys the appearanceOptions object. */
@@ -70,6 +80,48 @@ void appearanceOptions::init(void)
 	setColors();
 	// Font
 	updateFont();
+}
+
+/*! Toggles advanced theme mode. */
+void appearanceOptions::changeThemeMode(bool advanced)
+{
+	settings.setValue("theme/advancedtheme", advanced);
+	ui->advancedControls->setVisible(advanced);
+	ui->simpleControls->setVisible(!advanced);
+}
+
+/*! Sets simple theme (0 for light, 1 for dark). */
+void appearanceOptions::setSimpleTheme(int theme)
+{
+	settings.setValue("theme/simpletheme", theme);
+	ui->lightThemeButton->setChecked(theme == 0);
+	ui->darkThemeButton->setChecked(theme == 1);
+	if(theme == 0)
+		ui->themeList->setCurrentRow(4); // light blue
+	else if(theme == 1)
+		ui->themeList->setCurrentRow(1); // dark
+}
+
+/*! Loads selected simple theme. */
+void appearanceOptions::updateSimpleTheme(void)
+{
+	int simpleTheme = settings.value("theme/simpletheme", 0).toInt(); // 0 for light, 1 for dark
+	if((simpleTheme == 0) && (globalThemeEngine.theme() != 4)) // default theme for "light" - light blue
+	{
+		if(globalThemeEngine.theme() == 1)
+			setSimpleTheme(1);
+		else
+			setSimpleTheme(-1);
+	}
+	if((simpleTheme == 1) && (globalThemeEngine.theme() != 1)) // default theme for "dark" - dark
+	{
+		if(globalThemeEngine.theme() == 4)
+			setSimpleTheme(4);
+		else
+			setSimpleTheme(-1);
+	}
+	ui->lightThemeButton->setChecked(simpleTheme == 0);
+	ui->darkThemeButton->setChecked(simpleTheme == 1);
 }
 
 /*!
@@ -121,6 +173,7 @@ void appearanceOptions::changeFullTheme(QListWidgetItem* item)
 		updateFont();
 		setColors();
 	}
+	updateSimpleTheme();
 }
 
 /*! Select currently set full theme. */
