@@ -30,6 +30,11 @@ initialSetup::initialSetup(QWidget *parent) :
 	ui->setupUi(this);
 	loadList();
 	appearanceOptions *options = new appearanceOptions(ui->themeFrame);
+	options->hideModeSelector();
+	if(palette().color(QPalette::Base).toHsv().value() < 50)
+		options->setSimpleTheme(1);
+	else
+		options->setSimpleTheme(0);
 	ui->customizationLayout->addWidget(options);
 	// Connections
 	connect(ui->okButton,&QPushButton::clicked,this,&initialSetup::finish);
