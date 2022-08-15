@@ -59,9 +59,11 @@ class appearanceOptions : public QWidget
 		void setColors();
 		QSettings settings;
 
+	public slots:
+		void setSimpleTheme(int theme);
+
 	private slots:
 		void changeThemeMode(bool advanced);
-		void setSimpleTheme(int theme);
 		void changeFullTheme(QListWidgetItem* item);
 		void goBack(void);
 		void changeFont(QFont font);
