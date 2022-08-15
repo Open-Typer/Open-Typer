@@ -23,6 +23,16 @@
 #include "opentyper.h"
 #include "core/database.h"
 
+void changeSplashMessage(QSplashScreen *splash, QString message)
+{
+	// Add application version (if defined)
+	QString versionStr = "";
+#ifdef BUILD_VERSION
+	versionStr = QObject::tr("Version: %1").arg(BUILD_VERSION);
+#endif // BUILD_VERSION
+	splash->showMessage(versionStr + "\n" + message, Qt::AlignHCenter | Qt::AlignBottom, Qt::white);
+}
+
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -33,11 +43,19 @@ int main(int argc, char *argv[])
 #ifdef BUILD_VERSION
 	QCoreApplication::setApplicationVersion(BUILD_VERSION);
 #endif // BUILD_VERSION
+	QPixmap pixmap(":/res/images/splash.png");
+	QSplashScreen splash(pixmap);
+	splash.show();
+	changeSplashMessage(&splash, QObject::tr("Opening database..."));
+	a.processEvents();
 	if(!dbMgr.status())
 		dbMgr.open();
+	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
+	a.processEvents();
 	// Set icon
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
 	OpenTyper w;
 	// Main window will get shown by itself
+	splash.finish(&w);
 	return a.exec();
 }
