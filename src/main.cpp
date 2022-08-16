@@ -27,9 +27,8 @@ void changeSplashMessage(QSplashScreen *splash, QString message)
 {
 	// Add application version (if defined)
 	QString versionStr = "";
-#ifdef BUILD_VERSION
-	versionStr = QObject::tr("Version: %1").arg(BUILD_VERSION);
-#endif // BUILD_VERSION
+	if(!QCoreApplication::applicationVersion().isEmpty())
+		versionStr = QObject::tr("Version: %1").arg(QCoreApplication::applicationVersion());
 	splash->showMessage(versionStr + "\n" + message, Qt::AlignHCenter | Qt::AlignBottom, Qt::white);
 }
 
@@ -41,7 +40,7 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 	QCoreApplication::setApplicationName("Open-Typer");
 #ifdef BUILD_VERSION
-	QCoreApplication::setApplicationVersion(BUILD_VERSION);
+	QCoreApplication::setApplicationVersion(QString(BUILD_VERSION).remove(0, 1));
 #endif // BUILD_VERSION
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
