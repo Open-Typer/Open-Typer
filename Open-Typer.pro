@@ -1,6 +1,7 @@
 TARGET = open-typer
 
 QT += core gui charts network websockets
+QTPLUGIN += qsvg
 !wasm {
     QT += printsupport sql
     LIBS += -lssl -lcrypto
