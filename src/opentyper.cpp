@@ -1784,7 +1784,7 @@ void OpenTyper::showAboutDialog(void)
 	QMessageBox::about(this, QString(),
 		"<b>Open-Typer</b><br><br>" +
 #ifdef BUILD_VERSION
-		tr("Version: %1").arg(BUILD_VERSION) + "<br>" +
+		tr("Version: %1").arg(QCoreApplication::applicationVersion()) + "<br>" +
 #endif // BUILD_VERSION
 #ifdef BUILD_REVISION
 		tr("Revision: %1").arg(BUILD_REVISION) + "<br>" +
