@@ -14,7 +14,7 @@ parts:
     source: .
     source-type: git
     build-packages: [qttools5-dev-tools, libssl-dev, libqt5charts5-dev, libqt5websockets5-dev]
-    stage-packages: [libqt5charts5, libqt5websockets5, libqt5printsupport5, libqt5sql5, libqt5sql5-sqlite]
+    stage-packages: [libqt5charts5, libqt5websockets5, libqt5printsupport5, libqt5sql5, libqt5sql5-sqlite, libqt5svg5]
     override-pull: |
       snapcraftctl pull
       version=$(git describe --tags --abbrev=0 | sed 's/v//')
