@@ -9,7 +9,7 @@ CURRENT_DIR=`pwd`
 rm -rf AppDir *.AppImage
 
 for CHANNEL in "${CHANNELS[@]}"; do
-echo "${ppa_package_name} (${VERSION}~${CHANNEL}) ${CHANNEL}; urgency=medium
+echo "${ppa_package_name} (${VERSION}ubuntu1~${CHANNEL}) ${CHANNEL}; urgency=medium
 
   * New upstream release.
 
