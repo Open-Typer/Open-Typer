@@ -21,16 +21,17 @@ jobs:
       with:
         use_lxd: true
     - name: Build the Snap
-      run: |
-        VERSION=${{ steps.previoustag.outputs.tag }}
-        VERSION=${VERSION//v}
-        REVISION=$(git rev-parse --short HEAD)
-        sed -i -e "s/<version>/${VERSION}/g" snap/snapcraft.yaml
-        sed -i -e "s/<revision>/${REVISION}/g" snap/snapcraft.yaml
-        sg lxd -c 'snapcraft --use-lxd'
-      shell: bash
-    - name: Upload the package
+      uses: snapcore/action-build@v1
+      id: build
+    - name: Upload the package to artifacts
       uses: actions/upload-artifact@v2
       with:
         name: snap
-        path: '*.snap'
+        path: ${{ steps.build.outputs.snap }}
+    - name: Publish the package to the Snap Store
+      uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_STORE_LOGIN }}
+      with:
+        snap: ${{ steps.build.outputs.snap }}
+        release: stable
