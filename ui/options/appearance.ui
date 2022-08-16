@@ -161,6 +161,9 @@
             </property>
             <item>
              <widget class="QPushButton" name="lightThemeButton">
+              <property name="styleSheet">
+               <string notr="true">padding: 10px 10px 10px 10px;</string>
+              </property>
               <property name="text">
                <string>Light</string>
               </property>
@@ -174,6 +177,9 @@
             </item>
             <item>
              <widget class="QPushButton" name="darkThemeButton">
+              <property name="styleSheet">
+               <string notr="true">padding: 10px 10px 10px 10px;</string>
+              </property>
               <property name="text">
                <string>Dark</string>
               </property>
@@ -251,6 +257,9 @@
             </property>
             <item>
              <widget class="QPushButton" name="simpleModeButton">
+              <property name="styleSheet">
+               <string notr="true">padding: 10px 10px 10px 10px;</string>
+              </property>
               <property name="text">
                <string extracomment="Simple customization mode">Simple</string>
               </property>
@@ -264,6 +273,9 @@
             </item>
             <item>
              <widget class="QPushButton" name="advancedModeButton">
+              <property name="styleSheet">
+               <string notr="true">padding: 10px 10px 10px 10px;</string>
+              </property>
               <property name="text">
                <string extracomment="Advanced customization mode">Advanced</string>
               </property>
