@@ -121,6 +121,7 @@ jobs:
         path: |
           *.exe
           *.AppImage
+          *.zsync
           *.dmg
     - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
       name: Import GPG key
