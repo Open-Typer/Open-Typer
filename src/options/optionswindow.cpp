@@ -40,16 +40,15 @@ void optionsWindow::setupList(void)
 {
 	int oldIndex = ui->list->currentRow();
 	ui->list->clear();
-	QStringList optionLabels;
+	ui->list->setIconSize(QSize(36, 36));
 	// List of options
-	optionLabels += tr("Language");
-	optionLabels += tr("Behavior");
-	optionLabels += tr("Keyboard");
-	optionLabels += tr("Appearance");
+	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/languageOptions.svg"), tr("Language")));
+	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/behaviorOptions.svg"), tr("Behavior")));
+	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/keyboardOptions.svg"), tr("Keyboard")));
+	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/appearanceOptions.svg"), tr("Appearance")));
 #ifndef Q_OS_WASM
-	optionLabels += tr("Connection");
+	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/connectionOptions.svg"), tr("Connection")));
 #endif
-	ui->list->addItems(optionLabels);
 	ui->list->setCurrentRow(oldIndex);
 }
 
