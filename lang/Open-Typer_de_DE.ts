@@ -233,6 +233,18 @@
         <comment>Shift key</comment>
         <translation>Shift</translation>
     </message>
+    <message>
+        <source>Version: %1</source>
+        <translation>Version: %1</translation>
+    </message>
+    <message>
+        <source>Opening database...</source>
+        <translation>Datenbank wird geöffnet...</translation>
+    </message>
+    <message>
+        <source>Opening main window...</source>
+        <translation>Hauptfenster wird geöffnet...</translation>
+    </message>
 </context>
 <context>
     <name>UpdaterDialog</name>
@@ -271,6 +283,92 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
+    <name>appearanceOptions</name>
+    <message>
+        <source>Themes</source>
+        <translation>Themas</translation>
+    </message>
+    <message>
+        <source>Theme:</source>
+        <translation>Thema:</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>Hell</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation>Dunkel</translation>
+    </message>
+    <message>
+        <source>Mode:</source>
+        <extracomment>Customization mode</extracomment>
+        <translation>Modus:</translation>
+    </message>
+    <message>
+        <source>Simple</source>
+        <extracomment>Simple customization mode</extracomment>
+        <translation>Einfach</translation>
+    </message>
+    <message>
+        <source>Advanced</source>
+        <extracomment>Advanced customization mode</extracomment>
+        <translation>Vorgerückt</translation>
+    </message>
+    <message>
+        <source>Style:</source>
+        <translation>Stil:</translation>
+    </message>
+    <message>
+        <source>Font:</source>
+        <translation>Schriftart:</translation>
+    </message>
+    <message>
+        <source>Font size:</source>
+        <translation>Schrift größe:</translation>
+    </message>
+    <message>
+        <source>Text style:</source>
+        <translation>Text Stil:</translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <translation>Fett gedruckt</translation>
+    </message>
+    <message>
+        <source>Italic</source>
+        <translation>Kursiv</translation>
+    </message>
+    <message>
+        <source>Underlined</source>
+        <translation>Unterstrichen</translation>
+    </message>
+    <message>
+        <source>Exercise text color:</source>
+        <translation>Aufgaben Text Farbe:</translation>
+    </message>
+    <message>
+        <source>Input text color:</source>
+        <translation>Input Text Farbe:</translation>
+    </message>
+    <message>
+        <source>Background color:</source>
+        <translation>Hintergrund Farbe:</translation>
+    </message>
+    <message>
+        <source>Paper color:</source>
+        <translation>Papier Farbe:</translation>
+    </message>
+    <message>
+        <source>Panel color:</source>
+        <translation>Panel Farbe:</translation>
+    </message>
+    <message>
+        <source>Go back</source>
+        <translation>Zurück gehen</translation>
+    </message>
+</context>
+<context>
     <name>behaviorOptions</name>
     <message>
         <source>Start new line using space bar</source>
@@ -282,7 +380,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Exercise options</source>
-        <translation>Aufgaben Optionen</translation>
+        <translation type="vanished">Aufgaben Optionen</translation>
     </message>
     <message>
         <source>Updates</source>
@@ -291,6 +389,22 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Check for updates on startup</source>
         <translation>Beim Start nach Aktualisierung suchen</translation>
+    </message>
+    <message>
+        <source>Typing</source>
+        <translation>Tippen</translation>
+    </message>
+    <message>
+        <source>Exercise validation</source>
+        <translation>Validierung der Übung</translation>
+    </message>
+    <message>
+        <source>Number of characters in one word with max. 1 mistake:</source>
+        <translation>Anzahl der Zeichen in einem Wort mit max. 1 Fehler:</translation>
+    </message>
+    <message>
+        <source>Limit number of mistakes</source>
+        <translation>Die Anzahl der Fehler begrenzen</translation>
     </message>
 </context>
 <context>
@@ -526,71 +640,71 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>customizationOptions</name>
     <message>
         <source>System (default)</source>
-        <translation>System (Standard)</translation>
+        <translation type="vanished">System (Standard)</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation>Dunkel</translation>
+        <translation type="vanished">Dunkel</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation>Hell</translation>
+        <translation type="vanished">Hell</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation>Schriftart:</translation>
+        <translation type="vanished">Schriftart:</translation>
     </message>
     <message>
         <source>Font size:</source>
-        <translation>Schrift größe:</translation>
+        <translation type="vanished">Schrift größe:</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation>Kursiv</translation>
+        <translation type="vanished">Kursiv</translation>
     </message>
     <message>
         <source>Bold</source>
-        <translation>Fett gedruckt</translation>
+        <translation type="vanished">Fett gedruckt</translation>
     </message>
     <message>
         <source>Underlined</source>
-        <translation>Unterstrichen</translation>
+        <translation type="vanished">Unterstrichen</translation>
     </message>
     <message>
         <source>Text style:</source>
-        <translation>Text Stil:</translation>
+        <translation type="vanished">Text Stil:</translation>
     </message>
     <message>
         <source>Themes</source>
-        <translation>Themas</translation>
+        <translation type="vanished">Themas</translation>
     </message>
     <message>
         <source>Exercise text color:</source>
-        <translation>Aufgaben Text Farbe:</translation>
+        <translation type="vanished">Aufgaben Text Farbe:</translation>
     </message>
     <message>
         <source>Input text color:</source>
-        <translation>Input Text Farbe:</translation>
+        <translation type="vanished">Input Text Farbe:</translation>
     </message>
     <message>
         <source>Background color:</source>
-        <translation>Hintergrund Farbe:</translation>
+        <translation type="vanished">Hintergrund Farbe:</translation>
     </message>
     <message>
         <source>Paper color:</source>
-        <translation>Papier Farbe:</translation>
+        <translation type="vanished">Papier Farbe:</translation>
     </message>
     <message>
         <source>Panel color:</source>
-        <translation>Panel Farbe:</translation>
+        <translation type="vanished">Panel Farbe:</translation>
     </message>
     <message>
         <source>Go back</source>
-        <translation>Zurück gehen</translation>
+        <translation type="vanished">Zurück gehen</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation>Stil:</translation>
+        <translation type="vanished">Stil:</translation>
     </message>
 </context>
 <context>
@@ -993,7 +1107,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
     <message>
         <source>Customization</source>
-        <translation>Anpassung</translation>
+        <translation type="vanished">Anpassung</translation>
     </message>
     <message>
         <source>Behavior</source>
@@ -1002,6 +1116,10 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Connection</source>
         <translation>Verbindung</translation>
+    </message>
+    <message>
+        <source>Appearance</source>
+        <translation>Aussehen</translation>
     </message>
 </context>
 <context>
@@ -1394,7 +1512,7 @@ Möchtest du es herunterladen und installieren?</translation>
     <name>themeEngine</name>
     <message>
         <source>Default</source>
-        <translation>Standard</translation>
+        <translation type="vanished">Standard</translation>
     </message>
     <message>
         <source>Dark</source>

@@ -299,6 +299,21 @@
         <comment>Shift key</comment>
         <translation>Shift</translation>
     </message>
+    <message>
+        <location filename="../src/main.cpp" line="31"/>
+        <source>Version: %1</source>
+        <translation>Verzia: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="49"/>
+        <source>Opening database...</source>
+        <translation>Otváranie databázy...</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="53"/>
+        <source>Opening main window...</source>
+        <translation>Otváranie hlavného okna...</translation>
+    </message>
 </context>
 <context>
     <name>UpdaterDialog</name>
@@ -344,31 +359,158 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
     </message>
 </context>
 <context>
+    <name>appearanceOptions</name>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="63"/>
+        <source>Themes</source>
+        <translation>Motívy</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="134"/>
+        <source>Theme:</source>
+        <translation>Motív:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="168"/>
+        <location filename="../ui/options/appearance.ui" line="363"/>
+        <source>Light</source>
+        <translation>Svetlý</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="184"/>
+        <location filename="../ui/options/appearance.ui" line="358"/>
+        <source>Dark</source>
+        <translation>Tmavý</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="230"/>
+        <source>Mode:</source>
+        <extracomment>Customization mode</extracomment>
+        <translation>Režim:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="264"/>
+        <source>Simple</source>
+        <extracomment>Simple customization mode</extracomment>
+        <translation>Jednoduchý</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="280"/>
+        <source>Advanced</source>
+        <extracomment>Advanced customization mode</extracomment>
+        <translation>Rozšírený</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="347"/>
+        <source>Style:</source>
+        <translation>Štýl:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="395"/>
+        <source>Font:</source>
+        <translation>Písmo:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="418"/>
+        <source>Font size:</source>
+        <translation>Veľkosť písma:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="450"/>
+        <source>Text style:</source>
+        <translation>Štýl textu:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="466"/>
+        <source>Bold</source>
+        <translation>Tučný</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="484"/>
+        <source>Italic</source>
+        <translation>Kurzíva</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="502"/>
+        <source>Underlined</source>
+        <translation>Podčiarknutý</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="542"/>
+        <source>Exercise text color:</source>
+        <translation>Farba textu cvičenia:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="577"/>
+        <source>Input text color:</source>
+        <translation>Farba vstupného textu:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="606"/>
+        <source>Background color:</source>
+        <translation>Farba pozadia:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="635"/>
+        <source>Paper color:</source>
+        <translation>Farba papiera:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="664"/>
+        <source>Panel color:</source>
+        <translation>Farba panela:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/appearance.ui" line="852"/>
+        <source>Go back</source>
+        <translation>Späť</translation>
+    </message>
+</context>
+<context>
     <name>behaviorOptions</name>
     <message>
-        <location filename="../ui/options/behavior.ui" line="38"/>
+        <location filename="../ui/options/behavior.ui" line="54"/>
         <source>Start new line using space bar</source>
         <translation>Začať nový riadok medzerníkom</translation>
     </message>
     <message>
-        <location filename="../ui/options/behavior.ui" line="64"/>
+        <location filename="../ui/options/behavior.ui" line="92"/>
+        <source>Exercise validation</source>
+        <translation>Vyhodnocovanie cvičenia</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/behavior.ui" line="110"/>
         <source>Error penalty:</source>
         <translation>Penalizácia chýb:</translation>
     </message>
     <message>
-        <location filename="../ui/options/behavior.ui" line="100"/>
+        <location filename="../ui/options/behavior.ui" line="127"/>
+        <source>Number of characters in one word with max. 1 mistake:</source>
+        <translation>Počet znakov v jednom slove s max. 1 chybou:</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/behavior.ui" line="150"/>
+        <source>Limit number of mistakes</source>
+        <translation>Limitovať počet chýb</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/behavior.ui" line="70"/>
         <source>Updates</source>
         <translation>Aktualizácie</translation>
     </message>
     <message>
-        <location filename="../ui/options/behavior.ui" line="106"/>
+        <location filename="../ui/options/behavior.ui" line="42"/>
+        <source>Typing</source>
+        <translation>Písanie</translation>
+    </message>
+    <message>
+        <location filename="../ui/options/behavior.ui" line="76"/>
         <source>Check for updates on startup</source>
         <translation>Nájsť aktualizácie pri štarte</translation>
     </message>
     <message>
-        <location filename="../ui/options/behavior.ui" line="26"/>
         <source>Exercise options</source>
-        <translation>Možnosti cvičenia</translation>
+        <translation type="vanished">Možnosti cvičenia</translation>
     </message>
 </context>
 <context>
@@ -656,89 +798,72 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
 <context>
     <name>customizationOptions</name>
     <message>
-        <location filename="../ui/options/customization.ui" line="154"/>
         <source>System (default)</source>
-        <translation>Systémový (predvolené)</translation>
+        <translation type="vanished">Systémový (predvolené)</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="159"/>
         <source>Dark</source>
-        <translation>Tmavý</translation>
+        <translation type="vanished">Tmavý</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="164"/>
         <source>Light</source>
-        <translation>Svetlý</translation>
+        <translation type="vanished">Svetlý</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="343"/>
         <source>Exercise text color:</source>
-        <translation>Farba textu cvičenia:</translation>
+        <translation type="vanished">Farba textu cvičenia:</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="378"/>
         <source>Input text color:</source>
-        <translation>Farba vstupného textu:</translation>
+        <translation type="vanished">Farba vstupného textu:</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="407"/>
         <source>Background color:</source>
-        <translation>Farba pozadia:</translation>
+        <translation type="vanished">Farba pozadia:</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="436"/>
         <source>Paper color:</source>
-        <translation>Farba papiera:</translation>
+        <translation type="vanished">Farba papiera:</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="465"/>
         <source>Panel color:</source>
-        <translation>Farba panela:</translation>
+        <translation type="vanished">Farba panela:</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="653"/>
         <source>Go back</source>
-        <translation>Späť</translation>
+        <translation type="vanished">Späť</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="196"/>
         <source>Font:</source>
-        <translation>Písmo:</translation>
+        <translation type="vanished">Písmo:</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="143"/>
         <source>Style:</source>
-        <translation>Štýl:</translation>
+        <translation type="vanished">Štýl:</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="219"/>
         <source>Font size:</source>
-        <translation>Veľkosť písma:</translation>
+        <translation type="vanished">Veľkosť písma:</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="285"/>
         <source>Italic</source>
-        <translation>Kurzíva</translation>
+        <translation type="vanished">Kurzíva</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="267"/>
         <source>Bold</source>
-        <translation>Tučný</translation>
+        <translation type="vanished">Tučný</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="48"/>
         <source>Themes</source>
-        <translation>Motívy</translation>
+        <translation type="vanished">Motívy</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="303"/>
         <source>Underlined</source>
-        <translation>Podčiarknutý</translation>
+        <translation type="vanished">Podčiarknutý</translation>
     </message>
     <message>
-        <location filename="../ui/options/customization.ui" line="251"/>
         <source>Text style:</source>
-        <translation>Štýl textu:</translation>
+        <translation type="vanished">Štýl textu:</translation>
     </message>
 </context>
 <context>
@@ -767,12 +892,12 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Študent</translation>
     </message>
     <message>
-        <location filename="../src/core/database.cpp" line="336"/>
+        <location filename="../src/core/database.cpp" line="337"/>
         <source>Password for user %1:</source>
         <translation>Heslo používateľa %1:</translation>
     </message>
     <message>
-        <location filename="../src/core/database.cpp" line="366"/>
+        <location filename="../src/core/database.cpp" line="367"/>
         <source>Incorrect password!</source>
         <translation>Nesprávne heslo!</translation>
     </message>
@@ -1221,27 +1346,31 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
         <translation>Možnosti</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="43"/>
+        <location filename="../src/options/optionswindow.cpp" line="45"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="44"/>
+        <location filename="../src/options/optionswindow.cpp" line="46"/>
         <source>Behavior</source>
         <translation>Správanie</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="45"/>
+        <location filename="../src/options/optionswindow.cpp" line="47"/>
         <source>Keyboard</source>
         <translation>Klávesnica</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="46"/>
-        <source>Customization</source>
-        <translation>Prispôsobenie</translation>
+        <location filename="../src/options/optionswindow.cpp" line="48"/>
+        <source>Appearance</source>
+        <translation>Vzhľad</translation>
     </message>
     <message>
-        <location filename="../src/options/optionswindow.cpp" line="48"/>
+        <source>Customization</source>
+        <translation type="vanished">Prispôsobenie</translation>
+    </message>
+    <message>
+        <location filename="../src/options/optionswindow.cpp" line="50"/>
         <source>Connection</source>
         <translation>Pripojenie</translation>
     </message>
@@ -1731,32 +1860,31 @@ Prajete si ju stiahnuť a nainštalovať?</translation>
 <context>
     <name>themeEngine</name>
     <message>
-        <location filename="../src/core/theme.cpp" line="51"/>
         <source>Default</source>
-        <translation>Predvolený</translation>
+        <translation type="vanished">Predvolený</translation>
     </message>
     <message>
-        <location filename="../src/core/theme.cpp" line="57"/>
+        <location filename="../src/core/theme.cpp" line="54"/>
         <source>Dark</source>
         <translation>Tmavý</translation>
     </message>
     <message>
-        <location filename="../src/core/theme.cpp" line="64"/>
+        <location filename="../src/core/theme.cpp" line="61"/>
         <source>Light</source>
         <translation>Svetlý</translation>
     </message>
     <message>
-        <location filename="../src/core/theme.cpp" line="71"/>
+        <location filename="../src/core/theme.cpp" line="68"/>
         <source>Green</source>
         <translation>Zelený</translation>
     </message>
     <message>
-        <location filename="../src/core/theme.cpp" line="80"/>
+        <location filename="../src/core/theme.cpp" line="77"/>
         <source>Light blue</source>
         <translation>Svetlomodrý</translation>
     </message>
     <message>
-        <location filename="../src/core/theme.cpp" line="89"/>
+        <location filename="../src/core/theme.cpp" line="86"/>
         <source>Custom</source>
         <translation>Vlastný</translation>
     </message>
