@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install -y devscripts dput debhelper
+sudo apt install -y devscripts dput debhelper python3-launchpadlib
 
 CHANNELS=( $(./.ci/common/get-supported-releases.py) )
 VERSION=`git describe --tags --abbrev=0`
