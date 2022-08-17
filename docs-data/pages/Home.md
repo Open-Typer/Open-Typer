@@ -16,6 +16,10 @@ It works on Linux and Windows.
 
 ## Download
 Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typer/releases/latest) or [SourceForge](https://sourceforge.net/projects/open-typer/) or follow platform-specific instructions below.
+### Any Linux distribution
+Download the AppImage [here](https://github.com/Open-Typer/Open-Typer/releases/latest/download/Open-Typer-x86_64.AppImage) or install from the Snap Store:
+
+`sudo snap install open-typer`
 ### Ubuntu
 Use the following commands to install Open-Typer from the PPA:
 
