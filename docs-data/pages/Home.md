@@ -12,7 +12,8 @@ It works on Linux and Windows.
 * Multiple languages (still growing).
 * Customization (text font and size; colors; dark theme).
 * Automatic updates on Windows (shows a dialog window when a new update is found).
-* Can be used with Open-Typer Class Monitor to save student results on one computer.
+* Can be used as a server to save student results on one computer.
+* Advanced exercise validation.
 
 ## Download
 Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typer/releases/latest) or [SourceForge](https://sourceforge.net/projects/open-typer/) or follow platform-specific instructions below.
