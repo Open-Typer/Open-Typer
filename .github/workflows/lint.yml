@@ -1,0 +1,25 @@
+name: Linter
+
+on:
+  pull_request:
+    types: [opened, reopened]
+  push:
+    branches: [master]
+
+jobs:
+  cpp-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cpp-linter/cpp-linter-action@v1
+        id: linter
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          style: file
+
+      - name: Fail
+        if: steps.linter.outputs.checks-failed > 0
+        run: |
+          echo "Linting check failed!"
+          exit 1
