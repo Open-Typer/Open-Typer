@@ -41,7 +41,7 @@ jobs:
     # Windows
     - if: contains(matrix.os, 'windows')
       name: Install Qt (Windows)
-      uses: jurplel/install-qt-action@v3
+      uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt-version }}
         host: 'windows'
@@ -57,7 +57,7 @@ jobs:
     # Ubuntu
     - if: contains(matrix.os, 'ubuntu')
       name: Install Qt (Ubuntu)
-      uses: jurplel/install-qt-action@v3
+      uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt-version }}
         host: 'linux'
@@ -67,7 +67,7 @@ jobs:
     # MacOS
     - if: contains(matrix.os, 'macos')
       name: Install Qt (macOS)
-      uses: jurplel/install-qt-action@v3
+      uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt-version }}
         host: 'mac'
@@ -110,7 +110,7 @@ jobs:
         fetch-depth: 0
     # Install Qt
     - name: Install Qt
-      uses: jurplel/install-qt-action@v3
+      uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt-version }}
         host: 'linux'
