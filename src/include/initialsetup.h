@@ -38,7 +38,7 @@ namespace Ui {
  */
 class initialSetup : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit initialSetup(QWidget *parent = nullptr);
 		~initialSetup();

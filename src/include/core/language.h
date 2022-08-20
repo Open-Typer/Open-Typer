@@ -45,7 +45,7 @@ extern QTranslator *translator2;
  */
 class languageManager : public QObject
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit languageManager(QObject *parent = nullptr);
 		virtual ~languageManager();

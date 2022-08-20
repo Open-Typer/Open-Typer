@@ -38,7 +38,7 @@
 /*! \brief The monitorServer class is a QWebSocketServer that is used to communicate with Open-Typer clients. */
 class monitorServer : public QWebSocketServer
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit monitorServer(bool silent = false, QObject *parent = nullptr);
 		static quint16 port(void);
@@ -72,15 +72,15 @@ class monitorServer : public QWebSocketServer
 		void sendResponse(QString message);
 
 	private:
-		QList<QWebSocket*> clientSockets;
+		QList<QWebSocket *> clientSockets;
 		QString convertData(bool *ok, QStringList input);
 		QString convertData(QStringList input);
 		QStringList readData(QString input);
 		bool studentAuthAvailable(QString nickname);
 		void generateRandomCertKey(void);
-		QMap<QWebSocket*,QString> sessions; /*!< Stores student sessions (socket, username). */
-		QList<QWebSocket*> exerciseSockets;
-		QMap<QWebSocket*, QVector<QPair<QString, int>>> recordedCharacters;
+		QMap<QWebSocket *, QString> sessions; /*!< Stores student sessions (socket, username). */
+		QList<QWebSocket *> exerciseSockets;
+		QMap<QWebSocket *, QVector<QPair<QString, int>>> recordedCharacters;
 		QSettings settings;
 		QMap<int, QString> deviceStudentNames;
 };

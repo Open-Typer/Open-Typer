@@ -29,14 +29,14 @@ classEdit::classEdit(bool newClass, int id, QWidget *parent) :
 	ui->setupUi(this);
 	ui->okButton->setEnabled(false);
 	// Set up list of icons
-	QDirIterator icons(":/class-icons",QDirIterator::NoIteratorFlags);
+	QDirIterator icons(":/class-icons", QDirIterator::NoIteratorFlags);
 	QStringList iconNames;
 	while(icons.hasNext())
 		iconNames += icons.next();
 	iconNames.sort();
-	for(int i=0; i < iconNames.count(); i++)
+	for(int i = 0; i < iconNames.count(); i++)
 	{
-		QListWidgetItem *item = new QListWidgetItem(QIcon(iconNames[i]),"");
+		QListWidgetItem *item = new QListWidgetItem(QIcon(iconNames[i]), "");
 		ui->iconList->addItem(item);
 	}
 	if(newClass)
@@ -55,14 +55,14 @@ classEdit::classEdit(bool newClass, int id, QWidget *parent) :
 	// Set up list of users
 	ui->ownerBox->clear();
 	QList<int> users = dbMgr.teacherIDs();
-	for(int i=0; i < users.count(); i++)
+	for(int i = 0; i < users.count(); i++)
 		ui->ownerBox->addItem(dbMgr.userName(users[i]));
 	updateOwner(ui->ownerBox->currentText());
 	// Connections
-	connect(ui->nameEdit,&QLineEdit::textChanged,this,&classEdit::verify);
-	connect(ui->ownerBox,SIGNAL(currentTextChanged(const QString)),this,SLOT(updateOwner(const QString)));
-	connect(ui->passwordEdit,&QLineEdit::textChanged,this,&classEdit::verify);
-	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(finish()));
+	connect(ui->nameEdit, &QLineEdit::textChanged, this, &classEdit::verify);
+	connect(ui->ownerBox, SIGNAL(currentTextChanged(const QString)), this, SLOT(updateOwner(const QString)));
+	connect(ui->passwordEdit, &QLineEdit::textChanged, this, &classEdit::verify);
+	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(finish()));
 }
 
 /*! Destroys the classEdit object. */
@@ -82,7 +82,7 @@ void classEdit::verify(void)
 	if(ui->nameEdit->text().count() == 0)
 		return;
 	QStringList classes = dbMgr.classNames();
-	for(int i=0; i < classes.count(); i++)
+	for(int i = 0; i < classes.count(); i++)
 	{
 		if(classes[i] == ui->nameEdit->text())
 		{

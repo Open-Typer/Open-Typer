@@ -37,12 +37,13 @@
 /*! \brief The databaseManager class manages the server database. */
 class databaseManager : public QObject
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		databaseManager(QObject *parent = nullptr);
 		bool open(void);
 
-		enum Role {
+		enum Role
+		{
 			Role_Invalid = -1,
 			Role_Teacher = 0,
 			Role_Administrator = 1,

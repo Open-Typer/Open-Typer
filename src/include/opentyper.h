@@ -53,7 +53,9 @@
 #endif // Q_OS_WASM
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class OpenTyper; }
+namespace Ui {
+	class OpenTyper;
+}
 QT_END_NAMESPACE
 
 /*!
@@ -63,7 +65,7 @@ QT_END_NAMESPACE
  */
 class OpenTyper : public QMainWindow
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		OpenTyper(QWidget *parent = nullptr);
 		~OpenTyper();
@@ -86,7 +88,7 @@ class OpenTyper : public QMainWindow
 		int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentAbsoluteSublesson, currentLevel, currentLine, levelPos, displayPos, levelMistakes, totalHits, netHits, levelLengthExtension;
 		int lineCount, linePos, absolutePos;
 		int deadKeys;
-		QVector<QPair<QString,int>> recordedCharacters;
+		QVector<QPair<QString, int>> recordedCharacters;
 		QList<QVariantMap> recordedMistakes;
 		int sublessonListStart;
 		QElapsedTimer levelTimer;

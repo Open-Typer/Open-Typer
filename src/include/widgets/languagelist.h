@@ -36,13 +36,13 @@
  */
 class languageList : public QListWidget
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit languageList(QWidget *parent = nullptr);
 		~languageList();
 		QLocale::Language language(int index);
 		QLocale::Country country(int index);
-		
+
 	private:
 		languageManager langMgr;
 		QSettings settings;

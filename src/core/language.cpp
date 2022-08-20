@@ -41,9 +41,9 @@ languageManager::languageManager(QObject *parent) :
 	supportedCountries += QLocale::Slovakia;
 	// QStringList for combo boxes and list widgets
 	boxItems.clear();
-	for(int i=0; i < supportedLanguages.count(); i++)
+	for(int i = 0; i < supportedLanguages.count(); i++)
 		boxItems += QLocale::languageToString(supportedLanguages[i]) + " (" + QLocale::countryToString(supportedCountries[i]) + ")";
-	boxItems.insert(0,tr("System (default)"));
+	boxItems.insert(0, tr("System (default)"));
 }
 
 /*! Destroys the languageManager object. */

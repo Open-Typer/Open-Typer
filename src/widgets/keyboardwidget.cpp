@@ -34,9 +34,9 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 	mainLayout->setSpacing(0);
 	keyboardLayout->setSpacing(3);
-	mainLayout->setContentsMargins(0,0,0,0);
-	keyboardLayout->setContentsMargins(0,0,0,0);
-	keyboardFrame->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
+	mainLayout->setContentsMargins(0, 0, 0, 0);
+	keyboardLayout->setContentsMargins(0, 0, 0, 0);
+	keyboardFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 	mainLayout->addWidget(keyboardFrame);
 	keyboardFrame->installEventFilter(this);
 	keys.clear();
@@ -48,43 +48,43 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	keyFingerColors.clear();
 	// Close button
 	closeButton = new QPushButton(this);
-	setKeyboardVisible(settings.value("view/keyboardvisible","true").toBool());
-	closeButton->setIconSize(QSize(32,32));
+	setKeyboardVisible(settings.value("view/keyboardvisible", "true").toBool());
+	closeButton->setIconSize(QSize(32, 32));
 	closeButton->setFocusPolicy(Qt::NoFocus);
 	mainLayout->addWidget(closeButton);
-	closeButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
-	mainLayout->setAlignment(closeButton,Qt::AlignCenter);
+	closeButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+	mainLayout->setAlignment(closeButton, Qt::AlignCenter);
 	// Numeric row
 	nextRow();
-	for(int i=0; i < 13; i++)
+	for(int i = 0; i < 13; i++)
 		addKey();
-	addKey("⌫",Qt::Key_Backspace,125);
+	addKey("⌫", Qt::Key_Backspace, 125);
 	// Above main row
 	nextRow();
-	addKey("Tab ⭾",Qt::Key_Tab,75);
-	for(int i=0; i < 12; i++)
+	addKey("Tab ⭾", Qt::Key_Tab, 75);
+	for(int i = 0; i < 12; i++)
 		addKey();
 	// Main row
 	nextRow();
-	addKey("Caps lock",Qt::Key_CapsLock,100);
-	for(int i=0; i < 12; i++)
+	addKey("Caps lock", Qt::Key_CapsLock, 100);
+	for(int i = 0; i < 12; i++)
 		addKey();
-	addKey("⏎",Qt::Key_Return,75);
+	addKey("⏎", Qt::Key_Return, 75);
 	// Below main row
 	nextRow();
-	addKey("⇧ Shift",Qt::Key_Shift,125);
-	for(int i=0; i < 10; i++)
+	addKey("⇧ Shift", Qt::Key_Shift, 125);
+	for(int i = 0; i < 10; i++)
 		addKey();
-	addKey("Shift ⇧",-2,156); // Qt doesn't recognize left and right shift; -2 is a special code for right shift
+	addKey("Shift ⇧", -2, 156); // Qt doesn't recognize left and right shift; -2 is a special code for right shift
 	// Bottom row
 	nextRow();
-	addKey("Ctrl",Qt::Key_Control,75);
-	addKey("Alt",Qt::Key_Alt,75);
-	addKey("",Qt::Key_Space,475);
-	addKey("Alt",Qt::Key_AltGr,75);
-	addKey("Ctrl",-3,103); // Qt doesn't recognize left and right control; -3 is a special code for right control
+	addKey("Ctrl", Qt::Key_Control, 75);
+	addKey("Alt", Qt::Key_Alt, 75);
+	addKey("", Qt::Key_Space, 475);
+	addKey("Alt", Qt::Key_AltGr, 75);
+	addKey("Ctrl", -3, 103); // Qt doesn't recognize left and right control; -3 is a special code for right control
 	// Connections
-	connect(closeButton,&QPushButton::clicked,this,&keyboardWidget::toggleKeyboard);
+	connect(closeButton, &QPushButton::clicked, this, &keyboardWidget::toggleKeyboard);
 }
 
 /*! Adds a key. */
@@ -96,64 +96,65 @@ void keyboardWidget::addKey(QString keyLabelText, int keyCode, int keyMinimumWid
 		keyLabelText += "\n";
 	// Create key frame
 	QFrame *newKey = new QFrame(this);
-	newKey->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+	newKey->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 	newKey->setMinimumWidth(keyMinimumWidth);
 	newKey->setFrameShape(QFrame::WinPanel);
 	newKey->setFrameStyle(QFrame::WinPanel | QFrame::Raised);
-	Finger finger = keyFinger(currentColumn,currentRow);
-	QColor keyColor(0,0,0);
-	switch(finger) {
-		case Finger_LeftIndex:
-		case Finger_RightIndex:
-			keyColor = QColor(255,255,0);
-			break;
-		case Finger_LeftMiddle:
-		case Finger_RightMiddle:
-			keyColor = QColor(100,255,0);
-			break;
-		case Finger_LeftRing:
-		case Finger_RightRing:
-			keyColor = QColor(0,100,255);
-			break;
-		case Finger_LeftLittle:
-		case Finger_RightLittle:
-			keyColor = QColor(255,25,25);
-			break;
-		default:
-			break;
+	Finger finger = keyFinger(currentColumn, currentRow);
+	QColor keyColor(0, 0, 0);
+	switch(finger)
+	{
+	case Finger_LeftIndex:
+	case Finger_RightIndex:
+		keyColor = QColor(255, 255, 0);
+		break;
+	case Finger_LeftMiddle:
+	case Finger_RightMiddle:
+		keyColor = QColor(100, 255, 0);
+		break;
+	case Finger_LeftRing:
+	case Finger_RightRing:
+		keyColor = QColor(0, 100, 255);
+		break;
+	case Finger_LeftLittle:
+	case Finger_RightLittle:
+		keyColor = QColor(255, 25, 25);
+		break;
+	default:
+		break;
 	}
-	keyBaseStyleSheets.insert(newKey,"QFrame { border-radius: 5px; }");
-	keyFingerColors.insert(newKey,keyColor);
+	keyBaseStyleSheets.insert(newKey, "QFrame { border-radius: 5px; }");
+	keyFingerColors.insert(newKey, keyColor);
 	newKey->setStyleSheet(keyBaseStyleSheets[newKey]);
 	currentRowLayout->addWidget(newKey);
-	keyMap.insert(QPair<int,int>(currentColumn,currentRow),newKey);
+	keyMap.insert(QPair<int, int>(currentColumn, currentRow), newKey);
 	currentColumn++;
 	// Create key label
 	QHBoxLayout *keyLayout = new QHBoxLayout(newKey);
-	QLabel *keyLabel = new QLabel(keyLabelText,newKey);
-	keyLabel->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
+	QLabel *keyLabel = new QLabel(keyLabelText, newKey);
+	keyLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 	keyLabel->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 	keyLabel->setMargin(0);
 	keyLayout->addWidget(keyLabel);
-	keyLayout->setContentsMargins(1,1,1,1);
-	keyLabels.insert(newKey,keyLabel);
+	keyLayout->setContentsMargins(1, 1, 1, 1);
+	keyLabels.insert(newKey, keyLabel);
 	// Save the key
-	keys.insert(newKey,keyCode);
-	keyTypes.insert(newKey,0);
+	keys.insert(newKey, keyCode);
+	keyTypes.insert(newKey, 0);
 }
 
 /*! Starts a new row. */
 void keyboardWidget::nextRow(void)
 {
 	QFrame *currentRowFrame = new QFrame(this);
-	currentRowFrame->setContentsMargins(0,0,0,0);
-	currentRowFrame->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
+	currentRowFrame->setContentsMargins(0, 0, 0, 0);
+	currentRowFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 	currentRowFrame->setFrameShape(QFrame::NoFrame);
 	currentRowFrame->setFrameStyle(QFrame::NoFrame | QFrame::Plain);
 	currentRowLayout = new QHBoxLayout(currentRowFrame);
 	currentRowLayout->setSizeConstraint(QLayout::SetFixedSize);
 	currentRowLayout->setSpacing(3);
-	currentRowLayout->setContentsMargins(0,0,0,0);
+	currentRowLayout->setContentsMargins(0, 0, 0, 0);
 	keyboardLayout->addWidget(currentRowFrame);
 	currentRow++;
 	currentColumn = 0;
@@ -162,15 +163,15 @@ void keyboardWidget::nextRow(void)
 /*! Adds a layout-specific key. */
 void keyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode)
 {
-	QPair<int,int> keyPos = QPair<int,int>(x,y);
+	QPair<int, int> keyPos = QPair<int, int>(x, y);
 	if(!keyMap.contains(keyPos))
 		return;
 	if(!keyLabelText.contains("\n"))
 		keyLabelText += "\n";
 	QFrame *targetKeyFrame = keyMap[keyPos];
 	keys.remove(targetKeyFrame);
-	keys.insert(targetKeyFrame,keyCode);
-	keys.insert(targetKeyFrame,shiftKeyCode);
+	keys.insert(targetKeyFrame, keyCode);
+	keys.insert(targetKeyFrame, shiftKeyCode);
 	keyLabels[targetKeyFrame]->setText(keyLabelText);
 	keyTypes[targetKeyFrame] = 1;
 }
@@ -178,23 +179,20 @@ void keyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode
 /*! Sets color of all keys. */
 void keyboardWidget::setKeyColor(QColor color, QColor borderColor)
 {
-	QList<QFrame*> keyList = keys.keys();
-	for(int i=0; i < keyList.count(); i++)
+	QList<QFrame *> keyList = keys.keys();
+	for(int i = 0; i < keyList.count(); i++)
 	{
 		QColor fingerColor = keyFingerColors[keyList[i]];
 		QColor newColor = color;
 		if(!((fingerColor.red() == 0) && (fingerColor.green() == 0) && (fingerColor.blue() == 0)))
 		{
-			newColor = QColor::fromRgb(color.red() + (fingerColor.red()-color.red())/7.5,
-				color.green() + (fingerColor.green()-color.green())/7.5,
-				color.blue() + (fingerColor.blue()-color.blue())/7.5);
+			newColor = QColor::fromRgb(color.red() + (fingerColor.red() - color.red()) / 7.5,
+				color.green() + (fingerColor.green() - color.green()) / 7.5,
+				color.blue() + (fingerColor.blue() - color.blue()) / 7.5);
 		}
 		keyList[i]->setStyleSheet(keyBaseStyleSheets[keyList[i]]);
-		keyList[i]->setStyleSheet(keyBaseStyleSheets[keyList[i]] +
-			"QFrame { background-color: rgb(" + QString::number(newColor.red()) + ", " + QString::number(newColor.green()) + ", " + QString::number(newColor.blue()) + "); border: 1px solid rgb(" +
-			QString::number(borderColor.red()) + ", " + QString::number(borderColor.green()) + ", " + QString::number(borderColor.blue()) + "); }" +
-			"QLabel { border: 0px; }");
-		keyColors[keyList[i]] = QPair<QColor,QColor>(color,borderColor);
+		keyList[i]->setStyleSheet(keyBaseStyleSheets[keyList[i]] + "QFrame { background-color: rgb(" + QString::number(newColor.red()) + ", " + QString::number(newColor.green()) + ", " + QString::number(newColor.blue()) + "); border: 1px solid rgb(" + QString::number(borderColor.red()) + ", " + QString::number(borderColor.green()) + ", " + QString::number(borderColor.blue()) + "); }" + "QLabel { border: 0px; }");
+		keyColors[keyList[i]] = QPair<QColor, QColor>(color, borderColor);
 	}
 }
 
@@ -208,15 +206,12 @@ QColor keyboardWidget::resetKeyColor(QFrame *targetKey)
 		QColor fingerColor = keyFingerColors[targetKey];
 		if(!((fingerColor.red() == 0) && (fingerColor.green() == 0) && (fingerColor.blue() == 0)))
 		{
-			color = QColor::fromRgb(color.red() + (fingerColor.red()-color.red())/7.5,
-				color.green() + (fingerColor.green()-color.green())/7.5,
-				color.blue() + (fingerColor.blue()-color.blue())/7.5);
+			color = QColor::fromRgb(color.red() + (fingerColor.red() - color.red()) / 7.5,
+				color.green() + (fingerColor.green() - color.green()) / 7.5,
+				color.blue() + (fingerColor.blue() - color.blue()) / 7.5);
 		}
 		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey]);
-		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] +
-			"QFrame { background-color: rgb(" + QString::number(color.red()) + ", " + QString::number(color.green()) + ", " + QString::number(color.blue()) + "); border: 1px solid rgb(" +
-			QString::number(borderColor.red()) + ", " + QString::number(borderColor.green()) + ", " + QString::number(borderColor.blue()) + "); }" +
-			"QLabel { border: 0px; }");
+		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] + "QFrame { background-color: rgb(" + QString::number(color.red()) + ", " + QString::number(color.green()) + ", " + QString::number(color.blue()) + "); border: 1px solid rgb(" + QString::number(borderColor.red()) + ", " + QString::number(borderColor.green()) + ", " + QString::number(borderColor.blue()) + "); }" + "QLabel { border: 0px; }");
 		return color;
 	}
 	return QColor();
@@ -227,7 +222,7 @@ bool keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 {
 	if(variant == "")
 		variant = "QWERTY";
-	QLocale inputLocale(language,country);
+	QLocale inputLocale(language, country);
 	QString layoutPath = ":res/keyboard-layouts/" + inputLocale.name() + "-" + variant + ".json";
 	QFile layoutFile(layoutPath);
 	if(layoutFile.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -235,12 +230,12 @@ bool keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 		QJsonDocument layoutDocument = QJsonDocument::fromJson(layoutFile.readAll());
 		QJsonObject layoutObject = layoutDocument.object();
 		QJsonArray layoutKeys = layoutObject["keys"].toArray();
-		for(int i=0; i < layoutKeys.count(); i++)
+		for(int i = 0; i < layoutKeys.count(); i++)
 		{
 			QJsonObject layoutKey = layoutKeys[i].toObject();
 			QStringList keyStrings = layoutKey["label"].toString().split('\n');
 			int keyCode = -1, shiftKeyCode = -1;
-			for(int i=0; i < keyStrings.count(); i++)
+			for(int i = 0; i < keyStrings.count(); i++)
 			{
 				QKeySequence keySequence(keyStrings[i]);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -248,16 +243,17 @@ bool keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 #else
 				int code = keySequence[0];
 #endif
-				switch(i) {
-					case 0:
-						shiftKeyCode = code;
-						break;
-					case 1:
-						keyCode = code;
-						break;
+				switch(i)
+				{
+				case 0:
+					shiftKeyCode = code;
+					break;
+				case 1:
+					keyCode = code;
+					break;
 				}
 			}
-			registerKey(layoutKey["x"].toInt(),layoutKey["y"].toInt(),layoutKey["label"].toString(),keyCode,shiftKeyCode);
+			registerKey(layoutKey["x"].toInt(), layoutKey["y"].toInt(), layoutKey["label"].toString(), keyCode, shiftKeyCode);
 		}
 		return true;
 	}
@@ -272,12 +268,11 @@ void keyboardWidget::highlightKey(int keyCode)
 	{
 		QFrame *targetKey = keys.key(keyCode);
 		QColor oldColor = resetKeyColor(targetKey);
-		QColor keyBgColor = QColor(0,175,255);
-		keyBgColor = QColor::fromRgb(keyBgColor.red() + (oldColor.red()-keyBgColor.red())/1.2,
-		keyBgColor.green() + (oldColor.green()-keyBgColor.green())/1.2,
-		keyBgColor.blue() + (oldColor.blue()-keyBgColor.blue())/1.2);
-		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] +
-			"QFrame { background-color: rgb(" + QString::number(keyBgColor.red()) + ", " + QString::number(keyBgColor.green()) + ", " + QString::number(keyBgColor.blue()) + "); }");
+		QColor keyBgColor = QColor(0, 175, 255);
+		keyBgColor = QColor::fromRgb(keyBgColor.red() + (oldColor.red() - keyBgColor.red()) / 1.2,
+			keyBgColor.green() + (oldColor.green() - keyBgColor.green()) / 1.2,
+			keyBgColor.blue() + (oldColor.blue() - keyBgColor.blue()) / 1.2);
+		targetKey->setStyleSheet(keyBaseStyleSheets[targetKey] + "QFrame { background-color: rgb(" + QString::number(keyBgColor.red()) + ", " + QString::number(keyBgColor.green()) + ", " + QString::number(keyBgColor.blue()) + "); }");
 	}
 }
 
@@ -295,226 +290,232 @@ void keyboardWidget::dehighlightKey(int keyCode)
 /*! Returns the finger that should be used to press the key. */
 keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 {
-	QPoint keyPos(keyX,keyY);
-	switch(keyPos.y()) {
+	QPoint keyPos(keyX, keyY);
+	switch(keyPos.y())
+	{
+	case 0:
+		switch(keyPos.x())
+		{
 		case 0:
-			switch(keyPos.x()) {
-				case 0:
-					return Finger_LeftLittle;
-					break;
-				case 1:
-					return Finger_LeftLittle;
-					break;
-				case 2:
-					return Finger_LeftLittle;
-					break;
-				case 3:
-					return Finger_LeftRing;
-					break;
-				case 4:
-					return Finger_LeftMiddle;
-					break;
-				case 5:
-					return Finger_LeftIndex;
-					break;
-				case 6:
-					return Finger_LeftIndex;
-					break;
-				case 7:
-					return Finger_RightIndex;
-					break;
-				case 8:
-					return Finger_RightIndex;
-					break;
-				case 9:
-					return Finger_RightMiddle;
-					break;
-				case 10:
-					return Finger_RightRing;
-					break;
-				case 11:
-					return Finger_RightLittle;
-					break;
-				case 12:
-					return Finger_RightLittle;
-					break;
-				case 13:
-					return Finger_RightLittle;
-					break;
-				default:
-					return Finger_Invalid;
-					break;
-			}
+			return Finger_LeftLittle;
 			break;
 		case 1:
-			switch(keyPos.x()) {
-				case 0:
-					return Finger_LeftLittle;
-					break;
-				case 1:
-					return Finger_LeftLittle;
-					break;
-				case 2:
-					return Finger_LeftRing;
-					break;
-				case 3:
-					return Finger_LeftMiddle;
-					break;
-				case 4:
-					return Finger_LeftIndex;
-					break;
-				case 5:
-					return Finger_LeftIndex;
-					break;
-				case 6:
-					return Finger_RightIndex;
-					break;
-				case 7:
-					return Finger_RightIndex;
-					break;
-				case 8:
-					return Finger_RightMiddle;
-					break;
-				case 9:
-					return Finger_RightRing;
-					break;
-				case 10:
-					return Finger_RightLittle;
-					break;
-				case 11:
-					return Finger_RightLittle;
-					break;
-				case 12:
-					return Finger_RightLittle;
-					break;
-				default:
-					return Finger_Invalid;
-					break;
-			}
+			return Finger_LeftLittle;
 			break;
 		case 2:
-			switch(keyPos.x()) {
-				case 0:
-					return Finger_LeftLittle;
-					break;
-				case 1:
-					return Finger_LeftLittle;
-					break;
-				case 2:
-					return Finger_LeftRing;
-					break;
-				case 3:
-					return Finger_LeftMiddle;
-					break;
-				case 4:
-					return Finger_LeftIndex;
-					break;
-				case 5:
-					return Finger_LeftIndex;
-					break;
-				case 6:
-					return Finger_RightIndex;
-					break;
-				case 7:
-					return Finger_RightIndex;
-					break;
-				case 8:
-					return Finger_RightMiddle;
-					break;
-				case 9:
-					return Finger_RightRing;
-					break;
-				case 10:
-					return Finger_RightLittle;
-					break;
-				case 11:
-					return Finger_RightLittle;
-					break;
-				case 12:
-					return Finger_RightLittle;
-					break;
-				case 13:
-					return Finger_RightLittle;
-					break;
-				default:
-					return Finger_Invalid;
-					break;
-			}
+			return Finger_LeftLittle;
 			break;
 		case 3:
-			switch(keyPos.x()) {
-				case 0:
-					return Finger_LeftLittle;
-					break;
-				case 1:
-					return Finger_LeftLittle;
-					break;
-				case 2:
-					return Finger_LeftRing;
-					break;
-				case 3:
-					return Finger_LeftMiddle;
-					break;
-				case 4:
-					return Finger_LeftIndex;
-					break;
-				case 5:
-					return Finger_LeftIndex;
-					break;
-				case 6:
-					return Finger_RightIndex;
-					break;
-				case 7:
-					return Finger_RightIndex;
-					break;
-				case 8:
-					return Finger_RightMiddle;
-					break;
-				case 9:
-					return Finger_RightRing;
-					break;
-				case 10:
-					return Finger_RightLittle;
-					break;
-				case 11:
-					return Finger_RightLittle;
-					break;
-				case 12:
-					return Finger_RightLittle;
-					break;
-				default:
-					return Finger_Invalid;
-					break;
-			}
+			return Finger_LeftRing;
 			break;
 		case 4:
-			switch(keyPos.x()) {
-				case 2:
-					// TODO: Add an option to set left thumb finger for space bar
-					return Finger_RightThumb;
-					break;
-				default:
-					return Finger_Invalid;
-					break;
-			}
+			return Finger_LeftMiddle;
+			break;
+		case 5:
+			return Finger_LeftIndex;
+			break;
+		case 6:
+			return Finger_LeftIndex;
+			break;
+		case 7:
+			return Finger_RightIndex;
+			break;
+		case 8:
+			return Finger_RightIndex;
+			break;
+		case 9:
+			return Finger_RightMiddle;
+			break;
+		case 10:
+			return Finger_RightRing;
+			break;
+		case 11:
+			return Finger_RightLittle;
+			break;
+		case 12:
+			return Finger_RightLittle;
+			break;
+		case 13:
+			return Finger_RightLittle;
 			break;
 		default:
 			return Finger_Invalid;
 			break;
+		}
+		break;
+	case 1:
+		switch(keyPos.x())
+		{
+		case 0:
+			return Finger_LeftLittle;
+			break;
+		case 1:
+			return Finger_LeftLittle;
+			break;
+		case 2:
+			return Finger_LeftRing;
+			break;
+		case 3:
+			return Finger_LeftMiddle;
+			break;
+		case 4:
+			return Finger_LeftIndex;
+			break;
+		case 5:
+			return Finger_LeftIndex;
+			break;
+		case 6:
+			return Finger_RightIndex;
+			break;
+		case 7:
+			return Finger_RightIndex;
+			break;
+		case 8:
+			return Finger_RightMiddle;
+			break;
+		case 9:
+			return Finger_RightRing;
+			break;
+		case 10:
+			return Finger_RightLittle;
+			break;
+		case 11:
+			return Finger_RightLittle;
+			break;
+		case 12:
+			return Finger_RightLittle;
+			break;
+		default:
+			return Finger_Invalid;
+			break;
+		}
+		break;
+	case 2:
+		switch(keyPos.x())
+		{
+		case 0:
+			return Finger_LeftLittle;
+			break;
+		case 1:
+			return Finger_LeftLittle;
+			break;
+		case 2:
+			return Finger_LeftRing;
+			break;
+		case 3:
+			return Finger_LeftMiddle;
+			break;
+		case 4:
+			return Finger_LeftIndex;
+			break;
+		case 5:
+			return Finger_LeftIndex;
+			break;
+		case 6:
+			return Finger_RightIndex;
+			break;
+		case 7:
+			return Finger_RightIndex;
+			break;
+		case 8:
+			return Finger_RightMiddle;
+			break;
+		case 9:
+			return Finger_RightRing;
+			break;
+		case 10:
+			return Finger_RightLittle;
+			break;
+		case 11:
+			return Finger_RightLittle;
+			break;
+		case 12:
+			return Finger_RightLittle;
+			break;
+		case 13:
+			return Finger_RightLittle;
+			break;
+		default:
+			return Finger_Invalid;
+			break;
+		}
+		break;
+	case 3:
+		switch(keyPos.x())
+		{
+		case 0:
+			return Finger_LeftLittle;
+			break;
+		case 1:
+			return Finger_LeftLittle;
+			break;
+		case 2:
+			return Finger_LeftRing;
+			break;
+		case 3:
+			return Finger_LeftMiddle;
+			break;
+		case 4:
+			return Finger_LeftIndex;
+			break;
+		case 5:
+			return Finger_LeftIndex;
+			break;
+		case 6:
+			return Finger_RightIndex;
+			break;
+		case 7:
+			return Finger_RightIndex;
+			break;
+		case 8:
+			return Finger_RightMiddle;
+			break;
+		case 9:
+			return Finger_RightRing;
+			break;
+		case 10:
+			return Finger_RightLittle;
+			break;
+		case 11:
+			return Finger_RightLittle;
+			break;
+		case 12:
+			return Finger_RightLittle;
+			break;
+		default:
+			return Finger_Invalid;
+			break;
+		}
+		break;
+	case 4:
+		switch(keyPos.x())
+		{
+		case 2:
+			// TODO: Add an option to set left thumb finger for space bar
+			return Finger_RightThumb;
+			break;
+		default:
+			return Finger_Invalid;
+			break;
+		}
+		break;
+	default:
+		return Finger_Invalid;
+		break;
 	}
 }
 
 /*! Finds a key that contains label and returns its position. */
 QPoint keyboardWidget::findKey(QString label)
 {
-	QList<QLabel*> labels = keyLabels.values();
-	for(int i=0; i < labels.count(); i++)
+	QList<QLabel *> labels = keyLabels.values();
+	for(int i = 0; i < labels.count(); i++)
 	{
-		if((labels[i]->text().contains(label,Qt::CaseInsensitive)) && (keyTypes[keyLabels.key(labels[i])] == 1))
+		if((labels[i]->text().contains(label, Qt::CaseInsensitive)) && (keyTypes[keyLabels.key(labels[i])] == 1))
 		{
 			QFrame *targetKey = keyLabels.key(labels[i]);
-			QPair<int,int> keyPos = keyMap.key(targetKey);
-			return QPoint(keyPos.first,keyPos.second);
+			QPair<int, int> keyPos = keyMap.key(targetKey);
+			return QPoint(keyPos.first, keyPos.second);
 		}
 	}
 	return QPoint();
@@ -530,11 +531,7 @@ int keyboardWidget::fingerHand(keyboardWidget::Finger finger)
 {
 	if(finger == Finger_Invalid)
 		return -1;
-	else if((finger == Finger_LeftThumb) ||
-		(finger == Finger_LeftIndex) ||
-		(finger == Finger_LeftMiddle) ||
-		(finger == Finger_LeftRing) || 
-		(finger == Finger_LeftLittle))
+	else if((finger == Finger_LeftThumb) || (finger == Finger_LeftIndex) || (finger == Finger_LeftMiddle) || (finger == Finger_LeftRing) || (finger == Finger_LeftLittle))
 		return 0;
 	return 1;
 }
@@ -542,9 +539,9 @@ int keyboardWidget::fingerHand(keyboardWidget::Finger finger)
 /*! Toggles keyboard visibility. */
 void keyboardWidget::toggleKeyboard(void)
 {
-	QPropertyAnimation *anim = new QPropertyAnimation(keyboardFrame,"geometry");
+	QPropertyAnimation *anim = new QPropertyAnimation(keyboardFrame, "geometry");
 	anim->setDuration(250);
-	setKeyboardVisible(!keyboardVisible,false);
+	setKeyboardVisible(!keyboardVisible, false);
 	if(keyboardVisible)
 	{
 		anim->setEasingCurve(QEasingCurve::OutCubic);
@@ -558,7 +555,9 @@ void keyboardWidget::toggleKeyboard(void)
 		keyboardFrame->setGeometry(rect);
 		anim->setStartValue(rect);
 		anim->setEndValue(endRect);
-		connect(anim,&QPropertyAnimation::finished, [this]() { closeButton->setEnabled(true); });
+		connect(anim, &QPropertyAnimation::finished, [this]() {
+			closeButton->setEnabled(true);
+		});
 	}
 	else
 	{
@@ -569,8 +568,12 @@ void keyboardWidget::toggleKeyboard(void)
 		rect.setHeight(0);
 		anim->setEndValue(rect);
 		closeButton->setEnabled(false);
-		connect(anim,&QPropertyAnimation::finished,keyboardFrame,&QWidget::hide);
-		connect(anim,&QPropertyAnimation::finished, [this]() { closeButton->hide(); closeButton->setEnabled(true); closeButton->show(); }); // hide and then show to prevent geometry glitches
+		connect(anim, &QPropertyAnimation::finished, keyboardFrame, &QWidget::hide);
+		connect(anim, &QPropertyAnimation::finished, [this]() {
+			closeButton->hide();
+			closeButton->setEnabled(true);
+			closeButton->show();
+		}); // hide and then show to prevent geometry glitches
 	}
 	anim->start();
 }
@@ -578,7 +581,7 @@ void keyboardWidget::toggleKeyboard(void)
 /*! Sets keyboard visibility. */
 void keyboardWidget::setKeyboardVisible(bool visible, bool changeVisibility)
 {
-	settings.setValue("view/keyboardvisible",visible);
+	settings.setValue("view/keyboardvisible", visible);
 	if(visible)
 	{
 		closeButton->setIcon(QIcon(":/res/images/down.png"));
@@ -599,7 +602,7 @@ void keyboardWidget::changeEvent(QEvent *event)
 {
 	if(event->type() == QEvent::LanguageChange)
 	{
-		setKeyboardVisible(keyboardVisible,false);
+		setKeyboardVisible(keyboardVisible, false);
 		event->accept();
 	}
 	else

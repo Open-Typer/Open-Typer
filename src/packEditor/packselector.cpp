@@ -28,7 +28,7 @@ packSelector::packSelector(QWidget *parent) :
 {
 	ui->setupUi(this);
 	// Load built-in packs
-	QDirIterator it(":/res/configs/",QDirIterator::NoIteratorFlags);
+	QDirIterator it(":/res/configs/", QDirIterator::NoIteratorFlags);
 	int i;
 	QString item, current;
 	QStringList items;
@@ -37,15 +37,15 @@ packSelector::packSelector(QWidget *parent) :
 	{
 		item = it.next();
 		current = "";
-		for(i=14; i < item.count(); i++)
+		for(i = 14; i < item.count(); i++)
 			current += item[i];
 		rawItems += current;
 		items += builtinPacks::packName(current);
 	}
 	ui->selBox->addItems(items);
 	// Connect buttons
-	connect(ui->loadButton,SIGNAL(clicked()),this,SLOT(accept()));
-	connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(reject()));
+	connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(accept()));
+	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
 }
 
 /*! Destroys the packSelector object. */

@@ -74,7 +74,7 @@ void loadExerciseDialog::init(void)
 	else
 	{
 		// Set up targets
-		for(int i=0; i < m_targets.count(); i++)
+		for(int i = 0; i < m_targets.count(); i++)
 		{
 			QString name;
 			if(settings.value("server/fullmode", false).toBool())
@@ -181,7 +181,7 @@ QList<int> loadExerciseDialog::selectedTargets(void)
 {
 	QList<int> out;
 	auto keys = targets.keys();
-	for(int i=0; i < keys.count(); i++)
+	for(int i = 0; i < keys.count(); i++)
 	{
 		if(targets[keys[i]]->isChecked())
 			out += keys[i];
@@ -199,7 +199,7 @@ void loadExerciseDialog::verify(void)
 	{
 		int count = 0;
 		auto keys = targets.keys();
-		for(int i=0; i < keys.count(); i++)
+		for(int i = 0; i < keys.count(); i++)
 		{
 			if(targets[keys[i]]->isChecked())
 				count++;

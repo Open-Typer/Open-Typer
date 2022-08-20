@@ -34,20 +34,20 @@ exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 	QString finalText = "";
 	QStringList lines = inputText.split('\n');
 	int longestLineLength = 0;
-	for(int i=0; i < lines.count(); i++)
+	for(int i = 0; i < lines.count(); i++)
 	{
 		if(lines[i].count() > longestLineLength)
 			longestLineLength = lines[i].count();
 	}
-	QMap<int, QVariantMap*> mistakesMap;
-	for(int i=0; i < recordedMistakes.count(); i++)
+	QMap<int, QVariantMap *> mistakesMap;
+	for(int i = 0; i < recordedMistakes.count(); i++)
 		mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
 	int pos = 0;
-	for(int i=0; i < lines.count(); i++)
+	for(int i = 0; i < lines.count(); i++)
 	{
 		QString line = lines[i];
 		int lineMistakes = 0;
-		for(int i2=0; i2 <= line.count(); i2++)
+		for(int i2 = 0; i2 <= line.count(); i2++)
 		{
 			QString append;
 			if(i2 < line.count())
@@ -56,7 +56,7 @@ exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 				append = "";
 			if(mistakesMap.contains(pos))
 			{
-				QVariantMap* currentMistake = mistakesMap[pos];
+				QVariantMap *currentMistake = mistakesMap[pos];
 				if(!(currentMistake->contains("disable") && currentMistake->value("disable").toBool()))
 					lineMistakes++;
 				if(append == "")
@@ -210,15 +210,15 @@ void exportDialog::printResult(void)
 		double textScale = printerPtr->pageRect(QPrinter::DevicePixel).width() / double(document->size().width());
 		int fontHeight = QFontMetrics(font, printerPtr).height();
 		QStringList lines = exportHtml.split("<br>");
-		int relativeLine = 0, page = 0, fromPage = printerPtr->fromPage()-1, toPage = printerPtr->toPage()-1;
-		for(int i=0; i < lines.count(); i++)
+		int relativeLine = 0, page = 0, fromPage = printerPtr->fromPage() - 1, toPage = printerPtr->toPage() - 1;
+		for(int i = 0; i < lines.count(); i++)
 		{
 			int rangeEnd = toPage;
 			if(rangeEnd == -1)
-				rangeEnd = page+1;
-			if(fontHeight*textScale*(relativeLine+1) > printerPtr->pageRect(QPrinter::DevicePixel).height())
+				rangeEnd = page + 1;
+			if(fontHeight * textScale * (relativeLine + 1) > printerPtr->pageRect(QPrinter::DevicePixel).height())
 			{
-				if(((page+1 >= fromPage) && (page+1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
+				if(((page + 1 >= fromPage) && (page + 1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
 					printerPtr->newPage();
 				relativeLine = 0;
 				page++;
@@ -228,7 +228,7 @@ void exportDialog::printResult(void)
 			{
 				painter.resetTransform();
 				painter.scale(textScale, textScale);
-				painter.translate(0, fontHeight*relativeLine);
+				painter.translate(0, fontHeight * relativeLine);
 				document->drawContents(&painter);
 			}
 			relativeLine++;
@@ -236,13 +236,13 @@ void exportDialog::printResult(void)
 		painter.resetTransform();
 		double scale = printerPtr->pageRect(QPrinter::DevicePixel).width() / double(ui->exportTable->width());
 		painter.scale(scale, scale);
-		int tablePos = (printerPtr->pageRect(QPrinter::DevicePixel).height() - (ui->exportTable->height()*scale)) / scale;
+		int tablePos = (printerPtr->pageRect(QPrinter::DevicePixel).height() - (ui->exportTable->height() * scale)) / scale;
 		int rangeEnd = toPage;
 		if(rangeEnd == -1)
-			rangeEnd = page+1;
-		if(((fontHeight*relativeLine) / scale > tablePos) || (page == 0))
+			rangeEnd = page + 1;
+		if(((fontHeight * relativeLine) / scale > tablePos) || (page == 0))
 		{
-			if(((page+1 >= fromPage) && (page+1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
+			if(((page + 1 >= fromPage) && (page + 1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
 				printerPtr->newPage();
 			page++;
 		}

@@ -30,10 +30,10 @@ serverSetup::serverSetup(QWidget *parent) :
 	ui->gridLayout->setSizeConstraint(QLayout::SetFixedSize);
 	verify();
 	// Connections
-	connect(ui->adminNameEdit,&QLineEdit::textChanged,this,&serverSetup::verify);
-	connect(ui->adminPasswordEdit,&QLineEdit::textChanged,this,&serverSetup::verify);
-	connect(ui->repeatPasswordEdit,&QLineEdit::textChanged,this,&serverSetup::verify);
-	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(save()));
+	connect(ui->adminNameEdit, &QLineEdit::textChanged, this, &serverSetup::verify);
+	connect(ui->adminPasswordEdit, &QLineEdit::textChanged, this, &serverSetup::verify);
+	connect(ui->repeatPasswordEdit, &QLineEdit::textChanged, this, &serverSetup::verify);
+	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(save()));
 }
 
 /*! Destroys the serverSetup object. */

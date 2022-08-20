@@ -33,7 +33,7 @@
  */
 class textView : public QTextEdit
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit textView(QWidget *parent = nullptr);
 		~textView();

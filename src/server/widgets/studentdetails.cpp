@@ -61,12 +61,12 @@ studentDetails::studentDetails(int openClassID, int id, QWidget *parent) :
 	timeChart->setTitle(tr("Time"));
 	// Connections
 	connect(ui->backButton, &QPushButton::clicked, this, &studentDetails::backClicked);
-	connect(ui->packBox,SIGNAL(activated(int)),this,SLOT(refresh()));
-	connect(ui->lessonBox,SIGNAL(activated(int)),this,SLOT(refresh()));
-	connect(ui->sublessonBox,SIGNAL(activated(int)),this,SLOT(refresh()));
-	connect(ui->exerciseBox,SIGNAL(activated(int)),this,SLOT(refresh()));
-	connect(ui->refreshButton,SIGNAL(clicked()),this,SLOT(refresh()));
-	connect(ui->statsTable,SIGNAL(itemSelectionChanged()),SLOT(refreshTable()));
+	connect(ui->packBox, SIGNAL(activated(int)), this, SLOT(refresh()));
+	connect(ui->lessonBox, SIGNAL(activated(int)), this, SLOT(refresh()));
+	connect(ui->sublessonBox, SIGNAL(activated(int)), this, SLOT(refresh()));
+	connect(ui->exerciseBox, SIGNAL(activated(int)), this, SLOT(refresh()));
+	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
+	connect(ui->statsTable, SIGNAL(itemSelectionChanged()), SLOT(refreshTable()));
 	refresh();
 }
 
@@ -93,7 +93,7 @@ void studentDetails::refresh(void)
 	// Packs
 	ui->packBox->clear();
 	QStringList packs = dbMgr.studentPacks(classID, studentID);
-	for(int i=0; i < packs.count(); i++)
+	for(int i = 0; i < packs.count(); i++)
 		ui->packBox->addItem(builtinPacks::packName(packs[i]));
 	if(ui->packBox->count() == 0)
 	{
@@ -114,7 +114,7 @@ void studentDetails::refresh(void)
 	// Lessons
 	ui->lessonBox->clear();
 	QList<int> lessons = dbMgr.studentLessons(classID, studentID, packs[oldP]);
-	for(int i=0; i < lessons.count(); i++)
+	for(int i = 0; i < lessons.count(); i++)
 		ui->lessonBox->addItem(configParser::lessonTr(lessons[i]));
 	if(oldL == -1)
 		oldL = 0;
@@ -123,7 +123,7 @@ void studentDetails::refresh(void)
 	ui->sublessonBox->clear();
 	QList<int> sublessons = dbMgr.studentSublessons(classID, studentID, packs[oldP],
 		lessons[ui->lessonBox->currentIndex()]);
-	for(int i=0; i < sublessons.count(); i++)
+	for(int i = 0; i < sublessons.count(); i++)
 		ui->sublessonBox->addItem(configParser::sublessonName(sublessons[i]));
 	if(oldS == -1)
 		oldS = 0;
@@ -133,7 +133,7 @@ void studentDetails::refresh(void)
 	QList<int> exercises = dbMgr.studentExercises(classID, studentID, packs[oldP],
 		lessons[ui->lessonBox->currentIndex()],
 		sublessons[ui->sublessonBox->currentIndex()]);
-	for(int i=0; i < exercises.count(); i++)
+	for(int i = 0; i < exercises.count(); i++)
 		ui->exerciseBox->addItem(configParser::exerciseTr(exercises[i]));
 	if(oldE == -1)
 		oldE = 0;
@@ -173,18 +173,18 @@ void studentDetails::refreshTable(void)
 	ui->statsTable->setRowCount(count);
 	// Load entries
 	QTableWidgetItem *item;
-	for(i=0; i < count; i++)
+	for(i = 0; i < count; i++)
 	{
 		QVariantMap entry = entries[i];
 		// Speed
 		item = new QTableWidgetItem(QString::number(entry["speed"].toInt()));
-		ui->statsTable->setItem(i,0,item);
+		ui->statsTable->setItem(i, 0, item);
 		// Mistakes
 		item = new QTableWidgetItem(QString::number(entry["mistakes"].toInt()));
-		ui->statsTable->setItem(i,1,item);
+		ui->statsTable->setItem(i, 1, item);
 		// Time
 		item = new QTableWidgetItem(QString::number(entry["duration"].toInt()));
-		ui->statsTable->setItem(i,2,item);
+		ui->statsTable->setItem(i, 2, item);
 	}
 	// Refresh charts
 	refreshCharts();
@@ -196,14 +196,14 @@ void studentDetails::refreshCharts(void)
 	speedSeries->clear();
 	mistakesSeries->clear();
 	timeSeries->clear();
-	for(int i=0; i < ui->statsTable->rowCount(); i++)
+	for(int i = 0; i < ui->statsTable->rowCount(); i++)
 	{
 		// Speed
-		speedSeries->append(i,ui->statsTable->item(i,0)->text().toInt());
+		speedSeries->append(i, ui->statsTable->item(i, 0)->text().toInt());
 		// Mistakes
-		mistakesSeries->append(i,ui->statsTable->item(i,1)->text().toInt());
+		mistakesSeries->append(i, ui->statsTable->item(i, 1)->text().toInt());
 		// Time
-		timeSeries->append(i,ui->statsTable->item(i,2)->text().toInt());
+		timeSeries->append(i, ui->statsTable->item(i, 2)->text().toInt());
 	}
 	// Speed
 	speedChart->removeSeries(speedSeries);
@@ -223,7 +223,7 @@ void studentDetails::refreshCharts(void)
 	// Set theme
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QChart::ChartTheme theme;
-	if(settings.value("theme/theme","0").toInt() == 1)
+	if(settings.value("theme/theme", "0").toInt() == 1)
 		theme = QChart::ChartThemeDark;
 	else
 		theme = QChart::ChartThemeLight;

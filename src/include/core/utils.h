@@ -37,9 +37,9 @@ class stringUtils
 		static QString wordAt(QString str, int index);
 		static QList<QVariant> longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target);
 		static QString longestCommonSubsequence(QString source, QString target);
-		static QList<QVariantMap> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<QPair<QString,int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
-		static QList<QVariantMap> compareStrings(QString source, QString target, QVector<QPair<QString,int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
-		static QList<QVariantMap> findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
+		static QList<QVariantMap> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<QPair<QString, int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
+		static QList<QVariantMap> compareStrings(QString source, QString target, QVector<QPair<QString, int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
+		static QList<QVariantMap> findMistakes(QString exerciseText, QString input, QVector<QPair<QString, int>> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
 		static QList<QVariantMap> validateExercise(QString exerciseText, QString inputText, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords = nullptr, bool timed = false, int timeSecs = 0);
 		static QString addMistakes(QString exerciseText, QList<QVariantMap> *recordedMistakes);
 

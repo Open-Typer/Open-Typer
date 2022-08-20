@@ -32,7 +32,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	ui->mistakeLabel->setHorizontalAdjust(false);
 	ui->mistakeLabel->setParent(ui->inputLabel);
 	inputLabelLayout->addWidget(ui->mistakeLabel);
-	inputLabelLayout->setContentsMargins(0,0,0,0);
+	inputLabelLayout->setContentsMargins(0, 0, 0, 0);
 	inputLabelLayout->setAlignment(ui->mistakeLabel, Qt::AlignLeft | Qt::AlignTop);
 	QVBoxLayout *remainingTextAreaLayout = new QVBoxLayout(ui->remainingTextArea);
 	ui->keyboardFrame->setParent(ui->remainingTextArea);
@@ -48,10 +48,10 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	settings.setValue("main/clientdisabled", true);
 #endif // Q_OS_WASM
 	// Set language
-	if(settings.value("main/language","").toString() == "")
+	if(settings.value("main/language", "").toString() == "")
 		langMgr.setLanguage(-1);
 	else
-		langMgr.setLanguage(langMgr.boxItems.indexOf(settings.value("main/language","").toString()) - 1);
+		langMgr.setLanguage(langMgr.boxItems.indexOf(settings.value("main/language", "").toString()) - 1);
 	ui->retranslateUi(this);
 	// Opacity effect
 	QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
@@ -90,16 +90,23 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	// Settings menu
 	connect(ui->actionPreferences, &QAction::triggered, ui->optionsButton, &QPushButton::clicked);
 	// Help menu
-	connect(ui->actionDocs, &QAction::triggered, this, []() { QDesktopServices::openUrl(QUrl("https://open-typer.github.io/Open-Typer")); });
+	connect(ui->actionDocs, &QAction::triggered, this, []() {
+		QDesktopServices::openUrl(QUrl("https://open-typer.github.io/Open-Typer"));
+	});
 	connect(ui->actionAboutProgram, &QAction::triggered, this, &OpenTyper::showAboutDialog);
-	connect(ui->actionAboutQt, &QAction::triggered, this, [this]() { QMessageBox::aboutQt(this); });
+	connect(ui->actionAboutQt, &QAction::triggered, this, [this]() {
+		QMessageBox::aboutQt(this);
+	});
 	// Widgets
-	connect(ui->inputLabel, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(keyPress(QKeyEvent*)));
-	connect(ui->inputLabel, SIGNAL(keyReleased(QKeyEvent*)), this, SLOT(keyRelease(QKeyEvent*)));
+	connect(ui->inputLabel, SIGNAL(keyPressed(QKeyEvent *)), this, SLOT(keyPress(QKeyEvent *)));
+	connect(ui->inputLabel, SIGNAL(keyReleased(QKeyEvent *)), this, SLOT(keyRelease(QKeyEvent *)));
 	connect(ui->optionsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
 	connect(ui->openButton, &QPushButton::clicked, this, &OpenTyper::openExerciseFromFile);
 	connect(ui->repeatButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
-	connect(ui->closeCustomExButton, &QPushButton::clicked, this, [this](){ customLevelLoaded = false; repeatLevel(); });
+	connect(ui->closeCustomExButton, &QPushButton::clicked, this, [this]() {
+		customLevelLoaded = false;
+		repeatLevel();
+	});
 	connect(ui->nextButton, SIGNAL(clicked()), this, SLOT(nextLevel()));
 	connect(ui->previousButton, SIGNAL(clicked()), this, SLOT(previousLevel()));
 	connect(ui->lessonSelectionList, SIGNAL(activated(int)), this, SLOT(lessonSelectionListIndexChanged(int)));
@@ -167,7 +174,7 @@ OpenTyper::~OpenTyper()
 		serverPtr->deleteLater();
 #endif // Q_OS_WASM
 	if(testLoaded && uploadResult && client.available())
-		client.sendRequest("put", {"abortExercise"});
+		client.sendRequest("put", { "abortExercise" });
 	settings.setValue("main/windowState", saveState());
 	settings.setValue("main/windowGeometry", saveGeometry());
 }
@@ -193,12 +200,20 @@ void OpenTyper::refreshAll(void)
 				serverManager *serverManagerWidget = new serverManager(ui->serverFrame);
 				serverManagerWidget->setAttribute(Qt::WA_DeleteOnClose);
 				ui->serverFrameLayout->addWidget(serverManagerWidget);
-				connect(serverManagerWidget, &serverManager::widgetExpanded, this, [this]() { ui->paper->hide(); ui->controlFrame->setEnabled(false); ui->bottomPanel->setEnabled(false); });
-				connect(serverManagerWidget, &serverManager::widgetCollapsed, this, [this]() { ui->paper->show(); ui->controlFrame->setEnabled(true); ui->bottomPanel->setEnabled(true); });
+				connect(serverManagerWidget, &serverManager::widgetExpanded, this, [this]() {
+					ui->paper->hide();
+					ui->controlFrame->setEnabled(false);
+					ui->bottomPanel->setEnabled(false);
+				});
+				connect(serverManagerWidget, &serverManager::widgetCollapsed, this, [this]() {
+					ui->paper->show();
+					ui->controlFrame->setEnabled(true);
+					ui->bottomPanel->setEnabled(true);
+				});
 			}
 			else
 			{
-				serverManager *serverManagerWidget = (serverManager*) ui->serverFrameLayout->itemAt(0)->widget();
+				serverManager *serverManagerWidget = (serverManager *) ui->serverFrameLayout->itemAt(0)->widget();
 				serverManagerWidget->init();
 				serverManagerWidget->expand();
 				serverManagerWidget->collapse();
@@ -221,29 +236,35 @@ void OpenTyper::refreshAll(void)
 	}
 #endif // Q_OS_WASM
 	// Config file (lesson pack) name
-	QString configName = settings.value("main/configfile","").toString();
+	QString configName = settings.value("main/configfile", "").toString();
 	if(configName == "")
 	{
 		firstRun = true;
 		loadTheme();
 		initialSetup *dialog = new initialSetup;
 		dialog->show();
-		QMetaObject::invokeMethod(this,"hide",Qt::QueuedConnection);
+		QMetaObject::invokeMethod(this, "hide", Qt::QueuedConnection);
 #ifdef Q_OS_WASM
-		connect(dialog, &QDialog::accepted, this, [this]() { show(); refreshAll(); } );
+		connect(dialog, &QDialog::accepted, this, [this]() {
+			show();
+			refreshAll();
+		});
 #else
-		connect(dialog, &QDialog::accepted, this, [this]() { showMaximized(); refreshAll(); } );
+		connect(dialog, &QDialog::accepted, this, [this]() {
+			showMaximized();
+			refreshAll();
+		});
 #endif // Q_OS_WASM
 		return;
 	}
 	bool packChanged = (configName != oldConfigName);
 	oldConfigName = configName;
 	// Custom pack
-	customConfig = settings.value("main/customconfig","false").toBool();
+	customConfig = settings.value("main/customconfig", "false").toBool();
 	// Space new line
-	spaceNewline = settings.value("main/spacenewline","true").toBool();
+	spaceNewline = settings.value("main/spacenewline", "true").toBool();
 	// Error penalty
-	errorPenalty = settings.value("main/errorpenalty","10").toInt();
+	errorPenalty = settings.value("main/errorpenalty", "10").toInt();
 	// Load config and start
 	if(packChanged)
 	{
@@ -258,7 +279,7 @@ void OpenTyper::refreshAll(void)
 			// language_COUNTRY-VARIANT-SUFFIX
 			QString localeStr = "", variant = "";
 			bool localeRead = false;
-			for(int i=0; i < publicConfigName.count(); i++)
+			for(int i = 0; i < publicConfigName.count(); i++)
 			{
 				if(publicConfigName[i] == '-')
 				{
@@ -276,7 +297,7 @@ void OpenTyper::refreshAll(void)
 				}
 			}
 			QLocale locale(localeStr);
-			if(ui->keyboardFrame->loadLayout(locale.language(),locale.country(),variant))
+			if(ui->keyboardFrame->loadLayout(locale.language(), locale.country(), variant))
 				ui->keyboardFrame->show();
 			else
 				ui->keyboardFrame->hide();
@@ -290,7 +311,7 @@ void OpenTyper::refreshAll(void)
 	else
 	{
 		updateLessonList();
-		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
+		ui->lessonSelectionList->setCurrentIndex(currentLesson - 1);
 	}
 	// Client
 	updateStudent();
@@ -304,7 +325,7 @@ void OpenTyper::refreshAll(void)
  */
 QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
 {
-	customLevelLoaded=false;
+	customLevelLoaded = false;
 	QString configPath = "";
 	if(customConfig)
 		configPath = configName;
@@ -323,7 +344,7 @@ QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
 			openSuccess = parser.open(configPath);
 		if(!openSuccess && !bufferOpened)
 		{
-			settings.setValue("main/configfile","");
+			settings.setValue("main/configfile", "");
 			refreshAll();
 			return QString();
 		}
@@ -335,7 +356,7 @@ QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
 	if(customConfig)
 		configName = configPath;
 	// Save selected config to settings
-	settings.setValue("main/configfile",configName);
+	settings.setValue("main/configfile", configName);
 	if(customConfig)
 	{
 		QFile configQFile(configName);
@@ -358,7 +379,7 @@ QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
 void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 {
 	// Update selected lesson
-	ui->lessonSelectionList->setCurrentIndex(lessonID-1);
+	ui->lessonSelectionList->setCurrentIndex(lessonID - 1);
 	// Get sublesson count
 	sublessonCount = parser.sublessonCount(lessonID);
 	// Check if -1 (last sublesson in current lesson) was passed
@@ -366,37 +387,37 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 		sublessonID = sublessonCount;
 	// Update sublesson and exercise lists
 	// This must happen before level loading!
-	loadLesson(lessonID,sublessonID);
+	loadLesson(lessonID, sublessonID);
 	// Check if -1 (last level in current sublesson) was passed
 	if(levelID == -1)
-		levelID = parser.exerciseCount(lessonID,sublessonID+sublessonListStart);
+		levelID = parser.exerciseCount(lessonID, sublessonID + sublessonListStart);
 	// Load length extension
 	if(!customLevelLoaded)
-		levelLengthExtension = parser.exerciseLineLength(lessonID,sublessonID+sublessonListStart,levelID);
+		levelLengthExtension = parser.exerciseLineLength(lessonID, sublessonID + sublessonListStart, levelID);
 	// Load level text
 	if(customLevelLoaded)
 		level = customLevel;
 	else
 		level = parser.exerciseText(lessonID,
-			sublessonID+sublessonListStart,
+			sublessonID + sublessonListStart,
 			levelID);
 	if(uploadResult)
 	{
 		if((studentUsername != "") || (!client.fullMode() && client.isPaired()))
-			client.sendRequest("put", {"abortExercise"});
+			client.sendRequest("put", { "abortExercise" });
 		uploadResult = false;
 	}
 	// Get lesson count
 	lessonCount = parser.lessonCount();
 	// Get level count (in current lesson)
-	levelCount = parser.exerciseCount(lessonID,sublessonID+sublessonListStart);
+	levelCount = parser.exerciseCount(lessonID, sublessonID + sublessonListStart);
 	// Update level list
 	loadSublesson(levelID);
 	// Make lesson, sublesson and level info public
-	currentLesson=lessonID;
-	currentSublesson=sublessonID;
-	currentAbsoluteSublesson=sublessonID+sublessonListStart;
-	currentLevel=levelID;
+	currentLesson = lessonID;
+	currentSublesson = sublessonID;
+	currentAbsoluteSublesson = sublessonID + sublessonListStart;
+	currentLevel = levelID;
 	// Init level
 	levelFinalInit();
 }
@@ -408,7 +429,7 @@ void OpenTyper::updateLessonList(void)
 	QStringList lessons;
 	QString _lessonDesc;
 	int i, count = parser.lessonCount();
-	for(i=1; i <= count; i++)
+	for(i = 1; i <= count; i++)
 	{
 		_lessonDesc = configParser::parseDesc(parser.lessonDesc(i));
 		if(_lessonDesc == "")
@@ -426,20 +447,20 @@ void OpenTyper::loadLesson(int lessonID, int sublessonID)
 	ui->sublessonSelectionList->clear();
 	QStringList sublessons;
 	sublessonListStart = 0;
-	int i, i2=0;
-	for(i=1; i <= sublessonCount+i2; i++)
+	int i, i2 = 0;
+	for(i = 1; i <= sublessonCount + i2; i++)
 	{
-		if(parser.exerciseCount(lessonID,i) > 0)
+		if(parser.exerciseCount(lessonID, i) > 0)
 			sublessons += configParser::sublessonName(i);
 		else
 		{
 			i2++;
-			if(sublessonID+i2 > i)
+			if(sublessonID + i2 > i)
 				sublessonListStart++;
 		}
 	}
 	ui->sublessonSelectionList->addItems(sublessons);
-	ui->sublessonSelectionList->setCurrentIndex(sublessonID-1);
+	ui->sublessonSelectionList->setCurrentIndex(sublessonID - 1);
 }
 
 /*! Updates list of exercises. */
@@ -448,10 +469,10 @@ void OpenTyper::loadSublesson(int levelID)
 	// Exercises
 	ui->levelSelectionList->clear();
 	QStringList levels;
-	for(int i=1; i <= levelCount; i++)
+	for(int i = 1; i <= levelCount; i++)
 		levels += configParser::exerciseTr(i);
 	ui->levelSelectionList->addItems(levels);
-	ui->levelSelectionList->setCurrentIndex(levelID-1);
+	ui->levelSelectionList->setCurrentIndex(levelID - 1);
 }
 
 /*!
@@ -469,20 +490,20 @@ void OpenTyper::levelFinalInit(bool updateClient)
 		level += '\n';
 	ui->exerciseChecksFrame->setEnabled(true);
 	preview = false;
-	currentLine=0;
-	levelPos=0;
-	displayPos=0;
+	currentLine = 0;
+	levelPos = 0;
+	displayPos = 0;
 	absolutePos = 0;
 	linePos = 0;
-	levelMistakes=0;
-	totalHits=0;
+	levelMistakes = 0;
+	totalHits = 0;
 	recordedCharacters.clear();
 	recordedMistakes.clear();
-	deadKeys=0;
-	levelInProgress=false;
-	lastTime=0;
-	mistake=false;
-	ignoreMistakeLabelAppend=false;
+	deadKeys = 0;
+	levelInProgress = false;
+	lastTime = 0;
+	mistake = false;
+	ignoreMistakeLabelAppend = false;
 	mistakeTextHtml = "";
 	mistakeLabelHtml = "";
 	ui->mistakeLabel->setHtml(mistakeLabelHtml);
@@ -515,24 +536,24 @@ void OpenTyper::updateText(void)
 	ui->textSeparationLine->show();
 	ui->remainingTextArea->show();
 	ui->exportButton->hide();
-	displayLevel = configParser::initExercise(level,levelLengthExtension);
+	displayLevel = configParser::initExercise(level, levelLengthExtension);
 	lineCount = displayLevel.count('\n');
 	// Process exercise text
-	finalDisplayLevel = configParser::initExercise(level,levelLengthExtension,false,currentLine);
+	finalDisplayLevel = configParser::initExercise(level, levelLengthExtension, false, currentLine);
 	QString currentLineText = "";
 	QString remainingText = "";
 	int i, line = 0;
-	for(i=0; i < finalDisplayLevel.count(); i++)
+	for(i = 0; i < finalDisplayLevel.count(); i++)
 	{
 		remainingText += finalDisplayLevel[i];
-		if((finalDisplayLevel[i] == '\n') || (i+1 >= finalDisplayLevel.count()))
+		if((finalDisplayLevel[i] == '\n') || (i + 1 >= finalDisplayLevel.count()))
 		{
 			if(line == 0)
 			{
 				currentLineText = remainingText;
 				remainingText = "";
-				if(currentLineText[currentLineText.count()-1] == '\n')
-					currentLineText.remove(currentLineText.count()-1,1);
+				if(currentLineText[currentLineText.count() - 1] == '\n')
+					currentLineText.remove(currentLineText.count() - 1, 1);
 			}
 			line++;
 		}
@@ -540,7 +561,7 @@ void OpenTyper::updateText(void)
 	ui->levelCurrentLineLabel->setText(currentLineText);
 	ui->centralwidget->layout()->activate();
 	ui->levelLabel->setText(remainingText);
-	((QGraphicsOpacityEffect*)ui->levelLabel->graphicsEffect())->setOpacity(0.5);
+	((QGraphicsOpacityEffect *) ui->levelLabel->graphicsEffect())->setOpacity(0.5);
 	updateFont();
 	if(ui->hideTextCheckBox->isChecked())
 	{
@@ -557,7 +578,7 @@ void OpenTyper::updateText(void)
  */
 void OpenTyper::repeatLevel(void)
 {
-	startLevel(currentLesson,currentSublesson,currentLevel);
+	startLevel(currentLesson, currentSublesson, currentLevel);
 }
 
 /*! Connected from nextButton.\n
@@ -566,20 +587,20 @@ void OpenTyper::repeatLevel(void)
  */
 void OpenTyper::nextLevel(void)
 {
-	customLevelLoaded=false;
+	customLevelLoaded = false;
 	if(currentLevel == levelCount)
 	{
 		if(currentSublesson == sublessonCount)
 		{
 			if(currentLesson == lessonCount)
-				currentLesson=1;
+				currentLesson = 1;
 			else
 				currentLesson++;
-			currentSublesson=1;
+			currentSublesson = 1;
 		}
 		else
 			currentSublesson++;
-		currentLevel=1;
+		currentLevel = 1;
 	}
 	else
 		currentLevel++;
@@ -592,7 +613,7 @@ void OpenTyper::nextLevel(void)
 	 */
 void OpenTyper::previousLevel(void)
 {
-	customLevelLoaded=false;
+	customLevelLoaded = false;
 	if(currentLevel == 1)
 	{
 		if(currentSublesson == 1)
@@ -601,11 +622,11 @@ void OpenTyper::previousLevel(void)
 				currentLesson = lessonCount;
 			else
 				currentLesson--;
-			currentSublesson=-1;
+			currentSublesson = -1;
 		}
 		else
 			currentSublesson--;
-		currentLevel=-1;
+		currentLevel = -1;
 	}
 	else
 		currentLevel--;
@@ -622,7 +643,10 @@ void OpenTyper::openOptions(void)
 	optionsWin->init();
 	optionsWin->open();
 	optionsWin->setWindowModality(Qt::WindowModal);
-	connect(optionsWin, &QDialog::finished, this, [this]() { show(); refreshAll(); });
+	connect(optionsWin, &QDialog::finished, this, [this]() {
+		show();
+		refreshAll();
+	});
 }
 
 /*!
@@ -635,7 +659,7 @@ void OpenTyper::openStudentOptions(void)
 {
 	studentOptions *dialog = new studentOptions(this);
 	dialog->setWindowModality(Qt::WindowModal);
-	connect(dialog, &QDialog::accepted, this, [dialog,this]() {
+	connect(dialog, &QDialog::accepted, this, [dialog, this]() {
 		studentUsername = dialog->username;
 		studentPassword = dialog->password;
 		updateStudent();
@@ -657,11 +681,11 @@ void OpenTyper::updateStudent(void)
 		ui->actionStats->setEnabled(enableStats);
 		return;
 	}
-	QStringList response = client.sendRequest("get",{"username"});
+	QStringList response = client.sendRequest("get", { "username" });
 	if(response[0] == "ok")
 	{
 		if(studentUsername == "")
-			client.sendRequest("logout",{studentUsername});
+			client.sendRequest("logout", { studentUsername });
 		else
 		{
 			QString username = response[1];
@@ -676,7 +700,7 @@ void OpenTyper::updateStudent(void)
 	{
 		if(studentUsername != "")
 		{
-			response = client.sendRequest("auth",{studentUsername,studentPassword});
+			response = client.sendRequest("auth", { studentUsername, studentPassword });
 			if(response[0] == "ok")
 			{
 				updateStudent();
@@ -700,7 +724,7 @@ void OpenTyper::updateStudent(void)
  */
 void OpenTyper::lessonSelectionListIndexChanged(int index)
 {
-	currentLesson = index+1;
+	currentLesson = index + 1;
 	currentSublesson = 1;
 	currentLevel = 1;
 	customLevelLoaded = false;
@@ -712,7 +736,7 @@ void OpenTyper::lessonSelectionListIndexChanged(int index)
  */
 void OpenTyper::sublessonSelectionListIndexChanged(int index)
 {
-	currentSublesson = index+1;
+	currentSublesson = index + 1;
 	currentLevel = 1;
 	customLevelLoaded = false;
 	repeatLevel();
@@ -723,7 +747,7 @@ void OpenTyper::sublessonSelectionListIndexChanged(int index)
  */
 void OpenTyper::levelSelectionListIndexChanged(int index)
 {
-	currentLevel = index+1;
+	currentLevel = index + 1;
 	customLevelLoaded = false;
 	repeatLevel();
 }
@@ -751,7 +775,7 @@ void OpenTyper::openExerciseFromFile(void)
 		}
 	};
 #ifdef Q_OS_WASM
-	QFileDialog::getOpenFileContent(QString(),  fileContentReady);
+	QFileDialog::getOpenFileContent(QString(), fileContentReady);
 #else
 	QString fileName = QFileDialog::getOpenFileName(this, QString(), QString(), tr("Text files") + " (*.txt)" + ";;" + tr("All files") + " (*)");
 	if(fileName != "")
@@ -769,7 +793,7 @@ void OpenTyper::loadText(QByteArray text, bool includeNewLines, bool updateClien
 	level = "";
 	QBuffer in(&text);
 	in.open(QBuffer::ReadOnly | QBuffer::Text);
-	while (!in.atEnd())
+	while(!in.atEnd())
 	{
 		QString line = QString(in.readLine()).remove('\n');
 		if(level == "")
@@ -783,7 +807,7 @@ void OpenTyper::loadText(QByteArray text, bool includeNewLines, bool updateClien
 		}
 	}
 	customLevel = level;
-	customLevelLoaded=true;
+	customLevelLoaded = true;
 	levelFinalInit(updateClient);
 }
 
@@ -806,12 +830,13 @@ void OpenTyper::loadErrorWords(void)
 	usedWords.clear();
 	outputWords.clear();
 	int index = 0;
-	for(int i=0; i < wordCount; i++)
+	for(int i = 0; i < wordCount; i++)
 	{
 		QString word;
 		if(i % 5 == 0)
 		{
-			do {
+			do
+			{
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 				index = QRandomGenerator::global()->bounded(0, errorWords.count());
 #else
@@ -834,7 +859,7 @@ void OpenTyper::loadReversedText(void)
 {
 	QString oldText = configParser::initText(level);
 	QString newText = "";
-	for(int i = oldText.count()-1; i >= 0; i--)
+	for(int i = oldText.count() - 1; i >= 0; i--)
 		newText += level[i];
 	loadText(newText.toUtf8(), true);
 }
@@ -850,7 +875,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 	if((input.count() < level.count()) && (event->key() == Qt::Key_Shift))
 	{
 		QPoint keyPos = ui->keyboardFrame->findKey(QString(displayLevel[displayPos]));
-		keyboardWidget::Finger finger = ui->keyboardFrame->keyFinger(keyPos.x(),keyPos.y());
+		keyboardWidget::Finger finger = ui->keyboardFrame->keyFinger(keyPos.x(), keyPos.y());
 		if(keyboardWidget::fingerHand(finger) == 0)
 			highlightID = -2;
 	}
@@ -871,7 +896,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		ui->exerciseChecksFrame->setEnabled(false);
 		levelTimer.start();
 		secLoop->start(500);
-		levelInProgress=true;
+		levelInProgress = true;
 	}
 	QString keyText = event->text();
 	if((keyText == "'") && (displayLevel[displayPos] == QString("‘")))
@@ -882,8 +907,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		keyText = "\n";
 	QString convertedKeyText = keyText.toHtmlEscaped().replace(" ", "&nbsp;");
 	convertedKeyText.replace(" ", "&nbsp;");
-	bool correctChar = (( ((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) ||
-		(((displayLevel[displayPos] != '\n') || (spaceNewline && !ui->correctMistakesCheckBox->isChecked())) && (keyText == level[levelPos]))) && !mistake);
+	bool correctChar = ((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || (spaceNewline && !ui->correctMistakesCheckBox->isChecked())) && (keyText == level[levelPos]))) && !mistake);
 	if(correctChar || !ui->correctMistakesCheckBox->isChecked())
 	{
 		if(!mistake && ignoreMistakeLabelAppend)
@@ -893,12 +917,12 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		}
 		if(event->key() == Qt::Key_Backspace)
 		{
-			input = input.remove(input.count()-1, 1);
+			input = input.remove(input.count() - 1, 1);
 			QString plainText = displayInput;
 			if(plainText.count() == 0)
 			{
 				if(currentLine == 0)
-					displayInput = plainText.remove(plainText.count()-1, 1);
+					displayInput = plainText.remove(plainText.count() - 1, 1);
 				else if(input.count() > 0)
 				{
 					displayInput = input.split('\n').last();
@@ -908,18 +932,18 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				}
 			}
 			else
-				displayInput = plainText.remove(plainText.count()-1, 1);
+				displayInput = plainText.remove(plainText.count() - 1, 1);
 			if(input.count() > 0)
 			{
 				levelPos--;
 				displayPos--;
 				absolutePos--;
 				linePos--;
-				recordedCharacters.remove(recordedCharacters.count()-1);
+				recordedCharacters.remove(recordedCharacters.count() - 1);
 			}
 			plainText = QTextDocumentFragment::fromHtml(inputTextHtml).toPlainText();
-			inputTextHtml = plainText.remove(plainText.count()-1, 1).toHtmlEscaped().replace(" ", "&nbsp;");
-			inputTextHtml.replace("\n","<br>");
+			inputTextHtml = plainText.remove(plainText.count() - 1, 1).toHtmlEscaped().replace(" ", "&nbsp;");
+			inputTextHtml.replace("\n", "<br>");
 		}
 		else
 		{
@@ -935,15 +959,15 @@ void OpenTyper::keyPress(QKeyEvent *event)
 				currentLine++;
 				ignoreMistakeLabelAppend = false;
 				updateText();
-				if((currentMode == 1) && (currentLine >= lineCount-1))
+				if((currentMode == 1) && (currentLine >= lineCount - 1))
 				{
-					currentLine=0;
+					currentLine = 0;
 					updateText();
-					levelPos=-1;
-					displayPos=-1;
+					levelPos = -1;
+					displayPos = -1;
 					linePos = -1;
-					deadKeys=0;
-					mistake=false;
+					deadKeys = 0;
+					mistake = false;
 					mistakeLabelHtml = "";
 					if(ui->hideTextCheckBox->isChecked())
 						ui->mistakeLabel->setHtml(mistakeTextHtml);
@@ -959,7 +983,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			else
 			{
 				if(ignoreMistakeLabelAppend)
-					ignoreMistakeLabelAppend=false;
+					ignoreMistakeLabelAppend = false;
 				else
 				{
 					QString mistakeLabelAppend = keyText == "\n" ? "<br>" : "&nbsp;";
@@ -981,7 +1005,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			// Count dead keys
 			charHits += deadKeys;
 			totalHits += charHits;
-			recordedCharacters += QPair<QString,int>(keyText, charHits);
+			recordedCharacters += QPair<QString, int>(keyText, charHits);
 			deadKeys = 0;
 		}
 	}
@@ -992,8 +1016,8 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			deadKeys = 0;
 			if(event->key() == Qt::Key_Backspace)
 			{
-				mistake=false;
-				ignoreMistakeLabelAppend=true;
+				mistake = false;
+				ignoreMistakeLabelAppend = true;
 			}
 		}
 		else
@@ -1001,13 +1025,13 @@ void OpenTyper::keyPress(QKeyEvent *event)
 			if(!keyboardUtils::isSpecialKey(event))
 			{
 				QList<QVariantMap> mistakesToRemove;
-				for(int i=0; i < recordedMistakes.count(); i++)
+				for(int i = 0; i < recordedMistakes.count(); i++)
 				{
 					if(recordedMistakes[i]["pos"] == absolutePos)
 						mistakesToRemove += recordedMistakes[i];
 				}
 				levelMistakes -= mistakesToRemove.count();
-				for(int i=0; i < mistakesToRemove.count(); i++)
+				for(int i = 0; i < mistakesToRemove.count(); i++)
 					recordedMistakes.removeAll(mistakesToRemove[i]);
 				QVariantMap currentMistake;
 				currentMistake["pos"] = absolutePos;
@@ -1033,7 +1057,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 					ui->inputLabel->setHtml(displayInput.toHtmlEscaped().replace(" ", "&nbsp;").replace("\n", "<br>") + "<span style='color: red;'>" + errorAppend + "</span>");
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
-				mistake=true;
+				mistake = true;
 				QString errorWord = stringUtils::wordAt(level, levelPos);
 				if((errorWord != "") && !errorWords.contains(errorWord))
 					errorWords += errorWord;
@@ -1061,15 +1085,15 @@ void OpenTyper::keyPress(QKeyEvent *event)
 		ui->mistakeLabel->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
 	else
 		ui->mistakeLabel->moveCursor(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
-	ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+	ui->inputLabel->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
 	ui->typingSpace->ensureWidgetVisible(ui->inputLabel);
-	if(((displayPos >= displayLevel.count()) && ui->correctMistakesCheckBox->isChecked()) || (currentLine >= lineCount+1))
+	if(((displayPos >= displayLevel.count()) && ui->correctMistakesCheckBox->isChecked()) || (currentLine >= lineCount + 1))
 	{
-		if(currentLine >= lineCount+1)
-			input.remove(input.count()-1, 1);
+		if(currentLine >= lineCount + 1)
+			input.remove(input.count() - 1, 1);
 		keyRelease(event);
-		lastTime = levelTimer.elapsed()/1000;
-		lastTimeF = levelTimer.elapsed()/1000.0;
+		lastTime = levelTimer.elapsed() / 1000;
+		lastTimeF = levelTimer.elapsed() / 1000.0;
 		endExercise(true, true, false, true, true);
 	}
 }
@@ -1077,7 +1101,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 /*! Ends the exercise by (optionally) saving the results and showing the levelSummary dialog. */
 void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes)
 {
-	levelInProgress=false;
+	levelInProgress = false;
 	input.replace("‘", "'");
 	displayLevel.replace("‘", "'");
 	if(ui->correctMistakesCheckBox->isChecked())
@@ -1088,21 +1112,21 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		netHits = std::max(0, totalHits - (levelMistakes * errorPenalty));
 		ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 	}
-	QMap<int, QVariantMap*> mistakesMap;
-	for(int i=0; i < recordedMistakes.count(); i++)
+	QMap<int, QVariantMap *> mistakesMap;
+	for(int i = 0; i < recordedMistakes.count(); i++)
 		mistakesMap[recordedMistakes[i]["pos"].toInt()] = &recordedMistakes[i];
 	inputTextHtml = "";
 	QStringList lines = input.split("\n");
 	int pos = 0, delta = 0;
 	mistakeTextHtml = "";
-	for(int i=0; i < lines.count(); i++)
+	for(int i = 0; i < lines.count(); i++)
 	{
 		QString addLine = lines[i].toHtmlEscaped().replace(" ", "&nbsp;");
 		inputTextHtml += "<span style=\"color: rgba(0, 0, 0, 0);\">" + addLine + "</span><br>";
 		// Add line with correct characters
 		int oldPos = pos;
 		int count = lines[i].count();
-		for(int j=0; j <= lines[i].count(); j++)
+		for(int j = 0; j <= lines[i].count(); j++)
 		{
 			QString inputChar;
 			if(j < count)
@@ -1145,7 +1169,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		// Add line with underlined mistakes
 		mistakeTextHtml += "<br>";
 		pos = oldPos;
-		for(int j=0; j <= count; j++)
+		for(int j = 0; j <= count; j++)
 		{
 			QString append = "&nbsp;";
 			if(mistakesMap.contains(pos))
@@ -1174,22 +1198,22 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		mistakeTextHtml += "<br>";
 		pos++;
 	}
-	netHits = std::max(0, totalHits - levelMistakes * settings.value("main/errorpenalty","10").toInt());
-	int netHitsPerMinute = netHits*(60/(levelTimer.elapsed()/1000.0));
-	int grossHitsPerMinute = totalHits*(60/(levelTimer.elapsed()/1000.0));
-	int time = levelTimer.elapsed()/1000;
+	netHits = std::max(0, totalHits - levelMistakes * settings.value("main/errorpenalty", "10").toInt());
+	int netHitsPerMinute = netHits * (60 / (levelTimer.elapsed() / 1000.0));
+	int grossHitsPerMinute = totalHits * (60 / (levelTimer.elapsed() / 1000.0));
+	int time = levelTimer.elapsed() / 1000;
 	if(!customLevelLoaded && !customConfig && ui->correctMistakesCheckBox->isChecked())
 	{
 		if(studentUsername != "")
 		{
 			updateStudent();
 			client.sendRequest("put",
-				{"result",publicConfigName.toUtf8(),QByteArray::number(currentLesson),QByteArray::number(currentAbsoluteSublesson),QByteArray::number(currentLevel),
-				QByteArray::number(grossHitsPerMinute),QByteArray::number(levelMistakes),QByteArray::number(time)});
+				{ "result", publicConfigName.toUtf8(), QByteArray::number(currentLesson), QByteArray::number(currentAbsoluteSublesson), QByteArray::number(currentLevel),
+					QByteArray::number(grossHitsPerMinute), QByteArray::number(levelMistakes), QByteArray::number(time) });
 		}
 		else
-			historyParser::addHistoryEntry(publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,
-				{QString::number(grossHitsPerMinute),QString::number(levelMistakes),QString::number(time)});
+			historyParser::addHistoryEntry(publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel,
+				{ QString::number(grossHitsPerMinute), QString::number(levelMistakes), QString::number(time) });
 	}
 	if(testLoaded)
 	{
@@ -1203,15 +1227,15 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		if(uploadResult && ((studentUsername != "") || (!client.fullMode() && client.isPaired())))
 		{
 			updateStudent();
-			QStringList list = {"recordedCharacters"};
-			for(int i=0; i < recordedCharacters.count(); i++)
+			QStringList list = { "recordedCharacters" };
+			for(int i = 0; i < recordedCharacters.count(); i++)
 			{
 				QPair<QString, int> character = recordedCharacters[i];
 				list += character.first;
 				list += QString::number(character.second);
 			}
 			client.sendRequest("put", list);
-			client.sendRequest("put", {"testResult", input, QString::number(lastTimeF)});
+			client.sendRequest("put", { "testResult", input, QString::number(lastTimeF) });
 		}
 		ui->controlFrame->setEnabled(true);
 		ui->menuBar->setEnabled(true);
@@ -1227,7 +1251,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 	if(showTotalHits)
 		msgBox->setTotalHits(totalHits);
 	if(showMistakes)
-	msgBox->setMistakes(levelMistakes);
+		msgBox->setMistakes(levelMistakes);
 	msgBox->setWindowModality(Qt::WindowModal);
 	connect(msgBox, &QDialog::accepted, this, [this]() {
 		changeMode(0);
@@ -1239,8 +1263,8 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
 		ui->mistakeLabel->setHtml(mistakeTextHtml);
 		ui->mistakeLabel->setFixedWidth(ui->mistakeLabel->document()->size().width());
 		// Move cursor to the end
-		ui->mistakeLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
-		ui->inputLabel->moveCursor(QTextCursor::End,QTextCursor::MoveAnchor);
+		ui->mistakeLabel->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
+		ui->inputLabel->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
 		// Hide other widgets
 		ui->currentLineArea->hide();
 		ui->textSeparationLine->hide();
@@ -1280,18 +1304,18 @@ void OpenTyper::updateCurrentTime(void)
 {
 	int time;
 	if(levelInProgress)
-		time = levelTimer.elapsed()/1000;
+		time = levelTimer.elapsed() / 1000;
 	else
 		time = lastTime;
 	if(currentMode == 1)
 	{
 		QTime limitTime;
 		if(timedExStarted)
-			limitTime.setHMS(timedExHours,timedExMinutes,timedExSeconds);
+			limitTime.setHMS(timedExHours, timedExMinutes, timedExSeconds);
 		else
-			limitTime.setHMS(0,0,3);
-		QTime currentTime = limitTime.addSecs(time*(-1));
-		if((currentTime > limitTime) || (currentTime.hour()+currentTime.minute()+currentTime.second() == 0))
+			limitTime.setHMS(0, 0, 3);
+		QTime currentTime = limitTime.addSecs(time * (-1));
+		if((currentTime > limitTime) || (currentTime.hour() + currentTime.minute() + currentTime.second() == 0))
 		{
 			if(timedExStarted)
 			{
@@ -1299,7 +1323,7 @@ void OpenTyper::updateCurrentTime(void)
 				{
 					ui->timedExCountdownLabel->hide();
 					lastTime = QTime(0, 0, 0).secsTo(limitTime);
-					lastTimeF = QTime(0, 0, 0).msecsTo(limitTime)/1000.0;
+					lastTimeF = QTime(0, 0, 0).msecsTo(limitTime) / 1000.0;
 					endExercise(true, true, true, true, true);
 				}
 			}
@@ -1308,7 +1332,7 @@ void OpenTyper::updateCurrentTime(void)
 				timedExStarted = true;
 				levelTimer.start();
 				timedExTimer.setSingleShot(true);
-				limitTime.setHMS(timedExHours,timedExMinutes,timedExSeconds);
+				limitTime.setHMS(timedExHours, timedExMinutes, timedExSeconds);
 				timedExTimer.start(QTime(0, 0, 0).msecsTo(limitTime));
 				secLoop->start(500);
 				ui->timedExTime->show();
@@ -1317,12 +1341,12 @@ void OpenTyper::updateCurrentTime(void)
 		}
 		if(timedExStarted)
 		{
-			time = levelTimer.elapsed()/1000;
-			limitTime.setHMS(timedExHours,timedExMinutes,timedExSeconds);
+			time = levelTimer.elapsed() / 1000;
+			limitTime.setHMS(timedExHours, timedExMinutes, timedExSeconds);
 			if(levelInProgress)
-				ui->timedExTime->setTime(limitTime.addSecs(time*(-1)));
+				ui->timedExTime->setTime(limitTime.addSecs(time * (-1)));
 			else
-				ui->timedExTime->setTime(QTime(0,0,0));
+				ui->timedExTime->setTime(QTime(0, 0, 0));
 		}
 		else
 			ui->timedExCountdownLabel->setText(QString::number(currentTime.second()));
@@ -1357,16 +1381,16 @@ void OpenTyper::updateFont(void)
 	QTextDocument *tmpDoc = ui->levelCurrentLineLabel->document()->clone(this);
 	ui->currentLineArea->setFixedSize(tmpDoc->size().toSize() + QSize(scrollBarWidth, 0));
 	tmpDoc->setPlainText(displayLevel);
-	ui->typingSpace->setFixedWidth(std::max(tmpDoc->size().toSize().width()+12,
-		std::max(tmpDoc->size().toSize().width()+12,
-		ui->keyboardFrame->width()+12)));
+	ui->typingSpace->setFixedWidth(std::max(tmpDoc->size().toSize().width() + 12,
+		std::max(tmpDoc->size().toSize().width() + 12,
+			ui->keyboardFrame->width() + 12)));
 	ui->typingSpace->setMinimumHeight(0);
 	ui->typingSpace->setMaximumHeight(ui->inputLabel->document()->size().height() * 2);
 	if(!preview)
 		ui->typingSpace->setMaximumWidth(QWIDGETSIZE_MAX);
 	else
 	{
-		ui->typingSpace->setFixedWidth(ui->inputLabel->document()->size().width() + scrollBarWidth*2);
+		ui->typingSpace->setFixedWidth(ui->inputLabel->document()->size().width() + scrollBarWidth * 2);
 		ui->typingSpace->setMaximumHeight(QWIDGETSIZE_MAX);
 	}
 }
@@ -1393,11 +1417,7 @@ void OpenTyper::setColors(void)
 		localThemeEngine.resetPaperColor();
 	ui->paper->setStyleSheet(themeEngine::paperStyleSheet());
 	QColor lineColor = palette().color(QPalette::Window);
-	ui->textSeparationLine->setStyleSheet("QFrame { background-color: rgb(" +
-		QString::number(lineColor.red()) + "," + 
-		QString::number(lineColor.green()) + "," +
-		QString::number(lineColor.blue()) +
-		"); }");
+	ui->textSeparationLine->setStyleSheet("QFrame { background-color: rgb(" + QString::number(lineColor.red()) + "," + QString::number(lineColor.green()) + "," + QString::number(lineColor.blue()) + "); }");
 	// Set panel color
 	if(!themeEngine::customPanelColor())
 		localThemeEngine.resetPanelColor();
@@ -1408,14 +1428,14 @@ void OpenTyper::setColors(void)
 	ui->menuBar->setStyleSheet(panelStyleSheet);
 	// Set keyboard color
 	QColor keyBorderColor = palette().color(QPalette::Text);
-	keyBorderColor = QColor::fromRgb(keyBorderColor.red() + (128-keyBorderColor.red()),
-		keyBorderColor.green() + (128-keyBorderColor.green()),
-		keyBorderColor.blue() + (128-keyBorderColor.blue()));
+	keyBorderColor = QColor::fromRgb(keyBorderColor.red() + (128 - keyBorderColor.red()),
+		keyBorderColor.green() + (128 - keyBorderColor.green()),
+		keyBorderColor.blue() + (128 - keyBorderColor.blue()));
 	QColor keyBgColor = palette().color(QPalette::Window);
-	keyBgColor = QColor::fromRgb(keyBgColor.red() + (128-keyBgColor.red())/10,
-		keyBgColor.green() + (128-keyBgColor.green())/10,
-		keyBgColor.blue() + (128-keyBgColor.blue())/10);
-	ui->keyboardFrame->setKeyColor(keyBgColor,keyBorderColor);
+	keyBgColor = QColor::fromRgb(keyBgColor.red() + (128 - keyBgColor.red()) / 10,
+		keyBgColor.green() + (128 - keyBgColor.green()) / 10,
+		keyBgColor.blue() + (128 - keyBgColor.blue()) / 10);
+	ui->keyboardFrame->setKeyColor(keyBgColor, keyBorderColor);
 }
 
 /*! Connected from openPackButton.\n
@@ -1426,14 +1446,14 @@ void OpenTyper::openPack(void)
 	auto fileContentReady = [this](const QString &fileName, const QByteArray &fileContent) {
 		if(!fileName.isEmpty())
 		{
-			customConfig=true;
-			settings.setValue("main/customconfig",customConfig);
+			customConfig = true;
+			settings.setValue("main/customconfig", customConfig);
 			loadConfig(fileName, fileContent);
 			refreshAll();
 		}
 	};
 #ifdef Q_OS_WASM
-	QFileDialog::getOpenFileContent(QString(),  fileContentReady);
+	QFileDialog::getOpenFileContent(QString(), fileContentReady);
 #else
 	QString fileName = QFileDialog::getOpenFileName(this, QString(), QString(), tr("Open-Typer pack files") + " (*.typer)" + ";;" + tr("All files") + " (*)");
 	if(fileName != "")
@@ -1456,10 +1476,10 @@ void OpenTyper::openEditor(void)
 	// Open editor
 	packEditor *editorWindow;
 	editorWindow = new packEditor(this);
-	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint,true);
-	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint,true);
+	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint, true);
+	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint, true);
 	editorWindow->setWindowModality(Qt::WindowModal);
-	connect(editorWindow, &QDialog::finished, this, [oldFileName,this]() {
+	connect(editorWindow, &QDialog::finished, this, [oldFileName, this]() {
 		// Open pack file
 		parser.open(oldFileName);
 	});
@@ -1479,8 +1499,8 @@ void OpenTyper::changeEvent(QEvent *event)
 		globalThemeEngine.updateThemeList();
 		localThemeEngine.updateStyle();
 		updateLessonList();
-		ui->lessonSelectionList->setCurrentIndex(currentLesson-1);
-		loadLesson(currentLesson,currentSublesson);
+		ui->lessonSelectionList->setCurrentIndex(currentLesson - 1);
+		loadLesson(currentLesson, currentSublesson);
 		loadSublesson(currentLevel);
 	}
 	else
@@ -1512,17 +1532,18 @@ void OpenTyper::zoomOut(void)
  */
 void OpenTyper::changeMode(int mode, bool enableStudentUpdate)
 {
-	switch(mode) {
-		case 0:
-			// Default mode
-			ui->masterControlFrame->show();
-			ui->timedExControlFrame->hide();
-			break;
-		case 1:
-			// Timed exercise mode
-			ui->masterControlFrame->hide();
-			ui->timedExControlFrame->show();
-			break;
+	switch(mode)
+	{
+	case 0:
+		// Default mode
+		ui->masterControlFrame->show();
+		ui->timedExControlFrame->hide();
+		break;
+	case 1:
+		// Timed exercise mode
+		ui->masterControlFrame->hide();
+		ui->timedExControlFrame->show();
+		break;
 	}
 	currentMode = mode;
 	if(enableStudentUpdate)
@@ -1544,14 +1565,14 @@ void OpenTyper::initTimedExercise(void)
 	{
 		timeDialog *timeSelect = new timeDialog(this);
 		timeSelect->setWindowModality(Qt::WindowModal);
-		connect(timeSelect, &QDialog::accepted, this, [timeSelect,this]() {
+		connect(timeSelect, &QDialog::accepted, this, [timeSelect, this]() {
 			timedExHours = timeSelect->hours;
 			timedExMinutes = timeSelect->minutes;
 			timedExSeconds = timeSelect->seconds;
 			timedExStarted = false;
 			changeMode(1);
 			ui->timedExCountdownLabel->setText("3");
-			ui->timedExTime->setTime(QTime(timedExHours,timedExMinutes,timedExSeconds));
+			ui->timedExTime->setTime(QTime(timedExHours, timedExMinutes, timedExSeconds));
 			ui->timedExTime->hide();
 			ui->timedExCountdownLabel->show();
 			levelFinalInit();
@@ -1573,9 +1594,9 @@ void OpenTyper::showExerciseStats(void)
 {
 	statsDialog *dialog;
 	if((studentUsername != ""))
-		dialog = new statsDialog(&client,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,this);
+		dialog = new statsDialog(&client, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
 	else if(!customLevelLoaded && !customConfig)
-		dialog = new statsDialog(nullptr,publicConfigName,currentLesson,currentAbsoluteSublesson,currentLevel,this);
+		dialog = new statsDialog(nullptr, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
 	else
 		return;
 	dialog->setWindowModality(Qt::WindowModal);
@@ -1596,7 +1617,7 @@ void OpenTyper::startReceivedExercise(QByteArray text, int lineLength, bool incl
 {
 	changeMode(mode, false);
 	levelLengthExtension = lineLength;
-	loadText(text,includeNewLines,false);
+	loadText(text, includeNewLines, false);
 	if(mode == 1)
 	{
 		ui->timedExCountdownLabel->setText("3");
@@ -1644,7 +1665,9 @@ void OpenTyper::waitForReceivedExercise(QString text, int lineLength)
 	waitDialog->setWindowModality(Qt::WindowModal);
 	waitDialog->setAttribute(Qt::WA_DeleteOnClose);
 	testWaitDialog *dialogPtr = waitDialog;
-	connect(dialogPtr, &QDialog::finished, this, [this]() { waitDialog = nullptr; });
+	connect(dialogPtr, &QDialog::finished, this, [this]() {
+		waitDialog = nullptr;
+	});
 	waitDialog->open();
 }
 
@@ -1658,10 +1681,10 @@ void OpenTyper::exportText(void)
 	QVariantMap result;
 	result["grossHits"] = totalHits;
 	result["netHits"] = netHits;
-	result["netHitsPerMinute"] = (double) netHits*(60.0/lastTimeF);
+	result["netHitsPerMinute"] = (double) netHits * (60.0 / lastTimeF);
 	result["mistakes"] = levelMistakes;
 	result["penalty"] = errorPenalty;
-	result["time"] = lastTimeF/60.0;
+	result["time"] = lastTimeF / 60.0;
 	exportDialog *dialog = new exportDialog(input, result, recordedMistakes, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
@@ -1671,7 +1694,7 @@ void OpenTyper::exportText(void)
 /*! Prints the exercise text. */
 void OpenTyper::printText(void)
 {
-	#ifndef Q_OS_WASM
+#ifndef Q_OS_WASM
 	// Set up printer
 	QPrinter printer(QPrinter::HighResolution);
 	QPrinter *printerPtr = &printer;
@@ -1686,11 +1709,8 @@ void OpenTyper::printText(void)
 		QTextDocument *document = ui->levelLabel->document()->clone(this);
 		QString title = "";
 		if(!customLevelLoaded)
-			title = QString("<u>%1 / %2 / %3</u><br><br>").arg(configParser::lessonTr(publicPos::currentLesson),
-				configParser::sublessonName(publicPos::currentSublesson),
-				configParser::exerciseTr(publicPos::currentExercise));
-		document->setHtml(QString("<body>%1%2</body>").arg(title,
-			displayLevel.toHtmlEscaped().replace("\n", "<br>")));
+			title = QString("<u>%1 / %2 / %3</u><br><br>").arg(configParser::lessonTr(publicPos::currentLesson), configParser::sublessonName(publicPos::currentSublesson), configParser::exerciseTr(publicPos::currentExercise));
+		document->setHtml(QString("<body>%1%2</body>").arg(title, displayLevel.toHtmlEscaped().replace("\n", "<br>")));
 		font.setPointSize(50);
 		document->setDefaultFont(font);
 		document->documentLayout()->setPaintDevice(printerPtr);
@@ -1699,15 +1719,15 @@ void OpenTyper::printText(void)
 		double scale = printerPtr->pageRect(QPrinter::DevicePixel).width() / double(document->size().width());
 		int fontHeight = QFontMetrics(painter.font(), printerPtr).height();
 		QStringList lines = document->toHtml().split("<br>");
-		int relativeLine = 0, page = 0, fromPage = printerPtr->fromPage()-1, toPage = printerPtr->toPage()-1;
-		for(int i=0; i < lines.count(); i++)
+		int relativeLine = 0, page = 0, fromPage = printerPtr->fromPage() - 1, toPage = printerPtr->toPage() - 1;
+		for(int i = 0; i < lines.count(); i++)
 		{
 			int rangeEnd = toPage;
 			if(rangeEnd == -1)
-				rangeEnd = page+1;
-			if(fontHeight*relativeLine > printerPtr->pageRect(QPrinter::DevicePixel).height())
+				rangeEnd = page + 1;
+			if(fontHeight * relativeLine > printerPtr->pageRect(QPrinter::DevicePixel).height())
 			{
-				if(((page+1 >= fromPage) && (page+1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
+				if(((page + 1 >= fromPage) && (page + 1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
 					printerPtr->newPage();
 				relativeLine = 0;
 				page++;
@@ -1717,7 +1737,7 @@ void OpenTyper::printText(void)
 			{
 				painter.resetTransform();
 				painter.scale(scale, scale);
-				painter.translate(0, fontHeight*relativeLine);
+				painter.translate(0, fontHeight * relativeLine);
 				document->drawContents(&painter);
 			}
 			relativeLine++;
@@ -1744,7 +1764,7 @@ void OpenTyper::startTest(void)
 		else
 			targets = dbMgr.deviceIDs();
 		QList<int> onlineTargets, occupiedTargets = serverPtr->runningExerciseStudents();
-		for(int i=0; i < targets.count(); i++)
+		for(int i = 0; i < targets.count(); i++)
 		{
 			if(fullMode)
 			{
@@ -1784,13 +1804,10 @@ void OpenTyper::showAboutDialog(void)
 	QMessageBox::about(this, QString(),
 		"<b>Open-Typer</b><br><br>" +
 #ifdef BUILD_VERSION
-		tr("Version: %1").arg(QCoreApplication::applicationVersion()) + "<br>" +
+			tr("Version: %1").arg(QCoreApplication::applicationVersion()) + "<br>" +
 #endif // BUILD_VERSION
 #ifdef BUILD_REVISION
-		tr("Revision: %1").arg(BUILD_REVISION) + "<br>" +
+			tr("Revision: %1").arg(BUILD_REVISION) + "<br>" +
 #endif // BUILD_REVISION
-		tr("Source code: %1").arg("<a href=\"https://github.com/Open-Typer/Open-Typer\">https://github.com/Open-Typer/Open-Typer</a>") + "<br><br>" +
-		QString("Copyright © %1-%2 %3").arg("2021", buildYear, "adazem009") + "<br>" +
-		tr("Published with the GNU General Public License.")
-	);
+			tr("Source code: %1").arg("<a href=\"https://github.com/Open-Typer/Open-Typer\">https://github.com/Open-Typer/Open-Typer</a>") + "<br><br>" + QString("Copyright © %1-%2 %3").arg("2021", buildYear, "adazem009") + "<br>" + tr("Published with the GNU General Public License."));
 }

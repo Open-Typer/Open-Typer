@@ -60,7 +60,7 @@
  */
 class inputLabelWidget : public textView
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit inputLabelWidget(QWidget *parent = nullptr);
 		~inputLabelWidget();

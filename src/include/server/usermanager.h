@@ -38,7 +38,7 @@ namespace Ui {
  */
 class userManager : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit userManager(QWidget *parent = nullptr);
 		~userManager();

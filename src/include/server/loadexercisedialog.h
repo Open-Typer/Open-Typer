@@ -39,7 +39,7 @@ namespace Ui {
  */
 class loadExerciseDialog : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit loadExerciseDialog(QList<int> availableTargets, QWidget *parent = nullptr);
 		loadExerciseDialog(QWidget *parent = nullptr);
@@ -60,7 +60,7 @@ class loadExerciseDialog : public QDialog
 		void init(void);
 		QString fileName = "";
 		QList<int> m_targets;
-		QMap<int, QCheckBox*> targets;
+		QMap<int, QCheckBox *> targets;
 		QSettings settings;
 		QString m_exerciseText = "";
 		int m_lineLength = 0;

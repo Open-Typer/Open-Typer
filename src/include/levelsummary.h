@@ -24,7 +24,7 @@
 #include <QDialog>
 
 namespace Ui {
-class levelSummary;
+	class levelSummary;
 }
 
 /*!
@@ -37,7 +37,7 @@ class levelSummary;
  */
 class levelSummary : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit levelSummary(QWidget *parent = nullptr);
 		~levelSummary();

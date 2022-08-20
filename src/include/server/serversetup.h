@@ -36,7 +36,7 @@ namespace Ui {
  */
 class serverSetup : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit serverSetup(QWidget *parent = nullptr);
 		~serverSetup();

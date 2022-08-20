@@ -32,8 +32,8 @@ adminSelector::adminSelector(QWidget *parent) :
 	ui->adminList->addItems(dbMgr.administratorNames());
 	ui->adminList->setCurrentRow(0);
 	// Connections
-	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(finish()));
-	connect(ui->adminList,&QListWidget::itemDoubleClicked,this,&adminSelector::finish);
+	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(finish()));
+	connect(ui->adminList, &QListWidget::itemDoubleClicked, this, &adminSelector::finish);
 }
 
 /*! Destroys the adminSelector object. */

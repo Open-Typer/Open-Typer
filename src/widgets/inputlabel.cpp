@@ -25,7 +25,7 @@ inputLabelWidget::inputLabelWidget(QWidget *parent) :
 	textView(parent)
 {
 	parentWidget = parent;
-	setAttribute(Qt::WA_InputMethodEnabled,true);
+	setAttribute(Qt::WA_InputMethodEnabled, true);
 	setHorizontalAdjust(false);
 }
 
@@ -39,9 +39,9 @@ inputLabelWidget::~inputLabelWidget() { }
  */
 void inputLabelWidget::inputMethodEvent(QInputMethodEvent *event)
 {
-	if (!event->commitString().isEmpty())
+	if(!event->commitString().isEmpty())
 	{
-		QKeyEvent keyEvent(QEvent::KeyPress,0,Qt::NoModifier,event->commitString());
+		QKeyEvent keyEvent(QEvent::KeyPress, 0, Qt::NoModifier, event->commitString());
 		keyPressEvent(&keyEvent);
 	}
 	event->accept();

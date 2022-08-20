@@ -40,7 +40,7 @@ namespace Ui {
  */
 class keyboardOptions : public QWidget
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit keyboardOptions(QWidget *parent = nullptr);
 		~keyboardOptions();

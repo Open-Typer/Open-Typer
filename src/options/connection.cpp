@@ -31,13 +31,13 @@ connectionOptions::connectionOptions(QWidget *parent) :
 	refresh();
 	changeAddress();
 	// Connections
-	connect(ui->networkOptionsCheckBox, &QCheckBox::toggled, this,  &connectionOptions::toggleNetworkOptions);
-	connect(ui->IPEdit,&QLineEdit::textChanged,this,&connectionOptions::changeAddress);
-	connect(ui->portEdit,SIGNAL(valueChanged(int)),this,SLOT(changeAddress()));
+	connect(ui->networkOptionsCheckBox, &QCheckBox::toggled, this, &connectionOptions::toggleNetworkOptions);
+	connect(ui->IPEdit, &QLineEdit::textChanged, this, &connectionOptions::changeAddress);
+	connect(ui->portEdit, SIGNAL(valueChanged(int)), this, SLOT(changeAddress()));
 	connect(ui->clientButton, &QRadioButton::toggled, this, &connectionOptions::changeMode);
 	connect(ui->serverButton, &QRadioButton::toggled, this, &connectionOptions::changeMode);
 	connect(ui->fullModeCheckBox, &QCheckBox::toggled, this, &connectionOptions::setFullMode);
-	connect(ui->testButton,SIGNAL(clicked()),this,SLOT(testConnection()));
+	connect(ui->testButton, SIGNAL(clicked()), this, SLOT(testConnection()));
 }
 
 /*! Destroys the connectionOptions object. */
@@ -90,7 +90,6 @@ void connectionOptions::toggleNetworkOptions(bool checked)
 	refresh();
 }
 
-
 /*! Changes the mode (client or server). */
 void connectionOptions::changeMode(void)
 {
@@ -113,8 +112,8 @@ void connectionOptions::setFullMode(bool enable)
  */
 void connectionOptions::changeAddress(void)
 {
-	settings.setValue("server/address",ui->IPEdit->text());
-	settings.setValue("server/port",ui->portEdit->text());
+	settings.setValue("server/address", ui->IPEdit->text());
+	settings.setValue("server/port", ui->portEdit->text());
 	settings.sync();
 #ifndef Q_OS_WASM
 	if((settings.value("server/mode", 2).toInt() == 1) && serverPtr)

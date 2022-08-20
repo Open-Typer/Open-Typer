@@ -54,7 +54,7 @@ namespace publicPos {
  */
 class configParser : public QObject
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit configParser(QObject *parent = nullptr);
 		static const int defaultRepeatLimit = 128;
@@ -105,7 +105,7 @@ class configParser : public QObject
 /*! \brief The historyParser class provides functions for exercise history and statistics. */
 class historyParser : public QObject
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		static int historySize(QString pack, int lesson, int sublesson, int exercise);
 		static QStringList historyEntry(QString pack, int lesson, int sublesson, int exercise, int entry);

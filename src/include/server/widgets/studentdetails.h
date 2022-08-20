@@ -42,7 +42,7 @@ namespace Ui {
  */
 class studentDetails : public QWidget
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit studentDetails(int openClassID, int id, QWidget *parent = nullptr);
 		~studentDetails();

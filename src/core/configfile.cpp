@@ -120,7 +120,7 @@ int configParser::lessonCount(void)
 	while(!currentDevice->atEnd())
 	{
 		QString line = QString(currentDevice->readLine()).remove('\n');
-		int lessonID = exerciseID(line,1);
+		int lessonID = exerciseID(line, 1);
 		if(!lessonIDs.contains(lessonID))
 			lessonIDs += lessonID;
 	}
@@ -141,10 +141,10 @@ int configParser::sublessonCount(int lesson)
 	while(!currentDevice->atEnd())
 	{
 		QString line = QString(currentDevice->readLine()).remove('\n');
-		int lessonID = exerciseID(line,1);
+		int lessonID = exerciseID(line, 1);
 		if(lessonID == lesson)
 		{
-			int sublessonID = exerciseID(line,2);
+			int sublessonID = exerciseID(line, 2);
 			if(!sublessonIDs.contains(sublessonID))
 				sublessonIDs += sublessonID;
 		}
@@ -162,13 +162,13 @@ int configParser::exerciseCount(int lesson, int sublesson)
 	while(!currentDevice->atEnd())
 	{
 		QString line = QString(currentDevice->readLine()).remove('\n');
-		int lessonID = exerciseID(line,1);
+		int lessonID = exerciseID(line, 1);
 		if(lessonID == lesson)
 		{
-			int sublessonID = exerciseID(line,2);
+			int sublessonID = exerciseID(line, 2);
 			if(sublessonID == sublesson)
 			{
-				int _exerciseID = exerciseID(line,3);
+				int _exerciseID = exerciseID(line, 3);
 				if(!exerciseIDs.contains(_exerciseID))
 					exerciseIDs += _exerciseID;
 			}
@@ -188,7 +188,7 @@ int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 	{
 		lineID++;
 		QString line = QString(currentDevice->readLine()).remove('\n');
-		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
+		if((exerciseID(line, 1) == lesson) && (exerciseID(line, 2) == sublesson) && (exerciseID(line, 3) == exercise))
 			return lineID;
 	}
 	return 0;
@@ -197,25 +197,25 @@ int configParser::exerciseLine(int lesson, int sublesson, int exercise)
 /*! Returns true if repeating is enabled in the exercise. */
 bool configParser::exerciseRepeatBool(int lesson, int sublesson, int exercise)
 {
-	return exerciseRepeatBool(exerciseRepeatConfig(lineOf(lesson,sublesson,exercise)));
+	return exerciseRepeatBool(exerciseRepeatConfig(lineOf(lesson, sublesson, exercise)));
 }
 
 /*! Returns repeat configuration of the exercise. */
 QString configParser::exerciseRepeatType(int lesson, int sublesson, int exercise)
 {
-	return exerciseRepeatType(exerciseRepeatConfig(lineOf(lesson,sublesson,exercise)));
+	return exerciseRepeatType(exerciseRepeatConfig(lineOf(lesson, sublesson, exercise)));
 }
 
 /*! Returns the maximum number of characters of the exercise (if repeating is enabled). */
 int configParser::exerciseRepeatLimit(int lesson, int sublesson, int exercise)
 {
-	return exerciseAttribute(exerciseAttributes(lineOf(lesson,sublesson,exercise)),0).toInt();
+	return exerciseAttribute(exerciseAttributes(lineOf(lesson, sublesson, exercise)), 0).toInt();
 }
 
 /*! Returns the exercise's maximum number of characters in one line. */
 int configParser::exerciseLineLength(int lesson, int sublesson, int exercise)
 {
-	return exerciseAttribute(exerciseAttributes(lineOf(lesson,sublesson,exercise)),1).toInt();
+	return exerciseAttribute(exerciseAttributes(lineOf(lesson, sublesson, exercise)), 1).toInt();
 }
 
 /*! Returns the description of a lesson (what new characters are learned in it). */
@@ -227,9 +227,9 @@ QString configParser::lessonDesc(int lesson)
 	while(!currentDevice->atEnd())
 	{
 		QString line = QString(currentDevice->readLine()).remove('\n');
-		if(exerciseID(line,1) == lesson)
+		if(exerciseID(line, 1) == lesson)
 		{
-			QString out = exerciseAttribute(exerciseAttributes(line),2);
+			QString out = exerciseAttribute(exerciseAttributes(line), 2);
 			if(out != "")
 				return out;
 		}
@@ -251,8 +251,8 @@ QString configParser::parseDesc(QString desc)
 {
 	QString out = "";
 	int i;
-	bool bracket=false;
-	for(i=0; i < desc.count(); i++)
+	bool bracket = false;
+	for(i = 0; i < desc.count(); i++)
 	{
 		if(desc[i] == '%')
 		{
@@ -273,19 +273,19 @@ QString configParser::parseDesc(QString desc)
 				if(!bracket)
 				{
 					out += '{';
-					bracket=true;
+					bracket = true;
 				}
-				out += QObject::tr("Shift","Shift key");
+				out += QObject::tr("Shift", "Shift key");
 			}
 			else
-				bracket=false;
+				bracket = false;
 		}
 		else
 		{
 			if(!bracket)
 			{
 				out += '{';
-				bracket=true;
+				bracket = true;
 			}
 			out += desc[i];
 		}
@@ -301,22 +301,23 @@ QString configParser::parseDesc(QString desc)
  */
 QString configParser::sublessonName(int id)
 {
-	switch(id) {
-		case 1:
-			return tr("Touch");
-			break;
-		case 2:
-			return tr("Words");
-			break;
-		case 3:
-			return tr("Sentences");
-			break;
-		case 4:
-			return tr("Text");
-			break;
-		default:
-			return sublessonTr(id);
-			break;
+	switch(id)
+	{
+	case 1:
+		return tr("Touch");
+		break;
+	case 2:
+		return tr("Words");
+		break;
+	case 3:
+		return tr("Sentences");
+		break;
+	case 4:
+		return tr("Text");
+		break;
+	default:
+		return sublessonTr(id);
+		break;
 	}
 }
 
@@ -345,7 +346,7 @@ QString configParser::exerciseTr(int id)
  */
 QString configParser::exerciseRawText(int lesson, int sublesson, int exercise)
 {
-	return exerciseRawText(lineOf(lesson,sublesson,exercise));
+	return exerciseRawText(lineOf(lesson, sublesson, exercise));
 }
 
 /*!
@@ -355,13 +356,13 @@ QString configParser::exerciseRawText(int lesson, int sublesson, int exercise)
  */
 QString configParser::exerciseText(int lesson, int sublesson, int exercise)
 {
-	QString line = lineOf(lesson,sublesson,exercise);
+	QString line = lineOf(lesson, sublesson, exercise);
 	QString repeatConfig = exerciseRepeatConfig(line);
 	QString attributes = exerciseAttributes(line);
 	return generateText(exerciseRawText(line),
 		exerciseRepeatBool(repeatConfig),
 		exerciseRepeatType(repeatConfig),
-		exerciseAttribute(attributes,0).toInt());
+		exerciseAttribute(attributes, 0).toInt());
 }
 
 /*!
@@ -371,26 +372,26 @@ QString configParser::exerciseText(int lesson, int sublesson, int exercise)
  */
 QString configParser::initExercise(QString exercise, int lineLength)
 {
-	int len, len2, i, line_pos=0;
+	int len, len2, i, line_pos = 0;
 	QString out = "";
 	len = exercise.count();
 	QString word = "";
-	bool first_word=true;
-	for(i=0; i < len; i++)
+	bool first_word = true;
+	for(i = 0; i < len; i++)
 	{
-		if(((exercise[i] == ' ') || (exercise[i] == '\n')) || (i+1 >= len))
+		if(((exercise[i] == ' ') || (exercise[i] == '\n')) || (i + 1 >= len))
 		{
-			if(i+1 >= len)
+			if(i + 1 >= len)
 				word += exercise[i];
 			len2 = word.count();
-			if(line_pos+len2 > lineLength)
+			if(line_pos + len2 > lineLength)
 			{
 				out += '\n';
-				line_pos=0;
+				line_pos = 0;
 			}
 			if(!first_word && (line_pos > 0))
 				out += ' ';
-			first_word=false;
+			first_word = false;
 			out += word;
 			word = "";
 			if(exercise[i] == '\n')
@@ -402,7 +403,7 @@ QString configParser::initExercise(QString exercise, int lineLength)
 			{
 				if(!first_word)
 					line_pos++;
-				line_pos=line_pos+len2;
+				line_pos = line_pos + len2;
 			}
 		}
 		else
@@ -421,20 +422,20 @@ QString configParser::initExercise(QString exercise, int lineLength, bool lineCo
 	QString text = initExercise(exercise, lineLength);
 	QString out = "";
 	int i, line = 0;
-	for(i=0; i < text.count(); i++)
+	for(i = 0; i < text.count(); i++)
 	{
 		if(text[i] == '\n')
 		{
-			if((line >= currentLine) && ((line+1 < currentLine+3) || !lineCountLimit))
+			if((line >= currentLine) && ((line + 1 < currentLine + 3) || !lineCountLimit))
 				out += text[i];
 			line++;
 		}
 		else
 		{
-			if((line >= currentLine) && ((line < currentLine+3) || !lineCountLimit))
+			if((line >= currentLine) && ((line < currentLine + 3) || !lineCountLimit))
 				out += text[i];
 		}
-		if((line >= currentLine+3) && lineCountLimit)
+		if((line >= currentLine + 3) && lineCountLimit)
 			break;
 	}
 	return out;
@@ -451,7 +452,7 @@ bool configParser::exerciseRepeatBool(const QString config)
 {
 	QString out = "";
 	int i;
-	for(i=0; i < config.count(); i++)
+	for(i = 0; i < config.count(); i++)
 	{
 		if(config[i] == '\\')
 		{
@@ -473,7 +474,7 @@ QString configParser::exerciseRepeatType(const QString config)
 	QString out = "";
 	bool repeatTypeReached = false;
 	int i;
-	for(i=0; i < config.count(); i++)
+	for(i = 0; i < config.count(); i++)
 	{
 		if(config[i] == '\\')
 		{
@@ -498,7 +499,7 @@ QString configParser::exerciseRepeatConfig(const QString line)
 	QString out = "";
 	bool repeatConfigReached = false;
 	int i;
-	for(i=0; i < line.count(); i++)
+	for(i = 0; i < line.count(); i++)
 	{
 		if(line[i] == '\\')
 		{
@@ -524,7 +525,7 @@ QString configParser::exerciseAttribute(const QString config, const int id)
 {
 	QString out = "";
 	int i, currentID = 0;
-	for(i=0; i < config.count(); i++)
+	for(i = 0; i < config.count(); i++)
 	{
 		if(config[i] == '\\')
 		{
@@ -554,7 +555,7 @@ QString configParser::exerciseAttributes(const QString line)
 	QString out = "";
 	bool lengthConfigReached = false;
 	int i;
-	for(i=0; i < line.count(); i++)
+	for(i = 0; i < line.count(); i++)
 	{
 		if(line[i] == '\\')
 		{
@@ -581,7 +582,7 @@ QString configParser::exerciseRawText(const QString line)
 	QString out = "";
 	bool textReached = false;
 	int i;
-	for(i=0; i < line.count(); i++)
+	for(i = 0; i < line.count(); i++)
 	{
 		if(line[i] == '\\')
 		{
@@ -615,7 +616,7 @@ int configParser::exerciseID(const QString line, const int part)
 {
 	QString out = "";
 	int i, currentPart = 0;
-	for(i=0; i < line.count(); i++)
+	for(i = 0; i < line.count(); i++)
 	{
 		if(line[i] == '\\')
 		{
@@ -640,7 +641,7 @@ int configParser::exerciseID(const QString line, const int part)
 			out += line[i];
 		}
 	}
-	if(currentPart+1 == part)
+	if(currentPart + 1 == part)
 		return out.toInt();
 	else
 		return 0;
@@ -655,7 +656,7 @@ QString configParser::lineOf(int lesson, int sublesson, int exercise)
 	while(!currentDevice->atEnd())
 	{
 		QString line = QString(currentDevice->readLine()).remove('\n');
-		if((exerciseID(line,1) == lesson) && (exerciseID(line,2) == sublesson) && (exerciseID(line,3) == exercise))
+		if((exerciseID(line, 1) == lesson) && (exerciseID(line, 2) == sublesson) && (exerciseID(line, 3) == exercise))
 			return line;
 	}
 	return "";
@@ -676,7 +677,7 @@ QString configParser::generateText(QString rawText, bool repeat, QString repeatT
 		i = 1;
 		while(true)
 		{
-			QString nextWord = stringUtils::word(rawText,i);
+			QString nextWord = stringUtils::word(rawText, i);
 			int space = 0;
 			if(out.count() > 0)
 				space = 1; // for space between current text and new word
@@ -696,7 +697,7 @@ QString configParser::generateText(QString rawText, bool repeat, QString repeatT
 	else
 	{
 		QString out = "";
-		for(int i2=0; i2 < rawText.count(); i2++)
+		for(int i2 = 0; i2 < rawText.count(); i2++)
 		{
 			if(rawText[i2] == '\\')
 			{
@@ -781,18 +782,18 @@ void historyParser::addHistoryEntry(QString pack, int lesson, int sublesson, int
 	QJsonArray exerciseArray = exerciseValue.toArray();
 	QJsonObject entryObject;
 	// Write entry
-	entryObject.insert("speed",entry[0].toInt());
-	entryObject.insert("mistakes",entry[1].toInt());
-	entryObject.insert("time",entry[2].toInt());
+	entryObject.insert("speed", entry[0].toInt());
+	entryObject.insert("mistakes", entry[1].toInt());
+	entryObject.insert("time", entry[2].toInt());
 	// Save objects
 	exerciseArray.append(entryObject);
 	exerciseValue = exerciseArray;
-	sublessonObject.insert(QString::number(exercise),exerciseValue);
-	lessonObject.insert(QString::number(sublesson),sublessonObject);
+	sublessonObject.insert(QString::number(exercise), exerciseValue);
+	lessonObject.insert(QString::number(sublesson), sublessonObject);
 	QJsonObject packObject = packValue.toObject();
-	packObject.insert(QString::number(lesson),lessonObject);
+	packObject.insert(QString::number(lesson), lessonObject);
 	QJsonObject docObject = historyDocument().object();
-	docObject.insert(pack,packObject);
+	docObject.insert(pack, packObject);
 	// Save JSON document
 	QJsonDocument document(docObject);
 	QFile historyFile(fileUtils::configLocation() + "/history.json");

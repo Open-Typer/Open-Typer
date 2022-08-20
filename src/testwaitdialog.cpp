@@ -37,7 +37,9 @@ testWaitDialog::testWaitDialog(monitorClient *client, QWidget *parent) :
 	ui->buttonBox->button(QDialogButtonBox::Cancel)->setFocusPolicy(Qt::NoFocus);
 	// Connections
 	connect(ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &testWaitDialog::close);
-	connect(ui->nameEdit, &QLineEdit::textChanged, this, [this](QString text) { m_client->sendRequest("put", { "name", text }); });
+	connect(ui->nameEdit, &QLineEdit::textChanged, this, [this](QString text) {
+		m_client->sendRequest("put", { "name", text });
+	});
 	connect(client, &monitorClient::studentNameChanged, this, [this](QString name) {
 		// When the name changes on server side, disable editing on client side
 		ui->nameEdit->setEnabled(false);
@@ -83,7 +85,7 @@ void testWaitDialog::setText(QString text)
 	QFontMetrics fontMetrics = ui->textLabel->fontMetrics();
 	int width = 0;
 	QStringList lines = text.split("\n");
-	for(int i=0; i < lines.count(); i++)
+	for(int i = 0; i < lines.count(); i++)
 		width = std::max(width, fontMetrics.boundingRect(lines[i]).width());
 	ui->textArea->setFixedWidth(width + ui->textArea->verticalScrollBar()->width());
 }
@@ -99,7 +101,7 @@ void testWaitDialog::closeEvent(QCloseEvent *event)
 	connect(question, &QDialog::finished, this, [this, question]() {
 		if(question->result() == QMessageBox::Yes)
 		{
-			m_client->sendRequest("put", {"abortExercise"});
+			m_client->sendRequest("put", { "abortExercise" });
 			reject();
 		}
 	});

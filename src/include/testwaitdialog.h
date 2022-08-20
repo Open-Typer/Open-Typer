@@ -39,7 +39,7 @@ namespace Ui {
  */
 class testWaitDialog : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit testWaitDialog(monitorClient *client, QWidget *parent = nullptr);
 		~testWaitDialog();

@@ -43,15 +43,16 @@
  */
 class keyboardWidget : public QFrame
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit keyboardWidget(QWidget *parent = nullptr);
 		void setKeyColor(QColor color, QColor borderColor);
 		bool loadLayout(QLocale::Language language, QLocale::Country country, QString variant);
 		void highlightKey(int keyCode);
 		void dehighlightKey(int keyCode);
-		
-		enum Finger {
+
+		enum Finger
+		{
 			Finger_Invalid = 0,
 			Finger_LeftLittle = -5,
 			Finger_LeftRing = -4,
@@ -64,7 +65,7 @@ class keyboardWidget : public QFrame
 			Finger_RightRing = 4,
 			Finger_RightLittle = 5
 		};
-		
+
 		static Finger keyFinger(int keyX, int keyY);
 		QPoint findKey(QString label);
 		static int fingerHand(keyboardWidget::Finger finger);
@@ -74,15 +75,15 @@ class keyboardWidget : public QFrame
 		QFrame *keyboardFrame;
 		QVBoxLayout *keyboardLayout;
 		QPushButton *closeButton;
-		QMultiMap<QFrame*,int> keys;
-		QMap<QFrame*,QLabel*> keyLabels;
-		QMap<QFrame*,int> keyTypes;
-		QMap<QPair<int,int>,QFrame*> keyMap;
+		QMultiMap<QFrame *, int> keys;
+		QMap<QFrame *, QLabel *> keyLabels;
+		QMap<QFrame *, int> keyTypes;
+		QMap<QPair<int, int>, QFrame *> keyMap;
 		int currentRow, currentColumn;
 		QHBoxLayout *currentRowLayout = nullptr;
-		QMap<QFrame*,QString> keyBaseStyleSheets;
-		QMap<QFrame*,QPair<QColor,QColor>> keyColors;
-		QMap<QFrame*,QColor> keyFingerColors;
+		QMap<QFrame *, QString> keyBaseStyleSheets;
+		QMap<QFrame *, QPair<QColor, QColor>> keyColors;
+		QMap<QFrame *, QColor> keyFingerColors;
 		void addKey(QString keyLabelText = "", int keyCode = -1, int keyMinimumWidth = 50);
 		void nextRow(void);
 		void registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode);

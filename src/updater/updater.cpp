@@ -36,7 +36,7 @@ Updater::Updater(QObject *parent) :
 		}
 	}
 	QProcess *process = new QProcess(this);
-	process->start(maintenancetoolFile.fileName(),{"ch"});
+	process->start(maintenancetoolFile.fileName(), { "ch" });
 	process->waitForFinished();
 	if(process->readAllStandardOutput().contains("<update"))
 	{
@@ -47,7 +47,7 @@ Updater::Updater(QObject *parent) :
 			QStringList args;
 			args += "--updater";
 			args += "updateSource=" + QFileInfo(QCoreApplication::applicationFilePath()).fileName();
-			process->startDetached(maintenancetoolFile.fileName(),args);
+			process->startDetached(maintenancetoolFile.fileName(), args);
 			exit(0);
 		}
 	}

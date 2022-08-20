@@ -47,7 +47,7 @@ namespace Ui {
  */
 class exerciseProgressDialog : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit exerciseProgressDialog(int classID, QList<int> targets, QString exerciseText, int lineLength, bool includeNewLines, int mode, int timeLimitSecs, bool correctMistakes, bool lockUi, bool hideText, QWidget *parent = nullptr);
 		~exerciseProgressDialog();
@@ -60,7 +60,7 @@ class exerciseProgressDialog : public QDialog
 		QMap<int, QString> inputTexts;
 		QMap<int, bool> abortList;
 		QMap<int, QList<QVariantMap>> recordedMistakeLists;
-		QMap<QTableWidgetItem*, int> targetMap;
+		QMap<QTableWidgetItem *, int> targetMap;
 		QString m_exerciseText;
 		int m_lineLength;
 		bool m_includeNewLines;

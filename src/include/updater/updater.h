@@ -34,7 +34,7 @@
  */
 class Updater : public QObject
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit Updater(QObject *parent = nullptr);
 		virtual ~Updater();

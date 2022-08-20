@@ -43,7 +43,7 @@ namespace Ui {
  */
 class appearanceOptions : public QWidget
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit appearanceOptions(QWidget *parent = nullptr);
 		~appearanceOptions();
@@ -64,7 +64,7 @@ class appearanceOptions : public QWidget
 
 	private slots:
 		void changeThemeMode(bool advanced);
-		void changeFullTheme(QListWidgetItem* item);
+		void changeFullTheme(QListWidgetItem *item);
 		void goBack(void);
 		void changeFont(QFont font);
 		void changeFontSize(int size);

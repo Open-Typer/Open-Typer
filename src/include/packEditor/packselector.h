@@ -37,7 +37,7 @@ namespace Ui {
  */
 class packSelector : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit packSelector(QWidget *parent = nullptr);
 		~packSelector();

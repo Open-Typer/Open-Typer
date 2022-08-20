@@ -27,8 +27,8 @@ UpdaterDialog::UpdaterDialog(QWidget *parent) :
 	ui(new Ui::UpdaterDialog)
 {
 	ui->setupUi(this);
-	connect(ui->yesButton,SIGNAL(clicked()),this,SLOT(accept()));
-	connect(ui->noButton,SIGNAL(clicked()),this,SLOT(reject()));
+	connect(ui->yesButton, SIGNAL(clicked()), this, SLOT(accept()));
+	connect(ui->noButton, SIGNAL(clicked()), this, SLOT(reject()));
 }
 
 /*! Destroys the UpdaterDialog object. */

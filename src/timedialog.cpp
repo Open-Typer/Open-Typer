@@ -28,9 +28,9 @@ timeDialog::timeDialog(QWidget *parent) :
 {
 	ui->setupUi(this);
 	setTime(ui->timeEdit->time());
-	connect(ui->timeEdit,SIGNAL(timeChanged(QTime)),this,SLOT(setTime(QTime)));
-	connect(ui->startButton,SIGNAL(clicked()),this,SLOT(accept()));
-	connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(reject()));
+	connect(ui->timeEdit, SIGNAL(timeChanged(QTime)), this, SLOT(setTime(QTime)));
+	connect(ui->startButton, SIGNAL(clicked()), this, SLOT(accept()));
+	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
 }
 
 /*! Destroys the timeDialog class. */

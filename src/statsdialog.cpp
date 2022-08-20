@@ -33,12 +33,12 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	// Load data
 	QStringList response;
 	if(client == nullptr)
-		response = QStringList({ QString("ok"), QString::number(historyParser::historySize(configName,lesson,sublesson,exercise)) });
+		response = QStringList({ QString("ok"), QString::number(historyParser::historySize(configName, lesson, sublesson, exercise)) });
 	else
-		response = client->sendRequest("get",{"resultcount",configName.toUtf8(),QString::number(lesson),QString::number(sublesson),QString::number(exercise)});
+		response = client->sendRequest("get", { "resultcount", configName.toUtf8(), QString::number(lesson), QString::number(sublesson), QString::number(exercise) });
 	if(response[0] != "ok")
 	{
-		QMetaObject::invokeMethod(this,"reject",Qt::QueuedConnection);
+		QMetaObject::invokeMethod(this, "reject", Qt::QueuedConnection);
 		return;
 	}
 	ui->statsTable->clear();
@@ -50,34 +50,34 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	mistakesSeries = new QLineSeries;
 	timeSeries = new QLineSeries;
 	QTableWidgetItem *item;
-	for(i=0; i < count; i++)
+	for(i = 0; i < count; i++)
 	{
 		if(client == nullptr)
 		{
 			response = QStringList({ "ok" });
-			QStringList entry = historyParser::historyEntry(configName,lesson,sublesson,exercise,i);
-			for(int i2=0; i2 < entry.count(); i2++)
+			QStringList entry = historyParser::historyEntry(configName, lesson, sublesson, exercise, i);
+			for(int i2 = 0; i2 < entry.count(); i2++)
 				response += entry[i2].toUtf8();
 		}
 		else
-			response = client->sendRequest("get",{"result",configName.toUtf8(),QString::number(lesson),QString::number(sublesson),QString::number(exercise),QString::number(i)});
+			response = client->sendRequest("get", { "result", configName.toUtf8(), QString::number(lesson), QString::number(sublesson), QString::number(exercise), QString::number(i) });
 		if(response[0] != "ok")
 		{
-			QMetaObject::invokeMethod(this,"reject",Qt::QueuedConnection);
+			QMetaObject::invokeMethod(this, "reject", Qt::QueuedConnection);
 			return;
 		}
 		// Speed
 		item = new QTableWidgetItem(QString(response[1]));
-		ui->statsTable->setItem(i,0,item);
-		speedSeries->append(i,response[1].toInt());
+		ui->statsTable->setItem(i, 0, item);
+		speedSeries->append(i, response[1].toInt());
 		// Mistakes
 		item = new QTableWidgetItem(QString(response[2]));
-		ui->statsTable->setItem(i,1,item);
-		mistakesSeries->append(i,response[2].toInt());
+		ui->statsTable->setItem(i, 1, item);
+		mistakesSeries->append(i, response[2].toInt());
 		// Time
 		item = new QTableWidgetItem(QString(response[3]));
-		ui->statsTable->setItem(i,2,item);
-		timeSeries->append(i,response[3].toInt());
+		ui->statsTable->setItem(i, 2, item);
+		timeSeries->append(i, response[3].toInt());
 	}
 	// Set up charts
 	// Speed
@@ -109,7 +109,7 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	timeChart->setTitle(tr("Time"));
 	// Set charts theme
 	QChart::ChartTheme theme;
-	if(settings.value("theme/theme","0").toInt() == 1)
+	if(settings.value("theme/theme", "0").toInt() == 1)
 		theme = QChart::ChartThemeDark;
 	else
 		theme = QChart::ChartThemeLight;
@@ -124,19 +124,19 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	}
 	else
 	{
-		response = client->sendRequest("get",{"betterstudents",configName.toUtf8(),QString::number(lesson),QString::number(sublesson),QString::number(exercise)});
+		response = client->sendRequest("get", { "betterstudents", configName.toUtf8(), QString::number(lesson), QString::number(sublesson), QString::number(exercise) });
 		if(response[0] == "ok")
 			ui->betterStudentsLabel->setText(tr("Better students: %1").arg(QString(response[1])));
 		else
 			ui->betterStudentsLabel->hide();
-		response = client->sendRequest("get",{"worsestudents",configName.toUtf8(),QString::number(lesson),QString::number(sublesson),QString::number(exercise)});
+		response = client->sendRequest("get", { "worsestudents", configName.toUtf8(), QString::number(lesson), QString::number(sublesson), QString::number(exercise) });
 		if(response[0] == "ok")
 			ui->worseStudentsLabel->setText(tr("Worse students: %1").arg(QString(response[1])));
 		else
 			ui->worseStudentsLabel->hide();
 	}
 	// Connections
-	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(accept()));
+	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
 /*! Destroys the statsDialog object. */

@@ -40,7 +40,7 @@ namespace Ui {
  */
 class statsDialog : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit statsDialog(monitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent = nullptr);
 		~statsDialog();

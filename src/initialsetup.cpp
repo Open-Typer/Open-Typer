@@ -37,8 +37,8 @@ initialSetup::initialSetup(QWidget *parent) :
 		options->setSimpleTheme(0);
 	ui->customizationLayout->addWidget(options);
 	// Connections
-	connect(ui->okButton,&QPushButton::clicked,this,&initialSetup::finish);
-	connect(ui->showAllLayoutsCheckBox,&QCheckBox::stateChanged,this,&initialSetup::loadList);
+	connect(ui->okButton, &QPushButton::clicked, this, &initialSetup::finish);
+	connect(ui->showAllLayoutsCheckBox, &QCheckBox::stateChanged, this, &initialSetup::loadList);
 }
 
 /*! Destroys the initialSetup object. */
@@ -50,8 +50,8 @@ initialSetup::~initialSetup()
 /*! Saves settings and closes the dialog. */
 void initialSetup::finish(void)
 {
-	settings.setValue("main/configfile",rawItems[ui->packList->currentRow()]);
-	settings.setValue("main/customconfig",false);
+	settings.setValue("main/configfile", rawItems[ui->packList->currentRow()]);
+	settings.setValue("main/customconfig", false);
 	accept();
 }
 
@@ -59,7 +59,7 @@ void initialSetup::finish(void)
 void initialSetup::loadList(void)
 {
 	ui->packList->clear();
-	QDirIterator it(":/res/configs/",QDirIterator::NoIteratorFlags);
+	QDirIterator it(":/res/configs/", QDirIterator::NoIteratorFlags);
 	QString item, current;
 	QStringList items;
 	rawItems.clear();
@@ -67,7 +67,7 @@ void initialSetup::loadList(void)
 	{
 		item = it.next();
 		current = "";
-		for(int i=14; i < item.count(); i++)
+		for(int i = 14; i < item.count(); i++)
 			current += item[i];
 		rawItems += current;
 	}
@@ -75,10 +75,10 @@ void initialSetup::loadList(void)
 	{
 		QStringList itemsToRemove;
 		itemsToRemove.clear();
-		for(int i=0; i < rawItems.count(); i++)
+		for(int i = 0; i < rawItems.count(); i++)
 		{
 			QString localeStr = "";
-			for(int i2=0; i2 < rawItems[i].count(); i2++)
+			for(int i2 = 0; i2 < rawItems[i].count(); i2++)
 			{
 				if(rawItems[i][i2] == '-')
 					break;
@@ -90,11 +90,11 @@ void initialSetup::loadList(void)
 			if(!((packLocale.language() == systemLocale.language()) && (packLocale.country() == systemLocale.country())))
 				itemsToRemove += rawItems[i];
 		}
-		for(int i=0; i < itemsToRemove.count(); i++)
+		for(int i = 0; i < itemsToRemove.count(); i++)
 			rawItems.removeAll(itemsToRemove[i]);
 	}
 	items.clear();
-	for(int i=0; i < rawItems.count(); i++)
+	for(int i = 0; i < rawItems.count(); i++)
 		items += builtinPacks::packName(rawItems[i]);
 	ui->packList->addItems(items);
 	if(ui->packList->count() > 0)

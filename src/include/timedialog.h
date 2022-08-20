@@ -45,12 +45,12 @@ namespace Ui {
  */
 class timeDialog : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit timeDialog(QWidget *parent = nullptr);
 		~timeDialog();
 		int hours, minutes, seconds;
-	
+
 	private:
 		Ui::timeDialog *ui;
 

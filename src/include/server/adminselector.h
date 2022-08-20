@@ -34,7 +34,7 @@ namespace Ui {
  */
 class adminSelector : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit adminSelector(QWidget *parent = nullptr);
 		~adminSelector();

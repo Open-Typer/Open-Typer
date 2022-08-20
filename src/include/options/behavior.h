@@ -36,7 +36,7 @@ namespace Ui {
  */
 class behaviorOptions : public QWidget
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit behaviorOptions(QWidget *parent = nullptr);
 		~behaviorOptions();

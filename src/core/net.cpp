@@ -32,7 +32,7 @@ monitorClient::monitorClient(bool errDialogs, QObject *parent) :
 	connect(&socket, &QWebSocket::disconnected, this, &monitorClient::disconnected);
 	connect(&socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error), this, &monitorClient::errorOccurred);
 #ifndef Q_OS_WASM
-	connect(&socket, QOverload<const QList<QSslError>&>::of(&QWebSocket::sslErrors), this, &monitorClient::sslErrorsOccurred);
+	connect(&socket, QOverload<const QList<QSslError> &>::of(&QWebSocket::sslErrors), this, &monitorClient::sslErrorsOccurred);
 #endif // Q_OS_WASM
 }
 
@@ -59,14 +59,14 @@ void monitorClient::setErrorDialogs(bool errDialogs)
 QHostAddress monitorClient::serverAddress(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	return QHostAddress(settings.value("server/address","127.0.0.1").toString());
+	return QHostAddress(settings.value("server/address", "127.0.0.1").toString());
 }
 
 /*! Returns server port. */
 quint16 monitorClient::serverPort(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	return settings.value("server/port","57100").toUInt();
+	return settings.value("server/port", "57100").toUInt();
 }
 
 /*! Returns the local IP address, e. g. 192.168.0.100. */
@@ -74,7 +74,7 @@ QHostAddress monitorClient::localAddress(void)
 {
 #ifndef Q_OS_WASM
 	QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
-	for(QHostAddress address: addresses)
+	for(QHostAddress address : addresses)
 	{
 		if((address.protocol() == QAbstractSocket::IPv4Protocol) && !address.isLoopback())
 			return address;
@@ -94,7 +94,7 @@ bool monitorClient::enabled(void)
 bool monitorClient::available(void)
 {
 	if(enabled())
-		return (sendRequest("check",{}).value(0) == "ok");
+		return (sendRequest("check", {}).value(0) == "ok");
 	else
 		return false;
 }
@@ -115,7 +115,6 @@ bool monitorClient::isPaired(void)
 	if(fullMode())
 		return true;
 	return (sendRequest("get", { "paired" }).value(0) == "ok");
-	
 }
 
 /*! Enables client again after connection failure. */
@@ -134,7 +133,7 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 {
 	clientDisabled = settings.value("main/clientdisabled", false).toBool();
 	if(clientDisabled)
-		return {"clientDisabled"};
+		return { "clientDisabled" };
 	connected = (socket.state() == QAbstractSocket::ConnectedState);
 	if(!connected)
 	{
@@ -173,9 +172,9 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 		connect(this, &monitorClient::responseReady, &eventLoop, &QEventLoop::quit);
 		connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
 		timer.start(5000);
-		socket.sendTextMessage(convertData(&ok,reqList));
+		socket.sendTextMessage(convertData(&ok, reqList));
 		if(!ok)
-			return {"requestError"};
+			return { "requestError" };
 		// Wait for response
 		QApplication::setOverrideCursor(Qt::WaitCursor);
 		eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
@@ -185,13 +184,13 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 		if(!readStatus)
 		{
 			errorOccurred(QAbstractSocket::SocketTimeoutError);
-			return {"timeout"};
+			return { "timeout" };
 		}
 		else
 			return readData(response);
 	}
 	else
-		return {"connectFailure"};
+		return { "connectFailure" };
 }
 
 /*!
@@ -203,9 +202,9 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 void monitorClient::readResponse(QString message)
 {
 	receivedData += message;
-	if(receivedData[receivedData.count()-1] != ';')
+	if(receivedData[receivedData.count() - 1] != ';')
 		return;
-	receivedData.remove(receivedData.count()-1, 1);
+	receivedData.remove(receivedData.count() - 1, 1);
 	if(waitingForResponse)
 	{
 		response = receivedData;
@@ -222,7 +221,7 @@ void monitorClient::readResponse(QString message)
 		else if(signal[0] == "loadExercise")
 		{
 			if(signal.count() >= 9)
-				emit exerciseReceived(signal[1].toUtf8(), signal[2].toInt(), (signal[3]=="true"), signal[4].toInt(), signal[5].toInt(), (signal[6]=="true"), (signal[7]=="true"), (signal[8]=="true"));
+				emit exerciseReceived(signal[1].toUtf8(), signal[2].toInt(), (signal[3] == "true"), signal[4].toInt(), signal[5].toInt(), (signal[6] == "true"), (signal[7] == "true"), (signal[8] == "true"));
 		}
 		else if(signal[0] == "changeName")
 		{
@@ -244,13 +243,14 @@ void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
 	QMessageBox errBox;
 	errBox.setWindowTitle(tr("Error"));
 	errBox.setText(tr("Unable to connect to class monitor server."));
-	switch(error) {
-		case QAbstractSocket::SocketTimeoutError:
-			errBox.setInformativeText("Connection timed out.");
-			break;
-		default:
-			errBox.setInformativeText(socket.errorString());
-			break;
+	switch(error)
+	{
+	case QAbstractSocket::SocketTimeoutError:
+		errBox.setInformativeText("Connection timed out.");
+		break;
+	default:
+		errBox.setInformativeText(socket.errorString());
+		break;
 	}
 	errBox.setIcon(QMessageBox::Critical);
 	errBox.exec();
@@ -308,7 +308,7 @@ QStringList monitorClient::readData(QString input)
 		// Read data size
 		dataSizeStr.clear();
 		int j;
-		for(j=0; j < 10; j++)
+		for(j = 0; j < 10; j++)
 		{
 			if(i + j >= input.count())
 				break;
@@ -318,7 +318,7 @@ QStringList monitorClient::readData(QString input)
 		dataSize = dataSizeStr.toInt();
 		// Read data
 		data.clear();
-		for(i2=0; i2 < dataSize; i2++)
+		for(i2 = 0; i2 < dataSize; i2++)
 		{
 			data += input[i];
 			i++;

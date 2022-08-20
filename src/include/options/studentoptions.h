@@ -36,7 +36,7 @@ namespace Ui {
  */
 class studentOptions : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit studentOptions(QWidget *parent = nullptr);
 		~studentOptions();

@@ -42,57 +42,22 @@ bool databaseManager::open(void)
 	{
 		QStringList tables = db.tables();
 		if(!(
-			(tables.contains("user")) &&
-			(tables.contains("users")) &&
-			(tables.contains("class")) &&
-			(tables.contains("exercise_result")) &&
-			(tables.contains("device"))
-		))
+			   (tables.contains("user")) && (tables.contains("users")) && (tables.contains("class")) && (tables.contains("exercise_result")) && (tables.contains("device"))))
 		{
 			QSqlQuery query;
 			QStringList tables = db.tables();
-			for(int i=0; i < tables.count(); i++)
+			for(int i = 0; i < tables.count(); i++)
 				query.exec(QString("DROP TABLE %1").arg(tables[i]));
 			// user
-			query.exec(QString("CREATE TABLE user (") +
-				QString("id INTEGER PRIMARY KEY NOT NULL,") +
-				QString("name VARCHAR(64) NOT NULL,") +
-				QString("nickname VARCHAR(128) NOT NULL UNIQUE,") +
-				QString("password VARCHAR(64) NOT NULL,") +
-				QString("role INT NOT NULL)"));
+			query.exec(QString("CREATE TABLE user (") + QString("id INTEGER PRIMARY KEY NOT NULL,") + QString("name VARCHAR(64) NOT NULL,") + QString("nickname VARCHAR(128) NOT NULL UNIQUE,") + QString("password VARCHAR(64) NOT NULL,") + QString("role INT NOT NULL)"));
 			// class
-			query.exec(QString("CREATE TABLE class (") +
-				QString("id INTEGER PRIMARY KEY NOT NULL,") +
-				QString("name VARCHAR(20) NOT NULL,") +
-				QString("icon INT NOT NULL,") +
-				QString("used_time TIMESTAMP NOT NULL)"));
+			query.exec(QString("CREATE TABLE class (") + QString("id INTEGER PRIMARY KEY NOT NULL,") + QString("name VARCHAR(20) NOT NULL,") + QString("icon INT NOT NULL,") + QString("used_time TIMESTAMP NOT NULL)"));
 			// users
-			query.exec(QString("CREATE TABLE users (") +
-				QString("user INT NOT NULL,") +
-				QString("class INT NOT NULL,") +
-				QString("PRIMARY KEY (user, class),") +
-				QString("FOREIGN KEY (user) REFERENCES user(id) ON DELETE CASCADE,") +
-				QString("FOREIGN KEY (class) REFERENCES class(id) ON DELETE CASCADE)"));
+			query.exec(QString("CREATE TABLE users (") + QString("user INT NOT NULL,") + QString("class INT NOT NULL,") + QString("PRIMARY KEY (user, class),") + QString("FOREIGN KEY (user) REFERENCES user(id) ON DELETE CASCADE,") + QString("FOREIGN KEY (class) REFERENCES class(id) ON DELETE CASCADE)"));
 			// exercise_result
-			query.exec(QString("CREATE TABLE exercise_result (") +
-				QString("id INTEGER PRIMARY KEY NOT NULL,") +
-				QString("user INT NOT NULL,") +
-				QString("class INT NOT NULL,") +
-				QString("upload_time TIMESTAMP NOT NULL,") +
-				QString("pack VARCHAR(64) NOT NULL,") +
-				QString("lesson INT NOT NULL,") +
-				QString("sublesson INT NOT NULL,") +
-				QString("exercise INT NOT NULL,") +
-				QString("speed INT NOT NULL,") +
-				QString("mistakes INT NOT NULL,") +
-				QString("duration INT NOT NULL,") +
-				QString("FOREIGN KEY (user) REFERENCES user(id) ON DELETE CASCADE,") +
-				QString("FOREIGN KEY (class) REFERENCES class(id) ON DELETE CASCADE)"));
+			query.exec(QString("CREATE TABLE exercise_result (") + QString("id INTEGER PRIMARY KEY NOT NULL,") + QString("user INT NOT NULL,") + QString("class INT NOT NULL,") + QString("upload_time TIMESTAMP NOT NULL,") + QString("pack VARCHAR(64) NOT NULL,") + QString("lesson INT NOT NULL,") + QString("sublesson INT NOT NULL,") + QString("exercise INT NOT NULL,") + QString("speed INT NOT NULL,") + QString("mistakes INT NOT NULL,") + QString("duration INT NOT NULL,") + QString("FOREIGN KEY (user) REFERENCES user(id) ON DELETE CASCADE,") + QString("FOREIGN KEY (class) REFERENCES class(id) ON DELETE CASCADE)"));
 			// device
-			query.exec(QString("CREATE TABLE device (") +
-				QString("id INTEGER PRIMARY KEY NOT NULL,") +
-				QString("ip_address VARCHAR(15) NOT NULL UNIQUE,") +
-				QString("name VARCHAR(20) NOT NULL)"));
+			query.exec(QString("CREATE TABLE device (") + QString("id INTEGER PRIMARY KEY NOT NULL,") + QString("ip_address VARCHAR(15) NOT NULL UNIQUE,") + QString("name VARCHAR(20) NOT NULL)"));
 		}
 		QSqlQuery query;
 		query.exec("PRAGMA foreign_keys=on"); // required for foreign keys
@@ -116,10 +81,10 @@ QStringList databaseManager::roles(bool includeStudentRole)
 {
 	// All new roles must be added to the Role enum!
 	QStringList out;
-	out += tr("Teacher","Teacher user role");
-	out += tr("Administrator","Administrator user role");
+	out += tr("Teacher", "Teacher user role");
+	out += tr("Administrator", "Administrator user role");
 	if(includeStudentRole)
-		out += tr("Student","Student user role");
+		out += tr("Student", "Student user role");
 	return out;
 }
 
@@ -350,22 +315,22 @@ bool databaseManager::auth(int userID, QString password, bool forceDialogs)
 		goto validate;
 	}
 	return false;
-	validate:
-		QCryptographicHash hash(QCryptographicHash::Sha256);
-		hash.addData(password.toUtf8());
-		QSqlQuery query;
-		query.exec("SELECT password FROM user WHERE id = " + QString::number(userID));
-		QStringList out;
-		query.next();
-		Q_ASSERT(query.value(0).isValid());
-		if(query.value(0).toString().toUtf8() == hash.result().toHex())
-		{
-			userLoginID = userID;
-			return true;
-		}
-		else if(!silent)
-			QMessageBox::warning(nullptr, QString(), tr("Incorrect password!"));
-		return false;
+validate:
+	QCryptographicHash hash(QCryptographicHash::Sha256);
+	hash.addData(password.toUtf8());
+	QSqlQuery query;
+	query.exec("SELECT password FROM user WHERE id = " + QString::number(userID));
+	QStringList out;
+	query.next();
+	Q_ASSERT(query.value(0).isValid());
+	if(query.value(0).toString().toUtf8() == hash.result().toHex())
+	{
+		userLoginID = userID;
+		return true;
+	}
+	else if(!silent)
+		QMessageBox::warning(nullptr, QString(), tr("Incorrect password!"));
+	return false;
 #endif
 }
 
@@ -876,9 +841,7 @@ void databaseManager::addHistoryEntry(int classID, int userID, QString pack, int
 	Q_UNUSED(record);
 #else
 	QSqlQuery query;
-	bool result = query.exec(QString("INSERT INTO exercise_result (user, class, upload_time, pack, lesson, sublesson, exercise, speed, mistakes, duration) VALUES (%1, %2, CURRENT_TIMESTAMP, %3, %4, %5, %6, %7, %8, %9)").arg(QString::number(userID),
-		QString::number(classID), quotesEnclosed(pack), QString::number(lesson), QString::number(sublesson), QString::number(exercise),
-		QString::number(record["speed"].toInt()), QString::number(record["mistakes"].toInt()), QString::number(record["duration"].toInt())));
+	bool result = query.exec(QString("INSERT INTO exercise_result (user, class, upload_time, pack, lesson, sublesson, exercise, speed, mistakes, duration) VALUES (%1, %2, CURRENT_TIMESTAMP, %3, %4, %5, %6, %7, %8, %9)").arg(QString::number(userID), QString::number(classID), quotesEnclosed(pack), QString::number(lesson), QString::number(sublesson), QString::number(exercise), QString::number(record["speed"].toInt()), QString::number(record["mistakes"].toInt()), QString::number(record["duration"].toInt())));
 	Q_ASSERT(result);
 #endif
 }
@@ -901,7 +864,7 @@ int databaseManager::compareWithStudents(int classID, int studentID, QString pac
 #else
 	int out = 0;
 	QList<int> recordedStudents, students = studentIDs(classID);
-	for(int i=0; i < students.count(); i++)
+	for(int i = 0; i < students.count(); i++)
 	{
 		QSqlQuery query;
 		query.exec(QString("SELECT * FROM exercise_result WHERE user = %1 AND class = %2 AND pack = %3 AND lesson = %4 AND sublesson = %5 AND exercise = %6").arg(QString::number(students[i]), QString::number(classID), quotesEnclosed(pack), QString::number(lesson), QString::number(sublesson), QString::number(exercise)));
@@ -916,24 +879,24 @@ int databaseManager::compareWithStudents(int classID, int studentID, QString pac
 	QList<int> points;
 	points.clear();
 	int sum = 0;
-	for(int i2=0; i2 < count; i2++)
+	for(int i2 = 0; i2 < count; i2++)
 	{
 		QVariantMap entry = entries[i2];
-		int pointCount = entry["speed"].toInt() - entry["mistakes"].toInt()*10;
+		int pointCount = entry["speed"].toInt() - entry["mistakes"].toInt() * 10;
 		points += pointCount;
 		sum += pointCount;
 	}
 	int myAvgPoints = sum / count;
-	for(int i=0; i < recordedStudents.count(); i++)
+	for(int i = 0; i < recordedStudents.count(); i++)
 	{
 		entries = historyEntries(classID, recordedStudents[i], pack, lesson, sublesson, exercise);
 		count = entries.count();
 		points.clear();
 		sum = 0;
-		for(int i2=0; i2 < count; i2++)
+		for(int i2 = 0; i2 < count; i2++)
 		{
 			QVariantMap entry = entries[i2];
-			int pointCount = entry["speed"].toInt() - entry["mistakes"].toInt()*10;
+			int pointCount = entry["speed"].toInt() - entry["mistakes"].toInt() * 10;
 			points += pointCount;
 			sum += pointCount;
 		}
@@ -1099,7 +1062,7 @@ void databaseManager::removeDevice(int deviceID)
 QString databaseManager::quotesEnclosed(QString str)
 {
 	QString out = "\"";
-	for(int i=0; i < str.count(); i++)
+	for(int i = 0; i < str.count(); i++)
 	{
 		if(str[i] == '"')
 			out += '"';

@@ -30,7 +30,7 @@ studentOptions::studentOptions(QWidget *parent) :
 	client = new monitorClient;
 	ui->errorLabel->hide();
 	// Connections
-	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(auth()));
+	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(auth()));
 }
 
 /*! Destroys the studentOptions object. */
@@ -49,7 +49,7 @@ void studentOptions::auth(void)
 	requestData.clear();
 	requestData += ui->usernameEdit->text();
 	requestData += ui->passwordEdit->text();
-	auto response = client->sendRequest("auth",requestData);
+	auto response = client->sendRequest("auth", requestData);
 	if(response[0] == "ok")
 	{
 		username = ui->usernameEdit->text();
@@ -66,11 +66,11 @@ void studentOptions::auth(void)
 		ui->errorLabel->show();
 		int labelWidth = ui->errorLabel->geometry().width();
 		ui->errorLabel->adjustSize();
-		QPropertyAnimation *anim = new QPropertyAnimation(ui->errorLabel,"geometry");
+		QPropertyAnimation *anim = new QPropertyAnimation(ui->errorLabel, "geometry");
 		anim->setDuration(250);
 		QRect animGeometry = ui->errorLabel->geometry();
 		animGeometry.setWidth(labelWidth);
-		anim->setStartValue(QRect(animGeometry.x(),animGeometry.y(),animGeometry.width(),0));
+		anim->setStartValue(QRect(animGeometry.x(), animGeometry.y(), animGeometry.width(), 0));
 		anim->setEndValue(animGeometry);
 		anim->start();
 	}

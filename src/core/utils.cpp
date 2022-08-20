@@ -24,7 +24,7 @@
 int stringUtils::wordCount(QString str)
 {
 	int i, out = 0;
-	for(i=0; i < str.count(); i++)
+	for(i = 0; i < str.count(); i++)
 	{
 		if(str[i] == ' ')
 			out++;
@@ -39,12 +39,12 @@ QString stringUtils::word(QString str, int id)
 {
 	int i, cur = 0;
 	QString out = "";
-	for(i=0; i < str.count(); i++)
+	for(i = 0; i < str.count(); i++)
 	{
-		if((str[i] == ' ') || (i+1 == str.count()))
+		if((str[i] == ' ') || (i + 1 == str.count()))
 		{
 			cur++;
-			if(i+1 == str.count())
+			if(i + 1 == str.count())
 				out += str[i];
 			if(cur == id)
 				return out;
@@ -62,11 +62,11 @@ QString stringUtils::wordAt(QString str, int index)
 	if(str[index] == ' ')
 		return "";
 	QString currentWord = "";
-	for(int i=0; i < str.count(); i++)
+	for(int i = 0; i < str.count(); i++)
 	{
-		if((str[i] == ' ') || (i+1 >= str.count()))
+		if((str[i] == ' ') || (i + 1 >= str.count()))
 		{
-			if(i+1 >= str.count())
+			if(i + 1 >= str.count())
 				currentWord += str[i];
 			if(i > index)
 				return currentWord;
@@ -93,13 +93,13 @@ int stringUtils::lcsLen(QList<QVariant> source, QList<QVariant> target, QMap<int
 	* https://nasauber.de/blog/2019/levenshtein-distance-and-longest-common-subsequence-in-qt/
 	*/
 	QMap<int, QMap<int, int>> l;
-	for (int i = 0; i <= source.count(); i++)
+	for(int i = 0; i <= source.count(); i++)
 	{
-		for (int j = 0; j <= target.count(); j++)
+		for(int j = 0; j <= target.count(); j++)
 		{
-			if (i == 0 || j == 0)
+			if(i == 0 || j == 0)
 				l[i][j] = 0;
-			else if (source.at(i - 1) == target.at(j - 1))
+			else if(source.at(i - 1) == target.at(j - 1))
 				l[i][j] = l[i - 1][j - 1] + 1;
 			else
 				l[i][j] = std::max(l[i - 1][j], l[i][j - 1]);
@@ -117,20 +117,20 @@ QList<QVariant> stringUtils::longestCommonSubsequence(QList<QVariant> source, QL
 	int i = source.count();
 	int j = target.count();
 	QList<QVariant> longestCommonSubsequence;
-	while (i > 0 && j > 0)
+	while(i > 0 && j > 0)
 	{
 		if(i == 0)
 			j--;
 		else if(j == 0)
 			i--;
-		else if (source.at(i - 1) == target.at(j - 1))
+		else if(source.at(i - 1) == target.at(j - 1))
 		{
-			longestCommonSubsequence.prepend(source.at(i-1));
+			longestCommonSubsequence.prepend(source.at(i - 1));
 			i--;
 			j--;
 		}
 		//else if (l[i][j] == l[i-1][j])
-		else if (l[i - 1][j] > l[i][j - 1]) // This method works better for switched characters (e. g. abcd -> acbd)
+		else if(l[i - 1][j] > l[i][j - 1]) // This method works better for switched characters (e. g. abcd -> acbd)
 			i--;
 		else
 			j--;
@@ -143,25 +143,25 @@ QString stringUtils::longestCommonSubsequence(QString source, QString target)
 {
 	QList<QVariant> sourceList, targetList;
 	int i;
-	for(i=0; i < source.count(); i++)
+	for(i = 0; i < source.count(); i++)
 		sourceList += QString(source[i]);
-	for(i=0; i < target.count(); i++)
+	for(i = 0; i < target.count(); i++)
 		targetList += QString(target[i]);
 	QList<QVariant> lcs = longestCommonSubsequence(sourceList, targetList);
 	QString out = "";
-	for(i=0; i < lcs.count(); i++)
+	for(i = 0; i < lcs.count(); i++)
 		out += lcs[i].toString();
 	return out;
 }
 
 /*! Compares 2 lists using longest common subsequence. */
-QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVariant> target, QVector<QPair<QString,int>> *recordedCharacters, int *hits, int *inputPos)
+QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVariant> target, QVector<QPair<QString, int>> *recordedCharacters, int *hits, int *inputPos)
 {
 	QList<QVariantMap> out;
 	auto lcs = longestCommonSubsequence(source, target);
 	int sourcePos = 0, targetPos = 0;
 	int count = std::max(source.count(), target.count());
-	for(int i=0; i < count; i++)
+	for(int i = 0; i < count; i++)
 	{
 		QVariant subseq, sourceSubseq, targetSubseq;
 		bool lcsSrc = false, lcsTarget = false;
@@ -257,13 +257,13 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 }
 
 /*! Compares 2 strings using longest common subsequence. */
-QList<QVariantMap> stringUtils::compareStrings(QString source, QString target, QVector<QPair<QString,int>> *recordedCharacters, int *hits, int *inputPos)
+QList<QVariantMap> stringUtils::compareStrings(QString source, QString target, QVector<QPair<QString, int>> *recordedCharacters, int *hits, int *inputPos)
 {
 	QList<QVariant> sourceList, targetList;
 	int i;
-	for(i=0; i < source.count(); i++)
+	for(i = 0; i < source.count(); i++)
 		sourceList += QString(source[i]);
-	for(i=0; i < target.count(); i++)
+	for(i = 0; i < target.count(); i++)
 		targetList += QString(target[i]);
 	return compareLists(sourceList, targetList, recordedCharacters, hits, inputPos);
 }
@@ -272,11 +272,11 @@ QList<QVariantMap> stringUtils::compareStrings(QString source, QString target, Q
 QStringList stringUtils::splitWordsByPunct(QStringList source)
 {
 	QStringList out;
-	for(int i=0; i < source.count(); i++)
+	for(int i = 0; i < source.count(); i++)
 	{
 		QString part = "";
 		bool ignore = (source[i].count() > 0);
-		for(int j=0; j < source[i].count(); j++)
+		for(int j = 0; j < source[i].count(); j++)
 		{
 			if(source[i][j].isPunct())
 			{
@@ -287,7 +287,7 @@ QStringList stringUtils::splitWordsByPunct(QStringList source)
 				if(j == 0)
 					out += " ";
 				out += QString(source[i][j]);
-				if(j+1 == source[i].count())
+				if(j + 1 == source[i].count())
 					out += " ";
 			}
 			else
@@ -309,25 +309,25 @@ QMap<int, QVariantMap> stringUtils::generateDiffList(QStringList *sourceWords, Q
 {
 	// Compare word lists
 	QList<QVariant> sourceList, targetList;
-	for(int i=0; i < sourceWords->count(); i++)
+	for(int i = 0; i < sourceWords->count(); i++)
 		sourceList += sourceWords->at(i);
-	for(int i=0; i < targetWords->count(); i++)
+	for(int i = 0; i < targetWords->count(); i++)
 		targetList += targetWords->at(i);
 	QList<QVariantMap> wordDiff = compareLists(sourceList, targetList);
 	QMap<int, QVariantMap> differences;
 	QList<int> newMergeList;
 	if(mergeList == nullptr || !mergeList)
 		mergeList = &newMergeList;
-	for(int i=0; i < wordDiff.count(); i++)
+	for(int i = 0; i < wordDiff.count(); i++)
 	{
 		if(mergeList->contains(wordDiff[i]["pos"].toInt()))
 			wordDiff[i]["merged"] = true;
 		// If current diff is a change and the next one is a deletion or a change,
 		// there might be a "deleted space" between the 2 words.
-		if((i < wordDiff.count()-1) && (wordDiff[i+1]["pos"].toInt() == wordDiff[i]["pos"].toInt()+1) && !mergeList->contains(wordDiff[i]["pos"].toInt()))
+		if((i < wordDiff.count() - 1) && (wordDiff[i + 1]["pos"].toInt() == wordDiff[i]["pos"].toInt() + 1) && !mergeList->contains(wordDiff[i]["pos"].toInt()))
 		{
 			QVariantMap *currentDiff = &wordDiff[i];
-			QVariantMap *nextDiff = &wordDiff[i+1];
+			QVariantMap *nextDiff = &wordDiff[i + 1];
 			QString type1 = currentDiff->value("type").toString();
 			QString type2 = nextDiff->value("type").toString();
 			QString newWord = currentDiff->value("previous").toString() + " " + nextDiff->value("previous").toString();
@@ -365,7 +365,7 @@ QMap<int, QVariantMap> stringUtils::generateDiffList(QStringList *sourceWords, Q
 }
 
 /*! Compares input text with exercise text and finds mistakes. */
-QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString,int>> recordedCharacters, int *totalHits, QStringList *errorWords)
+QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, QStringList *errorWords)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QList<QVariantMap> out;
@@ -375,14 +375,14 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 	QStringList inputLines = input.split('\n');
 	// Split words in each line
 	QStringList exerciseWords, inputWords;
-	for(i=0; i < exerciseLines.count(); i++)
+	for(i = 0; i < exerciseLines.count(); i++)
 	{
 		if(i > 0)
 			exerciseWords += "\n";
 		exerciseWords += exerciseLines[i].split(' ');
 	}
 	exerciseWords = splitWordsByPunct(exerciseWords);
-	for(i=0; i < inputLines.count(); i++)
+	for(i = 0; i < inputLines.count(); i++)
 	{
 		if(i > 0)
 			inputWords += "\n";
@@ -393,7 +393,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 	if(errorWords)
 		errorWords->clear();
 	int pos = 0, hits = 0;
-	for(i=0; i < inputWords.count(); i++)
+	for(i = 0; i < inputWords.count(); i++)
 	{
 		if((i > 0) && (inputWords[i] != "\n"))
 		{
@@ -403,11 +403,11 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 		}
 		if(inputWords[i][0].isPunct())
 			pos--;
-		else if((i > 0) && (inputWords[i-1] == " "))
+		else if((i > 0) && (inputWords[i - 1] == " "))
 			pos--;
 		if(inputWords[i] == " ")
 			pos--;
-		else if(((i > 0) && inputWords[i-1][0].isPunct()) && !inputWords[i][0].isPunct())
+		else if(((i > 0) && inputWords[i - 1][0].isPunct()) && !inputWords[i][0].isPunct())
 			pos--;
 		if(differences.contains(i))
 		{
@@ -422,7 +422,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 				{
 					int charCount = settings.value("main/mistakechars", 6).toInt();
 					int lastMistakePos = -1;
-					for(int i2=0; i2 < diff.count(); i2++)
+					for(int i2 = 0; i2 < diff.count(); i2++)
 					{
 						if((lastMistakePos != -1) && (diff[i2]["pos"].toInt() / charCount == lastMistakePos / charCount))
 							diff[i2].insert("disable", true);
@@ -432,7 +432,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 				}
 				bool merged = (differences[i].contains("merged") && differences[i]["merged"].toBool());
 				// Translate mistake position
-				for(int i2=0; i2 < diff.count(); i2++)
+				for(int i2 = 0; i2 < diff.count(); i2++)
 				{
 					QVariantMap currentMap = diff[i2];
 					if((currentMap["type"].toString() == "deletion") && (currentMap["previous"].toString() == " ") && !merged)
@@ -446,11 +446,11 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			else if(differences[i]["type"].toString() == "deletion")
 			{
 				QVariantMap currentMap = differences[i];
-				currentMap["pos"] = pos > 0 && !inputWords[i][0].isPunct() ? pos-1 : pos;
+				currentMap["pos"] = pos > 0 && !inputWords[i][0].isPunct() ? pos - 1 : pos;
 				QString previous = currentMap["previous"].toString();
 				if((i > 0) && (previous != " ") && !previous[0].isPunct())
 				{
-					if(inputWords[i-1] == "\n")
+					if(inputWords[i - 1] == "\n")
 						currentMap["previous"] = previous.prepend("\n");
 					else
 						currentMap["previous"] = previous.prepend(" ");
@@ -462,22 +462,23 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			{
 				int k = i, previousPos = -1;
 				bool disable = false;
-				do {
+				do
+				{
 					if(k > i)
 					{
 						pos++;
 						if(inputWords[k][0].isPunct())
 							pos--;
-						else if((k > 0) && (inputWords[k-1] == " "))
+						else if((k > 0) && (inputWords[k - 1] == " "))
 							pos--;
 						if(inputWords[k] == " ")
 							pos--;
-						else if(((k > 0) && inputWords[k-1][0].isPunct()) && !inputWords[k][0].isPunct())
+						else if(((k > 0) && inputWords[k - 1][0].isPunct()) && !inputWords[k][0].isPunct())
 							pos--;
-						for(int l=0; l < pos - previousPos; l++)
+						for(int l = 0; l < pos - previousPos; l++)
 						{
 							QVariantMap currentMap = differences[k];
-							currentMap["pos"] = previousPos+l;
+							currentMap["pos"] = previousPos + l;
 							currentMap["disable"] = disable;
 							disable = true;
 							out += currentMap;
@@ -493,7 +494,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 					}
 					else
 					{
-						for(int j=0; j < inputWords[k].count(); j++)
+						for(int j = 0; j < inputWords[k].count(); j++)
 						{
 							QVariantMap currentMap = differences[k];
 							currentMap["pos"] = pos;
@@ -506,13 +507,13 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 					previousPos = pos;
 					k++;
 				} while((differences.contains(k)) && (differences[k]["type"].toString() == "addition"));
-				i = k-1;
+				i = k - 1;
 				// TODO: Should we count hits in added words?
 			}
 		}
 		else if(inputWords[i] != "\n")
 		{
-			for(int i2=0; i2 < inputWords[i].count(); i2++)
+			for(int i2 = 0; i2 < inputWords[i].count(); i2++)
 			{
 				if(pos < recordedCharacters.count())
 					hits += recordedCharacters[pos].second;
@@ -523,8 +524,8 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 	if(totalHits)
 		*totalHits = hits;
 	// Merge mistakes with the same position
-	QMap<int, QVariantMap*> mistakesMap;
-	for(int i=0; i < out.count(); i++)
+	QMap<int, QVariantMap *> mistakesMap;
+	for(int i = 0; i < out.count(); i++)
 	{
 		int pos = out[i]["pos"].toInt();
 		if(mistakesMap.contains(pos))
@@ -533,7 +534,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 			mistakesMap[pos] = &out[i];
 	}
 	QList<QVariantMap> finalList;
-	for(int i=0; i < mistakesMap.keys().count(); i++)
+	for(int i = 0; i < mistakesMap.keys().count(); i++)
 		finalList.append(*mistakesMap[mistakesMap.keys().at(i)]);
 	return finalList;
 }
@@ -550,16 +551,16 @@ QList<QVariantMap> stringUtils::validateExercise(QString exerciseText, QString i
 		if(exerciseText.count() > 0)
 		{
 			int pos = 0, count = timeSecs * 10;
-			for(int i=0; i < count; i++)
+			for(int i = 0; i < count; i++)
 			{
 				newText += exerciseText[pos];
 				pos++;
 				if(pos >= exerciseText.count())
 				{
-					newText.remove(newText.count()-1, 1);
+					newText.remove(newText.count() - 1, 1);
 					pos = 0;
 				}
-				if((i % std::max(exerciseText.count(), inputText.count()) == 0) || (i == exerciseText.count()-1) || (i+1 >= count))
+				if((i % std::max(exerciseText.count(), inputText.count()) == 0) || (i == exerciseText.count() - 1) || (i + 1 >= count))
 				{
 					attempts[i] = stringUtils::findMistakes(newText, inputText, recordedCharacters, totalHits, errorWords);
 					if((minValue == -1) || (attempts[i].count() < minValue))
@@ -581,7 +582,7 @@ QList<QVariantMap> stringUtils::validateExercise(QString exerciseText, QString i
 		recordedMistakes = stringUtils::findMistakes(exerciseText, inputText, recordedCharacters, totalHits, errorWords);
 	QList<QVariantMap> mistakesToRemove;
 	*mistakeCount = 0;
-	for(int i=0; i < recordedMistakes.count(); i++)
+	for(int i = 0; i < recordedMistakes.count(); i++)
 	{
 		if(recordedMistakes[i]["pos"].toInt() >= inputText.count())
 			mistakesToRemove += recordedMistakes[i];
@@ -591,7 +592,7 @@ QList<QVariantMap> stringUtils::validateExercise(QString exerciseText, QString i
 				*mistakeCount = (*mistakeCount) + 1;
 		}
 	}
-	for(int i=0; i < mistakesToRemove.count(); i++)
+	for(int i = 0; i < mistakesToRemove.count(); i++)
 		recordedMistakes.removeAll(mistakesToRemove[i]);
 	return recordedMistakes;
 }
@@ -601,11 +602,11 @@ QString stringUtils::addMistakes(QString exerciseText, QList<QVariantMap> *recor
 {
 	Q_ASSERT(recordedMistakes);
 	QMap<int, int> mistakesMap;
-	for(int i=0; i < recordedMistakes->count(); i++)
+	for(int i = 0; i < recordedMistakes->count(); i++)
 		mistakesMap[recordedMistakes->at(i).value("pos").toInt()] = i;
 	int delta = 0;
 	QString out;
-	for(int i=0; i <= exerciseText.count(); i++)
+	for(int i = 0; i <= exerciseText.count(); i++)
 	{
 		if(mistakesMap.contains(i))
 		{
@@ -640,7 +641,7 @@ QString fileUtils::configLocation(void)
 /*! Returns the path to the main configuration file, currently \c config.ini in the program configuration directory. */
 QString fileUtils::mainSettingsLocation(void)
 {
-	return configLocation()+"/config.ini";
+	return configLocation() + "/config.ini";
 }
 
 /*!
@@ -652,22 +653,23 @@ bool keyboardUtils::isSpecialKey(QKeyEvent *event)
 {
 	if((event->text() == "") && (event->key() != Qt::Key_Return) && (event->key() != Qt::Key_Enter))
 		return true;
-	switch(event->key()) {
-		case Qt::Key_Delete:
-			return true;
-			break;
-		case Qt::Key_Backspace:
-			return true;
-			break;
-		case Qt::Key_Backtab:
-			return true;
-			break;
-		case Qt::Key_Escape:
-			return true;
-			break;
-		default:
-			return false;
-			break;
+	switch(event->key())
+	{
+	case Qt::Key_Delete:
+		return true;
+		break;
+	case Qt::Key_Backspace:
+		return true;
+		break;
+	case Qt::Key_Backtab:
+		return true;
+		break;
+	case Qt::Key_Escape:
+		return true;
+		break;
+	default:
+		return false;
+		break;
 	}
 }
 

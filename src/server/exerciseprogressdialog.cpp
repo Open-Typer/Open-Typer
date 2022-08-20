@@ -49,7 +49,7 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, 
 	if(!settings.value("server/fullmode", false).toBool())
 	{
 		// Clear old student names
-		for(int i=0; i < exerciseTargets.count(); i++)
+		for(int i = 0; i < exerciseTargets.count(); i++)
 			serverPtr->setDeviceStudentName(exerciseTargets[i], "");
 	}
 #endif // Q_OS_WASM
@@ -65,7 +65,7 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, 
 		bool fullMode = settings.value("server/fullmode", false).toBool();
 		QList<QByteArray> usernames;
 		QList<QHostAddress> addresses;
-		for(int i=0; i < exerciseTargets.count(); i++)
+		for(int i = 0; i < exerciseTargets.count(); i++)
 		{
 			if(!(abortList.contains(exerciseTargets[i]) && abortList[exerciseTargets[i]]))
 			{
@@ -121,7 +121,7 @@ void exerciseProgressDialog::setupTable(void)
 	loadingTable = true;
 	targetMap.clear();
 	int abortCount = abortList.values().count(true);
-	for(int i=0; i < abortList.keys().count(); i++)
+	for(int i = 0; i < abortList.keys().count(); i++)
 	{
 		if(results.contains(abortList[abortList.keys().at(i)]))
 			abortCount--;
@@ -135,7 +135,7 @@ void exerciseProgressDialog::setupTable(void)
 	// Rows
 	QList<int> targets = exerciseTargets;
 	ui->studentsTable->setRowCount(targets.count());
-	for(int i=0; i < targets.count(); i++)
+	for(int i = 0; i < targets.count(); i++)
 	{
 		QString name;
 		// Full name
@@ -216,7 +216,7 @@ void exerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 		// because there are only "change" diffs.
 		QList<QVariantMap> recordedMistakes;
 		int srcPos = 0;
-		for(int targetPos=0; targetPos < inputText.count(); targetPos++)
+		for(int targetPos = 0; targetPos < inputText.count(); targetPos++)
 		{
 			if(srcPos >= exerciseText.count() || targetPos >= inputText.count())
 				break;
@@ -234,20 +234,20 @@ void exerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 		mistakes = recordedMistakes.count();
 		recordedMistakeLists[targetID] = recordedMistakes;
 		grossHits = 0;
-		for(int i=0; i < recordedCharacters.count(); i++)
+		for(int i = 0; i < recordedCharacters.count(); i++)
 			grossHits += recordedCharacters[i].second;
 	}
 	else
 		recordedMistakeLists[targetID] = stringUtils::validateExercise(exerciseText, inputText, recordedCharacters, &grossHits, &mistakes, nullptr, (m_mode == 1), m_timeLimit);
 	qreal exerciseTime = m_mode == 1 ? m_timeLimit : time;
-	int netHits = std::max(0, grossHits - mistakes * settings.value("main/errorpenalty","10").toInt());
+	int netHits = std::max(0, grossHits - mistakes * settings.value("main/errorpenalty", "10").toInt());
 	qreal netHitsPerMinute = netHits * (60 / exerciseTime);
 	QVariantMap result;
 	result["grossHits"] = grossHits;
 	result["netHits"] = netHits;
 	result["netHitsPerMinute"] = netHitsPerMinute;
 	result["mistakes"] = mistakes;
-	result["penalty"] = settings.value("main/errorpenalty","10").toInt();
+	result["penalty"] = settings.value("main/errorpenalty", "10").toInt();
 	result["time"] = exerciseTime / 60.0;
 	results[targetID] = result;
 	inputTexts[targetID] = inputText;
@@ -267,7 +267,7 @@ void exerciseProgressDialog::abortExercise(int userID)
 void exerciseProgressDialog::closeEvent(QCloseEvent *event)
 {
 	int abortCount = abortList.values().count(true);
-	for(int i=0; i < abortList.keys().count(); i++)
+	for(int i = 0; i < abortList.keys().count(); i++)
 	{
 		if(results.contains(abortList[abortList.keys().at(i)]))
 			abortCount--;
@@ -287,7 +287,7 @@ void exerciseProgressDialog::closeEvent(QCloseEvent *event)
 /*! Prints all results. */
 void exerciseProgressDialog::printAll(void)
 {
-	for(int i=0; i < exerciseTargets.count(); i++)
+	for(int i = 0; i < exerciseTargets.count(); i++)
 	{
 		if(abortList.contains(exerciseTargets[i]) && abortList[exerciseTargets[i]] && !results.contains(exerciseTargets[i]))
 			continue;
@@ -309,7 +309,7 @@ void exerciseProgressDialog::printAll(void)
 		msgBox.setText(tr("Printing result of student %1...").arg(name));
 		QPushButton *printButton = msgBox.addButton(tr("Print"), QMessageBox::YesRole);
 		QPushButton *nextButton;
-		if(i < exerciseTargets.count()-1)
+		if(i < exerciseTargets.count() - 1)
 			nextButton = msgBox.addButton(tr("Next student"), QMessageBox::NoRole);
 		else
 			nextButton = msgBox.addButton(QMessageBox::Close);

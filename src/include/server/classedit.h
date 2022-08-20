@@ -37,7 +37,7 @@ namespace Ui {
  */
 class classEdit : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit classEdit(bool newClass = false, int id = 1, QWidget *parent = nullptr);
 		~classEdit();

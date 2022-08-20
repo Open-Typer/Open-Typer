@@ -36,7 +36,7 @@ namespace Ui {
  */
 class deviceEdit : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit deviceEdit(int deviceID = 0, QWidget *parent = nullptr);
 		~deviceEdit();

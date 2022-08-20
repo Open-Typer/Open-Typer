@@ -35,7 +35,7 @@ namespace Ui {
  */
 class studentEdit : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit studentEdit(bool newStudent = false, int class_id = 0, int id = 1, QWidget *parent = nullptr);
 		~studentEdit();

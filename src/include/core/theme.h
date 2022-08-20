@@ -35,12 +35,13 @@
 /*! \brief The themeEngine class provides theme functions. */
 class themeEngine : public QObject
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		themeEngine(QObject *parent = nullptr);
 		void updateThemeList(void);
 
-		enum Style {
+		enum Style
+		{
 			SystemStyle = 0,
 			DarkStyle = 1,
 			LightStyle = 2

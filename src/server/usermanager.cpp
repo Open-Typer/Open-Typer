@@ -29,10 +29,10 @@ userManager::userManager(QWidget *parent) :
 	ui->setupUi(this);
 	setupList();
 	// Connections
-	connect(ui->userList,&QListWidget::itemSelectionChanged,this,&userManager::verify);
-	connect(ui->addButton,SIGNAL(clicked()),this,SLOT(addUser()));
-	connect(ui->removeButton,SIGNAL(clicked()),this,SLOT(removeUser()));
-	connect(ui->editButton,SIGNAL(clicked()),this,SLOT(editUser()));
+	connect(ui->userList, &QListWidget::itemSelectionChanged, this, &userManager::verify);
+	connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addUser()));
+	connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(removeUser()));
+	connect(ui->editButton, SIGNAL(clicked()), this, SLOT(editUser()));
 }
 
 /*! Destroys the userManager object. */
@@ -46,7 +46,7 @@ void userManager::setupList(void)
 {
 	ui->userList->clear();
 	QList<int> users = dbMgr.teacherIDs();
-	for(int i=0; i < users.count(); i++)
+	for(int i = 0; i < users.count(); i++)
 	{
 		QListWidgetItem *item = new QListWidgetItem(dbMgr.userName(users[i]));
 		ui->userList->addItem(item);
@@ -95,8 +95,8 @@ void userManager::removeUser(void)
 	confirmDialog.setWindowTitle(tr("Confirm"));
 	confirmDialog.setText(tr("Are you sure you want to remove user %1?").arg(dbMgr.userName(userID)));
 	confirmDialog.setInformativeText(tr("This will remove all classes the user owns!"));
-	QPushButton *yesButton = confirmDialog.addButton(tr("Yes"),QMessageBox::YesRole);
-	QPushButton *noButton = confirmDialog.addButton(tr("No"),QMessageBox::NoRole);
+	QPushButton *yesButton = confirmDialog.addButton(tr("Yes"), QMessageBox::YesRole);
+	QPushButton *noButton = confirmDialog.addButton(tr("No"), QMessageBox::NoRole);
 	confirmDialog.setIcon(QMessageBox::Question);
 	confirmDialog.exec();
 	if(confirmDialog.clickedButton() == yesButton)

@@ -50,19 +50,19 @@ classControls::classControls(int openClassID, QWidget *parent) :
 	timeChart->setTitle(tr("Time"));
 	refreshCharts();
 	// Connections
-	connect(ui->loadExerciseButton,SIGNAL(clicked()),this,SLOT(loadExercise()));
-	connect(ui->studentsTable,SIGNAL(itemSelectionChanged()),this,SLOT(verify()));
-	connect(ui->studentsTable,&QTableWidget::itemDoubleClicked,this,&classControls::openDetails);
-	connect(ui->addButton,SIGNAL(clicked()),this,SLOT(addStudent()));
-	connect(ui->removeButton,SIGNAL(clicked()),this,SLOT(removeStudent()));
-	connect(ui->editButton,SIGNAL(clicked()),this,SLOT(editStudent()));
-	connect(ui->detailsButton,SIGNAL(clicked()),this,SLOT(openDetails()));
-	connect(ui->tabWidget,SIGNAL(currentChanged(int)),this,SLOT(refreshCharts()));
-	connect(ui->packBox,SIGNAL(activated(int)),this,SLOT(refreshCharts()));
-	connect(ui->lessonBox,SIGNAL(activated(int)),this,SLOT(refreshCharts()));
-	connect(ui->sublessonBox,SIGNAL(activated(int)),this,SLOT(refreshCharts()));
-	connect(ui->exerciseBox,SIGNAL(activated(int)),this,SLOT(refreshCharts()));
-	connect(ui->refreshButton,SIGNAL(clicked()),this,SLOT(refreshCharts()));
+	connect(ui->loadExerciseButton, SIGNAL(clicked()), this, SLOT(loadExercise()));
+	connect(ui->studentsTable, SIGNAL(itemSelectionChanged()), this, SLOT(verify()));
+	connect(ui->studentsTable, &QTableWidget::itemDoubleClicked, this, &classControls::openDetails);
+	connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addStudent()));
+	connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(removeStudent()));
+	connect(ui->editButton, SIGNAL(clicked()), this, SLOT(editStudent()));
+	connect(ui->detailsButton, SIGNAL(clicked()), this, SLOT(openDetails()));
+	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(refreshCharts()));
+	connect(ui->packBox, SIGNAL(activated(int)), this, SLOT(refreshCharts()));
+	connect(ui->lessonBox, SIGNAL(activated(int)), this, SLOT(refreshCharts()));
+	connect(ui->sublessonBox, SIGNAL(activated(int)), this, SLOT(refreshCharts()));
+	connect(ui->exerciseBox, SIGNAL(activated(int)), this, SLOT(refreshCharts()));
+	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshCharts()));
 #ifndef Q_OS_WASM
 	connect(serverPtr, &monitorServer::loggedInStudentsChanged, this, &classControls::setupTable);
 #endif // Q_OS_WASM
@@ -78,7 +78,6 @@ classControls::~classControls()
 #endif
 }
 
-
 /*! Loads the students. */
 void classControls::setupTable(void)
 {
@@ -91,7 +90,7 @@ void classControls::setupTable(void)
 	// Rows
 	QList<int> students = dbMgr.studentIDs(classID);
 	ui->studentsTable->setRowCount(students.count());
-	for(int i=0; i < students.count(); i++)
+	for(int i = 0; i < students.count(); i++)
 	{
 		// Full name
 		QTableWidgetItem *item = new QTableWidgetItem(dbMgr.userName(students[i]));
@@ -144,7 +143,7 @@ void classControls::verify(void)
  */
 void classControls::addStudent(void)
 {
-	studentEdit dialog(true,classID);
+	studentEdit dialog(true, classID);
 	dialog.exec();
 	setupTable();
 }
@@ -160,8 +159,8 @@ void classControls::removeStudent(void)
 	confirmDialog.setWindowTitle(tr("Confirm"));
 	confirmDialog.setText(tr("Are you sure you want to remove student %1?").arg(dbMgr.userName(studentID)));
 	confirmDialog.setInformativeText(tr("This will remove whole training history of the student!"));
-	QPushButton *yesButton = confirmDialog.addButton(tr("Yes"),QMessageBox::YesRole);
-	QPushButton *noButton = confirmDialog.addButton(tr("No"),QMessageBox::NoRole);
+	QPushButton *yesButton = confirmDialog.addButton(tr("Yes"), QMessageBox::YesRole);
+	QPushButton *noButton = confirmDialog.addButton(tr("No"), QMessageBox::NoRole);
 	confirmDialog.setIcon(QMessageBox::Question);
 	confirmDialog.exec();
 	if(confirmDialog.clickedButton() == yesButton)
@@ -208,7 +207,7 @@ void classControls::refreshCharts(void)
 	// Packs
 	ui->packBox->clear();
 	QStringList packs = dbMgr.recordedPacks(classID);
-	for(int i=0; i < packs.count(); i++)
+	for(int i = 0; i < packs.count(); i++)
 		ui->packBox->addItem(builtinPacks::packName(packs[i]));
 	if(ui->packBox->count() == 0)
 	{
@@ -229,7 +228,7 @@ void classControls::refreshCharts(void)
 	// Lessons
 	ui->lessonBox->clear();
 	QList<int> lessons = dbMgr.recordedLessons(classID, packs[oldP]);
-	for(int i=0; i < lessons.count(); i++)
+	for(int i = 0; i < lessons.count(); i++)
 		ui->lessonBox->addItem(configParser::lessonTr(lessons[i]));
 	if(oldL == -1)
 		oldL = 0;
@@ -237,8 +236,8 @@ void classControls::refreshCharts(void)
 	// Sublessons
 	ui->sublessonBox->clear();
 	QList<int> sublessons = dbMgr.recordedSublessons(classID, packs[oldP],
-			lessons[ui->lessonBox->currentIndex()]);
-	for(int i=0; i < sublessons.count(); i++)
+		lessons[ui->lessonBox->currentIndex()]);
+	for(int i = 0; i < sublessons.count(); i++)
 		ui->sublessonBox->addItem(configParser::sublessonName(sublessons[i]));
 	if(oldS == -1)
 		oldS = 0;
@@ -246,9 +245,9 @@ void classControls::refreshCharts(void)
 	// Exercises
 	ui->exerciseBox->clear();
 	QList<int> exercises = dbMgr.recordedExercises(classID, packs[oldP],
-			lessons[ui->lessonBox->currentIndex()],
-			sublessons[ui->sublessonBox->currentIndex()]);
-	for(int i=0; i < exercises.count(); i++)
+		lessons[ui->lessonBox->currentIndex()],
+		sublessons[ui->sublessonBox->currentIndex()]);
+	for(int i = 0; i < exercises.count(); i++)
 		ui->exerciseBox->addItem(configParser::exerciseTr(exercises[i]));
 	if(oldE == -1)
 		oldE = 0;
@@ -261,7 +260,7 @@ void classControls::refreshCharts(void)
 	int lesson = lessons[ui->lessonBox->currentIndex()];
 	int sublesson = sublessons[ui->sublessonBox->currentIndex()];
 	int exercise = exercises[ui->exerciseBox->currentIndex()];
-	for(int i=0; i < studentIDs.count(); i++)
+	for(int i = 0; i < studentIDs.count(); i++)
 	{
 		int i2;
 		QList<QVariantMap> entries = dbMgr.historyEntries(classID, studentIDs[i], pack, lesson, sublesson, exercise);
@@ -272,7 +271,7 @@ void classControls::refreshCharts(void)
 		speedSeries->setName(studentName);
 		mistakesSeries->setName(studentName);
 		timeSeries->setName(studentName);
-		for(i2=0; i2 < entries.count(); i2++)
+		for(i2 = 0; i2 < entries.count(); i2++)
 		{
 			QVariantMap entry = entries[i2];
 			speedSeries->append(i2, entry["speed"].toInt());
@@ -289,7 +288,7 @@ void classControls::refreshCharts(void)
 	// Set theme
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QChart::ChartTheme theme;
-	if(settings.value("theme/theme","0").toInt() == 1)
+	if(settings.value("theme/theme", "0").toInt() == 1)
 		theme = QChart::ChartThemeDark;
 	else
 		theme = QChart::ChartThemeLight;
@@ -306,7 +305,7 @@ void classControls::loadExercise(void)
 {
 #ifndef Q_OS_WASM
 	QList<int> students, allStudents = dbMgr.studentIDs(classID), occupiedStudents = serverPtr->runningExerciseStudents();
-	for(int i=0; i < allStudents.count(); i++)
+	for(int i = 0; i < allStudents.count(); i++)
 	{
 		if(serverPtr->isLoggedIn(dbMgr.userNickname(allStudents[i])) && !occupiedStudents.contains(allStudents[i]))
 			students += allStudents[i];
@@ -325,7 +324,7 @@ void classControls::startExercise(loadExerciseDialog *dialog)
 	QList<QByteArray> usernames;
 	QList<QHostAddress> addresses;
 	auto selectedTargets = dialog->selectedTargets();
-	for(int i=0; i < selectedTargets.count(); i++)
+	for(int i = 0; i < selectedTargets.count(); i++)
 	{
 		if(fullMode)
 			usernames += dbMgr.userNickname(selectedTargets[i]).toUtf8();

@@ -48,7 +48,7 @@ namespace Ui {
  */
 class classControls : public QWidget
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit classControls(int openClassID, QWidget *parent = nullptr);
 		~classControls();

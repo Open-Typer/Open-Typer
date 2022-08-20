@@ -21,13 +21,13 @@
 #ifndef PACKS_H
 #define PACKS_H
 
-#include<QObject>
-#include<QString>
+#include <QObject>
+#include <QString>
 
 /*! \brief The builtinPacks class provides functions for built-in pack settings. */
 class builtinPacks : public QObject
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		static QString packName(QString rawName);
 };

@@ -29,7 +29,7 @@ keyboardOptions::keyboardOptions(QWidget *parent) :
 {
 	ui->setupUi(this);
 	// Load packs
-	QDirIterator it(":/res/configs/",QDirIterator::NoIteratorFlags);
+	QDirIterator it(":/res/configs/", QDirIterator::NoIteratorFlags);
 	int i;
 	QString item, current;
 	QStringList items;
@@ -38,7 +38,7 @@ keyboardOptions::keyboardOptions(QWidget *parent) :
 	{
 		item = it.next();
 		current = "";
-		for(i=14; i < item.count(); i++)
+		for(i = 14; i < item.count(); i++)
 			current += item[i];
 		rawItems += current;
 		items += builtinPacks::packName(current);
@@ -46,11 +46,11 @@ keyboardOptions::keyboardOptions(QWidget *parent) :
 	ui->packList->addItems(items);
 	// Get current pack
 	// TODO: Detect default config
-	if(!settings.value("main/customconfig","false").toBool())
-		ui->packList->setCurrentItem(ui->packList->item(rawItems.indexOf(settings.value("main/configfile","sk_SK-QWERTZ-B1").toString())));
+	if(!settings.value("main/customconfig", "false").toBool())
+		ui->packList->setCurrentItem(ui->packList->item(rawItems.indexOf(settings.value("main/configfile", "sk_SK-QWERTZ-B1").toString())));
 	// Connections
-	connect(ui->editorButton,SIGNAL(clicked()),this,SLOT(openEditor()));
-	connect(ui->packList,SIGNAL(currentRowChanged(int)),this,SLOT(changePack(int)));
+	connect(ui->editorButton, SIGNAL(clicked()), this, SLOT(openEditor()));
+	connect(ui->packList, SIGNAL(currentRowChanged(int)), this, SLOT(changePack(int)));
 }
 
 /*! Destroys the keyboardOptions object. */
@@ -67,8 +67,8 @@ keyboardOptions::~keyboardOptions()
 void keyboardOptions::openEditor(void)
 {
 	packEditor *editorWindow = new packEditor(this);
-	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint,true);
-	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint,true);
+	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint, true);
+	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint, true);
 	editorWindow->setWindowModality(Qt::WindowModal);
 	editorWindow->show();
 }
@@ -79,6 +79,6 @@ void keyboardOptions::openEditor(void)
  */
 void keyboardOptions::changePack(int index)
 {
-	settings.setValue("main/configfile",rawItems[index]);
-	settings.setValue("main/customconfig","false");
+	settings.setValue("main/configfile", rawItems[index]);
+	settings.setValue("main/customconfig", "false");
 }

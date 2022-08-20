@@ -30,12 +30,12 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 	ui->setupUi(this);
 	// Load settings
 	// Space bar newline
-	if(settings.value("main/spacenewline","true").toBool())
+	if(settings.value("main/spacenewline", "true").toBool())
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Checked);
 	else
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
 	// Error penalty
-	ui->errorPenaltyBox->setValue(settings.value("main/errorpenalty","10").toInt());
+	ui->errorPenaltyBox->setValue(settings.value("main/errorpenalty", "10").toInt());
 	// Mistake limit
 	bool mistakeLimit = settings.value("main/mistakelimit", true).toBool();
 	ui->mistakeLimitCheckBox->setChecked(mistakeLimit);
@@ -49,15 +49,17 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 #endif // Q_OS_WIN
 	// Connect
 	// Space bar newline checkbox
-	connect(ui->spaceNewlineCheckBox,SIGNAL(clicked(bool)),this,SLOT(setSpaceNewline(bool)));
+	connect(ui->spaceNewlineCheckBox, SIGNAL(clicked(bool)), this, SLOT(setSpaceNewline(bool)));
 	// Error penalty box
-	connect(ui->errorPenaltyBox,SIGNAL(valueChanged(int)),this,SLOT(setErrorPenalty(int)));
+	connect(ui->errorPenaltyBox, SIGNAL(valueChanged(int)), this, SLOT(setErrorPenalty(int)));
 	// Mistake limit check box
 	connect(ui->mistakeLimitCheckBox, &QCheckBox::toggled, this, &behaviorOptions::toggleMistakeLimit);
 	// Mistake characters box
 	connect(ui->mistakeCharsBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &behaviorOptions::setMistakeChars);
 	// Updates check box
-	connect(ui->updatesCheckBox, &QCheckBox::toggled, this, [this](bool checked) { settings.setValue("main/updatechecks", checked); });
+	connect(ui->updatesCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
+		settings.setValue("main/updatechecks", checked);
+	});
 }
 
 /*! Destroys the behaviorOptions object. */
@@ -73,9 +75,9 @@ behaviorOptions::~behaviorOptions()
 void behaviorOptions::setSpaceNewline(bool value)
 {
 	if(value)
-		settings.setValue("main/spacenewline","true");
+		settings.setValue("main/spacenewline", "true");
 	else
-		settings.setValue("main/spacenewline","false");
+		settings.setValue("main/spacenewline", "false");
 }
 
 /*!
@@ -84,7 +86,7 @@ void behaviorOptions::setSpaceNewline(bool value)
  */
 void behaviorOptions::setErrorPenalty(int value)
 {
-	settings.setValue("main/errorpenalty",value);
+	settings.setValue("main/errorpenalty", value);
 }
 
 /*!

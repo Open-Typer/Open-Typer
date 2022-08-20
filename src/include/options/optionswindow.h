@@ -44,7 +44,7 @@ namespace Ui {
  */
 class optionsWindow : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit optionsWindow(QWidget *parent = nullptr);
 		~optionsWindow();

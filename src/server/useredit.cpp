@@ -49,11 +49,11 @@ userEdit::userEdit(bool newUser, int id, QWidget *parent) :
 	userID = id;
 	verify();
 	// Connections
-	connect(ui->userNameEdit,&QLineEdit::textChanged,this,&userEdit::verify);
-	connect(ui->passwordEdit,&QLineEdit::textChanged,this,&userEdit::verify);
-	connect(ui->repeatPasswordEdit,&QLineEdit::textChanged,this,&userEdit::verify);
-	connect(ui->resetPasswordButton,SIGNAL(clicked()),this,SLOT(resetPassword()));
-	connect(ui->okButton,SIGNAL(clicked()),this,SLOT(finish()));
+	connect(ui->userNameEdit, &QLineEdit::textChanged, this, &userEdit::verify);
+	connect(ui->passwordEdit, &QLineEdit::textChanged, this, &userEdit::verify);
+	connect(ui->repeatPasswordEdit, &QLineEdit::textChanged, this, &userEdit::verify);
+	connect(ui->resetPasswordButton, SIGNAL(clicked()), this, SLOT(resetPassword()));
+	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(finish()));
 }
 
 /*! Destroys the userEdit object. */
@@ -73,7 +73,7 @@ void userEdit::verify(void)
 	if(ui->userNameEdit->text() == "")
 		return;
 	QStringList users = dbMgr.teacherNames();
-	for(int i=0; i < users.count(); i++)
+	for(int i = 0; i < users.count(); i++)
 	{
 		if(users[i] == ui->userNameEdit->text())
 		{

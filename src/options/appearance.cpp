@@ -38,7 +38,7 @@ appearanceOptions::appearanceOptions(QWidget *parent) :
 	updateFont();
 	// Load built-in themes
 	QList<QVariantMap> themes = globalThemeEngine.themeList();
-	for(int i=0; i < themes.count(); i++)
+	for(int i = 0; i < themes.count(); i++)
 	{
 		QListWidgetItem *item = new QListWidgetItem(QIcon(":res/images/themes/" + themes[i]["icon"].toString()), themes[i]["name"].toString());
 		if(i == 0)
@@ -48,10 +48,14 @@ appearanceOptions::appearanceOptions(QWidget *parent) :
 	selectCurrentFullTheme();
 	// Connections
 	connect(ui->advancedModeButton, &QPushButton::toggled, this, &appearanceOptions::changeThemeMode);
-	connect(ui->lightThemeButton, &QPushButton::clicked, this, [this](bool checked){ setSimpleTheme(checked ? 0 : 1); });
-	connect(ui->darkThemeButton, &QPushButton::clicked, this, [this](bool checked){ setSimpleTheme(checked ? 1 : 0); });
-	connect(ui->themeList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(changeFullTheme(QListWidgetItem*)));
-	connect(ui->themeList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(changeFullTheme(QListWidgetItem*)));
+	connect(ui->lightThemeButton, &QPushButton::clicked, this, [this](bool checked) {
+		setSimpleTheme(checked ? 0 : 1);
+	});
+	connect(ui->darkThemeButton, &QPushButton::clicked, this, [this](bool checked) {
+		setSimpleTheme(checked ? 1 : 0);
+	});
+	connect(ui->themeList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(changeFullTheme(QListWidgetItem *)));
+	connect(ui->themeList, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changeFullTheme(QListWidgetItem *)));
 	connect(ui->backButton, SIGNAL(clicked()), this, SLOT(goBack()));
 	connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), this, SLOT(changeFont(QFont)));
 	connect(ui->fontSizeBox, SIGNAL(valueChanged(int)), this, SLOT(changeFontSize(int)));
@@ -136,7 +140,7 @@ void appearanceOptions::updateSimpleTheme(void)
  * Connected from themeList->itemClicked() and themeList->itemActivated().\n
  * Switches built-in theme.
  */
-void appearanceOptions::changeFullTheme(QListWidgetItem* item)
+void appearanceOptions::changeFullTheme(QListWidgetItem *item)
 {
 	int index = ui->themeList->row(item);
 	if(index == 0) // block obsolete "default" theme
@@ -148,7 +152,7 @@ void appearanceOptions::changeFullTheme(QListWidgetItem* item)
 	{
 		init();
 		ui->themeList->hide();
-		QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themesFrame,"geometry");
+		QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themesFrame, "geometry");
 		int oldWidth2 = geometry().width();
 		// Animation 1
 		animation1->setEasingCurve(QEasingCurve::InQuad);
@@ -159,13 +163,13 @@ void appearanceOptions::changeFullTheme(QListWidgetItem* item)
 		widgetGeometry.setWidth(0);
 		animation1->setEndValue(widgetGeometry);
 		animation1->start(QAbstractAnimation::DeleteWhenStopped);
-		connect(animation1,&QPropertyAnimation::finished,this,[oldWidth, oldWidth2, index, this]() {
+		connect(animation1, &QPropertyAnimation::finished, this, [oldWidth, oldWidth2, index, this]() {
 			ui->themesFrame->hide();
 			QRect widgetGeometry = ui->themesFrame->geometry();
 			widgetGeometry.setWidth(oldWidth);
 			ui->themesFrame->setGeometry(widgetGeometry);
 			// Animation 2
-			QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themeCustomizationFrame,"geometry");
+			QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themeCustomizationFrame, "geometry");
 			animation2->setEasingCurve(QEasingCurve::OutQuad);
 			animation2->setDuration(128);
 			ui->themeCustomizationFrame->show();
@@ -189,9 +193,9 @@ void appearanceOptions::changeFullTheme(QListWidgetItem* item)
 /*! Select currently set full theme. */
 void appearanceOptions::selectCurrentFullTheme(void)
 {
-	QString id = settings.value("theme/fulltheme","default").toString();
+	QString id = settings.value("theme/fulltheme", "default").toString();
 	QList<QVariantMap> themes = globalThemeEngine.themeList();
-	for(int i=0; i < themes.count(); i++)
+	for(int i = 0; i < themes.count(); i++)
 	{
 		if(themes[i]["id"] == id)
 		{
@@ -207,7 +211,7 @@ void appearanceOptions::selectCurrentFullTheme(void)
  */
 void appearanceOptions::goBack(void)
 {
-	QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themeCustomizationFrame,"geometry");
+	QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themeCustomizationFrame, "geometry");
 	// Animation 1
 	animation1->setEasingCurve(QEasingCurve::InQuad);
 	QRect widgetGeometry = ui->themeCustomizationFrame->geometry();
@@ -219,7 +223,7 @@ void appearanceOptions::goBack(void)
 	connect(animation1, &QPropertyAnimation::finished, this, [this]() {
 		ui->themeCustomizationFrame->hide();
 		// Animation 2
-		QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themesFrame,"geometry");
+		QPropertyAnimation *animation2 = new QPropertyAnimation(ui->themesFrame, "geometry");
 		animation2->setEasingCurve(QEasingCurve::OutQuad);
 		animation2->setDuration(128);
 		ui->themesFrame->show();
@@ -326,26 +330,11 @@ void appearanceOptions::setColors()
 	QColor paperColor = themeEngine::paperColor();
 	QColor panelColor = themeEngine::panelColor();
 	QString styleSheetPart = "border: 2px solid gray; background-color: rgb(";
-	ui->levelTextColorButton->setStyleSheet(styleSheetPart +
-		QString::number(exTextColor.red()) + ", " +
-		QString::number(exTextColor.green()) + ", " +
-		QString::number(exTextColor.blue()) + ");");
-	ui->inputTextColorButton->setStyleSheet(styleSheetPart +
-		QString::number(inTextColor.red()) + ", " +
-		QString::number(inTextColor.green()) + ", " +
-		QString::number(inTextColor.blue()) + ");");
-	ui->bgColorButton->setStyleSheet(styleSheetPart +
-		QString::number(bgColor.red()) + ", " +
-		QString::number(bgColor.green()) + ", " +
-		QString::number(bgColor.blue()) + ");");
-	ui->paperColorButton->setStyleSheet(styleSheetPart +
-		QString::number(paperColor.red()) + ", " +
-		QString::number(paperColor.green()) + ", " +
-		QString::number(paperColor.blue()) + ");");
-	ui->panelColorButton->setStyleSheet(styleSheetPart +
-		QString::number(panelColor.red()) + ", " +
-		QString::number(panelColor.green()) + ", " +
-		QString::number(panelColor.blue()) + ");");
+	ui->levelTextColorButton->setStyleSheet(styleSheetPart + QString::number(exTextColor.red()) + ", " + QString::number(exTextColor.green()) + ", " + QString::number(exTextColor.blue()) + ");");
+	ui->inputTextColorButton->setStyleSheet(styleSheetPart + QString::number(inTextColor.red()) + ", " + QString::number(inTextColor.green()) + ", " + QString::number(inTextColor.blue()) + ");");
+	ui->bgColorButton->setStyleSheet(styleSheetPart + QString::number(bgColor.red()) + ", " + QString::number(bgColor.green()) + ", " + QString::number(bgColor.blue()) + ");");
+	ui->paperColorButton->setStyleSheet(styleSheetPart + QString::number(paperColor.red()) + ", " + QString::number(paperColor.green()) + ", " + QString::number(paperColor.blue()) + ");");
+	ui->panelColorButton->setStyleSheet(styleSheetPart + QString::number(panelColor.red()) + ", " + QString::number(panelColor.green()) + ", " + QString::number(panelColor.blue()) + ");");
 }
 
 /*!
@@ -458,6 +447,6 @@ void appearanceOptions::resetBgPaperColors(void)
  */
 void appearanceOptions::changeTheme(int index)
 {
-	globalThemeEngine.setStyle((themeEngine::Style) (index + 1));
+	globalThemeEngine.setStyle((themeEngine::Style)(index + 1));
 	setColors();
 }

@@ -26,7 +26,7 @@
 #include "updater.h"
 
 namespace Ui {
-class UpdaterDialog;
+	class UpdaterDialog;
 }
 
 /*!
@@ -38,7 +38,7 @@ class UpdaterDialog;
  */
 class UpdaterDialog : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit UpdaterDialog(QWidget *parent = nullptr);
 		~UpdaterDialog();

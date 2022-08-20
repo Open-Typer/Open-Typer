@@ -56,7 +56,7 @@ namespace Ui {
  */
 class packEditor : public QDialog
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit packEditor(QWidget *parent = nullptr);
 		~packEditor();

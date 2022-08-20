@@ -38,7 +38,7 @@
 /*! \brief The monitorClient class is used to communicate with the class monitor server. */
 class monitorClient : public QObject
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit monitorClient(bool errDialogs = true, QObject *parent = nullptr);
 		~monitorClient();

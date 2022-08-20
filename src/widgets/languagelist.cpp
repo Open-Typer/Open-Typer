@@ -27,11 +27,11 @@ languageList::languageList(QWidget *parent) :
 {
 	clear();
 	addItems(langMgr.boxItems);
-	if(settings.value("main/language","").toString() == "")
+	if(settings.value("main/language", "").toString() == "")
 		setCurrentRow(0);
 	else
-		setCurrentRow(langMgr.boxItems.indexOf(settings.value("main/language","").toString()));
-	connect(this,SIGNAL(currentRowChanged(int)),this,SLOT(changeLanguage(int)));
+		setCurrentRow(langMgr.boxItems.indexOf(settings.value("main/language", "").toString()));
+	connect(this, SIGNAL(currentRowChanged(int)), this, SLOT(changeLanguage(int)));
 }
 
 /*! Destroys the languageList object. */
@@ -45,8 +45,8 @@ languageList::~languageList() { }
 void languageList::changeLanguage(int index)
 {
 	if(index == 0)
-		settings.setValue("main/language","");
+		settings.setValue("main/language", "");
 	else
-		settings.setValue("main/language",langMgr.boxItems[index]);
-	langMgr.setLanguage(index-1);
+		settings.setValue("main/language", langMgr.boxItems[index]);
+	langMgr.setLanguage(index - 1);
 }

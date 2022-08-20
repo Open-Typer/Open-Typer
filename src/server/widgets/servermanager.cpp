@@ -29,7 +29,7 @@ serverManager::serverManager(QWidget *parent) :
 {
 	ui->setupUi(this);
 	ui->editDeviceButton->setEnabled(false);
-	ui->removeDeviceButton->setEnabled(false);	
+	ui->removeDeviceButton->setEnabled(false);
 	init();
 	collapse();
 	// Connections
@@ -79,18 +79,22 @@ bool serverManager::init(void)
 			serverSetup *dialog = new serverSetup(this);
 			dialog->setWindowModality(Qt::WindowModal);
 			dialog->open();
-			connect(dialog, &QDialog::rejected, this, [this]() { ui->mainControlsFrame->setEnabled(false); });
-			connect(dialog, &QDialog::accepted, this, [this]() { ui->mainControlsFrame->setEnabled(true); });
+			connect(dialog, &QDialog::rejected, this, [this]() {
+				ui->mainControlsFrame->setEnabled(false);
+			});
+			connect(dialog, &QDialog::accepted, this, [this]() {
+				ui->mainControlsFrame->setEnabled(true);
+			});
 			ret = false;
 		}
-		QDirIterator icons(":/class-icons",QDirIterator::NoIteratorFlags);
+		QDirIterator icons(":/class-icons", QDirIterator::NoIteratorFlags);
 		QStringList iconNames;
 		while(icons.hasNext())
 			iconNames += icons.next();
 		iconNames.sort();
 		int oldClass = 0, currentIndex = ui->classBox->currentIndex();
 		if(currentIndex > 0)
-			oldClass = classes[currentIndex-1];
+			oldClass = classes[currentIndex - 1];
 		disableClassOpening = true;
 		ui->classBox->clear();
 		ui->classBox->addItem(tr("No class selected", "Displayed in the class selection combo box."));
@@ -98,10 +102,10 @@ bool serverManager::init(void)
 		for(int i = 0; i < classes.count(); i++)
 		{
 			ui->classBox->addItem(dbMgr.className(classes[i]));
-			ui->classBox->setItemIcon(i+1, QIcon(iconNames[dbMgr.classIcon(classes[i])]));
+			ui->classBox->setItemIcon(i + 1, QIcon(iconNames[dbMgr.classIcon(classes[i])]));
 		}
 		if(oldClass != 0)
-			ui->classBox->setCurrentIndex(classes.indexOf(oldClass)+1);
+			ui->classBox->setCurrentIndex(classes.indexOf(oldClass) + 1);
 		disableClassOpening = false;
 		if((classes.count() == 0) || (ui->classBox->currentIndex() == 0))
 		{
@@ -138,7 +142,7 @@ void serverManager::loadDevices(void)
 	QList<int> devices = dbMgr.deviceIDs();
 	ui->deviceList->clear();
 #ifndef Q_OS_WASM
-	for(int i=0; i < devices.count(); i++)
+	for(int i = 0; i < devices.count(); i++)
 	{
 		QString text = dbMgr.deviceName(devices[i]) + " (" + dbMgr.deviceAddress(devices[i]).toString() + ") [";
 		text += serverPtr->isConnected(dbMgr.deviceAddress(devices[i])) ? tr("online") : tr("offline");
@@ -233,7 +237,7 @@ void serverManager::openClass(bool auth)
 	lastClassBoxIndex = ui->classBox->currentIndex();
 	if(disableClassOpening)
 		return;
-	int selected = ui->classBox->currentIndex()-1;
+	int selected = ui->classBox->currentIndex() - 1;
 	if(selected == -1)
 	{
 		ui->classControlsFrame->hide();
@@ -268,12 +272,14 @@ void serverManager::openClass(bool auth)
 /*! Opens student details. \see studentDetails */
 void serverManager::openDetails(int studentID)
 {
-	studentDetails *detailsWidget = new studentDetails(classes[ui->classBox->currentIndex()-1], studentID, ui->classControlsFrame);
+	studentDetails *detailsWidget = new studentDetails(classes[ui->classBox->currentIndex() - 1], studentID, ui->classControlsFrame);
 	detailsWidget->setAttribute(Qt::WA_DeleteOnClose);
 	QWidget *oldWidget = ui->classControlsLayout->itemAt(0)->widget();
 	oldWidget->close();
 	ui->classControlsLayout->addWidget(detailsWidget);
-	connect(detailsWidget, &studentDetails::backClicked, this, [this](){ openClass(false); });
+	connect(detailsWidget, &studentDetails::backClicked, this, [this]() {
+		openClass(false);
+	});
 }
 
 /*! Removes selected class. */
@@ -284,7 +290,7 @@ void serverManager::removeClass(void)
 		showCloseExercisesMessage();
 		return;
 	}
-	int selectedClass = classes[ui->classBox->currentIndex()-1];
+	int selectedClass = classes[ui->classBox->currentIndex() - 1];
 	if(QMessageBox::question(this, QString(), tr("Are you sure you want to remove class %1?").arg(dbMgr.className(selectedClass))) == QMessageBox::Yes)
 	{
 		if(dbMgr.auth(dbMgr.loginID()))
@@ -307,7 +313,10 @@ void serverManager::editClass(void)
 	classEdit *dialog = new classEdit(false, 1, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
-	connect(dialog, &QDialog::accepted, this, [this]() { init(); openClass(false); });
+	connect(dialog, &QDialog::accepted, this, [this]() {
+		init();
+		openClass(false);
+	});
 }
 
 /*! Shows a warning about opened exerciseProgressDialog dialogs. */

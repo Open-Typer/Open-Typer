@@ -41,7 +41,7 @@ namespace Ui {
  */
 class serverManager : public QWidget
 {
-	Q_OBJECT
+		Q_OBJECT
 	public:
 		explicit serverManager(QWidget *parent = nullptr);
 		~serverManager();

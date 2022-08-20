@@ -33,7 +33,7 @@ levelSummary::levelSummary(QWidget *parent) :
 	ui->grossHitsLabel->hide();
 	ui->mistakesLabel->hide();
 	// Connections
-	connect(ui->previewButton,SIGNAL(clicked()),this,SLOT(accept()));
+	connect(ui->previewButton, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
 /*! Destroys the levelSummary object. */
