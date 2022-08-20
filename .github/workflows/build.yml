@@ -48,7 +48,6 @@ jobs:
         arch: 'win32_mingw${{ matrix.mingw-version }}'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
-        setup-python: 'false'
     - if: contains(matrix.os, 'windows')
       name: Install 32-bit MinGW
       uses: egor-tensin/setup-mingw@v2
@@ -63,7 +62,6 @@ jobs:
         host: 'linux'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
-        setup-python: 'false'
     # MacOS
     - if: contains(matrix.os, 'macos')
       name: Install Qt (macOS)
@@ -73,7 +71,6 @@ jobs:
         host: 'mac'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
-        setup-python: 'false'
     ## Build
     - name: Build
       run: .ci/${{ env.os_name }}-build.sh
@@ -117,7 +114,6 @@ jobs:
         arch: 'wasm_32'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
-        setup-python: 'false'
     # Install emscripten
     - name: Install emscripten
       uses: mymindstorm/setup-emsdk@v11
