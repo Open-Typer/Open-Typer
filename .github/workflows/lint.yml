@@ -11,12 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: cpp-linter/cpp-linter-action@v1
-        id: linter
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install clang-tools
+        uses: KyleMayes/install-llvm-action@v1
         with:
-          style: file
+          version: 14
+          directory: ${{ runner.temp }}/llvm
+      - name: Install linter python package
+        run: python3 -m pip install git+https://github.com/cpp-linter/cpp-linter-action@v1
+      - name: Run linter
+        id: linter
+        run: cpp-linter --version=${{ runner.temp }}/llvm --style=file --ignore='.github' --tidy-checks='-*'
 
       - name: Fail
         if: steps.linter.outputs.checks-failed > 0
