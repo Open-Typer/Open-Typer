@@ -97,8 +97,8 @@ IncludeCategories:
 IncludeIsMainRegex: '(Test)?$'
 IncludeIsMainSourceRegex: ''
 IndentAccessModifiers: true
-IndentCaseLabels: false
-IndentCaseBlocks: false
+IndentCaseLabels: true
+IndentCaseBlocks: true
 IndentGotoLabels: true
 IndentPPDirectives: None
 IndentExternBlock: AfterExternBlock
