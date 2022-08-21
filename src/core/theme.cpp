@@ -394,20 +394,20 @@ void themeEngine::resetPaperColor(void)
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	switch(style())
 	{
-	case DarkStyle:
-		setPaperColor(QColor(15, 25, 35));
-		break;
-	case LightStyle:
-		setPaperColor(QColor(255, 255, 255));
-		break;
-	default:
-		QPalette palette;
-		if(parent() == nullptr)
-			palette = qApp->palette();
-		else
-			palette = ((QWidget *) parent())->palette();
-		setPaperColor(palette.color(QPalette::Base));
-		break;
+		case DarkStyle:
+			setPaperColor(QColor(15, 25, 35));
+			break;
+		case LightStyle:
+			setPaperColor(QColor(255, 255, 255));
+			break;
+		default:
+			QPalette palette;
+			if(parent() == nullptr)
+				palette = qApp->palette();
+			else
+				palette = ((QWidget *) parent())->palette();
+			setPaperColor(palette.color(QPalette::Base));
+			break;
 	}
 	settings.setValue("theme/custompapercolor", false);
 }
@@ -451,20 +451,20 @@ void themeEngine::resetPanelColor(void)
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	switch(style())
 	{
-	case DarkStyle:
-		setPanelColor(QColor(20, 33, 47));
-		break;
-	case LightStyle:
-		setPanelColor(QColor(255, 255, 255));
-		break;
-	default:
-		QPalette palette;
-		if(parent() == nullptr)
-			palette = qApp->palette();
-		else
-			palette = ((QWidget *) parent())->palette();
-		setPanelColor(palette.color(QPalette::Midlight));
-		break;
+		case DarkStyle:
+			setPanelColor(QColor(20, 33, 47));
+			break;
+		case LightStyle:
+			setPanelColor(QColor(255, 255, 255));
+			break;
+		default:
+			QPalette palette;
+			if(parent() == nullptr)
+				palette = qApp->palette();
+			else
+				palette = ((QWidget *) parent())->palette();
+			setPanelColor(palette.color(QPalette::Midlight));
+			break;
 	}
 	settings.setValue("theme/custompanelcolor", false);
 }
@@ -489,22 +489,22 @@ void themeEngine::setStyle(themeEngine::Style newStyle)
 	QFile styleFile;
 	switch(newStyle)
 	{
-	case SystemStyle:
-		// System (default)
-		qApp->setStyleSheet("");
-		break;
-	case DarkStyle:
-		// Dark
-		styleFile.setFileName(":/dark-theme/style.qss");
-		if(styleFile.open(QFile::ReadOnly | QFile::Text))
-			qApp->setStyleSheet(styleFile.readAll());
-		break;
-	case LightStyle:
-		// Light
-		styleFile.setFileName(":/light-theme/style.qss");
-		if(styleFile.open(QFile::ReadOnly | QFile::Text))
-			qApp->setStyleSheet(styleFile.readAll());
-		break;
+		case SystemStyle:
+			// System (default)
+			qApp->setStyleSheet("");
+			break;
+		case DarkStyle:
+			// Dark
+			styleFile.setFileName(":/dark-theme/style.qss");
+			if(styleFile.open(QFile::ReadOnly | QFile::Text))
+				qApp->setStyleSheet(styleFile.readAll());
+			break;
+		case LightStyle:
+			// Light
+			styleFile.setFileName(":/light-theme/style.qss");
+			if(styleFile.open(QFile::ReadOnly | QFile::Text))
+				qApp->setStyleSheet(styleFile.readAll());
+			break;
 	}
 	settings.setValue("theme/theme", (int) newStyle);
 	emit styleChanged();

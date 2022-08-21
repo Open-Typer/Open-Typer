@@ -623,14 +623,14 @@ void packEditor::changeRepeating(int index)
 	QString repeatType;
 	switch(index)
 	{
-	case 1:
-		// Words
-		repeatType = "w";
-		break;
-	default:
-		// None
-		repeatType = "0";
-		break;
+		case 1:
+			// Words
+			repeatType = "w";
+			break;
+		default:
+			// None
+			repeatType = "0";
+			break;
 	}
 	QString lessonDesc;
 	if((sublesson == 1) && (level == 1))

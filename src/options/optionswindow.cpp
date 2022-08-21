@@ -64,26 +64,26 @@ void optionsWindow::changeOptionWidget(int index)
 	QWidget *options = nullptr;
 	switch(index)
 	{
-	case 0:
-		// Language
-		options = new languageList;
-		break;
-	case 1:
-		// Behavior
-		options = new behaviorOptions;
-		break;
-	case 2:
-		// Keyboard
-		options = new keyboardOptions;
-		break;
-	case 3:
-		// Appearance
-		options = new appearanceOptions;
-		break;
-	case 4:
-		// Connection
-		options = new connectionOptions;
-		break;
+		case 0:
+			// Language
+			options = new languageList;
+			break;
+		case 1:
+			// Behavior
+			options = new behaviorOptions;
+			break;
+		case 2:
+			// Keyboard
+			options = new keyboardOptions;
+			break;
+		case 3:
+			// Appearance
+			options = new appearanceOptions;
+			break;
+		case 4:
+			// Connection
+			options = new connectionOptions;
+			break;
 	}
 	if(options == nullptr)
 		return;

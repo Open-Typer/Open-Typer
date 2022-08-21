@@ -1534,16 +1534,16 @@ void OpenTyper::changeMode(int mode, bool enableStudentUpdate)
 {
 	switch(mode)
 	{
-	case 0:
-		// Default mode
-		ui->masterControlFrame->show();
-		ui->timedExControlFrame->hide();
-		break;
-	case 1:
-		// Timed exercise mode
-		ui->masterControlFrame->hide();
-		ui->timedExControlFrame->show();
-		break;
+		case 0:
+			// Default mode
+			ui->masterControlFrame->show();
+			ui->timedExControlFrame->hide();
+			break;
+		case 1:
+			// Timed exercise mode
+			ui->masterControlFrame->hide();
+			ui->timedExControlFrame->show();
+			break;
 	}
 	currentMode = mode;
 	if(enableStudentUpdate)

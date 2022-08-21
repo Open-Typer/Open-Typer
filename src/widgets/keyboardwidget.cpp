@@ -104,24 +104,24 @@ void keyboardWidget::addKey(QString keyLabelText, int keyCode, int keyMinimumWid
 	QColor keyColor(0, 0, 0);
 	switch(finger)
 	{
-	case Finger_LeftIndex:
-	case Finger_RightIndex:
-		keyColor = QColor(255, 255, 0);
-		break;
-	case Finger_LeftMiddle:
-	case Finger_RightMiddle:
-		keyColor = QColor(100, 255, 0);
-		break;
-	case Finger_LeftRing:
-	case Finger_RightRing:
-		keyColor = QColor(0, 100, 255);
-		break;
-	case Finger_LeftLittle:
-	case Finger_RightLittle:
-		keyColor = QColor(255, 25, 25);
-		break;
-	default:
-		break;
+		case Finger_LeftIndex:
+		case Finger_RightIndex:
+			keyColor = QColor(255, 255, 0);
+			break;
+		case Finger_LeftMiddle:
+		case Finger_RightMiddle:
+			keyColor = QColor(100, 255, 0);
+			break;
+		case Finger_LeftRing:
+		case Finger_RightRing:
+			keyColor = QColor(0, 100, 255);
+			break;
+		case Finger_LeftLittle:
+		case Finger_RightLittle:
+			keyColor = QColor(255, 25, 25);
+			break;
+		default:
+			break;
 	}
 	keyBaseStyleSheets.insert(newKey, "QFrame { border-radius: 5px; }");
 	keyFingerColors.insert(newKey, keyColor);
@@ -245,12 +245,12 @@ bool keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 #endif
 				switch(i)
 				{
-				case 0:
-					shiftKeyCode = code;
-					break;
-				case 1:
-					keyCode = code;
-					break;
+					case 0:
+						shiftKeyCode = code;
+						break;
+					case 1:
+						keyCode = code;
+						break;
 				}
 			}
 			registerKey(layoutKey["x"].toInt(), layoutKey["y"].toInt(), layoutKey["label"].toString(), keyCode, shiftKeyCode);
@@ -293,215 +293,215 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 	QPoint keyPos(keyX, keyY);
 	switch(keyPos.y())
 	{
-	case 0:
-		switch(keyPos.x())
-		{
 		case 0:
-			return Finger_LeftLittle;
+			switch(keyPos.x())
+			{
+				case 0:
+					return Finger_LeftLittle;
+					break;
+				case 1:
+					return Finger_LeftLittle;
+					break;
+				case 2:
+					return Finger_LeftLittle;
+					break;
+				case 3:
+					return Finger_LeftRing;
+					break;
+				case 4:
+					return Finger_LeftMiddle;
+					break;
+				case 5:
+					return Finger_LeftIndex;
+					break;
+				case 6:
+					return Finger_LeftIndex;
+					break;
+				case 7:
+					return Finger_RightIndex;
+					break;
+				case 8:
+					return Finger_RightIndex;
+					break;
+				case 9:
+					return Finger_RightMiddle;
+					break;
+				case 10:
+					return Finger_RightRing;
+					break;
+				case 11:
+					return Finger_RightLittle;
+					break;
+				case 12:
+					return Finger_RightLittle;
+					break;
+				case 13:
+					return Finger_RightLittle;
+					break;
+				default:
+					return Finger_Invalid;
+					break;
+			}
 			break;
 		case 1:
-			return Finger_LeftLittle;
+			switch(keyPos.x())
+			{
+				case 0:
+					return Finger_LeftLittle;
+					break;
+				case 1:
+					return Finger_LeftLittle;
+					break;
+				case 2:
+					return Finger_LeftRing;
+					break;
+				case 3:
+					return Finger_LeftMiddle;
+					break;
+				case 4:
+					return Finger_LeftIndex;
+					break;
+				case 5:
+					return Finger_LeftIndex;
+					break;
+				case 6:
+					return Finger_RightIndex;
+					break;
+				case 7:
+					return Finger_RightIndex;
+					break;
+				case 8:
+					return Finger_RightMiddle;
+					break;
+				case 9:
+					return Finger_RightRing;
+					break;
+				case 10:
+					return Finger_RightLittle;
+					break;
+				case 11:
+					return Finger_RightLittle;
+					break;
+				case 12:
+					return Finger_RightLittle;
+					break;
+				default:
+					return Finger_Invalid;
+					break;
+			}
 			break;
 		case 2:
-			return Finger_LeftLittle;
+			switch(keyPos.x())
+			{
+				case 0:
+					return Finger_LeftLittle;
+					break;
+				case 1:
+					return Finger_LeftLittle;
+					break;
+				case 2:
+					return Finger_LeftRing;
+					break;
+				case 3:
+					return Finger_LeftMiddle;
+					break;
+				case 4:
+					return Finger_LeftIndex;
+					break;
+				case 5:
+					return Finger_LeftIndex;
+					break;
+				case 6:
+					return Finger_RightIndex;
+					break;
+				case 7:
+					return Finger_RightIndex;
+					break;
+				case 8:
+					return Finger_RightMiddle;
+					break;
+				case 9:
+					return Finger_RightRing;
+					break;
+				case 10:
+					return Finger_RightLittle;
+					break;
+				case 11:
+					return Finger_RightLittle;
+					break;
+				case 12:
+					return Finger_RightLittle;
+					break;
+				case 13:
+					return Finger_RightLittle;
+					break;
+				default:
+					return Finger_Invalid;
+					break;
+			}
 			break;
 		case 3:
-			return Finger_LeftRing;
+			switch(keyPos.x())
+			{
+				case 0:
+					return Finger_LeftLittle;
+					break;
+				case 1:
+					return Finger_LeftLittle;
+					break;
+				case 2:
+					return Finger_LeftRing;
+					break;
+				case 3:
+					return Finger_LeftMiddle;
+					break;
+				case 4:
+					return Finger_LeftIndex;
+					break;
+				case 5:
+					return Finger_LeftIndex;
+					break;
+				case 6:
+					return Finger_RightIndex;
+					break;
+				case 7:
+					return Finger_RightIndex;
+					break;
+				case 8:
+					return Finger_RightMiddle;
+					break;
+				case 9:
+					return Finger_RightRing;
+					break;
+				case 10:
+					return Finger_RightLittle;
+					break;
+				case 11:
+					return Finger_RightLittle;
+					break;
+				case 12:
+					return Finger_RightLittle;
+					break;
+				default:
+					return Finger_Invalid;
+					break;
+			}
 			break;
 		case 4:
-			return Finger_LeftMiddle;
-			break;
-		case 5:
-			return Finger_LeftIndex;
-			break;
-		case 6:
-			return Finger_LeftIndex;
-			break;
-		case 7:
-			return Finger_RightIndex;
-			break;
-		case 8:
-			return Finger_RightIndex;
-			break;
-		case 9:
-			return Finger_RightMiddle;
-			break;
-		case 10:
-			return Finger_RightRing;
-			break;
-		case 11:
-			return Finger_RightLittle;
-			break;
-		case 12:
-			return Finger_RightLittle;
-			break;
-		case 13:
-			return Finger_RightLittle;
+			switch(keyPos.x())
+			{
+				case 2:
+					// TODO: Add an option to set left thumb finger for space bar
+					return Finger_RightThumb;
+					break;
+				default:
+					return Finger_Invalid;
+					break;
+			}
 			break;
 		default:
 			return Finger_Invalid;
 			break;
-		}
-		break;
-	case 1:
-		switch(keyPos.x())
-		{
-		case 0:
-			return Finger_LeftLittle;
-			break;
-		case 1:
-			return Finger_LeftLittle;
-			break;
-		case 2:
-			return Finger_LeftRing;
-			break;
-		case 3:
-			return Finger_LeftMiddle;
-			break;
-		case 4:
-			return Finger_LeftIndex;
-			break;
-		case 5:
-			return Finger_LeftIndex;
-			break;
-		case 6:
-			return Finger_RightIndex;
-			break;
-		case 7:
-			return Finger_RightIndex;
-			break;
-		case 8:
-			return Finger_RightMiddle;
-			break;
-		case 9:
-			return Finger_RightRing;
-			break;
-		case 10:
-			return Finger_RightLittle;
-			break;
-		case 11:
-			return Finger_RightLittle;
-			break;
-		case 12:
-			return Finger_RightLittle;
-			break;
-		default:
-			return Finger_Invalid;
-			break;
-		}
-		break;
-	case 2:
-		switch(keyPos.x())
-		{
-		case 0:
-			return Finger_LeftLittle;
-			break;
-		case 1:
-			return Finger_LeftLittle;
-			break;
-		case 2:
-			return Finger_LeftRing;
-			break;
-		case 3:
-			return Finger_LeftMiddle;
-			break;
-		case 4:
-			return Finger_LeftIndex;
-			break;
-		case 5:
-			return Finger_LeftIndex;
-			break;
-		case 6:
-			return Finger_RightIndex;
-			break;
-		case 7:
-			return Finger_RightIndex;
-			break;
-		case 8:
-			return Finger_RightMiddle;
-			break;
-		case 9:
-			return Finger_RightRing;
-			break;
-		case 10:
-			return Finger_RightLittle;
-			break;
-		case 11:
-			return Finger_RightLittle;
-			break;
-		case 12:
-			return Finger_RightLittle;
-			break;
-		case 13:
-			return Finger_RightLittle;
-			break;
-		default:
-			return Finger_Invalid;
-			break;
-		}
-		break;
-	case 3:
-		switch(keyPos.x())
-		{
-		case 0:
-			return Finger_LeftLittle;
-			break;
-		case 1:
-			return Finger_LeftLittle;
-			break;
-		case 2:
-			return Finger_LeftRing;
-			break;
-		case 3:
-			return Finger_LeftMiddle;
-			break;
-		case 4:
-			return Finger_LeftIndex;
-			break;
-		case 5:
-			return Finger_LeftIndex;
-			break;
-		case 6:
-			return Finger_RightIndex;
-			break;
-		case 7:
-			return Finger_RightIndex;
-			break;
-		case 8:
-			return Finger_RightMiddle;
-			break;
-		case 9:
-			return Finger_RightRing;
-			break;
-		case 10:
-			return Finger_RightLittle;
-			break;
-		case 11:
-			return Finger_RightLittle;
-			break;
-		case 12:
-			return Finger_RightLittle;
-			break;
-		default:
-			return Finger_Invalid;
-			break;
-		}
-		break;
-	case 4:
-		switch(keyPos.x())
-		{
-		case 2:
-			// TODO: Add an option to set left thumb finger for space bar
-			return Finger_RightThumb;
-			break;
-		default:
-			return Finger_Invalid;
-			break;
-		}
-		break;
-	default:
-		return Finger_Invalid;
-		break;
 	}
 }
 

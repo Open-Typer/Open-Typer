@@ -245,12 +245,12 @@ void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
 	errBox.setText(tr("Unable to connect to class monitor server."));
 	switch(error)
 	{
-	case QAbstractSocket::SocketTimeoutError:
-		errBox.setInformativeText("Connection timed out.");
-		break;
-	default:
-		errBox.setInformativeText(socket.errorString());
-		break;
+		case QAbstractSocket::SocketTimeoutError:
+			errBox.setInformativeText("Connection timed out.");
+			break;
+		default:
+			errBox.setInformativeText(socket.errorString());
+			break;
 	}
 	errBox.setIcon(QMessageBox::Critical);
 	errBox.exec();
