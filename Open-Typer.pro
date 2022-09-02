@@ -73,7 +73,7 @@ SOURCES += \
     src/packEditor/packselector.cpp \
     src/updater/updater.cpp \
     src/main.cpp \
-    src/opentyper.cpp \
+    src/MainWindow.cpp \
     src/exportdialog.cpp \
     src/server/usermanager.cpp \
     src/server/useredit.cpp \
@@ -120,7 +120,7 @@ HEADERS += \
     src/include/packEditor/packselector.h \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
-    src/include/opentyper.h \
+    src/include/MainWindow.h \
     src/include/exportdialog.h \
     src/include/server/usermanager.h \
     src/include/server/useredit.h \
@@ -150,7 +150,7 @@ FORMS += \
     ui/statsdialog.ui \
     ui/timedialog.ui \
     ui/testwaitdialog.ui \
-    ui/opentyper.ui \
+    ui/MainWindow.ui \
     ui/exportdialog.ui \
     ui/server/usermanager.ui \
     ui/server/useredit.ui \

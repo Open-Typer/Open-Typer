@@ -1,5 +1,5 @@
 /*
- * opentyper.cpp
+ * MainWindow.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "opentyper.h"
-#include "ui_opentyper.h"
+#include "MainWindow.h"
+#include "ui_MainWindow.h"
 
 /*! Constructs the main window. */
-OpenTyper::OpenTyper(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
-	ui(new Ui::OpenTyper),
+	ui(new Ui::MainWindow),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
@@ -63,19 +63,19 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	updateText();
 	// Connections
 	connect(&client, SIGNAL(disconnected()), this, SLOT(updateStudent()));
-	connect(&client, &monitorClient::exerciseReceived, this, &OpenTyper::loadReceivedExercise);
-	connect(&client, &monitorClient::initExReceived, this, &OpenTyper::waitForReceivedExercise);
+	connect(&client, &monitorClient::exerciseReceived, this, &MainWindow::loadReceivedExercise);
+	connect(&client, &monitorClient::initExReceived, this, &MainWindow::waitForReceivedExercise);
 	// File menu
-	connect(ui->actionOpenText, &QAction::triggered, this, &OpenTyper::openExerciseFromFile);
-	connect(ui->actionOpenPack, &QAction::triggered, this, &OpenTyper::openPack);
-	connect(ui->actionNewPack, &QAction::triggered, this, &OpenTyper::openEditor);
+	connect(ui->actionOpenText, &QAction::triggered, this, &MainWindow::openExerciseFromFile);
+	connect(ui->actionOpenPack, &QAction::triggered, this, &MainWindow::openPack);
+	connect(ui->actionNewPack, &QAction::triggered, this, &MainWindow::openEditor);
 	connect(ui->actionPrint, &QAction::triggered, ui->printButton, &QPushButton::clicked);
 	// View menu
 	connect(ui->actionViewNavigation, &QAction::toggled, ui->navigationFrame, &QWidget::setVisible);
 	connect(ui->actionViewExOptions, &QAction::toggled, ui->exerciseOptionsFrame, &QWidget::setVisible);
 	connect(ui->actionViewState, &QAction::toggled, ui->stateFrame, &QWidget::setVisible);
 	// Student menu
-	connect(ui->actionLogIn, &QAction::triggered, this, &OpenTyper::openStudentOptions);
+	connect(ui->actionLogIn, &QAction::triggered, this, &MainWindow::openStudentOptions);
 	// Tools menu
 	connect(ui->actionTypingTest, &QAction::triggered, ui->testButton, &QPushButton::clicked);
 	// Exercise menu
@@ -93,7 +93,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->actionDocs, &QAction::triggered, this, []() {
 		QDesktopServices::openUrl(QUrl("https://open-typer.github.io/Open-Typer"));
 	});
-	connect(ui->actionAboutProgram, &QAction::triggered, this, &OpenTyper::showAboutDialog);
+	connect(ui->actionAboutProgram, &QAction::triggered, this, &MainWindow::showAboutDialog);
 	connect(ui->actionAboutQt, &QAction::triggered, this, [this]() {
 		QMessageBox::aboutQt(this);
 	});
@@ -101,7 +101,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->inputLabel, SIGNAL(keyPressed(QKeyEvent *)), this, SLOT(keyPress(QKeyEvent *)));
 	connect(ui->inputLabel, SIGNAL(keyReleased(QKeyEvent *)), this, SLOT(keyRelease(QKeyEvent *)));
 	connect(ui->optionsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
-	connect(ui->openButton, &QPushButton::clicked, this, &OpenTyper::openExerciseFromFile);
+	connect(ui->openButton, &QPushButton::clicked, this, &MainWindow::openExerciseFromFile);
 	connect(ui->repeatButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
 	connect(ui->closeCustomExButton, &QPushButton::clicked, this, [this]() {
 		customLevelLoaded = false;
@@ -112,27 +112,27 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	connect(ui->lessonSelectionList, SIGNAL(activated(int)), this, SLOT(lessonSelectionListIndexChanged(int)));
 	connect(ui->sublessonSelectionList, SIGNAL(activated(int)), this, SLOT(sublessonSelectionListIndexChanged(int)));
 	connect(ui->levelSelectionList, SIGNAL(activated(int)), this, SLOT(levelSelectionListIndexChanged(int)));
-	connect(ui->errorWordsButton, &QPushButton::clicked, this, &OpenTyper::loadErrorWords);
-	connect(ui->reversedTextButton, &QPushButton::clicked, this, &OpenTyper::loadReversedText);
+	connect(ui->errorWordsButton, &QPushButton::clicked, this, &MainWindow::loadErrorWords);
+	connect(ui->reversedTextButton, &QPushButton::clicked, this, &MainWindow::loadReversedText);
 	connect(ui->zoomInButton, SIGNAL(clicked()), this, SLOT(zoomIn()));
 	connect(ui->zoomOutButton, SIGNAL(clicked()), this, SLOT(zoomOut()));
 	connect(ui->timedExerciseButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
 	connect(ui->stopTimedExButton, &QPushButton::clicked, ui->timedExerciseButton, &QPushButton::clicked);
 	connect(ui->statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
-	connect(ui->printButton, &QPushButton::clicked, this, &OpenTyper::printText);
-	connect(ui->exportButton, &QPushButton::clicked, this, &OpenTyper::exportText);
-	connect(ui->testButton, &QPushButton::clicked, this, &OpenTyper::startTest);
+	connect(ui->printButton, &QPushButton::clicked, this, &MainWindow::printText);
+	connect(ui->exportButton, &QPushButton::clicked, this, &MainWindow::exportText);
+	connect(ui->testButton, &QPushButton::clicked, this, &MainWindow::startTest);
 	connect(ui->hideTextCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
 		ui->currentLineArea->setVisible(!checked);
 		ui->textSeparationLine->setVisible(!checked);
 		updateText();
 	});
-	connect(ui->keyboardFrame, &keyboardWidget::visibilityChanged, this, &OpenTyper::updateFont);
+	connect(ui->keyboardFrame, &keyboardWidget::visibilityChanged, this, &MainWindow::updateFont);
 	// Theme engine
-	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &OpenTyper::updateFont);
-	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &OpenTyper::setColors);
-	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &OpenTyper::setColors);
-	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &OpenTyper::loadTheme);
+	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &MainWindow::updateFont);
+	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &MainWindow::setColors);
+	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &MainWindow::setColors);
+	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &MainWindow::loadTheme);
 	// Theme
 	if(settings.contains("main/windowState") && settings.contains("main/windowGeometry"))
 	{
@@ -153,7 +153,7 @@ OpenTyper::OpenTyper(QWidget *parent) :
 	// Start timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
 	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
-	connect(&timedExTimer, &QTimer::timeout, this, &OpenTyper::updateCurrentTime);
+	connect(&timedExTimer, &QTimer::timeout, this, &MainWindow::updateCurrentTime);
 	secLoop->start(500);
 #ifdef Q_OS_WASM
 	ui->printButton->hide();
@@ -165,8 +165,8 @@ OpenTyper::OpenTyper(QWidget *parent) :
 #endif // Q_OS_WASM
 }
 
-/*! Destroys the Open-Typer object. */
-OpenTyper::~OpenTyper()
+/*! Destroys the MainWindow object. */
+MainWindow::~MainWindow()
 {
 	delete ui;
 #ifndef Q_OS_WASM
@@ -184,7 +184,7 @@ OpenTyper::~OpenTyper()
  * \see setColors
  * \see repeatLevel
  */
-void OpenTyper::refreshAll(void)
+void MainWindow::refreshAll(void)
 {
 #ifndef Q_OS_WASM
 	// Start or stop server
@@ -323,7 +323,7 @@ void OpenTyper::refreshAll(void)
  * \param[in] packContent If it's not empty, a QBuffer with pack content is created and configParser treats it as a regular file.
  * \see configParser
  */
-QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
+QString MainWindow::loadConfig(QString configName, QByteArray packContent)
 {
 	customLevelLoaded = false;
 	QString configPath = "";
@@ -376,7 +376,7 @@ QString OpenTyper::loadConfig(QString configName, QByteArray packContent)
  * \see configParser
  * \see levelFinalInit
  */
-void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
+void MainWindow::startLevel(int lessonID, int sublessonID, int levelID)
 {
 	// Update selected lesson
 	ui->lessonSelectionList->setCurrentIndex(lessonID - 1);
@@ -423,7 +423,7 @@ void OpenTyper::startLevel(int lessonID, int sublessonID, int levelID)
 }
 
 /*! Updates list of lessons. */
-void OpenTyper::updateLessonList(void)
+void MainWindow::updateLessonList(void)
 {
 	ui->lessonSelectionList->clear();
 	QStringList lessons;
@@ -441,7 +441,7 @@ void OpenTyper::updateLessonList(void)
 }
 
 /*! Updates list of sublessons. */
-void OpenTyper::loadLesson(int lessonID, int sublessonID)
+void MainWindow::loadLesson(int lessonID, int sublessonID)
 {
 	// Sublessons
 	ui->sublessonSelectionList->clear();
@@ -464,7 +464,7 @@ void OpenTyper::loadLesson(int lessonID, int sublessonID)
 }
 
 /*! Updates list of exercises. */
-void OpenTyper::loadSublesson(int levelID)
+void MainWindow::loadSublesson(int levelID)
 {
 	// Exercises
 	ui->levelSelectionList->clear();
@@ -480,7 +480,7 @@ void OpenTyper::loadSublesson(int levelID)
  * \see startLevel
  * \see updateText
  */
-void OpenTyper::levelFinalInit(bool updateClient)
+void MainWindow::levelFinalInit(bool updateClient)
 {
 	// Init level
 	publicPos::currentLesson = currentLesson;
@@ -527,7 +527,7 @@ void OpenTyper::levelFinalInit(bool updateClient)
  * \see levelFinalInit
  * \see configParser
  */
-void OpenTyper::updateText(void)
+void MainWindow::updateText(void)
 {
 	ui->currentLineArea->show();
 	ui->inputLabel->setFocusPolicy(Qt::StrongFocus);
@@ -576,7 +576,7 @@ void OpenTyper::updateText(void)
  * Resets currently selected exercise.
  * \see startLevel
  */
-void OpenTyper::repeatLevel(void)
+void MainWindow::repeatLevel(void)
 {
 	startLevel(currentLesson, currentSublesson, currentLevel);
 }
@@ -585,7 +585,7 @@ void OpenTyper::repeatLevel(void)
  * Selects the next exercise.
  * \see repeatLevel
  */
-void OpenTyper::nextLevel(void)
+void MainWindow::nextLevel(void)
 {
 	customLevelLoaded = false;
 	if(currentLevel == levelCount)
@@ -611,7 +611,7 @@ void OpenTyper::nextLevel(void)
 	 * Selects the previous exercise.
 	 * \see repeatLevel
 	 */
-void OpenTyper::previousLevel(void)
+void MainWindow::previousLevel(void)
 {
 	customLevelLoaded = false;
 	if(currentLevel == 1)
@@ -636,7 +636,7 @@ void OpenTyper::previousLevel(void)
 /*! Connected from optionsButton.\n
  * Opens options window.
  */
-void OpenTyper::openOptions(void)
+void MainWindow::openOptions(void)
 {
 	settings.sync();
 	optionsWindow *optionsWin = new optionsWindow(this);
@@ -655,7 +655,7 @@ void OpenTyper::openOptions(void)
  *
  * \see studentOptions
  */
-void OpenTyper::openStudentOptions(void)
+void MainWindow::openStudentOptions(void)
 {
 	studentOptions *dialog = new studentOptions(this);
 	dialog->setWindowModality(Qt::WindowModal);
@@ -668,7 +668,7 @@ void OpenTyper::openStudentOptions(void)
 }
 
 /*! Updates student session. */
-void OpenTyper::updateStudent(void)
+void MainWindow::updateStudent(void)
 {
 	if(client.available() && client.sendRequest("get", { "serverMode" }).at(1) == "full")
 		ui->actionLogIn->setEnabled(true);
@@ -722,7 +722,7 @@ void OpenTyper::updateStudent(void)
 /*! Connected from lessonSelectionList.\n
  * Selects the lesson selected in lessonSelectionList.
  */
-void OpenTyper::lessonSelectionListIndexChanged(int index)
+void MainWindow::lessonSelectionListIndexChanged(int index)
 {
 	currentLesson = index + 1;
 	currentSublesson = 1;
@@ -734,7 +734,7 @@ void OpenTyper::lessonSelectionListIndexChanged(int index)
 /*! Connected from sublessonSelectionList.\n
  * Selects the sublesson selected in sublessonSelectionList.
  */
-void OpenTyper::sublessonSelectionListIndexChanged(int index)
+void MainWindow::sublessonSelectionListIndexChanged(int index)
 {
 	currentSublesson = index + 1;
 	currentLevel = 1;
@@ -745,7 +745,7 @@ void OpenTyper::sublessonSelectionListIndexChanged(int index)
 /*! Connected from levelSelectionList.\n
  * Selects the exercise selected in levelSelectionList.
  */
-void OpenTyper::levelSelectionListIndexChanged(int index)
+void MainWindow::levelSelectionListIndexChanged(int index)
 {
 	currentLevel = index + 1;
 	customLevelLoaded = false;
@@ -755,7 +755,7 @@ void OpenTyper::levelSelectionListIndexChanged(int index)
 /*! Connected from openExerciseButton.\n
  * Shows a file dialog and opens a custom exercise.
  */
-void OpenTyper::openExerciseFromFile(void)
+void MainWindow::openExerciseFromFile(void)
 {
 	auto fileContentReady = [this](const QString &fileName, const QByteArray &fileContent) {
 		if(!fileName.isEmpty())
@@ -788,7 +788,7 @@ void OpenTyper::openExerciseFromFile(void)
 }
 
 /*! Loads custom text. */
-void OpenTyper::loadText(QByteArray text, bool includeNewLines, bool updateClient)
+void MainWindow::loadText(QByteArray text, bool includeNewLines, bool updateClient)
 {
 	level = "";
 	QBuffer in(&text);
@@ -812,7 +812,7 @@ void OpenTyper::loadText(QByteArray text, bool includeNewLines, bool updateClien
 }
 
 /*! Generates text from error words. */
-void OpenTyper::loadErrorWords(void)
+void MainWindow::loadErrorWords(void)
 {
 	if(errorWords.count() == 0)
 	{
@@ -855,7 +855,7 @@ void OpenTyper::loadErrorWords(void)
 }
 
 /*! Generates reversed text. */
-void OpenTyper::loadReversedText(void)
+void MainWindow::loadReversedText(void)
 {
 	QString oldText = configParser::initText(level);
 	QString newText = "";
@@ -867,7 +867,7 @@ void OpenTyper::loadReversedText(void)
 /*! Connected from inputLabelWidget#keyPressed signal.\n
  * Handles all key presses, counts hits, displays typed characters and counts mistakes.
  */
-void OpenTyper::keyPress(QKeyEvent *event)
+void MainWindow::keyPress(QKeyEvent *event)
 {
 	if(blockInput || event->isAutoRepeat() || ((currentMode == 1) && !timedExStarted))
 		return;
@@ -1099,7 +1099,7 @@ void OpenTyper::keyPress(QKeyEvent *event)
 }
 
 /*! Ends the exercise by (optionally) saving the results and showing the levelSummary dialog. */
-void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes)
+void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes)
 {
 	levelInProgress = false;
 	input.replace("‘", "'");
@@ -1290,7 +1290,7 @@ void OpenTyper::endExercise(bool showNetHits, bool showGrossHits, bool showTotal
  * Dehighlights keys on the virtual keyboard.
  * \see keyboardWidget
  */
-void OpenTyper::keyRelease(QKeyEvent *event)
+void MainWindow::keyRelease(QKeyEvent *event)
 {
 	ui->keyboardFrame->dehighlightKey(event->key());
 	if(event->key() == Qt::Key_Shift)
@@ -1300,7 +1300,7 @@ void OpenTyper::keyRelease(QKeyEvent *event)
 /*! Connected from secLoop.\n
  * Runs periodically and updates time widgets.
  */
-void OpenTyper::updateCurrentTime(void)
+void MainWindow::updateCurrentTime(void)
 {
 	int time;
 	if(levelInProgress)
@@ -1356,7 +1356,7 @@ void OpenTyper::updateCurrentTime(void)
 }
 
 /*! Loads theme from settings. */
-void OpenTyper::loadTheme(void)
+void MainWindow::loadTheme(void)
 {
 	// Load style
 	localThemeEngine.updateStyle();
@@ -1367,7 +1367,7 @@ void OpenTyper::loadTheme(void)
 }
 
 /*! Updates text font. */
-void OpenTyper::updateFont(void)
+void MainWindow::updateFont(void)
 {
 	QFont newFont = themeEngine::font();
 	QFont mistakeLabelFont = themeEngine::errorFont();
@@ -1396,7 +1396,7 @@ void OpenTyper::updateFont(void)
 }
 
 /*! Sets custom colors (if they are set) or default colors. */
-void OpenTyper::setColors(void)
+void MainWindow::setColors(void)
 {
 	// Set exercise text color
 	if(!themeEngine::customExerciseTextColor())
@@ -1441,7 +1441,7 @@ void OpenTyper::setColors(void)
 /*! Connected from openPackButton.\n
  * Shows a file dialog and opens a custom pack.
  */
-void OpenTyper::openPack(void)
+void MainWindow::openPack(void)
 {
 	auto fileContentReady = [this](const QString &fileName, const QByteArray &fileContent) {
 		if(!fileName.isEmpty())
@@ -1468,7 +1468,7 @@ void OpenTyper::openPack(void)
 /*! Connected from openEditorButton.\n
  * Opens the editor.
  */
-void OpenTyper::openEditor(void)
+void MainWindow::openEditor(void)
 {
 	// Close pack file
 	QString oldFileName = parser.fileName();
@@ -1489,7 +1489,7 @@ void OpenTyper::openEditor(void)
 /*! Overrides QWidget#changeEvent().
  * Retranslates UI when the display language changes.
  */
-void OpenTyper::changeEvent(QEvent *event)
+void MainWindow::changeEvent(QEvent *event)
 {
 	if(event->type() == QEvent::LanguageChange)
 	{
@@ -1511,7 +1511,7 @@ void OpenTyper::changeEvent(QEvent *event)
  * Increases the text size.
  * \see zoomOut
  */
-void OpenTyper::zoomIn(void)
+void MainWindow::zoomIn(void)
 {
 	localThemeEngine.increaseFontSize(2);
 	updateFont();
@@ -1521,7 +1521,7 @@ void OpenTyper::zoomIn(void)
  * Decreases the text size.
  * \see zoomIn
  */
-void OpenTyper::zoomOut(void)
+void MainWindow::zoomOut(void)
 {
 	localThemeEngine.increaseFontSize(-2);
 	updateFont();
@@ -1530,7 +1530,7 @@ void OpenTyper::zoomOut(void)
 /*! Changes the operation mode.\n
  * Supported modes are default (0) and timed exercise mode (1).
  */
-void OpenTyper::changeMode(int mode, bool enableStudentUpdate)
+void MainWindow::changeMode(int mode, bool enableStudentUpdate)
 {
 	switch(mode)
 	{
@@ -1553,7 +1553,7 @@ void OpenTyper::changeMode(int mode, bool enableStudentUpdate)
 /*! Connected from timedExerciseButton.\n
  * Switches to timed exercise mode.
  */
-void OpenTyper::initTimedExercise(void)
+void MainWindow::initTimedExercise(void)
 {
 	if(currentMode == 1)
 	{
@@ -1590,7 +1590,7 @@ void OpenTyper::initTimedExercise(void)
  *
  * \see statsDialog
  */
-void OpenTyper::showExerciseStats(void)
+void MainWindow::showExerciseStats(void)
 {
 	statsDialog *dialog;
 	if((studentUsername != ""))
@@ -1604,7 +1604,7 @@ void OpenTyper::showExerciseStats(void)
 }
 
 /*! Connected from client.exerciseReceived(). */
-void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText)
+void MainWindow::loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText)
 {
 	if(waitDialog)
 		waitDialog->accept();
@@ -1613,7 +1613,7 @@ void OpenTyper::loadReceivedExercise(QByteArray text, int lineLength, bool inclu
 }
 
 /*! Starts received exercise or a local typing test. */
-void OpenTyper::startReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText, bool upload)
+void MainWindow::startReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText, bool upload)
 {
 	changeMode(mode, false);
 	levelLengthExtension = lineLength;
@@ -1649,7 +1649,7 @@ void OpenTyper::startReceivedExercise(QByteArray text, int lineLength, bool incl
 }
 
 /*! Opens testWaitDialog and waits until the received exercise starts. */
-void OpenTyper::waitForReceivedExercise(QString text, int lineLength)
+void MainWindow::waitForReceivedExercise(QString text, int lineLength)
 {
 	waitDialog = new testWaitDialog(&client, this);
 	if(text != "")
@@ -1676,7 +1676,7 @@ void OpenTyper::waitForReceivedExercise(QString text, int lineLength)
  *
  * \see exportDialog
  */
-void OpenTyper::exportText(void)
+void MainWindow::exportText(void)
 {
 	QVariantMap result;
 	result["grossHits"] = totalHits;
@@ -1692,7 +1692,7 @@ void OpenTyper::exportText(void)
 }
 
 /*! Prints the exercise text. */
-void OpenTyper::printText(void)
+void MainWindow::printText(void)
 {
 #ifndef Q_OS_WASM
 	// Set up printer
@@ -1749,7 +1749,7 @@ void OpenTyper::printText(void)
 }
 
 /*! Starts typing test. */
-void OpenTyper::startTest(void)
+void MainWindow::startTest(void)
 {
 	loadExerciseDialog *dialog;
 	bool fullMode = settings.value("server/fullmode", false).toBool();
@@ -1793,7 +1793,7 @@ void OpenTyper::startTest(void)
 }
 
 /*! Shows about program dialog. */
-void OpenTyper::showAboutDialog(void)
+void MainWindow::showAboutDialog(void)
 {
 	QString buildDate = __DATE__;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

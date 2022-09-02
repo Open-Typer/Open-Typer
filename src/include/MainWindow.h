@@ -1,5 +1,5 @@
 /*
- * opentyper.h
+ * MainWindow.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef OPENTYPER_H
-#define OPENTYPER_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QWidget>
@@ -54,24 +54,24 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-	class OpenTyper;
+	class MainWindow;
 }
 QT_END_NAMESPACE
 
 /*!
- * \brief The OpenTyper class is the main window class. It shows the UI, text and handles input and output.
+ * \brief The MainWindow class is the main window class. It shows the UI, text and handles input and output.
  *
- * \image html OpenTyper.png
+ * \image html MainWindow.png
  */
-class OpenTyper : public QMainWindow
+class MainWindow : public QMainWindow
 {
 		Q_OBJECT
 	public:
-		OpenTyper(QWidget *parent = nullptr);
-		~OpenTyper();
+		MainWindow(QWidget *parent = nullptr);
+		~MainWindow();
 
 	private:
-		Ui::OpenTyper *ui;
+		Ui::MainWindow *ui;
 		QSettings settings;
 		languageManager langMgr;
 		configParser parser;
@@ -156,4 +156,4 @@ class OpenTyper : public QMainWindow
 		void showAboutDialog(void);
 };
 
-#endif // OPENTYPER_H
+#endif // MAINWINDOW_H

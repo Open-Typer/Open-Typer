@@ -20,7 +20,7 @@
 
 #include <QApplication>
 #include <QSettings>
-#include "opentyper.h"
+#include "MainWindow.h"
 #include "core/database.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 	a.processEvents();
 	// Set icon
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
-	OpenTyper w;
+	MainWindow w;
 	// Main window will get shown by itself
 	splash.finish(&w);
 	return a.exec();
