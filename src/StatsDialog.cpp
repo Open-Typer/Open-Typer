@@ -22,7 +22,7 @@
 #include "ui_StatsDialog.h"
 
 /*! Constructs StatsDialog. */
-StatsDialog::StatsDialog(monitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent) :
+StatsDialog::StatsDialog(MonitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::StatsDialog),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)

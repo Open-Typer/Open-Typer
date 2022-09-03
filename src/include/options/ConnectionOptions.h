@@ -23,7 +23,7 @@
 
 #include <QWidget>
 #include "core/utils.h"
-#include "core/net.h"
+#include "core/MonitorClient.h"
 #ifndef Q_OS_WASM
 #include "core/server.h"
 #endif // Q_OS_WASM
@@ -36,7 +36,7 @@ namespace Ui {
  * \brief The ConnectionOptions class is the connection category in the options.
  * \image html ConnectionOptions.png
  * \see OptionsWindow
- * \see monitorClient
+ * \see MonitorClient
  */
 class ConnectionOptions : public QWidget
 {
@@ -48,7 +48,7 @@ class ConnectionOptions : public QWidget
 
 	private:
 		Ui::ConnectionOptions *ui;
-		monitorClient client;
+		MonitorClient client;
 		QSettings settings;
 
 	private slots:

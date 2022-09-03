@@ -1,5 +1,5 @@
 /*
- * net.cpp
+ * MonitorClient.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,59 +18,59 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/net.h"
+#include "core/MonitorClient.h"
 
-/*! Constructs monitorClient. */
-monitorClient::monitorClient(bool errDialogs, QObject *parent) :
+/*! Constructs MonitorClient. */
+MonitorClient::MonitorClient(bool errDialogs, QObject *parent) :
 	QObject(parent),
 	connected(false),
 	waitingForResponse(false),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	setErrorDialogs(errDialogs);
-	connect(&socket, &QWebSocket::textMessageReceived, this, &monitorClient::readResponse);
-	connect(&socket, &QWebSocket::disconnected, this, &monitorClient::disconnected);
-	connect(&socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error), this, &monitorClient::errorOccurred);
+	connect(&socket, &QWebSocket::textMessageReceived, this, &MonitorClient::readResponse);
+	connect(&socket, &QWebSocket::disconnected, this, &MonitorClient::disconnected);
+	connect(&socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error), this, &MonitorClient::errorOccurred);
 #ifndef Q_OS_WASM
-	connect(&socket, QOverload<const QList<QSslError> &>::of(&QWebSocket::sslErrors), this, &monitorClient::sslErrorsOccurred);
+	connect(&socket, QOverload<const QList<QSslError> &>::of(&QWebSocket::sslErrors), this, &MonitorClient::sslErrorsOccurred);
 #endif // Q_OS_WASM
 }
 
-/*! Destroys the monitorClient object. */
-monitorClient::~monitorClient()
+/*! Destroys the MonitorClient object. */
+MonitorClient::~MonitorClient()
 {
 	// Disconnect everything from socket because the connections cause segfaults
 	disconnect(&socket, nullptr, nullptr, nullptr);
 }
 
 /*! Closes the connection. */
-void monitorClient::close(void)
+void MonitorClient::close(void)
 {
 	socket.close();
 }
 
 /*! Enables or disables connection error dialogs. */
-void monitorClient::setErrorDialogs(bool errDialogs)
+void MonitorClient::setErrorDialogs(bool errDialogs)
 {
 	errorDialogs = errDialogs;
 }
 
 /*! Returns server address. */
-QHostAddress monitorClient::serverAddress(void)
+QHostAddress MonitorClient::serverAddress(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QHostAddress(settings.value("server/address", "127.0.0.1").toString());
 }
 
 /*! Returns server port. */
-quint16 monitorClient::serverPort(void)
+quint16 MonitorClient::serverPort(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("server/port", "57100").toUInt();
 }
 
 /*! Returns the local IP address, e. g. 192.168.0.100. */
-QHostAddress monitorClient::localAddress(void)
+QHostAddress MonitorClient::localAddress(void)
 {
 #ifndef Q_OS_WASM
 	QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
@@ -84,14 +84,14 @@ QHostAddress monitorClient::localAddress(void)
 }
 
 /*! Returns true if client is enabled in the settings. */
-bool monitorClient::enabled(void)
+bool MonitorClient::enabled(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return (settings.value("main/networkEnabled", false).toBool() && (settings.value("server/mode", 2).toInt() == 2));
 }
 
 /*! Returns true if class monitor server connection is enabled in the settings and the server is available. */
-bool monitorClient::available(void)
+bool MonitorClient::available(void)
 {
 	if(enabled())
 		return (sendRequest("check", {}).value(0) == "ok");
@@ -100,7 +100,7 @@ bool monitorClient::available(void)
 }
 
 /*! Returns true if full mode is enabled on the server. */
-bool monitorClient::fullMode(void)
+bool MonitorClient::fullMode(void)
 {
 	auto response = sendRequest("get", { "serverMode" });
 	if(response[0] == "ok")
@@ -110,7 +110,7 @@ bool monitorClient::fullMode(void)
 }
 
 /*! Returns true if this device is paired with the server or full mode is enabled. */
-bool monitorClient::isPaired(void)
+bool MonitorClient::isPaired(void)
 {
 	if(fullMode())
 		return true;
@@ -118,7 +118,7 @@ bool monitorClient::isPaired(void)
 }
 
 /*! Enables client again after connection failure. */
-void monitorClient::enableClient(void)
+void MonitorClient::enableClient(void)
 {
 	clientDisabled = false;
 	settings.setValue("main/clientdisabled", clientDisabled);
@@ -129,7 +129,7 @@ void monitorClient::enableClient(void)
  * \param[in] method Request method.
  * \param[in] data Request data.
  */
-QStringList monitorClient::sendRequest(QString method, QStringList data)
+QStringList MonitorClient::sendRequest(QString method, QStringList data)
 {
 	clientDisabled = settings.value("main/clientdisabled", false).toBool();
 	if(clientDisabled)
@@ -169,7 +169,7 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
 		QTimer timer;
 		timer.setSingleShot(true);
 		QEventLoop eventLoop;
-		connect(this, &monitorClient::responseReady, &eventLoop, &QEventLoop::quit);
+		connect(this, &MonitorClient::responseReady, &eventLoop, &QEventLoop::quit);
 		connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
 		timer.start(5000);
 		socket.sendTextMessage(convertData(&ok, reqList));
@@ -199,7 +199,7 @@ QStringList monitorClient::sendRequest(QString method, QStringList data)
  * If there isn't any request in progress, it reads the data as a signal.
  * \see responseReady()
  */
-void monitorClient::readResponse(QString message)
+void MonitorClient::readResponse(QString message)
 {
 	receivedData += message;
 	if(receivedData[receivedData.count() - 1] != ';')
@@ -236,7 +236,7 @@ void monitorClient::readResponse(QString message)
  * Connected from socket->error().\n
  * Displays connection error message.
  */
-void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
+void MonitorClient::errorOccurred(QAbstractSocket::SocketError error)
 {
 	if(!errorDialogs)
 		return;
@@ -260,7 +260,7 @@ void monitorClient::errorOccurred(QAbstractSocket::SocketError error)
 /*!
  * Ignores SSL errors.
  */
-void monitorClient::sslErrorsOccurred(const QList<QSslError> &errors)
+void MonitorClient::sslErrorsOccurred(const QList<QSslError> &errors)
 {
 	Q_UNUSED(errors);
 	// Reason for ignoring SSL errors: The server generates random certificate and key when it starts.
@@ -271,7 +271,7 @@ void monitorClient::sslErrorsOccurred(const QList<QSslError> &errors)
 #endif // Q_OS_WASM
 
 /*! Converts list of QStrings to a single QString, which can be used for a request. */
-QString monitorClient::convertData(bool *ok, QStringList input)
+QString MonitorClient::convertData(bool *ok, QStringList input)
 {
 	QString out;
 	out.clear();
@@ -296,7 +296,7 @@ QString monitorClient::convertData(bool *ok, QStringList input)
 }
 
 /*! Returns a list of QStrings from the input QString. */
-QStringList monitorClient::readData(QString input)
+QStringList MonitorClient::readData(QString input)
 {
 	QStringList out;
 	out.clear();

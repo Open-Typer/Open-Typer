@@ -26,7 +26,7 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QScrollBar>
-#include "core/net.h"
+#include "core/MonitorClient.h"
 #include "core/theme.h"
 
 namespace Ui {
@@ -41,7 +41,7 @@ class TestWaitDialog : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit TestWaitDialog(monitorClient *client, QWidget *parent = nullptr);
+		explicit TestWaitDialog(MonitorClient *client, QWidget *parent = nullptr);
 		~TestWaitDialog();
 		QString name(void);
 		void setName(QString name);
@@ -51,7 +51,7 @@ class TestWaitDialog : public QDialog
 
 	private:
 		Ui::TestWaitDialog *ui;
-		monitorClient *m_client;
+		MonitorClient *m_client;
 		QFont font;
 
 	protected:

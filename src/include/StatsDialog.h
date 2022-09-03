@@ -23,7 +23,7 @@
 
 #include <QDialog>
 #include <QtCharts>
-#include "core/net.h"
+#include "core/MonitorClient.h"
 #include "core/ConfigParser.h"
 #include "core/HistoryParser.h"
 
@@ -43,7 +43,7 @@ class StatsDialog : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit StatsDialog(monitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent = nullptr);
+		explicit StatsDialog(MonitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent = nullptr);
 		~StatsDialog();
 
 	private:

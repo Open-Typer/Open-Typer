@@ -27,7 +27,7 @@ StudentOptions::StudentOptions(QWidget *parent) :
 	ui(new Ui::StudentOptions)
 {
 	ui->setupUi(this);
-	client = new monitorClient;
+	client = new MonitorClient;
 	ui->errorLabel->hide();
 	// Connections
 	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(auth()));

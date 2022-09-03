@@ -55,7 +55,7 @@ SOURCES += \
     SOURCES += src/core/server.cpp
 }
 SOURCES += \
-    src/core/net.cpp \
+    src/core/MonitorClient.cpp \
     src/core/packs.cpp \
     src/core/LanguageManager.cpp \
     src/core/theme.cpp \
@@ -103,7 +103,7 @@ HEADERS += \
     HEADERS += src/include/core/server.h
 }
 HEADERS += \
-    src/include/core/net.h \
+    src/include/core/MonitorClient.h \
     src/include/core/packs.h \
     src/include/core/LanguageManager.h \
     src/include/core/theme.h \

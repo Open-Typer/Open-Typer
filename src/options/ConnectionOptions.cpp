@@ -144,8 +144,8 @@ void ConnectionOptions::testConnection(bool silent)
 		if(available && !paired)
 		{
 			QMessageBox *pairMsg = new QMessageBox(QMessageBox::Critical, tr("Error"), tr("Please allow the following address on the server:"), QMessageBox::Ok, this);
-			QString address = monitorClient::localAddress().toString();
-			if(monitorClient::serverAddress() == QHostAddress(QHostAddress::LocalHost))
+			QString address = MonitorClient::localAddress().toString();
+			if(MonitorClient::serverAddress() == QHostAddress(QHostAddress::LocalHost))
 				address = QHostAddress(QHostAddress::LocalHost).toString();
 			pairMsg->setInformativeText(address);
 			pairMsg->setWindowModality(Qt::WindowModal);

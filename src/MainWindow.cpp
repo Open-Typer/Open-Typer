@@ -63,8 +63,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	updateText();
 	// Connections
 	connect(&client, SIGNAL(disconnected()), this, SLOT(updateStudent()));
-	connect(&client, &monitorClient::exerciseReceived, this, &MainWindow::loadReceivedExercise);
-	connect(&client, &monitorClient::initExReceived, this, &MainWindow::waitForReceivedExercise);
+	connect(&client, &MonitorClient::exerciseReceived, this, &MainWindow::loadReceivedExercise);
+	connect(&client, &MonitorClient::initExReceived, this, &MainWindow::waitForReceivedExercise);
 	// File menu
 	connect(ui->actionOpenText, &QAction::triggered, this, &MainWindow::openExerciseFromFile);
 	connect(ui->actionOpenPack, &QAction::triggered, this, &MainWindow::openPack);

@@ -23,7 +23,7 @@
 
 #include <QDialog>
 #include <QPropertyAnimation>
-#include "core/net.h"
+#include "core/MonitorClient.h"
 
 namespace Ui {
 	class StudentOptions;
@@ -32,7 +32,7 @@ namespace Ui {
 /*!
  * \brief The StudentOptions class is a dialog for student authentication.
  * \image html StudentOptions.png
- * \see monitorClient
+ * \see MonitorClient
  */
 class StudentOptions : public QDialog
 {
@@ -44,7 +44,7 @@ class StudentOptions : public QDialog
 
 	private:
 		Ui::StudentOptions *ui;
-		monitorClient *client;
+		MonitorClient *client;
 
 	private slots:
 		void auth(void);

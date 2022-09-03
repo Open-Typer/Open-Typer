@@ -1,5 +1,5 @@
 /*
- * net.h
+ * MonitorClient.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -35,13 +35,13 @@
 #include <QNetworkInterface>
 #include "core/utils.h"
 
-/*! \brief The monitorClient class is used to communicate with the class monitor server. */
-class monitorClient : public QObject
+/*! \brief The MonitorClient class is used to communicate with the class monitor server. */
+class MonitorClient : public QObject
 {
 		Q_OBJECT
 	public:
-		explicit monitorClient(bool errDialogs = true, QObject *parent = nullptr);
-		~monitorClient();
+		explicit MonitorClient(bool errDialogs = true, QObject *parent = nullptr);
+		~MonitorClient();
 		void close(void);
 		void setErrorDialogs(bool errDialogs);
 		bool fullMode(void);

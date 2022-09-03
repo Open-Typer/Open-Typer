@@ -76,7 +76,7 @@ class MainWindow : public QMainWindow
 		QSettings settings;
 		LanguageManager langMgr;
 		ConfigParser parser;
-		monitorClient client;
+		MonitorClient client;
 		QString studentUsername, studentPassword;
 		QString loadConfig(QString configName, QByteArray packContent = "");
 		void startLevel(int lesson, int sublesson, int level);

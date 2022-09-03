@@ -22,7 +22,7 @@
 #include "ui_TestWaitDialog.h"
 
 /*! Constructs TestWaitDialog. */
-TestWaitDialog::TestWaitDialog(monitorClient *client, QWidget *parent) :
+TestWaitDialog::TestWaitDialog(MonitorClient *client, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::TestWaitDialog),
 	m_client(client)
@@ -40,7 +40,7 @@ TestWaitDialog::TestWaitDialog(monitorClient *client, QWidget *parent) :
 	connect(ui->nameEdit, &QLineEdit::textChanged, this, [this](QString text) {
 		m_client->sendRequest("put", { "name", text });
 	});
-	connect(client, &monitorClient::studentNameChanged, this, [this](QString name) {
+	connect(client, &MonitorClient::studentNameChanged, this, [this](QString name) {
 		// When the name changes on server side, disable editing on client side
 		ui->nameEdit->setEnabled(false);
 		ui->nameEdit->setText(name);
