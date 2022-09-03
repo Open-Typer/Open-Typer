@@ -63,7 +63,7 @@ SOURCES += \
     src/options/connection.cpp \
     src/options/studentoptions.cpp \
     src/StatsDialog.cpp \
-    src/timedialog.cpp \
+    src/TimeDialog.cpp \
     src/TestWaitDialog.cpp \
     src/options/behavior.cpp \
     src/options/appearance.cpp \
@@ -110,7 +110,7 @@ HEADERS += \
     src/include/options/connection.h \
     src/include/options/studentoptions.h \
     src/include/StatsDialog.h \
-    src/include/timedialog.h \
+    src/include/TimeDialog.h \
     src/include/TestWaitDialog.h \
     src/include/options/behavior.h \
     src/include/options/appearance.h \
@@ -148,7 +148,7 @@ FORMS += \
     ui/ExerciseSummary.ui \
     ui/options/studentoptions.ui \
     ui/StatsDialog.ui \
-    ui/timedialog.ui \
+    ui/TimeDialog.ui \
     ui/TestWaitDialog.ui \
     ui/MainWindow.ui \
     ui/ExportDialog.ui \

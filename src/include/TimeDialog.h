@@ -1,5 +1,5 @@
 /*
- * timedialog.cpp
+ * TimeDialog.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,34 +18,44 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "timedialog.h"
-#include "ui_timedialog.h"
+#ifndef TIMEDIALOG_H
+#define TIMEDIALOG_H
 
-/*! Constructs timeDialog. */
-timeDialog::timeDialog(QWidget *parent) :
-	QDialog(parent),
-	ui(new Ui::timeDialog)
-{
-	ui->setupUi(this);
-	setTime(ui->timeEdit->time());
-	connect(ui->timeEdit, SIGNAL(timeChanged(QTime)), this, SLOT(setTime(QTime)));
-	connect(ui->startButton, SIGNAL(clicked()), this, SLOT(accept()));
-	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-}
+#include <QDialog>
+#include <QTime>
 
-/*! Destroys the timeDialog class. */
-timeDialog::~timeDialog()
-{
-	delete ui;
+namespace Ui {
+	class TimeDialog;
 }
 
 /*!
- * Connected from timeEdit->timeChanged().\n
- * Sets time based on the value of timeEdit.
+ * \brief The TimeDialog class is a time selector dialog used for timed exercises.
+ *
+ * \image html TimeDialog.png
+ *
+ * Usage example:
+ * \code
+ * TimeDialog dialog;
+ * dialog.exec();
+ * int hours, minutes, seconds;
+ * hours = dialog.hours; // Get hours
+ * minutes = dialog.minutes; // Get minutes
+ * seconds = dialog.seconds; // Get seconds
+ * \endcode
  */
-void timeDialog::setTime(QTime time)
+class TimeDialog : public QDialog
 {
-	hours = time.hour();
-	minutes = time.minute();
-	seconds = time.second();
-}
+		Q_OBJECT
+	public:
+		explicit TimeDialog(QWidget *parent = nullptr);
+		~TimeDialog();
+		int hours, minutes, seconds;
+
+	private:
+		Ui::TimeDialog *ui;
+
+	private slots:
+		void setTime(QTime time);
+};
+
+#endif // TIMEDIALOG_H

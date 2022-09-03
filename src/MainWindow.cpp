@@ -1563,7 +1563,7 @@ void MainWindow::initTimedExercise(void)
 	}
 	else
 	{
-		timeDialog *timeSelect = new timeDialog(this);
+		TimeDialog *timeSelect = new TimeDialog(this);
 		timeSelect->setWindowModality(Qt::WindowModal);
 		connect(timeSelect, &QDialog::accepted, this, [timeSelect, this]() {
 			timedExHours = timeSelect->hours;
