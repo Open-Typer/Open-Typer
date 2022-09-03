@@ -1,5 +1,5 @@
 /*
- * updaterdialog.h
+ * UpdaterDialog.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009

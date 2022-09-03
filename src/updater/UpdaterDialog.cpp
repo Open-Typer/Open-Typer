@@ -1,5 +1,5 @@
 /*
- * updaterdialog.cpp
+ * UpdaterDialog.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "updater/updaterdialog.h"
-#include "ui_updaterdialog.h"
+#include "updater/UpdaterDialog.h"
+#include "ui_UpdaterDialog.h"
 
 /*! Constructs UpdaterDialog. */
 UpdaterDialog::UpdaterDialog(QWidget *parent) :

@@ -87,7 +87,7 @@ SOURCES += \
     src/server/widgets/ServerManager.cpp \
     src/server/widgets/ClassControls.cpp \
     src/server/widgets/StudentDetails.cpp \
-    src/updater/updaterdialog.cpp \
+    src/updater/UpdaterDialog.cpp \
     src/widgets/inputlabel.cpp \
     src/widgets/textview.cpp \
     src/widgets/languagelist.cpp \
@@ -119,7 +119,7 @@ HEADERS += \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h \
-    src/include/updater/updaterdialog.h \
+    src/include/updater/UpdaterDialog.h \
     src/include/MainWindow.h \
     src/include/ExportDialog.h \
     src/include/server/UserManager.h \
@@ -167,7 +167,7 @@ FORMS += \
     ui/options/OptionsWindow.ui \
     ui/packEditor/PackEditor.ui \
     ui/packEditor/PackSelector.ui \
-    ui/updater/updaterdialog.ui
+    ui/updater/UpdaterDialog.ui
 
 TRANSLATIONS += \
     lang/Open-Typer_sk_SK.ts \

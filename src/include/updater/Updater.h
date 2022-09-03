@@ -25,7 +25,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QProcess>
-#include "updaterdialog.h"
+#include "UpdaterDialog.h"
 
 /*!
  * \brief The Updater class is used to check for updates and download new versions of the program.
