@@ -25,7 +25,7 @@
 #include <QFile>
 #include <QBuffer>
 #include <QString>
-#include "utils.h"
+#include "StringUtils.h"
 
 namespace publicPos {
 	extern int currentLesson, currentSublesson, currentExercise;

@@ -1,5 +1,5 @@
 /*
- * utils.cpp
+ * StringUtils.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,10 +18,10 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/utils.h"
+#include "core/StringUtils.h"
 
 /*! Returns number of words in the string. */
-int stringUtils::wordCount(QString str)
+int StringUtils::wordCount(QString str)
 {
 	int i, out = 0;
 	for(i = 0; i < str.count(); i++)
@@ -35,7 +35,7 @@ int stringUtils::wordCount(QString str)
 }
 
 /*! Returns a word in the string. */
-QString stringUtils::word(QString str, int id)
+QString StringUtils::word(QString str, int id)
 {
 	int i, cur = 0;
 	QString out = "";
@@ -57,7 +57,7 @@ QString stringUtils::word(QString str, int id)
 }
 
 /*! Returns the word at index. */
-QString stringUtils::wordAt(QString str, int index)
+QString StringUtils::wordAt(QString str, int index)
 {
 	if(str[index] == ' ')
 		return "";
@@ -79,13 +79,13 @@ QString stringUtils::wordAt(QString str, int index)
 }
 
 /*! Returns the length of the longest common subsequence of source and target list. */
-int stringUtils::lcsLen(QList<QVariant> source, QList<QVariant> target)
+int StringUtils::lcsLen(QList<QVariant> source, QList<QVariant> target)
 {
 	QMap<int, QMap<int, int>> table;
 	return lcsLen(source, target, &table);
 }
 
-int stringUtils::lcsLen(QList<QVariant> source, QList<QVariant> target, QMap<int, QMap<int, int>> *lcsTable)
+int StringUtils::lcsLen(QList<QVariant> source, QList<QVariant> target, QMap<int, QMap<int, int>> *lcsTable)
 {
 	/*
 	* References:
@@ -110,7 +110,7 @@ int stringUtils::lcsLen(QList<QVariant> source, QList<QVariant> target, QMap<int
 }
 
 /*! Returns the longest common subsequence of source and target list. */
-QList<QVariant> stringUtils::longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target)
+QList<QVariant> StringUtils::longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target)
 {
 	QMap<int, QMap<int, int>> l;
 	lcsLen(source, target, &l);
@@ -139,7 +139,7 @@ QList<QVariant> stringUtils::longestCommonSubsequence(QList<QVariant> source, QL
 }
 
 /*! Returns the longest common subsequence of source and target string. */
-QString stringUtils::longestCommonSubsequence(QString source, QString target)
+QString StringUtils::longestCommonSubsequence(QString source, QString target)
 {
 	QList<QVariant> sourceList, targetList;
 	int i;
@@ -155,7 +155,7 @@ QString stringUtils::longestCommonSubsequence(QString source, QString target)
 }
 
 /*! Compares 2 lists using longest common subsequence. */
-QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVariant> target, QVector<QPair<QString, int>> *recordedCharacters, int *hits, int *inputPos)
+QList<QVariantMap> StringUtils::compareLists(QList<QVariant> source, QList<QVariant> target, QVector<QPair<QString, int>> *recordedCharacters, int *hits, int *inputPos)
 {
 	QList<QVariantMap> out;
 	auto lcs = longestCommonSubsequence(source, target);
@@ -257,7 +257,7 @@ QList<QVariantMap> stringUtils::compareLists(QList<QVariant> source, QList<QVari
 }
 
 /*! Compares 2 strings using longest common subsequence. */
-QList<QVariantMap> stringUtils::compareStrings(QString source, QString target, QVector<QPair<QString, int>> *recordedCharacters, int *hits, int *inputPos)
+QList<QVariantMap> StringUtils::compareStrings(QString source, QString target, QVector<QPair<QString, int>> *recordedCharacters, int *hits, int *inputPos)
 {
 	QList<QVariant> sourceList, targetList;
 	int i;
@@ -269,7 +269,7 @@ QList<QVariantMap> stringUtils::compareStrings(QString source, QString target, Q
 }
 
 /*! Splits each word by punctuation marks. */
-QStringList stringUtils::splitWordsByPunct(QStringList source)
+QStringList StringUtils::splitWordsByPunct(QStringList source)
 {
 	QStringList out;
 	for(int i = 0; i < source.count(); i++)
@@ -305,7 +305,7 @@ QStringList stringUtils::splitWordsByPunct(QStringList source)
 }
 
 /*! Recursively generates a diff list from source and target word list. */
-QMap<int, QVariantMap> stringUtils::generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList)
+QMap<int, QVariantMap> StringUtils::generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList)
 {
 	// Compare word lists
 	QList<QVariant> sourceList, targetList;
@@ -365,7 +365,7 @@ QMap<int, QVariantMap> stringUtils::generateDiffList(QStringList *sourceWords, Q
 }
 
 /*! Compares input text with exercise text and finds mistakes. */
-QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, QStringList *errorWords)
+QList<QVariantMap> StringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, QStringList *errorWords)
 {
 	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QList<QVariantMap> out;
@@ -540,7 +540,7 @@ QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input
 }
 
 /*! Validates a typing test. */
-QList<QVariantMap> stringUtils::validateExercise(QString exerciseText, QString inputText, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords, bool timed, int timeSecs)
+QList<QVariantMap> StringUtils::validateExercise(QString exerciseText, QString inputText, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords, bool timed, int timeSecs)
 {
 	QList<QVariantMap> recordedMistakes;
 	if(timed)
@@ -562,7 +562,7 @@ QList<QVariantMap> stringUtils::validateExercise(QString exerciseText, QString i
 				}
 				if((i % std::max(exerciseText.count(), inputText.count()) == 0) || (i == exerciseText.count() - 1) || (i + 1 >= count))
 				{
-					attempts[i] = stringUtils::findMistakes(newText, inputText, recordedCharacters, totalHits, errorWords);
+					attempts[i] = StringUtils::findMistakes(newText, inputText, recordedCharacters, totalHits, errorWords);
 					if((minValue == -1) || (attempts[i].count() < minValue))
 					{
 						minValue = attempts[i].count();
@@ -579,7 +579,7 @@ QList<QVariantMap> stringUtils::validateExercise(QString exerciseText, QString i
 			recordedMistakes = QList<QVariantMap>();
 	}
 	else
-		recordedMistakes = stringUtils::findMistakes(exerciseText, inputText, recordedCharacters, totalHits, errorWords);
+		recordedMistakes = StringUtils::findMistakes(exerciseText, inputText, recordedCharacters, totalHits, errorWords);
 	QList<QVariantMap> mistakesToRemove;
 	*mistakeCount = 0;
 	for(int i = 0; i < recordedMistakes.count(); i++)
@@ -598,7 +598,7 @@ QList<QVariantMap> stringUtils::validateExercise(QString exerciseText, QString i
 }
 
 /*! Adds mistakes to an exercise with mistake correction enabled. */
-QString stringUtils::addMistakes(QString exerciseText, QList<QVariantMap> *recordedMistakes)
+QString StringUtils::addMistakes(QString exerciseText, QList<QVariantMap> *recordedMistakes)
 {
 	Q_ASSERT(recordedMistakes);
 	QMap<int, int> mistakesMap;

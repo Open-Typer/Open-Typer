@@ -24,7 +24,7 @@
 #include <QDialog>
 #include <QSettings>
 #include "core/DatabaseManager.h"
-#include "core/utils.h"
+#include "core/StringUtils.h"
 
 namespace Ui {
 	class ServerSetup;

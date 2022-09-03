@@ -1058,7 +1058,7 @@ void MainWindow::keyPress(QKeyEvent *event)
 				levelMistakes++;
 				ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 				mistake = true;
-				QString errorWord = stringUtils::wordAt(level, levelPos);
+				QString errorWord = StringUtils::wordAt(level, levelPos);
 				if((errorWord != "") && !errorWords.contains(errorWord))
 					errorWords += errorWord;
 				deadKeys = 0;
@@ -1105,10 +1105,10 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 	input.replace("‘", "'");
 	displayLevel.replace("‘", "'");
 	if(ui->correctMistakesCheckBox->isChecked())
-		input = stringUtils::addMistakes(input, &recordedMistakes);
+		input = StringUtils::addMistakes(input, &recordedMistakes);
 	else
 	{
-		recordedMistakes = stringUtils::validateExercise(displayLevel, input, recordedCharacters, &totalHits, &levelMistakes, &errorWords, (currentMode == 1), lastTimeF);
+		recordedMistakes = StringUtils::validateExercise(displayLevel, input, recordedCharacters, &totalHits, &levelMistakes, &errorWords, (currentMode == 1), lastTimeF);
 		netHits = std::max(0, totalHits - (levelMistakes * errorPenalty));
 		ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 	}

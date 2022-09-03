@@ -47,7 +47,7 @@ win32 {
 }
 
 SOURCES += \
-    src/core/utils.cpp \
+    src/core/StringUtils.cpp \
     src/core/FileUtils.cpp \
     src/core/KeyboardUtils.cpp \
     src/core/ConfigParser.cpp \
@@ -97,7 +97,7 @@ SOURCES += \
     src/widgets/KeyboardWidget.cpp
 
 HEADERS += \
-    src/include/core/utils.h \
+    src/include/core/StringUtils.h \
     src/include/core/FileUtils.h \
     src/include/core/KeyboardUtils.h \
     src/include/core/ConfigParser.h \

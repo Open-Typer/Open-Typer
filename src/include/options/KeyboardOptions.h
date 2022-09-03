@@ -26,7 +26,7 @@
 #include <QDirIterator>
 #include "options/OptionsWindow.h"
 #include "packEditor/PackEditor.h"
-#include "core/utils.h"
+#include "core/StringUtils.h"
 #include "core/BuiltInPacks.h"
 
 namespace Ui {

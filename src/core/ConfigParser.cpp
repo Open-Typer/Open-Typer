@@ -672,12 +672,12 @@ QString ConfigParser::generateText(QString rawText, bool repeat, QString repeatT
 	{
 		if(rawText == "")
 			return "";
-		int i, words = stringUtils::wordCount(rawText);
+		int i, words = StringUtils::wordCount(rawText);
 		QString out = "";
 		i = 1;
 		while(true)
 		{
-			QString nextWord = stringUtils::word(rawText, i);
+			QString nextWord = StringUtils::word(rawText, i);
 			int space = 0;
 			if(out.count() > 0)
 				space = 1; // for space between current text and new word

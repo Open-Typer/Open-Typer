@@ -23,7 +23,7 @@
 
 #include <QWidget>
 #include <QSettings>
-#include "core/utils.h"
+#include "core/StringUtils.h"
 
 namespace Ui {
 	class BehaviorOptions;

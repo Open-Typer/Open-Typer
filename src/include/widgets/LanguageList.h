@@ -24,7 +24,7 @@
 #include <QWidget>
 #include <QListWidget>
 #include <QSettings>
-#include "core/utils.h"
+#include "core/StringUtils.h"
 #include "core/LanguageManager.h"
 
 /*!

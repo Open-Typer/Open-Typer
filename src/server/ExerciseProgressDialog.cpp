@@ -238,7 +238,7 @@ void ExerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 			grossHits += recordedCharacters[i].second;
 	}
 	else
-		recordedMistakeLists[targetID] = stringUtils::validateExercise(exerciseText, inputText, recordedCharacters, &grossHits, &mistakes, nullptr, (m_mode == 1), m_timeLimit);
+		recordedMistakeLists[targetID] = StringUtils::validateExercise(exerciseText, inputText, recordedCharacters, &grossHits, &mistakes, nullptr, (m_mode == 1), m_timeLimit);
 	qreal exerciseTime = m_mode == 1 ? m_timeLimit : time;
 	int netHits = std::max(0, grossHits - mistakes * settings.value("main/errorpenalty", "10").toInt());
 	qreal netHitsPerMinute = netHits * (60 / exerciseTime);

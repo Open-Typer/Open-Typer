@@ -34,7 +34,7 @@
 #include <QPushButton>
 #include <QPropertyAnimation>
 #include <QSettings>
-#include "core/utils.h"
+#include "core/StringUtils.h"
 
 /*!
  * \brief The KeyboardWidget class provides a simple virtual keyboard widget.

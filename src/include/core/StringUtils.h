@@ -1,5 +1,5 @@
 /*
- * utils.h
+ * StringUtils.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -26,8 +26,8 @@
 #include <QSettings>
 #include "core/FileUtils.h"
 
-/*! \brief The stringUtils class contains functions related to strings. */
-class stringUtils
+/*! \brief The StringUtils class contains functions related to strings. */
+class StringUtils
 {
 	public:
 		static int wordCount(QString str);
