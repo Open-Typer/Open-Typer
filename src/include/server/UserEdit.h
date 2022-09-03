@@ -29,7 +29,7 @@ namespace Ui {
 }
 
 /*!
- * \brief the UserEdit class is a dialog used to add or edit users.
+ * \brief The UserEdit class is a dialog used to add or edit users.
  *
  * \image html UserEdit.png
  */
