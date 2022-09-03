@@ -49,6 +49,7 @@ win32 {
 SOURCES += \
     src/core/utils.cpp \
     src/core/configfile.cpp \
+    src/core/HistoryParser.cpp \
     src/core/database.cpp
 !wasm {
     SOURCES += src/core/server.cpp
@@ -96,6 +97,7 @@ SOURCES += \
 HEADERS += \
     src/include/core/utils.h \
     src/include/core/configfile.h \
+    src/include/core/HistoryParser.h \
     src/include/core/database.h
 !wasm {
     HEADERS += src/include/core/server.h

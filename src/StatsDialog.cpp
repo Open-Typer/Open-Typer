@@ -33,7 +33,7 @@ StatsDialog::StatsDialog(monitorClient *client, QString configName, int lesson, 
 	// Load data
 	QStringList response;
 	if(client == nullptr)
-		response = QStringList({ QString("ok"), QString::number(historyParser::historySize(configName, lesson, sublesson, exercise)) });
+		response = QStringList({ QString("ok"), QString::number(HistoryParser::historySize(configName, lesson, sublesson, exercise)) });
 	else
 		response = client->sendRequest("get", { "resultcount", configName.toUtf8(), QString::number(lesson), QString::number(sublesson), QString::number(exercise) });
 	if(response[0] != "ok")
@@ -55,7 +55,7 @@ StatsDialog::StatsDialog(monitorClient *client, QString configName, int lesson, 
 		if(client == nullptr)
 		{
 			response = QStringList({ "ok" });
-			QStringList entry = historyParser::historyEntry(configName, lesson, sublesson, exercise, i);
+			QStringList entry = HistoryParser::historyEntry(configName, lesson, sublesson, exercise, i);
 			for(int i2 = 0; i2 < entry.count(); i2++)
 				response += entry[i2].toUtf8();
 		}

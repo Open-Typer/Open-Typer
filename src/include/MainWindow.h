@@ -44,6 +44,7 @@
 #include "ExportDialog.h"
 #include "TestWaitDialog.h"
 #include "core/configfile.h"
+#include "core/HistoryParser.h"
 #include "core/utils.h"
 #include "core/packs.h"
 #include "core/language.h"

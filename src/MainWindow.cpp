@@ -1212,7 +1212,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 					QByteArray::number(grossHitsPerMinute), QByteArray::number(levelMistakes), QByteArray::number(time) });
 		}
 		else
-			historyParser::addHistoryEntry(publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel,
+			HistoryParser::addHistoryEntry(publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel,
 				{ QString::number(grossHitsPerMinute), QString::number(levelMistakes), QString::number(time) });
 	}
 	if(testLoaded)
