@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>testWaitDialog</class>
- <widget class="QDialog" name="testWaitDialog">
+ <class>TestWaitDialog</class>
+ <widget class="QDialog" name="TestWaitDialog">
   <property name="geometry">
    <rect>
     <x>0</x>

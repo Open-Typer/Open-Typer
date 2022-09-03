@@ -64,7 +64,7 @@ SOURCES += \
     src/options/studentoptions.cpp \
     src/StatsDialog.cpp \
     src/timedialog.cpp \
-    src/testwaitdialog.cpp \
+    src/TestWaitDialog.cpp \
     src/options/behavior.cpp \
     src/options/appearance.cpp \
     src/options/keyboard.cpp \
@@ -111,7 +111,7 @@ HEADERS += \
     src/include/options/studentoptions.h \
     src/include/StatsDialog.h \
     src/include/timedialog.h \
-    src/include/testwaitdialog.h \
+    src/include/TestWaitDialog.h \
     src/include/options/behavior.h \
     src/include/options/appearance.h \
     src/include/options/keyboard.h \
@@ -149,7 +149,7 @@ FORMS += \
     ui/options/studentoptions.ui \
     ui/StatsDialog.ui \
     ui/timedialog.ui \
-    ui/testwaitdialog.ui \
+    ui/TestWaitDialog.ui \
     ui/MainWindow.ui \
     ui/ExportDialog.ui \
     ui/server/usermanager.ui \

@@ -42,7 +42,7 @@
 #include "timedialog.h"
 #include "StatsDialog.h"
 #include "ExportDialog.h"
-#include "testwaitdialog.h"
+#include "TestWaitDialog.h"
 #include "core/configfile.h"
 #include "core/utils.h"
 #include "core/packs.h"
@@ -119,7 +119,7 @@ class MainWindow : public QMainWindow
 		void loadReversedText(void);
 		void exportText(void);
 		bool preview = false, uploadResult = false, testLoaded = false, correctMistakesOld = true, hideTextOld = false;
-		testWaitDialog *waitDialog = nullptr;
+		TestWaitDialog *waitDialog = nullptr;
 		QByteArray oldGeometry;
 		bool firstRun = false;
 

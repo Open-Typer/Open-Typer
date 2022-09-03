@@ -1,5 +1,5 @@
 /*
- * testwaitdialog.h
+ * TestWaitDialog.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -30,19 +30,19 @@
 #include "core/theme.h"
 
 namespace Ui {
-	class testWaitDialog;
+	class TestWaitDialog;
 }
 
 /*!
- * \brief The testWaitDialog class is a dialog, which is displayed when client receives an exercise.
- * \image html testWaitDialog.png
+ * \brief The TestWaitDialog class is a dialog, which is displayed when client receives an exercise.
+ * \image html TestWaitDialog.png
  */
-class testWaitDialog : public QDialog
+class TestWaitDialog : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit testWaitDialog(monitorClient *client, QWidget *parent = nullptr);
-		~testWaitDialog();
+		explicit TestWaitDialog(monitorClient *client, QWidget *parent = nullptr);
+		~TestWaitDialog();
 		QString name(void);
 		void setName(QString name);
 		bool nameReadOnly(void);
@@ -50,7 +50,7 @@ class testWaitDialog : public QDialog
 		void setText(QString text);
 
 	private:
-		Ui::testWaitDialog *ui;
+		Ui::TestWaitDialog *ui;
 		monitorClient *m_client;
 		QFont font;
 

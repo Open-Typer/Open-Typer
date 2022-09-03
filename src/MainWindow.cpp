@@ -1648,10 +1648,10 @@ void MainWindow::startReceivedExercise(QByteArray text, int lineLength, bool inc
 	uploadResult = upload;
 }
 
-/*! Opens testWaitDialog and waits until the received exercise starts. */
+/*! Opens TestWaitDialog and waits until the received exercise starts. */
 void MainWindow::waitForReceivedExercise(QString text, int lineLength)
 {
-	waitDialog = new testWaitDialog(&client, this);
+	waitDialog = new TestWaitDialog(&client, this);
 	if(text != "")
 		waitDialog->setText(configParser::initExercise(text, lineLength));
 	QString name = "";
@@ -1664,7 +1664,7 @@ void MainWindow::waitForReceivedExercise(QString text, int lineLength)
 	waitDialog->setName(name);
 	waitDialog->setWindowModality(Qt::WindowModal);
 	waitDialog->setAttribute(Qt::WA_DeleteOnClose);
-	testWaitDialog *dialogPtr = waitDialog;
+	TestWaitDialog *dialogPtr = waitDialog;
 	connect(dialogPtr, &QDialog::finished, this, [this]() {
 		waitDialog = nullptr;
 	});
