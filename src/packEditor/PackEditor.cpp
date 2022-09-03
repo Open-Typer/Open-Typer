@@ -83,10 +83,10 @@ void PackEditor::createNewFile(void)
 	saved = false;
 }
 
-/*! Opens a built-in pack. \see packSelector */
+/*! Opens a built-in pack. \see PackSelector */
 void PackEditor::openPrebuilt(void)
 {
-	packSelector *packSel = new packSelector(this);
+	PackSelector *packSel = new PackSelector(this);
 	connect(packSel, &QDialog::accepted, this, [packSel, this]() {
 		openFile(":res/configs/" + packSel->selectedConfig(), false, true);
 	});

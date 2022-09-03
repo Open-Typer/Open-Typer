@@ -1,5 +1,5 @@
 /*
- * packselector.cpp
+ * PackSelector.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "packEditor/packselector.h"
-#include "ui_packselector.h"
+#include "packEditor/PackSelector.h"
+#include "ui_PackSelector.h"
 
-/*! Constructs packSelector. */
-packSelector::packSelector(QWidget *parent) :
+/*! Constructs PackSelector. */
+PackSelector::PackSelector(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::packSelector)
+	ui(new Ui::PackSelector)
 {
 	ui->setupUi(this);
 	// Load built-in packs
@@ -48,14 +48,14 @@ packSelector::packSelector(QWidget *parent) :
 	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
 }
 
-/*! Destroys the packSelector object. */
-packSelector::~packSelector()
+/*! Destroys the PackSelector object. */
+PackSelector::~PackSelector()
 {
 	delete ui;
 }
 
 /*! Returns selected built-in pack raw name. \see builtinPacks#packName() */
-QString packSelector::selectedConfig(void)
+QString PackSelector::selectedConfig(void)
 {
 	return rawItems[ui->selBox->currentIndex()];
 }

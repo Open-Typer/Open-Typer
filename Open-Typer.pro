@@ -70,7 +70,7 @@ SOURCES += \
     src/options/KeyboardOptions.cpp \
     src/options/OptionsWindow.cpp \
     src/packEditor/PackEditor.cpp \
-    src/packEditor/packselector.cpp \
+    src/packEditor/PackSelector.cpp \
     src/updater/updater.cpp \
     src/main.cpp \
     src/MainWindow.cpp \
@@ -117,7 +117,7 @@ HEADERS += \
     src/include/options/KeyboardOptions.h \
     src/include/options/OptionsWindow.h \
     src/include/packEditor/PackEditor.h \
-    src/include/packEditor/packselector.h \
+    src/include/packEditor/PackSelector.h \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
     src/include/MainWindow.h \
@@ -166,7 +166,7 @@ FORMS += \
     ui/server/widgets/studentdetails.ui \
     ui/options/OptionsWindow.ui \
     ui/packEditor/PackEditor.ui \
-    ui/packEditor/packselector.ui \
+    ui/packEditor/PackSelector.ui \
     ui/updater/updaterdialog.ui
 
 TRANSLATIONS += \

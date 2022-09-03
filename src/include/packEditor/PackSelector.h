@@ -1,5 +1,5 @@
 /*
- * packselector.h
+ * PackSelector.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -27,25 +27,25 @@
 #include "core/packs.h"
 
 namespace Ui {
-	class packSelector;
+	class PackSelector;
 }
 
 /*!
- * \brief The packSelector class is a QDialog, which allows the user to select a built-in pack.
+ * \brief The PackSelector class is a QDialog, which allows the user to select a built-in pack.
  *
- * \image html packSelector.png
+ * \image html PackSelector.png
  */
-class packSelector : public QDialog
+class PackSelector : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit packSelector(QWidget *parent = nullptr);
-		~packSelector();
+		explicit PackSelector(QWidget *parent = nullptr);
+		~PackSelector();
 		QString selectedConfig(void);
 		QStringList rawItems;
 
 	private:
-		Ui::packSelector *ui;
+		Ui::PackSelector *ui;
 };
 
 #endif // PACKSELECTOR_H
