@@ -1,5 +1,5 @@
 /*
- * theme.cpp
+ * ThemeEngine.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,31 +18,31 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/theme.h"
+#include "core/ThemeEngine.h"
 
-themeEngine globalThemeEngine;
+ThemeEngine globalThemeEngine;
 
-/*! Constructs themeEngine. */
-themeEngine::themeEngine(QObject *parent) :
+/*! Constructs ThemeEngine. */
+ThemeEngine::ThemeEngine(QObject *parent) :
 	QObject(parent)
 {
 	updateThemeList();
 	// Connections
-	connect(this, &themeEngine::fontBoldChanged, this, &themeEngine::fontStyleChanged);
-	connect(this, &themeEngine::fontItalicChanged, this, &themeEngine::fontStyleChanged);
-	connect(this, &themeEngine::fontUnderlineChanged, this, &themeEngine::fontStyleChanged);
-	connect(this, &themeEngine::fontFamilyChanged, this, &themeEngine::fontChanged);
-	connect(this, &themeEngine::fontSizeChanged, this, &themeEngine::fontChanged);
-	connect(this, &themeEngine::fontStyleChanged, this, &themeEngine::fontChanged);
-	connect(this, &themeEngine::exerciseTextColorChanged, this, &themeEngine::colorChanged);
-	connect(this, &themeEngine::inputTextColorChanged, this, &themeEngine::colorChanged);
-	connect(this, &themeEngine::bgColorChanged, this, &themeEngine::colorChanged);
-	connect(this, &themeEngine::paperColorChanged, this, &themeEngine::colorChanged);
-	connect(this, &themeEngine::panelColorChanged, this, &themeEngine::colorChanged);
+	connect(this, &ThemeEngine::fontBoldChanged, this, &ThemeEngine::fontStyleChanged);
+	connect(this, &ThemeEngine::fontItalicChanged, this, &ThemeEngine::fontStyleChanged);
+	connect(this, &ThemeEngine::fontUnderlineChanged, this, &ThemeEngine::fontStyleChanged);
+	connect(this, &ThemeEngine::fontFamilyChanged, this, &ThemeEngine::fontChanged);
+	connect(this, &ThemeEngine::fontSizeChanged, this, &ThemeEngine::fontChanged);
+	connect(this, &ThemeEngine::fontStyleChanged, this, &ThemeEngine::fontChanged);
+	connect(this, &ThemeEngine::exerciseTextColorChanged, this, &ThemeEngine::colorChanged);
+	connect(this, &ThemeEngine::inputTextColorChanged, this, &ThemeEngine::colorChanged);
+	connect(this, &ThemeEngine::bgColorChanged, this, &ThemeEngine::colorChanged);
+	connect(this, &ThemeEngine::paperColorChanged, this, &ThemeEngine::colorChanged);
+	connect(this, &ThemeEngine::panelColorChanged, this, &ThemeEngine::colorChanged);
 }
 
 /*! Regenerates the list of themes. */
-void themeEngine::updateThemeList(void)
+void ThemeEngine::updateThemeList(void)
 {
 	themes.clear();
 	QVariantMap themeMap;
@@ -90,7 +90,7 @@ void themeEngine::updateThemeList(void)
 }
 
 /*! Returns selected font. */
-QFont themeEngine::font(void)
+QFont ThemeEngine::font(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QFont _font;
@@ -114,7 +114,7 @@ QFont themeEngine::font(void)
 }
 
 /*! Sets font. */
-void themeEngine::setFont(QFont newFont)
+void ThemeEngine::setFont(QFont newFont)
 {
 	setFontFamily(newFont.family());
 	setFontSize(newFont.pointSize());
@@ -124,7 +124,7 @@ void themeEngine::setFont(QFont newFont)
 }
 
 /*! Returns selected font optimized for error text. */
-QFont themeEngine::errorFont(void)
+QFont ThemeEngine::errorFont(void)
 {
 	QFont _font = font();
 	_font.setUnderline(false);
@@ -132,13 +132,13 @@ QFont themeEngine::errorFont(void)
 }
 
 /*! Returns font family of selected font. */
-QString themeEngine::fontFamily(void)
+QString ThemeEngine::fontFamily(void)
 {
 	return font().family();
 }
 
 /*! Sets font family. */
-void themeEngine::setFontFamily(QString family)
+void ThemeEngine::setFontFamily(QString family)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QFont _font;
@@ -155,13 +155,13 @@ void themeEngine::setFontFamily(QString family)
 }
 
 /*! Returns point size of selected font. */
-int themeEngine::fontSize(void)
+int ThemeEngine::fontSize(void)
 {
 	return font().pointSize();
 }
 
 /*! Sets font point size. */
-void themeEngine::setFontSize(int size)
+void ThemeEngine::setFontSize(int size)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	settings.setValue("theme/fontsize", size);
@@ -169,7 +169,7 @@ void themeEngine::setFontSize(int size)
 }
 
 /*! Increases (or decreases) font point size. */
-void themeEngine::increaseFontSize(int delta)
+void ThemeEngine::increaseFontSize(int delta)
 {
 	int currentSize = fontSize();
 	currentSize += delta;
@@ -181,19 +181,19 @@ void themeEngine::increaseFontSize(int delta)
 }
 
 /*! Returns maximum font point size. */
-int themeEngine::maxFontSize(void)
+int ThemeEngine::maxFontSize(void)
 {
 	return 24;
 }
 
 /*! Returns true if selected font is bold. */
-bool themeEngine::fontBold(void)
+bool ThemeEngine::fontBold(void)
 {
 	return font().bold();
 }
 
 /*! Sets font weight. */
-void themeEngine::setFontBold(bool value)
+void ThemeEngine::setFontBold(bool value)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	settings.setValue("theme/fontbold", value);
@@ -201,13 +201,13 @@ void themeEngine::setFontBold(bool value)
 }
 
 /*! Returns true if selected font style is set to italic. */
-bool themeEngine::fontItalic(void)
+bool ThemeEngine::fontItalic(void)
 {
 	return font().italic();
 }
 
 /*! Sets font style to italic if value is true. */
-void themeEngine::setFontItalic(bool value)
+void ThemeEngine::setFontItalic(bool value)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	settings.setValue("theme/fontitalic", value);
@@ -215,13 +215,13 @@ void themeEngine::setFontItalic(bool value)
 }
 
 /*! Returns true if selected font's underline is enabled. */
-bool themeEngine::fontUnderline(void)
+bool ThemeEngine::fontUnderline(void)
 {
 	return font().underline();
 }
 
 /*! Sets font underline. */
-void themeEngine::setFontUnderline(bool value)
+void ThemeEngine::setFontUnderline(bool value)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	settings.setValue("theme/fontunderline", value);
@@ -229,14 +229,14 @@ void themeEngine::setFontUnderline(bool value)
 }
 
 /*! Returns true if there's a custom exercise text color set. */
-bool themeEngine::customExerciseTextColor(void)
+bool ThemeEngine::customExerciseTextColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("theme/customleveltextcolor", "false").toBool();
 }
 
 /*! Returns exercise text color. */
-QColor themeEngine::exerciseTextColor(void)
+QColor ThemeEngine::exerciseTextColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QColor(settings.value("theme/leveltextred", "0").toInt(),
@@ -245,7 +245,7 @@ QColor themeEngine::exerciseTextColor(void)
 }
 
 /*! Sets exercise text color. */
-void themeEngine::setExerciseTextColor(QColor color)
+void ThemeEngine::setExerciseTextColor(QColor color)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	settings.setValue("theme/leveltextred", color.red());
@@ -256,7 +256,7 @@ void themeEngine::setExerciseTextColor(QColor color)
 }
 
 /*! Resets exercise text color. */
-void themeEngine::resetExerciseTextColor(void)
+void ThemeEngine::resetExerciseTextColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	setExerciseTextColor(QColor(0, 125, 175));
@@ -264,20 +264,20 @@ void themeEngine::resetExerciseTextColor(void)
 }
 
 /*! Returns exercise text style sheet. */
-QString themeEngine::exerciseTextStyleSheet(void)
+QString ThemeEngine::exerciseTextStyleSheet(void)
 {
 	return "QWidget { color: rgb(" + QString::number(exerciseTextColor().red()) + ", " + QString::number(exerciseTextColor().green()) + ", " + QString::number(exerciseTextColor().blue()) + "); margin: 0px; padding: 0px; }";
 }
 
 /*! Returns true if there's a custom input text color set. */
-bool themeEngine::customInputTextColor(void)
+bool ThemeEngine::customInputTextColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("theme/custominputtextcolor", "false").toBool();
 }
 
 /*! Returns input text color. */
-QColor themeEngine::inputTextColor(void)
+QColor ThemeEngine::inputTextColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QColor(settings.value("theme/inputtextred", "0").toInt(),
@@ -286,7 +286,7 @@ QColor themeEngine::inputTextColor(void)
 }
 
 /*! Sets input text color. */
-void themeEngine::setInputTextColor(QColor color)
+void ThemeEngine::setInputTextColor(QColor color)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	settings.setValue("theme/inputtextred", color.red());
@@ -297,7 +297,7 @@ void themeEngine::setInputTextColor(QColor color)
 }
 
 /*! Resets input text color. */
-void themeEngine::resetInputTextColor(void)
+void ThemeEngine::resetInputTextColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QPalette palette;
@@ -310,20 +310,20 @@ void themeEngine::resetInputTextColor(void)
 }
 
 /*! Returns input text style sheet. */
-QString themeEngine::inputTextStyleSheet(void)
+QString ThemeEngine::inputTextStyleSheet(void)
 {
 	return "QWidget { color: rgb(" + QString::number(inputTextColor().red()) + ", " + QString::number(inputTextColor().green()) + ", " + QString::number(inputTextColor().blue()) + "); margin: 0px; padding: 0px; background-color: rgba(0,0,0,0); }";
 }
 
 /*! Returns true if there's a custom background color set. */
-bool themeEngine::customBgColor(void)
+bool ThemeEngine::customBgColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("theme/custombgcolor", "false").toBool();
 }
 
 /*! Returns background color. */
-QColor themeEngine::bgColor(void)
+QColor ThemeEngine::bgColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QColor(settings.value("theme/bgred", "0").toInt(),
@@ -332,7 +332,7 @@ QColor themeEngine::bgColor(void)
 }
 
 /*! Sets background color. */
-void themeEngine::setBgColor(QColor color)
+void ThemeEngine::setBgColor(QColor color)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	settings.setValue("theme/bgred", color.red());
@@ -343,7 +343,7 @@ void themeEngine::setBgColor(QColor color)
 }
 
 /*! Resets background color. */
-void themeEngine::resetBgColor(void)
+void ThemeEngine::resetBgColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QPalette palette;
@@ -356,20 +356,20 @@ void themeEngine::resetBgColor(void)
 }
 
 /*! Returns background style sheet. */
-QString themeEngine::bgStyleSheet(void)
+QString ThemeEngine::bgStyleSheet(void)
 {
 	return "QFrame, #centralwidget { background-color: rgb(" + QString::number(bgColor().red()) + ", " + QString::number(bgColor().green()) + ", " + QString::number(bgColor().blue()) + ");}";
 }
 
 /*! Returns true if there's a custom paper color set. */
-bool themeEngine::customPaperColor(void)
+bool ThemeEngine::customPaperColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("theme/custompapercolor", "false").toBool();
 }
 
 /*! Returns paper color. */
-QColor themeEngine::paperColor(void)
+QColor ThemeEngine::paperColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QColor(settings.value("theme/paperred", "0").toInt(),
@@ -378,7 +378,7 @@ QColor themeEngine::paperColor(void)
 }
 
 /*! Sets paper color. */
-void themeEngine::setPaperColor(QColor color)
+void ThemeEngine::setPaperColor(QColor color)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	settings.setValue("theme/paperred", color.red());
@@ -389,7 +389,7 @@ void themeEngine::setPaperColor(QColor color)
 }
 
 /*! Resets paper color. */
-void themeEngine::resetPaperColor(void)
+void ThemeEngine::resetPaperColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	switch(style())
@@ -413,20 +413,20 @@ void themeEngine::resetPaperColor(void)
 }
 
 /*! Returns paper style sheet. */
-QString themeEngine::paperStyleSheet(void)
+QString ThemeEngine::paperStyleSheet(void)
 {
 	return "QFrame { background-color: rgb(" + QString::number(paperColor().red()) + ", " + QString::number(paperColor().green()) + ", " + QString::number(paperColor().blue()) + ");}";
 }
 
 /*! Returns true if there's a custom panel color set. */
-bool themeEngine::customPanelColor(void)
+bool ThemeEngine::customPanelColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("theme/custompanelcolor", "false").toBool();
 }
 
 /*! Returns panel color. */
-QColor themeEngine::panelColor(void)
+QColor ThemeEngine::panelColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QColor(settings.value("theme/panelred", "0").toInt(),
@@ -435,7 +435,7 @@ QColor themeEngine::panelColor(void)
 }
 
 /*! Sets panel color. */
-void themeEngine::setPanelColor(QColor color)
+void ThemeEngine::setPanelColor(QColor color)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	settings.setValue("theme/panelred", color.red());
@@ -446,7 +446,7 @@ void themeEngine::setPanelColor(QColor color)
 }
 
 /*! Resets panel color. */
-void themeEngine::resetPanelColor(void)
+void ThemeEngine::resetPanelColor(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	switch(style())
@@ -470,20 +470,20 @@ void themeEngine::resetPanelColor(void)
 }
 
 /*! Returns panel style sheet. */
-QString themeEngine::panelStyleSheet(void)
+QString ThemeEngine::panelStyleSheet(void)
 {
 	return "QMenuBar, QFrame, QCheckBox { background-color: rgb(" + QString::number(panelColor().red()) + ", " + QString::number(panelColor().green()) + ", " + QString::number(panelColor().blue()) + ");}";
 }
 
 /*! Returns current application style. */
-themeEngine::Style themeEngine::style(void)
+ThemeEngine::Style ThemeEngine::style(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	return (themeEngine::Style) settings.value("theme/theme", "0").toInt();
+	return (ThemeEngine::Style) settings.value("theme/theme", "0").toInt();
 }
 
 /*! Sets application style. */
-void themeEngine::setStyle(themeEngine::Style newStyle)
+void ThemeEngine::setStyle(ThemeEngine::Style newStyle)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QFile styleFile;
@@ -511,14 +511,14 @@ void themeEngine::setStyle(themeEngine::Style newStyle)
 }
 
 /*! Loads and sets application style. */
-void themeEngine::updateStyle(void)
+void ThemeEngine::updateStyle(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	setStyle((themeEngine::Style) settings.value("theme/theme", "0").toInt());
+	setStyle((ThemeEngine::Style) settings.value("theme/theme", "0").toInt());
 }
 
 /*! Returns current application theme. */
-int themeEngine::theme(void)
+int ThemeEngine::theme(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QString id = settings.value("theme/fulltheme", "default").toString();
@@ -531,7 +531,7 @@ int themeEngine::theme(void)
 }
 
 /*! Sets application theme. */
-void themeEngine::setTheme(int index)
+void ThemeEngine::setTheme(int index)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	blockSignals(true);
@@ -616,13 +616,13 @@ void themeEngine::setTheme(int index)
 }
 
 /*! Returns the name of the theme. */
-QString themeEngine::themeName(int index)
+QString ThemeEngine::themeName(int index)
 {
 	return themes[index]["id"].toString();
 }
 
 /*! Returns list of themes. */
-QList<QVariantMap> themeEngine::themeList(void)
+QList<QVariantMap> ThemeEngine::themeList(void)
 {
 	return themes;
 }

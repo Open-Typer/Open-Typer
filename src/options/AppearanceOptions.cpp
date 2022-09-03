@@ -81,7 +81,7 @@ AppearanceOptions::~AppearanceOptions()
 /*! Initializes widgets and loads settings. */
 void AppearanceOptions::init(void)
 {
-	ui->themeBox->setCurrentIndex((int) (themeEngine::style() - 1));
+	ui->themeBox->setCurrentIndex((int) (ThemeEngine::style() - 1));
 	// Colors
 	setColors();
 	// Font
@@ -244,7 +244,7 @@ void AppearanceOptions::goBack(void)
 /*! Updates text font. */
 void AppearanceOptions::updateFont(void)
 {
-	QFont newFont = themeEngine::font();
+	QFont newFont = ThemeEngine::font();
 	ui->fontComboBox->setCurrentFont(newFont);
 	ui->fontSizeBox->setValue(newFont.pointSize());
 	ui->boldTextBox->setChecked(newFont.bold());
@@ -314,21 +314,21 @@ void AppearanceOptions::setUnderlineText(void)
 void AppearanceOptions::setColors()
 {
 	// Set exercise text color
-	ui->levelLabel->setStyleSheet(themeEngine::exerciseTextStyleSheet());
+	ui->levelLabel->setStyleSheet(ThemeEngine::exerciseTextStyleSheet());
 	// Set input text color
-	ui->inputLabel->setStyleSheet(themeEngine::inputTextStyleSheet());
+	ui->inputLabel->setStyleSheet(ThemeEngine::inputTextStyleSheet());
 	// Set background color
-	ui->previewFrame->setStyleSheet(themeEngine::bgStyleSheet());
+	ui->previewFrame->setStyleSheet(ThemeEngine::bgStyleSheet());
 	// Set paper color
-	ui->paper->setStyleSheet(themeEngine::paperStyleSheet());
+	ui->paper->setStyleSheet(ThemeEngine::paperStyleSheet());
 	// Set panel color
-	ui->panelFrame->setStyleSheet(themeEngine::panelStyleSheet());
+	ui->panelFrame->setStyleSheet(ThemeEngine::panelStyleSheet());
 	// Update color buttons
-	QColor exTextColor = themeEngine::exerciseTextColor();
-	QColor inTextColor = themeEngine::inputTextColor();
-	QColor bgColor = themeEngine::bgColor();
-	QColor paperColor = themeEngine::paperColor();
-	QColor panelColor = themeEngine::panelColor();
+	QColor exTextColor = ThemeEngine::exerciseTextColor();
+	QColor inTextColor = ThemeEngine::inputTextColor();
+	QColor bgColor = ThemeEngine::bgColor();
+	QColor paperColor = ThemeEngine::paperColor();
+	QColor panelColor = ThemeEngine::panelColor();
 	QString styleSheetPart = "border: 2px solid gray; background-color: rgb(";
 	ui->levelTextColorButton->setStyleSheet(styleSheetPart + QString::number(exTextColor.red()) + ", " + QString::number(exTextColor.green()) + ", " + QString::number(exTextColor.blue()) + ");");
 	ui->inputTextColorButton->setStyleSheet(styleSheetPart + QString::number(inTextColor.red()) + ", " + QString::number(inTextColor.green()) + ", " + QString::number(inTextColor.blue()) + ");");
@@ -447,6 +447,6 @@ void AppearanceOptions::resetBgPaperColors(void)
  */
 void AppearanceOptions::changeTheme(int index)
 {
-	globalThemeEngine.setStyle((themeEngine::Style)(index + 1));
+	globalThemeEngine.setStyle((ThemeEngine::Style)(index + 1));
 	setColors();
 }

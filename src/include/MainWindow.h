@@ -48,7 +48,7 @@
 #include "core/utils.h"
 #include "core/BuiltInPacks.h"
 #include "core/LanguageManager.h"
-#include "core/theme.h"
+#include "core/ThemeEngine.h"
 #ifndef Q_OS_WASM
 #include "core/MonitorServer.h"
 #endif // Q_OS_WASM
@@ -99,7 +99,7 @@ class MainWindow : public QMainWindow
 		QString inputTextHtml, mistakeTextHtml;
 		int lastTime;
 		double lastTimeF;
-		themeEngine localThemeEngine;
+		ThemeEngine localThemeEngine;
 		void setColors(void);
 		bool customLevelLoaded = false;
 		QString customLevel;

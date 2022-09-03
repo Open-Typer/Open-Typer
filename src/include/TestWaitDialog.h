@@ -27,7 +27,7 @@
 #include <QCloseEvent>
 #include <QScrollBar>
 #include "core/MonitorClient.h"
-#include "core/theme.h"
+#include "core/ThemeEngine.h"
 
 namespace Ui {
 	class TestWaitDialog;

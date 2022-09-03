@@ -73,7 +73,7 @@ ExportDialog::ExportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 	exportHtml = finalText;
 	ui->exportText->setHtml(exportHtml);
 	// Set font
-	QFont textFont = themeEngine::font();
+	QFont textFont = ThemeEngine::font();
 	textFont.setPointSize(12);
 	ui->exportText->setFont(textFont);
 	// Fill table

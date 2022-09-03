@@ -1,5 +1,5 @@
 /*
- * theme.h
+ * ThemeEngine.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -32,12 +32,12 @@
 #include <QFile>
 #include "core/utils.h"
 
-/*! \brief The themeEngine class provides theme functions. */
-class themeEngine : public QObject
+/*! \brief The ThemeEngine class provides theme functions. */
+class ThemeEngine : public QObject
 {
 		Q_OBJECT
 	public:
-		themeEngine(QObject *parent = nullptr);
+		ThemeEngine(QObject *parent = nullptr);
 		void updateThemeList(void);
 
 		enum Style
@@ -139,6 +139,6 @@ class themeEngine : public QObject
 		void themeChanged();
 };
 
-extern themeEngine globalThemeEngine;
+extern ThemeEngine globalThemeEngine;
 
 #endif // THEME_H

@@ -129,10 +129,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	});
 	connect(ui->keyboardFrame, &KeyboardWidget::visibilityChanged, this, &MainWindow::updateFont);
 	// Theme engine
-	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &MainWindow::updateFont);
-	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &MainWindow::setColors);
-	connect(&globalThemeEngine, &themeEngine::styleChanged, this, &MainWindow::setColors);
-	connect(&globalThemeEngine, &themeEngine::themeChanged, this, &MainWindow::loadTheme);
+	connect(&globalThemeEngine, &ThemeEngine::fontChanged, this, &MainWindow::updateFont);
+	connect(&globalThemeEngine, &ThemeEngine::colorChanged, this, &MainWindow::setColors);
+	connect(&globalThemeEngine, &ThemeEngine::styleChanged, this, &MainWindow::setColors);
+	connect(&globalThemeEngine, &ThemeEngine::themeChanged, this, &MainWindow::loadTheme);
 	// Theme
 	if(settings.contains("main/windowState") && settings.contains("main/windowGeometry"))
 	{
@@ -1369,8 +1369,8 @@ void MainWindow::loadTheme(void)
 /*! Updates text font. */
 void MainWindow::updateFont(void)
 {
-	QFont newFont = themeEngine::font();
-	QFont mistakeLabelFont = themeEngine::errorFont();
+	QFont newFont = ThemeEngine::font();
+	QFont mistakeLabelFont = ThemeEngine::errorFont();
 	// Update labels
 	ui->levelCurrentLineLabel->setFont(newFont);
 	ui->levelLabel->setFont(newFont);
@@ -1399,29 +1399,29 @@ void MainWindow::updateFont(void)
 void MainWindow::setColors(void)
 {
 	// Set exercise text color
-	if(!themeEngine::customExerciseTextColor())
+	if(!ThemeEngine::customExerciseTextColor())
 		localThemeEngine.resetExerciseTextColor();
-	QString levelLabelStyleSheet = themeEngine::exerciseTextStyleSheet();
+	QString levelLabelStyleSheet = ThemeEngine::exerciseTextStyleSheet();
 	ui->levelLabel->setStyleSheet(levelLabelStyleSheet);
 	ui->levelCurrentLineLabel->setStyleSheet(levelLabelStyleSheet);
 	// Set input text color
-	if(!themeEngine::customInputTextColor())
+	if(!ThemeEngine::customInputTextColor())
 		localThemeEngine.resetInputTextColor();
-	ui->inputLabel->setStyleSheet(themeEngine::inputTextStyleSheet());
+	ui->inputLabel->setStyleSheet(ThemeEngine::inputTextStyleSheet());
 	// Set background color
-	if(!themeEngine::customBgColor())
+	if(!ThemeEngine::customBgColor())
 		localThemeEngine.resetBgColor();
-	ui->centralwidget->setStyleSheet(themeEngine::bgStyleSheet());
+	ui->centralwidget->setStyleSheet(ThemeEngine::bgStyleSheet());
 	// Set paper color
-	if(!themeEngine::customPaperColor())
+	if(!ThemeEngine::customPaperColor())
 		localThemeEngine.resetPaperColor();
-	ui->paper->setStyleSheet(themeEngine::paperStyleSheet());
+	ui->paper->setStyleSheet(ThemeEngine::paperStyleSheet());
 	QColor lineColor = palette().color(QPalette::Window);
 	ui->textSeparationLine->setStyleSheet("QFrame { background-color: rgb(" + QString::number(lineColor.red()) + "," + QString::number(lineColor.green()) + "," + QString::number(lineColor.blue()) + "); }");
 	// Set panel color
-	if(!themeEngine::customPanelColor())
+	if(!ThemeEngine::customPanelColor())
 		localThemeEngine.resetPanelColor();
-	QString panelStyleSheet = themeEngine::panelStyleSheet();
+	QString panelStyleSheet = ThemeEngine::panelStyleSheet();
 	ui->controlFrame->setStyleSheet(panelStyleSheet);
 	ui->bottomPanel->setStyleSheet(panelStyleSheet);
 	ui->serverFrame->setStyleSheet(qApp->styleSheet());
