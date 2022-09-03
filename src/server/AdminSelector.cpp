@@ -1,5 +1,5 @@
 /*
- * adminselector.cpp
+ * AdminSelector.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/adminselector.h"
-#include "ui_adminselector.h"
+#include "server/AdminSelector.h"
+#include "ui_AdminSelector.h"
 
-/*! Constructs adminSelector. */
-adminSelector::adminSelector(QWidget *parent) :
+/*! Constructs AdminSelector. */
+AdminSelector::AdminSelector(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::adminSelector)
+	ui(new Ui::AdminSelector)
 {
 	ui->setupUi(this);
 	// Load administrators
@@ -33,11 +33,11 @@ adminSelector::adminSelector(QWidget *parent) :
 	ui->adminList->setCurrentRow(0);
 	// Connections
 	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(finish()));
-	connect(ui->adminList, &QListWidget::itemDoubleClicked, this, &adminSelector::finish);
+	connect(ui->adminList, &QListWidget::itemDoubleClicked, this, &AdminSelector::finish);
 }
 
-/*! Destroys the adminSelector object. */
-adminSelector::~adminSelector()
+/*! Destroys the AdminSelector object. */
+AdminSelector::~AdminSelector()
 {
 	delete ui;
 }
@@ -46,7 +46,7 @@ adminSelector::~adminSelector()
  * Connected from okButton->clicked().\n
  * Sets userID attribute and closes the dialog.
  */
-void adminSelector::finish(void)
+void AdminSelector::finish(void)
 {
 	userID = adminIDs.value(ui->adminList->currentRow());
 	accept();

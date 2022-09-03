@@ -161,7 +161,7 @@ void serverManager::openUserManager(void)
 		showCloseExercisesMessage();
 		return;
 	}
-	adminSelector *selectDialog = new adminSelector(this);
+	AdminSelector *selectDialog = new AdminSelector(this);
 	selectDialog->setWindowModality(Qt::WindowModal);
 	selectDialog->open();
 	connect(selectDialog, &QDialog::accepted, this, [selectDialog, this]() {

@@ -1,5 +1,5 @@
 /*
- * adminselector.h
+ * AdminSelector.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -25,23 +25,23 @@
 #include "core/database.h"
 
 namespace Ui {
-	class adminSelector;
+	class AdminSelector;
 }
 
 /*!
- * \brief The adminSelector class is a dialog used to select an administrator account.
- * \image html adminSelector.png
+ * \brief The AdminSelector class is a dialog used to select an administrator account.
+ * \image html AdminSelector.png
  */
-class adminSelector : public QDialog
+class AdminSelector : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit adminSelector(QWidget *parent = nullptr);
-		~adminSelector();
+		explicit AdminSelector(QWidget *parent = nullptr);
+		~AdminSelector();
 		int userID;
 
 	private:
-		Ui::adminSelector *ui;
+		Ui::AdminSelector *ui;
 		QList<int> adminIDs;
 
 	private slots:
