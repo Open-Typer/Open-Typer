@@ -57,7 +57,7 @@ SOURCES += \
 SOURCES += \
     src/core/net.cpp \
     src/core/packs.cpp \
-    src/core/language.cpp \
+    src/core/LanguageManager.cpp \
     src/core/theme.cpp \
     src/InitialSetup.cpp \
     src/ExerciseSummary.cpp \
@@ -105,7 +105,7 @@ HEADERS += \
 HEADERS += \
     src/include/core/net.h \
     src/include/core/packs.h \
-    src/include/core/language.h \
+    src/include/core/LanguageManager.h \
     src/include/core/theme.h \
     src/include/InitialSetup.h \
     src/include/ExerciseSummary.h \

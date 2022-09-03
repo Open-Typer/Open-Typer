@@ -1,5 +1,5 @@
 /*
- * language.cpp
+ * LanguageManager.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/language.h"
+#include "core/LanguageManager.h"
 
 QTranslator *translator1 = nullptr;
 QTranslator *translator2 = nullptr;
 
-/*! Constructs languageManager. */
-languageManager::languageManager(QObject *parent) :
+/*! Constructs LanguageManager. */
+LanguageManager::LanguageManager(QObject *parent) :
 	QObject(parent)
 {
 	supportedLanguages.clear();
@@ -46,11 +46,11 @@ languageManager::languageManager(QObject *parent) :
 	boxItems.insert(0, tr("System (default)"));
 }
 
-/*! Destroys the languageManager object. */
-languageManager::~languageManager() { }
+/*! Destroys the LanguageManager object. */
+LanguageManager::~LanguageManager() { }
 
 /*! Changes the application language. */
-void languageManager::setLanguage(int index)
+void LanguageManager::setLanguage(int index)
 {
 	QLocale targetLocale;
 	if(index < 0)

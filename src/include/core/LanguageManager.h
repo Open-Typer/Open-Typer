@@ -1,5 +1,5 @@
 /*
- * language.h
+ * LanguageManager.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -32,10 +32,10 @@ extern QTranslator *translator1;
 extern QTranslator *translator2;
 
 /*!
- * \brief The languageManager class provides a list of supported languages.
+ * \brief The LanguageManager class provides a list of supported languages.
  *
  * \code
- * languageManager langMgr;
+ * LanguageManager langMgr;
  * QList<QLocale::Language> languages = langMgr.supportedLanguages; // list of supported languages
  * QList<QLocale::Country> countries = langMgr.supportedCountries; // list of supported countries (every language has a country, e. g. en_US and en_GB)
  * QStringList items = langMgr.boxItems; // list of languages, which can be used in selector widgets
@@ -43,12 +43,12 @@ extern QTranslator *translator2;
  *
  * \see LanguageList
  */
-class languageManager : public QObject
+class LanguageManager : public QObject
 {
 		Q_OBJECT
 	public:
-		explicit languageManager(QObject *parent = nullptr);
-		virtual ~languageManager();
+		explicit LanguageManager(QObject *parent = nullptr);
+		virtual ~LanguageManager();
 		void setLanguage(int index);
 		QList<QLocale::Language> supportedLanguages;
 		QList<QLocale::Country> supportedCountries;
