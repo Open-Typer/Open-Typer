@@ -95,7 +95,7 @@ void InitialSetup::loadList(void)
 	}
 	items.clear();
 	for(int i = 0; i < rawItems.count(); i++)
-		items += builtinPacks::packName(rawItems[i]);
+		items += BuiltInPacks::packName(rawItems[i]);
 	ui->packList->addItems(items);
 	if(ui->packList->count() > 0)
 		ui->packList->setCurrentRow(0);

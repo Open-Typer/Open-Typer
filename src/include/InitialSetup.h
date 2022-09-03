@@ -24,7 +24,7 @@
 #include <QDialog>
 #include <QDirIterator>
 #include "options/AppearanceOptions.h"
-#include "core/packs.h"
+#include "core/BuiltInPacks.h"
 #include "core/utils.h"
 
 namespace Ui {

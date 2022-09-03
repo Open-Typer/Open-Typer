@@ -56,7 +56,7 @@ SOURCES += \
 }
 SOURCES += \
     src/core/MonitorClient.cpp \
-    src/core/packs.cpp \
+    src/core/BuiltInPacks.cpp \
     src/core/LanguageManager.cpp \
     src/core/theme.cpp \
     src/InitialSetup.cpp \
@@ -104,7 +104,7 @@ HEADERS += \
 }
 HEADERS += \
     src/include/core/MonitorClient.h \
-    src/include/core/packs.h \
+    src/include/core/BuiltInPacks.h \
     src/include/core/LanguageManager.h \
     src/include/core/theme.h \
     src/include/InitialSetup.h \

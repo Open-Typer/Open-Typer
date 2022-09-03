@@ -24,7 +24,7 @@
 #include <QDialog>
 #include <QDirIterator>
 #include "core/utils.h"
-#include "core/packs.h"
+#include "core/BuiltInPacks.h"
 
 namespace Ui {
 	class PackSelector;

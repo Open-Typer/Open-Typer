@@ -40,7 +40,7 @@ PackSelector::PackSelector(QWidget *parent) :
 		for(i = 14; i < item.count(); i++)
 			current += item[i];
 		rawItems += current;
-		items += builtinPacks::packName(current);
+		items += BuiltInPacks::packName(current);
 	}
 	ui->selBox->addItems(items);
 	// Connect buttons
@@ -54,7 +54,7 @@ PackSelector::~PackSelector()
 	delete ui;
 }
 
-/*! Returns selected built-in pack raw name. \see builtinPacks#packName() */
+/*! Returns selected built-in pack raw name. \see BuiltInPacks#packName() */
 QString PackSelector::selectedConfig(void)
 {
 	return rawItems[ui->selBox->currentIndex()];

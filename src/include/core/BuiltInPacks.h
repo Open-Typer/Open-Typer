@@ -1,5 +1,5 @@
 /*
- * packs.h
+ * BuiltInPacks.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -24,8 +24,8 @@
 #include <QObject>
 #include <QString>
 
-/*! \brief The builtinPacks class provides functions for built-in pack settings. */
-class builtinPacks : public QObject
+/*! \brief The BuiltInPacks class provides functions for built-in pack settings. */
+class BuiltInPacks : public QObject
 {
 		Q_OBJECT
 	public:

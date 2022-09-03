@@ -27,7 +27,7 @@
 #include "options/OptionsWindow.h"
 #include "packEditor/PackEditor.h"
 #include "core/utils.h"
-#include "core/packs.h"
+#include "core/BuiltInPacks.h"
 
 namespace Ui {
 	class KeyboardOptions;

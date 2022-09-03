@@ -364,7 +364,7 @@ QString MainWindow::loadConfig(QString configName, QByteArray packContent)
 		ui->trainingPackNameLabel->setText(configQFileInfo.fileName());
 	}
 	else
-		ui->trainingPackNameLabel->setText(builtinPacks::packName(configName));
+		ui->trainingPackNameLabel->setText(BuiltInPacks::packName(configName));
 	publicConfigName = configName;
 	return configPath;
 }

@@ -25,7 +25,7 @@
 #include <QtCharts>
 #include "core/DatabaseManager.h"
 #include "core/ConfigParser.h"
-#include "core/packs.h"
+#include "core/BuiltInPacks.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
 using namespace QtCharts;

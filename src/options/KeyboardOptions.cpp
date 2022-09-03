@@ -41,7 +41,7 @@ KeyboardOptions::KeyboardOptions(QWidget *parent) :
 		for(i = 14; i < item.count(); i++)
 			current += item[i];
 		rawItems += current;
-		items += builtinPacks::packName(current);
+		items += BuiltInPacks::packName(current);
 	}
 	ui->packList->addItems(items);
 	// Get current pack

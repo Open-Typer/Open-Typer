@@ -46,7 +46,7 @@
 #include "core/ConfigParser.h"
 #include "core/HistoryParser.h"
 #include "core/utils.h"
-#include "core/packs.h"
+#include "core/BuiltInPacks.h"
 #include "core/LanguageManager.h"
 #include "core/theme.h"
 #ifndef Q_OS_WASM

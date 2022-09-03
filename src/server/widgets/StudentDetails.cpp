@@ -94,7 +94,7 @@ void StudentDetails::refresh(void)
 	ui->packBox->clear();
 	QStringList packs = dbMgr.studentPacks(classID, studentID);
 	for(int i = 0; i < packs.count(); i++)
-		ui->packBox->addItem(builtinPacks::packName(packs[i]));
+		ui->packBox->addItem(BuiltInPacks::packName(packs[i]));
 	if(ui->packBox->count() == 0)
 	{
 		ui->exerciseFrame->hide();

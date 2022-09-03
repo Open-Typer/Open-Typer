@@ -28,7 +28,7 @@
 #include "server/ExerciseProgressDialog.h"
 #include "core/DatabaseManager.h"
 #include "core/ConfigParser.h"
-#include "core/packs.h"
+#include "core/BuiltInPacks.h"
 #ifndef Q_OS_WASM
 #include "core/server.h"
 #endif // Q_OS_WASM
