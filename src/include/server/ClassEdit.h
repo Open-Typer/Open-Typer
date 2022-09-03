@@ -1,5 +1,5 @@
 /*
- * classedit.h
+ * ClassEdit.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -27,23 +27,23 @@
 #include "core/database.h"
 
 namespace Ui {
-	class classEdit;
+	class ClassEdit;
 }
 
 /*!
- * \brief The classEdit class is a dialog for class adding and editing.
+ * \brief The ClassEdit class is a dialog for class adding and editing.
  *
- * \image html classEdit.png
+ * \image html ClassEdit.png
  */
-class classEdit : public QDialog
+class ClassEdit : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit classEdit(bool newClass = false, int id = 1, QWidget *parent = nullptr);
-		~classEdit();
+		explicit ClassEdit(bool newClass = false, int id = 1, QWidget *parent = nullptr);
+		~ClassEdit();
 
 	private:
-		Ui::classEdit *ui;
+		Ui::ClassEdit *ui;
 		bool creatingNewClass;
 		int classID;
 

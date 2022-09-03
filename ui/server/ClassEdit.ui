@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>classEdit</class>
- <widget class="QDialog" name="classEdit">
+ <class>ClassEdit</class>
+ <widget class="QDialog" name="ClassEdit">
   <property name="geometry">
    <rect>
     <x>0</x>

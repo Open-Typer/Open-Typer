@@ -79,7 +79,7 @@ SOURCES += \
     src/server/useredit.cpp \
     src/server/AdminSelector.cpp \
     src/server/serversetup.cpp \
-    src/server/classedit.cpp \
+    src/server/ClassEdit.cpp \
     src/server/studentedit.cpp \
     src/server/deviceedit.cpp \
     src/server/loadexercisedialog.cpp \
@@ -126,7 +126,7 @@ HEADERS += \
     src/include/server/useredit.h \
     src/include/server/AdminSelector.h \
     src/include/server/serversetup.h \
-    src/include/server/classedit.h \
+    src/include/server/ClassEdit.h \
     src/include/server/studentedit.h \
     src/include/server/deviceedit.h \
     src/include/server/loadexercisedialog.h \
@@ -156,7 +156,7 @@ FORMS += \
     ui/server/useredit.ui \
     ui/server/AdminSelector.ui \
     ui/server/serversetup.ui \
-    ui/server/classedit.ui \
+    ui/server/ClassEdit.ui \
     ui/server/studentedit.ui \
     ui/server/deviceedit.ui \
     ui/server/loadexercisedialog.ui \

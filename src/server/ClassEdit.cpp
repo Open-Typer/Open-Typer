@@ -1,5 +1,5 @@
 /*
- * classedit.cpp
+ * ClassEdit.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/classedit.h"
-#include "ui_classedit.h"
+#include "server/ClassEdit.h"
+#include "ui_ClassEdit.h"
 
-/*! Constructs classEdit. */
-classEdit::classEdit(bool newClass, int id, QWidget *parent) :
+/*! Constructs ClassEdit. */
+ClassEdit::ClassEdit(bool newClass, int id, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::classEdit)
+	ui(new Ui::ClassEdit)
 {
 	ui->setupUi(this);
 	ui->okButton->setEnabled(false);
@@ -59,14 +59,14 @@ classEdit::classEdit(bool newClass, int id, QWidget *parent) :
 		ui->ownerBox->addItem(dbMgr.userName(users[i]));
 	updateOwner(ui->ownerBox->currentText());
 	// Connections
-	connect(ui->nameEdit, &QLineEdit::textChanged, this, &classEdit::verify);
+	connect(ui->nameEdit, &QLineEdit::textChanged, this, &ClassEdit::verify);
 	connect(ui->ownerBox, SIGNAL(currentTextChanged(const QString)), this, SLOT(updateOwner(const QString)));
-	connect(ui->passwordEdit, &QLineEdit::textChanged, this, &classEdit::verify);
+	connect(ui->passwordEdit, &QLineEdit::textChanged, this, &ClassEdit::verify);
 	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(finish()));
 }
 
-/*! Destroys the classEdit object. */
-classEdit::~classEdit()
+/*! Destroys the ClassEdit object. */
+ClassEdit::~ClassEdit()
 {
 	delete ui;
 }
@@ -75,7 +75,7 @@ classEdit::~classEdit()
  * Connected from all line edits' textChanged() signal.\n
  * Checks if all info is correct and enables the OK button.
  */
-void classEdit::verify(void)
+void ClassEdit::verify(void)
 {
 	ui->okButton->setEnabled(false);
 	// Check class name
@@ -101,7 +101,7 @@ void classEdit::verify(void)
  * Connected from ownerBox->currentTextChanged().\n
  * Updates passwordLabel.
  */
-void classEdit::updateOwner(const QString name)
+void ClassEdit::updateOwner(const QString name)
 {
 	ui->passwordLabel->setText("Password for " + name + ":");
 	verify();
@@ -111,7 +111,7 @@ void classEdit::updateOwner(const QString name)
  * Connected from okButton->clicked().\n
  * Checks owner password, creates or edits the class and closes the dialog.
  */
-void classEdit::finish(void)
+void ClassEdit::finish(void)
 {
 	int owner = dbMgr.teacherIDs().value(ui->ownerBox->currentIndex());
 	if(dbMgr.auth(owner, ui->passwordEdit->text(), true))

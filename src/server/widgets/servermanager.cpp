@@ -203,7 +203,7 @@ void serverManager::expand(void)
 	emit widgetExpanded();
 }
 
-/*! Opens classEdit and creates a class. */
+/*! Opens ClassEdit and creates a class. */
 void serverManager::addClass(void)
 {
 	if(exerciseProgressDialogConfig::dialogCount > 0)
@@ -211,7 +211,7 @@ void serverManager::addClass(void)
 		showCloseExercisesMessage();
 		return;
 	}
-	classEdit *dialog = new classEdit(true, 1, this);
+	ClassEdit *dialog = new ClassEdit(true, 1, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
 	connect(dialog, &QDialog::accepted, this, [this]() {
@@ -310,7 +310,7 @@ void serverManager::editClass(void)
 		showCloseExercisesMessage();
 		return;
 	}
-	classEdit *dialog = new classEdit(false, 1, this);
+	ClassEdit *dialog = new ClassEdit(false, 1, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
 	connect(dialog, &QDialog::accepted, this, [this]() {
