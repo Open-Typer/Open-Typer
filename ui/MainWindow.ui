@@ -1409,7 +1409,7 @@
             <number>0</number>
            </property>
            <item alignment="Qt::AlignTop">
-            <widget class="textView" name="levelLabel">
+            <widget class="TextView" name="levelLabel">
              <property name="focusPolicy">
               <enum>Qt::NoFocus</enum>
              </property>
@@ -1594,7 +1594,7 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
            <item>
-            <widget class="textView" name="mistakeLabel">
+            <widget class="TextView" name="mistakeLabel">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -1718,7 +1718,7 @@ p, li { white-space: pre-wrap; }
             <number>0</number>
            </property>
            <item>
-            <widget class="textView" name="levelCurrentLineLabel">
+            <widget class="TextView" name="levelCurrentLineLabel">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -2184,9 +2184,9 @@ p, li { white-space: pre-wrap; }
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>textView</class>
+   <class>TextView</class>
    <extends>QTextEdit</extends>
-   <header>widgets/textview.h</header>
+   <header>widgets/TextView.h</header>
   </customwidget>
  </customwidgets>
  <resources>

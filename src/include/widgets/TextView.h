@@ -1,5 +1,5 @@
 /*
- * textview.h
+ * TextView.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -27,16 +27,16 @@
 #include <QLayout>
 
 /*!
- * \brief The textView class is a QTextEdit used to display text.
+ * \brief The TextView class is a QTextEdit used to display text.
  *
  * It contains modifications that ignore mouse wheel events and make the widget resize using fixed size according to the text document size.
  */
-class textView : public QTextEdit
+class TextView : public QTextEdit
 {
 		Q_OBJECT
 	public:
-		explicit textView(QWidget *parent = nullptr);
-		~textView();
+		explicit TextView(QWidget *parent = nullptr);
+		~TextView();
 		void setHorizontalAdjust(bool value);
 		void setVerticalAdjust(bool value);
 

@@ -1,5 +1,5 @@
 /*
- * textview.cpp
+ * TextView.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,32 +18,32 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "widgets/textview.h"
+#include "widgets/TextView.h"
 
-/*! Constructs textView. */
-textView::textView(QWidget *parent) :
+/*! Constructs TextView. */
+TextView::TextView(QWidget *parent) :
 	QTextEdit(parent)
 {
-	connect(this, &textView::textChanged, this, &textView::updateWidgetSize);
+	connect(this, &TextView::textChanged, this, &TextView::updateWidgetSize);
 }
 
-/*! Destroys the textView object. */
-textView::~textView() { }
+/*! Destroys the TextView object. */
+TextView::~TextView() { }
 
 /*! Sets horizontal adjustment (according to the text document) of the widget. */
-void textView::setHorizontalAdjust(bool value)
+void TextView::setHorizontalAdjust(bool value)
 {
 	horizontalAdjust = value;
 }
 
 /*! Sets vertical adjustment (according to the text document) of the widget. */
-void textView::setVerticalAdjust(bool value)
+void TextView::setVerticalAdjust(bool value)
 {
 	verticalAdjust = value;
 }
 
 /*! Sets widget fixed size according to the text document. */
-void textView::updateWidgetSize(void)
+void TextView::updateWidgetSize(void)
 {
 	QTextDocument *targetDocument;
 	if(toPlainText() == "")
@@ -72,7 +72,7 @@ void textView::updateWidgetSize(void)
 }
 
 /*! Overrides QTextEdit#changeEvent(). */
-void textView::changeEvent(QEvent *event)
+void TextView::changeEvent(QEvent *event)
 {
 	QTextEdit::changeEvent(event);
 	if(event->type() == QEvent::FontChange)
@@ -80,13 +80,13 @@ void textView::changeEvent(QEvent *event)
 }
 
 /*! Overrides QTextEdit#wheelEvent(). */
-void textView::wheelEvent(QWheelEvent *event)
+void TextView::wheelEvent(QWheelEvent *event)
 {
 	event->accept();
 }
 
 /*! Overrides QTextEdit#mouseMoveEvent(). */
-void textView::mouseMoveEvent(QMouseEvent *event)
+void TextView::mouseMoveEvent(QMouseEvent *event)
 {
 	event->accept();
 }

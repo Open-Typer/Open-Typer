@@ -160,7 +160,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="textView" name="exportText">
+           <widget class="TextView" name="exportText">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -304,9 +304,9 @@ QWidget::item:hover {
  </widget>
  <customwidgets>
   <customwidget>
-   <class>textView</class>
+   <class>TextView</class>
    <extends>QTextEdit</extends>
-   <header>widgets/textview.h</header>
+   <header>widgets/TextView.h</header>
   </customwidget>
  </customwidgets>
  <resources>

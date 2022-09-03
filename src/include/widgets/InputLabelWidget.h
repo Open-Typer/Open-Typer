@@ -24,11 +24,11 @@
 #include <QWidget>
 #include <QMainWindow>
 #include <QInputMethodEvent>
-#include "widgets/textview.h"
+#include "widgets/TextView.h"
 #include "core/utils.h"
 
 /*!
- * \brief The InputLabelWidget class is a textView, which handles all key presses.
+ * \brief The InputLabelWidget class is a TextView, which handles all key presses.
  *
  * The main window (OpenTyper) uses it to display the input text and receive key presses.
  * \image html InputLabelWidget.png
@@ -58,7 +58,7 @@
  * }
  * \endcode
  */
-class InputLabelWidget : public textView
+class InputLabelWidget : public TextView
 {
 		Q_OBJECT
 	public:

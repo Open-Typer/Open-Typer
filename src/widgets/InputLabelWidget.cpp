@@ -22,7 +22,7 @@
 
 /*! Constructs InputLabelWidget. */
 InputLabelWidget::InputLabelWidget(QWidget *parent) :
-	textView(parent)
+	TextView(parent)
 {
 	parentWidget = parent;
 	setAttribute(Qt::WA_InputMethodEnabled, true);
