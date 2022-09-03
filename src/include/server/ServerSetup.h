@@ -23,7 +23,7 @@
 
 #include <QDialog>
 #include <QSettings>
-#include "core/database.h"
+#include "core/DatabaseManager.h"
 #include "core/utils.h"
 
 namespace Ui {

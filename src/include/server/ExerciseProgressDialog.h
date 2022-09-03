@@ -27,7 +27,7 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include "ExportDialog.h"
-#include "core/database.h"
+#include "core/DatabaseManager.h"
 #include "core/ConfigParser.h"
 #ifndef Q_OS_WASM
 #include "core/server.h"

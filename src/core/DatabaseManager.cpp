@@ -1,5 +1,5 @@
 /*
- * database.cpp
+ * DatabaseManager.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,17 +18,17 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/database.h"
+#include "core/DatabaseManager.h"
 
-databaseManager dbMgr;
+DatabaseManager dbMgr;
 
-/*! Constructs databaseManager. */
-databaseManager::databaseManager(QObject *parent) :
+/*! Constructs DatabaseManager. */
+DatabaseManager::DatabaseManager(QObject *parent) :
 	QObject(parent),
 	openStatus(false) { }
 
 /*! Opens the database. */
-bool databaseManager::open(void)
+bool DatabaseManager::open(void)
 {
 #ifndef Q_OS_WASM
 	QSqlDatabase db;
@@ -70,14 +70,14 @@ bool databaseManager::open(void)
 	return openStatus;
 }
 
-/*! Returns true if the database has been successfully opened. */
-bool databaseManager::status(void)
+/*! Returns true if the DatabaseManager.has been successfully opened. */
+bool DatabaseManager::status(void)
 {
 	return openStatus;
 }
 
 /*! Returns list of translated user role names. */
-QStringList databaseManager::roles(bool includeStudentRole)
+QStringList DatabaseManager::roles(bool includeStudentRole)
 {
 	// All new roles must be added to the Role enum!
 	QStringList out;
@@ -89,7 +89,7 @@ QStringList databaseManager::roles(bool includeStudentRole)
 }
 
 /*! Returns the name of the user. */
-QString databaseManager::userName(int userID)
+QString DatabaseManager::userName(int userID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
@@ -104,7 +104,7 @@ QString databaseManager::userName(int userID)
 }
 
 /*! Returns the nickname of the user. */
-QString databaseManager::userNickname(int userID)
+QString DatabaseManager::userNickname(int userID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
@@ -119,7 +119,7 @@ QString databaseManager::userNickname(int userID)
 }
 
 /*! Returns the role of the user. */
-databaseManager::Role databaseManager::userRole(int userID)
+DatabaseManager::Role DatabaseManager::userRole(int userID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
@@ -134,7 +134,7 @@ databaseManager::Role databaseManager::userRole(int userID)
 }
 
 /*! Returns list of users. */
-QStringList databaseManager::userNames(void)
+QStringList DatabaseManager::userNames(void)
 {
 #ifdef Q_OS_WASM
 	return QStringList();
@@ -152,7 +152,7 @@ QStringList databaseManager::userNames(void)
 }
 
 /*! Returns list of teachers or administrators. */
-QStringList databaseManager::teacherNames(void)
+QStringList DatabaseManager::teacherNames(void)
 {
 #ifdef Q_OS_WASM
 	return QStringList();
@@ -170,7 +170,7 @@ QStringList databaseManager::teacherNames(void)
 }
 
 /*! Returns list of administrators. */
-QStringList databaseManager::administratorNames(void)
+QStringList DatabaseManager::administratorNames(void)
 {
 #ifdef Q_OS_WASM
 	return QStringList();
@@ -188,7 +188,7 @@ QStringList databaseManager::administratorNames(void)
 }
 
 /*! Returns list of user IDs. */
-QList<int> databaseManager::userIDs(void)
+QList<int> DatabaseManager::userIDs(void)
 {
 #ifdef Q_OS_WASM
 	return QList<int>();
@@ -206,7 +206,7 @@ QList<int> databaseManager::userIDs(void)
 }
 
 /*! Finds user by nickname. */
-int databaseManager::findUser(QString nickname)
+int DatabaseManager::findUser(QString nickname)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(nickname);
@@ -225,7 +225,7 @@ int databaseManager::findUser(QString nickname)
 }
 
 /*! Returns list of student IDs in the given class. */
-QList<int> databaseManager::studentIDs(int classID)
+QList<int> DatabaseManager::studentIDs(int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -244,7 +244,7 @@ QList<int> databaseManager::studentIDs(int classID)
 }
 
 /*! Returns list of teacher or administrator IDs. */
-QList<int> databaseManager::teacherIDs(void)
+QList<int> DatabaseManager::teacherIDs(void)
 {
 #ifdef Q_OS_WASM
 	return QList<int>();
@@ -262,7 +262,7 @@ QList<int> databaseManager::teacherIDs(void)
 }
 
 /*! Returns list of administrator IDs. */
-QList<int> databaseManager::administratorIDs(void)
+QList<int> DatabaseManager::administratorIDs(void)
 {
 #ifdef Q_OS_WASM
 	return QList<int>();
@@ -280,13 +280,13 @@ QList<int> databaseManager::administratorIDs(void)
 }
 
 /*! Returns the ID of currently logged in user. */
-int databaseManager::loginID(void)
+int DatabaseManager::loginID(void)
 {
 	return userLoginID;
 }
 
 /*! Opens an authentication dialog logs in as the given user. */
-bool databaseManager::auth(int userID, QString password, bool forceDialogs)
+bool DatabaseManager::auth(int userID, QString password, bool forceDialogs)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
@@ -335,7 +335,7 @@ validate:
 }
 
 /*! Adds a user. */
-void databaseManager::addUser(QString name, databaseManager::Role role, QString password, QString nickname, int classID)
+void DatabaseManager::addUser(QString name, DatabaseManager::Role role, QString password, QString nickname, int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(name);
@@ -369,7 +369,7 @@ void databaseManager::addUser(QString name, databaseManager::Role role, QString 
 }
 
 /*! Adds a student to the given class. */
-void databaseManager::addStudentToClass(int userID, int classID)
+void DatabaseManager::addStudentToClass(int userID, int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
@@ -385,7 +385,7 @@ void databaseManager::addStudentToClass(int userID, int classID)
 }
 
 /*! Edits a user. */
-void databaseManager::editUser(int userID, QString name, databaseManager::Role role, QString password, QString nickname)
+void DatabaseManager::editUser(int userID, QString name, DatabaseManager::Role role, QString password, QString nickname)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
@@ -429,7 +429,7 @@ void databaseManager::editUser(int userID, QString name, databaseManager::Role r
 }
 
 /*! Removes a user. */
-void databaseManager::removeUser(int userID)
+void DatabaseManager::removeUser(int userID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
@@ -448,7 +448,7 @@ void databaseManager::removeUser(int userID)
 }
 
 /*! Removes the student from the given class. */
-void databaseManager::removeStudentFromClass(int userID, int classID)
+void DatabaseManager::removeStudentFromClass(int userID, int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(userID);
@@ -465,7 +465,7 @@ void databaseManager::removeStudentFromClass(int userID, int classID)
 }
 
 /*! Returns the name of the class. */
-QString databaseManager::className(int classID)
+QString DatabaseManager::className(int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -480,7 +480,7 @@ QString databaseManager::className(int classID)
 }
 
 /*! Returns the icon of the class. */
-int databaseManager::classIcon(int classID)
+int DatabaseManager::classIcon(int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -495,7 +495,7 @@ int databaseManager::classIcon(int classID)
 }
 
 /*! Returns the timestamp of the class. */
-unsigned long long databaseManager::classTimestamp(int classID)
+unsigned long long DatabaseManager::classTimestamp(int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -510,7 +510,7 @@ unsigned long long databaseManager::classTimestamp(int classID)
 }
 
 /*! Returns the owner of the class */
-int databaseManager::classOwner(int classID)
+int DatabaseManager::classOwner(int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -525,7 +525,7 @@ int databaseManager::classOwner(int classID)
 }
 
 /*! Returns list of classes. */
-QStringList databaseManager::classNames(bool sort)
+QStringList DatabaseManager::classNames(bool sort)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(sort);
@@ -547,7 +547,7 @@ QStringList databaseManager::classNames(bool sort)
 }
 
 /*! Returns list of class IDs. */
-QList<int> databaseManager::classIDs(bool sort)
+QList<int> DatabaseManager::classIDs(bool sort)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(sort);
@@ -569,7 +569,7 @@ QList<int> databaseManager::classIDs(bool sort)
 }
 
 /*! Adds a class. */
-void databaseManager::addClass(QString name, int owner, int icon)
+void DatabaseManager::addClass(QString name, int owner, int icon)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(name);
@@ -588,7 +588,7 @@ void databaseManager::addClass(QString name, int owner, int icon)
 }
 
 /*! Edits a class. */
-void databaseManager::editClass(int classID, QString name, int owner, int icon)
+void DatabaseManager::editClass(int classID, QString name, int owner, int icon)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -606,7 +606,7 @@ void databaseManager::editClass(int classID, QString name, int owner, int icon)
 }
 
 /*! Updates the timestamp of the class. */
-void databaseManager::updateClassTimestamp(int classID)
+void DatabaseManager::updateClassTimestamp(int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -618,7 +618,7 @@ void databaseManager::updateClassTimestamp(int classID)
 }
 
 /*! Removes a class. */
-void databaseManager::removeClass(int classID)
+void DatabaseManager::removeClass(int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -631,7 +631,7 @@ void databaseManager::removeClass(int classID)
 }
 
 /*! Returns list of all packs in recorded exercise results of the given class. */
-QStringList databaseManager::recordedPacks(int classID)
+QStringList DatabaseManager::recordedPacks(int classID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -650,7 +650,7 @@ QStringList databaseManager::recordedPacks(int classID)
 }
 
 /*! Returns list of all packs in recorded exercise results of the given student. */
-QStringList databaseManager::studentPacks(int classID, int userID)
+QStringList DatabaseManager::studentPacks(int classID, int userID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -670,7 +670,7 @@ QStringList databaseManager::studentPacks(int classID, int userID)
 }
 
 /*! Returns list of all recorded lessons in the given pack. */
-QList<int> databaseManager::recordedLessons(int classID, QString pack)
+QList<int> DatabaseManager::recordedLessons(int classID, QString pack)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -690,7 +690,7 @@ QList<int> databaseManager::recordedLessons(int classID, QString pack)
 }
 
 /*! Returns list of all lessons in the pack of the given student. */
-QList<int> databaseManager::studentLessons(int classID, int userID, QString pack)
+QList<int> DatabaseManager::studentLessons(int classID, int userID, QString pack)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -711,7 +711,7 @@ QList<int> databaseManager::studentLessons(int classID, int userID, QString pack
 }
 
 /*! Returns list of all recorded sublessons in the given lesson. */
-QList<int> databaseManager::recordedSublessons(int classID, QString pack, int lesson)
+QList<int> DatabaseManager::recordedSublessons(int classID, QString pack, int lesson)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -732,7 +732,7 @@ QList<int> databaseManager::recordedSublessons(int classID, QString pack, int le
 }
 
 /*! Returns list of all sublessons in the lesson of the given student. */
-QList<int> databaseManager::studentSublessons(int classID, int userID, QString pack, int lesson)
+QList<int> DatabaseManager::studentSublessons(int classID, int userID, QString pack, int lesson)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -754,7 +754,7 @@ QList<int> databaseManager::studentSublessons(int classID, int userID, QString p
 }
 
 /*! Returns list of all recorded exercises in the given sublesson. */
-QList<int> databaseManager::recordedExercises(int classID, QString pack, int lesson, int sublesson)
+QList<int> DatabaseManager::recordedExercises(int classID, QString pack, int lesson, int sublesson)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -776,7 +776,7 @@ QList<int> databaseManager::recordedExercises(int classID, QString pack, int les
 }
 
 /*! Returns list of all exercises in the sublesson of the given student. */
-QList<int> databaseManager::studentExercises(int classID, int userID, QString pack, int lesson, int sublesson)
+QList<int> DatabaseManager::studentExercises(int classID, int userID, QString pack, int lesson, int sublesson)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -799,7 +799,7 @@ QList<int> databaseManager::studentExercises(int classID, int userID, QString pa
 }
 
 /*! Returns list of all entries in the exercise of the given student. */
-QList<QVariantMap> databaseManager::historyEntries(int classID, int userID, QString pack, int lesson, int sublesson, int exercise)
+QList<QVariantMap> DatabaseManager::historyEntries(int classID, int userID, QString pack, int lesson, int sublesson, int exercise)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -829,7 +829,7 @@ QList<QVariantMap> databaseManager::historyEntries(int classID, int userID, QStr
 }
 
 /*! Adds an entry to the exercise history. */
-void databaseManager::addHistoryEntry(int classID, int userID, QString pack, int lesson, int sublesson, int exercise, QVariantMap record)
+void DatabaseManager::addHistoryEntry(int classID, int userID, QString pack, int lesson, int sublesson, int exercise, QVariantMap record)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -850,7 +850,7 @@ void databaseManager::addHistoryEntry(int classID, int userID, QString pack, int
  * Returns number of better or worse students based on their average number of points.\n
  * The number of points for each entry is speed - mistakes*10.
  */
-int databaseManager::compareWithStudents(int classID, int studentID, QString pack, int lesson, int sublesson, int exercise, bool better)
+int DatabaseManager::compareWithStudents(int classID, int studentID, QString pack, int lesson, int sublesson, int exercise, bool better)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(classID);
@@ -917,7 +917,7 @@ int databaseManager::compareWithStudents(int classID, int studentID, QString pac
 }
 
 /*! Removes orphaned students. */
-void databaseManager::removeOrphanedStudents(void)
+void DatabaseManager::removeOrphanedStudents(void)
 {
 #ifndef Q_OS_WASM
 	QSqlQuery query1;
@@ -935,7 +935,7 @@ void databaseManager::removeOrphanedStudents(void)
 }
 
 /*! Returns list of paired device IDs. */
-QList<int> databaseManager::deviceIDs(void)
+QList<int> DatabaseManager::deviceIDs(void)
 {
 #ifdef Q_OS_WASM
 	return QList<int>();
@@ -953,7 +953,7 @@ QList<int> databaseManager::deviceIDs(void)
 }
 
 /*! Returns list of paired device IPv4 addresses. */
-QList<QHostAddress> databaseManager::deviceAddresses(void)
+QList<QHostAddress> DatabaseManager::deviceAddresses(void)
 {
 #ifdef Q_OS_WASM
 	return QList<QHostAddress>();
@@ -971,7 +971,7 @@ QList<QHostAddress> databaseManager::deviceAddresses(void)
 }
 
 /*! Returns the IPv4 address of the given device. */
-QHostAddress databaseManager::deviceAddress(int deviceID)
+QHostAddress DatabaseManager::deviceAddress(int deviceID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(deviceID);
@@ -986,7 +986,7 @@ QHostAddress databaseManager::deviceAddress(int deviceID)
 }
 
 /*! Returns the name of the given device. */
-QString databaseManager::deviceName(int deviceID)
+QString DatabaseManager::deviceName(int deviceID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(deviceID);
@@ -1001,7 +1001,7 @@ QString databaseManager::deviceName(int deviceID)
 }
 
 /*! Finds device by IPv4 address. */
-int databaseManager::findDevice(QHostAddress address)
+int DatabaseManager::findDevice(QHostAddress address)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(address);
@@ -1020,7 +1020,7 @@ int databaseManager::findDevice(QHostAddress address)
 }
 
 /*! Adds a new device. */
-void databaseManager::addDevice(QString name, QHostAddress address)
+void DatabaseManager::addDevice(QString name, QHostAddress address)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(name);
@@ -1033,7 +1033,7 @@ void databaseManager::addDevice(QString name, QHostAddress address)
 }
 
 /*! Edits the given device. */
-void databaseManager::editDevice(int deviceID, QString name, QHostAddress address)
+void DatabaseManager::editDevice(int deviceID, QString name, QHostAddress address)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(deviceID);
@@ -1047,7 +1047,7 @@ void databaseManager::editDevice(int deviceID, QString name, QHostAddress addres
 }
 
 /*! Removes the given device. */
-void databaseManager::removeDevice(int deviceID)
+void DatabaseManager::removeDevice(int deviceID)
 {
 #ifdef Q_OS_WASM
 	Q_UNUSED(deviceID);
@@ -1059,7 +1059,7 @@ void databaseManager::removeDevice(int deviceID)
 }
 
 /*! Returns the given string enclosed by quotes compatible with SQLite (special characters are automatically escaped). */
-QString databaseManager::quotesEnclosed(QString str)
+QString DatabaseManager::quotesEnclosed(QString str)
 {
 	QString out = "\"";
 	for(int i = 0; i < str.count(); i++)

@@ -28,7 +28,7 @@ UserEdit::UserEdit(bool newUser, int id, QWidget *parent) :
 {
 	ui->setupUi(this);
 	// Roles
-	ui->roleBox->addItems(databaseManager::roles(false));
+	ui->roleBox->addItems(DatabaseManager::roles(false));
 	ui->roleBox->setCurrentIndex(0);
 	if(newUser)
 	{
@@ -113,7 +113,7 @@ void UserEdit::resetPassword(void)
  */
 void UserEdit::finish(void)
 {
-	databaseManager::Role role = (databaseManager::Role) ui->roleBox->currentIndex();
+	DatabaseManager::Role role = (DatabaseManager::Role) ui->roleBox->currentIndex();
 	if(creatingNewUser)
 		dbMgr.addUser(ui->userNameEdit->text(), role, ui->passwordEdit->text());
 	else

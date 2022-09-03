@@ -26,7 +26,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include "core/ConfigParser.h"
-#include "core/database.h"
+#include "core/DatabaseManager.h"
 
 namespace Ui {
 	class LoadExerciseDialog;

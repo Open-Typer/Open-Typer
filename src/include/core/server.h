@@ -33,7 +33,7 @@
 #include <openssl/rsa.h>
 #include <openssl/x509.h>
 #include <openssl/pem.h>
-#include "core/database.h"
+#include "core/DatabaseManager.h"
 
 /*! \brief The monitorServer class is a QWebSocketServer that is used to communicate with Open-Typer clients. */
 class monitorServer : public QWebSocketServer

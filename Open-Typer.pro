@@ -50,7 +50,7 @@ SOURCES += \
     src/core/utils.cpp \
     src/core/ConfigParser.cpp \
     src/core/HistoryParser.cpp \
-    src/core/database.cpp
+    src/core/DatabaseManager.cpp
 !wasm {
     SOURCES += src/core/server.cpp
 }
@@ -98,7 +98,7 @@ HEADERS += \
     src/include/core/utils.h \
     src/include/core/ConfigParser.h \
     src/include/core/HistoryParser.h \
-    src/include/core/database.h
+    src/include/core/DatabaseManager.h
 !wasm {
     HEADERS += src/include/core/server.h
 }

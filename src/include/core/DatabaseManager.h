@@ -1,5 +1,5 @@
 /*
- * database.h
+ * DatabaseManager.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -34,12 +34,12 @@
 #include "core/utils.h"
 #endif // Q_OS_WASM
 
-/*! \brief The databaseManager class manages the server database. */
-class databaseManager : public QObject
+/*! \brief The DatabaseManager class manages the server database. */
+class DatabaseManager : public QObject
 {
 		Q_OBJECT
 	public:
-		databaseManager(QObject *parent = nullptr);
+		DatabaseManager(QObject *parent = nullptr);
 		bool open(void);
 
 		enum Role
@@ -108,6 +108,6 @@ class databaseManager : public QObject
 		QString quotesEnclosed(QString str);
 };
 
-extern databaseManager dbMgr;
+extern DatabaseManager dbMgr;
 
 #endif // DATABASE_H

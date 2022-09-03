@@ -23,7 +23,7 @@
 
 #include <QWidget>
 #include <QtCharts>
-#include "core/database.h"
+#include "core/DatabaseManager.h"
 #include "core/ConfigParser.h"
 #include "core/packs.h"
 

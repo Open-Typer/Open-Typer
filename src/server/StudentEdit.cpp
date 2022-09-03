@@ -153,16 +153,16 @@ void StudentEdit::finish(void)
 	if(creatingNewStudent)
 	{
 		if(ui->newStudentButton->isChecked())
-			dbMgr.addUser(ui->nameEdit->text(), databaseManager::Role_Student, ui->passwordEdit->text(), ui->usernameEdit->text(), classID);
+			dbMgr.addUser(ui->nameEdit->text(), DatabaseManager::Role_Student, ui->passwordEdit->text(), ui->usernameEdit->text(), classID);
 		else
 			dbMgr.addStudentToClass(students[ui->studentBox->currentIndex()], classID);
 	}
 	else
 	{
 		if(passwordReset)
-			dbMgr.editUser(userID, ui->nameEdit->text(), databaseManager::Role_Student, ui->passwordEdit->text(), ui->usernameEdit->text());
+			dbMgr.editUser(userID, ui->nameEdit->text(), DatabaseManager::Role_Student, ui->passwordEdit->text(), ui->usernameEdit->text());
 		else
-			dbMgr.editUser(userID, ui->nameEdit->text(), databaseManager::Role_Student, "", ui->usernameEdit->text());
+			dbMgr.editUser(userID, ui->nameEdit->text(), DatabaseManager::Role_Student, "", ui->usernameEdit->text());
 	}
 	accept();
 }

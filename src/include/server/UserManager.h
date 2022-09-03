@@ -25,7 +25,7 @@
 #include <QSettings>
 #include <QMessageBox>
 #include "UserEdit.h"
-#include "core/database.h"
+#include "core/DatabaseManager.h"
 
 namespace Ui {
 	class UserManager;
