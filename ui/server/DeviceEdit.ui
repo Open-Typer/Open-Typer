@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>deviceEdit</class>
- <widget class="QDialog" name="deviceEdit">
+ <class>DeviceEdit</class>
+ <widget class="QDialog" name="DeviceEdit">
   <property name="geometry">
    <rect>
     <x>0</x>

@@ -333,15 +333,15 @@ void serverManager::changeEvent(QEvent *event)
 	QWidget::changeEvent(event);
 }
 
-/*! Opens deviceEdit and adds a device. */
+/*! Opens DeviceEdit and adds a device. */
 void serverManager::addDevice(void)
 {
-	deviceEdit dialog(0, this);
+	DeviceEdit dialog(0, this);
 	if(dialog.exec() == QDialog::Accepted)
 		loadDevices();
 }
 
-/*! Opens deviceEdit and edits selected device. */
+/*! Opens DeviceEdit and edits selected device. */
 void serverManager::editDevice(void)
 {
 	if(exerciseProgressDialogConfig::dialogCount > 0)
@@ -349,7 +349,7 @@ void serverManager::editDevice(void)
 		showCloseExercisesMessage();
 		return;
 	}
-	deviceEdit dialog(ui->deviceList->currentRow() + 1, this);
+	DeviceEdit dialog(ui->deviceList->currentRow() + 1, this);
 	if(dialog.exec() == QDialog::Accepted)
 		loadDevices();
 }

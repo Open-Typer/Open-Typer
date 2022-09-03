@@ -1,5 +1,5 @@
 /*
- * deviceedit.h
+ * DeviceEdit.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -26,23 +26,23 @@
 #include "core/database.h"
 
 namespace Ui {
-	class deviceEdit;
+	class DeviceEdit;
 }
 
 /*!
- * \brief the deviceEdit class is a dialog used to add or edit devices.
+ * \brief the DeviceEdit class is a dialog used to add or edit devices.
  *
- * \image html deviceEdit.png
+ * \image html DeviceEdit.png
  */
-class deviceEdit : public QDialog
+class DeviceEdit : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit deviceEdit(int deviceID = 0, QWidget *parent = nullptr);
-		~deviceEdit();
+		explicit DeviceEdit(int deviceID = 0, QWidget *parent = nullptr);
+		~DeviceEdit();
 
 	private:
-		Ui::deviceEdit *ui;
+		Ui::DeviceEdit *ui;
 		bool newDevice;
 		int m_deviceID;
 		QHostAddress oldAddress;

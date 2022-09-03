@@ -1,5 +1,5 @@
 /*
- * deviceedit.cpp
+ * DeviceEdit.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/deviceedit.h"
-#include "ui_deviceedit.h"
+#include "server/DeviceEdit.h"
+#include "ui_DeviceEdit.h"
 
-/*! Constructs deviceEdit. */
-deviceEdit::deviceEdit(int deviceID, QWidget *parent) :
+/*! Constructs DeviceEdit. */
+DeviceEdit::DeviceEdit(int deviceID, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::deviceEdit),
+	ui(new Ui::DeviceEdit),
 	m_deviceID(deviceID)
 {
 	ui->setupUi(this);
@@ -40,20 +40,20 @@ deviceEdit::deviceEdit(int deviceID, QWidget *parent) :
 	}
 	verify();
 	// Connections
-	connect(ui->nameEdit, &QLineEdit::textChanged, this, &deviceEdit::verify);
-	connect(ui->ipEdit, &QLineEdit::textChanged, this, &deviceEdit::verify);
-	connect(ui->buttonBox->button(QDialogButtonBox::Save), &QPushButton::clicked, this, &deviceEdit::finish);
-	connect(ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &deviceEdit::reject);
+	connect(ui->nameEdit, &QLineEdit::textChanged, this, &DeviceEdit::verify);
+	connect(ui->ipEdit, &QLineEdit::textChanged, this, &DeviceEdit::verify);
+	connect(ui->buttonBox->button(QDialogButtonBox::Save), &QPushButton::clicked, this, &DeviceEdit::finish);
+	connect(ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &DeviceEdit::reject);
 }
 
-/*! Destroys the deviceEdit object. */
-deviceEdit::~deviceEdit()
+/*! Destroys the DeviceEdit object. */
+DeviceEdit::~DeviceEdit()
 {
 	delete ui;
 }
 
 /*! Checks if everything is correct and enables the Save button. */
-void deviceEdit::verify(void)
+void DeviceEdit::verify(void)
 {
 	ui->buttonBox->button(QDialogButtonBox::Save)->setEnabled(false);
 	// Check name
@@ -70,7 +70,7 @@ void deviceEdit::verify(void)
 }
 
 /*! Adds the device and closes the window. */
-void deviceEdit::finish(void)
+void DeviceEdit::finish(void)
 {
 	if(newDevice)
 		dbMgr.addDevice(ui->nameEdit->text(), QHostAddress(ui->ipEdit->text()));

@@ -26,7 +26,7 @@
 #include "server/AdminSelector.h"
 #include "server/serversetup.h"
 #include "server/ClassEdit.h"
-#include "server/deviceedit.h"
+#include "server/DeviceEdit.h"
 #include "server/widgets/classcontrols.h"
 #include "server/widgets/studentdetails.h"
 
