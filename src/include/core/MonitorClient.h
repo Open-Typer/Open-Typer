@@ -33,6 +33,7 @@
 #include <QFile>
 #include <QWebSocketServer>
 #include <QNetworkInterface>
+#include <QPointer>
 #include "core/FileUtils.h"
 
 /*! \brief The MonitorClient class is used to communicate with the class monitor server. */

@@ -141,11 +141,11 @@ QStringList MonitorClient::sendRequest(QString method, QStringList data)
 		QTimer timer;
 		QEventLoop eventLoop;
 		connect(&socket, &QWebSocket::connected, &eventLoop, &QEventLoop::quit);
-		QEventLoop *eventLoopPtr = &eventLoop;
+		QPointer<QEventLoop> eventLoopPtr = &eventLoop;
 		auto errorSlot = [this, eventLoopPtr]() {
 			clientDisabled = true;
 			settings.setValue("main/clientdisabled", clientDisabled);
-			if(connecting)
+			if(connecting && eventLoopPtr)
 				eventLoopPtr->quit();
 		};
 		connect(&socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error), this, errorSlot);
