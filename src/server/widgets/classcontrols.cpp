@@ -349,7 +349,7 @@ void classControls::startExercise(loadExerciseDialog *dialog)
 		serverPtr->sendSignal("initExercise", signalArgs, usernames);
 	else
 		serverPtr->sendSignal("initExercise", signalArgs, addresses);
-	exerciseProgressDialog *progressDialog = new exerciseProgressDialog(dbMgr.activeClass, selectedTargets, dialog->exerciseText(), dialog->lineLength(), dialog->includeNewLines(),
+	ExerciseProgressDialog *progressDialog = new ExerciseProgressDialog(dbMgr.activeClass, selectedTargets, dialog->exerciseText(), dialog->lineLength(), dialog->includeNewLines(),
 		dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText());
 	progressDialog->show();
 #endif // Q_OS_WASM

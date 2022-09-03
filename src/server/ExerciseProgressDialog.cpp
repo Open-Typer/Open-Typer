@@ -1,5 +1,5 @@
 /*
- * exerciseprogressdialog.cpp
+ * ExerciseProgressDialog.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,17 +18,17 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/exerciseprogressdialog.h"
-#include "ui_exerciseprogressdialog.h"
+#include "server/ExerciseProgressDialog.h"
+#include "ui_ExerciseProgressDialog.h"
 
-namespace exerciseProgressDialogConfig {
+namespace ExerciseProgressDialogConfig {
 	int dialogCount = 0;
 }
 
-/*! Constructs exerciseProgressDialog. */
-exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, QString exerciseText, int lineLength, bool includeNewLines, int mode, int timeLimitSecs, bool correctMistakes, bool lockUi, bool hideText, QWidget *parent) :
+/*! Constructs ExerciseProgressDialog. */
+ExerciseProgressDialog::ExerciseProgressDialog(int classID, QList<int> targets, QString exerciseText, int lineLength, bool includeNewLines, int mode, int timeLimitSecs, bool correctMistakes, bool lockUi, bool hideText, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::exerciseProgressDialog),
+	ui(new Ui::ExerciseProgressDialog),
 	exerciseTargets(targets),
 	m_exerciseText(exerciseText),
 	m_lineLength(lineLength),
@@ -40,7 +40,7 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, 
 	m_hideText(hideText)
 {
 	setAttribute(Qt::WA_DeleteOnClose);
-	exerciseProgressDialogConfig::dialogCount++;
+	ExerciseProgressDialogConfig::dialogCount++;
 	ui->setupUi(this);
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	if((targets.count() > 0) && settings.value("server/fullmode", false).toBool())
@@ -57,9 +57,9 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, 
 	setupTable();
 	// Connections
 #ifndef Q_OS_WASM
-	connect(serverPtr, &monitorServer::resultUploaded, this, &exerciseProgressDialog::loadResult);
-	connect(serverPtr, &monitorServer::exerciseAborted, this, &exerciseProgressDialog::abortExercise);
-	connect(serverPtr, &monitorServer::deviceConfigurationChanged, this, &exerciseProgressDialog::setupTable);
+	connect(serverPtr, &monitorServer::resultUploaded, this, &ExerciseProgressDialog::loadResult);
+	connect(serverPtr, &monitorServer::exerciseAborted, this, &ExerciseProgressDialog::abortExercise);
+	connect(serverPtr, &monitorServer::deviceConfigurationChanged, this, &ExerciseProgressDialog::setupTable);
 	connect(ui->startButton, &QToolButton::clicked, this, [this]() {
 		QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 		bool fullMode = settings.value("server/fullmode", false).toBool();
@@ -103,20 +103,20 @@ exerciseProgressDialog::exerciseProgressDialog(int classID, QList<int> targets, 
 		setupTable();
 	});
 #endif // Q_OS_WASM
-	connect(ui->printButton, &QPushButton::clicked, this, &exerciseProgressDialog::printAll);
+	connect(ui->printButton, &QPushButton::clicked, this, &ExerciseProgressDialog::printAll);
 	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &QDialog::close);
-	connect(ui->studentsTable, &QTableWidget::cellChanged, this, &exerciseProgressDialog::uploadChangedName);
+	connect(ui->studentsTable, &QTableWidget::cellChanged, this, &ExerciseProgressDialog::uploadChangedName);
 }
 
-/*! Destroys the exerciseProgressDialog object. */
-exerciseProgressDialog::~exerciseProgressDialog()
+/*! Destroys the ExerciseProgressDialog object. */
+ExerciseProgressDialog::~ExerciseProgressDialog()
 {
 	delete ui;
-	exerciseProgressDialogConfig::dialogCount--;
+	ExerciseProgressDialogConfig::dialogCount--;
 }
 
 /*! Loads the targets. */
-void exerciseProgressDialog::setupTable(void)
+void ExerciseProgressDialog::setupTable(void)
 {
 	loadingTable = true;
 	targetMap.clear();
@@ -203,7 +203,7 @@ void exerciseProgressDialog::setupTable(void)
 }
 
 /*! Loads the uploaded result. */
-void exerciseProgressDialog::loadResult(int targetID, QString inputText, QVector<QPair<QString, int>> recordedCharacters, qreal time)
+void ExerciseProgressDialog::loadResult(int targetID, QString inputText, QVector<QPair<QString, int>> recordedCharacters, qreal time)
 {
 	if(!exerciseTargets.contains(targetID))
 		return;
@@ -255,7 +255,7 @@ void exerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 }
 
 /*! Aborts the given student's exercise. */
-void exerciseProgressDialog::abortExercise(int userID)
+void ExerciseProgressDialog::abortExercise(int userID)
 {
 	if(!exerciseTargets.contains(userID))
 		return;
@@ -264,7 +264,7 @@ void exerciseProgressDialog::abortExercise(int userID)
 }
 
 /*! Overrides QDialog#closeEvent(). */
-void exerciseProgressDialog::closeEvent(QCloseEvent *event)
+void ExerciseProgressDialog::closeEvent(QCloseEvent *event)
 {
 	int abortCount = abortList.values().count(true);
 	for(int i = 0; i < abortList.keys().count(); i++)
@@ -285,7 +285,7 @@ void exerciseProgressDialog::closeEvent(QCloseEvent *event)
 }
 
 /*! Prints all results. */
-void exerciseProgressDialog::printAll(void)
+void ExerciseProgressDialog::printAll(void)
 {
 	for(int i = 0; i < exerciseTargets.count(); i++)
 	{
@@ -325,7 +325,7 @@ void exerciseProgressDialog::printAll(void)
 }
 
 /*! Uploads a changed name to the student. */
-void exerciseProgressDialog::uploadChangedName(int row, int column)
+void ExerciseProgressDialog::uploadChangedName(int row, int column)
 {
 	if(column != 0 || loadingTable)
 		return;

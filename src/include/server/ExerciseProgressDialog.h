@@ -1,5 +1,5 @@
 /*
- * exerciseprogressdialog.h
+ * ExerciseProgressDialog.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -33,27 +33,27 @@
 #include "core/server.h"
 #endif // Q_OS_WASM
 
-namespace exerciseProgressDialogConfig {
+namespace ExerciseProgressDialogConfig {
 	extern int dialogCount;
 }
 
 namespace Ui {
-	class exerciseProgressDialog;
+	class ExerciseProgressDialog;
 }
 
 /*!
- * \brief The exerciseProgressDialog class is a dialog for exercise monitoring.
- * \image html exerciseProgressDialog.png
+ * \brief The ExerciseProgressDialog class is a dialog for exercise monitoring.
+ * \image html ExerciseProgressDialog.png
  */
-class exerciseProgressDialog : public QDialog
+class ExerciseProgressDialog : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit exerciseProgressDialog(int classID, QList<int> targets, QString exerciseText, int lineLength, bool includeNewLines, int mode, int timeLimitSecs, bool correctMistakes, bool lockUi, bool hideText, QWidget *parent = nullptr);
-		~exerciseProgressDialog();
+		explicit ExerciseProgressDialog(int classID, QList<int> targets, QString exerciseText, int lineLength, bool includeNewLines, int mode, int timeLimitSecs, bool correctMistakes, bool lockUi, bool hideText, QWidget *parent = nullptr);
+		~ExerciseProgressDialog();
 
 	private:
-		Ui::exerciseProgressDialog *ui;
+		Ui::ExerciseProgressDialog *ui;
 		QList<int> exerciseTargets;
 		QMap<int, QString> names;
 		QMap<int, QVariantMap> results;

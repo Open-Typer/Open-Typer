@@ -25,7 +25,7 @@
 #include <QtCharts>
 #include "server/studentedit.h"
 #include "server/loadexercisedialog.h"
-#include "server/exerciseprogressdialog.h"
+#include "server/ExerciseProgressDialog.h"
 #include "core/database.h"
 #include "core/configfile.h"
 #include "core/packs.h"

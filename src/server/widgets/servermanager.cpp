@@ -156,7 +156,7 @@ void serverManager::loadDevices(void)
 /*! Opens userManager. */
 void serverManager::openUserManager(void)
 {
-	if(exerciseProgressDialogConfig::dialogCount > 0)
+	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
 		showCloseExercisesMessage();
 		return;
@@ -206,7 +206,7 @@ void serverManager::expand(void)
 /*! Opens ClassEdit and creates a class. */
 void serverManager::addClass(void)
 {
-	if(exerciseProgressDialogConfig::dialogCount > 0)
+	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
 		showCloseExercisesMessage();
 		return;
@@ -226,7 +226,7 @@ void serverManager::addClass(void)
 /*! Opens selected class */
 void serverManager::openClass(bool auth)
 {
-	if((exerciseProgressDialogConfig::dialogCount > 0) && !disableClassOpening)
+	if((ExerciseProgressDialogConfig::dialogCount > 0) && !disableClassOpening)
 	{
 		showCloseExercisesMessage();
 		disableClassOpening = true;
@@ -285,7 +285,7 @@ void serverManager::openDetails(int studentID)
 /*! Removes selected class. */
 void serverManager::removeClass(void)
 {
-	if(exerciseProgressDialogConfig::dialogCount > 0)
+	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
 		showCloseExercisesMessage();
 		return;
@@ -305,7 +305,7 @@ void serverManager::removeClass(void)
 /*! Edits selected class. */
 void serverManager::editClass(void)
 {
-	if(exerciseProgressDialogConfig::dialogCount > 0)
+	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
 		showCloseExercisesMessage();
 		return;
@@ -319,7 +319,7 @@ void serverManager::editClass(void)
 	});
 }
 
-/*! Shows a warning about opened exerciseProgressDialog dialogs. */
+/*! Shows a warning about opened ExerciseProgressDialog dialogs. */
 void serverManager::showCloseExercisesMessage(void)
 {
 	QMessageBox::warning(this, QString(), tr("Close opened windows first."));
@@ -344,7 +344,7 @@ void serverManager::addDevice(void)
 /*! Opens DeviceEdit and edits selected device. */
 void serverManager::editDevice(void)
 {
-	if(exerciseProgressDialogConfig::dialogCount > 0)
+	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
 		showCloseExercisesMessage();
 		return;
@@ -357,7 +357,7 @@ void serverManager::editDevice(void)
 /*! Removes selected device. */
 void serverManager::removeDevice(void)
 {
-	if(exerciseProgressDialogConfig::dialogCount > 0)
+	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
 		showCloseExercisesMessage();
 		return;
