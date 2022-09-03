@@ -62,11 +62,11 @@ KeyboardOptions::~KeyboardOptions()
 /*!
  * Connected from editorButton->clicked().\n
  * Opens the editor window.
- * \see packEditor
+ * \see PackEditor
  */
 void KeyboardOptions::openEditor(void)
 {
-	packEditor *editorWindow = new packEditor(this);
+	PackEditor *editorWindow = new PackEditor(this);
 	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint, true);
 	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint, true);
 	editorWindow->setWindowModality(Qt::WindowModal);

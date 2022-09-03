@@ -1,5 +1,5 @@
 /*
- * packeditor.h
+ * PackEditor.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -29,19 +29,19 @@
 #include "core/configfile.h"
 
 namespace Ui {
-	class packEditor;
+	class PackEditor;
 }
 
 /*!
- * \brief The packEditor class is the pack editor window.
+ * \brief The PackEditor class is the pack editor window.
  *
- * \image html packEditor.png
+ * \image html PackEditor.png
  *
- * packEditor uses this widget for tab content.\n
+ * PackEditor uses this widget for tab content.\n
  *
  * Creating a new file:
  * \code
- * packEditor editor;
+ * PackEditor editor;
  * \endcode
  *
  * Opening existing file:
@@ -54,17 +54,17 @@ namespace Ui {
  * editor.openFile(fileName, false, true)
  * \endcode
  */
-class packEditor : public QDialog
+class PackEditor : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit packEditor(QWidget *parent = nullptr);
-		~packEditor();
+		explicit PackEditor(QWidget *parent = nullptr);
+		~PackEditor();
 		void openFile(QString path, bool newf, bool rdonly);
 		QString getFileName(void);
 
 	private:
-		Ui::packEditor *ui;
+		Ui::PackEditor *ui;
 		QSettings settings;
 		configParser parser;
 		QString saveFileName;

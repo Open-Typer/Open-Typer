@@ -35,7 +35,7 @@
 #include "widgets/languagelist.h"
 #include "server/widgets/servermanager.h"
 #include "updater/updater.h"
-#include "packEditor/packeditor.h"
+#include "packEditor/PackEditor.h"
 #include "options/OptionsWindow.h"
 #include "options/StudentOptions.h"
 #include "ExerciseSummary.h"

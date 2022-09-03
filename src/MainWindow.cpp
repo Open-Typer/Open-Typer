@@ -1474,8 +1474,8 @@ void MainWindow::openEditor(void)
 	QString oldFileName = parser.fileName();
 	parser.close();
 	// Open editor
-	packEditor *editorWindow;
-	editorWindow = new packEditor(this);
+	PackEditor *editorWindow;
+	editorWindow = new PackEditor(this);
 	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint, true);
 	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint, true);
 	editorWindow->setWindowModality(Qt::WindowModal);

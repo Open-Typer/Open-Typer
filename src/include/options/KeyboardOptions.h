@@ -25,7 +25,7 @@
 #include <QListWidget>
 #include <QDirIterator>
 #include "options/OptionsWindow.h"
-#include "packEditor/packeditor.h"
+#include "packEditor/PackEditor.h"
 #include "core/utils.h"
 #include "core/packs.h"
 

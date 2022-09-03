@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>packEditor</class>
- <widget class="QDialog" name="packEditor">
+ <class>PackEditor</class>
+ <widget class="QDialog" name="PackEditor">
   <property name="geometry">
    <rect>
     <x>0</x>

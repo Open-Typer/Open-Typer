@@ -1,5 +1,5 @@
 /*
- * packeditor.cpp
+ * PackEditor.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "packEditor/packeditor.h"
-#include "ui_packeditor.h"
+#include "packEditor/PackEditor.h"
+#include "ui_PackEditor.h"
 
-/*! Constructs packEditor and creates a new file. */
-packEditor::packEditor(QWidget *parent) :
+/*! Constructs PackEditor and creates a new file. */
+PackEditor::PackEditor(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::packEditor),
+	ui(new Ui::PackEditor),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
@@ -42,8 +42,8 @@ packEditor::packEditor(QWidget *parent) :
 	connect(ui->openPrebuiltAction, &QAction::triggered, this, [this]() {
 		closeFile(false, false, true);
 	}); // closeFile() will open the file because openPrebuiltPack = true
-	connect(ui->saveAction, &QAction::triggered, this, &packEditor::save);
-	connect(ui->saveAsAction, &QAction::triggered, this, &packEditor::saveAs);
+	connect(ui->saveAction, &QAction::triggered, this, &PackEditor::save);
+	connect(ui->saveAsAction, &QAction::triggered, this, &PackEditor::saveAs);
 	// Add buttons
 	connect(ui->newLessonButton, SIGNAL(clicked()), this, SLOT(addLesson()));
 	connect(ui->newSublessonButton, SIGNAL(clicked()), this, SLOT(addSublesson()));
@@ -70,21 +70,21 @@ packEditor::packEditor(QWidget *parent) :
 	skipTextRefresh = false;
 }
 
-/*! Destroys the packEditor object. */
-packEditor::~packEditor()
+/*! Destroys the PackEditor object. */
+PackEditor::~PackEditor()
 {
 	delete ui;
 }
 
 /*! Creates a new file. */
-void packEditor::createNewFile(void)
+void PackEditor::createNewFile(void)
 {
 	openFile(tr("Unnamed") + ".typer", true, true);
 	saved = false;
 }
 
 /*! Opens a built-in pack. \see packSelector */
-void packEditor::openPrebuilt(void)
+void PackEditor::openPrebuilt(void)
 {
 	packSelector *packSel = new packSelector(this);
 	connect(packSel, &QDialog::accepted, this, [packSel, this]() {
@@ -94,7 +94,7 @@ void packEditor::openPrebuilt(void)
 }
 
 /*! Opens a file selected by the user. */
-void packEditor::openFile(void)
+void PackEditor::openFile(void)
 {
 #ifdef Q_OS_WASM
 	auto readOpenedFile = [this](const QString &fileName, const QByteArray &fileContent) {
@@ -127,7 +127,7 @@ void packEditor::openFile(void)
  * \param[in] newf Whether to create a new file.
  * \param[in] rdonly Whether to open the file read-only.
  */
-void packEditor::openFile(QString path, bool newf, bool rdonly)
+void PackEditor::openFile(QString path, bool newf, bool rdonly)
 {
 	saveFileName = path;
 	newFile = newf;
@@ -157,7 +157,7 @@ void packEditor::openFile(QString path, bool newf, bool rdonly)
 }
 
 /*! Closes opened file. */
-void packEditor::closeFile(bool createNew, bool open, bool openPrebuiltPack)
+void PackEditor::closeFile(bool createNew, bool open, bool openPrebuiltPack)
 {
 	if(saved)
 	{
@@ -224,7 +224,7 @@ void packEditor::closeFile(bool createNew, bool open, bool openPrebuiltPack)
  * \see addExercise()
  * \see configParser
  */
-void packEditor::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
+void PackEditor::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 {
 	updateTitle();
 	// Lesson selector
@@ -336,7 +336,7 @@ void packEditor::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 }
 
 /*! Updates the title. */
-void packEditor::updateTitle(void)
+void PackEditor::updateTitle(void)
 {
 	QFile saveQFile(saveFileName);
 	QFileInfo saveQFileInfo(saveQFile.fileName());
@@ -351,7 +351,7 @@ void packEditor::updateTitle(void)
  * \see addSublesson()
  * \see addExercise()
  */
-void packEditor::addLesson(void)
+void PackEditor::addLesson(void)
 {
 	refreshUi(true, false, false);
 }
@@ -363,7 +363,7 @@ void packEditor::addLesson(void)
  * \see addLesson()
  * \see addExercise()
  */
-void packEditor::addSublesson(void)
+void PackEditor::addSublesson(void)
 {
 	if(ui->lessonSelectionBox->count() == 0)
 		return;
@@ -377,7 +377,7 @@ void packEditor::addSublesson(void)
  * \see addLesson()
  * \see addSublesson()
  */
-void packEditor::addExercise(void)
+void PackEditor::addExercise(void)
 {
 	if(ui->sublessonSelectionBox->count() == 0)
 		return;
@@ -394,7 +394,7 @@ void packEditor::addExercise(void)
  * Connected from removeExerciseButton->clicked().\n
  * Removes selected exercise.
  */
-void packEditor::removeExercise(void)
+void PackEditor::removeExercise(void)
 {
 	int i, targetLesson, targetSublesson, targetLevel;
 	targetLesson = ui->lessonSelectionBox->currentIndex() + 1;
@@ -413,7 +413,7 @@ void packEditor::removeExercise(void)
 }
 
 /*! Moves exercise to a new position (lesson, sublesson, exercise). */
-void packEditor::changeExercisePos(QString lessonDesc, int lesson, int sublesson, int level, int nlesson, int nsublesson, int nlevel)
+void PackEditor::changeExercisePos(QString lessonDesc, int lesson, int sublesson, int level, int nlesson, int nsublesson, int nlevel)
 {
 	int limitExt, lengthExt;
 	limitExt = parser.exerciseRepeatLimit(lesson, sublesson, level);
@@ -430,7 +430,7 @@ void packEditor::changeExercisePos(QString lessonDesc, int lesson, int sublesson
 }
 
 /*! Removes an exercise from the temporary file. */
-void packEditor::deleteExerciseLine(int lesson, int sublesson, int level)
+void PackEditor::deleteExerciseLine(int lesson, int sublesson, int level)
 {
 	int targetLine, curLine;
 	targetLine = parser.exerciseLine(lesson, sublesson, level);
@@ -455,7 +455,7 @@ void packEditor::deleteExerciseLine(int lesson, int sublesson, int level)
  * Connected from lessonDescEdit->textEdited().\n
  * Changes lesson description based on the value in lessonDescEdit.
  */
-void packEditor::changeLessonDesc(const QString rawLessonDesc)
+void PackEditor::changeLessonDesc(const QString rawLessonDesc)
 {
 	QString lessonDesc = "";
 	for(int i = 0; i < rawLessonDesc.count(); i++)
@@ -490,7 +490,7 @@ void packEditor::changeLessonDesc(const QString rawLessonDesc)
  * Marks current lesson as a revision lesson.
  * \see changeLessonDesc()
  */
-void packEditor::setRevisionLesson(void)
+void PackEditor::setRevisionLesson(void)
 {
 	changeLessonDesc("%r");
 }
@@ -499,7 +499,7 @@ void packEditor::setRevisionLesson(void)
  * Connected from levelTextEdit->textChanged().\n
  * Updates exercise text.
  */
-void packEditor::updateText(void)
+void PackEditor::updateText(void)
 {
 	if(skipTextUpdates)
 		return;
@@ -536,7 +536,7 @@ void packEditor::updateText(void)
 }
 
 /*! Loads current exercise text. */
-void packEditor::restoreText(void)
+void PackEditor::restoreText(void)
 {
 	ui->levelLabel->setText(
 		configParser::initExercise(
@@ -570,7 +570,7 @@ void packEditor::restoreText(void)
  * \see switchSublesson
  * \see switchExercise
  */
-void packEditor::switchLesson(void)
+void PackEditor::switchLesson(void)
 {
 	for(int i = 0; i < 2; i++)
 	{
@@ -587,7 +587,7 @@ void packEditor::switchLesson(void)
  * \see switchLesson
  * \see switchExercise
  */
-void packEditor::switchSublesson(void)
+void PackEditor::switchSublesson(void)
 {
 	for(int i = 0; i < 2; i++)
 	{
@@ -603,7 +603,7 @@ void packEditor::switchSublesson(void)
  * \see switchLesson
  * \see switchSublesson
  */
-void packEditor::switchExercise(void)
+void PackEditor::switchExercise(void)
 {
 	refreshUi(false, false, false);
 }
@@ -612,7 +612,7 @@ void packEditor::switchExercise(void)
  * Connected from repeatingBox->activated().\n
  * Changes current exercise repeat method.
  */
-void packEditor::changeRepeating(int index)
+void PackEditor::changeRepeating(int index)
 {
 	int lesson, sublesson, level, limitExt, lengthExt;
 	lesson = ui->lessonSelectionBox->currentIndex() + 1;
@@ -650,7 +650,7 @@ void packEditor::changeRepeating(int index)
  * Connected from repeatLengthBox->valueChanged().\n
  * Changes current exercise maximum number of characters (if repeating is enabled).
  */
-void packEditor::changeRepeatLength(int limitExt)
+void PackEditor::changeRepeatLength(int limitExt)
 {
 	if(skipBoxUpdates)
 		return;
@@ -678,7 +678,7 @@ void packEditor::changeRepeatLength(int limitExt)
  * Connected from lineLengthBox->valueChanged().\n
  * Changes current exercise maximum number of characters in one line.
  */
-void packEditor::changeLineLength(int lengthExt)
+void PackEditor::changeLineLength(int lengthExt)
 {
 	if(skipBoxUpdates)
 		return;
@@ -706,7 +706,7 @@ void packEditor::changeLineLength(int lengthExt)
  * Connected from saveButton->clicked().\n
  * Saves opened pack file.
  */
-void packEditor::save(void)
+void PackEditor::save(void)
 {
 	if(newFile || readOnly)
 		saveAs();
@@ -728,7 +728,7 @@ void packEditor::save(void)
  * Connected from saveAsButton->clicked().\n
  * Saves opened pack file as another file.
  */
-void packEditor::saveAs(void)
+void PackEditor::saveAs(void)
 {
 	QFileDialog saveDialog;
 	saveDialog.setFileMode(QFileDialog::AnyFile);
@@ -746,7 +746,7 @@ void packEditor::saveAs(void)
 }
 
 /*! Returns pack file name. */
-QString packEditor::getFileName(void)
+QString PackEditor::getFileName(void)
 {
 	return saveFileName;
 }
@@ -755,7 +755,7 @@ QString packEditor::getFileName(void)
  * Overrides QDialog#closeEvent().\n
  * Closes the opened file before closing the window.
  */
-void packEditor::closeEvent(QCloseEvent *event)
+void PackEditor::closeEvent(QCloseEvent *event)
 {
 	closeFile();
 	event->ignore();
@@ -765,7 +765,7 @@ void packEditor::closeEvent(QCloseEvent *event)
  * Overrides QDialog#keyPressEvent().\n
  * Prevents escape key from closing the dialog.
  */
-void packEditor::keyPressEvent(QKeyEvent *event)
+void PackEditor::keyPressEvent(QKeyEvent *event)
 {
 	// Block Esc key
 	if(event->key() != Qt::Key_Escape)
