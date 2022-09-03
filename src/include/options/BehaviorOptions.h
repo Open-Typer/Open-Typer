@@ -30,7 +30,7 @@ namespace Ui {
 }
 
 /*!
- * \brief The BehaviorOptions class is the BehaviorOptions category in the options.
+ * \brief The BehaviorOptions class is the behavior category in the options.
  * \image html BehaviorOptions.png
  * \see OptionsWindow
  */
