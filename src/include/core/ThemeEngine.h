@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef THEME_H
-#define THEME_H
+#ifndef THEMEENGINE_H
+#define THEMEENGINE_H
 
 #include <QObject>
 #include <QApplication>
@@ -141,4 +141,4 @@ class ThemeEngine : public QObject
 
 extern ThemeEngine globalThemeEngine;
 
-#endif // THEME_H
+#endif // THEMEENGINE_H

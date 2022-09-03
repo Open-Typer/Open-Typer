@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CORELANG_H
-#define CORELANG_H
+#ifndef LANGUAGEMANAGER_H
+#define LANGUAGEMANAGER_H
 
 #include <QObject>
 #include <QLocale>
@@ -55,4 +55,4 @@ class LanguageManager : public QObject
 		QStringList boxItems;
 };
 
-#endif // CORELANG_H
+#endif // LANGUAGEMANAGER_H

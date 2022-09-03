@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CONFIGFILE_H
-#define CONFIGFILE_H
+#ifndef CONFIGPARSER_H
+#define CONFIGPARSER_H
 
 #include <QObject>
 #include <QFile>
@@ -99,4 +99,4 @@ class ConfigParser : public QObject
 		static QString generateText(QString rawText, bool repeat, QString repeatType, int repeatLimit);
 };
 
-#endif // CONFIGFILE_H
+#endif // CONFIGPARSER_H

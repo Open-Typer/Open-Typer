@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INPUTLABEL_H
-#define INPUTLABEL_H
+#ifndef INPUTLABELWIDGET_H
+#define INPUTLABELWIDGET_H
 
 #include <QWidget>
 #include <QMainWindow>
@@ -76,4 +76,4 @@ class InputLabelWidget : public TextView
 		void keyReleased(QKeyEvent *event);
 };
 
-#endif // INPUTLABEL_H
+#endif // INPUTLABELWIDGET_H

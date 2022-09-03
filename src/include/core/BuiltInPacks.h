@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PACKS_H
-#define PACKS_H
+#ifndef BUILTINPACKS_H
+#define BUILTINPACKS_H
 
 #include <QObject>
 #include <QString>
@@ -32,4 +32,4 @@ class BuiltInPacks : public QObject
 		static QString packName(QString rawName);
 };
 
-#endif // PACKS_H
+#endif // BUILTINPACKS_H

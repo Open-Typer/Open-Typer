@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DATABASE_H
-#define DATABASE_H
+#ifndef DATABASEMANAGER_H
+#define DATABASEMANAGER_H
 
 #include <QObject>
 #include <QVariantMap>
@@ -110,4 +110,4 @@ class DatabaseManager : public QObject
 
 extern DatabaseManager dbMgr;
 
-#endif // DATABASE_H
+#endif // DATABASEMANAGER_H

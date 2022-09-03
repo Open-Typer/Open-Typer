@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NET_H
-#define NET_H
+#ifndef MONITORCLIENT_H
+#define MONITORCLIENT_H
 
 #include <QObject>
 #include <QApplication>
@@ -84,4 +84,4 @@ class MonitorClient : public QObject
 #endif // Q_OS_WASM
 };
 
-#endif // NET_H
+#endif // MONITORCLIENT_H

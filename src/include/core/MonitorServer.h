@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SERVER_H
-#define SERVER_H
+#ifndef MONITORSERVER_H
+#define MONITORSERVER_H
 
 #include <QObject>
 #include <QSettings>
@@ -87,4 +87,4 @@ class MonitorServer : public QWebSocketServer
 
 extern QPointer<MonitorServer> serverPtr;
 
-#endif // SERVER_H
+#endif // MONITORSERVER_H

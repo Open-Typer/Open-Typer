@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef BEHAVIOR_H
-#define BEHAVIOR_H
+#ifndef BEHAVIOROPTIONS_H
+#define BEHAVIOROPTIONS_H
 
 #include <QWidget>
 #include <QSettings>
@@ -52,4 +52,4 @@ class BehaviorOptions : public QWidget
 		void setMistakeChars(int value);
 };
 
-#endif // BEHAVIOR_H
+#endif // BEHAVIOROPTIONS_H

@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LANGUAGECOMBOBOX_H
-#define LANGUAGECOMBOBOX_H
+#ifndef LANGUAGELIST_H
+#define LANGUAGELIST_H
 
 #include <QWidget>
 #include <QListWidget>
@@ -51,4 +51,4 @@ class LanguageList : public QListWidget
 		void changeLanguage(int index);
 };
 
-#endif // LANGUAGECOMBOBOX_H
+#endif // LANGUAGELIST_H
