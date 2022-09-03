@@ -66,7 +66,7 @@ SOURCES += \
     src/TimeDialog.cpp \
     src/TestWaitDialog.cpp \
     src/options/behavior.cpp \
-    src/options/appearance.cpp \
+    src/options/AppearanceOptions.cpp \
     src/options/keyboard.cpp \
     src/options/optionswindow.cpp \
     src/packEditor/packeditor.cpp \
@@ -113,7 +113,7 @@ HEADERS += \
     src/include/TimeDialog.h \
     src/include/TestWaitDialog.h \
     src/include/options/behavior.h \
-    src/include/options/appearance.h \
+    src/include/options/AppearanceOptions.h \
     src/include/options/keyboard.h \
     src/include/options/optionswindow.h \
     src/include/packEditor/packeditor.h \
@@ -143,7 +143,7 @@ FORMS += \
     ui/InitialSetup.ui \
     ui/options/behavior.ui \
     ui/options/connection.ui \
-    ui/options/appearance.ui \
+    ui/options/AppearanceOptions.ui \
     ui/options/keyboard.ui \
     ui/ExerciseSummary.ui \
     ui/options/studentoptions.ui \

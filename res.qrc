@@ -46,7 +46,7 @@
         <file>res/images/languageOptions.svg</file>
         <file>res/images/behaviorOptions.svg</file>
         <file>res/images/keyboardOptions.svg</file>
-        <file>res/images/appearanceOptions.svg</file>
+        <file>res/images/AppearanceOptions.svg</file>
         <file>res/images/connectionOptions.svg</file>
     </qresource>
 </RCC>

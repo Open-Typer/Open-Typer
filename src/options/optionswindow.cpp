@@ -45,7 +45,7 @@ void optionsWindow::setupList(void)
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/languageOptions.svg"), tr("Language")));
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/behaviorOptions.svg"), tr("Behavior")));
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/keyboardOptions.svg"), tr("Keyboard")));
-	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/appearanceOptions.svg"), tr("Appearance")));
+	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/AppearanceOptions.svg"), tr("Appearance")));
 #ifndef Q_OS_WASM
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/connectionOptions.svg"), tr("Connection")));
 #endif
@@ -78,7 +78,7 @@ void optionsWindow::changeOptionWidget(int index)
 			break;
 		case 3:
 			// Appearance
-			options = new appearanceOptions;
+			options = new AppearanceOptions;
 			break;
 		case 4:
 			// Connection

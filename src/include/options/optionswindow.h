@@ -26,7 +26,7 @@
 #include <QPushButton>
 #include "options/behavior.h"
 #include "options/keyboard.h"
-#include "options/appearance.h"
+#include "options/AppearanceOptions.h"
 #include "options/connection.h"
 #include "widgets/languagelist.h"
 

@@ -29,7 +29,7 @@ InitialSetup::InitialSetup(QWidget *parent) :
 {
 	ui->setupUi(this);
 	loadList();
-	appearanceOptions *options = new appearanceOptions(ui->themeFrame);
+	AppearanceOptions *options = new AppearanceOptions(ui->themeFrame);
 	options->hideModeSelector();
 	if(palette().color(QPalette::Base).toHsv().value() < 50)
 		options->setSimpleTheme(1);

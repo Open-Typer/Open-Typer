@@ -1,5 +1,5 @@
 /*
- * appearance.cpp
+ * AppearanceOptions.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "options/appearance.h"
-#include "ui_appearance.h"
+#include "options/AppearanceOptions.h"
+#include "ui_AppearanceOptions.h"
 
-/*! Constructs appearanceOptions. */
-appearanceOptions::appearanceOptions(QWidget *parent) :
+/*! Constructs AppearanceOptions. */
+AppearanceOptions::AppearanceOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::appearanceOptions),
+	ui(new Ui::AppearanceOptions),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
@@ -47,7 +47,7 @@ appearanceOptions::appearanceOptions(QWidget *parent) :
 	}
 	selectCurrentFullTheme();
 	// Connections
-	connect(ui->advancedModeButton, &QPushButton::toggled, this, &appearanceOptions::changeThemeMode);
+	connect(ui->advancedModeButton, &QPushButton::toggled, this, &AppearanceOptions::changeThemeMode);
 	connect(ui->lightThemeButton, &QPushButton::clicked, this, [this](bool checked) {
 		setSimpleTheme(checked ? 0 : 1);
 	});
@@ -72,14 +72,14 @@ appearanceOptions::appearanceOptions(QWidget *parent) :
 	updateSimpleTheme();
 }
 
-/*! Destroys the appearanceOptions object. */
-appearanceOptions::~appearanceOptions()
+/*! Destroys the AppearanceOptions object. */
+AppearanceOptions::~AppearanceOptions()
 {
 	delete ui;
 }
 
 /*! Initializes widgets and loads settings. */
-void appearanceOptions::init(void)
+void AppearanceOptions::init(void)
 {
 	ui->themeBox->setCurrentIndex((int) (themeEngine::style() - 1));
 	// Colors
@@ -89,13 +89,13 @@ void appearanceOptions::init(void)
 }
 
 /*! Hides mode selector (simple and advanced mode). */
-void appearanceOptions::hideModeSelector(void)
+void AppearanceOptions::hideModeSelector(void)
 {
 	ui->modeSelectWidget->hide();
 }
 
 /*! Toggles advanced theme mode. */
-void appearanceOptions::changeThemeMode(bool advanced)
+void AppearanceOptions::changeThemeMode(bool advanced)
 {
 	settings.setValue("theme/advancedtheme", advanced);
 	ui->advancedControls->setVisible(advanced);
@@ -103,7 +103,7 @@ void appearanceOptions::changeThemeMode(bool advanced)
 }
 
 /*! Sets simple theme (0 for light, 1 for dark). */
-void appearanceOptions::setSimpleTheme(int theme)
+void AppearanceOptions::setSimpleTheme(int theme)
 {
 	settings.setValue("theme/simpletheme", theme);
 	ui->lightThemeButton->setChecked(theme == 0);
@@ -115,7 +115,7 @@ void appearanceOptions::setSimpleTheme(int theme)
 }
 
 /*! Loads selected simple theme. */
-void appearanceOptions::updateSimpleTheme(void)
+void AppearanceOptions::updateSimpleTheme(void)
 {
 	int simpleTheme = settings.value("theme/simpletheme", 0).toInt(); // 0 for light, 1 for dark
 	if((simpleTheme == 0) && (globalThemeEngine.theme() != 4)) // default theme for "light" - light blue
@@ -140,7 +140,7 @@ void appearanceOptions::updateSimpleTheme(void)
  * Connected from themeList->itemClicked() and themeList->itemActivated().\n
  * Switches built-in theme.
  */
-void appearanceOptions::changeFullTheme(QListWidgetItem *item)
+void AppearanceOptions::changeFullTheme(QListWidgetItem *item)
 {
 	int index = ui->themeList->row(item);
 	if(index == 0) // block obsolete "default" theme
@@ -191,7 +191,7 @@ void appearanceOptions::changeFullTheme(QListWidgetItem *item)
 }
 
 /*! Select currently set full theme. */
-void appearanceOptions::selectCurrentFullTheme(void)
+void AppearanceOptions::selectCurrentFullTheme(void)
 {
 	QString id = settings.value("theme/fulltheme", "default").toString();
 	QList<QVariantMap> themes = globalThemeEngine.themeList();
@@ -209,7 +209,7 @@ void appearanceOptions::selectCurrentFullTheme(void)
  * Connected from backButton->clicked().\n
  * Returns to theme selection.
  */
-void appearanceOptions::goBack(void)
+void AppearanceOptions::goBack(void)
 {
 	QPropertyAnimation *animation1 = new QPropertyAnimation(ui->themeCustomizationFrame, "geometry");
 	// Animation 1
@@ -242,7 +242,7 @@ void appearanceOptions::goBack(void)
 }
 
 /*! Updates text font. */
-void appearanceOptions::updateFont(void)
+void AppearanceOptions::updateFont(void)
 {
 	QFont newFont = themeEngine::font();
 	ui->fontComboBox->setCurrentFont(newFont);
@@ -260,7 +260,7 @@ void appearanceOptions::updateFont(void)
  * Sets exercise text font family and saves it in the settings.
  * \see setFont()
  */
-void appearanceOptions::changeFont(QFont font)
+void AppearanceOptions::changeFont(QFont font)
 {
 	globalThemeEngine.setFontFamily(font.family());
 	updateFont();
@@ -271,7 +271,7 @@ void appearanceOptions::changeFont(QFont font)
  * Sets font size and saves it in the settings.
  * \see setFont()
  */
-void appearanceOptions::changeFontSize(int size)
+void AppearanceOptions::changeFontSize(int size)
 {
 	globalThemeEngine.setFontSize(size);
 	updateFont();
@@ -282,7 +282,7 @@ void appearanceOptions::changeFontSize(int size)
  * Switches bold text based on the value of boldTextBox.
  * \see setFont()
  */
-void appearanceOptions::setBoldText(void)
+void AppearanceOptions::setBoldText(void)
 {
 	globalThemeEngine.setFontBold(ui->boldTextBox->isChecked());
 	updateFont();
@@ -293,7 +293,7 @@ void appearanceOptions::setBoldText(void)
  * Switches italic text based on the value of italicTextBox.
  * \see setFont()
  */
-void appearanceOptions::setItalicText(void)
+void AppearanceOptions::setItalicText(void)
 {
 	globalThemeEngine.setFontItalic(ui->italicTextBox->isChecked());
 	updateFont();
@@ -304,14 +304,14 @@ void appearanceOptions::setItalicText(void)
  * Switches text underline based on the value of underlineTextBox.
  * \see setFont()
  */
-void appearanceOptions::setUnderlineText(void)
+void AppearanceOptions::setUnderlineText(void)
 {
 	globalThemeEngine.setFontUnderline(ui->underlineTextBox->isChecked());
 	updateFont();
 }
 
 /*! Sets custom colors (if they are set) or default colors. */
-void appearanceOptions::setColors()
+void AppearanceOptions::setColors()
 {
 	// Set exercise text color
 	ui->levelLabel->setStyleSheet(themeEngine::exerciseTextStyleSheet());
@@ -342,7 +342,7 @@ void appearanceOptions::setColors()
  * Opens QColorDialog and sets exercise text color.
  * \see changeInputTextColor()
  */
-void appearanceOptions::changeLevelTextColor(void)
+void AppearanceOptions::changeLevelTextColor(void)
 {
 	QColorDialog *colorDialog = new QColorDialog(globalThemeEngine.exerciseTextColor(), this);
 	colorDialog->setWindowModality(Qt::WindowModal);
@@ -358,7 +358,7 @@ void appearanceOptions::changeLevelTextColor(void)
  * Opens QColorDialog and sets input text color.
  * \see changeLevelTextColor()
  */
-void appearanceOptions::changeInputTextColor(void)
+void AppearanceOptions::changeInputTextColor(void)
 {
 	QColorDialog *colorDialog = new QColorDialog(globalThemeEngine.inputTextColor(), this);
 	colorDialog->setWindowModality(Qt::WindowModal);
@@ -373,7 +373,7 @@ void appearanceOptions::changeInputTextColor(void)
  * Connected from resetTextColorButton->clicked().\n
  * Sets the default text colors.
  */
-void appearanceOptions::resetTextColors(void)
+void AppearanceOptions::resetTextColors(void)
 {
 	globalThemeEngine.resetExerciseTextColor();
 	globalThemeEngine.resetInputTextColor();
@@ -385,7 +385,7 @@ void appearanceOptions::resetTextColors(void)
  * \see changePaperColor()
  * \see changePanelColor()
  */
-void appearanceOptions::changeBgColor(void)
+void AppearanceOptions::changeBgColor(void)
 {
 	QColorDialog *colorDialog = new QColorDialog(globalThemeEngine.bgColor(), this);
 	colorDialog->setWindowModality(Qt::WindowModal);
@@ -402,7 +402,7 @@ void appearanceOptions::changeBgColor(void)
  * \see changeBgColor()
  * \see changePanelColor()
  */
-void appearanceOptions::changePaperColor(void)
+void AppearanceOptions::changePaperColor(void)
 {
 	QColorDialog *colorDialog = new QColorDialog(globalThemeEngine.paperColor(), this);
 	colorDialog->setWindowModality(Qt::WindowModal);
@@ -419,7 +419,7 @@ void appearanceOptions::changePaperColor(void)
  * \see changeBgColor()
  * \see changePaperColor()
  */
-void appearanceOptions::changePanelColor(void)
+void AppearanceOptions::changePanelColor(void)
 {
 	QColorDialog *colorDialog = new QColorDialog(globalThemeEngine.panelColor(), this);
 	colorDialog->setWindowModality(Qt::WindowModal);
@@ -434,7 +434,7 @@ void appearanceOptions::changePanelColor(void)
  * Connected from resetBgPaperColorButton->clicked().\n
  * Sets the default background, paper and panel colors.
  */
-void appearanceOptions::resetBgPaperColors(void)
+void AppearanceOptions::resetBgPaperColors(void)
 {
 	globalThemeEngine.resetBgColor();
 	globalThemeEngine.resetPaperColor();
@@ -445,7 +445,7 @@ void appearanceOptions::resetBgPaperColors(void)
  * Connected from themeBox->activated().\n
  * Sets theme based on the value of themeBox.
  */
-void appearanceOptions::changeTheme(int index)
+void AppearanceOptions::changeTheme(int index)
 {
 	globalThemeEngine.setStyle((themeEngine::Style)(index + 1));
 	setColors();
