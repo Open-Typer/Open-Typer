@@ -65,7 +65,7 @@ void InputLabelWidget::keyPressEvent(QKeyEvent *event)
  */
 void InputLabelWidget::keyReleaseEvent(QKeyEvent *event)
 {
-	if(keyboardUtils::isDeadKey(event->key()))
+	if(KeyboardUtils::isDeadKey(event->key()))
 		emit keyPressed(event);
 	emit keyReleased(event);
 }

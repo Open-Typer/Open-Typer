@@ -23,7 +23,6 @@
 
 #include <QObject>
 #include <QString>
-#include <QKeyEvent>
 #include <QSettings>
 #include "core/FileUtils.h"
 
@@ -47,14 +46,6 @@ class stringUtils
 		static int lcsLen(QList<QVariant> source, QList<QVariant> target, QMap<int, QMap<int, int>> *lcsTable);
 		static QStringList splitWordsByPunct(QStringList source);
 		static QMap<int, QVariantMap> generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList = nullptr);
-};
-
-/*! \brief The keyboardUtils class provides functions related to keyboard and input method. */
-class keyboardUtils
-{
-	public:
-		static bool isSpecialKey(QKeyEvent *event);
-		static bool isDeadKey(int key);
 };
 
 #endif // UTILS_H

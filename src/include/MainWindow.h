@@ -45,7 +45,7 @@
 #include "TestWaitDialog.h"
 #include "core/ConfigParser.h"
 #include "core/HistoryParser.h"
-#include "core/utils.h"
+#include "core/KeyboardUtils.h"
 #include "core/BuiltInPacks.h"
 #include "core/LanguageManager.h"
 #include "core/ThemeEngine.h"

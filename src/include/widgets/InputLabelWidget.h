@@ -25,7 +25,7 @@
 #include <QMainWindow>
 #include <QInputMethodEvent>
 #include "widgets/TextView.h"
-#include "core/utils.h"
+#include "core/KeyboardUtils.h"
 
 /*!
  * \brief The InputLabelWidget class is a TextView, which handles all key presses.

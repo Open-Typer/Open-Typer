@@ -880,7 +880,7 @@ void MainWindow::keyPress(QKeyEvent *event)
 			highlightID = -2;
 	}
 	ui->keyboardFrame->highlightKey(highlightID);
-	if(keyboardUtils::isDeadKey(event->key()))
+	if(KeyboardUtils::isDeadKey(event->key()))
 	{
 		deadKeys++;
 		// Count modifier key used with the dead key
@@ -888,7 +888,7 @@ void MainWindow::keyPress(QKeyEvent *event)
 			deadKeys++;
 		return;
 	}
-	if(keyboardUtils::isSpecialKey(event) && (event->key() != Qt::Key_Backspace))
+	if(KeyboardUtils::isSpecialKey(event) && (event->key() != Qt::Key_Backspace))
 		return;
 	if((levelPos == 0) && !levelInProgress)
 	{
@@ -1022,7 +1022,7 @@ void MainWindow::keyPress(QKeyEvent *event)
 		}
 		else
 		{
-			if(!keyboardUtils::isSpecialKey(event))
+			if(!KeyboardUtils::isSpecialKey(event))
 			{
 				QList<QVariantMap> mistakesToRemove;
 				for(int i = 0; i < recordedMistakes.count(); i++)
