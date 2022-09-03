@@ -35,7 +35,7 @@ namespace Ui {
 /*!
  * \brief The ConnectionOptions class is the connection category in the options.
  * \image html ConnectionOptions.png
- * \see optionsWindow
+ * \see OptionsWindow
  * \see monitorClient
  */
 class ConnectionOptions : public QWidget

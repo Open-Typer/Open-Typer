@@ -32,7 +32,7 @@
  *
  * \image html languageList.png
  * \see languageManager
- * \see optionsWindow
+ * \see OptionsWindow
  */
 class languageList : public QListWidget
 {

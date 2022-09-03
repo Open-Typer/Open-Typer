@@ -1,5 +1,5 @@
 /*
- * optionswindow.cpp
+ * OptionsWindow.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -19,24 +19,24 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "options/optionswindow.h"
-#include "ui_optionswindow.h"
+#include "options/OptionsWindow.h"
+#include "ui_OptionsWindow.h"
 
-/*! Constructs optionsWindow. */
-optionsWindow::optionsWindow(QWidget *parent) :
+/*! Constructs OptionsWindow. */
+OptionsWindow::OptionsWindow(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::optionsWindow)
+	ui(new Ui::OptionsWindow)
 {
 	ui->setupUi(this);
 	setAttribute(Qt::WA_DeleteOnClose, true);
 	setupList();
 	// Connections
 	connect(ui->list, SIGNAL(currentRowChanged(int)), this, SLOT(changeOptionWidget(int)));
-	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &optionsWindow::accept);
+	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &OptionsWindow::accept);
 }
 
 /*! Sets up list of categories. */
-void optionsWindow::setupList(void)
+void OptionsWindow::setupList(void)
 {
 	int oldIndex = ui->list->currentRow();
 	ui->list->clear();
@@ -52,14 +52,14 @@ void optionsWindow::setupList(void)
 	ui->list->setCurrentRow(oldIndex);
 }
 
-/*! Destroys the optionsWindow object. */
-optionsWindow::~optionsWindow()
+/*! Destroys the OptionsWindow object. */
+OptionsWindow::~OptionsWindow()
 {
 	delete ui;
 }
 
 /*! Opens selected category. */
-void optionsWindow::changeOptionWidget(int index)
+void OptionsWindow::changeOptionWidget(int index)
 {
 	QWidget *options = nullptr;
 	switch(index)
@@ -98,7 +98,7 @@ void optionsWindow::changeOptionWidget(int index)
 }
 
 /*! Selects default category. */
-void optionsWindow::init(void)
+void OptionsWindow::init(void)
 {
 	ui->list->setCurrentRow(0);
 }
@@ -106,7 +106,7 @@ void optionsWindow::init(void)
 /*! Overrides QWidget#changeEvent().
  * Retranslates UI when the display language changes.
  */
-void optionsWindow::changeEvent(QEvent *event)
+void OptionsWindow::changeEvent(QEvent *event)
 {
 	if(event->type() == QEvent::LanguageChange)
 	{

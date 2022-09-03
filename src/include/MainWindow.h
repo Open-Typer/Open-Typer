@@ -36,7 +36,7 @@
 #include "server/widgets/servermanager.h"
 #include "updater/updater.h"
 #include "packEditor/packeditor.h"
-#include "options/optionswindow.h"
+#include "options/OptionsWindow.h"
 #include "options/studentoptions.h"
 #include "ExerciseSummary.h"
 #include "TimeDialog.h"

@@ -32,7 +32,7 @@ namespace Ui {
 /*!
  * \brief The BehaviorOptions class is the BehaviorOptions category in the options.
  * \image html BehaviorOptions.png
- * \see optionsWindow
+ * \see OptionsWindow
  */
 class BehaviorOptions : public QWidget
 {

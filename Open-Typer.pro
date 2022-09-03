@@ -68,7 +68,7 @@ SOURCES += \
     src/options/BehaviorOptions.cpp \
     src/options/AppearanceOptions.cpp \
     src/options/KeyboardOptions.cpp \
-    src/options/optionswindow.cpp \
+    src/options/OptionsWindow.cpp \
     src/packEditor/packeditor.cpp \
     src/packEditor/packselector.cpp \
     src/updater/updater.cpp \
@@ -115,7 +115,7 @@ HEADERS += \
     src/include/options/BehaviorOptions.h \
     src/include/options/AppearanceOptions.h \
     src/include/options/KeyboardOptions.h \
-    src/include/options/optionswindow.h \
+    src/include/options/OptionsWindow.h \
     src/include/packEditor/packeditor.h \
     src/include/packEditor/packselector.h \
     src/include/updater/updater.h \
@@ -164,7 +164,7 @@ FORMS += \
     ui/server/widgets/servermanager.ui \
     ui/server/widgets/classcontrols.ui \
     ui/server/widgets/studentdetails.ui \
-    ui/options/optionswindow.ui \
+    ui/options/OptionsWindow.ui \
     ui/packEditor/packeditor.ui \
     ui/packEditor/packselector.ui \
     ui/updater/updaterdialog.ui

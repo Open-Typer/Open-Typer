@@ -26,7 +26,7 @@
 #include <QTextStream>
 #include <QPropertyAnimation>
 #include <QColorDialog>
-#include "options/optionswindow.h"
+#include "options/OptionsWindow.h"
 #include "core/utils.h"
 #include "core/theme.h"
 
@@ -39,7 +39,7 @@ namespace Ui {
  * \image html AppearanceOptions.png
  * \n
  * \image html AppearanceOptions2.png
- * \see optionsWindow
+ * \see OptionsWindow
  */
 class AppearanceOptions : public QWidget
 {

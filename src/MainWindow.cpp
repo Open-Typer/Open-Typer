@@ -639,7 +639,7 @@ void MainWindow::previousLevel(void)
 void MainWindow::openOptions(void)
 {
 	settings.sync();
-	optionsWindow *optionsWin = new optionsWindow(this);
+	OptionsWindow *optionsWin = new OptionsWindow(this);
 	optionsWin->init();
 	optionsWin->open();
 	optionsWin->setWindowModality(Qt::WindowModal);

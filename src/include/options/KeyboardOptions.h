@@ -24,7 +24,7 @@
 #include <QWidget>
 #include <QListWidget>
 #include <QDirIterator>
-#include "options/optionswindow.h"
+#include "options/OptionsWindow.h"
 #include "packEditor/packeditor.h"
 #include "core/utils.h"
 #include "core/packs.h"
@@ -36,7 +36,7 @@ namespace Ui {
 /*!
  * \brief The KeyboardOptions class is the keyboard category in the options.
  * \image html KeyboardOptions.png
- * \see optionsWindow
+ * \see OptionsWindow
  */
 class KeyboardOptions : public QWidget
 {
