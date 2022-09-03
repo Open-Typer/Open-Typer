@@ -269,15 +269,15 @@ void ServerManager::openClass(bool auth)
 	init();
 }
 
-/*! Opens student details. \see studentDetails */
+/*! Opens student details. \see StudentDetails */
 void ServerManager::openDetails(int studentID)
 {
-	studentDetails *detailsWidget = new studentDetails(classes[ui->classBox->currentIndex() - 1], studentID, ui->classControlsFrame);
+	StudentDetails *detailsWidget = new StudentDetails(classes[ui->classBox->currentIndex() - 1], studentID, ui->classControlsFrame);
 	detailsWidget->setAttribute(Qt::WA_DeleteOnClose);
 	QWidget *oldWidget = ui->classControlsLayout->itemAt(0)->widget();
 	oldWidget->close();
 	ui->classControlsLayout->addWidget(detailsWidget);
-	connect(detailsWidget, &studentDetails::backClicked, this, [this]() {
+	connect(detailsWidget, &StudentDetails::backClicked, this, [this]() {
 		openClass(false);
 	});
 }

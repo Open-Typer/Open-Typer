@@ -1,5 +1,5 @@
 /*
- * studentdetails.cpp
+ * StudentDetails.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/widgets/studentdetails.h"
-#include "ui_studentdetails.h"
+#include "server/widgets/StudentDetails.h"
+#include "ui_StudentDetails.h"
 
-/*! Constructs studentDetails. */
-studentDetails::studentDetails(int openClassID, int id, QWidget *parent) :
+/*! Constructs StudentDetails. */
+StudentDetails::StudentDetails(int openClassID, int id, QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::studentDetails)
+	ui(new Ui::StudentDetails)
 {
 	ui->setupUi(this);
 	classID = openClassID;
@@ -60,7 +60,7 @@ studentDetails::studentDetails(int openClassID, int id, QWidget *parent) :
 	timeChart->legend()->hide();
 	timeChart->setTitle(tr("Time"));
 	// Connections
-	connect(ui->backButton, &QPushButton::clicked, this, &studentDetails::backClicked);
+	connect(ui->backButton, &QPushButton::clicked, this, &StudentDetails::backClicked);
 	connect(ui->packBox, SIGNAL(activated(int)), this, SLOT(refresh()));
 	connect(ui->lessonBox, SIGNAL(activated(int)), this, SLOT(refresh()));
 	connect(ui->sublessonBox, SIGNAL(activated(int)), this, SLOT(refresh()));
@@ -70,8 +70,8 @@ studentDetails::studentDetails(int openClassID, int id, QWidget *parent) :
 	refresh();
 }
 
-/*! Destroys the studentDetails object. */
-studentDetails::~studentDetails()
+/*! Destroys the StudentDetails object. */
+StudentDetails::~StudentDetails()
 {
 	delete ui;
 }
@@ -82,7 +82,7 @@ studentDetails::~studentDetails()
  *
  * \see refreshTable()
  */
-void studentDetails::refresh(void)
+void StudentDetails::refresh(void)
 {
 	// Save old indexes
 	int oldP, oldL, oldS, oldE;
@@ -148,7 +148,7 @@ void studentDetails::refresh(void)
  *
  * \see refresh()
  */
-void studentDetails::refreshTable(void)
+void StudentDetails::refreshTable(void)
 {
 	if(ui->packBox->count() == 0)
 		return;
@@ -191,7 +191,7 @@ void studentDetails::refreshTable(void)
 }
 
 /*! Refreshes the charts. */
-void studentDetails::refreshCharts(void)
+void StudentDetails::refreshCharts(void)
 {
 	speedSeries->clear();
 	mistakesSeries->clear();
@@ -233,7 +233,7 @@ void studentDetails::refreshCharts(void)
 }
 
 /*! Overrides QWidget#changeEvent(). */
-void studentDetails::changeEvent(QEvent *event)
+void StudentDetails::changeEvent(QEvent *event)
 {
 	if(event->type() == QEvent::StyleChange)
 		refreshCharts();

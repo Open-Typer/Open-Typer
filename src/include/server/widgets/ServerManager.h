@@ -28,7 +28,7 @@
 #include "server/ClassEdit.h"
 #include "server/DeviceEdit.h"
 #include "server/widgets/ClassControls.h"
-#include "server/widgets/studentdetails.h"
+#include "server/widgets/StudentDetails.h"
 
 namespace Ui {
 	class ServerManager;

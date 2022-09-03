@@ -1,5 +1,5 @@
 /*
- * studentdetails.h
+ * StudentDetails.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -32,23 +32,23 @@ using namespace QtCharts;
 #endif
 
 namespace Ui {
-	class studentDetails;
+	class StudentDetails;
 }
 
 /*!
- * \brief The studentDetails class is a widget for student results and statistics.
+ * \brief The StudentDetails class is a widget for student results and statistics.
  *
- * \image html studentDetails.png
+ * \image html StudentDetails.png
  */
-class studentDetails : public QWidget
+class StudentDetails : public QWidget
 {
 		Q_OBJECT
 	public:
-		explicit studentDetails(int openClassID, int id, QWidget *parent = nullptr);
-		~studentDetails();
+		explicit StudentDetails(int openClassID, int id, QWidget *parent = nullptr);
+		~StudentDetails();
 
 	private:
-		Ui::studentDetails *ui;
+		Ui::StudentDetails *ui;
 		void refreshCharts(void);
 		int classID, studentID;
 		QChart *speedChart, *mistakesChart, *timeChart;
