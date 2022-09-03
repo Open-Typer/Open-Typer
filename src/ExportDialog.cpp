@@ -1,5 +1,5 @@
 /*
- * exportdialog.cpp
+ * ExportDialog.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "exportdialog.h"
-#include "ui_exportdialog.h"
+#include "ExportDialog.h"
+#include "ui_ExportDialog.h"
 
-/*! Constructs exportDialog. */
-exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> mistakes, QWidget *parent) :
+/*! Constructs ExportDialog. */
+ExportDialog::ExportDialog(QString text, QVariantMap result, QList<QVariantMap> mistakes, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::exportDialog),
+	ui(new Ui::ExportDialog),
 	inputText(text),
 	performanceResult(result),
 	recordedMistakes(mistakes)
@@ -88,25 +88,25 @@ exportDialog::exportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 	ui->exportTable->setSpan(6, 3, 3, 1);
 	updateTable();
 	// Connections
-	connect(ui->printButton, &QToolButton::clicked, this, &exportDialog::printResult);
-	connect(ui->nameEdit, &QLineEdit::textChanged, this, &exportDialog::updateTable);
-	connect(ui->classEdit, &QLineEdit::textChanged, this, &exportDialog::updateTable);
-	connect(ui->numberEdit, &QLineEdit::textChanged, this, &exportDialog::updateTable);
-	connect(ui->markEdit, &QLineEdit::textChanged, this, &exportDialog::updateTable);
+	connect(ui->printButton, &QToolButton::clicked, this, &ExportDialog::printResult);
+	connect(ui->nameEdit, &QLineEdit::textChanged, this, &ExportDialog::updateTable);
+	connect(ui->classEdit, &QLineEdit::textChanged, this, &ExportDialog::updateTable);
+	connect(ui->numberEdit, &QLineEdit::textChanged, this, &ExportDialog::updateTable);
+	connect(ui->markEdit, &QLineEdit::textChanged, this, &ExportDialog::updateTable);
 	connect(ui->closeButton, &QPushButton::clicked, this, &QDialog::close);
 #ifdef Q_OS_WASM
 	ui->printButton->hide();
 #endif
 }
 
-/*! Destroys the exportDialog object. */
-exportDialog::~exportDialog()
+/*! Destroys the ExportDialog object. */
+ExportDialog::~ExportDialog()
 {
 	delete ui;
 }
 
 /*! Updates the table. */
-void exportDialog::updateTable(void)
+void ExportDialog::updateTable(void)
 {
 	ui->exportTable->clearContents();
 	QFont boldFont;
@@ -181,7 +181,7 @@ void exportDialog::updateTable(void)
 }
 
 /*! Prints the result. */
-void exportDialog::printResult(void)
+void ExportDialog::printResult(void)
 {
 #ifndef Q_OS_WASM
 	// Set up printer
@@ -256,49 +256,49 @@ void exportDialog::printResult(void)
 }
 
 /*! Sets the student name. */
-void exportDialog::setStudentName(QString name)
+void ExportDialog::setStudentName(QString name)
 {
 	ui->nameEdit->setText(name);
 }
 
 /*! Returns the student name. */
-QString exportDialog::studentName(void)
+QString ExportDialog::studentName(void)
 {
 	return ui->nameEdit->text();
 }
 
 /*! Sets the class name. */
-void exportDialog::setClassName(QString name)
+void ExportDialog::setClassName(QString name)
 {
 	ui->classEdit->setText(name);
 }
 
 /*! Returns the class name. */
-QString exportDialog::className(void)
+QString ExportDialog::className(void)
 {
 	return ui->classEdit->text();
 }
 
 /*! Sets the exercise number. */
-void exportDialog::setNumber(QString number)
+void ExportDialog::setNumber(QString number)
 {
 	ui->numberEdit->setText(number);
 }
 
 /*! Returns the exercise number. */
-QString exportDialog::number(void)
+QString ExportDialog::number(void)
 {
 	return ui->numberEdit->text();
 }
 
 /*! Sets the mark. */
-void exportDialog::setMark(QString mark)
+void ExportDialog::setMark(QString mark)
 {
 	ui->markEdit->setText(mark);
 }
 
 /*! Returns the mark. */
-QString exportDialog::mark(void)
+QString ExportDialog::mark(void)
 {
 	return ui->markEdit->text();
 }

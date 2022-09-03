@@ -1672,9 +1672,9 @@ void MainWindow::waitForReceivedExercise(QString text, int lineLength)
 }
 
 /*!
- * Opens exportDialog.
+ * Opens ExportDialog.
  *
- * \see exportDialog
+ * \see ExportDialog
  */
 void MainWindow::exportText(void)
 {
@@ -1685,7 +1685,7 @@ void MainWindow::exportText(void)
 	result["mistakes"] = levelMistakes;
 	result["penalty"] = errorPenalty;
 	result["time"] = lastTimeF / 60.0;
-	exportDialog *dialog = new exportDialog(input, result, recordedMistakes, this);
+	ExportDialog *dialog = new ExportDialog(input, result, recordedMistakes, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
 	dialog->showMaximized();

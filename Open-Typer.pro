@@ -74,7 +74,7 @@ SOURCES += \
     src/updater/updater.cpp \
     src/main.cpp \
     src/MainWindow.cpp \
-    src/exportdialog.cpp \
+    src/ExportDialog.cpp \
     src/server/usermanager.cpp \
     src/server/useredit.cpp \
     src/server/adminselector.cpp \
@@ -121,7 +121,7 @@ HEADERS += \
     src/include/updater/updater.h \
     src/include/updater/updaterdialog.h \
     src/include/MainWindow.h \
-    src/include/exportdialog.h \
+    src/include/ExportDialog.h \
     src/include/server/usermanager.h \
     src/include/server/useredit.h \
     src/include/server/adminselector.h \
@@ -151,7 +151,7 @@ FORMS += \
     ui/timedialog.ui \
     ui/testwaitdialog.ui \
     ui/MainWindow.ui \
-    ui/exportdialog.ui \
+    ui/ExportDialog.ui \
     ui/server/usermanager.ui \
     ui/server/useredit.ui \
     ui/server/adminselector.ui \

@@ -41,7 +41,7 @@
 #include "levelsummary.h"
 #include "timedialog.h"
 #include "statsdialog.h"
-#include "exportdialog.h"
+#include "ExportDialog.h"
 #include "testwaitdialog.h"
 #include "core/configfile.h"
 #include "core/utils.h"

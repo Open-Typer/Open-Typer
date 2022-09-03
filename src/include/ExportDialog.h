@@ -1,5 +1,5 @@
 /*
- * exportdialog.h
+ * ExportDialog.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -34,20 +34,20 @@
 #include "core/theme.h"
 
 namespace Ui {
-	class exportDialog;
+	class ExportDialog;
 }
 
 /*!
- * \brief The exportDialog class is a dialog for typewriting result exports.
+ * \brief The ExportDialog class is a dialog for typewriting result exports.
  *
- * \image html exportDialog.png
+ * \image html ExportDialog.png
  */
-class exportDialog : public QDialog
+class ExportDialog : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit exportDialog(QString text, QVariantMap result, QList<QVariantMap> mistakes, QWidget *parent = nullptr);
-		~exportDialog();
+		explicit ExportDialog(QString text, QVariantMap result, QList<QVariantMap> mistakes, QWidget *parent = nullptr);
+		~ExportDialog();
 		void setStudentName(QString name);
 		QString studentName(void);
 		void setClassName(QString name);
@@ -58,7 +58,7 @@ class exportDialog : public QDialog
 		QString mark(void);
 
 	private:
-		Ui::exportDialog *ui;
+		Ui::ExportDialog *ui;
 		QString inputText, exportHtml;
 		QVariantMap performanceResult;
 		QList<QVariantMap> recordedMistakes;

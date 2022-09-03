@@ -163,7 +163,7 @@ void exerciseProgressDialog::setupTable(void)
 			QPushButton *button = new QPushButton(tr("View"), this);
 			ui->studentsTable->setCellWidget(i, 2, button);
 			connect(button, &QPushButton::clicked, this, [this, targets, i, name]() {
-				exportDialog *dialog = new exportDialog(inputTexts[targets[i]], results[targets[i]], recordedMistakeLists[targets[i]], this);
+				ExportDialog *dialog = new ExportDialog(inputTexts[targets[i]], results[targets[i]], recordedMistakeLists[targets[i]], this);
 				dialog->setStudentName(name);
 				dialog->setClassName(ui->classEdit->text());
 				dialog->setNumber(ui->numberEdit->text());
@@ -291,7 +291,7 @@ void exerciseProgressDialog::printAll(void)
 	{
 		if(abortList.contains(exerciseTargets[i]) && abortList[exerciseTargets[i]] && !results.contains(exerciseTargets[i]))
 			continue;
-		exportDialog dialog(inputTexts[exerciseTargets[i]], results[exerciseTargets[i]], recordedMistakeLists[exerciseTargets[i]], this);
+		ExportDialog dialog(inputTexts[exerciseTargets[i]], results[exerciseTargets[i]], recordedMistakeLists[exerciseTargets[i]], this);
 		QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 		QString name;
 		if(settings.value("server/fullmode", false).toBool())
