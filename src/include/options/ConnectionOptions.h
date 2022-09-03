@@ -1,5 +1,5 @@
 /*
- * connection.h
+ * ConnectionOptions.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -29,25 +29,25 @@
 #endif // Q_OS_WASM
 
 namespace Ui {
-	class connectionOptions;
+	class ConnectionOptions;
 }
 
 /*!
- * \brief The connectionOptions class is the connection category in the options.
- * \image html connectionOptions.png
+ * \brief The ConnectionOptions class is the connection category in the options.
+ * \image html ConnectionOptions.png
  * \see optionsWindow
  * \see monitorClient
  */
-class connectionOptions : public QWidget
+class ConnectionOptions : public QWidget
 {
 		Q_OBJECT
 
 	public:
-		explicit connectionOptions(QWidget *parent = nullptr);
-		~connectionOptions();
+		explicit ConnectionOptions(QWidget *parent = nullptr);
+		~ConnectionOptions();
 
 	private:
-		Ui::connectionOptions *ui;
+		Ui::ConnectionOptions *ui;
 		monitorClient client;
 		QSettings settings;
 

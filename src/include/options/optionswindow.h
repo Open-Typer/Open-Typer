@@ -27,7 +27,7 @@
 #include "options/BehaviorOptions.h"
 #include "options/keyboard.h"
 #include "options/AppearanceOptions.h"
-#include "options/connection.h"
+#include "options/ConnectionOptions.h"
 #include "widgets/languagelist.h"
 
 namespace Ui {

@@ -47,7 +47,7 @@ void optionsWindow::setupList(void)
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/keyboardOptions.svg"), tr("Keyboard")));
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/AppearanceOptions.svg"), tr("Appearance")));
 #ifndef Q_OS_WASM
-	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/connectionOptions.svg"), tr("Connection")));
+	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/ConnectionOptions.svg"), tr("Connection")));
 #endif
 	ui->list->setCurrentRow(oldIndex);
 }
@@ -82,7 +82,7 @@ void optionsWindow::changeOptionWidget(int index)
 			break;
 		case 4:
 			// Connection
-			options = new connectionOptions;
+			options = new ConnectionOptions;
 			break;
 	}
 	if(options == nullptr)

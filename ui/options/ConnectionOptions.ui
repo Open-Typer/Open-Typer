@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>connectionOptions</class>
- <widget class="QWidget" name="connectionOptions">
+ <class>ConnectionOptions</class>
+ <widget class="QWidget" name="ConnectionOptions">
   <property name="geometry">
    <rect>
     <x>0</x>

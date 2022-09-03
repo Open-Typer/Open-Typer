@@ -60,7 +60,7 @@ SOURCES += \
     src/core/theme.cpp \
     src/InitialSetup.cpp \
     src/ExerciseSummary.cpp \
-    src/options/connection.cpp \
+    src/options/ConnectionOptions.cpp \
     src/options/studentoptions.cpp \
     src/StatsDialog.cpp \
     src/TimeDialog.cpp \
@@ -107,7 +107,7 @@ HEADERS += \
     src/include/core/theme.h \
     src/include/InitialSetup.h \
     src/include/ExerciseSummary.h \
-    src/include/options/connection.h \
+    src/include/options/ConnectionOptions.h \
     src/include/options/studentoptions.h \
     src/include/StatsDialog.h \
     src/include/TimeDialog.h \
@@ -142,7 +142,7 @@ HEADERS += \
 FORMS += \
     ui/InitialSetup.ui \
     ui/options/BehaviorOptions.ui \
-    ui/options/connection.ui \
+    ui/options/ConnectionOptions.ui \
     ui/options/AppearanceOptions.ui \
     ui/options/keyboard.ui \
     ui/ExerciseSummary.ui \

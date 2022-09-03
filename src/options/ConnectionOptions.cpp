@@ -1,5 +1,5 @@
 /*
- * connection.cpp
+ * ConnectionOptions.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,30 +18,30 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "options/connection.h"
-#include "ui_connection.h"
+#include "options/ConnectionOptions.h"
+#include "ui_ConnectionOptions.h"
 
-/*! Constructs connectionOptions. */
-connectionOptions::connectionOptions(QWidget *parent) :
+/*! Constructs ConnectionOptions. */
+ConnectionOptions::ConnectionOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::connectionOptions),
+	ui(new Ui::ConnectionOptions),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	refresh();
 	changeAddress();
 	// Connections
-	connect(ui->networkOptionsCheckBox, &QCheckBox::toggled, this, &connectionOptions::toggleNetworkOptions);
-	connect(ui->IPEdit, &QLineEdit::textChanged, this, &connectionOptions::changeAddress);
+	connect(ui->networkOptionsCheckBox, &QCheckBox::toggled, this, &ConnectionOptions::toggleNetworkOptions);
+	connect(ui->IPEdit, &QLineEdit::textChanged, this, &ConnectionOptions::changeAddress);
 	connect(ui->portEdit, SIGNAL(valueChanged(int)), this, SLOT(changeAddress()));
-	connect(ui->clientButton, &QRadioButton::toggled, this, &connectionOptions::changeMode);
-	connect(ui->serverButton, &QRadioButton::toggled, this, &connectionOptions::changeMode);
-	connect(ui->fullModeCheckBox, &QCheckBox::toggled, this, &connectionOptions::setFullMode);
+	connect(ui->clientButton, &QRadioButton::toggled, this, &ConnectionOptions::changeMode);
+	connect(ui->serverButton, &QRadioButton::toggled, this, &ConnectionOptions::changeMode);
+	connect(ui->fullModeCheckBox, &QCheckBox::toggled, this, &ConnectionOptions::setFullMode);
 	connect(ui->testButton, SIGNAL(clicked()), this, SLOT(testConnection()));
 }
 
-/*! Destroys the connectionOptions object. */
-connectionOptions::~connectionOptions()
+/*! Destroys the ConnectionOptions object. */
+ConnectionOptions::~ConnectionOptions()
 {
 	if(settings.value("main/networkEnabled", false).toBool() && (settings.value("server/mode", 2).toInt() == 2))
 		testConnection(true);
@@ -49,7 +49,7 @@ connectionOptions::~connectionOptions()
 }
 
 /*! Reloads settings. */
-void connectionOptions::refresh(void)
+void ConnectionOptions::refresh(void)
 {
 #ifndef Q_OS_WASM
 	int mode = settings.value("server/mode", 2).toInt();
@@ -84,14 +84,14 @@ void connectionOptions::refresh(void)
 }
 
 /*! Toggles network options. */
-void connectionOptions::toggleNetworkOptions(bool checked)
+void ConnectionOptions::toggleNetworkOptions(bool checked)
 {
 	settings.setValue("main/networkEnabled", checked);
 	refresh();
 }
 
 /*! Changes the mode (client or server). */
-void connectionOptions::changeMode(void)
+void ConnectionOptions::changeMode(void)
 {
 	if(ui->serverButton->isChecked())
 		settings.setValue("server/mode", 1);
@@ -101,7 +101,7 @@ void connectionOptions::changeMode(void)
 }
 
 /*! Toggles full mode. */
-void connectionOptions::setFullMode(bool enable)
+void ConnectionOptions::setFullMode(bool enable)
 {
 	settings.setValue("server/fullmode", enable);
 }
@@ -110,7 +110,7 @@ void connectionOptions::setFullMode(bool enable)
  * Connected from %textChanged() signal of %IPEdit and %portEdit.\n
  * Changes server address settings.
  */
-void connectionOptions::changeAddress(void)
+void ConnectionOptions::changeAddress(void)
 {
 	settings.setValue("server/address", ui->IPEdit->text());
 	settings.setValue("server/port", ui->portEdit->text());
@@ -127,7 +127,7 @@ void connectionOptions::changeAddress(void)
 }
 
 /*! Tests server connection. */
-void connectionOptions::testConnection(bool silent)
+void ConnectionOptions::testConnection(bool silent)
 {
 	ui->statusValueLabel->setText("...");
 	ui->testButton->setEnabled(false);
