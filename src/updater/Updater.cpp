@@ -1,5 +1,5 @@
 /*
- * updater.cpp
+ * Updater.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "updater/updater.h"
+#include "updater/Updater.h"
 
 /*! Constructs Updater and starts maintenance tool to check for updates. */
 Updater::Updater(QObject *parent) :

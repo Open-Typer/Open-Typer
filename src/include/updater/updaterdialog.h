@@ -23,7 +23,7 @@
 
 #include <QDialog>
 #include <QCloseEvent>
-#include "updater.h"
+#include "Updater.h"
 
 namespace Ui {
 	class UpdaterDialog;

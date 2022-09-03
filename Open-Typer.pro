@@ -71,7 +71,7 @@ SOURCES += \
     src/options/OptionsWindow.cpp \
     src/packEditor/PackEditor.cpp \
     src/packEditor/PackSelector.cpp \
-    src/updater/updater.cpp \
+    src/updater/Updater.cpp \
     src/main.cpp \
     src/MainWindow.cpp \
     src/ExportDialog.cpp \
@@ -118,7 +118,7 @@ HEADERS += \
     src/include/options/OptionsWindow.h \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
-    src/include/updater/updater.h \
+    src/include/updater/Updater.h \
     src/include/updater/updaterdialog.h \
     src/include/MainWindow.h \
     src/include/ExportDialog.h \
