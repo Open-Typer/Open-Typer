@@ -30,7 +30,7 @@ namespace Ui {
 }
 
 /*!
- * \brief the DeviceEdit class is a dialog used to add or edit devices.
+ * \brief The DeviceEdit class is a dialog used to add or edit devices.
  *
  * \image html DeviceEdit.png
  */
