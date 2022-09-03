@@ -1098,7 +1098,7 @@ void MainWindow::keyPress(QKeyEvent *event)
 	}
 }
 
-/*! Ends the exercise by (optionally) saving the results and showing the levelSummary dialog. */
+/*! Ends the exercise by (optionally) saving the results and showing the ExerciseSummary dialog. */
 void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes)
 {
 	levelInProgress = false;
@@ -1241,7 +1241,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 		ui->menuBar->setEnabled(true);
 		testLoaded = false;
 	}
-	levelSummary *msgBox = new levelSummary(this);
+	ExerciseSummary *msgBox = new ExerciseSummary(this);
 	if(showNetHits)
 		msgBox->setNetHits(netHitsPerMinute);
 	if(showGrossHits)

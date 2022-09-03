@@ -1,5 +1,5 @@
 /*
- * levelsummary.cpp
+ * ExerciseSummary.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "levelsummary.h"
-#include "ui_levelsummary.h"
+#include "ExerciseSummary.h"
+#include "ui_ExerciseSummary.h"
 
-/*! Constructs the levelSummary dialog. */
-levelSummary::levelSummary(QWidget *parent) :
+/*! Constructs the ExerciseSummary dialog. */
+ExerciseSummary::ExerciseSummary(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::levelSummary)
+	ui(new Ui::ExerciseSummary)
 {
 	ui->setupUi(this);
 	ui->timeLabel->hide();
@@ -36,14 +36,14 @@ levelSummary::levelSummary(QWidget *parent) :
 	connect(ui->previewButton, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
-/*! Destroys the levelSummary object. */
-levelSummary::~levelSummary()
+/*! Destroys the ExerciseSummary object. */
+ExerciseSummary::~ExerciseSummary()
 {
 	delete ui;
 }
 
 /*! Sets and shows the exercise time. */
-void levelSummary::setTotalTime(double time)
+void ExerciseSummary::setTotalTime(double time)
 {
 	ui->timeLabel->setText(
 		ui->timeLabel->text() + " " + QString::number(time) + " " + tr("seconds"));
@@ -51,7 +51,7 @@ void levelSummary::setTotalTime(double time)
 }
 
 /*! Sets and shows the total number of hits (excluding error penalty). */
-void levelSummary::setTotalHits(int hits)
+void ExerciseSummary::setTotalHits(int hits)
 {
 	ui->hitsLabel->setText(
 		ui->hitsLabel->text() + " " + QString::number(hits));
@@ -59,7 +59,7 @@ void levelSummary::setTotalHits(int hits)
 }
 
 /*! Sets and shows the number of net hits per minute. */
-void levelSummary::setNetHits(int hits)
+void ExerciseSummary::setNetHits(int hits)
 {
 	ui->netHitsLabel->setText(
 		ui->netHitsLabel->text() + " " + QString::number(hits));
@@ -67,7 +67,7 @@ void levelSummary::setNetHits(int hits)
 }
 
 /*! Sets and shows the number of gross hits per minute. */
-void levelSummary::setGrossHits(int hits)
+void ExerciseSummary::setGrossHits(int hits)
 {
 	ui->grossHitsLabel->setText(
 		ui->grossHitsLabel->text() + " " + QString::number(hits));
@@ -75,7 +75,7 @@ void levelSummary::setGrossHits(int hits)
 }
 
 /*! Sets and shows the number of mistakes */
-void levelSummary::setMistakes(int mistakes)
+void ExerciseSummary::setMistakes(int mistakes)
 {
 	ui->mistakesLabel->setText(
 		ui->mistakesLabel->text() + " " + QString::number(mistakes));

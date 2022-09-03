@@ -38,7 +38,7 @@
 #include "packEditor/packeditor.h"
 #include "options/optionswindow.h"
 #include "options/studentoptions.h"
-#include "levelsummary.h"
+#include "ExerciseSummary.h"
 #include "timedialog.h"
 #include "statsdialog.h"
 #include "ExportDialog.h"

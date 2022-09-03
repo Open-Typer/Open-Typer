@@ -59,7 +59,7 @@ SOURCES += \
     src/core/language.cpp \
     src/core/theme.cpp \
     src/InitialSetup.cpp \
-    src/levelsummary.cpp \
+    src/ExerciseSummary.cpp \
     src/options/connection.cpp \
     src/options/studentoptions.cpp \
     src/statsdialog.cpp \
@@ -106,7 +106,7 @@ HEADERS += \
     src/include/core/language.h \
     src/include/core/theme.h \
     src/include/InitialSetup.h \
-    src/include/levelsummary.h \
+    src/include/ExerciseSummary.h \
     src/include/options/connection.h \
     src/include/options/studentoptions.h \
     src/include/statsdialog.h \
@@ -145,7 +145,7 @@ FORMS += \
     ui/options/connection.ui \
     ui/options/appearance.ui \
     ui/options/keyboard.ui \
-    ui/levelsummary.ui \
+    ui/ExerciseSummary.ui \
     ui/options/studentoptions.ui \
     ui/statsdialog.ui \
     ui/timedialog.ui \

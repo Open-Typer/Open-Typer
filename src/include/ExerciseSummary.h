@@ -1,5 +1,5 @@
 /*
- * levelsummary.h
+ * ExerciseSummary.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LEVELSUMMARY_H
-#define LEVELSUMMARY_H
+#ifndef EXERCISESUMMARY_H
+#define EXERCISESUMMARY_H
 
 #include <QDialog>
 
 namespace Ui {
-	class levelSummary;
+	class ExerciseSummary;
 }
 
 /*!
@@ -33,14 +33,14 @@ namespace Ui {
  * Each value can be set using the functions.\n
  * They're all optional and unset values will be hidden.
  *
- * \image html levelSummary.png
+ * \image html ExerciseSummary.png
  */
-class levelSummary : public QDialog
+class ExerciseSummary : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit levelSummary(QWidget *parent = nullptr);
-		~levelSummary();
+		explicit ExerciseSummary(QWidget *parent = nullptr);
+		~ExerciseSummary();
 		void setTotalTime(double time);
 		void setTotalHits(int hits);
 		void setNetHits(int hits);
@@ -48,7 +48,7 @@ class levelSummary : public QDialog
 		void setMistakes(int mistakes);
 
 	private:
-		Ui::levelSummary *ui;
+		Ui::ExerciseSummary *ui;
 };
 
-#endif // LEVELSUMMARY_H
+#endif // EXERCISESUMMARY_H
