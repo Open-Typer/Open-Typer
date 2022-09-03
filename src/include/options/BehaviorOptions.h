@@ -1,5 +1,5 @@
 /*
- * behavior.h
+ * BehaviorOptions.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -26,23 +26,23 @@
 #include "core/utils.h"
 
 namespace Ui {
-	class behaviorOptions;
+	class BehaviorOptions;
 }
 
 /*!
- * \brief The behaviorOptions class is the behavior category in the options.
- * \image html behaviorOptions.png
+ * \brief The BehaviorOptions class is the BehaviorOptions category in the options.
+ * \image html BehaviorOptions.png
  * \see optionsWindow
  */
-class behaviorOptions : public QWidget
+class BehaviorOptions : public QWidget
 {
 		Q_OBJECT
 	public:
-		explicit behaviorOptions(QWidget *parent = nullptr);
-		~behaviorOptions();
+		explicit BehaviorOptions(QWidget *parent = nullptr);
+		~BehaviorOptions();
 
 	private:
-		Ui::behaviorOptions *ui;
+		Ui::BehaviorOptions *ui;
 		QSettings settings;
 
 	private slots:

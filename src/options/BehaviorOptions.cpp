@@ -1,5 +1,5 @@
 /*
- * behavior.cpp
+ * BehaviorOptions.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "options/behavior.h"
-#include "ui_behavior.h"
+#include "options/BehaviorOptions.h"
+#include "ui_BehaviorOptions.h"
 
-/*! Constructs behaviorOptions. */
-behaviorOptions::behaviorOptions(QWidget *parent) :
+/*! Constructs BehaviorOptions. */
+BehaviorOptions::BehaviorOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::behaviorOptions),
+	ui(new Ui::BehaviorOptions),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
@@ -53,17 +53,17 @@ behaviorOptions::behaviorOptions(QWidget *parent) :
 	// Error penalty box
 	connect(ui->errorPenaltyBox, SIGNAL(valueChanged(int)), this, SLOT(setErrorPenalty(int)));
 	// Mistake limit check box
-	connect(ui->mistakeLimitCheckBox, &QCheckBox::toggled, this, &behaviorOptions::toggleMistakeLimit);
+	connect(ui->mistakeLimitCheckBox, &QCheckBox::toggled, this, &BehaviorOptions::toggleMistakeLimit);
 	// Mistake characters box
-	connect(ui->mistakeCharsBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &behaviorOptions::setMistakeChars);
+	connect(ui->mistakeCharsBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &BehaviorOptions::setMistakeChars);
 	// Updates check box
 	connect(ui->updatesCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
 		settings.setValue("main/updatechecks", checked);
 	});
 }
 
-/*! Destroys the behaviorOptions object. */
-behaviorOptions::~behaviorOptions()
+/*! Destroys the BehaviorOptions object. */
+BehaviorOptions::~BehaviorOptions()
 {
 	delete ui;
 }
@@ -72,7 +72,7 @@ behaviorOptions::~behaviorOptions()
  * Connected from spaceNewlineCheckBox#clicked().
  * Enables or disables space bar at the end of line.
  */
-void behaviorOptions::setSpaceNewline(bool value)
+void BehaviorOptions::setSpaceNewline(bool value)
 {
 	if(value)
 		settings.setValue("main/spacenewline", "true");
@@ -84,7 +84,7 @@ void behaviorOptions::setSpaceNewline(bool value)
  * Connected from errorPenaltyBox#valueChanged().
  * Sets error penalty value.
  */
-void behaviorOptions::setErrorPenalty(int value)
+void BehaviorOptions::setErrorPenalty(int value)
 {
 	settings.setValue("main/errorpenalty", value);
 }
@@ -92,7 +92,7 @@ void behaviorOptions::setErrorPenalty(int value)
 /*!
  * Toggles mistake limit.
  */
-void behaviorOptions::toggleMistakeLimit(bool checked)
+void BehaviorOptions::toggleMistakeLimit(bool checked)
 {
 	settings.setValue("main/mistakelimit", checked);
 	ui->mistakeCharsBox->setEnabled(checked);
@@ -101,7 +101,7 @@ void behaviorOptions::toggleMistakeLimit(bool checked)
 /*!
  * Sets number of characters with max. 1 mistake.
  */
-void behaviorOptions::setMistakeChars(int value)
+void BehaviorOptions::setMistakeChars(int value)
 {
 	settings.setValue("main/mistakechars", value);
 }

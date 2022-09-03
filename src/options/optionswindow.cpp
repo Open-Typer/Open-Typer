@@ -43,7 +43,7 @@ void optionsWindow::setupList(void)
 	ui->list->setIconSize(QSize(36, 36));
 	// List of options
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/languageOptions.svg"), tr("Language")));
-	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/behaviorOptions.svg"), tr("Behavior")));
+	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/BehaviorOptions.svg"), tr("Behavior")));
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/keyboardOptions.svg"), tr("Keyboard")));
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/AppearanceOptions.svg"), tr("Appearance")));
 #ifndef Q_OS_WASM
@@ -70,7 +70,7 @@ void optionsWindow::changeOptionWidget(int index)
 			break;
 		case 1:
 			// Behavior
-			options = new behaviorOptions;
+			options = new BehaviorOptions;
 			break;
 		case 2:
 			// Keyboard

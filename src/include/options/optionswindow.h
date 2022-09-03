@@ -24,7 +24,7 @@
 
 #include <QDialog>
 #include <QPushButton>
-#include "options/behavior.h"
+#include "options/BehaviorOptions.h"
 #include "options/keyboard.h"
 #include "options/AppearanceOptions.h"
 #include "options/connection.h"

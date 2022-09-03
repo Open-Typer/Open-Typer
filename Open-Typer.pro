@@ -65,7 +65,7 @@ SOURCES += \
     src/StatsDialog.cpp \
     src/TimeDialog.cpp \
     src/TestWaitDialog.cpp \
-    src/options/behavior.cpp \
+    src/options/BehaviorOptions.cpp \
     src/options/AppearanceOptions.cpp \
     src/options/keyboard.cpp \
     src/options/optionswindow.cpp \
@@ -112,7 +112,7 @@ HEADERS += \
     src/include/StatsDialog.h \
     src/include/TimeDialog.h \
     src/include/TestWaitDialog.h \
-    src/include/options/behavior.h \
+    src/include/options/BehaviorOptions.h \
     src/include/options/AppearanceOptions.h \
     src/include/options/keyboard.h \
     src/include/options/optionswindow.h \
@@ -141,7 +141,7 @@ HEADERS += \
 
 FORMS += \
     ui/InitialSetup.ui \
-    ui/options/behavior.ui \
+    ui/options/BehaviorOptions.ui \
     ui/options/connection.ui \
     ui/options/AppearanceOptions.ui \
     ui/options/keyboard.ui \
