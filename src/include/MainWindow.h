@@ -30,7 +30,7 @@
 #include <QFileDialog>
 #include <QTextCursor>
 #include <QTranslator>
-#include "initialsetup.h"
+#include "InitialSetup.h"
 #include "widgets/inputlabel.h"
 #include "widgets/languagelist.h"
 #include "server/widgets/servermanager.h"

@@ -1,5 +1,5 @@
 /*
- * initialsetup.cpp
+ * InitialSetup.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "initialsetup.h"
-#include "ui_initialsetup.h"
+#include "InitialSetup.h"
+#include "ui_InitialSetup.h"
 
-/*! Constructs initialSetup. */
-initialSetup::initialSetup(QWidget *parent) :
+/*! Constructs InitialSetup. */
+InitialSetup::InitialSetup(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::initialSetup),
+	ui(new Ui::InitialSetup),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
@@ -37,18 +37,18 @@ initialSetup::initialSetup(QWidget *parent) :
 		options->setSimpleTheme(0);
 	ui->customizationLayout->addWidget(options);
 	// Connections
-	connect(ui->okButton, &QPushButton::clicked, this, &initialSetup::finish);
-	connect(ui->showAllLayoutsCheckBox, &QCheckBox::stateChanged, this, &initialSetup::loadList);
+	connect(ui->okButton, &QPushButton::clicked, this, &InitialSetup::finish);
+	connect(ui->showAllLayoutsCheckBox, &QCheckBox::stateChanged, this, &InitialSetup::loadList);
 }
 
-/*! Destroys the initialSetup object. */
-initialSetup::~initialSetup()
+/*! Destroys the InitialSetup object. */
+InitialSetup::~InitialSetup()
 {
 	delete ui;
 }
 
 /*! Saves settings and closes the dialog. */
-void initialSetup::finish(void)
+void InitialSetup::finish(void)
 {
 	settings.setValue("main/configfile", rawItems[ui->packList->currentRow()]);
 	settings.setValue("main/customconfig", false);
@@ -56,7 +56,7 @@ void initialSetup::finish(void)
 }
 
 /*! Loads list of packs. */
-void initialSetup::loadList(void)
+void InitialSetup::loadList(void)
 {
 	ui->packList->clear();
 	QDirIterator it(":/res/configs/", QDirIterator::NoIteratorFlags);

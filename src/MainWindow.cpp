@@ -241,7 +241,7 @@ void MainWindow::refreshAll(void)
 	{
 		firstRun = true;
 		loadTheme();
-		initialSetup *dialog = new initialSetup;
+		InitialSetup *dialog = new InitialSetup;
 		dialog->show();
 		QMetaObject::invokeMethod(this, "hide", Qt::QueuedConnection);
 #ifdef Q_OS_WASM

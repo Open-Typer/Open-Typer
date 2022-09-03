@@ -1,5 +1,5 @@
 /*
- * initialsetup.h
+ * InitialSetup.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -28,23 +28,23 @@
 #include "core/utils.h"
 
 namespace Ui {
-	class initialSetup;
+	class InitialSetup;
 }
 
 /*!
- * \brief The initialSetup class is a dialog for initial program configuration.
+ * \brief The InitialSetup class is a dialog for initial program configuration.
  *
- * \image html initialSetup.png
+ * \image html InitialSetup.png
  */
-class initialSetup : public QDialog
+class InitialSetup : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit initialSetup(QWidget *parent = nullptr);
-		~initialSetup();
+		explicit InitialSetup(QWidget *parent = nullptr);
+		~InitialSetup();
 
 	private:
-		Ui::initialSetup *ui;
+		Ui::InitialSetup *ui;
 		QStringList rawItems;
 		QSettings settings;
 

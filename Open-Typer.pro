@@ -58,7 +58,7 @@ SOURCES += \
     src/core/packs.cpp \
     src/core/language.cpp \
     src/core/theme.cpp \
-    src/initialsetup.cpp \
+    src/InitialSetup.cpp \
     src/levelsummary.cpp \
     src/options/connection.cpp \
     src/options/studentoptions.cpp \
@@ -105,7 +105,7 @@ HEADERS += \
     src/include/core/packs.h \
     src/include/core/language.h \
     src/include/core/theme.h \
-    src/include/initialsetup.h \
+    src/include/InitialSetup.h \
     src/include/levelsummary.h \
     src/include/options/connection.h \
     src/include/options/studentoptions.h \
@@ -140,7 +140,7 @@ HEADERS += \
     src/include/widgets/keyboardwidget.h
 
 FORMS += \
-    ui/initialsetup.ui \
+    ui/InitialSetup.ui \
     ui/options/behavior.ui \
     ui/options/connection.ui \
     ui/options/appearance.ui \
