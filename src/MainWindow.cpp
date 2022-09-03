@@ -127,7 +127,7 @@ MainWindow::MainWindow(QWidget *parent) :
 		ui->textSeparationLine->setVisible(!checked);
 		updateText();
 	});
-	connect(ui->keyboardFrame, &keyboardWidget::visibilityChanged, this, &MainWindow::updateFont);
+	connect(ui->keyboardFrame, &KeyboardWidget::visibilityChanged, this, &MainWindow::updateFont);
 	// Theme engine
 	connect(&globalThemeEngine, &themeEngine::fontChanged, this, &MainWindow::updateFont);
 	connect(&globalThemeEngine, &themeEngine::colorChanged, this, &MainWindow::setColors);
@@ -875,8 +875,8 @@ void MainWindow::keyPress(QKeyEvent *event)
 	if((input.count() < level.count()) && (event->key() == Qt::Key_Shift))
 	{
 		QPoint keyPos = ui->keyboardFrame->findKey(QString(displayLevel[displayPos]));
-		keyboardWidget::Finger finger = ui->keyboardFrame->keyFinger(keyPos.x(), keyPos.y());
-		if(keyboardWidget::fingerHand(finger) == 0)
+		KeyboardWidget::Finger finger = ui->keyboardFrame->keyFinger(keyPos.x(), keyPos.y());
+		if(KeyboardWidget::fingerHand(finger) == 0)
 			highlightID = -2;
 	}
 	ui->keyboardFrame->highlightKey(highlightID);
@@ -1288,7 +1288,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 /*!
  * Connected from InputLabelWidget#keyReleased signal.\n
  * Dehighlights keys on the virtual keyboard.
- * \see keyboardWidget
+ * \see KeyboardWidget
  */
 void MainWindow::keyRelease(QKeyEvent *event)
 {

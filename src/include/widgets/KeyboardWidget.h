@@ -1,5 +1,5 @@
 /*
- * keyboardwidget.h
+ * KeyboardWidget.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -37,15 +37,15 @@
 #include "core/utils.h"
 
 /*!
- * \brief The keyboardWidget class provides a simple virtual keyboard widget.
+ * \brief The KeyboardWidget class provides a simple virtual keyboard widget.
  *
- * \image html keyboardWidget.png
+ * \image html KeyboardWidget.png
  */
-class keyboardWidget : public QFrame
+class KeyboardWidget : public QFrame
 {
 		Q_OBJECT
 	public:
-		explicit keyboardWidget(QWidget *parent = nullptr);
+		explicit KeyboardWidget(QWidget *parent = nullptr);
 		void setKeyColor(QColor color, QColor borderColor);
 		bool loadLayout(QLocale::Language language, QLocale::Country country, QString variant);
 		void highlightKey(int keyCode);
@@ -68,7 +68,7 @@ class keyboardWidget : public QFrame
 
 		static Finger keyFinger(int keyX, int keyY);
 		QPoint findKey(QString label);
-		static int fingerHand(keyboardWidget::Finger finger);
+		static int fingerHand(KeyboardWidget::Finger finger);
 
 	private:
 		QVBoxLayout *mainLayout;

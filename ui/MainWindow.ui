@@ -1435,7 +1435,7 @@
         </widget>
        </item>
        <item row="6" column="0" alignment="Qt::AlignHCenter">
-        <widget class="keyboardWidget" name="keyboardFrame">
+        <widget class="KeyboardWidget" name="keyboardFrame">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -2178,9 +2178,9 @@ p, li { white-space: pre-wrap; }
    <header>src/include/widgets/InputLabelWidget.h</header>
   </customwidget>
   <customwidget>
-   <class>keyboardWidget</class>
+   <class>KeyboardWidget</class>
    <extends>QFrame</extends>
-   <header>widgets/keyboardwidget.h</header>
+   <header>widgets/KeyboardWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

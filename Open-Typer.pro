@@ -91,7 +91,7 @@ SOURCES += \
     src/widgets/InputLabelWidget.cpp \
     src/widgets/textview.cpp \
     src/widgets/languagelist.cpp \
-    src/widgets/keyboardwidget.cpp
+    src/widgets/KeyboardWidget.cpp
 
 HEADERS += \
     src/include/core/utils.h \
@@ -137,7 +137,7 @@ HEADERS += \
     src/include/widgets/InputLabelWidget.h \
     src/include/widgets/textview.h \
     src/include/widgets/languagelist.h \
-    src/include/widgets/keyboardwidget.h
+    src/include/widgets/KeyboardWidget.h
 
 FORMS += \
     ui/InitialSetup.ui \

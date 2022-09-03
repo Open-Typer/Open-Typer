@@ -1,5 +1,5 @@
 /*
- * keyboardwidget.cpp
+ * KeyboardWidget.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,10 +18,10 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "widgets/keyboardwidget.h"
+#include "widgets/KeyboardWidget.h"
 
-/*! Constructs keyboardWidget. */
-keyboardWidget::keyboardWidget(QWidget *parent) :
+/*! Constructs KeyboardWidget. */
+KeyboardWidget::KeyboardWidget(QWidget *parent) :
 	QFrame(parent),
 	mainLayout(new QVBoxLayout(this)),
 	keyboardFrame(new QFrame(this)),
@@ -84,11 +84,11 @@ keyboardWidget::keyboardWidget(QWidget *parent) :
 	addKey("Alt", Qt::Key_AltGr, 75);
 	addKey("Ctrl", -3, 103); // Qt doesn't recognize left and right control; -3 is a special code for right control
 	// Connections
-	connect(closeButton, &QPushButton::clicked, this, &keyboardWidget::toggleKeyboard);
+	connect(closeButton, &QPushButton::clicked, this, &KeyboardWidget::toggleKeyboard);
 }
 
 /*! Adds a key. */
-void keyboardWidget::addKey(QString keyLabelText, int keyCode, int keyMinimumWidth)
+void KeyboardWidget::addKey(QString keyLabelText, int keyCode, int keyMinimumWidth)
 {
 	if(currentRowLayout == nullptr)
 		return;
@@ -144,7 +144,7 @@ void keyboardWidget::addKey(QString keyLabelText, int keyCode, int keyMinimumWid
 }
 
 /*! Starts a new row. */
-void keyboardWidget::nextRow(void)
+void KeyboardWidget::nextRow(void)
 {
 	QFrame *currentRowFrame = new QFrame(this);
 	currentRowFrame->setContentsMargins(0, 0, 0, 0);
@@ -161,7 +161,7 @@ void keyboardWidget::nextRow(void)
 }
 
 /*! Adds a layout-specific key. */
-void keyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode)
+void KeyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode)
 {
 	QPair<int, int> keyPos = QPair<int, int>(x, y);
 	if(!keyMap.contains(keyPos))
@@ -177,7 +177,7 @@ void keyboardWidget::registerKey(int x, int y, QString keyLabelText, int keyCode
 }
 
 /*! Sets color of all keys. */
-void keyboardWidget::setKeyColor(QColor color, QColor borderColor)
+void KeyboardWidget::setKeyColor(QColor color, QColor borderColor)
 {
 	QList<QFrame *> keyList = keys.keys();
 	for(int i = 0; i < keyList.count(); i++)
@@ -197,7 +197,7 @@ void keyboardWidget::setKeyColor(QColor color, QColor borderColor)
 }
 
 /*! Resets color of a key and returns new color. */
-QColor keyboardWidget::resetKeyColor(QFrame *targetKey)
+QColor KeyboardWidget::resetKeyColor(QFrame *targetKey)
 {
 	if(keyColors.contains(targetKey))
 	{
@@ -218,7 +218,7 @@ QColor keyboardWidget::resetKeyColor(QFrame *targetKey)
 }
 
 /*! Loads a keyboard layout. */
-bool keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country country, QString variant)
+bool KeyboardWidget::loadLayout(QLocale::Language language, QLocale::Country country, QString variant)
 {
 	if(variant == "")
 		variant = "QWERTY";
@@ -261,7 +261,7 @@ bool keyboardWidget::loadLayout(QLocale::Language language, QLocale::Country cou
 }
 
 /*! Highlights a key. */
-void keyboardWidget::highlightKey(int keyCode)
+void KeyboardWidget::highlightKey(int keyCode)
 {
 	QList<int> keyCodes = keys.values();
 	if(keyCodes.contains(keyCode))
@@ -277,7 +277,7 @@ void keyboardWidget::highlightKey(int keyCode)
 }
 
 /*! Dehighlights a key. */
-void keyboardWidget::dehighlightKey(int keyCode)
+void KeyboardWidget::dehighlightKey(int keyCode)
 {
 	QList<int> keyCodes = keys.values();
 	if(keyCodes.contains(keyCode))
@@ -288,7 +288,7 @@ void keyboardWidget::dehighlightKey(int keyCode)
 }
 
 /*! Returns the finger that should be used to press the key. */
-keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
+KeyboardWidget::Finger KeyboardWidget::keyFinger(int keyX, int keyY)
 {
 	QPoint keyPos(keyX, keyY);
 	switch(keyPos.y())
@@ -506,7 +506,7 @@ keyboardWidget::Finger keyboardWidget::keyFinger(int keyX, int keyY)
 }
 
 /*! Finds a key that contains label and returns its position. */
-QPoint keyboardWidget::findKey(QString label)
+QPoint KeyboardWidget::findKey(QString label)
 {
 	QList<QLabel *> labels = keyLabels.values();
 	for(int i = 0; i < labels.count(); i++)
@@ -527,7 +527,7 @@ QPoint keyboardWidget::findKey(QString label)
  * 0 - Left\n
  * 1 - Right
  */
-int keyboardWidget::fingerHand(keyboardWidget::Finger finger)
+int KeyboardWidget::fingerHand(KeyboardWidget::Finger finger)
 {
 	if(finger == Finger_Invalid)
 		return -1;
@@ -537,7 +537,7 @@ int keyboardWidget::fingerHand(keyboardWidget::Finger finger)
 }
 
 /*! Toggles keyboard visibility. */
-void keyboardWidget::toggleKeyboard(void)
+void KeyboardWidget::toggleKeyboard(void)
 {
 	QPropertyAnimation *anim = new QPropertyAnimation(keyboardFrame, "geometry");
 	anim->setDuration(250);
@@ -579,7 +579,7 @@ void keyboardWidget::toggleKeyboard(void)
 }
 
 /*! Sets keyboard visibility. */
-void keyboardWidget::setKeyboardVisible(bool visible, bool changeVisibility)
+void KeyboardWidget::setKeyboardVisible(bool visible, bool changeVisibility)
 {
 	settings.setValue("view/keyboardvisible", visible);
 	if(visible)
@@ -598,7 +598,7 @@ void keyboardWidget::setKeyboardVisible(bool visible, bool changeVisibility)
 }
 
 /*! Overrides QWidget::changeEvent(). */
-void keyboardWidget::changeEvent(QEvent *event)
+void KeyboardWidget::changeEvent(QEvent *event)
 {
 	if(event->type() == QEvent::LanguageChange)
 	{
@@ -610,7 +610,7 @@ void keyboardWidget::changeEvent(QEvent *event)
 }
 
 /*! Overrides QFrame::eventFilter(). */
-bool keyboardWidget::eventFilter(QObject *obj, QEvent *event)
+bool KeyboardWidget::eventFilter(QObject *obj, QEvent *event)
 {
 	if(obj == keyboardFrame)
 	{
