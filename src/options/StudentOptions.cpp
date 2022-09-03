@@ -1,5 +1,5 @@
 /*
- * studentoptions.cpp
+ * StudentOptions.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "options/studentoptions.h"
-#include "ui_studentoptions.h"
+#include "options/StudentOptions.h"
+#include "ui_StudentOptions.h"
 
-/*! Constructs studentOptions. */
-studentOptions::studentOptions(QWidget *parent) :
+/*! Constructs StudentOptions. */
+StudentOptions::StudentOptions(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::studentOptions)
+	ui(new Ui::StudentOptions)
 {
 	ui->setupUi(this);
 	client = new monitorClient;
@@ -33,8 +33,8 @@ studentOptions::studentOptions(QWidget *parent) :
 	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(auth()));
 }
 
-/*! Destroys the studentOptions object. */
-studentOptions::~studentOptions()
+/*! Destroys the StudentOptions object. */
+StudentOptions::~StudentOptions()
 {
 	delete ui;
 }
@@ -43,7 +43,7 @@ studentOptions::~studentOptions()
  * Connected from okButton->clicked().\n
  * Checks student password and closes the dialog.
  */
-void studentOptions::auth(void)
+void StudentOptions::auth(void)
 {
 	QStringList requestData;
 	requestData.clear();

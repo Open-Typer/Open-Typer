@@ -1,5 +1,5 @@
 /*
- * studentoptions.h
+ * StudentOptions.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -26,24 +26,24 @@
 #include "core/net.h"
 
 namespace Ui {
-	class studentOptions;
+	class StudentOptions;
 }
 
 /*!
- * \brief The studentOptions class is a dialog for student authentication.
- * \image html studentOptions.png
+ * \brief The StudentOptions class is a dialog for student authentication.
+ * \image html StudentOptions.png
  * \see monitorClient
  */
-class studentOptions : public QDialog
+class StudentOptions : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit studentOptions(QWidget *parent = nullptr);
-		~studentOptions();
+		explicit StudentOptions(QWidget *parent = nullptr);
+		~StudentOptions();
 		QString username, password;
 
 	private:
-		Ui::studentOptions *ui;
+		Ui::StudentOptions *ui;
 		monitorClient *client;
 
 	private slots:

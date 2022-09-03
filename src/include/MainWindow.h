@@ -37,7 +37,7 @@
 #include "updater/updater.h"
 #include "packEditor/packeditor.h"
 #include "options/OptionsWindow.h"
-#include "options/studentoptions.h"
+#include "options/StudentOptions.h"
 #include "ExerciseSummary.h"
 #include "TimeDialog.h"
 #include "StatsDialog.h"

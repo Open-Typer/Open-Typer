@@ -651,13 +651,13 @@ void MainWindow::openOptions(void)
 
 /*!
  * Connected from studentButton->clicked().\n
- * Opens student authentication dialog (studentOptions).
+ * Opens student authentication dialog (StudentOptions).
  *
- * \see studentOptions
+ * \see StudentOptions
  */
 void MainWindow::openStudentOptions(void)
 {
-	studentOptions *dialog = new studentOptions(this);
+	StudentOptions *dialog = new StudentOptions(this);
 	dialog->setWindowModality(Qt::WindowModal);
 	connect(dialog, &QDialog::accepted, this, [dialog, this]() {
 		studentUsername = dialog->username;

@@ -61,7 +61,7 @@ SOURCES += \
     src/InitialSetup.cpp \
     src/ExerciseSummary.cpp \
     src/options/ConnectionOptions.cpp \
-    src/options/studentoptions.cpp \
+    src/options/StudentOptions.cpp \
     src/StatsDialog.cpp \
     src/TimeDialog.cpp \
     src/TestWaitDialog.cpp \
@@ -108,7 +108,7 @@ HEADERS += \
     src/include/InitialSetup.h \
     src/include/ExerciseSummary.h \
     src/include/options/ConnectionOptions.h \
-    src/include/options/studentoptions.h \
+    src/include/options/StudentOptions.h \
     src/include/StatsDialog.h \
     src/include/TimeDialog.h \
     src/include/TestWaitDialog.h \
@@ -146,7 +146,7 @@ FORMS += \
     ui/options/AppearanceOptions.ui \
     ui/options/KeyboardOptions.ui \
     ui/ExerciseSummary.ui \
-    ui/options/studentoptions.ui \
+    ui/options/StudentOptions.ui \
     ui/StatsDialog.ui \
     ui/TimeDialog.ui \
     ui/TestWaitDialog.ui \
