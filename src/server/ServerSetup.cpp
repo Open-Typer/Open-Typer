@@ -1,5 +1,5 @@
 /*
- * serversetup.cpp
+ * ServerSetup.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,26 +18,26 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/serversetup.h"
-#include "ui_serversetup.h"
+#include "server/ServerSetup.h"
+#include "ui_ServerSetup.h"
 
-/*! Constructs serverSetup. */
-serverSetup::serverSetup(QWidget *parent) :
+/*! Constructs ServerSetup. */
+ServerSetup::ServerSetup(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::serverSetup)
+	ui(new Ui::ServerSetup)
 {
 	ui->setupUi(this);
 	ui->gridLayout->setSizeConstraint(QLayout::SetFixedSize);
 	verify();
 	// Connections
-	connect(ui->adminNameEdit, &QLineEdit::textChanged, this, &serverSetup::verify);
-	connect(ui->adminPasswordEdit, &QLineEdit::textChanged, this, &serverSetup::verify);
-	connect(ui->repeatPasswordEdit, &QLineEdit::textChanged, this, &serverSetup::verify);
+	connect(ui->adminNameEdit, &QLineEdit::textChanged, this, &ServerSetup::verify);
+	connect(ui->adminPasswordEdit, &QLineEdit::textChanged, this, &ServerSetup::verify);
+	connect(ui->repeatPasswordEdit, &QLineEdit::textChanged, this, &ServerSetup::verify);
 	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(save()));
 }
 
-/*! Destroys the serverSetup object. */
-serverSetup::~serverSetup()
+/*! Destroys the ServerSetup object. */
+ServerSetup::~ServerSetup()
 {
 	delete ui;
 }
@@ -45,7 +45,7 @@ serverSetup::~serverSetup()
 /*! Connected from all line edits' %textChanged() signal.\n
  * Checks if everything is correct and enables the OK button.
  */
-void serverSetup::verify(void)
+void ServerSetup::verify(void)
 {
 	ui->okButton->setEnabled(false);
 	// Check administrator name
@@ -64,7 +64,7 @@ void serverSetup::verify(void)
  * Connected from okButton->clicked().\n
  * Saves settings and closes the dialog.
  */
-void serverSetup::save(void)
+void ServerSetup::save(void)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	dbMgr.addUser(ui->adminNameEdit->text(), databaseManager::Role_Administrator, ui->adminPasswordEdit->text());

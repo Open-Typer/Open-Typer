@@ -78,7 +78,7 @@ SOURCES += \
     src/server/usermanager.cpp \
     src/server/useredit.cpp \
     src/server/AdminSelector.cpp \
-    src/server/serversetup.cpp \
+    src/server/ServerSetup.cpp \
     src/server/ClassEdit.cpp \
     src/server/studentedit.cpp \
     src/server/DeviceEdit.cpp \
@@ -125,7 +125,7 @@ HEADERS += \
     src/include/server/usermanager.h \
     src/include/server/useredit.h \
     src/include/server/AdminSelector.h \
-    src/include/server/serversetup.h \
+    src/include/server/ServerSetup.h \
     src/include/server/ClassEdit.h \
     src/include/server/studentedit.h \
     src/include/server/DeviceEdit.h \
@@ -155,7 +155,7 @@ FORMS += \
     ui/server/usermanager.ui \
     ui/server/useredit.ui \
     ui/server/AdminSelector.ui \
-    ui/server/serversetup.ui \
+    ui/server/ServerSetup.ui \
     ui/server/ClassEdit.ui \
     ui/server/studentedit.ui \
     ui/server/DeviceEdit.ui \

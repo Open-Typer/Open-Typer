@@ -24,7 +24,7 @@
 #include <QWidget>
 #include "server/usermanager.h"
 #include "server/AdminSelector.h"
-#include "server/serversetup.h"
+#include "server/ServerSetup.h"
 #include "server/ClassEdit.h"
 #include "server/DeviceEdit.h"
 #include "server/widgets/classcontrols.h"

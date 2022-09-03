@@ -1,5 +1,5 @@
 /*
- * serversetup.h
+ * ServerSetup.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -27,22 +27,22 @@
 #include "core/utils.h"
 
 namespace Ui {
-	class serverSetup;
+	class ServerSetup;
 }
 
 /*!
- * \brief The serverSetup class is a dialog for initial server setup.
- * \image html serverSetup.png
+ * \brief The ServerSetup class is a dialog for initial server setup.
+ * \image html ServerSetup.png
  */
-class serverSetup : public QDialog
+class ServerSetup : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit serverSetup(QWidget *parent = nullptr);
-		~serverSetup();
+		explicit ServerSetup(QWidget *parent = nullptr);
+		~ServerSetup();
 
 	private:
-		Ui::serverSetup *ui;
+		Ui::ServerSetup *ui;
 
 	private slots:
 		void verify(void);

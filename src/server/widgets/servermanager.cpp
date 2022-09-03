@@ -76,7 +76,7 @@ bool serverManager::init(void)
 			ui->classControlsFrame->show();
 		if(dbMgr.administratorIDs().count() == 0)
 		{
-			serverSetup *dialog = new serverSetup(this);
+			ServerSetup *dialog = new ServerSetup(this);
 			dialog->setWindowModality(Qt::WindowModal);
 			dialog->open();
 			connect(dialog, &QDialog::rejected, this, [this]() {
