@@ -1,5 +1,5 @@
 /*
- * useredit.h
+ * UserEdit.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -25,23 +25,23 @@
 #include "core/database.h"
 
 namespace Ui {
-	class userEdit;
+	class UserEdit;
 }
 
 /*!
- * \brief the userEdit class is a dialog used to add or edit users.
+ * \brief the UserEdit class is a dialog used to add or edit users.
  *
- * \image html userEdit.png
+ * \image html UserEdit.png
  */
-class userEdit : public QDialog
+class UserEdit : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit userEdit(bool newUser = false, int id = 1, QWidget *parent = nullptr);
-		~userEdit();
+		explicit UserEdit(bool newUser = false, int id = 1, QWidget *parent = nullptr);
+		~UserEdit();
 
 	private:
-		Ui::userEdit *ui;
+		Ui::UserEdit *ui;
 		bool creatingNewUser, passwordReset;
 		int userID;
 

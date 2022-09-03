@@ -1,5 +1,5 @@
 /*
- * useredit.cpp
+ * UserEdit.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/useredit.h"
-#include "ui_useredit.h"
+#include "server/UserEdit.h"
+#include "ui_UserEdit.h"
 
-/*! Constructs userEdit. */
-userEdit::userEdit(bool newUser, int id, QWidget *parent) :
+/*! Constructs UserEdit. */
+UserEdit::UserEdit(bool newUser, int id, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::userEdit)
+	ui(new Ui::UserEdit)
 {
 	ui->setupUi(this);
 	// Roles
@@ -49,15 +49,15 @@ userEdit::userEdit(bool newUser, int id, QWidget *parent) :
 	userID = id;
 	verify();
 	// Connections
-	connect(ui->userNameEdit, &QLineEdit::textChanged, this, &userEdit::verify);
-	connect(ui->passwordEdit, &QLineEdit::textChanged, this, &userEdit::verify);
-	connect(ui->repeatPasswordEdit, &QLineEdit::textChanged, this, &userEdit::verify);
+	connect(ui->userNameEdit, &QLineEdit::textChanged, this, &UserEdit::verify);
+	connect(ui->passwordEdit, &QLineEdit::textChanged, this, &UserEdit::verify);
+	connect(ui->repeatPasswordEdit, &QLineEdit::textChanged, this, &UserEdit::verify);
 	connect(ui->resetPasswordButton, SIGNAL(clicked()), this, SLOT(resetPassword()));
 	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(finish()));
 }
 
-/*! Destroys the userEdit object. */
-userEdit::~userEdit()
+/*! Destroys the UserEdit object. */
+UserEdit::~UserEdit()
 {
 	delete ui;
 }
@@ -66,7 +66,7 @@ userEdit::~userEdit()
  * Connected from all line edits.\n
  * Checks if everything is correct and enables the OK button.
  */
-void userEdit::verify(void)
+void UserEdit::verify(void)
 {
 	ui->okButton->setEnabled(false);
 	// Check user name
@@ -97,7 +97,7 @@ void userEdit::verify(void)
  * Connected from resetPasswordButton->clicked().\n
  * Shows password boxes.
  */
-void userEdit::resetPassword(void)
+void UserEdit::resetPassword(void)
 {
 	ui->resetPasswordButton->hide();
 	ui->passwordEdit->show();
@@ -111,7 +111,7 @@ void userEdit::resetPassword(void)
  * Connected from okButton->clicked().\n
  * Edits or creates the user and closes the window.
  */
-void userEdit::finish(void)
+void UserEdit::finish(void)
 {
 	databaseManager::Role role = (databaseManager::Role) ui->roleBox->currentIndex();
 	if(creatingNewUser)

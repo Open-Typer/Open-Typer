@@ -71,13 +71,13 @@ void userManager::verify(void)
 
 /*!
  * Connected from addButton->clicked().\n
- * Opens userEdit and creates a new user.
+ * Opens UserEdit and creates a new user.
  *
- * \see userEdit
+ * \see UserEdit
  */
 void userManager::addUser(void)
 {
-	userEdit dialog(true);
+	UserEdit dialog(true);
 	dialog.exec();
 	setupList();
 }
@@ -111,13 +111,13 @@ void userManager::removeUser(void)
 
 /*!
  * Connected from editButton->clicked().\n
- * Opens userEdit and edits selected user.
+ * Opens UserEdit and edits selected user.
  *
- * \see userEdit
+ * \see UserEdit
  */
 void userManager::editUser(void)
 {
-	userEdit dialog(false, dbMgr.teacherIDs().value(ui->userList->currentRow()));
+	UserEdit dialog(false, dbMgr.teacherIDs().value(ui->userList->currentRow()));
 	dialog.exec();
 	setupList();
 }

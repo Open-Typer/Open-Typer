@@ -24,7 +24,7 @@
 #include <QWidget>
 #include <QSettings>
 #include <QMessageBox>
-#include "useredit.h"
+#include "UserEdit.h"
 #include "core/database.h"
 
 namespace Ui {

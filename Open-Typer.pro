@@ -76,7 +76,7 @@ SOURCES += \
     src/MainWindow.cpp \
     src/ExportDialog.cpp \
     src/server/usermanager.cpp \
-    src/server/useredit.cpp \
+    src/server/UserEdit.cpp \
     src/server/AdminSelector.cpp \
     src/server/ServerSetup.cpp \
     src/server/ClassEdit.cpp \
@@ -123,7 +123,7 @@ HEADERS += \
     src/include/MainWindow.h \
     src/include/ExportDialog.h \
     src/include/server/usermanager.h \
-    src/include/server/useredit.h \
+    src/include/server/UserEdit.h \
     src/include/server/AdminSelector.h \
     src/include/server/ServerSetup.h \
     src/include/server/ClassEdit.h \
@@ -153,7 +153,7 @@ FORMS += \
     ui/MainWindow.ui \
     ui/ExportDialog.ui \
     ui/server/usermanager.ui \
-    ui/server/useredit.ui \
+    ui/server/UserEdit.ui \
     ui/server/AdminSelector.ui \
     ui/server/ServerSetup.ui \
     ui/server/ClassEdit.ui \
