@@ -1,8 +1,8 @@
 /*
- * InitialSetup.h
+ * FileUtils.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,39 +18,19 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INITIALSETUP_H
-#define INITIALSETUP_H
+#ifndef FILEUTILS_H
+#define FILEUTILS_H
 
-#include <QDialog>
-#include <QDirIterator>
-#include "options/AppearanceOptions.h"
-#include "core/BuiltInPacks.h"
-#include "core/FileUtils.h"
+#include <QString>
+#include <QStandardPaths>
+#include <QDir>
 
-namespace Ui {
-	class InitialSetup;
-}
-
-/*!
- * \brief The InitialSetup class is a dialog for initial program configuration.
- *
- * \image html InitialSetup.png
- */
-class InitialSetup : public QDialog
+/*! \brief The FileUtils class contains functions for file or directory paths. */
+class FileUtils
 {
-		Q_OBJECT
 	public:
-		explicit InitialSetup(QWidget *parent = nullptr);
-		~InitialSetup();
-
-	private:
-		Ui::InitialSetup *ui;
-		QStringList rawItems;
-		QSettings settings;
-
-	private slots:
-		void finish(void);
-		void loadList(void);
+		static QString configLocation(void);
+		static QString mainSettingsLocation(void);
 };
 
-#endif // INITIALSETUP_H
+#endif // FILEUTILS_H

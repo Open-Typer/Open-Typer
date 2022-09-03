@@ -67,7 +67,7 @@ void HistoryParser::addHistoryEntry(QString pack, int lesson, int sublesson, int
 	docObject.insert(pack, packObject);
 	// Save JSON document
 	QJsonDocument document(docObject);
-	QFile historyFile(fileUtils::configLocation() + "/history.json");
+	QFile historyFile(FileUtils::configLocation() + "/history.json");
 	if(historyFile.open(QIODevice::WriteOnly | QIODevice::Text))
 		historyFile.write(document.toJson(QJsonDocument::Indented));
 }
@@ -75,7 +75,7 @@ void HistoryParser::addHistoryEntry(QString pack, int lesson, int sublesson, int
 /*! Returns JSON document of the history JSON file. */
 QJsonDocument HistoryParser::historyDocument(void)
 {
-	QFile historyFile(fileUtils::configLocation() + "/history.json");
+	QFile historyFile(FileUtils::configLocation() + "/history.json");
 	if(historyFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		return QJsonDocument::fromJson(historyFile.readAll());
 	else if(historyFile.open(QIODevice::WriteOnly | QIODevice::Text))

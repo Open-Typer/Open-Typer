@@ -26,7 +26,7 @@ LoadExerciseDialog::LoadExerciseDialog(QList<int> availableTargets, QWidget *par
 	QDialog(parent),
 	ui(new Ui::LoadExerciseDialog),
 	m_targets(availableTargets),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	init();
 }
@@ -35,7 +35,7 @@ LoadExerciseDialog::LoadExerciseDialog(QList<int> availableTargets, QWidget *par
 LoadExerciseDialog::LoadExerciseDialog(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::LoadExerciseDialog),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	local = true;
 	init();

@@ -25,7 +25,7 @@
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	QGridLayout *inputLabelLayout = new QGridLayout(ui->inputLabel);

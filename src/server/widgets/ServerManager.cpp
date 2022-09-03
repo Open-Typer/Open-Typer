@@ -25,7 +25,7 @@
 ServerManager::ServerManager(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::ServerManager),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	ui->editDeviceButton->setEnabled(false);

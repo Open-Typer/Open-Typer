@@ -42,7 +42,7 @@ ExerciseProgressDialog::ExerciseProgressDialog(int classID, QList<int> targets, 
 	setAttribute(Qt::WA_DeleteOnClose);
 	ExerciseProgressDialogConfig::dialogCount++;
 	ui->setupUi(this);
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	if((targets.count() > 0) && settings.value("server/fullmode", false).toBool())
 		ui->classEdit->setText(dbMgr.className(classID));
 #ifndef Q_OS_WASM
@@ -61,7 +61,7 @@ ExerciseProgressDialog::ExerciseProgressDialog(int classID, QList<int> targets, 
 	connect(serverPtr, &MonitorServer::exerciseAborted, this, &ExerciseProgressDialog::abortExercise);
 	connect(serverPtr, &MonitorServer::deviceConfigurationChanged, this, &ExerciseProgressDialog::setupTable);
 	connect(ui->startButton, &QToolButton::clicked, this, [this]() {
-		QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+		QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 		bool fullMode = settings.value("server/fullmode", false).toBool();
 		QList<QByteArray> usernames;
 		QList<QHostAddress> addresses;
@@ -130,7 +130,7 @@ void ExerciseProgressDialog::setupTable(void)
 	ui->studentsTable->clearContents();
 	ui->studentsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->studentsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	bool fullMode = settings.value("server/fullmode", false).toBool();
 	// Rows
 	QList<int> targets = exerciseTargets;
@@ -207,7 +207,7 @@ void ExerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 {
 	if(!exerciseTargets.contains(targetID))
 		return;
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QString exerciseText = ConfigParser::initExercise(m_exerciseText, m_lineLength);
 	int grossHits, mistakes;
 	if(m_correctMistakes)
@@ -292,7 +292,7 @@ void ExerciseProgressDialog::printAll(void)
 		if(abortList.contains(exerciseTargets[i]) && abortList[exerciseTargets[i]] && !results.contains(exerciseTargets[i]))
 			continue;
 		ExportDialog dialog(inputTexts[exerciseTargets[i]], results[exerciseTargets[i]], recordedMistakeLists[exerciseTargets[i]], this);
-		QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+		QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 		QString name;
 		if(settings.value("server/fullmode", false).toBool())
 			name = dbMgr.userName(exerciseTargets[i]);
@@ -331,7 +331,7 @@ void ExerciseProgressDialog::uploadChangedName(int row, int column)
 		return;
 	auto item = ui->studentsTable->item(row, column);
 #ifndef Q_OS_WASM
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	if(settings.value("server/fullmode", false).toBool())
 		serverPtr->sendSignal("changeName", { item->text() }, { dbMgr.userNickname(targetMap[item]).toUtf8() });
 	else

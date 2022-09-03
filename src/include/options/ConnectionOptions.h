@@ -22,7 +22,7 @@
 #define CONNECTION_H
 
 #include <QWidget>
-#include "core/utils.h"
+#include "core/FileUtils.h"
 #include "core/MonitorClient.h"
 #ifndef Q_OS_WASM
 #include "core/MonitorServer.h"

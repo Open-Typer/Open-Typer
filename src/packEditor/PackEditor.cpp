@@ -25,7 +25,7 @@
 PackEditor::PackEditor(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::PackEditor),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	if(settings.contains("main/editorGeometry"))

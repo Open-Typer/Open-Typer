@@ -25,7 +25,7 @@
 InitialSetup::InitialSetup(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::InitialSetup),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	loadList();

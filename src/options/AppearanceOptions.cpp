@@ -25,7 +25,7 @@
 AppearanceOptions::AppearanceOptions(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::AppearanceOptions),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	ui->themeCustomizationFrame->hide();

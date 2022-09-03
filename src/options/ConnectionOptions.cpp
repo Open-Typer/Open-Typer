@@ -25,7 +25,7 @@
 ConnectionOptions::ConnectionOptions(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::ConnectionOptions),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	refresh();

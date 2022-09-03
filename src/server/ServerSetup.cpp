@@ -66,7 +66,7 @@ void ServerSetup::verify(void)
  */
 void ServerSetup::save(void)
 {
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	dbMgr.addUser(ui->adminNameEdit->text(), DatabaseManager::Role_Administrator, ui->adminPasswordEdit->text());
 	accept();
 }

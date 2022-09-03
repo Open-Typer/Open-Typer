@@ -30,7 +30,7 @@
 #include <QPalette>
 #include <QSettings>
 #include <QFile>
-#include "core/utils.h"
+#include "core/FileUtils.h"
 
 /*! \brief The ThemeEngine class provides theme functions. */
 class ThemeEngine : public QObject

@@ -367,7 +367,7 @@ QMap<int, QVariantMap> stringUtils::generateDiffList(QStringList *sourceWords, Q
 /*! Compares input text with exercise text and finds mistakes. */
 QList<QVariantMap> stringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, QStringList *errorWords)
 {
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QList<QVariantMap> out;
 	int i;
 	// Split lines
@@ -624,24 +624,6 @@ QString stringUtils::addMistakes(QString exerciseText, QList<QVariantMap> *recor
 			out += i < exerciseText.count() ? QString(exerciseText[i]) : QString();
 	}
 	return out;
-}
-
-/*!
- * Returns the path to the program configuration directory.\n
- * For example: <tt>/home/user/.config/Open-Typer</tt>
- */
-QString fileUtils::configLocation(void)
-{
-	QString path = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
-	QDir dir;
-	dir.mkpath(path);
-	return path;
-}
-
-/*! Returns the path to the main configuration file, currently \c config.ini in the program configuration directory. */
-QString fileUtils::mainSettingsLocation(void)
-{
-	return configLocation() + "/config.ini";
 }
 
 /*!

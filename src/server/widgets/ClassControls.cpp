@@ -286,7 +286,7 @@ void ClassControls::refreshCharts(void)
 		timeChart->createDefaultAxes();
 	}
 	// Set theme
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QChart::ChartTheme theme;
 	if(settings.value("theme/theme", "0").toInt() == 1)
 		theme = QChart::ChartThemeDark;
@@ -319,7 +319,7 @@ void ClassControls::loadExercise(void)
 /*! Starts the exercise loaded by the dialog. */
 void ClassControls::startExercise(LoadExerciseDialog *dialog)
 {
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	bool fullMode = settings.value("server/fullmode", false).toBool();
 	QList<QByteArray> usernames;
 	QList<QHostAddress> addresses;

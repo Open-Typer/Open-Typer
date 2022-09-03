@@ -221,7 +221,7 @@ void StudentDetails::refreshCharts(void)
 	timeChart->createDefaultAxes();
 	timeChart->axes(Qt::Vertical).value(0)->setMin(0);
 	// Set theme
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QChart::ChartTheme theme;
 	if(settings.value("theme/theme", "0").toInt() == 1)
 		theme = QChart::ChartThemeDark;

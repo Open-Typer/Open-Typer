@@ -1,8 +1,8 @@
 /*
- * InitialSetup.h
+ * FileUtils.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2021-2022 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,39 +18,22 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INITIALSETUP_H
-#define INITIALSETUP_H
-
-#include <QDialog>
-#include <QDirIterator>
-#include "options/AppearanceOptions.h"
-#include "core/BuiltInPacks.h"
 #include "core/FileUtils.h"
 
-namespace Ui {
-	class InitialSetup;
+/*!
+ * Returns the path to the program configuration directory.\n
+ * For example: <tt>/home/user/.config/Open-Typer</tt>
+ */
+QString FileUtils::configLocation(void)
+{
+	QString path = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
+	QDir dir;
+	dir.mkpath(path);
+	return path;
 }
 
-/*!
- * \brief The InitialSetup class is a dialog for initial program configuration.
- *
- * \image html InitialSetup.png
- */
-class InitialSetup : public QDialog
+/*! Returns the path to the main configuration file, currently \c config.ini in the program configuration directory. */
+QString FileUtils::mainSettingsLocation(void)
 {
-		Q_OBJECT
-	public:
-		explicit InitialSetup(QWidget *parent = nullptr);
-		~InitialSetup();
-
-	private:
-		Ui::InitialSetup *ui;
-		QStringList rawItems;
-		QSettings settings;
-
-	private slots:
-		void finish(void);
-		void loadList(void);
-};
-
-#endif // INITIALSETUP_H
+	return configLocation() + "/config.ini";
+}

@@ -36,7 +36,7 @@ bool DatabaseManager::open(void)
 		db = QSqlDatabase::addDatabase("QSQLITE");
 	else
 		db = QSqlDatabase::database();
-	db.setDatabaseName(fileUtils::configLocation() + "/database.db");
+	db.setDatabaseName(FileUtils::configLocation() + "/database.db");
 	openStatus = db.open();
 	if(openStatus)
 	{

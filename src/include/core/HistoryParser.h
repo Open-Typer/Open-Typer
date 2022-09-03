@@ -26,7 +26,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
-#include "utils.h"
+#include "core/FileUtils.h"
 
 /*! \brief The HistoryParser class provides functions for exercise history and statistics. */
 class HistoryParser : public QObject

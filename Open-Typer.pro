@@ -48,6 +48,7 @@ win32 {
 
 SOURCES += \
     src/core/utils.cpp \
+    src/core/FileUtils.cpp \
     src/core/ConfigParser.cpp \
     src/core/HistoryParser.cpp \
     src/core/DatabaseManager.cpp
@@ -96,6 +97,7 @@ SOURCES += \
 
 HEADERS += \
     src/include/core/utils.h \
+    src/include/core/FileUtils.h \
     src/include/core/ConfigParser.h \
     src/include/core/HistoryParser.h \
     src/include/core/DatabaseManager.h

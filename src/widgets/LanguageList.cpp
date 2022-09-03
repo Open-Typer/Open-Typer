@@ -23,7 +23,7 @@
 /*! Constructs LanguageList. */
 LanguageList::LanguageList(QWidget *parent) :
 	QListWidget(parent),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	clear();
 	addItems(langMgr.boxItems);

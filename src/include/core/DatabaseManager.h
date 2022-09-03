@@ -31,7 +31,7 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QCryptographicHash>
-#include "core/utils.h"
+#include "core/FileUtils.h"
 #endif // Q_OS_WASM
 
 /*! \brief The DatabaseManager class manages the server database. */

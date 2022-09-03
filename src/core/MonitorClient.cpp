@@ -25,7 +25,7 @@ MonitorClient::MonitorClient(bool errDialogs, QObject *parent) :
 	QObject(parent),
 	connected(false),
 	waitingForResponse(false),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	setErrorDialogs(errDialogs);
 	connect(&socket, &QWebSocket::textMessageReceived, this, &MonitorClient::readResponse);
@@ -58,14 +58,14 @@ void MonitorClient::setErrorDialogs(bool errDialogs)
 /*! Returns server address. */
 QHostAddress MonitorClient::serverAddress(void)
 {
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return QHostAddress(settings.value("server/address", "127.0.0.1").toString());
 }
 
 /*! Returns server port. */
 quint16 MonitorClient::serverPort(void)
 {
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return settings.value("server/port", "57100").toUInt();
 }
 
@@ -86,7 +86,7 @@ QHostAddress MonitorClient::localAddress(void)
 /*! Returns true if client is enabled in the settings. */
 bool MonitorClient::enabled(void)
 {
-	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	return (settings.value("main/networkEnabled", false).toBool() && (settings.value("server/mode", 2).toInt() == 2));
 }
 

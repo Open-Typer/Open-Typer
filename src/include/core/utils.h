@@ -23,10 +23,9 @@
 
 #include <QObject>
 #include <QString>
-#include <QStandardPaths>
 #include <QKeyEvent>
-#include <QDir>
 #include <QSettings>
+#include "core/FileUtils.h"
 
 /*! \brief The stringUtils class contains functions related to strings. */
 class stringUtils
@@ -48,14 +47,6 @@ class stringUtils
 		static int lcsLen(QList<QVariant> source, QList<QVariant> target, QMap<int, QMap<int, int>> *lcsTable);
 		static QStringList splitWordsByPunct(QStringList source);
 		static QMap<int, QVariantMap> generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList = nullptr);
-};
-
-/*! \brief The fileUtils class contains functions for file or directory paths. */
-class fileUtils
-{
-	public:
-		static QString configLocation(void);
-		static QString mainSettingsLocation(void);
 };
 
 /*! \brief The keyboardUtils class provides functions related to keyboard and input method. */

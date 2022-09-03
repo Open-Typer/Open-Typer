@@ -28,7 +28,7 @@ MonitorServer::MonitorServer(bool silent, QObject *parent) :
 	clientSockets(),
 	sessions(),
 	exerciseSockets(),
-	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	generateRandomCertKey();
 	if(!listen(QHostAddress::Any, port()))
@@ -63,7 +63,7 @@ QHostAddress MonitorServer::address(void)
 /*! Returns the port, which was set by the user (or the default port). */
 quint16 MonitorServer::port(void)
 {
-	QSettings settings(fileUtils::configLocation() + "/config.ini", QSettings::IniFormat);
+	QSettings settings(FileUtils::configLocation() + "/config.ini", QSettings::IniFormat);
 	return settings.value("server/port", 57100).toUInt();
 }
 
