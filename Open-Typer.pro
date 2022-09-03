@@ -75,7 +75,7 @@ SOURCES += \
     src/main.cpp \
     src/MainWindow.cpp \
     src/ExportDialog.cpp \
-    src/server/usermanager.cpp \
+    src/server/UserManager.cpp \
     src/server/UserEdit.cpp \
     src/server/AdminSelector.cpp \
     src/server/ServerSetup.cpp \
@@ -122,7 +122,7 @@ HEADERS += \
     src/include/updater/updaterdialog.h \
     src/include/MainWindow.h \
     src/include/ExportDialog.h \
-    src/include/server/usermanager.h \
+    src/include/server/UserManager.h \
     src/include/server/UserEdit.h \
     src/include/server/AdminSelector.h \
     src/include/server/ServerSetup.h \
@@ -152,7 +152,7 @@ FORMS += \
     ui/TestWaitDialog.ui \
     ui/MainWindow.ui \
     ui/ExportDialog.ui \
-    ui/server/usermanager.ui \
+    ui/server/UserManager.ui \
     ui/server/UserEdit.ui \
     ui/server/AdminSelector.ui \
     ui/server/ServerSetup.ui \

@@ -1,5 +1,5 @@
 /*
- * usermanager.cpp
+ * UserManager.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,31 +18,31 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/usermanager.h"
-#include "ui_usermanager.h"
+#include "server/UserManager.h"
+#include "ui_UserManager.h"
 
-/*! Constructs userManager. */
-userManager::userManager(QWidget *parent) :
+/*! Constructs UserManager. */
+UserManager::UserManager(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::userManager)
+	ui(new Ui::UserManager)
 {
 	ui->setupUi(this);
 	setupList();
 	// Connections
-	connect(ui->userList, &QListWidget::itemSelectionChanged, this, &userManager::verify);
+	connect(ui->userList, &QListWidget::itemSelectionChanged, this, &UserManager::verify);
 	connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addUser()));
 	connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(removeUser()));
 	connect(ui->editButton, SIGNAL(clicked()), this, SLOT(editUser()));
 }
 
-/*! Destroys the userManager object. */
-userManager::~userManager()
+/*! Destroys the UserManager object. */
+UserManager::~UserManager()
 {
 	delete ui;
 }
 
 /*! Loads the users. */
-void userManager::setupList(void)
+void UserManager::setupList(void)
 {
 	ui->userList->clear();
 	QList<int> users = dbMgr.teacherIDs();
@@ -58,7 +58,7 @@ void userManager::setupList(void)
  * Connected from userList->itemSelectionChanged().\n
  * Checks if there's a selected user and enables the open and remove buttons.
  */
-void userManager::verify(void)
+void UserManager::verify(void)
 {
 	// Check list of users
 	bool enable = (ui->userList->currentRow() != -1);
@@ -75,7 +75,7 @@ void userManager::verify(void)
  *
  * \see UserEdit
  */
-void userManager::addUser(void)
+void UserManager::addUser(void)
 {
 	UserEdit dialog(true);
 	dialog.exec();
@@ -86,7 +86,7 @@ void userManager::addUser(void)
  * Connected from removeButton->clicked().\n
  * Removes selected user.
  */
-void userManager::removeUser(void)
+void UserManager::removeUser(void)
 {
 	if(ui->userList->currentRow() == -1)
 		return;
@@ -115,7 +115,7 @@ void userManager::removeUser(void)
  *
  * \see UserEdit
  */
-void userManager::editUser(void)
+void UserManager::editUser(void)
 {
 	UserEdit dialog(false, dbMgr.teacherIDs().value(ui->userList->currentRow()));
 	dialog.exec();

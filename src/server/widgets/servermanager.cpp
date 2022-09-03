@@ -153,7 +153,7 @@ void serverManager::loadDevices(void)
 	ui->deviceList->setCurrentRow(-1);
 }
 
-/*! Opens userManager. */
+/*! Opens UserManager. */
 void serverManager::openUserManager(void)
 {
 	if(ExerciseProgressDialogConfig::dialogCount > 0)
@@ -167,7 +167,7 @@ void serverManager::openUserManager(void)
 	connect(selectDialog, &QDialog::accepted, this, [selectDialog, this]() {
 		if(dbMgr.auth(selectDialog->userID))
 		{
-			userManager *dialog = new userManager(this);
+			UserManager *dialog = new UserManager(this);
 			dialog->setWindowModality(Qt::WindowModal);
 			dialog->open();
 			connect(dialog, &QDialog::finished, this, &serverManager::init);

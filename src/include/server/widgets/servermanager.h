@@ -22,7 +22,7 @@
 #define SERVERMANAGER_H
 
 #include <QWidget>
-#include "server/usermanager.h"
+#include "server/UserManager.h"
 #include "server/AdminSelector.h"
 #include "server/ServerSetup.h"
 #include "server/ClassEdit.h"

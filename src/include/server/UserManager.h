@@ -1,5 +1,5 @@
 /*
- * usermanager.h
+ * UserManager.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -28,23 +28,23 @@
 #include "core/database.h"
 
 namespace Ui {
-	class userManager;
+	class UserManager;
 }
 
 /*!
- * \brief the userManager class is a widget for user management.
+ * \brief the UserManager class is a widget for user management.
  *
- * \image html userManager.png
+ * \image html UserManager.png
  */
-class userManager : public QDialog
+class UserManager : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit userManager(QWidget *parent = nullptr);
-		~userManager();
+		explicit UserManager(QWidget *parent = nullptr);
+		~UserManager();
 
 	private:
-		Ui::userManager *ui;
+		Ui::UserManager *ui;
 		void setupList(void);
 
 	private slots:
