@@ -64,7 +64,7 @@ ClassControls::ClassControls(int openClassID, QWidget *parent) :
 	connect(ui->exerciseBox, SIGNAL(activated(int)), this, SLOT(refreshCharts()));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshCharts()));
 #ifndef Q_OS_WASM
-	connect(serverPtr, &monitorServer::loggedInStudentsChanged, this, &ClassControls::setupTable);
+	connect(serverPtr, &MonitorServer::loggedInStudentsChanged, this, &ClassControls::setupTable);
 #endif // Q_OS_WASM
 }
 

@@ -1,5 +1,5 @@
 /*
- * server.h
+ * MonitorServer.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -35,12 +35,12 @@
 #include <openssl/pem.h>
 #include "core/DatabaseManager.h"
 
-/*! \brief The monitorServer class is a QWebSocketServer that is used to communicate with Open-Typer clients. */
-class monitorServer : public QWebSocketServer
+/*! \brief The MonitorServer class is a QWebSocketServer that is used to communicate with Open-Typer clients. */
+class MonitorServer : public QWebSocketServer
 {
 		Q_OBJECT
 	public:
-		explicit monitorServer(bool silent = false, QObject *parent = nullptr);
+		explicit MonitorServer(bool silent = false, QObject *parent = nullptr);
 		static quint16 port(void);
 		static QHostAddress address(void);
 		void sendSignal(QByteArray name, QStringList data, QList<QByteArray> usernames);
@@ -85,6 +85,6 @@ class monitorServer : public QWebSocketServer
 		QMap<int, QString> deviceStudentNames;
 };
 
-extern QPointer<monitorServer> serverPtr;
+extern QPointer<MonitorServer> serverPtr;
 
 #endif // SERVER_H

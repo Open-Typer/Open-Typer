@@ -57,7 +57,7 @@ void ConnectionOptions::refresh(void)
 	if(serverMode)
 	{
 		if(!serverPtr)
-			serverPtr = new monitorServer;
+			serverPtr = new MonitorServer;
 		ui->serverButton->setChecked(true);
 		ui->fullModeCheckBox->show();
 		ui->fullModeCheckBox->setChecked(settings.value("server/fullmode", false).toBool());
@@ -120,7 +120,7 @@ void ConnectionOptions::changeAddress(void)
 	{
 		serverPtr->close();
 		serverPtr->deleteLater();
-		serverPtr = new monitorServer;
+		serverPtr = new MonitorServer;
 	}
 #endif // Q_OS_WASM
 	ui->statusValueLabel->setText(tr("Unknown"));

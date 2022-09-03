@@ -25,7 +25,7 @@
 #include "core/utils.h"
 #include "core/MonitorClient.h"
 #ifndef Q_OS_WASM
-#include "core/server.h"
+#include "core/MonitorServer.h"
 #endif // Q_OS_WASM
 
 namespace Ui {

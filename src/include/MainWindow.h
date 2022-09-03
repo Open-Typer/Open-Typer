@@ -50,7 +50,7 @@
 #include "core/LanguageManager.h"
 #include "core/theme.h"
 #ifndef Q_OS_WASM
-#include "core/server.h"
+#include "core/MonitorServer.h"
 #endif // Q_OS_WASM
 
 QT_BEGIN_NAMESPACE

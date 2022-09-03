@@ -63,7 +63,7 @@ ServerManager::~ServerManager()
 bool ServerManager::init(void)
 {
 #ifndef Q_OS_WASM
-	connect(serverPtr, &monitorServer::connectedDevicesChanged, this, &ServerManager::loadDevices);
+	connect(serverPtr, &MonitorServer::connectedDevicesChanged, this, &ServerManager::loadDevices);
 #endif // Q_OS_WASM
 	bool ret = true;
 	fullMode = settings.value("server/fullmode", false).toBool();

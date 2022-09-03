@@ -30,7 +30,7 @@
 #include "core/ConfigParser.h"
 #include "core/BuiltInPacks.h"
 #ifndef Q_OS_WASM
-#include "core/server.h"
+#include "core/MonitorServer.h"
 #endif // Q_OS_WASM
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)

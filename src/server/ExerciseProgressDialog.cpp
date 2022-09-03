@@ -57,9 +57,9 @@ ExerciseProgressDialog::ExerciseProgressDialog(int classID, QList<int> targets, 
 	setupTable();
 	// Connections
 #ifndef Q_OS_WASM
-	connect(serverPtr, &monitorServer::resultUploaded, this, &ExerciseProgressDialog::loadResult);
-	connect(serverPtr, &monitorServer::exerciseAborted, this, &ExerciseProgressDialog::abortExercise);
-	connect(serverPtr, &monitorServer::deviceConfigurationChanged, this, &ExerciseProgressDialog::setupTable);
+	connect(serverPtr, &MonitorServer::resultUploaded, this, &ExerciseProgressDialog::loadResult);
+	connect(serverPtr, &MonitorServer::exerciseAborted, this, &ExerciseProgressDialog::abortExercise);
+	connect(serverPtr, &MonitorServer::deviceConfigurationChanged, this, &ExerciseProgressDialog::setupTable);
 	connect(ui->startButton, &QToolButton::clicked, this, [this]() {
 		QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 		bool fullMode = settings.value("server/fullmode", false).toBool();

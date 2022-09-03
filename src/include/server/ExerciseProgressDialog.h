@@ -30,7 +30,7 @@
 #include "core/DatabaseManager.h"
 #include "core/ConfigParser.h"
 #ifndef Q_OS_WASM
-#include "core/server.h"
+#include "core/MonitorServer.h"
 #endif // Q_OS_WASM
 
 namespace ExerciseProgressDialogConfig {

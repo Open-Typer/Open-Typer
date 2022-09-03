@@ -1,5 +1,5 @@
 /*
- * server.cpp
+ * MonitorServer.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,12 +18,12 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/server.h"
+#include "core/MonitorServer.h"
 
-QPointer<monitorServer> serverPtr = nullptr;
+QPointer<MonitorServer> serverPtr = nullptr;
 
-/*! Constructs monitorServer. */
-monitorServer::monitorServer(bool silent, QObject *parent) :
+/*! Constructs MonitorServer. */
+MonitorServer::MonitorServer(bool silent, QObject *parent) :
 	QWebSocketServer("Open-Typer", QWebSocketServer::SecureMode, parent),
 	clientSockets(),
 	sessions(),
@@ -45,11 +45,11 @@ monitorServer::monitorServer(bool silent, QObject *parent) :
 		return;
 	}
 	// Connections
-	connect(this, &QWebSocketServer::newConnection, this, &monitorServer::acceptConnection);
+	connect(this, &QWebSocketServer::newConnection, this, &MonitorServer::acceptConnection);
 }
 
 /*! Returns the IP address of the network interface. */
-QHostAddress monitorServer::address(void)
+QHostAddress MonitorServer::address(void)
 {
 	QList<QHostAddress> addressList = QNetworkInterface::allAddresses();
 	for(int i = 0; i < addressList.count(); i++)
@@ -61,7 +61,7 @@ QHostAddress monitorServer::address(void)
 }
 
 /*! Returns the port, which was set by the user (or the default port). */
-quint16 monitorServer::port(void)
+quint16 MonitorServer::port(void)
 {
 	QSettings settings(fileUtils::configLocation() + "/config.ini", QSettings::IniFormat);
 	return settings.value("server/port", 57100).toUInt();
@@ -72,18 +72,18 @@ quint16 monitorServer::port(void)
  *
  * \see sendResponse()
  */
-void monitorServer::acceptConnection(void)
+void MonitorServer::acceptConnection(void)
 {
 	QWebSocket *clientSocket = nextPendingConnection();
-	connect(clientSocket, &QWebSocket::textMessageReceived, this, &monitorServer::sendResponse);
-	connect(clientSocket, &QWebSocket::disconnected, this, &monitorServer::disconnectClient);
+	connect(clientSocket, &QWebSocket::textMessageReceived, this, &MonitorServer::sendResponse);
+	connect(clientSocket, &QWebSocket::disconnected, this, &MonitorServer::disconnectClient);
 	clientSockets += clientSocket;
 	if(!settings.value("server/fullmode", false).toBool())
 		emit connectedDevicesChanged();
 }
 
 /*! Connected from QWebSocket::disconnected(). */
-void monitorServer::disconnectClient(void)
+void MonitorServer::disconnectClient(void)
 {
 	QWebSocket *clientSocket = (QWebSocket *) sender();
 	clientSockets.removeAll(clientSocket);
@@ -100,7 +100,7 @@ void monitorServer::disconnectClient(void)
  * Connected from QWebSocket::binaryMessageReceived().\n
  * Sends a response back to the client.
  */
-void monitorServer::sendResponse(QString message)
+void MonitorServer::sendResponse(QString message)
 {
 	QWebSocket *clientSocket = (QWebSocket *) sender();
 	QStringList requestList = readData(message.toUtf8());
@@ -330,7 +330,7 @@ void monitorServer::sendResponse(QString message)
 }
 
 /*! Sends a signal to clients with username from a list. */
-void monitorServer::sendSignal(QByteArray name, QStringList data, QList<QByteArray> usernames)
+void MonitorServer::sendSignal(QByteArray name, QStringList data, QList<QByteArray> usernames)
 {
 	QStringList rawData;
 	rawData.clear();
@@ -353,7 +353,7 @@ void monitorServer::sendSignal(QByteArray name, QStringList data, QList<QByteArr
 }
 
 /*! Sends a signal to clients with address from a list. */
-void monitorServer::sendSignal(QByteArray name, QStringList data, QList<QHostAddress> addresses)
+void MonitorServer::sendSignal(QByteArray name, QStringList data, QList<QHostAddress> addresses)
 {
 	QStringList rawData;
 	rawData.clear();
@@ -377,13 +377,13 @@ void monitorServer::sendSignal(QByteArray name, QStringList data, QList<QHostAdd
 }
 
 /*! Returns true if the given student is logged in. */
-bool monitorServer::isLoggedIn(QString username)
+bool MonitorServer::isLoggedIn(QString username)
 {
 	return sessions.values().contains(username);
 }
 
 /*! Returns true if the given device is online. */
-bool monitorServer::isConnected(QHostAddress address)
+bool MonitorServer::isConnected(QHostAddress address)
 {
 	for(int i = 0; i < clientSockets.count(); i++)
 	{
@@ -394,7 +394,7 @@ bool monitorServer::isConnected(QHostAddress address)
 }
 
 /*! Returns list of students with an exercise in progress. */
-QList<int> monitorServer::runningExerciseStudents(void)
+QList<int> MonitorServer::runningExerciseStudents(void)
 {
 	QList<int> out;
 	for(int i = 0; i < exerciseSockets.count(); i++)
@@ -403,7 +403,7 @@ QList<int> monitorServer::runningExerciseStudents(void)
 }
 
 /*! Returns the name entered by student on the given device. */
-QString monitorServer::deviceStudentName(int deviceID)
+QString MonitorServer::deviceStudentName(int deviceID)
 {
 	if(deviceStudentNames.contains(deviceID))
 		return deviceStudentNames[deviceID];
@@ -412,14 +412,14 @@ QString monitorServer::deviceStudentName(int deviceID)
 }
 
 /*! Sets the student name of the given device. */
-void monitorServer::setDeviceStudentName(int deviceID, QString name)
+void MonitorServer::setDeviceStudentName(int deviceID, QString name)
 {
 	deviceStudentNames[deviceID] = name;
 	emit deviceConfigurationChanged();
 }
 
 /*! Converts list of QStrings to a single QString, which can be used for a response or signal. */
-QString monitorServer::convertData(bool *ok, QStringList input)
+QString MonitorServer::convertData(bool *ok, QStringList input)
 {
 	QString out;
 	out.clear();
@@ -446,13 +446,13 @@ QString monitorServer::convertData(bool *ok, QStringList input)
 }
 
 /*! Implementation of convertData() without status boolean. */
-QString monitorServer::convertData(QStringList input)
+QString MonitorServer::convertData(QStringList input)
 {
 	return convertData(nullptr, input);
 }
 
 /*! Returns a list of QStrings from the input QString. */
-QStringList monitorServer::readData(QString input)
+QStringList MonitorServer::readData(QString input)
 {
 	QStringList out;
 	out.clear();
@@ -485,7 +485,7 @@ QStringList monitorServer::readData(QString input)
 }
 
 /*! Returns true if the given student is in the active class. */
-bool monitorServer::studentAuthAvailable(QString nickname)
+bool MonitorServer::studentAuthAvailable(QString nickname)
 {
 	QList<int> students = dbMgr.studentIDs(dbMgr.activeClass);
 	for(int i = 0; i < students.count(); i++)
@@ -497,7 +497,7 @@ bool monitorServer::studentAuthAvailable(QString nickname)
 }
 
 /*! Generates and sets random SSL key and certificate. */
-void monitorServer::generateRandomCertKey(void)
+void MonitorServer::generateRandomCertKey(void)
 {
 	EVP_PKEY *pkey = nullptr;
 	RSA *rsa = nullptr;

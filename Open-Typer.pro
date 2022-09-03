@@ -52,7 +52,7 @@ SOURCES += \
     src/core/HistoryParser.cpp \
     src/core/DatabaseManager.cpp
 !wasm {
-    SOURCES += src/core/server.cpp
+    SOURCES += src/core/MonitorServer.cpp
 }
 SOURCES += \
     src/core/MonitorClient.cpp \
@@ -100,7 +100,7 @@ HEADERS += \
     src/include/core/HistoryParser.h \
     src/include/core/DatabaseManager.h
 !wasm {
-    HEADERS += src/include/core/server.h
+    HEADERS += src/include/core/MonitorServer.h
 }
 HEADERS += \
     src/include/core/MonitorClient.h \
