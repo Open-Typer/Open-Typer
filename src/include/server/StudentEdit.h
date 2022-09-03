@@ -1,5 +1,5 @@
 /*
- * studentedit.h
+ * StudentEdit.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -25,23 +25,23 @@
 #include "core/database.h"
 
 namespace Ui {
-	class studentEdit;
+	class StudentEdit;
 }
 
 /*!
- * \brief The studentEdit class is a dialog used to add or edit students.
+ * \brief The StudentEdit class is a dialog used to add or edit students.
  *
- * \image html studentEdit.png
+ * \image html StudentEdit.png
  */
-class studentEdit : public QDialog
+class StudentEdit : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit studentEdit(bool newStudent = false, int class_id = 0, int id = 1, QWidget *parent = nullptr);
-		~studentEdit();
+		explicit StudentEdit(bool newStudent = false, int class_id = 0, int id = 1, QWidget *parent = nullptr);
+		~StudentEdit();
 
 	private:
-		Ui::studentEdit *ui;
+		Ui::StudentEdit *ui;
 		bool creatingNewStudent, passwordReset;
 		int classID, userID;
 		QList<int> classes, students;

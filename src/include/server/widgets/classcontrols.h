@@ -23,7 +23,7 @@
 
 #include <QWidget>
 #include <QtCharts>
-#include "server/studentedit.h"
+#include "server/StudentEdit.h"
 #include "server/LoadExerciseDialog.h"
 #include "server/ExerciseProgressDialog.h"
 #include "core/database.h"

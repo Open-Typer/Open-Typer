@@ -80,7 +80,7 @@ SOURCES += \
     src/server/AdminSelector.cpp \
     src/server/ServerSetup.cpp \
     src/server/ClassEdit.cpp \
-    src/server/studentedit.cpp \
+    src/server/StudentEdit.cpp \
     src/server/DeviceEdit.cpp \
     src/server/LoadExerciseDialog.cpp \
     src/server/ExerciseProgressDialog.cpp \
@@ -127,7 +127,7 @@ HEADERS += \
     src/include/server/AdminSelector.h \
     src/include/server/ServerSetup.h \
     src/include/server/ClassEdit.h \
-    src/include/server/studentedit.h \
+    src/include/server/StudentEdit.h \
     src/include/server/DeviceEdit.h \
     src/include/server/LoadExerciseDialog.h \
     src/include/server/ExerciseProgressDialog.h \
@@ -157,7 +157,7 @@ FORMS += \
     ui/server/AdminSelector.ui \
     ui/server/ServerSetup.ui \
     ui/server/ClassEdit.ui \
-    ui/server/studentedit.ui \
+    ui/server/StudentEdit.ui \
     ui/server/DeviceEdit.ui \
     ui/server/LoadExerciseDialog.ui \
     ui/server/ExerciseProgressDialog.ui \

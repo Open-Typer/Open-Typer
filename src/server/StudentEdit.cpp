@@ -1,5 +1,5 @@
 /*
- * studentedit.cpp
+ * StudentEdit.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/studentedit.h"
-#include "ui_studentedit.h"
+#include "server/StudentEdit.h"
+#include "ui_StudentEdit.h"
 
-/*! Constructs studentEdit. */
-studentEdit::studentEdit(bool newStudent, int class_id, int id, QWidget *parent) :
+/*! Constructs StudentEdit. */
+StudentEdit::StudentEdit(bool newStudent, int class_id, int id, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::studentEdit),
+	ui(new Ui::StudentEdit),
 	classID(class_id)
 {
 	ui->setupUi(this);
@@ -64,14 +64,14 @@ studentEdit::studentEdit(bool newStudent, int class_id, int id, QWidget *parent)
 		ui->classBox->addItem(dbMgr.className(classes[i]));
 	verify();
 	// Connections
-	connect(ui->nameEdit, &QLineEdit::textChanged, this, &studentEdit::verify);
-	connect(ui->passwordEdit, &QLineEdit::textChanged, this, &studentEdit::verify);
-	connect(ui->repeatPasswordEdit, &QLineEdit::textChanged, this, &studentEdit::verify);
+	connect(ui->nameEdit, &QLineEdit::textChanged, this, &StudentEdit::verify);
+	connect(ui->passwordEdit, &QLineEdit::textChanged, this, &StudentEdit::verify);
+	connect(ui->repeatPasswordEdit, &QLineEdit::textChanged, this, &StudentEdit::verify);
 	connect(ui->resetPasswordButton, SIGNAL(clicked()), this, SLOT(resetPassword()));
 	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(finish()));
-	connect(ui->classBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &studentEdit::openClass);
-	connect(ui->newStudentButton, &QRadioButton::toggled, this, &studentEdit::switchMode);
-	connect(ui->existingStudentButton, &QRadioButton::toggled, this, &studentEdit::switchMode);
+	connect(ui->classBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &StudentEdit::openClass);
+	connect(ui->newStudentButton, &QRadioButton::toggled, this, &StudentEdit::switchMode);
+	connect(ui->existingStudentButton, &QRadioButton::toggled, this, &StudentEdit::switchMode);
 	ui->newStudentButton->setChecked(true);
 	if(!creatingNewStudent || (classes.count() == 0))
 	{
@@ -82,8 +82,8 @@ studentEdit::studentEdit(bool newStudent, int class_id, int id, QWidget *parent)
 		openClass();
 }
 
-/*! Destroys the studentEdit object. */
-studentEdit::~studentEdit()
+/*! Destroys the StudentEdit object. */
+StudentEdit::~StudentEdit()
 {
 	delete ui;
 }
@@ -92,7 +92,7 @@ studentEdit::~studentEdit()
  * Connected from all line edits.\n
  * Checks if everything is correct and enables the OK button.
  */
-void studentEdit::verify(void)
+void StudentEdit::verify(void)
 {
 	ui->okButton->setEnabled(false);
 	// Check name
@@ -134,7 +134,7 @@ void studentEdit::verify(void)
  * Connected from resetPasswordButton->clicked().\n
  * Shows password boxes.
  */
-void studentEdit::resetPassword(void)
+void StudentEdit::resetPassword(void)
 {
 	ui->resetPasswordButton->hide();
 	ui->passwordEdit->show();
@@ -148,7 +148,7 @@ void studentEdit::resetPassword(void)
  * Connected from okButton->clicked().\n
  * Edits or creates the user and closes the window.
  */
-void studentEdit::finish(void)
+void StudentEdit::finish(void)
 {
 	if(creatingNewStudent)
 	{
@@ -168,7 +168,7 @@ void studentEdit::finish(void)
 }
 
 /*! Changes the mode (new student, existing student). */
-void studentEdit::switchMode(void)
+void StudentEdit::switchMode(void)
 {
 	if(ui->newStudentButton->isChecked())
 	{
@@ -183,7 +183,7 @@ void studentEdit::switchMode(void)
 }
 
 /*! Opens the selected class. */
-void studentEdit::openClass(void)
+void StudentEdit::openClass(void)
 {
 	int selected = classes[ui->classBox->currentIndex()];
 	students = dbMgr.studentIDs(selected);

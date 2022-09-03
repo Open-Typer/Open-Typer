@@ -137,13 +137,13 @@ void classControls::verify(void)
 
 /*!
  * Connected from addButton->clicked().\n
- * Opens studentEdit and adds a new student.
+ * Opens StudentEdit and adds a new student.
  *
- * \see studentEdit
+ * \see StudentEdit
  */
 void classControls::addStudent(void)
 {
-	studentEdit dialog(true, classID);
+	StudentEdit dialog(true, classID);
 	dialog.exec();
 	setupTable();
 }
@@ -172,13 +172,13 @@ void classControls::removeStudent(void)
 
 /*!
  * Connected from editButton->clicked().\n
- * Opens studentEdit and edits the student.
+ * Opens StudentEdit and edits the student.
  *
- * \see studentEdit
+ * \see StudentEdit
  */
 void classControls::editStudent(void)
 {
-	studentEdit dialog(false, classID, dbMgr.studentIDs(classID).value(ui->studentsTable->selectionModel()->selectedRows()[0].row()));
+	StudentEdit dialog(false, classID, dbMgr.studentIDs(classID).value(ui->studentsTable->selectionModel()->selectedRows()[0].row()));
 	dialog.exec();
 	setupTable();
 }
