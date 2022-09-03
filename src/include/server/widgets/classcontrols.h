@@ -24,7 +24,7 @@
 #include <QWidget>
 #include <QtCharts>
 #include "server/studentedit.h"
-#include "server/loadexercisedialog.h"
+#include "server/LoadExerciseDialog.h"
 #include "server/ExerciseProgressDialog.h"
 #include "core/database.h"
 #include "core/configfile.h"
@@ -52,7 +52,7 @@ class classControls : public QWidget
 	public:
 		explicit classControls(int openClassID, QWidget *parent = nullptr);
 		~classControls();
-		static void startExercise(loadExerciseDialog *dialog);
+		static void startExercise(LoadExerciseDialog *dialog);
 
 	private:
 		Ui::classControls *ui;

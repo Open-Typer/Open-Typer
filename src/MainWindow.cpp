@@ -1751,10 +1751,10 @@ void MainWindow::printText(void)
 /*! Starts typing test. */
 void MainWindow::startTest(void)
 {
-	loadExerciseDialog *dialog;
+	LoadExerciseDialog *dialog;
 	bool fullMode = settings.value("server/fullmode", false).toBool();
 #ifdef Q_OS_WASM
-	dialog = new loadExerciseDialog(this);
+	dialog = new LoadExerciseDialog(this);
 #else
 	if(serverPtr && serverPtr->isListening() && (!fullMode || (dbMgr.activeClass != 0)))
 	{
@@ -1774,10 +1774,10 @@ void MainWindow::startTest(void)
 			else if(serverPtr->isConnected(dbMgr.deviceAddress(targets[i])))
 				onlineTargets += targets[i];
 		}
-		dialog = new loadExerciseDialog(onlineTargets, this);
+		dialog = new LoadExerciseDialog(onlineTargets, this);
 	}
 	else
-		dialog = new loadExerciseDialog(this);
+		dialog = new LoadExerciseDialog(this);
 #endif // Q_OS_WASM
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();

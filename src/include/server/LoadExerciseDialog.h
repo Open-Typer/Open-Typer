@@ -1,5 +1,5 @@
 /*
- * loadexercisedialog.h
+ * LoadExerciseDialog.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -29,21 +29,21 @@
 #include "core/database.h"
 
 namespace Ui {
-	class loadExerciseDialog;
+	class LoadExerciseDialog;
 }
 
 /*!
- * \brief The loadExerciseDialog class is a dialog for exercise configuration on the server.
+ * \brief The LoadExerciseDialog class is a dialog for exercise configuration on the server.
  *
- * \image html loadExerciseDialog.png
+ * \image html LoadExerciseDialog.png
  */
-class loadExerciseDialog : public QDialog
+class LoadExerciseDialog : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit loadExerciseDialog(QList<int> availableTargets, QWidget *parent = nullptr);
-		loadExerciseDialog(QWidget *parent = nullptr);
-		~loadExerciseDialog();
+		explicit LoadExerciseDialog(QList<int> availableTargets, QWidget *parent = nullptr);
+		LoadExerciseDialog(QWidget *parent = nullptr);
+		~LoadExerciseDialog();
 		QString exerciseText(void);
 		int lineLength(void);
 		bool includeNewLines(void);
@@ -56,7 +56,7 @@ class loadExerciseDialog : public QDialog
 		QList<int> selectedTargets(void);
 
 	private:
-		Ui::loadExerciseDialog *ui;
+		Ui::LoadExerciseDialog *ui;
 		void init(void);
 		QString fileName = "";
 		QList<int> m_targets;

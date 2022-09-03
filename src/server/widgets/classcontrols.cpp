@@ -310,14 +310,14 @@ void classControls::loadExercise(void)
 		if(serverPtr->isLoggedIn(dbMgr.userNickname(allStudents[i])) && !occupiedStudents.contains(allStudents[i]))
 			students += allStudents[i];
 	}
-	loadExerciseDialog dialog(students);
+	LoadExerciseDialog dialog(students);
 	if(dialog.exec() == QDialog::Accepted)
 		startExercise(&dialog);
 #endif // Q_OS_WASM
 }
 
 /*! Starts the exercise loaded by the dialog. */
-void classControls::startExercise(loadExerciseDialog *dialog)
+void classControls::startExercise(LoadExerciseDialog *dialog)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	bool fullMode = settings.value("server/fullmode", false).toBool();

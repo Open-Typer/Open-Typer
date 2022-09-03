@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>loadExerciseDialog</class>
- <widget class="QDialog" name="loadExerciseDialog">
+ <class>LoadExerciseDialog</class>
+ <widget class="QDialog" name="LoadExerciseDialog">
   <property name="geometry">
    <rect>
     <x>0</x>

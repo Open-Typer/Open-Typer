@@ -1,5 +1,5 @@
 /*
- * loadexercisedialog.cpp
+ * LoadExerciseDialog.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,23 +18,23 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/loadexercisedialog.h"
-#include "ui_loadexercisedialog.h"
+#include "server/LoadExerciseDialog.h"
+#include "ui_LoadExerciseDialog.h"
 
-/*! Constructs loadExerciseDialog. */
-loadExerciseDialog::loadExerciseDialog(QList<int> availableTargets, QWidget *parent) :
+/*! Constructs LoadExerciseDialog. */
+LoadExerciseDialog::LoadExerciseDialog(QList<int> availableTargets, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::loadExerciseDialog),
+	ui(new Ui::LoadExerciseDialog),
 	m_targets(availableTargets),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	init();
 }
 
-/*! Constructs loadExerciseDialog for use on the local computer. */
-loadExerciseDialog::loadExerciseDialog(QWidget *parent) :
+/*! Constructs LoadExerciseDialog for use on the local computer. */
+LoadExerciseDialog::LoadExerciseDialog(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::loadExerciseDialog),
+	ui(new Ui::LoadExerciseDialog),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	local = true;
@@ -42,7 +42,7 @@ loadExerciseDialog::loadExerciseDialog(QWidget *parent) :
 }
 
 /*! Initializes the dialog. */
-void loadExerciseDialog::init(void)
+void LoadExerciseDialog::init(void)
 {
 	ui->setupUi(this);
 	changeSource();
@@ -84,28 +84,28 @@ void loadExerciseDialog::init(void)
 			QCheckBox *checkBox = new QCheckBox(name, ui->targetBox);
 			ui->targetLayout->addWidget(checkBox);
 			checkBox->setChecked(true);
-			connect(checkBox, &QCheckBox::toggled, this, &loadExerciseDialog::verify);
+			connect(checkBox, &QCheckBox::toggled, this, &LoadExerciseDialog::verify);
 			targets[m_targets[i]] = checkBox;
 		}
 	}
 	verify();
 	// Connections
-	connect(ui->selectedExButton, &QCheckBox::toggled, this, &loadExerciseDialog::changeSource);
-	connect(ui->fromFileButton, &QCheckBox::toggled, this, &loadExerciseDialog::changeSource);
-	connect(ui->browseButton, &QPushButton::clicked, this, &loadExerciseDialog::openFile);
-	connect(ui->modeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &loadExerciseDialog::changeMode);
-	connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this, &loadExerciseDialog::accept);
+	connect(ui->selectedExButton, &QCheckBox::toggled, this, &LoadExerciseDialog::changeSource);
+	connect(ui->fromFileButton, &QCheckBox::toggled, this, &LoadExerciseDialog::changeSource);
+	connect(ui->browseButton, &QPushButton::clicked, this, &LoadExerciseDialog::openFile);
+	connect(ui->modeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &LoadExerciseDialog::changeMode);
+	connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this, &LoadExerciseDialog::accept);
 	connect(ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &QDialog::reject);
 }
 
-/*! Destroys the loadExerciseDialog object. */
-loadExerciseDialog::~loadExerciseDialog()
+/*! Destroys the LoadExerciseDialog object. */
+LoadExerciseDialog::~LoadExerciseDialog()
 {
 	delete ui;
 }
 
 /*! Returns the text of the selected exercise. */
-QString loadExerciseDialog::exerciseText(void)
+QString LoadExerciseDialog::exerciseText(void)
 {
 	if(ui->fromFileButton->isChecked())
 	{
@@ -121,7 +121,7 @@ QString loadExerciseDialog::exerciseText(void)
 }
 
 /*! Returns the maximum line length of the selected exercise. */
-int loadExerciseDialog::lineLength(void)
+int LoadExerciseDialog::lineLength(void)
 {
 	if(ui->fromFileButton->isChecked())
 		return configParser::defaultLineLength;
@@ -131,7 +131,7 @@ int loadExerciseDialog::lineLength(void)
 }
 
 /*! Returns true if the user has enabled new line inclusion. */
-bool loadExerciseDialog::includeNewLines(void)
+bool LoadExerciseDialog::includeNewLines(void)
 {
 	if(ui->fromFileButton->isChecked())
 		return true;
@@ -141,43 +141,43 @@ bool loadExerciseDialog::includeNewLines(void)
 }
 
 /*! Returns selected mode. */
-int loadExerciseDialog::mode(void)
+int LoadExerciseDialog::mode(void)
 {
 	return ui->modeBox->currentIndex();
 }
 
 /*! Returns selected time limit. */
-QTime loadExerciseDialog::timeLimit(void)
+QTime LoadExerciseDialog::timeLimit(void)
 {
 	return ui->timeEdit->time();
 }
 
 /*! Returns true if the user has enabled mistake correction. */
-bool loadExerciseDialog::correctMistakes(void)
+bool LoadExerciseDialog::correctMistakes(void)
 {
 	return ui->correctMistakesCheckBox->isChecked();
 }
 
 /*! Returns true if the user has enabled user interface lock. */
-bool loadExerciseDialog::lockUi(void)
+bool LoadExerciseDialog::lockUi(void)
 {
 	return ui->lockUiCheckBox->isChecked();
 }
 
 /*! Returns true if the user has hidden the exercise text. */
-bool loadExerciseDialog::hideText(void)
+bool LoadExerciseDialog::hideText(void)
 {
 	return ui->hideTextCheckBox->isChecked();
 }
 
 /*! Returns true if the user has allowed exercise text preview. */
-bool loadExerciseDialog::allowTextPreview(void)
+bool LoadExerciseDialog::allowTextPreview(void)
 {
 	return ui->textPreviewCheckBox->isChecked();
 }
 
 /*! Returns list of selected targets. */
-QList<int> loadExerciseDialog::selectedTargets(void)
+QList<int> LoadExerciseDialog::selectedTargets(void)
 {
 	QList<int> out;
 	auto keys = targets.keys();
@@ -190,7 +190,7 @@ QList<int> loadExerciseDialog::selectedTargets(void)
 }
 
 /*! Checks input values and enables the apply button. */
-void loadExerciseDialog::verify(void)
+void LoadExerciseDialog::verify(void)
 {
 	bool enable = true;
 	if(ui->fromFileButton->isChecked() && (fileName == ""))
@@ -211,14 +211,14 @@ void loadExerciseDialog::verify(void)
 }
 
 /*! Changes the text source. */
-void loadExerciseDialog::changeSource(void)
+void LoadExerciseDialog::changeSource(void)
 {
 	ui->selectedFileWidget->setEnabled(ui->fromFileButton->isChecked());
 	verify();
 }
 
 /*! Opens exercise file. */
-void loadExerciseDialog::openFile(void)
+void LoadExerciseDialog::openFile(void)
 {
 	QString newFileName = QFileDialog::getOpenFileName(this);
 	if(!newFileName.isNull())
@@ -244,7 +244,7 @@ void loadExerciseDialog::openFile(void)
 }
 
 /*! Changes the exercise mode. */
-void loadExerciseDialog::changeMode(void)
+void LoadExerciseDialog::changeMode(void)
 {
 	bool enableTimeEdit = (ui->modeBox->currentIndex() == 1);
 	ui->timeLabel->setEnabled(enableTimeEdit);
