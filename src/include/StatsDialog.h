@@ -1,5 +1,5 @@
 /*
- * statsdialog.h
+ * StatsDialog.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -31,22 +31,22 @@ using namespace QtCharts;
 #endif
 
 namespace Ui {
-	class statsDialog;
+	class StatsDialog;
 }
 
 /*!
- * \brief The statsDialog class is a dialog, which shows exercise history.
- * \image html statsDialog.png
+ * \brief The StatsDialog class is a dialog, which shows exercise history.
+ * \image html StatsDialog.png
  */
-class statsDialog : public QDialog
+class StatsDialog : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit statsDialog(monitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent = nullptr);
-		~statsDialog();
+		explicit StatsDialog(monitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent = nullptr);
+		~StatsDialog();
 
 	private:
-		Ui::statsDialog *ui;
+		Ui::StatsDialog *ui;
 		QChart *speedChart, *mistakesChart, *timeChart;
 		QLineSeries *speedSeries, *mistakesSeries, *timeSeries;
 		QSettings settings;

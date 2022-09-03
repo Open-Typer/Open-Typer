@@ -1586,17 +1586,17 @@ void MainWindow::initTimedExercise(void)
 
 /*!
  * Connected from statsButton->clicked().\n
- * Opens statsDialog.
+ * Opens StatsDialog.
  *
- * \see statsDialog
+ * \see StatsDialog
  */
 void MainWindow::showExerciseStats(void)
 {
-	statsDialog *dialog;
+	StatsDialog *dialog;
 	if((studentUsername != ""))
-		dialog = new statsDialog(&client, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
+		dialog = new StatsDialog(&client, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
 	else if(!customLevelLoaded && !customConfig)
-		dialog = new statsDialog(nullptr, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
+		dialog = new StatsDialog(nullptr, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
 	else
 		return;
 	dialog->setWindowModality(Qt::WindowModal);

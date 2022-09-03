@@ -40,7 +40,7 @@
 #include "options/studentoptions.h"
 #include "ExerciseSummary.h"
 #include "timedialog.h"
-#include "statsdialog.h"
+#include "StatsDialog.h"
 #include "ExportDialog.h"
 #include "testwaitdialog.h"
 #include "core/configfile.h"

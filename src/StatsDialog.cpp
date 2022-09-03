@@ -1,5 +1,5 @@
 /*
- * statsdialog.cpp
+ * StatsDialog.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "statsdialog.h"
-#include "ui_statsdialog.h"
+#include "StatsDialog.h"
+#include "ui_StatsDialog.h"
 
-/*! Constructs statsDialog. */
-statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent) :
+/*! Constructs StatsDialog. */
+StatsDialog::StatsDialog(monitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::statsDialog),
+	ui(new Ui::StatsDialog),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
@@ -139,8 +139,8 @@ statsDialog::statsDialog(monitorClient *client, QString configName, int lesson, 
 	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
-/*! Destroys the statsDialog object. */
-statsDialog::~statsDialog()
+/*! Destroys the StatsDialog object. */
+StatsDialog::~StatsDialog()
 {
 	delete ui;
 }
