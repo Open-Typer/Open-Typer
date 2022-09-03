@@ -318,10 +318,10 @@ void MainWindow::refreshAll(void)
 }
 
 /*!
- * Opens a pack file using configParser and returns the file name of the pack file.
+ * Opens a pack file using ConfigParser and returns the file name of the pack file.
  * \param[in] configName If there's a custom pack opened, configName represents the absolute path to the pack. Otherwise, it represents the built-in pack name.
- * \param[in] packContent If it's not empty, a QBuffer with pack content is created and configParser treats it as a regular file.
- * \see configParser
+ * \param[in] packContent If it's not empty, a QBuffer with pack content is created and ConfigParser treats it as a regular file.
+ * \see ConfigParser
  */
 QString MainWindow::loadConfig(QString configName, QByteArray packContent)
 {
@@ -373,7 +373,7 @@ QString MainWindow::loadConfig(QString configName, QByteArray packContent)
  * Initializes the specified exercise.
  * \param[in] lessonID, sublessonID, levelID Exercise location (lesson, sublesson and exercise ID).
  * \see loadConfig
- * \see configParser
+ * \see ConfigParser
  * \see levelFinalInit
  */
 void MainWindow::startLevel(int lessonID, int sublessonID, int levelID)
@@ -431,11 +431,11 @@ void MainWindow::updateLessonList(void)
 	int i, count = parser.lessonCount();
 	for(i = 1; i <= count; i++)
 	{
-		_lessonDesc = configParser::parseDesc(parser.lessonDesc(i));
+		_lessonDesc = ConfigParser::parseDesc(parser.lessonDesc(i));
 		if(_lessonDesc == "")
-			lessons += configParser::lessonTr(i);
+			lessons += ConfigParser::lessonTr(i);
 		else
-			lessons += configParser::lessonTr(i) + " " + _lessonDesc;
+			lessons += ConfigParser::lessonTr(i) + " " + _lessonDesc;
 	}
 	ui->lessonSelectionList->addItems(lessons);
 }
@@ -451,7 +451,7 @@ void MainWindow::loadLesson(int lessonID, int sublessonID)
 	for(i = 1; i <= sublessonCount + i2; i++)
 	{
 		if(parser.exerciseCount(lessonID, i) > 0)
-			sublessons += configParser::sublessonName(i);
+			sublessons += ConfigParser::sublessonName(i);
 		else
 		{
 			i2++;
@@ -470,7 +470,7 @@ void MainWindow::loadSublesson(int levelID)
 	ui->levelSelectionList->clear();
 	QStringList levels;
 	for(int i = 1; i <= levelCount; i++)
-		levels += configParser::exerciseTr(i);
+		levels += ConfigParser::exerciseTr(i);
 	ui->levelSelectionList->addItems(levels);
 	ui->levelSelectionList->setCurrentIndex(levelID - 1);
 }
@@ -525,7 +525,7 @@ void MainWindow::levelFinalInit(bool updateClient)
 /*!
  * Converts exercise text (line wrapping, limited number of lines).
  * \see levelFinalInit
- * \see configParser
+ * \see ConfigParser
  */
 void MainWindow::updateText(void)
 {
@@ -536,10 +536,10 @@ void MainWindow::updateText(void)
 	ui->textSeparationLine->show();
 	ui->remainingTextArea->show();
 	ui->exportButton->hide();
-	displayLevel = configParser::initExercise(level, levelLengthExtension);
+	displayLevel = ConfigParser::initExercise(level, levelLengthExtension);
 	lineCount = displayLevel.count('\n');
 	// Process exercise text
-	finalDisplayLevel = configParser::initExercise(level, levelLengthExtension, false, currentLine);
+	finalDisplayLevel = ConfigParser::initExercise(level, levelLengthExtension, false, currentLine);
 	QString currentLineText = "";
 	QString remainingText = "";
 	int i, line = 0;
@@ -769,7 +769,7 @@ void MainWindow::openExerciseFromFile(void)
 			}
 			else
 			{
-				levelLengthExtension = configParser::defaultLineLength;
+				levelLengthExtension = ConfigParser::defaultLineLength;
 				loadText(fileContent, true);
 			}
 		}
@@ -857,7 +857,7 @@ void MainWindow::loadErrorWords(void)
 /*! Generates reversed text. */
 void MainWindow::loadReversedText(void)
 {
-	QString oldText = configParser::initText(level);
+	QString oldText = ConfigParser::initText(level);
 	QString newText = "";
 	for(int i = oldText.count() - 1; i >= 0; i--)
 		newText += level[i];
@@ -1653,7 +1653,7 @@ void MainWindow::waitForReceivedExercise(QString text, int lineLength)
 {
 	waitDialog = new TestWaitDialog(&client, this);
 	if(text != "")
-		waitDialog->setText(configParser::initExercise(text, lineLength));
+		waitDialog->setText(ConfigParser::initExercise(text, lineLength));
 	QString name = "";
 	if(client.fullMode())
 	{
@@ -1709,7 +1709,7 @@ void MainWindow::printText(void)
 		QTextDocument *document = ui->levelLabel->document()->clone(this);
 		QString title = "";
 		if(!customLevelLoaded)
-			title = QString("<u>%1 / %2 / %3</u><br><br>").arg(configParser::lessonTr(publicPos::currentLesson), configParser::sublessonName(publicPos::currentSublesson), configParser::exerciseTr(publicPos::currentExercise));
+			title = QString("<u>%1 / %2 / %3</u><br><br>").arg(ConfigParser::lessonTr(publicPos::currentLesson), ConfigParser::sublessonName(publicPos::currentSublesson), ConfigParser::exerciseTr(publicPos::currentExercise));
 		document->setHtml(QString("<body>%1%2</body>").arg(title, displayLevel.toHtmlEscaped().replace("\n", "<br>")));
 		font.setPointSize(50);
 		document->setDefaultFont(font);

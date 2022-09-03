@@ -208,7 +208,7 @@ void ExerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 	if(!exerciseTargets.contains(targetID))
 		return;
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	QString exerciseText = configParser::initExercise(m_exerciseText, m_lineLength);
+	QString exerciseText = ConfigParser::initExercise(m_exerciseText, m_lineLength);
 	int grossHits, mistakes;
 	if(m_correctMistakes)
 	{

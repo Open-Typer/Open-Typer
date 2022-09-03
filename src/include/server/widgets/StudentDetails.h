@@ -24,7 +24,7 @@
 #include <QWidget>
 #include <QtCharts>
 #include "core/database.h"
-#include "core/configfile.h"
+#include "core/ConfigParser.h"
 #include "core/packs.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)

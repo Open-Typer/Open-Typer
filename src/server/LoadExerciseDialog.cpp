@@ -49,9 +49,9 @@ void LoadExerciseDialog::init(void)
 	changeMode();
 	// Get selected exercise
 	QString oldText = ui->selectedExButton->text();
-	QString lessonTr = configParser::lessonTr(publicPos::currentLesson);
-	QString sublessonTr = configParser::sublessonName(publicPos::currentSublesson);
-	QString exerciseTr = configParser::exerciseTr(publicPos::currentExercise);
+	QString lessonTr = ConfigParser::lessonTr(publicPos::currentLesson);
+	QString sublessonTr = ConfigParser::sublessonName(publicPos::currentSublesson);
+	QString exerciseTr = ConfigParser::exerciseTr(publicPos::currentExercise);
 	ui->selectedExButton->setText(oldText.arg(lessonTr + ", " + sublessonTr + ", " + exerciseTr));
 	// Load selected exercise
 	QString packPath = "", packName = settings.value("main/configfile", "").toString();
@@ -59,7 +59,7 @@ void LoadExerciseDialog::init(void)
 		packPath = packName;
 	else
 		packPath = ":/res/configs/" + packName;
-	configParser parser;
+	ConfigParser parser;
 	if(parser.open(packPath))
 	{
 		m_exerciseText = parser.exerciseText(publicPos::currentLesson, publicPos::currentSublesson, publicPos::currentExercise);
@@ -124,7 +124,7 @@ QString LoadExerciseDialog::exerciseText(void)
 int LoadExerciseDialog::lineLength(void)
 {
 	if(ui->fromFileButton->isChecked())
-		return configParser::defaultLineLength;
+		return ConfigParser::defaultLineLength;
 	else if(ui->selectedExButton->isChecked())
 		return m_lineLength;
 	return 0;

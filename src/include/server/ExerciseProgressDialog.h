@@ -28,7 +28,7 @@
 #include <QMessageBox>
 #include "ExportDialog.h"
 #include "core/database.h"
-#include "core/configfile.h"
+#include "core/ConfigParser.h"
 #ifndef Q_OS_WASM
 #include "core/server.h"
 #endif // Q_OS_WASM

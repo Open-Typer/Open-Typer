@@ -43,7 +43,7 @@
 #include "StatsDialog.h"
 #include "ExportDialog.h"
 #include "TestWaitDialog.h"
-#include "core/configfile.h"
+#include "core/ConfigParser.h"
 #include "core/HistoryParser.h"
 #include "core/utils.h"
 #include "core/packs.h"
@@ -75,7 +75,7 @@ class MainWindow : public QMainWindow
 		Ui::MainWindow *ui;
 		QSettings settings;
 		languageManager langMgr;
-		configParser parser;
+		ConfigParser parser;
 		monitorClient client;
 		QString studentUsername, studentPassword;
 		QString loadConfig(QString configName, QByteArray packContent = "");

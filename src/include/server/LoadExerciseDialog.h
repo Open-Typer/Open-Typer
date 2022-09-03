@@ -25,7 +25,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
-#include "core/configfile.h"
+#include "core/ConfigParser.h"
 #include "core/database.h"
 
 namespace Ui {

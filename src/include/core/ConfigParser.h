@@ -1,5 +1,5 @@
 /*
- * configfile.h
+ * ConfigParser.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -33,27 +33,27 @@ namespace publicPos {
 
 // TODO: Add a link to pack file format documentation.
 /*!
- * \brief The configParser class provides functions for the pack file format.
+ * \brief The ConfigParser class provides functions for the pack file format.
  *
  * Example usage:
  * \code
- * configParser parser;
+ * ConfigParser parser;
  * parser.open("/path/to/pack.typer");
  * printf("There are %d lessons in the opened pack.\n",parser.lessonCount());
  * \endcode
  *
  * Closing the file isn't required most of the time, but there might be
  * some special situations, in which you'll have to close the file.\n
- * For example if you need to open the file again before destroying the configParser object.
+ * For example if you need to open the file again before destroying the ConfigParser object.
  * \code
  * parser.close();
  * \endcode
  */
-class configParser : public QObject
+class ConfigParser : public QObject
 {
 		Q_OBJECT
 	public:
-		explicit configParser(QObject *parent = nullptr);
+		explicit ConfigParser(QObject *parent = nullptr);
 		static const int defaultRepeatLimit = 128;
 		static const int defaultLineLength = 60;
 		bool open(const QString fileName);

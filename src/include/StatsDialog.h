@@ -24,7 +24,7 @@
 #include <QDialog>
 #include <QtCharts>
 #include "core/net.h"
-#include "core/configfile.h"
+#include "core/ConfigParser.h"
 #include "core/HistoryParser.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)

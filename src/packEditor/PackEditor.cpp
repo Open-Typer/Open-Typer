@@ -222,7 +222,7 @@ void PackEditor::closeFile(bool createNew, bool open, bool openPrebuiltPack)
  * \see addLesson()
  * \see addSublesson()
  * \see addExercise()
- * \see configParser
+ * \see ConfigParser
  */
 void PackEditor::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 {
@@ -240,11 +240,11 @@ void PackEditor::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		if(newLesson && (i == count))
 			_lessonDesc = "";
 		else
-			_lessonDesc = configParser::parseDesc(parser.lessonDesc(i));
+			_lessonDesc = ConfigParser::parseDesc(parser.lessonDesc(i));
 		if(_lessonDesc == "")
-			lessons += configParser::lessonTr(i);
+			lessons += ConfigParser::lessonTr(i);
 		else
-			lessons += configParser::lessonTr(i) + " " + _lessonDesc;
+			lessons += ConfigParser::lessonTr(i) + " " + _lessonDesc;
 	}
 	ui->lessonSelectionBox->addItems(lessons);
 	if(newLesson)
@@ -268,7 +268,7 @@ void PackEditor::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 	for(i = 1; i <= sublessonCount + i2; i++)
 	{
 		if(parser.exerciseCount(oldLesson + 1, i) > 0)
-			sublessons += configParser::sublessonName(i);
+			sublessons += ConfigParser::sublessonName(i);
 		else
 		{
 			sublessons += " (" + tr("empty") + ")";
@@ -286,7 +286,7 @@ void PackEditor::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 	ui->exerciseSelectionBox->clear();
 	QStringList exercises;
 	for(i = 1; i <= exerciseCount; i++)
-		exercises += configParser::exerciseTr(i);
+		exercises += ConfigParser::exerciseTr(i);
 	ui->exerciseSelectionBox->addItems(exercises);
 	if(newExercise)
 		oldExercise = ui->exerciseSelectionBox->count() - 1;
@@ -539,7 +539,7 @@ void PackEditor::updateText(void)
 void PackEditor::restoreText(void)
 {
 	ui->levelLabel->setText(
-		configParser::initExercise(
+		ConfigParser::initExercise(
 			parser.exerciseText(
 				ui->lessonSelectionBox->currentIndex() + 1,
 				ui->sublessonSelectionBox->currentIndex() + 1,

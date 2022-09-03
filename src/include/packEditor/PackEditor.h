@@ -26,7 +26,7 @@
 #include <QFileDialog>
 #include <QSettings>
 #include "packEditor/PackSelector.h"
-#include "core/configfile.h"
+#include "core/ConfigParser.h"
 
 namespace Ui {
 	class PackEditor;
@@ -66,7 +66,7 @@ class PackEditor : public QDialog
 	private:
 		Ui::PackEditor *ui;
 		QSettings settings;
-		configParser parser;
+		ConfigParser parser;
 		QString saveFileName;
 		void openPrebuilt(void);
 		void openFile(void);
