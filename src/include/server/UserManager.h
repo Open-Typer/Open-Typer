@@ -32,7 +32,7 @@ namespace Ui {
 }
 
 /*!
- * \brief the UserManager class is a widget for user management.
+ * \brief The UserManager class is a widget for user management.
  *
  * \image html UserManager.png
  */
