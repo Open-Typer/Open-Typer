@@ -27,7 +27,7 @@
 #include "server/ServerSetup.h"
 #include "server/ClassEdit.h"
 #include "server/DeviceEdit.h"
-#include "server/widgets/classcontrols.h"
+#include "server/widgets/ClassControls.h"
 #include "server/widgets/studentdetails.h"
 
 namespace Ui {

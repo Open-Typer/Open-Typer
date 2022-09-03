@@ -1,5 +1,5 @@
 /*
- * classcontrols.cpp
+ * ClassControls.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/widgets/classcontrols.h"
-#include "ui_classcontrols.h"
+#include "server/widgets/ClassControls.h"
+#include "ui_ClassControls.h"
 
-/*! Constructs classControls. */
-classControls::classControls(int openClassID, QWidget *parent) :
+/*! Constructs ClassControls. */
+ClassControls::ClassControls(int openClassID, QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::classControls)
+	ui(new Ui::ClassControls)
 {
 	ui->setupUi(this);
 	classID = openClassID;
@@ -52,7 +52,7 @@ classControls::classControls(int openClassID, QWidget *parent) :
 	// Connections
 	connect(ui->loadExerciseButton, SIGNAL(clicked()), this, SLOT(loadExercise()));
 	connect(ui->studentsTable, SIGNAL(itemSelectionChanged()), this, SLOT(verify()));
-	connect(ui->studentsTable, &QTableWidget::itemDoubleClicked, this, &classControls::openDetails);
+	connect(ui->studentsTable, &QTableWidget::itemDoubleClicked, this, &ClassControls::openDetails);
 	connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addStudent()));
 	connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(removeStudent()));
 	connect(ui->editButton, SIGNAL(clicked()), this, SLOT(editStudent()));
@@ -64,12 +64,12 @@ classControls::classControls(int openClassID, QWidget *parent) :
 	connect(ui->exerciseBox, SIGNAL(activated(int)), this, SLOT(refreshCharts()));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshCharts()));
 #ifndef Q_OS_WASM
-	connect(serverPtr, &monitorServer::loggedInStudentsChanged, this, &classControls::setupTable);
+	connect(serverPtr, &monitorServer::loggedInStudentsChanged, this, &ClassControls::setupTable);
 #endif // Q_OS_WASM
 }
 
-/*! Destroys the classControls object. */
-classControls::~classControls()
+/*! Destroys the ClassControls object. */
+ClassControls::~ClassControls()
 {
 	delete ui;
 #ifndef Q_OS_WASM
@@ -79,7 +79,7 @@ classControls::~classControls()
 }
 
 /*! Loads the students. */
-void classControls::setupTable(void)
+void ClassControls::setupTable(void)
 {
 	ui->studentsTable->clear();
 	ui->studentsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -110,7 +110,7 @@ void classControls::setupTable(void)
 }
 
 /*! Overrides QWidget#changeEvent(). */
-void classControls::changeEvent(QEvent *event)
+void ClassControls::changeEvent(QEvent *event)
 {
 	if(event->type() == QEvent::StyleChange)
 		refreshCharts();
@@ -126,7 +126,7 @@ void classControls::changeEvent(QEvent *event)
  * Connected from studentsTable->itemSelectionChanged().\n
  * Checks if everything is correct and enables buttons.
  */
-void classControls::verify(void)
+void ClassControls::verify(void)
 {
 	// Check students table
 	bool enable = ui->studentsTable->selectionModel()->hasSelection();
@@ -141,7 +141,7 @@ void classControls::verify(void)
  *
  * \see StudentEdit
  */
-void classControls::addStudent(void)
+void ClassControls::addStudent(void)
 {
 	StudentEdit dialog(true, classID);
 	dialog.exec();
@@ -152,7 +152,7 @@ void classControls::addStudent(void)
  * Connected from removeButton->clicked().\n
  * Removes selected student.
  */
-void classControls::removeStudent(void)
+void ClassControls::removeStudent(void)
 {
 	int studentID = dbMgr.studentIDs(classID).value(ui->studentsTable->selectionModel()->selectedRows()[0].row());
 	QMessageBox confirmDialog;
@@ -176,7 +176,7 @@ void classControls::removeStudent(void)
  *
  * \see StudentEdit
  */
-void classControls::editStudent(void)
+void ClassControls::editStudent(void)
 {
 	StudentEdit dialog(false, classID, dbMgr.studentIDs(classID).value(ui->studentsTable->selectionModel()->selectedRows()[0].row()));
 	dialog.exec();
@@ -189,13 +189,13 @@ void classControls::editStudent(void)
  *
  * \see detailsClicked()
  */
-void classControls::openDetails(void)
+void ClassControls::openDetails(void)
 {
 	emit detailsClicked(dbMgr.studentIDs(classID).value(ui->studentsTable->selectionModel()->selectedRows()[0].row()));
 }
 
 /*! Refreshes the charts. */
-void classControls::refreshCharts(void)
+void ClassControls::refreshCharts(void)
 {
 	QList<int> studentIDs = dbMgr.studentIDs(classID);
 	// Save old indexes
@@ -301,7 +301,7 @@ void classControls::refreshCharts(void)
  * Connected from loadExerciseButton.\n
  * Loads exercise from a text file and sends it to all students in this class.
  */
-void classControls::loadExercise(void)
+void ClassControls::loadExercise(void)
 {
 #ifndef Q_OS_WASM
 	QList<int> students, allStudents = dbMgr.studentIDs(classID), occupiedStudents = serverPtr->runningExerciseStudents();
@@ -317,7 +317,7 @@ void classControls::loadExercise(void)
 }
 
 /*! Starts the exercise loaded by the dialog. */
-void classControls::startExercise(LoadExerciseDialog *dialog)
+void ClassControls::startExercise(LoadExerciseDialog *dialog)
 {
 	QSettings settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	bool fullMode = settings.value("server/fullmode", false).toBool();

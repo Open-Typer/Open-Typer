@@ -85,7 +85,7 @@ SOURCES += \
     src/server/LoadExerciseDialog.cpp \
     src/server/ExerciseProgressDialog.cpp \
     src/server/widgets/servermanager.cpp \
-    src/server/widgets/classcontrols.cpp \
+    src/server/widgets/ClassControls.cpp \
     src/server/widgets/studentdetails.cpp \
     src/updater/updaterdialog.cpp \
     src/widgets/inputlabel.cpp \
@@ -132,7 +132,7 @@ HEADERS += \
     src/include/server/LoadExerciseDialog.h \
     src/include/server/ExerciseProgressDialog.h \
     src/include/server/widgets/servermanager.h \
-    src/include/server/widgets/classcontrols.h \
+    src/include/server/widgets/ClassControls.h \
     src/include/server/widgets/studentdetails.h \
     src/include/widgets/inputlabel.h \
     src/include/widgets/textview.h \
@@ -162,7 +162,7 @@ FORMS += \
     ui/server/LoadExerciseDialog.ui \
     ui/server/ExerciseProgressDialog.ui \
     ui/server/widgets/servermanager.ui \
-    ui/server/widgets/classcontrols.ui \
+    ui/server/widgets/ClassControls.ui \
     ui/server/widgets/studentdetails.ui \
     ui/options/OptionsWindow.ui \
     ui/packEditor/PackEditor.ui \

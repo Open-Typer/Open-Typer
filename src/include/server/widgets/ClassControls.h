@@ -1,5 +1,5 @@
 /*
- * classcontrols.h
+ * ClassControls.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -38,24 +38,24 @@ using namespace QtCharts;
 #endif
 
 namespace Ui {
-	class classControls;
+	class ClassControls;
 }
 
 /*!
- * \brief The classControls class is a widget for class management.
+ * \brief The ClassControls class is a widget for class management.
  *
- * \image html classControls.png
+ * \image html ClassControls.png
  */
-class classControls : public QWidget
+class ClassControls : public QWidget
 {
 		Q_OBJECT
 	public:
-		explicit classControls(int openClassID, QWidget *parent = nullptr);
-		~classControls();
+		explicit ClassControls(int openClassID, QWidget *parent = nullptr);
+		~ClassControls();
 		static void startExercise(LoadExerciseDialog *dialog);
 
 	private:
-		Ui::classControls *ui;
+		Ui::ClassControls *ui;
 		int classID;
 		QChart *speedChart, *mistakesChart, *timeChart;
 

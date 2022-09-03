@@ -252,7 +252,7 @@ void serverManager::openClass(bool auth)
 			else
 				ui->easyModeControls->setVisible(expanded);
 			dbMgr.updateClassTimestamp(classes[selected]);
-			classControls *controlsWidget = new classControls(classes[selected], ui->classControlsFrame);
+			ClassControls *controlsWidget = new ClassControls(classes[selected], ui->classControlsFrame);
 			controlsWidget->setAttribute(Qt::WA_DeleteOnClose);
 			if(ui->classControlsLayout->count() > 0)
 			{
@@ -260,7 +260,7 @@ void serverManager::openClass(bool auth)
 				oldWidget->close();
 			}
 			ui->classControlsLayout->addWidget(controlsWidget);
-			connect(controlsWidget, &classControls::detailsClicked, this, &serverManager::openDetails);
+			connect(controlsWidget, &ClassControls::detailsClicked, this, &serverManager::openDetails);
 			dbMgr.activeClass = classes[selected];
 		}
 		else

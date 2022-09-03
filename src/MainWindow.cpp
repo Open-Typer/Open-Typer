@@ -1784,7 +1784,7 @@ void MainWindow::startTest(void)
 	connect(dialog, &QDialog::accepted, this, [this, dialog, fullMode]() {
 #ifndef Q_OS_WASM
 		if(serverPtr && serverPtr->isListening() && (!fullMode || (dbMgr.activeClass != 0)))
-			classControls::startExercise(dialog);
+			ClassControls::startExercise(dialog);
 		else
 #endif // Q_OS_WASM
 			startReceivedExercise(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
