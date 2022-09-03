@@ -1,5 +1,5 @@
 /*
- * keyboard.h
+ * KeyboardOptions.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KEYBOARD_H
-#define KEYBOARD_H
+#ifndef KEYBOARDOPTIONS_H
+#define KEYBOARDOPTIONS_H
 
 #include <QWidget>
 #include <QListWidget>
@@ -30,23 +30,23 @@
 #include "core/packs.h"
 
 namespace Ui {
-	class keyboardOptions;
+	class KeyboardOptions;
 }
 
 /*!
- * \brief The keyboardOptions class is the keyboard category in the options.
- * \image html keyboardOptions.png
+ * \brief The KeyboardOptions class is the keyboard category in the options.
+ * \image html KeyboardOptions.png
  * \see optionsWindow
  */
-class keyboardOptions : public QWidget
+class KeyboardOptions : public QWidget
 {
 		Q_OBJECT
 	public:
-		explicit keyboardOptions(QWidget *parent = nullptr);
-		~keyboardOptions();
+		explicit KeyboardOptions(QWidget *parent = nullptr);
+		~KeyboardOptions();
 
 	private:
-		Ui::keyboardOptions *ui;
+		Ui::KeyboardOptions *ui;
 		QStringList rawItems;
 		QSettings settings;
 
@@ -55,4 +55,4 @@ class keyboardOptions : public QWidget
 		void changePack(int index);
 };
 
-#endif // KEYBOARD_H
+#endif // KEYBOARDOPTIONS_H

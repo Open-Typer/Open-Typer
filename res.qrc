@@ -45,7 +45,7 @@
         <file>res/images/start.png</file>
         <file>res/images/languageOptions.svg</file>
         <file>res/images/BehaviorOptions.svg</file>
-        <file>res/images/keyboardOptions.svg</file>
+        <file>res/images/KeyboardOptions.svg</file>
         <file>res/images/AppearanceOptions.svg</file>
         <file>res/images/ConnectionOptions.svg</file>
     </qresource>

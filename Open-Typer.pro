@@ -67,7 +67,7 @@ SOURCES += \
     src/TestWaitDialog.cpp \
     src/options/BehaviorOptions.cpp \
     src/options/AppearanceOptions.cpp \
-    src/options/keyboard.cpp \
+    src/options/KeyboardOptions.cpp \
     src/options/optionswindow.cpp \
     src/packEditor/packeditor.cpp \
     src/packEditor/packselector.cpp \
@@ -114,7 +114,7 @@ HEADERS += \
     src/include/TestWaitDialog.h \
     src/include/options/BehaviorOptions.h \
     src/include/options/AppearanceOptions.h \
-    src/include/options/keyboard.h \
+    src/include/options/KeyboardOptions.h \
     src/include/options/optionswindow.h \
     src/include/packEditor/packeditor.h \
     src/include/packEditor/packselector.h \
@@ -144,7 +144,7 @@ FORMS += \
     ui/options/BehaviorOptions.ui \
     ui/options/ConnectionOptions.ui \
     ui/options/AppearanceOptions.ui \
-    ui/options/keyboard.ui \
+    ui/options/KeyboardOptions.ui \
     ui/ExerciseSummary.ui \
     ui/options/studentoptions.ui \
     ui/StatsDialog.ui \

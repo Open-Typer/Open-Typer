@@ -1,5 +1,5 @@
 /*
- * keyboard.cpp
+ * KeyboardOptions.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "options/keyboard.h"
-#include "ui_keyboard.h"
+#include "options/KeyboardOptions.h"
+#include "ui_KeyboardOptions.h"
 
-/*! Constructs keyboardOptions object. */
-keyboardOptions::keyboardOptions(QWidget *parent) :
+/*! Constructs KeyboardOptions object. */
+KeyboardOptions::KeyboardOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::keyboardOptions),
+	ui(new Ui::KeyboardOptions),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
@@ -53,8 +53,8 @@ keyboardOptions::keyboardOptions(QWidget *parent) :
 	connect(ui->packList, SIGNAL(currentRowChanged(int)), this, SLOT(changePack(int)));
 }
 
-/*! Destroys the keyboardOptions object. */
-keyboardOptions::~keyboardOptions()
+/*! Destroys the KeyboardOptions object. */
+KeyboardOptions::~KeyboardOptions()
 {
 	delete ui;
 }
@@ -64,7 +64,7 @@ keyboardOptions::~keyboardOptions()
  * Opens the editor window.
  * \see packEditor
  */
-void keyboardOptions::openEditor(void)
+void KeyboardOptions::openEditor(void)
 {
 	packEditor *editorWindow = new packEditor(this);
 	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint, true);
@@ -77,7 +77,7 @@ void keyboardOptions::openEditor(void)
  * Connected from packList->currentRowChanged().\n
  * Sets selected pack based on the value in packList and saves it in the settings.
  */
-void keyboardOptions::changePack(int index)
+void KeyboardOptions::changePack(int index)
 {
 	settings.setValue("main/configfile", rawItems[index]);
 	settings.setValue("main/customconfig", "false");
