@@ -33,7 +33,7 @@
 #include "InitialSetup.h"
 #include "widgets/inputlabel.h"
 #include "widgets/languagelist.h"
-#include "server/widgets/servermanager.h"
+#include "server/widgets/ServerManager.h"
 #include "updater/updater.h"
 #include "packEditor/PackEditor.h"
 #include "options/OptionsWindow.h"

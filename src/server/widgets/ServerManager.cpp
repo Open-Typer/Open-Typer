@@ -1,5 +1,5 @@
 /*
- * servermanager.cpp
+ * ServerManager.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -18,13 +18,13 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/widgets/servermanager.h"
-#include "ui_servermanager.h"
+#include "server/widgets/ServerManager.h"
+#include "ui_ServerManager.h"
 
-/*! Constructs serverManager. */
-serverManager::serverManager(QWidget *parent) :
+/*! Constructs ServerManager. */
+ServerManager::ServerManager(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::serverManager),
+	ui(new Ui::ServerManager),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
@@ -39,31 +39,31 @@ serverManager::serverManager(QWidget *parent) :
 		else
 			expand();
 	});
-	connect(ui->usersButton, &QToolButton::clicked, this, &serverManager::openUserManager);
-	connect(ui->addClassButton, &QToolButton::clicked, this, &serverManager::addClass);
-	connect(ui->classBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &serverManager::openClass);
-	connect(ui->removeClassButton, &QToolButton::clicked, this, &serverManager::removeClass);
-	connect(ui->editClassButton, &QToolButton::clicked, this, &serverManager::editClass);
+	connect(ui->usersButton, &QToolButton::clicked, this, &ServerManager::openUserManager);
+	connect(ui->addClassButton, &QToolButton::clicked, this, &ServerManager::addClass);
+	connect(ui->classBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ServerManager::openClass);
+	connect(ui->removeClassButton, &QToolButton::clicked, this, &ServerManager::removeClass);
+	connect(ui->editClassButton, &QToolButton::clicked, this, &ServerManager::editClass);
 	connect(ui->deviceList, &QListWidget::currentRowChanged, this, [this](int currentRow) {
 		ui->editDeviceButton->setEnabled(currentRow != -1);
 		ui->removeDeviceButton->setEnabled(currentRow != -1);
 	});
-	connect(ui->addDeviceButton, &QToolButton::clicked, this, &serverManager::addDevice);
-	connect(ui->editDeviceButton, &QToolButton::clicked, this, &serverManager::editDevice);
-	connect(ui->removeDeviceButton, &QToolButton::clicked, this, &serverManager::removeDevice);
+	connect(ui->addDeviceButton, &QToolButton::clicked, this, &ServerManager::addDevice);
+	connect(ui->editDeviceButton, &QToolButton::clicked, this, &ServerManager::editDevice);
+	connect(ui->removeDeviceButton, &QToolButton::clicked, this, &ServerManager::removeDevice);
 }
 
-/*! Destroys serverManager. */
-serverManager::~serverManager()
+/*! Destroys ServerManager. */
+ServerManager::~ServerManager()
 {
 	delete ui;
 }
 
 /*! Initializes server manager. */
-bool serverManager::init(void)
+bool ServerManager::init(void)
 {
 #ifndef Q_OS_WASM
-	connect(serverPtr, &monitorServer::connectedDevicesChanged, this, &serverManager::loadDevices);
+	connect(serverPtr, &monitorServer::connectedDevicesChanged, this, &ServerManager::loadDevices);
 #endif // Q_OS_WASM
 	bool ret = true;
 	fullMode = settings.value("server/fullmode", false).toBool();
@@ -137,7 +137,7 @@ bool serverManager::init(void)
 }
 
 /*! Loads list of devices. */
-void serverManager::loadDevices(void)
+void ServerManager::loadDevices(void)
 {
 	QList<int> devices = dbMgr.deviceIDs();
 	ui->deviceList->clear();
@@ -154,7 +154,7 @@ void serverManager::loadDevices(void)
 }
 
 /*! Opens UserManager. */
-void serverManager::openUserManager(void)
+void ServerManager::openUserManager(void)
 {
 	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
@@ -170,13 +170,13 @@ void serverManager::openUserManager(void)
 			UserManager *dialog = new UserManager(this);
 			dialog->setWindowModality(Qt::WindowModal);
 			dialog->open();
-			connect(dialog, &QDialog::finished, this, &serverManager::init);
+			connect(dialog, &QDialog::finished, this, &ServerManager::init);
 		}
 	});
 }
 
 /*! Hides class controls. */
-void serverManager::collapse(void)
+void ServerManager::collapse(void)
 {
 	ui->toggleButton->setIcon(QIcon(":/res/images/up.png"));
 	if(!expanded)
@@ -190,7 +190,7 @@ void serverManager::collapse(void)
 }
 
 /*! Shows class controls. */
-void serverManager::expand(void)
+void ServerManager::expand(void)
 {
 	ui->toggleButton->setIcon(QIcon(":/res/images/down.png"));
 	if(expanded)
@@ -204,7 +204,7 @@ void serverManager::expand(void)
 }
 
 /*! Opens ClassEdit and creates a class. */
-void serverManager::addClass(void)
+void ServerManager::addClass(void)
 {
 	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
@@ -224,7 +224,7 @@ void serverManager::addClass(void)
 }
 
 /*! Opens selected class */
-void serverManager::openClass(bool auth)
+void ServerManager::openClass(bool auth)
 {
 	if((ExerciseProgressDialogConfig::dialogCount > 0) && !disableClassOpening)
 	{
@@ -260,7 +260,7 @@ void serverManager::openClass(bool auth)
 				oldWidget->close();
 			}
 			ui->classControlsLayout->addWidget(controlsWidget);
-			connect(controlsWidget, &ClassControls::detailsClicked, this, &serverManager::openDetails);
+			connect(controlsWidget, &ClassControls::detailsClicked, this, &ServerManager::openDetails);
 			dbMgr.activeClass = classes[selected];
 		}
 		else
@@ -270,7 +270,7 @@ void serverManager::openClass(bool auth)
 }
 
 /*! Opens student details. \see studentDetails */
-void serverManager::openDetails(int studentID)
+void ServerManager::openDetails(int studentID)
 {
 	studentDetails *detailsWidget = new studentDetails(classes[ui->classBox->currentIndex() - 1], studentID, ui->classControlsFrame);
 	detailsWidget->setAttribute(Qt::WA_DeleteOnClose);
@@ -283,7 +283,7 @@ void serverManager::openDetails(int studentID)
 }
 
 /*! Removes selected class. */
-void serverManager::removeClass(void)
+void ServerManager::removeClass(void)
 {
 	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
@@ -303,7 +303,7 @@ void serverManager::removeClass(void)
 }
 
 /*! Edits selected class. */
-void serverManager::editClass(void)
+void ServerManager::editClass(void)
 {
 	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
@@ -320,13 +320,13 @@ void serverManager::editClass(void)
 }
 
 /*! Shows a warning about opened ExerciseProgressDialog dialogs. */
-void serverManager::showCloseExercisesMessage(void)
+void ServerManager::showCloseExercisesMessage(void)
 {
 	QMessageBox::warning(this, QString(), tr("Close opened windows first."));
 }
 
 /*! Overrides QWidget#changeEvent(). */
-void serverManager::changeEvent(QEvent *event)
+void ServerManager::changeEvent(QEvent *event)
 {
 	if(event->type() == QEvent::LanguageChange)
 		ui->retranslateUi(this);
@@ -334,7 +334,7 @@ void serverManager::changeEvent(QEvent *event)
 }
 
 /*! Opens DeviceEdit and adds a device. */
-void serverManager::addDevice(void)
+void ServerManager::addDevice(void)
 {
 	DeviceEdit dialog(0, this);
 	if(dialog.exec() == QDialog::Accepted)
@@ -342,7 +342,7 @@ void serverManager::addDevice(void)
 }
 
 /*! Opens DeviceEdit and edits selected device. */
-void serverManager::editDevice(void)
+void ServerManager::editDevice(void)
 {
 	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{
@@ -355,7 +355,7 @@ void serverManager::editDevice(void)
 }
 
 /*! Removes selected device. */
-void serverManager::removeDevice(void)
+void ServerManager::removeDevice(void)
 {
 	if(ExerciseProgressDialogConfig::dialogCount > 0)
 	{

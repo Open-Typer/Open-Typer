@@ -84,7 +84,7 @@ SOURCES += \
     src/server/DeviceEdit.cpp \
     src/server/LoadExerciseDialog.cpp \
     src/server/ExerciseProgressDialog.cpp \
-    src/server/widgets/servermanager.cpp \
+    src/server/widgets/ServerManager.cpp \
     src/server/widgets/ClassControls.cpp \
     src/server/widgets/studentdetails.cpp \
     src/updater/updaterdialog.cpp \
@@ -131,7 +131,7 @@ HEADERS += \
     src/include/server/DeviceEdit.h \
     src/include/server/LoadExerciseDialog.h \
     src/include/server/ExerciseProgressDialog.h \
-    src/include/server/widgets/servermanager.h \
+    src/include/server/widgets/ServerManager.h \
     src/include/server/widgets/ClassControls.h \
     src/include/server/widgets/studentdetails.h \
     src/include/widgets/inputlabel.h \
@@ -161,7 +161,7 @@ FORMS += \
     ui/server/DeviceEdit.ui \
     ui/server/LoadExerciseDialog.ui \
     ui/server/ExerciseProgressDialog.ui \
-    ui/server/widgets/servermanager.ui \
+    ui/server/widgets/ServerManager.ui \
     ui/server/widgets/ClassControls.ui \
     ui/server/widgets/studentdetails.ui \
     ui/options/OptionsWindow.ui \

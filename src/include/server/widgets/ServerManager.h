@@ -1,5 +1,5 @@
 /*
- * servermanager.h
+ * ServerManager.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
@@ -31,23 +31,23 @@
 #include "server/widgets/studentdetails.h"
 
 namespace Ui {
-	class serverManager;
+	class ServerManager;
 }
 
 /*!
- * \brief The serverManager class is a widget that can be used as a server control panel.
+ * \brief The ServerManager class is a widget that can be used as a server control panel.
  *
- * \image html serverManager.png
+ * \image html ServerManager.png
  */
-class serverManager : public QWidget
+class ServerManager : public QWidget
 {
 		Q_OBJECT
 	public:
-		explicit serverManager(QWidget *parent = nullptr);
-		~serverManager();
+		explicit ServerManager(QWidget *parent = nullptr);
+		~ServerManager();
 
 	private:
-		Ui::serverManager *ui;
+		Ui::ServerManager *ui;
 		bool expanded = true;
 		QList<int> classes;
 		bool disableClassOpening = false;

@@ -197,15 +197,15 @@ void MainWindow::refreshAll(void)
 		{
 			if(ui->serverFrameLayout->count() == 0)
 			{
-				serverManager *serverManagerWidget = new serverManager(ui->serverFrame);
+				ServerManager *serverManagerWidget = new ServerManager(ui->serverFrame);
 				serverManagerWidget->setAttribute(Qt::WA_DeleteOnClose);
 				ui->serverFrameLayout->addWidget(serverManagerWidget);
-				connect(serverManagerWidget, &serverManager::widgetExpanded, this, [this]() {
+				connect(serverManagerWidget, &ServerManager::widgetExpanded, this, [this]() {
 					ui->paper->hide();
 					ui->controlFrame->setEnabled(false);
 					ui->bottomPanel->setEnabled(false);
 				});
-				connect(serverManagerWidget, &serverManager::widgetCollapsed, this, [this]() {
+				connect(serverManagerWidget, &ServerManager::widgetCollapsed, this, [this]() {
 					ui->paper->show();
 					ui->controlFrame->setEnabled(true);
 					ui->bottomPanel->setEnabled(true);
@@ -213,7 +213,7 @@ void MainWindow::refreshAll(void)
 			}
 			else
 			{
-				serverManager *serverManagerWidget = (serverManager *) ui->serverFrameLayout->itemAt(0)->widget();
+				ServerManager *serverManagerWidget = (ServerManager *) ui->serverFrameLayout->itemAt(0)->widget();
 				serverManagerWidget->init();
 				serverManagerWidget->expand();
 				serverManagerWidget->collapse();
