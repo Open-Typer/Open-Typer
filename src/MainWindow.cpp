@@ -864,7 +864,7 @@ void MainWindow::loadReversedText(void)
 	loadText(newText.toUtf8(), true);
 }
 
-/*! Connected from inputLabelWidget#keyPressed signal.\n
+/*! Connected from InputLabelWidget#keyPressed signal.\n
  * Handles all key presses, counts hits, displays typed characters and counts mistakes.
  */
 void MainWindow::keyPress(QKeyEvent *event)
@@ -1286,7 +1286,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 }
 
 /*!
- * Connected from inputLabelWidget#keyReleased signal.\n
+ * Connected from InputLabelWidget#keyReleased signal.\n
  * Dehighlights keys on the virtual keyboard.
  * \see keyboardWidget
  */

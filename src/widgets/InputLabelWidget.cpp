@@ -1,5 +1,5 @@
 /*
- * inputlabel.cpp
+ * InputLabelWidget.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,10 +18,10 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "widgets/inputlabel.h"
+#include "widgets/InputLabelWidget.h"
 
-/*! Constructs inputLabelWidget. */
-inputLabelWidget::inputLabelWidget(QWidget *parent) :
+/*! Constructs InputLabelWidget. */
+InputLabelWidget::InputLabelWidget(QWidget *parent) :
 	textView(parent)
 {
 	parentWidget = parent;
@@ -29,15 +29,15 @@ inputLabelWidget::inputLabelWidget(QWidget *parent) :
 	setHorizontalAdjust(false);
 }
 
-/*! Destroys the inputLabelWidget object. */
-inputLabelWidget::~inputLabelWidget() { }
+/*! Destroys the InputLabelWidget object. */
+InputLabelWidget::~InputLabelWidget() { }
 
 /*!
  * Overrides QWidget#inputMethodEvent.
  * Handles characters composed using dead keys.
  * \see keyReleaseEvent()
  */
-void inputLabelWidget::inputMethodEvent(QInputMethodEvent *event)
+void InputLabelWidget::inputMethodEvent(QInputMethodEvent *event)
 {
 	if(!event->commitString().isEmpty())
 	{
@@ -53,7 +53,7 @@ void inputLabelWidget::inputMethodEvent(QInputMethodEvent *event)
  * \see inputMethodEvent()
  * \see keyReleaseEvent()
  */
-void inputLabelWidget::keyPressEvent(QKeyEvent *event)
+void InputLabelWidget::keyPressEvent(QKeyEvent *event)
 {
 	emit keyPressed(event);
 }
@@ -63,7 +63,7 @@ void inputLabelWidget::keyPressEvent(QKeyEvent *event)
  * Handles characters generated from 2 same dead keys.\n
  * \see inputMethodEvent()
  */
-void inputLabelWidget::keyReleaseEvent(QKeyEvent *event)
+void InputLabelWidget::keyReleaseEvent(QKeyEvent *event)
 {
 	if(keyboardUtils::isDeadKey(event->key()))
 		emit keyPressed(event);

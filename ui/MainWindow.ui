@@ -1533,7 +1533,7 @@
             <number>0</number>
            </property>
            <item alignment="Qt::AlignTop">
-            <widget class="inputLabelWidget" name="inputLabel">
+            <widget class="InputLabelWidget" name="inputLabel">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -2173,9 +2173,9 @@ p, li { white-space: pre-wrap; }
  </widget>
  <customwidgets>
   <customwidget>
-   <class>inputLabelWidget</class>
+   <class>InputLabelWidget</class>
    <extends>QTextEdit</extends>
-   <header>src/include/widgets/inputlabel.h</header>
+   <header>src/include/widgets/InputLabelWidget.h</header>
   </customwidget>
   <customwidget>
    <class>keyboardWidget</class>

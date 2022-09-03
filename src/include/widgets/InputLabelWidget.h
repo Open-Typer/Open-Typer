@@ -1,5 +1,5 @@
 /*
- * inputlabel.h
+ * InputLabelWidget.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -28,10 +28,10 @@
 #include "core/utils.h"
 
 /*!
- * \brief The inputLabelWidget class is a textView, which handles all key presses.
+ * \brief The InputLabelWidget class is a textView, which handles all key presses.
  *
  * The main window (OpenTyper) uses it to display the input text and receive key presses.
- * \image html inputLabelWidget.png
+ * \image html InputLabelWidget.png
  *
  * Usage example:
  * \code
@@ -40,7 +40,7 @@
  * 	Q_OBJECT
  * 	private:
  * 		explicit myClass(QWidget *parent = nullptr);
- * 		inputLabelWidget *inputText;
+ * 		InputLabelWidget *inputText;
  *
  * 	private slots:
  * 		void keyPressed(QKeyEvent* event);
@@ -48,8 +48,8 @@
  *
  * void myClass::myClass(QWidget *parent)
  * {
- * 	inputText = new inputLabelWidget;
- * 	connect(inputLabelWidget,SIGNAL(keyPressed(QKeyEvent*)),this,SLOT(keyPressed(QKeyEvent*)));
+ * 	inputText = new InputLabelWidget;
+ * 	connect(InputLabelWidget,SIGNAL(keyPressed(QKeyEvent*)),this,SLOT(keyPressed(QKeyEvent*)));
  * }
  *
  * void myClass::keyPressed(QKeyEvent* event)
@@ -58,12 +58,12 @@
  * }
  * \endcode
  */
-class inputLabelWidget : public textView
+class InputLabelWidget : public textView
 {
 		Q_OBJECT
 	public:
-		explicit inputLabelWidget(QWidget *parent = nullptr);
-		~inputLabelWidget();
+		explicit InputLabelWidget(QWidget *parent = nullptr);
+		~InputLabelWidget();
 		QWidget *parentWidget;
 
 	protected:

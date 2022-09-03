@@ -31,7 +31,7 @@
 #include <QTextCursor>
 #include <QTranslator>
 #include "InitialSetup.h"
-#include "widgets/inputlabel.h"
+#include "widgets/InputLabelWidget.h"
 #include "widgets/languagelist.h"
 #include "server/widgets/ServerManager.h"
 #include "updater/Updater.h"
