@@ -28,7 +28,7 @@
 #include "options/KeyboardOptions.h"
 #include "options/AppearanceOptions.h"
 #include "options/ConnectionOptions.h"
-#include "widgets/languagelist.h"
+#include "widgets/LanguageList.h"
 
 namespace Ui {
 	class OptionsWindow;

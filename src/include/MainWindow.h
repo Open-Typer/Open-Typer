@@ -32,7 +32,7 @@
 #include <QTranslator>
 #include "InitialSetup.h"
 #include "widgets/InputLabelWidget.h"
-#include "widgets/languagelist.h"
+#include "widgets/LanguageList.h"
 #include "server/widgets/ServerManager.h"
 #include "updater/Updater.h"
 #include "packEditor/PackEditor.h"

@@ -66,7 +66,7 @@ void OptionsWindow::changeOptionWidget(int index)
 	{
 		case 0:
 			// Language
-			options = new languageList;
+			options = new LanguageList;
 			break;
 		case 1:
 			// Behavior

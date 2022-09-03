@@ -41,7 +41,7 @@ extern QTranslator *translator2;
  * QStringList items = langMgr.boxItems; // list of languages, which can be used in selector widgets
  * \endcode
  *
- * \see languageList
+ * \see LanguageList
  */
 class languageManager : public QObject
 {

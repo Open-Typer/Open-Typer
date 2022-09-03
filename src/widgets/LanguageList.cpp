@@ -1,5 +1,5 @@
 /*
- * languagelist.cpp
+ * LanguageList.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,10 +18,10 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "widgets/languagelist.h"
+#include "widgets/LanguageList.h"
 
-/*! Constructs languageList. */
-languageList::languageList(QWidget *parent) :
+/*! Constructs LanguageList. */
+LanguageList::LanguageList(QWidget *parent) :
 	QListWidget(parent),
 	settings(fileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
@@ -34,15 +34,15 @@ languageList::languageList(QWidget *parent) :
 	connect(this, SIGNAL(currentRowChanged(int)), this, SLOT(changeLanguage(int)));
 }
 
-/*! Destroys the languageList object. */
-languageList::~languageList() { }
+/*! Destroys the LanguageList object. */
+LanguageList::~LanguageList() { }
 
 /*!
- * Connected from languageList#currentRowChanged() (this object).
+ * Connected from LanguageList#currentRowChanged() (this object).
  * Changes display language in program settings and emits languageChanged().
  * \see languageChanged()
  */
-void languageList::changeLanguage(int index)
+void LanguageList::changeLanguage(int index)
 {
 	if(index == 0)
 		settings.setValue("main/language", "");

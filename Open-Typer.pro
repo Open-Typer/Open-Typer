@@ -90,7 +90,7 @@ SOURCES += \
     src/updater/UpdaterDialog.cpp \
     src/widgets/InputLabelWidget.cpp \
     src/widgets/textview.cpp \
-    src/widgets/languagelist.cpp \
+    src/widgets/LanguageList.cpp \
     src/widgets/KeyboardWidget.cpp
 
 HEADERS += \
@@ -136,7 +136,7 @@ HEADERS += \
     src/include/server/widgets/StudentDetails.h \
     src/include/widgets/InputLabelWidget.h \
     src/include/widgets/textview.h \
-    src/include/widgets/languagelist.h \
+    src/include/widgets/LanguageList.h \
     src/include/widgets/KeyboardWidget.h
 
 FORMS += \

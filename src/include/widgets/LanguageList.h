@@ -1,5 +1,5 @@
 /*
- * languagelist.h
+ * LanguageList.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -28,18 +28,18 @@
 #include "core/language.h"
 
 /*!
- * \brief The languageList class is a QListWidget, which provides a language selector.
+ * \brief The LanguageList class is a QListWidget, which provides a language selector.
  *
- * \image html languageList.png
+ * \image html LanguageList.png
  * \see languageManager
  * \see OptionsWindow
  */
-class languageList : public QListWidget
+class LanguageList : public QListWidget
 {
 		Q_OBJECT
 	public:
-		explicit languageList(QWidget *parent = nullptr);
-		~languageList();
+		explicit LanguageList(QWidget *parent = nullptr);
+		~LanguageList();
 		QLocale::Language language(int index);
 		QLocale::Country country(int index);
 
