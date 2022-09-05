@@ -23,6 +23,9 @@
 
 #include <QWidget>
 #include <QSettings>
+#include <QInputDialog>
+#include <QCryptographicHash>
+#include <QMessageBox>
 #include "core/StringUtils.h"
 
 namespace Ui {
@@ -50,6 +53,8 @@ class BehaviorOptions : public QWidget
 		void setErrorPenalty(int value);
 		void toggleMistakeLimit(bool checked);
 		void setMistakeChars(int value);
+		void toggleSettingsLock(bool checked);
+		void setSettingsPassword(void);
 };
 
 #endif // BEHAVIOROPTIONS_H
