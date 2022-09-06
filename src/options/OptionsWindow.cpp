@@ -25,12 +25,21 @@
 /*! Constructs OptionsWindow. */
 OptionsWindow::OptionsWindow(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::OptionsWindow)
+	ui(new Ui::OptionsWindow),
+	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
 {
 	ui->setupUi(this);
 	setAttribute(Qt::WA_DeleteOnClose, true);
+	if(settings.value("main/settingslock_enabled", false).toBool())
+		ui->widget->setEnabled(false);
+	else
+	{
+		ui->settingsLockLabel->hide();
+		ui->unlockSettingsButton->hide();
+	}
 	setupList();
 	// Connections
+	connect(ui->unlockSettingsButton, &QPushButton::clicked, this, &OptionsWindow::unlockSettings);
 	connect(ui->list, SIGNAL(currentRowChanged(int)), this, SLOT(changeOptionWidget(int)));
 	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &OptionsWindow::accept);
 }
@@ -115,4 +124,31 @@ void OptionsWindow::changeEvent(QEvent *event)
 	}
 	else
 		QWidget::changeEvent(event);
+}
+
+/*! Asks for a password and unlocks settings. */
+void OptionsWindow::unlockSettings(void)
+{
+	if(settings.contains("main/settingslock_passwd"))
+	{
+		QInputDialog *dialog = new QInputDialog(this);
+		dialog->setWindowModality(Qt::WindowModal);
+		dialog->setLabelText(tr("Settings lock password:"));
+		dialog->setInputMode(QInputDialog::TextInput);
+		dialog->setTextEchoMode(QLineEdit::Password);
+		connect(dialog, &QDialog::accepted, this, [this, dialog]() {
+			QCryptographicHash hash(QCryptographicHash::Sha256);
+			hash.addData(dialog->textValue().toUtf8());
+			if(hash.result().toHex() == settings.value("main/settingslock_passwd").toString())
+			{
+				// Password verification succeeded
+				ui->settingsLockLabel->hide();
+				ui->unlockSettingsButton->hide();
+				ui->widget->setEnabled(true);
+			}
+			else
+				QMessageBox::warning(this, QString(), tr("Incorrect password!"));
+		});
+		dialog->open();
+	}
 }

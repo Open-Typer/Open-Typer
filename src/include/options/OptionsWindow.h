@@ -53,6 +53,7 @@ class OptionsWindow : public QDialog
 	private:
 		Ui::OptionsWindow *ui;
 		QWidget *currentWidget = nullptr;
+		QSettings settings;
 		void setupList(void);
 
 	protected:
@@ -60,6 +61,7 @@ class OptionsWindow : public QDialog
 
 	private slots:
 		void changeOptionWidget(int index);
+		void unlockSettings(void);
 };
 
 #endif // OPTIONSWINDOW_H
