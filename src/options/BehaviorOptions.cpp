@@ -138,7 +138,8 @@ void BehaviorOptions::toggleSettingsLock(bool checked)
 	else if(settings.contains("main/settingslock_passwd"))
 	{
 		// User has disabled settings lock and there's an existing password
-		QInputDialog *dialog = new QInputDialog;
+		QInputDialog *dialog = new QInputDialog(this);
+		dialog->setWindowModality(Qt::WindowModal);
 		dialog->setLabelText(tr("Settings lock password:"));
 		dialog->setInputMode(QInputDialog::TextInput);
 		dialog->setTextEchoMode(QLineEdit::Password);
