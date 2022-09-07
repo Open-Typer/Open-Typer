@@ -162,8 +162,8 @@ void BehaviorOptions::toggleSettingsLock(bool checked)
 			else
 			{
 				// Password verification failed
-				QMessageBox::warning(this, QString(), tr("Incorrect password!"));
 				ui->lockSettingsCheckBox->setChecked(true);
+				QMessageBox::warning(this, QString(), tr("Incorrect password!"));
 			}
 		});
 		connect(dialog, &QDialog::rejected, this, [this]() {
