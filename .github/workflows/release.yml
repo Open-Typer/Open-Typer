@@ -59,7 +59,7 @@ jobs:
     - if: contains(matrix.os, 'windows')
       name: Install Qt IFW (Windows)
       run: |
-        curl -o aqt.exe -L https://github.com/miurahr/aqtinstall/releases/download/v2.2.3/aqt.exe
+        curl -o aqt.exe -L https://github.com/miurahr/aqtinstall/releases/download/v2.2.1/aqt.exe
         ./aqt.exe install-tool windows desktop tools_ifw
         mv Tools ..
         echo ${pwd}/../Tools/QtInstallerFramework/*/bin >> "${GITHUB_PATH}"
