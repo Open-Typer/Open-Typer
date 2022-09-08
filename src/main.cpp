@@ -22,6 +22,7 @@
 #include <QSettings>
 #include "MainWindow.h"
 #include "core/DatabaseManager.h"
+#include "core/Settings.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -51,6 +52,8 @@ int main(int argc, char *argv[])
 		dbMgr.open();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
+	// Initialize settings
+	Settings::init();
 	// Set icon
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
 	MainWindow w;
