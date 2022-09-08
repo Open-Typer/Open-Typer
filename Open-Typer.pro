@@ -60,6 +60,7 @@ SOURCES += \
     src/core/MonitorClient.cpp \
     src/core/BuiltInPacks.cpp \
     src/core/LanguageManager.cpp \
+    src/core/Settings.cpp \
     src/core/ThemeEngine.cpp \
     src/InitialSetup.cpp \
     src/ExerciseSummary.cpp \
@@ -110,6 +111,7 @@ HEADERS += \
     src/include/core/MonitorClient.h \
     src/include/core/BuiltInPacks.h \
     src/include/core/LanguageManager.h \
+    src/include/core/Settings.h \
     src/include/core/ThemeEngine.h \
     src/include/InitialSetup.h \
     src/include/ExerciseSummary.h \
