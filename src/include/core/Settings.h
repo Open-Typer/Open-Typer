@@ -34,6 +34,7 @@ class Settings
 {
 	public:
 		static void init(void);
+
 	private:
 		static QSettings *settingsInstance;
 };
