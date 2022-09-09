@@ -26,7 +26,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Number of MonitorClient.hits per minute:</string>
+      <string>Number of net hits per minute:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
