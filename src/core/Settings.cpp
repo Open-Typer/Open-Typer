@@ -27,3 +27,17 @@ void Settings::init(void)
 {
 	settingsInstance = new QSettings(qApp);
 }
+
+/*! Getter for main/clientdisabled. */
+bool Settings::clientDisabled(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/clientdisabled", false).toBool();
+}
+
+/*! Setter for main/clientdisabled. */
+void Settings::setClientDisabled(bool value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/clientdisabled", value);
+}

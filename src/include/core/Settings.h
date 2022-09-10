@@ -27,13 +27,19 @@
 /*!
  * \brief The Settings class contains functions for application settings.
  * You should use this class instead of QSettings.\n
- * If there is a new settings key, create getter and setter functions for it.\n
- * Use Settings#init() to initialize settings when the application starts.
+ * If there is a new settings key, create getter and setter functions for it.
+ * and don't forget to describe it in the list below.\n
+ * Use Settings#init() to initialize settings when the application starts.\n
+ * \n
+ * <b>List of settings keys:</b>\n
+ *  - Settings#clientDisabled() - If there's a connection failure, MonitorClient sets this to true. Use MonitorClient#enableClient() to enable it again.
  */
 class Settings
 {
 	public:
 		static void init(void);
+		static bool clientDisabled(void);
+		static void setClientDisabled(bool value);
 
 	private:
 		static QSettings *settingsInstance;
