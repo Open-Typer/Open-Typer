@@ -22,6 +22,7 @@
 
 QSettings *Settings::settingsInstance = nullptr;
 
+/*! Initializes settings. Run Settings#init() after the application starts. */
 void Settings::init(void)
 {
 	settingsInstance = new QSettings(qApp);
