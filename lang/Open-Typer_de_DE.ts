@@ -2,277 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
-    <name>OpenTyper</name>
-    <message>
-        <source>Options</source>
-        <translation>Optionen</translation>
-    </message>
-    <message>
-        <source>Repeat exercise</source>
-        <translation>Aufgabe wiederholen</translation>
-    </message>
-    <message>
-        <source>Previous exercise</source>
-        <translation>Vorherige Aufgabe</translation>
-    </message>
-    <message>
-        <source>Next exercise</source>
-        <translation>Nächste Aufgabe</translation>
-    </message>
-    <message>
-        <source>Lesson:</source>
-        <translation>Lektion:</translation>
-    </message>
-    <message>
-        <source>Sublesson:</source>
-        <translation>Unter Lektion:</translation>
-    </message>
-    <message>
-        <source>Time:</source>
-        <translation>Zeit:</translation>
-    </message>
-    <message>
-        <source>Mistakes:</source>
-        <translation>Fehler:</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>Text Dateien</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation>Alle Dateien</translation>
-    </message>
-    <message>
-        <source>This file is too large!</source>
-        <translation>Diese Datei ist zu groß!</translation>
-    </message>
-    <message>
-        <source>Open-Typer pack files</source>
-        <translation>Open-Typer packet Dateien</translation>
-    </message>
-    <message>
-        <source>Timed exercise</source>
-        <translation>Zeitbegrenzte Aufgabe</translation>
-    </message>
-    <message>
-        <source>Exercise history</source>
-        <translation>Aufgabe Verlauf</translation>
-    </message>
-    <message>
-        <source>Logged in as %1</source>
-        <translation>Eingeloggt als %1</translation>
-    </message>
-    <message>
-        <source>Not logged in.</source>
-        <translation>Nicht eingeloggt.</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
-    </message>
-    <message>
-        <source>Close loaded exercise</source>
-        <translation>Geladene Aufgabe schließen</translation>
-    </message>
-    <message>
-        <source>Generate text from error words</source>
-        <translation>Text aus Fehlerwörtern generieren</translation>
-    </message>
-    <message>
-        <source>You don&apos;t have any error words.</source>
-        <translation>Sie haben keine Fehlerwörter.</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation>Exportieren</translation>
-    </message>
-    <message>
-        <source>Open custom text</source>
-        <translation>Benutzerdefinierten Text öffnen</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Drucken</translation>
-    </message>
-    <message>
-        <source>Navigation</source>
-        <translation>Navigation</translation>
-    </message>
-    <message>
-        <source>Exercise history</source>
-        <comment>exercise history</comment>
-        <translation>Aufgabe Verlauf</translation>
-    </message>
-    <message>
-        <source>Reverse text</source>
-        <comment>reverse text button</comment>
-        <translation>Text umkehren</translation>
-    </message>
-    <message>
-        <source>Correct mistakes</source>
-        <comment>correct mistakes</comment>
-        <extracomment>Whether to correct mistakes while typing</extracomment>
-        <translation>Fehler korrigieren</translation>
-    </message>
-    <message>
-        <source>Hide exercise text</source>
-        <comment>hide text</comment>
-        <translation>Übungstext verstecken</translation>
-    </message>
-    <message>
-        <source>Exercise options</source>
-        <translation>Aufgaben Optionen</translation>
-    </message>
-    <message>
-        <source>State</source>
-        <extracomment>Current status</extracomment>
-        <translation>Zustand</translation>
-    </message>
-    <message>
-        <source>Remaining time</source>
-        <translation>Verbleibende Zeit</translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Neu</translation>
-    </message>
-    <message>
-        <source>&amp;View</source>
-        <translation>&amp;Sicht</translation>
-    </message>
-    <message>
-        <source>S&amp;tudent</source>
-        <translation>S&amp;tudent</translation>
-    </message>
-    <message>
-        <source>&amp;Exercise</source>
-        <translation>&amp;Aufgabe</translation>
-    </message>
-    <message>
-        <source>&amp;Settings</source>
-        <translation>&amp;Einstellungen</translation>
-    </message>
-    <message>
-        <source>Custom text</source>
-        <translation>Benutzerdefinierten Text</translation>
-    </message>
-    <message>
-        <source>Lesson pack</source>
-        <translation>Lektion Paket</translation>
-    </message>
-    <message>
-        <source>Log in</source>
-        <translation>Einloggen</translation>
-    </message>
-    <message>
-        <source>Text from error words</source>
-        <translation>Text aus Fehlerwörtern</translation>
-    </message>
-    <message>
-        <source>Preferences...</source>
-        <translation>Präferenzen...</translation>
-    </message>
-    <message>
-        <source>Print...</source>
-        <translation>Drucken...</translation>
-    </message>
-    <message>
-        <source>Typing test</source>
-        <translation>Tipp Test</translation>
-    </message>
-    <message>
-        <source>Tools</source>
-        <translation>Werkzeuge</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Hilfe</translation>
-    </message>
-    <message>
-        <source>About Qt...</source>
-        <translation>Über Qt...</translation>
-    </message>
-    <message>
-        <source>About program...</source>
-        <translation>Über Programm...</translation>
-    </message>
-    <message>
-        <source>Online documentation</source>
-        <translation>Online Dokumentation</translation>
-    </message>
-    <message>
-        <source>Version: %1</source>
-        <translation>Version: %1</translation>
-    </message>
-    <message>
-        <source>Revision: %1</source>
-        <translation>Revision: %1</translation>
-    </message>
-    <message>
-        <source>Source code: %1</source>
-        <translation>Quellcode: %1</translation>
-    </message>
-    <message>
-        <source>Published with the GNU General Public License.</source>
-        <translation>Veröffentlicht unter der GNU General Public License.</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Revision</source>
-        <translation>Revision</translation>
-    </message>
-    <message>
-        <source>Shift</source>
-        <comment>Shift key</comment>
-        <translation>Shift</translation>
-    </message>
-    <message>
-        <source>Version: %1</source>
-        <translation>Version: %1</translation>
-    </message>
-    <message>
-        <source>Opening database...</source>
-        <translation>Datenbank wird geöffnet...</translation>
-    </message>
-    <message>
-        <source>Opening main window...</source>
-        <translation>Hauptfenster wird geöffnet...</translation>
-    </message>
-</context>
-<context>
-    <name>UpdaterDialog</name>
-    <message>
-        <source>Update</source>
-        <translation>Update</translation>
-    </message>
-    <message>
-        <source>Update available</source>
-        <translation>Update verfügbar</translation>
-    </message>
-    <message>
-        <source>There&apos;s a new update available.
-Would you like to download and install it?</source>
-        <translation>Es ist ein neues Update verfügbar.
-Möchtest du es herunterladen und installieren?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Ja</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>Nein</translation>
-    </message>
-</context>
-<context>
-    <name>adminSelector</name>
+    <name>AdminSelector</name>
     <message>
         <source>Administrator accounts</source>
         <translation>Administratorkonten</translation>
@@ -283,7 +13,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>appearanceOptions</name>
+    <name>AppearanceOptions</name>
     <message>
         <source>Themes</source>
         <translation>Themas</translation>
@@ -369,18 +99,30 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>behaviorOptions</name>
+    <name>BehaviorOptions</name>
     <message>
-        <source>Start new line using space bar</source>
-        <translation>Neue Zeile mit der Leer Taste beginnen</translation>
+        <source>Exercise validation</source>
+        <translation>Validierung der Übung</translation>
     </message>
     <message>
         <source>Error penalty:</source>
         <translation>Fehlerstrafe:</translation>
     </message>
     <message>
-        <source>Exercise options</source>
-        <translation type="vanished">Aufgaben Optionen</translation>
+        <source>Number of characters in one word with max. 1 mistake:</source>
+        <translation>Anzahl der Zeichen in einem Wort mit max. 1 Fehler:</translation>
+    </message>
+    <message>
+        <source>Limit number of mistakes</source>
+        <translation>Die Anzahl der Fehler begrenzen</translation>
+    </message>
+    <message>
+        <source>Typing</source>
+        <translation>Tippen</translation>
+    </message>
+    <message>
+        <source>Start new line using space bar</source>
+        <translation>Neue Zeile mit der Leer Taste beginnen</translation>
     </message>
     <message>
         <source>Updates</source>
@@ -391,35 +133,63 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Beim Start nach Aktualisierung suchen</translation>
     </message>
     <message>
-        <source>Typing</source>
-        <translation>Tippen</translation>
+        <source>Settings lock</source>
+        <translation>Einstellungenschloss</translation>
     </message>
     <message>
-        <source>Exercise validation</source>
-        <translation>Validierung der Übung</translation>
+        <source>Lock settings</source>
+        <translation>Sperr die Einstellungen</translation>
     </message>
     <message>
-        <source>Number of characters in one word with max. 1 mistake:</source>
-        <translation>Anzahl der Zeichen in einem Wort mit max. 1 Fehler:</translation>
+        <source>Old password:</source>
+        <translation>Altes Passwort:</translation>
     </message>
     <message>
-        <source>Limit number of mistakes</source>
-        <translation>Die Anzahl der Fehler begrenzen</translation>
+        <source>New password:</source>
+        <translation>Neues Passwort:</translation>
+    </message>
+    <message>
+        <source>Repeat password:</source>
+        <translation>Passwort wiederholen:</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>Anwenden</translation>
+    </message>
+    <message>
+        <source>Settings lock password:</source>
+        <translation>Passwort des Einstellungenschlosses:</translation>
+    </message>
+    <message>
+        <source>Incorrect password!</source>
+        <translation>Falsches Passwort!</translation>
+    </message>
+    <message>
+        <source>The passwords do not match.</source>
+        <translation>Die Passwörter stimmen nicht miteinander überein.</translation>
+    </message>
+    <message>
+        <source>Settings lock enabled</source>
+        <translation>Das Einstellungenschloss ist eingeschaltet</translation>
+    </message>
+    <message>
+        <source>Password changed</source>
+        <translation>Das Passwort wurde verändert</translation>
     </message>
 </context>
 <context>
-    <name>builtinPacks</name>
-    <message>
-        <source>Unknown pack</source>
-        <translation>Unbekanntes Paket</translation>
-    </message>
+    <name>BuiltInPacks</name>
     <message>
         <source>auto-generated</source>
         <translation>automatisch generiert</translation>
     </message>
+    <message>
+        <source>Unknown pack</source>
+        <translation>Unbekanntes Paket</translation>
+    </message>
 </context>
 <context>
-    <name>classControls</name>
+    <name>ClassControls</name>
     <message>
         <source>Students</source>
         <translation>Studenten</translation>
@@ -506,6 +276,10 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Bestätigen</translation>
     </message>
     <message>
+        <source>Are you sure you want to remove student %1?</source>
+        <translation>Sind Sie sicher, dass Sie Student %1 entfernen möchten?</translation>
+    </message>
+    <message>
         <source>This will remove whole training history of the student!</source>
         <translation>Dadurch wird die gesamte Trainingsverlauf des Students entfernt!</translation>
     </message>
@@ -517,13 +291,9 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>No</source>
         <translation>Nein</translation>
     </message>
-    <message>
-        <source>Are you sure you want to remove student %1?</source>
-        <translation>Sind Sie sicher, dass Sie Student %1 entfernen möchten?</translation>
-    </message>
 </context>
 <context>
-    <name>classEdit</name>
+    <name>ClassEdit</name>
     <message>
         <source>Class name:</source>
         <translation>Klassenname:</translation>
@@ -546,7 +316,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>configParser</name>
+    <name>ConfigParser</name>
     <message>
         <source>Touch</source>
         <translation>Berühren</translation>
@@ -577,36 +347,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>connectionOptions</name>
-    <message>
-        <source>IP address:</source>
-        <translation>IP Adresse:</translation>
-    </message>
-    <message>
-        <source>Port:</source>
-        <translation>Port:</translation>
-    </message>
-    <message>
-        <source>Test connection</source>
-        <extracomment>A button for pairing</extracomment>
-        <translation>Verbindung testen</translation>
-    </message>
-    <message>
-        <source>Connection status:</source>
-        <translation>Verbindungsstatus:</translation>
-    </message>
-    <message>
-        <source>Unknown</source>
-        <translation>Unbekannter</translation>
-    </message>
-    <message>
-        <source>Failed to connect</source>
-        <translation>Verbindung fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Full mode (teacher and student accounts, exercise history)</source>
-        <translation>Vollmodus (Lehrer- und Studentkonten, Aufgabe Verlauf)</translation>
-    </message>
+    <name>ConnectionOptions</name>
     <message>
         <source>Enable network options</source>
         <translation>Netzwerkoptionen aktivieren</translation>
@@ -614,6 +355,14 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Network options</source>
         <translation>Netzwerkoptionen</translation>
+    </message>
+    <message>
+        <source>IP address:</source>
+        <translation>IP Adresse:</translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation>Port:</translation>
     </message>
     <message>
         <source>Server</source>
@@ -624,8 +373,29 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Klient</translation>
     </message>
     <message>
+        <source>Connection status:</source>
+        <translation>Verbindungsstatus:</translation>
+    </message>
+    <message>
+        <source>Full mode (teacher and student accounts, exercise history)</source>
+        <translation>Vollmodus (Lehrer- und Studentkonten, Aufgabe Verlauf)</translation>
+    </message>
+    <message>
+        <source>Test connection</source>
+        <extracomment>A button for pairing</extracomment>
+        <translation>Verbindung testen</translation>
+    </message>
+    <message>
         <source>Mode:</source>
         <translation>Modus:</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation>Unbekannter</translation>
+    </message>
+    <message>
+        <source>Failed to connect</source>
+        <translation>Verbindung fehlgeschlagen</translation>
     </message>
     <message>
         <source>Error</source>
@@ -637,78 +407,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>customizationOptions</name>
-    <message>
-        <source>System (default)</source>
-        <translation type="vanished">System (Standard)</translation>
-    </message>
-    <message>
-        <source>Dark</source>
-        <translation type="vanished">Dunkel</translation>
-    </message>
-    <message>
-        <source>Light</source>
-        <translation type="vanished">Hell</translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation type="vanished">Schriftart:</translation>
-    </message>
-    <message>
-        <source>Font size:</source>
-        <translation type="vanished">Schrift größe:</translation>
-    </message>
-    <message>
-        <source>Italic</source>
-        <translation type="vanished">Kursiv</translation>
-    </message>
-    <message>
-        <source>Bold</source>
-        <translation type="vanished">Fett gedruckt</translation>
-    </message>
-    <message>
-        <source>Underlined</source>
-        <translation type="vanished">Unterstrichen</translation>
-    </message>
-    <message>
-        <source>Text style:</source>
-        <translation type="vanished">Text Stil:</translation>
-    </message>
-    <message>
-        <source>Themes</source>
-        <translation type="vanished">Themas</translation>
-    </message>
-    <message>
-        <source>Exercise text color:</source>
-        <translation type="vanished">Aufgaben Text Farbe:</translation>
-    </message>
-    <message>
-        <source>Input text color:</source>
-        <translation type="vanished">Input Text Farbe:</translation>
-    </message>
-    <message>
-        <source>Background color:</source>
-        <translation type="vanished">Hintergrund Farbe:</translation>
-    </message>
-    <message>
-        <source>Paper color:</source>
-        <translation type="vanished">Papier Farbe:</translation>
-    </message>
-    <message>
-        <source>Panel color:</source>
-        <translation type="vanished">Panel Farbe:</translation>
-    </message>
-    <message>
-        <source>Go back</source>
-        <translation type="vanished">Zurück gehen</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation type="vanished">Stil:</translation>
-    </message>
-</context>
-<context>
-    <name>databaseManager</name>
+    <name>DatabaseManager</name>
     <message>
         <source>Couldn&apos;t open the database.</source>
         <translation>Die Datenbank konnte nicht geöffnet werden.</translation>
@@ -738,7 +437,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>deviceEdit</name>
+    <name>DeviceEdit</name>
     <message>
         <source>Name:</source>
         <translation>Name:</translation>
@@ -761,7 +460,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>exerciseProgressDialog</name>
+    <name>ExerciseProgressDialog</name>
     <message>
         <source>Exercise results</source>
         <translation>Aufgabe Ergebnisse</translation>
@@ -769,6 +468,10 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>Print all</source>
         <translation>Alles drucken</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Starten</translation>
     </message>
     <message>
         <source>Class:</source>
@@ -795,16 +498,24 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Kennzeichen</translation>
     </message>
     <message>
-        <source>Aborted</source>
-        <translation>Abgebrochen</translation>
-    </message>
-    <message>
         <source>View</source>
         <translation>Zeigen</translation>
     </message>
     <message>
+        <source>Aborted</source>
+        <translation>Abgebrochen</translation>
+    </message>
+    <message>
+        <source>Waiting...</source>
+        <translation>Warten...</translation>
+    </message>
+    <message>
         <source>In progress...</source>
         <translation>In Arbeit...</translation>
+    </message>
+    <message>
+        <source>Some targets have not finished yet.</source>
+        <translation>Einige Ziele sind noch nicht fertig.</translation>
     </message>
     <message>
         <source>Printing result of student %1...</source>
@@ -818,21 +529,48 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>Next student</source>
         <translation>Nächster Student</translation>
     </message>
+</context>
+<context>
+    <name>ExerciseSummary</name>
     <message>
-        <source>Start</source>
-        <translation>Starten</translation>
+        <source>Summary</source>
+        <translation>Zusammenfassung</translation>
     </message>
     <message>
-        <source>Waiting...</source>
-        <translation>Warten...</translation>
+        <source>Number of net hits per minute:</source>
+        <translation>Anzahl Nettoschläge pro Minute:</translation>
     </message>
     <message>
-        <source>Some targets have not finished yet.</source>
-        <translation>Einige Ziele sind noch nicht fertig.</translation>
+        <source>Total number of hits:</source>
+        <translation>Gesamtzahl der Schläge:</translation>
+    </message>
+    <message>
+        <source>Mistakes:</source>
+        <translation>Fehler:</translation>
+    </message>
+    <message>
+        <source>Exercise completed</source>
+        <translation>Aufgaben abgeschlossen</translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation>Vorschau</translation>
+    </message>
+    <message>
+        <source>Total time:</source>
+        <translation>Gesamtzeit:</translation>
+    </message>
+    <message>
+        <source>Number of gross hits per minute:</source>
+        <translation>Anzahl der Bruttoschläge pro Minute:</translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation>Sekunden</translation>
     </message>
 </context>
 <context>
-    <name>exportDialog</name>
+    <name>ExportDialog</name>
     <message>
         <source>Export text</source>
         <translation>Text Exportieren</translation>
@@ -898,6 +636,15 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Anzahl der Straftreffer</translation>
     </message>
     <message>
+        <source>Number of net hits</source>
+        <translation>Anzahl Nettoschläge</translation>
+    </message>
+    <message>
+        <source>Time (min)</source>
+        <comment>How many minutes the exercise took</comment>
+        <translation>Zeit (min)</translation>
+    </message>
+    <message>
         <source>Number of net hits per minute</source>
         <translation>Anzahl Nettoschläge pro Minute</translation>
     </message>
@@ -913,40 +660,31 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>Mark</source>
         <translation>Kennzeichen</translation>
     </message>
-    <message>
-        <source>Number of net hits</source>
-        <translation>Anzahl Nettoschläge</translation>
-    </message>
-    <message>
-        <source>Time (min)</source>
-        <comment>How many minutes the exercise took</comment>
-        <translation>Zeit (min)</translation>
-    </message>
 </context>
 <context>
-    <name>initialSetup</name>
+    <name>InitialSetup</name>
     <message>
         <source>Welcome to Open-Typer!</source>
         <translation>Willkommen bei Open-Typer!</translation>
     </message>
     <message>
-        <source>Show all</source>
-        <translation>Anzeigen alles</translation>
-    </message>
-    <message>
         <source>Choose a pack with lessons for your keyboard layout:</source>
         <translation>Wählen Sie ein Paket mit Lektionen für Ihr Tastaturlayout:</translation>
     </message>
+    <message>
+        <source>Show all</source>
+        <translation>Anzeigen alles</translation>
+    </message>
 </context>
 <context>
-    <name>keyboardOptions</name>
+    <name>KeyboardOptions</name>
     <message>
         <source>Editor</source>
         <translation></translation>
     </message>
 </context>
 <context>
-    <name>keyboardWidget</name>
+    <name>KeyboardWidget</name>
     <message>
         <source>Hide keyboard</source>
         <translation>Verstecken die Tastatur</translation>
@@ -957,53 +695,14 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>languageManager</name>
+    <name>LanguageManager</name>
     <message>
         <source>System (default)</source>
         <translation>System (Standard)</translation>
     </message>
 </context>
 <context>
-    <name>levelSummary</name>
-    <message>
-        <source>Summary</source>
-        <translation>Zusammenfassung</translation>
-    </message>
-    <message>
-        <source>Total time:</source>
-        <translation>Gesamtzeit:</translation>
-    </message>
-    <message>
-        <source>Exercise completed</source>
-        <translation>Aufgaben abgeschlossen</translation>
-    </message>
-    <message>
-        <source>Mistakes:</source>
-        <translation>Fehler:</translation>
-    </message>
-    <message>
-        <source>seconds</source>
-        <translation>Sekunden</translation>
-    </message>
-    <message>
-        <source>Preview</source>
-        <translation>Vorschau</translation>
-    </message>
-    <message>
-        <source>Number of net hits per minute:</source>
-        <translation>Anzahl Nettoschläge pro Minute:</translation>
-    </message>
-    <message>
-        <source>Total number of hits:</source>
-        <translation>Gesamtzahl der Schläge:</translation>
-    </message>
-    <message>
-        <source>Number of gross hits per minute:</source>
-        <translation>Anzahl der Bruttoschläge pro Minute:</translation>
-    </message>
-</context>
-<context>
-    <name>loadExerciseDialog</name>
+    <name>LoadExerciseDialog</name>
     <message>
         <source>Load exercise</source>
         <translation>Aufgabe laden</translation>
@@ -1061,6 +760,10 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Text verstecken</translation>
     </message>
     <message>
+        <source>Allow text preview before starting the exercise</source>
+        <translation>Lassen Sie Textvorschau zu, bevor Sie mit der Aufgabe beginnen</translation>
+    </message>
+    <message>
         <source>Target students</source>
         <translation>Ziel Studenten</translation>
     </message>
@@ -1068,13 +771,230 @@ Möchtest du es herunterladen und installieren?</translation>
         <source>This file is too large!</source>
         <translation>Diese Datei ist zu groß!</translation>
     </message>
+</context>
+<context>
+    <name>MainWindow</name>
     <message>
-        <source>Allow text preview before starting the exercise</source>
-        <translation>Lassen Sie Textvorschau zu, bevor Sie mit der Aufgabe beginnen</translation>
+        <source>Options</source>
+        <translation>Optionen</translation>
+    </message>
+    <message>
+        <source>Open custom text</source>
+        <translation>Benutzerdefinierten Text öffnen</translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation>Drucken</translation>
+    </message>
+    <message>
+        <source>Typing test</source>
+        <translation>Tipp Test</translation>
+    </message>
+    <message>
+        <source>Navigation</source>
+        <translation>Navigation</translation>
+    </message>
+    <message>
+        <source>Repeat exercise</source>
+        <translation>Aufgabe wiederholen</translation>
+    </message>
+    <message>
+        <source>Close loaded exercise</source>
+        <translation>Geladene Aufgabe schließen</translation>
+    </message>
+    <message>
+        <source>Previous exercise</source>
+        <translation>Vorherige Aufgabe</translation>
+    </message>
+    <message>
+        <source>Next exercise</source>
+        <translation>Nächste Aufgabe</translation>
+    </message>
+    <message>
+        <source>Lesson:</source>
+        <translation>Lektion:</translation>
+    </message>
+    <message>
+        <source>Sublesson:</source>
+        <translation>Unter Lektion:</translation>
+    </message>
+    <message>
+        <source>Exercise history</source>
+        <comment>exercise history</comment>
+        <translation>Aufgabe Verlauf</translation>
+    </message>
+    <message>
+        <source>Timed exercise</source>
+        <translation>Zeitbegrenzte Aufgabe</translation>
+    </message>
+    <message>
+        <source>Generate text from error words</source>
+        <translation>Text aus Fehlerwörtern generieren</translation>
+    </message>
+    <message>
+        <source>Reverse text</source>
+        <comment>reverse text button</comment>
+        <translation>Text umkehren</translation>
+    </message>
+    <message>
+        <source>Correct mistakes</source>
+        <comment>correct mistakes</comment>
+        <extracomment>Whether to correct mistakes while typing</extracomment>
+        <translation>Fehler korrigieren</translation>
+    </message>
+    <message>
+        <source>Hide exercise text</source>
+        <comment>hide text</comment>
+        <translation>Übungstext verstecken</translation>
+    </message>
+    <message>
+        <source>Exercise options</source>
+        <translation>Aufgaben Optionen</translation>
+    </message>
+    <message>
+        <source>State</source>
+        <extracomment>Current status</extracomment>
+        <translation>Zustand</translation>
+    </message>
+    <message>
+        <source>Mistakes:</source>
+        <translation>Fehler:</translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation>Zeit:</translation>
+    </message>
+    <message>
+        <source>Remaining time</source>
+        <translation>Verbleibende Zeit</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>Exportieren</translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation>&amp;Datei</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Öffnen</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Neu</translation>
+    </message>
+    <message>
+        <source>&amp;View</source>
+        <translation>&amp;Sicht</translation>
+    </message>
+    <message>
+        <source>S&amp;tudent</source>
+        <translation>S&amp;tudent</translation>
+    </message>
+    <message>
+        <source>&amp;Exercise</source>
+        <translation>&amp;Aufgabe</translation>
+    </message>
+    <message>
+        <source>&amp;Settings</source>
+        <translation>&amp;Einstellungen</translation>
+    </message>
+    <message>
+        <source>Tools</source>
+        <translation>Werkzeuge</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Hilfe</translation>
+    </message>
+    <message>
+        <source>Custom text</source>
+        <translation>Benutzerdefinierten Text</translation>
+    </message>
+    <message>
+        <source>Lesson pack</source>
+        <translation>Lektion Paket</translation>
+    </message>
+    <message>
+        <source>Log in</source>
+        <translation>Einloggen</translation>
+    </message>
+    <message>
+        <source>Text from error words</source>
+        <translation>Text aus Fehlerwörtern</translation>
+    </message>
+    <message>
+        <source>Preferences...</source>
+        <translation>Präferenzen...</translation>
+    </message>
+    <message>
+        <source>Exercise history</source>
+        <translation>Aufgabe Verlauf</translation>
+    </message>
+    <message>
+        <source>Print...</source>
+        <translation>Drucken...</translation>
+    </message>
+    <message>
+        <source>About Qt...</source>
+        <translation>Über Qt...</translation>
+    </message>
+    <message>
+        <source>About program...</source>
+        <translation>Über Programm...</translation>
+    </message>
+    <message>
+        <source>Online documentation</source>
+        <translation>Online Dokumentation</translation>
+    </message>
+    <message>
+        <source>Logged in as %1</source>
+        <translation>Eingeloggt als %1</translation>
+    </message>
+    <message>
+        <source>Not logged in.</source>
+        <translation>Nicht eingeloggt.</translation>
+    </message>
+    <message>
+        <source>This file is too large!</source>
+        <translation>Diese Datei ist zu groß!</translation>
+    </message>
+    <message>
+        <source>Text files</source>
+        <translation>Text Dateien</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Alle Dateien</translation>
+    </message>
+    <message>
+        <source>You don&apos;t have any error words.</source>
+        <translation>Sie haben keine Fehlerwörter.</translation>
+    </message>
+    <message>
+        <source>Open-Typer pack files</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Version: %1</source>
+        <translation>Version: %1</translation>
+    </message>
+    <message>
+        <source>Revision: %1</source>
+        <translation>Revision: %1</translation>
+    </message>
+    <message>
+        <source>Source code: %1</source>
+        <translation>Quellcode: %1</translation>
+    </message>
+    <message>
+        <source>Published with the GNU General Public License.</source>
+        <translation>Veröffentlicht unter der GNU General Public License.</translation>
     </message>
 </context>
 <context>
-    <name>monitorClient</name>
+    <name>MonitorClient</name>
     <message>
         <source>Error</source>
         <translation>Fehler</translation>
@@ -1085,84 +1005,64 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>monitorServer</name>
+    <name>MonitorServer</name>
     <message>
         <source>Unable to start server on port %1.</source>
         <translation>Server kann auf Port %1 nicht gestartet werden.</translation>
     </message>
 </context>
 <context>
-    <name>optionsWindow</name>
+    <name>OptionsWindow</name>
     <message>
         <source>Options</source>
         <translation>Optionen</translation>
+    </message>
+    <message>
+        <source>Settings are locked.</source>
+        <translation>Die Einstellungen sind verschlossen.</translation>
+    </message>
+    <message>
+        <source>Unlock settings</source>
+        <translation>Schließ die Einstellungen auf</translation>
     </message>
     <message>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
+        <source>Behavior</source>
+        <translation>Verhalten</translation>
+    </message>
+    <message>
         <source>Keyboard</source>
         <translation>Tastatur</translation>
     </message>
     <message>
-        <source>Customization</source>
-        <translation type="vanished">Anpassung</translation>
-    </message>
-    <message>
-        <source>Behavior</source>
-        <translation>Verhalten</translation>
+        <source>Appearance</source>
+        <translation>Aussehen</translation>
     </message>
     <message>
         <source>Connection</source>
         <translation>Verbindung</translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation>Aussehen</translation>
+        <source>Settings lock password:</source>
+        <translation>Passwort des Einstellungenschlosses:</translation>
+    </message>
+    <message>
+        <source>Incorrect password!</source>
+        <translation>Falsches Passwort!</translation>
     </message>
 </context>
 <context>
-    <name>packEditor</name>
+    <name>PackEditor</name>
     <message>
         <source>Open-Typer Pack Editor</source>
         <translation>Open-Typer Packet Editor</translation>
     </message>
     <message>
-        <source>New</source>
-        <translation>Neu</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation>Unbenannt</translation>
-    </message>
-    <message>
-        <source>Open-Typer pack files</source>
-        <translation>Open-Typer Packet Dateien</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation>Alle Dateien</translation>
-    </message>
-    <message>
         <source>File</source>
         <translation>Datei</translation>
-    </message>
-    <message>
-        <source>Open built-in pack</source>
-        <translation>Built-In Packet öffnen</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Speichern</translation>
-    </message>
-    <message>
-        <source>Save As...</source>
-        <translation>Speichern unter...</translation>
     </message>
     <message>
         <source>Sublesson:</source>
@@ -1209,6 +1109,34 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Zeilen Länge:</translation>
     </message>
     <message>
+        <source>New</source>
+        <translation>Neu</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Öffnen</translation>
+    </message>
+    <message>
+        <source>Open built-in pack</source>
+        <translation>Built-In Packet öffnen</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Speichern</translation>
+    </message>
+    <message>
+        <source>Save As...</source>
+        <translation>Speichern unter...</translation>
+    </message>
+    <message>
+        <source>Unnamed</source>
+        <translation>Unbenannt</translation>
+    </message>
+    <message>
+        <source>Save changes to &quot;%1&quot; before closing?</source>
+        <translation>Änderungen speichern als &quot;%1&quot; bevor schließen?</translation>
+    </message>
+    <message>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
@@ -1229,12 +1157,16 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Text länge:</translation>
     </message>
     <message>
-        <source>Save changes to &quot;%1&quot; before closing?</source>
-        <translation>Änderungen speichern als &quot;%1&quot; bevor schließen?</translation>
+        <source>Open-Typer pack files</source>
+        <translation>Open-Typer-Paketdateien</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Alle Dateien</translation>
     </message>
 </context>
 <context>
-    <name>packSelector</name>
+    <name>PackSelector</name>
     <message>
         <source>Open built-in pack</source>
         <translation>Built-In Packet öffnen</translation>
@@ -1253,31 +1185,42 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>serverManager</name>
+    <name>QObject</name>
+    <message>
+        <source>Revision</source>
+        <translation>Revision</translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <comment>Shift key</comment>
+        <translation>Shift</translation>
+    </message>
+    <message>
+        <source>Version: %1</source>
+        <translation>Version: %1</translation>
+    </message>
+    <message>
+        <source>Opening database...</source>
+        <translation>Datenbank wird geöffnet...</translation>
+    </message>
+    <message>
+        <source>Opening main window...</source>
+        <translation>Hauptfenster wird geöffnet...</translation>
+    </message>
+</context>
+<context>
+    <name>ServerManager</name>
     <message>
         <source>Users</source>
         <translation>Benutzeren</translation>
     </message>
     <message>
-        <source>Create class</source>
-        <translation>Klasse schaffen</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to remove class %1?</source>
-        <translation>Sind Sie sicher, dass Sie Klasse %1 entfernen möchten?</translation>
-    </message>
-    <message>
-        <source>Close opened windows first.</source>
-        <translation>Schließen Sie zuerst geöffnete Fenster.</translation>
-    </message>
-    <message>
-        <source>No class selected</source>
-        <comment>Displayed in the class selection combo box.</comment>
-        <translation>Keine Klasse ausgewählt</translation>
-    </message>
-    <message>
         <source>Edit the class</source>
         <translation>Klasse bearbeiten</translation>
+    </message>
+    <message>
+        <source>Create class</source>
+        <translation>Klasse schaffen</translation>
     </message>
     <message>
         <source>Remove the class</source>
@@ -1296,6 +1239,11 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Geräte</translation>
     </message>
     <message>
+        <source>No class selected</source>
+        <comment>Displayed in the class selection combo box.</comment>
+        <translation>Keine Klasse ausgewählt</translation>
+    </message>
+    <message>
         <source>online</source>
         <translation>online</translation>
     </message>
@@ -1304,12 +1252,20 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>offline</translation>
     </message>
     <message>
+        <source>Are you sure you want to remove class %1?</source>
+        <translation>Sind Sie sicher, dass Sie Klasse %1 entfernen möchten?</translation>
+    </message>
+    <message>
+        <source>Close opened windows first.</source>
+        <translation>Schließen Sie zuerst geöffnete Fenster.</translation>
+    </message>
+    <message>
         <source>Are you sure you want to remove device %1?</source>
         <translation>Sind Sie sicher, dass Sie Gerät %1 entfernen möchten?</translation>
     </message>
 </context>
 <context>
-    <name>serverSetup</name>
+    <name>ServerSetup</name>
     <message>
         <source>Server setup</source>
         <translation>Server Konfiguration</translation>
@@ -1328,7 +1284,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>statsDialog</name>
+    <name>StatsDialog</name>
     <message>
         <source>Exercise history</source>
         <translation>Aufgabe Verlauf</translation>
@@ -1363,7 +1319,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>studentDetails</name>
+    <name>StudentDetails</name>
     <message>
         <source>Pack:</source>
         <translation>Paket:</translation>
@@ -1414,7 +1370,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>studentEdit</name>
+    <name>StudentEdit</name>
     <message>
         <source>Add new student</source>
         <translation>Neuen Student hinzufügen</translation>
@@ -1463,7 +1419,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>studentOptions</name>
+    <name>StudentOptions</name>
     <message>
         <source>Authentication</source>
         <translation>Authentifizierung</translation>
@@ -1490,7 +1446,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>testWaitDialog</name>
+    <name>TestWaitDialog</name>
     <message>
         <source>Typing test</source>
         <translation>Tipp Test</translation>
@@ -1509,11 +1465,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>themeEngine</name>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Standard</translation>
-    </message>
+    <name>ThemeEngine</name>
     <message>
         <source>Dark</source>
         <translation>Dunkel</translation>
@@ -1527,16 +1479,16 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Grün</translation>
     </message>
     <message>
-        <source>Custom</source>
-        <translation>Benutzerdefiniert</translation>
-    </message>
-    <message>
         <source>Light blue</source>
         <translation>Hellblau</translation>
     </message>
+    <message>
+        <source>Custom</source>
+        <translation>Benutzerdefiniert</translation>
+    </message>
 </context>
 <context>
-    <name>timeDialog</name>
+    <name>TimeDialog</name>
     <message>
         <source>Time</source>
         <translation>Zeit</translation>
@@ -1551,7 +1503,32 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>userEdit</name>
+    <name>UpdaterDialog</name>
+    <message>
+        <source>Update</source>
+        <translation>Update</translation>
+    </message>
+    <message>
+        <source>Update available</source>
+        <translation>Update verfügbar</translation>
+    </message>
+    <message>
+        <source>There&apos;s a new update available.
+Would you like to download and install it?</source>
+        <translation>Es ist ein neues Update verfügbar.
+Möchtest du es herunterladen und installieren?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Nein</translation>
+    </message>
+</context>
+<context>
+    <name>UserEdit</name>
     <message>
         <source>User name:</source>
         <translation>Nutzername:</translation>
@@ -1582,7 +1559,7 @@ Möchtest du es herunterladen und installieren?</translation>
     </message>
 </context>
 <context>
-    <name>userManager</name>
+    <name>UserManager</name>
     <message>
         <source>Add user</source>
         <translation>Nutzer hinzufügen</translation>
@@ -1604,6 +1581,10 @@ Möchtest du es herunterladen und installieren?</translation>
         <translation>Bestätigen</translation>
     </message>
     <message>
+        <source>Are you sure you want to remove user %1?</source>
+        <translation>Sind Sie sicher, dass Sie Benutzer %1 entfernen möchten?</translation>
+    </message>
+    <message>
         <source>This will remove all classes the user owns!</source>
         <translation>Dadurch werden alle Klassen entfernt, die der Benutzer besitzt!</translation>
     </message>
@@ -1614,10 +1595,6 @@ Möchtest du es herunterladen und installieren?</translation>
     <message>
         <source>No</source>
         <translation>Nein</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to remove user %1?</source>
-        <translation>Sind Sie sicher, dass Sie Benutzer %1 entfernen möchten?</translation>
     </message>
 </context>
 </TS>
