@@ -31,8 +31,9 @@
  * and don't forget to describe it in the list below.\n
  * Use Settings#init() to initialize settings when the application starts.\n
  * \n
- * <b>List of settings keys:</b>\n
+ * <b>List of settings keys:</b>
  *  - Settings#clientDisabled() - If there's a connection failure, MonitorClient sets this to true. Use MonitorClient#enableClient() to enable it again.
+ *  - Settings#language() - Application language name. Unset to use the system language.
  */
 class Settings
 {
@@ -40,6 +41,8 @@ class Settings
 		static void init(void);
 		static bool clientDisabled(void);
 		static void setClientDisabled(bool value);
+		static QString language(void);
+		static void setLanguage(QString value);
 
 	private:
 		static QSettings *settingsInstance;

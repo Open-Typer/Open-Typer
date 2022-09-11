@@ -41,3 +41,17 @@ void Settings::setClientDisabled(bool value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/clientdisabled", value);
 }
+
+/*! Getter for main/language. */
+QString Settings::language(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/language", "").toString();
+}
+
+/*! Setter for main/language. */
+void Settings::setLanguage(QString value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/language", value);
+}
