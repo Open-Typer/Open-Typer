@@ -23,6 +23,7 @@
 
 #include <QSettings>
 #include <QApplication>
+#include "core/FileUtils.h"
 
 /*!
  * \brief The Settings class contains functions for application settings.

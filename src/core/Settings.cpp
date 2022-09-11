@@ -25,7 +25,7 @@ QSettings *Settings::settingsInstance = nullptr;
 /*! Initializes settings. Run Settings#init() after the application starts. */
 void Settings::init(void)
 {
-	settingsInstance = new QSettings(qApp);
+	settingsInstance = new QSettings(FileUtils::mainSettingsLocation(), QSettings::IniFormat, qApp);
 }
 
 /*! Getter for main/clientdisabled. */
