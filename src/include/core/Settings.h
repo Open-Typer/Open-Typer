@@ -35,6 +35,7 @@
  * <b>List of settings keys:</b>
  *  - Settings#clientDisabled() - If there's a connection failure, MonitorClient sets this to true. Use MonitorClient#enableClient() to enable it again.
  *  - Settings#language() - Application language name. Unset to use the system language.
+ *  - Settings#windowState() - Main window state (see QMainWindow#saveState()).
  */
 class Settings
 {
@@ -44,6 +45,8 @@ class Settings
 		static void setClientDisabled(bool value);
 		static QString language(void);
 		static void setLanguage(QString value);
+		static QByteArray windowState(void);
+		static void setWindowState(QByteArray value);
 
 	private:
 		static QSettings *settingsInstance;

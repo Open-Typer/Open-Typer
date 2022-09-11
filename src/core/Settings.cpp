@@ -55,3 +55,17 @@ void Settings::setLanguage(QString value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/language", value);
 }
+
+/*! Getter for main/windowState. */
+QByteArray Settings::windowState(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/windowState", "").toByteArray();
+}
+
+/*! Setter for main/windowState. */
+void Settings::setWindowState(QByteArray value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/windowState", value);
+}
