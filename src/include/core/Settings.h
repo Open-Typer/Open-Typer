@@ -39,6 +39,7 @@
  *  - Settings#windowState() - Main window state (see QMainWindow#saveState()).
  *  - Settings#windowGeometry() - Main window geometry.
  *  - Settings#updateChecks() - Whether automatic update checks are enabled (on supported platforms).
+ *  - Settings#networkEnabled() - Whether to enable network features (client/server).
  */
 class Settings
 {
@@ -64,8 +65,10 @@ class Settings
 		static bool updateChecks(void);
 		static bool containsUpdateChecks(void);
 		static void setUpdateChecks(bool value);
-
-
+		// networkEnabled
+		static bool networkEnabled(void);
+		static bool containsNetworkEnabled(void);
+		static void setNetworkEnabled(bool value);
 
 	private:
 		static QSettings *settingsInstance;

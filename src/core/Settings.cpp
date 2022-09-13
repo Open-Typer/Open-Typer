@@ -142,3 +142,26 @@ void Settings::setUpdateChecks(bool value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/updatechecks", value);
 }
+
+// networkEnabled
+
+/*! Getter for main/networkEnabled. */
+bool Settings::networkEnabled(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/networkEnabled", false).toBool();
+}
+
+/*! Returns true if there's a main/networkEnabled key. */
+bool Settings::containsNetworkEnabled(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/networkEnabled");
+}
+
+/*! Setter for main/networkEnabled. */
+void Settings::setNetworkEnabled(bool value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/networkEnabled", value);
+}
