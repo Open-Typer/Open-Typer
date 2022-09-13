@@ -43,6 +43,7 @@
  *  - Settings#networkMode() - Network mode (1 = server, 2 = client).
  *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
  *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
+ *  - Settings#spaceNewLine() - Whether to allow space bar to be used to break lines.
  */
 class Settings
 {
@@ -84,6 +85,10 @@ class Settings
 		static bool customLessonPack(void);
 		static bool containsCustomLessonPack(void);
 		static void setCustomLessonPack(bool value);
+		// spaceNewLine
+		static bool spaceNewLine(void);
+		static bool containsSpaceNewLine(void);
+		static void setSpaceNewLine(bool value);
 
 	private:
 		static QSettings *settingsInstance;

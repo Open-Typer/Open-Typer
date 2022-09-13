@@ -234,3 +234,26 @@ void Settings::setCustomLessonPack(bool value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/customconfig", value);
 }
+
+// spaceNewLine
+
+/*! Getter for main/spacenewline. */
+bool Settings::spaceNewLine(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/spacenewline", true).toBool();
+}
+
+/*! Returns true if there's a main/spacenewline key. */
+bool Settings::containsSpaceNewLine(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/spacenewline");
+}
+
+/*! Setter for main/spacenewline. */
+void Settings::setSpaceNewLine(bool value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/spacenewline", value);
+}
