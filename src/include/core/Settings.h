@@ -42,6 +42,7 @@
  *  - Settings#networkEnabled() - Whether to enable network features (client/server).
  *  - Settings#networkMode() - Network mode (1 = server, 2 = client).
  *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
+ *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
  */
 class Settings
 {
@@ -79,6 +80,10 @@ class Settings
 		static QString lessonPack(void);
 		static bool containsLessonPack(void);
 		static void setLessonPack(QString value);
+		// customLessonPack
+		static bool customLessonPack(void);
+		static bool containsCustomLessonPack(void);
+		static void setCustomLessonPack(bool value);
 
 	private:
 		static QSettings *settingsInstance;

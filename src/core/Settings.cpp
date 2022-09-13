@@ -211,3 +211,26 @@ void Settings::setLessonPack(QString value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/configfile", value);
 }
+
+// customLessonPack
+
+/*! Getter for main/customconfig. */
+bool Settings::customLessonPack(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/customconfig", false).toBool();
+}
+
+/*! Returns true if there's a main/customconfig key. */
+bool Settings::containsCustomLessonPack(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/customconfig");
+}
+
+/*! Setter for main/customconfig. */
+void Settings::setCustomLessonPack(bool value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/customconfig", value);
+}
