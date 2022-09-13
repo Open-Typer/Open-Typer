@@ -24,8 +24,7 @@
 /*! Constructs the main window. */
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
-	ui(new Ui::MainWindow),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
 	QGridLayout *inputLabelLayout = new QGridLayout(ui->inputLabel);
@@ -45,13 +44,13 @@ MainWindow::MainWindow(QWidget *parent) :
 	oldConfigName = "";
 	errorWords.clear();
 #ifdef Q_OS_WASM
-	settings.setValue("main/clientdisabled", true);
+	Settings::setClientDisabled(true);
 #endif // Q_OS_WASM
 	// Set language
-	if(settings.value("main/language", "").toString() == "")
+	if(Settings::language() == "")
 		langMgr.setLanguage(-1);
 	else
-		langMgr.setLanguage(langMgr.boxItems.indexOf(settings.value("main/language", "").toString()) - 1);
+		langMgr.setLanguage(langMgr.boxItems.indexOf(Settings::language()) - 1);
 	ui->retranslateUi(this);
 	// Opacity effect
 	QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
@@ -134,10 +133,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(&globalThemeEngine, &ThemeEngine::styleChanged, this, &MainWindow::setColors);
 	connect(&globalThemeEngine, &ThemeEngine::themeChanged, this, &MainWindow::loadTheme);
 	// Theme
-	if(settings.contains("main/windowState") && settings.contains("main/windowGeometry"))
+	if(Settings::containsWindowState() && Settings::containsWindowGeometry())
 	{
-		restoreState(settings.value("main/windowState").toByteArray());
-		restoreGeometry(settings.value("main/windowGeometry").toByteArray());
+		restoreState(Settings::windowState());
+		restoreGeometry(Settings::windowGeometry());
 	}
 	else if(!isVisible() && !firstRun)
 	{
@@ -160,7 +159,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->actionPrint->setEnabled(false);
 #else
 	// Check for updates
-	if(settings.value("main/updatechecks", true).toBool())
+	if(Settings::updateChecks())
 		new Updater();
 #endif // Q_OS_WASM
 }
@@ -175,8 +174,8 @@ MainWindow::~MainWindow()
 #endif // Q_OS_WASM
 	if(testLoaded && uploadResult && client.available())
 		client.sendRequest("put", { "abortExercise" });
-	settings.setValue("main/windowState", saveState());
-	settings.setValue("main/windowGeometry", saveGeometry());
+	Settings::setWindowState(saveState());
+	Settings::setWindowGeometry(saveGeometry());
 }
 
 /*! Initializes the program and loads all settings.
@@ -188,7 +187,7 @@ void MainWindow::refreshAll(void)
 {
 #ifndef Q_OS_WASM
 	// Start or stop server
-	if(settings.value("main/networkEnabled", false).toBool() && (settings.value("server/mode", 2).toInt() == 1))
+	if(Settings::networkEnabled() && (Settings::networkMode() == 1))
 	{
 		if(!serverPtr)
 			serverPtr = new MonitorServer(true, this);
@@ -236,7 +235,7 @@ void MainWindow::refreshAll(void)
 	}
 #endif // Q_OS_WASM
 	// Config file (lesson pack) name
-	QString configName = settings.value("main/configfile", "").toString();
+	QString configName = Settings::lessonPack();
 	if(configName == "")
 	{
 		firstRun = true;
@@ -260,11 +259,11 @@ void MainWindow::refreshAll(void)
 	bool packChanged = (configName != oldConfigName);
 	oldConfigName = configName;
 	// Custom pack
-	customConfig = settings.value("main/customconfig", "false").toBool();
+	customConfig = Settings::customLessonPack();
 	// Space new line
-	spaceNewline = settings.value("main/spacenewline", "true").toBool();
+	spaceNewline = Settings::spaceNewLine();
 	// Error penalty
-	errorPenalty = settings.value("main/errorpenalty", "10").toInt();
+	errorPenalty = Settings::errorPenalty();
 	// Load config and start
 	if(packChanged)
 	{
@@ -344,7 +343,7 @@ QString MainWindow::loadConfig(QString configName, QByteArray packContent)
 			openSuccess = parser.open(configPath);
 		if(!openSuccess && !bufferOpened)
 		{
-			settings.setValue("main/configfile", "");
+			Settings::setLessonPack("");
 			refreshAll();
 			return QString();
 		}
@@ -356,7 +355,7 @@ QString MainWindow::loadConfig(QString configName, QByteArray packContent)
 	if(customConfig)
 		configName = configPath;
 	// Save selected config to settings
-	settings.setValue("main/configfile", configName);
+	Settings::setLessonPack(configName);
 	if(customConfig)
 	{
 		QFile configQFile(configName);
@@ -638,7 +637,6 @@ void MainWindow::previousLevel(void)
  */
 void MainWindow::openOptions(void)
 {
-	settings.sync();
 	OptionsWindow *optionsWin = new OptionsWindow(this);
 	optionsWin->init();
 	optionsWin->open();
@@ -1198,7 +1196,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 		mistakeTextHtml += "<br>";
 		pos++;
 	}
-	netHits = std::max(0, totalHits - levelMistakes * settings.value("main/errorpenalty", "10").toInt());
+	netHits = std::max(0, totalHits - levelMistakes * Settings::errorPenalty());
 	int netHitsPerMinute = netHits * (60 / (levelTimer.elapsed() / 1000.0));
 	int grossHitsPerMinute = totalHits * (60 / (levelTimer.elapsed() / 1000.0));
 	int time = levelTimer.elapsed() / 1000;
@@ -1447,7 +1445,7 @@ void MainWindow::openPack(void)
 		if(!fileName.isEmpty())
 		{
 			customConfig = true;
-			settings.setValue("main/customconfig", customConfig);
+			Settings::setCustomLessonPack(customConfig);
 			loadConfig(fileName, fileContent);
 			refreshAll();
 		}
@@ -1494,7 +1492,7 @@ void MainWindow::changeEvent(QEvent *event)
 	if(event->type() == QEvent::LanguageChange)
 	{
 		ui->retranslateUi(this);
-		if(settings.value("main/configfile", "").toString() == "")
+		if(Settings::lessonPack() == "")
 			return;
 		globalThemeEngine.updateThemeList();
 		localThemeEngine.updateStyle();
@@ -1752,7 +1750,7 @@ void MainWindow::printText(void)
 void MainWindow::startTest(void)
 {
 	LoadExerciseDialog *dialog;
-	bool fullMode = settings.value("server/fullmode", false).toBool();
+	bool fullMode = Settings::serverFullMode();
 #ifdef Q_OS_WASM
 	dialog = new LoadExerciseDialog(this);
 #else

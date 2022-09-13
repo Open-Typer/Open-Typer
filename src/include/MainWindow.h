@@ -49,6 +49,7 @@
 #include "core/BuiltInPacks.h"
 #include "core/LanguageManager.h"
 #include "core/ThemeEngine.h"
+#include "core/Settings.h"
 #ifndef Q_OS_WASM
 #include "core/MonitorServer.h"
 #endif // Q_OS_WASM
@@ -73,7 +74,6 @@ class MainWindow : public QMainWindow
 
 	private:
 		Ui::MainWindow *ui;
-		QSettings settings;
 		LanguageManager langMgr;
 		ConfigParser parser;
 		MonitorClient client;
