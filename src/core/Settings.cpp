@@ -28,11 +28,20 @@ void Settings::init(void)
 	settingsInstance = new QSettings(FileUtils::mainSettingsLocation(), QSettings::IniFormat, qApp);
 }
 
+// clientDisabled
+
 /*! Getter for main/clientdisabled. */
 bool Settings::clientDisabled(void)
 {
 	Q_ASSERT(settingsInstance == nullptr);
 	return settingsInstance->value("main/clientdisabled", false).toBool();
+}
+
+/*! Returns true if there's a main/clientdisabled key. */
+bool Settings::containsClientDisabled(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/clientdisabled");
 }
 
 /*! Setter for main/clientdisabled. */
@@ -42,11 +51,20 @@ void Settings::setClientDisabled(bool value)
 	settingsInstance->setValue("main/clientdisabled", value);
 }
 
+// language
+
 /*! Getter for main/language. */
 QString Settings::language(void)
 {
 	Q_ASSERT(settingsInstance == nullptr);
 	return settingsInstance->value("main/language", "").toString();
+}
+
+/*! Returns true if there's a main/language key. */
+bool Settings::containsLanguage(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/language");
 }
 
 /*! Setter for main/language. */
@@ -56,11 +74,20 @@ void Settings::setLanguage(QString value)
 	settingsInstance->setValue("main/language", value);
 }
 
+// windowState
+
 /*! Getter for main/windowState. */
 QByteArray Settings::windowState(void)
 {
 	Q_ASSERT(settingsInstance == nullptr);
 	return settingsInstance->value("main/windowState", "").toByteArray();
+}
+
+/*! Returns true if there's a main/windowState key. */
+bool Settings::containsWindowState(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/windowState");
 }
 
 /*! Setter for main/windowState. */

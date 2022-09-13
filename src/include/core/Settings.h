@@ -41,11 +41,17 @@ class Settings
 {
 	public:
 		static void init(void);
+		// clientDisabled
 		static bool clientDisabled(void);
+		static bool containsClientDisabled(void);
 		static void setClientDisabled(bool value);
+		// language
 		static QString language(void);
+		static bool containsLanguage(void);
 		static void setLanguage(QString value);
+		// windowState
 		static QByteArray windowState(void);
+		static bool containsWindowState(void);
 		static void setWindowState(QByteArray value);
 
 	private:
