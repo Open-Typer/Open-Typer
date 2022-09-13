@@ -41,6 +41,7 @@
  *  - Settings#updateChecks() - Whether automatic update checks are enabled (on supported platforms).
  *  - Settings#networkEnabled() - Whether to enable network features (client/server).
  *  - Settings#networkMode() - Network mode (1 = server, 2 = client).
+ *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
  */
 class Settings
 {
@@ -74,6 +75,10 @@ class Settings
 		static int networkMode(void);
 		static bool containsNetworkMode(void);
 		static void setNetworkMode(int value);
+		// lessonPack
+		static QString lessonPack(void);
+		static bool containsLessonPack(void);
+		static void setLessonPack(QString value);
 
 	private:
 		static QSettings *settingsInstance;

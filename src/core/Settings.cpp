@@ -188,3 +188,26 @@ void Settings::setNetworkMode(int value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("server/mode", value);
 }
+
+// lessonPack
+
+/*! Getter for main/configfile. */
+QString Settings::lessonPack(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/configfile", "").toString();
+}
+
+/*! Returns true if there's a main/configfile key. */
+bool Settings::containsLessonPack(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/configfile");
+}
+
+/*! Setter for main/configfile. */
+void Settings::setLessonPack(QString value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/configfile", value);
+}
