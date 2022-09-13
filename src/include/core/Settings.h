@@ -27,6 +27,7 @@
 
 /*!
  * \brief The Settings class contains functions for application settings.
+ *
  * You should use this class instead of QSettings.\n
  * If there is a new settings key, create getter and setter functions for it.
  * and don't forget to describe it in the list below.\n
