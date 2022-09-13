@@ -119,3 +119,26 @@ void Settings::setWindowGeometry(QByteArray value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/windowGeometry", value);
 }
+
+// updateChecks
+
+/*! Getter for main/updatechecks. */
+bool Settings::updateChecks(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/updatechecks", true).toBool();
+}
+
+/*! Returns true if there's a main/updatechecks key. */
+bool Settings::containsUpdateChecks(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/updatechecks");
+}
+
+/*! Setter for main/updatechecks. */
+void Settings::setUpdateChecks(bool value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/updatechecks", value);
+}

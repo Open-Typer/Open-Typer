@@ -37,6 +37,7 @@
  *  - Settings#language() - Application language name. Unset to use the system language.
  *  - Settings#windowState() - Main window state (see QMainWindow#saveState()).
  *  - Settings#windowGeometry() - Main window geometry.
+ *  - Settings#updateChecks() - Whether automatic update checks are enabled (on supported platforms).
  */
 class Settings
 {
@@ -58,6 +59,11 @@ class Settings
 		static QByteArray windowGeometry(void);
 		static bool containsWindowGeometry(void);
 		static void setWindowGeometry(QByteArray value);
+		// updateChecks
+		static bool updateChecks(void);
+		static bool containsUpdateChecks(void);
+		static void setUpdateChecks(bool value);
+
 
 
 	private:
