@@ -45,6 +45,7 @@
  *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
  *  - Settings#spaceNewLine() - Whether to allow space bar to be used to break lines.
  *  - Settings#errorPenalty() - Number of hits subtracted from net hits on every mistake.
+ *  - Settings#serverFullMode() - Whether to enable server full mode (teacher and student accounts, database, etc.).
  */
 class Settings
 {
@@ -94,6 +95,10 @@ class Settings
 		static int errorPenalty(void);
 		static bool containsErrorPenalty(void);
 		static void setErrorPenalty(int value);
+		// serverFullMode
+		static bool serverFullMode(void);
+		static bool containsServerFullMode(void);
+		static void setServerFullMode(bool value);
 
 	private:
 		static QSettings *settingsInstance;

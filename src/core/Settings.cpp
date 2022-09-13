@@ -280,3 +280,26 @@ void Settings::setErrorPenalty(int value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/errorpenalty", value);
 }
+
+// serverFullMode
+
+/*! Getter for server/fullmode. */
+bool Settings::serverFullMode(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("server/fullmode", false).toBool();
+}
+
+/*! Returns true if there's a server/fullmode key. */
+bool Settings::containsServerFullMode(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("server/fullmode");
+}
+
+/*! Setter for server/fullmode. */
+void Settings::setServerFullMode(bool value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("server/fullmode", value);
+}
