@@ -36,6 +36,7 @@
  *  - Settings#clientDisabled() - If there's a connection failure, MonitorClient sets this to true. Use MonitorClient#enableClient() to enable it again.
  *  - Settings#language() - Application language name. Unset to use the system language.
  *  - Settings#windowState() - Main window state (see QMainWindow#saveState()).
+ *  - Settings#windowGeometry() - Main window geometry.
  */
 class Settings
 {
@@ -53,6 +54,11 @@ class Settings
 		static QByteArray windowState(void);
 		static bool containsWindowState(void);
 		static void setWindowState(QByteArray value);
+		// windowGeometry
+		static QByteArray windowGeometry(void);
+		static bool containsWindowGeometry(void);
+		static void setWindowGeometry(QByteArray value);
+
 
 	private:
 		static QSettings *settingsInstance;

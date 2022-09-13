@@ -96,3 +96,26 @@ void Settings::setWindowState(QByteArray value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/windowState", value);
 }
+
+// windowGeometry
+
+/*! Getter for main/windowGeometry. */
+QByteArray Settings::windowGeometry(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/windowGeometry", "").toByteArray();
+}
+
+/*! Returns true if there's a main/windowGeometry key. */
+bool Settings::containsWindowGeometry(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/windowGeometry");
+}
+
+/*! Setter for main/windowGeometry. */
+void Settings::setWindowGeometry(QByteArray value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/windowGeometry", value);
+}
