@@ -40,6 +40,7 @@
  *  - Settings#windowGeometry() - Main window geometry.
  *  - Settings#updateChecks() - Whether automatic update checks are enabled (on supported platforms).
  *  - Settings#networkEnabled() - Whether to enable network features (client/server).
+ *  - Settings#networkMode() - Network mode (1 = server, 2 = client).
  */
 class Settings
 {
@@ -69,6 +70,10 @@ class Settings
 		static bool networkEnabled(void);
 		static bool containsNetworkEnabled(void);
 		static void setNetworkEnabled(bool value);
+		// networkMode
+		static int networkMode(void);
+		static bool containsNetworkMode(void);
+		static void setNetworkMode(int value);
 
 	private:
 		static QSettings *settingsInstance;

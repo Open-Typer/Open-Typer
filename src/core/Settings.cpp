@@ -165,3 +165,26 @@ void Settings::setNetworkEnabled(bool value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/networkEnabled", value);
 }
+
+// networkMode
+
+/*! Getter for server/mode. */
+int Settings::networkMode(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("server/mode", 2).toInt();
+}
+
+/*! Returns true if there's a server/mode key. */
+bool Settings::containsNetworkMode(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("server/mode");
+}
+
+/*! Setter for server/mode. */
+void Settings::setNetworkMode(int value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("server/mode", value);
+}
