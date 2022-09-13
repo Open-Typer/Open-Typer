@@ -257,3 +257,26 @@ void Settings::setSpaceNewLine(bool value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/spacenewline", value);
 }
+
+// errorPenalty
+
+/*! Getter for main/errorpenalty. */
+int Settings::errorPenalty(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/errorpenalty", 10).toInt();
+}
+
+/*! Returns true if there's a main/errorpenalty key. */
+bool Settings::containsErrorPenalty(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/errorpenalty");
+}
+
+/*! Setter for main/errorpenalty. */
+void Settings::setErrorPenalty(int value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/errorpenalty", value);
+}

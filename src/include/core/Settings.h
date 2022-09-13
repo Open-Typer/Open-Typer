@@ -44,6 +44,7 @@
  *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
  *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
  *  - Settings#spaceNewLine() - Whether to allow space bar to be used to break lines.
+ *  - Settings#errorPenalty() - Number of hits subtracted from net hits on every mistake.
  */
 class Settings
 {
@@ -89,6 +90,10 @@ class Settings
 		static bool spaceNewLine(void);
 		static bool containsSpaceNewLine(void);
 		static void setSpaceNewLine(bool value);
+		// errorPenalty
+		static int errorPenalty(void);
+		static bool containsErrorPenalty(void);
+		static void setErrorPenalty(int value);
 
 	private:
 		static QSettings *settingsInstance;
