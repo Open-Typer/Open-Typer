@@ -63,6 +63,7 @@
  *  - Settings#customInputTextColor() - If false, the default input text color is used.
  *  - Settings#customBgColor() - If false, the background color is based on the theme.
  *  - Settings#bgColor() - Background color.
+ *  - Settings#customPaperColor() - If false, the paper color is based on the theme.
  */
 class Settings
 {
@@ -176,6 +177,10 @@ class Settings
 		static QRgb bgColor(void);
 		static bool containsBgColor(void);
 		static void setBgColor(QRgb value);
+		// customPaperColor
+		static bool customPaperColor(void);
+		static bool containsCustomPaperColor(void);
+		static void setCustomPaperColor(bool value);
 
 	private:
 		static QSettings *settingsInstance;

@@ -387,3 +387,14 @@ void Settings::setBgColor(QRgb value)
 	set("theme/bggreen", color.green());
 	set("theme/bgblue", color.blue());
 }
+
+// customPaperColor
+
+/*! Getter for theme/custompapercolor. */
+bool Settings::customPaperColor(void) { return get("theme/custompapercolor", false).toBool(); }
+
+/*! Returns true if there's a theme/custompapercolor key. */
+bool Settings::containsCustomPaperColor(void) { return contains("theme/custompapercolor"); }
+
+/*! Setter for theme/custompapercolor. */
+void Settings::setCustomPaperColor(bool value) { set("theme/custompapercolor", value); }
