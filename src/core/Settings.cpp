@@ -279,3 +279,14 @@ bool Settings::containsThemeFontUnderline(void) { return contains("theme/fontund
 
 /*! Setter for theme/fontunderline. */
 void Settings::setThemeFontUnderline(bool value) { set("theme/fontunderline", value); }
+
+// customExerciseTextColor
+
+/*! Getter for theme/customleveltextcolor. */
+bool Settings::customExerciseTextColor(void) { return get("theme/customleveltextcolor", false).toBool(); }
+
+/*! Returns true if there's a theme/customleveltextcolor key. */
+bool Settings::containsCustomExerciseTextColor(void) { return contains("theme/customleveltextcolor"); }
+
+/*! Setter for theme/customleveltextcolor. */
+void Settings::setCustomExerciseTextColor(bool value) { set("theme/customleveltextcolor", value); }

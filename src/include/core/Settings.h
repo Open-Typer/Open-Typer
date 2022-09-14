@@ -55,6 +55,7 @@
  *  - Settings#themeFontBold() - Whether to use a bold font in exercise and input text.
  *  - Settings#themeFontItalic() - Whether to use an italic font in exercise and input text.
  *  - Settings#themeFontUnderline() - Whether to use an underlined font in exercise and input text.
+ *  - Settings#customExerciseTextColor() - If false, the text color is based on the theme.
  */
 class Settings
 {
@@ -144,6 +145,10 @@ class Settings
 		static bool themeFontUnderline(void);
 		static bool containsThemeFontUnderline(void);
 		static void setThemeFontUnderline(bool value);
+		// customExerciseTextColor
+		static bool customExerciseTextColor(void);
+		static bool containsCustomExerciseTextColor(void);
+		static void setCustomExerciseTextColor(bool value);
 
 	private:
 		static QSettings *settingsInstance;
