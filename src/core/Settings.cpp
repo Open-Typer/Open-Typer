@@ -398,3 +398,28 @@ bool Settings::containsCustomPaperColor(void) { return contains("theme/custompap
 
 /*! Setter for theme/custompapercolor. */
 void Settings::setCustomPaperColor(bool value) { set("theme/custompapercolor", value); }
+
+// paperColor
+
+/*! Getter for paper color (theme/paperred, theme/papergreen, theme/paperblue). */
+QRgb Settings::paperColor(void)
+{
+	return QColor(get("theme/paperred", 0).toInt(),
+		get("theme/papergreen", 0).toInt(),
+		get("theme/paperblue", 0).toInt()).rgb();
+}
+
+/*! Returns true if there's are all paper color keys. */
+bool Settings::containsPaperColor(void)
+{
+	return (contains("theme/paperred") && contains("theme/papergreen") && contains("theme/paperblue"));
+}
+
+/*! Setter for paper color. */
+void Settings::setPaperColor(QRgb value)
+{
+	QColor color(value);
+	set("theme/paperred", color.red());
+	set("theme/papergreen", color.green());
+	set("theme/paperblue", color.blue());
+}
