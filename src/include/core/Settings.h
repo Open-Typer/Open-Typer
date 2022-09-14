@@ -46,6 +46,7 @@
  *  - Settings#spaceNewLine() - Whether to allow space bar to be used to break lines.
  *  - Settings#errorPenalty() - Number of hits subtracted from net hits on every mistake.
  *  - Settings#serverFullMode() - Whether to enable server full mode (teacher and student accounts, database, etc.).
+ *  - Settings#mistakeLimit() - Whether to limit number of mistakes in per characters in words.
  */
 class Settings
 {
@@ -99,6 +100,10 @@ class Settings
 		static bool serverFullMode(void);
 		static bool containsServerFullMode(void);
 		static void setServerFullMode(bool value);
+		// mistakeLimit
+		static bool mistakeLimit(void);
+		static bool containsMistakeLimit(void);
+		static void setMistakeLimit(bool value);
 
 	private:
 		static QSettings *settingsInstance;

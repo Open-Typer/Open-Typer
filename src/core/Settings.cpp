@@ -303,3 +303,26 @@ void Settings::setServerFullMode(bool value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("server/fullmode", value);
 }
+
+// mistakeLimit
+
+/*! Getter for main/mistakelimit. */
+bool Settings::mistakeLimit(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/mistakelimit", true).toBool();
+}
+
+/*! Returns true if there's a main/mistakelimit key. */
+bool Settings::containsMistakeLimit(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/mistakelimit");
+}
+
+/*! Setter for main/mistakelimit. */
+void Settings::setMistakeLimit(bool value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/mistakelimit", value);
+}
