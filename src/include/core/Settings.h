@@ -53,6 +53,7 @@
  *  - Settings#themeFont() - Text font family name.
  *  - Settings#themeFontSize() - Text font size.
  *  - Settings#themeFontBold() - Whether to use a bold font in exercise and input text.
+ *  - Settings#themeFontItalic() - Whether to use an italic font in exercise and input text.
  */
 class Settings
 {
@@ -134,6 +135,10 @@ class Settings
 		static bool themeFontBold(void);
 		static bool containsThemeFontBold(void);
 		static void setThemeFontBold(bool value);
+		// themeFontItalic
+		static bool themeFontItalic(void);
+		static bool containsThemeFontItalic(void);
+		static void setThemeFontItalic(bool value);
 
 	private:
 		static QSettings *settingsInstance;

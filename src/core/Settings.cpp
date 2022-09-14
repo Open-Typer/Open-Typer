@@ -257,3 +257,14 @@ bool Settings::containsThemeFontBold(void) { return contains("theme/fontbold"); 
 
 /*! Setter for theme/fontbold. */
 void Settings::setThemeFontBold(bool value) { set("theme/fontbold", value); }
+
+// themeFontItalic
+
+/*! Getter for theme/fontitalic. */
+bool Settings::themeFontItalic(void) { return get("theme/fontitalic", false).toBool(); }
+
+/*! Returns true if there's a theme/fontitalic key. */
+bool Settings::containsThemeFontItalic(void) { return contains("theme/fontitalic"); }
+
+/*! Setter for theme/fontitalic. */
+void Settings::setThemeFontItalic(bool value) { set("theme/fontitalic", value); }
