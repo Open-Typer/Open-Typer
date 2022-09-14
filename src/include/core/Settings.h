@@ -59,6 +59,7 @@
  *  - Settings#themeFontUnderline() - Whether to use an underlined font in exercise and input text.
  *  - Settings#customExerciseTextColor() - If false, the text color is based on the theme.
  *  - Settings#exerciseTextColor() - Exercise text color.
+ *  - Settings#inputTextColor() - Input text color.
  */
 class Settings
 {
@@ -156,6 +157,10 @@ class Settings
 		static QRgb exerciseTextColor(void);
 		static bool containsExerciseTextColor(void);
 		static void setExerciseTextColor(QRgb value);
+		// inputTextColor
+		static QRgb inputTextColor(void);
+		static bool containsInputTextColor(void);
+		static void setInputTextColor(QRgb value);
 
 	private:
 		static QSettings *settingsInstance;

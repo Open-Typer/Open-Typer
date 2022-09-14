@@ -315,3 +315,28 @@ void Settings::setExerciseTextColor(QRgb value)
 	set("theme/leveltextgreen", color.green());
 	set("theme/leveltextblue", color.blue());
 }
+
+// inputTextColor
+
+/*! Getter for input text color (theme/inputtextred, theme/inputtextgreen, theme/inputtextblue). */
+QRgb Settings::inputTextColor(void)
+{
+	return QColor(get("theme/inputtextred", 0).toInt(),
+		get("theme/inputtextgreen", 0).toInt(),
+		get("theme/inputtextblue", 0).toInt()).rgb();
+}
+
+/*! Returns true if there's are all input text color keys. */
+bool Settings::containsInputTextColor(void)
+{
+	return (contains("theme/inputtextred") && contains("theme/inputtextgreen") && contains("theme/inputtextblue"));
+}
+
+/*! Setter for input text color. */
+void Settings::setInputTextColor(QRgb value)
+{
+	QColor color(value);
+	set("theme/inputtextred", color.red());
+	set("theme/inputtextgreen", color.green());
+	set("theme/inputtextblue", color.blue());
+}
