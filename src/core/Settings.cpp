@@ -224,3 +224,14 @@ bool Settings::containsServerPort(void) { return contains("server/port"); }
 
 /*! Setter for server/port. */
 void Settings::setServerPort(uint value) { set("server/port", value); }
+
+// themeFont
+
+/*! Getter for theme/font. */
+QString Settings::themeFont(void) { return get("theme/font", "").toString(); }
+
+/*! Returns true if there's a theme/font key. */
+bool Settings::containsThemeFont(void) { return contains("theme/font"); }
+
+/*! Setter for theme/font. */
+void Settings::setThemeFont(QString value) { set("theme/font", value); }
