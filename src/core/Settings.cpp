@@ -362,3 +362,28 @@ bool Settings::containsCustomBgColor(void) { return contains("theme/custombgcolo
 
 /*! Setter for theme/custombgcolor. */
 void Settings::setCustomBgColor(bool value) { set("theme/custombgcolor", value); }
+
+// bgColor
+
+/*! Getter for background color (theme/bgred, theme/bggreen, theme/bgblue). */
+QRgb Settings::bgColor(void)
+{
+	return QColor(get("theme/bgred", 0).toInt(),
+		get("theme/bggreen", 0).toInt(),
+		get("theme/bgblue", 0).toInt()).rgb();
+}
+
+/*! Returns true if there's are all background color keys. */
+bool Settings::containsBgColor(void)
+{
+	return (contains("theme/bgred") && contains("theme/bggreen") && contains("theme/bgblue"));
+}
+
+/*! Setter for background color. */
+void Settings::setBgColor(QRgb value)
+{
+	QColor color(value);
+	set("theme/bgred", color.red());
+	set("theme/bggreen", color.green());
+	set("theme/bgblue", color.blue());
+}
