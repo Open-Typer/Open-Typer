@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef STRINGUTILS_H
+#define STRINGUTILS_H
 
 #include <QObject>
 #include <QString>
@@ -49,4 +49,4 @@ class StringUtils
 		static QMap<int, QVariantMap> generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList = nullptr);
 };
 
-#endif // UTILS_H
+#endif // STRINGUTILS_H
