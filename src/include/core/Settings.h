@@ -47,6 +47,7 @@
  *  - Settings#errorPenalty() - Number of hits subtracted from net hits on every mistake.
  *  - Settings#serverFullMode() - Whether to enable server full mode (teacher and student accounts, database, etc.).
  *  - Settings#mistakeLimit() - Whether to limit number of mistakes in per characters in words.
+ *  - Settings#mistakeChars() - Number of characters in one word with max. 1 mistake.
  */
 class Settings
 {
@@ -104,6 +105,10 @@ class Settings
 		static bool mistakeLimit(void);
 		static bool containsMistakeLimit(void);
 		static void setMistakeLimit(bool value);
+		// mistakeChars
+		static int mistakeChars(void);
+		static bool containsMistakeChars(void);
+		static void setMistakeChars(int value);
 
 	private:
 		static QSettings *settingsInstance;

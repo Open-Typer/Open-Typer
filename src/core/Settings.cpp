@@ -326,3 +326,26 @@ void Settings::setMistakeLimit(bool value)
 	Q_ASSERT(settingsInstance == nullptr);
 	settingsInstance->setValue("main/mistakelimit", value);
 }
+
+// mistakeChars
+
+/*! Getter for main/mistakechars. */
+int Settings::mistakeChars(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value("main/mistakechars", 6).toInt();
+}
+
+/*! Returns true if there's a main/mistakechars key. */
+bool Settings::containsMistakeChars(void)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains("main/mistakechars");
+}
+
+/*! Setter for main/mistakechars. */
+void Settings::setMistakeChars(int value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue("main/mistakechars", value);
+}
