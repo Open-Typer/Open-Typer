@@ -24,8 +24,7 @@
 MonitorClient::MonitorClient(bool errDialogs, QObject *parent) :
 	QObject(parent),
 	connected(false),
-	waitingForResponse(false),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	waitingForResponse(false)
 {
 	setErrorDialogs(errDialogs);
 	connect(&socket, &QWebSocket::textMessageReceived, this, &MonitorClient::readResponse);
@@ -58,15 +57,13 @@ void MonitorClient::setErrorDialogs(bool errDialogs)
 /*! Returns server address. */
 QHostAddress MonitorClient::serverAddress(void)
 {
-	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	return QHostAddress(settings.value("server/address", "127.0.0.1").toString());
+	return QHostAddress(Settings::serverAddress());
 }
 
 /*! Returns server port. */
 quint16 MonitorClient::serverPort(void)
 {
-	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	return settings.value("server/port", "57100").toUInt();
+	return Settings::serverPort();
 }
 
 /*! Returns the local IP address, e. g. 192.168.0.100. */
@@ -86,8 +83,7 @@ QHostAddress MonitorClient::localAddress(void)
 /*! Returns true if client is enabled in the settings. */
 bool MonitorClient::enabled(void)
 {
-	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	return (settings.value("main/networkEnabled", false).toBool() && (settings.value("server/mode", 2).toInt() == 2));
+	return (Settings::networkEnabled() && (Settings::networkMode() == 2));
 }
 
 /*! Returns true if class monitor server connection is enabled in the settings and the server is available. */
@@ -121,7 +117,7 @@ bool MonitorClient::isPaired(void)
 void MonitorClient::enableClient(void)
 {
 	clientDisabled = false;
-	settings.setValue("main/clientdisabled", clientDisabled);
+	Settings::setClientDisabled(clientDisabled);
 }
 
 /*!
@@ -131,7 +127,7 @@ void MonitorClient::enableClient(void)
  */
 QStringList MonitorClient::sendRequest(QString method, QStringList data)
 {
-	clientDisabled = settings.value("main/clientdisabled", false).toBool();
+	clientDisabled = Settings::clientDisabled();
 	if(clientDisabled)
 		return { "clientDisabled" };
 	connected = (socket.state() == QAbstractSocket::ConnectedState);
@@ -144,7 +140,7 @@ QStringList MonitorClient::sendRequest(QString method, QStringList data)
 		QPointer<QEventLoop> eventLoopPtr = &eventLoop;
 		auto errorSlot = [this, eventLoopPtr]() {
 			clientDisabled = true;
-			settings.setValue("main/clientdisabled", clientDisabled);
+			Settings::setClientDisabled(clientDisabled);
 			if(connecting && eventLoopPtr)
 				eventLoopPtr->quit();
 		};

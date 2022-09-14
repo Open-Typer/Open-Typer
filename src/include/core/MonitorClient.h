@@ -29,12 +29,12 @@
 #include <QHostAddress>
 #include <QTimer>
 #include <QWebSocket>
-#include <QSettings>
 #include <QFile>
 #include <QWebSocketServer>
 #include <QNetworkInterface>
 #include <QPointer>
 #include "core/FileUtils.h"
+#include "core/Settings.h"
 
 /*! \brief The MonitorClient class is used to communicate with the class monitor server. */
 class MonitorClient : public QObject
@@ -62,7 +62,6 @@ class MonitorClient : public QObject
 		bool connected, waitingForResponse;
 		QString convertData(bool *ok, QStringList input);
 		QStringList readData(QString input);
-		QSettings settings;
 		bool clientDisabled = false, connecting = false;
 
 	signals:
