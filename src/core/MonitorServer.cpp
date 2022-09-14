@@ -27,8 +27,7 @@ MonitorServer::MonitorServer(bool silent, QObject *parent) :
 	QWebSocketServer("Open-Typer", QWebSocketServer::SecureMode, parent),
 	clientSockets(),
 	sessions(),
-	exerciseSockets(),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	exerciseSockets()
 {
 	generateRandomCertKey();
 	if(!listen(QHostAddress::Any, port()))
@@ -63,8 +62,7 @@ QHostAddress MonitorServer::address(void)
 /*! Returns the port, which was set by the user (or the default port). */
 quint16 MonitorServer::port(void)
 {
-	QSettings settings(FileUtils::configLocation() + "/config.ini", QSettings::IniFormat);
-	return settings.value("server/port", 57100).toUInt();
+	return Settings::serverPort();
 }
 
 /*!
@@ -78,7 +76,7 @@ void MonitorServer::acceptConnection(void)
 	connect(clientSocket, &QWebSocket::textMessageReceived, this, &MonitorServer::sendResponse);
 	connect(clientSocket, &QWebSocket::disconnected, this, &MonitorServer::disconnectClient);
 	clientSockets += clientSocket;
-	if(!settings.value("server/fullmode", false).toBool())
+	if(!Settings::serverFullMode())
 		emit connectedDevicesChanged();
 }
 
@@ -92,7 +90,7 @@ void MonitorServer::disconnectClient(void)
 	exerciseSockets.removeAll(clientSocket);
 	emit exerciseAborted(dbMgr.findUser(sessions[clientSocket]));
 	clientSocket->deleteLater();
-	if(!settings.value("server/fullmode", false).toBool())
+	if(!Settings::serverFullMode())
 		emit connectedDevicesChanged();
 }
 
@@ -119,7 +117,7 @@ void MonitorServer::sendResponse(QString message)
 		clientSocket->sendTextMessage(convertData({ "ok" }));
 		return;
 	}
-	if(settings.value("server/fullmode", false).toBool())
+	if(Settings::serverFullMode())
 	{
 		if((requestList[0] == "auth") && (requestList.count() >= 3))
 		{
@@ -267,7 +265,7 @@ void MonitorServer::sendResponse(QString message)
 	{
 		if(requestList[1] == "serverMode")
 		{
-			clientSocket->sendTextMessage(convertData({ "ok", settings.value("server/fullmode", false).toBool() ? "full" : "easy" }));
+			clientSocket->sendTextMessage(convertData({ "ok", Settings::serverFullMode() ? "full" : "easy" }));
 			return;
 		}
 	}
@@ -275,7 +273,7 @@ void MonitorServer::sendResponse(QString message)
 	{
 		if(requestList[1] == "recordedCharacters")
 		{
-			if(settings.value("server/fullmode", false).toBool() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
+			if(Settings::serverFullMode() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
 			{
 				if(!recordedCharacters.contains(clientSocket))
 					recordedCharacters[clientSocket] = QVector<QPair<QString, int>>();
@@ -299,7 +297,7 @@ void MonitorServer::sendResponse(QString message)
 		}
 		else if((requestList[1] == "testResult") && (requestList.count() >= 4))
 		{
-			if(settings.value("server/fullmode", false).toBool() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
+			if(Settings::serverFullMode() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
 			{
 				int id;
 				if(sessions.contains(clientSocket))
@@ -314,12 +312,12 @@ void MonitorServer::sendResponse(QString message)
 		}
 		else if(requestList[1] == "abortExercise")
 		{
-			if(settings.value("server/fullmode", false).toBool() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
+			if(Settings::serverFullMode() || (dbMgr.findDevice(clientSocket->peerAddress()) != 0))
 			{
 				exerciseSockets.removeAll(clientSocket);
 				if(sessions.contains(clientSocket))
 					emit exerciseAborted(dbMgr.findUser(sessions[clientSocket]));
-				else if(!settings.value("server/fullmode", false).toBool())
+				else if(!Settings::serverFullMode())
 					emit exerciseAborted(dbMgr.findDevice(QHostAddress(clientSocket->peerAddress().toIPv4Address())));
 			}
 			clientSocket->sendTextMessage(convertData({ "ok" }));

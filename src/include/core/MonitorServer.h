@@ -22,7 +22,6 @@
 #define MONITORSERVER_H
 
 #include <QObject>
-#include <QSettings>
 #include <QWebSocketServer>
 #include <QWebSocket>
 #include <QNetworkInterface>
@@ -34,6 +33,7 @@
 #include <openssl/x509.h>
 #include <openssl/pem.h>
 #include "core/DatabaseManager.h"
+#include "core/Settings.h"
 
 /*! \brief The MonitorServer class is a QWebSocketServer that is used to communicate with Open-Typer clients. */
 class MonitorServer : public QWebSocketServer
@@ -81,7 +81,6 @@ class MonitorServer : public QWebSocketServer
 		QMap<QWebSocket *, QString> sessions; /*!< Stores student sessions (socket, username). */
 		QList<QWebSocket *> exerciseSockets;
 		QMap<QWebSocket *, QVector<QPair<QString, int>>> recordedCharacters;
-		QSettings settings;
 		QMap<int, QString> deviceStudentNames;
 };
 
