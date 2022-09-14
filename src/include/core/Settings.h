@@ -54,6 +54,7 @@
  *  - Settings#themeFontSize() - Text font size.
  *  - Settings#themeFontBold() - Whether to use a bold font in exercise and input text.
  *  - Settings#themeFontItalic() - Whether to use an italic font in exercise and input text.
+ *  - Settings#themeFontUnderline() - Whether to use an underlined font in exercise and input text.
  */
 class Settings
 {
@@ -139,6 +140,10 @@ class Settings
 		static bool themeFontItalic(void);
 		static bool containsThemeFontItalic(void);
 		static void setThemeFontItalic(bool value);
+		// themeFontUnderline
+		static bool themeFontUnderline(void);
+		static bool containsThemeFontUnderline(void);
+		static void setThemeFontUnderline(bool value);
 
 	private:
 		static QSettings *settingsInstance;

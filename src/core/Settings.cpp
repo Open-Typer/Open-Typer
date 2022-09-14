@@ -268,3 +268,14 @@ bool Settings::containsThemeFontItalic(void) { return contains("theme/fontitalic
 
 /*! Setter for theme/fontitalic. */
 void Settings::setThemeFontItalic(bool value) { set("theme/fontitalic", value); }
+
+// themeFontUnderline
+
+/*! Getter for theme/fontunderline. */
+bool Settings::themeFontUnderline(void) { return get("theme/fontunderline", false).toBool(); }
+
+/*! Returns true if there's a theme/fontunderline key. */
+bool Settings::containsThemeFontUnderline(void) { return contains("theme/fontunderline"); }
+
+/*! Setter for theme/fontunderline. */
+void Settings::setThemeFontUnderline(bool value) { set("theme/fontunderline", value); }
