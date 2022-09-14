@@ -298,7 +298,8 @@ QRgb Settings::exerciseTextColor(void)
 {
 	return QColor(get("theme/leveltextred", 0).toInt(),
 		get("theme/leveltextgreen", 0).toInt(),
-		get("theme/leveltextblue", 0).toInt()).rgb();
+		get("theme/leveltextblue", 0).toInt())
+		.rgb();
 }
 
 /*! Returns true if there's are all exercise text color keys. */
@@ -323,7 +324,8 @@ QRgb Settings::inputTextColor(void)
 {
 	return QColor(get("theme/inputtextred", 0).toInt(),
 		get("theme/inputtextgreen", 0).toInt(),
-		get("theme/inputtextblue", 0).toInt()).rgb();
+		get("theme/inputtextblue", 0).toInt())
+		.rgb();
 }
 
 /*! Returns true if there's are all input text color keys. */
@@ -370,7 +372,8 @@ QRgb Settings::bgColor(void)
 {
 	return QColor(get("theme/bgred", 0).toInt(),
 		get("theme/bggreen", 0).toInt(),
-		get("theme/bgblue", 0).toInt()).rgb();
+		get("theme/bgblue", 0).toInt())
+		.rgb();
 }
 
 /*! Returns true if there's are all background color keys. */
@@ -406,7 +409,8 @@ QRgb Settings::paperColor(void)
 {
 	return QColor(get("theme/paperred", 0).toInt(),
 		get("theme/papergreen", 0).toInt(),
-		get("theme/paperblue", 0).toInt()).rgb();
+		get("theme/paperblue", 0).toInt())
+		.rgb();
 }
 
 /*! Returns true if there's are all paper color keys. */
