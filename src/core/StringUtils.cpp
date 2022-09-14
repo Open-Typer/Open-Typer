@@ -367,7 +367,6 @@ QMap<int, QVariantMap> StringUtils::generateDiffList(QStringList *sourceWords, Q
 /*! Compares input text with exercise text and finds mistakes. */
 QList<QVariantMap> StringUtils::findMistakes(QString exerciseText, QString input, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, QStringList *errorWords)
 {
-	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QList<QVariantMap> out;
 	int i;
 	// Split lines
@@ -418,9 +417,9 @@ QList<QVariantMap> StringUtils::findMistakes(QString exerciseText, QString input
 				int wordStart = pos;
 				auto diff = compareStrings(differences[i]["previous"].toString(), inputWords[i], &recordedCharacters, &hits, &pos);
 				// Ensure there's max. one mistake per n characters (depends on settings)
-				if(settings.value("main/mistakelimit", true).toBool())
+				if(Settings::mistakeLimit())
 				{
-					int charCount = settings.value("main/mistakechars", 6).toInt();
+					int charCount = Settings::mistakeChars();
 					int lastMistakePos = -1;
 					for(int i2 = 0; i2 < diff.count(); i2++)
 					{
