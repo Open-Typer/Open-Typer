@@ -246,3 +246,14 @@ bool Settings::containsThemeFontSize(void) { return contains("theme/fontsize"); 
 
 /*! Setter for theme/fontsize. */
 void Settings::setThemeFontSize(int value) { set("theme/fontsize", value); }
+
+// themeFontBold
+
+/*! Getter for theme/fontbold. */
+bool Settings::themeFontBold(void) { return get("theme/fontbold", true).toBool(); }
+
+/*! Returns true if there's a theme/fontbold key. */
+bool Settings::containsThemeFontBold(void) { return contains("theme/fontbold"); }
+
+/*! Setter for theme/fontbold. */
+void Settings::setThemeFontBold(bool value) { set("theme/fontbold", value); }

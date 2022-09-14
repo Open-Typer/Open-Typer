@@ -52,6 +52,7 @@
  *  - Settings#serverPort() - Server port (used by client or server).
  *  - Settings#themeFont() - Text font family name.
  *  - Settings#themeFontSize() - Text font size.
+ *  - Settings#themeFontBold() - Whether to use a bold font in exercise and input text.
  */
 class Settings
 {
@@ -129,6 +130,10 @@ class Settings
 		static int themeFontSize(void);
 		static bool containsThemeFontSize(void);
 		static void setThemeFontSize(int value);
+		// themeFontBold
+		static bool themeFontBold(void);
+		static bool containsThemeFontBold(void);
+		static void setThemeFontBold(bool value);
 
 	private:
 		static QSettings *settingsInstance;
