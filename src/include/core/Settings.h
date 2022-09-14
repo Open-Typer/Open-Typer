@@ -48,6 +48,7 @@
  *  - Settings#serverFullMode() - Whether to enable server full mode (teacher and student accounts, database, etc.).
  *  - Settings#mistakeLimit() - Whether to limit number of mistakes in per characters in words.
  *  - Settings#mistakeChars() - Number of characters in one word with max. 1 mistake.
+ *  - Settings#serverAddress() - The IPv4 address of the server (used by client).
  */
 class Settings
 {
@@ -109,6 +110,10 @@ class Settings
 		static int mistakeChars(void);
 		static bool containsMistakeChars(void);
 		static void setMistakeChars(int value);
+		// serverAddress
+		static QString serverAddress(void);
+		static bool containsServerAddress(void);
+		static void setServerAddress(QString value);
 
 	private:
 		static QSettings *settingsInstance;

@@ -202,3 +202,14 @@ bool Settings::containsMistakeChars(void) { return contains("main/mistakechars")
 
 /*! Setter for main/mistakechars. */
 void Settings::setMistakeChars(int value) { set("main/mistakechars", value); }
+
+// serverAddress
+
+/*! Getter for server/address. */
+QString Settings::serverAddress(void) { return get("server/address", "127.0.0.1").toString(); }
+
+/*! Returns true if there's a server/address key. */
+bool Settings::containsServerAddress(void) { return contains("server/address"); }
+
+/*! Setter for server/address. */
+void Settings::setServerAddress(QString value) { set("server/address", value); }
