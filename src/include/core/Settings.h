@@ -51,6 +51,7 @@
  *  - Settings#serverAddress() - The IPv4 address of the server (used by client).
  *  - Settings#serverPort() - Server port (used by client or server).
  *  - Settings#themeFont() - Text font family name.
+ *  - Settings#themeFontSize() - Text font size.
  */
 class Settings
 {
@@ -124,6 +125,10 @@ class Settings
 		static QString themeFont(void);
 		static bool containsThemeFont(void);
 		static void setThemeFont(QString value);
+		// themeFontSize
+		static int themeFontSize(void);
+		static bool containsThemeFontSize(void);
+		static void setThemeFontSize(int value);
 
 	private:
 		static QSettings *settingsInstance;

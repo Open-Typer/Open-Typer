@@ -235,3 +235,14 @@ bool Settings::containsThemeFont(void) { return contains("theme/font"); }
 
 /*! Setter for theme/font. */
 void Settings::setThemeFont(QString value) { set("theme/font", value); }
+
+// themeFontSize
+
+/*! Getter for theme/fontsize. */
+int Settings::themeFontSize(void) { return get("theme/fontsize", 20).toInt(); }
+
+/*! Returns true if there's a theme/fontsize key. */
+bool Settings::containsThemeFontSize(void) { return contains("theme/fontsize"); }
+
+/*! Setter for theme/fontsize. */
+void Settings::setThemeFontSize(int value) { set("theme/fontsize", value); }
