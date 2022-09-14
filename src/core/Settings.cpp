@@ -213,3 +213,14 @@ bool Settings::containsServerAddress(void) { return contains("server/address"); 
 
 /*! Setter for server/address. */
 void Settings::setServerAddress(QString value) { set("server/address", value); }
+
+// serverPort
+
+/*! Getter for server/port. */
+uint Settings::serverPort(void) { return get("server/port", 57100).toUInt(); }
+
+/*! Returns true if there's a server/port key. */
+bool Settings::containsServerPort(void) { return contains("server/port"); }
+
+/*! Setter for server/port. */
+void Settings::setServerPort(uint value) { set("server/port", value); }

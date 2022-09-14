@@ -49,6 +49,7 @@
  *  - Settings#mistakeLimit() - Whether to limit number of mistakes in per characters in words.
  *  - Settings#mistakeChars() - Number of characters in one word with max. 1 mistake.
  *  - Settings#serverAddress() - The IPv4 address of the server (used by client).
+ *  - Settings#serverPort() - Server port (used by client or server).
  */
 class Settings
 {
@@ -114,6 +115,10 @@ class Settings
 		static QString serverAddress(void);
 		static bool containsServerAddress(void);
 		static void setServerAddress(QString value);
+		// serverPort
+		static uint serverPort(void);
+		static bool containsServerPort(void);
+		static void setServerPort(uint value);
 
 	private:
 		static QSettings *settingsInstance;
