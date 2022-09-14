@@ -57,9 +57,10 @@
  *  - Settings#themeFontBold() - Whether to use a bold font in exercise and input text.
  *  - Settings#themeFontItalic() - Whether to use an italic font in exercise and input text.
  *  - Settings#themeFontUnderline() - Whether to use an underlined font in exercise and input text.
- *  - Settings#customExerciseTextColor() - If false, the text color is based on the theme.
+ *  - Settings#customExerciseTextColor() - If false, the exercise text color is based on the theme.
  *  - Settings#exerciseTextColor() - Exercise text color.
  *  - Settings#inputTextColor() - Input text color.
+ *  - Settings#customInputTextColor() - If false, the default input text color is used.
  */
 class Settings
 {
@@ -161,6 +162,10 @@ class Settings
 		static QRgb inputTextColor(void);
 		static bool containsInputTextColor(void);
 		static void setInputTextColor(QRgb value);
+		// customInputTextColor
+		static bool customInputTextColor(void);
+		static bool containsCustomInputTextColor(void);
+		static void setCustomInputTextColor(bool value);
 
 	private:
 		static QSettings *settingsInstance;

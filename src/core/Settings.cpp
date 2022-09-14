@@ -340,3 +340,14 @@ void Settings::setInputTextColor(QRgb value)
 	set("theme/inputtextgreen", color.green());
 	set("theme/inputtextblue", color.blue());
 }
+
+// customInputTextColor
+
+/*! Getter for theme/custominputtextcolor. */
+bool Settings::customInputTextColor(void) { return get("theme/custominputtextcolor", false).toBool(); }
+
+/*! Returns true if there's a theme/custominputtextcolor key. */
+bool Settings::containsCustomInputTextColor(void) { return contains("theme/custominputtextcolor"); }
+
+/*! Setter for theme/custominputtextcolor. */
+void Settings::setCustomInputTextColor(bool value) { set("theme/custominputtextcolor", value); }
