@@ -28,324 +28,177 @@ void Settings::init(void)
 	settingsInstance = new QSettings(FileUtils::mainSettingsLocation(), QSettings::IniFormat, qApp);
 }
 
+/*! Returns the value of the given key. */
+QVariant Settings::get(QString key, QVariant defaultValue)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->value(key, defaultValue);
+}
+
+/*! Returns true if the given key exists. */
+bool Settings::contains(QString key)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	return settingsInstance->contains(key);
+}
+
+/*! Sets the key value. */
+void Settings::set(QString key, QVariant value)
+{
+	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance->setValue(key, value);
+}
+
 // clientDisabled
 
 /*! Getter for main/clientdisabled. */
-bool Settings::clientDisabled(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/clientdisabled", false).toBool();
-}
+bool Settings::clientDisabled(void) { return get("main/clientdisabled", false).toBool(); }
 
 /*! Returns true if there's a main/clientdisabled key. */
-bool Settings::containsClientDisabled(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/clientdisabled");
-}
+bool Settings::containsClientDisabled(void) { return contains("main/clientdisabled"); }
 
 /*! Setter for main/clientdisabled. */
-void Settings::setClientDisabled(bool value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/clientdisabled", value);
-}
+void Settings::setClientDisabled(bool value) { set("main/clientdisabled", value); }
 
 // language
 
 /*! Getter for main/language. */
-QString Settings::language(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/language", "").toString();
-}
+QString Settings::language(void) { return get("main/language", "").toString(); }
 
 /*! Returns true if there's a main/language key. */
-bool Settings::containsLanguage(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/language");
-}
+bool Settings::containsLanguage(void) { return contains("main/language"); }
 
 /*! Setter for main/language. */
-void Settings::setLanguage(QString value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/language", value);
-}
+void Settings::setLanguage(QString value) { set("main/language", value); }
 
 // windowState
 
 /*! Getter for main/windowState. */
-QByteArray Settings::windowState(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/windowState", "").toByteArray();
-}
+QByteArray Settings::windowState(void) { return get("main/windowState", "").toByteArray(); }
 
 /*! Returns true if there's a main/windowState key. */
-bool Settings::containsWindowState(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/windowState");
-}
+bool Settings::containsWindowState(void) { return contains("main/windowState"); }
 
 /*! Setter for main/windowState. */
-void Settings::setWindowState(QByteArray value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/windowState", value);
-}
+void Settings::setWindowState(QByteArray value) { set("main/windowState", value); }
 
 // windowGeometry
 
 /*! Getter for main/windowGeometry. */
-QByteArray Settings::windowGeometry(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/windowGeometry", "").toByteArray();
-}
+QByteArray Settings::windowGeometry(void) { return get("main/windowGeometry", "").toByteArray(); }
 
 /*! Returns true if there's a main/windowGeometry key. */
-bool Settings::containsWindowGeometry(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/windowGeometry");
-}
+bool Settings::containsWindowGeometry(void) { return contains("main/windowGeometry"); }
 
 /*! Setter for main/windowGeometry. */
-void Settings::setWindowGeometry(QByteArray value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/windowGeometry", value);
-}
+void Settings::setWindowGeometry(QByteArray value) { set("main/windowGeometry", value); }
 
 // updateChecks
 
 /*! Getter for main/updatechecks. */
-bool Settings::updateChecks(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/updatechecks", true).toBool();
-}
+bool Settings::updateChecks(void) { return get("main/updatechecks", true).toBool(); }
 
 /*! Returns true if there's a main/updatechecks key. */
-bool Settings::containsUpdateChecks(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/updatechecks");
-}
+bool Settings::containsUpdateChecks(void) { return contains("main/updatechecks"); }
 
 /*! Setter for main/updatechecks. */
-void Settings::setUpdateChecks(bool value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/updatechecks", value);
-}
+void Settings::setUpdateChecks(bool value) { set("main/updatechecks", value); }
 
 // networkEnabled
 
 /*! Getter for main/networkEnabled. */
-bool Settings::networkEnabled(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/networkEnabled", false).toBool();
-}
+bool Settings::networkEnabled(void) { return get("main/networkEnabled", false).toBool(); }
 
 /*! Returns true if there's a main/networkEnabled key. */
-bool Settings::containsNetworkEnabled(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/networkEnabled");
-}
+bool Settings::containsNetworkEnabled(void) { return contains("main/networkEnabled"); }
 
 /*! Setter for main/networkEnabled. */
-void Settings::setNetworkEnabled(bool value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/networkEnabled", value);
-}
+void Settings::setNetworkEnabled(bool value) { set("main/networkEnabled", value); }
 
 // networkMode
 
 /*! Getter for server/mode. */
-int Settings::networkMode(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("server/mode", 2).toInt();
-}
+int Settings::networkMode(void) { return get("server/mode", 2).toInt(); }
 
 /*! Returns true if there's a server/mode key. */
-bool Settings::containsNetworkMode(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("server/mode");
-}
+bool Settings::containsNetworkMode(void) { return contains("server/mode"); }
 
 /*! Setter for server/mode. */
-void Settings::setNetworkMode(int value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("server/mode", value);
-}
+void Settings::setNetworkMode(int value) { set("server/mode", value); }
 
 // lessonPack
 
 /*! Getter for main/configfile. */
-QString Settings::lessonPack(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/configfile", "").toString();
-}
+QString Settings::lessonPack(void) { return get("main/configfile", "").toString(); }
 
 /*! Returns true if there's a main/configfile key. */
-bool Settings::containsLessonPack(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/configfile");
-}
+bool Settings::containsLessonPack(void) { return contains("main/configfile"); }
 
 /*! Setter for main/configfile. */
-void Settings::setLessonPack(QString value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/configfile", value);
-}
+void Settings::setLessonPack(QString value) { set("main/configfile", value); }
 
 // customLessonPack
 
 /*! Getter for main/customconfig. */
-bool Settings::customLessonPack(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/customconfig", false).toBool();
-}
+bool Settings::customLessonPack(void) { return get("main/customconfig", false).toBool(); }
 
 /*! Returns true if there's a main/customconfig key. */
-bool Settings::containsCustomLessonPack(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/customconfig");
-}
+bool Settings::containsCustomLessonPack(void) { return contains("main/customconfig"); }
 
 /*! Setter for main/customconfig. */
-void Settings::setCustomLessonPack(bool value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/customconfig", value);
-}
+void Settings::setCustomLessonPack(bool value) { set("main/customconfig", value); }
 
 // spaceNewLine
 
 /*! Getter for main/spacenewline. */
-bool Settings::spaceNewLine(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/spacenewline", true).toBool();
-}
+bool Settings::spaceNewLine(void) { return get("main/spacenewline", true).toBool(); }
 
 /*! Returns true if there's a main/spacenewline key. */
-bool Settings::containsSpaceNewLine(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/spacenewline");
-}
+bool Settings::containsSpaceNewLine(void) { return contains("main/spacenewline"); }
 
 /*! Setter for main/spacenewline. */
-void Settings::setSpaceNewLine(bool value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/spacenewline", value);
-}
+void Settings::setSpaceNewLine(bool value) { set("main/spacenewline", value); }
 
 // errorPenalty
 
 /*! Getter for main/errorpenalty. */
-int Settings::errorPenalty(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/errorpenalty", 10).toInt();
-}
+int Settings::errorPenalty(void) { return get("main/errorpenalty", 10).toInt(); }
 
 /*! Returns true if there's a main/errorpenalty key. */
-bool Settings::containsErrorPenalty(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/errorpenalty");
-}
+bool Settings::containsErrorPenalty(void) { return contains("main/errorpenalty"); }
 
 /*! Setter for main/errorpenalty. */
-void Settings::setErrorPenalty(int value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/errorpenalty", value);
-}
+void Settings::setErrorPenalty(int value) { set("main/errorpenalty", value); }
 
 // serverFullMode
 
 /*! Getter for server/fullmode. */
-bool Settings::serverFullMode(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("server/fullmode", false).toBool();
-}
+bool Settings::serverFullMode(void) { return get("server/fullmode", false).toBool(); }
 
 /*! Returns true if there's a server/fullmode key. */
-bool Settings::containsServerFullMode(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("server/fullmode");
-}
+bool Settings::containsServerFullMode(void) { return contains("server/fullmode"); }
 
 /*! Setter for server/fullmode. */
-void Settings::setServerFullMode(bool value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("server/fullmode", value);
-}
+void Settings::setServerFullMode(bool value) { set("server/fullmode", value); }
 
 // mistakeLimit
 
 /*! Getter for main/mistakelimit. */
-bool Settings::mistakeLimit(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/mistakelimit", true).toBool();
-}
+bool Settings::mistakeLimit(void) { return get("main/mistakelimit", true).toBool(); }
 
 /*! Returns true if there's a main/mistakelimit key. */
-bool Settings::containsMistakeLimit(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/mistakelimit");
-}
+bool Settings::containsMistakeLimit(void) { return contains("main/mistakelimit"); }
 
 /*! Setter for main/mistakelimit. */
-void Settings::setMistakeLimit(bool value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/mistakelimit", value);
-}
+void Settings::setMistakeLimit(bool value) { set("main/mistakelimit", value); }
 
 // mistakeChars
 
 /*! Getter for main/mistakechars. */
-int Settings::mistakeChars(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->value("main/mistakechars", 6).toInt();
-}
+int Settings::mistakeChars(void) { return get("main/mistakechars", 6).toInt(); }
 
 /*! Returns true if there's a main/mistakechars key. */
-bool Settings::containsMistakeChars(void)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	return settingsInstance->contains("main/mistakechars");
-}
+bool Settings::containsMistakeChars(void) { return contains("main/mistakechars"); }
 
 /*! Setter for main/mistakechars. */
-void Settings::setMistakeChars(int value)
-{
-	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance->setValue("main/mistakechars", value);
-}
+void Settings::setMistakeChars(int value) { set("main/mistakechars", value); }

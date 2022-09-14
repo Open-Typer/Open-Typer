@@ -112,6 +112,9 @@ class Settings
 
 	private:
 		static QSettings *settingsInstance;
+		static QVariant get(QString key, QVariant defaultValue);
+		static bool contains(QString key);
+		static void set(QString key, QVariant value);
 };
 
 #endif // SETTINGS_H
