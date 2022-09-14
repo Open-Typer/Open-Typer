@@ -351,3 +351,14 @@ bool Settings::containsCustomInputTextColor(void) { return contains("theme/custo
 
 /*! Setter for theme/custominputtextcolor. */
 void Settings::setCustomInputTextColor(bool value) { set("theme/custominputtextcolor", value); }
+
+// customBgColor
+
+/*! Getter for theme/custombgcolor. */
+bool Settings::customBgColor(void) { return get("theme/custombgcolor", false).toBool(); }
+
+/*! Returns true if there's a theme/custombgcolor key. */
+bool Settings::containsCustomBgColor(void) { return contains("theme/custombgcolor"); }
+
+/*! Setter for theme/custombgcolor. */
+void Settings::setCustomBgColor(bool value) { set("theme/custombgcolor", value); }

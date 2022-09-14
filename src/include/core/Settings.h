@@ -61,6 +61,7 @@
  *  - Settings#exerciseTextColor() - Exercise text color.
  *  - Settings#inputTextColor() - Input text color.
  *  - Settings#customInputTextColor() - If false, the default input text color is used.
+ *  - Settings#customBgColor() - If false, the background color is based on the theme.
  */
 class Settings
 {
@@ -166,6 +167,10 @@ class Settings
 		static bool customInputTextColor(void);
 		static bool containsCustomInputTextColor(void);
 		static void setCustomInputTextColor(bool value);
+		// customBgColor
+		static bool customBgColor(void);
+		static bool containsCustomBgColor(void);
+		static void setCustomBgColor(bool value);
 
 	private:
 		static QSettings *settingsInstance;
