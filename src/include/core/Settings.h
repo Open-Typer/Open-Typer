@@ -23,6 +23,8 @@
 
 #include <QSettings>
 #include <QApplication>
+#include <QRgb>
+#include <QColor>
 #include "core/FileUtils.h"
 
 /*!
@@ -56,6 +58,7 @@
  *  - Settings#themeFontItalic() - Whether to use an italic font in exercise and input text.
  *  - Settings#themeFontUnderline() - Whether to use an underlined font in exercise and input text.
  *  - Settings#customExerciseTextColor() - If false, the text color is based on the theme.
+ *  - Settings#exerciseTextColor() - Exercise text color.
  */
 class Settings
 {
@@ -149,6 +152,10 @@ class Settings
 		static bool customExerciseTextColor(void);
 		static bool containsCustomExerciseTextColor(void);
 		static void setCustomExerciseTextColor(bool value);
+		// exerciseTextColor
+		static QRgb exerciseTextColor(void);
+		static bool containsExerciseTextColor(void);
+		static void setExerciseTextColor(QRgb value);
 
 	private:
 		static QSettings *settingsInstance;

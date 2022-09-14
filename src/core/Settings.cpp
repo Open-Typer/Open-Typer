@@ -290,3 +290,28 @@ bool Settings::containsCustomExerciseTextColor(void) { return contains("theme/cu
 
 /*! Setter for theme/customleveltextcolor. */
 void Settings::setCustomExerciseTextColor(bool value) { set("theme/customleveltextcolor", value); }
+
+// exerciseTextColor
+
+/*! Getter for exercise text color (theme/leveltextred, theme/leveltextgreen, theme/leveltextblue). */
+QRgb Settings::exerciseTextColor(void)
+{
+	return QColor(get("theme/leveltextred", 0).toInt(),
+		get("theme/leveltextgreen", 0).toInt(),
+		get("theme/leveltextblue", 0).toInt()).rgb();
+}
+
+/*! Returns true if there's are all exercise text color keys. */
+bool Settings::containsExerciseTextColor(void)
+{
+	return (contains("theme/leveltextred") && contains("theme/leveltextgreen") && contains("theme/leveltextblue"));
+}
+
+/*! Setter for exercise text color. */
+void Settings::setExerciseTextColor(QRgb value)
+{
+	QColor color(value);
+	set("theme/leveltextred", color.red());
+	set("theme/leveltextgreen", color.green());
+	set("theme/leveltextblue", color.blue());
+}
