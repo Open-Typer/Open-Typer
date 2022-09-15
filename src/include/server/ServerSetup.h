@@ -22,7 +22,6 @@
 #define SERVERSETUP_H
 
 #include <QDialog>
-#include <QSettings>
 #include "core/DatabaseManager.h"
 #include "core/StringUtils.h"
 
