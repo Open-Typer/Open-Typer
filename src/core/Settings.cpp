@@ -427,3 +427,14 @@ void Settings::setPaperColor(QRgb value)
 	set("theme/papergreen", color.green());
 	set("theme/paperblue", color.blue());
 }
+
+// customPanelColor
+
+/*! Getter for theme/custompanelcolor. */
+bool Settings::customPanelColor(void) { return get("theme/custompanelcolor", false).toBool(); }
+
+/*! Returns true if there's a theme/custompanelcolor key. */
+bool Settings::containsCustomPanelColor(void) { return contains("theme/custompanelcolor"); }
+
+/*! Setter for theme/custompanelcolor. */
+void Settings::setCustomPanelColor(bool value) { set("theme/custompanelcolor", value); }
