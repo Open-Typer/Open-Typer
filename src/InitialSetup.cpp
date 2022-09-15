@@ -24,8 +24,7 @@
 /*! Constructs InitialSetup. */
 InitialSetup::InitialSetup(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::InitialSetup),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	ui(new Ui::InitialSetup)
 {
 	ui->setupUi(this);
 	loadList();
@@ -50,8 +49,8 @@ InitialSetup::~InitialSetup()
 /*! Saves settings and closes the dialog. */
 void InitialSetup::finish(void)
 {
-	settings.setValue("main/configfile", rawItems[ui->packList->currentRow()]);
-	settings.setValue("main/customconfig", false);
+	Settings::setLessonPack(rawItems[ui->packList->currentRow()]);
+	Settings::setCustomLessonPack(false);
 	accept();
 }
 

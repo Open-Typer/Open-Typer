@@ -26,6 +26,7 @@
 #include "options/AppearanceOptions.h"
 #include "core/BuiltInPacks.h"
 #include "core/FileUtils.h"
+#include "core/Settings.h"
 
 namespace Ui {
 	class InitialSetup;
@@ -46,7 +47,6 @@ class InitialSetup : public QDialog
 	private:
 		Ui::InitialSetup *ui;
 		QStringList rawItems;
-		QSettings settings;
 
 	private slots:
 		void finish(void);
