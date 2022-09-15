@@ -24,8 +24,7 @@
 /*! Constructs ServerManager. */
 ServerManager::ServerManager(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::ServerManager),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	ui(new Ui::ServerManager)
 {
 	ui->setupUi(this);
 	ui->editDeviceButton->setEnabled(false);
@@ -66,7 +65,7 @@ bool ServerManager::init(void)
 	connect(serverPtr, &MonitorServer::connectedDevicesChanged, this, &ServerManager::loadDevices);
 #endif // Q_OS_WASM
 	bool ret = true;
-	fullMode = settings.value("server/fullmode", false).toBool();
+	fullMode = Settings::serverFullMode();
 	if(fullMode)
 	{
 		ui->easyControlsFrame->hide();

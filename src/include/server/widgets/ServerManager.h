@@ -29,6 +29,7 @@
 #include "server/DeviceEdit.h"
 #include "server/widgets/ClassControls.h"
 #include "server/widgets/StudentDetails.h"
+#include "core/Settings.h"
 
 namespace Ui {
 	class ServerManager;
@@ -52,7 +53,6 @@ class ServerManager : public QWidget
 		QList<int> classes;
 		bool disableClassOpening = false;
 		int lastClassBoxIndex = -1;
-		QSettings settings;
 		bool fullMode;
 
 	protected:
