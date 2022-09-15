@@ -53,7 +53,6 @@ class OptionsWindow : public QDialog
 	private:
 		Ui::OptionsWindow *ui;
 		QWidget *currentWidget = nullptr;
-		QSettings settings;
 		void setupList(void);
 
 	protected:

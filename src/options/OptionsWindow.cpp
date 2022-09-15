@@ -25,12 +25,11 @@
 /*! Constructs OptionsWindow. */
 OptionsWindow::OptionsWindow(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::OptionsWindow),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	ui(new Ui::OptionsWindow)
 {
 	ui->setupUi(this);
 	setAttribute(Qt::WA_DeleteOnClose, true);
-	if(settings.value("main/settingslock_enabled", false).toBool())
+	if(Settings::settingsLockEnabled())
 		ui->widget->setEnabled(false);
 	else
 	{
@@ -129,7 +128,7 @@ void OptionsWindow::changeEvent(QEvent *event)
 /*! Asks for a password and unlocks settings. */
 void OptionsWindow::unlockSettings(void)
 {
-	if(settings.contains("main/settingslock_passwd"))
+	if(Settings::containsSettingsLockPasswd() && (Settings::settingsLockPasswd() != "-")) // "-" means that there's no password set
 	{
 		QInputDialog *dialog = new QInputDialog(this);
 		dialog->setWindowModality(Qt::WindowModal);
@@ -139,7 +138,7 @@ void OptionsWindow::unlockSettings(void)
 		connect(dialog, &QDialog::accepted, this, [this, dialog]() {
 			QCryptographicHash hash(QCryptographicHash::Sha256);
 			hash.addData(dialog->textValue().toUtf8());
-			if(hash.result().toHex() == settings.value("main/settingslock_passwd").toString())
+			if(hash.result().toHex() == Settings::settingsLockPasswd())
 			{
 				// Password verification succeeded
 				ui->settingsLockLabel->hide();
