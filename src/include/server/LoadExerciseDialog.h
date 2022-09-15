@@ -24,7 +24,6 @@
 #include <QDialog>
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QSettings>
 #include "core/ConfigParser.h"
 #include "core/DatabaseManager.h"
 
@@ -61,7 +60,6 @@ class LoadExerciseDialog : public QDialog
 		QString fileName = "";
 		QList<int> m_targets;
 		QMap<int, QCheckBox *> targets;
-		QSettings settings;
 		QString m_exerciseText = "";
 		int m_lineLength = 0;
 		bool m_includeNewLines = false;

@@ -25,8 +25,7 @@
 LoadExerciseDialog::LoadExerciseDialog(QList<int> availableTargets, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::LoadExerciseDialog),
-	m_targets(availableTargets),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	m_targets(availableTargets)
 {
 	init();
 }
@@ -34,8 +33,7 @@ LoadExerciseDialog::LoadExerciseDialog(QList<int> availableTargets, QWidget *par
 /*! Constructs LoadExerciseDialog for use on the local computer. */
 LoadExerciseDialog::LoadExerciseDialog(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::LoadExerciseDialog),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	ui(new Ui::LoadExerciseDialog)
 {
 	local = true;
 	init();
@@ -54,8 +52,8 @@ void LoadExerciseDialog::init(void)
 	QString exerciseTr = ConfigParser::exerciseTr(publicPos::currentExercise);
 	ui->selectedExButton->setText(oldText.arg(lessonTr + ", " + sublessonTr + ", " + exerciseTr));
 	// Load selected exercise
-	QString packPath = "", packName = settings.value("main/configfile", "").toString();
-	if(settings.value("main/customconfig", false).toBool())
+	QString packPath = "", packName = Settings::lessonPack();
+	if(Settings::customLessonPack())
 		packPath = packName;
 	else
 		packPath = ":/res/configs/" + packName;
@@ -77,7 +75,7 @@ void LoadExerciseDialog::init(void)
 		for(int i = 0; i < m_targets.count(); i++)
 		{
 			QString name;
-			if(settings.value("server/fullmode", false).toBool())
+			if(Settings::serverFullMode())
 				name = dbMgr.userName(m_targets[i]);
 			else
 				name = dbMgr.deviceName(m_targets[i]);
