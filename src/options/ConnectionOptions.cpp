@@ -24,8 +24,7 @@
 /*! Constructs ConnectionOptions. */
 ConnectionOptions::ConnectionOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::ConnectionOptions),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	ui(new Ui::ConnectionOptions)
 {
 	ui->setupUi(this);
 	refresh();
@@ -43,7 +42,7 @@ ConnectionOptions::ConnectionOptions(QWidget *parent) :
 /*! Destroys the ConnectionOptions object. */
 ConnectionOptions::~ConnectionOptions()
 {
-	if(settings.value("main/networkEnabled", false).toBool() && (settings.value("server/mode", 2).toInt() == 2))
+	if(Settings::networkEnabled() && (Settings::networkMode() == 2))
 		testConnection(true);
 	delete ui;
 }
@@ -52,7 +51,7 @@ ConnectionOptions::~ConnectionOptions()
 void ConnectionOptions::refresh(void)
 {
 #ifndef Q_OS_WASM
-	int mode = settings.value("server/mode", 2).toInt();
+	int mode = Settings::networkMode();
 	bool serverMode = (mode == 1);
 	if(serverMode)
 	{
@@ -60,7 +59,7 @@ void ConnectionOptions::refresh(void)
 			serverPtr = new MonitorServer;
 		ui->serverButton->setChecked(true);
 		ui->fullModeCheckBox->show();
-		ui->fullModeCheckBox->setChecked(settings.value("server/fullmode", false).toBool());
+		ui->fullModeCheckBox->setChecked(Settings::serverFullMode());
 	}
 	else
 	{
@@ -75,7 +74,7 @@ void ConnectionOptions::refresh(void)
 	ui->statusLabel->setVisible(!serverMode);
 	ui->statusValueLabel->setVisible(!serverMode);
 #endif // Q_OS_WASM
-	bool networkEnabled = settings.value("main/networkEnabled", false).toBool();
+	bool networkEnabled = Settings::networkEnabled();
 	ui->networkOptionsCheckBox->setChecked(networkEnabled);
 	ui->networkOptions->setEnabled(networkEnabled);
 	ui->IPEdit->setText(QHostAddress(client.serverAddress().toIPv4Address()).toString());
@@ -86,7 +85,7 @@ void ConnectionOptions::refresh(void)
 /*! Toggles network options. */
 void ConnectionOptions::toggleNetworkOptions(bool checked)
 {
-	settings.setValue("main/networkEnabled", checked);
+	Settings::setNetworkEnabled(checked);
 	refresh();
 }
 
@@ -94,16 +93,16 @@ void ConnectionOptions::toggleNetworkOptions(bool checked)
 void ConnectionOptions::changeMode(void)
 {
 	if(ui->serverButton->isChecked())
-		settings.setValue("server/mode", 1);
+		Settings::setNetworkMode(1);
 	else
-		settings.setValue("server/mode", 2);
+		Settings::setNetworkMode(2);
 	refresh();
 }
 
 /*! Toggles full mode. */
 void ConnectionOptions::setFullMode(bool enable)
 {
-	settings.setValue("server/fullmode", enable);
+	Settings::setServerFullMode(enable);
 }
 
 /*!
@@ -112,11 +111,10 @@ void ConnectionOptions::setFullMode(bool enable)
  */
 void ConnectionOptions::changeAddress(void)
 {
-	settings.setValue("server/address", ui->IPEdit->text());
-	settings.setValue("server/port", ui->portEdit->text());
-	settings.sync();
+	Settings::setServerAddress(ui->IPEdit->text());
+	Settings::setServerPort(ui->portEdit->text().toUInt());
 #ifndef Q_OS_WASM
-	if((settings.value("server/mode", 2).toInt() == 1) && serverPtr)
+	if((Settings::networkMode() == 1) && serverPtr)
 	{
 		serverPtr->close();
 		serverPtr->deleteLater();

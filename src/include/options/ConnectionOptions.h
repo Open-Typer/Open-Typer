@@ -23,6 +23,7 @@
 
 #include <QWidget>
 #include "core/FileUtils.h"
+#include "core/Settings.h"
 #include "core/MonitorClient.h"
 #ifndef Q_OS_WASM
 #include "core/MonitorServer.h"
@@ -49,7 +50,6 @@ class ConnectionOptions : public QWidget
 	private:
 		Ui::ConnectionOptions *ui;
 		MonitorClient client;
-		QSettings settings;
 
 	private slots:
 		void refresh(void);
