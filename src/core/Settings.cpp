@@ -497,3 +497,14 @@ bool Settings::containsSettingsLockEnabled(void) { return contains("main/setting
 
 /*! Setter for main/settingslock_enabled. */
 void Settings::setSettingsLockEnabled(bool value) { set("main/settingslock_enabled", value); }
+
+// settingsLockPasswd
+
+/*! Getter for main/settingslock_passwd. */
+QByteArray Settings::settingsLockPasswd(void) { return get("main/settingslock_passwd", "").toByteArray(); }
+
+/*! Returns true if there's a main/settingslock_passwd key. */
+bool Settings::containsSettingsLockPasswd(void) { return contains("main/settingslock_passwd"); }
+
+/*! Setter for main/settingslock_passwd. */
+void Settings::setSettingsLockPasswd(QByteArray value) { set("main/settingslock_passwd", value); }
