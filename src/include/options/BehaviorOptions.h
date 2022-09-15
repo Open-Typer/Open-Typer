@@ -22,7 +22,6 @@
 #define BEHAVIOROPTIONS_H
 
 #include <QWidget>
-#include <QSettings>
 #include <QInputDialog>
 #include <QCryptographicHash>
 #include <QMessageBox>
@@ -46,7 +45,6 @@ class BehaviorOptions : public QWidget
 
 	private:
 		Ui::BehaviorOptions *ui;
-		QSettings settings;
 
 	private slots:
 		void setSpaceNewline(bool value);

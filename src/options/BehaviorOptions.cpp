@@ -24,25 +24,24 @@
 /*! Constructs BehaviorOptions. */
 BehaviorOptions::BehaviorOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::BehaviorOptions),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	ui(new Ui::BehaviorOptions)
 {
 	ui->setupUi(this);
 	// Load settings
 	// Space bar newline
-	if(settings.value("main/spacenewline", "true").toBool())
+	if(Settings::spaceNewLine())
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Checked);
 	else
 		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
 	// Error penalty
-	ui->errorPenaltyBox->setValue(settings.value("main/errorpenalty", "10").toInt());
+	ui->errorPenaltyBox->setValue(Settings::errorPenalty());
 	// Mistake limit
-	bool mistakeLimit = settings.value("main/mistakelimit", true).toBool();
+	bool mistakeLimit = Settings::mistakeLimit();
 	ui->mistakeLimitCheckBox->setChecked(mistakeLimit);
 	ui->mistakeCharsBox->setEnabled(mistakeLimit);
-	ui->mistakeCharsBox->setValue(settings.value("main/mistakechars", 6).toInt());
+	ui->mistakeCharsBox->setValue(Settings::mistakeChars());
 	// Settings lock
-	ui->lockSettingsCheckBox->setChecked(settings.value("main/settingslock_enabled", false).toBool());
+	ui->lockSettingsCheckBox->setChecked(Settings::settingsLockEnabled());
 	if(!ui->lockSettingsCheckBox->isChecked())
 	{
 		ui->oldSettingsPasswdLabel->hide();
@@ -55,7 +54,7 @@ BehaviorOptions::BehaviorOptions(QWidget *parent) :
 	}
 	// Updates
 #ifdef Q_OS_WIN
-	ui->updatesCheckBox->setChecked(settings.value("main/updatechecks", true).toBool());
+	ui->updatesCheckBox->setChecked(Settings::updateChecks());
 #else
 	ui->updatesBox->hide();
 #endif // Q_OS_WIN
@@ -73,7 +72,7 @@ BehaviorOptions::BehaviorOptions(QWidget *parent) :
 	connect(ui->applySettingsLockButton, &QPushButton::clicked, this, &BehaviorOptions::setSettingsPassword);
 	// Updates check box
 	connect(ui->updatesCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
-		settings.setValue("main/updatechecks", checked);
+		Settings::setUpdateChecks(checked);
 	});
 }
 
@@ -90,9 +89,9 @@ BehaviorOptions::~BehaviorOptions()
 void BehaviorOptions::setSpaceNewline(bool value)
 {
 	if(value)
-		settings.setValue("main/spacenewline", "true");
+		Settings::setSpaceNewLine("true");
 	else
-		settings.setValue("main/spacenewline", "false");
+		Settings::setSpaceNewLine("false");
 }
 
 /*!
@@ -101,7 +100,7 @@ void BehaviorOptions::setSpaceNewline(bool value)
  */
 void BehaviorOptions::setErrorPenalty(int value)
 {
-	settings.setValue("main/errorpenalty", value);
+	Settings::setErrorPenalty(value);
 }
 
 /*!
@@ -109,7 +108,7 @@ void BehaviorOptions::setErrorPenalty(int value)
  */
 void BehaviorOptions::toggleMistakeLimit(bool checked)
 {
-	settings.setValue("main/mistakelimit", checked);
+	Settings::setMistakeLimit(checked);
 	ui->mistakeCharsBox->setEnabled(checked);
 }
 
@@ -118,7 +117,7 @@ void BehaviorOptions::toggleMistakeLimit(bool checked)
  */
 void BehaviorOptions::setMistakeChars(int value)
 {
-	settings.setValue("main/mistakechars", value);
+	Settings::setMistakeChars(value);
 }
 
 /*! Toggles settings lock. */
@@ -135,7 +134,7 @@ void BehaviorOptions::toggleSettingsLock(bool checked)
 		ui->repeatSettingsPasswdEdit->show();
 		ui->applySettingsLockButton->show();
 	}
-	else if(settings.contains("main/settingslock_passwd"))
+	else if(Settings::containsSettingsLockPasswd() && (Settings::settingsLockPasswd() != "-")) // "-" means that there's no password set
 	{
 		// User has disabled settings lock and there's an existing password
 		QInputDialog *dialog = new QInputDialog(this);
@@ -146,7 +145,7 @@ void BehaviorOptions::toggleSettingsLock(bool checked)
 		connect(dialog, &QDialog::accepted, this, [this, dialog]() {
 			QCryptographicHash hash(QCryptographicHash::Sha256);
 			hash.addData(dialog->textValue().toUtf8());
-			if(hash.result().toHex() == settings.value("main/settingslock_passwd").toString())
+			if(hash.result().toHex() == Settings::settingsLockPasswd())
 			{
 				// Password verification succeeded
 				ui->oldSettingsPasswdLabel->hide();
@@ -156,8 +155,8 @@ void BehaviorOptions::toggleSettingsLock(bool checked)
 				ui->repeatSettingsPasswdLabel->hide();
 				ui->repeatSettingsPasswdEdit->hide();
 				ui->applySettingsLockButton->hide();
-				settings.remove("main/settingslock_passwd");
-				settings.setValue("main/settingslock_enabled", false);
+				Settings::setSettingsLockPasswd("-"); // "-" means that there's no password set
+				Settings::setSettingsLockEnabled(false);
 			}
 			else
 			{
@@ -188,12 +187,12 @@ void BehaviorOptions::toggleSettingsLock(bool checked)
 void BehaviorOptions::setSettingsPassword(void)
 {
 	bool enabling = true;
-	if(settings.contains("main/settingslock_passwd"))
+	if(Settings::containsSettingsLockPasswd() && (Settings::settingsLockPasswd() != "-")) // "-" means that there's no password set
 	{
 		// User is changing existing password, verify it first
 		QCryptographicHash hash(QCryptographicHash::Sha256);
 		hash.addData(ui->oldSettingsPasswdEdit->text().toUtf8());
-		if(hash.result().toHex() != settings.value("main/settingslock_passwd").toString())
+		if(hash.result().toHex() != Settings::settingsLockPasswd())
 		{
 			QMessageBox::warning(this, QString(), tr("Incorrect password!"));
 			return;
@@ -207,8 +206,8 @@ void BehaviorOptions::setSettingsPassword(void)
 	}
 	QCryptographicHash hash(QCryptographicHash::Sha256);
 	hash.addData(ui->newSettingsPasswdEdit->text().toUtf8());
-	settings.setValue("main/settingslock_passwd", hash.result().toHex());
-	settings.setValue("main/settingslock_enabled", true);
+	Settings::setSettingsLockPasswd(hash.result().toHex());
+	Settings::setSettingsLockEnabled(true);
 	ui->oldSettingsPasswdEdit->clear();
 	ui->newSettingsPasswdEdit->clear();
 	ui->repeatSettingsPasswdEdit->clear();
