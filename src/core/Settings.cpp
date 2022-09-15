@@ -302,7 +302,7 @@ QRgb Settings::exerciseTextColor(void)
 		.rgb();
 }
 
-/*! Returns true if there's are all exercise text color keys. */
+/*! Returns true if there are all exercise text color keys. */
 bool Settings::containsExerciseTextColor(void)
 {
 	return (contains("theme/leveltextred") && contains("theme/leveltextgreen") && contains("theme/leveltextblue"));
@@ -328,7 +328,7 @@ QRgb Settings::inputTextColor(void)
 		.rgb();
 }
 
-/*! Returns true if there's are all input text color keys. */
+/*! Returns true if there are all input text color keys. */
 bool Settings::containsInputTextColor(void)
 {
 	return (contains("theme/inputtextred") && contains("theme/inputtextgreen") && contains("theme/inputtextblue"));
@@ -376,7 +376,7 @@ QRgb Settings::bgColor(void)
 		.rgb();
 }
 
-/*! Returns true if there's are all background color keys. */
+/*! Returns true if there are all background color keys. */
 bool Settings::containsBgColor(void)
 {
 	return (contains("theme/bgred") && contains("theme/bggreen") && contains("theme/bgblue"));
@@ -413,7 +413,7 @@ QRgb Settings::paperColor(void)
 		.rgb();
 }
 
-/*! Returns true if there's are all paper color keys. */
+/*! Returns true if there are all paper color keys. */
 bool Settings::containsPaperColor(void)
 {
 	return (contains("theme/paperred") && contains("theme/papergreen") && contains("theme/paperblue"));
