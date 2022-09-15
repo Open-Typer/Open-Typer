@@ -66,6 +66,7 @@
  *  - Settings#customPaperColor() - If false, the paper color is based on the theme.
  *  - Settings#paperColor() - Paper color.
  *  - Settings#customPanelColor() - If false, the panel color is based on the theme.
+ *  - Settings#panelColor() - Top and bottom panel color.
  */
 class Settings
 {
@@ -191,6 +192,10 @@ class Settings
 		static bool customPanelColor(void);
 		static bool containsCustomPanelColor(void);
 		static void setCustomPanelColor(bool value);
+		// panelColor
+		static QRgb panelColor(void);
+		static bool containsPanelColor(void);
+		static void setPanelColor(QRgb value);
 
 	private:
 		static QSettings *settingsInstance;

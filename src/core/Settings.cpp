@@ -438,3 +438,29 @@ bool Settings::containsCustomPanelColor(void) { return contains("theme/custompan
 
 /*! Setter for theme/custompanelcolor. */
 void Settings::setCustomPanelColor(bool value) { set("theme/custompanelcolor", value); }
+
+// panelColor
+
+/*! Getter for panel color (theme/panelred, theme/panelgreen, theme/panelblue). */
+QRgb Settings::panelColor(void)
+{
+	return QColor(get("theme/panelred", 0).toInt(),
+		get("theme/panelgreen", 0).toInt(),
+		get("theme/panelblue", 0).toInt())
+		.rgb();
+}
+
+/*! Returns true if there are all panel color keys. */
+bool Settings::containsPanelColor(void)
+{
+	return (contains("theme/panelred") && contains("theme/panelgreen") && contains("theme/panelblue"));
+}
+
+/*! Setter for panel color. */
+void Settings::setPanelColor(QRgb value)
+{
+	QColor color(value);
+	set("theme/panelred", color.red());
+	set("theme/panelgreen", color.green());
+	set("theme/panelblue", color.blue());
+}
