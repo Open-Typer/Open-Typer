@@ -70,6 +70,7 @@ class ThemeEngine;
  *  - Settings#customPanelColor() - If false, the panel color is based on the theme.
  *  - Settings#panelColor() - Top and bottom panel color.
  *  - Settings#applicationStyle() - The application style (see ThemeEngine#Style).
+ *  - Settings#applicationTheme() - The application theme (light, dark, light blue, etc.).
  */
 class Settings
 {
@@ -203,6 +204,10 @@ class Settings
 		static ThemeEngine::Style applicationStyle(void);
 		static bool containsApplicationStyle(void);
 		static void setApplicationStyle(ThemeEngine::Style value);
+		// applicationTheme
+		static QString applicationTheme(void);
+		static bool containsApplicationTheme(void);
+		static void setApplicationTheme(QString value);
 
 	private:
 		static QSettings *settingsInstance;

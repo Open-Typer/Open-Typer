@@ -476,3 +476,14 @@ bool Settings::containsApplicationStyle(void) { return contains("theme/theme"); 
 
 /*! Setter for theme/theme. */
 void Settings::setApplicationStyle(ThemeEngine::Style value) { set("theme/theme", (int) value); }
+
+// applicationTheme
+
+/*! Getter for theme/fulltheme. */
+QString Settings::applicationTheme(void) { return get("theme/fulltheme", "default").toString(); }
+
+/*! Returns true if there's a theme/fulltheme key. */
+bool Settings::containsApplicationTheme(void) { return contains("theme/fulltheme"); }
+
+/*! Setter for theme/fulltheme. */
+void Settings::setApplicationTheme(QString value) { set("theme/fulltheme", value); }
