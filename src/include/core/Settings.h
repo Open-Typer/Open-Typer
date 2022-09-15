@@ -70,6 +70,7 @@
  *  - Settings#panelColor() - Top and bottom panel color.
  *  - Settings#applicationStyle() - The application style (see ThemeEngine#Style).
  *  - Settings#applicationTheme() - The application theme (light, dark, light blue, etc.).
+ *  - Settings#settingsLockEnabled() - If true, settings will ask for a password before they can be accessed.
  */
 class Settings
 {
@@ -207,6 +208,10 @@ class Settings
 		static QString applicationTheme(void);
 		static bool containsApplicationTheme(void);
 		static void setApplicationTheme(QString value);
+		// settingsLockEnabled
+		static bool settingsLockEnabled(void);
+		static bool containsSettingsLockEnabled(void);
+		static void setSettingsLockEnabled(bool value);
 
 	private:
 		static QSettings *settingsInstance;

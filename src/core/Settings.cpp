@@ -486,3 +486,14 @@ bool Settings::containsApplicationTheme(void) { return contains("theme/fulltheme
 
 /*! Setter for theme/fulltheme. */
 void Settings::setApplicationTheme(QString value) { set("theme/fulltheme", value); }
+
+// settingsLockEnabled
+
+/*! Getter for main/settingslock_enabled. */
+bool Settings::settingsLockEnabled(void) { return get("main/settingslock_enabled", false).toBool(); }
+
+/*! Returns true if there's a main/settingslock_enabled key. */
+bool Settings::containsSettingsLockEnabled(void) { return contains("main/settingslock_enabled"); }
+
+/*! Setter for main/settingslock_enabled. */
+void Settings::setSettingsLockEnabled(bool value) { set("main/settingslock_enabled", value); }
