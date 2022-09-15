@@ -22,7 +22,6 @@
 #define USERMANAGER_H
 
 #include <QWidget>
-#include <QSettings>
 #include <QMessageBox>
 #include "UserEdit.h"
 #include "core/DatabaseManager.h"
