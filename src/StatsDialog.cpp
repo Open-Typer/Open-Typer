@@ -24,8 +24,7 @@
 /*! Constructs StatsDialog. */
 StatsDialog::StatsDialog(MonitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::StatsDialog),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	ui(new Ui::StatsDialog)
 {
 	ui->setupUi(this);
 	ui->statsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -109,7 +108,7 @@ StatsDialog::StatsDialog(MonitorClient *client, QString configName, int lesson, 
 	timeChart->setTitle(tr("Time"));
 	// Set charts theme
 	QChart::ChartTheme theme;
-	if(settings.value("theme/theme", "0").toInt() == 1)
+	if(Settings::applicationStyle() == 1)
 		theme = QChart::ChartThemeDark;
 	else
 		theme = QChart::ChartThemeLight;

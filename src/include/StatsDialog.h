@@ -26,6 +26,7 @@
 #include "core/MonitorClient.h"
 #include "core/ConfigParser.h"
 #include "core/HistoryParser.h"
+#include "core/Settings.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
 using namespace QtCharts;
@@ -50,7 +51,6 @@ class StatsDialog : public QDialog
 		Ui::StatsDialog *ui;
 		QChart *speedChart, *mistakesChart, *timeChart;
 		QLineSeries *speedSeries, *mistakesSeries, *timeSeries;
-		QSettings settings;
 };
 
 #endif // STATSDIALOG_H
