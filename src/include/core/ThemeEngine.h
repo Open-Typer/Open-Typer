@@ -28,9 +28,10 @@
 #include <QFontDatabase>
 #include <QColor>
 #include <QPalette>
-#include <QSettings>
 #include <QFile>
 #include "core/FileUtils.h"
+
+class Settings;
 
 /*! \brief The ThemeEngine class provides theme functions. */
 class ThemeEngine : public QObject
