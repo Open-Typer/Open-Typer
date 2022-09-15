@@ -259,7 +259,7 @@ QString ThemeEngine::exerciseTextStyleSheet(void)
 /*! Returns true if there's a custom input text color set. */
 bool ThemeEngine::customInputTextColor(void)
 {
-	
+
 	return Settings::customInputTextColor();
 }
 
