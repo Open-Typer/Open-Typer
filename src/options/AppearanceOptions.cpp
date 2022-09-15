@@ -24,13 +24,12 @@
 /*! Constructs AppearanceOptions. */
 AppearanceOptions::AppearanceOptions(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::AppearanceOptions),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	ui(new Ui::AppearanceOptions)
 {
 	ui->setupUi(this);
 	ui->themeCustomizationFrame->hide();
 	ui->themesFrame->show();
-	bool advancedMode = settings.value("theme/advancedtheme", false).toBool();
+	bool advancedMode = Settings::advancedTheme();
 	ui->simpleModeButton->setChecked(!advancedMode);
 	ui->advancedModeButton->setChecked(advancedMode);
 	ui->advancedControls->setVisible(advancedMode);
@@ -97,7 +96,7 @@ void AppearanceOptions::hideModeSelector(void)
 /*! Toggles advanced theme mode. */
 void AppearanceOptions::changeThemeMode(bool advanced)
 {
-	settings.setValue("theme/advancedtheme", advanced);
+	Settings::setAdvancedTheme(advanced);
 	ui->advancedControls->setVisible(advanced);
 	ui->simpleControls->setVisible(!advanced);
 }
@@ -105,7 +104,7 @@ void AppearanceOptions::changeThemeMode(bool advanced)
 /*! Sets simple theme (0 for light, 1 for dark). */
 void AppearanceOptions::setSimpleTheme(int theme)
 {
-	settings.setValue("theme/simpletheme", theme);
+	Settings::setSimpleThemeId(theme);
 	ui->lightThemeButton->setChecked(theme == 0);
 	ui->darkThemeButton->setChecked(theme == 1);
 	if(theme == 0)
@@ -117,7 +116,7 @@ void AppearanceOptions::setSimpleTheme(int theme)
 /*! Loads selected simple theme. */
 void AppearanceOptions::updateSimpleTheme(void)
 {
-	int simpleTheme = settings.value("theme/simpletheme", 0).toInt(); // 0 for light, 1 for dark
+	int simpleTheme = Settings::simpleThemeId(); // 0 for light, 1 for dark
 	if((simpleTheme == 0) && (globalThemeEngine.theme() != 4)) // default theme for "light" - light blue
 	{
 		if(globalThemeEngine.theme() == 1)
@@ -193,7 +192,7 @@ void AppearanceOptions::changeFullTheme(QListWidgetItem *item)
 /*! Select currently set full theme. */
 void AppearanceOptions::selectCurrentFullTheme(void)
 {
-	QString id = settings.value("theme/fulltheme", "default").toString();
+	QString id = Settings::applicationTheme();
 	QList<QVariantMap> themes = globalThemeEngine.themeList();
 	for(int i = 0; i < themes.count(); i++)
 	{

@@ -57,7 +57,6 @@ class AppearanceOptions : public QWidget
 		void selectCurrentFullTheme(void);
 		void updateFont(void);
 		void setColors();
-		QSettings settings;
 
 	public slots:
 		void setSimpleTheme(int theme);
