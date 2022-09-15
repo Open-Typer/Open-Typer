@@ -18,7 +18,6 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/ThemeEngine.h"
 #include "core/Settings.h"
 
 QSettings *Settings::settingsInstance = nullptr;

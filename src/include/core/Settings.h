@@ -26,8 +26,7 @@
 #include <QRgb>
 #include <QColor>
 #include "core/FileUtils.h"
-
-class ThemeEngine;
+#include "core/ThemeEngine.h"
 
 /*!
  * \brief The Settings class contains functions for application settings.
