@@ -18,6 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "core/ThemeEngine.h"
 #include "core/Settings.h"
 
 QSettings *Settings::settingsInstance = nullptr;
@@ -464,3 +465,14 @@ void Settings::setPanelColor(QRgb value)
 	set("theme/panelgreen", color.green());
 	set("theme/panelblue", color.blue());
 }
+
+// applicationStyle
+
+/*! Getter for theme/theme. */
+ThemeEngine::Style Settings::applicationStyle(void) { return (ThemeEngine::Style) get("theme/theme", 0).toInt(); }
+
+/*! Returns true if there's a theme/theme key. */
+bool Settings::containsApplicationStyle(void) { return contains("theme/theme"); }
+
+/*! Setter for theme/theme. */
+void Settings::setApplicationStyle(ThemeEngine::Style value) { set("theme/theme", (int) value); }

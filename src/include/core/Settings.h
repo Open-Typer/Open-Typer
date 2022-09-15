@@ -27,6 +27,8 @@
 #include <QColor>
 #include "core/FileUtils.h"
 
+class ThemeEngine;
+
 /*!
  * \brief The Settings class contains functions for application settings.
  *
@@ -67,6 +69,7 @@
  *  - Settings#paperColor() - Paper color.
  *  - Settings#customPanelColor() - If false, the panel color is based on the theme.
  *  - Settings#panelColor() - Top and bottom panel color.
+ *  - Settings#applicationStyle() - The application style (see ThemeEngine#Style).
  */
 class Settings
 {
@@ -196,6 +199,10 @@ class Settings
 		static QRgb panelColor(void);
 		static bool containsPanelColor(void);
 		static void setPanelColor(QRgb value);
+		// applicationStyle
+		static ThemeEngine::Style applicationStyle(void);
+		static bool containsApplicationStyle(void);
+		static void setApplicationStyle(ThemeEngine::Style value);
 
 	private:
 		static QSettings *settingsInstance;
