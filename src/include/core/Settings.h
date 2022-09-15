@@ -72,6 +72,7 @@
  *  - Settings#applicationTheme() - The application theme (light, dark, light blue, etc.).
  *  - Settings#settingsLockEnabled() - If true, settings will ask for a password before they can be accessed.
  *  - Settings#settingsLockPasswd() - Hashed password (SHA256) for settings lock.
+ *  - Settings#advancedTheme() - Whether to allow the user to select advanced themes (dark, light, light blue, etc.).
  */
 class Settings
 {
@@ -217,6 +218,10 @@ class Settings
 		static QByteArray settingsLockPasswd(void);
 		static bool containsSettingsLockPasswd(void);
 		static void setSettingsLockPasswd(QByteArray value);
+		// advancedTheme
+		static bool advancedTheme(void);
+		static bool containsAdvancedTheme(void);
+		static void setAdvancedTheme(bool value);
 
 	private:
 		static QSettings *settingsInstance;

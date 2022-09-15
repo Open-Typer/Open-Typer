@@ -508,3 +508,14 @@ bool Settings::containsSettingsLockPasswd(void) { return contains("main/settings
 
 /*! Setter for main/settingslock_passwd. */
 void Settings::setSettingsLockPasswd(QByteArray value) { set("main/settingslock_passwd", value); }
+
+// advancedTheme
+
+/*! Getter for theme/advancedtheme. */
+bool Settings::advancedTheme(void) { return get("theme/advancedtheme", false).toBool(); }
+
+/*! Returns true if there's a theme/advancedtheme key. */
+bool Settings::containsAdvancedTheme(void) { return contains("theme/advancedtheme"); }
+
+/*! Setter for theme/advancedtheme. */
+void Settings::setAdvancedTheme(bool value) { set("theme/advancedtheme", value); }
