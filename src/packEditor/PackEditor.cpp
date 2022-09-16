@@ -24,12 +24,11 @@
 /*! Constructs PackEditor and creates a new file. */
 PackEditor::PackEditor(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::PackEditor),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	ui(new Ui::PackEditor)
 {
 	ui->setupUi(this);
-	if(settings.contains("main/editorGeometry"))
-		restoreGeometry(settings.value("main/editorGeometry").toByteArray());
+	if(Settings::containsEditorGeometry())
+		restoreGeometry(Settings::editorGeometry());
 	else
 		setWindowState(Qt::WindowMaximized);
 	// File menu
@@ -169,7 +168,7 @@ void PackEditor::closeFile(bool createNew, bool open, bool openPrebuiltPack)
 			openPrebuilt();
 		else
 		{
-			settings.setValue("main/editorGeometry", saveGeometry());
+			Settings::setEditorGeometry(saveGeometry());
 			accept();
 		}
 	}
@@ -202,7 +201,7 @@ void PackEditor::closeFile(bool createNew, bool open, bool openPrebuiltPack)
 					openPrebuilt();
 				else
 				{
-					settings.setValue("main/editorGeometry", saveGeometry());
+					Settings::setEditorGeometry(saveGeometry());
 					accept();
 				}
 			}
