@@ -33,8 +33,8 @@
 #include <QTimer>
 #include <QPushButton>
 #include <QPropertyAnimation>
-#include <QSettings>
 #include "core/StringUtils.h"
+#include "core/Settings.h"
 
 /*!
  * \brief The KeyboardWidget class provides a simple virtual keyboard widget.
@@ -89,7 +89,6 @@ class KeyboardWidget : public QFrame
 		void registerKey(int x, int y, QString keyLabelText, int keyCode, int shiftKeyCode);
 		QColor resetKeyColor(QFrame *targetKey);
 		bool keyboardVisible;
-		QSettings settings;
 
 	protected:
 		void changeEvent(QEvent *event);

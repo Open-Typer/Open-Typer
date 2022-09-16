@@ -28,8 +28,7 @@ KeyboardWidget::KeyboardWidget(QWidget *parent) :
 	keyboardLayout(new QVBoxLayout(keyboardFrame)),
 	currentRow(-1),
 	currentColumn(0),
-	keyboardVisible(true),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	keyboardVisible(true)
 {
 	mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 	mainLayout->setSpacing(0);
@@ -48,7 +47,7 @@ KeyboardWidget::KeyboardWidget(QWidget *parent) :
 	keyFingerColors.clear();
 	// Close button
 	closeButton = new QPushButton(this);
-	setKeyboardVisible(settings.value("view/keyboardvisible", "true").toBool());
+	setKeyboardVisible(Settings::keyboardVisible());
 	closeButton->setIconSize(QSize(32, 32));
 	closeButton->setFocusPolicy(Qt::NoFocus);
 	mainLayout->addWidget(closeButton);
@@ -581,7 +580,7 @@ void KeyboardWidget::toggleKeyboard(void)
 /*! Sets keyboard visibility. */
 void KeyboardWidget::setKeyboardVisible(bool visible, bool changeVisibility)
 {
-	settings.setValue("view/keyboardvisible", visible);
+	Settings::setKeyboardVisible(visible);
 	if(visible)
 	{
 		closeButton->setIcon(QIcon(":/res/images/down.png"));
