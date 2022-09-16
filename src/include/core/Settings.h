@@ -75,6 +75,7 @@
  *  - Settings#advancedTheme() - Whether to allow the user to select advanced themes (dark, light, light blue, etc.).
  *  - Settings#simpleThemeId() - Simple theme (0 = light, 1 = dark).
  *  - Settings#editorGeometry() - Pack editor window geometry.
+ *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
  */
 class Settings
 {
@@ -232,6 +233,10 @@ class Settings
 		static QByteArray editorGeometry(void);
 		static bool containsEditorGeometry(void);
 		static void setEditorGeometry(QByteArray value);
+		// keyboardVisible
+		static bool keyboardVisible(void);
+		static bool containsKeyboardVisible(void);
+		static void setKeyboardVisible(bool value);
 
 	private:
 		static QSettings *settingsInstance;
