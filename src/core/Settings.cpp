@@ -530,3 +530,14 @@ bool Settings::containsSimpleThemeId(void) { return contains("theme/simpletheme"
 
 /*! Setter for theme/simpletheme. */
 void Settings::setSimpleThemeId(int value) { set("theme/simpletheme", value); }
+
+// editorGeometry
+
+/*! Getter for main/editorGeometry. */
+QByteArray Settings::editorGeometry(void) { return get("main/editorGeometry", "").toByteArray(); }
+
+/*! Returns true if there's a main/editorGeometry key. */
+bool Settings::containsEditorGeometry(void) { return contains("main/editorGeometry"); }
+
+/*! Setter for main/editorGeometry. */
+void Settings::setEditorGeometry(QByteArray value) { set("main/editorGeometry", value); }
