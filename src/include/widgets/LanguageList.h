@@ -23,7 +23,6 @@
 
 #include <QWidget>
 #include <QListWidget>
-#include <QSettings>
 #include "core/StringUtils.h"
 #include "core/LanguageManager.h"
 
@@ -45,7 +44,6 @@ class LanguageList : public QListWidget
 
 	private:
 		LanguageManager langMgr;
-		QSettings settings;
 
 	private slots:
 		void changeLanguage(int index);

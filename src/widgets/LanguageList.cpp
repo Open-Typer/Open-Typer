@@ -22,15 +22,14 @@
 
 /*! Constructs LanguageList. */
 LanguageList::LanguageList(QWidget *parent) :
-	QListWidget(parent),
-	settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat)
+	QListWidget(parent)
 {
 	clear();
 	addItems(langMgr.boxItems);
-	if(settings.value("main/language", "").toString() == "")
+	if(Settings::language() == "")
 		setCurrentRow(0);
 	else
-		setCurrentRow(langMgr.boxItems.indexOf(settings.value("main/language", "").toString()));
+		setCurrentRow(langMgr.boxItems.indexOf(Settings::language()));
 	connect(this, SIGNAL(currentRowChanged(int)), this, SLOT(changeLanguage(int)));
 }
 
@@ -45,8 +44,8 @@ LanguageList::~LanguageList() { }
 void LanguageList::changeLanguage(int index)
 {
 	if(index == 0)
-		settings.setValue("main/language", "");
+		Settings::setLanguage("");
 	else
-		settings.setValue("main/language", langMgr.boxItems[index]);
+		Settings::setLanguage(langMgr.boxItems[index]);
 	langMgr.setLanguage(index - 1);
 }
