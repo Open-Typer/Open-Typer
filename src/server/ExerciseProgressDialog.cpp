@@ -42,11 +42,10 @@ ExerciseProgressDialog::ExerciseProgressDialog(int classID, QList<int> targets, 
 	setAttribute(Qt::WA_DeleteOnClose);
 	ExerciseProgressDialogConfig::dialogCount++;
 	ui->setupUi(this);
-	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	if((targets.count() > 0) && settings.value("server/fullmode", false).toBool())
+	if((targets.count() > 0) && Settings::serverFullMode())
 		ui->classEdit->setText(dbMgr.className(classID));
 #ifndef Q_OS_WASM
-	if(!settings.value("server/fullmode", false).toBool())
+	if(!Settings::serverFullMode())
 	{
 		// Clear old student names
 		for(int i = 0; i < exerciseTargets.count(); i++)
@@ -61,8 +60,7 @@ ExerciseProgressDialog::ExerciseProgressDialog(int classID, QList<int> targets, 
 	connect(serverPtr, &MonitorServer::exerciseAborted, this, &ExerciseProgressDialog::abortExercise);
 	connect(serverPtr, &MonitorServer::deviceConfigurationChanged, this, &ExerciseProgressDialog::setupTable);
 	connect(ui->startButton, &QToolButton::clicked, this, [this]() {
-		QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
-		bool fullMode = settings.value("server/fullmode", false).toBool();
+		bool fullMode = Settings::serverFullMode();
 		QList<QByteArray> usernames;
 		QList<QHostAddress> addresses;
 		for(int i = 0; i < exerciseTargets.count(); i++)
@@ -130,8 +128,7 @@ void ExerciseProgressDialog::setupTable(void)
 	ui->studentsTable->clearContents();
 	ui->studentsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->studentsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	bool fullMode = settings.value("server/fullmode", false).toBool();
+	bool fullMode = Settings::serverFullMode();
 	// Rows
 	QList<int> targets = exerciseTargets;
 	ui->studentsTable->setRowCount(targets.count());
@@ -207,7 +204,6 @@ void ExerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 {
 	if(!exerciseTargets.contains(targetID))
 		return;
-	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 	QString exerciseText = ConfigParser::initExercise(m_exerciseText, m_lineLength);
 	int grossHits, mistakes;
 	if(m_correctMistakes)
@@ -240,14 +236,14 @@ void ExerciseProgressDialog::loadResult(int targetID, QString inputText, QVector
 	else
 		recordedMistakeLists[targetID] = StringUtils::validateExercise(exerciseText, inputText, recordedCharacters, &grossHits, &mistakes, nullptr, (m_mode == 1), m_timeLimit);
 	qreal exerciseTime = m_mode == 1 ? m_timeLimit : time;
-	int netHits = std::max(0, grossHits - mistakes * settings.value("main/errorpenalty", "10").toInt());
+	int netHits = std::max(0, grossHits - mistakes * Settings::errorPenalty());
 	qreal netHitsPerMinute = netHits * (60 / exerciseTime);
 	QVariantMap result;
 	result["grossHits"] = grossHits;
 	result["netHits"] = netHits;
 	result["netHitsPerMinute"] = netHitsPerMinute;
 	result["mistakes"] = mistakes;
-	result["penalty"] = settings.value("main/errorpenalty", "10").toInt();
+	result["penalty"] = Settings::errorPenalty();
 	result["time"] = exerciseTime / 60.0;
 	results[targetID] = result;
 	inputTexts[targetID] = inputText;
@@ -292,9 +288,8 @@ void ExerciseProgressDialog::printAll(void)
 		if(abortList.contains(exerciseTargets[i]) && abortList[exerciseTargets[i]] && !results.contains(exerciseTargets[i]))
 			continue;
 		ExportDialog dialog(inputTexts[exerciseTargets[i]], results[exerciseTargets[i]], recordedMistakeLists[exerciseTargets[i]], this);
-		QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
 		QString name;
-		if(settings.value("server/fullmode", false).toBool())
+		if(Settings::serverFullMode())
 			name = dbMgr.userName(exerciseTargets[i]);
 #ifndef Q_OS_WASM
 		else
@@ -331,8 +326,7 @@ void ExerciseProgressDialog::uploadChangedName(int row, int column)
 		return;
 	auto item = ui->studentsTable->item(row, column);
 #ifndef Q_OS_WASM
-	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	if(settings.value("server/fullmode", false).toBool())
+	if(Settings::serverFullMode())
 		serverPtr->sendSignal("changeName", { item->text() }, { dbMgr.userNickname(targetMap[item]).toUtf8() });
 	else
 		serverPtr->sendSignal("changeName", { item->text() }, { dbMgr.deviceAddress(targetMap[item]) });
