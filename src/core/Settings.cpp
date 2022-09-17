@@ -27,8 +27,10 @@ void Settings::init(void)
 {
 #ifdef Q_OS_WASM
 	QWasmSettings::registerFormat(true);
-#endif
+	settingsInstance = new QSettings(qApp);
+#else
 	settingsInstance = new QSettings(FileUtils::mainSettingsLocation(), QSettings::IniFormat, qApp);
+#endif
 }
 
 /*! Returns the value of the given key. */
