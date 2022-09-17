@@ -324,8 +324,8 @@ void ExerciseProgressDialog::uploadChangedName(int row, int column)
 {
 	if(column != 0 || loadingTable)
 		return;
-	auto item = ui->studentsTable->item(row, column);
 #ifndef Q_OS_WASM
+	auto item = ui->studentsTable->item(row, column);
 	if(Settings::serverFullMode())
 		serverPtr->sendSignal("changeName", { item->text() }, { dbMgr.userNickname(targetMap[item]).toUtf8() });
 	else
