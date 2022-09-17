@@ -25,6 +25,9 @@ QSettings *Settings::settingsInstance = nullptr;
 /*! Initializes settings. Run Settings#init() after the application starts. */
 void Settings::init(void)
 {
+#ifdef Q_OS_WASM
+	QWasmSettings::registerFormat(true);
+#endif
 	settingsInstance = new QSettings(FileUtils::mainSettingsLocation(), QSettings::IniFormat, qApp);
 }
 
