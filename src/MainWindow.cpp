@@ -1783,12 +1783,12 @@ void MainWindow::startTest(void)
 #ifdef Q_OS_WASM
 		Q_UNUSED(this);
 #else
-		if(serverPtr && serverPtr->isListening() && (!fullMode || (dbMgr.activeClass != 0)))
-			ClassControls::startExercise(dialog);
-		else
+			if(serverPtr && serverPtr->isListening() && (!fullMode || (dbMgr.activeClass != 0)))
+				ClassControls::startExercise(dialog);
+			else
 #endif // Q_OS_WASM
-			startReceivedExercise(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
-				dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText(), false);
+		startReceivedExercise(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
+			dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText(), false);
 	});
 }
 
