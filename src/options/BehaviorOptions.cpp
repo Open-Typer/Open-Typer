@@ -71,7 +71,7 @@ BehaviorOptions::BehaviorOptions(QWidget *parent) :
 	connect(ui->lockSettingsCheckBox, &QCheckBox::clicked, this, &BehaviorOptions::toggleSettingsLock);
 	connect(ui->applySettingsLockButton, &QPushButton::clicked, this, &BehaviorOptions::setSettingsPassword);
 	// Updates check box
-	connect(ui->updatesCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
+	connect(ui->updatesCheckBox, &QCheckBox::toggled, this, [](bool checked) {
 		Settings::setUpdateChecks(checked);
 	});
 }
