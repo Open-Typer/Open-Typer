@@ -1780,7 +1780,9 @@ void MainWindow::startTest(void)
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
 	connect(dialog, &QDialog::accepted, this, [this, dialog, fullMode]() {
-#ifndef Q_OS_WASM
+#ifdef Q_OS_WASM
+		Q_UNUSED(this);
+#else
 		if(serverPtr && serverPtr->isListening() && (!fullMode || (dbMgr.activeClass != 0)))
 			ClassControls::startExercise(dialog);
 		else
