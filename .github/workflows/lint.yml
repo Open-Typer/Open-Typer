@@ -4,13 +4,15 @@ on:
   pull_request:
     types: [opened, reopened]
   push:
-    branches: [master]
+    branches: [master, staging]
 
 jobs:
   cpp-linter:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
       - name: Install clang-tools
         uses: KyleMayes/install-llvm-action@v1
         with:
@@ -20,7 +22,7 @@ jobs:
         run: python3 -m pip install git+https://github.com/cpp-linter/cpp-linter-action@v1
       - name: Run linter
         id: linter
-        run: cpp-linter --version=${{ runner.temp }}/llvm --style=file --ignore='.github' --tidy-checks='-*'
+        run: cpp-linter --version=${{ runner.temp }}/llvm --style=file --ignore='.github|thirdparty' --tidy-checks='-*'
 
       - name: Fail
         if: steps.linter.outputs.checks-failed > 0

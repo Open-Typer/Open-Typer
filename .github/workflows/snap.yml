@@ -2,7 +2,7 @@ name: Build Snap package
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, staging ]
     tags: '*'
 
 jobs:
@@ -12,6 +12,7 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+        submodules: true
     - name: 'Get Previous tag'
       id: previoustag
       uses: WyriHaximus/github-action-get-previous-tag@v1

@@ -24,6 +24,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
+        submodules: true
     - name: Setup environment
       run: |
         sed -i -e '/^#/d' .github/config.env
@@ -149,6 +150,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
+        submodules: true
     # Install Qt
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
@@ -183,6 +185,7 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+        submodules: true
     - name: Setup environment
       run: |
         sed -i -e '/^#/d' .github/config.env
