@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
       - name: Install clang-tools
         uses: KyleMayes/install-llvm-action@v1
         with:
