@@ -945,7 +945,7 @@ void MainWindow::keyPress(QKeyEvent *event)
 		}
 		else
 		{
-			if((((keyText == "\n") || ((keyText == " ") && spaceNewline)) && (displayLevel[displayPos] == "\n")) || (keyText == "\n"))
+			if((((keyText == "\n") || ((keyText == " ") && spaceNewline)) && (displayLevel[displayPos] == '\n')) || (keyText == "\n"))
 			{
 				inputTextHtml += "<br>";
 				mistakeTextHtml += "<br>";
