@@ -118,19 +118,9 @@ void AppearanceOptions::updateSimpleTheme(void)
 {
 	int simpleTheme = Settings::simpleThemeId(); // 0 for light, 1 for dark
 	if((simpleTheme == 0) && (globalThemeEngine.theme() != 4)) // default theme for "light" - light blue
-	{
-		if(globalThemeEngine.theme() == 1)
-			setSimpleTheme(1);
-		else
-			setSimpleTheme(-1);
-	}
+		setSimpleTheme(-1);
 	if((simpleTheme == 1) && (globalThemeEngine.theme() != 1)) // default theme for "dark" - dark
-	{
-		if(globalThemeEngine.theme() == 4)
-			setSimpleTheme(4);
-		else
-			setSimpleTheme(-1);
-	}
+		setSimpleTheme(-1);
 	ui->lightThemeButton->setChecked(simpleTheme == 0);
 	ui->darkThemeButton->setChecked(simpleTheme == 1);
 }
