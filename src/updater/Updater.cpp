@@ -24,6 +24,7 @@
 Updater::Updater(QObject *parent) :
 	QObject(parent)
 {
+#ifdef Q_OS_WINDOWS
 	QFile maintenancetoolFile;
 	maintenancetoolFile.setFileName(QCoreApplication::applicationDirPath() + "/../maintenancetool");
 	if(!maintenancetoolFile.exists())
@@ -52,6 +53,7 @@ Updater::Updater(QObject *parent) :
 		}
 	}
 	deleteLater();
+#endif
 }
 
 /*! Destroys the Updater object. */
