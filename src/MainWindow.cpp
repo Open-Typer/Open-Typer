@@ -90,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->actionPreferences, &QAction::triggered, ui->optionsButton, &QPushButton::clicked);
 	// Help menu
 	connect(ui->actionDocs, &QAction::triggered, this, []() {
-		QDesktopServices::openUrl(QUrl("https://open-typer.github.io/Open-Typer"));
+		QDesktopServices::openUrl(QUrl("https://open-typer.github.io/docs"));
 	});
 	connect(ui->actionAboutProgram, &QAction::triggered, this, &MainWindow::showAboutDialog);
 	connect(ui->actionAboutQt, &QAction::triggered, this, [this]() {
