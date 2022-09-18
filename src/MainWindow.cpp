@@ -1180,7 +1180,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 				if((mistakesMap[pos]->value("type").toString() == "deletion") && correct.contains("\n"))
 					mistakeTextHtml += "<u>&nbsp;";
 				else
-					mistakeTextHtml += "<u>" + QString("&nbsp;").repeated(std::max(1, correct.count()));
+					mistakeTextHtml += "<u>" + QString("&nbsp;").repeated(std::max(1LL, correct.count()));
 			}
 			else if(j < count)
 				mistakeTextHtml += "<span style=\"color: rgba(0, 0, 0, 0);\">" + QString(input[pos]).toHtmlEscaped().replace(" ", "&nbsp;") + "</span>";
