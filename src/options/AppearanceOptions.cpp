@@ -244,7 +244,9 @@ void AppearanceOptions::goBack(void)
 void AppearanceOptions::updateFont(void)
 {
 	QFont newFont = ThemeEngine::font();
+	ui->fontComboBox->blockSignals(true);
 	ui->fontComboBox->setCurrentFont(newFont);
+	ui->fontComboBox->blockSignals(false);
 	ui->fontSizeBox->setValue(newFont.pointSize());
 	ui->boldTextBox->setChecked(newFont.bold());
 	ui->italicTextBox->setChecked(newFont.italic());
