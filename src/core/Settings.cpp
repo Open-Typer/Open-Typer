@@ -40,7 +40,6 @@ void Settings::init(void)
 QVariant Settings::get(QString key, QVariant defaultValue)
 {
 	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance = new QSettings(qApp);
 #ifdef Q_OS_WASM
 	if(settingsInstance->isWritable())
 	{
@@ -63,7 +62,6 @@ QVariant Settings::get(QString key, QVariant defaultValue)
 bool Settings::contains(QString key)
 {
 	Q_ASSERT(settingsInstance == nullptr);
-	settingsInstance = new QSettings(qApp);
 #ifdef Q_OS_WASM
 	if(settingsInstance->isWritable())
 	{
