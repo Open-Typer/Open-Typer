@@ -39,6 +39,8 @@ int main(int argc, char *argv[])
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 	QApplication a(argc, argv);
+	QCoreApplication::setOrganizationDomain("open-typer.sourceforge.io");
+	QCoreApplication::setOrganizationName("Open-Typer");
 	QCoreApplication::setApplicationName("Open-Typer");
 #ifdef BUILD_VERSION
 	QCoreApplication::setApplicationVersion(QString(BUILD_VERSION).remove(0, 1));
