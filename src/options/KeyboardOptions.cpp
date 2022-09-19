@@ -78,5 +78,5 @@ void KeyboardOptions::openEditor(void)
 void KeyboardOptions::changePack(int index)
 {
 	Settings::setLessonPack(rawItems[index]);
-	Settings::setCustomLessonPack("false");
+	Settings::setCustomLessonPack(false);
 }
