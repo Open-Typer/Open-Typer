@@ -88,10 +88,7 @@ BehaviorOptions::~BehaviorOptions()
  */
 void BehaviorOptions::setSpaceNewline(bool value)
 {
-	if(value)
-		Settings::setSpaceNewLine("true");
-	else
-		Settings::setSpaceNewLine("false");
+	Settings::setSpaceNewLine(value);
 }
 
 /*!
