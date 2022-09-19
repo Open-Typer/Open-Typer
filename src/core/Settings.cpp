@@ -21,6 +21,9 @@
 #include "core/Settings.h"
 
 QSettings *Settings::settingsInstance = nullptr;
+#ifdef Q_OS_WASM
+bool Settings::tempSettingsCopied = false;
+#endif // Q_OS_WASM
 
 /*! Initializes settings. Run Settings#init() after the application starts. */
 void Settings::init(void)
@@ -37,22 +40,83 @@ void Settings::init(void)
 QVariant Settings::get(QString key, QVariant defaultValue)
 {
 	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance = new QSettings(qApp);
+#ifdef Q_OS_WASM
+	if(settingsInstance->isWritable())
+	{
+		if(!tempSettingsCopied)
+			copyTempSettings();
+		return settingsInstance->value(key, defaultValue);
+	}
+	else
+	{
+		// Use temporary settings until sandbox is initialized
+		QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
+		return settings.value(key, defaultValue);
+	}
+#else
 	return settingsInstance->value(key, defaultValue);
+#endif // Q_OS_WASM
 }
 
 /*! Returns true if the given key exists. */
 bool Settings::contains(QString key)
 {
 	Q_ASSERT(settingsInstance == nullptr);
+	settingsInstance = new QSettings(qApp);
+#ifdef Q_OS_WASM
+	if(settingsInstance->isWritable())
+	{
+		if(!tempSettingsCopied)
+			copyTempSettings();
+		return settingsInstance->contains(key);
+	}
+	else
+	{
+		// Use temporary settings until sandbox is initialized
+		QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
+		return settings.contains(key);
+	}
+#else
 	return settingsInstance->contains(key);
+#endif // Q_OS_WASM
 }
 
 /*! Sets the key value. */
 void Settings::set(QString key, QVariant value)
 {
 	Q_ASSERT(settingsInstance == nullptr);
+#ifdef Q_OS_WASM
+	if(settingsInstance->isWritable())
+	{
+		if(!tempSettingsCopied)
+			copyTempSettings();
+		settingsInstance->setValue(key, value);
+		settingsInstance->sync();
+	}
+	else
+	{
+		// Use temporary settings until sandbox is initialized
+		QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
+		settings.setValue(key, value);
+	}
+#else
 	settingsInstance->setValue(key, value);
+#endif // Q_OS_WASM
 }
+
+#ifdef Q_OS_WASM
+/*! Copies temporary settings to real settings after the WebAssembly sandbox gets initialized. */
+void Settings::copyTempSettings(void)
+{
+	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QStringList keys = settings.allKeys();
+	for(int i = 0; i < keys.count(); i++)
+		settingsInstance->setValue(keys[i], settings.value(keys[i]));
+	settingsInstance->sync();
+	tempSettingsCopied = true;
+}
+#endif // Q_OS_WASM
 
 // clientDisabled
 

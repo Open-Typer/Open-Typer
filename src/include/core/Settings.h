@@ -243,6 +243,10 @@ class Settings
 
 	private:
 		static QSettings *settingsInstance;
+#ifdef Q_OS_WASM
+		static bool tempSettingsCopied;
+		static void copyTempSettings(void);
+#endif // Q_OS_WASM
 		static QVariant get(QString key, QVariant defaultValue);
 		static bool contains(QString key);
 		static void set(QString key, QVariant value);
