@@ -6,7 +6,7 @@ unzip openssl.zip -d ../openssl
 mv ../openssl/OpenSSL/OpenSSL/* C:/OpenSSL
 rm openssl.zip
 find C:/OpenSSL/lib -depth -name "*.lib" -exec sh -c 'f="{}"; mv -- "$f" "${f%.lib}.a"' \;
-source .ci/common/build.sh win32
+source .ci/common/build.sh win64
 cd release
 rm -f *.o *.cpp *.h
 windeployqt ${executable_name}.exe

@@ -54,7 +54,7 @@ jobs:
       with:
         version: ${{ matrix.qt-version }}
         host: 'windows'
-        arch: 'win32_mingw${{ matrix.mingw-version }}'
+        arch: 'win64_mingw${{ matrix.mingw-version }}'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
     - if: contains(matrix.os, 'windows')
@@ -66,10 +66,10 @@ jobs:
         echo ${pwd}/../Tools/QtInstallerFramework/*/bin >> "${GITHUB_PATH}"
       shell: bash
     - if: contains(matrix.os, 'windows')
-      name: Install 32-bit MinGW
+      name: Install MinGW
       uses: egor-tensin/setup-mingw@v2
       with:
-        platform: i686
+        platform: x64
     # Ubuntu
     - if: contains(matrix.os, 'ubuntu')
       name: Install Qt
