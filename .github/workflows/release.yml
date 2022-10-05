@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04, windows-latest]
+        os: [ubuntu-18.04]
         qt-version: ['5.15.2']
         qt-target: ['desktop']
         include:
@@ -17,9 +17,6 @@ jobs:
             qt-version: '5.15.2'
             qt-target: 'desktop'
             mingw-version: 81
-        exclude:
-          - os: windows-latest
-            qt-version: '5.15.2'
     steps:
     - uses: actions/checkout@v2
       with:
