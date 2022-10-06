@@ -137,6 +137,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	{
 		restoreState(Settings::windowState());
 		restoreGeometry(Settings::windowGeometry());
+		if(isFullScreen())
+			showMaximized(); /* exit full screen when the application starts */
 	}
 	else if(!isVisible() && !firstRun)
 	{
