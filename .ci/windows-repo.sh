@@ -21,6 +21,7 @@ if (( $update_windows_installer == 1 )); then
 fi
 
 mv ../release/* packages/${windows_app_name}/data/${app_name}
+curl -L https://aka.ms/vs/16/release/VC_redist.x64.exe > packages/com.microsoft.vcredist/data/VC_redist.x64.exe
 ./build.sh $(echo ../Tools/QtInstallerFramework/*/bin/binarycreator.exe) $(echo ../Tools/QtInstallerFramework/*/bin/repogen.exe)
 
 if (( $update_windows_repository == 1 )); then
