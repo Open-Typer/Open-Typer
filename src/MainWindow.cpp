@@ -1199,9 +1199,9 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 		pos++;
 	}
 	netHits = std::max(0, totalHits - levelMistakes * Settings::errorPenalty());
-	int netHitsPerMinute = netHits * (60 / (levelTimer.elapsed() / 1000.0));
-	int grossHitsPerMinute = totalHits * (60 / (levelTimer.elapsed() / 1000.0));
-	int time = levelTimer.elapsed() / 1000;
+	int netHitsPerMinute = netHits * (60 / lastTimeF);
+	int grossHitsPerMinute = totalHits * (60 / lastTimeF);
+	int time = lastTimeF;
 	if(!customLevelLoaded && !customConfig && ui->correctMistakesCheckBox->isChecked())
 	{
 		if(studentUsername != "")
