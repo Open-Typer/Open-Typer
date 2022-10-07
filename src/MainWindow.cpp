@@ -1337,6 +1337,7 @@ void MainWindow::updateCurrentTime(void)
 				secLoop->start(500);
 				ui->timedExTime->show();
 				ui->timedExCountdownLabel->hide();
+				ui->inputLabel->setText("");
 			}
 		}
 		if(timedExStarted)
@@ -1349,7 +1350,10 @@ void MainWindow::updateCurrentTime(void)
 				ui->timedExTime->setTime(QTime(0, 0, 0));
 		}
 		else
+		{
 			ui->timedExCountdownLabel->setText(QString::number(currentTime.second()));
+			ui->inputLabel->setText(QString::number(currentTime.second()) + "...");
+		}
 	}
 	else
 		ui->currentTimeNumber->setText(QString::number(time));
@@ -1572,6 +1576,7 @@ void MainWindow::initTimedExercise(void)
 			timedExStarted = false;
 			changeMode(1);
 			ui->timedExCountdownLabel->setText("3");
+			ui->inputLabel->setText("3...");
 			ui->timedExTime->setTime(QTime(timedExHours, timedExMinutes, timedExSeconds));
 			ui->timedExTime->hide();
 			ui->timedExCountdownLabel->show();
@@ -1621,6 +1626,7 @@ void MainWindow::startReceivedExercise(QByteArray text, int lineLength, bool inc
 	if(mode == 1)
 	{
 		ui->timedExCountdownLabel->setText("3");
+		ui->inputLabel->setText("3...");
 		QTime exTime = QTime(0, 0, 0).addSecs(time);
 		timedExHours = exTime.hour();
 		timedExMinutes = exTime.minute();
