@@ -580,7 +580,8 @@ void KeyboardWidget::toggleKeyboard(void)
 /*! Sets keyboard visibility. */
 void KeyboardWidget::setKeyboardVisible(bool visible, bool changeVisibility)
 {
-	Settings::setKeyboardVisible(visible);
+	if(!Settings::settingsLockEnabled())
+		Settings::setKeyboardVisible(visible);
 	if(visible)
 	{
 		closeButton->setIcon(QIcon(":/res/images/down.png"));
