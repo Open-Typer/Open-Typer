@@ -749,7 +749,7 @@
     </message>
     <message>
         <source>Correct mistakes</source>
-        <translation>Fehler korrigieren</translation>
+        <translation type="vanished">Fehler korrigieren</translation>
     </message>
     <message>
         <source>Lock user interface</source>
@@ -770,6 +770,10 @@
     <message>
         <source>This file is too large!</source>
         <translation>Diese Datei ist zu groß!</translation>
+    </message>
+    <message>
+        <source>Character correction after mistake</source>
+        <translation>Zeichenkorrektur nach einem Fehler</translation>
     </message>
 </context>
 <context>
@@ -840,7 +844,7 @@
         <source>Correct mistakes</source>
         <comment>correct mistakes</comment>
         <extracomment>Whether to correct mistakes while typing</extracomment>
-        <translation>Fehler korrigieren</translation>
+        <translation type="vanished">Fehler korrigieren</translation>
     </message>
     <message>
         <source>Hide exercise text</source>
@@ -991,6 +995,16 @@
     <message>
         <source>Published with the GNU General Public License.</source>
         <translation>Veröffentlicht unter der GNU General Public License.</translation>
+    </message>
+    <message>
+        <source>Character correction after mistake</source>
+        <comment>correct mistakes</comment>
+        <extracomment>Whether to correct mistakes while typing</extracomment>
+        <translation>Zeichenkorrektur nach einem Fehler</translation>
+    </message>
+    <message>
+        <source>Character correction after mistake</source>
+        <translation>Zeichenkorrektur nach einem Fehler</translation>
     </message>
 </context>
 <context>

@@ -195,28 +195,28 @@
         <translation>Použiť</translation>
     </message>
     <message>
-        <location filename="../src/options/BehaviorOptions.cpp" line="143"/>
+        <location filename="../src/options/BehaviorOptions.cpp" line="139"/>
         <source>Settings lock password:</source>
         <translation>Heslo zámku nastavení:</translation>
     </message>
     <message>
-        <location filename="../src/options/BehaviorOptions.cpp" line="166"/>
-        <location filename="../src/options/BehaviorOptions.cpp" line="198"/>
+        <location filename="../src/options/BehaviorOptions.cpp" line="162"/>
+        <location filename="../src/options/BehaviorOptions.cpp" line="194"/>
         <source>Incorrect password!</source>
         <translation>Nesprávne heslo!</translation>
     </message>
     <message>
-        <location filename="../src/options/BehaviorOptions.cpp" line="205"/>
+        <location filename="../src/options/BehaviorOptions.cpp" line="201"/>
         <source>The passwords do not match.</source>
         <translation>Heslá sa nezhodujú.</translation>
     </message>
     <message>
-        <location filename="../src/options/BehaviorOptions.cpp" line="218"/>
+        <location filename="../src/options/BehaviorOptions.cpp" line="214"/>
         <source>Settings lock enabled</source>
         <translation>Zámok nastavení zapnutý</translation>
     </message>
     <message>
-        <location filename="../src/options/BehaviorOptions.cpp" line="220"/>
+        <location filename="../src/options/BehaviorOptions.cpp" line="216"/>
         <source>Password changed</source>
         <translation>Heslo bolo zmenené</translation>
     </message>
@@ -483,22 +483,22 @@
         <translation>Režim:</translation>
     </message>
     <message>
-        <location filename="../src/options/ConnectionOptions.cpp" line="126"/>
+        <location filename="../src/options/ConnectionOptions.cpp" line="124"/>
         <source>Unknown</source>
         <translation>Neznámy</translation>
     </message>
     <message>
-        <location filename="../src/options/ConnectionOptions.cpp" line="143"/>
+        <location filename="../src/options/ConnectionOptions.cpp" line="141"/>
         <source>Failed to connect</source>
         <translation>Nepodarilo sa pripojiť</translation>
     </message>
     <message>
-        <location filename="../src/options/ConnectionOptions.cpp" line="146"/>
+        <location filename="../src/options/ConnectionOptions.cpp" line="144"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../src/options/ConnectionOptions.cpp" line="146"/>
+        <location filename="../src/options/ConnectionOptions.cpp" line="144"/>
         <source>Please allow the following address on the server:</source>
         <translation>Povoľte, prosím, nasledujúcu adresu na serveri:</translation>
     </message>
@@ -616,42 +616,42 @@
         <translation>Známka</translation>
     </message>
     <message>
-        <location filename="../src/server/ExerciseProgressDialog.cpp" line="163"/>
+        <location filename="../src/server/ExerciseProgressDialog.cpp" line="160"/>
         <source>View</source>
         <translation>Zobraziť</translation>
     </message>
     <message>
-        <location filename="../src/server/ExerciseProgressDialog.cpp" line="186"/>
+        <location filename="../src/server/ExerciseProgressDialog.cpp" line="183"/>
         <source>Aborted</source>
         <translation>Zrušené</translation>
     </message>
     <message>
-        <location filename="../src/server/ExerciseProgressDialog.cpp" line="188"/>
+        <location filename="../src/server/ExerciseProgressDialog.cpp" line="185"/>
         <source>Waiting...</source>
         <translation>Čakajúci...</translation>
     </message>
     <message>
-        <location filename="../src/server/ExerciseProgressDialog.cpp" line="190"/>
+        <location filename="../src/server/ExerciseProgressDialog.cpp" line="187"/>
         <source>In progress...</source>
         <translation>Prebieha...</translation>
     </message>
     <message>
-        <location filename="../src/server/ExerciseProgressDialog.cpp" line="277"/>
+        <location filename="../src/server/ExerciseProgressDialog.cpp" line="273"/>
         <source>Some targets have not finished yet.</source>
         <translation>Niektoré ciele ešte nedokončili.</translation>
     </message>
     <message>
-        <location filename="../src/server/ExerciseProgressDialog.cpp" line="309"/>
+        <location filename="../src/server/ExerciseProgressDialog.cpp" line="304"/>
         <source>Printing result of student %1...</source>
         <translation>Tlačiť výsledok študenta %1...</translation>
     </message>
     <message>
-        <location filename="../src/server/ExerciseProgressDialog.cpp" line="310"/>
+        <location filename="../src/server/ExerciseProgressDialog.cpp" line="305"/>
         <source>Print</source>
         <translation>Tlačiť</translation>
     </message>
     <message>
-        <location filename="../src/server/ExerciseProgressDialog.cpp" line="313"/>
+        <location filename="../src/server/ExerciseProgressDialog.cpp" line="308"/>
         <source>Next student</source>
         <translation>Ďalší študent</translation>
     </message>
@@ -925,8 +925,12 @@
     </message>
     <message>
         <location filename="../ui/server/LoadExerciseDialog.ui" line="208"/>
+        <source>Character correction after mistake</source>
+        <translation>Oprava znaku po chybe</translation>
+    </message>
+    <message>
         <source>Correct mistakes</source>
-        <translation>Opravovať chyby</translation>
+        <translation type="vanished">Opravovať chyby</translation>
     </message>
     <message>
         <location filename="../ui/server/LoadExerciseDialog.ui" line="218"/>
@@ -949,7 +953,7 @@
         <translation>Cieľoví študenti</translation>
     </message>
     <message>
-        <location filename="../src/server/LoadExerciseDialog.cpp" line="229"/>
+        <location filename="../src/server/LoadExerciseDialog.cpp" line="227"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
@@ -1039,12 +1043,17 @@
         <translation>Obrátiť text</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="913"/>
-        <location filename="../ui/MainWindow.ui" line="2072"/>
         <source>Correct mistakes</source>
         <comment>correct mistakes</comment>
         <extracomment>Whether to correct mistakes while typing</extracomment>
-        <translation>Opravovať chyby</translation>
+        <translation type="vanished">Opravovať chyby</translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow.ui" line="913"/>
+        <source>Character correction after mistake</source>
+        <comment>correct mistakes</comment>
+        <extracomment>Whether to correct mistakes while typing</extracomment>
+        <translation>Oprava znaku po chybe</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="926"/>
@@ -1153,6 +1162,11 @@
         <translation>Text z chybných slov</translation>
     </message>
     <message>
+        <location filename="../ui/MainWindow.ui" line="2072"/>
+        <source>Character correction after mistake</source>
+        <translation>Oprava znaku po chybe</translation>
+    </message>
+    <message>
         <location filename="../ui/MainWindow.ui" line="2089"/>
         <source>Preferences...</source>
         <translation>Možnosti...</translation>
@@ -1183,58 +1197,58 @@
         <translation>Online dokumentácia</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="692"/>
+        <location filename="../src/MainWindow.cpp" line="686"/>
         <source>Logged in as %1</source>
         <translation>Prihlásený ako %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="716"/>
+        <location filename="../src/MainWindow.cpp" line="710"/>
         <source>Not logged in.</source>
         <translation>Neprihlásený.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="766"/>
+        <location filename="../src/MainWindow.cpp" line="760"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="780"/>
+        <location filename="../src/MainWindow.cpp" line="774"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="780"/>
-        <location filename="../src/MainWindow.cpp" line="1458"/>
+        <location filename="../src/MainWindow.cpp" line="774"/>
+        <location filename="../src/MainWindow.cpp" line="1456"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="821"/>
+        <location filename="../src/MainWindow.cpp" line="815"/>
         <source>You don&apos;t have any error words.</source>
         <translation>Nemáte žiadne chybné slová.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1458"/>
+        <location filename="../src/MainWindow.cpp" line="1456"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1807"/>
+        <location filename="../src/MainWindow.cpp" line="1810"/>
         <source>Version: %1</source>
         <translation>Verzia: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1810"/>
+        <location filename="../src/MainWindow.cpp" line="1813"/>
         <source>Revision: %1</source>
         <translation>Revízia: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1812"/>
+        <location filename="../src/MainWindow.cpp" line="1815"/>
         <source>Source code: %1</source>
         <translation>Zdrojový kód: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1812"/>
+        <location filename="../src/MainWindow.cpp" line="1815"/>
         <source>Published with the GNU General Public License.</source>
         <translation>Publikované s licenciou GNU General Public License.</translation>
     </message>
@@ -1242,12 +1256,12 @@
 <context>
     <name>MonitorClient</name>
     <message>
-        <location filename="../src/core/MonitorClient.cpp" line="244"/>
+        <location filename="../src/core/MonitorClient.cpp" line="240"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../src/core/MonitorClient.cpp" line="245"/>
+        <location filename="../src/core/MonitorClient.cpp" line="241"/>
         <source>Unable to connect to class monitor server.</source>
         <translation>Nepodarilo sa spojiť so serverom class monitor.</translation>
     </message>
@@ -1255,7 +1269,7 @@
 <context>
     <name>MonitorServer</name>
     <message>
-        <location filename="../src/core/MonitorServer.cpp" line="40"/>
+        <location filename="../src/core/MonitorServer.cpp" line="39"/>
         <source>Unable to start server on port %1.</source>
         <translation>Nepodarilo sa spustiť server na porte %1.</translation>
     </message>
@@ -1278,37 +1292,37 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="54"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="53"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="55"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="54"/>
         <source>Behavior</source>
         <translation>Správanie</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="56"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="55"/>
         <source>Keyboard</source>
         <translation>Klávesnica</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="57"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="56"/>
         <source>Appearance</source>
         <translation>Vzhľad</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="59"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="58"/>
         <source>Connection</source>
         <translation>Pripojenie</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="136"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="135"/>
         <source>Settings lock password:</source>
         <translation>Heslo zámku nastavení:</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="150"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="149"/>
         <source>Incorrect password!</source>
         <translation>Nesprávne heslo!</translation>
     </message>
@@ -1397,7 +1411,7 @@
     </message>
     <message>
         <location filename="../ui/packEditor/PackEditor.ui" line="565"/>
-        <location filename="../src/packEditor/PackEditor.cpp" line="183"/>
+        <location filename="../src/packEditor/PackEditor.cpp" line="182"/>
         <source>Save</source>
         <translation>Uložiť</translation>
     </message>
@@ -1407,47 +1421,47 @@
         <translation>Uložiť ako...</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/PackEditor.cpp" line="82"/>
+        <location filename="../src/packEditor/PackEditor.cpp" line="81"/>
         <source>Unnamed</source>
         <translation>Nepomenovaný</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/PackEditor.cpp" line="182"/>
+        <location filename="../src/packEditor/PackEditor.cpp" line="181"/>
         <source>Save changes to &quot;%1&quot; before closing?</source>
         <translation>Uložiť zmeny súboru &quot;%1&quot; pred zavretím?</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/PackEditor.cpp" line="184"/>
+        <location filename="../src/packEditor/PackEditor.cpp" line="183"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/PackEditor.cpp" line="185"/>
+        <location filename="../src/packEditor/PackEditor.cpp" line="184"/>
         <source>Close without saving</source>
         <translation>Zavrieť bez uloženia</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/PackEditor.cpp" line="274"/>
+        <location filename="../src/packEditor/PackEditor.cpp" line="273"/>
         <source>empty</source>
         <translation>prázdna</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/PackEditor.cpp" line="388"/>
+        <location filename="../src/packEditor/PackEditor.cpp" line="387"/>
         <source>New exercise</source>
         <translation>Nové cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/PackEditor.cpp" line="551"/>
+        <location filename="../src/packEditor/PackEditor.cpp" line="550"/>
         <source>Text length:</source>
         <translation>Dĺžka textu:</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/PackEditor.cpp" line="735"/>
+        <location filename="../src/packEditor/PackEditor.cpp" line="734"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
     <message>
-        <location filename="../src/packEditor/PackEditor.cpp" line="735"/>
+        <location filename="../src/packEditor/PackEditor.cpp" line="734"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
@@ -1489,17 +1503,17 @@
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="32"/>
+        <location filename="../src/main.cpp" line="33"/>
         <source>Version: %1</source>
         <translation>Verzia: %1</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="49"/>
+        <location filename="../src/main.cpp" line="60"/>
         <source>Opening database...</source>
         <translation>Otváranie databázy...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="53"/>
+        <location filename="../src/main.cpp" line="64"/>
         <source>Opening main window...</source>
         <translation>Otváranie hlavného okna...</translation>
     </message>
@@ -1542,33 +1556,33 @@
         <translation>Zariadenia</translation>
     </message>
     <message>
-        <location filename="../src/server/widgets/ServerManager.cpp" line="100"/>
+        <location filename="../src/server/widgets/ServerManager.cpp" line="99"/>
         <source>No class selected</source>
         <comment>Displayed in the class selection combo box.</comment>
         <translation>Žiadna trieda otvorená</translation>
     </message>
     <message>
-        <location filename="../src/server/widgets/ServerManager.cpp" line="148"/>
+        <location filename="../src/server/widgets/ServerManager.cpp" line="147"/>
         <source>online</source>
         <translation>online</translation>
     </message>
     <message>
-        <location filename="../src/server/widgets/ServerManager.cpp" line="148"/>
+        <location filename="../src/server/widgets/ServerManager.cpp" line="147"/>
         <source>offline</source>
         <translation>offline</translation>
     </message>
     <message>
-        <location filename="../src/server/widgets/ServerManager.cpp" line="294"/>
+        <location filename="../src/server/widgets/ServerManager.cpp" line="293"/>
         <source>Are you sure you want to remove class %1?</source>
         <translation>Ste si istý, že chcete vymazať triedu %1?</translation>
     </message>
     <message>
-        <location filename="../src/server/widgets/ServerManager.cpp" line="325"/>
+        <location filename="../src/server/widgets/ServerManager.cpp" line="324"/>
         <source>Close opened windows first.</source>
         <translation>Najprv zatvorte otvorené okná.</translation>
     </message>
     <message>
-        <location filename="../src/server/widgets/ServerManager.cpp" line="368"/>
+        <location filename="../src/server/widgets/ServerManager.cpp" line="367"/>
         <source>Are you sure you want to remove device %1?</source>
         <translation>Ste si istý, že chcete vymazať zariadenie %1?</translation>
     </message>
@@ -1614,30 +1628,30 @@
         <translation>Grafy</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="46"/>
-        <location filename="../src/StatsDialog.cpp" line="91"/>
+        <location filename="../src/StatsDialog.cpp" line="45"/>
+        <location filename="../src/StatsDialog.cpp" line="90"/>
         <source>Speed</source>
         <translation>Rýchlosť</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="46"/>
-        <location filename="../src/StatsDialog.cpp" line="100"/>
+        <location filename="../src/StatsDialog.cpp" line="45"/>
+        <location filename="../src/StatsDialog.cpp" line="99"/>
         <source>Mistakes</source>
         <translation>Chyby</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="46"/>
-        <location filename="../src/StatsDialog.cpp" line="109"/>
+        <location filename="../src/StatsDialog.cpp" line="45"/>
+        <location filename="../src/StatsDialog.cpp" line="108"/>
         <source>Time</source>
         <translation>Čas</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="129"/>
+        <location filename="../src/StatsDialog.cpp" line="128"/>
         <source>Better students: %1</source>
         <translation>Lepší študenti: %1</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="134"/>
+        <location filename="../src/StatsDialog.cpp" line="133"/>
         <source>Worse students: %1</source>
         <translation>Horší študenti: %1</translation>
     </message>
@@ -1827,27 +1841,27 @@
 <context>
     <name>ThemeEngine</name>
     <message>
-        <location filename="../src/core/ThemeEngine.cpp" line="54"/>
+        <location filename="../src/core/ThemeEngine.cpp" line="55"/>
         <source>Dark</source>
         <translation>Tmavý</translation>
     </message>
     <message>
-        <location filename="../src/core/ThemeEngine.cpp" line="61"/>
+        <location filename="../src/core/ThemeEngine.cpp" line="62"/>
         <source>Light</source>
         <translation>Svetlý</translation>
     </message>
     <message>
-        <location filename="../src/core/ThemeEngine.cpp" line="68"/>
+        <location filename="../src/core/ThemeEngine.cpp" line="69"/>
         <source>Green</source>
         <translation>Zelený</translation>
     </message>
     <message>
-        <location filename="../src/core/ThemeEngine.cpp" line="77"/>
+        <location filename="../src/core/ThemeEngine.cpp" line="78"/>
         <source>Light blue</source>
         <translation>Svetlomodrý</translation>
     </message>
     <message>
-        <location filename="../src/core/ThemeEngine.cpp" line="86"/>
+        <location filename="../src/core/ThemeEngine.cpp" line="87"/>
         <source>Custom</source>
         <translation>Vlastný</translation>
     </message>
