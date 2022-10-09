@@ -23,6 +23,7 @@
 #include "MainWindow.h"
 #include "core/DatabaseManager.h"
 #include "core/Settings.h"
+#include "core/LanguageManager.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -45,6 +46,14 @@ int main(int argc, char *argv[])
 #ifdef BUILD_VERSION
 	QCoreApplication::setApplicationVersion(QString(BUILD_VERSION).remove(0, 1));
 #endif // BUILD_VERSION
+	// Initialize settings
+	Settings::init();
+	// Set language
+	LanguageManager langMgr;
+	if(Settings::language() == "")
+		langMgr.setLanguage(-1);
+	else
+		langMgr.setLanguage(langMgr.boxItems.indexOf(Settings::language()) - 1);
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();
@@ -54,8 +63,6 @@ int main(int argc, char *argv[])
 		dbMgr.open();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
-	// Initialize settings
-	Settings::init();
 	// Set icon
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
 	MainWindow w;
