@@ -205,7 +205,7 @@
       <item>
        <widget class="QCheckBox" name="correctMistakesCheckBox">
         <property name="text">
-         <string>Correct mistakes</string>
+         <string>Character correction after mistake</string>
         </property>
         <property name="checked">
          <bool>true</bool>
