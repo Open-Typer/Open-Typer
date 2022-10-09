@@ -39,7 +39,7 @@ void Settings::init(void)
 /*! Returns the value of the given key. */
 QVariant Settings::get(QString key, QVariant defaultValue)
 {
-	Q_ASSERT(settingsInstance == nullptr);
+	Q_ASSERT(settingsInstance != nullptr);
 #ifdef Q_OS_WASM
 	if(settingsInstance->isWritable())
 	{
@@ -61,7 +61,7 @@ QVariant Settings::get(QString key, QVariant defaultValue)
 /*! Returns true if the given key exists. */
 bool Settings::contains(QString key)
 {
-	Q_ASSERT(settingsInstance == nullptr);
+	Q_ASSERT(settingsInstance != nullptr);
 #ifdef Q_OS_WASM
 	if(settingsInstance->isWritable())
 	{
@@ -83,7 +83,7 @@ bool Settings::contains(QString key)
 /*! Sets the key value. */
 void Settings::set(QString key, QVariant value)
 {
-	Q_ASSERT(settingsInstance == nullptr);
+	Q_ASSERT(settingsInstance != nullptr);
 #ifdef Q_OS_WASM
 	if(settingsInstance->isWritable())
 	{
