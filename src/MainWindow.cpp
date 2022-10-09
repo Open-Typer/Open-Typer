@@ -46,12 +46,6 @@ MainWindow::MainWindow(QWidget *parent) :
 #ifdef Q_OS_WASM
 	Settings::setClientDisabled(true);
 #endif // Q_OS_WASM
-	// Set language
-	if(Settings::language() == "")
-		langMgr.setLanguage(-1);
-	else
-		langMgr.setLanguage(langMgr.boxItems.indexOf(Settings::language()) - 1);
-	ui->retranslateUi(this);
 	// Opacity effect
 	QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
 	ui->levelLabel->setGraphicsEffect(opacityEffect);

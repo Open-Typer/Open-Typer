@@ -47,7 +47,6 @@
 #include "core/HistoryParser.h"
 #include "core/KeyboardUtils.h"
 #include "core/BuiltInPacks.h"
-#include "core/LanguageManager.h"
 #include "core/ThemeEngine.h"
 #include "core/Settings.h"
 #ifndef Q_OS_WASM
@@ -74,7 +73,6 @@ class MainWindow : public QMainWindow
 
 	private:
 		Ui::MainWindow *ui;
-		LanguageManager langMgr;
 		ConfigParser parser;
 		MonitorClient client;
 		QString studentUsername, studentPassword;
