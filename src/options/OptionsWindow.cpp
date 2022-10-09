@@ -37,6 +37,8 @@ OptionsWindow::OptionsWindow(QWidget *parent) :
 		ui->unlockSettingsButton->hide();
 	}
 	setupList();
+	// Disable focus of cancel button so that it doesn't react to return/enter key
+	ui->buttonBox->button(QDialogButtonBox::Close)->setFocusPolicy(Qt::NoFocus);
 	// Connections
 	connect(ui->unlockSettingsButton, &QPushButton::clicked, this, &OptionsWindow::unlockSettings);
 	connect(ui->list, SIGNAL(currentRowChanged(int)), this, SLOT(changeOptionWidget(int)));
