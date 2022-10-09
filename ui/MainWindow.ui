@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
+    <width>1007</width>
     <height>778</height>
    </rect>
   </property>
@@ -910,7 +910,7 @@
                          <enum>Qt::NoFocus</enum>
                         </property>
                         <property name="text">
-                         <string comment="correct mistakes" extracomment="Whether to correct mistakes while typing">Correct mistakes</string>
+                         <string comment="correct mistakes" extracomment="Whether to correct mistakes while typing">Character correction after mistake</string>
                         </property>
                         <property name="checked">
                          <bool>true</bool>
@@ -1909,7 +1909,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1007</width>
      <height>30</height>
     </rect>
    </property>
@@ -2069,7 +2069,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string comment="correct mistakes" extracomment="Whether to correct mistakes while typing">Correct mistakes</string>
+    <string>Character correction after mistake</string>
    </property>
   </action>
   <action name="actionHideText">
