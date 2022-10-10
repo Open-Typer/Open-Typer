@@ -748,10 +748,6 @@
         <translation>Zeitlimit:</translation>
     </message>
     <message>
-        <source>Correct mistakes</source>
-        <translation type="vanished">Fehler korrigieren</translation>
-    </message>
-    <message>
         <source>Lock user interface</source>
         <translation>Benutzeroberfläche sperren</translation>
     </message>
@@ -839,12 +835,6 @@
         <source>Reverse text</source>
         <comment>reverse text button</comment>
         <translation>Text umkehren</translation>
-    </message>
-    <message>
-        <source>Correct mistakes</source>
-        <comment>correct mistakes</comment>
-        <extracomment>Whether to correct mistakes while typing</extracomment>
-        <translation type="vanished">Fehler korrigieren</translation>
     </message>
     <message>
         <source>Hide exercise text</source>
@@ -1005,6 +995,10 @@
     <message>
         <source>Character correction after mistake</source>
         <translation>Zeichenkorrektur nach einem Fehler</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to quit?</source>
+        <translation>Sind Sie sicher, dass Sie aufhören wollen?</translation>
     </message>
 </context>
 <context>

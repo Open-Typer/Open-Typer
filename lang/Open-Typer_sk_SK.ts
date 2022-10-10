@@ -929,10 +929,6 @@
         <translation>Oprava znaku po chybe</translation>
     </message>
     <message>
-        <source>Correct mistakes</source>
-        <translation type="vanished">Opravovať chyby</translation>
-    </message>
-    <message>
         <location filename="../ui/server/LoadExerciseDialog.ui" line="218"/>
         <source>Lock user interface</source>
         <translation>Uzamknúť používateľské rozhranie</translation>
@@ -1041,12 +1037,6 @@
         <source>Reverse text</source>
         <comment>reverse text button</comment>
         <translation>Obrátiť text</translation>
-    </message>
-    <message>
-        <source>Correct mistakes</source>
-        <comment>correct mistakes</comment>
-        <extracomment>Whether to correct mistakes while typing</extracomment>
-        <translation type="vanished">Opravovať chyby</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="913"/>
@@ -1218,7 +1208,7 @@
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="774"/>
-        <location filename="../src/MainWindow.cpp" line="1456"/>
+        <location filename="../src/MainWindow.cpp" line="1457"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
@@ -1228,29 +1218,34 @@
         <translation>Nemáte žiadne chybné slová.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1456"/>
+        <location filename="../src/MainWindow.cpp" line="1457"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1810"/>
+        <location filename="../src/MainWindow.cpp" line="1812"/>
         <source>Version: %1</source>
         <translation>Verzia: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1813"/>
+        <location filename="../src/MainWindow.cpp" line="1815"/>
         <source>Revision: %1</source>
         <translation>Revízia: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1815"/>
+        <location filename="../src/MainWindow.cpp" line="1817"/>
         <source>Source code: %1</source>
         <translation>Zdrojový kód: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1815"/>
+        <location filename="../src/MainWindow.cpp" line="1817"/>
         <source>Published with the GNU General Public License.</source>
         <translation>Publikované s licenciou GNU General Public License.</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="1826"/>
+        <source>Are you sure you want to quit?</source>
+        <translation>Ste si istý, že chcete ukončiť program?</translation>
     </message>
 </context>
 <context>
@@ -1292,37 +1287,37 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="53"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="55"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="54"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="56"/>
         <source>Behavior</source>
         <translation>Správanie</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="55"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="57"/>
         <source>Keyboard</source>
         <translation>Klávesnica</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="56"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="58"/>
         <source>Appearance</source>
         <translation>Vzhľad</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="58"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="60"/>
         <source>Connection</source>
         <translation>Pripojenie</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="135"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="137"/>
         <source>Settings lock password:</source>
         <translation>Heslo zámku nastavení:</translation>
     </message>
     <message>
-        <location filename="../src/options/OptionsWindow.cpp" line="149"/>
+        <location filename="../src/options/OptionsWindow.cpp" line="151"/>
         <source>Incorrect password!</source>
         <translation>Nesprávne heslo!</translation>
     </message>
