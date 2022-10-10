@@ -121,9 +121,11 @@ class MainWindow : public QMainWindow
 		TestWaitDialog *waitDialog = nullptr;
 		QByteArray oldGeometry;
 		bool firstRun = false;
+		bool uiLocked = false;
 
 	protected:
 		void changeEvent(QEvent *event);
+		void closeEvent(QCloseEvent *event);
 
 	private slots:
 		void loadTheme(void);

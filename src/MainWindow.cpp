@@ -1233,6 +1233,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 		}
 		ui->controlFrame->setEnabled(true);
 		ui->menuBar->setEnabled(true);
+		uiLocked = false;
 		testLoaded = false;
 	}
 	ExerciseSummary *msgBox = new ExerciseSummary(this);
@@ -1643,6 +1644,7 @@ void MainWindow::startReceivedExercise(QByteArray text, int lineLength, bool inc
 		ui->menuBar->setEnabled(false);
 		oldGeometry = saveGeometry();
 		showFullScreen();
+		uiLocked = true;
 	}
 	testLoaded = true;
 	uploadResult = upload;
@@ -1813,4 +1815,19 @@ void MainWindow::showAboutDialog(void)
 			tr("Revision: %1").arg(BUILD_REVISION) + "<br>" +
 #endif // BUILD_REVISION
 			tr("Source code: %1").arg("<a href=\"https://github.com/Open-Typer/Open-Typer\">https://github.com/Open-Typer/Open-Typer</a>") + "<br><br>" + QString("Copyright © %1-%2 %3").arg("2021", buildYear, "adazem009") + "<br>" + tr("Published with the GNU General Public License."));
+}
+
+/*! Overrides QMainWindow#closeEvent(). */
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+	if(uiLocked)
+	{
+		// Show a confirmation dialog if UI is locked and user tries to close the window
+		if(QMessageBox::question(this, QString(), tr("Are you sure you want to quit?")) != QMessageBox::Yes)
+		{
+			event->ignore();
+			return;
+		}
+	}
+	event->accept();
 }
