@@ -35,6 +35,8 @@ Thumbs.db
 /.qmake.stash
 release/
 lang/*.qm
+moc_predefs.h
+open-typer
 
 # qtcreator generated files
 *.pro.user*
