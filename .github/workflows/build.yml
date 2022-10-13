@@ -15,9 +15,8 @@ jobs:
         qt-target: ['desktop']
         include:
           - os: windows-latest
-            qt-version: '5.15.2'
+            qt-version: '6.2.4'
             qt-target: 'desktop'
-            mingw-version: 81
     steps:
     - uses: actions/checkout@v2
       with:
@@ -43,7 +42,7 @@ jobs:
       with:
         version: ${{ matrix.qt-version }}
         host: 'windows'
-        arch: 'win64_mingw${{ matrix.mingw-version }}'
+        arch: 'win64_mingw'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
     - if: contains(matrix.os, 'windows')
