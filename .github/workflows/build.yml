@@ -44,7 +44,7 @@ jobs:
         host: 'windows'
         arch: 'win64_mingw'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts'
+        modules: 'qtcharts qtwebsockets'
     - if: contains(matrix.os, 'windows')
       name: Install MinGW
       uses: egor-tensin/setup-mingw@v2
