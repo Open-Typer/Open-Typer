@@ -91,6 +91,19 @@ jobs:
         cp .ci/windows-repo.sh ..
         .ci/windows-build.sh
       shell: bash
+    - if: contains(matrix.os, 'windows')
+      name: Windows build
+      run: |
+        lrelease ${{ env.app_name }}.pro
+        qmake
+        mingw32-make -j4
+        cd release
+        windeployqt ${{ env.executable_name }}.exe
+      shell: cmd
+    - if: contains(matrix.os, 'windows')
+      name: Finalize Windows build
+      run: .ci/${{ env.os_name }}-build.sh 1
+      shell: bash
     - if: contains(matrix.os, 'ubuntu')
       name: Build (Ubuntu)
       run: .ci/ubuntu-build.sh
