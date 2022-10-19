@@ -95,7 +95,7 @@ jobs:
       name: Windows build
       run: |
         lrelease ${{ env.app_name }}.pro
-        qmake
+        qmake INCLUDEPATH+=C:\OpenSSL\include LIBS+=-LC:\OpenSSL\lib
         mingw32-make -j4
         cd release
         windeployqt ${{ env.executable_name }}.exe
