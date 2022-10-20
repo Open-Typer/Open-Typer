@@ -63,9 +63,10 @@ jobs:
       shell: bash
     - if: contains(matrix.os, 'windows')
       name: Install MinGW
-      uses: egor-tensin/setup-mingw@v2
+      uses: Open-Typer/setup-mingw@master
       with:
         platform: x64
+        version: '11.2.0'
     # Ubuntu
     - if: contains(matrix.os, 'ubuntu')
       name: Install Qt
