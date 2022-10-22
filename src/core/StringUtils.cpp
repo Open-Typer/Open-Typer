@@ -29,7 +29,7 @@ int StringUtils::wordCount(QString str)
 		if(str[i] == ' ')
 			out++;
 	}
-	if(str[i] != ' ')
+	if(str[i - 1] != ' ')
 		out++;
 	return out;
 }
