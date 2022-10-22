@@ -15,9 +15,8 @@ jobs:
         qt-target: ['desktop']
         include:
           - os: windows-latest
-            qt-version: '5.15.2'
+            qt-version: '6.2.4'
             qt-target: 'desktop'
-            mingw-version: 81
     steps:
     - uses: actions/checkout@v2
       with:
@@ -39,22 +38,23 @@ jobs:
     # Windows
     - if: contains(matrix.os, 'windows')
       name: Install Qt (Windows)
-      uses: jurplel/install-qt-action@v2
+      uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
         host: 'windows'
-        arch: 'win64_mingw${{ matrix.mingw-version }}'
+        arch: 'win64_mingw'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts'
+        modules: 'qtcharts qtwebsockets'
     - if: contains(matrix.os, 'windows')
       name: Install MinGW
-      uses: egor-tensin/setup-mingw@v2
+      uses: Open-Typer/setup-mingw@master
       with:
         platform: x64
+        version: '11.2.0'
     # Ubuntu
     - if: contains(matrix.os, 'ubuntu')
       name: Install Qt (Ubuntu)
-      uses: jurplel/install-qt-action@v2
+      uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
         host: 'linux'
@@ -63,7 +63,7 @@ jobs:
     # MacOS
     - if: contains(matrix.os, 'macos')
       name: Install Qt (macOS)
-      uses: jurplel/install-qt-action@v2
+      uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
         host: 'mac'
@@ -72,6 +72,19 @@ jobs:
     ## Build
     - name: Build
       run: .ci/${{ env.os_name }}-build.sh
+      shell: bash
+    - if: contains(matrix.os, 'windows')
+      name: Windows build
+      run: |
+        lrelease ${{ env.app_name }}.pro
+        qmake INCLUDEPATH+=C:\OpenSSL\include LIBS+=-LC:\OpenSSL\lib
+        mingw32-make -j4
+        cd release
+        windeployqt ${{ env.executable_name }}.exe
+      shell: cmd
+    - if: contains(matrix.os, 'windows')
+      name: Finalize Windows build
+      run: .ci/${{ env.os_name }}-build.sh 1
       shell: bash
     ## Package
     # Windows
@@ -106,7 +119,7 @@ jobs:
         submodules: true
     # Install Qt
     - name: Install Qt
-      uses: jurplel/install-qt-action@v2
+      uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
         host: 'linux'
