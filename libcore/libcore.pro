@@ -20,10 +20,13 @@ SOURCES += \
     src/KeyboardUtils.cpp \
     src/LanguageManager.cpp \
     src/MonitorClient.cpp \
-    src/MonitorServer.cpp \
     src/Settings.cpp \
     src/StringUtils.cpp \
     src/ThemeEngine.cpp
+
+!wasm {
+	SOURCES += src/MonitorServer.cpp
+}
 
 HEADERS += \
     src/include/BuiltInPacks.h \
@@ -34,10 +37,13 @@ HEADERS += \
     src/include/KeyboardUtils.h \
     src/include/LanguageManager.h \
     src/include/MonitorClient.h \
-    src/include/MonitorServer.h \
     src/include/Settings.h \
     src/include/StringUtils.h \
     src/include/ThemeEngine.h
+
+!wasm {
+	HEADERS += src/include/MonitorServer.h
+}
 
 DEFINES += CORE_SHARED_LIB
 
