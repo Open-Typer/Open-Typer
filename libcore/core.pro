@@ -2,6 +2,7 @@ QT += widgets network websockets
 
 !wasm {
 	QT += sql
+	LIBS += -lssl -lcrypto
 }
 
 TEMPLATE = lib
@@ -13,6 +14,7 @@ INCLUDEPATH += src/include
 SOURCES += \
     src/BuiltInPacks.cpp \
     src/ConfigParser.cpp \
+    src/DatabaseManager.cpp \
     src/FileUtils.cpp \
     src/HistoryParser.cpp \
     src/KeyboardUtils.cpp \
@@ -26,6 +28,7 @@ SOURCES += \
 HEADERS += \
     src/include/BuiltInPacks.h \
     src/include/ConfigParser.h \
+    src/include/DatabaseManager.h \
     src/include/FileUtils.h \
     src/include/HistoryParser.h \
     src/include/KeyboardUtils.h \
