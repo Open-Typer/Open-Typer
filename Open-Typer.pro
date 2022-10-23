@@ -42,10 +42,6 @@ isEmpty(GIT_LOCATION) | !exists(.git) {
 INCLUDEPATH += \
     src/include
 
-win32 {
-    INCLUDEPATH += C:/OpenSSL/include
-}
-
 SOURCES += \
     src/core/StringUtils.cpp \
     src/core/FileUtils.cpp \
