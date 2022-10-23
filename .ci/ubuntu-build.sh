@@ -19,5 +19,6 @@ mkdir -p AppDir/usr/share/applications &&
 cp -r app/res/linux-release/usr/share/pixmaps AppDir/usr/share/ &&
 cp app/res/linux-release/usr/share/applications/open-typer-appimage.desktop AppDir/usr/share/applications/open-typer.desktop &&
 cp "$executable_name" AppDir/usr/bin/
+cp *.so AppDir/usr/lib/
 ./linuxdeployqt-continuous-x86_64.AppImage AppDir/usr/share/applications/*.desktop -updateinformation="zsync|${appimage_zsync_url}" -appimage &&
 rm linuxdeployqt-continuous-x86_64.AppImage
