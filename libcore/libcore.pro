@@ -40,3 +40,8 @@ HEADERS += \
     src/include/ThemeEngine.h
 
 DEFINES += CORE_SHARED_LIB
+
+# Third-party
+wasm {
+	include($$PWD/../thirdparty/QWasmSettings/qwasmsettings.pri)
+}
