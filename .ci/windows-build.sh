@@ -9,7 +9,6 @@ if [[ "$1" != "1" ]]; then
 	find C:/OpenSSL/lib -depth -name "*.lib" -exec sh -c 'f="{}"; mv -- "$f" "${f%.lib}.a"' \;
 else
 	cd release
-	rm -f *.o *.cpp *.h
 	cp C:/OpenSSL/bin/*.dll ./
 	cd ..
 	mv release ../

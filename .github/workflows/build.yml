@@ -81,6 +81,9 @@ jobs:
         lrelease ${{ env.app_name }}.pro
         qmake INCLUDEPATH+=C:\OpenSSL\include LIBS+=-LC:\OpenSSL\lib
         mingw32-make -j4
+        mkdir release
+        move ${{ env.executable_name }}.exe release/
+        move *.dll release/
         cd release
         windeployqt ${{ env.executable_name }}.exe
       shell: cmd
