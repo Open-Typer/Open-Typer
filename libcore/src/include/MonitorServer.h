@@ -90,6 +90,6 @@ class CORE_LIB_EXPORT MonitorServer : public QWebSocketServer
 		QMap<int, QString> deviceStudentNames;
 };
 
-extern QPointer<MonitorServer> serverPtr;
+extern CORE_LIB_EXPORT QPointer<MonitorServer> serverPtr;
 
 #endif // MONITORSERVER_H
