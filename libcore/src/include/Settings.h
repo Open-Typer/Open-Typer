@@ -21,6 +21,12 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QSettings>
 #include <QApplication>
 #include <QRgb>
@@ -28,8 +34,8 @@
 #ifdef Q_OS_WASM
 #include <qwasmsettings.h>
 #endif // Q_OS_WASM
-#include "core/FileUtils.h"
-#include "core/ThemeEngine.h"
+#include "FileUtils.h"
+#include "ThemeEngine.h"
 
 /*!
  * \brief The Settings class contains functions for application settings.
@@ -80,7 +86,7 @@
  *  - Settings#editorGeometry() - Pack editor window geometry.
  *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
  */
-class Settings
+class CORE_LIB_EXPORT Settings
 {
 	public:
 		static void init(void);

@@ -21,6 +21,12 @@
 #ifndef THEMEENGINE_H
 #define THEMEENGINE_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QObject>
 #include <QApplication>
 #include <QWidget>
@@ -29,9 +35,9 @@
 #include <QColor>
 #include <QPalette>
 #include <QFile>
-#include "core/FileUtils.h"
+#include "FileUtils.h"
 
-class Settings;
+class CORE_LIB_EXPORT Settings;
 
 /*! \brief The ThemeEngine class provides theme functions. */
 class ThemeEngine : public QObject

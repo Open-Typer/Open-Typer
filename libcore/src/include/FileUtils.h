@@ -21,12 +21,18 @@
 #ifndef FILEUTILS_H
 #define FILEUTILS_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QString>
 #include <QStandardPaths>
 #include <QDir>
 
 /*! \brief The FileUtils class contains functions for file or directory paths. */
-class FileUtils
+class CORE_LIB_EXPORT FileUtils
 {
 	public:
 		static QString configLocation(void);

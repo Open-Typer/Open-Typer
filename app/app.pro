@@ -44,21 +44,6 @@ INCLUDEPATH += \
     src/include
 
 SOURCES += \
-    src/core/StringUtils.cpp \
-    src/core/FileUtils.cpp \
-    src/core/KeyboardUtils.cpp \
-    src/core/ConfigParser.cpp \
-    src/core/HistoryParser.cpp \
-    src/core/DatabaseManager.cpp
-!wasm {
-    SOURCES += src/core/MonitorServer.cpp
-}
-SOURCES += \
-    src/core/MonitorClient.cpp \
-    src/core/BuiltInPacks.cpp \
-    src/core/LanguageManager.cpp \
-    src/core/Settings.cpp \
-    src/core/ThemeEngine.cpp \
     src/InitialSetup.cpp \
     src/ExerciseSummary.cpp \
     src/options/ConnectionOptions.cpp \
@@ -95,21 +80,6 @@ SOURCES += \
     src/widgets/KeyboardWidget.cpp
 
 HEADERS += \
-    src/include/core/StringUtils.h \
-    src/include/core/FileUtils.h \
-    src/include/core/KeyboardUtils.h \
-    src/include/core/ConfigParser.h \
-    src/include/core/HistoryParser.h \
-    src/include/core/DatabaseManager.h
-!wasm {
-    HEADERS += src/include/core/MonitorServer.h
-}
-HEADERS += \
-    src/include/core/MonitorClient.h \
-    src/include/core/BuiltInPacks.h \
-    src/include/core/LanguageManager.h \
-    src/include/core/Settings.h \
-    src/include/core/ThemeEngine.h \
     src/include/InitialSetup.h \
     src/include/ExerciseSummary.h \
     src/include/options/ConnectionOptions.h \

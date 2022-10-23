@@ -1,5 +1,5 @@
 /*
- * KeyboardUtils.h
+ * BuiltInPacks.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,18 +18,24 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KEYBOARDUTILS_H
-#define KEYBOARDUTILS_H
+#ifndef BUILTINPACKS_H
+#define BUILTINPACKS_H
+
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
 
 #include <QObject>
-#include <QKeyEvent>
+#include <QString>
 
-/*! \brief The KeyboardUtils class provides functions related to keyboard and input method. */
-class KeyboardUtils
+/*! \brief The BuiltInPacks class provides functions for built-in pack settings. */
+class CORE_LIB_EXPORT BuiltInPacks : public QObject
 {
+		Q_OBJECT
 	public:
-		static bool isSpecialKey(QKeyEvent *event);
-		static bool isDeadKey(int key);
+		static QString packName(QString rawName);
 };
 
-#endif // KEYBOARDUTILS_H
+#endif // BUILTINPACKS_H

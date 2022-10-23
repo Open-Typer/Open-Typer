@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/ThemeEngine.h"
-#include "core/Settings.h"
+#include "ThemeEngine.h"
+#include "Settings.h"
 
 ThemeEngine globalThemeEngine;
 

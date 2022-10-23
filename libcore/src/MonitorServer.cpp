@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/MonitorServer.h"
+#include "MonitorServer.h"
 
 QPointer<MonitorServer> serverPtr = nullptr;
 

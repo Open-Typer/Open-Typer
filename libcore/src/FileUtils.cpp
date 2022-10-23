@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/FileUtils.h"
+#include "FileUtils.h"
 
 /*!
  * Returns the path to the program configuration directory.\n

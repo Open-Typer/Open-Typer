@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/BuiltInPacks.h"
+#include "BuiltInPacks.h"
 
 /*! Returns human-readable name of the built-in pack. */
 QString BuiltInPacks::packName(QString rawName)

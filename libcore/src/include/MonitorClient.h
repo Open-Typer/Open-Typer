@@ -21,6 +21,12 @@
 #ifndef MONITORCLIENT_H
 #define MONITORCLIENT_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QObject>
 #include <QApplication>
 #include <QByteArray>
@@ -33,11 +39,11 @@
 #include <QWebSocketServer>
 #include <QNetworkInterface>
 #include <QPointer>
-#include "core/FileUtils.h"
-#include "core/Settings.h"
+#include "FileUtils.h"
+#include "Settings.h"
 
 /*! \brief The MonitorClient class is used to communicate with the class monitor server. */
-class MonitorClient : public QObject
+class CORE_LIB_EXPORT MonitorClient : public QObject
 {
 		Q_OBJECT
 	public:

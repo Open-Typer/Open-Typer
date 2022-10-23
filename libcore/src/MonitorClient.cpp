@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/MonitorClient.h"
+#include "MonitorClient.h"
 
 /*! Constructs MonitorClient. */
 MonitorClient::MonitorClient(bool errDialogs, QObject *parent) :

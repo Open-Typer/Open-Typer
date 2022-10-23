@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/HistoryParser.h"
+#include "HistoryParser.h"
 
 /*! Returns number of entries in the exercise history. */
 int HistoryParser::historySize(QString pack, int lesson, int sublesson, int exercise)

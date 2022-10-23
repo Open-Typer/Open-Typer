@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/ConfigParser.h"
+#include "ConfigParser.h"
 
 namespace publicPos {
 	int currentLesson = 0, currentSublesson = 0, currentExercise = 0;

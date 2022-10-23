@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/KeyboardUtils.h"
+#include "KeyboardUtils.h"
 
 /*!
  * Returns true if the key is a special key.\n

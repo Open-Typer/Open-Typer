@@ -21,6 +21,12 @@
 #ifndef CONFIGPARSER_H
 #define CONFIGPARSER_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QObject>
 #include <QFile>
 #include <QBuffer>
@@ -49,7 +55,7 @@ namespace publicPos {
  * parser.close();
  * \endcode
  */
-class ConfigParser : public QObject
+class CORE_LIB_EXPORT ConfigParser : public QObject
 {
 		Q_OBJECT
 	public:

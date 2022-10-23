@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/Settings.h"
+#include "Settings.h"
 
 QSettings *Settings::settingsInstance = nullptr;
 #ifdef Q_OS_WASM

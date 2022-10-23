@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "core/LanguageManager.h"
+#include "LanguageManager.h"
 
 QTranslator *translator1 = nullptr;
 QTranslator *translator2 = nullptr;
