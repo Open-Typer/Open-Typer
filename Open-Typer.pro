@@ -189,7 +189,9 @@ RESOURCES += \
 win32:RC_ICONS += res/images/icon.ico
 
 # Third-party
-include($$PWD/thirdparty/QWasmSettings/qwasmsettings.pri)
+wasm {
+	include($$PWD/thirdparty/QWasmSettings/qwasmsettings.pri)
+}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
