@@ -44,6 +44,8 @@ INCLUDEPATH += \
     src/include \
     ../libcore/src/include
 
+LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
+
 SOURCES += \
     src/InitialSetup.cpp \
     src/ExerciseSummary.cpp \
