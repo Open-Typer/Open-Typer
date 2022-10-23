@@ -4,6 +4,8 @@ on:
   push:
     branches: [ master, staging ]
     tags: '*'
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
 
 jobs:
   build:
