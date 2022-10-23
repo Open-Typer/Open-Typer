@@ -114,6 +114,6 @@ class CORE_LIB_EXPORT DatabaseManager : public QObject
 		QString quotesEnclosed(QString str);
 };
 
-extern DatabaseManager dbMgr;
+extern DatabaseManager CORE_LIB_EXPORT dbMgr;
 
 #endif // DATABASEMANAGER_H
