@@ -33,8 +33,8 @@
 #include <QString>
 #include "StringUtils.h"
 
-namespace CORE_LIB_EXPORT publicPos {
-	extern int currentLesson, currentSublesson, currentExercise;
+namespace publicPos {
+	extern int CORE_LIB_EXPORT currentLesson, currentSublesson, currentExercise;
 }
 
 // TODO: Add a link to pack file format documentation.
