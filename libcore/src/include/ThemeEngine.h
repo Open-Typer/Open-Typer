@@ -37,10 +37,10 @@
 #include <QFile>
 #include "FileUtils.h"
 
-class CORE_LIB_EXPORT Settings;
+class Settings;
 
 /*! \brief The ThemeEngine class provides theme functions. */
-class ThemeEngine : public QObject
+class CORE_LIB_EXPORT ThemeEngine : public QObject
 {
 		Q_OBJECT
 	public:
