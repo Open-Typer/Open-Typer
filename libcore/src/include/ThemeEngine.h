@@ -146,6 +146,6 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		void themeChanged();
 };
 
-extern ThemeEngine globalThemeEngine;
+extern ThemeEngine CORE_LIB_EXPORT globalThemeEngine;
 
 #endif // THEMEENGINE_H
