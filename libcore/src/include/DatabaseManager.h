@@ -21,6 +21,12 @@
 #ifndef DATABASEMANAGER_H
 #define DATABASEMANAGER_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QObject>
 #include <QVariantMap>
 #include <QHostAddress>
@@ -35,7 +41,7 @@
 #endif // Q_OS_WASM
 
 /*! \brief The DatabaseManager class manages the server database. */
-class DatabaseManager : public QObject
+class CORE_LIB_EXPORT DatabaseManager : public QObject
 {
 		Q_OBJECT
 	public:

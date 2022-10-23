@@ -21,6 +21,12 @@
 #ifndef MONITORSERVER_H
 #define MONITORSERVER_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QObject>
 #include <QWebSocketServer>
 #include <QWebSocket>
@@ -36,7 +42,7 @@
 #include "Settings.h"
 
 /*! \brief The MonitorServer class is a QWebSocketServer that is used to communicate with Open-Typer clients. */
-class MonitorServer : public QWebSocketServer
+class CORE_LIB_EXPORT MonitorServer : public QWebSocketServer
 {
 		Q_OBJECT
 	public:
