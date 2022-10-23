@@ -16,8 +16,8 @@ chmod +x linuxdeployqt-continuous-x86_64.AppImage &&
 mkdir -p AppDir/usr/bin &&
 mkdir -p AppDir/usr/lib &&
 mkdir -p AppDir/usr/share/applications &&
-cp -r res/linux-release/usr/share/pixmaps AppDir/usr/share/ &&
-cp res/linux-release/usr/share/applications/open-typer-appimage.desktop AppDir/usr/share/applications/open-typer.desktop &&
+cp -r app/res/linux-release/usr/share/pixmaps AppDir/usr/share/ &&
+cp app/res/linux-release/usr/share/applications/open-typer-appimage.desktop AppDir/usr/share/applications/open-typer.desktop &&
 cp "$executable_name" AppDir/usr/bin/
 ./linuxdeployqt-continuous-x86_64.AppImage AppDir/usr/share/applications/*.desktop -updateinformation="zsync|${appimage_zsync_url}" -appimage &&
 rm linuxdeployqt-continuous-x86_64.AppImage
