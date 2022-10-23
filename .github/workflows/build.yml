@@ -86,6 +86,7 @@ jobs:
         move *.dll release/
         cd release
         windeployqt ${{ env.executable_name }}.exe
+        windeployqt opentyper-core.dll
       shell: cmd
     - if: contains(matrix.os, 'windows')
       name: Finalize Windows build
