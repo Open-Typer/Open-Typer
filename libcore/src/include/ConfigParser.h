@@ -33,7 +33,7 @@
 #include <QString>
 #include "StringUtils.h"
 
-namespace publicPos {
+namespace CORE_LIB_EXPORT publicPos {
 	extern int currentLesson, currentSublesson, currentExercise;
 }
 
