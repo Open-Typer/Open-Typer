@@ -162,6 +162,11 @@ RESOURCES += \
 
 win32:RC_ICONS += res/images/icon.ico
 
+# Third-party
+wasm {
+	include($$PWD/../thirdparty/QWasmSettings/qwasmsettings.pri)
+}
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /usr/bin
