@@ -22,7 +22,7 @@
 #define USEREDIT_H
 
 #include <QDialog>
-#include "core/DatabaseManager.h"
+#include "DatabaseManager.h"
 
 namespace Ui {
 	class UserEdit;

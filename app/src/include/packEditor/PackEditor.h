@@ -25,8 +25,8 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include "packEditor/PackSelector.h"
-#include "core/ConfigParser.h"
-#include "core/Settings.h"
+#include "ConfigParser.h"
+#include "Settings.h"
 
 namespace Ui {
 	class PackEditor;

@@ -24,9 +24,9 @@
 #include <QDialog>
 #include <QDirIterator>
 #include "options/AppearanceOptions.h"
-#include "core/BuiltInPacks.h"
-#include "core/FileUtils.h"
-#include "core/Settings.h"
+#include "BuiltInPacks.h"
+#include "FileUtils.h"
+#include "Settings.h"
 
 namespace Ui {
 	class InitialSetup;

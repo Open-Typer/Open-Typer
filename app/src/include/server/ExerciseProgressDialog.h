@@ -27,10 +27,10 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include "ExportDialog.h"
-#include "core/DatabaseManager.h"
-#include "core/ConfigParser.h"
+#include "DatabaseManager.h"
+#include "ConfigParser.h"
 #ifndef Q_OS_WASM
-#include "core/MonitorServer.h"
+#include "MonitorServer.h"
 #endif // Q_OS_WASM
 
 namespace ExerciseProgressDialogConfig {

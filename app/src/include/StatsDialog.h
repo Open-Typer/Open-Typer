@@ -23,10 +23,10 @@
 
 #include <QDialog>
 #include <QtCharts>
-#include "core/MonitorClient.h"
-#include "core/ConfigParser.h"
-#include "core/HistoryParser.h"
-#include "core/Settings.h"
+#include "MonitorClient.h"
+#include "ConfigParser.h"
+#include "HistoryParser.h"
+#include "Settings.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
 using namespace QtCharts;

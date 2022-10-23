@@ -23,7 +23,7 @@
 
 #include <QDialog>
 #include <QPropertyAnimation>
-#include "core/MonitorClient.h"
+#include "MonitorClient.h"
 
 namespace Ui {
 	class StudentOptions;

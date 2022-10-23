@@ -27,8 +27,8 @@
 #include <QPropertyAnimation>
 #include <QColorDialog>
 #include "options/OptionsWindow.h"
-#include "core/StringUtils.h"
-#include "core/ThemeEngine.h"
+#include "StringUtils.h"
+#include "ThemeEngine.h"
 
 namespace Ui {
 	class AppearanceOptions;

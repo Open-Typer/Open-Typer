@@ -21,9 +21,9 @@
 #include <QApplication>
 #include <QSettings>
 #include "MainWindow.h"
-#include "core/DatabaseManager.h"
-#include "core/Settings.h"
-#include "core/LanguageManager.h"
+#include "DatabaseManager.h"
+#include "Settings.h"
+#include "LanguageManager.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {

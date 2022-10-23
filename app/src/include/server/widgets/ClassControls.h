@@ -26,11 +26,11 @@
 #include "server/StudentEdit.h"
 #include "server/LoadExerciseDialog.h"
 #include "server/ExerciseProgressDialog.h"
-#include "core/DatabaseManager.h"
-#include "core/ConfigParser.h"
-#include "core/BuiltInPacks.h"
+#include "DatabaseManager.h"
+#include "ConfigParser.h"
+#include "BuiltInPacks.h"
 #ifndef Q_OS_WASM
-#include "core/MonitorServer.h"
+#include "MonitorServer.h"
 #endif // Q_OS_WASM
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)

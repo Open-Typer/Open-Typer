@@ -22,11 +22,11 @@
 #define CONNECTION_H
 
 #include <QWidget>
-#include "core/FileUtils.h"
-#include "core/Settings.h"
-#include "core/MonitorClient.h"
+#include "FileUtils.h"
+#include "Settings.h"
+#include "MonitorClient.h"
 #ifndef Q_OS_WASM
-#include "core/MonitorServer.h"
+#include "MonitorServer.h"
 #endif // Q_OS_WASM
 
 namespace Ui {

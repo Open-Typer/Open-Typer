@@ -29,7 +29,7 @@
 #include "server/DeviceEdit.h"
 #include "server/widgets/ClassControls.h"
 #include "server/widgets/StudentDetails.h"
-#include "core/Settings.h"
+#include "Settings.h"
 
 namespace Ui {
 	class ServerManager;

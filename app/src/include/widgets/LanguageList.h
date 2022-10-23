@@ -23,8 +23,8 @@
 
 #include <QWidget>
 #include <QListWidget>
-#include "core/StringUtils.h"
-#include "core/LanguageManager.h"
+#include "StringUtils.h"
+#include "LanguageManager.h"
 
 /*!
  * \brief The LanguageList class is a QListWidget, which provides a language selector.

@@ -22,7 +22,7 @@
 #define ADMINSELECTOR_H
 
 #include <QDialog>
-#include "core/DatabaseManager.h"
+#include "DatabaseManager.h"
 
 namespace Ui {
 	class AdminSelector;

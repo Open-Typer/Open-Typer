@@ -43,14 +43,14 @@
 #include "StatsDialog.h"
 #include "ExportDialog.h"
 #include "TestWaitDialog.h"
-#include "core/ConfigParser.h"
-#include "core/HistoryParser.h"
-#include "core/KeyboardUtils.h"
-#include "core/BuiltInPacks.h"
-#include "core/ThemeEngine.h"
-#include "core/Settings.h"
+#include "ConfigParser.h"
+#include "HistoryParser.h"
+#include "KeyboardUtils.h"
+#include "BuiltInPacks.h"
+#include "ThemeEngine.h"
+#include "Settings.h"
 #ifndef Q_OS_WASM
-#include "core/MonitorServer.h"
+#include "MonitorServer.h"
 #endif // Q_OS_WASM
 
 QT_BEGIN_NAMESPACE

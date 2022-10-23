@@ -24,7 +24,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QDirIterator>
-#include "core/DatabaseManager.h"
+#include "DatabaseManager.h"
 
 namespace Ui {
 	class ClassEdit;

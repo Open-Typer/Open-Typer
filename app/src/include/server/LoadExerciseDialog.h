@@ -24,8 +24,8 @@
 #include <QDialog>
 #include <QFileDialog>
 #include <QMessageBox>
-#include "core/ConfigParser.h"
-#include "core/DatabaseManager.h"
+#include "ConfigParser.h"
+#include "DatabaseManager.h"
 
 namespace Ui {
 	class LoadExerciseDialog;

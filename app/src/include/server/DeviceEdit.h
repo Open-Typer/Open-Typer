@@ -23,7 +23,7 @@
 
 #include <QDialog>
 #include <QPushButton>
-#include "core/DatabaseManager.h"
+#include "DatabaseManager.h"
 
 namespace Ui {
 	class DeviceEdit;

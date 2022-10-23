@@ -31,7 +31,7 @@
 
 #include <QPainter>
 #include <QAbstractTextDocumentLayout>
-#include "core/ThemeEngine.h"
+#include "ThemeEngine.h"
 
 namespace Ui {
 	class ExportDialog;

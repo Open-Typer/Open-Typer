@@ -22,8 +22,8 @@
 #define SERVERSETUP_H
 
 #include <QDialog>
-#include "core/DatabaseManager.h"
-#include "core/StringUtils.h"
+#include "DatabaseManager.h"
+#include "StringUtils.h"
 
 namespace Ui {
 	class ServerSetup;

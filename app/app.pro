@@ -41,7 +41,8 @@ isEmpty(GIT_LOCATION) | !exists(../.git) {
 }
 
 INCLUDEPATH += \
-    src/include
+    src/include \
+    ../libcore/src/include
 
 SOURCES += \
     src/InitialSetup.cpp \

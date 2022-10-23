@@ -26,8 +26,8 @@
 #include <QDirIterator>
 #include "options/OptionsWindow.h"
 #include "packEditor/PackEditor.h"
-#include "core/StringUtils.h"
-#include "core/BuiltInPacks.h"
+#include "StringUtils.h"
+#include "BuiltInPacks.h"
 
 namespace Ui {
 	class KeyboardOptions;

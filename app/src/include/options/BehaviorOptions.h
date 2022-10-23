@@ -25,7 +25,7 @@
 #include <QInputDialog>
 #include <QCryptographicHash>
 #include <QMessageBox>
-#include "core/StringUtils.h"
+#include "StringUtils.h"
 
 namespace Ui {
 	class BehaviorOptions;
