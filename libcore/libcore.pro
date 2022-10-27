@@ -23,6 +23,7 @@ SOURCES += \
     src/MonitorClient.cpp \
     src/Settings.cpp \
     src/StringUtils.cpp \
+    src/widgets/TextView.cpp \
     src/ThemeEngine.cpp
 
 !wasm {
@@ -41,6 +42,7 @@ HEADERS += \
     src/include/MonitorClient.h \
     src/include/Settings.h \
     src/include/StringUtils.h \
+    src/include/widgets/TextView.h \
     src/include/ThemeEngine.h
 
 !wasm {

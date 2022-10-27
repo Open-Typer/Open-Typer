@@ -77,7 +77,6 @@ SOURCES += \
     src/server/widgets/StudentDetails.cpp \
     src/updater/UpdaterDialog.cpp \
     src/widgets/InputLabelWidget.cpp \
-    src/widgets/TextView.cpp \
     src/widgets/LanguageList.cpp \
     src/widgets/KeyboardWidget.cpp
 
@@ -111,7 +110,6 @@ HEADERS += \
     src/include/server/widgets/ClassControls.h \
     src/include/server/widgets/StudentDetails.h \
     src/include/widgets/InputLabelWidget.h \
-    src/include/widgets/TextView.h \
     src/include/widgets/LanguageList.h \
     src/include/widgets/KeyboardWidget.h
 
