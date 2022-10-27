@@ -21,6 +21,12 @@
 #ifndef LOADEXERCISEDIALOG_H
 #define LOADEXERCISEDIALOG_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QDialog>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -36,7 +42,7 @@ namespace Ui {
  *
  * \image html LoadExerciseDialog.png
  */
-class LoadExerciseDialog : public QDialog
+class CORE_LIB_EXPORT LoadExerciseDialog : public QDialog
 {
 		Q_OBJECT
 	public:

@@ -70,7 +70,6 @@ SOURCES += \
     src/server/ClassEdit.cpp \
     src/server/StudentEdit.cpp \
     src/server/DeviceEdit.cpp \
-    src/server/LoadExerciseDialog.cpp \
     src/server/ExerciseProgressDialog.cpp \
     src/server/widgets/ServerManager.cpp \
     src/server/widgets/ClassControls.cpp \
@@ -104,7 +103,6 @@ HEADERS += \
     src/include/server/ClassEdit.h \
     src/include/server/StudentEdit.h \
     src/include/server/DeviceEdit.h \
-    src/include/server/LoadExerciseDialog.h \
     src/include/server/ExerciseProgressDialog.h \
     src/include/server/widgets/ServerManager.h \
     src/include/server/widgets/ClassControls.h \
@@ -132,7 +130,6 @@ FORMS += \
     ui/server/ClassEdit.ui \
     ui/server/StudentEdit.ui \
     ui/server/DeviceEdit.ui \
-    ui/server/LoadExerciseDialog.ui \
     ui/server/ExerciseProgressDialog.ui \
     ui/server/widgets/ServerManager.ui \
     ui/server/widgets/ClassControls.ui \

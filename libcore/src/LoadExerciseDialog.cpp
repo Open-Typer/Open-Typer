@@ -18,7 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "server/LoadExerciseDialog.h"
+#include "LoadExerciseDialog.h"
 #include "ui_LoadExerciseDialog.h"
 
 /*! Constructs LoadExerciseDialog. */

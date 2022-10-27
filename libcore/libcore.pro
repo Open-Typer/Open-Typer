@@ -21,6 +21,7 @@ SOURCES += \
     src/KeyboardUtils.cpp \
     src/LanguageManager.cpp \
     src/MonitorClient.cpp \
+    src/LoadExerciseDialog.cpp \
     src/Settings.cpp \
     src/StringUtils.cpp \
     src/widgets/TextView.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     src/include/KeyboardUtils.h \
     src/include/LanguageManager.h \
     src/include/MonitorClient.h \
+    src/include/LoadExerciseDialog.h \
     src/include/Settings.h \
     src/include/StringUtils.h \
     src/include/widgets/TextView.h \
@@ -52,7 +54,8 @@ HEADERS += \
 }
 
 FORMS += \
-    ui/ExportDialog.ui
+    ui/ExportDialog.ui \
+    ui/LoadExerciseDialog.ui
 
 DEFINES += CORE_SHARED_LIB
 
