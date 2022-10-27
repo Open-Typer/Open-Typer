@@ -63,7 +63,6 @@ SOURCES += \
     src/updater/Updater.cpp \
     src/main.cpp \
     src/MainWindow.cpp \
-    src/ExportDialog.cpp \
     src/server/UserManager.cpp \
     src/server/UserEdit.cpp \
     src/server/AdminSelector.cpp \
@@ -99,7 +98,6 @@ HEADERS += \
     src/include/updater/Updater.h \
     src/include/updater/UpdaterDialog.h \
     src/include/MainWindow.h \
-    src/include/ExportDialog.h \
     src/include/server/UserManager.h \
     src/include/server/UserEdit.h \
     src/include/server/AdminSelector.h \
@@ -129,7 +127,6 @@ FORMS += \
     ui/TimeDialog.ui \
     ui/TestWaitDialog.ui \
     ui/MainWindow.ui \
-    ui/ExportDialog.ui \
     ui/server/UserManager.ui \
     ui/server/UserEdit.ui \
     ui/server/AdminSelector.ui \
