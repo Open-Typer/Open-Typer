@@ -24,6 +24,7 @@
 #include "DatabaseManager.h"
 #include "Settings.h"
 #include "LanguageManager.h"
+#include "IAddon.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -32,6 +33,37 @@ void changeSplashMessage(QSplashScreen *splash, QString message)
 	if(!QCoreApplication::applicationVersion().isEmpty())
 		versionStr = QObject::tr("Version: %1").arg(QCoreApplication::applicationVersion());
 	splash->showMessage(versionStr + "\n" + message, Qt::AlignHCenter | Qt::AlignBottom, Qt::white);
+}
+
+void loadAddons(void)
+{
+	QDir pluginsDir(QCoreApplication::applicationDirPath());
+#if defined(Q_OS_WIN)
+	if(pluginsDir.dirName().toLower() == "debug" || pluginsDir.dirName().toLower() == "release")
+		pluginsDir.cdUp();
+#elif defined(Q_OS_MAC)
+	if(pluginsDir.dirName() == "MacOS")
+	{
+		pluginsDir.cdUp();
+		pluginsDir.cdUp();
+		pluginsDir.cdUp();
+	}
+#endif
+	pluginsDir.cd("plugins");
+	const QStringList entries = pluginsDir.entryList(QDir::Files);
+	for(const QString &fileName : entries)
+	{
+		QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
+		QObject *plugin = pluginLoader.instance();
+		if(plugin)
+		{
+			IAddon *interface = qobject_cast<IAddon *>(plugin);
+			if(interface)
+				loadedAddons.append(interface);
+			else
+				pluginLoader.unload();
+		}
+	}
 }
 
 int main(int argc, char *argv[])
@@ -57,6 +89,9 @@ int main(int argc, char *argv[])
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();
+	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
+	a.processEvents();
+	loadAddons();
 	changeSplashMessage(&splash, QObject::tr("Opening database..."));
 	a.processEvents();
 	if(!dbMgr.status())

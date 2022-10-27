@@ -24,7 +24,8 @@ SOURCES += \
     src/Settings.cpp \
     src/StringUtils.cpp \
     src/widgets/TextView.cpp \
-    src/ThemeEngine.cpp
+    src/ThemeEngine.cpp \
+    src/IAddon.cpp
 
 !wasm {
 	SOURCES += src/MonitorServer.cpp
@@ -43,7 +44,8 @@ HEADERS += \
     src/include/Settings.h \
     src/include/StringUtils.h \
     src/include/widgets/TextView.h \
-    src/include/ThemeEngine.h
+    src/include/ThemeEngine.h \
+    src/include/IAddon.h
 
 !wasm {
 	HEADERS += src/include/MonitorServer.h
