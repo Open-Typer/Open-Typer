@@ -22,7 +22,7 @@
 #include "ui_LoadExerciseDialog.h"
 
 /*! Constructs LoadExerciseDialog. */
-LoadExerciseDialog::LoadExerciseDialog(QList<int> availableTargets, QWidget *parent) :
+LoadExerciseDialog::LoadExerciseDialog(QMap<int, QString> availableTargets, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::LoadExerciseDialog),
 	m_targets(availableTargets)
@@ -72,18 +72,14 @@ void LoadExerciseDialog::init(void)
 	else
 	{
 		// Set up targets
-		for(int i = 0; i < m_targets.count(); i++)
+		QList<int> keys = m_targets.keys();
+		for(int i = 0; i < keys.count(); i++)
 		{
-			QString name;
-			if(Settings::serverFullMode())
-				name = dbMgr.userName(m_targets[i]);
-			else
-				name = dbMgr.deviceName(m_targets[i]);
-			QCheckBox *checkBox = new QCheckBox(name, ui->targetBox);
+			QCheckBox *checkBox = new QCheckBox(m_targets[keys[i]], ui->targetBox);
 			ui->targetLayout->addWidget(checkBox);
 			checkBox->setChecked(true);
 			connect(checkBox, &QCheckBox::toggled, this, &LoadExerciseDialog::verify);
-			targets[m_targets[i]] = checkBox;
+			targets[keys[i]] = checkBox;
 		}
 	}
 	verify();

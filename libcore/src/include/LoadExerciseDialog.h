@@ -31,7 +31,6 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include "ConfigParser.h"
-#include "DatabaseManager.h"
 
 namespace Ui {
 	class LoadExerciseDialog;
@@ -46,7 +45,7 @@ class CORE_LIB_EXPORT LoadExerciseDialog : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit LoadExerciseDialog(QList<int> availableTargets, QWidget *parent = nullptr);
+		explicit LoadExerciseDialog(QMap<int, QString> availableTargets, QWidget *parent = nullptr);
 		LoadExerciseDialog(QWidget *parent = nullptr);
 		~LoadExerciseDialog();
 		QString exerciseText(void);
@@ -64,7 +63,7 @@ class CORE_LIB_EXPORT LoadExerciseDialog : public QDialog
 		Ui::LoadExerciseDialog *ui;
 		void init(void);
 		QString fileName = "";
-		QList<int> m_targets;
+		QMap<int, QString> m_targets;
 		QMap<int, QCheckBox *> targets;
 		QString m_exerciseText = "";
 		int m_lineLength = 0;
