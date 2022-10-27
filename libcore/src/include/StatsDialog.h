@@ -21,6 +21,12 @@
 #ifndef STATSDIALOG_H
 #define STATSDIALOG_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QDialog>
 #include <QtCharts>
 #include "MonitorClient.h"
@@ -40,7 +46,7 @@ namespace Ui {
  * \brief The StatsDialog class is a dialog, which shows exercise history.
  * \image html StatsDialog.png
  */
-class StatsDialog : public QDialog
+class CORE_LIB_EXPORT StatsDialog : public QDialog
 {
 		Q_OBJECT
 	public:
