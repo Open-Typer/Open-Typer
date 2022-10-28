@@ -21,6 +21,7 @@
 #include "AddonApi.h"
 
 QList<QVariantMap> AddonApi::m_settingsCategories;
+QMap<QString, QMenu *> AddonApi::m_menus;
 
 /*! Adds settings category with widget of class className. */
 bool AddonApi::addSettingsCategory(QString categoryName, QIcon icon, QString className)
@@ -66,4 +67,40 @@ void AddonApi::sendEvent(IAddon::Event type)
 {
 	for(int i = 0; i < loadedAddons.count(); i++)
 		loadedAddons[i]->addonEvent(type);
+}
+
+/*! Deletes all menus. */
+void AddonApi::deleteMenus(void)
+{
+	QStringList keys = m_menus.keys();
+	for(int i = 0; i < keys.count(); i++)
+	{
+		if(m_menus[keys[i]] != nullptr)
+			m_menus[keys[i]]->deleteLater();
+	}
+	m_menus.clear();
+}
+
+/*! Adds a menu with the given name to the list of menus. Use registerMenu() to assign a QMenu to the name. */
+void AddonApi::addMenu(QString name)
+{
+	m_menus[name] = nullptr;
+}
+
+/*! Assigns a QMenu to menu with the given name. */
+void AddonApi::registerMenu(QMenu *menu)
+{
+	m_menus[menu->title()] = menu;
+}
+
+/*! Returns the map of menus. */
+QMap<QString, QMenu *> AddonApi::menus(void)
+{
+	return m_menus;
+}
+
+/*! Convenience function, which returns menu with the given name. */
+QMenu *AddonApi::menu(QString name)
+{
+	return m_menus[name];
 }

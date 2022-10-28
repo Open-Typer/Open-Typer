@@ -25,6 +25,7 @@
 #include <QIcon>
 #include <QMessageBox>
 #include <QVariantMap>
+#include <QMenu>
 #include "IAddon.h"
 
 #if defined CORE_SHARED_LIB
@@ -42,9 +43,15 @@ class CORE_LIB_EXPORT AddonApi
 		static void clearSettingsCategories(void);
 		static void initSettingsCategories(bool clear = false);
 		static void sendEvent(IAddon::Event type);
+		static void deleteMenus(void);
+		static void addMenu(QString name);
+		static void registerMenu(QMenu *menu);
+		static QMap<QString, QMenu *> menus(void);
+		static QMenu *menu(QString name);
 
 	private:
 		static QList<QVariantMap> m_settingsCategories;
+		static QMap<QString, QMenu *> m_menus;
 };
 
 #endif // ADDONAPI_H
