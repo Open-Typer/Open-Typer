@@ -48,15 +48,22 @@ OptionsWindow::OptionsWindow(QWidget *parent) :
 /*! Sets up list of categories. */
 void OptionsWindow::setupList(void)
 {
-	AddonApi::initSettingsCategories();
 	int oldIndex = ui->list->currentRow();
 	ui->list->clear();
 	ui->list->setIconSize(QSize(36, 36));
-	// List of options
-	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/languageOptions.svg"), tr("Language")));
-	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/BehaviorOptions.svg"), tr("Behavior")));
-	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/KeyboardOptions.svg"), tr("Keyboard")));
-	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/AppearanceOptions.svg"), tr("Appearance")));
+	// Register category classes
+	qRegisterMetaType<LanguageList *>("LanguageList");
+	qRegisterMetaType<BehaviorOptions *>("BehaviorOptions");
+	qRegisterMetaType<KeyboardOptions *>("KeyboardOptions");
+	qRegisterMetaType<AppearanceOptions *>("AppearanceOptions");
+	// Add default categories
+	AddonApi::clearSettingsCategories();
+	AddonApi::addSettingsCategory(tr("Language"), QIcon(":res/images/languageOptions.svg"), "LanguageList");
+	AddonApi::addSettingsCategory(tr("Behavior"), QIcon(":res/images/BehaviorOptions.svg"), "BehaviorOptions");
+	AddonApi::addSettingsCategory(tr("Keyboard"), QIcon(":res/images/KeyboardOptions.svg"), "KeyboardOptions");
+	AddonApi::addSettingsCategory(tr("Appearance"), QIcon(":res/images/AppearanceOptions.svg"), "AppearanceOptions");
+	// Add addon categories
+	AddonApi::initSettingsCategories();
 	QList<QVariantMap> categories = AddonApi::settingsCategories();
 	for(int i = 0; i < categories.count(); i++)
 		ui->list->addItem(new QListWidgetItem(categories[i]["icon"].value<QIcon>(), categories[i]["name"].toString()));
@@ -73,39 +80,17 @@ OptionsWindow::~OptionsWindow()
 void OptionsWindow::changeOptionWidget(int index)
 {
 	QWidget *options = nullptr;
-	switch(index)
+	Q_ASSERT(index >= 0 && index < AddonApi::settingsCategories().count());
+	QVariantMap category = AddonApi::settingsCategories().at(index);
+	QString categoryName = category["name"].toString();
+	QString className = category["class"].toString();
+	int id = QMetaType::type(QString(className + "*").toStdString().c_str());
+	if(id != QMetaType::UnknownType)
 	{
-		case 0:
-			// Language
-			options = new LanguageList;
-			break;
-		case 1:
-			// Behavior
-			options = new BehaviorOptions;
-			break;
-		case 2:
-			// Keyboard
-			options = new KeyboardOptions;
-			break;
-		case 3:
-			// Appearance
-			options = new AppearanceOptions;
-			break;
-		case -1:
-			break;
-		default:
-			// TODO: Remove '- 4'
-			QVariantMap category = AddonApi::settingsCategories().at(index - 4);
-			QString categoryName = category["name"].toString();
-			QString className = category["class"].toString();
-			int id = QMetaType::type(QString(className + "*").toStdString().c_str());
-			if(id != QMetaType::UnknownType)
-			{
-				const QMetaObject *metaObject = QMetaType::metaObjectForType(id);
-				options = qobject_cast<QWidget *>(metaObject->newInstance());
-				if(options == nullptr)
-					QMessageBox::critical(nullptr, "Error", QString("Could not create settings page \"%1\": is %2's constructor declared with Q_INVOKABLE?").arg(categoryName, className));
-			}
+		const QMetaObject *metaObject = QMetaType::metaObjectForType(id);
+		options = qobject_cast<QWidget *>(metaObject->newInstance());
+		if(options == nullptr)
+			QMessageBox::critical(nullptr, "Error", QString("Could not create settings page \"%1\": is %2's constructor declared with Q_INVOKABLE?").arg(categoryName, className));
 	}
 	if(options == nullptr)
 		return;
