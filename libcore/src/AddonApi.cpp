@@ -53,11 +53,11 @@ void AddonApi::clearSettingsCategories(void)
 	m_settingsCategories.clear();
 }
 
-/*! Calls IAddon#initSettingsCategories() for each loaded addon. */
+/*! Calls IAddon#addonEvent() with Event_InitSettings for each loaded addon. */
 void AddonApi::initSettingsCategories(bool clear)
 {
 	if(clear)
 		clearSettingsCategories();
 	for(int i = 0; i < loadedAddons.count(); i++)
-		loadedAddons[i]->initSettingsCategories();
+		loadedAddons[i]->addonEvent(IAddon::Event_InitSettings);
 }
