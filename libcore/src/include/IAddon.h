@@ -35,6 +35,7 @@ class CORE_LIB_EXPORT IAddon
 {
 	public:
 		virtual ~IAddon(void) = default;
+		virtual void initSettingsCategories(void) = 0;
 };
 
 Q_DECLARE_INTERFACE(IAddon, "opentyper.addon")
