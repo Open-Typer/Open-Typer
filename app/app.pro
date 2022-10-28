@@ -49,10 +49,7 @@ LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 SOURCES += \
     src/InitialSetup.cpp \
     src/ExerciseSummary.cpp \
-    src/options/ConnectionOptions.cpp \
-    src/options/StudentOptions.cpp \
     src/TimeDialog.cpp \
-    src/TestWaitDialog.cpp \
     src/options/BehaviorOptions.cpp \
     src/options/AppearanceOptions.cpp \
     src/options/KeyboardOptions.cpp \
@@ -62,17 +59,6 @@ SOURCES += \
     src/updater/Updater.cpp \
     src/main.cpp \
     src/MainWindow.cpp \
-    src/server/UserManager.cpp \
-    src/server/UserEdit.cpp \
-    src/server/AdminSelector.cpp \
-    src/server/ServerSetup.cpp \
-    src/server/ClassEdit.cpp \
-    src/server/StudentEdit.cpp \
-    src/server/DeviceEdit.cpp \
-    src/server/ExerciseProgressDialog.cpp \
-    src/server/widgets/ServerManager.cpp \
-    src/server/widgets/ClassControls.cpp \
-    src/server/widgets/StudentDetails.cpp \
     src/updater/UpdaterDialog.cpp \
     src/widgets/InputLabelWidget.cpp \
     src/widgets/LanguageList.cpp \
@@ -81,10 +67,7 @@ SOURCES += \
 HEADERS += \
     src/include/InitialSetup.h \
     src/include/ExerciseSummary.h \
-    src/include/options/ConnectionOptions.h \
-    src/include/options/StudentOptions.h \
     src/include/TimeDialog.h \
-    src/include/TestWaitDialog.h \
     src/include/options/BehaviorOptions.h \
     src/include/options/AppearanceOptions.h \
     src/include/options/KeyboardOptions.h \
@@ -94,17 +77,6 @@ HEADERS += \
     src/include/updater/Updater.h \
     src/include/updater/UpdaterDialog.h \
     src/include/MainWindow.h \
-    src/include/server/UserManager.h \
-    src/include/server/UserEdit.h \
-    src/include/server/AdminSelector.h \
-    src/include/server/ServerSetup.h \
-    src/include/server/ClassEdit.h \
-    src/include/server/StudentEdit.h \
-    src/include/server/DeviceEdit.h \
-    src/include/server/ExerciseProgressDialog.h \
-    src/include/server/widgets/ServerManager.h \
-    src/include/server/widgets/ClassControls.h \
-    src/include/server/widgets/StudentDetails.h \
     src/include/widgets/InputLabelWidget.h \
     src/include/widgets/LanguageList.h \
     src/include/widgets/KeyboardWidget.h
@@ -112,25 +84,11 @@ HEADERS += \
 FORMS += \
     ui/InitialSetup.ui \
     ui/options/BehaviorOptions.ui \
-    ui/options/ConnectionOptions.ui \
     ui/options/AppearanceOptions.ui \
     ui/options/KeyboardOptions.ui \
     ui/ExerciseSummary.ui \
-    ui/options/StudentOptions.ui \
     ui/TimeDialog.ui \
-    ui/TestWaitDialog.ui \
     ui/MainWindow.ui \
-    ui/server/UserManager.ui \
-    ui/server/UserEdit.ui \
-    ui/server/AdminSelector.ui \
-    ui/server/ServerSetup.ui \
-    ui/server/ClassEdit.ui \
-    ui/server/StudentEdit.ui \
-    ui/server/DeviceEdit.ui \
-    ui/server/ExerciseProgressDialog.ui \
-    ui/server/widgets/ServerManager.ui \
-    ui/server/widgets/ClassControls.ui \
-    ui/server/widgets/StudentDetails.ui \
     ui/options/OptionsWindow.ui \
     ui/packEditor/PackEditor.ui \
     ui/packEditor/PackSelector.ui \

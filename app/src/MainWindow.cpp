@@ -38,7 +38,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	remainingTextAreaLayout->addWidget(ui->keyboardFrame);
 	remainingTextAreaLayout->setAlignment(ui->keyboardFrame, Qt::AlignHCenter | Qt::AlignBottom);
 	localThemeEngine.setParent(this);
-	client.setErrorDialogs(false);
 	studentUsername = "";
 	studentPassword = "";
 	oldConfigName = "";
@@ -55,9 +54,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	// Load text
 	updateText();
 	// Connections
-	connect(&client, SIGNAL(disconnected()), this, SLOT(updateStudent()));
-	connect(&client, &MonitorClient::exerciseReceived, this, &MainWindow::loadReceivedExercise);
-	connect(&client, &MonitorClient::initExReceived, this, &MainWindow::waitForReceivedExercise);
 	// File menu
 	connect(ui->actionOpenText, &QAction::triggered, this, &MainWindow::openExerciseFromFile);
 	connect(ui->actionOpenPack, &QAction::triggered, this, &MainWindow::openPack);
@@ -164,12 +160,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
 	delete ui;
-#ifndef Q_OS_WASM
-	if(serverPtr)
-		serverPtr->deleteLater();
-#endif // Q_OS_WASM
-	if(testLoaded && uploadResult && client.available())
-		client.sendRequest("put", { "abortExercise" });
 	Settings::setWindowState(saveState());
 	Settings::setWindowGeometry(saveGeometry());
 }
@@ -183,7 +173,7 @@ void MainWindow::refreshAll(void)
 {
 #ifndef Q_OS_WASM
 	// Start or stop server
-	if(Settings::networkEnabled() && (Settings::networkMode() == 1))
+	/*if(Settings::networkEnabled() && (Settings::networkMode() == 1))
 	{
 		if(!serverPtr)
 			serverPtr = new MonitorServer(true, this);
@@ -228,7 +218,7 @@ void MainWindow::refreshAll(void)
 		ui->serverFrame->hide();
 		if(ui->serverFrameLayout->count() > 0)
 			ui->serverFrameLayout->itemAt(0)->widget()->close();
-	}
+	}*/
 #endif // Q_OS_WASM
 	// Config file (lesson pack) name
 	QString configName = Settings::lessonPack();
@@ -398,8 +388,8 @@ void MainWindow::startLevel(int lessonID, int sublessonID, int levelID)
 			levelID);
 	if(uploadResult)
 	{
-		if((studentUsername != "") || (!client.fullMode() && client.isPaired()))
-			client.sendRequest("put", { "abortExercise" });
+		/*if((studentUsername != "") || (!client.fullMode() && client.isPaired()))
+			client.sendRequest("put", { "abortExercise" });*/
 		uploadResult = false;
 	}
 	// Get lesson count
@@ -651,20 +641,20 @@ void MainWindow::openOptions(void)
  */
 void MainWindow::openStudentOptions(void)
 {
-	StudentOptions *dialog = new StudentOptions(this);
+	/*StudentOptions *dialog = new StudentOptions(this);
 	dialog->setWindowModality(Qt::WindowModal);
 	connect(dialog, &QDialog::accepted, this, [dialog, this]() {
 		studentUsername = dialog->username;
 		studentPassword = dialog->password;
 		updateStudent();
 	});
-	dialog->open();
+	dialog->open();*/
 }
 
 /*! Updates student session. */
 void MainWindow::updateStudent(void)
 {
-	if(client.available() && client.sendRequest("get", { "serverMode" }).at(1) == "full")
+	/*if(client.available() && client.sendRequest("get", { "serverMode" }).at(1) == "full")
 		ui->actionLogIn->setEnabled(true);
 	else
 	{
@@ -710,7 +700,7 @@ void MainWindow::updateStudent(void)
 	ui->studentLabel->setText(tr("Not logged in."));
 	bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
 	ui->statsButton->setEnabled(enableStats);
-	ui->actionStats->setEnabled(enableStats);
+	ui->actionStats->setEnabled(enableStats);*/
 }
 
 /*! Connected from lessonSelectionList.\n
@@ -1201,9 +1191,9 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 		if(studentUsername != "")
 		{
 			updateStudent();
-			client.sendRequest("put",
+			/*client.sendRequest("put",
 				{ "result", publicConfigName.toUtf8(), QByteArray::number(currentLesson), QByteArray::number(currentAbsoluteSublesson), QByteArray::number(currentLevel),
-					QByteArray::number(grossHitsPerMinute), QByteArray::number(levelMistakes), QByteArray::number(time) });
+					QByteArray::number(grossHitsPerMinute), QByteArray::number(levelMistakes), QByteArray::number(time) });*/
 		}
 		else
 			HistoryParser::addHistoryEntry(publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel,
@@ -1218,7 +1208,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 			showNormal();
 			restoreGeometry(oldGeometry);
 		}
-		if(uploadResult && ((studentUsername != "") || (!client.fullMode() && client.isPaired())))
+		/*if(uploadResult && ((studentUsername != "") || (!client.fullMode() && client.isPaired())))
 		{
 			updateStudent();
 			QStringList list = { "recordedCharacters" };
@@ -1230,7 +1220,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 			}
 			client.sendRequest("put", list);
 			client.sendRequest("put", { "testResult", input, QString::number(lastTimeF) });
-		}
+		}*/
 		ui->controlFrame->setEnabled(true);
 		ui->menuBar->setEnabled(true);
 		uiLocked = false;
@@ -1594,9 +1584,9 @@ void MainWindow::showExerciseStats(void)
 {
 	StatsDialog *dialog;
 	if((studentUsername != ""))
-		dialog = new StatsDialog(&client, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
+		/*dialog = new StatsDialog(&client, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this)*/;
 	else if(!customLevelLoaded && !customConfig)
-		dialog = new StatsDialog(nullptr, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
+		dialog = new StatsDialog(true, { }, QPair<int, int>(0, 0), publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
 	else
 		return;
 	dialog->setWindowModality(Qt::WindowModal);
@@ -1606,10 +1596,10 @@ void MainWindow::showExerciseStats(void)
 /*! Connected from client.exerciseReceived(). */
 void MainWindow::loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText)
 {
-	if(waitDialog)
+	/*if(waitDialog)
 		waitDialog->accept();
 	waitDialog = nullptr;
-	startReceivedExercise(text, lineLength, includeNewLines, mode, time, correctMistakes, lockUi, hideText, true);
+	startReceivedExercise(text, lineLength, includeNewLines, mode, time, correctMistakes, lockUi, hideText, true);*/
 }
 
 /*! Starts received exercise or a local typing test. */
@@ -1653,7 +1643,7 @@ void MainWindow::startReceivedExercise(QByteArray text, int lineLength, bool inc
 /*! Opens TestWaitDialog and waits until the received exercise starts. */
 void MainWindow::waitForReceivedExercise(QString text, int lineLength)
 {
-	waitDialog = new TestWaitDialog(&client, this);
+	/*waitDialog = new TestWaitDialog(&client, this);
 	if(text != "")
 		waitDialog->setText(ConfigParser::initExercise(text, lineLength));
 	QString name = "";
@@ -1670,7 +1660,7 @@ void MainWindow::waitForReceivedExercise(QString text, int lineLength)
 	connect(dialogPtr, &QDialog::finished, this, [this]() {
 		waitDialog = nullptr;
 	});
-	waitDialog->open();
+	waitDialog->open();*/
 }
 
 /*!
@@ -1753,7 +1743,7 @@ void MainWindow::printText(void)
 /*! Starts typing test. */
 void MainWindow::startTest(void)
 {
-	LoadExerciseDialog *dialog;
+	/*LoadExerciseDialog *dialog;
 	bool fullMode = Settings::serverFullMode();
 #ifdef Q_OS_WASM
 	dialog = new LoadExerciseDialog(this);
@@ -1794,7 +1784,7 @@ void MainWindow::startTest(void)
 #endif // Q_OS_WASM
 		startReceivedExercise(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
 			dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText(), false);
-	});
+	});*/
 }
 
 /*! Shows about program dialog. */

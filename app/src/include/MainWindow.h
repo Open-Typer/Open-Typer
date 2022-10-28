@@ -33,25 +33,19 @@
 #include "InitialSetup.h"
 #include "widgets/InputLabelWidget.h"
 #include "widgets/LanguageList.h"
-#include "server/widgets/ServerManager.h"
 #include "updater/Updater.h"
 #include "packEditor/PackEditor.h"
 #include "options/OptionsWindow.h"
-#include "options/StudentOptions.h"
 #include "ExerciseSummary.h"
 #include "TimeDialog.h"
 #include "StatsDialog.h"
 #include "ExportDialog.h"
-#include "TestWaitDialog.h"
 #include "ConfigParser.h"
 #include "HistoryParser.h"
 #include "KeyboardUtils.h"
 #include "BuiltInPacks.h"
 #include "ThemeEngine.h"
 #include "Settings.h"
-#ifndef Q_OS_WASM
-#include "MonitorServer.h"
-#endif // Q_OS_WASM
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -74,7 +68,6 @@ class MainWindow : public QMainWindow
 	private:
 		Ui::MainWindow *ui;
 		ConfigParser parser;
-		MonitorClient client;
 		QString studentUsername, studentPassword;
 		QString loadConfig(QString configName, QByteArray packContent = "");
 		void startLevel(int lesson, int sublesson, int level);
@@ -118,7 +111,6 @@ class MainWindow : public QMainWindow
 		void loadReversedText(void);
 		void exportText(void);
 		bool preview = false, uploadResult = false, testLoaded = false, correctMistakesOld = true, hideTextOld = false;
-		TestWaitDialog *waitDialog = nullptr;
 		QByteArray oldGeometry;
 		bool firstRun = false;
 		bool uiLocked = false;

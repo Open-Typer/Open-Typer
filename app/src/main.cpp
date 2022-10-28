@@ -21,7 +21,6 @@
 #include <QApplication>
 #include <QSettings>
 #include "MainWindow.h"
-#include "DatabaseManager.h"
 #include "Settings.h"
 #include "LanguageManager.h"
 #include "IAddon.h"
@@ -92,10 +91,6 @@ int main(int argc, char *argv[])
 	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
 	a.processEvents();
 	loadAddons();
-	changeSplashMessage(&splash, QObject::tr("Opening database..."));
-	a.processEvents();
-	if(!dbMgr.status())
-		dbMgr.open();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Set icon

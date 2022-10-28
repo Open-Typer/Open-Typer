@@ -29,7 +29,6 @@
 
 #include <QDialog>
 #include <QtCharts>
-#include "MonitorClient.h"
 #include "ConfigParser.h"
 #include "HistoryParser.h"
 #include "Settings.h"
@@ -50,7 +49,7 @@ class CORE_LIB_EXPORT StatsDialog : public QDialog
 {
 		Q_OBJECT
 	public:
-		explicit StatsDialog(MonitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent = nullptr);
+		explicit StatsDialog(bool offline, QList<QStringList> data, QPair<int, int> studentComparison, QString configName, int lesson, int sublesson, int exercise, QWidget *parent = nullptr);
 		~StatsDialog();
 
 	private:

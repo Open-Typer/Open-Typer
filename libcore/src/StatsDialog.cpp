@@ -22,7 +22,7 @@
 #include "ui_StatsDialog.h"
 
 /*! Constructs StatsDialog. */
-StatsDialog::StatsDialog(MonitorClient *client, QString configName, int lesson, int sublesson, int exercise, QWidget *parent) :
+StatsDialog::StatsDialog(bool offline, QList<QStringList> data, QPair<int, int> studentComparison, QString configName, int lesson, int sublesson, int exercise, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::StatsDialog)
 {
@@ -31,10 +31,10 @@ StatsDialog::StatsDialog(MonitorClient *client, QString configName, int lesson, 
 	ui->statsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	// Load data
 	QStringList response;
-	if(client == nullptr)
+	if(offline)
 		response = QStringList({ QString("ok"), QString::number(HistoryParser::historySize(configName, lesson, sublesson, exercise)) });
 	else
-		response = client->sendRequest("get", { "resultcount", configName.toUtf8(), QString::number(lesson), QString::number(sublesson), QString::number(exercise) });
+		response = QStringList({ QString("ok"), QString::number(data.count()) });
 	if(response[0] != "ok")
 	{
 		QMetaObject::invokeMethod(this, "reject", Qt::QueuedConnection);
@@ -51,7 +51,7 @@ StatsDialog::StatsDialog(MonitorClient *client, QString configName, int lesson, 
 	QTableWidgetItem *item;
 	for(i = 0; i < count; i++)
 	{
-		if(client == nullptr)
+		if(offline)
 		{
 			response = QStringList({ "ok" });
 			QStringList entry = HistoryParser::historyEntry(configName, lesson, sublesson, exercise, i);
@@ -59,7 +59,7 @@ StatsDialog::StatsDialog(MonitorClient *client, QString configName, int lesson, 
 				response += entry[i2].toUtf8();
 		}
 		else
-			response = client->sendRequest("get", { "result", configName.toUtf8(), QString::number(lesson), QString::number(sublesson), QString::number(exercise), QString::number(i) });
+			response = data[i];
 		if(response[0] != "ok")
 		{
 			QMetaObject::invokeMethod(this, "reject", Qt::QueuedConnection);
@@ -116,23 +116,15 @@ StatsDialog::StatsDialog(MonitorClient *client, QString configName, int lesson, 
 	mistakesChart->setTheme(theme);
 	timeChart->setTheme(theme);
 	// Load comparison data
-	if(client == nullptr)
+	if(offline)
 	{
 		ui->betterStudentsLabel->hide();
 		ui->worseStudentsLabel->hide();
 	}
 	else
 	{
-		response = client->sendRequest("get", { "betterstudents", configName.toUtf8(), QString::number(lesson), QString::number(sublesson), QString::number(exercise) });
-		if(response[0] == "ok")
-			ui->betterStudentsLabel->setText(tr("Better students: %1").arg(QString(response[1])));
-		else
-			ui->betterStudentsLabel->hide();
-		response = client->sendRequest("get", { "worsestudents", configName.toUtf8(), QString::number(lesson), QString::number(sublesson), QString::number(exercise) });
-		if(response[0] == "ok")
-			ui->worseStudentsLabel->setText(tr("Worse students: %1").arg(QString(response[1])));
-		else
-			ui->worseStudentsLabel->hide();
+		ui->betterStudentsLabel->setText(tr("Better students: %1").arg(studentComparison.first));
+		ui->worseStudentsLabel->setText(tr("Worse students: %1").arg(studentComparison.second));
 	}
 	// Connections
 	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(accept()));
