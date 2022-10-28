@@ -54,7 +54,11 @@ void loadAddons(void)
 	for(const QString &fileName : entries)
 	{
 		QFileInfo fileInfo(fileName);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 		if(fileInfo.isSymbolicLink())
+#else
+		if(fileInfo.isSymLink())
+#endif
 			continue;
 		QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
 		QObject *plugin = pluginLoader.instance();
