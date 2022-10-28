@@ -154,6 +154,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	if(Settings::updateChecks())
 		new Updater();
 #endif // Q_OS_WASM
+	AddonApi::sendEvent(IAddon::Event_InitApp);
 }
 
 /*! Destroys the MainWindow object. */
