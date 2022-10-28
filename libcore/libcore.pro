@@ -12,6 +12,7 @@ DESTDIR = $$_PRO_FILE_PWD_/..
 INCLUDEPATH += src/include
 
 SOURCES += \
+    src/AddonApi.cpp \
     src/BuiltInPacks.cpp \
     src/ConfigParser.cpp \
     src/ExportDialog.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
     src/IAddon.cpp
 
 HEADERS += \
+    src/include/AddonApi.h \
     src/include/BuiltInPacks.h \
     src/include/ConfigParser.h \
     src/include/ExportDialog.h \
