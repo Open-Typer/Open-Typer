@@ -26,12 +26,18 @@
 #include <QWheelEvent>
 #include <QLayout>
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 /*!
  * \brief The TextView class is a QTextEdit used to display text.
  *
  * It contains modifications that ignore mouse wheel events and make the widget resize using fixed size according to the text document size.
  */
-class TextView : public QTextEdit
+class CORE_LIB_EXPORT TextView : public QTextEdit
 {
 		Q_OBJECT
 	public:
