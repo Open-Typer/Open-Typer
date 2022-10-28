@@ -24,6 +24,7 @@
 
 #include <QDialog>
 #include <QPushButton>
+#include "AddonApi.h"
 #include "options/BehaviorOptions.h"
 #include "options/KeyboardOptions.h"
 #include "options/AppearanceOptions.h"

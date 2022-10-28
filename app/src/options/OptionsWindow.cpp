@@ -48,6 +48,7 @@ OptionsWindow::OptionsWindow(QWidget *parent) :
 /*! Sets up list of categories. */
 void OptionsWindow::setupList(void)
 {
+	AddonApi::initSettingsCategories();
 	int oldIndex = ui->list->currentRow();
 	ui->list->clear();
 	ui->list->setIconSize(QSize(36, 36));
@@ -56,6 +57,9 @@ void OptionsWindow::setupList(void)
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/BehaviorOptions.svg"), tr("Behavior")));
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/KeyboardOptions.svg"), tr("Keyboard")));
 	ui->list->addItem(new QListWidgetItem(QIcon(":res/images/AppearanceOptions.svg"), tr("Appearance")));
+	QList<QVariantMap> categories = AddonApi::settingsCategories();
+	for(int i = 0; i < categories.count(); i++)
+		ui->list->addItem(new QListWidgetItem(categories[i]["icon"].value<QIcon>(), categories[i]["name"].toString()));
 	ui->list->setCurrentRow(oldIndex);
 }
 
@@ -87,6 +91,21 @@ void OptionsWindow::changeOptionWidget(int index)
 			// Appearance
 			options = new AppearanceOptions;
 			break;
+		case -1:
+			break;
+		default:
+			// TODO: Remove '- 4'
+			QVariantMap category = AddonApi::settingsCategories().at(index - 4);
+			QString categoryName = category["name"].toString();
+			QString className = category["class"].toString();
+			int id = QMetaType::type(QString(className + "*").toStdString().c_str());
+			if(id != QMetaType::UnknownType)
+			{
+				const QMetaObject *metaObject = QMetaType::metaObjectForType(id);
+				options = qobject_cast<QWidget *>(metaObject->newInstance());
+				if(options == nullptr)
+					QMessageBox::critical(nullptr, "Error", QString("Could not create settings page \"%1\": is %2's constructor declared with Q_INVOKABLE?").arg(categoryName, className));
+			}
 	}
 	if(options == nullptr)
 		return;
