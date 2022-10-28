@@ -39,7 +39,8 @@ class CORE_LIB_EXPORT AddonApi
 	public:
 		static bool addSettingsCategory(QString categoryName, QIcon icon, QString className);
 		static QList<QVariantMap> settingsCategories(void);
-		static void initSettingsCategories(void);
+		static void clearSettingsCategories(void);
+		static void initSettingsCategories(bool clear = false);
 	private:
 		static QList<QVariantMap> m_settingsCategories;
 };

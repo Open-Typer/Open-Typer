@@ -47,10 +47,17 @@ QList<QVariantMap> AddonApi::settingsCategories(void)
 	return m_settingsCategories;
 }
 
-/*! Calls IAddon#initSettingsCategories() for each loaded addon. */
-void AddonApi::initSettingsCategories(void)
+/*! Removes all settings categories. */
+void AddonApi::clearSettingsCategories(void)
 {
 	m_settingsCategories.clear();
+}
+
+/*! Calls IAddon#initSettingsCategories() for each loaded addon. */
+void AddonApi::initSettingsCategories(bool clear)
+{
+	if(clear)
+		clearSettingsCategories();
 	for(int i = 0; i < loadedAddons.count(); i++)
 		loadedAddons[i]->initSettingsCategories();
 }
