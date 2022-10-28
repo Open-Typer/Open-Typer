@@ -155,6 +155,7 @@ MainWindow::MainWindow(QWidget *parent) :
 		new Updater();
 #endif // Q_OS_WASM
 	AddonApi::sendEvent(IAddon::Event_InitApp);
+	loadMenus();
 }
 
 /*! Destroys the MainWindow object. */
@@ -163,6 +164,22 @@ MainWindow::~MainWindow()
 	delete ui;
 	Settings::setWindowState(saveState());
 	Settings::setWindowGeometry(saveGeometry());
+}
+
+/*! Loads custom menus. */
+void MainWindow::loadMenus(void)
+{
+	AddonApi::deleteMenus();
+	AddonApi::sendEvent(IAddon::Event_InitMenu);
+	QMap<QString, QMenu *> menus = AddonApi::menus();
+	QStringList keys = menus.keys();
+	for(int i = 0; i < keys.count(); i++)
+	{
+		QMenu *menu = new QMenu(keys[i], ui->menuBar);
+		ui->menuBar->addMenu(menu);
+		AddonApi::registerMenu(menu);
+	}
+	AddonApi::sendEvent(IAddon::Event_InitMenuActions);
 }
 
 /*! Initializes the program and loads all settings.
@@ -1484,6 +1501,7 @@ void MainWindow::changeEvent(QEvent *event)
 	if(event->type() == QEvent::LanguageChange)
 	{
 		ui->retranslateUi(this);
+		loadMenus();
 		if(Settings::lessonPack() == "")
 			return;
 		globalThemeEngine.updateThemeList();
