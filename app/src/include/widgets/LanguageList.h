@@ -37,7 +37,7 @@ class LanguageList : public QListWidget
 {
 		Q_OBJECT
 	public:
-		explicit LanguageList(QWidget *parent = nullptr);
+		Q_INVOKABLE LanguageList(QWidget *parent = nullptr);
 		~LanguageList();
 		QLocale::Language language(int index);
 		QLocale::Country country(int index);

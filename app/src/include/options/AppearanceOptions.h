@@ -45,7 +45,7 @@ class AppearanceOptions : public QWidget
 {
 		Q_OBJECT
 	public:
-		explicit AppearanceOptions(QWidget *parent = nullptr);
+		Q_INVOKABLE AppearanceOptions(QWidget *parent = nullptr);
 		~AppearanceOptions();
 		void init(void);
 		void hideModeSelector(void);

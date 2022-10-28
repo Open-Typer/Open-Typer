@@ -42,7 +42,7 @@ class KeyboardOptions : public QWidget
 {
 		Q_OBJECT
 	public:
-		explicit KeyboardOptions(QWidget *parent = nullptr);
+		Q_INVOKABLE KeyboardOptions(QWidget *parent = nullptr);
 		~KeyboardOptions();
 
 	private:

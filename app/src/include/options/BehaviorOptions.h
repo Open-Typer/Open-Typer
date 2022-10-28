@@ -40,7 +40,7 @@ class BehaviorOptions : public QWidget
 {
 		Q_OBJECT
 	public:
-		explicit BehaviorOptions(QWidget *parent = nullptr);
+		Q_INVOKABLE BehaviorOptions(QWidget *parent = nullptr);
 		~BehaviorOptions();
 
 	private:
