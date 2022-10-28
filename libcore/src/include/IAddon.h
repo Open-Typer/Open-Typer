@@ -36,7 +36,8 @@ class CORE_LIB_EXPORT IAddon
 	public:
 		enum Event
 		{
-			Event_InitSettings = 0
+			Event_InitSettings = 0,
+			Event_InitApp = 1
 		};
 
 		virtual ~IAddon(void) = default;
