@@ -317,7 +317,7 @@ void MainWindow::refreshAll(void)
 		ui->lessonSelectionList->setCurrentIndex(currentLesson - 1);
 	}
 	// Client
-	updateStudent();
+	//updateStudent();
 }
 
 /*!
@@ -521,8 +521,8 @@ void MainWindow::levelFinalInit(bool updateClient)
 	ui->inputLabel->setHtml(displayInput);
 	updateText();
 	// Update student session
-	if(updateClient)
-		updateStudent();
+	/*if(updateClient)
+		updateStudent();*/
 }
 
 /*!
@@ -667,58 +667,6 @@ void MainWindow::openStudentOptions(void)
 		updateStudent();
 	});
 	dialog->open();*/
-}
-
-/*! Updates student session. */
-void MainWindow::updateStudent(void)
-{
-	/*if(client.available() && client.sendRequest("get", { "serverMode" }).at(1) == "full")
-		ui->actionLogIn->setEnabled(true);
-	else
-	{
-		ui->actionLogIn->setEnabled(false);
-		ui->studentLabel->setText("");
-		bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
-		ui->statsButton->setEnabled(enableStats);
-		ui->actionStats->setEnabled(enableStats);
-		return;
-	}
-	QStringList response = client.sendRequest("get", { "username" });
-	if(response[0] == "ok")
-	{
-		if(studentUsername == "")
-			client.sendRequest("logout", { studentUsername });
-		else
-		{
-			QString username = response[1];
-			ui->studentLabel->setText(tr("Logged in as %1").arg(username));
-			bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
-			ui->statsButton->setEnabled(enableStats);
-			ui->actionStats->setEnabled(enableStats);
-			return;
-		}
-	}
-	else
-	{
-		if(studentUsername != "")
-		{
-			response = client.sendRequest("auth", { studentUsername, studentPassword });
-			if(response[0] == "ok")
-			{
-				updateStudent();
-				return;
-			}
-			else
-			{
-				studentUsername = "";
-				studentPassword = "";
-			}
-		}
-	}
-	ui->studentLabel->setText(tr("Not logged in."));
-	bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
-	ui->statsButton->setEnabled(enableStats);
-	ui->actionStats->setEnabled(enableStats);*/
 }
 
 /*! Connected from lessonSelectionList.\n
@@ -1208,7 +1156,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 	{
 		if(studentUsername != "")
 		{
-			updateStudent();
+			//updateStudent();
 			/*client.sendRequest("put",
 				{ "result", publicConfigName.toUtf8(), QByteArray::number(currentLesson), QByteArray::number(currentAbsoluteSublesson), QByteArray::number(currentLevel),
 					QByteArray::number(grossHitsPerMinute), QByteArray::number(levelMistakes), QByteArray::number(time) });*/
@@ -1554,8 +1502,8 @@ void MainWindow::changeMode(int mode, bool enableStudentUpdate)
 			break;
 	}
 	currentMode = mode;
-	if(enableStudentUpdate)
-		updateStudent();
+	/*if(enableStudentUpdate)
+		updateStudent();*/
 }
 
 /*! Connected from timedExerciseButton.\n

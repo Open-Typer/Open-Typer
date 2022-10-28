@@ -139,7 +139,6 @@ class MainWindow : public QMainWindow
 		void zoomIn(void);
 		void zoomOut(void);
 		void initTimedExercise(void);
-		void updateStudent(void);
 		void showExerciseStats(void);
 		void loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
 		void startReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText, bool upload);
