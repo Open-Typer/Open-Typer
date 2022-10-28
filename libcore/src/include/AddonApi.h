@@ -41,6 +41,7 @@ class CORE_LIB_EXPORT AddonApi
 		static QList<QVariantMap> settingsCategories(void);
 		static void clearSettingsCategories(void);
 		static void initSettingsCategories(bool clear = false);
+		static void sendEvent(IAddon::Event type);
 
 	private:
 		static QList<QVariantMap> m_settingsCategories;
