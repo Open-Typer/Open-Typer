@@ -34,8 +34,13 @@
 class CORE_LIB_EXPORT IAddon
 {
 	public:
+		enum Event
+		{
+			Event_InitSettings = 0
+		};
+
 		virtual ~IAddon(void) = default;
-		virtual void initSettingsCategories(void) = 0;
+		virtual void addonEvent(Event type) = 0;
 };
 
 Q_DECLARE_INTERFACE(IAddon, "opentyper.addon")
