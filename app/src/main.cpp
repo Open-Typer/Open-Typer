@@ -24,6 +24,7 @@
 #include "Settings.h"
 #include "LanguageManager.h"
 #include "IAddon.h"
+#include "AddonApi.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -94,6 +95,7 @@ int main(int argc, char *argv[])
 	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
 	a.processEvents();
 	loadAddons();
+	AddonApi::initSettingsCategories();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Set icon
