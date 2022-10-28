@@ -52,6 +52,9 @@ void loadAddons(void)
 	const QStringList entries = pluginsDir.entryList(QDir::Files);
 	for(const QString &fileName : entries)
 	{
+		QFileInfo fileInfo(fileName);
+		if(fileInfo.isSymbolicLink())
+			continue;
 		QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
 		QObject *plugin = pluginLoader.instance();
 		if(plugin)
