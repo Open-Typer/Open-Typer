@@ -79,6 +79,8 @@ OptionsWindow::~OptionsWindow()
 /*! Opens selected category. */
 void OptionsWindow::changeOptionWidget(int index)
 {
+	if(index < 0)
+		return;
 	QWidget *options = nullptr;
 	Q_ASSERT(index >= 0 && index < AddonApi::settingsCategories().count());
 	QVariantMap category = AddonApi::settingsCategories().at(index);
