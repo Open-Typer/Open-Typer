@@ -169,6 +169,7 @@ MainWindow::~MainWindow()
 /*! Loads custom menus, buttons, etc. */
 void MainWindow::loadAddonParts(void)
 {
+	// Load menus
 	AddonApi::deleteMenus();
 	AddonApi::sendEvent(IAddon::Event_InitMenu);
 	QMap<QString, QMenu *> menus = AddonApi::menus();
@@ -180,6 +181,45 @@ void MainWindow::loadAddonParts(void)
 		AddonApi::registerMenu(menu);
 	}
 	AddonApi::sendEvent(IAddon::Event_InitMenuActions);
+	// Load buttons
+	AddonApi::deleteButtons();
+	AddonApi::sendEvent(IAddon::Event_InitButtons);
+	auto buttons = AddonApi::buttons();
+	keys = buttons.keys();
+	for(int i = 0; i < keys.count(); i++)
+	{
+		QFrame *sectionFrame;
+		switch(buttons[keys[i]].second.first)
+		{
+			case AddonApi::TopBarSection_Home:
+				sectionFrame = ui->mainButtonsFrame;
+				break;
+			case AddonApi::TopBarSection_Navigation:
+				sectionFrame = ui->navButtonsFrame;
+				break;
+			case AddonApi::TopBarSection_ExOptions:
+				sectionFrame = ui->exOptionsButtonsFrame;
+				break;
+			case AddonApi::TopBarSection_State:
+				sectionFrame = ui->stateFrameContents;
+				break;
+			case AddonApi::TopBarSection_Time:
+				sectionFrame = ui->timedExControlFrameContents;
+				break;
+			default:
+				sectionFrame = nullptr;
+				break;
+				
+		}
+		QSize size = ((QPushButton *) sectionFrame->layout()->itemAt(0)->widget())->iconSize();
+		QIcon icon = buttons[keys[i]].first.first;
+		QPushButton *button = new QPushButton(icon, "", sectionFrame);
+		sectionFrame->layout()->addWidget(button);
+		button->setIconSize(size);
+		button->setToolTip(buttons[keys[i]].first.second);
+		AddonApi::registerButton(keys[i], button);
+	}
+	AddonApi::sendEvent(IAddon::Event_InitButtonsFinalize);
 }
 
 /*! Initializes the program and loads all settings.
@@ -1449,7 +1489,7 @@ void MainWindow::changeEvent(QEvent *event)
 	if(event->type() == QEvent::LanguageChange)
 	{
 		ui->retranslateUi(this);
-		loadMenus();
+		loadAddonParts();
 		if(Settings::lessonPack() == "")
 			return;
 		globalThemeEngine.updateThemeList();
