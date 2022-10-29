@@ -48,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	// Opacity effect
 	QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
 	ui->levelLabel->setGraphicsEffect(opacityEffect);
+	loadAddonParts();
 	refreshAll();
 	// Set mode
 	changeMode(0);
@@ -155,7 +156,6 @@ MainWindow::MainWindow(QWidget *parent) :
 		new Updater();
 #endif // Q_OS_WASM
 	AddonApi::sendEvent(IAddon::Event_InitApp);
-	loadMenus();
 }
 
 /*! Destroys the MainWindow object. */
@@ -166,8 +166,8 @@ MainWindow::~MainWindow()
 	Settings::setWindowGeometry(saveGeometry());
 }
 
-/*! Loads custom menus. */
-void MainWindow::loadMenus(void)
+/*! Loads custom menus, buttons, etc. */
+void MainWindow::loadAddonParts(void)
 {
 	AddonApi::deleteMenus();
 	AddonApi::sendEvent(IAddon::Event_InitMenu);

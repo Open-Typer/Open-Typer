@@ -69,7 +69,7 @@ class MainWindow : public QMainWindow
 		Ui::MainWindow *ui;
 		ConfigParser parser;
 		QString studentUsername, studentPassword;
-		void loadMenus(void);
+		void loadAddonParts(void);
 		QString loadConfig(QString configName, QByteArray packContent = "");
 		void startLevel(int lesson, int sublesson, int level);
 		void updateLessonList(void);
