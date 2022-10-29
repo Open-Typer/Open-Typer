@@ -229,55 +229,6 @@ void MainWindow::loadAddonParts(void)
  */
 void MainWindow::refreshAll(void)
 {
-#ifndef Q_OS_WASM
-	// Start or stop server
-	/*if(Settings::networkEnabled() && (Settings::networkMode() == 1))
-	{
-		if(!serverPtr)
-			serverPtr = new MonitorServer(true, this);
-		ui->serverFrame->show();
-		if(serverPtr->isListening())
-		{
-			if(ui->serverFrameLayout->count() == 0)
-			{
-				ServerManager *serverManagerWidget = new ServerManager(ui->serverFrame);
-				serverManagerWidget->setAttribute(Qt::WA_DeleteOnClose);
-				ui->serverFrameLayout->addWidget(serverManagerWidget);
-				connect(serverManagerWidget, &ServerManager::widgetExpanded, this, [this]() {
-					ui->paper->hide();
-					ui->controlFrame->setEnabled(false);
-					ui->bottomPanel->setEnabled(false);
-				});
-				connect(serverManagerWidget, &ServerManager::widgetCollapsed, this, [this]() {
-					ui->paper->show();
-					ui->controlFrame->setEnabled(true);
-					ui->bottomPanel->setEnabled(true);
-				});
-			}
-			else
-			{
-				ServerManager *serverManagerWidget = (ServerManager *) ui->serverFrameLayout->itemAt(0)->widget();
-				serverManagerWidget->init();
-				serverManagerWidget->expand();
-				serverManagerWidget->collapse();
-			}
-		}
-		else
-		{
-			ui->serverFrame->hide();
-			if(ui->serverFrameLayout->count() > 0)
-				ui->serverFrameLayout->itemAt(0)->widget()->close();
-		}
-	}
-	else
-	{
-		if(serverPtr)
-			serverPtr->deleteLater();
-		ui->serverFrame->hide();
-		if(ui->serverFrameLayout->count() > 0)
-			ui->serverFrameLayout->itemAt(0)->widget()->close();
-	}*/
-#endif // Q_OS_WASM
 	// Config file (lesson pack) name
 	QString configName = Settings::lessonPack();
 	if(configName == "")
@@ -1419,7 +1370,6 @@ void MainWindow::setColors(void)
 	QString panelStyleSheet = ThemeEngine::panelStyleSheet();
 	ui->controlFrame->setStyleSheet(panelStyleSheet);
 	ui->bottomPanel->setStyleSheet(panelStyleSheet);
-	ui->serverFrame->setStyleSheet(qApp->styleSheet());
 	ui->menuBar->setStyleSheet(panelStyleSheet);
 	// Set keyboard color
 	QColor keyBorderColor = palette().color(QPalette::Text);

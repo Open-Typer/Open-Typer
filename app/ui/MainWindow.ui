@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1007</width>
+    <width>1038</width>
     <height>778</height>
    </rect>
   </property>
@@ -1389,7 +1389,7 @@
             <x>0</x>
             <y>0</y>
             <width>168</width>
-            <height>89</height>
+            <height>111</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1771,23 +1771,6 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item>
-     <widget class="QFrame" name="serverFrame">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::WinPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QVBoxLayout" name="serverFrameLayout"/>
-     </widget>
-    </item>
-    <item>
      <widget class="QFrame" name="bottomPanel">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1909,7 +1892,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1007</width>
+     <width>1038</width>
      <height>30</height>
     </rect>
    </property>
