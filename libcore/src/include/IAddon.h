@@ -39,7 +39,10 @@ class CORE_LIB_EXPORT IAddon
 			Event_InitSettings = 0,
 			Event_InitApp = 1,
 			Event_InitMenu = 2,
-			Event_InitMenuActions = 3
+			Event_InitMenuActions = 3,
+			Event_InitButtons = 4,
+			Event_InitButtonsFinalize = 5,
+			Event_RefreshApp = 6
 		};
 
 		virtual ~IAddon(void) = default;
