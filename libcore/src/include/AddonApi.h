@@ -53,10 +53,10 @@ class CORE_LIB_EXPORT AddonApi
 		static void initSettingsCategories(bool clear = false);
 		static void sendEvent(IAddon::Event type);
 		static void deleteMenus(void);
-		static void addMenu(QString name);
-		static void registerMenu(QMenu *menu);
-		static QMap<QString, QMenu *> menus(void);
-		static QMenu *menu(QString name);
+		static void addMenu(QString id, QString name);
+		static void registerMenu(QString id, QMenu *menu);
+		static QMap<QString, QPair<QString, QMenu *>> menus(void);
+		static QMenu *menu(QString id);
 		static void deleteButtons(void);
 		static void addButton(QString id, QIcon icon, QString toolTip, TopBarSection section);
 		static void registerButton(QString id, QPushButton *button);
@@ -65,7 +65,7 @@ class CORE_LIB_EXPORT AddonApi
 
 	private:
 		static QList<QVariantMap> m_settingsCategories;
-		static QMap<QString, QMenu *> m_menus;
+		static QMap<QString, QPair<QString, QMenu *>> m_menus;
 		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> m_buttons;
 };
 
