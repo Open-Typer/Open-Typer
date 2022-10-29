@@ -309,6 +309,7 @@ void MainWindow::refreshAll(void)
 	}
 	// Client
 	//updateStudent();
+	AddonApi::sendEvent(IAddon::Event_RefreshApp);
 }
 
 /*!
