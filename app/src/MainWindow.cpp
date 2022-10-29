@@ -172,13 +172,13 @@ void MainWindow::loadAddonParts(void)
 	// Load menus
 	AddonApi::deleteMenus();
 	AddonApi::sendEvent(IAddon::Event_InitMenu);
-	QMap<QString, QMenu *> menus = AddonApi::menus();
+	auto menus = AddonApi::menus();
 	QStringList keys = menus.keys();
 	for(int i = 0; i < keys.count(); i++)
 	{
-		QMenu *menu = new QMenu(keys[i], ui->menuBar);
+		QMenu *menu = new QMenu(menus[keys[i]].first, ui->menuBar);
 		ui->menuBar->addMenu(menu);
-		AddonApi::registerMenu(menu);
+		AddonApi::registerMenu(keys[i], menu);
 	}
 	AddonApi::sendEvent(IAddon::Event_InitMenuActions);
 	// Load buttons
