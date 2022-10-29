@@ -26,6 +26,7 @@
 #include <QMessageBox>
 #include <QVariantMap>
 #include <QMenu>
+#include <QPushButton>
 #include "IAddon.h"
 
 #if defined CORE_SHARED_LIB
@@ -38,6 +39,14 @@
 class CORE_LIB_EXPORT AddonApi
 {
 	public:
+		enum TopBarSection
+		{
+			TopBarSection_Home = 0,
+			TopBarSection_Navigation = 1,
+			TopBarSection_ExOptions = 2,
+			TopBarSection_State = 3,
+			TopBarSection_Time = 4
+		};
 		static bool addSettingsCategory(QString categoryName, QIcon icon, QString className);
 		static QList<QVariantMap> settingsCategories(void);
 		static void clearSettingsCategories(void);
@@ -48,10 +57,16 @@ class CORE_LIB_EXPORT AddonApi
 		static void registerMenu(QMenu *menu);
 		static QMap<QString, QMenu *> menus(void);
 		static QMenu *menu(QString name);
+		static void deleteButtons(void);
+		static void addButton(QString id, QIcon icon, QString toolTip, TopBarSection section);
+		static void registerButton(QString id, QPushButton *button);
+		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> buttons(void);
+		static QPushButton *button(QString id);
 
 	private:
 		static QList<QVariantMap> m_settingsCategories;
 		static QMap<QString, QMenu *> m_menus;
+		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> m_buttons;
 };
 
 #endif // ADDONAPI_H

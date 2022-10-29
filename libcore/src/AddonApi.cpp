@@ -22,6 +22,7 @@
 
 QList<QVariantMap> AddonApi::m_settingsCategories;
 QMap<QString, QMenu *> AddonApi::m_menus;
+QMap<QString, QPair<QPair<QIcon, QString>, QPair<AddonApi::TopBarSection, QPushButton *>>> AddonApi::m_buttons;
 
 /*! Adds settings category with widget of class className. */
 bool AddonApi::addSettingsCategory(QString categoryName, QIcon icon, QString className)
@@ -103,4 +104,50 @@ QMap<QString, QMenu *> AddonApi::menus(void)
 QMenu *AddonApi::menu(QString name)
 {
 	return m_menus[name];
+}
+
+/*! Deletes all buttons. */
+void AddonApi::deleteButtons(void)
+{
+	QStringList keys = m_buttons.keys();
+	for(int i = 0; i < keys.count(); i++)
+	{
+		QPushButton *button = m_buttons[keys[i]].second.second;
+		if(button != nullptr)
+			button->deleteLater();
+	}
+	m_buttons.clear();
+}
+
+/*! Adds a button with the given icon and tool tip to the list of buttons. Use registerButton() to assign a QPushButton to the ID. */
+void AddonApi::addButton(QString id, QIcon icon, QString toolTip, AddonApi::TopBarSection section)
+{
+	QPair<QIcon, QString> buttonPair1;
+	QPair<TopBarSection, QPushButton *> buttonPair2;
+	buttonPair1.first = icon;
+	buttonPair1.second = toolTip;
+	buttonPair2.first = section;
+	buttonPair2.second = nullptr;
+	m_buttons[id] = QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>(buttonPair1, buttonPair2);
+}
+
+/*! Assigns a QPushButton to a button with the given ID. */
+void AddonApi::registerButton(QString id, QPushButton *button)
+{
+	QPair<QIcon, QString> buttonPair1 = m_buttons[id].first;
+	QPair<TopBarSection, QPushButton *> buttonPair2 = m_buttons[id].second;
+	buttonPair2.second = button;
+	m_buttons[id] = QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>(buttonPair1, buttonPair2);
+}
+
+/*! Returns the map of buttons. */
+QMap<QString, QPair<QPair<QIcon, QString>, QPair<AddonApi::TopBarSection, QPushButton *>>> AddonApi::buttons(void)
+{
+	return m_buttons;
+}
+
+/*! Convenience function, which returns button with the given ID. */
+QPushButton *AddonApi::button(QString id)
+{
+	return m_buttons[id].second.second;
 }
