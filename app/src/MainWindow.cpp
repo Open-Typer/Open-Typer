@@ -407,6 +407,7 @@ void MainWindow::startLevel(int lessonID, int sublessonID, int levelID)
 	currentLevel = levelID;
 	// Init level
 	levelFinalInit();
+	AddonApi::sendEvent(IAddon::Event_InitExercise);
 }
 
 /*! Updates list of lessons. */
