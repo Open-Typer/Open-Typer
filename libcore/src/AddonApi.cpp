@@ -65,10 +65,10 @@ void AddonApi::initSettingsCategories(bool clear)
 }
 
 /*! Sends an event with the given type to each loaded addon. */
-void AddonApi::sendEvent(IAddon::Event type)
+void AddonApi::sendEvent(IAddon::Event type, QVariantMap args)
 {
 	for(int i = 0; i < loadedAddons.count(); i++)
-		loadedAddons[i]->addonEvent(type);
+		loadedAddons[i]->addonEvent(type, args);
 }
 
 /*! Deletes all menus. */

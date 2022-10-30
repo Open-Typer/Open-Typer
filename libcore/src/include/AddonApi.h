@@ -59,7 +59,7 @@ class CORE_LIB_EXPORT AddonApi
 		static QList<QVariantMap> settingsCategories(void);
 		static void clearSettingsCategories(void);
 		static void initSettingsCategories(bool clear = false);
-		static void sendEvent(IAddon::Event type);
+		static void sendEvent(IAddon::Event type, QVariantMap args = QVariantMap());
 		static void deleteMenus(void);
 		static void addMenu(QString id, QString name);
 		static void registerMenu(QString id, QMenu *menu);
