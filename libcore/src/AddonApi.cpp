@@ -83,7 +83,7 @@ void AddonApi::deleteMenus(void)
 	m_menus.clear();
 }
 
-/*! Adds a menu with the given name to the list of menus. Use registerMenu() to assign a QMenu to the name. */
+/*! Adds a menu with the given name to the list of menus. Use registerMenu() to assign a QMenu to the ID. */
 void AddonApi::addMenu(QString id, QString name)
 {
 	m_menus[id] = QPair<QString, QMenu *>(name, nullptr);
