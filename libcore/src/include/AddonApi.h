@@ -37,8 +37,9 @@
 #endif
 
 /*! \brief The AddonApi class provides an API for addons. */
-class CORE_LIB_EXPORT AddonApi
+class CORE_LIB_EXPORT AddonApi : public QObject
 {
+		Q_OBJECT
 	public:
 		enum TopBarSection
 		{
@@ -55,6 +56,7 @@ class CORE_LIB_EXPORT AddonApi
 			TopBarPos_BelowButtons = 2
 		};
 
+		static AddonApi *instance(void);
 		static bool addSettingsCategory(QString categoryName, QIcon icon, QString className);
 		static QList<QVariantMap> settingsCategories(void);
 		static void clearSettingsCategories(void);
@@ -78,6 +80,7 @@ class CORE_LIB_EXPORT AddonApi
 		static void recreateWidget(QWidget *oldWidget, QWidget *newWidget);
 
 	private:
+		static AddonApi m_instance;
 		static QList<QVariantMap> m_settingsCategories;
 		static QMap<QString, QPair<QString, QMenu *>> m_menus;
 		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> m_buttons;

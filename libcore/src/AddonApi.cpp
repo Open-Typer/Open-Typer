@@ -20,10 +20,17 @@
 
 #include "AddonApi.h"
 
+AddonApi AddonApi::m_instance;
 QList<QVariantMap> AddonApi::m_settingsCategories;
 QMap<QString, QPair<QString, QMenu *>> AddonApi::m_menus;
 QMap<QString, QPair<QPair<QIcon, QString>, QPair<AddonApi::TopBarSection, QPushButton *>>> AddonApi::m_buttons;
 QMap<QString, QPair<QPair<AddonApi::TopBarSection, AddonApi::TopBarPos>, QWidget *>> AddonApi::m_topBarWidgets;
+
+/*! Returns pointer to the global instance of AddonApi. Can be used to emit signals. */
+AddonApi *AddonApi::instance(void)
+{
+	return &m_instance;
+}
 
 /*! Adds settings category with widget of class className. */
 bool AddonApi::addSettingsCategory(QString categoryName, QIcon icon, QString className)
