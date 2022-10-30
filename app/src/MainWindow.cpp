@@ -62,8 +62,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->actionViewNavigation, &QAction::toggled, ui->navigationFrame, &QWidget::setVisible);
 	connect(ui->actionViewExOptions, &QAction::toggled, ui->exerciseOptionsFrame, &QWidget::setVisible);
 	connect(ui->actionViewState, &QAction::toggled, ui->stateFrame, &QWidget::setVisible);
-	// Student menu
-	connect(ui->actionLogIn, &QAction::triggered, this, &MainWindow::openStudentOptions);
 	// Tools menu
 	connect(ui->actionTypingTest, &QAction::triggered, ui->testButton, &QPushButton::clicked);
 	// Exercise menu
@@ -706,24 +704,6 @@ void MainWindow::openOptions(void)
 		show();
 		refreshAll();
 	});
-}
-
-/*!
- * Connected from studentButton->clicked().\n
- * Opens student authentication dialog (StudentOptions).
- *
- * \see StudentOptions
- */
-void MainWindow::openStudentOptions(void)
-{
-	/*StudentOptions *dialog = new StudentOptions(this);
-	dialog->setWindowModality(Qt::WindowModal);
-	connect(dialog, &QDialog::accepted, this, [dialog, this]() {
-		studentUsername = dialog->username;
-		studentPassword = dialog->password;
-		updateStudent();
-	});
-	dialog->open();*/
 }
 
 /*! Connected from lessonSelectionList.\n

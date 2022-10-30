@@ -125,7 +125,6 @@ class MainWindow : public QMainWindow
 		void keyPress(QKeyEvent *event);
 		void keyRelease(QKeyEvent *event);
 		void openOptions(void);
-		void openStudentOptions(void);
 		void openPack(void);
 		void repeatLevel(void);
 		void nextLevel(void);

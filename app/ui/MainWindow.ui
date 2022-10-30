@@ -2110,12 +2110,6 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionViewExOptions"/>
     <addaction name="actionViewState"/>
    </widget>
-   <widget class="QMenu" name="menuStudent">
-    <property name="title">
-     <string>S&amp;tudent</string>
-    </property>
-    <addaction name="actionLogIn"/>
-   </widget>
    <widget class="QMenu" name="menuExercise">
     <property name="title">
      <string>&amp;Exercise</string>
@@ -2151,7 +2145,6 @@ p, li { white-space: pre-wrap; }
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
-   <addaction name="menuStudent"/>
    <addaction name="menuTools"/>
    <addaction name="menuExercise"/>
    <addaction name="menuSettings"/>
