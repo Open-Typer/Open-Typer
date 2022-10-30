@@ -505,6 +505,10 @@ void MainWindow::levelFinalInit(bool updateClient)
 	ui->inputLabel->setAcceptRichText(true);
 	ui->inputLabel->setHtml(displayInput);
 	updateText();
+	// Enable/disable stats
+	bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
+	ui->statsButton->setEnabled(enableStats);
+	ui->actionStats->setEnabled(enableStats);
 	// Update student session
 	/*if(updateClient)
 		updateStudent();*/
