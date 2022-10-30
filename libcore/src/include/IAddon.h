@@ -45,7 +45,8 @@ class CORE_LIB_EXPORT IAddon
 			Event_RefreshApp = 6,
 			Event_InitExercise = 7,
 			Event_InitTopBarWidgets = 8,
-			Event_InitTopBarWidgetsFinalize = 9
+			Event_InitTopBarWidgetsFinalize = 9,
+			Event_ExerciseFinalInit = 10
 		};
 
 		virtual ~IAddon(void) = default;
