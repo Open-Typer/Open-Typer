@@ -45,8 +45,7 @@ class CORE_LIB_EXPORT AddonApi
 			TopBarSection_Home = 0,
 			TopBarSection_Navigation = 1,
 			TopBarSection_ExOptions = 2,
-			TopBarSection_State = 3,
-			TopBarSection_Time = 4
+			TopBarSection_State = 3
 		};
 
 		enum TopBarPos
