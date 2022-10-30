@@ -37,7 +37,7 @@ namespace Ui {
 }
 
 /*!
- * \brief The LoadExerciseDialog class is a dialog for exercise configuration on the server.
+ * \brief The LoadExerciseDialog class is a dialog for exercise loading.
  *
  * \image html LoadExerciseDialog.png
  */

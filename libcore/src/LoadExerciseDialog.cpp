@@ -21,7 +21,10 @@
 #include "LoadExerciseDialog.h"
 #include "ui_LoadExerciseDialog.h"
 
-/*! Constructs LoadExerciseDialog. */
+/*!
+ * Constructs LoadExerciseDialog.\n
+ * \param[in] availableTargets Can be used to display "targets", for example which students will receive the exercise (used by network addon).
+ */
 LoadExerciseDialog::LoadExerciseDialog(QMap<int, QString> availableTargets, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::LoadExerciseDialog),
