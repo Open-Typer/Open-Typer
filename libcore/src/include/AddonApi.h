@@ -46,14 +46,16 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 			TopBarSection_Home,
 			TopBarSection_Navigation,
 			TopBarSection_ExOptions,
-			TopBarSection_State
+			TopBarSection_State,
+			TopBarSecion_LastValue // do not use this
 		};
 
 		enum TopBarPos
 		{
 			TopBarPos_AboveButtons = 0,
 			TopBarPos_Buttons = 1,
-			TopBarPos_BelowButtons = 2
+			TopBarPos_BelowButtons = 2,
+			TopBarPos_LastValue // do not use this
 		};
 
 		static AddonApi *instance(void);
