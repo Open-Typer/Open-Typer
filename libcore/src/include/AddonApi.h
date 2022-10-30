@@ -43,10 +43,10 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 	public:
 		enum TopBarSection
 		{
-			TopBarSection_Home = 0,
-			TopBarSection_Navigation = 1,
-			TopBarSection_ExOptions = 2,
-			TopBarSection_State = 3
+			TopBarSection_Home,
+			TopBarSection_Navigation,
+			TopBarSection_ExOptions,
+			TopBarSection_State
 		};
 
 		enum TopBarPos
