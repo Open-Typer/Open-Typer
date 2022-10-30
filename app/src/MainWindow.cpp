@@ -186,29 +186,7 @@ void MainWindow::loadAddonParts(void)
 	keys = buttons.keys();
 	for(int i = 0; i < keys.count(); i++)
 	{
-		QFrame *sectionFrame;
-		switch(buttons[keys[i]].second.first)
-		{
-			case AddonApi::TopBarSection_Home:
-				sectionFrame = ui->mainButtonsFrame;
-				break;
-			case AddonApi::TopBarSection_Navigation:
-				sectionFrame = ui->navButtonsFrame;
-				break;
-			case AddonApi::TopBarSection_ExOptions:
-				sectionFrame = ui->exOptionsButtonsFrame;
-				break;
-			case AddonApi::TopBarSection_State:
-				sectionFrame = ui->stateFrameContents;
-				break;
-			case AddonApi::TopBarSection_Time:
-				sectionFrame = ui->timedExControlFrameContents;
-				break;
-			default:
-				sectionFrame = nullptr;
-				break;
-				
-		}
+		QFrame *sectionFrame = getTopBarFrame(buttons[keys[i]].second.first, AddonApi::TopBarPos_Buttons);
 		QSize size = ((QPushButton *) sectionFrame->layout()->itemAt(0)->widget())->iconSize();
 		QIcon icon = buttons[keys[i]].first.first;
 		QPushButton *button = new QPushButton(icon, "", sectionFrame);
@@ -218,6 +196,96 @@ void MainWindow::loadAddonParts(void)
 		AddonApi::registerButton(keys[i], button);
 	}
 	AddonApi::sendEvent(IAddon::Event_InitButtonsFinalize);
+	// Load top bar widgets
+	AddonApi::deleteTopBarWidgets();
+	AddonApi::sendEvent(IAddon::Event_InitTopBarWidgets);
+	auto widgets = AddonApi::topBarWidgets();
+	keys = widgets.keys();
+	for(int i = 0; i < keys.count(); i++)
+	{
+		auto widgetInfo = widgets[keys[i]].first;
+		QFrame *topBarFrame = getTopBarFrame(widgetInfo.first, widgetInfo.second);
+		QWidget *widget = new QWidget(topBarFrame);
+		topBarFrame->layout()->addWidget(widget);
+		AddonApi::registerTopBarWidget(keys[i], widget);
+	}
+	AddonApi::sendEvent(IAddon::Event_InitTopBarWidgetsFinalize);
+}
+
+/*! Returns pointer to frame in the given top bar section and position. */
+QFrame *MainWindow::getTopBarFrame(AddonApi::TopBarSection section, AddonApi::TopBarPos pos)
+{
+	switch(section)
+	{
+		case AddonApi::TopBarSection_Home:
+			switch(pos)
+			{
+				case AddonApi::TopBarPos_AboveButtons:
+					return ui->optionsFrameAboveButtons;
+					break;
+				case AddonApi::TopBarPos_Buttons:
+					return ui->mainButtonsFrame;
+					break;
+				case AddonApi::TopBarPos_BelowButtons:
+					return ui->optionsFrameBelowButtons;
+					break;
+				default:
+					return nullptr;
+			}
+			break;
+		case AddonApi::TopBarSection_Navigation:
+			switch(pos)
+			{
+				case AddonApi::TopBarPos_AboveButtons:
+					return ui->navigationFrameAboveButtons;
+					break;
+				case AddonApi::TopBarPos_Buttons:
+					return ui->navButtonsFrame;
+					break;
+				case AddonApi::TopBarPos_BelowButtons:
+					return ui->navigationFrameBelowButtons;
+					break;
+				default:
+					return nullptr;
+			}
+			break;
+		case AddonApi::TopBarSection_ExOptions:
+			switch(pos)
+			{
+				case AddonApi::TopBarPos_AboveButtons:
+					return ui->exerciseOptionsAboveButtons;
+					break;
+				case AddonApi::TopBarPos_Buttons:
+					return ui->exOptionsButtonsFrame;
+					break;
+				case AddonApi::TopBarPos_BelowButtons:
+					return ui->exerciseChecksFrame;
+					break;
+				default:
+					return nullptr;
+			}
+			break;
+		case AddonApi::TopBarSection_State:
+			switch(pos)
+			{
+				case AddonApi::TopBarPos_AboveButtons:
+					return ui->stateFrameAboveButtons;
+					break;
+				case AddonApi::TopBarPos_Buttons:
+					return ui->stateFrameContents;
+					break;
+				case AddonApi::TopBarPos_BelowButtons:
+					return ui->stateFrameBelowButtons;
+					break;
+				default:
+					return nullptr;
+			}
+			break;
+		default:
+			return nullptr;
+			break;
+			
+	}
 }
 
 /*! Initializes the program and loads all settings.

@@ -69,6 +69,7 @@ class MainWindow : public QMainWindow
 		Ui::MainWindow *ui;
 		ConfigParser parser;
 		void loadAddonParts(void);
+		QFrame *getTopBarFrame(AddonApi::TopBarSection section, AddonApi::TopBarPos pos);
 		QString loadConfig(QString configName, QByteArray packContent = "");
 		void startLevel(int lesson, int sublesson, int level);
 		void updateLessonList(void);

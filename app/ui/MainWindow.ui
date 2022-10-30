@@ -168,19 +168,27 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="studentLabel">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                 <widget class="QFrame" name="optionsFrameAboveButtons">
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
                   </property>
-                  <property name="text">
-                   <string notr="true"/>
+                  <property name="frameShadow">
+                   <enum>QFrame::Plain</enum>
                   </property>
-                  <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                  </layout>
                  </widget>
                 </item>
                 <item>
@@ -317,6 +325,30 @@
                      </property>
                     </widget>
                    </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="optionsFrameBelowButtons">
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Plain</enum>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_10">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
                   </layout>
                  </widget>
                 </item>
@@ -464,50 +496,9 @@
                     <number>0</number>
                    </property>
                    <item row="1" column="0">
-                    <widget class="QComboBox" name="lessonSelectionList">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="focusPolicy">
-                      <enum>Qt::NoFocus</enum>
-                     </property>
-                     <property name="sizeAdjustPolicy">
-                      <enum>QComboBox::AdjustToContents</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="1">
-                    <widget class="QComboBox" name="sublessonSelectionList">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="focusPolicy">
-                      <enum>Qt::NoFocus</enum>
-                     </property>
-                     <property name="sizeAdjustPolicy">
-                      <enum>QComboBox::AdjustToContents</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="13" column="1">
-                    <widget class="QComboBox" name="levelSelectionList">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="focusPolicy">
-                      <enum>Qt::NoFocus</enum>
-                     </property>
-                     <property name="sizeAdjustPolicy">
-                      <enum>QComboBox::AdjustToContents</enum>
+                    <widget class="QLabel" name="lessonLabel">
+                     <property name="text">
+                      <string>Lesson:</string>
                      </property>
                     </widget>
                    </item>
@@ -666,18 +657,107 @@
                      </layout>
                     </widget>
                    </item>
-                   <item row="0" column="0">
-                    <widget class="QLabel" name="lessonLabel">
-                     <property name="text">
-                      <string>Lesson:</string>
+                   <item row="13" column="1">
+                    <widget class="QComboBox" name="levelSelectionList">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="focusPolicy">
+                      <enum>Qt::NoFocus</enum>
+                     </property>
+                     <property name="sizeAdjustPolicy">
+                      <enum>QComboBox::AdjustToContents</enum>
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="1">
+                   <item row="2" column="1">
+                    <widget class="QComboBox" name="sublessonSelectionList">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="focusPolicy">
+                      <enum>Qt::NoFocus</enum>
+                     </property>
+                     <property name="sizeAdjustPolicy">
+                      <enum>QComboBox::AdjustToContents</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
                     <widget class="QLabel" name="sublessonLabel">
                      <property name="text">
                       <string>Sublesson:</string>
                      </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QComboBox" name="lessonSelectionList">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="focusPolicy">
+                      <enum>Qt::NoFocus</enum>
+                     </property>
+                     <property name="sizeAdjustPolicy">
+                      <enum>QComboBox::AdjustToContents</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0">
+                    <widget class="QFrame" name="navigationFrameBelowButtons">
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_11">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item row="0" column="0">
+                    <widget class="QFrame" name="navigationFrameAboveButtons">
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
+                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_11">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
                     </widget>
                    </item>
                   </layout>
@@ -731,6 +811,30 @@
                    <property name="bottomMargin">
                     <number>0</number>
                    </property>
+                   <item>
+                    <widget class="QFrame" name="exerciseOptionsAboveButtons">
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
+                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_12">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                   </item>
                    <item>
                     <widget class="QFrame" name="exOptionsButtonsFrame">
                      <property name="sizePolicy">
@@ -997,7 +1101,7 @@
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
-                <item row="4" column="0" colspan="2">
+                <item row="3" column="0" colspan="2">
                  <widget class="QLabel" name="stateFrameTitle">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1028,7 +1132,7 @@
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="0">
+                <item row="0" column="0">
                  <widget class="QFrame" name="stateFrameContents">
                   <property name="frameShape">
                    <enum>QFrame::NoFrame</enum>
@@ -1036,77 +1140,149 @@
                   <property name="frameShadow">
                    <enum>QFrame::Plain</enum>
                   </property>
-                  <layout class="QGridLayout" name="gridLayout_4">
+                  <layout class="QVBoxLayout" name="verticalLayout_13">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
                    <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
                     <number>0</number>
                    </property>
                    <property name="bottomMargin">
                     <number>0</number>
                    </property>
-                   <item row="1" column="0">
-                    <widget class="QLabel" name="currentMistakesLabel">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
+                   <item>
+                    <widget class="QFrame" name="stateFrameAboveButtons">
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
                      </property>
-                     <property name="text">
-                      <string>Mistakes:</string>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
                      </property>
+                     <layout class="QGridLayout" name="gridLayout_4">
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="currentMistakesLabel">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="text">
+                         <string>Mistakes:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QLabel" name="currentTimeNumber">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="text">
+                         <string notr="true">0</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="0">
+                       <spacer name="verticalSpacer">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>20</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="currentTimeLabel">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="text">
+                         <string>Time:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QLabel" name="currentMistakesNumber">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="text">
+                         <string notr="true">0</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
-                   <item row="1" column="1">
-                    <widget class="QLabel" name="currentMistakesNumber">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
+                   <item>
+                    <widget class="QFrame" name="stateFrameButtons">
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
                      </property>
-                     <property name="text">
-                      <string notr="true">0</string>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
                      </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_13">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
                     </widget>
                    </item>
-                   <item row="0" column="1">
-                    <widget class="QLabel" name="currentTimeNumber">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
+                   <item>
+                    <widget class="QFrame" name="stateFrameBelowButtons">
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
                      </property>
-                     <property name="text">
-                      <string notr="true">0</string>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
                      </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_12">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
                     </widget>
-                   </item>
-                   <item row="0" column="0">
-                    <widget class="QLabel" name="currentTimeLabel">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="text">
-                      <string>Time:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0">
-                    <spacer name="verticalSpacer">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                    </spacer>
                    </item>
                   </layout>
                  </widget>
