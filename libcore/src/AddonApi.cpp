@@ -23,6 +23,7 @@
 QList<QVariantMap> AddonApi::m_settingsCategories;
 QMap<QString, QPair<QString, QMenu *>> AddonApi::m_menus;
 QMap<QString, QPair<QPair<QIcon, QString>, QPair<AddonApi::TopBarSection, QPushButton *>>> AddonApi::m_buttons;
+QMap<QString, QPair<QPair<AddonApi::TopBarSection, AddonApi::TopBarPos>, QWidget *>> AddonApi::m_topBarWidgets;
 
 /*! Adds settings category with widget of class className. */
 bool AddonApi::addSettingsCategory(QString categoryName, QIcon icon, QString className)
@@ -151,4 +152,53 @@ QMap<QString, QPair<QPair<QIcon, QString>, QPair<AddonApi::TopBarSection, QPushB
 QPushButton *AddonApi::button(QString id)
 {
 	return m_buttons[id].second.second;
+}
+
+/*! Deletes all top bar widgets. */
+void AddonApi::deleteTopBarWidgets(void)
+{
+	QStringList keys = m_topBarWidgets.keys();
+	for(int i = 0; i < keys.count(); i++)
+	{
+		QWidget *widget = m_topBarWidgets[keys[i]].second;
+		if(widget != nullptr)
+			widget->deleteLater();
+	}
+	m_topBarWidgets.clear();
+}
+
+/*! Adds a top bar widget with the given position to the list of top bar widgets. Use registerTopBarWidget() to assign a QWidget to the ID. */
+void AddonApi::addTopBarWidget(QString id, AddonApi::TopBarSection section, AddonApi::TopBarPos pos)
+{
+	QPair<TopBarSection, TopBarPos> widgetPos;
+	widgetPos.first = section;
+	widgetPos.second = pos;
+	m_topBarWidgets[id] = QPair<QPair<TopBarSection, TopBarPos>, QWidget *>(widgetPos, nullptr);
+}
+
+/*! Assigns a QWidget to top bar widget with the given ID. */
+void AddonApi::registerTopBarWidget(QString id, QWidget *widget)
+{
+	m_topBarWidgets[id] = QPair<QPair<TopBarSection, TopBarPos>, QWidget *>(m_topBarWidgets[id].first, widget);
+}
+
+/*! Returns the map of top bar widgets. */
+QMap<QString, QPair<QPair<AddonApi::TopBarSection, AddonApi::TopBarPos>, QWidget *>> AddonApi::topBarWidgets(void)
+{
+	return m_topBarWidgets;
+}
+
+/*! Convenience function, which returns top bar widget with the given ID. */
+QWidget *AddonApi::topBarWidget(QString id)
+{
+	return m_topBarWidgets[id].second;
+}
+
+/*! Transforms old widget to new widget. Useful if you don't want to use QWidget for custom widgets. */
+void AddonApi::recreateWidget(QWidget *oldWidget, QWidget *newWidget)
+{
+	QWidget *parent = qobject_cast<QWidget *>(oldWidget->parent());
+	newWidget->setParent(parent);
+	oldWidget->deleteLater();
+	parent->layout()->addWidget(newWidget);
 }

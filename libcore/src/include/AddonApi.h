@@ -27,6 +27,7 @@
 #include <QVariantMap>
 #include <QMenu>
 #include <QPushButton>
+#include <QLayout>
 #include "IAddon.h"
 
 #if defined CORE_SHARED_LIB
@@ -47,6 +48,14 @@ class CORE_LIB_EXPORT AddonApi
 			TopBarSection_State = 3,
 			TopBarSection_Time = 4
 		};
+
+		enum TopBarPos
+		{
+			TopBarPos_AboveButtons = 0,
+			TopBarPos_Buttons = 1,
+			TopBarPos_BelowButtons = 2
+		};
+
 		static bool addSettingsCategory(QString categoryName, QIcon icon, QString className);
 		static QList<QVariantMap> settingsCategories(void);
 		static void clearSettingsCategories(void);
@@ -62,11 +71,18 @@ class CORE_LIB_EXPORT AddonApi
 		static void registerButton(QString id, QPushButton *button);
 		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> buttons(void);
 		static QPushButton *button(QString id);
+		static void deleteTopBarWidgets(void);
+		static void addTopBarWidget(QString id, TopBarSection section, TopBarPos pos);
+		static void registerTopBarWidget(QString id, QWidget *widget);
+		static QMap<QString, QPair<QPair<TopBarSection, TopBarPos>, QWidget *>> topBarWidgets(void);
+		static QWidget *topBarWidget(QString id);
+		static void recreateWidget(QWidget *oldWidget, QWidget *newWidget);
 
 	private:
 		static QList<QVariantMap> m_settingsCategories;
 		static QMap<QString, QPair<QString, QMenu *>> m_menus;
 		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> m_buttons;
+		static QMap<QString, QPair<QPair<TopBarSection, TopBarPos>, QWidget *>> m_topBarWidgets;
 };
 
 #endif // ADDONAPI_H
