@@ -21,6 +21,9 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+typedef QPair<QString, int> CharacterRecord; // needed for converting to QVariant
+Q_DECLARE_METATYPE(CharacterRecord);
+
 /*! Constructs the main window. */
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -371,8 +374,6 @@ void MainWindow::refreshAll(void)
 		updateLessonList();
 		ui->lessonSelectionList->setCurrentIndex(currentLesson - 1);
 	}
-	// Client
-	//updateStudent();
 	AddonApi::sendEvent(IAddon::Event_RefreshApp);
 }
 
@@ -575,9 +576,7 @@ void MainWindow::levelFinalInit(bool updateClient)
 	bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
 	ui->statsButton->setEnabled(enableStats);
 	ui->actionStats->setEnabled(enableStats);
-	// Update student session
-	/*if(updateClient)
-		updateStudent();*/
+	AddonApi::sendEvent(IAddon::Event_ExerciseFinalInit);
 }
 
 /*!
@@ -1191,16 +1190,18 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 	int time = lastTimeF;
 	if(!customLevelLoaded && !customConfig && ui->correctMistakesCheckBox->isChecked())
 	{
-		/*if(studentUsername != "")
-		{
-			updateStudent();
-			client.sendRequest("put",
-				{ "result", publicConfigName.toUtf8(), QByteArray::number(currentLesson), QByteArray::number(currentAbsoluteSublesson), QByteArray::number(currentLevel),
-					QByteArray::number(grossHitsPerMinute), QByteArray::number(levelMistakes), QByteArray::number(time) });
-		}*/
-		//else
-			HistoryParser::addHistoryEntry(publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel,
-				{ QString::number(grossHitsPerMinute), QString::number(levelMistakes), QString::number(time) });
+		QVariantMap eventArgs;
+		eventArgs["packName"] = publicConfigName;
+		eventArgs["lesson"] = currentLesson;
+		eventArgs["sublesson"] = currentAbsoluteSublesson;
+		eventArgs["exercise"] = currentLevel;
+		eventArgs["grossHitsPerMinute"] = grossHitsPerMinute;
+		eventArgs["mistakes"] = levelMistakes;
+		eventArgs["time"] = time;
+		AddonApi::sendEvent(IAddon::Event_EndStockExercise, eventArgs);
+		// The result will always be saved locally - even if an addon uses it
+		HistoryParser::addHistoryEntry(publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel,
+			{ QString::number(grossHitsPerMinute), QString::number(levelMistakes), QString::number(time) });
 	}
 	if(testLoaded)
 	{
@@ -1211,19 +1212,17 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 			showNormal();
 			restoreGeometry(oldGeometry);
 		}
-		/*if(uploadResult && ((studentUsername != "") || (!client.fullMode() && client.isPaired())))
+		QVariantMap args;
+		QList<QVariant> recordedCharactersList;
+		for(int i = 0; i < recordedCharacters.count(); i++)
 		{
-			updateStudent();
-			QStringList list = { "recordedCharacters" };
-			for(int i = 0; i < recordedCharacters.count(); i++)
-			{
-				QPair<QString, int> character = recordedCharacters[i];
-				list += character.first;
-				list += QString::number(character.second);
-			}
-			client.sendRequest("put", list);
-			client.sendRequest("put", { "testResult", input, QString::number(lastTimeF) });
-		}*/
+			QVariant record = QVariant::fromValue(recordedCharacters[i]);
+			recordedCharactersList.append(record);
+		}
+		args["recordedCharacters"] = recordedCharactersList;
+		args["inputText"] = input;
+		args["time"] = lastTimeF;
+		AddonApi::sendEvent(IAddon::Event_EndTypingTest, args);
 		ui->controlFrame->setEnabled(true);
 		ui->menuBar->setEnabled(true);
 		uiLocked = false;
