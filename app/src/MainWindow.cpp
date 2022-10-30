@@ -1600,10 +1600,23 @@ void MainWindow::initTimedExercise(void)
 void MainWindow::showExerciseStats(void)
 {
 	StatsDialog *dialog;
-	/*if((studentUsername != ""))
-		dialog = new StatsDialog(&client, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);*/
-	/*else*/ if(!customLevelLoaded && !customConfig)
-		dialog = new StatsDialog(true, { }, QPair<int, int>(0, 0), publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
+	QPair<QList<QStringList>, QPair<int, int>> *data = nullptr;
+	auto dataPtr = &data;
+	QVariantMap args;
+	args["dataPtr"] = QVariant::fromValue((void *) dataPtr);
+	args["packName"] = publicConfigName;
+	args["lesson"] = currentLesson;
+	args["sublesson"] = currentAbsoluteSublesson;
+	args["exercise"] = currentLevel;
+	AddonApi::sendEvent(IAddon::Event_LoadExStats, args);
+	if(data != nullptr)
+	{
+		dialog = new StatsDialog(false, data->first, data->second, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
+		delete data;
+		data = nullptr;
+	}
+	else if(!customLevelLoaded && !customConfig)
+		dialog = new StatsDialog(true, {}, QPair<int, int>(0, 0), publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
 	else
 		return;
 	dialog->setWindowModality(Qt::WindowModal);
