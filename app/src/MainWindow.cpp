@@ -38,8 +38,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	remainingTextAreaLayout->addWidget(ui->keyboardFrame);
 	remainingTextAreaLayout->setAlignment(ui->keyboardFrame, Qt::AlignHCenter | Qt::AlignBottom);
 	localThemeEngine.setParent(this);
-	studentUsername = "";
-	studentPassword = "";
 	oldConfigName = "";
 	errorWords.clear();
 #ifdef Q_OS_WASM
@@ -1146,14 +1144,14 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 	int time = lastTimeF;
 	if(!customLevelLoaded && !customConfig && ui->correctMistakesCheckBox->isChecked())
 	{
-		if(studentUsername != "")
+		/*if(studentUsername != "")
 		{
-			//updateStudent();
-			/*client.sendRequest("put",
+			updateStudent();
+			client.sendRequest("put",
 				{ "result", publicConfigName.toUtf8(), QByteArray::number(currentLesson), QByteArray::number(currentAbsoluteSublesson), QByteArray::number(currentLevel),
-					QByteArray::number(grossHitsPerMinute), QByteArray::number(levelMistakes), QByteArray::number(time) });*/
-		}
-		else
+					QByteArray::number(grossHitsPerMinute), QByteArray::number(levelMistakes), QByteArray::number(time) });
+		}*/
+		//else
 			HistoryParser::addHistoryEntry(publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel,
 				{ QString::number(grossHitsPerMinute), QString::number(levelMistakes), QString::number(time) });
 	}
@@ -1541,9 +1539,9 @@ void MainWindow::initTimedExercise(void)
 void MainWindow::showExerciseStats(void)
 {
 	StatsDialog *dialog;
-	if((studentUsername != ""))
-		/*dialog = new StatsDialog(&client, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this)*/;
-	else if(!customLevelLoaded && !customConfig)
+	/*if((studentUsername != ""))
+		dialog = new StatsDialog(&client, publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);*/
+	/*else*/ if(!customLevelLoaded && !customConfig)
 		dialog = new StatsDialog(true, { }, QPair<int, int>(0, 0), publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel, this);
 	else
 		return;

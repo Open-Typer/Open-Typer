@@ -68,7 +68,6 @@ class MainWindow : public QMainWindow
 	private:
 		Ui::MainWindow *ui;
 		ConfigParser parser;
-		QString studentUsername, studentPassword;
 		void loadAddonParts(void);
 		QString loadConfig(QString configName, QByteArray packContent = "");
 		void startLevel(int lesson, int sublesson, int level);
@@ -98,7 +97,6 @@ class MainWindow : public QMainWindow
 		bool customConfig = false;
 		bool spaceNewline;
 		int errorPenalty;
-		QTranslator translator;
 		void refreshAll(void);
 		void changeMode(int mode, bool enableStudentUpdate = true);
 		int currentMode = 0;
