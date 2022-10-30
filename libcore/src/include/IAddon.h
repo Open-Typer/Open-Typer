@@ -36,22 +36,22 @@ class CORE_LIB_EXPORT IAddon
 	public:
 		enum Event
 		{
-			Event_InitSettings = 0,
-			Event_InitApp = 1,
-			Event_InitMenu = 2,
-			Event_InitMenuActions = 3,
-			Event_InitButtons = 4,
-			Event_InitButtonsFinalize = 5,
-			Event_RefreshApp = 6,
-			Event_InitExercise = 7,
-			Event_InitTopBarWidgets = 8,
-			Event_InitTopBarWidgetsFinalize = 9,
-			Event_ExerciseFinalInit = 10,
-			Event_EndStockExercise = 11,
-			Event_EndTypingTest = 12,
-			Event_ChangeMode = 13,
-			Event_OpenLoadExDialog = 14,
-			Event_CustomExLoaded = 15
+			Event_InitSettings,
+			Event_InitApp,
+			Event_InitMenu,
+			Event_InitMenuActions,
+			Event_InitButtons,
+			Event_InitButtonsFinalize,
+			Event_RefreshApp,
+			Event_InitExercise,
+			Event_InitTopBarWidgets,
+			Event_InitTopBarWidgetsFinalize,
+			Event_ExerciseFinalInit,
+			Event_EndStockExercise,
+			Event_EndTypingTest,
+			Event_ChangeMode,
+			Event_OpenLoadExDialog,
+			Event_CustomExLoaded
 		};
 
 		virtual ~IAddon(void) = default;
