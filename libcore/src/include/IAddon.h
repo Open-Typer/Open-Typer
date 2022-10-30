@@ -51,7 +51,8 @@ class CORE_LIB_EXPORT IAddon
 			Event_EndTypingTest,
 			Event_ChangeMode,
 			Event_OpenLoadExDialog,
-			Event_CustomExLoaded
+			Event_CustomExLoaded,
+			Event_LoadExStats
 		};
 
 		virtual ~IAddon(void) = default;
