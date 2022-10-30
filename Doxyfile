@@ -103,7 +103,8 @@ WARN_NO_PARAMDOC       = NO
 WARN_AS_ERROR          = NO
 WARN_FORMAT            = "$file:$line: $text"
 WARN_LOGFILE           =
-INPUT                  = "src" \
+INPUT                  = app/src \
+                         libcore/src \
                          docs-data/pages
 
 INPUT_ENCODING         = UTF-8
