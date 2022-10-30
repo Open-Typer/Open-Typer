@@ -301,7 +301,6 @@ QFrame *MainWindow::getTopBarFrame(AddonApi::TopBarSection section, AddonApi::To
 		default:
 			return nullptr;
 			break;
-			
 	}
 }
 
