@@ -49,7 +49,8 @@ class CORE_LIB_EXPORT IAddon
 			Event_ExerciseFinalInit = 10,
 			Event_EndStockExercise = 11,
 			Event_EndTypingTest = 12,
-			Event_ChangeMode = 13
+			Event_ChangeMode = 13,
+			Event_OpenLoadExDialog = 14
 		};
 
 		virtual ~IAddon(void) = default;
