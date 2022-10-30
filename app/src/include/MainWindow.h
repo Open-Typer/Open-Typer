@@ -46,6 +46,7 @@
 #include "BuiltInPacks.h"
 #include "ThemeEngine.h"
 #include "Settings.h"
+#include "LoadExerciseDialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -99,7 +100,6 @@ class MainWindow : public QMainWindow
 		bool spaceNewline;
 		int errorPenalty;
 		void refreshAll(void);
-		void changeMode(int mode, bool enableStudentUpdate = true);
 		int currentMode = 0;
 		int timedExHours, timedExMinutes, timedExSeconds;
 		bool timedExStarted;
@@ -138,13 +138,12 @@ class MainWindow : public QMainWindow
 		void zoomOut(void);
 		void initTimedExercise(void);
 		void showExerciseStats(void);
-		void loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
-		void startReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText, bool upload);
-		void waitForReceivedExercise(QString text, int lineLength);
+		void initTest(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
 		void printText(void);
 		void openEditor(void);
 		void startTest(void);
 		void showAboutDialog(void);
+		void changeMode(int mode);
 };
 
 #endif // MAINWINDOW_H

@@ -24,6 +24,9 @@
 typedef QPair<QString, int> CharacterRecord; // needed for converting to QVariant
 Q_DECLARE_METATYPE(CharacterRecord);
 
+typedef void *VoidPtr; // needed for converting any pointer to QVariant
+Q_DECLARE_METATYPE(VoidPtr);
+
 /*! Constructs the main window. */
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -122,6 +125,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(&globalThemeEngine, &ThemeEngine::colorChanged, this, &MainWindow::setColors);
 	connect(&globalThemeEngine, &ThemeEngine::styleChanged, this, &MainWindow::setColors);
 	connect(&globalThemeEngine, &ThemeEngine::themeChanged, this, &MainWindow::loadTheme);
+	// Addon API
+	connect(AddonApi::instance(), &AddonApi::changeMode, this, &MainWindow::changeMode);
+	connect(AddonApi::instance(), &AddonApi::startTypingTest, this, &MainWindow::initTest);
 	// Theme
 	if(Settings::containsWindowState() && Settings::containsWindowGeometry())
 	{
@@ -1521,7 +1527,7 @@ void MainWindow::zoomOut(void)
 /*! Changes the operation mode.\n
  * Supported modes are default (0) and timed exercise mode (1).
  */
-void MainWindow::changeMode(int mode, bool enableStudentUpdate)
+void MainWindow::changeMode(int mode)
 {
 	switch(mode)
 	{
@@ -1537,8 +1543,7 @@ void MainWindow::changeMode(int mode, bool enableStudentUpdate)
 			break;
 	}
 	currentMode = mode;
-	/*if(enableStudentUpdate)
-		updateStudent();*/
+	AddonApi::sendEvent(IAddon::Event_ChangeMode);
 }
 
 /*! Connected from timedExerciseButton.\n
@@ -1595,19 +1600,10 @@ void MainWindow::showExerciseStats(void)
 	dialog->open();
 }
 
-/*! Connected from client.exerciseReceived(). */
-void MainWindow::loadReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText)
+/*! Starts a typing test. */
+void MainWindow::initTest(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText)
 {
-	/*if(waitDialog)
-		waitDialog->accept();
-	waitDialog = nullptr;
-	startReceivedExercise(text, lineLength, includeNewLines, mode, time, correctMistakes, lockUi, hideText, true);*/
-}
-
-/*! Starts received exercise or a local typing test. */
-void MainWindow::startReceivedExercise(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText, bool upload)
-{
-	changeMode(mode, false);
+	changeMode(mode);
 	levelLengthExtension = lineLength;
 	loadText(text, includeNewLines, false);
 	if(mode == 1)
@@ -1639,30 +1635,6 @@ void MainWindow::startReceivedExercise(QByteArray text, int lineLength, bool inc
 		uiLocked = true;
 	}
 	testLoaded = true;
-	//uploadResult = upload;
-}
-
-/*! Opens TestWaitDialog and waits until the received exercise starts. */
-void MainWindow::waitForReceivedExercise(QString text, int lineLength)
-{
-	/*waitDialog = new TestWaitDialog(&client, this);
-	if(text != "")
-		waitDialog->setText(ConfigParser::initExercise(text, lineLength));
-	QString name = "";
-	if(client.fullMode())
-	{
-		QStringList response = client.sendRequest("get", { "name" });
-		name = response.count() > 1 ? response[1] : "";
-		waitDialog->setNameReadOnly(true);
-	}
-	waitDialog->setName(name);
-	waitDialog->setWindowModality(Qt::WindowModal);
-	waitDialog->setAttribute(Qt::WA_DeleteOnClose);
-	TestWaitDialog *dialogPtr = waitDialog;
-	connect(dialogPtr, &QDialog::finished, this, [this]() {
-		waitDialog = nullptr;
-	});
-	waitDialog->open();*/
 }
 
 /*!
@@ -1745,48 +1717,25 @@ void MainWindow::printText(void)
 /*! Starts typing test. */
 void MainWindow::startTest(void)
 {
-	/*LoadExerciseDialog *dialog;
-	bool fullMode = Settings::serverFullMode();
-#ifdef Q_OS_WASM
-	dialog = new LoadExerciseDialog(this);
-#else
-	if(serverPtr && serverPtr->isListening() && (!fullMode || (dbMgr.activeClass != 0)))
-	{
-		QList<int> targets;
-		if(fullMode)
-			targets = dbMgr.studentIDs(dbMgr.activeClass);
-		else
-			targets = dbMgr.deviceIDs();
-		QList<int> onlineTargets, occupiedTargets = serverPtr->runningExerciseStudents();
-		for(int i = 0; i < targets.count(); i++)
-		{
-			if(fullMode)
-			{
-				if(serverPtr->isLoggedIn(dbMgr.userNickname(targets[i])) && !occupiedTargets.contains(targets[i]))
-					onlineTargets += targets[i];
-			}
-			else if(serverPtr->isConnected(dbMgr.deviceAddress(targets[i])))
-				onlineTargets += targets[i];
-		}
-		dialog = new LoadExerciseDialog(onlineTargets, this);
-	}
-	else
+	LoadExerciseDialog *dialog;
+	AddonApi::clearLoadExTargets();
+	AddonApi::sendEvent(IAddon::Event_OpenLoadExDialog);
+	QMap<int, QString> targets = AddonApi::loadExTargets();
+	if(targets.count() == 0)
 		dialog = new LoadExerciseDialog(this);
-#endif // Q_OS_WASM
+	else
+		dialog = new LoadExerciseDialog(targets, this);
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->open();
-	connect(dialog, &QDialog::accepted, this, [this, dialog, fullMode]() {
-#ifdef Q_OS_WASM
-		Q_UNUSED(this);
-		Q_UNUSED(fullMode);
-#else
-			if(serverPtr && serverPtr->isListening() && (!fullMode || (dbMgr.activeClass != 0)))
-				ClassControls::startExercise(dialog);
-			else
-#endif // Q_OS_WASM
-		startReceivedExercise(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
-			dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText(), false);
-	});*/
+	connect(dialog, &QDialog::accepted, this, [this, dialog]() {
+		AddonApi::setBlockLoadedEx(false);
+		QVariantMap args;
+		args["loadExDialog"] = QVariant::fromValue((void *) dialog);
+		AddonApi::sendEvent(IAddon::Event_CustomExLoaded, args);
+		if(!AddonApi::blockLoadedEx())
+			initTest(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
+				dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText());
+	});
 }
 
 /*! Shows about program dialog. */
