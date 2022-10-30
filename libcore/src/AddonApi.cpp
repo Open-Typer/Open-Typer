@@ -21,6 +21,8 @@
 #include "AddonApi.h"
 
 AddonApi AddonApi::m_instance;
+QMap<int, QString> AddonApi::m_loadExTargets;
+bool AddonApi::m_blockLoadedEx;
 QList<QVariantMap> AddonApi::m_settingsCategories;
 QMap<QString, QPair<QString, QMenu *>> AddonApi::m_menus;
 QMap<QString, QPair<QPair<QIcon, QString>, QPair<AddonApi::TopBarSection, QPushButton *>>> AddonApi::m_buttons;
@@ -30,6 +32,36 @@ QMap<QString, QPair<QPair<AddonApi::TopBarSection, AddonApi::TopBarPos>, QWidget
 AddonApi *AddonApi::instance(void)
 {
 	return &m_instance;
+}
+
+/*! Adds a load exercise target. */
+void AddonApi::addLoadExTarget(int id, QString name)
+{
+	m_loadExTargets[id] = name;
+}
+
+/*! Clears map of load exercise targets. */
+void AddonApi::clearLoadExTargets(void)
+{
+	m_loadExTargets.clear();
+}
+
+/*! Returns map of load exercise targets. */
+QMap<int, QString> AddonApi::loadExTargets(void)
+{
+	return m_loadExTargets;
+}
+
+/*! Returns true if an addon blocked starting the exercise loaded by LoadExerciseDialog. */
+bool AddonApi::blockLoadedEx(void)
+{
+	return m_blockLoadedEx;
+}
+
+/*! If set to true, the exercise loaded by LoadExerciseDialog will be ignored. */
+void AddonApi::setBlockLoadedEx(bool value)
+{
+	m_blockLoadedEx = value;
 }
 
 /*! Adds settings category with widget of class className. */

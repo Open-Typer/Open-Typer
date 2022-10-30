@@ -57,6 +57,11 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		};
 
 		static AddonApi *instance(void);
+		static void addLoadExTarget(int id, QString name);
+		static void clearLoadExTargets(void);
+		static QMap<int, QString> loadExTargets(void);
+		static bool blockLoadedEx(void);
+		static void setBlockLoadedEx(bool value);
 		static bool addSettingsCategory(QString categoryName, QIcon icon, QString className);
 		static QList<QVariantMap> settingsCategories(void);
 		static void clearSettingsCategories(void);
@@ -81,6 +86,8 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 
 	private:
 		static AddonApi m_instance;
+		static QMap<int, QString> m_loadExTargets;
+		static bool m_blockLoadedEx;
 		static QList<QVariantMap> m_settingsCategories;
 		static QMap<QString, QPair<QString, QMenu *>> m_menus;
 		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> m_buttons;
