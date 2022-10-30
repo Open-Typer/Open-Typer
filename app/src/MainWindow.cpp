@@ -217,6 +217,16 @@ void MainWindow::loadAddonParts(void)
 		AddonApi::registerTopBarWidget(keys[i], widget);
 	}
 	AddonApi::sendEvent(IAddon::Event_InitTopBarWidgetsFinalize);
+	// Hide empty top bar frames
+	for(int i = 0; i < AddonApi::TopBarSecion_LastValue; i++)
+	{
+		for(int j = 0; j < AddonApi::TopBarPos_LastValue; j++)
+		{
+			QFrame *frame = getTopBarFrame((AddonApi::TopBarSection) i, (AddonApi::TopBarPos) j);
+			if(frame->layout()->count() == 0)
+				frame->hide();
+		}
+	}
 }
 
 /*! Returns pointer to frame in the given top bar section and position. */
