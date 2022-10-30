@@ -85,6 +85,10 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static QMap<QString, QPair<QString, QMenu *>> m_menus;
 		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> m_buttons;
 		static QMap<QString, QPair<QPair<TopBarSection, TopBarPos>, QWidget *>> m_topBarWidgets;
+
+	signals:
+		void changeMode(int mode);
+		void startTypingTest(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
 };
 
 #endif // ADDONAPI_H
