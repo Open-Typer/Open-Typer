@@ -394,12 +394,6 @@ void MainWindow::startLevel(int lessonID, int sublessonID, int levelID)
 		level = parser.exerciseText(lessonID,
 			sublessonID + sublessonListStart,
 			levelID);
-	if(uploadResult)
-	{
-		/*if((studentUsername != "") || (!client.fullMode() && client.isPaired()))
-			client.sendRequest("put", { "abortExercise" });*/
-		uploadResult = false;
-	}
 	// Get lesson count
 	lessonCount = parser.lessonCount();
 	// Get level count (in current lesson)
@@ -1593,7 +1587,7 @@ void MainWindow::startReceivedExercise(QByteArray text, int lineLength, bool inc
 		uiLocked = true;
 	}
 	testLoaded = true;
-	uploadResult = upload;
+	//uploadResult = upload;
 }
 
 /*! Opens TestWaitDialog and waits until the received exercise starts. */

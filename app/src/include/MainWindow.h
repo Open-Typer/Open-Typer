@@ -109,7 +109,7 @@ class MainWindow : public QMainWindow
 		void loadErrorWords(void);
 		void loadReversedText(void);
 		void exportText(void);
-		bool preview = false, uploadResult = false, testLoaded = false, correctMistakesOld = true, hideTextOld = false;
+		bool preview = false, testLoaded = false, correctMistakesOld = true, hideTextOld = false;
 		QByteArray oldGeometry;
 		bool firstRun = false;
 		bool uiLocked = false;
