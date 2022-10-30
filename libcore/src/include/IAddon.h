@@ -48,7 +48,8 @@ class CORE_LIB_EXPORT IAddon
 			Event_InitTopBarWidgetsFinalize = 9,
 			Event_ExerciseFinalInit = 10,
 			Event_EndStockExercise = 11,
-			Event_EndTypingTest = 12
+			Event_EndTypingTest = 12,
+			Event_ChangeMode = 13
 		};
 
 		virtual ~IAddon(void) = default;
