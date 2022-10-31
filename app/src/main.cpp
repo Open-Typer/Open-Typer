@@ -50,23 +50,26 @@ void loadAddons(void)
 	}
 #endif
 	pluginsDir.cd("plugins");
+	QStringList classNames;
+	for(int i = 0; i < loadedAddons.count(); i++)
+		classNames += dynamic_cast<QObject *>(loadedAddons[i])->metaObject()->className();
 	const QStringList entries = pluginsDir.entryList(QDir::Files);
 	for(const QString &fileName : entries)
 	{
 		QFileInfo fileInfo(fileName);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-		if(fileInfo.isSymbolicLink())
-#else
-		if(fileInfo.isSymLink())
-#endif
-			continue;
 		QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
 		QObject *plugin = pluginLoader.instance();
 		if(plugin)
 		{
 			IAddon *interface = qobject_cast<IAddon *>(plugin);
 			if(interface)
+			{
+				QString className = plugin->metaObject()->className();
+				if(classNames.contains(className))
+					continue;
 				loadedAddons.append(interface);
+				classNames += className;
+			}
 			else
 				pluginLoader.unload();
 		}
