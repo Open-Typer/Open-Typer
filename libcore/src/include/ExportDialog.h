@@ -54,8 +54,8 @@ class ExportDialog : public QDialog
 		QString className(void);
 		void setNumber(QString number);
 		QString number(void);
-		void setMark(QString mark);
-		QString mark(void);
+		void setGrade(QString grade);
+		QString grade(void);
 
 	private:
 		Ui::ExportDialog *ui;

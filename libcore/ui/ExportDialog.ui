@@ -32,7 +32,7 @@
          <string notr="true"/>
         </property>
         <property name="icon">
-         <iconset resource="../res.qrc">
+         <iconset resource="../../app/res.qrc">
           <normaloff>:/res/images/print.png</normaloff>:/res/images/print.png</iconset>
         </property>
         <property name="iconSize">
@@ -101,14 +101,14 @@
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QLabel" name="markLabel">
+       <widget class="QLabel" name="gradeLabel">
         <property name="text">
-         <string>Mark:</string>
+         <string>Grade:</string>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QLineEdit" name="markEdit">
+       <widget class="QLineEdit" name="gradeEdit">
         <property name="maxLength">
          <number>8</number>
         </property>
@@ -310,7 +310,7 @@ QWidget::item:hover {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../res.qrc"/>
+  <include location="../../app/res.qrc"/>
  </resources>
  <connections/>
 </ui>

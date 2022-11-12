@@ -92,7 +92,7 @@ ExportDialog::ExportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 	connect(ui->nameEdit, &QLineEdit::textChanged, this, &ExportDialog::updateTable);
 	connect(ui->classEdit, &QLineEdit::textChanged, this, &ExportDialog::updateTable);
 	connect(ui->numberEdit, &QLineEdit::textChanged, this, &ExportDialog::updateTable);
-	connect(ui->markEdit, &QLineEdit::textChanged, this, &ExportDialog::updateTable);
+	connect(ui->gradeEdit, &QLineEdit::textChanged, this, &ExportDialog::updateTable);
 	connect(ui->closeButton, &QPushButton::clicked, this, &QDialog::close);
 #ifdef Q_OS_WASM
 	ui->printButton->hide();
@@ -169,12 +169,12 @@ void ExportDialog::updateTable(void)
 	// Achieved performance
 	ui->exportTable->setItem(4, 2, new QTableWidgetItem(tr("Achieved performance")));
 	ui->exportTable->setItem(4, 3, new QTableWidgetItem(QString::number((int) performanceResult["netHitsPerMinute"].toDouble())));
-	// Mark
-	item = new QTableWidgetItem(tr("Mark"));
+	// Grade
+	item = new QTableWidgetItem(tr("Grade"));
 	item->setFont(boldFont);
 	item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 	ui->exportTable->setItem(6, 2, item);
-	ui->exportTable->setItem(6, 3, new QTableWidgetItem(ui->markEdit->text()));
+	ui->exportTable->setItem(6, 3, new QTableWidgetItem(ui->gradeEdit->text()));
 	// Adjust size
 	ui->exportTable->resizeColumnsToContents();
 	ui->exportTable->resizeRowsToContents();
@@ -291,14 +291,14 @@ QString ExportDialog::number(void)
 	return ui->numberEdit->text();
 }
 
-/*! Sets the mark. */
-void ExportDialog::setMark(QString mark)
+/*! Sets the grade. */
+void ExportDialog::setGrade(QString grade)
 {
-	ui->markEdit->setText(mark);
+	ui->gradeEdit->setText(grade);
 }
 
-/*! Returns the mark. */
-QString ExportDialog::mark(void)
+/*! Returns the grade. */
+QString ExportDialog::grade(void)
 {
-	return ui->markEdit->text();
+	return ui->gradeEdit->text();
 }
