@@ -350,8 +350,6 @@ void MainWindow::refreshAll(void)
 	oldConfigName = configName;
 	// Custom pack
 	customConfig = Settings::customLessonPack();
-	// Space new line
-	spaceNewline = Settings::spaceNewLine();
 	// Error penalty
 	errorPenalty = Settings::errorPenalty();
 	// Load config and start
@@ -921,7 +919,7 @@ void MainWindow::keyPress(QKeyEvent *event)
 		keyText = "\n";
 	QString convertedKeyText = keyText.toHtmlEscaped().replace(" ", "&nbsp;");
 	convertedKeyText.replace(" ", "&nbsp;");
-	bool correctChar = ((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter))) || (((displayLevel[displayPos] != '\n') || (spaceNewline && !ui->correctMistakesCheckBox->isChecked())) && (keyText == level[levelPos]))) && !mistake);
+	bool correctChar = ((((displayLevel[displayPos] == '\n') && ((event->key() == Qt::Key_Return) || (event->key() == Qt::Key_Enter) || (event->key() == Qt::Key_Space))) || ((displayLevel[displayPos] != '\n') && (keyText == level[levelPos]))) && !mistake);
 	if(correctChar || !ui->correctMistakesCheckBox->isChecked())
 	{
 		if(!mistake && ignoreMistakeLabelAppend)
@@ -961,7 +959,7 @@ void MainWindow::keyPress(QKeyEvent *event)
 		}
 		else
 		{
-			if((((keyText == "\n") || ((keyText == " ") && spaceNewline)) && (displayLevel[displayPos] == '\n')) || (keyText == "\n"))
+			if((((keyText == "\n") || ((keyText == " ") && ui->correctMistakesCheckBox->isChecked())) && (displayLevel[displayPos] == '\n')) || (keyText == "\n"))
 			{
 				inputTextHtml += "<br>";
 				mistakeTextHtml += "<br>";
