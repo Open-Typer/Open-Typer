@@ -21,3 +21,4 @@
 #include "IAddon.h"
 
 QVector<IAddon *> loadedAddons;
+QStringList loadedAddonsClasses;
