@@ -2106,9 +2106,17 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>&amp;View</string>
     </property>
+    <widget class="QMenu" name="menuUserInterface">
+     <property name="title">
+      <string>User interface</string>
+     </property>
+     <addaction name="actionDarkTheme"/>
+    </widget>
     <addaction name="actionViewNavigation"/>
     <addaction name="actionViewExOptions"/>
     <addaction name="actionViewState"/>
+    <addaction name="separator"/>
+    <addaction name="menuUserInterface"/>
    </widget>
    <widget class="QMenu" name="menuExercise">
     <property name="title">
@@ -2320,6 +2328,17 @@ p, li { white-space: pre-wrap; }
   <action name="actionDocs">
    <property name="text">
     <string>Online documentation</string>
+   </property>
+  </action>
+  <action name="actionDarkTheme">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Dark theme</string>
    </property>
   </action>
  </widget>

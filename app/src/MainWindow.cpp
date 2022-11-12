@@ -68,6 +68,19 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->actionViewNavigation, &QAction::toggled, ui->navigationFrame, &QWidget::setVisible);
 	connect(ui->actionViewExOptions, &QAction::toggled, ui->exerciseOptionsFrame, &QWidget::setVisible);
 	connect(ui->actionViewState, &QAction::toggled, ui->stateFrame, &QWidget::setVisible);
+	// View -> User interface menu
+	connect(ui->actionDarkTheme, &QAction::toggled, this, [](bool checked) {
+		if(checked)
+		{
+			globalThemeEngine.setTheme(1);
+			Settings::setSimpleThemeId(1);
+		}
+		else
+		{
+			globalThemeEngine.setTheme(4);
+			Settings::setSimpleThemeId(0);
+		}
+	});
 	// Tools menu
 	connect(ui->actionTypingTest, &QAction::triggered, ui->testButton, &QPushButton::clicked);
 	// Exercise menu
@@ -1441,6 +1454,8 @@ void MainWindow::setColors(void)
 		keyBgColor.green() + (128 - keyBgColor.green()) / 10,
 		keyBgColor.blue() + (128 - keyBgColor.blue()) / 10);
 	ui->keyboardFrame->setKeyColor(keyBgColor, keyBorderColor);
+	// Update dark theme action
+	ui->actionDarkTheme->setChecked(ThemeEngine::style() == ThemeEngine::DarkStyle);
 }
 
 /*! Connected from openPackButton.\n
