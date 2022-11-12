@@ -33,6 +33,7 @@
 #include <QTranslator>
 #include <QCoreApplication>
 #include <QLibraryInfo>
+#include "ThemeEngine.h"
 
 extern QTranslator *translator1;
 extern QTranslator *translator2;
