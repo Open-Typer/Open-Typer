@@ -28,11 +28,6 @@ BehaviorOptions::BehaviorOptions(QWidget *parent) :
 {
 	ui->setupUi(this);
 	// Load settings
-	// Space bar newline
-	if(Settings::spaceNewLine())
-		ui->spaceNewlineCheckBox->setCheckState(Qt::Checked);
-	else
-		ui->spaceNewlineCheckBox->setCheckState(Qt::Unchecked);
 	// Error penalty
 	ui->errorPenaltyBox->setValue(Settings::errorPenalty());
 	// Mistake limit
@@ -59,8 +54,6 @@ BehaviorOptions::BehaviorOptions(QWidget *parent) :
 	ui->updatesBox->hide();
 #endif // Q_OS_WIN
 	// Connect
-	// Space bar newline checkbox
-	connect(ui->spaceNewlineCheckBox, SIGNAL(clicked(bool)), this, SLOT(setSpaceNewline(bool)));
 	// Error penalty box
 	connect(ui->errorPenaltyBox, SIGNAL(valueChanged(int)), this, SLOT(setErrorPenalty(int)));
 	// Mistake limit check box
@@ -80,15 +73,6 @@ BehaviorOptions::BehaviorOptions(QWidget *parent) :
 BehaviorOptions::~BehaviorOptions()
 {
 	delete ui;
-}
-
-/*!
- * Connected from spaceNewlineCheckBox#clicked().
- * Enables or disables space bar at the end of line.
- */
-void BehaviorOptions::setSpaceNewline(bool value)
-{
-	Settings::setSpaceNewLine(value);
 }
 
 /*!

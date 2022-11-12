@@ -47,7 +47,6 @@ class BehaviorOptions : public QWidget
 		Ui::BehaviorOptions *ui;
 
 	private slots:
-		void setSpaceNewline(bool value);
 		void setErrorPenalty(int value);
 		void toggleMistakeLimit(bool checked);
 		void setMistakeChars(int value);
