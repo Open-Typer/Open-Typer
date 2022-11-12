@@ -74,6 +74,10 @@ void loadAddons(void)
 		pluginsDir.cdUp();
 		pluginsDir.cdUp();
 	}
+#elif defined(Q_OS_UNIX)
+	QString AppImageDir = QProcessEnvironment::systemEnvironment().value(QStringLiteral("APPIMAGE"));
+	if(!AppImageDir.isEmpty())
+		pluginsDir.cd(AppImageDir + "/..");
 #endif
 	loadAddons(pluginsDir.path());
 	pluginsDir.cd("plugins");
