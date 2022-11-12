@@ -38,9 +38,6 @@ void changeSplashMessage(QSplashScreen *splash, QString message)
 void loadAddons(QString path)
 {
 	QDir pluginsDir(path);
-	QStringList classNames;
-	for(int i = 0; i < loadedAddons.count(); i++)
-		classNames += dynamic_cast<QObject *>(loadedAddons[i])->metaObject()->className();
 	const QStringList entries = pluginsDir.entryList(QDir::Files);
 	for(const QString &fileName : entries)
 	{
@@ -53,10 +50,10 @@ void loadAddons(QString path)
 			if(interface)
 			{
 				QString className = plugin->metaObject()->className();
-				if(classNames.contains(className))
+				if(loadedAddonsClasses.contains(className))
 					continue;
 				loadedAddons.append(interface);
-				classNames += className;
+				loadedAddonsClasses += className;
 			}
 			else
 				pluginLoader.unload();
