@@ -71,6 +71,7 @@ ExportDialog::ExportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 		finalText += "<br>";
 	}
 	exportHtml = finalText;
+	ui->exportText->toggleScrolling(false);
 	ui->exportText->setHtml(exportHtml);
 	// Set font
 	QFont textFont = ThemeEngine::font();
