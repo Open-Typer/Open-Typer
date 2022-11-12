@@ -35,21 +35,9 @@ void changeSplashMessage(QSplashScreen *splash, QString message)
 	splash->showMessage(versionStr + "\n" + message, Qt::AlignHCenter | Qt::AlignBottom, Qt::white);
 }
 
-void loadAddons(void)
+void loadAddons(QString path)
 {
-	QDir pluginsDir(QCoreApplication::applicationDirPath());
-#if defined(Q_OS_WIN)
-	if(pluginsDir.dirName().toLower() == "debug" || pluginsDir.dirName().toLower() == "release")
-		pluginsDir.cdUp();
-#elif defined(Q_OS_MAC)
-	if(pluginsDir.dirName() == "MacOS")
-	{
-		pluginsDir.cdUp();
-		pluginsDir.cdUp();
-		pluginsDir.cdUp();
-	}
-#endif
-	pluginsDir.cd("plugins");
+	QDir pluginsDir(path);
 	QStringList classNames;
 	for(int i = 0; i < loadedAddons.count(); i++)
 		classNames += dynamic_cast<QObject *>(loadedAddons[i])->metaObject()->className();
@@ -74,6 +62,25 @@ void loadAddons(void)
 				pluginLoader.unload();
 		}
 	}
+}
+
+void loadAddons(void)
+{
+	QDir pluginsDir(QCoreApplication::applicationDirPath());
+#if defined(Q_OS_WIN)
+	if(pluginsDir.dirName().toLower() == "debug" || pluginsDir.dirName().toLower() == "release")
+		pluginsDir.cdUp();
+#elif defined(Q_OS_MAC)
+	if(pluginsDir.dirName() == "MacOS")
+	{
+		pluginsDir.cdUp();
+		pluginsDir.cdUp();
+		pluginsDir.cdUp();
+	}
+#endif
+	loadAddons(pluginsDir.path());
+	pluginsDir.cd("plugins");
+	loadAddons(pluginsDir.path());
 }
 
 int main(int argc, char *argv[])
