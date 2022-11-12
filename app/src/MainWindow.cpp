@@ -43,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->keyboardFrame->setParent(ui->remainingTextArea);
 	remainingTextAreaLayout->addWidget(ui->keyboardFrame);
 	remainingTextAreaLayout->setAlignment(ui->keyboardFrame, Qt::AlignHCenter | Qt::AlignBottom);
+	ui->levelCurrentLineLabel->toggleScrolling(false);
+	ui->levelLabel->toggleScrolling(false);
 	localThemeEngine.setParent(this);
 	oldConfigName = "";
 	errorWords.clear();
