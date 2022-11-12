@@ -215,17 +215,6 @@ bool Settings::containsCustomLessonPack(void) { return contains("main/customconf
 /*! Setter for main/customconfig. */
 void Settings::setCustomLessonPack(bool value) { set("main/customconfig", value); }
 
-// spaceNewLine
-
-/*! Getter for main/spacenewline. */
-bool Settings::spaceNewLine(void) { return get("main/spacenewline", true).toBool(); }
-
-/*! Returns true if there's a main/spacenewline key. */
-bool Settings::containsSpaceNewLine(void) { return contains("main/spacenewline"); }
-
-/*! Setter for main/spacenewline. */
-void Settings::setSpaceNewLine(bool value) { set("main/spacenewline", value); }
-
 // errorPenalty
 
 /*! Getter for main/errorpenalty. */

@@ -55,7 +55,6 @@
  *  - Settings#networkMode() - Network mode (1 = server, 2 = client).
  *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
  *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
- *  - Settings#spaceNewLine() - Whether to allow space bar to be used to break lines.
  *  - Settings#errorPenalty() - Number of hits subtracted from net hits on every mistake.
  *  - Settings#serverFullMode() - Whether to enable server full mode (teacher and student accounts, database, etc.).
  *  - Settings#mistakeLimit() - Whether to limit number of mistakes in per characters in words.
@@ -126,10 +125,6 @@ class CORE_LIB_EXPORT Settings
 		static bool customLessonPack(void);
 		static bool containsCustomLessonPack(void);
 		static void setCustomLessonPack(bool value);
-		// spaceNewLine
-		static bool spaceNewLine(void);
-		static bool containsSpaceNewLine(void);
-		static void setSpaceNewLine(bool value);
 		// errorPenalty
 		static int errorPenalty(void);
 		static bool containsErrorPenalty(void);
