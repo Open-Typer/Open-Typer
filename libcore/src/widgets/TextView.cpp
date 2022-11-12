@@ -42,6 +42,12 @@ void TextView::setVerticalAdjust(bool value)
 	verticalAdjust = value;
 }
 
+/*! Toggles scrolling using mouse wheel. */
+void TextView::toggleScrolling(bool enabled)
+{
+	scrollingEnabled = enabled;
+}
+
 /*! Sets widget fixed size according to the text document. */
 void TextView::updateWidgetSize(void)
 {
@@ -82,7 +88,17 @@ void TextView::changeEvent(QEvent *event)
 /*! Overrides QTextEdit#wheelEvent(). */
 void TextView::wheelEvent(QWheelEvent *event)
 {
-	event->accept();
+	if(scrollingEnabled)
+	{
+		int fontSize = font().pointSize();
+		QTextEdit::wheelEvent(event);
+		// Prevent zooming using mouse wheel
+		QFont newFont(font());
+		newFont.setPointSize(fontSize);
+		setFont(newFont);
+	}
+	else
+		event->accept();
 }
 
 /*! Overrides QTextEdit#mouseMoveEvent(). */

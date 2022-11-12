@@ -45,9 +45,11 @@ class CORE_LIB_EXPORT TextView : public QTextEdit
 		~TextView();
 		void setHorizontalAdjust(bool value);
 		void setVerticalAdjust(bool value);
+		void toggleScrolling(bool enabled);
 
 	private:
 		bool horizontalAdjust = true, verticalAdjust = true;
+		bool scrollingEnabled = true;
 
 	private slots:
 		void updateWidgetSize(void);
