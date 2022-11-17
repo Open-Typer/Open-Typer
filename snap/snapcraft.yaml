@@ -23,6 +23,7 @@ parts:
     override-build: |
       QT_SELECT=qt5 lrelease *.pro
       snapcraftctl build
+      cp *.so* $SNAPCRAFT_PART_INSTALL/usr/lib/
       set -ex
 
 apps:
