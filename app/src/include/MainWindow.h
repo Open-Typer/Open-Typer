@@ -76,7 +76,7 @@ class MainWindow : public QMainWindow
 		void updateLessonList(void);
 		void loadLesson(int lessonID, int sublessonID);
 		void loadSublesson(int levelID);
-		void levelFinalInit(bool updateClient = true);
+		void levelFinalInit(void);
 		void updateText(void);
 		QString level, displayLevel, finalDisplayLevel, input, displayInput, publicConfigName, oldConfigName;
 		int lessonCount, sublessonCount, levelCount, currentLesson, currentSublesson, currentAbsoluteSublesson, currentLevel, currentLine, levelPos, displayPos, levelMistakes, totalHits, netHits, levelLengthExtension;
@@ -104,7 +104,7 @@ class MainWindow : public QMainWindow
 		int timedExHours, timedExMinutes, timedExSeconds;
 		bool timedExStarted;
 		bool blockInput;
-		void loadText(QByteArray text, bool includeNewLines = false, bool updateClient = true);
+		void loadText(QByteArray text, bool includeNewLines = false);
 		void endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes);
 		QStringList errorWords;
 		void loadErrorWords(void);

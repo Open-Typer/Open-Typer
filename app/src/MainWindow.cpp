@@ -563,7 +563,7 @@ void MainWindow::loadSublesson(int levelID)
  * \see startLevel
  * \see updateText
  */
-void MainWindow::levelFinalInit(bool updateClient)
+void MainWindow::levelFinalInit(void)
 {
 	// Init level
 	publicPos::currentLesson = currentLesson;
@@ -802,7 +802,7 @@ void MainWindow::openExerciseFromFile(void)
 }
 
 /*! Loads custom text. */
-void MainWindow::loadText(QByteArray text, bool includeNewLines, bool updateClient)
+void MainWindow::loadText(QByteArray text, bool includeNewLines)
 {
 	level = "";
 	QBuffer in(&text);
@@ -822,7 +822,7 @@ void MainWindow::loadText(QByteArray text, bool includeNewLines, bool updateClie
 	}
 	customLevel = level;
 	customLevelLoaded = true;
-	levelFinalInit(updateClient);
+	levelFinalInit();
 }
 
 /*! Generates text from error words. */
@@ -1642,7 +1642,7 @@ void MainWindow::initTest(QByteArray text, int lineLength, bool includeNewLines,
 {
 	changeMode(mode);
 	levelLengthExtension = lineLength;
-	loadText(text, includeNewLines, false);
+	loadText(text, includeNewLines);
 	if(mode == 1)
 	{
 		ui->timedExCountdownLabel->setText("3");
