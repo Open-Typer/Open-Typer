@@ -41,7 +41,7 @@ class ExerciseSummary : public QDialog
 	public:
 		explicit ExerciseSummary(QWidget *parent = nullptr);
 		~ExerciseSummary();
-		void setTotalTime(double time);
+		void setTotalTime(int time);
 		void setTotalHits(int hits);
 		void setNetHits(int hits);
 		void setGrossHits(int hits);

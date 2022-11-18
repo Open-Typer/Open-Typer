@@ -42,11 +42,17 @@ ExerciseSummary::~ExerciseSummary()
 	delete ui;
 }
 
-/*! Sets and shows the exercise time. */
-void ExerciseSummary::setTotalTime(double time)
+/*! Sets and shows the exercise time (in seconds). */
+void ExerciseSummary::setTotalTime(int time)
 {
-	ui->timeLabel->setText(
-		ui->timeLabel->text() + " " + QString::number(time) + " " + tr("seconds"));
+	int minutes = time / 60;
+	int seconds = time % 60;
+	QString text;
+	if(minutes > 0)
+		text += QString::number(minutes) + " min ";
+	if(seconds > 0)
+		text += QString::number(seconds) + " s";
+	ui->timeLabel->setText(ui->timeLabel->text() + " " + text);
 	ui->timeLabel->show();
 }
 
