@@ -178,7 +178,9 @@ MainWindow::MainWindow(QWidget *parent) :
 		{
 			updateQuestion = new UpdaterQuestion(ui->centralwidget);
 			qobject_cast<QBoxLayout *>(ui->centralwidget->layout())->insertWidget(1, updateQuestion); // below controlFrame
-			connect(updateQuestion, &UpdaterQuestion::accepted, this, []() { Updater::installUpdate(); });
+			connect(updateQuestion, &UpdaterQuestion::accepted, this, []() {
+				Updater::installUpdate();
+			});
 			setColors();
 		}
 	}
