@@ -883,7 +883,7 @@ void MainWindow::loadReversedText(void)
  */
 void MainWindow::keyPress(QKeyEvent *event)
 {
-	if(blockInput || event->isAutoRepeat() || ((currentMode == 1) && !timedExStarted))
+	if(blockInput || ((currentMode == 1) && !timedExStarted))
 		return;
 	int highlightID = event->key();
 	if((input.count() < level.count()) && (event->key() == Qt::Key_Shift))
@@ -894,6 +894,8 @@ void MainWindow::keyPress(QKeyEvent *event)
 			highlightID = -2;
 	}
 	ui->keyboardFrame->highlightKey(highlightID);
+	if(event->isAutoRepeat())
+		return;
 	if(KeyboardUtils::isDeadKey(event->key()))
 	{
 		deadKeys++;
