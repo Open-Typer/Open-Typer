@@ -173,7 +173,14 @@ MainWindow::MainWindow(QWidget *parent) :
 #else
 	// Check for updates
 	if(Settings::updateChecks())
-		new Updater();
+	{
+		if(Updater::updateAvailable())
+		{
+			UpdaterQuestion *updateQuestion = new UpdaterQuestion(ui->centralwidget);
+			qobject_cast<QBoxLayout *>(ui->centralwidget->layout())->insertWidget(1, updateQuestion); // below controlFrame
+			connect(updateQuestion, &UpdaterQuestion::accepted, this, []() { Updater::installUpdate(); });
+		}
+	}
 #endif // Q_OS_WASM
 	AddonApi::sendEvent(IAddon::Event_InitApp);
 }

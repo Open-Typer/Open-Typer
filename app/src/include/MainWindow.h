@@ -34,6 +34,7 @@
 #include "widgets/InputLabelWidget.h"
 #include "widgets/LanguageList.h"
 #include "updater/Updater.h"
+#include "updater/UpdaterQuestion.h"
 #include "packEditor/PackEditor.h"
 #include "options/OptionsWindow.h"
 #include "ExerciseSummary.h"
