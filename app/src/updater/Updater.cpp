@@ -38,7 +38,7 @@ bool Updater::updateAvailable(void)
 	if(process->readAllStandardOutput().contains("<update"))
 		return true;
 #endif // Q_OS_WINDOWS
-	return true;
+	return false;
 }
 
 /*! Starts maintenance tool and installs the update (only supports Windows). */
