@@ -1168,7 +1168,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 			{
 				QString correct;
 				if(ui->correctMistakesCheckBox->isChecked())
-					correct = displayLevel[pos - delta];
+					correct = displayLevel[(pos - delta) % (displayLevel.count() - 1)];
 				else
 					correct = mistakesMap[pos]->value("previous").toString();
 				QString type = mistakesMap[pos]->value("type").toString();
