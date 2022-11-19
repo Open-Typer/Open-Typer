@@ -59,7 +59,7 @@ SOURCES += \
     src/updater/Updater.cpp \
     src/main.cpp \
     src/MainWindow.cpp \
-    src/updater/UpdaterDialog.cpp \
+    src/updater/UpdaterQuestion.cpp \
     src/widgets/InputLabelWidget.cpp \
     src/widgets/LanguageList.cpp \
     src/widgets/KeyboardWidget.cpp
@@ -75,7 +75,7 @@ HEADERS += \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h \
-    src/include/updater/UpdaterDialog.h \
+    src/include/updater/UpdaterQuestion.h \
     src/include/MainWindow.h \
     src/include/widgets/InputLabelWidget.h \
     src/include/widgets/LanguageList.h \
@@ -92,7 +92,7 @@ FORMS += \
     ui/options/OptionsWindow.ui \
     ui/packEditor/PackEditor.ui \
     ui/packEditor/PackSelector.ui \
-    ui/updater/UpdaterDialog.ui
+    ui/updater/UpdaterQuestion.ui
 
 TRANSLATIONS += \
     lang/Open-Typer_sk_SK.ts \

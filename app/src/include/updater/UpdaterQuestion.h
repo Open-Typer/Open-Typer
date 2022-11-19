@@ -1,5 +1,5 @@
 /*
- * UpdaterDialog.h
+ * UpdaterQuestion.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,33 +18,35 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UPDATERDIALOG_H
-#define UPDATERDIALOG_H
+#ifndef UPDATERQUESTION_H
+#define UPDATERQUESTION_H
 
-#include <QDialog>
-#include <QCloseEvent>
-#include "Updater.h"
+#include <QWidget>
+#include <QPushButton>
 
 namespace Ui {
-	class UpdaterDialog;
+	class UpdaterQuestion;
 }
 
 /*!
- * \brief The UpdaterDialog class is a dialog used for program updates.
+ * \brief The UpdaterQuestion class is a widget that can be used to ask about installation of updates.
  *
- * \image html UpdaterDialog.png
+ * \image html UpdaterQuestion.png
  *
  * \see Updater
  */
-class UpdaterDialog : public QDialog
+class UpdaterQuestion : public QWidget
 {
 		Q_OBJECT
 	public:
-		explicit UpdaterDialog(QWidget *parent = nullptr);
-		~UpdaterDialog();
+		explicit UpdaterQuestion(QWidget *parent = nullptr);
+		~UpdaterQuestion();
 
 	private:
-		Ui::UpdaterDialog *ui;
+		Ui::UpdaterQuestion *ui;
+
+	signals:
+		void accepted(void);
 };
 
-#endif // UPDATERDIALOG_H
+#endif // UPDATERQUESTION_H

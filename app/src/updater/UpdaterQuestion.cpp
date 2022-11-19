@@ -1,5 +1,5 @@
 /*
- * UpdaterDialog.cpp
+ * UpdaterQuestion.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
@@ -18,21 +18,22 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "updater/UpdaterDialog.h"
-#include "ui_UpdaterDialog.h"
+#include "updater/UpdaterQuestion.h"
+#include "ui_UpdaterQuestion.h"
 
-/*! Constructs UpdaterDialog. */
-UpdaterDialog::UpdaterDialog(QWidget *parent) :
-	QDialog(parent),
-	ui(new Ui::UpdaterDialog)
+/*! Constructs UpdaterQuestion. */
+UpdaterQuestion::UpdaterQuestion(QWidget *parent) :
+	QWidget(parent),
+	ui(new Ui::UpdaterQuestion)
 {
 	ui->setupUi(this);
-	connect(ui->yesButton, SIGNAL(clicked()), this, SLOT(accept()));
-	connect(ui->noButton, SIGNAL(clicked()), this, SLOT(reject()));
+	setAttribute(Qt::WA_DeleteOnClose);
+	connect(ui->buttonBox->button(QDialogButtonBox::Yes), &QPushButton::clicked, this, &UpdaterQuestion::accepted);
+	connect(ui->buttonBox->button(QDialogButtonBox::No), &QPushButton::clicked, this, &UpdaterQuestion::close);
 }
 
-/*! Destroys the UpdaterDialog object. */
-UpdaterDialog::~UpdaterDialog()
+/*! Destroys the UpdaterQuestion object. */
+UpdaterQuestion::~UpdaterQuestion()
 {
 	delete ui;
 }
