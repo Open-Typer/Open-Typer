@@ -634,7 +634,12 @@ void MainWindow::updateText(void)
 	displayLevel = ConfigParser::initExercise(level, levelLengthExtension);
 	lineCount = displayLevel.count('\n');
 	// Process exercise text
-	finalDisplayLevel = ConfigParser::initExercise(level, levelLengthExtension, false, currentLine);
+	QString level_ = level;
+	if(currentMode == 1)
+		level_ = level.left(level.count() - 1);
+	finalDisplayLevel = ConfigParser::initExercise(level_, levelLengthExtension, false, currentLine);
+	if(currentMode == 1)
+		finalDisplayLevel += "\n" + displayLevel.left(displayLevel.count() - 1).repeated(100 / lineCount);
 	QString currentLineText = "";
 	QString remainingText = "";
 	int i, line = 0;
