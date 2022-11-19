@@ -176,9 +176,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	{
 		if(Updater::updateAvailable())
 		{
-			UpdaterQuestion *updateQuestion = new UpdaterQuestion(ui->centralwidget);
+			updateQuestion = new UpdaterQuestion(ui->centralwidget);
 			qobject_cast<QBoxLayout *>(ui->centralwidget->layout())->insertWidget(1, updateQuestion); // below controlFrame
 			connect(updateQuestion, &UpdaterQuestion::accepted, this, []() { Updater::installUpdate(); });
+			setColors();
 		}
 	}
 #endif // Q_OS_WASM
@@ -1453,6 +1454,8 @@ void MainWindow::setColors(void)
 	ui->controlFrame->setStyleSheet(panelStyleSheet);
 	ui->bottomPanel->setStyleSheet(panelStyleSheet);
 	ui->menuBar->setStyleSheet(panelStyleSheet);
+	if(updateQuestion)
+		updateQuestion->setStyleSheet(panelStyleSheet);
 	// Set keyboard color
 	QColor keyBorderColor = palette().color(QPalette::Text);
 	keyBorderColor = QColor::fromRgb(keyBorderColor.red() + (128 - keyBorderColor.red()),

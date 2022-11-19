@@ -115,6 +115,7 @@ class MainWindow : public QMainWindow
 		QByteArray oldGeometry;
 		bool firstRun = false;
 		bool uiLocked = false;
+		QPointer<UpdaterQuestion> updateQuestion = nullptr;
 
 	protected:
 		void changeEvent(QEvent *event);
