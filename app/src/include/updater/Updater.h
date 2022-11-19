@@ -25,19 +25,13 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QProcess>
-#include "UpdaterDialog.h"
 
-/*!
- * \brief The Updater class is used to check for updates and download new versions of the program.
- *
- * \see UpdaterDialog
- */
-class Updater : public QObject
+/*! \brief The Updater class is used to check for updates and download new versions of the program. */
+class Updater
 {
-		Q_OBJECT
 	public:
-		explicit Updater(QObject *parent = nullptr);
-		virtual ~Updater();
+		static bool updateAvailable(void);
+		static void installUpdate(void);
 };
 
 #endif // UPDATER_H

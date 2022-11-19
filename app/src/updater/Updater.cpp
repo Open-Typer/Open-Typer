@@ -20,9 +20,8 @@
 
 #include "updater/Updater.h"
 
-/*! Constructs Updater and starts maintenance tool to check for updates. */
-Updater::Updater(QObject *parent) :
-	QObject(parent)
+/*! Checks for updates and returns true if there's an update available (only supports Windows). */
+bool Updater::updateAvailable(void)
 {
 #ifdef Q_OS_WINDOWS
 	QFile maintenancetoolFile;
@@ -31,30 +30,26 @@ Updater::Updater(QObject *parent) :
 	{
 		maintenancetoolFile.setFileName(QCoreApplication::applicationDirPath() + "/../maintenancetool.exe");
 		if(!maintenancetoolFile.exists())
-		{
-			deleteLater();
-			return;
-		}
+			return false;
 	}
-	QProcess *process = new QProcess(this);
+	QProcess *process = new QProcess(qApp);
 	process->start(maintenancetoolFile.fileName(), { "ch" });
 	process->waitForFinished();
 	if(process->readAllStandardOutput().contains("<update"))
-	{
-		UpdaterDialog dialog;
-		if(dialog.exec() == QDialog::Accepted)
-		{
-			process->kill();
-			QStringList args;
-			args += "--updater";
-			args += "updateSource=" + QFileInfo(QCoreApplication::applicationFilePath()).fileName();
-			process->startDetached(maintenancetoolFile.fileName(), args);
-			exit(0);
-		}
-	}
-	deleteLater();
-#endif
+		return true;
+#endif // Q_OS_WINDOWS
+	return true;
 }
 
-/*! Destroys the Updater object. */
-Updater::~Updater() { }
+/*! Starts maintenance tool and installs the update (only supports Windows). */
+void Updater::installUpdate(void)
+{
+#ifdef Q_OS_WINDOWS
+	QProcess *process = new QProcess(qApp);
+	QStringList args;
+	args += "--updater";
+	args += "updateSource=" + QFileInfo(QCoreApplication::applicationFilePath()).fileName();
+	process->startDetached(maintenancetoolFile.fileName(), args);
+	exit(0);
+#endif // Q_OS_WINDOWS
+}
