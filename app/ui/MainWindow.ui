@@ -2185,15 +2185,6 @@ p, li { white-space: pre-wrap; }
     <string>Lesson pack</string>
    </property>
   </action>
-  <action name="actionLogIn">
-   <property name="icon">
-    <iconset resource="../res.qrc">
-     <normaloff>:/res/images/user.png</normaloff>:/res/images/user.png</iconset>
-   </property>
-   <property name="text">
-    <string>Log in</string>
-   </property>
-  </action>
   <action name="actionTimedEx">
    <property name="icon">
     <iconset resource="../res.qrc">
