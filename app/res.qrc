@@ -25,7 +25,6 @@
         <file>res/images/options.png</file>
         <file>res/images/minus.png</file>
         <file>res/images/clock.png</file>
-        <file>res/images/user.png</file>
         <file>res/images/stats.png</file>
         <file>res/images/themes/custom.png</file>
         <file>res/images/themes/light.png</file>
@@ -38,15 +37,11 @@
         <file>res/images/errorWords.png</file>
         <file>res/images/reversedExercise.png</file>
         <file>res/images/print.png</file>
-        <file>res/images/edit.png</file>
         <file>res/images/new.png</file>
-        <file>res/images/add.png</file>
         <file>res/images/paper.png</file>
-        <file>res/images/start.png</file>
         <file>res/images/languageOptions.svg</file>
         <file>res/images/BehaviorOptions.svg</file>
         <file>res/images/KeyboardOptions.svg</file>
         <file>res/images/AppearanceOptions.svg</file>
-        <file>res/images/ConnectionOptions.svg</file>
     </qresource>
 </RCC>
