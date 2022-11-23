@@ -8,24 +8,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch:
+        - i386
+        - amd64
+        - armhf
+        - arm64
+        - ppc64el
+        - s390x
     steps:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
         submodules: true
-    - name: 'Get Previous tag'
-      id: previoustag
-      uses: WyriHaximus/github-action-get-previous-tag@v1
-    - run: sudo ln -s /var/snap/lxd/common/lxd /var/lib/lxd
-      shell: bash
-    - name: Install snapcraft
-      uses: samuelmeuli/action-snapcraft@v1
-      with:
-        use_lxd: true
-    - name: Build the Snap
-      uses: snapcore/action-build@v1
+    - uses: docker/setup-qemu-action@v1
+    - uses: diddlesnaps/snapcraft-multiarch-action@v1
       id: build
-    - name: Upload the package to artifacts
+      with:
+        architecture: ${{ matrix.arch }}
+    - name: Upload the packages to artifacts
       uses: actions/upload-artifact@v2
       with:
         name: snap
