@@ -2,7 +2,7 @@ name: Build Snap package
 
 on:
   push:
-    branches: [ master, staging ]
+    branches: '*'
     tags: '*'
 
 jobs:

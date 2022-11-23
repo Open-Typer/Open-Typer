@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, reopened, synchronize, edited]
   push:
-    branches: [master, staging]
+    branches: '*'
 
 jobs:
   cpp-linter:
