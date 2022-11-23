@@ -16,7 +16,6 @@ jobs:
         - armhf
         - arm64
         - ppc64el
-        - s390x
     steps:
     - uses: actions/checkout@v3
       with:
