@@ -3,13 +3,13 @@ description: |
   Open-Typer is a free and open source software for
   typewriting training and education. It runs on
   multiple operating systems.
-base: core20
+base: core22
 adopt-info: open-typer
 confinement: strict
 
 parts:
   open-typer:
-    plugin: qmake
+    plugin: nil
     parse-info: [../src/data/com.github.open-typer.open-typer.metainfo.xml]
     source: .
     source-type: git
@@ -22,10 +22,10 @@ parts:
       snapcraftctl set-grade stable
     override-build: |
       QT_SELECT=qt5 lrelease ../src/*.pro
-      snapcraftctl build
-      ls
-      ls ../src
-      cp ../src/*.so* $SNAPCRAFT_PART_INSTALL/usr/lib/
+      qmake
+      make -j$(nproc --all)
+      cp open-typer $SNAPCRAFT_PART_INSTALL/usr/bin
+      cp *.so* $SNAPCRAFT_PART_INSTALL/usr/lib/
       set -ex
     after: [desktop-qt5]
 
@@ -40,7 +40,6 @@ parts:
       - dpkg-dev
     stage-packages:
       - libxkbcommon0
-      - ttf-ubuntu-font-family
       - dmz-cursor-theme
       - light-themes
       - adwaita-icon-theme
@@ -49,7 +48,6 @@ parts:
       - libqt5gui5
       - libgdk-pixbuf2.0-0
       - libqt5svg5 # for loading icon themes which are svg
-      - try: [appmenu-qt5] # not available on core18 and core20
       - locales-all
       - xdg-user-dirs
       - fcitx-frontend-qt5
