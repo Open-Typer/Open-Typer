@@ -25,6 +25,7 @@ jobs:
       id: build
       with:
         architecture: ${{ matrix.arch }}
+        snapcraft-args: '-v'
     - name: Upload the packages to artifacts
       uses: actions/upload-artifact@v2
       with:
