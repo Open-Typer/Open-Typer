@@ -11,7 +11,6 @@ jobs:
     strategy:
       matrix:
         arch:
-        - i386
         - amd64
         - armhf
         - arm64
