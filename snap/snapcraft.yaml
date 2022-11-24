@@ -3,15 +3,14 @@ description: |
   Open-Typer is a free and open source software for
   typewriting training and education. It runs on
   multiple operating systems.
-base: core18
+base: core20
 adopt-info: open-typer
 confinement: strict
 
 parts:
   open-typer:
     plugin: qmake
-    qt-version: qt5
-    parse-info: [data/com.github.open-typer.open-typer.metainfo.xml]
+    parse-info: [../src/data/com.github.open-typer.open-typer.metainfo.xml]
     source: .
     source-type: git
     build-packages: [build-essential, qttools5-dev-tools, libssl-dev, libqt5charts5-dev, libqt5websockets5-dev]
@@ -22,9 +21,11 @@ parts:
       snapcraftctl set-version "$version"
       snapcraftctl set-grade stable
     override-build: |
-      QT_SELECT=qt5 lrelease *.pro
+      QT_SELECT=qt5 lrelease ../src/*.pro
       snapcraftctl build
-      cp *.so* $SNAPCRAFT_PART_INSTALL/usr/lib/
+      ls
+      ls ../src
+      cp ../src/*.so* $SNAPCRAFT_PART_INSTALL/usr/lib/
       set -ex
     after: [desktop-qt5]
 
@@ -48,7 +49,7 @@ parts:
       - libqt5gui5
       - libgdk-pixbuf2.0-0
       - libqt5svg5 # for loading icon themes which are svg
-      - try: [appmenu-qt5] # not available on core18
+      - try: [appmenu-qt5] # not available on core18 and core20
       - locales-all
       - xdg-user-dirs
       - fcitx-frontend-qt5
@@ -56,7 +57,7 @@ parts:
 apps:
   open-typer:
     common-id: com.github.open-typer.open-typer
-    command: desktop-launch open-typer
+    command: bin/desktop-launch open-typer
     plugs:
       - x11
       - unity7
