@@ -16,10 +16,10 @@ parts:
     build-packages: [build-essential, qttools5-dev-tools, libssl-dev, libqt5charts5-dev, libqt5websockets5-dev]
     stage-packages: [libqt5gui5, libqt5widgets5, libqt5x11extras5, qtwayland5, libqt5charts5, libqt5websockets5, libqt5printsupport5, libqt5sql5, libqt5sql5-sqlite, libqt5svg5]
     override-pull: |
-      snapcraftctl pull
+      craftctl default
       version=$(git describe --tags --abbrev=0 | sed 's/v//')
-      snapcraftctl set-version "$version"
-      snapcraftctl set-grade stable
+      craftctl set version="$version"
+      craftctl set grade=stable
     override-build: |
       QT_SELECT=qt5 lrelease ../src/*.pro
       qmake
