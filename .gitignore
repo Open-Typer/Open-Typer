@@ -34,7 +34,7 @@ Thumbs.db
 /.qmake.cache
 /.qmake.stash
 release/
-lang/*.qm
+app/lang/*.qm
 moc_predefs.h
 open-typer
 
