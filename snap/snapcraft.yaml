@@ -12,17 +12,18 @@ parts:
     plugin: nil
     parse-info: [../src/data/com.github.open-typer.open-typer.metainfo.xml]
     source: .
-    source-type: git
+    source-type: local
     build-packages: [build-essential, qtbase5-dev, qtchooser, qt5-qmake, qtbase5-dev-tools, qttools5-dev-tools, libssl-dev, libqt5charts5-dev, libqt5websockets5-dev]
     stage-packages: [libqt5gui5, libqt5widgets5, libqt5x11extras5, qtwayland5, libqt5charts5, libqt5websockets5, libqt5printsupport5, libqt5sql5, libqt5sql5-sqlite, libqt5svg5]
     override-pull: |
       craftctl default
+      git config --global --add safe.directory /root/parts/open-typer/src
       version=$(git describe --tags --abbrev=0 | sed 's/v//')
       craftctl set version="$version"
       craftctl set grade=stable
     override-build: |
-      lrelease *.pro || :
       qmake
+      lrelease *.pro || :
       make -j$(nproc --all)
       cp open-typer $SNAPCRAFT_PART_INSTALL/usr/bin
       cp *.so* $SNAPCRAFT_PART_INSTALL/usr/lib/
