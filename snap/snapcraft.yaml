@@ -21,7 +21,7 @@ parts:
       craftctl set version="$version"
       craftctl set grade=stable
     override-build: |
-      QT_SELECT=qt5 lrelease *.pro
+      lrelease *.pro
       qmake
       make -j$(nproc --all)
       cp open-typer $SNAPCRAFT_PART_INSTALL/usr/bin
