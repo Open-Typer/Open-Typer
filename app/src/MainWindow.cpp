@@ -1284,6 +1284,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 		msgBox->setTotalHits(totalHits);
 	if(showMistakes)
 		msgBox->setMistakes(levelMistakes);
+	msgBox->setAccuracy(1.0 - (double) levelMistakes / totalHits);
 	msgBox->setWindowModality(Qt::WindowModal);
 	connect(msgBox, &QDialog::accepted, this, [this]() {
 		changeMode(0);
