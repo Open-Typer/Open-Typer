@@ -8,6 +8,8 @@ PLATFORM=$1
 # 3: qmake failed
 # 4: build (make) failed
 lrelease *.pro || exit 2
+lrelease app/*.pro || exit 2
+lrelease libcore/*.pro || exit 2
 qmake || exit 3
 if [[ "$PLATFORM" == "win32" ]]; then
 	mingw32-make.exe -j4 || exit 4
