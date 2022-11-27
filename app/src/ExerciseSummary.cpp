@@ -32,6 +32,7 @@ ExerciseSummary::ExerciseSummary(QWidget *parent) :
 	ui->netHitsLabel->hide();
 	ui->grossHitsLabel->hide();
 	ui->mistakesLabel->hide();
+	ui->accuracyLabel->hide();
 	// Connections
 	connect(ui->previewButton, SIGNAL(clicked()), this, SLOT(accept()));
 }
@@ -86,4 +87,12 @@ void ExerciseSummary::setMistakes(int mistakes)
 	ui->mistakesLabel->setText(
 		ui->mistakesLabel->text() + " " + QString::number(mistakes));
 	ui->mistakesLabel->show();
+}
+
+/*! Sets and shows the accuracy (from 0 to 1) */
+void ExerciseSummary::setAccuracy(double accuracy)
+{
+	ui->accuracyLabel->setText(
+		ui->accuracyLabel->text() + " " + QString::number(((int) (accuracy * 10000)) / 100.0) + " %");
+	ui->accuracyLabel->show();
 }

@@ -46,6 +46,7 @@ class ExerciseSummary : public QDialog
 		void setNetHits(int hits);
 		void setGrossHits(int hits);
 		void setMistakes(int mistakes);
+		void setAccuracy(double accuracy);
 
 	private:
 		Ui::ExerciseSummary *ui;
