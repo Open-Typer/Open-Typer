@@ -47,7 +47,6 @@ KeyboardOptions::KeyboardOptions(QWidget *parent) :
 	if(!Settings::customLessonPack())
 		ui->packList->setCurrentItem(ui->packList->item(rawItems.indexOf(Settings::lessonPack())));
 	// Connections
-	connect(ui->editorButton, SIGNAL(clicked()), this, SLOT(openEditor()));
 	connect(ui->packList, SIGNAL(currentRowChanged(int)), this, SLOT(changePack(int)));
 }
 
@@ -55,20 +54,6 @@ KeyboardOptions::KeyboardOptions(QWidget *parent) :
 KeyboardOptions::~KeyboardOptions()
 {
 	delete ui;
-}
-
-/*!
- * Connected from editorButton->clicked().\n
- * Opens the editor window.
- * \see PackEditor
- */
-void KeyboardOptions::openEditor(void)
-{
-	PackEditor *editorWindow = new PackEditor(this);
-	editorWindow->setWindowFlag(Qt::WindowMinimizeButtonHint, true);
-	editorWindow->setWindowFlag(Qt::WindowMaximizeButtonHint, true);
-	editorWindow->setWindowModality(Qt::WindowModal);
-	editorWindow->show();
 }
 
 /*!

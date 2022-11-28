@@ -25,7 +25,6 @@
 #include <QListWidget>
 #include <QDirIterator>
 #include "options/OptionsWindow.h"
-#include "packEditor/PackEditor.h"
 #include "StringUtils.h"
 #include "BuiltInPacks.h"
 
@@ -50,7 +49,6 @@ class KeyboardOptions : public QWidget
 		QStringList rawItems;
 
 	private slots:
-		void openEditor(void);
 		void changePack(int index);
 };
 
