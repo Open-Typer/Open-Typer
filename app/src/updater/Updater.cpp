@@ -49,7 +49,7 @@ void Updater::installUpdate(void)
 	QStringList args;
 	args += "--updater";
 	args += "updateSource=" + QFileInfo(QCoreApplication::applicationFilePath()).fileName();
-	process->startDetached(maintenancetoolFile.fileName(), args);
+	process->startDetached(QCoreApplication::applicationDirPath() + "/../maintenancetool", args);
 	exit(0);
 #endif // Q_OS_WINDOWS
 }
