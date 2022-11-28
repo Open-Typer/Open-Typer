@@ -242,15 +242,17 @@ class CORE_LIB_EXPORT Settings
 		static bool containsKeyboardVisible(void);
 		static void setKeyboardVisible(bool value);
 
+	protected:
+		static QVariant get(QString key, QVariant defaultValue);
+		static bool contains(QString key);
+		static void set(QString key, QVariant value);
+
 	private:
 		static QSettings *settingsInstance;
 #ifdef Q_OS_WASM
 		static bool tempSettingsCopied;
 		static void copyTempSettings(void);
 #endif // Q_OS_WASM
-		static QVariant get(QString key, QVariant defaultValue);
-		static bool contains(QString key);
-		static void set(QString key, QVariant value);
 };
 
 #endif // SETTINGS_H
