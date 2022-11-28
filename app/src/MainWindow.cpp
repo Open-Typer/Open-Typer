@@ -48,9 +48,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	localThemeEngine.setParent(this);
 	oldConfigName = "";
 	errorWords.clear();
-#ifdef Q_OS_WASM
-	Settings::setClientDisabled(true);
-#endif // Q_OS_WASM
 	// Opacity effect
 	QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect;
 	ui->levelLabel->setGraphicsEffect(opacityEffect);
