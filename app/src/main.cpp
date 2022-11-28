@@ -46,13 +46,13 @@ void loadAddons(QString path)
 		QObject *plugin = pluginLoader.instance();
 		if(plugin)
 		{
-			IAddon *interface = qobject_cast<IAddon *>(plugin);
-			if(interface)
+			IAddon *addonInterface = qobject_cast<IAddon *>(plugin);
+			if(addonInterface)
 			{
 				QString className = plugin->metaObject()->className();
 				if(loadedAddonsClasses.contains(className))
 					continue;
-				loadedAddons.append(interface);
+				loadedAddons.append(addonInterface);
 				loadedAddonsClasses += className;
 			}
 			else
