@@ -22,6 +22,7 @@
 
 QTranslator *translator1 = nullptr;
 QTranslator *translator2 = nullptr;
+QTranslator *translator3 = nullptr;
 
 /*! Constructs LanguageManager. */
 LanguageManager::LanguageManager(QObject *parent) :
@@ -67,7 +68,13 @@ void LanguageManager::setLanguage(int index)
 		translator2 = new QTranslator(qApp);
 		QCoreApplication::installTranslator(translator2);
 	}
+	if(!translator3)
+	{
+		translator3 = new QTranslator(qApp);
+		QCoreApplication::installTranslator(translator3);
+	}
 	translator1->load(targetLocale, "Open-Typer", "_", ":/res/lang");
-	translator2->load(targetLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qtbase_");
+	translator2->load(targetLocale, "libcore", "_", ":/res/lang");
+	translator3->load(targetLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qtbase_");
 	globalThemeEngine.updateThemeList();
 }

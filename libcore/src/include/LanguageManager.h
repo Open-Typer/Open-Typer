@@ -37,6 +37,7 @@
 
 extern QTranslator *translator1;
 extern QTranslator *translator2;
+extern QTranslator *translator3;
 
 /*!
  * \brief The LanguageManager class provides a list of supported languages.
