@@ -101,7 +101,8 @@ TRANSLATIONS += \
 RESOURCES += \
     res.qrc \
     res/images/class-icons/class-icons.qrc \
-    res/keyboard-layouts/layouts.qrc
+    res/keyboard-layouts/layouts.qrc \
+    translations/translations.qrc
 
 RESOURCES += \
     dark-theme/dark-style.qrc \

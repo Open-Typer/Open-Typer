@@ -1,8 +1,4 @@
 <RCC>
-    <qresource prefix="/res">
-        <file>lang/Open-Typer_sk_SK.qm</file>
-        <file>lang/Open-Typer_de_DE.qm</file>
-    </qresource>
     <qresource prefix="/">
         <file>res/configs/sk_SK-QWERTZ-B1</file>
         <file>res/configs/sk_SK-QWERTZ-A</file>
