@@ -102,7 +102,7 @@ jobs:
         dest: ${{ env.app_name }}-win32.zip
     ## Upload
     - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: build-${{ env.os_name }}
         path: |
@@ -141,7 +141,7 @@ jobs:
     # Build
     - run: source .ci/common/build.sh wasm
       shell: bash
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: build-wasm
         path: |

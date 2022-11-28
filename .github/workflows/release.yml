@@ -127,7 +127,7 @@ jobs:
       shell: bash
     ## Upload artifacts
     - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: build-${{ env.os_name }}
         path: |
@@ -182,7 +182,7 @@ jobs:
     # Build
     - run: source .ci/common/build.sh wasm
       shell: bash
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: build-wasm
         path: |

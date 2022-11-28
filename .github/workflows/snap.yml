@@ -32,7 +32,7 @@ jobs:
         architecture: ${{ matrix.arch }}
         snapcraft-args: '-v'
     - name: Upload the packages to artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: snap
         path: ${{ steps.build.outputs.snap }}
