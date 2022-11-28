@@ -21,6 +21,12 @@
 #ifndef EXPORTDIALOG_H
 #define EXPORTDIALOG_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QDialog>
 #include <QDate>
 
@@ -42,7 +48,7 @@ namespace Ui {
  *
  * \image html ExportDialog.png
  */
-class ExportDialog : public QDialog
+class CORE_LIB_EXPORT ExportDialog : public QDialog
 {
 		Q_OBJECT
 	public:
