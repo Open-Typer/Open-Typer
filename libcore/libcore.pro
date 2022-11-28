@@ -50,6 +50,13 @@ FORMS += \
     ui/LoadExerciseDialog.ui \
     ui/StatsDialog.ui
 
+TRANSLATIONS += \
+    translations/libcore_sk_SK.ts \
+    translations/libcore_de_DE.ts
+
+RESOURCES += \
+    translations/core-translations.qrc
+
 DEFINES += CORE_SHARED_LIB
 
 # Third-party
