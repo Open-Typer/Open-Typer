@@ -95,8 +95,8 @@ FORMS += \
     ui/updater/UpdaterQuestion.ui
 
 TRANSLATIONS += \
-    lang/Open-Typer_sk_SK.ts \
-    lang/Open-Typer_de_DE.ts
+    translations/Open-Typer_sk_SK.ts \
+    translations/Open-Typer_de_DE.ts
 
 RESOURCES += \
     res.qrc \
