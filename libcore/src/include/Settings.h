@@ -46,21 +46,15 @@
  * Use Settings#init() to initialize settings when the application starts.\n
  * \n
  * <b>List of settings keys:</b>
- *  - Settings#clientDisabled() - If there's a connection failure, MonitorClient sets this to true. Use MonitorClient#enableClient() to enable it again.
  *  - Settings#language() - Application language name. Unset to use the system language.
  *  - Settings#windowState() - Main window state (see QMainWindow#saveState()).
  *  - Settings#windowGeometry() - Main window geometry.
  *  - Settings#updateChecks() - Whether automatic update checks are enabled (on supported platforms).
- *  - Settings#networkEnabled() - Whether to enable network features (client/server).
- *  - Settings#networkMode() - Network mode (1 = server, 2 = client).
  *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
  *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
  *  - Settings#errorPenalty() - Number of hits subtracted from net hits on every mistake.
- *  - Settings#serverFullMode() - Whether to enable server full mode (teacher and student accounts, database, etc.).
  *  - Settings#mistakeLimit() - Whether to limit number of mistakes in per characters in words.
  *  - Settings#mistakeChars() - Number of characters in one word with max. 1 mistake.
- *  - Settings#serverAddress() - The IPv4 address of the server (used by client).
- *  - Settings#serverPort() - Server port (used by client or server).
  *  - Settings#themeFont() - Text font family name.
  *  - Settings#themeFontSize() - Text font size.
  *  - Settings#themeFontBold() - Whether to use a bold font in exercise and input text.
@@ -89,10 +83,6 @@ class CORE_LIB_EXPORT Settings
 {
 	public:
 		static void init(void);
-		// clientDisabled
-		static bool clientDisabled(void);
-		static bool containsClientDisabled(void);
-		static void setClientDisabled(bool value);
 		// language
 		static QString language(void);
 		static bool containsLanguage(void);
@@ -109,14 +99,6 @@ class CORE_LIB_EXPORT Settings
 		static bool updateChecks(void);
 		static bool containsUpdateChecks(void);
 		static void setUpdateChecks(bool value);
-		// networkEnabled
-		static bool networkEnabled(void);
-		static bool containsNetworkEnabled(void);
-		static void setNetworkEnabled(bool value);
-		// networkMode
-		static int networkMode(void);
-		static bool containsNetworkMode(void);
-		static void setNetworkMode(int value);
 		// lessonPack
 		static QString lessonPack(void);
 		static bool containsLessonPack(void);
@@ -141,14 +123,6 @@ class CORE_LIB_EXPORT Settings
 		static int mistakeChars(void);
 		static bool containsMistakeChars(void);
 		static void setMistakeChars(int value);
-		// serverAddress
-		static QString serverAddress(void);
-		static bool containsServerAddress(void);
-		static void setServerAddress(QString value);
-		// serverPort
-		static uint serverPort(void);
-		static bool containsServerPort(void);
-		static void setServerPort(uint value);
 		// themeFont
 		static QString themeFont(void);
 		static bool containsThemeFont(void);

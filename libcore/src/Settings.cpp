@@ -116,17 +116,6 @@ void Settings::copyTempSettings(void)
 }
 #endif // Q_OS_WASM
 
-// clientDisabled
-
-/*! Getter for main/clientdisabled. */
-bool Settings::clientDisabled(void) { return get("main/clientdisabled", false).toBool(); }
-
-/*! Returns true if there's a main/clientdisabled key. */
-bool Settings::containsClientDisabled(void) { return contains("main/clientdisabled"); }
-
-/*! Setter for main/clientdisabled. */
-void Settings::setClientDisabled(bool value) { set("main/clientdisabled", value); }
-
 // language
 
 /*! Getter for main/language. */
@@ -171,28 +160,6 @@ bool Settings::containsUpdateChecks(void) { return contains("main/updatechecks")
 /*! Setter for main/updatechecks. */
 void Settings::setUpdateChecks(bool value) { set("main/updatechecks", value); }
 
-// networkEnabled
-
-/*! Getter for main/networkEnabled. */
-bool Settings::networkEnabled(void) { return get("main/networkEnabled", false).toBool(); }
-
-/*! Returns true if there's a main/networkEnabled key. */
-bool Settings::containsNetworkEnabled(void) { return contains("main/networkEnabled"); }
-
-/*! Setter for main/networkEnabled. */
-void Settings::setNetworkEnabled(bool value) { set("main/networkEnabled", value); }
-
-// networkMode
-
-/*! Getter for server/mode. */
-int Settings::networkMode(void) { return get("server/mode", 2).toInt(); }
-
-/*! Returns true if there's a server/mode key. */
-bool Settings::containsNetworkMode(void) { return contains("server/mode"); }
-
-/*! Setter for server/mode. */
-void Settings::setNetworkMode(int value) { set("server/mode", value); }
-
 // lessonPack
 
 /*! Getter for main/configfile. */
@@ -226,17 +193,6 @@ bool Settings::containsErrorPenalty(void) { return contains("main/errorpenalty")
 /*! Setter for main/errorpenalty. */
 void Settings::setErrorPenalty(int value) { set("main/errorpenalty", value); }
 
-// serverFullMode
-
-/*! Getter for server/fullmode. */
-bool Settings::serverFullMode(void) { return get("server/fullmode", false).toBool(); }
-
-/*! Returns true if there's a server/fullmode key. */
-bool Settings::containsServerFullMode(void) { return contains("server/fullmode"); }
-
-/*! Setter for server/fullmode. */
-void Settings::setServerFullMode(bool value) { set("server/fullmode", value); }
-
 // mistakeLimit
 
 /*! Getter for main/mistakelimit. */
@@ -258,28 +214,6 @@ bool Settings::containsMistakeChars(void) { return contains("main/mistakechars")
 
 /*! Setter for main/mistakechars. */
 void Settings::setMistakeChars(int value) { set("main/mistakechars", value); }
-
-// serverAddress
-
-/*! Getter for server/address. */
-QString Settings::serverAddress(void) { return get("server/address", "127.0.0.1").toString(); }
-
-/*! Returns true if there's a server/address key. */
-bool Settings::containsServerAddress(void) { return contains("server/address"); }
-
-/*! Setter for server/address. */
-void Settings::setServerAddress(QString value) { set("server/address", value); }
-
-// serverPort
-
-/*! Getter for server/port. */
-uint Settings::serverPort(void) { return get("server/port", 57100).toUInt(); }
-
-/*! Returns true if there's a server/port key. */
-bool Settings::containsServerPort(void) { return contains("server/port"); }
-
-/*! Setter for server/port. */
-void Settings::setServerPort(uint value) { set("server/port", value); }
 
 // themeFont
 
