@@ -107,9 +107,6 @@ int main(int argc, char *argv[])
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();
-	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
-	a.processEvents();
-	loadAddons();
 	AddonApi::initSettingsCategories();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
