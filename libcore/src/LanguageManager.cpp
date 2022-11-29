@@ -70,6 +70,11 @@ void LanguageManager::setLanguage(int index)
 	globalThemeEngine.updateThemeList();
 }
 
+const QStringList& LanguageManager::getBoxItems() const noexcept
+{
+	return boxItems;
+}
+
 const QString LanguageManager::boxLangItemTemplate = QString("%1 (%2)");
 
 const QList<LanguageManager::LanguageCountry> LanguageManager::supportedLanguagesList =

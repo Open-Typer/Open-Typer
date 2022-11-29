@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
 	if(Settings::language() == "")
 		langMgr.setLanguage(-1);
 	else
-		langMgr.setLanguage(langMgr.boxItems.indexOf(Settings::language()) - 1);
+		langMgr.setLanguage(langMgr.getBoxItems().indexOf(Settings::language()) - 1);
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();

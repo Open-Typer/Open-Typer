@@ -60,9 +60,10 @@ class CORE_LIB_EXPORT LanguageManager : public QObject
 		explicit LanguageManager(QObject *parent = nullptr);
 		virtual ~LanguageManager();
 		void setLanguage(int index);
-		QStringList boxItems{};
+		const QStringList& getBoxItems() const noexcept;
 
 	private:
+		QStringList boxItems{};
 		static const QList<LanguageCountry> supportedLanguagesList;
 		static const QString boxLangItemTemplate;
 };
