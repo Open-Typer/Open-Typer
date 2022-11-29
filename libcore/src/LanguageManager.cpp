@@ -28,25 +28,10 @@ QTranslator *translator3 = nullptr;
 LanguageManager::LanguageManager(QObject *parent) :
 	QObject(parent)
 {
-	supportedLanguages.clear();
-	supportedCountries.clear();
-	// Supported languages
-	// de_DE
-	supportedLanguages += QLocale::German;
-	supportedCountries += QLocale::Germany;
-	// en_US
-	supportedLanguages += QLocale::English;
-	supportedCountries += QLocale::UnitedStates;
-	// sk_SK
-	supportedLanguages += QLocale::Slovak;
-	supportedCountries += QLocale::Slovakia;
-	// ru_RU
-	supportedLanguages += QLocale::Russian;
-	supportedCountries += QLocale::Russia;
-	// QStringList for combo boxes and list widgets
-	boxItems.clear();
-	for(int i = 0; i < supportedLanguages.count(); i++)
-		boxItems += QLocale::languageToString(supportedLanguages[i]) + " (" + QLocale::countryToString(supportedCountries[i]) + ")";
+	for (const auto& [lang, country] : supportedLanguagesList)
+	{
+		boxItems += boxLangItemTemplate.arg(QLocale::languageToString(lang), QLocale::countryToString(country));
+	}
 	boxItems.insert(0, tr("System (default)"));
 }
 
@@ -60,7 +45,10 @@ void LanguageManager::setLanguage(int index)
 	if(index < 0)
 		targetLocale = QLocale::system();
 	else
-		targetLocale = QLocale(supportedLanguages[index], supportedCountries[index]);
+	{
+		const auto [lang, country] = supportedLanguagesList.at(index);
+		targetLocale = QLocale(lang, country);
+	}
 	if(!translator1)
 	{
 		translator1 = new QTranslator(qApp);
@@ -81,3 +69,13 @@ void LanguageManager::setLanguage(int index)
 	translator3->load(targetLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qtbase_");
 	globalThemeEngine.updateThemeList();
 }
+
+const QString LanguageManager::boxLangItemTemplate = QString("%1 (%2)");
+
+const QList<LanguageManager::LanguageCountry> LanguageManager::supportedLanguagesList =
+{
+	{ QLocale::German,  QLocale::Germany      },
+	{ QLocale::English, QLocale::UnitedStates },
+	{ QLocale::Slovak,  QLocale::Slovakia     },
+	{ QLocale::Russian, QLocale::Russia       },
+};
