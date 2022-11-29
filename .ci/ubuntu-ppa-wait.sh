@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ### This script waits until the new release is available in the PPA for Ubuntu
+sudo apt install -y python3-launchpadlib
 VERSION=`git describe --tags --abbrev=0`
 VERSION=${VERSION//v}
 echo VERSION=$VERSION
