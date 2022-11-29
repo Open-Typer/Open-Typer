@@ -40,6 +40,9 @@ LanguageManager::LanguageManager(QObject *parent) :
 	// sk_SK
 	supportedLanguages += QLocale::Slovak;
 	supportedCountries += QLocale::Slovakia;
+	// ru_RU
+	supportedLanguages += QLocale::Russian;
+	supportedCountries += QLocale::Russia;
 	// QStringList for combo boxes and list widgets
 	boxItems.clear();
 	for(int i = 0; i < supportedLanguages.count(); i++)
