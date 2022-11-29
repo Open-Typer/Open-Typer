@@ -5,6 +5,8 @@ QT += widgets network websockets charts
 	LIBS += -lssl -lcrypto
 }
 
+CONFIG += c++17
+
 TEMPLATE = lib
 TARGET = opentyper-core
 !win32 {
