@@ -11,7 +11,7 @@ found = False
 records = archive.getBuildRecords(source_name=sys.argv[3])
 for build in records:
 	print(sys.argv[4], build.source_package_version)
-	if sys.argv[4]+"ubuntu3" in build.source_package_version:
+	if sys.argv[4] in build.source_package_version:
 		if "Success" in build.buildstate:
 			found = True
 		else:
