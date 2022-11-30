@@ -12,7 +12,9 @@ build-arch:
 
 %:
 	if [ -d .git ]; then \
-	echo `git describe --tags --abbrev=0` > version; \
-	echo `git rev-parse --short HEAD` > revision; \
+	echo `git describe --tags --abbrev=0` > app/version; \
+	cp app/version libcore/version; \
+	echo `git rev-parse --short HEAD` > app/revision; \
+	cp app/revision libcore/revision; \
 	fi
 	dh $@
