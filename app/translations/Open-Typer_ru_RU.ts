@@ -76,7 +76,7 @@
     <message>
         <location filename="../ui/options/AppearanceOptions.ui" line="502"/>
         <source>Underlined</source>
-        <translation>Подчерктнутый</translation>
+        <translation>Подчеркнутый</translation>
     </message>
     <message>
         <location filename="../ui/options/AppearanceOptions.ui" line="542"/>
@@ -203,7 +203,7 @@
     <message>
         <location filename="../ui/ExerciseSummary.ui" line="14"/>
         <source>Summary</source>
-        <translation>Резултат</translation>
+        <translation>Результат</translation>
     </message>
     <message>
         <location filename="../ui/ExerciseSummary.ui" line="53"/>
@@ -233,7 +233,7 @@
     <message>
         <location filename="../ui/ExerciseSummary.ui" line="139"/>
         <source>Number of net hits per minute:</source>
-        <translation>Количество чистый попаданий в минуту:</translation>
+        <translation>Количество чистых попаданий в минуту:</translation>
     </message>
     <message>
         <location filename="../ui/ExerciseSummary.ui" line="168"/>
@@ -666,7 +666,7 @@
     <message>
         <location filename="../ui/packEditor/PackEditor.ui" line="412"/>
         <source>Repeating:</source>
-        <translation>Повторие:</translation>
+        <translation>Повторение:</translation>
     </message>
     <message>
         <location filename="../ui/packEditor/PackEditor.ui" line="420"/>
@@ -819,7 +819,7 @@
     <message>
         <location filename="../ui/updater/UpdaterQuestion.ui" line="71"/>
         <source>There&apos;s a new update available. Would you like to download and install it?</source>
-        <translation>Доступно новое обновление. Хотите ли Вы скачать и установить его?</translation>
+        <translation>Доступно новое обновление. Хотите скачать и установить его?</translation>
     </message>
 </context>
 </TS>
