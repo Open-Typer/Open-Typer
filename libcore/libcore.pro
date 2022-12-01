@@ -55,7 +55,8 @@ FORMS += \
 
 TRANSLATIONS += \
     translations/libcore_sk_SK.ts \
-    translations/libcore_de_DE.ts
+    translations/libcore_de_DE.ts \
+    translations/libcore_ru_RU.ts
 
 RESOURCES += \
     translations/core-translations.qrc
