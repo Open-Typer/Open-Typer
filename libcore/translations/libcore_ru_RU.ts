@@ -134,7 +134,7 @@
     <message>
         <location filename="../src/ExportDialog.cpp" line="152"/>
         <source>Number of penalty hits</source>
-        <translation>Количество штрафовочных попаданий</translation>
+        <translation>Количество штрафных попаданий</translation>
     </message>
     <message>
         <location filename="../src/ExportDialog.cpp" line="156"/>
