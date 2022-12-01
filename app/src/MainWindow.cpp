@@ -1472,7 +1472,7 @@ void MainWindow::setColors(void)
 		keyBgColor.blue() + (128 - keyBgColor.blue()) / 10);
 	ui->keyboardFrame->setKeyColor(keyBgColor, keyBorderColor);
 	// Update dark theme action
-	ui->actionDarkTheme->setChecked(ThemeEngine::style() == ThemeEngine::DarkStyle);
+	ui->actionDarkTheme->setChecked(ThemeEngine::style() == ThemeEngine::Style::DarkStyle);
 }
 
 /*! Connected from openPackButton.\n

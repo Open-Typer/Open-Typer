@@ -358,10 +358,10 @@ void ThemeEngine::resetPaperColor(void)
 {
 	switch(style())
 	{
-		case DarkStyle:
+		case Style::DarkStyle:
 			setPaperColor(QColor(15, 25, 35));
 			break;
-		case LightStyle:
+		case Style::LightStyle:
 			setPaperColor(QColor(255, 255, 255));
 			break;
 		default:
@@ -407,10 +407,10 @@ void ThemeEngine::resetPanelColor(void)
 {
 	switch(style())
 	{
-		case DarkStyle:
+		case Style::DarkStyle:
 			setPanelColor(QColor(20, 33, 47));
 			break;
-		case LightStyle:
+		case Style::LightStyle:
 			setPanelColor(QColor(255, 255, 255));
 			break;
 		default:
@@ -443,17 +443,17 @@ void ThemeEngine::setStyle(ThemeEngine::Style newStyle)
 	QFile styleFile;
 	switch(newStyle)
 	{
-		case SystemStyle:
+		case Style::SystemStyle:
 			// System (default)
 			qApp->setStyleSheet("");
 			break;
-		case DarkStyle:
+		case Style::DarkStyle:
 			// Dark
 			styleFile.setFileName(":/dark-theme/style.qss");
 			if(styleFile.open(QFile::ReadOnly | QFile::Text))
 				qApp->setStyleSheet(styleFile.readAll());
 			break;
-		case LightStyle:
+		case Style::LightStyle:
 			// Light
 			styleFile.setFileName(":/light-theme/style.qss");
 			if(styleFile.open(QFile::ReadOnly | QFile::Text))
@@ -491,9 +491,9 @@ void ThemeEngine::setTheme(int index)
 		QVariantMap themeMap = themes[index];
 		// Style
 		if(themeMap.contains("style"))
-			setStyle((Style) themeMap["style"].toInt());
+			setStyle(static_cast<Style>(themeMap["style"].toInt()));
 		else
-			setStyle(SystemStyle);
+			setStyle(Style::SystemStyle);
 		// Font
 		QString fontFamily;
 		int fontSize;

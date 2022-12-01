@@ -80,7 +80,7 @@ AppearanceOptions::~AppearanceOptions()
 /*! Initializes widgets and loads settings. */
 void AppearanceOptions::init(void)
 {
-	ui->themeBox->setCurrentIndex((int) (ThemeEngine::style() - 1));
+	ui->themeBox->setCurrentIndex(static_cast<int>(ThemeEngine::style()) - 1);
 	// Colors
 	setColors();
 	// Font

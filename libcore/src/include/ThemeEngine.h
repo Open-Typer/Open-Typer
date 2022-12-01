@@ -47,7 +47,7 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		ThemeEngine(QObject *parent = nullptr);
 		void updateThemeList(void);
 
-		enum Style
+		enum class Style
 		{
 			SystemStyle = 0,
 			DarkStyle = 1,
