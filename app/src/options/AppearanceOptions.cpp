@@ -36,7 +36,7 @@ AppearanceOptions::AppearanceOptions(QWidget *parent) :
 	ui->simpleControls->setVisible(!advancedMode);
 	updateFont();
 	// Load built-in themes
-	QList<QVariantMap> themes = globalThemeEngine.themeList();
+	const auto& themes = globalThemeEngine.themeList();
 	for(int i = 0; i < themes.count(); i++)
 	{
 		QListWidgetItem *item = new QListWidgetItem(QIcon(":res/images/themes/" + themes[i]["icon"].toString()), themes[i]["name"].toString());
@@ -183,7 +183,7 @@ void AppearanceOptions::changeFullTheme(QListWidgetItem *item)
 void AppearanceOptions::selectCurrentFullTheme(void)
 {
 	QString id = Settings::applicationTheme();
-	QList<QVariantMap> themes = globalThemeEngine.themeList();
+	const auto& themes = globalThemeEngine.themeList();
 	for(int i = 0; i < themes.count(); i++)
 	{
 		if(themes[i]["id"] == id)

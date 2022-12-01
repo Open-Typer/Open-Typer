@@ -576,7 +576,7 @@ QString ThemeEngine::themeName(int index)
 }
 
 /*! Returns list of themes. */
-QList<QVariantMap> ThemeEngine::themeList(void)
+const QList<QVariantMap>&  ThemeEngine::themeList(void)
 {
 	return themes;
 }
