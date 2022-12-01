@@ -55,21 +55,21 @@ void ThemeEngine::updateThemeList(void)
 	themeMap.insert("name", tr("Dark"));
 	themeMap.insert("id", "dark");
 	themeMap.insert("icon", "dark.png");
-	themeMap.insert("style", 1);
+	themeMap.insert("style", static_cast<int>(Style::DarkStyle));
 	themes += themeMap;
 	// Light
 	themeMap.clear();
 	themeMap.insert("name", tr("Light"));
 	themeMap.insert("id", "light");
 	themeMap.insert("icon", "light.png");
-	themeMap.insert("style", 2);
+	themeMap.insert("style", static_cast<int>(Style::LightStyle));
 	themes += themeMap;
 	// Green
 	themeMap.clear();
 	themeMap.insert("name", tr("Green"));
 	themeMap.insert("id", "green");
 	themeMap.insert("icon", "green.png");
-	themeMap.insert("style", 2);
+	themeMap.insert("style", static_cast<int>(Style::LightStyle));
 	themeMap.insert("bgColor", qRgb(0, 108, 0));
 	themeMap.insert("panelColor", qRgb(175, 175, 175));
 	themes += themeMap;
@@ -78,7 +78,7 @@ void ThemeEngine::updateThemeList(void)
 	themeMap.insert("name", tr("Light blue"));
 	themeMap.insert("id", "light_blue");
 	themeMap.insert("icon", "light_blue.png");
-	themeMap.insert("style", 2);
+	themeMap.insert("style", static_cast<int>(Style::LightStyle));
 	themeMap.insert("bgColor", qRgb(228, 245, 255));
 	themeMap.insert("panelColor", qRgb(180, 229, 255));
 	themes += themeMap;
