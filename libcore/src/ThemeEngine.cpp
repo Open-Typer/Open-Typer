@@ -440,7 +440,6 @@ ThemeEngine::Style ThemeEngine::style(void)
 /*! Sets application style. */
 void ThemeEngine::setStyle(ThemeEngine::Style newStyle)
 {
-	QFile styleFile;
 	switch(newStyle)
 	{
 		case Style::SystemStyle:
@@ -449,15 +448,11 @@ void ThemeEngine::setStyle(ThemeEngine::Style newStyle)
 			break;
 		case Style::DarkStyle:
 			// Dark
-			styleFile.setFileName(":/dark-theme/style.qss");
-			if(styleFile.open(QFile::ReadOnly | QFile::Text))
-				qApp->setStyleSheet(styleFile.readAll());
+			applyStyleSheetFromFile(":/dark-theme/style.qss");
 			break;
 		case Style::LightStyle:
 			// Light
-			styleFile.setFileName(":/light-theme/style.qss");
-			if(styleFile.open(QFile::ReadOnly | QFile::Text))
-				qApp->setStyleSheet(styleFile.readAll());
+			applyStyleSheetFromFile(":/light-theme/style.qss");
 			break;
 	}
 	Settings::setApplicationStyle(newStyle);
@@ -564,6 +559,14 @@ void ThemeEngine::setTheme(int index)
 	blockSignals(false);
 	if(themeName(index) != "custom")
 		emit themeChanged();
+}
+
+void ThemeEngine::applyStyleSheetFromFile(const QString& stylePath)
+{
+	QFile styleFile;
+	styleFile.setFileName(stylePath);
+	if(styleFile.open(QFile::ReadOnly | QFile::Text))
+		qApp->setStyleSheet(styleFile.readAll());
 }
 
 /*! Returns the name of the theme. */

@@ -111,6 +111,9 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		QList<QVariantMap> themeList(void);
 
 	private:
+		void applyStyleSheetFromFile(const QString& stylePath);
+
+	private:
 		QList<QVariantMap> themes;
 
 	signals:
