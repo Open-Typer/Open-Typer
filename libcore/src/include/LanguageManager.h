@@ -54,16 +54,16 @@ extern QTranslator *translator3;
 class CORE_LIB_EXPORT LanguageManager : public QObject
 {
 		Q_OBJECT
-	using LanguageCountry = std::pair<QLocale::Language, QLocale::Country>;
+		using LanguageCountry = std::pair<QLocale::Language, QLocale::Country>;
 
 	public:
 		explicit LanguageManager(QObject *parent = nullptr);
 		virtual ~LanguageManager();
 		void setLanguage(int index);
-		const QStringList& getBoxItems() const noexcept;
+		const QStringList &getBoxItems() const noexcept;
 
 	private:
-		QStringList boxItems{};
+		QStringList boxItems {};
 		static const QList<LanguageCountry> supportedLanguagesList;
 		static const QString boxLangItemTemplate;
 };

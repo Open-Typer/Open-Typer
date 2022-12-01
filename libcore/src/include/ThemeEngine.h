@@ -108,10 +108,10 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		int theme(void);
 		void setTheme(int index);
 		QString themeName(int index);
-		const QList<QVariantMap>& themeList(void);
+		const QList<QVariantMap> &themeList(void);
 
 	private:
-		void applyStyleSheetFromFile(const QString& stylePath);
+		void applyStyleSheetFromFile(const QString &stylePath);
 
 	private:
 		QList<QVariantMap> themes;

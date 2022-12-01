@@ -561,7 +561,7 @@ void ThemeEngine::setTheme(int index)
 		emit themeChanged();
 }
 
-void ThemeEngine::applyStyleSheetFromFile(const QString& stylePath)
+void ThemeEngine::applyStyleSheetFromFile(const QString &stylePath)
 {
 	QFile styleFile;
 	styleFile.setFileName(stylePath);
@@ -576,7 +576,7 @@ QString ThemeEngine::themeName(int index)
 }
 
 /*! Returns list of themes. */
-const QList<QVariantMap>&  ThemeEngine::themeList(void)
+const QList<QVariantMap> &ThemeEngine::themeList(void)
 {
 	return themes;
 }

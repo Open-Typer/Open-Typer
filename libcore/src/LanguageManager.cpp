@@ -28,7 +28,7 @@ QTranslator *translator3 = nullptr;
 LanguageManager::LanguageManager(QObject *parent) :
 	QObject(parent)
 {
-	for (const auto& [lang, country] : supportedLanguagesList)
+	for(const auto &[lang, country] : supportedLanguagesList)
 	{
 		boxItems += boxLangItemTemplate.arg(QLocale::languageToString(lang), QLocale::countryToString(country));
 	}
@@ -70,17 +70,16 @@ void LanguageManager::setLanguage(int index)
 	globalThemeEngine.updateThemeList();
 }
 
-const QStringList& LanguageManager::getBoxItems() const noexcept
+const QStringList &LanguageManager::getBoxItems() const noexcept
 {
 	return boxItems;
 }
 
 const QString LanguageManager::boxLangItemTemplate = QString("%1 (%2)");
 
-const QList<LanguageManager::LanguageCountry> LanguageManager::supportedLanguagesList =
-{
-	{ QLocale::German,  QLocale::Germany      },
+const QList<LanguageManager::LanguageCountry> LanguageManager::supportedLanguagesList = {
+	{ QLocale::German, QLocale::Germany },
 	{ QLocale::English, QLocale::UnitedStates },
-	{ QLocale::Slovak,  QLocale::Slovakia     },
-	{ QLocale::Russian, QLocale::Russia       },
+	{ QLocale::Slovak, QLocale::Slovakia },
+	{ QLocale::Russian, QLocale::Russia },
 };
