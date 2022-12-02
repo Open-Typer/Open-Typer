@@ -123,13 +123,13 @@ void AppearanceOptions::setSimpleTheme(SimpleTheme theme)
 /*! Loads selected simple theme. */
 void AppearanceOptions::updateSimpleTheme(void)
 {
-	int simpleTheme = Settings::simpleThemeId(); // 0 for light, 1 for dark
-	if((simpleTheme == 0) && (globalThemeEngine.theme() != 4)) // default theme for "light" - light blue
+	SimpleTheme simpleTheme = static_cast<SimpleTheme>(Settings::simpleThemeId());
+	if((simpleTheme == SimpleTheme::Light) && (globalThemeEngine.theme() != 4)) // default theme for "light" - light blue
 		setSimpleTheme(SimpleTheme::Undefined);
-	if((simpleTheme == 1) && (globalThemeEngine.theme() != 1)) // default theme for "dark" - dark
+	if((simpleTheme == SimpleTheme::Dark) && (globalThemeEngine.theme() != 1)) // default theme for "dark" - dark
 		setSimpleTheme(SimpleTheme::Undefined);
-	ui->lightThemeButton->setChecked(simpleTheme == 0);
-	ui->darkThemeButton->setChecked(simpleTheme == 1);
+	ui->lightThemeButton->setChecked(simpleTheme == SimpleTheme::Light);
+	ui->darkThemeButton->setChecked(simpleTheme == SimpleTheme::Dark);
 }
 
 /*!
