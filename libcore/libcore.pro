@@ -5,6 +5,8 @@ QT += widgets network websockets charts
 	LIBS += -lssl -lcrypto
 }
 
+CONFIG += c++17
+
 TEMPLATE = lib
 TARGET = opentyper-core
 !win32 {
@@ -55,7 +57,8 @@ FORMS += \
 
 TRANSLATIONS += \
     translations/libcore_sk_SK.ts \
-    translations/libcore_de_DE.ts
+    translations/libcore_de_DE.ts \
+    translations/libcore_ru_RU.ts
 
 RESOURCES += \
     translations/core-translations.qrc

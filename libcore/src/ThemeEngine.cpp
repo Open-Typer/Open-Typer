@@ -55,21 +55,21 @@ void ThemeEngine::updateThemeList(void)
 	themeMap.insert("name", tr("Dark"));
 	themeMap.insert("id", "dark");
 	themeMap.insert("icon", "dark.png");
-	themeMap.insert("style", 1);
+	themeMap.insert("style", static_cast<int>(Style::DarkStyle));
 	themes += themeMap;
 	// Light
 	themeMap.clear();
 	themeMap.insert("name", tr("Light"));
 	themeMap.insert("id", "light");
 	themeMap.insert("icon", "light.png");
-	themeMap.insert("style", 2);
+	themeMap.insert("style", static_cast<int>(Style::LightStyle));
 	themes += themeMap;
 	// Green
 	themeMap.clear();
 	themeMap.insert("name", tr("Green"));
 	themeMap.insert("id", "green");
 	themeMap.insert("icon", "green.png");
-	themeMap.insert("style", 2);
+	themeMap.insert("style", static_cast<int>(Style::LightStyle));
 	themeMap.insert("bgColor", qRgb(0, 108, 0));
 	themeMap.insert("panelColor", qRgb(175, 175, 175));
 	themes += themeMap;
@@ -78,7 +78,7 @@ void ThemeEngine::updateThemeList(void)
 	themeMap.insert("name", tr("Light blue"));
 	themeMap.insert("id", "light_blue");
 	themeMap.insert("icon", "light_blue.png");
-	themeMap.insert("style", 2);
+	themeMap.insert("style", static_cast<int>(Style::LightStyle));
 	themeMap.insert("bgColor", qRgb(228, 245, 255));
 	themeMap.insert("panelColor", qRgb(180, 229, 255));
 	themes += themeMap;
@@ -358,10 +358,10 @@ void ThemeEngine::resetPaperColor(void)
 {
 	switch(style())
 	{
-		case DarkStyle:
+		case Style::DarkStyle:
 			setPaperColor(QColor(15, 25, 35));
 			break;
-		case LightStyle:
+		case Style::LightStyle:
 			setPaperColor(QColor(255, 255, 255));
 			break;
 		default:
@@ -407,10 +407,10 @@ void ThemeEngine::resetPanelColor(void)
 {
 	switch(style())
 	{
-		case DarkStyle:
+		case Style::DarkStyle:
 			setPanelColor(QColor(20, 33, 47));
 			break;
-		case LightStyle:
+		case Style::LightStyle:
 			setPanelColor(QColor(255, 255, 255));
 			break;
 		default:
@@ -440,24 +440,19 @@ ThemeEngine::Style ThemeEngine::style(void)
 /*! Sets application style. */
 void ThemeEngine::setStyle(ThemeEngine::Style newStyle)
 {
-	QFile styleFile;
 	switch(newStyle)
 	{
-		case SystemStyle:
+		case Style::SystemStyle:
 			// System (default)
 			qApp->setStyleSheet("");
 			break;
-		case DarkStyle:
+		case Style::DarkStyle:
 			// Dark
-			styleFile.setFileName(":/dark-theme/style.qss");
-			if(styleFile.open(QFile::ReadOnly | QFile::Text))
-				qApp->setStyleSheet(styleFile.readAll());
+			applyStyleSheetFromFile(":/dark-theme/style.qss");
 			break;
-		case LightStyle:
+		case Style::LightStyle:
 			// Light
-			styleFile.setFileName(":/light-theme/style.qss");
-			if(styleFile.open(QFile::ReadOnly | QFile::Text))
-				qApp->setStyleSheet(styleFile.readAll());
+			applyStyleSheetFromFile(":/light-theme/style.qss");
 			break;
 	}
 	Settings::setApplicationStyle(newStyle);
@@ -491,9 +486,9 @@ void ThemeEngine::setTheme(int index)
 		QVariantMap themeMap = themes[index];
 		// Style
 		if(themeMap.contains("style"))
-			setStyle((Style) themeMap["style"].toInt());
+			setStyle(static_cast<Style>(themeMap["style"].toInt()));
 		else
-			setStyle(SystemStyle);
+			setStyle(Style::SystemStyle);
 		// Font
 		QString fontFamily;
 		int fontSize;
@@ -566,6 +561,14 @@ void ThemeEngine::setTheme(int index)
 		emit themeChanged();
 }
 
+void ThemeEngine::applyStyleSheetFromFile(const QString &stylePath)
+{
+	QFile styleFile;
+	styleFile.setFileName(stylePath);
+	if(styleFile.open(QFile::ReadOnly | QFile::Text))
+		qApp->setStyleSheet(styleFile.readAll());
+}
+
 /*! Returns the name of the theme. */
 QString ThemeEngine::themeName(int index)
 {
@@ -573,7 +576,7 @@ QString ThemeEngine::themeName(int index)
 }
 
 /*! Returns list of themes. */
-QList<QVariantMap> ThemeEngine::themeList(void)
+const QList<QVariantMap> &ThemeEngine::themeList(void)
 {
 	return themes;
 }
