@@ -54,20 +54,20 @@ AppearanceOptions::AppearanceOptions(QWidget *parent) :
 	connect(ui->darkThemeButton, &QPushButton::clicked, this, [this](bool checked) {
 		setSimpleTheme(checked ? 1 : 0);
 	});
-	connect(ui->themeList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(changeFullTheme(QListWidgetItem *)));
-	connect(ui->themeList, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changeFullTheme(QListWidgetItem *)));
-	connect(ui->backButton, SIGNAL(clicked()), this, SLOT(goBack()));
-	connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), this, SLOT(changeFont(QFont)));
-	connect(ui->fontSizeBox, SIGNAL(valueChanged(int)), this, SLOT(changeFontSize(int)));
-	connect(ui->boldTextBox, SIGNAL(clicked()), this, SLOT(setBoldText()));
-	connect(ui->italicTextBox, SIGNAL(clicked()), this, SLOT(setItalicText()));
-	connect(ui->underlineTextBox, SIGNAL(clicked()), this, SLOT(setUnderlineText()));
-	connect(ui->levelTextColorButton, SIGNAL(clicked()), this, SLOT(changeLevelTextColor()));
-	connect(ui->inputTextColorButton, SIGNAL(clicked()), this, SLOT(changeInputTextColor()));
-	connect(ui->bgColorButton, SIGNAL(clicked()), this, SLOT(changeBgColor()));
-	connect(ui->paperColorButton, SIGNAL(clicked()), this, SLOT(changePaperColor()));
-	connect(ui->panelColorButton, SIGNAL(clicked()), this, SLOT(changePanelColor()));
-	connect(ui->themeBox, SIGNAL(activated(int)), this, SLOT(changeTheme(int)));
+	connect(ui->themeList, &QListWidget::itemClicked, this, &AppearanceOptions::changeFullTheme);
+	connect(ui->themeList, &QListWidget::currentItemChanged, this, &AppearanceOptions::changeFullTheme);
+	connect(ui->backButton, &QPushButton::clicked, this, &AppearanceOptions::goBack);
+	connect(ui->fontComboBox, &QFontComboBox::currentFontChanged, this, &AppearanceOptions::changeFont);
+	connect(ui->fontSizeBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &AppearanceOptions::changeFontSize);
+	connect(ui->boldTextBox, &QCheckBox::clicked, this, &AppearanceOptions::setBoldText);
+	connect(ui->italicTextBox, &QCheckBox::clicked, this, &AppearanceOptions::setItalicText);
+	connect(ui->underlineTextBox, &QCheckBox::clicked, this, &AppearanceOptions::setUnderlineText);
+	connect(ui->levelTextColorButton, &QPushButton::clicked, this, &AppearanceOptions::changeLevelTextColor);
+	connect(ui->inputTextColorButton, &QPushButton::clicked, this, &AppearanceOptions::changeInputTextColor);
+	connect(ui->bgColorButton, &QPushButton::clicked, this, &AppearanceOptions::changeBgColor);
+	connect(ui->paperColorButton, &QPushButton::clicked, this, &AppearanceOptions::changePaperColor);
+	connect(ui->panelColorButton, &QPushButton::clicked, this, &AppearanceOptions::changePanelColor);
+	connect(ui->themeBox, QOverload<int>::of(&QComboBox::activated), this, &AppearanceOptions::changeTheme);
 	// Set up simple themes
 	updateSimpleTheme();
 }
