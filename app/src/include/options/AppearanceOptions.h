@@ -49,6 +49,7 @@ class AppearanceOptions : public QWidget
 		~AppearanceOptions();
 		void init(void);
 		void hideModeSelector(void);
+		void setSimpleTheme(int theme);
 
 	private:
 		Ui::AppearanceOptions *ui;
@@ -57,9 +58,6 @@ class AppearanceOptions : public QWidget
 		void selectCurrentFullTheme(void);
 		void updateFont(void);
 		void setColors();
-
-	public slots:
-		void setSimpleTheme(int theme);
 
 	private slots:
 		void changeThemeMode(bool advanced);
