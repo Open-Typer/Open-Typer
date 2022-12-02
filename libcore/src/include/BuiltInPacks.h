@@ -31,9 +31,8 @@
 #include <QString>
 
 /*! \brief The BuiltInPacks class provides functions for built-in pack settings. */
-class CORE_LIB_EXPORT BuiltInPacks : public QObject
+class CORE_LIB_EXPORT BuiltInPacks
 {
-		Q_OBJECT
 	public:
 		static QString packName(QString rawName);
 };
