@@ -30,7 +30,7 @@ AppearanceOptions::AppearanceOptions(QWidget *parent) :
 	ui->setupUi(this);
 	ui->themeCustomizationFrame->hide();
 	ui->themesFrame->show();
-	bool advancedMode = Settings::advancedTheme();
+	const bool advancedMode = Settings::advancedTheme();
 	ui->simpleModeButton->setChecked(!advancedMode);
 	ui->advancedModeButton->setChecked(advancedMode);
 	ui->advancedControls->setVisible(advancedMode);
