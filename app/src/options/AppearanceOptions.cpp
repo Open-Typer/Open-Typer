@@ -49,10 +49,10 @@ AppearanceOptions::AppearanceOptions(QWidget *parent) :
 	// Connections
 	connect(ui->advancedModeButton, &QPushButton::toggled, this, &AppearanceOptions::changeThemeMode);
 	connect(ui->lightThemeButton, &QPushButton::clicked, this, [this](bool checked) {
-		setSimpleTheme(checked ? 0 : 1);
+		setSimpleTheme(checked ? SimpleTheme::Light : SimpleTheme::Dark);
 	});
 	connect(ui->darkThemeButton, &QPushButton::clicked, this, [this](bool checked) {
-		setSimpleTheme(checked ? 1 : 0);
+		setSimpleTheme(checked ? SimpleTheme::Dark : SimpleTheme::Light);
 	});
 	connect(ui->themeList, &QListWidget::itemClicked, this, &AppearanceOptions::changeFullTheme);
 	connect(ui->themeList, &QListWidget::currentItemChanged, this, &AppearanceOptions::changeFullTheme);
@@ -103,14 +103,14 @@ void AppearanceOptions::changeThemeMode(bool advanced)
 }
 
 /*! Sets simple theme (0 for light, 1 for dark). */
-void AppearanceOptions::setSimpleTheme(int theme)
+void AppearanceOptions::setSimpleTheme(SimpleTheme theme)
 {
-	Settings::setSimpleThemeId(theme);
-	ui->lightThemeButton->setChecked(theme == 0);
-	ui->darkThemeButton->setChecked(theme == 1);
-	if(theme == 0)
+	Settings::setSimpleThemeId(static_cast<int>(theme));
+	ui->lightThemeButton->setChecked(theme == SimpleTheme::Light);
+	ui->darkThemeButton->setChecked(theme == SimpleTheme::Dark);
+	if(theme == SimpleTheme::Light)
 		ui->themeList->setCurrentRow(4); // light blue
-	else if(theme == 1)
+	else if(theme == SimpleTheme::Dark)
 		ui->themeList->setCurrentRow(1); // dark
 }
 
@@ -119,9 +119,9 @@ void AppearanceOptions::updateSimpleTheme(void)
 {
 	int simpleTheme = Settings::simpleThemeId(); // 0 for light, 1 for dark
 	if((simpleTheme == 0) && (globalThemeEngine.theme() != 4)) // default theme for "light" - light blue
-		setSimpleTheme(-1);
+		setSimpleTheme(SimpleTheme::Undefined);
 	if((simpleTheme == 1) && (globalThemeEngine.theme() != 1)) // default theme for "dark" - dark
-		setSimpleTheme(-1);
+		setSimpleTheme(SimpleTheme::Undefined);
 	ui->lightThemeButton->setChecked(simpleTheme == 0);
 	ui->darkThemeButton->setChecked(simpleTheme == 1);
 }

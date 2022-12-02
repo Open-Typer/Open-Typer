@@ -45,11 +45,19 @@ class AppearanceOptions : public QWidget
 {
 		Q_OBJECT
 	public:
+		enum class SimpleTheme
+		{
+			Undefined = -1,
+			Light = 0,
+			Dark = 1
+		};
+
+	public:
 		Q_INVOKABLE AppearanceOptions(QWidget *parent = nullptr);
 		~AppearanceOptions();
 		void init(void);
 		void hideModeSelector(void);
-		void setSimpleTheme(int theme);
+		void setSimpleTheme(SimpleTheme theme);
 
 	private:
 		Ui::AppearanceOptions *ui;
