@@ -1,7 +1,7 @@
-QT += widgets network websockets charts
+QT += widgets charts
 
 !wasm {
-	QT += sql printsupport
+	QT += printsupport
 	LIBS += -lssl -lcrypto
 }
 
