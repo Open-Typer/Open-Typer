@@ -46,7 +46,7 @@ jobs:
         host: 'windows'
         arch: 'win64_mingw'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts qtwebsockets'
+        modules: 'qtcharts'
     - if: contains(matrix.os, 'windows')
       name: Install MinGW
       uses: Open-Typer/setup-mingw@master
