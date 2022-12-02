@@ -20,6 +20,7 @@
  */
 
 #include "BuiltInPacks.h"
+#include <QObject>
 #include <map>
 
 namespace {

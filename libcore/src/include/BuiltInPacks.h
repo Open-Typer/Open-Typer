@@ -28,7 +28,6 @@
 #define CORE_LIB_EXPORT Q_DECL_IMPORT
 #endif
 
-#include <QObject>
 #include <QString>
 
 /*! \brief The BuiltInPacks class provides functions for built-in pack settings. */
