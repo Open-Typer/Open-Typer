@@ -56,7 +56,7 @@ OptionsWindow::OptionsWindow(QWidget *parent) :
 /*! Sets up list of categories. */
 void OptionsWindow::setupList(void)
 {
-	int oldIndex = ui->list->currentRow();
+	const int oldIndex = ui->list->currentRow();
 	ui->list->clear();
 	ui->list->setIconSize(QSize(36, 36));
 	// Register category classes
