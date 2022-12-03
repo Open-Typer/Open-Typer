@@ -22,13 +22,7 @@
 #define APPEARANCEOPTIONS_H
 
 #include <QWidget>
-#include <QFile>
-#include <QTextStream>
-#include <QPropertyAnimation>
-#include <QColorDialog>
-#include "options/OptionsWindow.h"
-#include "StringUtils.h"
-#include "ThemeEngine.h"
+#include <QListWidgetItem>
 
 namespace Ui {
 	class AppearanceOptions;
