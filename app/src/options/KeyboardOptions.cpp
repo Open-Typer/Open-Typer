@@ -21,6 +21,10 @@
 #include "options/KeyboardOptions.h"
 #include "ui_KeyboardOptions.h"
 
+#include <QDirIterator>
+#include "BuiltInPacks.h"
+#include "Settings.h"
+
 /*! Constructs KeyboardOptions object. */
 KeyboardOptions::KeyboardOptions(QWidget *parent) :
 	QWidget(parent),

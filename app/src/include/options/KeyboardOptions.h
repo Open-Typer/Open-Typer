@@ -23,10 +23,6 @@
 
 #include <QWidget>
 #include <QListWidget>
-#include <QDirIterator>
-#include "options/OptionsWindow.h"
-#include "StringUtils.h"
-#include "BuiltInPacks.h"
 
 namespace Ui {
 	class KeyboardOptions;
