@@ -22,6 +22,14 @@
 #include "options/OptionsWindow.h"
 #include "ui_OptionsWindow.h"
 
+#include "AddonApi.h"
+#include "options/BehaviorOptions.h"
+#include "options/KeyboardOptions.h"
+#include "options/AppearanceOptions.h"
+#include "widgets/LanguageList.h"
+
+#include <QPushButton>
+
 /*! Constructs OptionsWindow. */
 OptionsWindow::OptionsWindow(QWidget *parent) :
 	QDialog(parent),
