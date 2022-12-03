@@ -23,6 +23,8 @@
 #include "options/OptionsWindow.h"
 #include "ui_OptionsWindow.h"
 
+#include <QInputDialog>
+#include <QCryptographicHash>
 #include <QPushButton>
 #include "AddonApi.h"
 #include "options/BehaviorOptions.h"
