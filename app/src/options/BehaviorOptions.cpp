@@ -21,6 +21,11 @@
 #include "options/BehaviorOptions.h"
 #include "ui_BehaviorOptions.h"
 
+#include <QInputDialog>
+#include <QCryptographicHash>
+#include <QMessageBox>
+#include "Settings.h"
+
 /*! Constructs BehaviorOptions. */
 BehaviorOptions::BehaviorOptions(QWidget *parent) :
 	QWidget(parent),

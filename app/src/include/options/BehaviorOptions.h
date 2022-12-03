@@ -22,10 +22,6 @@
 #define BEHAVIOROPTIONS_H
 
 #include <QWidget>
-#include <QInputDialog>
-#include <QCryptographicHash>
-#include <QMessageBox>
-#include "StringUtils.h"
 
 namespace Ui {
 	class BehaviorOptions;
