@@ -88,12 +88,12 @@ MainWindow::MainWindow(QWidget *parent) :
 		if(checked)
 		{
 			globalThemeEngine.setTheme(1);
-			Settings::setSimpleThemeId(1);
+			Settings::setSimpleThemeId(static_cast<int>(AppearanceOptions::SimpleTheme::Dark));
 		}
 		else
 		{
 			globalThemeEngine.setTheme(4);
-			Settings::setSimpleThemeId(0);
+			Settings::setSimpleThemeId(static_cast<int>(AppearanceOptions::SimpleTheme::Light));
 		}
 	});
 	// Tools menu
