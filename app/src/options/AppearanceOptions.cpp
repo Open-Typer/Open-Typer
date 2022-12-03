@@ -22,11 +22,10 @@
 #include "options/AppearanceOptions.h"
 #include "ui_AppearanceOptions.h"
 
-#include "Settings.h"
-#include "ThemeEngine.h"
-
 #include <QColorDialog>
 #include <QPropertyAnimation>
+#include "Settings.h"
+#include "ThemeEngine.h"
 
 /*! Constructs AppearanceOptions. */
 AppearanceOptions::AppearanceOptions(QWidget *parent) :
