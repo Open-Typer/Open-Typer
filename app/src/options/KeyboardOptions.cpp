@@ -34,15 +34,12 @@ KeyboardOptions::KeyboardOptions(QWidget *parent) :
 	ui->setupUi(this);
 	// Load packs
 	QDirIterator it(":/res/configs/", QDirIterator::NoIteratorFlags);
-	int i;
-	QString item, current;
 	QStringList items;
-	rawItems.clear();
 	while(it.hasNext())
 	{
-		item = it.next();
-		current = "";
-		for(i = 14; i < item.count(); i++)
+		const QString item = it.next();
+		QString current;
+		for(int i = 14; i < item.count(); i++)
 			current += item[i];
 		rawItems += current;
 		items += BuiltInPacks::packName(current);
