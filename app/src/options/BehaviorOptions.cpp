@@ -37,7 +37,7 @@ BehaviorOptions::BehaviorOptions(QWidget *parent) :
 	// Error penalty
 	ui->errorPenaltyBox->setValue(Settings::errorPenalty());
 	// Mistake limit
-	bool mistakeLimit = Settings::mistakeLimit();
+	const bool mistakeLimit = Settings::mistakeLimit();
 	ui->mistakeLimitCheckBox->setChecked(mistakeLimit);
 	ui->mistakeCharsBox->setEnabled(mistakeLimit);
 	ui->mistakeCharsBox->setValue(Settings::mistakeChars());
