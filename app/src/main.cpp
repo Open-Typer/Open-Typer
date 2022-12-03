@@ -21,6 +21,8 @@
 
 #include <QApplication>
 #include <QSettings>
+#include <QSplashScreen>
+#include <QPluginLoader>
 #include "MainWindow.h"
 #include "Settings.h"
 #include "LanguageManager.h"
