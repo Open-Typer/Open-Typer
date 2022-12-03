@@ -44,7 +44,6 @@ void loadAddons(QString path)
 	const QStringList entries = pluginsDir.entryList(QDir::Files);
 	for(const QString &fileName : entries)
 	{
-		QFileInfo fileInfo(fileName);
 		QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
 		QObject *plugin = pluginLoader.instance();
 		if(plugin)
