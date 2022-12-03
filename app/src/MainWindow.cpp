@@ -22,6 +22,21 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include "InitialSetup.h"
+#include "widgets/InputLabelWidget.h"
+#include "updater/Updater.h"
+#include "packEditor/PackEditor.h"
+#include "options/OptionsWindow.h"
+#include "ExerciseSummary.h"
+#include "TimeDialog.h"
+#include "StatsDialog.h"
+#include "ExportDialog.h"
+#include "HistoryParser.h"
+#include "KeyboardUtils.h"
+#include "BuiltInPacks.h"
+#include "Settings.h"
+#include "LoadExerciseDialog.h"
+
 typedef QPair<QString, int> CharacterRecord; // needed for converting to QVariant
 Q_DECLARE_METATYPE(CharacterRecord);
 

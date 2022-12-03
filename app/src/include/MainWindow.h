@@ -30,25 +30,11 @@
 #include <QFileDialog>
 #include <QTextCursor>
 #include <QTranslator>
+#include <QFrame>
 #include "AddonApi.h"
-#include "InitialSetup.h"
-#include "widgets/InputLabelWidget.h"
-#include "widgets/LanguageList.h"
-#include "updater/Updater.h"
 #include "updater/UpdaterQuestion.h"
-#include "packEditor/PackEditor.h"
-#include "options/OptionsWindow.h"
-#include "ExerciseSummary.h"
-#include "TimeDialog.h"
-#include "StatsDialog.h"
-#include "ExportDialog.h"
 #include "ConfigParser.h"
-#include "HistoryParser.h"
-#include "KeyboardUtils.h"
-#include "BuiltInPacks.h"
 #include "ThemeEngine.h"
-#include "Settings.h"
-#include "LoadExerciseDialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
