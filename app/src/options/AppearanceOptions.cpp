@@ -113,15 +113,16 @@ void AppearanceOptions::setSimpleTheme(SimpleTheme theme)
 	Settings::setSimpleThemeId(static_cast<int>(theme));
 	ui->lightThemeButton->setChecked(theme == SimpleTheme::Light);
 	ui->darkThemeButton->setChecked(theme == SimpleTheme::Dark);
-	switch (theme) {
-	case SimpleTheme::Light:
-		ui->themeList->setCurrentRow(4); // light blue
-		break;
-	case SimpleTheme::Dark:
-		ui->themeList->setCurrentRow(1); // dark
-		break;
-	default:
-		break;
+	switch(theme)
+	{
+		case SimpleTheme::Light:
+			ui->themeList->setCurrentRow(4); // light blue
+			break;
+		case SimpleTheme::Dark:
+			ui->themeList->setCurrentRow(1); // dark
+			break;
+		default:
+			break;
 	}
 }
 
