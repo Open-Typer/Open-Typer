@@ -39,10 +39,10 @@ namespace {
 }
 
 /*! Returns human-readable name of the built-in pack. */
-const QString& BuiltInPacks::packName(QString rawName)
+const QString &BuiltInPacks::packName(QString rawName)
 {
-	if (const auto fullName = rawNameToFullName.find(rawName);
-			fullName == rawNameToFullName.end())
+	if(const auto fullName = rawNameToFullName.find(rawName);
+		fullName == rawNameToFullName.end())
 	{
 		static const QString unknownPackName = QObject::tr("Unknown pack");
 		return unknownPackName;

@@ -34,7 +34,7 @@
 class CORE_LIB_EXPORT BuiltInPacks
 {
 	public:
-		static const QString& packName(QString rawName);
+		static const QString &packName(QString rawName);
 };
 
 #endif // BUILTINPACKS_H
