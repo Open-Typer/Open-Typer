@@ -52,7 +52,7 @@ KeyboardOptions::KeyboardOptions(QWidget *parent) :
 	if(!Settings::customLessonPack())
 		ui->packList->setCurrentItem(ui->packList->item(rawItems.indexOf(Settings::lessonPack())));
 	// Connections
-	connect(ui->packList, SIGNAL(currentRowChanged(int)), this, SLOT(changePack(int)));
+	connect(ui->packList, &QListWidget::currentRowChanged, this, &KeyboardOptions::changePack);
 }
 
 /*! Destroys the KeyboardOptions object. */
