@@ -49,7 +49,7 @@ OptionsWindow::OptionsWindow(QWidget *parent) :
 	ui->buttonBox->button(QDialogButtonBox::Close)->setFocusPolicy(Qt::NoFocus);
 	// Connections
 	connect(ui->unlockSettingsButton, &QPushButton::clicked, this, &OptionsWindow::unlockSettings);
-	connect(ui->list, SIGNAL(currentRowChanged(int)), this, SLOT(changeOptionWidget(int)));
+	connect(ui->list, &QListWidget::currentRowChanged, this, &OptionsWindow::changeOptionWidget);
 	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &OptionsWindow::accept);
 }
 
