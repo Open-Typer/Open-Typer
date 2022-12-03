@@ -118,27 +118,27 @@ MainWindow::MainWindow(QWidget *parent) :
 		QMessageBox::aboutQt(this);
 	});
 	// Widgets
-	connect(ui->inputLabel, SIGNAL(keyPressed(QKeyEvent *)), this, SLOT(keyPress(QKeyEvent *)));
-	connect(ui->inputLabel, SIGNAL(keyReleased(QKeyEvent *)), this, SLOT(keyRelease(QKeyEvent *)));
-	connect(ui->optionsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
+	connect(ui->inputLabel, &InputLabelWidget::keyPressed, this, &MainWindow::keyPress);
+	connect(ui->inputLabel, &InputLabelWidget::keyReleased, this, &MainWindow::keyRelease);
+	connect(ui->optionsButton, &QPushButton::clicked, this, &MainWindow::openOptions);
 	connect(ui->openButton, &QPushButton::clicked, this, &MainWindow::openExerciseFromFile);
-	connect(ui->repeatButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
+	connect(ui->repeatButton, &QPushButton::clicked, this, &MainWindow::repeatLevel);
 	connect(ui->closeCustomExButton, &QPushButton::clicked, this, [this]() {
 		customLevelLoaded = false;
 		repeatLevel();
 	});
-	connect(ui->nextButton, SIGNAL(clicked()), this, SLOT(nextLevel()));
-	connect(ui->previousButton, SIGNAL(clicked()), this, SLOT(previousLevel()));
-	connect(ui->lessonSelectionList, SIGNAL(activated(int)), this, SLOT(lessonSelectionListIndexChanged(int)));
-	connect(ui->sublessonSelectionList, SIGNAL(activated(int)), this, SLOT(sublessonSelectionListIndexChanged(int)));
-	connect(ui->levelSelectionList, SIGNAL(activated(int)), this, SLOT(levelSelectionListIndexChanged(int)));
+	connect(ui->nextButton, &QPushButton::clicked, this, &MainWindow::nextLevel);
+	connect(ui->previousButton, &QPushButton::clicked, this, &MainWindow::previousLevel);
+	connect(ui->lessonSelectionList, QOverload<int>::of(&QComboBox::activated), this, &MainWindow::lessonSelectionListIndexChanged);
+	connect(ui->sublessonSelectionList, QOverload<int>::of(&QComboBox::activated), this, &MainWindow::sublessonSelectionListIndexChanged);
+	connect(ui->levelSelectionList, QOverload<int>::of(&QComboBox::activated), this, &MainWindow::levelSelectionListIndexChanged);
 	connect(ui->errorWordsButton, &QPushButton::clicked, this, &MainWindow::loadErrorWords);
 	connect(ui->reversedTextButton, &QPushButton::clicked, this, &MainWindow::loadReversedText);
-	connect(ui->zoomInButton, SIGNAL(clicked()), this, SLOT(zoomIn()));
-	connect(ui->zoomOutButton, SIGNAL(clicked()), this, SLOT(zoomOut()));
-	connect(ui->timedExerciseButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
+	connect(ui->zoomInButton, &QPushButton::clicked, this, &MainWindow::zoomIn);
+	connect(ui->zoomOutButton, &QPushButton::clicked, this, &MainWindow::zoomOut);
+	connect(ui->timedExerciseButton, &QPushButton::clicked, this, &MainWindow::initTimedExercise);
 	connect(ui->stopTimedExButton, &QPushButton::clicked, ui->timedExerciseButton, &QPushButton::clicked);
-	connect(ui->statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
+	connect(ui->statsButton, &QPushButton::clicked, this, &MainWindow::showExerciseStats);
 	connect(ui->printButton, &QPushButton::clicked, this, &MainWindow::printText);
 	connect(ui->exportButton, &QPushButton::clicked, this, &MainWindow::exportText);
 	connect(ui->testButton, &QPushButton::clicked, this, &MainWindow::startTest);
@@ -177,7 +177,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	loadTheme();
 	// Start timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
-	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
+	connect(secLoop, &QTimer::timeout, this, &MainWindow::updateCurrentTime);
 	connect(&timedExTimer, &QTimer::timeout, this, &MainWindow::updateCurrentTime);
 	secLoop->start(500);
 #ifdef Q_OS_WASM
