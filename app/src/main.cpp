@@ -23,6 +23,7 @@
 #include <QSettings>
 #include <QSplashScreen>
 #include <QPluginLoader>
+#include <QProcessEnvironment>
 #include "MainWindow.h"
 #include "Settings.h"
 #include "LanguageManager.h"
