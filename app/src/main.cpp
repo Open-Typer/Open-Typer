@@ -21,6 +21,7 @@
 
 #include <QApplication>
 #include <QSettings>
+#include <QQuickStyle>
 #include "MainWindow.h"
 #include "Settings.h"
 #include "LanguageManager.h"
@@ -114,8 +115,11 @@ int main(int argc, char *argv[])
 	AddonApi::initSettingsCategories();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
+	// Set icon theme
+	QIcon::setThemeName("open-typer");
 	// Set icon
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
+	QQuickStyle::setStyle("Material");
 	MainWindow w;
 	// Main window will get shown by itself
 	splash.finish(&w);
