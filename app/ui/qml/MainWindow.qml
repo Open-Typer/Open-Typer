@@ -63,18 +63,9 @@ Item {
 					icon.name: "right"
 					toolTipText: qsTr("Next exercise")
 				}
-				CustomComboBox {
-					objectName: "lessonBox"
-					model: ["Lesson 1 {fjdk}", "Lesson 2 {aô}", "Lesson 3 {sl}"]
-				}
-				CustomComboBox {
-					objectName: "sublessonBox"
-					model: ["Touch", "Words", "Sentences", "Text"]
-				}
-				CustomComboBox {
-					objectName: "exerciseBox"
-					model: ["Exercise 1", "Exercise 2", "Exercise 3"]
-				}
+				CustomComboBox { objectName: "lessonBox" }
+				CustomComboBox { objectName: "sublessonBox" }
+				CustomComboBox { objectName: "exerciseBox" }
 			}
 		}
 	}
