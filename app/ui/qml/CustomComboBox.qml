@@ -20,8 +20,8 @@ ComboBox {
 	}
 	popup.implicitWidth: computeWidth(model)
 	function computeWidth(mdl) {
-		if (mdl === null)
-			return;
+		if (mdl === null || mdl === undefined)
+			return 100; // width of an empty combo box
 		var longest = "";
 		for (var i = 0; i < mdl.length; i++) {
 			var txt = mdl[i];
