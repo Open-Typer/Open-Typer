@@ -14,7 +14,7 @@ parts:
     source: .
     source-type: local
     build-packages: [build-essential, qtbase5-dev, qtchooser, qt5-qmake, qtbase5-dev-tools, qttools5-dev-tools, qtdeclarative5-dev, qtquickcontrols2-5-dev, libssl-dev, libqt5charts5-dev]
-    stage-packages: [libqt5gui5, libqt5widgets5, libqt5x11extras5, libqt5quick5, libqt5quickwidgets5, libqt5quickcontrols2-5, qtwayland5, libqt5waylandclient5, libqt5charts5, libqt5printsupport5, libqt5svg5, qml-module-qtquick-controls2]
+    stage-packages: [libqt5gui5, libqt5widgets5, libqt5x11extras5, libqt5quick5, libqt5quickwidgets5, libqt5quickcontrols2-5, qtwayland5, libqt5waylandclient5, libqt5charts5, libqt5printsupport5, libqt5svg5, qml-module-qtquick-controls2, qml-module-qtquick-layouts]
     override-pull: |
       craftctl default
       git config --global --add safe.directory /root/parts/open-typer/src
