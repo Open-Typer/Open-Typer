@@ -34,6 +34,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
+	ui->qmlContent->setAttribute(Qt::WA_TranslucentBackground);
+	ui->qmlContent->setAttribute(Qt::WA_AlwaysStackOnTop);
+	ui->qmlContent->setClearColor(Qt::transparent);
 	QGridLayout *inputLabelLayout = new QGridLayout(ui->inputLabel);
 	ui->mistakeLabel->setHorizontalAdjust(false);
 	ui->mistakeLabel->setParent(ui->inputLabel);
