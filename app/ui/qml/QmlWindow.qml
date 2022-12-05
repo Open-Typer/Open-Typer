@@ -10,6 +10,7 @@ Item {
 	height: mainLayout.height
 	visible: true
 	id: root
+
 	ColumnLayout {
 		id: mainLayout
 		width: parent.width

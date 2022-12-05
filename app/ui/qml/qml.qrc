@@ -1,9 +1,9 @@
 <RCC>
     <qresource prefix="/qml">
-        <file>MainWindow.qml</file>
         <file>HoverToolTip.qml</file>
         <file>CustomToolButton.qml</file>
         <file>Panel.qml</file>
         <file>CustomComboBox.qml</file>
+        <file>QmlWindow.qml</file>
     </qresource>
 </RCC>
