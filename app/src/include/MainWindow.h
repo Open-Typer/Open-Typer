@@ -30,6 +30,7 @@
 #include <QFileDialog>
 #include <QTextCursor>
 #include <QTranslator>
+#include <QQuickItem>
 #include "InitialSetup.h"
 #include "widgets/InputLabelWidget.h"
 #include "widgets/LanguageList.h"
@@ -116,6 +117,9 @@ class MainWindow : public QMainWindow
 		bool firstRun = false;
 		bool uiLocked = false;
 		QPointer<UpdaterQuestion> updateQuestion = nullptr;
+		// UI components
+		QQuickItem *rootObject;
+		QObject *lessonBox, *sublessonBox, *exerciseBox; // exercise combo boxes
 
 	protected:
 		void changeEvent(QEvent *event);

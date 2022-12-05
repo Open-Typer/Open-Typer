@@ -37,6 +37,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->qmlContent->setAttribute(Qt::WA_TranslucentBackground);
 	ui->qmlContent->setAttribute(Qt::WA_AlwaysStackOnTop);
 	ui->qmlContent->setClearColor(Qt::transparent);
+	rootObject = ui->qmlContent->rootObject();
+	lessonBox = rootObject->findChild<QObject *>("lessonBox");
+	sublessonBox = rootObject->findChild<QObject *>("sublessonBox");
+	exerciseBox = rootObject->findChild<QObject *>("exerciseBox");
 	QGridLayout *inputLabelLayout = new QGridLayout(ui->inputLabel);
 	ui->mistakeLabel->setHorizontalAdjust(false);
 	ui->mistakeLabel->setParent(ui->inputLabel);
