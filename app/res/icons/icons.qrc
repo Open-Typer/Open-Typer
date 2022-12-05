@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/icons/open-typer/32x32">
+        <file>settings.svg</file>
+        <file>open.svg</file>
+        <file>print.svg</file>
+        <file>paper.svg</file>
+        <file>left.svg</file>
+        <file>right.svg</file>
+        <file>repeat.svg</file>
+        <file>stats.svg</file>
+        <file>time.svg</file>
+        <file>close.svg</file>
+        <file>rewind.svg</file>
+    </qresource>
+    <qresource prefix="/icons/open-typer">
+        <file>index.theme</file>
+    </qresource>
+</RCC>
