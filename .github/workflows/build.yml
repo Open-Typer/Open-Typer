@@ -85,7 +85,7 @@ jobs:
         move ${{ env.executable_name }}.exe release/
         move *.dll release/
         cd release
-        windeployqt ${{ env.executable_name }}.exe || exit 5
+        windeployqt ${{ env.executable_name }}.exe --qmldir $PWD/app/ui/qml || exit 5
         windeployqt opentyper-core.dll || exit 5
       shell: cmd
     - if: contains(matrix.os, 'windows')
