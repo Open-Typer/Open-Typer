@@ -122,9 +122,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	});
 	connect(ui->nextButton, SIGNAL(clicked()), this, SLOT(nextLevel()));
 	connect(ui->previousButton, SIGNAL(clicked()), this, SLOT(previousLevel()));
-	connect(ui->lessonSelectionList, SIGNAL(activated(int)), this, SLOT(lessonSelectionListIndexChanged(int)));
-	connect(ui->sublessonSelectionList, SIGNAL(activated(int)), this, SLOT(sublessonSelectionListIndexChanged(int)));
-	connect(ui->levelSelectionList, SIGNAL(activated(int)), this, SLOT(levelSelectionListIndexChanged(int)));
+	connect(lessonBox, SIGNAL(activated(int)), this, SLOT(selectLesson(int)));
+	connect(sublessonBox, SIGNAL(activated(int)), this, SLOT(selectSublesson(int)));
+	connect(exerciseBox, SIGNAL(activated(int)), this, SLOT(selectExercise(int)));
 	connect(ui->errorWordsButton, &QPushButton::clicked, this, &MainWindow::loadErrorWords);
 	connect(ui->reversedTextButton, &QPushButton::clicked, this, &MainWindow::loadReversedText);
 	connect(ui->zoomInButton, SIGNAL(clicked()), this, SLOT(zoomIn()));
@@ -754,10 +754,8 @@ void MainWindow::openOptions(void)
 	});
 }
 
-/*! Connected from lessonSelectionList.\n
- * Selects the lesson selected in lessonSelectionList.
- */
-void MainWindow::lessonSelectionListIndexChanged(int index)
+/*! Selects the given lesson. */
+void MainWindow::selectLesson(int index)
 {
 	currentLesson = index + 1;
 	currentSublesson = 1;
@@ -766,10 +764,8 @@ void MainWindow::lessonSelectionListIndexChanged(int index)
 	repeatLevel();
 }
 
-/*! Connected from sublessonSelectionList.\n
- * Selects the sublesson selected in sublessonSelectionList.
- */
-void MainWindow::sublessonSelectionListIndexChanged(int index)
+/*! Selects the given sublesson. */
+void MainWindow::selectSublesson(int index)
 {
 	currentSublesson = index + 1;
 	currentLevel = 1;
@@ -777,10 +773,8 @@ void MainWindow::sublessonSelectionListIndexChanged(int index)
 	repeatLevel();
 }
 
-/*! Connected from levelSelectionList.\n
- * Selects the exercise selected in levelSelectionList.
- */
-void MainWindow::levelSelectionListIndexChanged(int index)
+/*! Selects the given exercise. */
+void MainWindow::selectExercise(int index)
 {
 	currentLevel = index + 1;
 	customLevelLoaded = false;

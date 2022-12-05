@@ -136,9 +136,9 @@ class MainWindow : public QMainWindow
 		void nextLevel(void);
 		void previousLevel(void);
 		void updateCurrentTime(void);
-		void lessonSelectionListIndexChanged(int index);
-		void sublessonSelectionListIndexChanged(int index);
-		void levelSelectionListIndexChanged(int index);
+		void selectLesson(int index);
+		void selectSublesson(int index);
+		void selectExercise(int index);
 		void openExerciseFromFile(void);
 		void zoomIn(void);
 		void zoomOut(void);
