@@ -77,6 +77,12 @@ Item {
 				CustomComboBox { objectName: "lessonBox" }
 				CustomComboBox { objectName: "sublessonBox" }
 				CustomComboBox { objectName: "exerciseBox" }
+				ToolSeparator {}
+				CustomToolButton {
+					objectName: "statsButton"
+					icon.name: "stats"
+					text: qsTr("Exercise history")
+				}
 			}
 		}
 	}
