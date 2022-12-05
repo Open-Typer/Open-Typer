@@ -41,6 +41,17 @@ MainWindow::MainWindow(QWidget *parent) :
 	lessonBox = rootObject->findChild<QObject *>("lessonBox");
 	sublessonBox = rootObject->findChild<QObject *>("sublessonBox");
 	exerciseBox = rootObject->findChild<QObject *>("exerciseBox");
+	settingsButton = rootObject->findChild<QObject *>("settingsButton");
+	openButton = rootObject->findChild<QObject *>("openButton");
+	printButton = rootObject->findChild<QObject *>("printButton");
+	typingTestButton = rootObject->findChild<QObject *>("typingTestButton");
+	timedExButton = rootObject->findChild<QObject *>("timedExButton");
+	errorWordsButton = rootObject->findChild<QObject *>("errorWordsButton");
+	reverseTextButton = rootObject->findChild<QObject *>("reverseTextButton");
+	repeatExButton = rootObject->findChild<QObject *>("repeatExButton");
+	previousExButton = rootObject->findChild<QObject *>("previousExButton");
+	nextExButton = rootObject->findChild<QObject *>("nextExButton");
+	statsButton = rootObject->findChild<QObject *>("statsButton");
 	QGridLayout *inputLabelLayout = new QGridLayout(ui->inputLabel);
 	ui->mistakeLabel->setHorizontalAdjust(false);
 	ui->mistakeLabel->setParent(ui->inputLabel);
@@ -71,7 +82,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->actionOpenText, &QAction::triggered, this, &MainWindow::openExerciseFromFile);
 	connect(ui->actionOpenPack, &QAction::triggered, this, &MainWindow::openPack);
 	connect(ui->actionNewPack, &QAction::triggered, this, &MainWindow::openEditor);
-	connect(ui->actionPrint, &QAction::triggered, ui->printButton, &QPushButton::clicked);
+	connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::printText);
 	// View menu
 	connect(ui->actionViewNavigation, &QAction::toggled, ui->navigationFrame, &QWidget::setVisible);
 	connect(ui->actionViewExOptions, &QAction::toggled, ui->exerciseOptionsFrame, &QWidget::setVisible);
@@ -90,12 +101,12 @@ MainWindow::MainWindow(QWidget *parent) :
 		}
 	});
 	// Tools menu
-	connect(ui->actionTypingTest, &QAction::triggered, ui->testButton, &QPushButton::clicked);
+	connect(ui->actionTypingTest, &QAction::triggered, this, &MainWindow::startTest);
 	// Exercise menu
-	connect(ui->actionStats, &QAction::triggered, ui->statsButton, &QPushButton::clicked);
-	connect(ui->actionTimedEx, &QAction::triggered, ui->timedExerciseButton, &QPushButton::clicked);
-	connect(ui->actionErrorWords, &QAction::triggered, ui->errorWordsButton, &QPushButton::clicked);
-	connect(ui->actionReverseText, &QAction::triggered, ui->reversedTextButton, &QPushButton::clicked);
+	connect(ui->actionStats, &QAction::triggered, this, &MainWindow::showExerciseStats);
+	connect(ui->actionTimedEx, &QAction::triggered, this, &MainWindow::initTimedExercise);
+	connect(ui->actionErrorWords, &QAction::triggered, this, &MainWindow::loadErrorWords);
+	connect(ui->actionReverseText, &QAction::triggered, this, &MainWindow::loadReversedText);
 	connect(ui->actionCorrectMistakes, &QAction::toggled, ui->correctMistakesCheckBox, &QCheckBox::setChecked);
 	connect(ui->correctMistakesCheckBox, &QCheckBox::toggled, ui->actionCorrectMistakes, &QAction::setChecked);
 	connect(ui->actionHideText, &QAction::toggled, ui->hideTextCheckBox, &QCheckBox::setChecked);
@@ -113,28 +124,28 @@ MainWindow::MainWindow(QWidget *parent) :
 	// Widgets
 	connect(ui->inputLabel, SIGNAL(keyPressed(QKeyEvent *)), this, SLOT(keyPress(QKeyEvent *)));
 	connect(ui->inputLabel, SIGNAL(keyReleased(QKeyEvent *)), this, SLOT(keyRelease(QKeyEvent *)));
-	connect(ui->optionsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
-	connect(ui->openButton, &QPushButton::clicked, this, &MainWindow::openExerciseFromFile);
-	connect(ui->repeatButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
+	connect(settingsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
+	connect(openButton, SIGNAL(clicked()), this, SLOT(openExerciseFromFile()));
+	connect(repeatExButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
 	connect(ui->closeCustomExButton, &QPushButton::clicked, this, [this]() {
 		customLevelLoaded = false;
 		repeatLevel();
 	});
-	connect(ui->nextButton, SIGNAL(clicked()), this, SLOT(nextLevel()));
-	connect(ui->previousButton, SIGNAL(clicked()), this, SLOT(previousLevel()));
+	connect(nextExButton, SIGNAL(clicked()), this, SLOT(nextLevel()));
+	connect(previousExButton, SIGNAL(clicked()), this, SLOT(previousLevel()));
 	connect(lessonBox, SIGNAL(activated(int)), this, SLOT(selectLesson(int)));
 	connect(sublessonBox, SIGNAL(activated(int)), this, SLOT(selectSublesson(int)));
 	connect(exerciseBox, SIGNAL(activated(int)), this, SLOT(selectExercise(int)));
-	connect(ui->errorWordsButton, &QPushButton::clicked, this, &MainWindow::loadErrorWords);
-	connect(ui->reversedTextButton, &QPushButton::clicked, this, &MainWindow::loadReversedText);
+	connect(errorWordsButton, SIGNAL(clicked()), this, SLOT(loadErrorWords()));
+	connect(reverseTextButton, SIGNAL(clicked()), this, SLOT(loadReversedText()));
 	connect(ui->zoomInButton, SIGNAL(clicked()), this, SLOT(zoomIn()));
 	connect(ui->zoomOutButton, SIGNAL(clicked()), this, SLOT(zoomOut()));
-	connect(ui->timedExerciseButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
-	connect(ui->stopTimedExButton, &QPushButton::clicked, ui->timedExerciseButton, &QPushButton::clicked);
-	connect(ui->statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
-	connect(ui->printButton, &QPushButton::clicked, this, &MainWindow::printText);
+	connect(timedExButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
+	connect(ui->stopTimedExButton, &QPushButton::clicked, this, &MainWindow::initTimedExercise);
+	connect(statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
+	connect(printButton, SIGNAL(clicked()), this, SLOT(printText()));
 	connect(ui->exportButton, &QPushButton::clicked, this, &MainWindow::exportText);
-	connect(ui->testButton, &QPushButton::clicked, this, &MainWindow::startTest);
+	connect(typingTestButton, SIGNAL(clicked()), this, SLOT(startTest()));
 	connect(ui->hideTextCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
 		ui->currentLineArea->setVisible(!checked);
 		ui->textSeparationLine->setVisible(!checked);
@@ -174,7 +185,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(&timedExTimer, &QTimer::timeout, this, &MainWindow::updateCurrentTime);
 	secLoop->start(500);
 #ifdef Q_OS_WASM
-	ui->printButton->hide();
+	printButton->setProperty("visible", false);
 	ui->actionPrint->setEnabled(false);
 #else
 	// Check for updates
@@ -618,7 +629,7 @@ void MainWindow::levelFinalInit(void)
 	updateText();
 	// Enable/disable stats
 	bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
-	ui->statsButton->setEnabled(enableStats);
+	statsButton->setProperty("enabled", enableStats);
 	ui->actionStats->setEnabled(enableStats);
 	AddonApi::sendEvent(IAddon::Event_ExerciseFinalInit);
 }
@@ -678,7 +689,7 @@ void MainWindow::updateText(void)
 	blockInput = false;
 }
 
-/*! Connected from repeatButton.\n
+/*!
  * Resets currently selected exercise.
  * \see startLevel
  */
@@ -687,7 +698,7 @@ void MainWindow::repeatLevel(void)
 	startLevel(currentLesson, currentSublesson, currentLevel);
 }
 
-/*! Connected from nextButton.\n
+/*!
  * Selects the next exercise.
  * \see repeatLevel
  */
@@ -713,10 +724,10 @@ void MainWindow::nextLevel(void)
 	repeatLevel();
 }
 
-/*! Connected from previousButton.\n
-	 * Selects the previous exercise.
-	 * \see repeatLevel
-	 */
+/*! 
+ * Selects the previous exercise.
+ * \see repeatLevel
+ */
 void MainWindow::previousLevel(void)
 {
 	customLevelLoaded = false;
@@ -739,9 +750,7 @@ void MainWindow::previousLevel(void)
 	repeatLevel();
 }
 
-/*! Connected from optionsButton.\n
- * Opens options window.
- */
+/*! Opens options window. */
 void MainWindow::openOptions(void)
 {
 	OptionsWindow *optionsWin = new OptionsWindow(this);
@@ -1590,11 +1599,10 @@ void MainWindow::changeMode(int mode)
 	AddonApi::sendEvent(IAddon::Event_ChangeMode);
 }
 
-/*! Connected from timedExerciseButton.\n
- * Switches to timed exercise mode.
- */
+/*! Switches to timed exercise mode. */
 void MainWindow::initTimedExercise(void)
 {
+	// TODO: Implement timed exercises with QML tool bar
 	if(currentMode == 1)
 	{
 		// Switch back to default mode
@@ -1626,7 +1634,6 @@ void MainWindow::initTimedExercise(void)
 }
 
 /*!
- * Connected from statsButton->clicked().\n
  * Opens StatsDialog.
  *
  * \see StatsDialog

@@ -109,8 +109,6 @@ class MainWindow : public QMainWindow
 		void loadText(QByteArray text, bool includeNewLines = false);
 		void endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes);
 		QStringList errorWords;
-		void loadErrorWords(void);
-		void loadReversedText(void);
 		void exportText(void);
 		bool preview = false, testLoaded = false, correctMistakesOld = true, hideTextOld = false;
 		QByteArray oldGeometry;
@@ -120,6 +118,9 @@ class MainWindow : public QMainWindow
 		// UI components
 		QQuickItem *rootObject;
 		QObject *lessonBox, *sublessonBox, *exerciseBox; // exercise combo boxes
+		QObject *settingsButton, *openButton, *printButton;
+		QObject *typingTestButton, *timedExButton, *errorWordsButton, *reverseTextButton;
+		QObject *repeatExButton, *previousExButton, *nextExButton, *statsButton;
 
 	protected:
 		void changeEvent(QEvent *event);
@@ -148,6 +149,8 @@ class MainWindow : public QMainWindow
 		void printText(void);
 		void openEditor(void);
 		void startTest(void);
+		void loadErrorWords(void);
+		void loadReversedText(void);
 		void showAboutDialog(void);
 		void changeMode(int mode);
 };
