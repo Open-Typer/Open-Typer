@@ -416,7 +416,7 @@ void MainWindow::refreshAll(void)
 	else
 	{
 		updateLessonList();
-		ui->lessonSelectionList->setCurrentIndex(currentLesson - 1);
+		lessonBox->setProperty("currentIndex", currentLesson - 1);
 	}
 	AddonApi::sendEvent(IAddon::Event_RefreshApp);
 }
@@ -455,7 +455,7 @@ QString MainWindow::loadConfig(QString configName, QByteArray packContent)
 	}
 	else
 		parser.loadToBuffer(packContent);
-	// Update lessonSelectionList widget
+	// Update lessonBox
 	updateLessonList();
 	if(customConfig)
 		configName = configPath;
@@ -483,7 +483,7 @@ QString MainWindow::loadConfig(QString configName, QByteArray packContent)
 void MainWindow::startLevel(int lessonID, int sublessonID, int levelID)
 {
 	// Update selected lesson
-	ui->lessonSelectionList->setCurrentIndex(lessonID - 1);
+	lessonBox->setProperty("currentIndex", lessonID - 1);
 	// Get sublesson count
 	sublessonCount = parser.sublessonCount(lessonID);
 	// Check if -1 (last sublesson in current lesson) was passed
@@ -524,7 +524,7 @@ void MainWindow::startLevel(int lessonID, int sublessonID, int levelID)
 /*! Updates list of lessons. */
 void MainWindow::updateLessonList(void)
 {
-	ui->lessonSelectionList->clear();
+	lessonBox->setProperty("model", {});
 	QStringList lessons;
 	QString _lessonDesc;
 	int i, count = parser.lessonCount();
@@ -536,14 +536,14 @@ void MainWindow::updateLessonList(void)
 		else
 			lessons += ConfigParser::lessonTr(i) + " " + _lessonDesc;
 	}
-	ui->lessonSelectionList->addItems(lessons);
+	lessonBox->setProperty("model", lessons);
 }
 
 /*! Updates list of sublessons. */
 void MainWindow::loadLesson(int lessonID, int sublessonID)
 {
 	// Sublessons
-	ui->sublessonSelectionList->clear();
+	sublessonBox->setProperty("model", {});
 	QStringList sublessons;
 	sublessonListStart = 0;
 	int i, i2 = 0;
@@ -558,20 +558,20 @@ void MainWindow::loadLesson(int lessonID, int sublessonID)
 				sublessonListStart++;
 		}
 	}
-	ui->sublessonSelectionList->addItems(sublessons);
-	ui->sublessonSelectionList->setCurrentIndex(sublessonID - 1);
+	sublessonBox->setProperty("model", sublessons);
+	sublessonBox->setProperty("currentIndex", sublessonID - 1);
 }
 
 /*! Updates list of exercises. */
 void MainWindow::loadSublesson(int levelID)
 {
 	// Exercises
-	ui->levelSelectionList->clear();
+	exerciseBox->setProperty("model", {});
 	QStringList levels;
 	for(int i = 1; i <= levelCount; i++)
 		levels += ConfigParser::exerciseTr(i);
-	ui->levelSelectionList->addItems(levels);
-	ui->levelSelectionList->setCurrentIndex(levelID - 1);
+	exerciseBox->setProperty("model", levels);
+	exerciseBox->setProperty("currentIndex", levelID - 1);
 }
 
 /*!
@@ -1546,7 +1546,7 @@ void MainWindow::changeEvent(QEvent *event)
 		globalThemeEngine.updateThemeList();
 		localThemeEngine.updateStyle();
 		updateLessonList();
-		ui->lessonSelectionList->setCurrentIndex(currentLesson - 1);
+		lessonBox->setProperty("currentIndex", currentLesson - 1);
 		loadLesson(currentLesson, currentSublesson);
 		loadSublesson(currentLevel);
 	}
