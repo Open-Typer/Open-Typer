@@ -1,7 +1,7 @@
 TARGET = open-typer
 DESTDIR = $$_PRO_FILE_PWD_/..
 
-QT += core gui charts
+QT += core gui quick quickcontrols2 quickwidgets charts
 QTPLUGIN += qsvg
 !wasm {
     QT += printsupport
@@ -94,6 +94,13 @@ FORMS += \
     ui/packEditor/PackSelector.ui \
     ui/updater/UpdaterQuestion.ui
 
+DISTFILES += \
+    ui/qml/CustomComboBox.qml \
+    ui/qml/CustomToolButton.qml \
+    ui/qml/MainWindow.qml \
+    ui/qml/HoverToolTip.qml \
+    ui/qml/Panel.qml
+
 TRANSLATIONS += \
     translations/Open-Typer_sk_SK.ts \
     translations/Open-Typer_de_DE.ts \
@@ -104,7 +111,8 @@ RESOURCES += \
     res/icons/icons.qrc \
     res/images/class-icons/class-icons.qrc \
     res/keyboard-layouts/layouts.qrc \
-    translations/translations.qrc
+    translations/translations.qrc \
+    ui/qml/qml.qrc
 
 RESOURCES += \
     dark-theme/dark-style.qrc \
