@@ -46,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	remainingTextAreaLayout->setAlignment(ui->keyboardFrame, Qt::AlignHCenter | Qt::AlignBottom);
 	ui->levelCurrentLineLabel->toggleScrolling(false);
 	ui->levelLabel->toggleScrolling(false);
+	ui->controlFrame->hide();
 	localThemeEngine.setParent(this);
 	oldConfigName = "";
 	errorWords.clear();
