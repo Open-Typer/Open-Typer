@@ -65,6 +65,11 @@ Item {
 					toolTipText: qsTr("Repeat exercise")
 				}
 				CustomToolButton {
+					objectName: "closeLoadedExButton"
+					icon.name: "close"
+					toolTipText: qsTr("Close loaded exercise")
+				}
+				CustomToolButton {
 					objectName: "previousExButton"
 					icon.name: "left"
 					toolTipText: qsTr("Previous exercise")
