@@ -113,7 +113,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->actionHideText, &QAction::toggled, ui->hideTextCheckBox, &QCheckBox::setChecked);
 	connect(ui->hideTextCheckBox, &QCheckBox::toggled, ui->actionHideText, &QAction::setChecked);
 	// Settings menu
-	connect(ui->actionPreferences, &QAction::triggered, ui->optionsButton, &QPushButton::clicked);
+	connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::openOptions);
 	// Help menu
 	connect(ui->actionDocs, &QAction::triggered, this, []() {
 		QDesktopServices::openUrl(QUrl("https://open-typer.github.io/docs"));
