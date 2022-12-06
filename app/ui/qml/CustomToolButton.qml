@@ -9,6 +9,6 @@ Button {
 	signal clicked()
 	font.capitalization: Font.MixedCase
 	Material.background: Qt.rgba(0, 0, 0, 0)
-	onPressed: clicked()
+	onReleased: clicked()
 	HoverToolTip { text: toolTipText }
 }
