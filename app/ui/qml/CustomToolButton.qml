@@ -9,6 +9,8 @@ Button {
 	signal clicked()
 	font.capitalization: Font.MixedCase
 	Material.background: Qt.rgba(0, 0, 0, 0)
+	Material.foreground: Material.theme === Material.Dark ? "white" : "black"
+	icon.color: Material.theme === Material.Dark ? "white" : "black"
 	onReleased: clicked()
 	HoverToolTip { text: toolTipText }
 }
