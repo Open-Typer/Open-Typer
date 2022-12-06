@@ -121,6 +121,7 @@ class MainWindow : public QMainWindow
 		QObject *settingsButton, *openButton, *printButton;
 		QObject *typingTestButton, *timedExButton, *errorWordsButton, *reverseTextButton;
 		QObject *repeatExButton, *previousExButton, *nextExButton, *statsButton;
+		QObject *closeLoadedExButton;
 
 	protected:
 		void changeEvent(QEvent *event);
@@ -141,6 +142,7 @@ class MainWindow : public QMainWindow
 		void selectSublesson(int index);
 		void selectExercise(int index);
 		void openExerciseFromFile(void);
+		void closeLoadedExercise(void);
 		void zoomIn(void);
 		void zoomOut(void);
 		void initTimedExercise(void);

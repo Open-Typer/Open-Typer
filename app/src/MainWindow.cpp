@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	previousExButton = rootObject->findChild<QObject *>("previousExButton");
 	nextExButton = rootObject->findChild<QObject *>("nextExButton");
 	statsButton = rootObject->findChild<QObject *>("statsButton");
+	closeLoadedExButton = rootObject->findChild<QObject *>("closeLoadedExButton");
 	QGridLayout *inputLabelLayout = new QGridLayout(ui->inputLabel);
 	ui->mistakeLabel->setHorizontalAdjust(false);
 	ui->mistakeLabel->setParent(ui->inputLabel);
@@ -127,10 +128,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(settingsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
 	connect(openButton, SIGNAL(clicked()), this, SLOT(openExerciseFromFile()));
 	connect(repeatExButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
-	connect(ui->closeCustomExButton, &QPushButton::clicked, this, [this]() {
-		customLevelLoaded = false;
-		repeatLevel();
-	});
+	connect(closeLoadedExButton, SIGNAL(clicked()), this, SLOT(closeLoadedExercise()));
 	connect(nextExButton, SIGNAL(clicked()), this, SLOT(nextLevel()));
 	connect(previousExButton, SIGNAL(clicked()), this, SLOT(previousLevel()));
 	connect(lessonBox, SIGNAL(activated(int)), this, SLOT(selectLesson(int)));
@@ -619,7 +617,7 @@ void MainWindow::levelFinalInit(void)
 	ui->mistakeLabel->setHtml(mistakeLabelHtml);
 	ui->currentTimeNumber->setText("0");
 	ui->currentMistakesNumber->setText("0");
-	ui->closeCustomExButton->setVisible(customLevelLoaded);
+	closeLoadedExButton->setProperty("visible", customLevelLoaded);
 	// Init level input
 	input = "";
 	inputTextHtml = "";
@@ -790,9 +788,7 @@ void MainWindow::selectExercise(int index)
 	repeatLevel();
 }
 
-/*! Connected from openExerciseButton.\n
- * Shows a file dialog and opens a custom exercise.
- */
+/*! Shows a file dialog and opens a custom exercise. */
 void MainWindow::openExerciseFromFile(void)
 {
 	auto fileContentReady = [this](const QString &fileName, const QByteArray &fileContent) {
@@ -823,6 +819,13 @@ void MainWindow::openExerciseFromFile(void)
 			fileContentReady(fileName, file.readAll());
 	}
 #endif
+}
+
+/*! Closes custom exercise. */
+void MainWindow::closeLoadedExercise(void)
+{
+	customLevelLoaded = false;
+	repeatLevel();
 }
 
 /*! Loads custom text. */
