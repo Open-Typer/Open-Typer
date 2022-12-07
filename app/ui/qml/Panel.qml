@@ -5,8 +5,19 @@ import QtQuick.Layouts 1.3
 ToolBar {
 	property alias control: loader.sourceComponent
 	padding: 0
+	function getPanelColor() {
+		background.color = themeEngine.panelColor();
+		return background.color;
+	}
+	Connections {
+		target: themeEngine
+		function onColorChanged() { getPanelColor(); }
+		function onStyleChanged() { getPanelColor(); }
+		function onThemeChanged() { getPanelColor(); }
+	}
+
 	background: Rectangle {
-		color: "#14212f" // TODO: Use panel color from ThemeEngine
+		color: getPanelColor();
 		radius: 5
 	}
 	RowLayout {
