@@ -19,6 +19,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QQmlContext>
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
@@ -37,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->qmlContent->setAttribute(Qt::WA_TranslucentBackground);
 	ui->qmlContent->setAttribute(Qt::WA_AlwaysStackOnTop);
 	ui->qmlContent->setClearColor(Qt::transparent);
+	ui->qmlContent->rootContext()->setContextProperty("themeEngine", &globalThemeEngine);
+	ui->qmlContent->setSource(QUrl("qrc:/qml/QmlWindow.qml"));
 	rootObject = ui->qmlContent->rootObject();
 	lessonBox = rootObject->findChild<QObject *>("lessonBox");
 	sublessonBox = rootObject->findChild<QObject *>("sublessonBox");

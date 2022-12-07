@@ -41,11 +41,6 @@
       <property name="resizeMode">
        <enum>QQuickWidget::SizeRootObjectToView</enum>
       </property>
-      <property name="source">
-       <url>
-        <string>qrc:/qml/QmlWindow.qml</string>
-       </url>
-      </property>
      </widget>
     </item>
     <item>
