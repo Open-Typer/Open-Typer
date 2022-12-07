@@ -54,62 +54,63 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 			DarkStyle = 1,
 			LightStyle = 2
 		};
+		Q_ENUM(Style)
 
 		// Font
-		static QFont font(void);
-		void setFont(QFont newFont);
-		static QFont errorFont(void);
-		static QString fontFamily(void);
-		void setFontFamily(QString family);
-		static int fontSize(void);
-		void setFontSize(int size);
-		void increaseFontSize(int delta);
-		static int maxFontSize(void);
-		static bool fontBold(void);
-		void setFontBold(bool value);
-		static bool fontItalic(void);
-		void setFontItalic(bool value);
-		static bool fontUnderline(void);
-		void setFontUnderline(bool value);
+		Q_INVOKABLE static QFont font(void);
+		Q_INVOKABLE void setFont(QFont newFont);
+		Q_INVOKABLE static QFont errorFont(void);
+		Q_INVOKABLE static QString fontFamily(void);
+		Q_INVOKABLE void setFontFamily(QString family);
+		Q_INVOKABLE static int fontSize(void);
+		Q_INVOKABLE void setFontSize(int size);
+		Q_INVOKABLE void increaseFontSize(int delta);
+		Q_INVOKABLE static int maxFontSize(void);
+		Q_INVOKABLE static bool fontBold(void);
+		Q_INVOKABLE void setFontBold(bool value);
+		Q_INVOKABLE static bool fontItalic(void);
+		Q_INVOKABLE void setFontItalic(bool value);
+		Q_INVOKABLE static bool fontUnderline(void);
+		Q_INVOKABLE void setFontUnderline(bool value);
 		// Exercise text color
-		static bool customExerciseTextColor(void);
-		static QColor exerciseTextColor(void);
-		void setExerciseTextColor(QColor color);
-		void resetExerciseTextColor(void);
-		static QString exerciseTextStyleSheet(void);
+		Q_INVOKABLE static bool customExerciseTextColor(void);
+		Q_INVOKABLE static QColor exerciseTextColor(void);
+		Q_INVOKABLE void setExerciseTextColor(QColor color);
+		Q_INVOKABLE void resetExerciseTextColor(void);
+		Q_INVOKABLE static QString exerciseTextStyleSheet(void);
 		// Input text color
-		static bool customInputTextColor(void);
-		static QColor inputTextColor(void);
-		void setInputTextColor(QColor color);
-		void resetInputTextColor(void);
-		static QString inputTextStyleSheet(void);
+		Q_INVOKABLE static bool customInputTextColor(void);
+		Q_INVOKABLE static QColor inputTextColor(void);
+		Q_INVOKABLE void setInputTextColor(QColor color);
+		Q_INVOKABLE void resetInputTextColor(void);
+		Q_INVOKABLE static QString inputTextStyleSheet(void);
 		// Background color
-		static bool customBgColor(void);
-		static QColor bgColor(void);
-		void setBgColor(QColor color);
-		void resetBgColor(void);
-		static QString bgStyleSheet(void);
+		Q_INVOKABLE static bool customBgColor(void);
+		Q_INVOKABLE static QColor bgColor(void);
+		Q_INVOKABLE void setBgColor(QColor color);
+		Q_INVOKABLE void resetBgColor(void);
+		Q_INVOKABLE static QString bgStyleSheet(void);
 		// Paper color
-		static bool customPaperColor(void);
-		static QColor paperColor(void);
-		void setPaperColor(QColor color);
-		void resetPaperColor(void);
-		static QString paperStyleSheet(void);
+		Q_INVOKABLE static bool customPaperColor(void);
+		Q_INVOKABLE static QColor paperColor(void);
+		Q_INVOKABLE void setPaperColor(QColor color);
+		Q_INVOKABLE void resetPaperColor(void);
+		Q_INVOKABLE static QString paperStyleSheet(void);
 		// Panel color
-		static bool customPanelColor(void);
-		static QColor panelColor(void);
-		void setPanelColor(QColor color);
-		void resetPanelColor(void);
-		static QString panelStyleSheet(void);
+		Q_INVOKABLE static bool customPanelColor(void);
+		Q_INVOKABLE static QColor panelColor(void);
+		Q_INVOKABLE void setPanelColor(QColor color);
+		Q_INVOKABLE void resetPanelColor(void);
+		Q_INVOKABLE static QString panelStyleSheet(void);
 		// Style
-		static Style style(void);
-		void setStyle(Style newStyle);
-		void updateStyle(void);
+		Q_INVOKABLE static ThemeEngine::Style style(void);
+		Q_INVOKABLE void setStyle(ThemeEngine::Style newStyle);
+		Q_INVOKABLE void updateStyle(void);
 		// Theme
-		int theme(void);
-		void setTheme(int index);
-		QString themeName(int index);
-		const QList<QVariantMap> &themeList(void);
+		Q_INVOKABLE int theme(void);
+		Q_INVOKABLE void setTheme(int index);
+		Q_INVOKABLE QString themeName(int index);
+		Q_INVOKABLE const QList<QVariantMap> &themeList(void);
 
 	private:
 		void applyStyleSheetFromFile(const QString &stylePath);
