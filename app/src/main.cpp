@@ -115,6 +115,8 @@ int main(int argc, char *argv[])
 	AddonApi::initSettingsCategories();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
+	// Register QML types
+	qmlRegisterType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine");
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
 	// Set icon
