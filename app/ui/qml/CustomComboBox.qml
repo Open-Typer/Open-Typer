@@ -14,7 +14,7 @@ ComboBox {
 	Binding on implicitWidth {
 		value: computeWidth(model)
 	}
-	Material.background: Qt.rgba(0, 0.3921, 1, 0.15) // TODO: Use accent color
+	Material.background: Qt.rgba(0, 0.3921, 1, 0.1) // TODO: Use accent color
 	popup.background: Rectangle {
 		color: backgroundColor()
 	}
