@@ -2,14 +2,25 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.15
+import OpenTyper 1.0
 
 Item {
-	Material.theme: Material.Dark // TODO: Use style from ThemeEngine
-	Material.accent: Material.LightBlue
+	Material.theme: getStyle()
+	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
 	width: mainLayout.width
 	height: mainLayout.height
 	visible: true
 	id: root
+	function getStyle() {
+		root.Material.theme = themeEngine.style() === ThemeEngine.DarkStyle ? Material.Dark : Material.Light;
+		return root.Material.theme;
+	}
+
+	Connections {
+		target: themeEngine
+		function onStyleChanged() { getStyle(); }
+		function onThemeChanged() { getStyle(); }
+	}
 
 	ColumnLayout {
 		id: mainLayout
