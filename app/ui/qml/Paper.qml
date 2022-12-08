@@ -11,7 +11,7 @@ Rectangle {
 	border.width: 0.5
 	width: 1000
 	height: 300
-	color: "#0f1923" // TODO: Use paper color from ThemeEngine
+	color: themeEngine.paperColor
 	clip: true
 	ColumnLayout {
 		anchors.fill: parent
@@ -22,10 +22,8 @@ Rectangle {
 			background: null
 			topPadding: 0
 			text: "Current line"
-			font.family: "FreeMono" // TODO: Use exercise text font family from ThemeEngine
-			font.pointSize: 20 // TODO: Use text font size from ThemeEngine
-			font.bold: true // TODO: Use text style from ThemeEngine
-			color: "#007daf" // TODO: Use exercise text color from ThemeEngine
+			font: themeEngine.font
+			color: themeEngine.exerciseTextColor
 			readOnly: true
 			selectByMouse: false
 			selectByKeyboard: false
@@ -40,10 +38,8 @@ Rectangle {
 			background: null
 			topPadding: 0
 			text: "tes"
-			font.family: "FreeMono" // TODO: Use exercise text font family from ThemeEngine
-			font.pointSize: 20 // TODO: Use text font size from ThemeEngine
-			font.bold: true // TODO: Use text style from ThemeEngine
-			// TODO: Use input text color from ThemeEngine
+			font: themeEngine.font
+			color: themeEngine.inputTextColor
 			readOnly: false
 			selectByMouse: false
 			selectByKeyboard: false
@@ -52,9 +48,7 @@ Rectangle {
 				anchors.fill: parent
 				background: null
 				text: " _ t"
-				font.family: "FreeMono" // TODO: Use exercise text font family from ThemeEngine
-				font.pointSize: 20 // TODO: Use text font size from ThemeEngine
-				font.bold: true // TODO: Use text style from ThemeEngine
+				font: themeEngine.font
 				color: Qt.rgba(0.84, 0.28, 0.06, 1)
 				clip: true
 			}
@@ -70,9 +64,7 @@ Rectangle {
 				id: remainingText
 				background: null
 				text: "another line\nanother line\nanother line\nanother line\nanother line\nanother line"
-				font.family: "FreeMono" // TODO: Use exercise text font family from ThemeEngine
-				font.pointSize: 20 // TODO: Use text font size from ThemeEngine
-				font.bold: true // TODO: Use text style from ThemeEngine
+				font: themeEngine.font
 				readOnly: true
 				selectByMouse: false
 				selectByKeyboard: false
@@ -85,7 +77,7 @@ Rectangle {
 				source: remainingText
 				visible: false
 				gradient: Gradient {
-					GradientStop { position: 0; color: Qt.rgba(0, 0.49, 0.69, 1) } // TODO: Use exercise text color from ThemeEngine
+					GradientStop { position: 0; color: themeEngine.exerciseTextColor }
 					GradientStop { position: 1; color: Qt.rgba(0, 0, 0, 0) }
 				}
 			}
