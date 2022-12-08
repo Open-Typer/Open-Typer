@@ -44,6 +44,19 @@ class Settings;
 class CORE_LIB_EXPORT ThemeEngine : public QObject
 {
 		Q_OBJECT
+		Q_PROPERTY(QFont font READ font WRITE setFont NOTIFY fontChanged)
+		Q_PROPERTY(QString fontFamily READ fontFamily WRITE setFontFamily NOTIFY fontFamilyChanged)
+		Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
+		Q_PROPERTY(bool fontBold READ fontBold WRITE setFontBold NOTIFY fontBoldChanged)
+		Q_PROPERTY(bool fontItalic READ fontItalic WRITE setFontItalic NOTIFY fontItalicChanged)
+		Q_PROPERTY(bool fontUnderline READ fontUnderline WRITE setFontUnderline NOTIFY fontUnderlineChanged)
+		Q_PROPERTY(QColor exerciseTextColor READ exerciseTextColor WRITE setExerciseTextColor NOTIFY exerciseTextColorChanged)
+		Q_PROPERTY(QColor inputTextColor READ inputTextColor WRITE setInputTextColor NOTIFY inputTextColorChanged)
+		Q_PROPERTY(QColor bgColor READ bgColor WRITE setBgColor NOTIFY bgColorChanged)
+		Q_PROPERTY(QColor paperColor READ paperColor WRITE setPaperColor NOTIFY paperColorChanged)
+		Q_PROPERTY(QColor panelColor READ panelColor WRITE setPanelColor NOTIFY panelColorChanged)
+		Q_PROPERTY(Style style READ style WRITE setStyle NOTIFY styleChanged)
+		Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged())
 	public:
 		ThemeEngine(QObject *parent = nullptr);
 		void updateThemeList(void);
