@@ -265,13 +265,6 @@
     </message>
 </context>
 <context>
-    <name>KeyboardOptions</name>
-    <message>
-        <source>Editor</source>
-        <translation type="vanished">Редактор</translation>
-    </message>
-</context>
-<context>
     <name>KeyboardWidget</name>
     <message>
         <location filename="../src/widgets/KeyboardWidget.cpp" line="588"/>
@@ -287,283 +280,223 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../ui/MainWindow.ui" line="233"/>
-        <source>Options</source>
-        <translation>Опции</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="262"/>
-        <source>Open custom text</source>
-        <translation>Открыть кастомный текст</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="291"/>
-        <source>Print</source>
-        <translation>Распечатать</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="314"/>
-        <location filename="../ui/MainWindow.ui" line="2300"/>
+        <location filename="../ui/MainWindow.ui" line="1878"/>
         <source>Typing test</source>
         <translation>Вводимый тест</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="470"/>
-        <location filename="../ui/MainWindow.ui" line="2269"/>
+        <location filename="../ui/MainWindow.ui" line="348"/>
+        <location filename="../ui/MainWindow.ui" line="1847"/>
         <source>Navigation</source>
         <translation>Навигация</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="501"/>
-        <source>Lesson:</source>
-        <translation>Урок:</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="547"/>
-        <location filename="../ui/MainWindow.ui" line="550"/>
-        <source>Repeat exercise</source>
-        <translation>Повторить упражнение</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="582"/>
-        <source>Close loaded exercise</source>
-        <translation>Закрыть загруженное упражнение</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="611"/>
-        <source>Previous exercise</source>
-        <translation>Предыдущее упражнение</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="640"/>
-        <source>Next exercise</source>
-        <translation>Следующее упражнение</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="695"/>
-        <source>Sublesson:</source>
-        <translation>Подурок:</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="877"/>
-        <source>Exercise history</source>
-        <comment>exercise history</comment>
-        <translation>История упражения</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="906"/>
-        <location filename="../ui/MainWindow.ui" line="2194"/>
+        <location filename="../ui/MainWindow.ui" line="1772"/>
         <source>Timed exercise</source>
         <translation>Упражнение на время</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="932"/>
-        <source>Generate text from error words</source>
-        <translation>Сгенерировать текст из слов с ошибками</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="961"/>
-        <location filename="../ui/MainWindow.ui" line="2212"/>
+        <location filename="../ui/MainWindow.ui" line="1790"/>
         <source>Reverse text</source>
         <comment>reverse text button</comment>
         <translation>Перевернуть текст</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1017"/>
+        <location filename="../ui/MainWindow.ui" line="598"/>
         <source>Character correction after mistake (by program)</source>
         <comment>correct mistakes</comment>
         <extracomment>Whether to correct mistakes while typing</extracomment>
         <translation>Исправление символа после ошибки (программой)</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1030"/>
-        <location filename="../ui/MainWindow.ui" line="2231"/>
+        <location filename="../ui/MainWindow.ui" line="611"/>
+        <location filename="../ui/MainWindow.ui" line="1809"/>
         <source>Hide exercise text</source>
         <comment>hide text</comment>
         <translation>Скрыть текст упражнения</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1064"/>
-        <location filename="../ui/MainWindow.ui" line="2280"/>
+        <location filename="../ui/MainWindow.ui" line="644"/>
+        <location filename="../ui/MainWindow.ui" line="1858"/>
         <source>Exercise options</source>
         <translation>Опции упражнения</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1128"/>
-        <location filename="../ui/MainWindow.ui" line="2291"/>
+        <location filename="../ui/MainWindow.ui" line="707"/>
+        <location filename="../ui/MainWindow.ui" line="1869"/>
         <source>State</source>
         <extracomment>Current status</extracomment>
         <translation>Состояние</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1180"/>
+        <location filename="../ui/MainWindow.ui" line="759"/>
         <source>Mistakes:</source>
         <translation>Ошибки:</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1219"/>
+        <location filename="../ui/MainWindow.ui" line="798"/>
         <source>Time:</source>
         <translation>Время:</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1471"/>
+        <location filename="../ui/MainWindow.ui" line="1048"/>
         <source>Remaining time</source>
         <translation>Оставшееся время</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1638"/>
+        <location filename="../ui/MainWindow.ui" line="1215"/>
         <source>Export</source>
         <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2077"/>
+        <location filename="../ui/MainWindow.ui" line="1655"/>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2081"/>
+        <location filename="../ui/MainWindow.ui" line="1659"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2092"/>
+        <location filename="../ui/MainWindow.ui" line="1670"/>
         <source>New</source>
         <translation>Новый</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2107"/>
+        <location filename="../ui/MainWindow.ui" line="1685"/>
         <source>&amp;View</source>
         <translation>&amp;Вид</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2111"/>
+        <location filename="../ui/MainWindow.ui" line="1689"/>
         <source>User interface</source>
         <translation>Пользовательский интерфейс</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2123"/>
+        <location filename="../ui/MainWindow.ui" line="1701"/>
         <source>&amp;Exercise</source>
         <translation>&amp;Упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2135"/>
+        <location filename="../ui/MainWindow.ui" line="1713"/>
         <source>&amp;Settings</source>
         <translation>&amp;Настройки</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2141"/>
+        <location filename="../ui/MainWindow.ui" line="1719"/>
         <source>Tools</source>
         <translation>Инструменты</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2147"/>
+        <location filename="../ui/MainWindow.ui" line="1725"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2167"/>
+        <location filename="../ui/MainWindow.ui" line="1745"/>
         <source>Custom text</source>
         <translation>Кастомный текст</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2176"/>
-        <location filename="../ui/MainWindow.ui" line="2185"/>
+        <location filename="../ui/MainWindow.ui" line="1754"/>
+        <location filename="../ui/MainWindow.ui" line="1763"/>
         <source>Lesson pack</source>
         <translation>Набор уроков</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2203"/>
+        <location filename="../ui/MainWindow.ui" line="1781"/>
         <source>Text from error words</source>
         <translation>Текст из слов с ошибками</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2223"/>
+        <location filename="../ui/MainWindow.ui" line="1801"/>
         <source>Character correction after mistake (by program)</source>
         <translation>Исправление символа после ошибки (программой)</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2240"/>
+        <location filename="../ui/MainWindow.ui" line="1818"/>
         <source>Preferences...</source>
         <translation>Персональные настройки...</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2249"/>
+        <location filename="../ui/MainWindow.ui" line="1827"/>
         <source>Exercise history</source>
         <translation>История урока</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2258"/>
+        <location filename="../ui/MainWindow.ui" line="1836"/>
         <source>Print...</source>
         <translation>Распечатать...</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2305"/>
+        <location filename="../ui/MainWindow.ui" line="1883"/>
         <source>About Qt...</source>
         <translation>О Qt...</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2313"/>
+        <location filename="../ui/MainWindow.ui" line="1891"/>
         <source>About program...</source>
         <translation>О программе...</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2321"/>
+        <location filename="../ui/MainWindow.ui" line="1899"/>
         <source>Online documentation</source>
         <translation>Онлайн документация</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2332"/>
+        <location filename="../ui/MainWindow.ui" line="1910"/>
         <source>Dark theme</source>
         <translation>Темная тема</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="792"/>
+        <location filename="../src/MainWindow.cpp" line="803"/>
         <source>This file is too large!</source>
         <translation>Этот файл слишком большой!</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="806"/>
+        <location filename="../src/MainWindow.cpp" line="817"/>
         <source>Text files</source>
         <translation>Текстовые файлы</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="806"/>
-        <location filename="../src/MainWindow.cpp" line="1495"/>
+        <location filename="../src/MainWindow.cpp" line="817"/>
+        <location filename="../src/MainWindow.cpp" line="1513"/>
         <source>All files</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="847"/>
+        <location filename="../src/MainWindow.cpp" line="865"/>
         <source>You don&apos;t have any error words.</source>
         <translation>У Вас нет никаких ошибочных слов.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1495"/>
+        <location filename="../src/MainWindow.cpp" line="1513"/>
         <source>Open-Typer pack files</source>
         <translation>Набор файлов Open-Typer</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1807"/>
+        <location filename="../src/MainWindow.cpp" line="1823"/>
         <source>Version: %1</source>
         <translation>Версия: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1810"/>
+        <location filename="../src/MainWindow.cpp" line="1826"/>
         <source>Revision: %1</source>
         <translation>Ревизия: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1812"/>
+        <location filename="../src/MainWindow.cpp" line="1828"/>
         <source>Source code: %1</source>
         <translation>Исходный код: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1812"/>
+        <location filename="../src/MainWindow.cpp" line="1828"/>
         <source>Published with the GNU General Public License.</source>
         <translation>Опубликовано с GNU General Public License.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1821"/>
+        <location filename="../src/MainWindow.cpp" line="1837"/>
         <source>Are you sure you want to quit?</source>
         <translation>Вы уверены, что хотите выйти?</translation>
     </message>
@@ -781,19 +714,82 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="34"/>
+        <location filename="../src/main.cpp" line="37"/>
         <source>Version: %1</source>
         <translation>Версия: %1</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="110"/>
+        <location filename="../src/main.cpp" line="113"/>
         <source>Loading addons...</source>
         <translation>Загрузка аддонов...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="114"/>
+        <location filename="../src/main.cpp" line="117"/>
         <source>Opening main window...</source>
         <translation>Открывается главное окно...</translation>
+    </message>
+</context>
+<context>
+    <name>QmlWindow</name>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="25"/>
+        <source>Options</source>
+        <translation>Опции</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="30"/>
+        <source>Open</source>
+        <translation>Открыть</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="35"/>
+        <source>Print</source>
+        <translation>Распечатать</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="41"/>
+        <source>Typing test</source>
+        <translation>Вводимый тест</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="46"/>
+        <source>Timed exercise</source>
+        <translation>Упражнение на время</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="51"/>
+        <source>Text from error words</source>
+        <translation>Текст из слов с ошибками</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="56"/>
+        <source>Reverse text</source>
+        <translation>Перевернуть текст</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="66"/>
+        <source>Repeat exercise</source>
+        <translation>Повторить упражнение</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="71"/>
+        <source>Close loaded exercise</source>
+        <translation>Закрыть загруженное упражнение</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="76"/>
+        <source>Previous exercise</source>
+        <translation>Предыдущее упражнение</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="81"/>
+        <source>Next exercise</source>
+        <translation>Следующее упражнение</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="90"/>
+        <source>Exercise history</source>
+        <translation>История упражения</translation>
     </message>
 </context>
 <context>

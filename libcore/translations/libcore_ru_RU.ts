@@ -171,7 +171,7 @@
 <context>
     <name>LanguageManager</name>
     <message>
-        <location filename="../src/LanguageManager.cpp" line="35"/>
+        <location filename="../src/LanguageManager.cpp" line="36"/>
         <source>System (default)</source>
         <translation>Системный (стандартный)</translation>
     </message>
@@ -297,30 +297,30 @@
         <translation>Диаграммы</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="47"/>
-        <location filename="../src/StatsDialog.cpp" line="92"/>
+        <location filename="../src/StatsDialog.cpp" line="46"/>
+        <location filename="../src/StatsDialog.cpp" line="91"/>
         <source>Speed</source>
         <translation>Скорость</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="47"/>
-        <location filename="../src/StatsDialog.cpp" line="101"/>
+        <location filename="../src/StatsDialog.cpp" line="46"/>
+        <location filename="../src/StatsDialog.cpp" line="100"/>
         <source>Mistakes</source>
         <translation>Ошибки</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="47"/>
-        <location filename="../src/StatsDialog.cpp" line="110"/>
+        <location filename="../src/StatsDialog.cpp" line="46"/>
+        <location filename="../src/StatsDialog.cpp" line="109"/>
         <source>Time</source>
         <translation>Время</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="128"/>
+        <location filename="../src/StatsDialog.cpp" line="127"/>
         <source>Better students: %1</source>
         <translation>Лучшие студенты: %1</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="129"/>
+        <location filename="../src/StatsDialog.cpp" line="128"/>
         <source>Worse students: %1</source>
         <translation>Худшие студенты: %1</translation>
     </message>
@@ -328,27 +328,27 @@
 <context>
     <name>ThemeEngine</name>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="55"/>
+        <location filename="../src/ThemeEngine.cpp" line="67"/>
         <source>Dark</source>
         <translation>Темная</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="62"/>
+        <location filename="../src/ThemeEngine.cpp" line="74"/>
         <source>Light</source>
         <translation>Светлая</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="69"/>
+        <location filename="../src/ThemeEngine.cpp" line="81"/>
         <source>Green</source>
         <translation>Зеленая</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="78"/>
+        <location filename="../src/ThemeEngine.cpp" line="90"/>
         <source>Light blue</source>
         <translation>Голубая</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="87"/>
+        <location filename="../src/ThemeEngine.cpp" line="99"/>
         <source>Custom</source>
         <translation>Кастомная</translation>
     </message>

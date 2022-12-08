@@ -169,7 +169,7 @@
 <context>
     <name>LanguageManager</name>
     <message>
-        <location filename="../src/LanguageManager.cpp" line="47"/>
+        <location filename="../src/LanguageManager.cpp" line="36"/>
         <source>System (default)</source>
         <translation>Systémový (predvolené)</translation>
     </message>
@@ -295,30 +295,30 @@
         <translation>Grafy</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="45"/>
-        <location filename="../src/StatsDialog.cpp" line="90"/>
+        <location filename="../src/StatsDialog.cpp" line="46"/>
+        <location filename="../src/StatsDialog.cpp" line="91"/>
         <source>Speed</source>
         <translation>Rýchlosť</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="45"/>
-        <location filename="../src/StatsDialog.cpp" line="99"/>
+        <location filename="../src/StatsDialog.cpp" line="46"/>
+        <location filename="../src/StatsDialog.cpp" line="100"/>
         <source>Mistakes</source>
         <translation>Chyby</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="45"/>
-        <location filename="../src/StatsDialog.cpp" line="108"/>
+        <location filename="../src/StatsDialog.cpp" line="46"/>
+        <location filename="../src/StatsDialog.cpp" line="109"/>
         <source>Time</source>
         <translation>Čas</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="126"/>
+        <location filename="../src/StatsDialog.cpp" line="127"/>
         <source>Better students: %1</source>
         <translation>Lepší študenti: %1</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="127"/>
+        <location filename="../src/StatsDialog.cpp" line="128"/>
         <source>Worse students: %1</source>
         <translation>Horší študenti: %1</translation>
     </message>
@@ -326,27 +326,27 @@
 <context>
     <name>ThemeEngine</name>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="55"/>
+        <location filename="../src/ThemeEngine.cpp" line="67"/>
         <source>Dark</source>
         <translation>Tmavý</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="62"/>
+        <location filename="../src/ThemeEngine.cpp" line="74"/>
         <source>Light</source>
         <translation>Svetlý</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="69"/>
+        <location filename="../src/ThemeEngine.cpp" line="81"/>
         <source>Green</source>
         <translation>Zelený</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="78"/>
+        <location filename="../src/ThemeEngine.cpp" line="90"/>
         <source>Light blue</source>
         <translation>Svetlomodrý</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="87"/>
+        <location filename="../src/ThemeEngine.cpp" line="99"/>
         <source>Custom</source>
         <translation>Vlastný</translation>
     </message>
