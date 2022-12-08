@@ -16,10 +16,7 @@ ToolBar {
 		function onThemeChanged() { getPanelColor(); }
 	}
 
-	background: Rectangle {
-		color: getPanelColor();
-		radius: 5
-	}
+	background: Rectangle { color: getPanelColor() }
 	RowLayout {
 		width: parent.width
 		ColumnLayout {
