@@ -5,6 +5,7 @@ import QtQuick.Controls.Material 2.15
 // An auto-resizing ComboBox (based on its items)
 // Fixes: material style popup background color
 // The background is semi-transparent to match with CustomToolButton's design
+// Elevation (shadow) is disabled
 ComboBox {
 	id: control
 	FontMetrics {
@@ -14,7 +15,9 @@ ComboBox {
 	Binding on implicitWidth {
 		value: computeWidth(model)
 	}
-	Material.background: Qt.rgba(0, 0.3921, 1, 0.1) // TODO: Use accent color
+	Material.background: Qt.rgba(0.13, 0.58, 1, 0.25) // TODO: Use accent color
+	background.layer.enabled: false
+
 	popup.background: Rectangle {
 		color: backgroundColor()
 	}
