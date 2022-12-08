@@ -111,10 +111,6 @@ class CORE_LIB_EXPORT Settings
 		static int errorPenalty(void);
 		static bool containsErrorPenalty(void);
 		static void setErrorPenalty(int value);
-		// serverFullMode
-		static bool serverFullMode(void);
-		static bool containsServerFullMode(void);
-		static void setServerFullMode(bool value);
 		// mistakeLimit
 		static bool mistakeLimit(void);
 		static bool containsMistakeLimit(void);
