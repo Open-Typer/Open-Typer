@@ -41,6 +41,17 @@ ThemeEngine::ThemeEngine(QObject *parent) :
 	connect(this, &ThemeEngine::bgColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::paperColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::panelColorChanged, this, &ThemeEngine::colorChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::styleChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::fontBoldChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::fontItalicChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::fontUnderlineChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::fontFamilyChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::fontSizeChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::exerciseTextColorChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::inputTextColorChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::bgColorChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::paperColorChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::panelColorChanged);
 }
 
 /*! Regenerates the list of themes. */
