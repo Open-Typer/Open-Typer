@@ -5,7 +5,7 @@ import QtQuick.Controls.Material 2.15
 import OpenTyper 1.0
 
 Item {
-	Material.theme: themeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
+	Material.theme: ThemeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
 	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
 	width: mainLayout.width
 	height: mainLayout.height
