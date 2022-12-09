@@ -38,7 +38,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->qmlContent->setAttribute(Qt::WA_TranslucentBackground);
 	ui->qmlContent->setAttribute(Qt::WA_AlwaysStackOnTop);
 	ui->qmlContent->setClearColor(Qt::transparent);
-	ui->qmlContent->rootContext()->setContextProperty("themeEngine", &globalThemeEngine);
 	ui->qmlContent->setSource(QUrl("qrc:/qml/QmlWindow.qml"));
 	rootObject = ui->qmlContent->rootObject();
 	lessonBox = rootObject->findChild<QObject *>("lessonBox");
