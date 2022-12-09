@@ -116,7 +116,9 @@ int main(int argc, char *argv[])
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
-	qmlRegisterType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine");
+	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [&](QQmlEngine *, QJSEngine *) -> QObject * {
+		return &globalThemeEngine;
+	});
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
 	// Set icon
