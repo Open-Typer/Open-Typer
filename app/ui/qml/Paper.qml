@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.15
 import QtGraphicalEffects 1.15
+import OpenTyper 1.0
 
 Rectangle {
 	property color materialColor: Material.foreground
@@ -11,7 +12,7 @@ Rectangle {
 	border.width: 0.5
 	width: 1000
 	height: 300
-	color: themeEngine.paperColor
+	color: ThemeEngine.paperColor
 	clip: true
 	ColumnLayout {
 		anchors.fill: parent
@@ -22,8 +23,8 @@ Rectangle {
 			background: null
 			topPadding: 0
 			text: "Current line"
-			font: themeEngine.font
-			color: themeEngine.exerciseTextColor
+			font: ThemeEngine.font
+			color: ThemeEngine.exerciseTextColor
 			readOnly: true
 			selectByMouse: false
 			selectByKeyboard: false
@@ -38,8 +39,8 @@ Rectangle {
 			background: null
 			topPadding: 0
 			text: "tes"
-			font: themeEngine.font
-			color: themeEngine.inputTextColor
+			font: ThemeEngine.font
+			color: ThemeEngine.inputTextColor
 			readOnly: false
 			selectByMouse: false
 			selectByKeyboard: false
@@ -48,7 +49,7 @@ Rectangle {
 				anchors.fill: parent
 				background: null
 				text: " _ t"
-				font: themeEngine.font
+				font: ThemeEngine.font
 				color: Qt.rgba(0.84, 0.28, 0.06, 1)
 				clip: true
 			}
@@ -64,7 +65,7 @@ Rectangle {
 				id: remainingText
 				background: null
 				text: "another line\nanother line\nanother line\nanother line\nanother line\nanother line"
-				font: themeEngine.font
+				font: ThemeEngine.font
 				readOnly: true
 				selectByMouse: false
 				selectByKeyboard: false
@@ -77,7 +78,7 @@ Rectangle {
 				source: remainingText
 				visible: false
 				gradient: Gradient {
-					GradientStop { position: 0; color: themeEngine.exerciseTextColor }
+					GradientStop { position: 0; color: ThemeEngine.exerciseTextColor }
 					GradientStop { position: 1; color: Qt.rgba(0, 0, 0, 0) }
 				}
 			}
