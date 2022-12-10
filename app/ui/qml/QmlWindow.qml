@@ -4,11 +4,12 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.15
 import OpenTyper 1.0
 
-Item {
+ApplicationWindow {
 	Material.theme: ThemeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
 	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
-	width: mainLayout.width
-	height: mainLayout.height
+	// TODO: Load window geometry from settings
+	width: 1200
+	height: 800
 	visible: true
 	id: root
 
