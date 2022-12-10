@@ -7,18 +7,30 @@ import OpenTyper 1.0
 
 Rectangle {
 	property color materialColor: Material.foreground
+	property int textMargins: 20
 	radius: 10
 	border.color: Qt.rgba(materialColor.r, materialColor.g, materialColor.b, 0.25)
 	border.width: 0.5
-	width: 1000
-	height: 300
+	width: textMargins * 2 + Math.max(currentLineText.textWidth, inputText.textWidth, remainingText.textWidth);
 	color: ThemeEngine.paperColor
 	clip: true
+	id: control
+
+	function calculateTextWidth(text, metrics) {
+		var lines = text.split("\n");
+		var maxValue = 0;
+		for(var i = 0; i < lines.length; i++)
+			maxValue = Math.max(maxValue, metrics.boundingRect(lines[i]).width);
+		return maxValue;
+	}
+
 	ColumnLayout {
 		anchors.fill: parent
-		anchors.margins: 20
+		anchors.margins: control.textMargins
 		spacing: 0
 		TextArea {
+			property int textWidth: calculateTextWidth(text, currentLineTextMetrics);
+			id: currentLineText
 			Layout.fillWidth: true
 			background: null
 			topPadding: 0
@@ -29,12 +41,18 @@ Rectangle {
 			selectByMouse: false
 			selectByKeyboard: false
 			clip: true
+			FontMetrics {
+				id: currentLineTextMetrics
+				font: currentLineText.font
+			}
 		}
 		// MenuSeparator should be enough...
 		MenuSeparator {
 			Layout.fillWidth: true
 		}
 		TextArea {
+			property int textWidth: Math.max(calculateTextWidth(text, inputTextMetrics), calculateTextWidth(errorText.text, errorTextMetrics));
+			id: inputText
 			Layout.fillWidth: true
 			background: null
 			topPadding: 0
@@ -46,12 +64,21 @@ Rectangle {
 			selectByKeyboard: false
 			clip: true
 			Label {
+				id: errorText
 				anchors.fill: parent
 				background: null
 				text: " _ t"
 				font: ThemeEngine.font
 				color: Qt.rgba(0.84, 0.28, 0.06, 1)
 				clip: true
+				FontMetrics {
+					id: errorTextMetrics
+					font: errorText.font
+				}
+			}
+			FontMetrics {
+				id: inputTextMetrics
+				font: inputText.font
 			}
 		}
 		Frame {
@@ -62,6 +89,7 @@ Rectangle {
 			padding: 0
 			background: null
 			TextArea {
+				property int textWidth: calculateTextWidth(text, remainingTextMetrics);
 				id: remainingText
 				background: null
 				text: "another line\nanother line\nanother line\nanother line\nanother line\nanother line"
@@ -71,6 +99,10 @@ Rectangle {
 				selectByKeyboard: false
 				clip: true
 				visible: false
+				FontMetrics {
+					id: remainingTextMetrics
+					font: remainingText.font
+				}
 			}
 			LinearGradient  {
 				id: mask
