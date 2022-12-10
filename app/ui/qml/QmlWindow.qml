@@ -15,7 +15,7 @@ ApplicationWindow {
 
 	ColumnLayout {
 		id: mainLayout
-		width: parent.width
+		anchors.fill: parent
 		spacing: 0
 		Panel {
 			Layout.fillWidth: true
