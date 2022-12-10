@@ -22,6 +22,8 @@
 #include <QApplication>
 #include <QSettings>
 #include <QQuickStyle>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include "MainWindow.h"
 #include "Settings.h"
 #include "LanguageManager.h"
@@ -119,13 +121,16 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [&](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalThemeEngine;
 	});
+	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
 	// Set icon
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
 	QQuickStyle::setStyle("Material");
-	MainWindow w;
-	// Main window will get shown by itself
-	splash.finish(&w);
+	QQmlApplicationEngine engine;
+	Settings settings;
+	engine.rootContext()->setContextProperty("Settings", &settings);
+	engine.load("qrc:/qml/QmlWindow.qml");
+	splash.finish(nullptr);
 	return a.exec();
 }
