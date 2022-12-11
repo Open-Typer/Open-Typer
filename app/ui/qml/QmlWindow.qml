@@ -127,6 +127,7 @@ ApplicationWindow {
 				CustomToolButton {
 					icon.name: "repeat"
 					toolTipText: qsTr("Repeat exercise")
+					onClicked: repeatExercise();
 				}
 				CustomToolButton {
 					id: closeLoadedExButton
@@ -136,14 +137,16 @@ ApplicationWindow {
 				CustomToolButton {
 					icon.name: "left"
 					toolTipText: qsTr("Previous exercise")
+					onClicked: previousExercise();
 				}
 				CustomToolButton {
 					icon.name: "right"
 					toolTipText: qsTr("Next exercise")
+					onClicked: nextExercise();
 				}
-				CustomComboBox { id: lessonBox }
-				CustomComboBox { id: sublessonBox }
-				CustomComboBox { id: exerciseBox }
+				CustomComboBox { id: lessonBox; onActivated: selectLesson(index); }
+				CustomComboBox { id: sublessonBox; onActivated: selectSublesson(index); }
+				CustomComboBox { id: exerciseBox; onActivated: selectExercise(index); }
 				ToolSeparator {}
 				CustomToolButton {
 					id: statsButton
@@ -344,6 +347,48 @@ ApplicationWindow {
 		startExercise(currentLesson, currentSublesson, currentExercise);
 	}
 
+	function nextExercise() {
+		customExerciseLoaded = false;
+		if(currentExercise == exerciseCount)
+		{
+			if(currentSublesson == sublessonCount)
+			{
+				if(currentLesson == lessonCount)
+					currentLesson = 1;
+				else
+					currentLesson++;
+				currentSublesson = 1;
+			}
+			else
+				currentSublesson++;
+			currentExercise = 1;
+		}
+		else
+			currentExercise++;
+		repeatExercise();
+	}
+
+	function previousExercise() {
+		customExerciseLoaded = false;
+		if(currentExercise == 1)
+		{
+			if(currentSublesson == 1)
+			{
+				if(currentLesson == 1)
+					currentLesson = lessonCount;
+				else
+					currentLesson--;
+				currentSublesson = -1;
+			}
+			else
+				currentSublesson--;
+			currentExercise = -1;
+		}
+		else
+			currentExercise--;
+		repeatExercise();
+	}
+
 	function updateLessonList() {
 		var lessons = [];
 		var lessonDesc;
@@ -389,6 +434,27 @@ ApplicationWindow {
 			exercises[i - 1] = parser.exerciseTr(i);
 		panel2.contents.exerciseBox.model = exercises;
 		panel2.contents.exerciseBox.currentIndex = exerciseID - 1;
+	}
+
+	function selectLesson(index) {
+		currentLesson = index + 1;
+		currentSublesson = 1;
+		currentExercise = 1;
+		customExerciseLoaded = false;
+		repeatExercise();
+	}
+
+	function selectSublesson(index) {
+		currentSublesson = index + 1;
+		currentExercise = 1;
+		customExerciseLoaded = false;
+		repeatExercise();
+	}
+
+	function selectExercise(index) {
+		currentExercise = index + 1;
+		customExerciseLoaded = false;
+		repeatExercise();
 	}
 
 	Component.onCompleted: reload();
