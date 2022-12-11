@@ -35,7 +35,7 @@ class CORE_LIB_EXPORT BuiltInPacks : public QObject
 {
 		Q_OBJECT
 	public:
-		static QString packName(QString rawName);
+		Q_INVOKABLE static QString packName(QString rawName);
 };
 
 #endif // BUILTINPACKS_H
