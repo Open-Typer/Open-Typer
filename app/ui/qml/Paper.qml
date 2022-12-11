@@ -51,7 +51,7 @@ Item {
 		border.color: Qt.rgba(materialColor.r, materialColor.g, materialColor.b, 0.25)
 		border.width: 0.5
 		anchors.centerIn: parent
-		width: textMargins * 2 + Math.max(currentLineText.textWidth, inputText.textWidth, remainingText.textWidth);
+		width: textMargins * 3 + Math.max(currentLineText.textWidth, inputText.textWidth, remainingText.textWidth);
 		height: parent.height
 		color: ThemeEngine.paperColor
 		clip: true
