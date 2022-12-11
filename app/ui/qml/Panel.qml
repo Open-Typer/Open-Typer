@@ -25,6 +25,7 @@ import OpenTyper 1.0
 
 ToolBar {
 	property alias control: loader.sourceComponent
+	property alias contents: loader.item
 	padding: 0
 
 	background: Rectangle { color: ThemeEngine.panelColor }
