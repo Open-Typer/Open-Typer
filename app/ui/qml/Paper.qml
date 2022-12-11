@@ -37,6 +37,8 @@ Item {
 	property bool mistakeVisible: true
 	property string remaining: ""
 	property bool remainingVisible: true
+	signal keyPressed(var event)
+	signal keyReleased(var event)
 	id: control
 
 	function calculateTextWidth(text, metrics) {
@@ -45,6 +47,12 @@ Item {
 		for(var i = 0; i < lines.length; i++)
 			maxValue = Math.max(maxValue, metrics.boundingRect(lines[i]).width);
 		return maxValue;
+	}
+
+	KeyboardHandler {
+		id: keyboardHandler
+		onKeyPressed: (event) => control.keyPressed(event);
+		onKeyReleased: (event) => control.keyReleased(event);
 	}
 
 	Rectangle {
@@ -100,6 +108,11 @@ Item {
 				selectByKeyboard: false
 				clip: true
 				visible: inputVisible
+				onFocusChanged: {
+					if(focus)
+						keyboardHandler.focus = true;
+				}
+
 				Label {
 					id: errorText
 					anchors.fill: parent
