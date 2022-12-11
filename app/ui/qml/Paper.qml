@@ -26,6 +26,7 @@ import QtGraphicalEffects 1.15
 import OpenTyper 1.0
 
 Item {
+	property alias paperRect: paperRect
 	property color materialColor: Material.foreground
 	property int textMargins: 20
 	property string currentLine: ""
@@ -47,6 +48,7 @@ Item {
 	}
 
 	Rectangle {
+		id: paperRect
 		radius: 10
 		border.color: Qt.rgba(materialColor.r, materialColor.g, materialColor.b, 0.25)
 		border.width: 0.5
