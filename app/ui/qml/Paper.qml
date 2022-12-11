@@ -28,6 +28,14 @@ import OpenTyper 1.0
 Rectangle {
 	property color materialColor: Material.foreground
 	property int textMargins: 20
+	property string currentLine: ""
+	property bool currentLineVisible: true
+	property string input: ""
+	property bool inputVisible: true
+	property string mistake: ""
+	property bool mistakeVisible: true
+	property string remaining: ""
+	property bool remainingVisible: true
 	radius: 10
 	border.color: Qt.rgba(materialColor.r, materialColor.g, materialColor.b, 0.25)
 	border.width: 0.5
@@ -54,13 +62,14 @@ Rectangle {
 			Layout.fillWidth: true
 			background: null
 			topPadding: 0
-			text: "Current line"
+			text: currentLine
 			font: ThemeEngine.font
 			color: ThemeEngine.exerciseTextColor
 			readOnly: true
 			selectByMouse: false
 			selectByKeyboard: false
 			clip: true
+			visible: currentLineVisible
 			FontMetrics {
 				id: currentLineTextMetrics
 				font: currentLineText.font
@@ -69,6 +78,7 @@ Rectangle {
 		// MenuSeparator should be enough...
 		MenuSeparator {
 			Layout.fillWidth: true
+			visible: currentLineVisible
 		}
 		TextArea {
 			property int textWidth: Math.max(calculateTextWidth(text, inputTextMetrics), calculateTextWidth(errorText.text, errorTextMetrics));
@@ -76,21 +86,23 @@ Rectangle {
 			Layout.fillWidth: true
 			background: null
 			topPadding: 0
-			text: "tes"
+			text: input
 			font: ThemeEngine.font
 			color: ThemeEngine.inputTextColor
 			readOnly: false
 			selectByMouse: false
 			selectByKeyboard: false
 			clip: true
+			visible: inputVisible
 			Label {
 				id: errorText
 				anchors.fill: parent
 				background: null
-				text: " _ t"
+				text: mistake
 				font: ThemeEngine.font
 				color: Qt.rgba(0.84, 0.28, 0.06, 1)
 				clip: true
+				visible: mistakeVisible
 				FontMetrics {
 					id: errorTextMetrics
 					font: errorText.font
@@ -108,11 +120,12 @@ Rectangle {
 			spacing: 0
 			padding: 0
 			background: null
+			visible: remainingVisible
 			TextArea {
 				property int textWidth: calculateTextWidth(text, remainingTextMetrics);
 				id: remainingText
 				background: null
-				text: "another line\nanother line\nanother line\nanother line\nanother line\nanother line"
+				text: remaining
 				font: ThemeEngine.font
 				readOnly: true
 				selectByMouse: false
