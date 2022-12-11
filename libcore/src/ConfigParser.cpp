@@ -21,6 +21,7 @@
 #include "ConfigParser.h"
 
 namespace publicPos {
+	Q_NAMESPACE
 	int currentLesson = 0, currentSublesson = 0, currentExercise = 0;
 }
 
