@@ -27,6 +27,7 @@ import OpenTyper 1.0
 ApplicationWindow {
 	Material.theme: ThemeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
 	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
+	color: ThemeEngine.bgColor
 	// TODO: Load window geometry from settings
 	width: 1200
 	height: 800
