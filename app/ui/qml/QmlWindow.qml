@@ -162,9 +162,9 @@ ApplicationWindow {
 		}
 		Paper {
 			id: paper
+			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.topMargin: 10
-			Layout.alignment: Qt.AlignHCenter
 		}
 	}
 
