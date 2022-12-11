@@ -136,6 +136,8 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("FileUtils", &fileUtils);
 	BuiltInPacks builtInPacks;
 	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
+	StringUtils stringUtils;
+	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
 	engine.load("qrc:/qml/QmlWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
