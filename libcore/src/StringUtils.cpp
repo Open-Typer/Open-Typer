@@ -34,6 +34,12 @@ int StringUtils::wordCount(QString str)
 	return out;
 }
 
+/*! Returns count of the given character in the string. */
+int StringUtils::charCount(QString str, QChar ch)
+{
+	return str.count(ch);
+}
+
 /*! Returns a word in the string. */
 QString StringUtils::word(QString str, int id)
 {

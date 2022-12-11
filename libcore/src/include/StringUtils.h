@@ -39,6 +39,7 @@ class CORE_LIB_EXPORT StringUtils : public QObject
 		Q_OBJECT
 	public:
 		Q_INVOKABLE static int wordCount(QString str);
+		Q_INVOKABLE static int charCount(QString str, QChar ch);
 		Q_INVOKABLE static QString word(QString str, int id);
 		Q_INVOKABLE static QString wordAt(QString str, int index);
 		Q_INVOKABLE static QList<QVariant> longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target);
