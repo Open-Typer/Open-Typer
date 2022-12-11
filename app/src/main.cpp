@@ -131,6 +131,10 @@ int main(int argc, char *argv[])
 	QQmlApplicationEngine engine;
 	Settings settings;
 	engine.rootContext()->setContextProperty("Settings", &settings);
+	FileUtils fileUtils;
+	engine.rootContext()->setContextProperty("FileUtils", &fileUtils);
+	BuiltInPacks builtInPacks;
+	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
 	engine.load("qrc:/qml/QmlWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
