@@ -62,6 +62,8 @@ ApplicationWindow {
 	Material.theme: ThemeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
 	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
 	color: ThemeEngine.bgColor
+	minimumWidth: mainLayout.minWidth
+	minimumHeight: mainLayout.minHeight
 	// TODO: Load window geometry from settings
 	width: 1200
 	height: 800
@@ -73,6 +75,8 @@ ApplicationWindow {
 	}
 
 	ColumnLayout {
+		property int minWidth: Math.max(implicitWidth, paper.paperRect.width)
+		property int minHeight: implicitHeight
 		id: mainLayout
 		anchors.fill: parent
 		spacing: 0
