@@ -118,6 +118,7 @@ int main(int argc, char *argv[])
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
+	QQmlEngine::setObjectOwnership(&globalThemeEngine, QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [&](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalThemeEngine;
 	});
