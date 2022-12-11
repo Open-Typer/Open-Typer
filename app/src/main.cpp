@@ -29,6 +29,7 @@
 #include "LanguageManager.h"
 #include "IAddon.h"
 #include "AddonApi.h"
+#include "QmlKeyboardHandler.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -123,6 +124,7 @@ int main(int argc, char *argv[])
 		return &globalThemeEngine;
 	});
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
+	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
