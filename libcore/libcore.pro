@@ -26,6 +26,7 @@ SOURCES += \
     src/KeyboardUtils.cpp \
     src/LanguageManager.cpp \
     src/LoadExerciseDialog.cpp \
+    src/QmlKeyboardHandler.cpp \
     src/Settings.cpp \
     src/StatsDialog.cpp \
     src/StringUtils.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     src/include/KeyboardUtils.h \
     src/include/LanguageManager.h \
     src/include/LoadExerciseDialog.h \
+    src/include/QmlKeyboardHandler.h \
     src/include/Settings.h \
     src/include/StatsDialog.h \
     src/include/StringUtils.h \
