@@ -1,4 +1,4 @@
-QT += widgets charts
+QT += widgets charts quick
 
 !wasm {
 	QT += printsupport
