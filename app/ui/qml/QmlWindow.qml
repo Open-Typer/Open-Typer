@@ -333,7 +333,7 @@ ApplicationWindow {
 					currentLineText = remainingText;
 					remainingText = "";
 					if(currentLineText[currentLineText.length - 1] === '\n')
-						currentLineText.replace(currentLineText.length - 1, '');
+						currentLineText = currentLineText.substring(0, currentLineText.length - 1);
 				}
 				line++;
 			}
