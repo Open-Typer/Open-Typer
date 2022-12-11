@@ -38,6 +38,7 @@ class CORE_LIB_EXPORT FileUtils : public QObject
 	public:
 		Q_INVOKABLE static QString configLocation(void);
 		Q_INVOKABLE static QString mainSettingsLocation(void);
+		Q_INVOKABLE static QString fileName(QString path);
 };
 
 #endif // FILEUTILS_H
