@@ -21,11 +21,17 @@
 #ifndef QMLKEYBOARDHANDLER_H
 #define QMLKEYBOARDHANDLER_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QQuickItem>
 #include "KeyboardUtils.h"
 
 /*! \brief The QmlKeyboardHandler class can be used to receive any key presses (including dead keys). */
-class QmlKeyboardHandler : public QQuickItem
+class CORE_LIB_EXPORT QmlKeyboardHandler : public QQuickItem
 {
 		Q_OBJECT
 	public:
