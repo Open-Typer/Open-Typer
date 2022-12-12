@@ -51,8 +51,8 @@ Item {
 
 	KeyboardHandler {
 		id: keyboardHandler
-		onKeyPressed: (event) => control.keyPressed(event);
-		onKeyReleased: (event) => control.keyReleased(event);
+		onKeyPressed: control.keyPressed(event);
+		onKeyReleased: control.keyReleased(event);
 	}
 
 	Rectangle {
