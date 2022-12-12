@@ -75,8 +75,8 @@ void OptionsWindow::setupList(void)
 	// Add addon categories
 	AddonApi::initSettingsCategories();
 	QList<QVariantMap> categories = AddonApi::settingsCategories();
-	for(int i = 0; i < categories.count(); i++)
-		ui->list->addItem(new QListWidgetItem(categories[i]["icon"].value<QIcon>(), categories[i]["name"].toString()));
+	for(const auto &category : categories)
+		ui->list->addItem(new QListWidgetItem(category["icon"].value<QIcon>(), category["name"].toString()));
 	ui->list->setCurrentRow(oldIndex);
 }
 
