@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +22,11 @@
 #include "options/BehaviorOptions.h"
 #include "ui_BehaviorOptions.h"
 
+#include <QInputDialog>
+#include <QCryptographicHash>
+#include <QMessageBox>
+#include "Settings.h"
+
 /*! Constructs BehaviorOptions. */
 BehaviorOptions::BehaviorOptions(QWidget *parent) :
 	QWidget(parent),
@@ -31,7 +37,7 @@ BehaviorOptions::BehaviorOptions(QWidget *parent) :
 	// Error penalty
 	ui->errorPenaltyBox->setValue(Settings::errorPenalty());
 	// Mistake limit
-	bool mistakeLimit = Settings::mistakeLimit();
+	const bool mistakeLimit = Settings::mistakeLimit();
 	ui->mistakeLimitCheckBox->setChecked(mistakeLimit);
 	ui->mistakeCharsBox->setEnabled(mistakeLimit);
 	ui->mistakeCharsBox->setValue(Settings::mistakeChars());
@@ -55,7 +61,7 @@ BehaviorOptions::BehaviorOptions(QWidget *parent) :
 #endif // Q_OS_WIN
 	// Connect
 	// Error penalty box
-	connect(ui->errorPenaltyBox, SIGNAL(valueChanged(int)), this, SLOT(setErrorPenalty(int)));
+	connect(ui->errorPenaltyBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &BehaviorOptions::setErrorPenalty);
 	// Mistake limit check box
 	connect(ui->mistakeLimitCheckBox, &QCheckBox::toggled, this, &BehaviorOptions::toggleMistakeLimit);
 	// Mistake characters box

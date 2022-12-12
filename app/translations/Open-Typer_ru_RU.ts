@@ -348,7 +348,7 @@
         <location filename="../ui/MainWindow.ui" line="877"/>
         <source>Exercise history</source>
         <comment>exercise history</comment>
-        <translation>История упражения</translation>
+        <translation>История упражнения</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="906"/>

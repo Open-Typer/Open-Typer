@@ -22,6 +22,11 @@
 #include "options/AppearanceOptions.h"
 #include "ui_AppearanceOptions.h"
 
+#include <QColorDialog>
+#include <QPropertyAnimation>
+#include "Settings.h"
+#include "ThemeEngine.h"
+
 /*! Constructs AppearanceOptions. */
 AppearanceOptions::AppearanceOptions(QWidget *parent) :
 	QWidget(parent),
@@ -30,7 +35,7 @@ AppearanceOptions::AppearanceOptions(QWidget *parent) :
 	ui->setupUi(this);
 	ui->themeCustomizationFrame->hide();
 	ui->themesFrame->show();
-	bool advancedMode = Settings::advancedTheme();
+	const bool advancedMode = Settings::advancedTheme();
 	ui->simpleModeButton->setChecked(!advancedMode);
 	ui->advancedModeButton->setChecked(advancedMode);
 	ui->advancedControls->setVisible(advancedMode);
@@ -49,25 +54,25 @@ AppearanceOptions::AppearanceOptions(QWidget *parent) :
 	// Connections
 	connect(ui->advancedModeButton, &QPushButton::toggled, this, &AppearanceOptions::changeThemeMode);
 	connect(ui->lightThemeButton, &QPushButton::clicked, this, [this](bool checked) {
-		setSimpleTheme(checked ? 0 : 1);
+		setSimpleTheme(checked ? SimpleTheme::Light : SimpleTheme::Dark);
 	});
 	connect(ui->darkThemeButton, &QPushButton::clicked, this, [this](bool checked) {
-		setSimpleTheme(checked ? 1 : 0);
+		setSimpleTheme(checked ? SimpleTheme::Dark : SimpleTheme::Light);
 	});
-	connect(ui->themeList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(changeFullTheme(QListWidgetItem *)));
-	connect(ui->themeList, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changeFullTheme(QListWidgetItem *)));
-	connect(ui->backButton, SIGNAL(clicked()), this, SLOT(goBack()));
-	connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), this, SLOT(changeFont(QFont)));
-	connect(ui->fontSizeBox, SIGNAL(valueChanged(int)), this, SLOT(changeFontSize(int)));
-	connect(ui->boldTextBox, SIGNAL(clicked()), this, SLOT(setBoldText()));
-	connect(ui->italicTextBox, SIGNAL(clicked()), this, SLOT(setItalicText()));
-	connect(ui->underlineTextBox, SIGNAL(clicked()), this, SLOT(setUnderlineText()));
-	connect(ui->levelTextColorButton, SIGNAL(clicked()), this, SLOT(changeLevelTextColor()));
-	connect(ui->inputTextColorButton, SIGNAL(clicked()), this, SLOT(changeInputTextColor()));
-	connect(ui->bgColorButton, SIGNAL(clicked()), this, SLOT(changeBgColor()));
-	connect(ui->paperColorButton, SIGNAL(clicked()), this, SLOT(changePaperColor()));
-	connect(ui->panelColorButton, SIGNAL(clicked()), this, SLOT(changePanelColor()));
-	connect(ui->themeBox, SIGNAL(activated(int)), this, SLOT(changeTheme(int)));
+	connect(ui->themeList, &QListWidget::itemClicked, this, &AppearanceOptions::changeFullTheme);
+	connect(ui->themeList, &QListWidget::currentItemChanged, this, &AppearanceOptions::changeFullTheme);
+	connect(ui->backButton, &QPushButton::clicked, this, &AppearanceOptions::goBack);
+	connect(ui->fontComboBox, &QFontComboBox::currentFontChanged, this, &AppearanceOptions::changeFont);
+	connect(ui->fontSizeBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &AppearanceOptions::changeFontSize);
+	connect(ui->boldTextBox, &QCheckBox::clicked, this, &AppearanceOptions::setBoldText);
+	connect(ui->italicTextBox, &QCheckBox::clicked, this, &AppearanceOptions::setItalicText);
+	connect(ui->underlineTextBox, &QCheckBox::clicked, this, &AppearanceOptions::setUnderlineText);
+	connect(ui->levelTextColorButton, &QPushButton::clicked, this, &AppearanceOptions::changeLevelTextColor);
+	connect(ui->inputTextColorButton, &QPushButton::clicked, this, &AppearanceOptions::changeInputTextColor);
+	connect(ui->bgColorButton, &QPushButton::clicked, this, &AppearanceOptions::changeBgColor);
+	connect(ui->paperColorButton, &QPushButton::clicked, this, &AppearanceOptions::changePaperColor);
+	connect(ui->panelColorButton, &QPushButton::clicked, this, &AppearanceOptions::changePanelColor);
+	connect(ui->themeBox, QOverload<int>::of(&QComboBox::activated), this, &AppearanceOptions::changeTheme);
 	// Set up simple themes
 	updateSimpleTheme();
 }
@@ -103,27 +108,34 @@ void AppearanceOptions::changeThemeMode(bool advanced)
 }
 
 /*! Sets simple theme (0 for light, 1 for dark). */
-void AppearanceOptions::setSimpleTheme(int theme)
+void AppearanceOptions::setSimpleTheme(SimpleTheme theme)
 {
-	Settings::setSimpleThemeId(theme);
-	ui->lightThemeButton->setChecked(theme == 0);
-	ui->darkThemeButton->setChecked(theme == 1);
-	if(theme == 0)
-		ui->themeList->setCurrentRow(4); // light blue
-	else if(theme == 1)
-		ui->themeList->setCurrentRow(1); // dark
+	Settings::setSimpleThemeId(static_cast<int>(theme));
+	ui->lightThemeButton->setChecked(theme == SimpleTheme::Light);
+	ui->darkThemeButton->setChecked(theme == SimpleTheme::Dark);
+	switch(theme)
+	{
+		case SimpleTheme::Light:
+			ui->themeList->setCurrentRow(4); // light blue
+			break;
+		case SimpleTheme::Dark:
+			ui->themeList->setCurrentRow(1); // dark
+			break;
+		default:
+			break;
+	}
 }
 
 /*! Loads selected simple theme. */
 void AppearanceOptions::updateSimpleTheme(void)
 {
-	int simpleTheme = Settings::simpleThemeId(); // 0 for light, 1 for dark
-	if((simpleTheme == 0) && (globalThemeEngine.theme() != 4)) // default theme for "light" - light blue
-		setSimpleTheme(-1);
-	if((simpleTheme == 1) && (globalThemeEngine.theme() != 1)) // default theme for "dark" - dark
-		setSimpleTheme(-1);
-	ui->lightThemeButton->setChecked(simpleTheme == 0);
-	ui->darkThemeButton->setChecked(simpleTheme == 1);
+	SimpleTheme simpleTheme = static_cast<SimpleTheme>(Settings::simpleThemeId());
+	if((simpleTheme == SimpleTheme::Light) && (globalThemeEngine.theme() != 4)) // default theme for "light" - light blue
+		setSimpleTheme(SimpleTheme::Undefined);
+	if((simpleTheme == SimpleTheme::Dark) && (globalThemeEngine.theme() != 1)) // default theme for "dark" - dark
+		setSimpleTheme(SimpleTheme::Undefined);
+	ui->lightThemeButton->setChecked(simpleTheme == SimpleTheme::Light);
+	ui->darkThemeButton->setChecked(simpleTheme == SimpleTheme::Dark);
 }
 
 /*!

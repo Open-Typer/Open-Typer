@@ -4,6 +4,7 @@
  *
  * Copyright (C) 2021-2022 - adazem009
  * Copyright (C) 2022 - yeti0904
+ * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +22,15 @@
 
 #include "options/OptionsWindow.h"
 #include "ui_OptionsWindow.h"
+
+#include <QInputDialog>
+#include <QCryptographicHash>
+#include <QPushButton>
+#include "AddonApi.h"
+#include "options/BehaviorOptions.h"
+#include "options/KeyboardOptions.h"
+#include "options/AppearanceOptions.h"
+#include "widgets/LanguageList.h"
 
 /*! Constructs OptionsWindow. */
 OptionsWindow::OptionsWindow(QWidget *parent) :
@@ -41,14 +51,14 @@ OptionsWindow::OptionsWindow(QWidget *parent) :
 	ui->buttonBox->button(QDialogButtonBox::Close)->setFocusPolicy(Qt::NoFocus);
 	// Connections
 	connect(ui->unlockSettingsButton, &QPushButton::clicked, this, &OptionsWindow::unlockSettings);
-	connect(ui->list, SIGNAL(currentRowChanged(int)), this, SLOT(changeOptionWidget(int)));
+	connect(ui->list, &QListWidget::currentRowChanged, this, &OptionsWindow::changeOptionWidget);
 	connect(ui->buttonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &OptionsWindow::accept);
 }
 
 /*! Sets up list of categories. */
 void OptionsWindow::setupList(void)
 {
-	int oldIndex = ui->list->currentRow();
+	const int oldIndex = ui->list->currentRow();
 	ui->list->clear();
 	ui->list->setIconSize(QSize(36, 36));
 	// Register category classes
@@ -65,8 +75,8 @@ void OptionsWindow::setupList(void)
 	// Add addon categories
 	AddonApi::initSettingsCategories();
 	QList<QVariantMap> categories = AddonApi::settingsCategories();
-	for(int i = 0; i < categories.count(); i++)
-		ui->list->addItem(new QListWidgetItem(categories[i]["icon"].value<QIcon>(), categories[i]["name"].toString()));
+	for(const auto &category : categories)
+		ui->list->addItem(new QListWidgetItem(category["icon"].value<QIcon>(), category["name"].toString()));
 	ui->list->setCurrentRow(oldIndex);
 }
 
