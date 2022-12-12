@@ -140,6 +140,8 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
 	StringUtils stringUtils;
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
+	KeyboardUtils keyboardUtils;
+	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
 	engine.load("qrc:/qml/QmlWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
