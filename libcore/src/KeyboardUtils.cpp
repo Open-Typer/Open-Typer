@@ -22,14 +22,20 @@
 
 /*!
  * Returns true if the key is a special key.\n
- * Special keys are ignored by MainWindow#keyPress().
- * \see MainWindow#keyPress()
+ * Special keys are ignored by default.
  */
 bool KeyboardUtils::isSpecialKey(QKeyEvent *event)
 {
-	if((event->text() == "") && (event->key() != Qt::Key_Return) && (event->key() != Qt::Key_Enter))
+	return isSpecialKey(QmlKeyboardHandler::convertEvent(event));
+}
+
+/*! Implementation of isSpecialKey() for QVariantMap events. */
+bool KeyboardUtils::isSpecialKey(QVariantMap event)
+{
+	int keyID = event["key"].toInt();
+	if((event["text"].toString() == "") && (keyID != Qt::Key_Return) && (keyID != Qt::Key_Enter))
 		return true;
-	switch(event->key())
+	switch(keyID)
 	{
 		case Qt::Key_Delete:
 			return true;
