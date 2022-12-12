@@ -34,7 +34,7 @@
 #include "StringUtils.h"
 
 namespace publicPos {
-	CORE_LIB_EXPORT Q_NAMESPACE
+	CORE_LIB_EXPORT Q_NAMESPACE;
 	extern int CORE_LIB_EXPORT currentLesson, currentSublesson, currentExercise;
 }
 
