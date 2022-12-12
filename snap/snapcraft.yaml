@@ -14,7 +14,7 @@ parts:
     source: .
     source-type: local
     build-packages: [build-essential, qtbase5-dev, qtchooser, qt5-qmake, qtbase5-dev-tools, qttools5-dev-tools, libssl-dev, libqt5charts5-dev]
-    stage-packages: [libqt5gui5, libqt5widgets5, libqt5x11extras5, qtwayland5, libqt5charts5, libqt5printsupport5, libqt5svg5]
+    stage-packages: [libqt5gui5, libqt5widgets5, libqt5x11extras5, qtwayland5, libqt5waylandclient5, libqt5charts5, libqt5printsupport5, libqt5svg5]
     override-pull: |
       craftctl default
       git config --global --add safe.directory /root/parts/open-typer/src
@@ -56,6 +56,8 @@ parts:
 apps:
   open-typer:
     common-id: com.github.open-typer.open-typer
+    environment:
+      WAYLAND_DISPLAY: wayland-99
     command: bin/desktop-launch open-typer
     plugs:
       - x11
