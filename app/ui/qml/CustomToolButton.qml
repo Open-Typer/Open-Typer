@@ -25,12 +25,13 @@ import QtQuick.Controls.Material 2.15
 // Similar to ToolButton, but it's always a rectangle
 // Double click events are not supported, use the clicked() signal like with a QPushButton
 Button {
+	readonly property color foregroundColor: Material.theme === Material.Dark ? "white" : "black"
 	property string toolTipText
 	signal clicked()
 	font.capitalization: Font.MixedCase
 	Material.background: Qt.rgba(0, 0, 0, 0)
-	Material.foreground: Material.theme === Material.Dark ? "white" : "black"
-	icon.color: Material.theme === Material.Dark ? "white" : "black"
+	Material.foreground: foregroundColor
+	icon.color: foregroundColor
 	onReleased: clicked()
 	HoverToolTip { text: toolTipText }
 }
