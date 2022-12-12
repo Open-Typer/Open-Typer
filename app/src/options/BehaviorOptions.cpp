@@ -61,7 +61,7 @@ BehaviorOptions::BehaviorOptions(QWidget *parent) :
 #endif // Q_OS_WIN
 	// Connect
 	// Error penalty box
-	connect(ui->errorPenaltyBox, SIGNAL(valueChanged(int)), this, SLOT(setErrorPenalty(int)));
+	connect(ui->errorPenaltyBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &BehaviorOptions::setErrorPenalty);
 	// Mistake limit check box
 	connect(ui->mistakeLimitCheckBox, &QCheckBox::toggled, this, &BehaviorOptions::toggleMistakeLimit);
 	// Mistake characters box
