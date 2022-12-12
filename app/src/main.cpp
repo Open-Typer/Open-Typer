@@ -31,6 +31,7 @@
 #include "AddonApi.h"
 #include "QmlKeyboardHandler.h"
 #include "ExerciseTimer.h"
+#include "CharacterRecord.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -127,6 +128,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
 	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
+	qmlRegisterType<CharacterRecord>("OpenTyper", 1, 0, "CharacterRecord");
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
