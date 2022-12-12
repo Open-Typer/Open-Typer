@@ -20,6 +20,7 @@ SOURCES += \
     src/AddonApi.cpp \
     src/BuiltInPacks.cpp \
     src/ConfigParser.cpp \
+    src/ExerciseTimer.cpp \
     src/ExportDialog.cpp \
     src/FileUtils.cpp \
     src/HistoryParser.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     src/include/AddonApi.h \
     src/include/BuiltInPacks.h \
     src/include/ConfigParser.h \
+    src/include/ExerciseTimer.h \
     src/include/ExportDialog.h \
     src/include/FileUtils.h \
     src/include/HistoryParser.h \
