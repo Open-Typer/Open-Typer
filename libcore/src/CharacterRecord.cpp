@@ -27,17 +27,20 @@ void CharacterRecord::setKeyText(QString text)
 	emit keyTextChanged(text);
 }
 
+/*! Returns key text. */
 QString CharacterRecord::keyText(void)
 {
 	return m_keyText;
 }
 
+/*! Sets number of key hits used to compose the character. */
 void CharacterRecord::setHits(int count)
 {
 	m_hits = count;
 	emit hitsChanged(count);
 }
 
+/*! Returns number of key hits used to compose the character. */
 int CharacterRecord::hits(void)
 {
 	return m_hits;
