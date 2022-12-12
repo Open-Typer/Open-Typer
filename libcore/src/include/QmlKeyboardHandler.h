@@ -36,14 +36,12 @@ class CORE_LIB_EXPORT QmlKeyboardHandler : public QQuickItem
 		Q_OBJECT
 	public:
 		explicit QmlKeyboardHandler(QQuickItem *parent = nullptr);
+		static QVariantMap convertEvent(QKeyEvent *event);
 
 	protected:
 		void inputMethodEvent(QInputMethodEvent *event) override;
 		void keyPressEvent(QKeyEvent *event) override;
 		void keyReleaseEvent(QKeyEvent *event) override;
-
-	private:
-		QVariantMap convertEvent(QKeyEvent *event);
 
 	signals:
 		void keyPressed(QVariantMap event);
