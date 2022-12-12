@@ -19,6 +19,7 @@ INCLUDEPATH += src/include
 SOURCES += \
     src/AddonApi.cpp \
     src/BuiltInPacks.cpp \
+    src/CharacterRecord.cpp \
     src/ConfigParser.cpp \
     src/ExerciseTimer.cpp \
     src/ExportDialog.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
 HEADERS += \
     src/include/AddonApi.h \
     src/include/BuiltInPacks.h \
+    src/include/CharacterRecord.h \
     src/include/ConfigParser.h \
     src/include/ExerciseTimer.h \
     src/include/ExportDialog.h \
