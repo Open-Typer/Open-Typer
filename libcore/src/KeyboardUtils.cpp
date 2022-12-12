@@ -22,8 +22,8 @@
 
 /*!
  * Returns true if the key is a special key.\n
- * Special keys are ignored by OpenTyper#keyPress().
- * \see OpenTyper#keyPress()
+ * Special keys are ignored by MainWindow#keyPress().
+ * \see MainWindow#keyPress()
  */
 bool KeyboardUtils::isSpecialKey(QKeyEvent *event)
 {
