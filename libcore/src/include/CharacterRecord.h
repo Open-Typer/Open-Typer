@@ -21,13 +21,19 @@
 #ifndef CHARACTERRECORD_H
 #define CHARACTERRECORD_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QObject>
 
 /*!
  * \brief The CharacterRecord class can be used to store character records.
  * A character record consists of key text (usually a single character) and number of key hits used to compose the character.
  */
-class CharacterRecord : public QObject
+class CORE_LIB_EXPORT CharacterRecord : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString keyText READ keyText WRITE setKeyText NOTIFY keyTextChanged)
