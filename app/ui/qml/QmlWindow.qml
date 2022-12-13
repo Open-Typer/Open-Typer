@@ -497,6 +497,7 @@ ApplicationWindow {
 			exerciseTimer.start();
 			exerciseInProgress = true;
 		}
+		var ignoreBackspace = false;
 		var keyText = event["text"];
 		if((keyText === "'") && (displayExercise[displayPos] === "‘"))
 			keyText = "‘";
@@ -629,6 +630,8 @@ ApplicationWindow {
 					currentMistake.previousText = keyText;
 					currentMistake.type = MistakeRecord.Type_Change;
 					recordedMistakes[recordedMistakes.length] = currentMistake;
+					if(ignoreMistakeAppend)
+						paper.mistake = paper.mistake.substring(0, paper.mistake.length - 1);
 					var errorAppend = keyText;
 					if(keyText === " ")
 						errorAppend = "_";
@@ -642,9 +645,11 @@ ApplicationWindow {
 						errorWords[errorWords.length] = errorWord;
 					deadKeys = 0;
 				}
+				if(keyID === Qt.Key_Backspace)
+					ignoreBackspace = true;
 			}
 		}
-		if(!mistake && ignoreMistakeAppend)
+		if(!mistake && ignoreMistakeAppend && !ignoreBackspace)
 			paper.mistake += "_";
 		if(((displayPos >= displayExercise.length) && correctMistakes) || (currentLine >= lineCount + 1))
 		{
