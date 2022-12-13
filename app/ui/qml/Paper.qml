@@ -95,6 +95,7 @@ Item {
 			}
 			TextEdit {
 				property int textWidth: Math.max(calculateTextWidth(text, inputTextMetrics), calculateTextWidth(errorText.text, errorTextMetrics));
+				property bool lockFocus: false
 				id: inputText
 				Layout.fillWidth: true
 				topPadding: 0
@@ -107,10 +108,29 @@ Item {
 				clip: true
 				visible: inputVisible
 				onFocusChanged: {
-					if(focus)
+					if(focus && !lockFocus)
+					{
+						forceActiveFocus();
+						cursorVisible = true;
 						keyboardHandler.focus = true;
+					}
+				}
+				onCursorVisibleChanged: {
+					if(!cursorVisible)
+						cursorVisible = true;
+				}
+				onTextChanged: {
+					lockFocus = true;
+					forceActiveFocus();
+					cursorPosition = text.length;
+					lockFocus = false;
+					keyboardHandler.focus = true;
 				}
 
+				MouseArea {
+					anchors.fill: parent
+					onClicked: parent.forceActiveFocus();
+				}
 				Label {
 					id: errorText
 					anchors.fill: parent
