@@ -608,6 +608,7 @@ ApplicationWindow {
 					mistake = false;
 					ignoreMistakeAppend = true;
 					paper.mistake = paper.mistake.substring(0, paper.mistake.length - 1);
+					paper.input = paper.input.substring(0, paper.input.length - 1);
 				}
 			}
 			else
@@ -638,6 +639,7 @@ ApplicationWindow {
 					else if(keyText === "\n")
 						errorAppend = "↵\n";
 					paper.mistake += errorAppend;
+					paper.input += " ";
 					exerciseMistakes++;
 					mistake = true;
 					var errorWord = StringUtils.wordAt(exerciseText, exercisePos);
