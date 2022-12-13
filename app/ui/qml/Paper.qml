@@ -70,11 +70,10 @@ Item {
 			anchors.fill: parent
 			anchors.margins: control.textMargins
 			spacing: 0
-			TextArea {
+			TextEdit {
 				property int textWidth: calculateTextWidth(text, currentLineTextMetrics);
 				id: currentLineText
 				Layout.fillWidth: true
-				background: null
 				topPadding: 0
 				text: currentLine
 				font: ThemeEngine.font
@@ -94,11 +93,10 @@ Item {
 				Layout.fillWidth: true
 				visible: currentLineVisible
 			}
-			TextArea {
+			TextEdit {
 				property int textWidth: Math.max(calculateTextWidth(text, inputTextMetrics), calculateTextWidth(errorText.text, errorTextMetrics));
 				id: inputText
 				Layout.fillWidth: true
-				background: null
 				topPadding: 0
 				text: input
 				font: ThemeEngine.font
@@ -140,10 +138,9 @@ Item {
 				padding: 0
 				background: null
 				visible: remainingVisible
-				TextArea {
+				TextEdit {
 					property int textWidth: calculateTextWidth(text, remainingTextMetrics);
 					id: remainingText
-					background: null
 					text: remaining
 					font: ThemeEngine.font
 					readOnly: true
