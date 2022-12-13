@@ -145,6 +145,7 @@ Item {
 
 				MouseArea {
 					anchors.fill: parent
+					cursorShape: Qt.IBeamCursor
 					onClicked: parent.forceActiveFocus();
 				}
 				Label {
