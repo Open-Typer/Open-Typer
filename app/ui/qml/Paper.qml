@@ -96,6 +96,7 @@ Item {
 			TextEdit {
 				property int textWidth: Math.max(calculateTextWidth(text, inputTextMetrics), calculateTextWidth(errorText.text, errorTextMetrics));
 				property bool lockFocus: false
+				property bool cursorBlinkState: true
 				id: inputText
 				Layout.fillWidth: true
 				topPadding: 0
@@ -125,6 +126,21 @@ Item {
 					cursorPosition = text.length;
 					lockFocus = false;
 					keyboardHandler.focus = true;
+					cursorTimer.restart();
+					cursorBlinkState = true;
+				}
+				cursorDelegate: Rectangle {
+					visible: parent.cursorVisible && parent.cursorBlinkState
+					color: Material.foreground
+					width: parent.cursorRectangle.width
+				}
+
+				Timer {
+					id: cursorTimer
+					interval: 500
+					repeat: true
+					running: true
+					onTriggered: parent.cursorBlinkState = !parent.cursorBlinkState;
 				}
 
 				MouseArea {
