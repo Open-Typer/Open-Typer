@@ -40,6 +40,8 @@ ApplicationWindow {
 	property int exerciseCount
 	property int exerciseLineLength
 	property string exerciseText
+	property string displayExercise
+	property string fullInput
 	property int currentMode
 	property bool preview
 	property int currentLine
@@ -57,8 +59,11 @@ ApplicationWindow {
 	property bool mistake
 	property bool ignoreMistakeAppend
 	property int lineCount
-	property bool hideText
+	property bool hideText: false
 	property bool blockInput
+	property bool timedExStarted
+	property var errorWords
+	property bool correctMistakes: true
 	Material.theme: ThemeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
 	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
 	color: ThemeEngine.bgColor
@@ -72,6 +77,10 @@ ApplicationWindow {
 
 	ConfigParser {
 		id: parser
+	}
+
+	ExerciseTimer {
+		id: exerciseTimer
 	}
 
 	ColumnLayout {
@@ -160,6 +169,8 @@ ApplicationWindow {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.topMargin: 10
+			onKeyPressed: keyPress(event);
+			onKeyReleased: console.log("released: " + event["text"]);
 		}
 	}
 
@@ -259,7 +270,7 @@ ApplicationWindow {
 		lessonCount = parser.lessonCount();
 		// Get exercise count (in current lesson)
 		exerciseCount = parser.exerciseCount(lessonID, sublessonID + sublessonListStart);
-		// Update level list
+		// Update exercise list
 		loadSublesson(exerciseID);
 		// Make lesson, sublesson and exercise info public
 		currentLesson = lessonID;
@@ -295,6 +306,7 @@ ApplicationWindow {
 		paper.mistake = "";
 		panel2.contents.closeLoadedExButton.visible = customExerciseLoaded;
 		// Init input
+		fullInput = "";
 		paper.input = "";
 		updateText();
 		// Enable/disable stats
@@ -306,7 +318,7 @@ ApplicationWindow {
 		paper.currentLineVisible = true;
 		paper.remainingVisible = true;
 		// TODO: Hide export button here
-		var displayExercise = parser.initExercise(exerciseText, exerciseLineLength);
+		displayExercise = parser.initExercise(exerciseText, exerciseLineLength);
 		lineCount = StringUtils.charCount(displayExercise, '\n');
 		// Process exercise text
 		var text = exerciseText;
@@ -314,7 +326,7 @@ ApplicationWindow {
 			text = exerciseText.substring(0, exerciseText.length - 1);
 		var finalText = parser.initExercise(text, exerciseLineLength, false, currentLine);
 		if(currentMode == 1)
-			finalText += "\n" + displayExercise.substring(0, displayLevel.count() - 1).repeat(100 / lineCount);
+			finalText += "\n" + displayExercise.substring(0, displayExercise.length - 1).repeat(100 / lineCount);
 		var currentLineText = "";
 		var remainingText = "";
 		var line = 0;
@@ -455,6 +467,195 @@ ApplicationWindow {
 		currentExercise = index + 1;
 		customExerciseLoaded = false;
 		repeatExercise();
+	}
+
+	function keyPress(event) {
+		if(blockInput || ((currentMode == 1) && !timedExStarted))
+			return;
+		var keyID = event["key"];
+		var highlightID = keyID;
+		if((fullInput.length < exerciseText.length) && (keyID === Qt.Key_Shift))
+		{
+			// TODO: Get shift key based on next character and set a special highlight ID
+		}
+		// TODO: Highlight the key on the keyboard
+		if(event["isAutoRepeat"])
+			return;
+		if(KeyboardUtils.isDeadKey(keyID))
+		{
+			deadKeys++;
+			// Count modifier key used with the dead key
+			if(event["modifiers"] !== Qt.NoModifier)
+				deadKeys++;
+			return;
+		}
+		if(KeyboardUtils.isSpecialKey(event) && (keyID !== Qt.Key_Backspace))
+			return;
+		if((exercisePos == 0) && !exerciseInProgress)
+		{
+			errorWords = [];
+			exerciseTimer.start();
+			exerciseInProgress = true;
+		}
+		var keyText = event["text"];
+		if((keyText === "'") && (displayExercise[displayPos] === "‘"))
+			keyText = "‘";
+		if((keyText === "‘") && (displayExercise[displayPos] === '\''))
+			keyText = "'";
+		if((keyID === Qt.Key_Return) || (keyID === Qt.Key_Enter))
+			keyText = "\n";
+		var correctChar = ((((displayExercise[displayPos] === '\n') && ((keyID === Qt.Key_Return) || (keyID === Qt.Key_Enter) || (keyID === Qt.Key_Space))) || ((displayExercise[displayPos] !== '\n') && (keyText === exerciseText[exercisePos]))) && !mistake);
+		if(correctChar || !correctMistakes)
+		{
+			if(!mistake && ignoreMistakeAppend)
+				paper.mistake += "_";
+			if(keyID === Qt.Key_Backspace)
+			{
+				fullInput = fullInput.substring(0, fullInput.length - 1);
+				var text = paper.input;
+				if(text.length == 0)
+				{
+					if(currentLine == 0)
+						paper.input = text.substring(0, text.length - 1);
+					else if(fullInput.length > 0)
+					{
+						var arr = fullInput.split('\n');
+						paper.input = arr[arr.length - 1];
+						currentLine--;
+						linePos = 0;
+						updateText();
+					}
+				}
+				else
+					paper.input = text.substring(0, text.length - 1);
+				if(fullInput.length > 0)
+				{
+					exercisePos--;
+					displayPos--;
+					absolutePos--;
+					linePos--;
+					recordedCharacters.pop();
+				}
+			}
+			else
+			{
+				if(ignoreMistakeAppend)
+					paper.mistake = paper.mistake.substring(0, paper.mistake.length - 1);
+				if((((keyText === "\n") || ((keyText === " ") && correctMistakes)) && (displayExercise[displayPos] === '\n')) || (keyText === "\n"))
+				{
+					if(hideText)
+					{
+						paper.input += "\n";
+						paper.mistake += "\n";
+					}
+					else
+					{
+						paper.input = "";
+						paper.mistake = "";
+					}
+					linePos = 0;
+					keyText = "\n";
+					currentLine++;
+					ignoreMistakeAppend = false;
+					updateText();
+					if((currentMode == 1) && (currentLine >= lineCount - 1))
+					{
+						currentLine = 0;
+						updateText();
+						exercisePos = -1;
+						displayPos = -1;
+						linePos = -1;
+						deadKeys = 0;
+						mistake = false;
+						paper.input = "";
+					}
+				}
+				else
+				{
+					if(ignoreMistakeAppend)
+						ignoreMistakeAppend = false;
+					else
+						paper.mistake += keyText === "\n" ? "\n" : " ";
+					paper.input += keyText;
+					linePos++;
+				}
+				fullInput += keyText;
+				exercisePos++;
+				displayPos++;
+				absolutePos++;
+				var charHits = 1;
+				// Count modifier keys
+				if(event["modifiers"] !== Qt.NoModifier)
+					charHits++;
+				// Count dead keys
+				charHits += deadKeys;
+				totalHits += charHits;
+				var charRecord = Qt.createQmlObject("import OpenTyper 1.0; CharacterRecord {}", this);
+				charRecord.keyText = keyText;
+				charRecord.hits = charHits;
+				recordedCharacters[recordedCharacters.length] = charRecord;
+				deadKeys = 0;
+			}
+		}
+		else
+		{
+			if(mistake)
+			{
+				deadKeys = 0;
+				if(keyID === Qt.Key_Backspace)
+				{
+					mistake = false;
+					ignoreMistakeAppend = true;
+					paper.mistake = paper.mistake.substring(0, paper.mistake.length - 1);
+				}
+			}
+			else
+			{
+				if(!KeyboardUtils.isSpecialKey(event))
+				{
+					var newRecordedMistakes = [];
+					var removeCount = 0;
+					for(var i = 0; i < recordedMistakes.length; i++)
+					{
+						if(recordedMistakes[i].position === absolutePos)
+							removeCount++;
+						else
+							newRecordedMistakes[newRecordedMistakes.length] = recordedMistakes[i];
+					}
+					exerciseMistakes -= removeCount;
+					recordedMistakes = newRecordedMistakes;
+					var currentMistake = Qt.createQmlObject("import OpenTyper 1.0; MistakeRecord {}", this);
+					currentMistake.position = absolutePos;
+					currentMistake.previousText = keyText;
+					currentMistake.type = MistakeRecord.Type_Change;
+					recordedMistakes[recordedMistakes.length] = currentMistake;
+					var errorAppend = keyText;
+					if(keyText === " ")
+						errorAppend = "_";
+					else if(keyText === "\n")
+						errorAppend = "↵\n";
+					paper.mistake += errorAppend;
+					exerciseMistakes++;
+					mistake = true;
+					var errorWord = StringUtils.wordAt(exerciseText, exercisePos);
+					if((errorWord !== "") && !errorWords.includes(errorWord))
+						errorWords[errorWords.length] = errorWord;
+					deadKeys = 0;
+				}
+			}
+		}
+		if(!mistake && ignoreMistakeAppend)
+			paper.mistake += "_";
+		if(((displayPos >= displayExercise.length) && correctMistakes) || (currentLine >= lineCount + 1))
+		{
+			if(currentLine >= lineCount + 1)
+				paper.input = paper.input.substring(0, paper.input.length - 1);
+			// TODO: Add keyRelease() method
+			//keyRelease(event);
+			lastTime = exerciseTimer.elapsed / 1000.0;
+			// TODO: Add endExercise() method
+			//endExercise(true, true, false, true, true);
+		}
 	}
 
 	Component.onCompleted: reload();
