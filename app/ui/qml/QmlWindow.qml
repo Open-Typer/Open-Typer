@@ -647,7 +647,7 @@ ApplicationWindow {
 					exerciseMistakes++;
 					mistake = true;
 					var errorWord = StringUtils.wordAt(exerciseText, exercisePos);
-					if((errorWord !== "") && !errorWords.includes(errorWord))
+					if((errorWord !== "") && (errorWords.indexOf(errorWord) === -1))
 						errorWords[errorWords.length] = errorWord;
 					deadKeys = 0;
 				}
