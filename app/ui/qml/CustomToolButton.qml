@@ -41,7 +41,7 @@ Button {
 	Image {
 		id: iconImage
 		property string name
-		source: "qrc:/icons/open-typer/32x32/" + name
+		source: "qrc:/icons/open-typer/32x32/" + name + ".svg"
 		fillMode: Image.PreserveAspectFit
 		width: 24
 		height: 24
