@@ -595,7 +595,7 @@ ApplicationWindow {
 				// Count dead keys
 				charHits += deadKeys;
 				totalHits += charHits;
-				var charRecord = Qt.createQmlObject("import OpenTyper 1.0; CharacterRecord {}", this);
+				var charRecord = Qt.createQmlObject("import OpenTyper 1.0; CharacterRecord {}", root);
 				charRecord.keyText = keyText;
 				charRecord.hits = charHits;
 				recordedCharacters[recordedCharacters.length] = charRecord;
@@ -630,7 +630,7 @@ ApplicationWindow {
 					}
 					exerciseMistakes -= removeCount;
 					recordedMistakes = newRecordedMistakes;
-					var currentMistake = Qt.createQmlObject("import OpenTyper 1.0; MistakeRecord {}", this);
+					var currentMistake = Qt.createQmlObject("import OpenTyper 1.0; MistakeRecord {}", root);
 					currentMistake.position = absolutePos;
 					currentMistake.previousText = keyText;
 					currentMistake.type = MistakeRecord.Type_Change;
