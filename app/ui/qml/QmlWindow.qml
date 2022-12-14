@@ -89,6 +89,17 @@ ApplicationWindow {
 		id: mainLayout
 		anchors.fill: parent
 		spacing: 0
+
+		CustomMenuBar {
+			Layout.fillWidth: true
+		}
+
+		Rectangle {
+			Layout.fillWidth: true
+			implicitHeight: 1
+			color: Material.theme == Material.Dark ? Qt.rgba(1, 1, 1, 0.2) : Qt.rgba(0, 0, 0, 0.2);
+		}
+
 		Panel {
 			id: panel1
 			Layout.fillWidth: true
