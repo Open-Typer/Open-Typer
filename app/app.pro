@@ -97,6 +97,7 @@ FORMS += \
 DISTFILES += \
     ui/qml/CustomComboBox.qml \
     ui/qml/CustomMenu.qml \
+    ui/qml/CustomMenuBar.qml \
     ui/qml/CustomToolButton.qml \
     ui/qml/Paper.qml \
     ui/qml/QmlWindow.qml \
