@@ -18,9 +18,9 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Controls.Material 2.15
+import QtQuick 2.9
+import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.2
 
 // Similar to ToolButton, but it's always a rectangle
 // Double click events are not supported, use the clicked() signal like with a QPushButton
