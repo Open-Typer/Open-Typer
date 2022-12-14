@@ -94,32 +94,32 @@ ApplicationWindow {
 			Layout.fillWidth: true
 			control: RowLayout {
 				CustomToolButton {
-					icon.name: "settings"
+					iconName: "settings"
 					toolTipText: qsTr("Options")
 				}
 				CustomToolButton {
-					icon.name: "open"
+					iconName: "open"
 					toolTipText: qsTr("Open")
 				}
 				CustomToolButton {
-					icon.name: "print"
+					iconName: "print"
 					toolTipText: qsTr("Print")
 				}
 				ToolSeparator {}
 				CustomToolButton {
-					icon.name: "paper"
+					iconName: "paper"
 					text: qsTr("Typing test")
 				}
 				CustomToolButton {
-					icon.name: "time"
+					iconName: "time"
 					text: qsTr("Timed exercise")
 				}
 				CustomToolButton {
-					icon.name: "close"
+					iconName: "close"
 					text: qsTr("Text from error words")
 				}
 				CustomToolButton {
-					icon.name: "rewind"
+					iconName: "rewind"
 					text: qsTr("Reverse text")
 				}
 			}
@@ -134,22 +134,22 @@ ApplicationWindow {
 				property alias sublessonBox: sublessonBox
 				property alias exerciseBox: exerciseBox
 				CustomToolButton {
-					icon.name: "repeat"
+					iconName: "repeat"
 					toolTipText: qsTr("Repeat exercise")
 					onClicked: repeatExercise();
 				}
 				CustomToolButton {
 					id: closeLoadedExButton
-					icon.name: "close"
+					iconName: "close"
 					toolTipText: qsTr("Close loaded exercise")
 				}
 				CustomToolButton {
-					icon.name: "left"
+					iconName: "left"
 					toolTipText: qsTr("Previous exercise")
 					onClicked: previousExercise();
 				}
 				CustomToolButton {
-					icon.name: "right"
+					iconName: "right"
 					toolTipText: qsTr("Next exercise")
 					onClicked: nextExercise();
 				}
@@ -159,7 +159,7 @@ ApplicationWindow {
 				ToolSeparator {}
 				CustomToolButton {
 					id: statsButton
-					icon.name: "stats"
+					iconName: "stats"
 					text: qsTr("Exercise history")
 				}
 			}
