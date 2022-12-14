@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 	a.processEvents();
 	// Register QML types
 	QQmlEngine::setObjectOwnership(&globalThemeEngine, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [&](QQmlEngine *, QJSEngine *) -> QObject * {
+	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalThemeEngine;
 	});
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
