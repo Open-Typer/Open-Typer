@@ -6,5 +6,6 @@
         <file>CustomComboBox.qml</file>
         <file>QmlWindow.qml</file>
         <file>Paper.qml</file>
+        <file>CustomMenu.qml</file>
     </qresource>
 </RCC>
