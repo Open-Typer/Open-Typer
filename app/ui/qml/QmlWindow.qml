@@ -203,7 +203,11 @@ ApplicationWindow {
 		}
 	}
 
-	function loadPack(name, content = "") {
+	function loadPack(name) {
+		return loadPackContent(name, "");
+	}
+
+	function loadPackContent(name, content) {
 		customExerciseLoaded = false;
 		var packPath = "";
 		if(customPack)
