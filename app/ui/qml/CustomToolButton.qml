@@ -21,17 +21,45 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
+import QtGraphicalEffects 1.0
 
 // Similar to ToolButton, but it's always a rectangle
 // Double click events are not supported, use the clicked() signal like with a QPushButton
 Button {
 	readonly property color foregroundColor: Material.theme === Material.Dark ? "white" : "black"
 	property string toolTipText
+	property alias iconName: iconImage.name
 	signal clicked()
+	id: control
 	font.capitalization: Font.MixedCase
 	Material.background: Qt.rgba(0, 0, 0, 0)
 	Material.foreground: foregroundColor
-	icon.color: foregroundColor
+	// TODO: Use this after dropping Qt < 5.10 and remove iconImage
+	//icon.color: foregroundColor
 	onReleased: clicked()
 	HoverToolTip { text: toolTipText }
+	Image {
+		id: iconImage
+		property string name
+		source: "qrc:/icons/open-typer/32x32/" + name
+		fillMode: Image.PreserveAspectFit
+		width: 24
+		height: 24
+		Component.onCompleted: {
+			if(text == "")
+				anchors.centerIn = parent;
+			else
+			{
+				anchors.left = parent.left;
+				anchors.top = parent.top;
+				anchors.bottom = parent.bottom;
+				control.implicitWidth = control.implicitWidth + width + 16;
+			}
+		}
+	}
+	ColorOverlay {
+		anchors.fill: iconImage
+		source: iconImage
+		color: control.foregroundColor
+	}
 }
