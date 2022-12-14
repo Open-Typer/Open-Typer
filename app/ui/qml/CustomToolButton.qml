@@ -40,13 +40,15 @@ Button {
 	HoverToolTip { text: toolTipText }
 	Image {
 		id: iconImage
-		property string name
-		source: "qrc:/icons/open-typer/32x32/" + name + ".svg"
+		property string name: ""
+		source: name == "" ? "" : "qrc:/icons/open-typer/32x32/" + name + ".svg"
 		fillMode: Image.PreserveAspectFit
 		width: 24
 		height: 24
 		Component.onCompleted: {
-			if(text == "")
+			if(name == "")
+				visible = false;
+			else if(text == "")
 				anchors.centerIn = parent;
 			else
 			{
