@@ -22,7 +22,9 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 Menu {
-	y: parent.height
+	property bool isSubMenu: false
+	x: isSubMenu ? parent.width : 0
+	y: isSubMenu ? 0 : parent.height
 	font.pointSize: 10
 	background: Rectangle {
 		color: backgroundColor();
