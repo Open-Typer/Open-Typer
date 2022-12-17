@@ -148,7 +148,22 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
 	KeyboardUtils keyboardUtils;
 	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
-	engine.load("qrc:/qml/QmlWindow.qml");
-	splash.finish(nullptr);
+	if(!Settings::containsLessonPack())
+	{
+		InitialSetup *initialSetup = new InitialSetup;
+		initialSetup->setWindowModality(Qt::ApplicationModal);
+		auto enginePtr = &engine;
+		auto splashPtr = &splash;
+		QObject::connect(initialSetup, &InitialSetup::accepted, enginePtr, [enginePtr, splashPtr]() {
+			enginePtr->load("qrc:/qml/QmlWindow.qml");
+			splashPtr->finish(nullptr);
+		});
+		initialSetup->open();
+	}
+	else
+	{
+		engine.load("qrc:/qml/QmlWindow.qml");
+		splash.finish(nullptr);
+	}
 	return a.exec();
 }
