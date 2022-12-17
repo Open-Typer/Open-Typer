@@ -31,19 +31,6 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QQuickWidget" name="qmlContent">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="resizeMode">
-       <enum>QQuickWidget::SizeRootObjectToView</enum>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QFrame" name="controlFrame">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
@@ -1142,7 +1129,7 @@
             <x>0</x>
             <y>0</y>
             <width>165</width>
-            <height>101</height>
+            <height>137</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1912,11 +1899,6 @@ hr { height: 1px; border-width: 0; }
   </action>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>QQuickWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">QtQuickWidgets/QQuickWidget</header>
-  </customwidget>
   <customwidget>
    <class>InputLabelWidget</class>
    <extends>QTextEdit</extends>
