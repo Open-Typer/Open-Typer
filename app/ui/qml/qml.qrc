@@ -7,6 +7,6 @@
         <file>QmlWindow.qml</file>
         <file>Paper.qml</file>
         <file>CustomMenuBar.qml</file>
-        <file>CustomMenu.qml</file>
+        <file>MenuButton.qml</file>
     </qresource>
 </RCC>

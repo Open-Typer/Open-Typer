@@ -25,7 +25,7 @@ import QtQuick.Layouts 1.3
 
 Panel {
 	control: RowLayout {
-		CustomMenu {
+		MenuButton {
 			text: qsTr("&File");
 			menu: Menu {
 				id: menu

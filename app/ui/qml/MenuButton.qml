@@ -1,5 +1,5 @@
 /*
- * CustomMenu.qml
+ * MenuButton.qml
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022 - adazem009
