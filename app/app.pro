@@ -1,7 +1,7 @@
 TARGET = open-typer
 DESTDIR = $$_PRO_FILE_PWD_/..
 
-QT += core gui quick quickcontrols2 quickwidgets charts
+QT += core gui quick quickcontrols2 charts
 QTPLUGIN += qsvg
 !wasm {
     QT += printsupport
