@@ -9,5 +9,7 @@
         <file>CustomMenuBar.qml</file>
         <file>MenuButton.qml</file>
         <file>CustomMenu.qml</file>
+        <file>CustomMenuItem.qml</file>
+        <file>CustomMenuSeparator.qml</file>
     </qresource>
 </RCC>

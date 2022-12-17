@@ -98,6 +98,8 @@ DISTFILES += \
     ui/qml/CustomComboBox.qml \
     ui/qml/CustomMenu.qml \
     ui/qml/CustomMenuBar.qml \
+    ui/qml/CustomMenuItem.qml \
+    ui/qml/CustomMenuSeparator.qml \
     ui/qml/CustomToolButton.qml \
     ui/qml/MenuButton.qml \
     ui/qml/Paper.qml \
