@@ -27,14 +27,7 @@ Panel {
 	control: RowLayout {
 		MenuButton {
 			text: qsTr("&File");
-			menu: Menu {
-				id: menu
-				background: Rectangle {
-					color: backgroundColor();
-					implicitWidth: 200
-					implicitHeight: 40
-				}
-
+			menu: CustomMenu {
 				MenuItem { text: qsTr("&New..."); font.pointSize: 10; implicitHeight: 36 }
 				MenuItem { text: qsTr("&Open..."); font.pointSize: 10; implicitHeight: 36 }
 				MenuSeparator { }
