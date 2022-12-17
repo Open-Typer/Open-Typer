@@ -21,10 +21,22 @@
 import QtQuick 2.9
 
 CustomToolButton {
-	property alias menu: loader.sourceComponent
+	property CustomMenu menu: CustomMenu {}
+	property bool menuOpened: false
 	id: control
 	font.pointSize: 10
-	onClicked: loader.item.open();
+	onClicked: {
+		if(menuOpened)
+		{
+			menu.close();
+			menuOpened = false;
+		}
+		else
+		{
+			menu.open();
+			menuOpened = true;
+		}
+	}
 	implicitWidth: metrics.boundingRect(text).width + 16
 	implicitHeight: metrics.height + 16
 
@@ -32,6 +44,4 @@ CustomToolButton {
 		id: metrics
 		font: control.font
 	}
-
-	Loader { id: loader }
 }
