@@ -64,6 +64,7 @@ ApplicationWindow {
 	property bool timedExStarted
 	property var errorWords
 	property bool correctMistakes: true
+	property bool eventInProgress: false
 	Material.theme: ThemeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
 	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
 	color: ThemeEngine.bgColor
@@ -485,7 +486,7 @@ ApplicationWindow {
 	}
 
 	function keyPress(event) {
-		if(blockInput || ((currentMode == 1) && !timedExStarted))
+		if(eventInProgress || blockInput || ((currentMode == 1) && !timedExStarted))
 			return;
 		var keyID = event["key"];
 		var highlightID = keyID;
@@ -506,6 +507,7 @@ ApplicationWindow {
 		}
 		if(KeyboardUtils.isSpecialKey(event) && (keyID !== Qt.Key_Backspace))
 			return;
+		eventInProgress = true;
 		if((exercisePos == 0) && !exerciseInProgress)
 		{
 			errorWords = [];
@@ -678,6 +680,7 @@ ApplicationWindow {
 			// TODO: Add endExercise() method
 			//endExercise(true, true, false, true, true);
 		}
+		eventInProgress = false;
 	}
 
 	Component.onCompleted: reload();
