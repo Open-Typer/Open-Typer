@@ -9,5 +9,5 @@ Vcs-Git: https://github.com/Open-Typer/Open-Typer.git
 
 Package: open-typer
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, qml-module-qtquick2, qml-module-qtquick-controls2, qml-module-qtquick-layouts, qml-module-qtquick-window2, qml-module-qtgraphicaleffects
 Description: Free and open source typing tutor
