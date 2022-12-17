@@ -8,5 +8,6 @@
         <file>Paper.qml</file>
         <file>CustomMenuBar.qml</file>
         <file>MenuButton.qml</file>
+        <file>CustomMenu.qml</file>
     </qresource>
 </RCC>
