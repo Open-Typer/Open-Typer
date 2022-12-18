@@ -103,9 +103,9 @@ Panel {
 					itemComponent = Qt.createQmlObject(getComponentString(menuType), parentItem)
 					item = itemComponent.createObject(parentItem);
 					item.title = itemData.title;
+					parentItem.addMenu(item);
 					createMenu(item, itemData.itemList, buttonType, menuType, menuItemType, menuSeparatorType);
 					overrideAddItem = true;
-					parentItem.addMenu(item);
 				}
 				else {
 					itemComponent = Qt.createQmlObject(getComponentString(buttonType), parentItem)
