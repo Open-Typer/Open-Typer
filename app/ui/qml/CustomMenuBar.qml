@@ -22,6 +22,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtQuick.Layouts 1.3
+import Qt.labs.platform 1.0 as Platform
 
 Panel {
 	property list<Item> menuList: [
@@ -49,19 +50,23 @@ Panel {
 	]
 
 	function getComponentString(typeName) {
-		var imports = "import QtQuick 2.9; import QtQuick.Controls 2.2;"
+		var imports = "import QtQuick 2.9; import QtQuick.Controls 2.2; import Qt.labs.platform 1.0 as Platform;"
 		return imports + " Component { " + typeName + " {} }";
 	}
 
 	function createMenuBar(parentItem, buttonType, menuType, menuItemType, menuSeparatorType) {
 		for(var i = 0; i < menuList.length; i++)
 		{
-			var buttonComponent = Qt.createQmlObject(getComponentString(buttonType), parentItem);
-			var button = buttonComponent.createObject(parentItem);
-			button.text = menuList[i].text;
+			if(buttonType !== "")
+			{
+				var buttonComponent = Qt.createQmlObject(getComponentString(buttonType), parentItem);
+				var button = buttonComponent.createObject(parentItem);
+				button.text = menuList[i].text;
+			}
 			var menuComponent = Qt.createQmlObject(getComponentString(menuType), parentItem);
 			var menu = menuComponent.createObject(parentItem);
-			button.menu = menu;
+			if(buttonType !== "")
+				button.menu = menu;
 			createMenu(menu, menuList[i].itemList, buttonType, menuType, menuItemType, menuSeparatorType);
 		}
 	}
@@ -72,13 +77,14 @@ Panel {
 			var itemData = itemList[j];
 			var itemComponent;
 			var item;
+			var overrideAddItem = false;
 			if(itemData.type === "item")
 			{
 				itemComponent = Qt.createQmlObject(getComponentString(menuItemType), parentItem);
 				item = itemComponent.createObject(null);
 				item.text = itemData.text;
 				if(typeof itemData.onClicked != "undefined")
-					item.onClicked.connect(itemData.onClicked);
+					item.onTriggered.connect(itemData.onClicked);
 			}
 			else if(itemData.type === "separator")
 			{
@@ -87,34 +93,51 @@ Panel {
 			}
 			else if(itemData.type === "menu")
 			{
-				itemComponent = Qt.createQmlObject(getComponentString(buttonType), parentItem)
-				item = itemComponent.createObject(null);
-				item.text = itemData.title;
-				var buttonTextComponent = Qt.createQmlObject(getComponentString("Text"), item);
-				var buttonText = buttonTextComponent.createObject(item);
-				buttonText.text = Qt.binding(function() { return item.text });
-				buttonText.font = Qt.binding(function() { return item.font });
-				buttonText.color = Qt.binding(function() { return Material.foreground });
-				buttonText.horizontalAlignment = Qt.AlignLeft;
-				buttonText.verticalAlignment = Qt.AlignVCenter;
-				item.contentItem = buttonText;
-				item.implicitWidth = buttonText.implicitWidth;
-				item.implicitHeight = 50;
-				item.padding = 20;
-				var menuComponent = Qt.createQmlObject(getComponentString(menuType), item)
-				var menu = menuComponent.createObject(item);
-				menu.isSubMenu = true;
-				menu.onClosed.connect(parentItem.close);
-				createMenu(menu, itemData.itemList, buttonType, menuType, menuItemType, menuSeparatorType);
-				item.menu = menu;
+				if(buttonType === "")
+				{
+					itemComponent = Qt.createQmlObject(getComponentString(menuType), parentItem)
+					item = itemComponent.createObject(parentItem);
+					item.title = itemData.title;
+					createMenu(item, itemData.itemList, buttonType, menuType, menuItemType, menuSeparatorType);
+					overrideAddItem = true;
+					parentItem.addMenu(item);
+				}
+				else {
+					itemComponent = Qt.createQmlObject(getComponentString(buttonType), parentItem)
+					item = itemComponent.createObject(null);
+					item.text = itemData.title;
+					var buttonTextComponent = Qt.createQmlObject(getComponentString("Text"), item);
+					var buttonText = buttonTextComponent.createObject(item);
+					buttonText.text = Qt.binding(function() { return item.text });
+					buttonText.font = Qt.binding(function() { return item.font });
+					buttonText.color = Qt.binding(function() { return Material.foreground });
+					buttonText.horizontalAlignment = Qt.AlignLeft;
+					buttonText.verticalAlignment = Qt.AlignVCenter;
+					item.contentItem = buttonText;
+					item.implicitWidth = buttonText.implicitWidth;
+					item.implicitHeight = 50;
+					item.padding = 20;
+					var menuComponent = Qt.createQmlObject(getComponentString(menuType), item)
+					var menu = menuComponent.createObject(item);
+					menu.isSubMenu = true;
+					menu.onClosed.connect(parentItem.close);
+					createMenu(menu, itemData.itemList, buttonType, menuType, menuItemType, menuSeparatorType);
+					item.menu = menu;
+				}
 			}
-			parentItem.addItem(item);
+			if(!overrideAddItem)
+				parentItem.addItem(item);
 		}
 	}
 
 	control: RowLayout {
 		id: mainLayout
 		Component.onCompleted: { createMenuBar(mainLayout, "MenuButton", "CustomMenu", "CustomMenuItem", "MenuSeparator"); }
+	}
+
+	Platform.MenuBar {
+		id: platformMenuBar
+		Component.onCompleted: { createMenuBar(platformMenuBar, "", "Platform.Menu", "Platform.MenuItem", "Platform.MenuSeparator"); }
 	}
 
 	function backgroundColor() {
