@@ -65,7 +65,12 @@ Panel {
 			}
 			var menuComponent = Qt.createQmlObject(getComponentString(menuType), parentItem);
 			var menu = menuComponent.createObject(parentItem);
-			if(buttonType !== "")
+			if(buttonType === "")
+			{
+				menu.title = menuList[i].text;
+				parentItem.addMenu(menu);
+			}
+			else
 				button.menu = menu;
 			createMenu(menu, menuList[i].itemList, buttonType, menuType, menuItemType, menuSeparatorType);
 		}
