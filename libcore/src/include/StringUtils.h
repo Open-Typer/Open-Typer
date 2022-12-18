@@ -32,6 +32,7 @@
 #include <QVector>
 #include "FileUtils.h"
 #include "Settings.h"
+#include "MistakeRecord.h"
 
 /*! \brief The StringUtils class contains functions related to strings. */
 class CORE_LIB_EXPORT StringUtils : public QObject
@@ -48,7 +49,7 @@ class CORE_LIB_EXPORT StringUtils : public QObject
 		Q_INVOKABLE static QList<QVariantMap> compareStrings(QString source, QString target, QVector<QPair<QString, int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
 		Q_INVOKABLE static QList<QVariantMap> findMistakes(QString exerciseText, QString input, QVector<QPair<QString, int>> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
 		Q_INVOKABLE static QList<QVariantMap> validateExercise(QString exerciseText, QString inputText, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords = nullptr, bool timed = false, int timeSecs = 0);
-		Q_INVOKABLE static QString addMistakes(QString exerciseText, QList<QVariantMap> *recordedMistakes);
+		Q_INVOKABLE static QString addMistakes(QString exerciseText, QList<MistakeRecord *> recordedMistakes);
 
 	private:
 		static int lcsLen(QList<QVariant> source, QList<QVariant> target);
