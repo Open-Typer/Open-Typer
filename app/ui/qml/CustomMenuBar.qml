@@ -27,22 +27,22 @@ import Qt.labs.platform 1.0 as Platform
 Panel {
 	property list<Item> menuList: [
 		Item {
-			property string text: qsTr("&File");
+			property string text: qsTr("File");
 			property list<Item> itemList: [
 				Item {
 					property string type: "item"
-					property string text: qsTr("&New...")
+					property string text: qsTr("New...")
 				},
 				Item {
 					property string type: "item"
-					property string text: qsTr("&Open...")
+					property string text: qsTr("Open...")
 				},
 				Item {
 					property string type: "separator"
 				},
 				Item {
 					property string type: "item"
-					property string text: qsTr("&Quit")
+					property string text: qsTr("Quit")
 					function onClicked() { Qt.quit(); }
 				}
 			]
