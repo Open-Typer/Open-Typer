@@ -654,7 +654,7 @@ ApplicationWindow {
 					if(keyText === " ")
 						errorAppend = "_";
 					else if(keyText === "\n")
-						errorAppend = "↵\n";
+						errorAppend = "↵";
 					paper.mistake += errorAppend;
 					paper.input += " ";
 					exerciseMistakes++;
