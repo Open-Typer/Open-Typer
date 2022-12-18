@@ -1144,7 +1144,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 	input.replace("‘", "'");
 	displayLevel.replace("‘", "'");
 	if(ui->correctMistakesCheckBox->isChecked())
-		input = StringUtils::addMistakes(input, &recordedMistakes);
+		/*input = StringUtils::addMistakes(input, &recordedMistakes)*/;
 	else
 	{
 		recordedMistakes = StringUtils::validateExercise(displayLevel, input, recordedCharacters, &totalHits, &levelMistakes, &errorWords, (currentMode == 1), lastTimeF);
