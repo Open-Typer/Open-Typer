@@ -20,6 +20,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.2
 
 Menu {
 	property bool isSubMenu: false
@@ -30,5 +31,12 @@ Menu {
 		color: backgroundColor();
 		implicitWidth: 200
 		implicitHeight: 40
+	}
+
+	function backgroundColor() {
+		if(Material.theme === Material.Light)
+			return "white";
+		else
+			return "black";
 	}
 }

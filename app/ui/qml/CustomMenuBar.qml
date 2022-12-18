@@ -144,11 +144,4 @@ Panel {
 		id: platformMenuBar
 		Component.onCompleted: { createMenuBar(platformMenuBar, "", "Platform.Menu", "Platform.MenuItem", "Platform.MenuSeparator"); }
 	}
-
-	function backgroundColor() {
-		if(Material.theme === Material.Light)
-			return Qt.rgba(1, 1, 1, 1);
-		else
-			return Qt.rgba(0, 0, 0, 1);
-	}
 }
