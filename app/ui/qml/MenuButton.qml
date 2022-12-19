@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.9
+import QtQuick.Controls 2.2
 
 CustomToolButton {
 	property CustomMenu menu: CustomMenu {}
@@ -36,6 +37,15 @@ CustomToolButton {
 	}
 	implicitWidth: metrics.boundingRect(text).width + 20
 	implicitHeight: metrics.height + 16
+
+	Label {
+		visible: menu.isSubMenu
+		anchors.fill: parent
+		text: ">"
+		horizontalAlignment: Qt.AlignRight
+		verticalAlignment: Qt.AlignVCenter
+		padding: 10
+	}
 
 	FontMetrics {
 		id: metrics
