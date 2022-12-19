@@ -23,8 +23,10 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtQuick.Layouts 1.3
 import Qt.labs.platform 1.0 as Platform
+import OpenTyper 1.0
 
 Panel {
+	id: root
 	property list<Item> menuList: [
 		Item {
 			property string text: qsTr("File");
@@ -141,7 +143,11 @@ Panel {
 
 	control: RowLayout {
 		id: mainLayout
-		Component.onCompleted: { createMenuBar(mainLayout, "MenuButton", "CustomMenu", "CustomMenuItem", "MenuSeparator"); }
+		Component.onCompleted: {
+			if(QmlUtils.nativeMenuBar())
+				root.visible = false;
+			createMenuBar(mainLayout, "MenuButton", "CustomMenu", "CustomMenuItem", "MenuSeparator");
+		}
 	}
 
 	Platform.MenuBar {
