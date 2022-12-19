@@ -126,9 +126,9 @@ Panel {
 					var menu = menuComponent.createObject(item);
 					menu.isSubMenu = true;
 					menu.onClosed.connect(function() {
-						if(!item.ignoreClosing)
+						if(!menu.parent.ignoreClosing)
 							parentItem.close();
-						item.ignoreClosing = false;
+						menu.parent.ignoreClosing = false;
 					})
 					createMenu(menu, itemData.itemList, buttonType, menuType, menuItemType, menuSeparatorType);
 					item.menu = menu;
