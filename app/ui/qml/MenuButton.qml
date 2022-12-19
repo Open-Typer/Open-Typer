@@ -22,20 +22,17 @@ import QtQuick 2.9
 
 CustomToolButton {
 	property CustomMenu menu: CustomMenu {}
-	property bool menuOpened: false
+	property bool ignoreClosing: false
 	id: control
 	font.pointSize: 10
 	onClicked: {
-		if(menuOpened)
+		if(menu.visible)
 		{
+			ignoreClosing = true;
 			menu.close();
-			menuOpened = false;
 		}
 		else
-		{
 			menu.open();
-			menuOpened = true;
-		}
 	}
 	implicitWidth: metrics.boundingRect(text).width + 20
 	implicitHeight: metrics.height + 16
