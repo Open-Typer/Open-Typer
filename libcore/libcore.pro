@@ -30,6 +30,7 @@ SOURCES += \
     src/LoadExerciseDialog.cpp \
     src/MistakeRecord.cpp \
     src/QmlKeyboardHandler.cpp \
+    src/QmlUtils.cpp \
     src/Settings.cpp \
     src/StatsDialog.cpp \
     src/StringUtils.cpp \
@@ -51,6 +52,7 @@ HEADERS += \
     src/include/LoadExerciseDialog.h \
     src/include/MistakeRecord.h \
     src/include/QmlKeyboardHandler.h \
+    src/include/QmlUtils.h \
     src/include/Settings.h \
     src/include/StatsDialog.h \
     src/include/StringUtils.h \
