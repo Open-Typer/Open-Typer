@@ -21,10 +21,16 @@
 #ifndef QMLUTILS_H
 #define QMLUTILS_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QObject>
 
 /*! \brief The QmlUtils class acts like a bridge for QML code. */
-class QmlUtils : public QObject
+class CORE_LIB_EXPORT QmlUtils : public QObject
 {
 		Q_OBJECT
 	public:
