@@ -33,6 +33,7 @@
 #include "ExerciseTimer.h"
 #include "CharacterRecord.h"
 #include "MistakeRecord.h"
+#include "QmlUtils.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -148,6 +149,8 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
 	KeyboardUtils keyboardUtils;
 	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
+	QmlUtils qmlUtils;
+	engine.rootContext()->setContextProperty("QmlUtils", &qmlUtils);
 	if(!Settings::containsLessonPack())
 	{
 		InitialSetup *initialSetup = new InitialSetup;
