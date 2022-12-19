@@ -37,7 +37,7 @@ CustomToolButton {
 			menuOpened = true;
 		}
 	}
-	implicitWidth: metrics.boundingRect(text).width + 16
+	implicitWidth: metrics.boundingRect(text).width + 20
 	implicitHeight: metrics.height + 16
 
 	FontMetrics {
