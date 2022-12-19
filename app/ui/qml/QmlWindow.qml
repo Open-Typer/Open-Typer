@@ -92,10 +92,12 @@ ApplicationWindow {
 		spacing: 0
 
 		CustomMenuBar {
+			id: customMenuBar
 			Layout.fillWidth: true
 		}
 
 		Rectangle {
+			visible: customMenuBar.visible
 			Layout.fillWidth: true
 			implicitHeight: 1
 			color: Material.theme == Material.Dark ? Qt.rgba(1, 1, 1, 0.2) : Qt.rgba(0, 0, 0, 0.2);
