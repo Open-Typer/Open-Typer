@@ -125,7 +125,11 @@ Panel {
 					var menuComponent = Qt.createQmlObject(getComponentString(menuType), item)
 					var menu = menuComponent.createObject(item);
 					menu.isSubMenu = true;
-					menu.onClosed.connect(parentItem.close);
+					menu.onClosed.connect(function() {
+						if(!item.ignoreClosing)
+							parentItem.close();
+						item.ignoreClosing = false;
+					})
 					createMenu(menu, itemData.itemList, buttonType, menuType, menuItemType, menuSeparatorType);
 					item.menu = menu;
 				}
