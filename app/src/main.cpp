@@ -153,6 +153,9 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
 	QmlUtils qmlUtils;
 	engine.rootContext()->setContextProperty("QmlUtils", &qmlUtils);
+	ExerciseSummary summaryDialog;
+	summaryDialog.setWindowModality(Qt::ApplicationModal);
+	engine.rootContext()->setContextProperty("summaryDialog", &summaryDialog);
 	if(!Settings::containsLessonPack())
 	{
 		InitialSetup *initialSetup = new InitialSetup;
