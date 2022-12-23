@@ -18,7 +18,15 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QQmlEngine>
 #include "MistakeRecord.h"
+
+/*! Constructs MistakeRecord. */
+MistakeRecord::MistakeRecord(QObject *parent) :
+	QObject(parent)
+{
+	QQmlEngine::setObjectOwnership(this, QQmlEngine::JavaScriptOwnership);
+}
 
 /*! Sets mistake position. */
 void MistakeRecord::setPosition(int pos)

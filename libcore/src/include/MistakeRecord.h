@@ -40,6 +40,7 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
 		Q_PROPERTY(bool merged READ isMerged WRITE setMerged NOTIFY mergedChanged)
 	public:
+		explicit MistakeRecord(QObject *parent = nullptr);
 		enum Type
 		{
 			Type_Addition,
