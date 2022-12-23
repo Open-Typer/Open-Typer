@@ -99,6 +99,7 @@ Item {
 				property bool cursorBlinkState: true
 				id: inputText
 				Layout.fillWidth: true
+				Layout.alignment: Qt.AlignTop
 				topPadding: 0
 				text: input
 				font: ThemeEngine.font
