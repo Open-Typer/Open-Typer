@@ -34,6 +34,7 @@
 #include "CharacterRecord.h"
 #include "MistakeRecord.h"
 #include "QmlUtils.h"
+#include "ExerciseValidator.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -132,6 +133,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
 	qmlRegisterType<CharacterRecord>("OpenTyper", 1, 0, "CharacterRecord");
 	qmlRegisterType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord");
+	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
