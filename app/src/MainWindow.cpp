@@ -22,9 +22,6 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
-typedef QPair<QString, int> CharacterRecord; // needed for converting to QVariant
-Q_DECLARE_METATYPE(CharacterRecord);
-
 typedef void *VoidPtr; // needed for converting any pointer to QVariant
 Q_DECLARE_METATYPE(VoidPtr);
 
@@ -1147,7 +1144,7 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 		/*input = StringUtils::addMistakes(input, &recordedMistakes)*/;
 	else
 	{
-		recordedMistakes = StringUtils::validateExercise(displayLevel, input, recordedCharacters, &totalHits, &levelMistakes, &errorWords, (currentMode == 1), lastTimeF);
+		//recordedMistakes = StringUtils::validateExercise(displayLevel, input, recordedCharacters, &totalHits, &levelMistakes, &errorWords, (currentMode == 1), lastTimeF);
 		netHits = std::max(0, totalHits - (levelMistakes * errorPenalty));
 		ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 	}
