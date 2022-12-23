@@ -71,3 +71,16 @@ int MistakeRecord::previousPosition(void)
 {
 	return m_previousPosition;
 }
+
+/*! Enables or disables this mistake. */
+void MistakeRecord::setEnabled(bool enabled)
+{
+	m_isEnabled = enabled;
+	emit enabledChanged(enabled);
+}
+
+/*! Returns true if this mistake is enabled. */
+bool MistakeRecord::isEnabled(void)
+{
+	return m_isEnabled;
+}
