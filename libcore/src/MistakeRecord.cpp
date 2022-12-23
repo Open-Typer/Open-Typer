@@ -58,3 +58,16 @@ QString MistakeRecord::previousText(void)
 {
 	return m_previousText;
 }
+
+/*! Sets previous position. */
+void MistakeRecord::setPreviousPosition(int pos)
+{
+	m_previousPosition = pos;
+	emit previousPositionChanged(pos);
+}
+
+/*! Returns previous position. */
+int MistakeRecord::previousPosition(void)
+{
+	return m_previousPosition;
+}

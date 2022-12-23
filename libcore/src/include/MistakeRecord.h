@@ -36,6 +36,7 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		Q_PROPERTY(int position READ position WRITE setPosition NOTIFY positionChanged)
 		Q_PROPERTY(Type type READ type WRITE setType NOTIFY typeChanged)
 		Q_PROPERTY(QString previousText READ previousText WRITE setPreviousText NOTIFY previousTextChanged)
+		Q_PROPERTY(int previousPosition READ previousPosition WRITE setPreviousPosition NOTIFY previousPositionChanged)
 	public:
 		enum Type
 		{
@@ -51,16 +52,20 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		Type type(void);
 		void setPreviousText(QString text);
 		QString previousText(void);
+		void setPreviousPosition(int pos);
+		int previousPosition(void);
 
 	private:
 		int m_position;
 		Type m_type;
 		QString m_previousText;
+		int m_previousPosition;
 
 	signals:
 		void positionChanged(int pos);
 		void typeChanged(MistakeRecord::Type type);
 		void previousTextChanged(QString text);
+		void previousPositionChanged(int pos);
 };
 
 #endif // MISTAKERECORD_H
