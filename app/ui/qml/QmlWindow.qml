@@ -678,6 +678,7 @@ ApplicationWindow {
 				paper.input = paper.input.substring(0, paper.input.length - 1);
 			// TODO: Add keyRelease() method
 			//keyRelease(event);
+			exerciseTimer.stop();
 			lastTime = exerciseTimer.elapsed / 1000.0;
 			// TODO: Add endExercise() method
 			//endExercise(true, true, false, true, true);
