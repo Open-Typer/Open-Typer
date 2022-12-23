@@ -51,6 +51,7 @@ ApplicationWindow {
 	property int linePos
 	property int exerciseMistakes
 	property int totalHits
+	property int netHits
 	property var recordedCharacters
 	property var recordedMistakes
 	property int deadKeys
@@ -65,6 +66,8 @@ ApplicationWindow {
 	property var errorWords
 	property bool correctMistakes: true
 	property bool eventInProgress: false
+	property bool testLoaded: false
+	property bool uiLocked: false
 	Material.theme: ThemeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
 	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
 	color: ThemeEngine.bgColor
@@ -103,6 +106,7 @@ ApplicationWindow {
 			color: Material.theme == Material.Dark ? Qt.rgba(1, 1, 1, 0.2) : Qt.rgba(0, 0, 0, 0.2);
 		}
 
+		// TODO: Implement UI locking
 		Panel {
 			id: panel1
 			Layout.fillWidth: true
@@ -680,10 +684,106 @@ ApplicationWindow {
 			//keyRelease(event);
 			exerciseTimer.stop();
 			lastTime = exerciseTimer.elapsed / 1000.0;
-			// TODO: Add endExercise() method
-			//endExercise(true, true, false, true, true);
+			endExercise();
 		}
 		eventInProgress = false;
+	}
+
+	function endExercise() {
+		exerciseInProgress = false;
+		fullInput.replace("‘", "'");
+		displayExercise.replace("‘", "'");
+		var validator = Qt.createQmlObject("import OpenTyper 1.0; ExerciseValidator {}", root);
+		validator.exerciseText = displayExercise;
+		validator.inputText = fullInput;
+		validator.characters = recordedCharacters;
+		validator.timed = (currentMode == 1);
+		validator.time = lastTime;
+		if(correctMistakes)
+		{
+			validator.mistakes = recordedMistakes;
+			fullInput = StringUtils.addMistakes(fullInput, recordedMistakes);
+			validator.inputText = fullInput;
+		}
+		else
+		{
+			validator.validate();
+			recordedMistakes = validator.mistakes;
+			totalHits = validator.grossHits();
+			exerciseMistakes = validator.mistakeCount();
+			errorWords = validator.errorWords();
+			netHits = Math.max(0, totalHits - (exerciseMistakes * Settings.errorPenalty()));
+		}
+		validator.generateMistakeText(correctMistakes);
+		netHits = Math.max(0, totalHits - exerciseMistakes * Settings.errorPenalty());
+		var netHitsPerMinute = netHits * (60 / lastTime);
+		var grossHitsPerMinute = totalHits * (60 / lastTime);
+		var time = lastTime;
+		if(!customExerciseLoaded && !customPack && correctMistakes)
+		{
+			// TODO: Send end stock exercise event
+			/*QVariantMap eventArgs;
+			eventArgs["packName"] = publicConfigName;
+			eventArgs["lesson"] = currentLesson;
+			eventArgs["sublesson"] = currentAbsoluteSublesson;
+			eventArgs["exercise"] = currentLevel;
+			eventArgs["grossHitsPerMinute"] = grossHitsPerMinute;
+			eventArgs["mistakes"] = levelMistakes;
+			eventArgs["time"] = time;
+			AddonApi::sendEvent(IAddon::Event_EndStockExercise, eventArgs);*/
+			// The result will always be saved locally - even if an addon uses it
+			// TODO: Save the result
+			/*HistoryParser::addHistoryEntry(publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel,
+				{ QString::number(grossHitsPerMinute), QString::number(levelMistakes), QString::number(time) });*/
+		}
+		if(testLoaded)
+		{
+			correctMistakes = true;
+			hideText = false;
+			// TODO: Restore window geometry if full screen
+			// TODO: Send end typing test event
+			/*QVariantMap args;
+			QList<QVariant> recordedCharactersList;
+			for(int i = 0; i < recordedCharacters.count(); i++)
+			{
+				QVariant record = QVariant::fromValue(recordedCharacters[i]);
+				recordedCharactersList.append(record);
+			}
+			args["recordedCharacters"] = recordedCharactersList;
+			args["inputText"] = input;
+			args["time"] = lastTimeF;
+			AddonApi::sendEvent(IAddon::Event_EndTypingTest, args);*/
+			uiLocked = false;
+			testLoaded = false;
+		}
+		summaryDialog.setNetHits(netHitsPerMinute);
+		summaryDialog.setGrossHits(grossHitsPerMinute);
+		summaryDialog.setTotalTime(time);
+		summaryDialog.setTotalHits(totalHits);
+		summaryDialog.setMistakes(exerciseMistakes);
+		summaryDialog.setAccuracy(1.0 - exerciseMistakes / totalHits);
+		summaryDialog.onAccepted.connect(function() {
+			// TODO: Add changeMode method
+			//changeMode(0);
+			// TODO: Show export button
+			preview = true;
+			// Load saved text
+			paper.input = validator.generatedInputText();
+			paper.mistake = validator.generatedMistakeText();
+			// Hide other widgets
+			paper.currentLineVisible = false;
+			paper.remainingVisible = false;
+			blockInput = true;
+		});
+		summaryDialog.onRejected.connect(function() {
+			// TODO: Add changeMode method
+			//changeMode(0);
+			if(customExerciseLoaded)
+				initExercise();
+			else
+				repeatExercise();
+		});
+		summaryDialog.open();
 	}
 
 	Component.onCompleted: reload();
