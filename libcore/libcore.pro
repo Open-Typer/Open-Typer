@@ -22,6 +22,7 @@ SOURCES += \
     src/CharacterRecord.cpp \
     src/ConfigParser.cpp \
     src/ExerciseTimer.cpp \
+    src/ExerciseValidator.cpp \
     src/ExportDialog.cpp \
     src/FileUtils.cpp \
     src/HistoryParser.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
     src/include/CharacterRecord.h \
     src/include/ConfigParser.h \
     src/include/ExerciseTimer.h \
+    src/include/ExerciseValidator.h \
     src/include/ExportDialog.h \
     src/include/FileUtils.h \
     src/include/HistoryParser.h \
