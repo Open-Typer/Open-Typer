@@ -28,11 +28,17 @@ ExerciseSummary::ExerciseSummary(QWidget *parent) :
 {
 	ui->setupUi(this);
 	ui->timeLabel->hide();
+	ui->timeValueLabel->hide();
 	ui->hitsLabel->hide();
+	ui->hitsValueLabel->hide();
 	ui->netHitsLabel->hide();
+	ui->netHitsValueLabel->hide();
 	ui->grossHitsLabel->hide();
+	ui->grossHitsValueLabel->hide();
 	ui->mistakesLabel->hide();
+	ui->mistakesValueLabel->hide();
 	ui->accuracyLabel->hide();
+	ui->accuracyValueLabel->hide();
 	// Connections
 	connect(ui->previewButton, SIGNAL(clicked()), this, SLOT(accept()));
 }
@@ -53,46 +59,47 @@ void ExerciseSummary::setTotalTime(int time)
 		text += QString::number(minutes) + " min ";
 	if(seconds > 0)
 		text += QString::number(seconds) + " s";
-	ui->timeLabel->setText(ui->timeLabel->text() + " " + text);
+	ui->timeValueLabel->setText(text);
 	ui->timeLabel->show();
+	ui->timeValueLabel->show();
 }
 
 /*! Sets and shows the total number of hits (excluding error penalty). */
 void ExerciseSummary::setTotalHits(int hits)
 {
-	ui->hitsLabel->setText(
-		ui->hitsLabel->text() + " " + QString::number(hits));
+	ui->hitsValueLabel->setText(QString::number(hits));
 	ui->hitsLabel->show();
+	ui->hitsValueLabel->show();
 }
 
 /*! Sets and shows the number of net hits per minute. */
 void ExerciseSummary::setNetHits(int hits)
 {
-	ui->netHitsLabel->setText(
-		ui->netHitsLabel->text() + " " + QString::number(hits));
+	ui->netHitsValueLabel->setText(QString::number(hits));
 	ui->netHitsLabel->show();
+	ui->netHitsValueLabel->show();
 }
 
 /*! Sets and shows the number of gross hits per minute. */
 void ExerciseSummary::setGrossHits(int hits)
 {
-	ui->grossHitsLabel->setText(
-		ui->grossHitsLabel->text() + " " + QString::number(hits));
+	ui->grossHitsValueLabel->setText(QString::number(hits));
 	ui->grossHitsLabel->show();
+	ui->grossHitsValueLabel->show();
 }
 
 /*! Sets and shows the number of mistakes */
 void ExerciseSummary::setMistakes(int mistakes)
 {
-	ui->mistakesLabel->setText(
-		ui->mistakesLabel->text() + " " + QString::number(mistakes));
+	ui->mistakesValueLabel->setText(QString::number(mistakes));
 	ui->mistakesLabel->show();
+	ui->mistakesValueLabel->show();
 }
 
 /*! Sets and shows the accuracy (from 0 to 1) */
 void ExerciseSummary::setAccuracy(double accuracy)
 {
-	ui->accuracyLabel->setText(
-		ui->accuracyLabel->text() + " " + QString::number(((int) (accuracy * 10000)) / 100.0) + " %");
+	ui->accuracyValueLabel->setText(QString::number(((int) (accuracy * 10000)) / 100.0) + " %");
 	ui->accuracyLabel->show();
+	ui->accuracyValueLabel->show();
 }
