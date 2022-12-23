@@ -38,6 +38,7 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		Q_PROPERTY(QString previousText READ previousText WRITE setPreviousText NOTIFY previousTextChanged)
 		Q_PROPERTY(int previousPosition READ previousPosition WRITE setPreviousPosition NOTIFY previousPositionChanged)
 		Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
+		Q_PROPERTY(bool merged READ isMerged WRITE setMerged NOTIFY mergedChanged)
 	public:
 		enum Type
 		{
@@ -57,6 +58,8 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		int previousPosition(void);
 		void setEnabled(bool enabled);
 		bool isEnabled(void);
+		void setMerged(bool merged);
+		bool isMerged(void);
 
 	private:
 		int m_position;
@@ -64,6 +67,7 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		QString m_previousText;
 		int m_previousPosition;
 		bool m_isEnabled = true;
+		bool m_isMerged = false;
 
 	signals:
 		void positionChanged(int pos);
@@ -71,6 +75,7 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		void previousTextChanged(QString text);
 		void previousPositionChanged(int pos);
 		void enabledChanged(bool enabled);
+		void mergedChanged(bool merged);
 };
 
 #endif // MISTAKERECORD_H

@@ -84,3 +84,16 @@ bool MistakeRecord::isEnabled(void)
 {
 	return m_isEnabled;
 }
+
+/*! Toggles merged mistake. */
+void MistakeRecord::setMerged(bool merged)
+{
+	m_isMerged = merged;
+	emit mergedChanged(merged);
+}
+
+/*! Returns true if this mistake is merged. */
+bool MistakeRecord::isMerged(void)
+{
+	return m_isMerged;
+}
