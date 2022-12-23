@@ -58,6 +58,7 @@ MistakeRecord::Type MistakeRecord::type(void)
 void MistakeRecord::setPreviousText(QString text)
 {
 	m_previousText = text;
+	setPreviousVariant(text);
 	emit previousTextChanged(text);
 }
 
@@ -65,6 +66,24 @@ void MistakeRecord::setPreviousText(QString text)
 QString MistakeRecord::previousText(void)
 {
 	return m_previousText;
+}
+
+/*! Sets previous value (useful if you need to support non-QString values). */
+void MistakeRecord::setPreviousVariant(QVariant value)
+{
+	m_previousVariant = value;
+	emit previousVariantChanged(value);
+	if(strcmp(value.typeName(), "QString") == 0)
+	{
+		m_previousText = value.toString();
+		emit previousTextChanged(m_previousText);
+	}
+}
+
+/*! Returns previous value (useful if you need to support non-QString values). */
+QVariant MistakeRecord::previousVariant(void)
+{
+	return m_previousVariant;
 }
 
 /*! Sets previous position. */

@@ -28,6 +28,7 @@
 #endif
 
 #include <QObject>
+#include <QVariant>
 
 /*! \brief The MistakeRecord class can be used to store mistake records. */
 class CORE_LIB_EXPORT MistakeRecord : public QObject
@@ -36,6 +37,7 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		Q_PROPERTY(int position READ position WRITE setPosition NOTIFY positionChanged)
 		Q_PROPERTY(Type type READ type WRITE setType NOTIFY typeChanged)
 		Q_PROPERTY(QString previousText READ previousText WRITE setPreviousText NOTIFY previousTextChanged)
+		Q_PROPERTY(QVariant previousVariant READ previousVariant WRITE setPreviousVariant NOTIFY previousVariantChanged)
 		Q_PROPERTY(int previousPosition READ previousPosition WRITE setPreviousPosition NOTIFY previousPositionChanged)
 		Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
 		Q_PROPERTY(bool merged READ isMerged WRITE setMerged NOTIFY mergedChanged)
@@ -55,6 +57,8 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		Type type(void);
 		void setPreviousText(QString text);
 		QString previousText(void);
+		void setPreviousVariant(QVariant value);
+		QVariant previousVariant(void);
 		void setPreviousPosition(int pos);
 		int previousPosition(void);
 		void setEnabled(bool enabled);
@@ -66,6 +70,7 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		int m_position;
 		Type m_type;
 		QString m_previousText;
+		QVariant m_previousVariant;
 		int m_previousPosition;
 		bool m_isEnabled = true;
 		bool m_isMerged = false;
@@ -74,6 +79,7 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		void positionChanged(int pos);
 		void typeChanged(MistakeRecord::Type type);
 		void previousTextChanged(QString text);
+		void previousVariantChanged(QVariant value);
 		void previousPositionChanged(int pos);
 		void enabledChanged(bool enabled);
 		void mergedChanged(bool merged);
