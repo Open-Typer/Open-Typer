@@ -181,7 +181,7 @@ jobs:
         host: 'linux'
         arch: 'gcc_64'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts'
+        modules: 'qtcharts qt5compat qtshadertools'
         set-env: false
     - name: Install WASM Qt
       uses: jurplel/install-qt-action@v3
@@ -192,7 +192,7 @@ jobs:
         host: 'linux'
         arch: 'wasm_32'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts'
+        modules: 'qtcharts qt5compat qtshadertools'
     # Build
     - run: source .ci/common/build.sh wasm
       shell: bash
