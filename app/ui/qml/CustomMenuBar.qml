@@ -150,8 +150,15 @@ Panel {
 		}
 	}
 
+	onEnabledChanged: platformMenuBar.reload();
+
 	Platform.MenuBar {
 		id: platformMenuBar
-		Component.onCompleted: { createMenuBar(platformMenuBar, "", "Platform.Menu", "Platform.MenuItem", "Platform.MenuSeparator"); }
+		function reload() {
+			clear();
+			if(root.enabled)
+				createMenuBar(platformMenuBar, "", "Platform.Menu", "Platform.MenuItem", "Platform.MenuSeparator");
+		}
+		Component.onCompleted: reload();
 	}
 }
