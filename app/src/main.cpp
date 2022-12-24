@@ -163,6 +163,9 @@ int main(int argc, char *argv[])
 	ExerciseSummary summaryDialog;
 	summaryDialog.setWindowModality(Qt::ApplicationModal);
 	engine.rootContext()->setContextProperty("summaryDialog", &summaryDialog);
+	OptionsWindow optionsWindow;
+	optionsWindow.setWindowModality(Qt::ApplicationModal);
+	engine.rootContext()->setContextProperty("optionsWindow", &optionsWindow);
 	if(!Settings::containsLessonPack())
 	{
 		InitialSetup *initialSetup = new InitialSetup;
