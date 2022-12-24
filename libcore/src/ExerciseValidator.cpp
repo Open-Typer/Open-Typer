@@ -54,6 +54,22 @@ void ExerciseValidator::setMistakes(QList<MistakeRecord *> mistakeList)
 	emit mistakesChanged(mistakeList);
 }
 
+/*! Removes all mistakes. */
+void ExerciseValidator::clearMistakes(void)
+{
+	for(int i = 0; i < m_mistakes.size(); i++)
+		m_mistakes[i]->deleteLater();
+	m_mistakes.clear();
+	emit mistakesChanged(m_mistakes);
+}
+
+/*! Adds a mistake. */
+void ExerciseValidator::addMistake(MistakeRecord *mistake)
+{
+	m_mistakes.append(mistake);
+	emit mistakesChanged(m_mistakes);
+}
+
 /*! Returns list of mistakes. */
 QList<MistakeRecord *> ExerciseValidator::mistakes(void)
 {
@@ -65,6 +81,22 @@ void ExerciseValidator::setCharacters(QList<CharacterRecord *> characterList)
 {
 	m_characters = characterList;
 	emit charactersChanged(characterList);
+}
+
+/*! Removes all characters. */
+void ExerciseValidator::clearCharacters(void)
+{
+	for(int i = 0; i < m_characters.size(); i++)
+		m_characters[i]->deleteLater();
+	m_characters.clear();
+	emit charactersChanged(m_characters);
+}
+
+/*! Adds a character. */
+void ExerciseValidator::addCharacter(CharacterRecord *character)
+{
+	m_characters.append(character);
+	emit charactersChanged(m_characters);
 }
 
 /*! Returns list of characters. */

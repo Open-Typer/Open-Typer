@@ -47,8 +47,12 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		void setInputText(QString text);
 		QString inputText(void);
 		void setMistakes(QList<MistakeRecord *> mistakeList);
+		Q_INVOKABLE void clearMistakes(void);
+		Q_INVOKABLE void addMistake(MistakeRecord *mistake);
 		QList<MistakeRecord *> mistakes(void);
 		void setCharacters(QList<CharacterRecord *> characterList);
+		Q_INVOKABLE void clearCharacters(void);
+		Q_INVOKABLE void addCharacter(CharacterRecord *character);
 		QList<CharacterRecord *> characters(void);
 		void setTimed(bool value);
 		bool isTimed(void);
