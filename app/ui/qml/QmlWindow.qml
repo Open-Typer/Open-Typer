@@ -115,6 +115,9 @@ ApplicationWindow {
 				CustomToolButton {
 					iconName: "settings"
 					toolTipText: qsTr("Options")
+					onClicked: {
+						optionsWindow.open();
+					}
 				}
 				CustomToolButton {
 					iconName: "open"
