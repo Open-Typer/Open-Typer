@@ -116,28 +116,41 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        qt-version: ['5.15.2']
+        qt-version: ['6.4.1']
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
         submodules: true
-    # Install Qt
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: ${{ matrix.qt-version }}
-        host: 'linux'
-        arch: 'wasm_32'
-        target: ${{ matrix.qt-target }}
-        modules: 'qtcharts'
     # Install emscripten
     - name: Install emscripten
       uses: mymindstorm/setup-emsdk@v11
       with:
-        version: 1.39.8
-        actions-cache-folder: 'emsdk-cache1'
+        version: 3.1.14
+        actions-cache-folder: 'emsdk-cache2'
+    # Install Qt
+    - name: Install desktop Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt-version }}
+        aqtversion: '==3.1.0'
+        py7zrversion: '==0.20.2'
+        host: 'linux'
+        arch: 'gcc_64'
+        target: ${{ matrix.qt-target }}
+        modules: 'qtcharts'
+        set-env: false
+    - name: Install WASM Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt-version }}
+        aqtversion: '==3.1.0'
+        py7zrversion: '==0.20.2'
+        host: 'linux'
+        arch: 'wasm_32'
+        target: ${{ matrix.qt-target }}
+        modules: 'qtcharts'
     # Build
     - run: source .ci/common/build.sh wasm
       shell: bash
