@@ -23,7 +23,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.2
 import QtGraphicalEffects 1.0
-import Qt5Compat.GraphicalEffects
+import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
 
 Item {
