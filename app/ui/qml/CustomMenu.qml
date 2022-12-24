@@ -35,8 +35,8 @@ Menu {
 
 	function backgroundColor() {
 		if(Material.theme === Material.Light)
-			return "white";
+			return Qt.rgba(1, 1, 1, 0.95);
 		else
-			return "black";
+			return Qt.rgba(0, 0, 0, 0.95);
 	}
 }
