@@ -135,6 +135,11 @@ int main(int argc, char *argv[])
 	qmlRegisterType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord");
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	qmlRegisterModule("QtGraphicalEffects", 1, 0); // TODO: Remove this after fully switching to Qt 6
+#else
+	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0); // TODO: Remove this after fully switching to Qt 6
+#endif
 	// Set style
 	globalThemeEngine.updateStyle();
 	// Set icon theme
