@@ -97,6 +97,7 @@ ApplicationWindow {
 		CustomMenuBar {
 			id: customMenuBar
 			Layout.fillWidth: true
+			enabled: !uiLocked
 		}
 
 		Rectangle {
@@ -106,10 +107,10 @@ ApplicationWindow {
 			color: Material.theme == Material.Dark ? Qt.rgba(1, 1, 1, 0.2) : Qt.rgba(0, 0, 0, 0.2);
 		}
 
-		// TODO: Implement UI locking
 		Panel {
 			id: panel1
 			Layout.fillWidth: true
+			enabled: !uiLocked
 			control: RowLayout {
 				CustomToolButton {
 					iconName: "settings"
@@ -145,6 +146,7 @@ ApplicationWindow {
 		Panel {
 			id: panel2
 			Layout.fillWidth: true
+			enabled: !uiLocked
 			control: RowLayout {
 				property alias closeLoadedExButton: closeLoadedExButton
 				property alias statsButton: statsButton
