@@ -701,12 +701,16 @@ ApplicationWindow {
 		var validator = Qt.createQmlObject("import OpenTyper 1.0; ExerciseValidator {}", root);
 		validator.exerciseText = displayExercise;
 		validator.inputText = fullInput;
-		validator.characters = recordedCharacters;
+		validator.clearCharacters();
+		for(var i = 0; i < recordedCharacters.length; i++)
+			validator.addCharacter(recordedCharacters[i]);
 		validator.timed = (currentMode == 1);
 		validator.time = lastTime;
 		if(correctMistakes)
 		{
-			validator.mistakes = recordedMistakes;
+			validator.clearMistakes();
+			for(var j = 0; j < recordedMistakes.length; j++)
+				validator.addMistake(recordedMistakes[j]);
 			fullInput = StringUtils.addMistakes(fullInput, recordedMistakes);
 			validator.inputText = fullInput;
 		}
