@@ -135,6 +135,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord");
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
+	// Set style
+	globalThemeEngine.updateStyle();
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
 	// Set icon
