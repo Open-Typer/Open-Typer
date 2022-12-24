@@ -29,7 +29,6 @@ bool Settings::tempSettingsCopied = false;
 void Settings::init(void)
 {
 #ifdef Q_OS_WASM
-	QWasmSettings::registerFormat(true);
 	settingsInstance = new QSettings(qApp);
 #else
 	settingsInstance = new QSettings(FileUtils::mainSettingsLocation(), QSettings::IniFormat, qApp);

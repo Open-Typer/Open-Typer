@@ -31,9 +31,6 @@
 #include <QApplication>
 #include <QRgb>
 #include <QColor>
-#ifdef Q_OS_WASM
-#include <qwasmsettings.h>
-#endif // Q_OS_WASM
 #include "FileUtils.h"
 #include "ThemeEngine.h"
 
