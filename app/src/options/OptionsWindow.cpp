@@ -28,7 +28,6 @@ OptionsWindow::OptionsWindow(QWidget *parent) :
 	ui(new Ui::OptionsWindow)
 {
 	ui->setupUi(this);
-	setAttribute(Qt::WA_DeleteOnClose, true);
 	if(Settings::settingsLockEnabled())
 		ui->widget->setEnabled(false);
 	else
