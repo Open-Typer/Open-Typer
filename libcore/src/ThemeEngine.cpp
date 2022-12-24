@@ -292,12 +292,10 @@ void ThemeEngine::setInputTextColor(QColor color)
 /*! Resets input text color. */
 void ThemeEngine::resetInputTextColor(void)
 {
-	QPalette palette;
-	if(parent() == nullptr)
-		palette = qApp->palette();
+	if(style() == Style::DarkStyle)
+		setInputTextColor(QColor(255, 255, 255));
 	else
-		palette = ((QWidget *) parent())->palette();
-	setInputTextColor(palette.color(QPalette::Text));
+		setInputTextColor(QColor(0, 0, 0));
 	Settings::setCustomInputTextColor(false);
 }
 
@@ -330,12 +328,10 @@ void ThemeEngine::setBgColor(QColor color)
 /*! Resets background color. */
 void ThemeEngine::resetBgColor(void)
 {
-	QPalette palette;
-	if(parent() == nullptr)
-		palette = qApp->palette();
+	if(style() == Style::DarkStyle)
+		setBgColor(QColor(25, 35, 45));
 	else
-		palette = ((QWidget *) parent())->palette();
-	setBgColor(palette.color(QPalette::Window));
+		setBgColor(QColor(255, 255, 255));
 	Settings::setCustomBgColor(false);
 }
 
@@ -377,12 +373,6 @@ void ThemeEngine::resetPaperColor(void)
 			setPaperColor(QColor(255, 255, 255));
 			break;
 		default:
-			QPalette palette;
-			if(parent() == nullptr)
-				palette = qApp->palette();
-			else
-				palette = ((QWidget *) parent())->palette();
-			setPaperColor(palette.color(QPalette::Base));
 			break;
 	}
 	Settings::setCustomPaperColor(false);
@@ -426,12 +416,6 @@ void ThemeEngine::resetPanelColor(void)
 			setPanelColor(QColor(255, 255, 255));
 			break;
 		default:
-			QPalette palette;
-			if(parent() == nullptr)
-				palette = qApp->palette();
-			else
-				palette = ((QWidget *) parent())->palette();
-			setPanelColor(palette.color(QPalette::Midlight));
 			break;
 	}
 	Settings::setCustomPanelColor(false);

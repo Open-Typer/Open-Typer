@@ -34,7 +34,6 @@
 #include <QFont>
 #include <QFontDatabase>
 #include <QColor>
-#include <QPalette>
 #include <QFile>
 #include "FileUtils.h"
 
