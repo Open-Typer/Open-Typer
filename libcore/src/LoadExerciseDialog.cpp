@@ -121,7 +121,7 @@ QString LoadExerciseDialog::exerciseText(void)
 int LoadExerciseDialog::lineLength(void)
 {
 	if(ui->fromFileButton->isChecked())
-		return ConfigParser::defaultLineLength;
+		return ConfigParser::defaultLineLength();
 	else if(ui->selectedExButton->isChecked())
 		return m_lineLength;
 	return 0;
