@@ -57,7 +57,7 @@ void QmlFileDialog::getOpenFileContent(void)
 	auto fileContentReadyLambda = [this](const QString &fileName, const QByteArray &fileContent) {
 		if(!fileName.isEmpty())
 		{
-			emit fileContentReady(fileContent);
+			emit fileContentReady(QString::fromUtf8(fileContent));
 		}
 	};
 #ifdef Q_OS_WASM

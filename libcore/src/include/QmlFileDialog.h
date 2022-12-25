@@ -52,7 +52,7 @@ class CORE_LIB_EXPORT QmlFileDialog : public QObject
 	signals:
 		void nameFiltersChanged(QStringList filters);
 		void showAllFilesChanged(bool value);
-		void fileContentReady(QByteArray content);
+		void fileContentReady(QString content);
 };
 
 #endif // QMLFILEDIALOG_H
