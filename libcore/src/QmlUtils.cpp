@@ -27,3 +27,21 @@ bool QmlUtils::nativeMenuBar(void)
 	QMenuBar menuBar;
 	return menuBar.isNativeMenuBar();
 }
+
+/*! Returns major version of Qt. */
+int QmlUtils::qtVersionMajor(void)
+{
+	return QT_VERSION_MAJOR;
+}
+
+/*! Returns minor version of Qt. */
+int QmlUtils::qtVersionMinor(void)
+{
+	return QT_VERSION_MINOR;
+}
+
+/*! Returns patch version of Qt. */
+int QmlUtils::qtVersionPatch(void)
+{
+	return QT_VERSION_PATCH;
+}

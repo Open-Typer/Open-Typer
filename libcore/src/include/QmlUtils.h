@@ -35,6 +35,9 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_OBJECT
 	public:
 		Q_INVOKABLE static bool nativeMenuBar(void);
+		Q_INVOKABLE static int qtVersionMajor(void);
+		Q_INVOKABLE static int qtVersionMinor(void);
+		Q_INVOKABLE static int qtVersionPatch(void);
 };
 
 #endif // QMLUTILS_H
