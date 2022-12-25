@@ -11,5 +11,6 @@
         <file>CustomMenu.qml</file>
         <file>CustomMenuItem.qml</file>
         <file>CustomMenuSeparator.qml</file>
+        <file>MessageBox.qml</file>
     </qresource>
 </RCC>

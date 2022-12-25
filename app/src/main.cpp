@@ -142,6 +142,10 @@ int main(int argc, char *argv[])
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterModule("QtGraphicalEffects", 1, 0);
 #endif
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+	// TODO: Remove this after dropping Qt 5.9 support
+	qmlRegisterModule("QtQuick.Controls", 2, 3);
+#endif
 	// Set style
 	globalThemeEngine.updateStyle();
 	// Set icon theme
