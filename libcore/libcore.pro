@@ -30,6 +30,7 @@ SOURCES += \
     src/LanguageManager.cpp \
     src/LoadExerciseDialog.cpp \
     src/MistakeRecord.cpp \
+    src/QmlFileDialog.cpp \
     src/QmlKeyboardHandler.cpp \
     src/QmlUtils.cpp \
     src/Settings.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     src/include/LanguageManager.h \
     src/include/LoadExerciseDialog.h \
     src/include/MistakeRecord.h \
+    src/include/QmlFileDialog.h \
     src/include/QmlKeyboardHandler.h \
     src/include/QmlUtils.h \
     src/include/Settings.h \
