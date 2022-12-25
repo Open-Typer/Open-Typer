@@ -35,6 +35,7 @@
 #include "MistakeRecord.h"
 #include "QmlUtils.h"
 #include "ExerciseValidator.h"
+#include "QmlFileDialog.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -134,6 +135,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<CharacterRecord>("OpenTyper", 1, 0, "CharacterRecord");
 	qmlRegisterType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord");
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
+	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
 	// TODO: Remove this after fully switching to Qt 6
 	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
