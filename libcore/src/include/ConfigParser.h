@@ -61,8 +61,6 @@ class CORE_LIB_EXPORT ConfigParser : public QObject
 		Q_OBJECT
 	public:
 		explicit ConfigParser(QObject *parent = nullptr);
-		static const int defaultRepeatLimit = 128;
-		static const int defaultLineLength = 60;
 		Q_INVOKABLE bool open(const QString fileName);
 		Q_INVOKABLE void loadToBuffer(const QByteArray content);
 		Q_INVOKABLE QByteArray data(void);
@@ -89,11 +87,15 @@ class CORE_LIB_EXPORT ConfigParser : public QObject
 		Q_INVOKABLE static QString initExercise(QString exercise, int lineLength, bool lineCountLimit, int currentLine);
 		Q_INVOKABLE static QString initText(QString rawText);
 		Q_INVOKABLE bool addExercise(int lesson, int sublesson, int exercise, bool repeat, QString repeatType, int repeatLimit, int lineLength, QString desc, QString rawText);
+		Q_INVOKABLE static int defaultRepeatLimit(void);
+		Q_INVOKABLE static int defaultLineLength(void);
 
 	private:
 		QFile configFile;
 		QBuffer configBuffer;
 		QIODevice *currentDevice;
+		static const int m_defaultRepeatLimit = 128;
+		static const int m_defaultLineLength = 60;
 		bool reopen(QIODevice::OpenMode mode);
 		int exerciseID(const QString line, const int part);
 		QString lineOf(int lesson, int sublesson, int exercise);

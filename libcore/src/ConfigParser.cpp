@@ -749,3 +749,15 @@ bool ConfigParser::addExercise(int lesson, int sublesson, int exercise, bool rep
 		return false;
 	return true;
 }
+
+/*! Returns default repeat limit (text length). */
+int ConfigParser::defaultRepeatLimit(void)
+{
+	return m_defaultRepeatLimit;
+}
+
+/*! Returns default line length. */
+int ConfigParser::defaultLineLength(void)
+{
+	return m_defaultLineLength;
+}
