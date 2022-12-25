@@ -34,6 +34,7 @@ ApplicationWindow {
 	property int currentAbsoluteSublesson
 	property int currentExercise
 	property bool customExerciseLoaded
+	property string customExerciseText
 	property int sublessonListStart
 	property int lessonCount
 	property int sublessonCount
@@ -87,6 +88,20 @@ ApplicationWindow {
 		id: exerciseTimer
 	}
 
+	QmlFileDialog {
+		id: customExFileDialog
+		nameFilters: qsTr("Text files") + "(*.txt)"
+		onFileContentReady: (content)=> {
+			if(content.length > 8192) // Maximum size
+				largeFileBox.open();
+			else
+			{
+				exerciseLineLength = parser.defaultLineLength();
+				loadText(content, true);
+			}
+		}
+	}
+
 	ColumnLayout {
 		property int minWidth: Math.max(implicitWidth, paper.paperRect.width)
 		property int minHeight: implicitHeight
@@ -122,6 +137,7 @@ ApplicationWindow {
 				CustomToolButton {
 					iconName: "open"
 					toolTipText: qsTr("Open")
+					onClicked: customExFileDialog.getOpenFileContent()
 				}
 				CustomToolButton {
 					iconName: "print"
@@ -165,6 +181,10 @@ ApplicationWindow {
 					id: closeLoadedExButton
 					iconName: "close"
 					toolTipText: qsTr("Close loaded exercise")
+					onClicked: {
+						customExerciseLoaded = false
+						repeatExercise();
+					}
 				}
 				CustomToolButton {
 					iconName: "left"
@@ -195,6 +215,14 @@ ApplicationWindow {
 			onKeyPressed: keyPress(event);
 			onKeyReleased: console.log("released: " + event["text"]);
 		}
+	}
+
+	MessageBox {
+		id: largeFileBox
+		anchors.fill: parent
+		windowTitle: qsTr("Error");
+		title: qsTr("This file is too large!")
+		blurSource: mainLayout
 	}
 
 	function reload() {
@@ -793,6 +821,27 @@ ApplicationWindow {
 				repeatExercise();
 		});
 		summaryDialog.open();
+	}
+
+	function loadText(text, includeNewLines) {
+		exerciseText = "";
+		var lines =  text.split('\n');
+		for(var i = 0; i < lines.length; i++)
+		{
+			var line = lines[i];
+			if(exerciseText == "")
+				exerciseText = line;
+			else
+			{
+				if(includeNewLines)
+					exerciseText += "\n" + line;
+				else
+					exerciseText += " " + line;
+			}
+		}
+		customExerciseText = exerciseText;
+		customExerciseLoaded = true;
+		initExercise();
 	}
 
 	Component.onCompleted: reload();
