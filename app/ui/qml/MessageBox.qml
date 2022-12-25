@@ -118,7 +118,7 @@ Item {
 			shadow.visible = false
 		}
 		header: Rectangle {
-			color: Material.theme === Material.Light ? "white" : "black"
+			color: dialogColor
 			width: headerLayout.implicitWidth
 			height: headerLayout.implicitHeight
 			radius: control.radius
@@ -150,12 +150,12 @@ Item {
 		footer: DialogButtonBox {
 			id: dialogButtonBox
 			background: Rectangle {
-				color: Material.theme === Material.Light ? "white" : "black"
+				color: dialogColor
 				radius: control.radius
 			}
 		}
 		background: Rectangle {
-			color: Material.theme === Material.Light ? "white" : "black"
+			color: dialogColor
 			width: control.width
 			height: control.height
 			radius: control.radius
