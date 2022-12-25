@@ -796,7 +796,7 @@ void MainWindow::openExerciseFromFile(void)
 			}
 			else
 			{
-				levelLengthExtension = ConfigParser::defaultLineLength;
+				levelLengthExtension = ConfigParser::defaultLineLength();
 				loadText(fileContent, true);
 			}
 		}
