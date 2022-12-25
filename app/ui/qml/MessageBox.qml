@@ -81,6 +81,7 @@ Item {
 		samples: 16
 		color: "#80000000"
 		source: dialogMask
+		opacity: 0
 		visible: false
 		PropertyAnimation {
 			id: shadowInAnimation
