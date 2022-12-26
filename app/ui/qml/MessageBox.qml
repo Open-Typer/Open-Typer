@@ -120,6 +120,7 @@ Item {
 			shadowOutAnimation.running = true;
 			shadow.visible = false
 		}
+        onClosed: QmlUtils.reloadMenuBar();
 		header: Rectangle {
 			color: dialogColor
 			width: headerLayout.implicitWidth
