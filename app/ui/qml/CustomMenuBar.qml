@@ -150,7 +150,7 @@ Panel {
 
 		Connections {
 			target: QmlUtils
-			onMenuBarReloadTriggered: reload();
+			function onMenuBarReloadTriggered() { reload(); }
 		}
 
 		function reload() {
