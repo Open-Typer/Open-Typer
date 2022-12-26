@@ -89,6 +89,12 @@ class CORE_LIB_EXPORT ConfigParser : public QObject
 		Q_INVOKABLE bool addExercise(int lesson, int sublesson, int exercise, bool repeat, QString repeatType, int repeatLimit, int lineLength, QString desc, QString rawText);
 		Q_INVOKABLE static int defaultRepeatLimit(void);
 		Q_INVOKABLE static int defaultLineLength(void);
+		Q_INVOKABLE static void setCurrentLesson(int value);
+		Q_INVOKABLE static int currentLesson(void);
+		Q_INVOKABLE static void setCurrentSublesson(int value);
+		Q_INVOKABLE static int currentSublesson(void);
+		Q_INVOKABLE static void setCurrentExercise(int value);
+		Q_INVOKABLE static int currentExercise(void);
 
 	private:
 		QFile configFile;

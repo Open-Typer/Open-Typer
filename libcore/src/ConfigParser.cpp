@@ -761,3 +761,39 @@ int ConfigParser::defaultLineLength(void)
 {
 	return m_defaultLineLength;
 }
+
+/*! Sets selected lesson (should only be used in QML). */
+void ConfigParser::setCurrentLesson(int value)
+{
+	publicPos::currentLesson = value;
+}
+
+/*! Returns selected lesson. */
+int ConfigParser::currentLesson(void)
+{
+	return publicPos::currentLesson;
+}
+
+/*! Sets selected sublesson (should only be used in QML). */
+void ConfigParser::setCurrentSublesson(int value)
+{
+	publicPos::currentSublesson = value;
+}
+
+/*! Returns selected sublesson. */
+int ConfigParser::currentSublesson(void)
+{
+	return publicPos::currentSublesson;
+}
+
+/*! Sets selected exercise (should only be used in QML). */
+void ConfigParser::setCurrentExercise(int value)
+{
+	publicPos::currentExercise = value;
+}
+
+/*! Returns selected exercise. */
+int ConfigParser::currentExercise(void)
+{
+	return publicPos::currentExercise;
+}
