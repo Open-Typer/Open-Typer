@@ -222,7 +222,6 @@ ApplicationWindow {
 		anchors.fill: parent
 		windowTitle: qsTr("Error");
 		title: qsTr("This file is too large!")
-		blurSource: mainLayout
 	}
 
 	function reload() {
@@ -844,5 +843,8 @@ ApplicationWindow {
 		initExercise();
 	}
 
-	Component.onCompleted: reload();
+	Component.onCompleted: {
+		QmlUtils.blurSource = mainLayout;
+		reload();
+	}
 }
