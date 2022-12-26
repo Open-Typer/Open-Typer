@@ -38,6 +38,10 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_INVOKABLE static int qtVersionMajor(void);
 		Q_INVOKABLE static int qtVersionMinor(void);
 		Q_INVOKABLE static int qtVersionPatch(void);
+		Q_INVOKABLE void reloadMenuBar(void);
+
+	signals:
+		void menuBarReloadTriggered(void);
 };
 
 #endif // QMLUTILS_H

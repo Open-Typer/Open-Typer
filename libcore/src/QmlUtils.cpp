@@ -45,3 +45,10 @@ int QmlUtils::qtVersionPatch(void)
 {
 	return QT_VERSION_PATCH;
 }
+
+// TODO: Remove this after dropping Qt 5.9 support
+/*! Emits menuBarReloadTriggered() to fix empty menu bar in Qt 5.9. */
+void QmlUtils::reloadMenuBar(void)
+{
+	emit menuBarReloadTriggered();
+}
