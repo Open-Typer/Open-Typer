@@ -142,6 +142,7 @@ ApplicationWindow {
 				CustomToolButton {
 					iconName: "print"
 					toolTipText: qsTr("Print")
+					visible: !QmlUtils.osWasm();
 					onClicked: {
 						if(customExerciseLoaded)
 							QmlUtils.printExercise(displayExercise);
