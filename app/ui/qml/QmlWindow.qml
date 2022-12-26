@@ -69,6 +69,7 @@ ApplicationWindow {
 	property bool eventInProgress: false
 	property bool testLoaded: false
 	property bool uiLocked: false
+	property int mode: 0
 	Material.theme: ThemeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
 	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
 	color: ThemeEngine.bgColor
@@ -154,6 +155,19 @@ ApplicationWindow {
 				CustomToolButton {
 					iconName: "paper"
 					text: qsTr("Typing test")
+					onClicked: {
+						// TODO: Send events
+						/*AddonApi::clearLoadExTargets();
+						AddonApi::sendEvent(IAddon::Event_OpenLoadExDialog);*/
+						// TODO: Add targets support
+						/*QMap<int, QString> targets = AddonApi::loadExTargets();
+						if(targets.count() == 0)
+							dialog = new LoadExerciseDialog(this);
+						else
+							dialog = new LoadExerciseDialog(targets, this);*/
+						loadExerciseDialog.init();
+						loadExerciseDialog.open();
+					}
 				}
 				CustomToolButton {
 					iconName: "time"
@@ -850,8 +864,56 @@ ApplicationWindow {
 		initExercise();
 	}
 
+	function loadTestFinished() {
+		// TODO: Send events
+		/*AddonApi::setBlockLoadedEx(false);
+		QVariantMap args;
+		args["loadExDialog"] = QVariant::fromValue((void *) dialog);
+		AddonApi::sendEvent(IAddon::Event_CustomExLoaded, args);
+		if(!AddonApi::blockLoadedEx())
+			initTest(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
+				dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText());*/
+		console.log("accepted?");
+		initTest(loadExerciseDialog.exerciseText(), loadExerciseDialog.lineLength(), loadExerciseDialog.includeNewLines(),
+			 loadExerciseDialog.mode(), loadExerciseDialog.timeLimitSecs(), loadExerciseDialog.correctMistakes(), loadExerciseDialog.lockUi(), loadExerciseDialog.hideText());
+	}
+
+	function initTest(text, lineLength, includeNewLines, mode, time, correctMistakes_, lockUi, hideText_) {
+		// TODO: Add changeMode method
+		//changeMode(mode);
+		exerciseLineLength = lineLength;
+		loadText(text, includeNewLines);
+		if(mode === 1)
+		{
+			// TODO: Add timed exercises
+			/*ui->timedExCountdownLabel->setText("3");
+			ui->inputLabel->setText("3...");
+			QTime exTime = QTime(0, 0, 0).addSecs(time);
+			timedExHours = exTime.hour();
+			timedExMinutes = exTime.minute();
+			timedExSeconds = exTime.second();
+			timedExStarted = false;
+			ui->timedExTime->setTime(exTime);
+			ui->timedExTime->hide();
+			ui->timedExCountdownLabel->show();
+			levelInProgress = true;
+			levelTimer.start();
+			secLoop->start(500);*/
+		}
+		correctMistakes = correctMistakes_;
+		hideText = hideText_;
+		if(lockUi)
+		{
+			// TODO: Save window geometry
+			showFullScreen();
+			uiLocked = true;
+		}
+		testLoaded = true;
+	}
+
 	Component.onCompleted: {
 		QmlUtils.blurSource = mainLayout;
+		loadExerciseDialog.onAccepted.connect(function() { loadTestFinished(); });
 		reload();
 	}
 }
