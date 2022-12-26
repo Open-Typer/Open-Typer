@@ -344,9 +344,9 @@ ApplicationWindow {
 
 	function initExercise() {
 		// Init exercise
-		PublicPos.currentLesson = currentLesson;
-		PublicPos.currentSublesson = currentAbsoluteSublesson;
-		PublicPos.currentExercise = currentExercise;
+		parser.setCurrentLesson(currentLesson);
+		parser.setCurrentSublesson(currentAbsoluteSublesson);
+		parser.setCurrentExercise(currentExercise);
 		if(currentMode == 1)
 			exerciseText += '\n';
 		preview = false;
