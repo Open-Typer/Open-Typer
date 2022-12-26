@@ -67,6 +67,16 @@ int QmlUtils::qtVersionPatch(void)
 	return QT_VERSION_PATCH;
 }
 
+/*! Returns true if the platform is WebAssembly. */
+bool QmlUtils::osWasm(void)
+{
+#ifdef Q_OS_WASM
+	return true;
+#else
+	return false;
+#endif
+}
+
 // TODO: Remove this after dropping Qt 5.9 support
 /*! Emits menuBarReloadTriggered() to fix empty menu bar in Qt 5.9. */
 void QmlUtils::reloadMenuBar(void)

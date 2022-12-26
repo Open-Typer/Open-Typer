@@ -42,6 +42,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_INVOKABLE static int qtVersionMajor(void);
 		Q_INVOKABLE static int qtVersionMinor(void);
 		Q_INVOKABLE static int qtVersionPatch(void);
+		Q_INVOKABLE static bool osWasm(void);
 		Q_INVOKABLE void reloadMenuBar(void);
 		Q_INVOKABLE static void printExercise(int lesson, int sublesson, int exercise, QString text);
 		Q_INVOKABLE static void printExercise(QString text);
