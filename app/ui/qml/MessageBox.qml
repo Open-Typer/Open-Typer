@@ -28,7 +28,7 @@ import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
 
 Item {
-	property Item blurSource
+	property Item blurSource: QmlUtils.blurSource
 	property string windowTitle: ""
 	property string title: ""
 	property int standardButtons: Dialog.Ok
