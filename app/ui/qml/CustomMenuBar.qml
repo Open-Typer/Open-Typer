@@ -60,15 +60,17 @@ Panel {
 	function createMenuBar(parentItem, buttonType, menuType, menuItemType, menuSeparatorType) {
 		for(var i = 0; i < menuList.length; i++)
 		{
+			var menuParent = parentItem;
 			if(buttonType !== "")
 			{
 				var buttonComponent = Qt.createQmlObject(getComponentString(buttonType), parentItem);
 				var button = buttonComponent.createObject(parentItem);
 				menuObjects[menuObjects.length] = button;
 				button.text = menuList[i].text;
+				menuParent = button;
 			}
-			var menuComponent = Qt.createQmlObject(getComponentString(menuType), parentItem);
-			var menu = menuComponent.createObject(parentItem);
+			var menuComponent = Qt.createQmlObject(getComponentString(menuType), menuParent);
+			var menu = menuComponent.createObject(menuParent);
 			if(buttonType === "")
 			{
 				menu.title = menuList[i].text;
