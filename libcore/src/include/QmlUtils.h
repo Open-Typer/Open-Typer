@@ -28,19 +28,27 @@
 #endif
 
 #include <QObject>
+#include <QQuickItem>
 
 /*! \brief The QmlUtils class acts like a bridge for QML code. */
 class CORE_LIB_EXPORT QmlUtils : public QObject
 {
 		Q_OBJECT
+		Q_PROPERTY(QQuickItem *blurSource READ blurSource WRITE setBlurSource NOTIFY blurSourceChanged)
 	public:
+		void setBlurSource(QQuickItem *item);
+		QQuickItem *blurSource(void);
 		Q_INVOKABLE static bool nativeMenuBar(void);
 		Q_INVOKABLE static int qtVersionMajor(void);
 		Q_INVOKABLE static int qtVersionMinor(void);
 		Q_INVOKABLE static int qtVersionPatch(void);
 		Q_INVOKABLE void reloadMenuBar(void);
 
+	private:
+		QQuickItem *m_blurSource = nullptr;
+
 	signals:
+		void blurSourceChanged(QQuickItem *item);
 		void menuBarReloadTriggered(void);
 };
 

@@ -21,6 +21,19 @@
 #include "QmlUtils.h"
 #include <QMenuBar>
 
+/*! Sets QML root item. */
+void QmlUtils::setBlurSource(QQuickItem *item)
+{
+	m_blurSource = item;
+	emit blurSourceChanged(item);
+}
+
+/*! Returns QML root item. */
+QQuickItem *QmlUtils::blurSource(void)
+{
+	return m_blurSource;
+}
+
 /*! Returns true if the application uses native menu bar. */
 bool QmlUtils::nativeMenuBar(void)
 {
