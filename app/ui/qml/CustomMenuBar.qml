@@ -50,6 +50,7 @@ Panel {
 			]
 		}
 	]
+	property var menuObjects: []
 
 	function getComponentString(typeName) {
 		var imports = "import QtQuick 2.9; import QtQuick.Controls 2.2; import Qt.labs.platform 1.0 as Platform;"
@@ -63,6 +64,7 @@ Panel {
 			{
 				var buttonComponent = Qt.createQmlObject(getComponentString(buttonType), parentItem);
 				var button = buttonComponent.createObject(parentItem);
+				menuObjects[menuObjects.length] = button;
 				button.text = menuList[i].text;
 			}
 			var menuComponent = Qt.createQmlObject(getComponentString(menuType), parentItem);
@@ -142,12 +144,22 @@ Panel {
 	}
 
 	control: RowLayout {
-		id: mainLayout
-		Component.onCompleted: {
+		id: uiMenuBar
+
+		Connections {
+			target: QmlUtils
+			onMenuBarReloadTriggered: reload();
+		}
+
+		function reload() {
 			if(QmlUtils.nativeMenuBar())
 				root.visible = false;
-			createMenuBar(mainLayout, "MenuButton", "CustomMenu", "CustomMenuItem", "MenuSeparator");
+			for(var i = 0; i < menuObjects.length; i++)
+				menuObjects[i].destroy();
+			menuObjects = [];
+			createMenuBar(uiMenuBar, "MenuButton", "CustomMenu", "CustomMenuItem", "MenuSeparator");
 		}
+		Component.onCompleted: reload();
 	}
 
 	onEnabledChanged: platformMenuBar.reload();
