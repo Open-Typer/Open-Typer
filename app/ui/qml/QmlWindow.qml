@@ -142,6 +142,12 @@ ApplicationWindow {
 				CustomToolButton {
 					iconName: "print"
 					toolTipText: qsTr("Print")
+					onClicked: {
+						if(customExerciseLoaded)
+							QmlUtils.printExercise(displayExercise);
+						else
+							QmlUtils.printExercise(currentLesson, currentAbsoluteSublesson, currentExercise, displayExercise);
+					}
 				}
 				ToolSeparator {}
 				CustomToolButton {
