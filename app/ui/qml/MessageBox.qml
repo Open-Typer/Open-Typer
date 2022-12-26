@@ -42,8 +42,8 @@ Item {
 	Rectangle {
 		id: dialogMask
 		anchors.centerIn: parent
-		width: control.width + 3
-		height: control.height + 3
+        width: control.width + 4
+        height: control.height + 4
 		color: dialogColor
 		radius: control.radius
 		visible: shadow.visible
@@ -103,8 +103,8 @@ Item {
 	Dialog {
 		property int radius: 10
 		id: control
-		x: dialogMask.x
-		y: dialogMask.y
+        x: dialogMask.x + 2
+        y: dialogMask.y + 2
 		width: headerLayout.implicitWidth
 		height: headerLayout.implicitHeight + dialogButtonBox.height
 		title: root.title
