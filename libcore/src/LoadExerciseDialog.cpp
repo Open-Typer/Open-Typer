@@ -149,6 +149,12 @@ QTime LoadExerciseDialog::timeLimit(void)
 	return ui->timeEdit->time();
 }
 
+/*! Returns selected time limit (in seconds). */
+int LoadExerciseDialog::timeLimitSecs(void)
+{
+	return QTime(0, 0, 0).secsTo(timeLimit());
+}
+
 /*! Returns true if the user has enabled mistake correction. */
 bool LoadExerciseDialog::correctMistakes(void)
 {

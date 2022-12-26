@@ -30,6 +30,7 @@
 #include <QDialog>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QTime>
 #include "ConfigParser.h"
 
 namespace Ui {
@@ -53,6 +54,7 @@ class CORE_LIB_EXPORT LoadExerciseDialog : public QDialog
 		Q_INVOKABLE bool includeNewLines(void);
 		Q_INVOKABLE int mode(void);
 		Q_INVOKABLE QTime timeLimit(void);
+		Q_INVOKABLE int timeLimitSecs(void);
 		Q_INVOKABLE bool correctMistakes(void);
 		Q_INVOKABLE bool lockUi(void);
 		Q_INVOKABLE bool hideText(void);
