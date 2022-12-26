@@ -30,6 +30,8 @@ LoadExerciseDialog::LoadExerciseDialog(QMap<int, QString> availableTargets, QWid
 	ui(new Ui::LoadExerciseDialog),
 	m_targets(availableTargets)
 {
+	ui->setupUi(this);
+	oldSelectedExText = ui->selectedExButton->text();
 	init();
 }
 
@@ -38,6 +40,8 @@ LoadExerciseDialog::LoadExerciseDialog(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::LoadExerciseDialog)
 {
+	ui->setupUi(this);
+	oldSelectedExText = ui->selectedExButton->text();
 	local = true;
 	init();
 }
@@ -45,11 +49,10 @@ LoadExerciseDialog::LoadExerciseDialog(QWidget *parent) :
 /*! Initializes the dialog. */
 void LoadExerciseDialog::init(void)
 {
-	ui->setupUi(this);
 	changeSource();
 	changeMode();
 	// Get selected exercise
-	QString oldText = ui->selectedExButton->text();
+	QString oldText = oldSelectedExText;
 	QString lessonTr = ConfigParser::lessonTr(publicPos::currentLesson);
 	QString sublessonTr = ConfigParser::sublessonName(publicPos::currentSublesson);
 	QString exerciseTr = ConfigParser::exerciseTr(publicPos::currentExercise);

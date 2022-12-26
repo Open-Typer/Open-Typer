@@ -49,6 +49,7 @@ class CORE_LIB_EXPORT LoadExerciseDialog : public QDialog
 		explicit LoadExerciseDialog(QMap<int, QString> availableTargets, QWidget *parent = nullptr);
 		LoadExerciseDialog(QWidget *parent = nullptr);
 		~LoadExerciseDialog();
+		Q_INVOKABLE void init(void);
 		Q_INVOKABLE QString exerciseText(void);
 		Q_INVOKABLE int lineLength(void);
 		Q_INVOKABLE bool includeNewLines(void);
@@ -63,7 +64,6 @@ class CORE_LIB_EXPORT LoadExerciseDialog : public QDialog
 
 	private:
 		Ui::LoadExerciseDialog *ui;
-		void init(void);
 		QString fileName = "";
 		QMap<int, QString> m_targets;
 		QMap<int, QCheckBox *> targets;
@@ -71,6 +71,7 @@ class CORE_LIB_EXPORT LoadExerciseDialog : public QDialog
 		int m_lineLength = 0;
 		bool m_includeNewLines = false;
 		bool local = false;
+		QString oldSelectedExText;
 
 	private slots:
 		void verify(void);
