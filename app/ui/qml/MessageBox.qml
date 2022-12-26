@@ -103,8 +103,8 @@ Item {
 	Dialog {
 		property int radius: 10
 		id: control
-        x: dialogMask.x + 2
-        y: dialogMask.y + 2
+		x: dialogMask.x + 2
+		y: dialogMask.y + 2
 		width: headerLayout.implicitWidth
 		height: headerLayout.implicitHeight + dialogButtonBox.height
 		title: root.title
