@@ -19,12 +19,14 @@
  */
 
 #include <QMenuBar>
+#ifndef Q_OS_WASM
 #include <QPrinter>
 #include <QPrintPreviewDialog>
 #include <QPainter>
 #include <QTextEdit>
 #include <QTextDocument>
 #include <QAbstractTextDocumentLayout>
+#endif
 #include "QmlUtils.h"
 #include "ThemeEngine.h"
 #include "ConfigParser.h"
