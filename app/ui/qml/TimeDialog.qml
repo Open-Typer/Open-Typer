@@ -25,11 +25,11 @@ import QtQuick.Layouts 1.3
 CustomDialog {
 	readonly property var itemStrings: ["1 min", "2 min 30 s", "5 min", "10 min"]
 	readonly property var itemValues: [60, 150, 300, 600]
-	property int timeSecs: contentItem.timeComboBox.customTime ? minBox.value * 60 + secBox.value : itemValues[contentItem.timeComboBox.currentIndex]
+	property int timeSecs: contentItem.timeSecs
 	windowTitle: qsTr("Time limit")
 	standardButtons: Dialog.Close | Dialog.Ok
 	contentComponent: ColumnLayout {
-		property alias timeComboBox: timeComboBox
+		property int timeSecs: timeComboBox.customTime ? minBox.value * 60 + secBox.value : itemValues[timeComboBox.currentIndex]
 		CustomComboBox {
 			readonly property bool customTime: currentIndex == model.length - 1
 			id: timeComboBox
