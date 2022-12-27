@@ -13,5 +13,6 @@
         <file>CustomMenuSeparator.qml</file>
         <file>MessageBox.qml</file>
         <file>CustomDialog.qml</file>
+        <file>TimeDialog.qml</file>
     </qresource>
 </RCC>
