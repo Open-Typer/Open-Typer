@@ -149,6 +149,7 @@ Item {
 				Pane {
 					padding: 10
 					background: null
+					Layout.fillWidth: true
 					Loader {
 						id: contentsLoader
 						anchors.fill: parent
