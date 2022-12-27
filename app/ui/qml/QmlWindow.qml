@@ -66,7 +66,7 @@ ApplicationWindow {
 	property bool timedExStarted
 	property int timedExTime
 	property int timedExCountdown
-	property var errorWords
+	property var errorWords: []
 	property bool correctMistakes: true
 	property bool eventInProgress: false
 	property bool testLoaded: false
