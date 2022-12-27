@@ -19,8 +19,13 @@
  */
 
 import QtQuick 2.9
+import QtQuick.Controls 2.2
 
 CustomDialog {
 	property string title: ""
-	onTitleChanged: dialog.title = title
+	contentComponent: Label {
+		text: title
+		font.bold: true
+		font.pointSize: 14
+	}
 }
