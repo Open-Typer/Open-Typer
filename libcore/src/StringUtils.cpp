@@ -84,6 +84,12 @@ QString StringUtils::wordAt(QString str, int index)
 	return "";
 }
 
+/*! Returns repeated string. Same as string.repeated(n). */
+QString StringUtils::repeatString(QString string, int n)
+{
+	return string.repeated(n);
+}
+
 /*! Returns the length of the longest common subsequence of source and target list. */
 int StringUtils::lcsLen(QList<QVariant> source, QList<QVariant> target)
 {

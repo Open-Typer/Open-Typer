@@ -44,6 +44,7 @@ class CORE_LIB_EXPORT StringUtils : public QObject
 		Q_INVOKABLE static int charCount(QString str, QChar ch);
 		Q_INVOKABLE static QString word(QString str, int id);
 		Q_INVOKABLE static QString wordAt(QString str, int index);
+		Q_INVOKABLE static QString repeatString(QString string, int n);
 		Q_INVOKABLE static QList<QVariant> longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target);
 		Q_INVOKABLE static QString longestCommonSubsequence(QString source, QString target);
 		Q_INVOKABLE static QList<MistakeRecord *> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord *> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
