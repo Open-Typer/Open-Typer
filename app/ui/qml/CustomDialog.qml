@@ -34,6 +34,7 @@ Item {
 	readonly property var dialogColor: Material.theme === Material.Light ? "white" : "black"
 	readonly property alias dialog: control
 	property alias contentComponent: contentsLoader.sourceComponent
+	readonly property alias contentItem: contentsLoader.item
 	property bool draggable: true
 	id: root
 	anchors.fill: parent
