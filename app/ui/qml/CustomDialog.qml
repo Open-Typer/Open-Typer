@@ -202,6 +202,7 @@ Item {
 		}
 		footer: DialogButtonBox {
 			id: dialogButtonBox
+			font.capitalization: Font.MixedCase
 			background: Rectangle {
 				color: dialogColor
 				radius: control.radius
