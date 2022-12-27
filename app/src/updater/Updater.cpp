@@ -28,7 +28,7 @@
 bool Updater::updateAvailable(void)
 {
 #ifdef Q_OS_WINDOWS
-	auto currentDate =  QDateTime::currentDateTimeUtc().date();
+	auto currentDate = QDateTime::currentDateTimeUtc().date();
 	// Disable updates on Windows 7 and 8 after May 2023
 	if((QSysInfo::productVersion().split(' ').at(0).toInt() < 10) && (currentDate.year() >= 2023) && (currentDate.month() >= 6))
 		return false;
