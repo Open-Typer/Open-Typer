@@ -148,6 +148,9 @@ Item {
 					font.bold: true
 					font.pointSize: 14
 				}
+				Loader {
+					id: contentsLoader
+				}
 				MenuSeparator { Layout.fillWidth: true }
 			}
 		}
@@ -163,9 +166,6 @@ Item {
 			width: control.width
 			height: control.height
 			radius: control.radius
-			Loader {
-				id: contentsLoader
-			}
 		}
 		Component {
 			id: overlayModal
