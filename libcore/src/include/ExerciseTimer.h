@@ -39,6 +39,7 @@ class CORE_LIB_EXPORT ExerciseTimer : public QObject
 	public:
 		Q_INVOKABLE QString formattedTime(void);
 		Q_INVOKABLE QString formattedRemainingTime(int limitMSecs);
+		Q_INVOKABLE void update(void);
 
 	private:
 		QElapsedTimer m_timer;

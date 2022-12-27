@@ -45,6 +45,13 @@ QString ExerciseTimer::formattedRemainingTime(int limitMSecs)
 		return newTime.toString("mm:ss");
 }
 
+/*! Updates the elapsed property. */
+void ExerciseTimer::update(void)
+{
+	m_elapsed = m_timer.elapsed();
+	emit elapsedChanged();
+}
+
 /*! Starts the timer. */
 void ExerciseTimer::start()
 {
