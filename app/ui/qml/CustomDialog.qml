@@ -142,13 +142,6 @@ Item {
 					Layout.fillWidth: true
 					visible: root.windowTitle != ""
 				}
-				Label {
-					id: titleLabel
-					padding: 10
-					text: control.title
-					font.bold: true
-					font.pointSize: 14
-				}
 				Loader {
 					id: contentsLoader
 				}
