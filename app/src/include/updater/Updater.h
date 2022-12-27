@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QProcess>
+#include <QDateTime>
 
 /*! \brief The Updater class is used to check for updates and download new versions of the program. */
 class Updater

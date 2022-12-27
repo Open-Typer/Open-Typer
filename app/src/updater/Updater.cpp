@@ -19,7 +19,6 @@
  */
 
 #ifdef Q_OS_WINDOWS
-#include <QDateTime>
 #include <QSysInfo>
 #endif
 #include "updater/Updater.h"
