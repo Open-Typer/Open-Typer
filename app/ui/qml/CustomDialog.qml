@@ -112,6 +112,7 @@ Item {
 		standardButtons: root.standardButtons
 		modal: true
 		onAboutToShow: {
+			blur.visible = true;
 			blurInAnimation.running = true;
 			shadowInAnimation.running = true;
 			shadow.visible = true;
@@ -121,7 +122,10 @@ Item {
 			shadowOutAnimation.running = true;
 			shadow.visible = false
 		}
-		onClosed: QmlUtils.reloadMenuBar();
+		onClosed: {
+			blur.visible = false;
+			QmlUtils.reloadMenuBar();
+		}
 		header: Rectangle {
 			color: dialogColor
 			width: headerLayout.implicitWidth
