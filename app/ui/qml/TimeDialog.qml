@@ -27,7 +27,7 @@ CustomDialog {
 	readonly property var itemValues: [60, 150, 300, 600]
 	property int timeSecs: contentItem.timeSecs
 	windowTitle: qsTr("Time limit")
-	standardButtons: Dialog.Close | Dialog.Ok
+	standardButtons: Dialog.Cancel | Dialog.Ok
 	contentComponent: ColumnLayout {
 		property int timeSecs: timeComboBox.customTime ? minBox.value * 60 + secBox.value : itemValues[timeComboBox.currentIndex]
 		CustomComboBox {
