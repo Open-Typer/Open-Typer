@@ -873,7 +873,6 @@ ApplicationWindow {
 		if(!AddonApi::blockLoadedEx())
 			initTest(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
 				dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText());*/
-		console.log("accepted?");
 		initTest(loadExerciseDialog.exerciseText(), loadExerciseDialog.lineLength(), loadExerciseDialog.includeNewLines(),
 			 loadExerciseDialog.mode(), loadExerciseDialog.timeLimitSecs(), loadExerciseDialog.correctMistakes(), loadExerciseDialog.lockUi(), loadExerciseDialog.hideText());
 	}
