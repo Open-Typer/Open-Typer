@@ -35,6 +35,7 @@ Item {
 	readonly property alias dialog: control
 	property alias contentComponent: contentsLoader.sourceComponent
 	id: root
+	anchors.fill: parent
 
 	function open() {
 		control.open();
