@@ -281,6 +281,7 @@ ApplicationWindow {
 		Panel {
 			id: timedExPanel
 			Layout.fillWidth: true
+			fillWidth: true
 			visible: currentMode == 1
 			enabled: !uiLocked
 			control: RowLayout {
@@ -288,6 +289,9 @@ ApplicationWindow {
 					text: formattedExerciseRemainingTime
 					Layout.fillWidth: true
 					horizontalAlignment: Qt.AlignHCenter
+					color: Material.theme === Material.Light ? "black" : "white"
+					font.pointSize: 20
+					font.bold: true
 				}
 			}
 		}
