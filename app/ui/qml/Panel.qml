@@ -26,13 +26,15 @@ import OpenTyper 1.0
 ToolBar {
 	property alias control: loader.sourceComponent
 	property alias contents: loader.item
+	property bool fillWidth: false
 	padding: 0
 
 	background: Rectangle { color: ThemeEngine.panelColor }
 	RowLayout {
-		width: parent.width
-		ColumnLayout {
-			Loader { id: loader }
+		anchors.fill: parent
+		Loader {
+			id: loader
+			Layout.fillWidth: fillWidth
 		}
 	}
 }
