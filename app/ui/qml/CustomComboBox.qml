@@ -42,6 +42,7 @@ ComboBox {
 		color: backgroundColor()
 	}
 	popup.implicitWidth: computeWidth(model)
+	popup.y: height
 	function computeWidth(mdl) {
 		if (mdl === null || mdl === undefined)
 			return 100; // width of an empty combo box
