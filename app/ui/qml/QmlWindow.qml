@@ -240,7 +240,6 @@ ApplicationWindow {
 
 	MessageBox {
 		id: largeFileBox
-		anchors.fill: parent
 		windowTitle: qsTr("Error");
 		title: qsTr("This file is too large!")
 	}
