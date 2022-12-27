@@ -30,7 +30,7 @@ import OpenTyper 1.0
 Item {
 	property Item blurSource: QmlUtils.blurSource
 	property string windowTitle: ""
-	property int standardButtons
+	property int standardButtons: Dialog.NoButton
 	readonly property var dialogColor: Material.theme === Material.Light ? "white" : "black"
 	readonly property alias dialog: control
 	property alias contentComponent: contentsLoader.sourceComponent
@@ -138,7 +138,7 @@ Item {
 		x: dialogMask.x + 2
 		y: dialogMask.y + 2
 		width: headerLayout.implicitWidth
-		height: headerLayout.implicitHeight + dialogButtonBox.height
+		height: standardButtons !== Dialog.NoButton ? headerLayout.implicitHeight + dialogButtonBox.height : headerLayout.implicitHeight
 		standardButtons: root.standardButtons
 		modal: true
 		onAboutToShow: {
@@ -192,7 +192,10 @@ Item {
 						anchors.fill: parent
 					}
 				}
-				MenuSeparator { Layout.fillWidth: true }
+				MenuSeparator {
+					Layout.fillWidth: true
+					visible: standardButtons !== Dialog.NoButton
+				}
 			}
 		}
 		footer: DialogButtonBox {
