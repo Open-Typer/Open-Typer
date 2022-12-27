@@ -211,16 +211,7 @@ ApplicationWindow {
 				CustomToolButton {
 					iconName: "time"
 					text: qsTr("Timed exercise")
-					onClicked: {
-						if(currentMode == 1)
-						{
-							// Switch back to default mode
-							changeMode(0);
-							repeatExercise();
-						}
-						else
-							timeDialog.open();
-					}
+					onClicked: timeDialog.open()
 				}
 				CustomToolButton {
 					iconName: "close"
@@ -285,14 +276,23 @@ ApplicationWindow {
 			visible: currentMode == 1
 			enabled: !uiLocked
 			control: RowLayout {
+				Item { Layout.fillWidth: true }
 				Label {
 					text: formattedExerciseRemainingTime
-					Layout.fillWidth: true
-					horizontalAlignment: Qt.AlignHCenter
 					color: Material.theme === Material.Light ? "black" : "white"
 					font.pointSize: 20
 					font.bold: true
 				}
+				CustomToolButton {
+					visible: !uiLocked
+					iconName: "close"
+					toolTipText: qsTr("Stop")
+					onClicked: {
+						changeMode(0);
+						repeatExercise();
+					}
+				}
+				Item { Layout.fillWidth: true }
 			}
 		}
 		Paper {
