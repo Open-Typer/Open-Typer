@@ -57,7 +57,7 @@ Item {
 		id: blur
 		anchors.fill: root
 		source: blurSource
-		visible: true
+		visible: false
 		radius: 0
 		PropertyAnimation {
 			id: blurInAnimation
