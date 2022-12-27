@@ -34,6 +34,7 @@ Item {
 	readonly property var dialogColor: Material.theme === Material.Light ? "white" : "black"
 	readonly property alias dialog: control
 	property alias contentComponent: contentsLoader.sourceComponent
+	property bool draggable: true
 	id: root
 	anchors.fill: parent
 
@@ -43,14 +44,43 @@ Item {
 
 	Rectangle {
 		id: dialogMask
-		anchors.centerIn: parent
-	width: control.width + 4
-	height: control.height + 4
+		width: control.width + 4
+		height: control.height + 4
 		color: dialogColor
 		radius: control.radius
 		visible: shadow.visible
 		border.width: 1
 		border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+		Component.onCompleted: resetPos();
+		onXChanged: checkPos();
+		onYChanged: checkPos();
+
+		function resetPos() {
+			anchors.centerIn = parent;
+			parent.onWidthChanged.connect(function() { checkPos(); });
+			parent.onHeightChanged.connect(function() { checkPos(); });
+		}
+
+		function checkPos() {
+			if(anchors.centerIn == parent)
+				return;
+			// x
+			var finalX = x;
+			if(finalX < 0)
+				finalX = 0;
+			else if(finalX + width > parent.width)
+				finalX = parent.width - width;
+			if(finalX != x)
+				x = finalX;
+			// y
+			var finalY = y;
+			if(finalY < 0)
+				finalY = 0;
+			if(finalY + height > parent.height)
+				finalY = parent.height - height;
+			if(finalY != y)
+				y = finalY;
+		}
 	}
 
 	FastBlur {
@@ -141,6 +171,13 @@ Item {
 					text: root.windowTitle
 					horizontalAlignment: Qt.AlignHCenter
 					visible: text != ""
+					Drag.active: draggable
+					MouseArea {
+						enabled: draggable
+						anchors.fill: parent
+						drag.target: dialogMask
+						onPressed: dialogMask.anchors.centerIn = undefined;
+					}
 				}
 				MenuSeparator {
 					Layout.fillWidth: true
