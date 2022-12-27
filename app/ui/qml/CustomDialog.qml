@@ -142,8 +142,13 @@ Item {
 					Layout.fillWidth: true
 					visible: root.windowTitle != ""
 				}
-				Loader {
-					id: contentsLoader
+				Pane {
+					padding: 10
+					background: null
+					Loader {
+						id: contentsLoader
+						anchors.fill: parent
+					}
 				}
 				MenuSeparator { Layout.fillWidth: true }
 			}
