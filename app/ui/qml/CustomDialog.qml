@@ -30,7 +30,7 @@ import OpenTyper 1.0
 Item {
 	property Item blurSource: QmlUtils.blurSource
 	property string windowTitle: ""
-	property int standardButtons: Dialog.Ok
+	property int standardButtons
 	readonly property var dialogColor: Material.theme === Material.Light ? "white" : "black"
 	readonly property alias dialog: control
 	property alias contentComponent: contentsLoader.sourceComponent
