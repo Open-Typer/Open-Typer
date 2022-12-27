@@ -23,6 +23,7 @@ import QtQuick.Controls 2.2
 
 CustomDialog {
 	property string title: ""
+	standardButtons: Dialog.Ok
 	contentComponent: Label {
 		text: title
 		font.bold: true
