@@ -43,7 +43,7 @@ ApplicationWindow {
 	property string exerciseText
 	property string displayExercise
 	property string fullInput
-	property int currentMode
+	property int currentMode: 0
 	property bool preview
 	property int currentLine
 	property int exercisePos
@@ -64,12 +64,15 @@ ApplicationWindow {
 	property bool hideText: false
 	property bool blockInput
 	property bool timedExStarted
+	property int timedExTime
+	property int timedExCountdown
 	property var errorWords
 	property bool correctMistakes: true
 	property bool eventInProgress: false
 	property bool testLoaded: false
 	property bool uiLocked: false
-	property int mode: 0
+	property string formattedExerciseTime
+	property string formattedExerciseRemainingTime
 	Material.theme: ThemeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
 	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
 	color: ThemeEngine.bgColor
@@ -87,6 +90,41 @@ ApplicationWindow {
 
 	ExerciseTimer {
 		id: exerciseTimer
+	}
+
+	Timer {
+		id: updateTimer
+		interval: 16
+		repeat: true
+		running: true
+		onTriggered: {
+			exerciseTimer.update();
+			eventInProgress = false;
+			formattedExerciseTime = exerciseTimer.formattedTime();
+			if(timedExStarted)
+			{
+				formattedExerciseRemainingTime = exerciseTimer.formattedRemainingTime(timedExTime * 1000);
+				if((exerciseTimer.elapsed / 1000 >= timedExTime) && exerciseInProgress)
+				{
+					lastTime = timedExTime;
+					changeMode(0);
+					endExercise();
+				}
+			}
+			else if(currentMode == 1)
+			{
+				formattedExerciseRemainingTime = exerciseTimer.formattedRemainingTime((timedExCountdown + 1) * 1000);
+				paper.input = timedExCountdown - Math.floor(exerciseTimer.elapsed / 1000) + "...";
+				if(exerciseTimer.elapsed / 1000 > timedExCountdown)
+				{
+					timedExStarted = true;
+					exerciseTimer.start();
+					blockInput = false;
+					restart();
+					paper.input = "";
+				}
+			}
+		}
 	}
 
 	QmlFileDialog {
@@ -126,6 +164,7 @@ ApplicationWindow {
 		Panel {
 			id: panel1
 			Layout.fillWidth: true
+			visible: currentMode == 0
 			enabled: !uiLocked
 			control: RowLayout {
 				CustomToolButton {
@@ -172,6 +211,16 @@ ApplicationWindow {
 				CustomToolButton {
 					iconName: "time"
 					text: qsTr("Timed exercise")
+					onClicked: {
+						if(currentMode == 1)
+						{
+							// Switch back to default mode
+							changeMode(0);
+							repeatExercise();
+						}
+						else
+							timeDialog.open();
+					}
 				}
 				CustomToolButton {
 					iconName: "close"
@@ -186,6 +235,7 @@ ApplicationWindow {
 		Panel {
 			id: panel2
 			Layout.fillWidth: true
+			visible: currentMode == 0
 			enabled: !uiLocked
 			control: RowLayout {
 				property alias closeLoadedExButton: closeLoadedExButton
@@ -228,6 +278,19 @@ ApplicationWindow {
 				}
 			}
 		}
+		Panel {
+			id: timedExPanel
+			Layout.fillWidth: true
+			visible: currentMode == 1
+			enabled: !uiLocked
+			control: RowLayout {
+				Label {
+					text: formattedExerciseRemainingTime
+					Layout.fillWidth: true
+					horizontalAlignment: Qt.AlignHCenter
+				}
+			}
+		}
 		Paper {
 			id: paper
 			Layout.fillWidth: true
@@ -242,6 +305,11 @@ ApplicationWindow {
 		id: largeFileBox
 		windowTitle: qsTr("Error");
 		title: qsTr("This file is too large!")
+	}
+
+	TimeDialog {
+		id: timeDialog
+		onAccepted: startTimedExercise(timeSecs)
 	}
 
 	function reload() {
@@ -400,7 +468,7 @@ ApplicationWindow {
 			text = exerciseText.substring(0, exerciseText.length - 1);
 		var finalText = parser.initExercise(text, exerciseLineLength, false, currentLine);
 		if(currentMode == 1)
-			finalText += "\n" + displayExercise.substring(0, displayExercise.length - 1).repeat(100 / lineCount);
+			finalText += "\n" + StringUtils.repeatString(displayExercise.substring(0, displayExercise.length - 1), 100 / lineCount);
 		var currentLineText = "";
 		var remainingText = "";
 		var line = 0;
@@ -819,8 +887,7 @@ ApplicationWindow {
 		summaryDialog.setMistakes(exerciseMistakes);
 		summaryDialog.setAccuracy(1.0 - exerciseMistakes / totalHits);
 		summaryDialog.onAccepted.connect(function() {
-			// TODO: Add changeMode method
-			//changeMode(0);
+			changeMode(0);
 			// TODO: Show export button
 			preview = true;
 			// Load saved text
@@ -832,8 +899,7 @@ ApplicationWindow {
 			blockInput = true;
 		});
 		summaryDialog.onRejected.connect(function() {
-			// TODO: Add changeMode method
-			//changeMode(0);
+			changeMode(0);
 			if(customExerciseLoaded)
 				initExercise();
 			else
@@ -877,27 +943,11 @@ ApplicationWindow {
 	}
 
 	function initTest(text, lineLength, includeNewLines, mode, time, correctMistakes_, lockUi, hideText_) {
-		// TODO: Add changeMode method
-		//changeMode(mode);
+		changeMode(mode);
 		exerciseLineLength = lineLength;
 		loadText(text, includeNewLines);
 		if(mode === 1)
-		{
-			// TODO: Add timed exercises
-			/*ui->timedExCountdownLabel->setText("3");
-			ui->inputLabel->setText("3...");
-			QTime exTime = QTime(0, 0, 0).addSecs(time);
-			timedExHours = exTime.hour();
-			timedExMinutes = exTime.minute();
-			timedExSeconds = exTime.second();
-			timedExStarted = false;
-			ui->timedExTime->setTime(exTime);
-			ui->timedExTime->hide();
-			ui->timedExCountdownLabel->show();
-			levelInProgress = true;
-			levelTimer.start();
-			secLoop->start(500);*/
-		}
+			startTimedExercise(time);
 		correctMistakes = correctMistakes_;
 		hideText = hideText_;
 		if(lockUi)
@@ -907,6 +957,26 @@ ApplicationWindow {
 			uiLocked = true;
 		}
 		testLoaded = true;
+	}
+
+	function changeMode(mode) {
+		currentMode = mode;
+		// TODO: Send change mode event
+		//AddonApi::sendEvent(IAddon::Event_ChangeMode);
+	}
+
+	function startTimedExercise(time)
+	{
+		timedExTime = time;
+		timedExCountdown = 3;
+		timedExStarted = false;
+		blockInput = true;
+		changeMode(1);
+		exerciseTimer.start();
+		updateTimer.triggered();
+		updateTimer.restart();
+		repeatExercise();
+		exerciseInProgress = true;
 	}
 
 	Component.onCompleted: {
