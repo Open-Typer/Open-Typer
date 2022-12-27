@@ -96,6 +96,7 @@ FORMS += \
 
 DISTFILES += \
     ui/qml/CustomComboBox.qml \
+    ui/qml/CustomDialog.qml \
     ui/qml/CustomMenu.qml \
     ui/qml/CustomMenuBar.qml \
     ui/qml/CustomMenuItem.qml \
