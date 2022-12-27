@@ -36,6 +36,9 @@ Item {
 	property alias contentComponent: contentsLoader.sourceComponent
 	readonly property alias contentItem: contentsLoader.item
 	property bool draggable: true
+	signal accepted()
+	// TODO: Add signals introduced in Qt 5.10
+	signal rejected()
 	id: root
 	anchors.fill: parent
 
@@ -226,5 +229,7 @@ Item {
 			else
 				NewControls.Overlay.modal = overlayModal;
 		}
+		onAccepted: root.accepted()
+		onRejected: root.rejected()
 	}
 }
