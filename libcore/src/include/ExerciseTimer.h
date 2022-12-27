@@ -36,6 +36,10 @@ class CORE_LIB_EXPORT ExerciseTimer : public QObject
 		Q_OBJECT
 		Q_PROPERTY(int elapsed MEMBER m_elapsed NOTIFY elapsedChanged)
 		Q_PROPERTY(bool running MEMBER m_running NOTIFY runningChanged)
+	public:
+		Q_INVOKABLE QString formattedTime(void);
+		Q_INVOKABLE QString formattedRemainingTime(int limitMSecs);
+
 	private:
 		QElapsedTimer m_timer;
 		bool m_running;

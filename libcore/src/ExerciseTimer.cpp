@@ -18,7 +18,32 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QTime>
 #include "ExerciseTimer.h"
+
+/*! Returns formatted elapsed time (m:s or h:m:s). */
+QString ExerciseTimer::formattedTime(void)
+{
+	QTime time(0, 0);
+	int msecs = m_timer.elapsed();
+	QTime newTime = time.addMSecs(msecs);
+	if(msecs > 3600000)
+		return newTime.toString("hh:mm:ss");
+	else
+		return newTime.toString("mm:ss");
+}
+
+/*! Returns formatted remaining time (m:s or h:m:s). */
+QString ExerciseTimer::formattedRemainingTime(int limitMSecs)
+{
+	QTime time(0, 0);
+	int msecs = limitMSecs - m_timer.elapsed();
+	QTime newTime = time.addMSecs(msecs);
+	if(msecs > 3600000)
+		return newTime.toString("hh:mm:ss");
+	else
+		return newTime.toString("mm:ss");
+}
 
 /*! Starts the timer. */
 void ExerciseTimer::start()
