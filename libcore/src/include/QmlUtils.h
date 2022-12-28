@@ -36,6 +36,16 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_OBJECT
 		Q_PROPERTY(QQuickItem *blurSource READ blurSource WRITE setBlurSource NOTIFY blurSourceChanged)
 	public:
+		enum StandardIcon
+		{
+			NoIcon = 0,
+			Information = 1,
+			Warning = 2,
+			Critical = 3,
+			Question = 4
+		};
+		Q_ENUM(StandardIcon)
+
 		void setBlurSource(QQuickItem *item);
 		QQuickItem *blurSource(void);
 		Q_INVOKABLE static bool nativeMenuBar(void);
@@ -46,8 +56,11 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_INVOKABLE void reloadMenuBar(void);
 		Q_INVOKABLE static void printExercise(int lesson, int sublesson, int exercise, QString text);
 		Q_INVOKABLE static void printExercise(QString text);
+		static QPixmap standardIcon(StandardIcon icon);
+		Q_INVOKABLE static QString standardIconStr(StandardIcon icon);
 
 	private:
+		static QString convertPixmap(QPixmap pixmap);
 		QQuickItem *m_blurSource = nullptr;
 
 	signals:

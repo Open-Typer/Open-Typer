@@ -19,6 +19,7 @@
  */
 
 #include <QMenuBar>
+#include <QStyle>
 #ifndef Q_OS_WASM
 #include <QPrinter>
 #include <QPrintPreviewDialog>
@@ -152,4 +153,47 @@ void QmlUtils::printExercise(int lesson, int sublesson, int exercise, QString te
 void QmlUtils::printExercise(QString text)
 {
 	printExercise(0, 0, 0, text);
+}
+
+/*! Returns the given message box standard icon. */
+QPixmap QmlUtils::standardIcon(QmlUtils::StandardIcon icon)
+{
+	QStyle *style = QApplication::style();
+	int iconSize = style->pixelMetric(QStyle::PM_MessageBoxIconSize, 0, nullptr);
+	QIcon tmpIcon;
+	switch(icon) {
+		case StandardIcon::Information:
+			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxInformation, 0, nullptr);
+			break;
+		case StandardIcon::Warning:
+			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxWarning, 0, nullptr);
+			break;
+		case StandardIcon::Critical:
+			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxCritical, 0, nullptr);
+			break;
+		case StandardIcon::Question:
+			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxQuestion, 0, nullptr);
+			break;
+		default:
+			break;
+	}
+	return tmpIcon.pixmap(QSize(iconSize, iconSize));
+}
+
+/*! Returns the given message box standard icon as a string loadable from QML. \see standardIcon(). */
+QString QmlUtils::standardIconStr(StandardIcon icon)
+{
+	return convertPixmap(standardIcon(icon));
+}
+
+/*! Saves the given pixmap in a string. */
+QString QmlUtils::convertPixmap(QPixmap pixmap)
+{
+	QByteArray pixmapData = "PNG";
+	QBuffer buffer(&pixmapData);
+	buffer.open(QBuffer::WriteOnly);
+	pixmap.save(&buffer, "PNG");
+	QString imageStr = "data:image/png;base64,";
+	imageStr += QString::fromLatin1(pixmapData.toBase64().data());
+	return imageStr;
 }
