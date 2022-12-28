@@ -848,7 +848,10 @@ ApplicationWindow {
 		if(((displayPos >= displayExercise.length) && correctMistakes) || (currentLine >= lineCount + 1))
 		{
 			if(currentLine >= lineCount + 1)
+			{
 				paper.input = paper.input.substring(0, paper.input.length - 1);
+				fullInput = fullInput.substring(0, fullInput.length - 1);
+			}
 			// TODO: Add keyRelease() method
 			//keyRelease(event);
 			exerciseTimer.stop();
