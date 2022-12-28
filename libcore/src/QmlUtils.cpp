@@ -161,7 +161,8 @@ QPixmap QmlUtils::standardIcon(QmlUtils::StandardIcon icon)
 	QStyle *style = QApplication::style();
 	int iconSize = style->pixelMetric(QStyle::PM_MessageBoxIconSize, 0, nullptr);
 	QIcon tmpIcon;
-	switch(icon) {
+	switch(icon)
+	{
 		case StandardIcon::Information:
 			tmpIcon = style->standardIcon(QStyle::SP_MessageBoxInformation, 0, nullptr);
 			break;
