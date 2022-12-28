@@ -250,6 +250,13 @@ ApplicationWindow {
 				CustomToolButton {
 					iconName: "rewind"
 					text: qsTr("Reverse text")
+					onClicked: {
+						var oldText = parser.initText(exerciseText);
+						var newText = "";
+						for(var i = oldText.length - 1; i >= 0; i--)
+							newText += exerciseText[i];
+						loadText(newText, true);
+					}
 				}
 			}
 		}
