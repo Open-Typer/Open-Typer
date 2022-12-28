@@ -65,7 +65,7 @@ void QmlFileDialog::getOpenFileContent(void)
 #else
 	QString filtersStr = m_nameFilters.join(";;");
 	if(m_showAllFiles)
-		filtersStr += tr("All files") + " (*)";
+		filtersStr += ";;" + tr("All files") + " (*)";
 	QString fileName = QFileDialog::getOpenFileName(nullptr, QString(), QString(), filtersStr);
 	if(fileName != "")
 	{
