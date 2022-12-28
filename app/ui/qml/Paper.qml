@@ -187,6 +187,7 @@ Item {
 					selectByKeyboard: false
 					clip: true
 					visible: false
+					height: parent.height * 0.75
 					FontMetrics {
 						id: remainingTextMetrics
 						font: remainingText.font
