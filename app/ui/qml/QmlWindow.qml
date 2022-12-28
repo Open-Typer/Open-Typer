@@ -309,6 +309,7 @@ ApplicationWindow {
 		id: largeFileBox
 		windowTitle: qsTr("Error");
 		title: qsTr("This file is too large!")
+		icon: critical
 	}
 
 	TimeDialog {
