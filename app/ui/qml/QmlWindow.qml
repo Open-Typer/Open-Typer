@@ -101,7 +101,7 @@ ApplicationWindow {
 			exerciseTimer.update();
 			eventInProgress = false;
 			formattedExerciseTime = exerciseTimer.formattedTime();
-			if(timedExStarted)
+			if((currentMode == 1) && timedExStarted)
 			{
 				formattedExerciseRemainingTime = exerciseTimer.formattedRemainingTime(timedExTime * 1000);
 				if((exerciseTimer.elapsed / 1000 >= timedExTime) && exerciseInProgress)
