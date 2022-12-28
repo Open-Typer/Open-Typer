@@ -216,6 +216,36 @@ ApplicationWindow {
 				CustomToolButton {
 					iconName: "close"
 					text: qsTr("Text from error words")
+					onClicked: {
+						if(errorWords.length == 0)
+						{
+							noErrorWordsBox.open();
+							return;
+						}
+						var wordCount = 25;
+						if(errorWords.length > wordCount)
+							wordCount = errorWords.length;
+						var usedWords = [], outputWords = [];
+						var index = 0;
+						for(var i = 0; i < wordCount; i++)
+						{
+							var word;
+							if(i % 5 == 0)
+							{
+								do
+								{
+									index = Math.floor(Math.random() * errorWords.length);
+									word = errorWords[index];
+								} while(usedWords.indexOf(word) != -1);
+								word = errorWords[index];
+								usedWords[usedWords.length] = word;
+							}
+							outputWords[outputWords.length] = word;
+							if(usedWords.length == errorWords.length)
+								usedWords = [];
+						}
+						loadText(outputWords.join(" "), false);
+					}
 				}
 				CustomToolButton {
 					iconName: "rewind"
@@ -315,6 +345,13 @@ ApplicationWindow {
 	TimeDialog {
 		id: timeDialog
 		onAccepted: startTimedExercise(timeSecs)
+	}
+
+	MessageBox {
+		id: noErrorWordsBox
+		windowTitle: qsTr("No error words");
+		title: qsTr("You don't have any error words.")
+		icon: information
 	}
 
 	function reload() {
