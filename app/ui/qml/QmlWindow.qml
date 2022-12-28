@@ -767,7 +767,7 @@ ApplicationWindow {
 				{
 					if(ignoreMistakeAppend)
 						ignoreMistakeAppend = false;
-					else
+					else if(correctMistakes)
 						paper.mistake += keyText === "\n" ? "\n" : " ";
 					paper.input += keyText;
 					linePos++;
