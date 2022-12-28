@@ -264,5 +264,5 @@ QString ExerciseValidator::generatedMistakeText(void)
 /*! Adds mistakes to the exercise text. */
 QString ExerciseValidator::textWithMistakes(void)
 {
-	return StringUtils::addMistakes(m_exerciseText, m_mistakes);
+	return StringUtils::addMistakes(m_inputText, m_mistakes);
 }
