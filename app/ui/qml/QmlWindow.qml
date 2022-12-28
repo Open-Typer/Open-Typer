@@ -129,7 +129,7 @@ ApplicationWindow {
 
 	QmlFileDialog {
 		id: customExFileDialog
-		nameFilters: qsTr("Text files") + "(*.txt)"
+		nameFilters: [qsTr("Text files") + "(*.txt)"]
 		onFileContentReady: {
 			if(content.length > 8192) // Maximum size
 				largeFileBox.open();
