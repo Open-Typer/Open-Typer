@@ -171,7 +171,7 @@ ApplicationWindow {
 					iconName: "settings"
 					toolTipText: qsTr("Options")
 					onClicked: {
-						optionsWindow.open();
+						optionsWindow.exec();
 					}
 				}
 				CustomToolButton {
@@ -205,7 +205,7 @@ ApplicationWindow {
 						else
 							dialog = new LoadExerciseDialog(targets, this);*/
 						loadExerciseDialog.init();
-						loadExerciseDialog.open();
+						loadExerciseDialog.exec();
 					}
 				}
 				CustomToolButton {
@@ -957,7 +957,7 @@ ApplicationWindow {
 			else
 				repeatExercise();
 		});
-		summaryDialog.open();
+		summaryDialog.exec();
 	}
 
 	function loadText(text, includeNewLines) {
