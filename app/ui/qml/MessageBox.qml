@@ -20,13 +20,26 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.3
+import OpenTyper 1.0
 
 CustomDialog {
+	readonly property int noIcon: QmlUtils.NoIcon
+	readonly property int information: QmlUtils.Information
+	readonly property int warning: QmlUtils.Warning
+	readonly property int critical: QmlUtils.Critical
+	readonly property int question: QmlUtils.Question
 	property string title: ""
+	property int icon: noIcon
 	standardButtons: Dialog.Ok
-	contentComponent: Label {
-		text: title
-		font.bold: true
-		font.pointSize: 14
+	contentComponent: RowLayout {
+		Image {
+			source: icon == noIcon ? null : QmlUtils.standardIconStr(icon)
+		}
+		Label {
+			text: title
+			font.bold: true
+			font.pointSize: 14
+		}
 	}
 }
