@@ -129,6 +129,9 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalThemeEngine;
 	});
+	qmlRegisterSingletonType<QmlUtils>("OpenTyper", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return new QmlUtils;
+	});
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
 	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
@@ -164,8 +167,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
 	KeyboardUtils keyboardUtils;
 	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
-	QmlUtils qmlUtils;
-	engine.rootContext()->setContextProperty("QmlUtils", &qmlUtils);
 	ExerciseSummary summaryDialog;
 	summaryDialog.setWindowModality(Qt::ApplicationModal);
 	engine.rootContext()->setContextProperty("summaryDialog", &summaryDialog);
