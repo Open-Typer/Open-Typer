@@ -98,14 +98,14 @@ Item {
 			target: blur
 			property: "radius"
 			to: 40
-			duration: 250
+			duration: 125
 		}
 		PropertyAnimation {
 			id: blurOutAnimation
 			target: blur
 			property: "radius"
 			to: 0
-			duration: 250
+			duration: 125
 		}
 	}
 
@@ -125,14 +125,14 @@ Item {
 			target: shadow
 			property: "opacity"
 			to: 1.0
-			duration: 250
+			duration: 125
 		}
 		PropertyAnimation {
 			id: shadowOutAnimation
 			target: shadow
 			property: "opacity"
 			to: 0.0
-			duration: 250
+			duration: 125
 		}
 	}
 
