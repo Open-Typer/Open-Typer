@@ -65,6 +65,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		Q_INVOKABLE void generateMistakeText(bool correctMistakes);
 		Q_INVOKABLE QString generatedInputText(void);
 		Q_INVOKABLE QString generatedMistakeText(void);
+		Q_INVOKABLE QString textWithMistakes(void);
 
 	private:
 		QString m_exerciseText;

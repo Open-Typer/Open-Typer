@@ -260,3 +260,9 @@ QString ExerciseValidator::generatedMistakeText(void)
 {
 	return m_generatedMistakeText;
 }
+
+/*! Adds mistakes to the exercise text. */
+QString ExerciseValidator::textWithMistakes(void)
+{
+	return StringUtils::addMistakes(m_exerciseText, m_mistakes);
+}
