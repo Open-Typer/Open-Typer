@@ -875,7 +875,7 @@ ApplicationWindow {
 			validator.clearMistakes();
 			for(var j = 0; j < recordedMistakes.length; j++)
 				validator.addMistake(recordedMistakes[j]);
-			fullInput = StringUtils.addMistakes(fullInput, recordedMistakes);
+			fullInput = validator.textWithMistakes();
 			validator.inputText = fullInput;
 		}
 		else
