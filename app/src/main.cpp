@@ -47,7 +47,6 @@
 #include "InitialSetup.h"
 #include "options/OptionsWindow.h"
 
-
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
 	// Add application version (if defined)
