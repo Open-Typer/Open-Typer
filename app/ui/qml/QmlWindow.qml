@@ -937,9 +937,8 @@ ApplicationWindow {
 			eventArgs["time"] = time;
 			AddonApi::sendEvent(IAddon::Event_EndStockExercise, eventArgs);*/
 			// The result will always be saved locally - even if an addon uses it
-			// TODO: Save the result
-			/*HistoryParser::addHistoryEntry(publicConfigName, currentLesson, currentAbsoluteSublesson, currentLevel,
-				{ QString::number(grossHitsPerMinute), QString::number(levelMistakes), QString::number(time) });*/
+			var result = [grossHitsPerMinute, exerciseMistakes, time];
+			HistoryParser.addHistoryEntry(packName, currentLesson, currentAbsoluteSublesson, currentExercise, result);
 		}
 		if(testLoaded)
 		{
