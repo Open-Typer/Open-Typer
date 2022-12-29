@@ -25,17 +25,51 @@
 /*! Constructs StatsDialog. */
 StatsDialog::StatsDialog(bool offline, QList<QStringList> data, QPair<int, int> studentComparison, QString configName, int lesson, int sublesson, int exercise, QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::StatsDialog)
+	ui(new Ui::StatsDialog),
+	m_packName(configName),
+	m_lesson(lesson),
+	m_sublesson(sublesson),
+	m_exercise(exercise),
+	m_offline(offline),
+	m_data(data),
+	m_comparison(studentComparison)
 {
 	ui->setupUi(this);
 	ui->statsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->statsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	// Load data
+	loadData();
+	// Connections
+	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(accept()));
+}
+
+/*! Destroys the StatsDialog object. */
+StatsDialog::~StatsDialog()
+{
+	delete ui;
+}
+
+/*! Loads history data. */
+void StatsDialog::loadData(void)
+{
+	if(chartsCreated)
+	{
+		speedSeries->deleteLater();
+		speedChartView->close();
+		speedChart->deleteLater();
+		mistakesSeries->deleteLater();
+		mistakesChartView->close();
+		mistakesChart->deleteLater();
+		timeSeries->deleteLater();
+		timeChartView->close();
+		timeChart->deleteLater();
+		chartsCreated = 0;
+	}
 	QStringList response;
-	if(offline)
-		response = QStringList({ QString("ok"), QString::number(HistoryParser::historySize(configName, lesson, sublesson, exercise)) });
+	if(m_offline)
+		response = QStringList({ QString("ok"), QString::number(HistoryParser::historySize(m_packName, m_lesson, m_sublesson, m_exercise)) });
 	else
-		response = QStringList({ QString("ok"), QString::number(data.count()) });
+		response = QStringList({ QString("ok"), QString::number(m_data.count()) });
 	if(response[0] != "ok")
 	{
 		QMetaObject::invokeMethod(this, "reject", Qt::QueuedConnection);
@@ -52,15 +86,15 @@ StatsDialog::StatsDialog(bool offline, QList<QStringList> data, QPair<int, int> 
 	QTableWidgetItem *item;
 	for(i = 0; i < count; i++)
 	{
-		if(offline)
+		if(m_offline)
 		{
 			response = QStringList({ "ok" });
-			QStringList entry = HistoryParser::historyEntry(configName, lesson, sublesson, exercise, i);
+			QStringList entry = HistoryParser::historyEntry(m_packName, m_lesson, m_sublesson, m_exercise, i);
 			for(int i2 = 0; i2 < entry.count(); i2++)
 				response += entry[i2].toUtf8();
 		}
 		else
-			response = data[i];
+			response = m_data[i];
 		if(response[0] != "ok")
 		{
 			QMetaObject::invokeMethod(this, "reject", Qt::QueuedConnection);
@@ -82,7 +116,8 @@ StatsDialog::StatsDialog(bool offline, QList<QStringList> data, QPair<int, int> 
 	// Set up charts
 	// Speed
 	speedChart = new QChart;
-	QChartView *speedChartView = new QChartView(speedChart, ui->chartTab);
+	speedChartView = new QChartView(speedChart, ui->chartTab);
+	speedChartView->setAttribute(Qt::WA_DeleteOnClose);
 	ui->chartTabLayout->addWidget(speedChartView);
 	speedChart->addSeries(speedSeries);
 	speedChart->legend()->hide();
@@ -91,7 +126,8 @@ StatsDialog::StatsDialog(bool offline, QList<QStringList> data, QPair<int, int> 
 	speedChart->setTitle(tr("Speed"));
 	// Mistakes
 	mistakesChart = new QChart;
-	QChartView *mistakesChartView = new QChartView(mistakesChart, ui->chartTab);
+	mistakesChartView = new QChartView(mistakesChart, ui->chartTab);
+	mistakesChartView->setAttribute(Qt::WA_DeleteOnClose);
 	ui->chartTabLayout->addWidget(mistakesChartView);
 	mistakesChart->addSeries(mistakesSeries);
 	mistakesChart->legend()->hide();
@@ -100,7 +136,8 @@ StatsDialog::StatsDialog(bool offline, QList<QStringList> data, QPair<int, int> 
 	mistakesChart->setTitle(tr("Mistakes"));
 	// Time
 	timeChart = new QChart;
-	QChartView *timeChartView = new QChartView(timeChart, ui->chartTab);
+	timeChartView = new QChartView(timeChart, ui->chartTab);
+	timeChartView->setAttribute(Qt::WA_DeleteOnClose);
 	ui->chartTabLayout->addWidget(timeChartView);
 	timeChart->addSeries(timeSeries);
 	timeChart->legend()->hide();
@@ -116,23 +153,68 @@ StatsDialog::StatsDialog(bool offline, QList<QStringList> data, QPair<int, int> 
 	speedChart->setTheme(theme);
 	mistakesChart->setTheme(theme);
 	timeChart->setTheme(theme);
+	chartsCreated = 1;
 	// Load comparison data
-	if(offline)
+	if(m_offline)
 	{
 		ui->betterStudentsLabel->hide();
 		ui->worseStudentsLabel->hide();
 	}
 	else
 	{
-		ui->betterStudentsLabel->setText(tr("Better students: %1").arg(studentComparison.first));
-		ui->worseStudentsLabel->setText(tr("Worse students: %1").arg(studentComparison.second));
+		ui->betterStudentsLabel->setText(tr("Better students: %1").arg(m_comparison.first));
+		ui->worseStudentsLabel->setText(tr("Worse students: %1").arg(m_comparison.second));
 	}
-	// Connections
-	connect(ui->okButton, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
-/*! Destroys the StatsDialog object. */
-StatsDialog::~StatsDialog()
+/*! Sets the pack name. */
+void StatsDialog::setPackName(QString name)
 {
-	delete ui;
+	m_packName = name;
+	emit packNameChanged(name);
+}
+
+/*! Returns the pack name. */
+QString StatsDialog::packName(void)
+{
+	return m_packName;
+}
+
+/*! Sets the lesson ID. */
+void StatsDialog::setLesson(int lesson)
+{
+	m_lesson = lesson;
+	emit lessonChanged(lesson);
+}
+
+/*! Returns the lesson ID. */
+int StatsDialog::lesson(void)
+{
+	return m_lesson;
+}
+
+/*! Sets the sublesson ID. */
+void StatsDialog::setSublesson(int sublesson)
+{
+	m_sublesson = sublesson;
+	emit sublessonChanged(sublesson);
+}
+
+/*! Returns the sublesson ID. */
+int StatsDialog::sublesson(void)
+{
+	return m_sublesson;
+}
+
+/*! Sets the exercise ID. */
+void StatsDialog::setExercise(int exercise)
+{
+	m_exercise = exercise;
+	emit exerciseChanged(exercise);
+}
+
+/*! Returns the exercise ID. */
+int StatsDialog::exercise(void)
+{
+	return m_exercise;
 }

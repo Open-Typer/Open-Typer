@@ -48,14 +48,42 @@ namespace Ui {
 class CORE_LIB_EXPORT StatsDialog : public QDialog
 {
 		Q_OBJECT
+		Q_PROPERTY(QString packName READ packName WRITE setPackName NOTIFY packNameChanged)
+		Q_PROPERTY(int lesson READ lesson WRITE setLesson NOTIFY lessonChanged)
+		Q_PROPERTY(int sublesson READ sublesson WRITE setSublesson NOTIFY sublessonChanged)
+		Q_PROPERTY(int exercise READ exercise WRITE setExercise NOTIFY exerciseChanged)
 	public:
 		explicit StatsDialog(bool offline, QList<QStringList> data, QPair<int, int> studentComparison, QString configName, int lesson, int sublesson, int exercise, QWidget *parent = nullptr);
 		~StatsDialog();
+		Q_INVOKABLE void loadData(void);
+		void setPackName(QString name);
+		QString packName(void);
+		void setLesson(int lesson);
+		int lesson(void);
+		void setSublesson(int sublesson);
+		int sublesson(void);
+		void setExercise(int exercise);
+		int exercise(void);
 
 	private:
 		Ui::StatsDialog *ui;
 		QChart *speedChart, *mistakesChart, *timeChart;
+		QChartView *speedChartView, *mistakesChartView, *timeChartView;
 		QLineSeries *speedSeries, *mistakesSeries, *timeSeries;
+		bool chartsCreated = false;
+		QString m_packName;
+		int m_lesson;
+		int m_sublesson;
+		int m_exercise;
+		bool m_offline;
+		QList<QStringList> m_data;
+		QPair<int, int> m_comparison;
+
+	signals:
+		void packNameChanged(QString name);
+		void lessonChanged(int lesson);
+		void sublessonChanged(int sublesson);
+		void exerciseChanged(int exercise);
 };
 
 #endif // STATSDIALOG_H

@@ -20,7 +20,6 @@
  */
 
 #include "BuiltInPacks.h"
-#include <QObject>
 #include <map>
 
 namespace {
@@ -39,7 +38,7 @@ namespace {
 }
 
 /*! Returns human-readable name of the built-in pack. */
-const QString &BuiltInPacks::packName(QString rawName)
+QString BuiltInPacks::packName(QString rawName)
 {
 	if(const auto fullName = rawNameToFullName.find(rawName);
 		fullName == rawNameToFullName.end())

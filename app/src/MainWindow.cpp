@@ -37,9 +37,6 @@
 #include "Settings.h"
 #include "LoadExerciseDialog.h"
 
-typedef QPair<QString, int> CharacterRecord; // needed for converting to QVariant
-Q_DECLARE_METATYPE(CharacterRecord);
-
 typedef void *VoidPtr; // needed for converting any pointer to QVariant
 Q_DECLARE_METATYPE(VoidPtr);
 
@@ -49,6 +46,21 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
+	lessonBox = rootObject->findChild<QObject *>("lessonBox");
+	sublessonBox = rootObject->findChild<QObject *>("sublessonBox");
+	exerciseBox = rootObject->findChild<QObject *>("exerciseBox");
+	settingsButton = rootObject->findChild<QObject *>("settingsButton");
+	openButton = rootObject->findChild<QObject *>("openButton");
+	printButton = rootObject->findChild<QObject *>("printButton");
+	typingTestButton = rootObject->findChild<QObject *>("typingTestButton");
+	timedExButton = rootObject->findChild<QObject *>("timedExButton");
+	errorWordsButton = rootObject->findChild<QObject *>("errorWordsButton");
+	reverseTextButton = rootObject->findChild<QObject *>("reverseTextButton");
+	repeatExButton = rootObject->findChild<QObject *>("repeatExButton");
+	previousExButton = rootObject->findChild<QObject *>("previousExButton");
+	nextExButton = rootObject->findChild<QObject *>("nextExButton");
+	statsButton = rootObject->findChild<QObject *>("statsButton");
+	closeLoadedExButton = rootObject->findChild<QObject *>("closeLoadedExButton");
 	QGridLayout *inputLabelLayout = new QGridLayout(ui->inputLabel);
 	ui->mistakeLabel->setHorizontalAdjust(false);
 	ui->mistakeLabel->setParent(ui->inputLabel);
@@ -61,6 +73,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	remainingTextAreaLayout->setAlignment(ui->keyboardFrame, Qt::AlignHCenter | Qt::AlignBottom);
 	ui->levelCurrentLineLabel->toggleScrolling(false);
 	ui->levelLabel->toggleScrolling(false);
+	ui->controlFrame->hide();
 	localThemeEngine.setParent(this);
 	oldConfigName = "";
 	errorWords.clear();
@@ -78,7 +91,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->actionOpenText, &QAction::triggered, this, &MainWindow::openExerciseFromFile);
 	connect(ui->actionOpenPack, &QAction::triggered, this, &MainWindow::openPack);
 	connect(ui->actionNewPack, &QAction::triggered, this, &MainWindow::openEditor);
-	connect(ui->actionPrint, &QAction::triggered, ui->printButton, &QPushButton::clicked);
+	connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::printText);
 	// View menu
 	connect(ui->actionViewNavigation, &QAction::toggled, ui->navigationFrame, &QWidget::setVisible);
 	connect(ui->actionViewExOptions, &QAction::toggled, ui->exerciseOptionsFrame, &QWidget::setVisible);
@@ -97,18 +110,18 @@ MainWindow::MainWindow(QWidget *parent) :
 		}
 	});
 	// Tools menu
-	connect(ui->actionTypingTest, &QAction::triggered, ui->testButton, &QPushButton::clicked);
+	connect(ui->actionTypingTest, &QAction::triggered, this, &MainWindow::startTest);
 	// Exercise menu
-	connect(ui->actionStats, &QAction::triggered, ui->statsButton, &QPushButton::clicked);
-	connect(ui->actionTimedEx, &QAction::triggered, ui->timedExerciseButton, &QPushButton::clicked);
-	connect(ui->actionErrorWords, &QAction::triggered, ui->errorWordsButton, &QPushButton::clicked);
-	connect(ui->actionReverseText, &QAction::triggered, ui->reversedTextButton, &QPushButton::clicked);
+	connect(ui->actionStats, &QAction::triggered, this, &MainWindow::showExerciseStats);
+	connect(ui->actionTimedEx, &QAction::triggered, this, &MainWindow::initTimedExercise);
+	connect(ui->actionErrorWords, &QAction::triggered, this, &MainWindow::loadErrorWords);
+	connect(ui->actionReverseText, &QAction::triggered, this, &MainWindow::loadReversedText);
 	connect(ui->actionCorrectMistakes, &QAction::toggled, ui->correctMistakesCheckBox, &QCheckBox::setChecked);
 	connect(ui->correctMistakesCheckBox, &QCheckBox::toggled, ui->actionCorrectMistakes, &QAction::setChecked);
 	connect(ui->actionHideText, &QAction::toggled, ui->hideTextCheckBox, &QCheckBox::setChecked);
 	connect(ui->hideTextCheckBox, &QCheckBox::toggled, ui->actionHideText, &QAction::setChecked);
 	// Settings menu
-	connect(ui->actionPreferences, &QAction::triggered, ui->optionsButton, &QPushButton::clicked);
+	connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::openOptions);
 	// Help menu
 	connect(ui->actionDocs, &QAction::triggered, this, []() {
 		QDesktopServices::openUrl(QUrl("https://open-typer.github.io/docs"));
@@ -120,28 +133,25 @@ MainWindow::MainWindow(QWidget *parent) :
 	// Widgets
 	connect(ui->inputLabel, &InputLabelWidget::keyPressed, this, &MainWindow::keyPress);
 	connect(ui->inputLabel, &InputLabelWidget::keyReleased, this, &MainWindow::keyRelease);
-	connect(ui->optionsButton, &QPushButton::clicked, this, &MainWindow::openOptions);
-	connect(ui->openButton, &QPushButton::clicked, this, &MainWindow::openExerciseFromFile);
-	connect(ui->repeatButton, &QPushButton::clicked, this, &MainWindow::repeatLevel);
-	connect(ui->closeCustomExButton, &QPushButton::clicked, this, [this]() {
-		customLevelLoaded = false;
-		repeatLevel();
-	});
-	connect(ui->nextButton, &QPushButton::clicked, this, &MainWindow::nextLevel);
-	connect(ui->previousButton, &QPushButton::clicked, this, &MainWindow::previousLevel);
-	connect(ui->lessonSelectionList, QOverload<int>::of(&QComboBox::activated), this, &MainWindow::lessonSelectionListIndexChanged);
-	connect(ui->sublessonSelectionList, QOverload<int>::of(&QComboBox::activated), this, &MainWindow::sublessonSelectionListIndexChanged);
-	connect(ui->levelSelectionList, QOverload<int>::of(&QComboBox::activated), this, &MainWindow::levelSelectionListIndexChanged);
-	connect(ui->errorWordsButton, &QPushButton::clicked, this, &MainWindow::loadErrorWords);
-	connect(ui->reversedTextButton, &QPushButton::clicked, this, &MainWindow::loadReversedText);
+	connect(settingsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
+	connect(openButton, SIGNAL(clicked()), this, SLOT(openExerciseFromFile()));
+	connect(repeatExButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
+	connect(closeLoadedExButton, SIGNAL(clicked()), this, SLOT(closeLoadedExercise()));
+	connect(nextExButton, SIGNAL(clicked()), this, SLOT(nextLevel()));
+	connect(previousExButton, SIGNAL(clicked()), this, SLOT(previousLevel()));
+	connect(lessonBox, SIGNAL(activated(int)), this, SLOT(selectLesson(int)));
+	connect(sublessonBox, SIGNAL(activated(int)), this, SLOT(selectSublesson(int)));
+	connect(exerciseBox, SIGNAL(activated(int)), this, SLOT(selectExercise(int)));
+	connect(errorWordsButton, SIGNAL(clicked()), this, SLOT(loadErrorWords()));
+	connect(reverseTextButton, SIGNAL(clicked()), this, SLOT(loadReversedText()));
 	connect(ui->zoomInButton, &QPushButton::clicked, this, &MainWindow::zoomIn);
 	connect(ui->zoomOutButton, &QPushButton::clicked, this, &MainWindow::zoomOut);
-	connect(ui->timedExerciseButton, &QPushButton::clicked, this, &MainWindow::initTimedExercise);
-	connect(ui->stopTimedExButton, &QPushButton::clicked, ui->timedExerciseButton, &QPushButton::clicked);
-	connect(ui->statsButton, &QPushButton::clicked, this, &MainWindow::showExerciseStats);
-	connect(ui->printButton, &QPushButton::clicked, this, &MainWindow::printText);
+	connect(timedExButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
+	connect(ui->stopTimedExButton, &QPushButton::clicked, this, &MainWindow::initTimedExercise);
+	connect(statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
+	connect(printButton, SIGNAL(clicked()), this, SLOT(printText()));
 	connect(ui->exportButton, &QPushButton::clicked, this, &MainWindow::exportText);
-	connect(ui->testButton, &QPushButton::clicked, this, &MainWindow::startTest);
+	connect(typingTestButton, SIGNAL(clicked()), this, SLOT(startTest()));
 	connect(ui->hideTextCheckBox, &QCheckBox::toggled, this, [this](bool checked) {
 		ui->currentLineArea->setVisible(!checked);
 		ui->textSeparationLine->setVisible(!checked);
@@ -181,7 +191,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(&timedExTimer, &QTimer::timeout, this, &MainWindow::updateCurrentTime);
 	secLoop->start(500);
 #ifdef Q_OS_WASM
-	ui->printButton->hide();
+	printButton->setProperty("visible", false);
 	ui->actionPrint->setEnabled(false);
 #else
 	// Check for updates
@@ -423,7 +433,7 @@ void MainWindow::refreshAll(void)
 	else
 	{
 		updateLessonList();
-		ui->lessonSelectionList->setCurrentIndex(currentLesson - 1);
+		lessonBox->setProperty("currentIndex", currentLesson - 1);
 	}
 	AddonApi::sendEvent(IAddon::Event_RefreshApp);
 }
@@ -462,7 +472,7 @@ QString MainWindow::loadConfig(QString configName, QByteArray packContent)
 	}
 	else
 		parser.loadToBuffer(packContent);
-	// Update lessonSelectionList widget
+	// Update lessonBox
 	updateLessonList();
 	if(customConfig)
 		configName = configPath;
@@ -490,7 +500,7 @@ QString MainWindow::loadConfig(QString configName, QByteArray packContent)
 void MainWindow::startLevel(int lessonID, int sublessonID, int levelID)
 {
 	// Update selected lesson
-	ui->lessonSelectionList->setCurrentIndex(lessonID - 1);
+	lessonBox->setProperty("currentIndex", lessonID - 1);
 	// Get sublesson count
 	sublessonCount = parser.sublessonCount(lessonID);
 	// Check if -1 (last sublesson in current lesson) was passed
@@ -531,7 +541,7 @@ void MainWindow::startLevel(int lessonID, int sublessonID, int levelID)
 /*! Updates list of lessons. */
 void MainWindow::updateLessonList(void)
 {
-	ui->lessonSelectionList->clear();
+	lessonBox->setProperty("model", {});
 	QStringList lessons;
 	QString _lessonDesc;
 	int i, count = parser.lessonCount();
@@ -543,14 +553,14 @@ void MainWindow::updateLessonList(void)
 		else
 			lessons += ConfigParser::lessonTr(i) + " " + _lessonDesc;
 	}
-	ui->lessonSelectionList->addItems(lessons);
+	lessonBox->setProperty("model", lessons);
 }
 
 /*! Updates list of sublessons. */
 void MainWindow::loadLesson(int lessonID, int sublessonID)
 {
 	// Sublessons
-	ui->sublessonSelectionList->clear();
+	sublessonBox->setProperty("model", {});
 	QStringList sublessons;
 	sublessonListStart = 0;
 	int i, i2 = 0;
@@ -565,20 +575,20 @@ void MainWindow::loadLesson(int lessonID, int sublessonID)
 				sublessonListStart++;
 		}
 	}
-	ui->sublessonSelectionList->addItems(sublessons);
-	ui->sublessonSelectionList->setCurrentIndex(sublessonID - 1);
+	sublessonBox->setProperty("model", sublessons);
+	sublessonBox->setProperty("currentIndex", sublessonID - 1);
 }
 
 /*! Updates list of exercises. */
 void MainWindow::loadSublesson(int levelID)
 {
 	// Exercises
-	ui->levelSelectionList->clear();
+	exerciseBox->setProperty("model", {});
 	QStringList levels;
 	for(int i = 1; i <= levelCount; i++)
 		levels += ConfigParser::exerciseTr(i);
-	ui->levelSelectionList->addItems(levels);
-	ui->levelSelectionList->setCurrentIndex(levelID - 1);
+	exerciseBox->setProperty("model", levels);
+	exerciseBox->setProperty("currentIndex", levelID - 1);
 }
 
 /*!
@@ -615,7 +625,7 @@ void MainWindow::levelFinalInit(void)
 	ui->mistakeLabel->setHtml(mistakeLabelHtml);
 	ui->currentTimeNumber->setText("0");
 	ui->currentMistakesNumber->setText("0");
-	ui->closeCustomExButton->setVisible(customLevelLoaded);
+	closeLoadedExButton->setProperty("visible", customLevelLoaded);
 	// Init level input
 	input = "";
 	inputTextHtml = "";
@@ -625,7 +635,7 @@ void MainWindow::levelFinalInit(void)
 	updateText();
 	// Enable/disable stats
 	bool enableStats = !customLevelLoaded && !customConfig && (currentMode == 0);
-	ui->statsButton->setEnabled(enableStats);
+	statsButton->setProperty("enabled", enableStats);
 	ui->actionStats->setEnabled(enableStats);
 	AddonApi::sendEvent(IAddon::Event_ExerciseFinalInit);
 }
@@ -685,7 +695,7 @@ void MainWindow::updateText(void)
 	blockInput = false;
 }
 
-/*! Connected from repeatButton.\n
+/*!
  * Resets currently selected exercise.
  * \see startLevel
  */
@@ -694,7 +704,7 @@ void MainWindow::repeatLevel(void)
 	startLevel(currentLesson, currentSublesson, currentLevel);
 }
 
-/*! Connected from nextButton.\n
+/*!
  * Selects the next exercise.
  * \see repeatLevel
  */
@@ -720,10 +730,10 @@ void MainWindow::nextLevel(void)
 	repeatLevel();
 }
 
-/*! Connected from previousButton.\n
-	 * Selects the previous exercise.
-	 * \see repeatLevel
-	 */
+/*! 
+ * Selects the previous exercise.
+ * \see repeatLevel
+ */
 void MainWindow::previousLevel(void)
 {
 	customLevelLoaded = false;
@@ -746,9 +756,7 @@ void MainWindow::previousLevel(void)
 	repeatLevel();
 }
 
-/*! Connected from optionsButton.\n
- * Opens options window.
- */
+/*! Opens options window. */
 void MainWindow::openOptions(void)
 {
 	OptionsWindow *optionsWin = new OptionsWindow(this);
@@ -761,10 +769,8 @@ void MainWindow::openOptions(void)
 	});
 }
 
-/*! Connected from lessonSelectionList.\n
- * Selects the lesson selected in lessonSelectionList.
- */
-void MainWindow::lessonSelectionListIndexChanged(int index)
+/*! Selects the given lesson. */
+void MainWindow::selectLesson(int index)
 {
 	currentLesson = index + 1;
 	currentSublesson = 1;
@@ -773,10 +779,8 @@ void MainWindow::lessonSelectionListIndexChanged(int index)
 	repeatLevel();
 }
 
-/*! Connected from sublessonSelectionList.\n
- * Selects the sublesson selected in sublessonSelectionList.
- */
-void MainWindow::sublessonSelectionListIndexChanged(int index)
+/*! Selects the given sublesson. */
+void MainWindow::selectSublesson(int index)
 {
 	currentSublesson = index + 1;
 	currentLevel = 1;
@@ -784,19 +788,15 @@ void MainWindow::sublessonSelectionListIndexChanged(int index)
 	repeatLevel();
 }
 
-/*! Connected from levelSelectionList.\n
- * Selects the exercise selected in levelSelectionList.
- */
-void MainWindow::levelSelectionListIndexChanged(int index)
+/*! Selects the given exercise. */
+void MainWindow::selectExercise(int index)
 {
 	currentLevel = index + 1;
 	customLevelLoaded = false;
 	repeatLevel();
 }
 
-/*! Connected from openExerciseButton.\n
- * Shows a file dialog and opens a custom exercise.
- */
+/*! Shows a file dialog and opens a custom exercise. */
 void MainWindow::openExerciseFromFile(void)
 {
 	auto fileContentReady = [this](const QString &fileName, const QByteArray &fileContent) {
@@ -811,7 +811,7 @@ void MainWindow::openExerciseFromFile(void)
 			}
 			else
 			{
-				levelLengthExtension = ConfigParser::defaultLineLength;
+				levelLengthExtension = ConfigParser::defaultLineLength();
 				loadText(fileContent, true);
 			}
 		}
@@ -827,6 +827,13 @@ void MainWindow::openExerciseFromFile(void)
 			fileContentReady(fileName, file.readAll());
 	}
 #endif
+}
+
+/*! Closes custom exercise. */
+void MainWindow::closeLoadedExercise(void)
+{
+	customLevelLoaded = false;
+	repeatLevel();
 }
 
 /*! Loads custom text. */
@@ -1149,10 +1156,10 @@ void MainWindow::endExercise(bool showNetHits, bool showGrossHits, bool showTota
 	input.replace("‘", "'");
 	displayLevel.replace("‘", "'");
 	if(ui->correctMistakesCheckBox->isChecked())
-		input = StringUtils::addMistakes(input, &recordedMistakes);
+		/*input = StringUtils::addMistakes(input, &recordedMistakes)*/;
 	else
 	{
-		recordedMistakes = StringUtils::validateExercise(displayLevel, input, recordedCharacters, &totalHits, &levelMistakes, &errorWords, (currentMode == 1), lastTimeF);
+		//recordedMistakes = StringUtils::validateExercise(displayLevel, input, recordedCharacters, &totalHits, &levelMistakes, &errorWords, (currentMode == 1), lastTimeF);
 		netHits = std::max(0, totalHits - (levelMistakes * errorPenalty));
 		ui->currentMistakesNumber->setText(QString::number(levelMistakes));
 	}
@@ -1555,7 +1562,7 @@ void MainWindow::changeEvent(QEvent *event)
 		globalThemeEngine.updateThemeList();
 		localThemeEngine.updateStyle();
 		updateLessonList();
-		ui->lessonSelectionList->setCurrentIndex(currentLesson - 1);
+		lessonBox->setProperty("currentIndex", currentLesson - 1);
 		loadLesson(currentLesson, currentSublesson);
 		loadSublesson(currentLevel);
 	}
@@ -1605,11 +1612,10 @@ void MainWindow::changeMode(int mode)
 	AddonApi::sendEvent(IAddon::Event_ChangeMode);
 }
 
-/*! Connected from timedExerciseButton.\n
- * Switches to timed exercise mode.
- */
+/*! Switches to timed exercise mode. */
 void MainWindow::initTimedExercise(void)
 {
+	// TODO: Implement timed exercises with QML tool bar
 	if(currentMode == 1)
 	{
 		// Switch back to default mode
@@ -1641,7 +1647,6 @@ void MainWindow::initTimedExercise(void)
 }
 
 /*!
- * Connected from statsButton->clicked().\n
  * Opens StatsDialog.
  *
  * \see StatsDialog

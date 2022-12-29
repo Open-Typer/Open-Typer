@@ -18,18 +18,25 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QMetaEnum>
 #include "KeyboardUtils.h"
 
 /*!
  * Returns true if the key is a special key.\n
- * Special keys are ignored by OpenTyper#keyPress().
- * \see OpenTyper#keyPress()
+ * Special keys are ignored by default.
  */
 bool KeyboardUtils::isSpecialKey(QKeyEvent *event)
 {
-	if((event->text() == "") && (event->key() != Qt::Key_Return) && (event->key() != Qt::Key_Enter))
+	return isSpecialKey(QmlKeyboardHandler::convertEvent(event));
+}
+
+/*! Implementation of isSpecialKey() for QVariantMap events. */
+bool KeyboardUtils::isSpecialKey(QVariantMap event)
+{
+	int keyID = event["key"].toInt();
+	if((event["text"].toString() == "") && (keyID != Qt::Key_Return) && (keyID != Qt::Key_Enter))
 		return true;
-	switch(event->key())
+	switch(keyID)
 	{
 		case Qt::Key_Delete:
 			return true;
@@ -49,14 +56,9 @@ bool KeyboardUtils::isSpecialKey(QKeyEvent *event)
 	}
 }
 
-#if QT_VERSION <= QT_VERSION_CHECK(5, 10, 0)
-#define LAST_DEAD_KEY Qt::Key_Dead_Horn
-#else
-#define LAST_DEAD_KEY Qt::Key_Dead_Longsolidusoverlay
-#endif
-
 /*! Returns true if the key code belongs to a dead key. */
 bool KeyboardUtils::isDeadKey(int key)
 {
-	return ((key >= Qt::Key_Dead_Grave) && (key <= LAST_DEAD_KEY));
+	QMetaEnum metaEnum = QMetaEnum::fromType<Qt::Key>();
+	return QString(metaEnum.valueToKey(key)).contains("Dead");
 }

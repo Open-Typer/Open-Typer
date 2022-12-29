@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>HoverToolTip.qml</file>
+        <file>CustomToolButton.qml</file>
+        <file>Panel.qml</file>
+        <file>CustomComboBox.qml</file>
+        <file>QmlWindow.qml</file>
+        <file>Paper.qml</file>
+        <file>CustomMenuBar.qml</file>
+        <file>MenuButton.qml</file>
+        <file>CustomMenu.qml</file>
+        <file>CustomMenuItem.qml</file>
+        <file>CustomMenuSeparator.qml</file>
+        <file>MessageBox.qml</file>
+        <file>CustomDialog.qml</file>
+        <file>TimeDialog.qml</file>
+    </qresource>
+</RCC>

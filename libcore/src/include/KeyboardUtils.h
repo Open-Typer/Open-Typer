@@ -29,13 +29,16 @@
 
 #include <QObject>
 #include <QKeyEvent>
+#include "QmlKeyboardHandler.h"
 
 /*! \brief The KeyboardUtils class provides functions related to keyboard and input method. */
-class CORE_LIB_EXPORT KeyboardUtils
+class CORE_LIB_EXPORT KeyboardUtils : public QObject
 {
+		Q_OBJECT
 	public:
 		static bool isSpecialKey(QKeyEvent *event);
-		static bool isDeadKey(int key);
+		Q_INVOKABLE static bool isSpecialKey(QVariantMap event);
+		Q_INVOKABLE static bool isDeadKey(int key);
 };
 
 #endif // KEYBOARDUTILS_H

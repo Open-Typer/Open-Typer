@@ -32,27 +32,32 @@
 #include <QVector>
 #include "FileUtils.h"
 #include "Settings.h"
+#include "MistakeRecord.h"
+#include "CharacterRecord.h"
 
 /*! \brief The StringUtils class contains functions related to strings. */
-class CORE_LIB_EXPORT StringUtils
+class CORE_LIB_EXPORT StringUtils : public QObject
 {
+		Q_OBJECT
 	public:
-		static int wordCount(QString str);
-		static QString word(QString str, int id);
-		static QString wordAt(QString str, int index);
-		static QList<QVariant> longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target);
-		static QString longestCommonSubsequence(QString source, QString target);
-		static QList<QVariantMap> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<QPair<QString, int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
-		static QList<QVariantMap> compareStrings(QString source, QString target, QVector<QPair<QString, int>> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
-		static QList<QVariantMap> findMistakes(QString exerciseText, QString input, QVector<QPair<QString, int>> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
-		static QList<QVariantMap> validateExercise(QString exerciseText, QString inputText, QVector<QPair<QString, int>> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords = nullptr, bool timed = false, int timeSecs = 0);
-		static QString addMistakes(QString exerciseText, QList<QVariantMap> *recordedMistakes);
+		Q_INVOKABLE static int wordCount(QString str);
+		Q_INVOKABLE static int charCount(QString str, QChar ch);
+		Q_INVOKABLE static QString word(QString str, int id);
+		Q_INVOKABLE static QString wordAt(QString str, int index);
+		Q_INVOKABLE static QString repeatString(QString string, int n);
+		Q_INVOKABLE static QList<QVariant> longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target);
+		Q_INVOKABLE static QString longestCommonSubsequence(QString source, QString target);
+		Q_INVOKABLE static QList<MistakeRecord *> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord *> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
+		Q_INVOKABLE static QList<MistakeRecord *> compareStrings(QString source, QString target, QVector<CharacterRecord *> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
+		Q_INVOKABLE static QList<MistakeRecord *> findMistakes(QString exerciseText, QString input, QVector<CharacterRecord *> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
+		Q_INVOKABLE static QList<MistakeRecord *> validateExercise(QString exerciseText, QString inputText, QVector<CharacterRecord *> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords = nullptr, bool timed = false, int timeSecs = 0);
+		Q_INVOKABLE static QString addMistakes(QString exerciseText, QList<MistakeRecord *> recordedMistakes);
 
 	private:
 		static int lcsLen(QList<QVariant> source, QList<QVariant> target);
 		static int lcsLen(QList<QVariant> source, QList<QVariant> target, QMap<int, QMap<int, int>> *lcsTable);
 		static QStringList splitWordsByPunct(QStringList source);
-		static QMap<int, QVariantMap> generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList = nullptr);
+		static QMap<int, MistakeRecord *> generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList = nullptr);
 };
 
 #endif // STRINGUTILS_H

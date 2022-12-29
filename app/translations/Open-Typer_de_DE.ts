@@ -213,13 +213,6 @@
     </message>
 </context>
 <context>
-    <name>KeyboardOptions</name>
-    <message>
-        <source>Editor</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
     <name>KeyboardWidget</name>
     <message>
         <source>Hide keyboard</source>
@@ -233,18 +226,6 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Options</source>
-        <translation>Optionen</translation>
-    </message>
-    <message>
-        <source>Open custom text</source>
-        <translation>Benutzerdefinierten Text öffnen</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Drucken</translation>
-    </message>
-    <message>
         <source>Typing test</source>
         <translation>Tipp Test</translation>
     </message>
@@ -253,41 +234,8 @@
         <translation>Navigation</translation>
     </message>
     <message>
-        <source>Repeat exercise</source>
-        <translation>Aufgabe wiederholen</translation>
-    </message>
-    <message>
-        <source>Close loaded exercise</source>
-        <translation>Geladene Aufgabe schließen</translation>
-    </message>
-    <message>
-        <source>Previous exercise</source>
-        <translation>Vorherige Aufgabe</translation>
-    </message>
-    <message>
-        <source>Next exercise</source>
-        <translation>Nächste Aufgabe</translation>
-    </message>
-    <message>
-        <source>Lesson:</source>
-        <translation>Lektion:</translation>
-    </message>
-    <message>
-        <source>Sublesson:</source>
-        <translation>Unter Lektion:</translation>
-    </message>
-    <message>
-        <source>Exercise history</source>
-        <comment>exercise history</comment>
-        <translation>Aufgabe Verlauf</translation>
-    </message>
-    <message>
         <source>Timed exercise</source>
         <translation>Zeitbegrenzte Aufgabe</translation>
-    </message>
-    <message>
-        <source>Generate text from error words</source>
-        <translation>Text aus Fehlerwörtern generieren</translation>
     </message>
     <message>
         <source>Reverse text</source>
@@ -633,6 +581,57 @@
     <message>
         <source>Loading addons...</source>
         <translation>Addons werden geladen...</translation>
+    </message>
+</context>
+<context>
+    <name>QmlWindow</name>
+    <message>
+        <source>Options</source>
+        <translation>Optionen</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Öffnen</translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation>Drucken</translation>
+    </message>
+    <message>
+        <source>Typing test</source>
+        <translation>Tipp Test</translation>
+    </message>
+    <message>
+        <source>Timed exercise</source>
+        <translation>Zeitbegrenzte Aufgabe</translation>
+    </message>
+    <message>
+        <source>Text from error words</source>
+        <translation>Text aus Fehlerwörtern</translation>
+    </message>
+    <message>
+        <source>Reverse text</source>
+        <translation>Text umkehren</translation>
+    </message>
+    <message>
+        <source>Repeat exercise</source>
+        <translation>Aufgabe wiederholen</translation>
+    </message>
+    <message>
+        <source>Close loaded exercise</source>
+        <translation>Geladene Aufgabe schließen</translation>
+    </message>
+    <message>
+        <source>Previous exercise</source>
+        <translation>Vorherige Aufgabe</translation>
+    </message>
+    <message>
+        <source>Next exercise</source>
+        <translation>Nächste Aufgabe</translation>
+    </message>
+    <message>
+        <source>Exercise history</source>
+        <translation>Aufgabe Verlauf</translation>
     </message>
 </context>
 <context>

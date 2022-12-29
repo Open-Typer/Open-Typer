@@ -10,7 +10,11 @@ PLATFORM=$1
 lrelease *.pro || exit 2
 lrelease app/*.pro || exit 2
 lrelease libcore/*.pro || exit 2
-qmake || exit 3
+if [[ "$PLATFORM" == "wasm" ]]; then
+	$RUNNER_WORKSPACE/Qt/*/wasm_32/bin/qmake || exit 3
+else
+	qmake || exit 3
+fi
 if [[ "$PLATFORM" == "win32" ]]; then
 	mingw32-make.exe -j4 || exit 4
 elif [[ "$PLATFORM" == "win64" ]]; then

@@ -41,12 +41,12 @@ class ExerciseSummary : public QDialog
 	public:
 		explicit ExerciseSummary(QWidget *parent = nullptr);
 		~ExerciseSummary();
-		void setTotalTime(int time);
-		void setTotalHits(int hits);
-		void setNetHits(int hits);
-		void setGrossHits(int hits);
-		void setMistakes(int mistakes);
-		void setAccuracy(double accuracy);
+		Q_INVOKABLE void setTotalTime(int time);
+		Q_INVOKABLE void setTotalHits(int hits);
+		Q_INVOKABLE void setNetHits(int hits);
+		Q_INVOKABLE void setGrossHits(int hits);
+		Q_INVOKABLE void setMistakes(int mistakes);
+		Q_INVOKABLE void setAccuracy(double accuracy);
 
 	private:
 		Ui::ExerciseSummary *ui;

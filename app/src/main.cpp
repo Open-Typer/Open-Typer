@@ -24,11 +24,28 @@
 #include <QSplashScreen>
 #include <QPluginLoader>
 #include <QProcessEnvironment>
+#include <QQuickStyle>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include "MainWindow.h"
 #include "Settings.h"
 #include "LanguageManager.h"
 #include "IAddon.h"
 #include "AddonApi.h"
+#include "QmlKeyboardHandler.h"
+#include "ExerciseTimer.h"
+#include "CharacterRecord.h"
+#include "MistakeRecord.h"
+#include "QmlUtils.h"
+#include "ExerciseValidator.h"
+#include "QmlFileDialog.h"
+#include "BuiltInPacks.h"
+#include "HistoryParser.h"
+#include "ExerciseSummary.h"
+#include "LoadExerciseDialog.h"
+#include "StatsDialog.h"
+#include "InitialSetup.h"
+#include "options/OptionsWindow.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -116,10 +133,75 @@ int main(int argc, char *argv[])
 	AddonApi::initSettingsCategories();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
+	// Register QML types
+	QQmlEngine::setObjectOwnership(&globalThemeEngine, QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return &globalThemeEngine;
+	});
+	qmlRegisterSingletonType<QmlUtils>("OpenTyper", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return new QmlUtils;
+	});
+	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
+	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
+	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
+	qmlRegisterType<CharacterRecord>("OpenTyper", 1, 0, "CharacterRecord");
+	qmlRegisterType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord");
+	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
+	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
+	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
+	// TODO: Remove this after fully switching to Qt 6
+	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	qmlRegisterModule("QtGraphicalEffects", 1, 0);
+#endif
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+	// TODO: Remove this after dropping Qt 5.9 support
+	qmlRegisterModule("QtQuick.Controls", 2, 3);
+#endif
+	// Set style
+	globalThemeEngine.updateStyle();
+	// Set icon theme
+	QIcon::setThemeName("open-typer");
 	// Set icon
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
-	MainWindow w;
-	// Main window will get shown by itself
-	splash.finish(&w);
+	QQuickStyle::setStyle("Material");
+	QQmlApplicationEngine engine;
+	Settings settings;
+	engine.rootContext()->setContextProperty("Settings", &settings);
+	FileUtils fileUtils;
+	engine.rootContext()->setContextProperty("FileUtils", &fileUtils);
+	BuiltInPacks builtInPacks;
+	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
+	StringUtils stringUtils;
+	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
+	KeyboardUtils keyboardUtils;
+	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
+	HistoryParser historyParser;
+	engine.rootContext()->setContextProperty("HistoryParser", &historyParser);
+	ExerciseSummary summaryDialog;
+	engine.rootContext()->setContextProperty("summaryDialog", &summaryDialog);
+	OptionsWindow optionsWindow;
+	engine.rootContext()->setContextProperty("optionsWindow", &optionsWindow);
+	LoadExerciseDialog loadExerciseDialog;
+	engine.rootContext()->setContextProperty("loadExerciseDialog", &loadExerciseDialog);
+	StatsDialog statsDialog(true, {}, QPair<int, int>(), QString(), 0, 0, 0);
+	engine.rootContext()->setContextProperty("statsDialog", &statsDialog);
+	if(!Settings::containsLessonPack())
+	{
+		InitialSetup *initialSetup = new InitialSetup;
+		initialSetup->setWindowModality(Qt::ApplicationModal);
+		auto enginePtr = &engine;
+		auto splashPtr = &splash;
+		QObject::connect(initialSetup, &InitialSetup::accepted, enginePtr, [enginePtr, splashPtr]() {
+			enginePtr->load("qrc:/qml/QmlWindow.qml");
+			splashPtr->finish(nullptr);
+		});
+		initialSetup->open();
+	}
+	else
+	{
+		engine.load("qrc:/qml/QmlWindow.qml");
+		splash.finish(nullptr);
+	}
 	return a.exec();
 }

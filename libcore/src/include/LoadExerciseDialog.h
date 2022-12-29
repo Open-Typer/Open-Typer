@@ -30,6 +30,7 @@
 #include <QDialog>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QTime>
 #include "ConfigParser.h"
 
 namespace Ui {
@@ -48,20 +49,21 @@ class CORE_LIB_EXPORT LoadExerciseDialog : public QDialog
 		explicit LoadExerciseDialog(QMap<int, QString> availableTargets, QWidget *parent = nullptr);
 		LoadExerciseDialog(QWidget *parent = nullptr);
 		~LoadExerciseDialog();
-		QString exerciseText(void);
-		int lineLength(void);
-		bool includeNewLines(void);
-		int mode(void);
-		QTime timeLimit(void);
-		bool correctMistakes(void);
-		bool lockUi(void);
-		bool hideText(void);
-		bool allowTextPreview(void);
-		QList<int> selectedTargets(void);
+		Q_INVOKABLE void init(void);
+		Q_INVOKABLE QString exerciseText(void);
+		Q_INVOKABLE int lineLength(void);
+		Q_INVOKABLE bool includeNewLines(void);
+		Q_INVOKABLE int mode(void);
+		Q_INVOKABLE QTime timeLimit(void);
+		Q_INVOKABLE int timeLimitSecs(void);
+		Q_INVOKABLE bool correctMistakes(void);
+		Q_INVOKABLE bool lockUi(void);
+		Q_INVOKABLE bool hideText(void);
+		Q_INVOKABLE bool allowTextPreview(void);
+		Q_INVOKABLE QList<int> selectedTargets(void);
 
 	private:
 		Ui::LoadExerciseDialog *ui;
-		void init(void);
 		QString fileName = "";
 		QMap<int, QString> m_targets;
 		QMap<int, QCheckBox *> targets;
@@ -69,6 +71,7 @@ class CORE_LIB_EXPORT LoadExerciseDialog : public QDialog
 		int m_lineLength = 0;
 		bool m_includeNewLines = false;
 		bool local = false;
+		QString oldSelectedExText;
 
 	private slots:
 		void verify(void);

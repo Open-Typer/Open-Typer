@@ -21,6 +21,7 @@
 #include "ConfigParser.h"
 
 namespace publicPos {
+	Q_NAMESPACE
 	int currentLesson = 0, currentSublesson = 0, currentExercise = 0;
 }
 
@@ -747,4 +748,52 @@ bool ConfigParser::addExercise(int lesson, int sublesson, int exercise, bool rep
 	if(!reopen(QIODevice::ReadOnly | QIODevice::Text)) // This shouldn't happen
 		return false;
 	return true;
+}
+
+/*! Returns default repeat limit (text length). */
+int ConfigParser::defaultRepeatLimit(void)
+{
+	return m_defaultRepeatLimit;
+}
+
+/*! Returns default line length. */
+int ConfigParser::defaultLineLength(void)
+{
+	return m_defaultLineLength;
+}
+
+/*! Sets selected lesson (should only be used in QML). */
+void ConfigParser::setCurrentLesson(int value)
+{
+	publicPos::currentLesson = value;
+}
+
+/*! Returns selected lesson. */
+int ConfigParser::currentLesson(void)
+{
+	return publicPos::currentLesson;
+}
+
+/*! Sets selected sublesson (should only be used in QML). */
+void ConfigParser::setCurrentSublesson(int value)
+{
+	publicPos::currentSublesson = value;
+}
+
+/*! Returns selected sublesson. */
+int ConfigParser::currentSublesson(void)
+{
+	return publicPos::currentSublesson;
+}
+
+/*! Sets selected exercise (should only be used in QML). */
+void ConfigParser::setCurrentExercise(int value)
+{
+	publicPos::currentExercise = value;
+}
+
+/*! Returns selected exercise. */
+int ConfigParser::currentExercise(void)
+{
+	return publicPos::currentExercise;
 }

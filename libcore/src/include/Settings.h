@@ -31,9 +31,6 @@
 #include <QApplication>
 #include <QRgb>
 #include <QColor>
-#ifdef Q_OS_WASM
-#include <qwasmsettings.h>
-#endif // Q_OS_WASM
 #include "FileUtils.h"
 #include "ThemeEngine.h"
 
@@ -79,142 +76,139 @@
  *  - Settings#editorGeometry() - Pack editor window geometry.
  *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
  */
-class CORE_LIB_EXPORT Settings
+class CORE_LIB_EXPORT Settings : public QObject
 {
+		Q_OBJECT
 	public:
 		static void init(void);
 		// language
-		static QString language(void);
-		static bool containsLanguage(void);
-		static void setLanguage(QString value);
+		Q_INVOKABLE static QString language(void);
+		Q_INVOKABLE static bool containsLanguage(void);
+		Q_INVOKABLE static void setLanguage(QString value);
 		// windowState
-		static QByteArray windowState(void);
-		static bool containsWindowState(void);
-		static void setWindowState(QByteArray value);
+		Q_INVOKABLE static QByteArray windowState(void);
+		Q_INVOKABLE static bool containsWindowState(void);
+		Q_INVOKABLE static void setWindowState(QByteArray value);
 		// windowGeometry
-		static QByteArray windowGeometry(void);
-		static bool containsWindowGeometry(void);
-		static void setWindowGeometry(QByteArray value);
+		Q_INVOKABLE static QByteArray windowGeometry(void);
+		Q_INVOKABLE static bool containsWindowGeometry(void);
+		Q_INVOKABLE static void setWindowGeometry(QByteArray value);
 		// updateChecks
-		static bool updateChecks(void);
-		static bool containsUpdateChecks(void);
-		static void setUpdateChecks(bool value);
+		Q_INVOKABLE static bool updateChecks(void);
+		Q_INVOKABLE static bool containsUpdateChecks(void);
+		Q_INVOKABLE static void setUpdateChecks(bool value);
 		// lessonPack
-		static QString lessonPack(void);
-		static bool containsLessonPack(void);
-		static void setLessonPack(QString value);
+		Q_INVOKABLE static QString lessonPack(void);
+		Q_INVOKABLE static bool containsLessonPack(void);
+		Q_INVOKABLE static void setLessonPack(QString value);
 		// customLessonPack
-		static bool customLessonPack(void);
-		static bool containsCustomLessonPack(void);
-		static void setCustomLessonPack(bool value);
+		Q_INVOKABLE static bool customLessonPack(void);
+		Q_INVOKABLE static bool containsCustomLessonPack(void);
+		Q_INVOKABLE static void setCustomLessonPack(bool value);
 		// errorPenalty
-		static int errorPenalty(void);
-		static bool containsErrorPenalty(void);
-		static void setErrorPenalty(int value);
-		// serverFullMode
-		static bool serverFullMode(void);
-		static bool containsServerFullMode(void);
-		static void setServerFullMode(bool value);
+		Q_INVOKABLE static int errorPenalty(void);
+		Q_INVOKABLE static bool containsErrorPenalty(void);
+		Q_INVOKABLE static void setErrorPenalty(int value);
 		// mistakeLimit
-		static bool mistakeLimit(void);
-		static bool containsMistakeLimit(void);
-		static void setMistakeLimit(bool value);
+		Q_INVOKABLE static bool mistakeLimit(void);
+		Q_INVOKABLE static bool containsMistakeLimit(void);
+		Q_INVOKABLE static void setMistakeLimit(bool value);
 		// mistakeChars
-		static int mistakeChars(void);
-		static bool containsMistakeChars(void);
-		static void setMistakeChars(int value);
+		Q_INVOKABLE static int mistakeChars(void);
+		Q_INVOKABLE static bool containsMistakeChars(void);
+		Q_INVOKABLE static void setMistakeChars(int value);
 		// themeFont
-		static QString themeFont(void);
-		static bool containsThemeFont(void);
-		static void setThemeFont(QString value);
+		Q_INVOKABLE static QString themeFont(void);
+		Q_INVOKABLE static bool containsThemeFont(void);
+		Q_INVOKABLE static void setThemeFont(QString value);
 		// themeFontSize
-		static int themeFontSize(void);
-		static bool containsThemeFontSize(void);
-		static void setThemeFontSize(int value);
+		Q_INVOKABLE static int themeFontSize(void);
+		Q_INVOKABLE static bool containsThemeFontSize(void);
+		Q_INVOKABLE static void setThemeFontSize(int value);
 		// themeFontBold
-		static bool themeFontBold(void);
-		static bool containsThemeFontBold(void);
-		static void setThemeFontBold(bool value);
+		Q_INVOKABLE static bool themeFontBold(void);
+		Q_INVOKABLE static bool containsThemeFontBold(void);
+		Q_INVOKABLE static void setThemeFontBold(bool value);
 		// themeFontItalic
-		static bool themeFontItalic(void);
-		static bool containsThemeFontItalic(void);
-		static void setThemeFontItalic(bool value);
+		Q_INVOKABLE static bool themeFontItalic(void);
+		Q_INVOKABLE static bool containsThemeFontItalic(void);
+		Q_INVOKABLE static void setThemeFontItalic(bool value);
 		// themeFontUnderline
-		static bool themeFontUnderline(void);
-		static bool containsThemeFontUnderline(void);
-		static void setThemeFontUnderline(bool value);
+		Q_INVOKABLE static bool themeFontUnderline(void);
+		Q_INVOKABLE static bool containsThemeFontUnderline(void);
+		Q_INVOKABLE static void setThemeFontUnderline(bool value);
 		// customExerciseTextColor
-		static bool customExerciseTextColor(void);
-		static bool containsCustomExerciseTextColor(void);
-		static void setCustomExerciseTextColor(bool value);
+		Q_INVOKABLE static bool customExerciseTextColor(void);
+		Q_INVOKABLE static bool containsCustomExerciseTextColor(void);
+		Q_INVOKABLE static void setCustomExerciseTextColor(bool value);
 		// exerciseTextColor
-		static QRgb exerciseTextColor(void);
-		static bool containsExerciseTextColor(void);
-		static void setExerciseTextColor(QRgb value);
+		Q_INVOKABLE static QRgb exerciseTextColor(void);
+		Q_INVOKABLE static bool containsExerciseTextColor(void);
+		Q_INVOKABLE static void setExerciseTextColor(QRgb value);
 		// inputTextColor
-		static QRgb inputTextColor(void);
-		static bool containsInputTextColor(void);
-		static void setInputTextColor(QRgb value);
+		Q_INVOKABLE static QRgb inputTextColor(void);
+		Q_INVOKABLE static bool containsInputTextColor(void);
+		Q_INVOKABLE static void setInputTextColor(QRgb value);
 		// customInputTextColor
-		static bool customInputTextColor(void);
-		static bool containsCustomInputTextColor(void);
-		static void setCustomInputTextColor(bool value);
+		Q_INVOKABLE static bool customInputTextColor(void);
+		Q_INVOKABLE static bool containsCustomInputTextColor(void);
+		Q_INVOKABLE static void setCustomInputTextColor(bool value);
 		// customBgColor
-		static bool customBgColor(void);
-		static bool containsCustomBgColor(void);
-		static void setCustomBgColor(bool value);
+		Q_INVOKABLE static bool customBgColor(void);
+		Q_INVOKABLE static bool containsCustomBgColor(void);
+		Q_INVOKABLE static void setCustomBgColor(bool value);
 		// bgColor
-		static QRgb bgColor(void);
-		static bool containsBgColor(void);
-		static void setBgColor(QRgb value);
+		Q_INVOKABLE static QRgb bgColor(void);
+		Q_INVOKABLE static bool containsBgColor(void);
+		Q_INVOKABLE static void setBgColor(QRgb value);
 		// customPaperColor
-		static bool customPaperColor(void);
-		static bool containsCustomPaperColor(void);
-		static void setCustomPaperColor(bool value);
+		Q_INVOKABLE static bool customPaperColor(void);
+		Q_INVOKABLE static bool containsCustomPaperColor(void);
+		Q_INVOKABLE static void setCustomPaperColor(bool value);
 		// paperColor
-		static QRgb paperColor(void);
-		static bool containsPaperColor(void);
-		static void setPaperColor(QRgb value);
+		Q_INVOKABLE static QRgb paperColor(void);
+		Q_INVOKABLE static bool containsPaperColor(void);
+		Q_INVOKABLE static void setPaperColor(QRgb value);
 		// customPanelColor
-		static bool customPanelColor(void);
-		static bool containsCustomPanelColor(void);
-		static void setCustomPanelColor(bool value);
+		Q_INVOKABLE static bool customPanelColor(void);
+		Q_INVOKABLE static bool containsCustomPanelColor(void);
+		Q_INVOKABLE static void setCustomPanelColor(bool value);
 		// panelColor
-		static QRgb panelColor(void);
-		static bool containsPanelColor(void);
-		static void setPanelColor(QRgb value);
+		Q_INVOKABLE static QRgb panelColor(void);
+		Q_INVOKABLE static bool containsPanelColor(void);
+		Q_INVOKABLE static void setPanelColor(QRgb value);
 		// applicationStyle
-		static ThemeEngine::Style applicationStyle(void);
-		static bool containsApplicationStyle(void);
-		static void setApplicationStyle(ThemeEngine::Style value);
+		Q_INVOKABLE static ThemeEngine::Style applicationStyle(void);
+		Q_INVOKABLE static bool containsApplicationStyle(void);
+		Q_INVOKABLE static void setApplicationStyle(ThemeEngine::Style value);
 		// applicationTheme
-		static QString applicationTheme(void);
-		static bool containsApplicationTheme(void);
-		static void setApplicationTheme(QString value);
+		Q_INVOKABLE static QString applicationTheme(void);
+		Q_INVOKABLE static bool containsApplicationTheme(void);
+		Q_INVOKABLE static void setApplicationTheme(QString value);
 		// settingsLockEnabled
-		static bool settingsLockEnabled(void);
-		static bool containsSettingsLockEnabled(void);
-		static void setSettingsLockEnabled(bool value);
+		Q_INVOKABLE static bool settingsLockEnabled(void);
+		Q_INVOKABLE static bool containsSettingsLockEnabled(void);
+		Q_INVOKABLE static void setSettingsLockEnabled(bool value);
 		// settingsLockPasswd
-		static QByteArray settingsLockPasswd(void);
-		static bool containsSettingsLockPasswd(void);
-		static void setSettingsLockPasswd(QByteArray value);
+		Q_INVOKABLE static QByteArray settingsLockPasswd(void);
+		Q_INVOKABLE static bool containsSettingsLockPasswd(void);
+		Q_INVOKABLE static void setSettingsLockPasswd(QByteArray value);
 		// advancedTheme
-		static bool advancedTheme(void);
-		static bool containsAdvancedTheme(void);
-		static void setAdvancedTheme(bool value);
+		Q_INVOKABLE static bool advancedTheme(void);
+		Q_INVOKABLE static bool containsAdvancedTheme(void);
+		Q_INVOKABLE static void setAdvancedTheme(bool value);
 		// simpleThemeId
-		static int simpleThemeId(void);
-		static bool containsSimpleThemeId(void);
-		static void setSimpleThemeId(int value);
+		Q_INVOKABLE static int simpleThemeId(void);
+		Q_INVOKABLE static bool containsSimpleThemeId(void);
+		Q_INVOKABLE static void setSimpleThemeId(int value);
 		// editorGeometry
-		static QByteArray editorGeometry(void);
-		static bool containsEditorGeometry(void);
-		static void setEditorGeometry(QByteArray value);
+		Q_INVOKABLE static QByteArray editorGeometry(void);
+		Q_INVOKABLE static bool containsEditorGeometry(void);
+		Q_INVOKABLE static void setEditorGeometry(QByteArray value);
 		// keyboardVisible
-		static bool keyboardVisible(void);
-		static bool containsKeyboardVisible(void);
-		static void setKeyboardVisible(bool value);
+		Q_INVOKABLE static bool keyboardVisible(void);
+		Q_INVOKABLE static bool containsKeyboardVisible(void);
+		Q_INVOKABLE static void setKeyboardVisible(bool value);
 
 	protected:
 		static QVariant get(QString key, QVariant defaultValue);

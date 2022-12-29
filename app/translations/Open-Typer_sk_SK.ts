@@ -265,14 +265,6 @@
     </message>
 </context>
 <context>
-    <name>KeyboardOptions</name>
-    <message>
-        <location filename="../ui/options/KeyboardOptions.ui" line="70"/>
-        <source>Editor</source>
-        <translation>Editor</translation>
-    </message>
-</context>
-<context>
     <name>KeyboardWidget</name>
     <message>
         <location filename="../src/widgets/KeyboardWidget.cpp" line="588"/>
@@ -288,283 +280,223 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../ui/MainWindow.ui" line="233"/>
-        <source>Options</source>
-        <translation>Možnosti</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="262"/>
-        <source>Open custom text</source>
-        <translation>Otvoriť vlastný text</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="291"/>
-        <source>Print</source>
-        <translation>Tlačiť</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="314"/>
-        <location filename="../ui/MainWindow.ui" line="2300"/>
+        <location filename="../ui/MainWindow.ui" line="1878"/>
         <source>Typing test</source>
         <translation>Kontrolný odpis</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="470"/>
-        <location filename="../ui/MainWindow.ui" line="2269"/>
+        <location filename="../ui/MainWindow.ui" line="348"/>
+        <location filename="../ui/MainWindow.ui" line="1847"/>
         <source>Navigation</source>
         <translation>Navigácia</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="547"/>
-        <location filename="../ui/MainWindow.ui" line="550"/>
-        <source>Repeat exercise</source>
-        <translation>Opakovať cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="582"/>
-        <source>Close loaded exercise</source>
-        <translation>Zatvoriť načítané cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="611"/>
-        <source>Previous exercise</source>
-        <translation>Predchádzajúce cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="640"/>
-        <source>Next exercise</source>
-        <translation>Nasledujúce cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="501"/>
-        <source>Lesson:</source>
-        <translation>Lekcia:</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="695"/>
-        <source>Sublesson:</source>
-        <translation>Podlekcia:</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="877"/>
-        <source>Exercise history</source>
-        <comment>exercise history</comment>
-        <translation>História cvičenia</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="906"/>
-        <location filename="../ui/MainWindow.ui" line="2194"/>
+        <location filename="../ui/MainWindow.ui" line="1772"/>
         <source>Timed exercise</source>
         <translation>Cvičenie na čas</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="932"/>
-        <source>Generate text from error words</source>
-        <translation>Generovať text z chybných slov</translation>
-    </message>
-    <message>
-        <location filename="../ui/MainWindow.ui" line="961"/>
-        <location filename="../ui/MainWindow.ui" line="2212"/>
+        <location filename="../ui/MainWindow.ui" line="1790"/>
         <source>Reverse text</source>
         <comment>reverse text button</comment>
         <translation>Obrátiť text</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1017"/>
+        <location filename="../ui/MainWindow.ui" line="598"/>
         <source>Character correction after mistake (by program)</source>
         <comment>correct mistakes</comment>
         <extracomment>Whether to correct mistakes while typing</extracomment>
         <translation>Oprava znaku po chybe programom</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1030"/>
-        <location filename="../ui/MainWindow.ui" line="2231"/>
+        <location filename="../ui/MainWindow.ui" line="611"/>
+        <location filename="../ui/MainWindow.ui" line="1809"/>
         <source>Hide exercise text</source>
         <comment>hide text</comment>
         <translation>Skryť text cvičenia</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1064"/>
-        <location filename="../ui/MainWindow.ui" line="2280"/>
+        <location filename="../ui/MainWindow.ui" line="644"/>
+        <location filename="../ui/MainWindow.ui" line="1858"/>
         <source>Exercise options</source>
         <translation>Možnosti cvičenia</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1128"/>
-        <location filename="../ui/MainWindow.ui" line="2291"/>
+        <location filename="../ui/MainWindow.ui" line="707"/>
+        <location filename="../ui/MainWindow.ui" line="1869"/>
         <source>State</source>
         <extracomment>Current status</extracomment>
         <translation>Stav</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1180"/>
+        <location filename="../ui/MainWindow.ui" line="759"/>
         <source>Mistakes:</source>
         <translation>Počet chýb:</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1219"/>
+        <location filename="../ui/MainWindow.ui" line="798"/>
         <source>Time:</source>
         <translation>Čas:</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1471"/>
+        <location filename="../ui/MainWindow.ui" line="1048"/>
         <source>Remaining time</source>
         <translation>Zostávajúci čas</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="1638"/>
+        <location filename="../ui/MainWindow.ui" line="1215"/>
         <source>Export</source>
         <translation>Exportovať</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2077"/>
+        <location filename="../ui/MainWindow.ui" line="1655"/>
         <source>&amp;File</source>
         <translation>&amp;Súbor</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2081"/>
+        <location filename="../ui/MainWindow.ui" line="1659"/>
         <source>Open</source>
         <translation>Otvoriť</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2092"/>
+        <location filename="../ui/MainWindow.ui" line="1670"/>
         <source>New</source>
         <translation>Nový</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2107"/>
+        <location filename="../ui/MainWindow.ui" line="1685"/>
         <source>&amp;View</source>
         <translation>&amp;Zobrazenie</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2111"/>
+        <location filename="../ui/MainWindow.ui" line="1689"/>
         <source>User interface</source>
         <translation>Používateľské rozhranie</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2223"/>
+        <location filename="../ui/MainWindow.ui" line="1801"/>
         <source>Character correction after mistake (by program)</source>
         <translation>Oprava znaku po chybe programom</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2332"/>
+        <location filename="../ui/MainWindow.ui" line="1910"/>
         <source>Dark theme</source>
         <translation>Tmavý motív</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2123"/>
+        <location filename="../ui/MainWindow.ui" line="1701"/>
         <source>&amp;Exercise</source>
         <translation>&amp;Cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2135"/>
+        <location filename="../ui/MainWindow.ui" line="1713"/>
         <source>&amp;Settings</source>
         <translation>&amp;Nastavenia</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2141"/>
+        <location filename="../ui/MainWindow.ui" line="1719"/>
         <source>Tools</source>
         <translation>Nástroje</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2147"/>
+        <location filename="../ui/MainWindow.ui" line="1725"/>
         <source>Help</source>
         <translation>Pomoc</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2167"/>
+        <location filename="../ui/MainWindow.ui" line="1745"/>
         <source>Custom text</source>
         <translation>Vlastný text</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2176"/>
-        <location filename="../ui/MainWindow.ui" line="2185"/>
+        <location filename="../ui/MainWindow.ui" line="1754"/>
+        <location filename="../ui/MainWindow.ui" line="1763"/>
         <source>Lesson pack</source>
         <translation>Balík lekcií</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2203"/>
+        <location filename="../ui/MainWindow.ui" line="1781"/>
         <source>Text from error words</source>
         <translation>Text z chybných slov</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2240"/>
+        <location filename="../ui/MainWindow.ui" line="1818"/>
         <source>Preferences...</source>
         <translation>Možnosti...</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2249"/>
+        <location filename="../ui/MainWindow.ui" line="1827"/>
         <source>Exercise history</source>
         <translation>História cvičenia</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2258"/>
+        <location filename="../ui/MainWindow.ui" line="1836"/>
         <source>Print...</source>
         <translation>Tlačiť...</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2305"/>
+        <location filename="../ui/MainWindow.ui" line="1883"/>
         <source>About Qt...</source>
         <translation>O Qt...</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2313"/>
+        <location filename="../ui/MainWindow.ui" line="1891"/>
         <source>About program...</source>
         <translation>O programe...</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="2321"/>
+        <location filename="../ui/MainWindow.ui" line="1899"/>
         <source>Online documentation</source>
         <translation>Online dokumentácia</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="795"/>
+        <location filename="../src/MainWindow.cpp" line="803"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="809"/>
+        <location filename="../src/MainWindow.cpp" line="817"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="809"/>
-        <location filename="../src/MainWindow.cpp" line="1498"/>
+        <location filename="../src/MainWindow.cpp" line="817"/>
+        <location filename="../src/MainWindow.cpp" line="1513"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="850"/>
+        <location filename="../src/MainWindow.cpp" line="865"/>
         <source>You don&apos;t have any error words.</source>
         <translation>Nemáte žiadne chybné slová.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1498"/>
+        <location filename="../src/MainWindow.cpp" line="1513"/>
         <source>Open-Typer pack files</source>
         <translation>Súbory balíkov Open-Typer</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1810"/>
+        <location filename="../src/MainWindow.cpp" line="1823"/>
         <source>Version: %1</source>
         <translation>Verzia: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1813"/>
+        <location filename="../src/MainWindow.cpp" line="1826"/>
         <source>Revision: %1</source>
         <translation>Revízia: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1815"/>
+        <location filename="../src/MainWindow.cpp" line="1828"/>
         <source>Source code: %1</source>
         <translation>Zdrojový kód: %1</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1815"/>
+        <location filename="../src/MainWindow.cpp" line="1828"/>
         <source>Published with the GNU General Public License.</source>
         <translation>Publikované s licenciou GNU General Public License.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="1824"/>
+        <location filename="../src/MainWindow.cpp" line="1837"/>
         <source>Are you sure you want to quit?</source>
         <translation>Ste si istý, že chcete ukončiť program?</translation>
     </message>
@@ -782,19 +714,82 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="34"/>
+        <location filename="../src/main.cpp" line="37"/>
         <source>Version: %1</source>
         <translation>Verzia: %1</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="110"/>
+        <location filename="../src/main.cpp" line="113"/>
         <source>Loading addons...</source>
         <translation>Načítavajú sa rozšírenia...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="114"/>
+        <location filename="../src/main.cpp" line="117"/>
         <source>Opening main window...</source>
         <translation>Otváranie hlavného okna...</translation>
+    </message>
+</context>
+<context>
+    <name>QmlWindow</name>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="25"/>
+        <source>Options</source>
+        <translation>Možnosti</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="30"/>
+        <source>Open</source>
+        <translation>Otvoriť</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="35"/>
+        <source>Print</source>
+        <translation>Tlačiť</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="41"/>
+        <source>Typing test</source>
+        <translation>Kontrolný odpis</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="46"/>
+        <source>Timed exercise</source>
+        <translation>Cvičenie na čas</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="51"/>
+        <source>Text from error words</source>
+        <translation>Text z chybných slov</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="56"/>
+        <source>Reverse text</source>
+        <translation>Obrátiť text</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="66"/>
+        <source>Repeat exercise</source>
+        <translation>Opakovať cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="71"/>
+        <source>Close loaded exercise</source>
+        <translation>Zatvoriť načítané cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="76"/>
+        <source>Previous exercise</source>
+        <translation>Predchádzajúce cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="81"/>
+        <source>Next exercise</source>
+        <translation>Nasledujúce cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/QmlWindow.qml" line="90"/>
+        <source>Exercise history</source>
+        <translation>História cvičenia</translation>
     </message>
 </context>
 <context>

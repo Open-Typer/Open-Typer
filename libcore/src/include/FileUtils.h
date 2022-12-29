@@ -32,11 +32,13 @@
 #include <QDir>
 
 /*! \brief The FileUtils class contains functions for file or directory paths. */
-class CORE_LIB_EXPORT FileUtils
+class CORE_LIB_EXPORT FileUtils : public QObject
 {
+		Q_OBJECT
 	public:
-		static QString configLocation(void);
-		static QString mainSettingsLocation(void);
+		Q_INVOKABLE static QString configLocation(void);
+		Q_INVOKABLE static QString mainSettingsLocation(void);
+		Q_INVOKABLE static QString fileName(QString path);
 };
 
 #endif // FILEUTILS_H

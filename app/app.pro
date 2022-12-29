@@ -1,7 +1,7 @@
 TARGET = open-typer
 DESTDIR = $$_PRO_FILE_PWD_/..
 
-QT += core gui charts
+QT += core gui quick quickcontrols2 charts
 QTPLUGIN += qsvg
 !wasm {
     QT += printsupport
@@ -94,6 +94,22 @@ FORMS += \
     ui/packEditor/PackSelector.ui \
     ui/updater/UpdaterQuestion.ui
 
+DISTFILES += \
+    ui/qml/CustomComboBox.qml \
+    ui/qml/CustomDialog.qml \
+    ui/qml/CustomMenu.qml \
+    ui/qml/CustomMenuBar.qml \
+    ui/qml/CustomMenuItem.qml \
+    ui/qml/CustomMenuSeparator.qml \
+    ui/qml/CustomToolButton.qml \
+    ui/qml/MenuButton.qml \
+    ui/qml/MessageBox.qml \
+    ui/qml/Paper.qml \
+    ui/qml/QmlWindow.qml \
+    ui/qml/HoverToolTip.qml \
+    ui/qml/Panel.qml \
+    ui/qml/TimeDialog.qml
+
 TRANSLATIONS += \
     translations/Open-Typer_sk_SK.ts \
     translations/Open-Typer_de_DE.ts \
@@ -101,20 +117,17 @@ TRANSLATIONS += \
 
 RESOURCES += \
     res.qrc \
+    res/icons/icons.qrc \
     res/images/class-icons/class-icons.qrc \
     res/keyboard-layouts/layouts.qrc \
-    translations/translations.qrc
+    translations/translations.qrc \
+    ui/qml/qml.qrc
 
 RESOURCES += \
     dark-theme/dark-style.qrc \
     light-theme/light-style.qrc
 
 win32:RC_ICONS += res/images/icon.ico
-
-# Third-party
-wasm {
-	include($$PWD/../thirdparty/QWasmSettings/qwasmsettings.pri)
-}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

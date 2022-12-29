@@ -41,3 +41,10 @@ QString FileUtils::mainSettingsLocation(void)
 {
 	return configLocation() + "/config.ini";
 }
+
+/*! Uses QFileInfo to get the file name of a file. */
+QString FileUtils::fileName(QString path)
+{
+	QFileInfo fileInfo(path);
+	return fileInfo.fileName();
+}

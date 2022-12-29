@@ -30,6 +30,8 @@ LoadExerciseDialog::LoadExerciseDialog(QMap<int, QString> availableTargets, QWid
 	ui(new Ui::LoadExerciseDialog),
 	m_targets(availableTargets)
 {
+	ui->setupUi(this);
+	oldSelectedExText = ui->selectedExButton->text();
 	init();
 }
 
@@ -38,6 +40,8 @@ LoadExerciseDialog::LoadExerciseDialog(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::LoadExerciseDialog)
 {
+	ui->setupUi(this);
+	oldSelectedExText = ui->selectedExButton->text();
 	local = true;
 	init();
 }
@@ -45,11 +49,10 @@ LoadExerciseDialog::LoadExerciseDialog(QWidget *parent) :
 /*! Initializes the dialog. */
 void LoadExerciseDialog::init(void)
 {
-	ui->setupUi(this);
 	changeSource();
 	changeMode();
 	// Get selected exercise
-	QString oldText = ui->selectedExButton->text();
+	QString oldText = oldSelectedExText;
 	QString lessonTr = ConfigParser::lessonTr(publicPos::currentLesson);
 	QString sublessonTr = ConfigParser::sublessonName(publicPos::currentSublesson);
 	QString exerciseTr = ConfigParser::exerciseTr(publicPos::currentExercise);
@@ -121,7 +124,7 @@ QString LoadExerciseDialog::exerciseText(void)
 int LoadExerciseDialog::lineLength(void)
 {
 	if(ui->fromFileButton->isChecked())
-		return ConfigParser::defaultLineLength;
+		return ConfigParser::defaultLineLength();
 	else if(ui->selectedExButton->isChecked())
 		return m_lineLength;
 	return 0;
@@ -147,6 +150,12 @@ int LoadExerciseDialog::mode(void)
 QTime LoadExerciseDialog::timeLimit(void)
 {
 	return ui->timeEdit->time();
+}
+
+/*! Returns selected time limit (in seconds). */
+int LoadExerciseDialog::timeLimitSecs(void)
+{
+	return QTime(0, 0, 0).secsTo(timeLimit());
 }
 
 /*! Returns true if the user has enabled mistake correction. */

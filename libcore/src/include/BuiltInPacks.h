@@ -28,13 +28,15 @@
 #define CORE_LIB_EXPORT Q_DECL_IMPORT
 #endif
 
+#include <QObject>
 #include <QString>
 
 /*! \brief The BuiltInPacks class provides functions for built-in pack settings. */
-class CORE_LIB_EXPORT BuiltInPacks
+class CORE_LIB_EXPORT BuiltInPacks : public QObject
 {
+		Q_OBJECT
 	public:
-		static const QString &packName(QString rawName);
+		Q_INVOKABLE static QString packName(QString rawName);
 };
 
 #endif // BUILTINPACKS_H

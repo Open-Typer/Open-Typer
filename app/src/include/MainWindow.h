@@ -31,6 +31,7 @@
 #include <QFileDialog>
 #include <QTextCursor>
 #include <QTranslator>
+#include <QQuickItem>
 #include <QFrame>
 #include "AddonApi.h"
 #include "updater/UpdaterQuestion.h"
@@ -96,14 +97,19 @@ class MainWindow : public QMainWindow
 		void loadText(QByteArray text, bool includeNewLines = false);
 		void endExercise(bool showNetHits, bool showGrossHits, bool showTotalHits, bool showTime, bool showMistakes);
 		QStringList errorWords;
-		void loadErrorWords(void);
-		void loadReversedText(void);
 		void exportText(void);
 		bool preview = false, testLoaded = false, correctMistakesOld = true, hideTextOld = false;
 		QByteArray oldGeometry;
 		bool firstRun = false;
 		bool uiLocked = false;
 		QPointer<UpdaterQuestion> updateQuestion = nullptr;
+		// UI components
+		QQuickItem *rootObject;
+		QObject *lessonBox, *sublessonBox, *exerciseBox; // exercise combo boxes
+		QObject *settingsButton, *openButton, *printButton;
+		QObject *typingTestButton, *timedExButton, *errorWordsButton, *reverseTextButton;
+		QObject *repeatExButton, *previousExButton, *nextExButton, *statsButton;
+		QObject *closeLoadedExButton;
 
 	protected:
 		void changeEvent(QEvent *event);
@@ -120,10 +126,11 @@ class MainWindow : public QMainWindow
 		void nextLevel(void);
 		void previousLevel(void);
 		void updateCurrentTime(void);
-		void lessonSelectionListIndexChanged(int index);
-		void sublessonSelectionListIndexChanged(int index);
-		void levelSelectionListIndexChanged(int index);
+		void selectLesson(int index);
+		void selectSublesson(int index);
+		void selectExercise(int index);
 		void openExerciseFromFile(void);
+		void closeLoadedExercise(void);
 		void zoomIn(void);
 		void zoomOut(void);
 		void initTimedExercise(void);
@@ -132,6 +139,8 @@ class MainWindow : public QMainWindow
 		void printText(void);
 		void openEditor(void);
 		void startTest(void);
+		void loadErrorWords(void);
+		void loadReversedText(void);
 		void showAboutDialog(void);
 		void changeMode(int mode);
 };

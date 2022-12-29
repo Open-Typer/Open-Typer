@@ -40,9 +40,9 @@ class CORE_LIB_EXPORT HistoryParser : public QObject
 {
 		Q_OBJECT
 	public:
-		static int historySize(QString pack, int lesson, int sublesson, int exercise);
-		static QStringList historyEntry(QString pack, int lesson, int sublesson, int exercise, int entry);
-		static void addHistoryEntry(QString pack, int lesson, int sublesson, int exercise, QList<QVariant> entry);
+		Q_INVOKABLE static int historySize(QString pack, int lesson, int sublesson, int exercise);
+		Q_INVOKABLE static QStringList historyEntry(QString pack, int lesson, int sublesson, int exercise, int entry);
+		Q_INVOKABLE static void addHistoryEntry(QString pack, int lesson, int sublesson, int exercise, QList<QVariant> entry);
 
 	private:
 		static QJsonDocument historyDocument(void);
