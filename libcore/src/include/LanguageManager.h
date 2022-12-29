@@ -67,6 +67,9 @@ class CORE_LIB_EXPORT LanguageManager : public QObject
 		QStringList boxItems {};
 		static const QList<LanguageCountry> supportedLanguagesList;
 		static const QString boxLangItemTemplate;
+
+	signals:
+		void languageChanged(void);
 };
 
 #endif // LANGUAGEMANAGER_H

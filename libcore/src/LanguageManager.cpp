@@ -69,6 +69,7 @@ void LanguageManager::setLanguage(int index)
 	translator2->load(targetLocale, "libcore", "_", ":/res/lang");
 	translator3->load(targetLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qtbase_");
 	globalThemeEngine.updateThemeList();
+	emit languageChanged();
 }
 
 const QStringList &LanguageManager::getBoxItems() const noexcept
