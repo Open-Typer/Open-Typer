@@ -167,6 +167,8 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
 	KeyboardUtils keyboardUtils;
 	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
+	HistoryParser historyParser;
+	engine.rootContext()->setContextProperty("HistoryParser", &historyParser);
 	ExerciseSummary summaryDialog;
 	engine.rootContext()->setContextProperty("summaryDialog", &summaryDialog);
 	OptionsWindow optionsWindow;
