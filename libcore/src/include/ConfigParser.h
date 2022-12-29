@@ -61,7 +61,7 @@ class CORE_LIB_EXPORT ConfigParser : public QObject
 	public:
 		explicit ConfigParser(QObject *parent = nullptr);
 		static const int defaultRepeatLimit = 128;
-		static const int defaultLineLength = 60;
+		static const int defaultLineLength = 100;
 		bool open(const QString fileName);
 		void loadToBuffer(const QByteArray content);
 		QByteArray data(void);
