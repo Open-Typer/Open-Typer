@@ -20,17 +20,18 @@
  */
 
 #include "widgets/LanguageList.h"
+#include "LanguageManager.h"
 
 /*! Constructs LanguageList. */
 LanguageList::LanguageList(QWidget *parent) :
 	QListWidget(parent)
 {
 	clear();
-	addItems(langMgr.getBoxItems());
+	addItems(globalLanguageManager.getBoxItems());
 	if(Settings::language() == "")
 		setCurrentRow(0);
 	else
-		setCurrentRow(langMgr.getBoxItems().indexOf(Settings::language()));
+		setCurrentRow(globalLanguageManager.getBoxItems().indexOf(Settings::language()));
 	connect(this, SIGNAL(currentRowChanged(int)), this, SLOT(changeLanguage(int)));
 }
 
@@ -47,6 +48,6 @@ void LanguageList::changeLanguage(int index)
 	if(index == 0)
 		Settings::setLanguage("");
 	else
-		Settings::setLanguage(langMgr.getBoxItems()[index]);
-	langMgr.setLanguage(index - 1);
+		Settings::setLanguage(globalLanguageManager.getBoxItems()[index]);
+	globalLanguageManager.setLanguage(index - 1);
 }
