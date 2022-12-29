@@ -141,6 +141,30 @@ ApplicationWindow {
 		}
 	}
 
+	Binding {
+		target: statsDialog
+		property: "packName"
+		value: packName
+	}
+
+	Binding {
+		target: statsDialog
+		property: "lesson"
+		value: currentLesson
+	}
+
+	Binding {
+		target: statsDialog
+		property: "sublesson"
+		value: currentAbsoluteSublesson
+	}
+
+	Binding {
+		target: statsDialog
+		property: "exercise"
+		value: currentExercise
+	}
+
 	ColumnLayout {
 		property int minWidth: Math.max(implicitWidth, paper.paperRect.width)
 		property int minHeight: implicitHeight
@@ -303,6 +327,11 @@ ApplicationWindow {
 					id: statsButton
 					iconName: "stats"
 					text: qsTr("Exercise history")
+					onClicked: {
+						// TODO: Send load stats event
+						statsDialog.loadData();
+						statsDialog.exec();
+					}
 				}
 			}
 		}
