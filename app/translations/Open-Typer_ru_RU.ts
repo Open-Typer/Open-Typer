@@ -789,7 +789,7 @@
     <message>
         <location filename="../ui/qml/QmlWindow.qml" line="90"/>
         <source>Exercise history</source>
-        <translation>История упражения</translation>
+        <translation>История упражнения</translation>
     </message>
 </context>
 <context>

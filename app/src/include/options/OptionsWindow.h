@@ -4,6 +4,7 @@
  *
  * Copyright (C) 2021-2022 - adazem009
  * Copyright (C) 2022 - yeti0904
+ * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,12 +24,6 @@
 #define OPTIONSWINDOW_H
 
 #include <QDialog>
-#include <QPushButton>
-#include "AddonApi.h"
-#include "options/BehaviorOptions.h"
-#include "options/KeyboardOptions.h"
-#include "options/AppearanceOptions.h"
-#include "widgets/LanguageList.h"
 
 namespace Ui {
 	class OptionsWindow;

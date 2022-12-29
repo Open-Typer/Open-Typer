@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +36,7 @@ class CORE_LIB_EXPORT BuiltInPacks : public QObject
 {
 		Q_OBJECT
 	public:
-		Q_INVOKABLE static QString packName(QString rawName);
+		Q_INVOKABLE static const QString &packName(QString rawName);
 };
 
 #endif // BUILTINPACKS_H

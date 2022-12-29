@@ -22,6 +22,21 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include "InitialSetup.h"
+#include "widgets/InputLabelWidget.h"
+#include "updater/Updater.h"
+#include "packEditor/PackEditor.h"
+#include "options/OptionsWindow.h"
+#include "ExerciseSummary.h"
+#include "TimeDialog.h"
+#include "StatsDialog.h"
+#include "ExportDialog.h"
+#include "HistoryParser.h"
+#include "KeyboardUtils.h"
+#include "BuiltInPacks.h"
+#include "Settings.h"
+#include "LoadExerciseDialog.h"
+
 typedef void *VoidPtr; // needed for converting any pointer to QVariant
 Q_DECLARE_METATYPE(VoidPtr);
 
@@ -86,12 +101,12 @@ MainWindow::MainWindow(QWidget *parent) :
 		if(checked)
 		{
 			globalThemeEngine.setTheme(1);
-			Settings::setSimpleThemeId(1);
+			Settings::setSimpleThemeId(static_cast<int>(AppearanceOptions::SimpleTheme::Dark));
 		}
 		else
 		{
 			globalThemeEngine.setTheme(4);
-			Settings::setSimpleThemeId(0);
+			Settings::setSimpleThemeId(static_cast<int>(AppearanceOptions::SimpleTheme::Light));
 		}
 	});
 	// Tools menu
@@ -116,8 +131,8 @@ MainWindow::MainWindow(QWidget *parent) :
 		QMessageBox::aboutQt(this);
 	});
 	// Widgets
-	connect(ui->inputLabel, SIGNAL(keyPressed(QKeyEvent *)), this, SLOT(keyPress(QKeyEvent *)));
-	connect(ui->inputLabel, SIGNAL(keyReleased(QKeyEvent *)), this, SLOT(keyRelease(QKeyEvent *)));
+	connect(ui->inputLabel, &InputLabelWidget::keyPressed, this, &MainWindow::keyPress);
+	connect(ui->inputLabel, &InputLabelWidget::keyReleased, this, &MainWindow::keyRelease);
 	connect(settingsButton, SIGNAL(clicked()), this, SLOT(openOptions()));
 	connect(openButton, SIGNAL(clicked()), this, SLOT(openExerciseFromFile()));
 	connect(repeatExButton, SIGNAL(clicked()), this, SLOT(repeatLevel()));
@@ -129,8 +144,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(exerciseBox, SIGNAL(activated(int)), this, SLOT(selectExercise(int)));
 	connect(errorWordsButton, SIGNAL(clicked()), this, SLOT(loadErrorWords()));
 	connect(reverseTextButton, SIGNAL(clicked()), this, SLOT(loadReversedText()));
-	connect(ui->zoomInButton, SIGNAL(clicked()), this, SLOT(zoomIn()));
-	connect(ui->zoomOutButton, SIGNAL(clicked()), this, SLOT(zoomOut()));
+	connect(ui->zoomInButton, &QPushButton::clicked, this, &MainWindow::zoomIn);
+	connect(ui->zoomOutButton, &QPushButton::clicked, this, &MainWindow::zoomOut);
 	connect(timedExButton, SIGNAL(clicked()), this, SLOT(initTimedExercise()));
 	connect(ui->stopTimedExButton, &QPushButton::clicked, this, &MainWindow::initTimedExercise);
 	connect(statsButton, SIGNAL(clicked()), this, SLOT(showExerciseStats()));
@@ -172,7 +187,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	loadTheme();
 	// Start timer (used to update currentTimeNumber every second)
 	secLoop = new QTimer(this);
-	connect(secLoop, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
+	connect(secLoop, &QTimer::timeout, this, &MainWindow::updateCurrentTime);
 	connect(&timedExTimer, &QTimer::timeout, this, &MainWindow::updateCurrentTime);
 	secLoop->start(500);
 #ifdef Q_OS_WASM
@@ -1480,7 +1495,9 @@ void MainWindow::setColors(void)
 		keyBgColor.blue() + (128 - keyBgColor.blue()) / 10);
 	ui->keyboardFrame->setKeyColor(keyBgColor, keyBorderColor);
 	// Update dark theme action
+	ui->actionDarkTheme->blockSignals(true);
 	ui->actionDarkTheme->setChecked(ThemeEngine::style() == ThemeEngine::Style::DarkStyle);
+	ui->actionDarkTheme->blockSignals(false);
 }
 
 /*! Connected from openPackButton.\n

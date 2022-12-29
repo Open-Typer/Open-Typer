@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,13 +23,7 @@
 #define APPEARANCEOPTIONS_H
 
 #include <QWidget>
-#include <QFile>
-#include <QTextStream>
-#include <QPropertyAnimation>
-#include <QColorDialog>
-#include "options/OptionsWindow.h"
-#include "StringUtils.h"
-#include "ThemeEngine.h"
+#include <QListWidgetItem>
 
 namespace Ui {
 	class AppearanceOptions;
@@ -45,10 +40,19 @@ class AppearanceOptions : public QWidget
 {
 		Q_OBJECT
 	public:
+		enum class SimpleTheme
+		{
+			Undefined = -1,
+			Light = 0,
+			Dark = 1
+		};
+
+	public:
 		Q_INVOKABLE AppearanceOptions(QWidget *parent = nullptr);
 		~AppearanceOptions();
 		void init(void);
 		void hideModeSelector(void);
+		void setSimpleTheme(SimpleTheme theme);
 
 	private:
 		Ui::AppearanceOptions *ui;
@@ -57,9 +61,6 @@ class AppearanceOptions : public QWidget
 		void selectCurrentFullTheme(void);
 		void updateFont(void);
 		void setColors();
-
-	public slots:
-		void setSimpleTheme(int theme);
 
 	private slots:
 		void changeThemeMode(bool advanced);

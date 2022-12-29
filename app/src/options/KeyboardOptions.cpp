@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +22,10 @@
 #include "options/KeyboardOptions.h"
 #include "ui_KeyboardOptions.h"
 
+#include <QDirIterator>
+#include "BuiltInPacks.h"
+#include "Settings.h"
+
 /*! Constructs KeyboardOptions object. */
 KeyboardOptions::KeyboardOptions(QWidget *parent) :
 	QWidget(parent),
@@ -29,15 +34,12 @@ KeyboardOptions::KeyboardOptions(QWidget *parent) :
 	ui->setupUi(this);
 	// Load packs
 	QDirIterator it(":/res/configs/", QDirIterator::NoIteratorFlags);
-	int i;
-	QString item, current;
 	QStringList items;
-	rawItems.clear();
 	while(it.hasNext())
 	{
-		item = it.next();
-		current = "";
-		for(i = 14; i < item.count(); i++)
+		const QString item = it.next();
+		QString current;
+		for(int i = 14; i < item.count(); i++)
 			current += item[i];
 		rawItems += current;
 		items += BuiltInPacks::packName(current);
@@ -47,7 +49,7 @@ KeyboardOptions::KeyboardOptions(QWidget *parent) :
 	if(!Settings::customLessonPack())
 		ui->packList->setCurrentItem(ui->packList->item(rawItems.indexOf(Settings::lessonPack())));
 	// Connections
-	connect(ui->packList, SIGNAL(currentRowChanged(int)), this, SLOT(changePack(int)));
+	connect(ui->packList, &QListWidget::currentRowChanged, this, &KeyboardOptions::changePack);
 }
 
 /*! Destroys the KeyboardOptions object. */
