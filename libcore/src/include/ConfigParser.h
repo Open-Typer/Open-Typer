@@ -101,7 +101,7 @@ class CORE_LIB_EXPORT ConfigParser : public QObject
 		QBuffer configBuffer;
 		QIODevice *currentDevice;
 		static const int m_defaultRepeatLimit = 128;
-		static const int m_defaultLineLength = 60;
+		static const int m_defaultLineLength = 100;
 		bool reopen(QIODevice::OpenMode mode);
 		int exerciseID(const QString line, const int part);
 		QString lineOf(int lesson, int sublesson, int exercise);
