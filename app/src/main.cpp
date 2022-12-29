@@ -119,11 +119,11 @@ int main(int argc, char *argv[])
 	// Initialize settings
 	Settings::init();
 	// Set language
-	LanguageManager langMgr;
+	globalLanguageManager.init();
 	if(Settings::language() == "")
-		langMgr.setLanguage(-1);
+		globalLanguageManager.setLanguage(-1);
 	else
-		langMgr.setLanguage(langMgr.getBoxItems().indexOf(Settings::language()) - 1);
+		globalLanguageManager.setLanguage(globalLanguageManager.getBoxItems().indexOf(Settings::language()) - 1);
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();
@@ -140,6 +140,10 @@ int main(int argc, char *argv[])
 	});
 	qmlRegisterSingletonType<QmlUtils>("OpenTyper", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return new QmlUtils;
+	});
+	QQmlEngine::setObjectOwnership(&globalLanguageManager, QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<LanguageManager>("OpenTyper", 1, 0, "LanguageManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return &globalLanguageManager;
 	});
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
 	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
@@ -166,6 +170,8 @@ int main(int argc, char *argv[])
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
 	QQuickStyle::setStyle("Material");
 	QQmlApplicationEngine engine;
+	engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
+	QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
 	Settings settings;
 	engine.rootContext()->setContextProperty("Settings", &settings);
 	FileUtils fileUtils;
