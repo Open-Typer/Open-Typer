@@ -39,6 +39,14 @@
 #include "QmlUtils.h"
 #include "ExerciseValidator.h"
 #include "QmlFileDialog.h"
+#include "BuiltInPacks.h"
+#include "HistoryParser.h"
+#include "ExerciseSummary.h"
+#include "LoadExerciseDialog.h"
+#include "StatsDialog.h"
+#include "InitialSetup.h"
+#include "options/OptionsWindow.h"
+
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
