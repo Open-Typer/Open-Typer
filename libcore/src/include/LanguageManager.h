@@ -44,10 +44,7 @@ extern QTranslator *translator3;
  * \brief The LanguageManager class provides a list of supported languages.
  *
  * \code
- * LanguageManager langMgr;
- * QList<QLocale::Language> languages = langMgr.supportedLanguages; // list of supported languages
- * QList<QLocale::Country> countries = langMgr.supportedCountries; // list of supported countries (every language has a country, e. g. en_US and en_GB)
- * QStringList items = langMgr.boxItems; // list of languages, which can be used in selector widgets
+ * QStringList items = globalLanguageManager.boxItems; // list of languages which can be used in selector widgets
  * \endcode
  *
  * \see LanguageList
