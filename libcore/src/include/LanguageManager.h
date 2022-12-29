@@ -58,8 +58,7 @@ class CORE_LIB_EXPORT LanguageManager : public QObject
 		using LanguageCountry = std::pair<QLocale::Language, QLocale::Country>;
 
 	public:
-		explicit LanguageManager(QObject *parent = nullptr);
-		virtual ~LanguageManager();
+		void init(void);
 		void setLanguage(int index);
 		const QStringList &getBoxItems() const noexcept;
 
@@ -67,9 +66,12 @@ class CORE_LIB_EXPORT LanguageManager : public QObject
 		QStringList boxItems {};
 		static const QList<LanguageCountry> supportedLanguagesList;
 		static const QString boxLangItemTemplate;
+		bool initComplete = false;
 
 	signals:
 		void languageChanged(void);
 };
+
+extern LanguageManager CORE_LIB_EXPORT globalLanguageManager;
 
 #endif // LANGUAGEMANAGER_H

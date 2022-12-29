@@ -24,20 +24,20 @@
 QTranslator *translator1 = nullptr;
 QTranslator *translator2 = nullptr;
 QTranslator *translator3 = nullptr;
+LanguageManager globalLanguageManager;
 
-/*! Constructs LanguageManager. */
-LanguageManager::LanguageManager(QObject *parent) :
-	QObject(parent)
+/*! Initializes the language manager. */
+void LanguageManager::init(void)
 {
+	if(initComplete)
+		return;
 	for(const auto &[lang, country] : supportedLanguagesList)
 	{
 		boxItems += boxLangItemTemplate.arg(QLocale::languageToString(lang), QLocale::countryToString(country));
 	}
 	boxItems.insert(0, tr("System (default)"));
+	initComplete = true;
 }
-
-/*! Destroys the LanguageManager object. */
-LanguageManager::~LanguageManager() { }
 
 /*! Changes the application language. */
 void LanguageManager::setLanguage(int index)
