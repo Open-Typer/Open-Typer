@@ -159,6 +159,25 @@
     </message>
 </context>
 <context>
+    <name>CustomMenuBar</name>
+    <message>
+        <source>File</source>
+        <translation>Datei</translation>
+    </message>
+    <message>
+        <source>New...</source>
+        <translation>Neu...</translation>
+    </message>
+    <message>
+        <source>Open...</source>
+        <translation>Öffnen...</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Beenden</translation>
+    </message>
+</context>
+<context>
     <name>ExerciseSummary</name>
     <message>
         <source>Summary</source>
@@ -633,6 +652,30 @@
         <source>Exercise history</source>
         <translation>Aufgabe Verlauf</translation>
     </message>
+    <message>
+        <source>Text files</source>
+        <translation>Text Dateien</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Halten</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Error</translation>
+    </message>
+    <message>
+        <source>This file is too large!</source>
+        <translation>Diese Datei ist zu groß!</translation>
+    </message>
+    <message>
+        <source>No error words</source>
+        <translation>Keine Fehlerwörter</translation>
+    </message>
+    <message>
+        <source>You don&apos;t have any error words.</source>
+        <translation>Sie haben keine Fehlerwörter.</translation>
+    </message>
 </context>
 <context>
     <name>TimeDialog</name>
@@ -647,6 +690,22 @@
     <message>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>Time limit</source>
+        <translation>Zeitlimit</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation>Benutzerdefiniertes</translation>
+    </message>
+    <message>
+        <source>Minutes:</source>
+        <translation>Minuten:</translation>
+    </message>
+    <message>
+        <source>Seconds:</source>
+        <translation>Sekunden:</translation>
     </message>
 </context>
 <context>
