@@ -173,6 +173,8 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("optionsWindow", &optionsWindow);
 	LoadExerciseDialog loadExerciseDialog;
 	engine.rootContext()->setContextProperty("loadExerciseDialog", &loadExerciseDialog);
+	StatsDialog statsDialog(true, {}, QPair<int, int>(), QString(), 0, 0, 0);
+	engine.rootContext()->setContextProperty("statsDialog", &statsDialog);
 	if(!Settings::containsLessonPack())
 	{
 		InitialSetup *initialSetup = new InitialSetup;
