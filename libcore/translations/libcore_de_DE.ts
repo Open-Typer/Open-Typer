@@ -5,11 +5,11 @@
     <name>BuiltInPacks</name>
     <message>
         <source>auto-generated</source>
-        <translation>automatisch generiert</translation>
+        <translation type="vanished">automatisch generiert</translation>
     </message>
     <message>
         <source>Unknown pack</source>
-        <translation>Unbekanntes Paket</translation>
+        <translation type="vanished">Unbekanntes Paket</translation>
     </message>
 </context>
 <context>
@@ -223,6 +223,21 @@
         <source>Shift</source>
         <comment>Shift key</comment>
         <translation>Shift</translation>
+    </message>
+    <message>
+        <source>auto-generated</source>
+        <translation>automatisch generiert</translation>
+    </message>
+    <message>
+        <source>Unknown pack</source>
+        <translation>Unbekanntes Paket</translation>
+    </message>
+</context>
+<context>
+    <name>QmlFileDialog</name>
+    <message>
+        <source>All files</source>
+        <translation>Alle Dateien</translation>
     </message>
 </context>
 <context>

@@ -4,50 +4,48 @@
 <context>
     <name>BuiltInPacks</name>
     <message>
-        <location filename="../src/BuiltInPacks.cpp" line="26"/>
         <source>auto-generated</source>
-        <translation>сгенерированно автоматически</translation>
+        <translation type="vanished">сгенерированно автоматически</translation>
     </message>
     <message>
-        <location filename="../src/BuiltInPacks.cpp" line="45"/>
         <source>Unknown pack</source>
-        <translation>Неизвестный набор</translation>
+        <translation type="vanished">Неизвестный набор</translation>
     </message>
 </context>
 <context>
     <name>ConfigParser</name>
     <message>
-        <location filename="../src/ConfigParser.cpp" line="307"/>
+        <location filename="../src/ConfigParser.cpp" line="308"/>
         <source>Touch</source>
         <translation>Касание</translation>
     </message>
     <message>
-        <location filename="../src/ConfigParser.cpp" line="310"/>
+        <location filename="../src/ConfigParser.cpp" line="311"/>
         <source>Words</source>
         <translation>Слова</translation>
     </message>
     <message>
-        <location filename="../src/ConfigParser.cpp" line="313"/>
+        <location filename="../src/ConfigParser.cpp" line="314"/>
         <source>Sentences</source>
         <translation>Предложения</translation>
     </message>
     <message>
-        <location filename="../src/ConfigParser.cpp" line="316"/>
+        <location filename="../src/ConfigParser.cpp" line="317"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../src/ConfigParser.cpp" line="327"/>
+        <location filename="../src/ConfigParser.cpp" line="328"/>
         <source>Lesson %1</source>
         <translation>Урок %1</translation>
     </message>
     <message>
-        <location filename="../src/ConfigParser.cpp" line="333"/>
+        <location filename="../src/ConfigParser.cpp" line="334"/>
         <source>Sublesson %1</source>
         <translation>Подурок %1</translation>
     </message>
     <message>
-        <location filename="../src/ConfigParser.cpp" line="339"/>
+        <location filename="../src/ConfigParser.cpp" line="340"/>
         <source>Exercise %1</source>
         <translation>Упражнение %1</translation>
     </message>
@@ -171,7 +169,7 @@
 <context>
     <name>LanguageManager</name>
     <message>
-        <location filename="../src/LanguageManager.cpp" line="36"/>
+        <location filename="../src/LanguageManager.cpp" line="38"/>
         <source>System (default)</source>
         <translation>Системный (стандартный)</translation>
     </message>
@@ -260,7 +258,7 @@
         <translation>Целевые студенты</translation>
     </message>
     <message>
-        <location filename="../src/LoadExerciseDialog.cpp" line="226"/>
+        <location filename="../src/LoadExerciseDialog.cpp" line="235"/>
         <source>This file is too large!</source>
         <translation>Этот файл слишком большой!</translation>
     </message>
@@ -268,15 +266,33 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/ConfigParser.cpp" line="263"/>
+        <location filename="../src/ConfigParser.cpp" line="264"/>
         <source>Revision</source>
         <translation>Ревизия</translation>
     </message>
     <message>
-        <location filename="../src/ConfigParser.cpp" line="278"/>
+        <location filename="../src/ConfigParser.cpp" line="279"/>
         <source>Shift</source>
         <comment>Shift key</comment>
         <translation>Shift</translation>
+    </message>
+    <message>
+        <location filename="../src/BuiltInPacks.cpp" line="26"/>
+        <source>auto-generated</source>
+        <translation>сгенерированно автоматически</translation>
+    </message>
+    <message>
+        <location filename="../src/BuiltInPacks.cpp" line="46"/>
+        <source>Unknown pack</source>
+        <translation>Неизвестный набор</translation>
+    </message>
+</context>
+<context>
+    <name>QmlFileDialog</name>
+    <message>
+        <location filename="../src/QmlFileDialog.cpp" line="68"/>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -297,30 +313,30 @@
         <translation>Диаграммы</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="46"/>
-        <location filename="../src/StatsDialog.cpp" line="91"/>
+        <location filename="../src/StatsDialog.cpp" line="80"/>
+        <location filename="../src/StatsDialog.cpp" line="126"/>
         <source>Speed</source>
         <translation>Скорость</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="46"/>
-        <location filename="../src/StatsDialog.cpp" line="100"/>
+        <location filename="../src/StatsDialog.cpp" line="80"/>
+        <location filename="../src/StatsDialog.cpp" line="136"/>
         <source>Mistakes</source>
         <translation>Ошибки</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="46"/>
-        <location filename="../src/StatsDialog.cpp" line="109"/>
+        <location filename="../src/StatsDialog.cpp" line="80"/>
+        <location filename="../src/StatsDialog.cpp" line="146"/>
         <source>Time</source>
         <translation>Время</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="127"/>
+        <location filename="../src/StatsDialog.cpp" line="165"/>
         <source>Better students: %1</source>
         <translation>Лучшие студенты: %1</translation>
     </message>
     <message>
-        <location filename="../src/StatsDialog.cpp" line="128"/>
+        <location filename="../src/StatsDialog.cpp" line="166"/>
         <source>Worse students: %1</source>
         <translation>Худшие студенты: %1</translation>
     </message>
