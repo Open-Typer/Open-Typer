@@ -15,5 +15,6 @@
         <file>CustomDialog.qml</file>
         <file>TimeDialog.qml</file>
         <file>UpdateQuestion.qml</file>
+        <file>ExerciseSummary.qml</file>
     </qresource>
 </RCC>
