@@ -172,7 +172,9 @@ int main(int argc, char *argv[])
 	QQuickStyle::setStyle("Material");
 	QQmlApplicationEngine engine;
 	engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
+#endif
 	Settings settings;
 	engine.rootContext()->setContextProperty("Settings", &settings);
 	FileUtils fileUtils;
