@@ -21,6 +21,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
+import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import Qt5Compat.GraphicalEffects 1.0
 
@@ -29,7 +30,7 @@ import Qt5Compat.GraphicalEffects 1.0
 Button {
 	readonly property color foregroundColor: Material.theme === Material.Dark ? "white" : "black"
 	property string toolTipText
-	property alias iconName: iconImage.name
+	property string iconName: ""
 	signal clicked()
 	id: control
 	font.capitalization: Font.MixedCase
@@ -39,30 +40,31 @@ Button {
 	//icon.color: foregroundColor
 	onReleased: clicked()
 	HoverToolTip { text: toolTipText }
-	Image {
-		id: iconImage
-		property string name: ""
-		source: name == "" ? "" : "qrc:/icons/open-typer/32x32/" + name + ".svg"
-		fillMode: Image.PreserveAspectFit
-		width: 24
-		height: 24
-		Component.onCompleted: {
-			if(name == "")
-				visible = false;
-			else if(text == "")
-				anchors.centerIn = parent;
-			else
-			{
-				anchors.left = parent.left;
-				anchors.top = parent.top;
-				anchors.bottom = parent.bottom;
-				control.implicitWidth = control.implicitWidth + width + 16;
+	contentItem: RowLayout {
+		property alias iconImage: iconImage
+		Control {
+			Layout.fillWidth: true
+			padding: 10
+			visible: iconImage.name != ""
+			Image {
+				id: iconImage
+				property string name: control.iconName
+				anchors.centerIn: parent
+				source: name == "" ? "" : "qrc:/icons/open-typer/32x32/" + name + ".svg"
+				fillMode: Image.PreserveAspectFit
+				width: 24
+				height: 24
+			}
+			ColorOverlay {
+				anchors.fill: iconImage
+				source: iconImage
+				color: control.foregroundColor
 			}
 		}
-	}
-	ColorOverlay {
-		anchors.fill: iconImage
-		source: iconImage
-		color: control.foregroundColor
+		Label {
+			text: control.text
+			Layout.fillHeight: true
+			verticalAlignment: Qt.AlignVCenter
+		}
 	}
 }
