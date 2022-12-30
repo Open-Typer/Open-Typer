@@ -371,6 +371,15 @@ ApplicationWindow {
 				Item { Layout.fillWidth: true }
 			}
 		}
+		UpdateQuestion {
+			visible: false
+			Layout.fillWidth: true
+			onAccepted: Updater.installUpdate()
+			Component.onCompleted: {
+				if(Updater.updateAvailable())
+					visible = true;
+			}
+		}
 		Paper {
 			id: paper
 			Layout.fillWidth: true
