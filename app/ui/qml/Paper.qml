@@ -38,6 +38,7 @@ Item {
 	property bool mistakeVisible: true
 	property string remaining: ""
 	property bool remainingVisible: true
+	property alias summary: summary
 	signal keyPressed(var event)
 	signal keyReleased(var event)
 	id: control
@@ -208,6 +209,11 @@ Item {
 					source: mask
 					maskSource: remainingText
 				}
+			}
+			ExerciseSummary {
+				id: summary
+				Layout.fillWidth: true
+				Layout.fillHeight: true
 			}
 		}
 	}
