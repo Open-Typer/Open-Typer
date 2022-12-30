@@ -100,7 +100,8 @@ DISTFILES += \
     ui/qml/QmlWindow.qml \
     ui/qml/HoverToolTip.qml \
     ui/qml/Panel.qml \
-    ui/qml/TimeDialog.qml
+    ui/qml/TimeDialog.qml \
+    ui/qml/UpdateQuestion.qml
 
 TRANSLATIONS += \
     translations/Open-Typer_sk_SK.ts \
