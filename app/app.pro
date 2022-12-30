@@ -49,7 +49,6 @@ LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 SOURCES += \
     src/InitialSetup.cpp \
     src/ExerciseSummary.cpp \
-    src/TimeDialog.cpp \
     src/options/BehaviorOptions.cpp \
     src/options/AppearanceOptions.cpp \
     src/options/KeyboardOptions.cpp \
@@ -65,7 +64,6 @@ SOURCES += \
 HEADERS += \
     src/include/InitialSetup.h \
     src/include/ExerciseSummary.h \
-    src/include/TimeDialog.h \
     src/include/options/BehaviorOptions.h \
     src/include/options/AppearanceOptions.h \
     src/include/options/KeyboardOptions.h \
@@ -83,7 +81,6 @@ FORMS += \
     ui/options/AppearanceOptions.ui \
     ui/options/KeyboardOptions.ui \
     ui/ExerciseSummary.ui \
-    ui/TimeDialog.ui \
     ui/options/OptionsWindow.ui \
     ui/packEditor/PackEditor.ui \
     ui/packEditor/PackSelector.ui \
