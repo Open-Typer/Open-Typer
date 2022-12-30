@@ -165,6 +165,16 @@ ApplicationWindow {
 		value: currentExercise
 	}
 
+	Connections {
+		target: rootItem
+		function onLanguageChanged() {
+			updateLessonList();
+			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
+			loadLesson(currentLesson, currentSublesson);
+			loadSublesson(currentExercise);
+		}
+	}
+
 	ColumnLayout {
 		property int minWidth: Math.max(implicitWidth, paper.paperRect.width)
 		property int minHeight: implicitHeight
