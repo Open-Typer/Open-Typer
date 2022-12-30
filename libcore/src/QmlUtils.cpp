@@ -80,8 +80,8 @@ bool QmlUtils::osWasm(void)
 #endif
 }
 
-// TODO: Remove this after dropping Qt 5.9 support
-/*! Emits menuBarReloadTriggered() to fix empty menu bar in Qt 5.9. */
+// TODO: Remove call to this function from CustomDialog.qml after dropping Qt 5.9 support
+/*! Reloads the menu bar (e. g. after language change). */
 void QmlUtils::reloadMenuBar(void)
 {
 	emit menuBarReloadTriggered();
