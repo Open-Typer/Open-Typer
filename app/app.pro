@@ -58,7 +58,6 @@ SOURCES += \
     src/packEditor/PackSelector.cpp \
     src/updater/Updater.cpp \
     src/main.cpp \
-    src/MainWindow.cpp \
     src/updater/UpdaterQuestion.cpp \
     src/widgets/InputLabelWidget.cpp \
     src/widgets/LanguageList.cpp \
@@ -76,7 +75,6 @@ HEADERS += \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h \
     src/include/updater/UpdaterQuestion.h \
-    src/include/MainWindow.h \
     src/include/widgets/InputLabelWidget.h \
     src/include/widgets/LanguageList.h \
     src/include/widgets/KeyboardWidget.h
@@ -88,7 +86,6 @@ FORMS += \
     ui/options/KeyboardOptions.ui \
     ui/ExerciseSummary.ui \
     ui/TimeDialog.ui \
-    ui/MainWindow.ui \
     ui/options/OptionsWindow.ui \
     ui/packEditor/PackEditor.ui \
     ui/packEditor/PackSelector.ui \

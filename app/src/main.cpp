@@ -27,7 +27,6 @@
 #include <QQuickStyle>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "MainWindow.h"
 #include "Settings.h"
 #include "LanguageManager.h"
 #include "IAddon.h"
