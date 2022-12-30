@@ -28,11 +28,12 @@
 #include <QDateTime>
 
 /*! \brief The Updater class is used to check for updates and download new versions of the program. */
-class Updater
+class Updater : public QObject
 {
+		Q_OBJECT
 	public:
-		static bool updateAvailable(void);
-		static void installUpdate(void);
+		Q_INVOKABLE static bool updateAvailable(void);
+		Q_INVOKABLE static void installUpdate(void);
 };
 
 #endif // UPDATER_H
