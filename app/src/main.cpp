@@ -44,6 +44,7 @@
 #include "LoadExerciseDialog.h"
 #include "StatsDialog.h"
 #include "InitialSetup.h"
+#include "updater/Updater.h"
 #include "options/OptionsWindow.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
@@ -177,6 +178,8 @@ int main(int argc, char *argv[])
 #endif
 	Settings settings;
 	engine.rootContext()->setContextProperty("Settings", &settings);
+	Updater updater;
+	engine.rootContext()->setContextProperty("Updater", &updater);
 	FileUtils fileUtils;
 	engine.rootContext()->setContextProperty("FileUtils", &fileUtils);
 	BuiltInPacks builtInPacks;
