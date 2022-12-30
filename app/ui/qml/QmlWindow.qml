@@ -96,7 +96,7 @@ ApplicationWindow {
 		id: updateTimer
 		interval: 16
 		repeat: true
-		running: true
+		running: exerciseInProgress
 		onTriggered: {
 			exerciseTimer.update();
 			eventInProgress = false;
