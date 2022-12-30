@@ -385,6 +385,7 @@ ApplicationWindow {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.topMargin: 10
+			summary.visible: preview
 			onKeyPressed: keyPress(event);
 			onKeyReleased: console.log("released: " + event["text"]);
 		}
@@ -979,32 +980,22 @@ ApplicationWindow {
 			uiLocked = false;
 			testLoaded = false;
 		}
-		summaryDialog.setNetHits(netHitsPerMinute);
-		summaryDialog.setGrossHits(grossHitsPerMinute);
-		summaryDialog.setTotalTime(time);
-		summaryDialog.setTotalHits(totalHits);
-		summaryDialog.setMistakes(exerciseMistakes);
-		summaryDialog.setAccuracy(1.0 - exerciseMistakes / totalHits);
-		summaryDialog.onAccepted.connect(function() {
-			changeMode(0);
-			// TODO: Show export button
-			preview = true;
-			// Load saved text
-			paper.input = validator.generatedInputText();
-			paper.mistake = validator.generatedMistakeText();
-			// Hide other widgets
-			paper.currentLineVisible = false;
-			paper.remainingVisible = false;
-			blockInput = true;
-		});
-		summaryDialog.onRejected.connect(function() {
-			changeMode(0);
-			if(customExerciseLoaded)
-				initExercise();
-			else
-				repeatExercise();
-		});
-		summaryDialog.exec();
+		paper.summary.netHits = netHitsPerMinute;
+		paper.summary.grossHits = grossHitsPerMinute;
+		paper.summary.totalTime = time;
+		paper.summary.totalHits = totalHits;
+		paper.summary.mistakes = exerciseMistakes;
+		paper.summary.accuracy = 1.0 - exerciseMistakes / totalHits;
+		changeMode(0);
+		// TODO: Show export button
+		preview = true;
+		// Load saved text
+		paper.input = validator.generatedInputText();
+		paper.mistake = validator.generatedMistakeText();
+		// Hide other items
+		paper.currentLineVisible = false;
+		paper.remainingVisible = false;
+		blockInput = true;
 	}
 
 	function loadText(text, includeNewLines) {
