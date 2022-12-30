@@ -57,7 +57,6 @@ SOURCES += \
     src/packEditor/PackSelector.cpp \
     src/updater/Updater.cpp \
     src/main.cpp \
-    src/updater/UpdaterQuestion.cpp \
     src/widgets/LanguageList.cpp \
     src/widgets/KeyboardWidget.cpp
 
@@ -71,7 +70,6 @@ HEADERS += \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h \
-    src/include/updater/UpdaterQuestion.h \
     src/include/widgets/LanguageList.h \
     src/include/widgets/KeyboardWidget.h
 
@@ -83,8 +81,7 @@ FORMS += \
     ui/ExerciseSummary.ui \
     ui/options/OptionsWindow.ui \
     ui/packEditor/PackEditor.ui \
-    ui/packEditor/PackSelector.ui \
-    ui/updater/UpdaterQuestion.ui
+    ui/packEditor/PackSelector.ui
 
 DISTFILES += \
     ui/qml/CustomComboBox.qml \
