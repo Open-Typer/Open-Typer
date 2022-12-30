@@ -139,7 +139,9 @@ int main(int argc, char *argv[])
 		return &globalThemeEngine;
 	});
 	qmlRegisterSingletonType<QmlUtils>("OpenTyper", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return new QmlUtils;
+		QmlUtils *qmlUtils = new QmlUtils;
+		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
+		return qmlUtils;
 	});
 	QQmlEngine::setObjectOwnership(&globalLanguageManager, QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<LanguageManager>("OpenTyper", 1, 0, "LanguageManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
