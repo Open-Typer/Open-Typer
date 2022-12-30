@@ -40,7 +40,6 @@
 #include "QmlFileDialog.h"
 #include "BuiltInPacks.h"
 #include "HistoryParser.h"
-#include "ExerciseSummary.h"
 #include "LoadExerciseDialog.h"
 #include "StatsDialog.h"
 #include "InitialSetup.h"
@@ -190,8 +189,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
 	HistoryParser historyParser;
 	engine.rootContext()->setContextProperty("HistoryParser", &historyParser);
-	ExerciseSummary summaryDialog;
-	engine.rootContext()->setContextProperty("summaryDialog", &summaryDialog);
 	OptionsWindow optionsWindow;
 	engine.rootContext()->setContextProperty("optionsWindow", &optionsWindow);
 	LoadExerciseDialog loadExerciseDialog;
