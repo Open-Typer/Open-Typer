@@ -59,7 +59,6 @@ SOURCES += \
     src/updater/Updater.cpp \
     src/main.cpp \
     src/updater/UpdaterQuestion.cpp \
-    src/widgets/InputLabelWidget.cpp \
     src/widgets/LanguageList.cpp \
     src/widgets/KeyboardWidget.cpp
 
@@ -75,7 +74,6 @@ HEADERS += \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h \
     src/include/updater/UpdaterQuestion.h \
-    src/include/widgets/InputLabelWidget.h \
     src/include/widgets/LanguageList.h \
     src/include/widgets/KeyboardWidget.h
 
