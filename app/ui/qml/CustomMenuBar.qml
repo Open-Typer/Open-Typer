@@ -77,7 +77,10 @@ Panel {
 				parentItem.addMenu(menu);
 			}
 			else
+			{
+				menu.onClosed.connect(function() { QmlUtils.reloadMenuBar(); });
 				button.menu = menu;
+			}
 			createMenu(menu, menuList[i].itemList, buttonType, menuType, menuItemType, menuSeparatorType);
 		}
 	}
