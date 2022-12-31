@@ -110,7 +110,7 @@ void AppearanceOptions::changeThemeMode(bool advanced)
 /*! Sets simple theme (0 for light, 1 for dark). */
 void AppearanceOptions::setSimpleTheme(SimpleTheme theme)
 {
-	Settings::setSimpleThemeId(static_cast<int>(theme));
+	Settings::setSimpleThemeId(static_cast<ThemeEngine::SimpleTheme>(theme));
 	ui->lightThemeButton->setChecked(theme == SimpleTheme::Light);
 	ui->darkThemeButton->setChecked(theme == SimpleTheme::Dark);
 	switch(theme)
