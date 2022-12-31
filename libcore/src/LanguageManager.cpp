@@ -72,6 +72,7 @@ void LanguageManager::setLanguage(int index)
 	emit languageChanged();
 }
 
+/*! Returns list of human-readable items that can be added to a lists (e. g. a combo box). */
 QStringList LanguageManager::getBoxItems()
 {
 	return boxItems;
