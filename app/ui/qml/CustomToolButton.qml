@@ -63,7 +63,9 @@ Button {
 		}
 		Label {
 			text: control.text
+			Layout.fillWidth: true
 			Layout.fillHeight: true
+			horizontalAlignment: Qt.AlignHCenter
 			verticalAlignment: Qt.AlignVCenter
 		}
 	}
