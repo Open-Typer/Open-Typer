@@ -195,22 +195,7 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("loadExerciseDialog", &loadExerciseDialog);
 	StatsDialog statsDialog(true, {}, QPair<int, int>(), QString(), 0, 0, 0);
 	engine.rootContext()->setContextProperty("statsDialog", &statsDialog);
-	if(!Settings::containsLessonPack())
-	{
-		InitialSetup *initialSetup = new InitialSetup;
-		initialSetup->setWindowModality(Qt::ApplicationModal);
-		auto enginePtr = &engine;
-		auto splashPtr = &splash;
-		QObject::connect(initialSetup, &InitialSetup::accepted, enginePtr, [enginePtr, splashPtr]() {
-			enginePtr->load("qrc:/qml/QmlWindow.qml");
-			splashPtr->finish(nullptr);
-		});
-		initialSetup->open();
-	}
-	else
-	{
-		engine.load("qrc:/qml/QmlWindow.qml");
-		splash.finish(nullptr);
-	}
+	engine.load("qrc:/qml/QmlWindow.qml");
+	splash.finish(nullptr);
 	return a.exec();
 }
