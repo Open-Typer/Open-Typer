@@ -92,6 +92,7 @@ DISTFILES += \
     ui/qml/InitialSetup.qml \
     ui/qml/KeyboardLayoutList.qml \
     ui/qml/LanguageList.qml \
+    ui/qml/LessonPackList.qml \
     ui/qml/MenuButton.qml \
     ui/qml/MessageBox.qml \
     ui/qml/Paper.qml \

@@ -19,5 +19,6 @@
         <file>InitialSetup.qml</file>
         <file>LanguageList.qml</file>
         <file>KeyboardLayoutList.qml</file>
+        <file>LessonPackList.qml</file>
     </qresource>
 </RCC>
