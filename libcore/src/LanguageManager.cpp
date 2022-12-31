@@ -72,7 +72,7 @@ void LanguageManager::setLanguage(int index)
 	emit languageChanged();
 }
 
-const QStringList &LanguageManager::getBoxItems() const noexcept
+QStringList LanguageManager::getBoxItems()
 {
 	return boxItems;
 }
