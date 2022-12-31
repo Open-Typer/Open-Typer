@@ -73,6 +73,17 @@ CustomDialog {
 					stack.push(pages[currentIndex]);
 				}
 			}
+			CustomToolButton {
+				visible: currentIndex == pages.length - 1
+				enabled: stack.currentItem.finished
+				//: To finish the initial setup
+				text: qsTr("Finish")
+				foregroundColor: Material.accent
+				onClicked: {
+					Settings.setInitFinished(true);
+					root.close();
+				}
+			}
 		}
 	}
 	Component {
