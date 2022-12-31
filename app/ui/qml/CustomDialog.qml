@@ -145,7 +145,7 @@ Item {
 		x: dialogMask.x + 2
 		y: dialogMask.y + 2
 		width: fillWindow ? parent.width - 100 : headerLayout.implicitWidth
-		height: fillWindow ? parent.height - 100 : (standardButtons !== Dialog.NoButton ? headerLayout.implicitHeight + dialogButtonBox.height : headerLayout.implicitHeight)
+		height: fillWindow ? parent.height - 100 : (standardButtons !== Dialog.NoButton ? headerLayout.implicitHeight + buttonBoxLoader.item.height : headerLayout.implicitHeight)
 		standardButtons: root.standardButtons
 		modal: true
 		onAboutToShow: {
@@ -211,12 +211,27 @@ Item {
 				}
 			}
 		}
-		footer: DialogButtonBox {
-			id: dialogButtonBox
-			font.capitalization: Font.MixedCase
-			background: Rectangle {
-				color: dialogColor
-				radius: control.radius
+		Component {
+			id: buttonBoxComponent
+			DialogButtonBox {
+				id: dialogButtonBox
+				font.capitalization: Font.MixedCase
+				standardButtons: control.standardButtons
+				background: Rectangle {
+					color: dialogColor
+					radius: control.radius
+				}
+			}
+		}
+		footer: Loader {
+			id: buttonBoxLoader
+			sourceComponent: buttonBoxComponent
+			Connections {
+				target: LanguageManager
+				function onLanguageChanged() {
+					buttonBoxLoader.active = 0;
+					buttonBoxLoader.active = 1;
+				}
 			}
 		}
 		background: Rectangle {
