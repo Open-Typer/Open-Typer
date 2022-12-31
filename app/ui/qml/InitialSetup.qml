@@ -25,9 +25,11 @@ import QtQuick.Layouts 1.3
 import OpenTyper 1.0
 
 CustomDialog {
-	readonly property var pages: [ localizationPage ]
+	readonly property var pages: [ localizationPage, lessonPackPage ]
 	property int currentIndex: 0
 	property int keyboardLayout: -1
+	property string keyboardLayoutName : ""
+	id: root
 	//: Application Setup, for example Open-Typer Setup
 	windowTitle: qsTr("%1 Setup").arg(Qt.application.displayName)
 	draggable: false
@@ -35,7 +37,8 @@ CustomDialog {
 	dialog.closePolicy: Popup.NoAutoClose
 	onAboutToShow: {
 		ThemeEngine.setDefaultTheme();
-		Settings.setLessonPack("en_US-default-A"); // lesson pack will be changed during initial setup anyway
+		if(!Settings.containsLessonPack() || (Settings.lessonPack() === ""))
+			Settings.setLessonPack("en_US-default-A"); // lesson pack will be changed during initial setup anyway
 	}
 	contentComponent: ColumnLayout {
 		anchors.fill: parent
@@ -111,9 +114,29 @@ CustomDialog {
 					id: layoutList
 					Layout.fillWidth: true
 					Layout.fillHeight: true
-					onCurrentIndexChanged: keyboardLayout = currentIndex
+					onCurrentIndexChanged: {
+						keyboardLayout = currentIndex;
+						keyboardLayoutName = currentItem.text;
+					}
 					onItemsLoaded: currentIndex = keyboardLayout
 				}
+			}
+		}
+	}
+	Component {
+		id: lessonPackPage
+		ColumnLayout {
+			property bool finished: packList.currentIndex != -1
+			Label {
+				text: qsTr("Lesson pack")
+				font.bold: true
+				font.pointSize: 14
+			}
+			LessonPackList {
+				id: packList
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+				keyboardLayout: root.keyboardLayoutName
 			}
 		}
 	}
