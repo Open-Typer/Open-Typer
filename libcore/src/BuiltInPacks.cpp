@@ -58,14 +58,39 @@ QStringList BuiltInPacks::keyboardLayouts(void)
 	QStringList keys = rawNameToFullName.keys();
 	for(int i = 0; i < keys.size(); i++)
 	{
-		// Remove last word which usually looks like "(auto-generated)"
-		QString value = rawNameToFullName[keys[i]];
-		QStringList parts = value.split(" ");
-		parts.removeAt(parts.length() - 1);
-		QString item = parts.join(" ");
+		QString item = keyboardLayoutForPack(keys[i]);
 		if(!out.contains(item))
 			out += item;
 	}
 	out.sort();
 	return out;
+}
+
+/*!
+ * Returns list of packs for the given keyboard layout.\n
+ * Returns all packs if keyboardLayout is empty.
+ */
+QStringList BuiltInPacks::packs(QString keyboardLayout)
+{
+	QStringList out;
+	QStringList keys = rawNameToFullName.keys();
+	if(keyboardLayout.isEmpty())
+		return keys;
+	for(int i = 0; i < keys.size(); i++)
+	{
+		if(keyboardLayoutForPack(keys[i]) == keyboardLayout)
+			out += keys[i];
+	}
+	out.sort();
+	return out;
+}
+
+/*! Returns the keyboard layout for this pack. */
+QString BuiltInPacks::keyboardLayoutForPack(QString rawName)
+{
+	// Remove last word which usually looks like "(auto-generated)"
+	QString value = rawNameToFullName[rawName];
+	QStringList parts = value.split(" ");
+	parts.removeAt(parts.length() - 1);
+	return parts.join(" ");
 }

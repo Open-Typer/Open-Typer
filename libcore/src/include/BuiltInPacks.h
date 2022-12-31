@@ -38,6 +38,10 @@ class CORE_LIB_EXPORT BuiltInPacks : public QObject
 	public:
 		Q_INVOKABLE static QString packName(QString rawName);
 		Q_INVOKABLE static QStringList keyboardLayouts(void);
+		Q_INVOKABLE static QStringList packs(QString keyboardLayout = "");
+
+	private:
+		static QString keyboardLayoutForPack(QString rawName);
 };
 
 #endif // BUILTINPACKS_H
