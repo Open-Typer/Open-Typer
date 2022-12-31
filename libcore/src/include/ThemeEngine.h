@@ -55,7 +55,7 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_PROPERTY(QColor paperColor READ paperColor WRITE setPaperColor NOTIFY paperColorChanged)
 		Q_PROPERTY(QColor panelColor READ panelColor WRITE setPanelColor NOTIFY panelColorChanged)
 		Q_PROPERTY(Style style READ style WRITE setStyle NOTIFY styleChanged)
-		Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged())
+		Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged)
 		Q_PROPERTY(SimpleTheme simpleTheme READ simpleTheme WRITE setSimpleTheme NOTIFY simpleThemeChanged)
 	public:
 		ThemeEngine(QObject *parent = nullptr);
