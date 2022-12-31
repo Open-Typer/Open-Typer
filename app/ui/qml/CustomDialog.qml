@@ -228,6 +228,8 @@ Item {
 				overlay.modal = overlayModal;
 			else
 				NewControls.Overlay.modal = overlayModal;
+			control.dim = false;
+			control.dim = true;
 		}
 		onAccepted: root.accepted()
 		onRejected: root.rejected()
