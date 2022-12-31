@@ -40,6 +40,8 @@ Item {
 	signal accepted()
 	// TODO: Add signals introduced in Qt 5.10
 	signal rejected()
+	signal aboutToShow()
+	signal aboutToHide()
 	id: root
 	anchors.fill: parent
 
@@ -151,11 +153,13 @@ Item {
 			blurInAnimation.running = true;
 			shadowInAnimation.running = true;
 			shadow.visible = true;
+			root.aboutToShow();
 		}
 		onAboutToHide: {
 			blurOutAnimation.running = true;
 			shadowOutAnimation.running = true;
 			shadow.visible = false
+			root.aboutToHide();
 		}
 		onClosed: {
 			blur.visible = false;
