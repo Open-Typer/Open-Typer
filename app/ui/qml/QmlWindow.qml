@@ -391,6 +391,8 @@ ApplicationWindow {
 		}
 	}
 
+	InitialSetup { id: initialSetup }
+
 	MessageBox {
 		id: largeFileBox
 		windowTitle: qsTr("Error");
@@ -1072,6 +1074,8 @@ ApplicationWindow {
 	Component.onCompleted: {
 		QmlUtils.blurSource = mainLayout;
 		loadExerciseDialog.onAccepted.connect(function() { loadTestFinished(); });
+		if(!Settings.initFinished())
+			initialSetup.open();
 		reload();
 	}
 }
