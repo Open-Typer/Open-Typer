@@ -198,9 +198,9 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static bool containsAdvancedTheme(void);
 		Q_INVOKABLE static void setAdvancedTheme(bool value);
 		// simpleThemeId
-		Q_INVOKABLE static int simpleThemeId(void);
+		Q_INVOKABLE static ThemeEngine::SimpleTheme simpleThemeId(void);
 		Q_INVOKABLE static bool containsSimpleThemeId(void);
-		Q_INVOKABLE static void setSimpleThemeId(int value);
+		Q_INVOKABLE static void setSimpleThemeId(ThemeEngine::SimpleTheme value);
 		// editorGeometry
 		Q_INVOKABLE static QByteArray editorGeometry(void);
 		Q_INVOKABLE static bool containsEditorGeometry(void);

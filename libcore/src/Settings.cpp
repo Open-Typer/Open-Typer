@@ -512,13 +512,13 @@ void Settings::setAdvancedTheme(bool value) { set("theme/advancedtheme", value);
 // simpleThemeId
 
 /*! Getter for theme/simpletheme. */
-int Settings::simpleThemeId(void) { return get("theme/simpletheme", 0).toInt(); }
+ThemeEngine::SimpleTheme Settings::simpleThemeId(void) { return (ThemeEngine::SimpleTheme) get("theme/simpletheme", 0).toInt(); }
 
 /*! Returns true if there's a theme/simpletheme key. */
 bool Settings::containsSimpleThemeId(void) { return contains("theme/simpletheme"); }
 
 /*! Setter for theme/simpletheme. */
-void Settings::setSimpleThemeId(int value) { set("theme/simpletheme", value); }
+void Settings::setSimpleThemeId(ThemeEngine::SimpleTheme value) { set("theme/simpletheme", (int) value); }
 
 // editorGeometry
 
