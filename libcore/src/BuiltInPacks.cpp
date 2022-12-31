@@ -50,3 +50,22 @@ QString BuiltInPacks::packName(QString rawName)
 		return rawNameToFullName[rawName];
 	}
 }
+
+/*! Returns list of supported keyboard layouts. */
+QStringList BuiltInPacks::keyboardLayouts(void)
+{
+	QStringList out;
+	QStringList keys = rawNameToFullName.keys();
+	for(int i = 0; i < keys.size(); i++)
+	{
+		// Remove last word which usually looks like "(auto-generated)"
+		QString value = rawNameToFullName[keys[i]];
+		QStringList parts = value.split(" ");
+		parts.removeAt(parts.length() - 1);
+		QString item = parts.join(" ");
+		if(!out.contains(item))
+			out += item;
+	}
+	out.sort();
+	return out;
+}
