@@ -75,6 +75,7 @@
  *  - Settings#simpleThemeId() - Simple theme (0 = light, 1 = dark).
  *  - Settings#editorGeometry() - Pack editor window geometry.
  *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
+ *  - Settings#initFinished() - If true, initial setup has been finished.
  */
 class CORE_LIB_EXPORT Settings : public QObject
 {
@@ -209,6 +210,10 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static bool keyboardVisible(void);
 		Q_INVOKABLE static bool containsKeyboardVisible(void);
 		Q_INVOKABLE static void setKeyboardVisible(bool value);
+		// initFinished
+		Q_INVOKABLE static bool initFinished(void);
+		Q_INVOKABLE static bool containsInitFinished(void);
+		Q_INVOKABLE static void setInitFinished(bool value);
 
 	protected:
 		static QVariant get(QString key, QVariant defaultValue);

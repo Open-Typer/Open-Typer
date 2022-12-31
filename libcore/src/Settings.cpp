@@ -541,3 +541,14 @@ bool Settings::containsKeyboardVisible(void) { return contains("view/keyboardvis
 
 /*! Setter for view/keyboardvisible. */
 void Settings::setKeyboardVisible(bool value) { set("view/keyboardvisible", value); }
+
+// initFinished
+
+/*! Getter for main/initfinished. */
+bool Settings::initFinished(void) { return get("main/initfinished", false).toBool(); }
+
+/*! Returns true if there's a main/initfinished key. */
+bool Settings::containsInitFinished(void) { return contains("main/initfinished"); }
+
+/*! Setter for main/initfinished. */
+void Settings::setInitFinished(bool value) { set("main/initfinished", value); }
