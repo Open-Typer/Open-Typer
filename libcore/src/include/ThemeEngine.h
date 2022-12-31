@@ -56,6 +56,7 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_PROPERTY(QColor panelColor READ panelColor WRITE setPanelColor NOTIFY panelColorChanged)
 		Q_PROPERTY(Style style READ style WRITE setStyle NOTIFY styleChanged)
 		Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged())
+		Q_PROPERTY(SimpleTheme simpleTheme READ simpleTheme WRITE setSimpleTheme NOTIFY simpleThemeChanged)
 	public:
 		ThemeEngine(QObject *parent = nullptr);
 		void updateThemeList(void);
@@ -67,6 +68,13 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 			LightStyle = 2
 		};
 		Q_ENUM(Style)
+
+		enum class SimpleTheme
+		{
+			LightTheme = 0,
+			DarkTheme = 1
+		};
+		Q_ENUM(SimpleTheme)
 
 		// Font
 		Q_INVOKABLE static QFont font(void);
@@ -123,6 +131,10 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_INVOKABLE void setTheme(int index);
 		Q_INVOKABLE QString themeName(int index);
 		Q_INVOKABLE const QList<QVariantMap> &themeList(void);
+		// Simple theme
+		Q_INVOKABLE ThemeEngine::SimpleTheme simpleTheme(void);
+		Q_INVOKABLE void setSimpleTheme(ThemeEngine::SimpleTheme theme);
+		Q_INVOKABLE void setDefaultTheme(void);
 
 	private:
 		void applyStyleSheetFromFile(const QString &stylePath);
@@ -161,6 +173,8 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		void styleChanged();
 		/*! A signal, which is emitted when the application theme changes. */
 		void themeChanged();
+		/*! A signal, which is emitted when the simple theme changes. */
+		void simpleThemeChanged();
 };
 
 extern ThemeEngine CORE_LIB_EXPORT globalThemeEngine;

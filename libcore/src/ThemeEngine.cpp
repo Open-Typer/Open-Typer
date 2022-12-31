@@ -576,3 +576,36 @@ const QList<QVariantMap> &ThemeEngine::themeList(void)
 {
 	return themes;
 }
+
+/*! Returns current simple theme. */
+ThemeEngine::SimpleTheme ThemeEngine::simpleTheme(void)
+{
+	return Settings::simpleThemeId();
+}
+
+/*! Sets simple theme. */
+void ThemeEngine::setSimpleTheme(SimpleTheme theme)
+{
+	Settings::setSimpleThemeId(theme);
+	switch(theme)
+	{
+		case SimpleTheme::LightTheme:
+			setTheme(4); // light blue
+			break;
+		case SimpleTheme::DarkTheme:
+			setTheme(1); // dark
+			break;
+		default:
+			break;
+	}
+	emit simpleThemeChanged();
+}
+
+/*! Sets simple theme based on system style. */
+void ThemeEngine::setDefaultTheme(void)
+{
+	if(qApp->palette().color(QPalette::Base).toHsv().value() < 50)
+		setSimpleTheme(SimpleTheme::DarkTheme);
+	else
+		setSimpleTheme(SimpleTheme::LightTheme);
+}
