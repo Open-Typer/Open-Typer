@@ -17,5 +17,6 @@
         <file>UpdateQuestion.qml</file>
         <file>ExerciseSummary.qml</file>
         <file>LanguageList.qml</file>
+        <file>KeyboardLayoutList.qml</file>
     </qresource>
 </RCC>
