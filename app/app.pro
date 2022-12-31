@@ -89,6 +89,7 @@ DISTFILES += \
     ui/qml/CustomMenuSeparator.qml \
     ui/qml/CustomToolButton.qml \
     ui/qml/ExerciseSummary.qml \
+    ui/qml/InitialSetup.qml \
     ui/qml/KeyboardLayoutList.qml \
     ui/qml/LanguageList.qml \
     ui/qml/MenuButton.qml \
