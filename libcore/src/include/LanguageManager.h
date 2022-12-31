@@ -56,8 +56,8 @@ class CORE_LIB_EXPORT LanguageManager : public QObject
 
 	public:
 		void init(void);
-		void setLanguage(int index);
-		const QStringList &getBoxItems() const noexcept;
+		Q_INVOKABLE void setLanguage(int index);
+		Q_INVOKABLE const QStringList &getBoxItems() const noexcept;
 
 	private:
 		QStringList boxItems {};
