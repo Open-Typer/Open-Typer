@@ -28,7 +28,7 @@ import Qt5Compat.GraphicalEffects 1.0
 // Similar to ToolButton, but it's always a rectangle
 // Double click events are not supported, use the clicked() signal like with a QPushButton
 Button {
-	readonly property color foregroundColor: Material.theme === Material.Dark ? "white" : "black"
+	property color foregroundColor: Material.theme === Material.Dark ? "white" : "black"
 	property string toolTipText
 	property string iconName: ""
 	signal clicked()
