@@ -191,6 +191,7 @@ Item {
 				Pane {
 					padding: 10
 					background: null
+					clip: true
 					Layout.fillWidth: true
 					Loader {
 						id: contentsLoader
