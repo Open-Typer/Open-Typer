@@ -49,6 +49,10 @@ Item {
 		control.open();
 	}
 
+	function close() {
+		control.close();
+	}
+
 	Rectangle {
 		id: dialogMask
 		width: control.width + 4
