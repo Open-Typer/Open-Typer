@@ -36,6 +36,7 @@ Item {
 	property alias contentComponent: contentsLoader.sourceComponent
 	readonly property alias contentItem: contentsLoader.item
 	property bool draggable: true
+	property bool fillWindow: false
 	signal accepted()
 	// TODO: Add signals introduced in Qt 5.10
 	signal rejected()
@@ -141,8 +142,8 @@ Item {
 		id: control
 		x: dialogMask.x + 2
 		y: dialogMask.y + 2
-		width: headerLayout.implicitWidth
-		height: standardButtons !== Dialog.NoButton ? headerLayout.implicitHeight + dialogButtonBox.height : headerLayout.implicitHeight
+		width: fillWindow ? parent.width - 100 : headerLayout.implicitWidth
+		height: fillWindow ? parent.height - 100 : (standardButtons !== Dialog.NoButton ? headerLayout.implicitHeight + dialogButtonBox.height : headerLayout.implicitHeight)
 		standardButtons: root.standardButtons
 		modal: true
 		onAboutToShow: {
@@ -163,11 +164,12 @@ Item {
 		}
 		header: Rectangle {
 			color: dialogColor
-			width: headerLayout.implicitWidth
-			height: headerLayout.implicitHeight
+			width: control.width
+			height: standardButtons !== Dialog.NoButton ? control.height - control.footer.height : control.height
 			radius: control.radius
 			ColumnLayout {
 				id: headerLayout
+				anchors.fill: parent
 				spacing: 0
 				Label {
 					id: windowTitleLabel
@@ -193,6 +195,7 @@ Item {
 					background: null
 					clip: true
 					Layout.fillWidth: true
+					Layout.fillHeight: true
 					Loader {
 						id: contentsLoader
 						anchors.fill: parent
