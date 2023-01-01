@@ -2,7 +2,7 @@
  * KeyboardLayoutList.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,6 +33,8 @@ ListView {
 			clear();
 			for(var i = 0; i < items.length; i++)
 				append({"name": items[i]});
+			if(Settings.containsLessonPack() && (Settings.lessonPack() !== ""))
+				currentIndex = items.indexOf(BuiltInPacks.keyboardLayoutForPack(Settings.lessonPack()));
 			itemsLoaded();
 		}
 		Component.onCompleted: loadItems()
