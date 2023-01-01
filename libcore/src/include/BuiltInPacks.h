@@ -2,7 +2,7 @@
  * BuiltInPacks.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
@@ -39,9 +39,7 @@ class CORE_LIB_EXPORT BuiltInPacks : public QObject
 		Q_INVOKABLE static QString packName(QString rawName);
 		Q_INVOKABLE static QStringList keyboardLayouts(void);
 		Q_INVOKABLE static QStringList packs(QString keyboardLayout = "");
-
-	private:
-		static QString keyboardLayoutForPack(QString rawName);
+		Q_INVOKABLE static QString keyboardLayoutForPack(QString rawName);
 };
 
 #endif // BUILTINPACKS_H
