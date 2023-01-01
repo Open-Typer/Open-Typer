@@ -103,7 +103,7 @@ void QmlUtils::printExercise(int lesson, int sublesson, int exercise, QString te
 		printerPtr->setPageMargins(QMarginsF(25, 25, 15, 25), QPageLayout::Millimeter);
 		QPainter painter;
 		painter.begin(printerPtr);
-		QFont font = ThemeEngine::font();
+		QFont font = globalThemeEngine.font();
 		painter.setFont(font);
 		QTextEdit textEdit; // is there any other way to get rid of line wrap?
 		textEdit.setPlainText(text);
