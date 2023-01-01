@@ -2,7 +2,7 @@
  * ThemeEngine.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
@@ -21,6 +21,7 @@
 
 #include "ThemeEngine.h"
 #include "Settings.h"
+#include "QmlUtils.h"
 
 ThemeEngine globalThemeEngine;
 
@@ -152,15 +153,9 @@ QString ThemeEngine::fontFamily(void)
 /*! Sets font family. */
 void ThemeEngine::setFontFamily(QString family)
 {
-	QFont _font;
-	_font.setStyleHint(QFont::TypeWriter);
-	_font.setFixedPitch(true);
-	if(family == "")
-		family = "Courier New";
-	_font.setFamily(family);
-	QFontDatabase fontDB;
-	if(!fontDB.families().contains(family))
-		family = _font.defaultFamily();
+	QStringList families = QmlUtils::fontFamilies(true);
+	if(!families.contains(family))
+		family = families[0];
 	Settings::setThemeFont(family);
 	emit fontFamilyChanged();
 }
