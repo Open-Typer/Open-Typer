@@ -172,11 +172,13 @@ Item {
 		}
 		header: Rectangle {
 			color: dialogColor
-			width: control.width
+			width: dialogMask.width
 			height: standardButtons !== Dialog.NoButton ? headerLayout.height - control.footer.height : headerLayout.height
 			radius: control.radius
 			ColumnLayout {
 				id: headerLayout
+				width: fillWindow ? control.width : undefined
+				height: fillWindow ? control.height : undefined
 				spacing: 0
 				Label {
 					id: windowTitleLabel
