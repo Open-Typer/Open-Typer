@@ -24,6 +24,7 @@ import OpenTyper 1.0
 
 ListView {
 	property var items: []
+	property bool noAutoLayout: false
 	signal itemsLoaded()
 	id: root
 	currentIndex: -1
@@ -33,7 +34,7 @@ ListView {
 			clear();
 			for(var i = 0; i < items.length; i++)
 				append({"name": items[i]});
-			if(Settings.containsLessonPack() && (Settings.lessonPack() !== ""))
+			if(Settings.containsLessonPack() && (Settings.lessonPack() !== "") && !noAutoLayout)
 				currentIndex = items.indexOf(BuiltInPacks.keyboardLayoutForPack(Settings.lessonPack()));
 			itemsLoaded();
 		}
