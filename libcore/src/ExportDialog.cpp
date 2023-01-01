@@ -2,7 +2,7 @@
  * ExportDialog.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -74,7 +74,7 @@ ExportDialog::ExportDialog(QString text, QVariantMap result, QList<QVariantMap> 
 	ui->exportText->toggleScrolling(false);
 	ui->exportText->setHtml(exportHtml);
 	// Set font
-	QFont textFont = ThemeEngine::font();
+	QFont textFont = globalThemeEngine.font();
 	textFont.setPointSize(12);
 	ui->exportText->setFont(textFont);
 	// Fill table
