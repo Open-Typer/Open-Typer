@@ -31,12 +31,35 @@ CustomDialog {
 	property int keyboardLayout: -1
 	property string keyboardLayoutName : ""
 	property bool noAutoLayout: false
+	property bool lastOperationNext
 	id: root
 	//: Application Setup, for example Open-Typer Setup
 	windowTitle: qsTr("%1 Setup").arg(Qt.application.displayName)
 	draggable: false
 	fillWindow: true
 	dialog.closePolicy: Popup.NoAutoClose
+	function previousPage() {
+		if(currentIndex > 0)
+		{
+			lastOperationNext = false;
+			currentIndex--;
+			contentItem.stack.push(pages[currentIndex], StackView.PopTransition);
+		}
+	}
+	function nextPage() {
+		if(currentIndex < pages.length - 1)
+		{
+			lastOperationNext = true;
+			currentIndex++;
+			contentItem.stack.push(pages[currentIndex]);
+		}
+	}
+	function skipPage() {
+		if(lastOperationNext)
+			nextPage();
+		else
+			previousPage();
+	}
 	onAboutToShow: {
 		if(!Settings.containsSimpleThemeId())
 			ThemeEngine.setDefaultTheme();
@@ -47,6 +70,7 @@ CustomDialog {
 		}
 	}
 	contentComponent: ColumnLayout {
+		property alias stack: stack
 		anchors.fill: parent
 		StackView {
 			id: stack
@@ -62,10 +86,7 @@ CustomDialog {
 				//: %1 is the left arrow
 				text: qsTr("%1 Previous").arg("◀")
 				foregroundColor: Material.accent
-				onClicked: {
-					currentIndex--;
-					stack.push(pages[currentIndex], StackView.PopTransition);
-				}
+				onClicked: previousPage()
 			}
 			Item { Layout.fillWidth: true }
 			CustomToolButton {
@@ -74,10 +95,7 @@ CustomDialog {
 				//: %1 is the right arrow
 				text: qsTr("Next %1").arg("▶")
 				foregroundColor: Material.accent
-				onClicked: {
-					currentIndex++;
-					stack.push(pages[currentIndex]);
-				}
+				onClicked: nextPage()
 			}
 			CustomToolButton {
 				visible: currentIndex == pages.length - 1
@@ -155,6 +173,14 @@ CustomDialog {
 				Layout.fillWidth: true
 				Layout.fillHeight: true
 				keyboardLayout: root.keyboardLayoutName
+				onItemsLoaded: {
+					if(items.length == 1)
+					{
+						currentIndex = 0;
+						currentItem.clicked();
+						skipPage();
+					}
+				}
 			}
 		}
 	}
