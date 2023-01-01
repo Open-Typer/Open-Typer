@@ -2,7 +2,7 @@
  * InitialSetup.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,9 +23,10 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtQuick.Layouts 1.3
 import OpenTyper 1.0
+import "settings"
 
 CustomDialog {
-	readonly property var pages: [ localizationPage, lessonPackPage ]
+	readonly property var pages: [ localizationPage, lessonPackPage, appearancePage ]
 	property int currentIndex: 0
 	property int keyboardLayout: -1
 	property string keyboardLayoutName : ""
@@ -36,7 +37,8 @@ CustomDialog {
 	fillWindow: true
 	dialog.closePolicy: Popup.NoAutoClose
 	onAboutToShow: {
-		ThemeEngine.setDefaultTheme();
+		if(!Settings.containsSimpleThemeId())
+			ThemeEngine.setDefaultTheme();
 		if(!Settings.containsLessonPack() || (Settings.lessonPack() === ""))
 			Settings.setLessonPack("en_US-default-A"); // lesson pack will be changed during initial setup anyway
 	}
@@ -148,6 +150,17 @@ CustomDialog {
 				Layout.fillWidth: true
 				Layout.fillHeight: true
 				keyboardLayout: root.keyboardLayoutName
+			}
+		}
+	}
+	Component {
+		id: appearancePage
+		ColumnLayout {
+			property bool finished: true
+			AppearanceSettings {
+				Layout.fillWidth: true
+				Layout.alignment: Qt.AlignTop
+				simple: true
 			}
 		}
 	}
