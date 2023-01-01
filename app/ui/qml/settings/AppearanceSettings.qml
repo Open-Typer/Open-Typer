@@ -24,6 +24,7 @@ import QtQuick.Controls.Material 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 import OpenTyper 1.0
+import ".."
 
 ColumnLayout {
 	property bool simple: false
