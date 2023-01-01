@@ -30,6 +30,7 @@ CustomDialog {
 	property int currentIndex: 0
 	property int keyboardLayout: -1
 	property string keyboardLayoutName : ""
+	property bool noAutoLayout: false
 	id: root
 	//: Application Setup, for example Open-Typer Setup
 	windowTitle: qsTr("%1 Setup").arg(Qt.application.displayName)
@@ -40,7 +41,10 @@ CustomDialog {
 		if(!Settings.containsSimpleThemeId())
 			ThemeEngine.setDefaultTheme();
 		if(!Settings.containsLessonPack() || (Settings.lessonPack() === ""))
+		{
 			Settings.setLessonPack("en_US-default-A"); // lesson pack will be changed during initial setup anyway
+			noAutoLayout = true;
+		}
 	}
 	contentComponent: ColumnLayout {
 		anchors.fill: parent
@@ -127,6 +131,7 @@ CustomDialog {
 					id: layoutList
 					Layout.fillWidth: true
 					Layout.fillHeight: true
+					noAutoLayout: root.noAutoLayout
 					onCurrentIndexChanged: {
 						keyboardLayout = currentIndex;
 						keyboardLayoutName = currentItem.text;
