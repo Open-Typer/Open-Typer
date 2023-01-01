@@ -42,7 +42,6 @@
 #include "HistoryParser.h"
 #include "LoadExerciseDialog.h"
 #include "StatsDialog.h"
-#include "InitialSetup.h"
 #include "updater/Updater.h"
 #include "options/OptionsWindow.h"
 
