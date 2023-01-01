@@ -27,9 +27,9 @@
 #include <QCryptographicHash>
 #include <QPushButton>
 #include "AddonApi.h"
+#include "Settings.h"
 #include "options/BehaviorOptions.h"
 #include "options/KeyboardOptions.h"
-#include "widgets/LanguageList.h"
 
 /*! Constructs OptionsWindow. */
 OptionsWindow::OptionsWindow(QWidget *parent) :
@@ -60,12 +60,10 @@ void OptionsWindow::setupList(void)
 	ui->list->clear();
 	ui->list->setIconSize(QSize(36, 36));
 	// Register category classes
-	qRegisterMetaType<LanguageList *>("LanguageList");
 	qRegisterMetaType<BehaviorOptions *>("BehaviorOptions");
 	qRegisterMetaType<KeyboardOptions *>("KeyboardOptions");
 	// Add default categories
 	AddonApi::clearSettingsCategories();
-	AddonApi::addSettingsCategory(tr("Language"), QIcon(":res/images/languageOptions.svg"), "LanguageList");
 	AddonApi::addSettingsCategory(tr("Behavior"), QIcon(":res/images/BehaviorOptions.svg"), "BehaviorOptions");
 	AddonApi::addSettingsCategory(tr("Keyboard"), QIcon(":res/images/KeyboardOptions.svg"), "KeyboardOptions");
 	// Add addon categories
