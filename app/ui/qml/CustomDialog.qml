@@ -2,7 +2,7 @@
  * CustomDialog.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -173,11 +173,10 @@ Item {
 		header: Rectangle {
 			color: dialogColor
 			width: control.width
-			height: standardButtons !== Dialog.NoButton ? control.height - control.footer.height : control.height
+			height: standardButtons !== Dialog.NoButton ? headerLayout.height - control.footer.height : headerLayout.height
 			radius: control.radius
 			ColumnLayout {
 				id: headerLayout
-				anchors.fill: parent
 				spacing: 0
 				Label {
 					id: windowTitleLabel
