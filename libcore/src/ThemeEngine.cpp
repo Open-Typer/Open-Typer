@@ -106,23 +106,21 @@ void ThemeEngine::updateThemeList(void)
 /*! Returns selected font. */
 QFont ThemeEngine::font(void)
 {
+	if(!Settings::containsThemeFont() || !Settings::containsThemeFontSize() || !Settings::containsThemeFontBold() ||
+			!Settings::containsThemeFontItalic() || !Settings::containsThemeFontUnderline())
+	{
+		setFontFamily("");
+		setFontSize(20);
+		setFontBold(true);
+		setFontItalic(false);
+		setFontUnderline(false);
+	}
 	QFont _font;
-	_font.setStyleHint(QFont::TypeWriter);
-	_font.setFixedPitch(true);
-	QString fontFamily = Settings::themeFont();
-	QString oldFamily = fontFamily;
-	if(fontFamily == "")
-		fontFamily = "Courier New";
-	_font.setFamily(fontFamily);
-	QFontDatabase fontDB;
-	if(!fontDB.families().contains(fontFamily))
-		fontFamily = _font.defaultFamily();
+	_font.setFamily(Settings::themeFont());
 	_font.setPointSize(Settings::themeFontSize());
 	_font.setBold(Settings::themeFontBold());
 	_font.setItalic(Settings::themeFontItalic());
 	_font.setUnderline(Settings::themeFontUnderline());
-	if(fontFamily != oldFamily)
-		Settings::setThemeFont(fontFamily);
 	return _font;
 }
 
@@ -481,34 +479,16 @@ void ThemeEngine::setTheme(int index)
 		else
 			setStyle(Style::SystemStyle);
 		// Font
-		QString fontFamily;
-		int fontSize;
-		bool fontBold, fontItalic, fontUnderline;
 		if(themeMap.contains("font"))
-			fontFamily = themeMap["font"].toString();
-		else
-			fontFamily = "";
+			setFontFamily(themeMap["font"].toString());
 		if(themeMap.contains("fontSize"))
-			fontSize = themeMap["fontSize"].toInt();
-		else
-			fontSize = 20;
+			setFontSize(themeMap["fontSize"].toInt());
 		if(themeMap.contains("fontBold"))
-			fontBold = themeMap["fontBold"].toBool();
-		else
-			fontBold = true;
+			setFontBold(themeMap["fontBold"].toBool());
 		if(themeMap.contains("fontItalic"))
-			fontItalic = themeMap["fontItalic"].toBool();
-		else
-			fontItalic = false;
+			setFontItalic(themeMap["fontItalic"].toBool());
 		if(themeMap.contains("fontUnderline"))
-			fontUnderline = themeMap["fontUnderline"].toBool();
-		else
-			fontUnderline = false;
-		setFontFamily(fontFamily);
-		setFontSize(fontSize);
-		setFontBold(fontBold);
-		setFontItalic(fontItalic);
-		setFontUnderline(fontUnderline);
+			setFontUnderline(themeMap["fontUnderline"].toBool());
 		// Colors
 		if(themeMap.contains("exerciseTextColor"))
 		{
