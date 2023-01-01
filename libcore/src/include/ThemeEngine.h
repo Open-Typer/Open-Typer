@@ -2,7 +2,7 @@
  * ThemeEngine.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
@@ -77,53 +77,53 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_ENUM(SimpleTheme)
 
 		// Font
-		Q_INVOKABLE static QFont font(void);
+		Q_INVOKABLE QFont font(void);
 		Q_INVOKABLE void setFont(QFont newFont);
-		Q_INVOKABLE static QFont errorFont(void);
-		Q_INVOKABLE static QString fontFamily(void);
+		Q_INVOKABLE QFont errorFont(void);
+		Q_INVOKABLE QString fontFamily(void);
 		Q_INVOKABLE void setFontFamily(QString family);
-		Q_INVOKABLE static int fontSize(void);
+		Q_INVOKABLE int fontSize(void);
 		Q_INVOKABLE void setFontSize(int size);
 		Q_INVOKABLE void increaseFontSize(int delta);
-		Q_INVOKABLE static int maxFontSize(void);
-		Q_INVOKABLE static bool fontBold(void);
+		Q_INVOKABLE int maxFontSize(void);
+		Q_INVOKABLE bool fontBold(void);
 		Q_INVOKABLE void setFontBold(bool value);
-		Q_INVOKABLE static bool fontItalic(void);
+		Q_INVOKABLE bool fontItalic(void);
 		Q_INVOKABLE void setFontItalic(bool value);
-		Q_INVOKABLE static bool fontUnderline(void);
+		Q_INVOKABLE bool fontUnderline(void);
 		Q_INVOKABLE void setFontUnderline(bool value);
 		// Exercise text color
-		Q_INVOKABLE static bool customExerciseTextColor(void);
-		Q_INVOKABLE static QColor exerciseTextColor(void);
+		Q_INVOKABLE bool customExerciseTextColor(void);
+		Q_INVOKABLE QColor exerciseTextColor(void);
 		Q_INVOKABLE void setExerciseTextColor(QColor color);
 		Q_INVOKABLE void resetExerciseTextColor(void);
-		Q_INVOKABLE static QString exerciseTextStyleSheet(void);
+		Q_INVOKABLE QString exerciseTextStyleSheet(void);
 		// Input text color
-		Q_INVOKABLE static bool customInputTextColor(void);
-		Q_INVOKABLE static QColor inputTextColor(void);
+		Q_INVOKABLE bool customInputTextColor(void);
+		Q_INVOKABLE QColor inputTextColor(void);
 		Q_INVOKABLE void setInputTextColor(QColor color);
 		Q_INVOKABLE void resetInputTextColor(void);
-		Q_INVOKABLE static QString inputTextStyleSheet(void);
+		Q_INVOKABLE QString inputTextStyleSheet(void);
 		// Background color
-		Q_INVOKABLE static bool customBgColor(void);
-		Q_INVOKABLE static QColor bgColor(void);
+		Q_INVOKABLE bool customBgColor(void);
+		Q_INVOKABLE QColor bgColor(void);
 		Q_INVOKABLE void setBgColor(QColor color);
 		Q_INVOKABLE void resetBgColor(void);
-		Q_INVOKABLE static QString bgStyleSheet(void);
+		Q_INVOKABLE QString bgStyleSheet(void);
 		// Paper color
-		Q_INVOKABLE static bool customPaperColor(void);
-		Q_INVOKABLE static QColor paperColor(void);
+		Q_INVOKABLE bool customPaperColor(void);
+		Q_INVOKABLE QColor paperColor(void);
 		Q_INVOKABLE void setPaperColor(QColor color);
 		Q_INVOKABLE void resetPaperColor(void);
-		Q_INVOKABLE static QString paperStyleSheet(void);
+		Q_INVOKABLE QString paperStyleSheet(void);
 		// Panel color
-		Q_INVOKABLE static bool customPanelColor(void);
-		Q_INVOKABLE static QColor panelColor(void);
+		Q_INVOKABLE bool customPanelColor(void);
+		Q_INVOKABLE QColor panelColor(void);
 		Q_INVOKABLE void setPanelColor(QColor color);
 		Q_INVOKABLE void resetPanelColor(void);
-		Q_INVOKABLE static QString panelStyleSheet(void);
+		Q_INVOKABLE QString panelStyleSheet(void);
 		// Style
-		Q_INVOKABLE static ThemeEngine::Style style(void);
+		Q_INVOKABLE ThemeEngine::Style style(void);
 		Q_INVOKABLE void setStyle(ThemeEngine::Style newStyle);
 		Q_INVOKABLE void updateStyle(void);
 		// Theme
