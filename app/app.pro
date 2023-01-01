@@ -47,7 +47,6 @@ INCLUDEPATH += \
 LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 
 SOURCES += \
-    src/InitialSetup.cpp \
     src/options/BehaviorOptions.cpp \
     src/options/KeyboardOptions.cpp \
     src/options/OptionsWindow.cpp \
@@ -59,7 +58,6 @@ SOURCES += \
     src/widgets/KeyboardWidget.cpp
 
 HEADERS += \
-    src/include/InitialSetup.h \
     src/include/options/BehaviorOptions.h \
     src/include/options/KeyboardOptions.h \
     src/include/options/OptionsWindow.h \
@@ -70,7 +68,6 @@ HEADERS += \
     src/include/widgets/KeyboardWidget.h
 
 FORMS += \
-    ui/InitialSetup.ui \
     ui/options/BehaviorOptions.ui \
     ui/options/KeyboardOptions.ui \
     ui/options/OptionsWindow.ui \
