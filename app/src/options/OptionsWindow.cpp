@@ -2,7 +2,7 @@
  * OptionsWindow.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  * Copyright (C) 2022 - yeti0904
  * Copyright (C) 2022 - Roker2
  *
@@ -29,7 +29,6 @@
 #include "AddonApi.h"
 #include "options/BehaviorOptions.h"
 #include "options/KeyboardOptions.h"
-#include "options/AppearanceOptions.h"
 #include "widgets/LanguageList.h"
 
 /*! Constructs OptionsWindow. */
@@ -64,13 +63,11 @@ void OptionsWindow::setupList(void)
 	qRegisterMetaType<LanguageList *>("LanguageList");
 	qRegisterMetaType<BehaviorOptions *>("BehaviorOptions");
 	qRegisterMetaType<KeyboardOptions *>("KeyboardOptions");
-	qRegisterMetaType<AppearanceOptions *>("AppearanceOptions");
 	// Add default categories
 	AddonApi::clearSettingsCategories();
 	AddonApi::addSettingsCategory(tr("Language"), QIcon(":res/images/languageOptions.svg"), "LanguageList");
 	AddonApi::addSettingsCategory(tr("Behavior"), QIcon(":res/images/BehaviorOptions.svg"), "BehaviorOptions");
 	AddonApi::addSettingsCategory(tr("Keyboard"), QIcon(":res/images/KeyboardOptions.svg"), "KeyboardOptions");
-	AddonApi::addSettingsCategory(tr("Appearance"), QIcon(":res/images/AppearanceOptions.svg"), "AppearanceOptions");
 	// Add addon categories
 	AddonApi::initSettingsCategories();
 	QList<QVariantMap> categories = AddonApi::settingsCategories();
