@@ -224,6 +224,8 @@ Item {
 					color: dialogColor
 					radius: control.radius
 				}
+				onAccepted: control.accept()
+				onRejected: control.reject()
 			}
 		}
 		footer: Loader {
