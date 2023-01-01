@@ -106,8 +106,7 @@ void ThemeEngine::updateThemeList(void)
 /*! Returns selected font. */
 QFont ThemeEngine::font(void)
 {
-	if(!Settings::containsThemeFont() || !Settings::containsThemeFontSize() || !Settings::containsThemeFontBold() ||
-			!Settings::containsThemeFontItalic() || !Settings::containsThemeFontUnderline())
+	if(!Settings::containsThemeFont() || !Settings::containsThemeFontSize() || !Settings::containsThemeFontBold() || !Settings::containsThemeFontItalic() || !Settings::containsThemeFontUnderline())
 	{
 		setFontFamily("");
 		setFontSize(20);
