@@ -101,7 +101,8 @@ DISTFILES += \
     ui/qml/HoverToolTip.qml \
     ui/qml/Panel.qml \
     ui/qml/TimeDialog.qml \
-    ui/qml/UpdateQuestion.qml
+    ui/qml/UpdateQuestion.qml \
+    ui/qml/settings/AppearanceSettings.qml
 
 TRANSLATIONS += \
     translations/Open-Typer_sk_SK.ts \
