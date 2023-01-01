@@ -2,7 +2,7 @@
  * QmlUtils.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@
 
 #include <QMenuBar>
 #include <QStyle>
+#include <QFontDatabase>
+#include <QFontInfo>
 #ifndef Q_OS_WASM
 #include <QPrinter>
 #include <QPrintPreviewDialog>
@@ -197,4 +199,26 @@ QString QmlUtils::convertPixmap(QPixmap pixmap)
 	QString imageStr = "data:image/png;base64,";
 	imageStr += QString::fromLatin1(pixmapData.toBase64().data());
 	return imageStr;
+}
+
+/*! Returns list of all (or only fixed pitch) font families. */
+QStringList QmlUtils::fontFamilies(bool fixedPitch)
+{
+	QStringList out;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	QStringList families = QFontDatabase::families();
+#else
+	QFontDatabase fontDatabase;
+	QStringList families = fontDatabase.families();
+#endif
+	for(int i = 0; i < families.count(); i++)
+	{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		if((!fixedPitch || QFontDatabase::isFixedPitch(families[i])) && !QFontDatabase::isPrivateFamily(families[i]))
+#else
+		if((!fixedPitch || fontDatabase.isFixedPitch(families[i])) && !fontDatabase.isPrivateFamily(families[i]))
+#endif
+			out += families[i];
+	}
+	return out;
 }

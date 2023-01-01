@@ -2,7 +2,7 @@
  * QmlUtils.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 
 #include <QObject>
 #include <QQuickItem>
+#include <QFont>
 
 /*! \brief The QmlUtils class acts like a bridge for QML code. */
 class CORE_LIB_EXPORT QmlUtils : public QObject
@@ -58,6 +59,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_INVOKABLE static void printExercise(QString text);
 		static QPixmap standardIcon(StandardIcon icon);
 		Q_INVOKABLE static QString standardIconStr(StandardIcon icon);
+		Q_INVOKABLE static QStringList fontFamilies(bool fixedPitch = false);
 
 	private:
 		static QString convertPixmap(QPixmap pixmap);
