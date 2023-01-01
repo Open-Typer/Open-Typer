@@ -54,7 +54,6 @@ SOURCES += \
     src/packEditor/PackSelector.cpp \
     src/updater/Updater.cpp \
     src/main.cpp \
-    src/widgets/LanguageList.cpp \
     src/widgets/KeyboardWidget.cpp
 
 HEADERS += \
@@ -64,7 +63,6 @@ HEADERS += \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h \
-    src/include/widgets/LanguageList.h \
     src/include/widgets/KeyboardWidget.h
 
 FORMS += \
