@@ -20,5 +20,6 @@
         <file>LanguageList.qml</file>
         <file>KeyboardLayoutList.qml</file>
         <file>LessonPackList.qml</file>
+        <file>FontComboBox.qml</file>
     </qresource>
 </RCC>
