@@ -2,7 +2,7 @@
  * QmlFileDialog.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,12 +51,20 @@ bool QmlFileDialog::showAllFiles(void)
 	return m_showAllFiles;
 }
 
+/*! Returns the file name of the selected file (after running getOpenFileContent()). */
+QString QmlFileDialog::fileName(void)
+{
+	return m_fileName;
+}
+
 /*! Shows a file dialog and emits fileContentReady() after a file is selected. */
 void QmlFileDialog::getOpenFileContent(void)
 {
 	auto fileContentReadyLambda = [this](const QString &fileName, const QByteArray &fileContent) {
 		if(!fileName.isEmpty())
 		{
+			m_fileName = fileName;
+			emit fileNameChanged(fileName);
 			emit fileContentReady(QString::fromUtf8(fileContent));
 		}
 	};

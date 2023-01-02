@@ -2,7 +2,7 @@
  * QmlFileDialog.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,20 +38,24 @@ class CORE_LIB_EXPORT QmlFileDialog : public QObject
 		Q_OBJECT
 		Q_PROPERTY(QStringList nameFilters READ nameFilters WRITE setNameFilters NOTIFY nameFiltersChanged)
 		Q_PROPERTY(bool showAllFiles READ showAllFiles WRITE setShowAllFiles NOTIFY showAllFilesChanged)
+		Q_PROPERTY(QString fileName READ fileName NOTIFY fileNameChanged)
 	public:
 		void setNameFilters(QStringList filters);
 		QStringList nameFilters(void);
 		void setShowAllFiles(bool value);
 		bool showAllFiles(void);
+		QString fileName(void);
 		Q_INVOKABLE void getOpenFileContent(void);
 
 	private:
 		QStringList m_nameFilters;
 		bool m_showAllFiles = true;
+		QString m_fileName;
 
 	signals:
 		void nameFiltersChanged(QStringList filters);
 		void showAllFilesChanged(bool value);
+		void fileNameChanged(QString name);
 		void fileContentReady(QString content);
 };
 
