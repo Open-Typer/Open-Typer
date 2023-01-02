@@ -28,6 +28,8 @@ import ".."
 
 ColumnLayout {
 	property bool simple: false
+	//: Set custom color
+	readonly property string customColorStr: qsTr("Set custom")
 	function setLightTheme() {
 		ThemeEngine.setSimpleTheme(ThemeEngine.LightTheme);
 	}
@@ -133,9 +135,27 @@ ColumnLayout {
 			text: qsTr("Exercise text color:")
 		}
 
-		RoundButton {
-			Material.background: exerciseTextColorDialog.color
+		Button {
+			visible: !QmlUtils.osWasm()
+			text: customColorStr
+			font.capitalization: Font.MixedCase
 			onClicked: exerciseTextColorDialog.open()
+		}
+
+		ColorButton {
+			color: ThemeEngine.defaultExerciseTextColor()
+			checked: ThemeEngine.exerciseTextColor == color
+			autoExclusive: true
+			checkable: true
+			onPressed: ThemeEngine.exerciseTextColor = color
+		}
+
+		ColorButton {
+			color: ThemeEngine.style === ThemeEngine.DarkStyle ? Qt.rgba(1, 1, 1, 1) : Qt.rgba(0, 0, 0, 1)
+			checked: ThemeEngine.exerciseTextColor == color
+			autoExclusive: true
+			checkable: true
+			onPressed: ThemeEngine.exerciseTextColor = color
 		}
 	}
 
@@ -145,9 +165,19 @@ ColumnLayout {
 			text: qsTr("Input text color:")
 		}
 
-		RoundButton {
-			Material.background: inputTextColorDialog.color
+		Button {
+			visible: !QmlUtils.osWasm()
+			text: customColorStr
+			font.capitalization: Font.MixedCase
 			onClicked: inputTextColorDialog.open()
+		}
+
+		ColorButton {
+			color: ThemeEngine.defaultInputTextColor(ThemeEngine.style === ThemeEngine.DarkStyle)
+			checked: ThemeEngine.inputTextColor == color
+			autoExclusive: true
+			checkable: true
+			onPressed: ThemeEngine.inputTextColor = color
 		}
 	}
 
@@ -166,9 +196,19 @@ ColumnLayout {
 			text: qsTr("Background color:")
 		}
 
-		RoundButton {
-			Material.background: bgColorDialog.color
+		Button {
+			visible: !QmlUtils.osWasm()
+			text: customColorStr
+			font.capitalization: Font.MixedCase
 			onClicked: bgColorDialog.open()
+		}
+
+		ColorButton {
+			color: ThemeEngine.defaultBgColor(ThemeEngine.style === ThemeEngine.DarkStyle)
+			checked: ThemeEngine.bgColor == color
+			autoExclusive: true
+			checkable: true
+			onPressed: ThemeEngine.bgColor = color
 		}
 	}
 
@@ -187,9 +227,19 @@ ColumnLayout {
 			text: qsTr("Paper color:")
 		}
 
-		RoundButton {
-			Material.background: paperColorDialog.color
+		Button {
+			visible: !QmlUtils.osWasm()
+			text: customColorStr
+			font.capitalization: Font.MixedCase
 			onClicked: paperColorDialog.open()
+		}
+
+		ColorButton {
+			color: ThemeEngine.defaultPaperColor(ThemeEngine.style === ThemeEngine.DarkStyle)
+			checked: ThemeEngine.paperColor == color
+			autoExclusive: true
+			checkable: true
+			onPressed: ThemeEngine.paperColor = color
 		}
 	}
 }
