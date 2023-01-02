@@ -250,8 +250,15 @@ void ThemeEngine::setExerciseTextColor(QColor color)
 /*! Resets exercise text color. */
 void ThemeEngine::resetExerciseTextColor(void)
 {
-	setExerciseTextColor(QColor(0, 125, 175));
+	setExerciseTextColor(defaultExerciseTextColor(style() == Style::DarkStyle));
 	Settings::setCustomExerciseTextColor(false);
+}
+
+/*! Returns default exercise text color. */
+QColor ThemeEngine::defaultExerciseTextColor(bool dark)
+{
+	Q_UNUSED(dark);
+	return QColor(0, 125, 175);
 }
 
 /*! Returns exercise text style sheet. */
@@ -284,11 +291,17 @@ void ThemeEngine::setInputTextColor(QColor color)
 /*! Resets input text color. */
 void ThemeEngine::resetInputTextColor(void)
 {
-	if(style() == Style::DarkStyle)
-		setInputTextColor(QColor(255, 255, 255));
-	else
-		setInputTextColor(QColor(0, 0, 0));
+	setInputTextColor(defaultInputTextColor(style() == Style::DarkStyle));
 	Settings::setCustomInputTextColor(false);
+}
+
+/*! Returns default input text color. */
+QColor ThemeEngine::defaultInputTextColor(bool dark)
+{
+	if(dark)
+		return QColor(255, 255, 255);
+	else
+		return QColor(0, 0, 0);
 }
 
 /*! Returns input text style sheet. */
@@ -320,11 +333,17 @@ void ThemeEngine::setBgColor(QColor color)
 /*! Resets background color. */
 void ThemeEngine::resetBgColor(void)
 {
-	if(style() == Style::DarkStyle)
-		setBgColor(QColor(25, 35, 45));
-	else
-		setBgColor(QColor(255, 255, 255));
+	setBgColor(defaultBgColor(style() == Style::DarkStyle));
 	Settings::setCustomBgColor(false);
+}
+
+/*! Returns default background color. */
+QColor ThemeEngine::defaultBgColor(bool dark)
+{
+	if(dark)
+		return QColor(25, 35, 45);
+	else
+		return QColor(255, 255, 255);
 }
 
 /*! Returns background style sheet. */
@@ -356,18 +375,17 @@ void ThemeEngine::setPaperColor(QColor color)
 /*! Resets paper color. */
 void ThemeEngine::resetPaperColor(void)
 {
-	switch(style())
-	{
-		case Style::DarkStyle:
-			setPaperColor(QColor(15, 25, 35));
-			break;
-		case Style::LightStyle:
-			setPaperColor(QColor(255, 255, 255));
-			break;
-		default:
-			break;
-	}
+	setPaperColor(defaultPaperColor(style() == Style::DarkStyle));
 	Settings::setCustomPaperColor(false);
+}
+
+/*! Returns default paper color. */
+QColor ThemeEngine::defaultPaperColor(bool dark)
+{
+	if(dark)
+		return QColor(15, 25, 35);
+	else
+		return QColor(255, 255, 255);
 }
 
 /*! Returns paper style sheet. */
@@ -399,18 +417,17 @@ void ThemeEngine::setPanelColor(QColor color)
 /*! Resets panel color. */
 void ThemeEngine::resetPanelColor(void)
 {
-	switch(style())
-	{
-		case Style::DarkStyle:
-			setPanelColor(QColor(20, 33, 47));
-			break;
-		case Style::LightStyle:
-			setPanelColor(QColor(255, 255, 255));
-			break;
-		default:
-			break;
-	}
+	setPanelColor(defaultPanelColor(style() == Style::DarkStyle));
 	Settings::setCustomPanelColor(false);
+}
+
+/*! Returns default panel color. */
+QColor ThemeEngine::defaultPanelColor(bool dark)
+{
+	if(dark)
+		return QColor(20, 33, 47);
+	else
+		return QColor(255, 255, 255);
 }
 
 /*! Returns panel style sheet. */
