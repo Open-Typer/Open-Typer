@@ -22,5 +22,6 @@
         <file>LessonPackList.qml</file>
         <file>FontComboBox.qml</file>
         <file>settings/AppearanceSettings.qml</file>
+        <file>ColorButton.qml</file>
     </qresource>
 </RCC>
