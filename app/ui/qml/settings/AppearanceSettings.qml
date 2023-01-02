@@ -22,7 +22,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtQuick.Layouts 1.3
-import QtQuick.Dialogs 1.2
+import Qt.labs.platform 1.0 as Platform
 import OpenTyper 1.0
 import ".."
 
@@ -36,33 +36,37 @@ ColumnLayout {
 		ThemeEngine.setSimpleTheme(ThemeEngine.DarkTheme);
 	}
 
-	ColorDialog {
+	Platform.ColorDialog {
 		id: exerciseTextColorDialog
 		modality: Qt.WindowModal
+		currentColor: ThemeEngine.exerciseTextColor
 		onColorChanged: ThemeEngine.exerciseTextColor = color
 		Component.onCompleted: updateColor()
 		function updateColor() { color = ThemeEngine.exerciseTextColor; }
 	}
 
-	ColorDialog {
+	Platform.ColorDialog {
 		id: inputTextColorDialog
 		modality: Qt.WindowModal
+		currentColor: ThemeEngine.inputTextColor
 		onColorChanged: ThemeEngine.inputTextColor = color
 		Component.onCompleted: updateColor()
 		function updateColor() { color = ThemeEngine.inputTextColor; }
 	}
 
-	ColorDialog {
+	Platform.ColorDialog {
 		id: bgColorDialog
 		modality: Qt.WindowModal
+		currentColor: ThemeEngine.bgColor
 		onColorChanged: ThemeEngine.bgColor = color
 		Component.onCompleted: updateColor()
 		function updateColor() { color = ThemeEngine.bgColor; }
 	}
 
-	ColorDialog {
+	Platform.ColorDialog {
 		id: paperColorDialog
 		modality: Qt.WindowModal
+		currentColor: ThemeEngine.paperColor
 		onColorChanged: ThemeEngine.paperColor = color
 		Component.onCompleted: updateColor()
 		function updateColor() { color = ThemeEngine.paperColor; }
