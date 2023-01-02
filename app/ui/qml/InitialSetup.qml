@@ -54,12 +54,7 @@ CustomDialog {
 			contentItem.stack.push(pages[currentIndex]);
 		}
 	}
-	function skipPage() {
-		if(lastOperationNext)
-			nextPage();
-		else
-			previousPage();
-	}
+	function skipPage() { skipPageTimer.start(); }
 	onAboutToShow: {
 		if(!Settings.containsSimpleThemeId())
 			ThemeEngine.setDefaultTheme();
@@ -108,6 +103,17 @@ CustomDialog {
 					root.close();
 				}
 			}
+		}
+	}
+	Timer {
+		id: skipPageTimer
+		repeat: false
+		interval: 10
+		onTriggered: {
+			if(lastOperationNext)
+				nextPage();
+			else
+				previousPage();
 		}
 	}
 	Component {
