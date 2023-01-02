@@ -89,6 +89,7 @@ ColumnLayout {
 	Label {
 		text: qsTr("Themes")
 		font.bold: true
+		font.pointSize: 12
 	}
 
 	RowLayout {
@@ -113,6 +114,7 @@ ColumnLayout {
 	Label {
 		text: qsTr("Text")
 		font.bold: true
+		font.pointSize: 12
 	}
 
 	RowLayout {
@@ -188,6 +190,7 @@ ColumnLayout {
 		visible: !simple
 		text: qsTr("Background")
 		font.bold: true
+		font.pointSize: 12
 	}
 
 	RowLayout {
@@ -219,6 +222,7 @@ ColumnLayout {
 		visible: !simple
 		text: qsTr("Paper")
 		font.bold: true
+		font.pointSize: 12
 	}
 
 	RowLayout {
