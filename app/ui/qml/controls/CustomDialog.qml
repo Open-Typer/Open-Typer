@@ -126,11 +126,14 @@ Item {
 		horizontalOffset: 20
 		verticalOffset: 20
 		radius: 16
-		samples: 16
 		color: "#80000000"
 		source: dialogMask
 		opacity: 0
 		visible: false
+		Component.onCompleted: {
+			if(!((QmlUtils.qtVersionMajor() === 6) && (QmlUtils.qtVersionMinor() < 4)))
+				samples = 16;
+		}
 		PropertyAnimation {
 			id: shadowInAnimation
 			target: shadow
