@@ -2,7 +2,7 @@
  * QmlWindow.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -238,8 +238,7 @@ ApplicationWindow {
 							dialog = new LoadExerciseDialog(this);
 						else
 							dialog = new LoadExerciseDialog(targets, this);*/
-						loadExerciseDialog.init();
-						loadExerciseDialog.exec();
+						typingTestDialog.open();
 					}
 				}
 				CustomToolButton {
@@ -398,6 +397,12 @@ ApplicationWindow {
 		windowTitle: qsTr("Error");
 		title: qsTr("This file is too large!")
 		icon: critical
+	}
+
+	TypingTestDialog {
+		id: typingTestDialog
+		parserObj: parser
+		onAccepted: loadTestFinished()
 	}
 
 	TimeDialog {
@@ -1030,8 +1035,8 @@ ApplicationWindow {
 		if(!AddonApi::blockLoadedEx())
 			initTest(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
 				dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText());*/
-		initTest(loadExerciseDialog.exerciseText(), loadExerciseDialog.lineLength(), loadExerciseDialog.includeNewLines(),
-			 loadExerciseDialog.mode(), loadExerciseDialog.timeLimitSecs(), loadExerciseDialog.correctMistakes(), loadExerciseDialog.lockUi(), loadExerciseDialog.hideText());
+		initTest(typingTestDialog.exerciseText, parser.defaultLineLength(), true, (typingTestDialog.timed ? 1 : 0),
+			 typingTestDialog.timeLimitSecs, typingTestDialog.correctMistakes, typingTestDialog.lockUi, typingTestDialog.hideText);
 	}
 
 	function initTest(text, lineLength, includeNewLines, mode, time, correctMistakes_, lockUi, hideText_) {
@@ -1073,7 +1078,6 @@ ApplicationWindow {
 
 	Component.onCompleted: {
 		QmlUtils.blurSource = mainLayout;
-		loadExerciseDialog.onAccepted.connect(function() { loadTestFinished(); });
 		if(!Settings.initFinished())
 			initialSetup.open();
 		reload();
