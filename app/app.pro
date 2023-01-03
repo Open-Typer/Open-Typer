@@ -94,6 +94,7 @@ DISTFILES += \
     ui/qml/HoverToolTip.qml \
     ui/qml/Panel.qml \
     ui/qml/TimeDialog.qml \
+    ui/qml/TypingTestDialog.qml \
     ui/qml/UpdateQuestion.qml \
     ui/qml/settings/AppearanceSettings.qml
 

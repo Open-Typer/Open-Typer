@@ -23,5 +23,6 @@
         <file>FontComboBox.qml</file>
         <file>settings/AppearanceSettings.qml</file>
         <file>ColorButton.qml</file>
+        <file>TypingTestDialog.qml</file>
     </qresource>
 </RCC>
