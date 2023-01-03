@@ -23,7 +23,9 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtQuick.Layouts 1.3
 import OpenTyper 1.0
-import "settings"
+import "../controls"
+import "../settings"
+import ".."
 
 CustomDialog {
 	readonly property var pages: [ localizationPage, lessonPackPage, appearancePage ]

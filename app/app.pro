@@ -73,29 +73,29 @@ FORMS += \
     ui/packEditor/PackSelector.ui
 
 DISTFILES += \
-    ui/qml/ColorButton.qml \
-    ui/qml/CustomComboBox.qml \
-    ui/qml/CustomDialog.qml \
-    ui/qml/CustomMenu.qml \
-    ui/qml/CustomMenuBar.qml \
-    ui/qml/CustomMenuItem.qml \
-    ui/qml/CustomMenuSeparator.qml \
-    ui/qml/CustomToolButton.qml \
-    ui/qml/ExerciseSummary.qml \
-    ui/qml/FontComboBox.qml \
-    ui/qml/InitialSetup.qml \
+    ui/qml/controls/ColorButton.qml \
+    ui/qml/controls/CustomComboBox.qml \
+    ui/qml/controls/CustomDialog.qml \
+    ui/qml/controls/CustomMenu.qml \
+    ui/qml/controls/CustomMenuBar.qml \
+    ui/qml/controls/CustomMenuItem.qml \
+    ui/qml/controls/CustomMenuSeparator.qml \
+    ui/qml/controls/CustomToolButton.qml \
+    ui/qml/controls/FontComboBox.qml \
+    ui/qml/controls/HoverToolTip.qml \
+    ui/qml/controls/MenuButton.qml \
+    ui/qml/controls/Panel.qml \
+    ui/qml/controls/UpdateQuestion.qml \
+    ui/qml/dialogs/ExerciseSummary.qml \
+    ui/qml/dialogs/InitialSetup.qml \
+    ui/qml/dialogs/MessageBox.qml \
+    ui/qml/dialogs/TimeDialog.qml \
+    ui/qml/dialogs/TypingTestDialog.qml \
     ui/qml/KeyboardLayoutList.qml \
     ui/qml/LanguageList.qml \
     ui/qml/LessonPackList.qml \
-    ui/qml/MenuButton.qml \
-    ui/qml/MessageBox.qml \
     ui/qml/Paper.qml \
     ui/qml/QmlWindow.qml \
-    ui/qml/HoverToolTip.qml \
-    ui/qml/Panel.qml \
-    ui/qml/TimeDialog.qml \
-    ui/qml/TypingTestDialog.qml \
-    ui/qml/UpdateQuestion.qml \
     ui/qml/settings/AppearanceSettings.qml
 
 TRANSLATIONS += \

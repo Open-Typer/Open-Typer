@@ -22,6 +22,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import OpenTyper 1.0
+import "../controls"
 
 CustomDialog {
 	property var parserObj: null

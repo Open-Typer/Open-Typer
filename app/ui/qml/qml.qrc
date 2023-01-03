@@ -1,28 +1,28 @@
 <RCC>
     <qresource prefix="/qml">
-        <file>HoverToolTip.qml</file>
-        <file>CustomToolButton.qml</file>
-        <file>Panel.qml</file>
-        <file>CustomComboBox.qml</file>
         <file>QmlWindow.qml</file>
         <file>Paper.qml</file>
-        <file>CustomMenuBar.qml</file>
-        <file>MenuButton.qml</file>
-        <file>CustomMenu.qml</file>
-        <file>CustomMenuItem.qml</file>
-        <file>CustomMenuSeparator.qml</file>
-        <file>MessageBox.qml</file>
-        <file>CustomDialog.qml</file>
-        <file>TimeDialog.qml</file>
-        <file>UpdateQuestion.qml</file>
         <file>ExerciseSummary.qml</file>
-        <file>InitialSetup.qml</file>
         <file>LanguageList.qml</file>
         <file>KeyboardLayoutList.qml</file>
         <file>LessonPackList.qml</file>
-        <file>FontComboBox.qml</file>
         <file>settings/AppearanceSettings.qml</file>
-        <file>ColorButton.qml</file>
-        <file>TypingTestDialog.qml</file>
+        <file>controls/CustomDialog.qml</file>
+        <file>controls/ColorButton.qml</file>
+        <file>controls/FontComboBox.qml</file>
+        <file>controls/CustomToolButton.qml</file>
+        <file>controls/UpdateQuestion.qml</file>
+        <file>controls/Panel.qml</file>
+        <file>controls/MenuButton.qml</file>
+        <file>controls/HoverToolTip.qml</file>
+        <file>controls/CustomMenuSeparator.qml</file>
+        <file>controls/CustomMenuItem.qml</file>
+        <file>controls/CustomMenuBar.qml</file>
+        <file>controls/CustomMenu.qml</file>
+        <file>controls/CustomComboBox.qml</file>
+        <file>dialogs/TimeDialog.qml</file>
+        <file>dialogs/TypingTestDialog.qml</file>
+        <file>dialogs/MessageBox.qml</file>
+        <file>dialogs/InitialSetup.qml</file>
     </qresource>
 </RCC>

@@ -2,7 +2,7 @@
  * MessageBox.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import OpenTyper 1.0
+import "../controls"
 
 CustomDialog {
 	readonly property int noIcon: QmlUtils.NoIcon
