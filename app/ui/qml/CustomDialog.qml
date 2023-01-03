@@ -53,6 +53,10 @@ Item {
 		control.close();
 	}
 
+	function standardButton(button) {
+		return buttonBoxLoader.item.standardButton(button);
+	}
+
 	Rectangle {
 		id: dialogMask
 		width: control.width + 4
@@ -228,6 +232,9 @@ Item {
 				}
 				onAccepted: control.accept()
 				onRejected: control.reject()
+				function getStandardButton(button) {
+					return standardButton(button);
+				}
 			}
 		}
 		footer: Loader {
