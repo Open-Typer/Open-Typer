@@ -57,6 +57,16 @@ QString QmlFileDialog::fileName(void)
 	return m_fileName;
 }
 
+/*!
+ * Returns the short file name of the selected file (after running getOpenFileContent()).\n
+ * A short file name doesn't contain parent directories.
+ */
+QString QmlFileDialog::shortFileName(void)
+{
+	QFileInfo fileInfo(m_fileName);
+	return fileInfo.fileName();
+}
+
 /*! Shows a file dialog and emits fileContentReady() after a file is selected. */
 void QmlFileDialog::getOpenFileContent(void)
 {
@@ -65,6 +75,7 @@ void QmlFileDialog::getOpenFileContent(void)
 		{
 			m_fileName = fileName;
 			emit fileNameChanged(fileName);
+			emit shortFileNameChanged(shortFileName());
 			emit fileContentReady(QString::fromUtf8(fileContent));
 		}
 	};

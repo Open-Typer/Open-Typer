@@ -39,12 +39,14 @@ class CORE_LIB_EXPORT QmlFileDialog : public QObject
 		Q_PROPERTY(QStringList nameFilters READ nameFilters WRITE setNameFilters NOTIFY nameFiltersChanged)
 		Q_PROPERTY(bool showAllFiles READ showAllFiles WRITE setShowAllFiles NOTIFY showAllFilesChanged)
 		Q_PROPERTY(QString fileName READ fileName NOTIFY fileNameChanged)
+		Q_PROPERTY(QString shortFileName READ shortFileName NOTIFY shortFileNameChanged)
 	public:
 		void setNameFilters(QStringList filters);
 		QStringList nameFilters(void);
 		void setShowAllFiles(bool value);
 		bool showAllFiles(void);
 		QString fileName(void);
+		QString shortFileName(void);
 		Q_INVOKABLE void getOpenFileContent(void);
 
 	private:
@@ -56,6 +58,7 @@ class CORE_LIB_EXPORT QmlFileDialog : public QObject
 		void nameFiltersChanged(QStringList filters);
 		void showAllFilesChanged(bool value);
 		void fileNameChanged(QString name);
+		void shortFileNameChanged(QString name);
 		void fileContentReady(QString content);
 };
 
