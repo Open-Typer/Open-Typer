@@ -6,7 +6,7 @@
 
 Qt can be installed using the official installer as well.
 
-As of writing, Open-Typer (officially) supports Qt 5 (from 5.9.5 to 5.15.8) and Qt 6 (6.2.4).
+As of writing, Open-Typer (officially) supports Qt 5 (from 5.9.5 to 5.15.8) and Qt 6 (from 6.2.4 to 6.4.1).
 
 ```
 lrelease *.pro
