@@ -28,7 +28,6 @@ SOURCES += \
     src/HistoryParser.cpp \
     src/KeyboardUtils.cpp \
     src/LanguageManager.cpp \
-    src/LoadExerciseDialog.cpp \
     src/MistakeRecord.cpp \
     src/QmlFileDialog.cpp \
     src/QmlKeyboardHandler.cpp \
@@ -52,7 +51,6 @@ HEADERS += \
     src/include/HistoryParser.h \
     src/include/KeyboardUtils.h \
     src/include/LanguageManager.h \
-    src/include/LoadExerciseDialog.h \
     src/include/MistakeRecord.h \
     src/include/QmlFileDialog.h \
     src/include/QmlKeyboardHandler.h \
@@ -66,7 +64,6 @@ HEADERS += \
 
 FORMS += \
     ui/ExportDialog.ui \
-    ui/LoadExerciseDialog.ui \
     ui/StatsDialog.ui
 
 TRANSLATIONS += \

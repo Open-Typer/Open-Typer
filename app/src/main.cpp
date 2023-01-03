@@ -2,7 +2,7 @@
  * main.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
@@ -40,7 +40,6 @@
 #include "QmlFileDialog.h"
 #include "BuiltInPacks.h"
 #include "HistoryParser.h"
-#include "LoadExerciseDialog.h"
 #include "StatsDialog.h"
 #include "updater/Updater.h"
 #include "options/OptionsWindow.h"
@@ -190,8 +189,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("HistoryParser", &historyParser);
 	OptionsWindow optionsWindow;
 	engine.rootContext()->setContextProperty("optionsWindow", &optionsWindow);
-	LoadExerciseDialog loadExerciseDialog;
-	engine.rootContext()->setContextProperty("loadExerciseDialog", &loadExerciseDialog);
 	StatsDialog statsDialog(true, {}, QPair<int, int>(), QString(), 0, 0, 0);
 	engine.rootContext()->setContextProperty("statsDialog", &statsDialog);
 	engine.load("qrc:/qml/QmlWindow.qml");
