@@ -206,9 +206,7 @@ ApplicationWindow {
 				CustomToolButton {
 					iconName: "settings"
 					toolTipText: qsTr("Options")
-					onClicked: {
-						optionsWindow.exec();
-					}
+					onClicked: settingsDialog.open()
 				}
 				CustomToolButton {
 					iconName: "open"
@@ -393,6 +391,10 @@ ApplicationWindow {
 	}
 
 	InitialSetup { id: initialSetup }
+
+	SettingsDialog {
+		id: settingsDialog
+	}
 
 	MessageBox {
 		id: largeFileBox
