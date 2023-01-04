@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/qml">
-        <file>QmlWindow.qml</file>
         <file>Paper.qml</file>
         <file>ExerciseSummary.qml</file>
         <file>LanguageList.qml</file>
@@ -26,5 +25,6 @@
         <file>dialogs/InitialSetup.qml</file>
         <file>dialogs/SettingsDialog.qml</file>
         <file>controls/VerticalStackView.qml</file>
+        <file>MainWindow.qml</file>
     </qresource>
 </RCC>

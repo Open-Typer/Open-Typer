@@ -96,8 +96,8 @@ DISTFILES += \
     ui/qml/KeyboardLayoutList.qml \
     ui/qml/LanguageList.qml \
     ui/qml/LessonPackList.qml \
+    ui/qml/MainWindow.qml \
     ui/qml/Paper.qml \
-    ui/qml/QmlWindow.qml \
     ui/qml/settings/AppearanceSettings.qml
 
 TRANSLATIONS += \

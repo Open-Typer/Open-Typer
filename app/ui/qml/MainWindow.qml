@@ -1,5 +1,5 @@
 /*
- * QmlWindow.qml
+ * MainWindow.qml
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022-2023 - adazem009
