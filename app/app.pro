@@ -90,6 +90,7 @@ DISTFILES += \
     ui/qml/dialogs/ExerciseSummary.qml \
     ui/qml/dialogs/InitialSetup.qml \
     ui/qml/dialogs/MessageBox.qml \
+    ui/qml/dialogs/SettingsDialog.qml \
     ui/qml/dialogs/TimeDialog.qml \
     ui/qml/dialogs/TypingTestDialog.qml \
     ui/qml/KeyboardLayoutList.qml \
