@@ -86,6 +86,7 @@ DISTFILES += \
     ui/qml/controls/MenuButton.qml \
     ui/qml/controls/Panel.qml \
     ui/qml/controls/UpdateQuestion.qml \
+    ui/qml/controls/VerticalStackView.qml \
     ui/qml/dialogs/ExerciseSummary.qml \
     ui/qml/dialogs/InitialSetup.qml \
     ui/qml/dialogs/MessageBox.qml \

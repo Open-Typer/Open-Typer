@@ -24,5 +24,6 @@
         <file>dialogs/TypingTestDialog.qml</file>
         <file>dialogs/MessageBox.qml</file>
         <file>dialogs/InitialSetup.qml</file>
+        <file>controls/VerticalStackView.qml</file>
     </qresource>
 </RCC>
