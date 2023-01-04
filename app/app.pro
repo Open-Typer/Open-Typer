@@ -95,7 +95,8 @@ DISTFILES += \
     ui/qml/LessonPackList.qml \
     ui/qml/MainWindow.qml \
     ui/qml/Paper.qml \
-    ui/qml/settings/AppearanceSettings.qml
+    ui/qml/settings/AppearanceSettings.qml \
+    ui/qml/settings/BehaviorSettings.qml
 
 TRANSLATIONS += \
     translations/Open-Typer_sk_SK.ts \

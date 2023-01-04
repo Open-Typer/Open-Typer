@@ -26,5 +26,6 @@
         <file>dialogs/SettingsDialog.qml</file>
         <file>controls/VerticalStackView.qml</file>
         <file>MainWindow.qml</file>
+        <file>settings/BehaviorSettings.qml</file>
     </qresource>
 </RCC>
