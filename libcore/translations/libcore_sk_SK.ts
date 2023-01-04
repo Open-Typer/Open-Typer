@@ -2,17 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="sk_SK">
 <context>
-    <name>BuiltInPacks</name>
-    <message>
-        <source>auto-generated</source>
-        <translation type="vanished">automaticky generované</translation>
-    </message>
-    <message>
-        <source>Unknown pack</source>
-        <translation type="vanished">Neznámy balík</translation>
-    </message>
-</context>
-<context>
     <name>ConfigParser</name>
     <message>
         <location filename="../src/ConfigParser.cpp" line="308"/>
@@ -173,95 +162,6 @@
     </message>
 </context>
 <context>
-    <name>LoadExerciseDialog</name>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="14"/>
-        <location filename="../ui/LoadExerciseDialog.ui" line="36"/>
-        <source>Load exercise</source>
-        <translation>Načítať cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="46"/>
-        <source>Source</source>
-        <translation>Zdroj</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="52"/>
-        <source>Selected exercise (%1)</source>
-        <translation>Vybrané cvičenie (%1)</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="62"/>
-        <source>From file</source>
-        <translation>Zo súboru</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="90"/>
-        <source>Browse</source>
-        <translation>Prehľadávať</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="97"/>
-        <source>(no file selected)</source>
-        <translation>(žiadny súbor)</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="110"/>
-        <source>Options</source>
-        <translation>Možnosti</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="143"/>
-        <source>Mode:</source>
-        <translation>Režim:</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="157"/>
-        <source>Default</source>
-        <translation>Predvolený</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="162"/>
-        <source>Time limited</source>
-        <translation>Na čas</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="170"/>
-        <source>Time limit:</source>
-        <translation>Časový limit:</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="208"/>
-        <source>Character correction after mistake (by program)</source>
-        <translation>Oprava znaku po chybe programom</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="218"/>
-        <source>Lock user interface</source>
-        <translation>Uzamknúť používateľské rozhranie</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="228"/>
-        <source>Hide text</source>
-        <translation>Skryť text</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="235"/>
-        <source>Allow text preview before starting the exercise</source>
-        <translation>Povoliť náhľad textu pred začiatkom cvičenia</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="245"/>
-        <source>Target students</source>
-        <translation>Cieľoví študenti</translation>
-    </message>
-    <message>
-        <location filename="../src/LoadExerciseDialog.cpp" line="235"/>
-        <source>This file is too large!</source>
-        <translation>Tento súbor je príliš veľký!</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
         <location filename="../src/ConfigParser.cpp" line="264"/>
@@ -280,7 +180,7 @@
         <translation>automaticky generované</translation>
     </message>
     <message>
-        <location filename="../src/BuiltInPacks.cpp" line="46"/>
+        <location filename="../src/BuiltInPacks.cpp" line="45"/>
         <source>Unknown pack</source>
         <translation>Neznámy balík</translation>
     </message>
@@ -288,7 +188,7 @@
 <context>
     <name>QmlFileDialog</name>
     <message>
-        <location filename="../src/QmlFileDialog.cpp" line="68"/>
+        <location filename="../src/QmlFileDialog.cpp" line="87"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
@@ -342,27 +242,27 @@
 <context>
     <name>ThemeEngine</name>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="67"/>
+        <location filename="../src/ThemeEngine.cpp" line="68"/>
         <source>Dark</source>
         <translation>Tmavý</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="74"/>
+        <location filename="../src/ThemeEngine.cpp" line="75"/>
         <source>Light</source>
         <translation>Svetlý</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="81"/>
+        <location filename="../src/ThemeEngine.cpp" line="82"/>
         <source>Green</source>
         <translation>Zelený</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="90"/>
+        <location filename="../src/ThemeEngine.cpp" line="91"/>
         <source>Light blue</source>
         <translation>Svetlomodrý</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="99"/>
+        <location filename="../src/ThemeEngine.cpp" line="100"/>
         <source>Custom</source>
         <translation>Vlastný</translation>
     </message>

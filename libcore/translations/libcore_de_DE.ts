@@ -2,17 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
-    <name>BuiltInPacks</name>
-    <message>
-        <source>auto-generated</source>
-        <translation type="vanished">automatisch generiert</translation>
-    </message>
-    <message>
-        <source>Unknown pack</source>
-        <translation type="vanished">Unbekanntes Paket</translation>
-    </message>
-</context>
-<context>
     <name>ConfigParser</name>
     <message>
         <source>Touch</source>
@@ -140,77 +129,6 @@
     <message>
         <source>System (default)</source>
         <translation>System (Standard)</translation>
-    </message>
-</context>
-<context>
-    <name>LoadExerciseDialog</name>
-    <message>
-        <source>Load exercise</source>
-        <translation>Aufgabe laden</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation>Quelle</translation>
-    </message>
-    <message>
-        <source>Selected exercise (%1)</source>
-        <translation>ausgewählte Aufgabe (%1)</translation>
-    </message>
-    <message>
-        <source>From file</source>
-        <translation>aus Datei</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation>Durchsuchen</translation>
-    </message>
-    <message>
-        <source>(no file selected)</source>
-        <translation>(keine Datei ausgewählt)</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation>Optionen</translation>
-    </message>
-    <message>
-        <source>Mode:</source>
-        <translation>Modus:</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation>Standard</translation>
-    </message>
-    <message>
-        <source>Time limited</source>
-        <translation>Zeitbegrenzt</translation>
-    </message>
-    <message>
-        <source>Time limit:</source>
-        <translation>Zeitlimit:</translation>
-    </message>
-    <message>
-        <source>Lock user interface</source>
-        <translation>Benutzeroberfläche sperren</translation>
-    </message>
-    <message>
-        <source>Hide text</source>
-        <translation>Text verstecken</translation>
-    </message>
-    <message>
-        <source>Allow text preview before starting the exercise</source>
-        <translation>Lassen Sie Textvorschau zu, bevor Sie mit der Aufgabe beginnen</translation>
-    </message>
-    <message>
-        <source>Target students</source>
-        <translation>Ziel Studenten</translation>
-    </message>
-    <message>
-        <source>This file is too large!</source>
-        <translation>Diese Datei ist zu groß!</translation>
-    </message>
-    <message>
-        <source>Character correction after mistake (by program)</source>
-        <translation>Zeichenkorrektur nach einem Fehler (durch das Programm)</translation>
     </message>
 </context>
 <context>

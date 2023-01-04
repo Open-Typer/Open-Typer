@@ -2,17 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
-    <name>BuiltInPacks</name>
-    <message>
-        <source>auto-generated</source>
-        <translation type="vanished">сгенерированно автоматически</translation>
-    </message>
-    <message>
-        <source>Unknown pack</source>
-        <translation type="vanished">Неизвестный набор</translation>
-    </message>
-</context>
-<context>
     <name>ConfigParser</name>
     <message>
         <location filename="../src/ConfigParser.cpp" line="308"/>
@@ -175,95 +164,6 @@
     </message>
 </context>
 <context>
-    <name>LoadExerciseDialog</name>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="14"/>
-        <location filename="../ui/LoadExerciseDialog.ui" line="36"/>
-        <source>Load exercise</source>
-        <translation>Загрузка упражнения</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="46"/>
-        <source>Source</source>
-        <translation>Исходник</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="52"/>
-        <source>Selected exercise (%1)</source>
-        <translation>Выбранное упражнение (%1)</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="62"/>
-        <source>From file</source>
-        <translation>Из файла</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="90"/>
-        <source>Browse</source>
-        <translation>Выбрать</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="97"/>
-        <source>(no file selected)</source>
-        <translation>(файл не выбран)</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="110"/>
-        <source>Options</source>
-        <translation>Опции</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="143"/>
-        <source>Mode:</source>
-        <translation>Режим:</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="157"/>
-        <source>Default</source>
-        <translation>Стандартный</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="162"/>
-        <source>Time limited</source>
-        <translation>С ограничением по времени</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="170"/>
-        <source>Time limit:</source>
-        <translation>Лимит времени:</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="208"/>
-        <source>Character correction after mistake (by program)</source>
-        <translation>Исправление символа после ошибки (программой)</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="218"/>
-        <source>Lock user interface</source>
-        <translation>Заблокировать пользовательский интерфейс</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="228"/>
-        <source>Hide text</source>
-        <translation>Скрыть текст</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="235"/>
-        <source>Allow text preview before starting the exercise</source>
-        <translation>Показать текст перед запуском упражнения</translation>
-    </message>
-    <message>
-        <location filename="../ui/LoadExerciseDialog.ui" line="245"/>
-        <source>Target students</source>
-        <translation>Целевые студенты</translation>
-    </message>
-    <message>
-        <location filename="../src/LoadExerciseDialog.cpp" line="235"/>
-        <source>This file is too large!</source>
-        <translation>Этот файл слишком большой!</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
         <location filename="../src/ConfigParser.cpp" line="264"/>
@@ -282,7 +182,7 @@
         <translation>сгенерированно автоматически</translation>
     </message>
     <message>
-        <location filename="../src/BuiltInPacks.cpp" line="46"/>
+        <location filename="../src/BuiltInPacks.cpp" line="45"/>
         <source>Unknown pack</source>
         <translation>Неизвестный набор</translation>
     </message>
@@ -290,7 +190,7 @@
 <context>
     <name>QmlFileDialog</name>
     <message>
-        <location filename="../src/QmlFileDialog.cpp" line="68"/>
+        <location filename="../src/QmlFileDialog.cpp" line="87"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -344,27 +244,27 @@
 <context>
     <name>ThemeEngine</name>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="67"/>
+        <location filename="../src/ThemeEngine.cpp" line="68"/>
         <source>Dark</source>
         <translation>Темная</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="74"/>
+        <location filename="../src/ThemeEngine.cpp" line="75"/>
         <source>Light</source>
         <translation>Светлая</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="81"/>
+        <location filename="../src/ThemeEngine.cpp" line="82"/>
         <source>Green</source>
         <translation>Зеленая</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="90"/>
+        <location filename="../src/ThemeEngine.cpp" line="91"/>
         <source>Light blue</source>
         <translation>Голубая</translation>
     </message>
     <message>
-        <location filename="../src/ThemeEngine.cpp" line="99"/>
+        <location filename="../src/ThemeEngine.cpp" line="100"/>
         <source>Custom</source>
         <translation>Кастомная</translation>
     </message>
