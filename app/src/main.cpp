@@ -42,7 +42,6 @@
 #include "HistoryParser.h"
 #include "StatsDialog.h"
 #include "updater/Updater.h"
-#include "options/OptionsWindow.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
 {
@@ -187,8 +186,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
 	HistoryParser historyParser;
 	engine.rootContext()->setContextProperty("HistoryParser", &historyParser);
-	OptionsWindow optionsWindow;
-	engine.rootContext()->setContextProperty("optionsWindow", &optionsWindow);
 	StatsDialog statsDialog(true, {}, QPair<int, int>(), QString(), 0, 0, 0);
 	engine.rootContext()->setContextProperty("statsDialog", &statsDialog);
 	engine.load("qrc:/qml/MainWindow.qml");

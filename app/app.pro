@@ -49,7 +49,6 @@ LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 SOURCES += \
     src/options/BehaviorOptions.cpp \
     src/options/KeyboardOptions.cpp \
-    src/options/OptionsWindow.cpp \
     src/packEditor/PackEditor.cpp \
     src/packEditor/PackSelector.cpp \
     src/updater/Updater.cpp \
@@ -59,7 +58,6 @@ SOURCES += \
 HEADERS += \
     src/include/options/BehaviorOptions.h \
     src/include/options/KeyboardOptions.h \
-    src/include/options/OptionsWindow.h \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h \
@@ -68,7 +66,6 @@ HEADERS += \
 FORMS += \
     ui/options/BehaviorOptions.ui \
     ui/options/KeyboardOptions.ui \
-    ui/options/OptionsWindow.ui \
     ui/packEditor/PackEditor.ui \
     ui/packEditor/PackSelector.ui
 
