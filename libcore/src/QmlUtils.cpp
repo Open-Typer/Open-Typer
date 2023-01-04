@@ -72,6 +72,16 @@ int QmlUtils::qtVersionPatch(void)
 	return QT_VERSION_PATCH;
 }
 
+/*! Returns true if the platform is Windows. */
+bool QmlUtils::osWindows(void)
+{
+#ifdef Q_OS_WINDOWS
+	return true;
+#else
+	return false;
+#endif
+}
+
 /*! Returns true if the platform is WebAssembly. */
 bool QmlUtils::osWasm(void)
 {
