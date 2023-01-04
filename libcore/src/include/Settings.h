@@ -2,7 +2,7 @@
  * Settings.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -82,6 +82,9 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_OBJECT
 	public:
 		static void init(void);
+		Q_INVOKABLE static void freeze(void);
+		Q_INVOKABLE static void saveChanges(void);
+		Q_INVOKABLE static void discardChanges(void);
 		// language
 		Q_INVOKABLE static QString language(void);
 		Q_INVOKABLE static bool containsLanguage(void);
@@ -222,6 +225,9 @@ class CORE_LIB_EXPORT Settings : public QObject
 
 	private:
 		static QSettings *settingsInstance;
+		static QSettings *mainSettingsInstance;
+		static bool frozen;
+		static void copySettings(QSettings *source, QSettings *target);
 #ifdef Q_OS_WASM
 		static bool tempSettingsCopied;
 		static void copyTempSettings(void);

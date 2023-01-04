@@ -2,7 +2,7 @@
  * Settings.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,8 @@
 #include "Settings.h"
 
 QSettings *Settings::settingsInstance = nullptr;
+QSettings *Settings::mainSettingsInstance = nullptr;
+bool Settings::frozen = false;
 #ifdef Q_OS_WASM
 bool Settings::tempSettingsCopied = false;
 #endif // Q_OS_WASM
@@ -33,6 +35,43 @@ void Settings::init(void)
 #else
 	settingsInstance = new QSettings(FileUtils::mainSettingsLocation(), QSettings::IniFormat, qApp);
 #endif
+}
+
+/*!
+ * Switches to temporary settings. You can decide to saveChanges() or discardChanges() later.\n
+ * This is useful for settings dialogs with a discard button.
+ */
+void Settings::freeze(void)
+{
+	Q_ASSERT(!frozen);
+	mainSettingsInstance = settingsInstance;
+	settingsInstance = new QSettings(FileUtils::mainSettingsLocation() + ".tmp", QSettings::IniFormat, qApp);
+	copySettings(mainSettingsInstance, settingsInstance);
+	frozen = true;
+}
+
+/*! Saves changes to real settings and switches back to them. \see freeze() */
+void Settings::saveChanges(void)
+{
+	Q_ASSERT(frozen);
+	copySettings(settingsInstance, mainSettingsInstance);
+	mainSettingsInstance->sync();
+	settingsInstance->clear();
+	settingsInstance->deleteLater();
+	settingsInstance = mainSettingsInstance;
+	frozen = false;
+}
+
+/*! Discards changes and switches back to real settings. \see freeze() */
+void Settings::discardChanges(void)
+{
+	Q_ASSERT(frozen);
+	settingsInstance->clear();
+	settingsInstance->deleteLater();
+	settingsInstance = mainSettingsInstance;
+	// Emit ThemeEngine signals to update UI
+	emit globalThemeEngine.themeChanged();
+	frozen = false;
 }
 
 /*! Returns the value of the given key. */
@@ -102,14 +141,21 @@ void Settings::set(QString key, QVariant value)
 #endif // Q_OS_WASM
 }
 
+/*! Copies values from source settings to target settings. */
+void Settings::copySettings(QSettings *source, QSettings *target)
+{
+	target->clear();
+	QStringList keys = source->allKeys();
+	for(int i = 0; i < keys.count(); i++)
+		target->setValue(keys[i], source->value(keys[i]));
+}
+
 #ifdef Q_OS_WASM
 /*! Copies temporary settings to real settings after the WebAssembly sandbox gets initialized. */
 void Settings::copyTempSettings(void)
 {
 	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
-	QStringList keys = settings.allKeys();
-	for(int i = 0; i < keys.count(); i++)
-		settingsInstance->setValue(keys[i], settings.value(keys[i]));
+	copySettings(&settings, settingsInstance);
 	settingsInstance->sync();
 	tempSettingsCopied = true;
 }
