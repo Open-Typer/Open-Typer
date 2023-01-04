@@ -53,6 +53,11 @@ CustomDialog {
 			implicitHeight: contentHeight
 			model: ListModel {
 				ListElement {
+					name: qsTr("Behavior")
+					iconSource: "qrc:/res/images/BehaviorOptions.svg"
+					sourceComponent: "../settings/BehaviorSettings.qml"
+				}
+				ListElement {
 					name: qsTr("Appearance")
 					iconSource: "qrc:/res/images/AppearanceOptions.svg"
 					sourceComponent: "../settings/AppearanceSettings.qml"
