@@ -2,65 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
-    <name>AppearanceOptions</name>
+    <name>AppearanceSettings</name>
+    <message>
+        <source>Set custom</source>
+        <extracomment>Set custom color</extracomment>
+        <translation>Freiwählbare</translation>
+    </message>
     <message>
         <source>Themes</source>
         <translation>Themas</translation>
     </message>
     <message>
-        <source>Theme:</source>
-        <translation>Thema:</translation>
-    </message>
-    <message>
         <source>Light</source>
+        <extracomment>The light theme</extracomment>
         <translation>Hell</translation>
     </message>
     <message>
         <source>Dark</source>
+        <extracomment>The dark theme</extracomment>
         <translation>Dunkel</translation>
     </message>
     <message>
-        <source>Mode:</source>
-        <extracomment>Customization mode</extracomment>
-        <translation>Modus:</translation>
-    </message>
-    <message>
-        <source>Simple</source>
-        <extracomment>Simple customization mode</extracomment>
-        <translation>Einfach</translation>
-    </message>
-    <message>
-        <source>Advanced</source>
-        <extracomment>Advanced customization mode</extracomment>
-        <translation>Vorgerückt</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation>Stil:</translation>
+        <source>Text</source>
+        <translation>Text</translation>
     </message>
     <message>
         <source>Font:</source>
         <translation>Schriftart:</translation>
-    </message>
-    <message>
-        <source>Font size:</source>
-        <translation>Schrift größe:</translation>
-    </message>
-    <message>
-        <source>Text style:</source>
-        <translation>Text Stil:</translation>
-    </message>
-    <message>
-        <source>Bold</source>
-        <translation>Fett gedruckt</translation>
-    </message>
-    <message>
-        <source>Italic</source>
-        <translation>Kursiv</translation>
-    </message>
-    <message>
-        <source>Underlined</source>
-        <translation>Unterstrichen</translation>
     </message>
     <message>
         <source>Exercise text color:</source>
@@ -71,20 +39,20 @@
         <translation>Input Text Farbe:</translation>
     </message>
     <message>
+        <source>Background</source>
+        <translation>Hintergrund</translation>
+    </message>
+    <message>
         <source>Background color:</source>
         <translation>Hintergrund Farbe:</translation>
     </message>
     <message>
+        <source>Paper</source>
+        <translation>Papier</translation>
+    </message>
+    <message>
         <source>Paper color:</source>
         <translation>Papier Farbe:</translation>
-    </message>
-    <message>
-        <source>Panel color:</source>
-        <translation>Panel Farbe:</translation>
-    </message>
-    <message>
-        <source>Go back</source>
-        <translation>Zurück gehen</translation>
     </message>
 </context>
 <context>
@@ -180,10 +148,6 @@
 <context>
     <name>ExerciseSummary</name>
     <message>
-        <source>Summary</source>
-        <translation>Zusammenfassung</translation>
-    </message>
-    <message>
         <source>Number of net hits per minute:</source>
         <translation>Anzahl Nettoschläge pro Minute:</translation>
     </message>
@@ -194,14 +158,6 @@
     <message>
         <source>Mistakes:</source>
         <translation>Fehler:</translation>
-    </message>
-    <message>
-        <source>Exercise completed</source>
-        <translation>Aufgaben abgeschlossen</translation>
-    </message>
-    <message>
-        <source>Preview</source>
-        <translation>Vorschau</translation>
     </message>
     <message>
         <source>Total time:</source>
@@ -219,16 +175,37 @@
 <context>
     <name>InitialSetup</name>
     <message>
-        <source>Welcome to Open-Typer!</source>
-        <translation>Willkommen bei Open-Typer!</translation>
+        <source>%1 Setup</source>
+        <extracomment>Application Setup, for example Open-Typer Setup</extracomment>
+        <translation>%1 Setup</translation>
     </message>
     <message>
-        <source>Choose a pack with lessons for your keyboard layout:</source>
-        <translation>Wählen Sie ein Paket mit Lektionen für Ihr Tastaturlayout:</translation>
+        <source>%1 Previous</source>
+        <extracomment>%1 is the left arrow</extracomment>
+        <translation>%1 Früher</translation>
     </message>
     <message>
-        <source>Show all</source>
-        <translation>Anzeigen alles</translation>
+        <source>Next %1</source>
+        <extracomment>%1 is the right arrow</extracomment>
+        <translation>Nächste %1</translation>
+    </message>
+    <message>
+        <source>Finish</source>
+        <extracomment>To finish the initial setup</extracomment>
+        <translation>Beenden</translation>
+    </message>
+    <message>
+        <source>User interface language</source>
+        <extracomment>The language for the user interface</extracomment>
+        <translation>Sprache der Benutzeroberfläche</translation>
+    </message>
+    <message>
+        <source>Keyboard layout</source>
+        <translation>Tastaturbelegung</translation>
+    </message>
+    <message>
+        <source>Lesson pack</source>
+        <translation>Lektion Paket</translation>
     </message>
 </context>
 <context>
@@ -249,115 +226,20 @@
         <translation>Tipp Test</translation>
     </message>
     <message>
-        <source>Navigation</source>
-        <translation>Navigation</translation>
-    </message>
-    <message>
         <source>Timed exercise</source>
         <translation>Zeitbegrenzte Aufgabe</translation>
-    </message>
-    <message>
-        <source>Reverse text</source>
-        <comment>reverse text button</comment>
-        <translation>Text umkehren</translation>
-    </message>
-    <message>
-        <source>Hide exercise text</source>
-        <comment>hide text</comment>
-        <translation>Übungstext verstecken</translation>
-    </message>
-    <message>
-        <source>Exercise options</source>
-        <translation>Aufgaben Optionen</translation>
-    </message>
-    <message>
-        <source>State</source>
-        <extracomment>Current status</extracomment>
-        <translation>Zustand</translation>
-    </message>
-    <message>
-        <source>Mistakes:</source>
-        <translation>Fehler:</translation>
-    </message>
-    <message>
-        <source>Time:</source>
-        <translation>Zeit:</translation>
-    </message>
-    <message>
-        <source>Remaining time</source>
-        <translation>Verbleibende Zeit</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation>Exportieren</translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
     </message>
     <message>
         <source>Open</source>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <source>New</source>
-        <translation>Neu</translation>
-    </message>
-    <message>
-        <source>&amp;View</source>
-        <translation>&amp;Sicht</translation>
-    </message>
-    <message>
-        <source>&amp;Exercise</source>
-        <translation>&amp;Aufgabe</translation>
-    </message>
-    <message>
-        <source>&amp;Settings</source>
-        <translation>&amp;Einstellungen</translation>
-    </message>
-    <message>
-        <source>Tools</source>
-        <translation>Werkzeuge</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Hilfe</translation>
-    </message>
-    <message>
-        <source>Custom text</source>
-        <translation>Benutzerdefinierten Text</translation>
-    </message>
-    <message>
-        <source>Lesson pack</source>
-        <translation>Lektion Paket</translation>
-    </message>
-    <message>
         <source>Text from error words</source>
         <translation>Text aus Fehlerwörtern</translation>
     </message>
     <message>
-        <source>Preferences...</source>
-        <translation>Präferenzen...</translation>
-    </message>
-    <message>
         <source>Exercise history</source>
         <translation>Aufgabe Verlauf</translation>
-    </message>
-    <message>
-        <source>Print...</source>
-        <translation>Drucken...</translation>
-    </message>
-    <message>
-        <source>About Qt...</source>
-        <translation>Über Qt...</translation>
-    </message>
-    <message>
-        <source>About program...</source>
-        <translation>Über Programm...</translation>
-    </message>
-    <message>
-        <source>Online documentation</source>
-        <translation>Online Dokumentation</translation>
     </message>
     <message>
         <source>This file is too large!</source>
@@ -368,93 +250,48 @@
         <translation>Text Dateien</translation>
     </message>
     <message>
-        <source>All files</source>
-        <translation>Alle Dateien</translation>
-    </message>
-    <message>
         <source>You don&apos;t have any error words.</source>
         <translation>Sie haben keine Fehlerwörter.</translation>
     </message>
-    <message>
-        <source>Open-Typer pack files</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Version: %1</source>
-        <translation>Version: %1</translation>
-    </message>
-    <message>
-        <source>Revision: %1</source>
-        <translation>Revision: %1</translation>
-    </message>
-    <message>
-        <source>Source code: %1</source>
-        <translation>Quellcode: %1</translation>
-    </message>
-    <message>
-        <source>Published with the GNU General Public License.</source>
-        <translation>Veröffentlicht unter der GNU General Public License.</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to quit?</source>
-        <translation>Sind Sie sicher, dass Sie aufhören wollen?</translation>
-    </message>
-    <message>
-        <source>Character correction after mistake (by program)</source>
-        <comment>correct mistakes</comment>
-        <extracomment>Whether to correct mistakes while typing</extracomment>
-        <translation>Zeichenkorrektur nach einem Fehler (durch das Programm)</translation>
-    </message>
-    <message>
-        <source>User interface</source>
-        <translation>Benutzeroberfläche</translation>
-    </message>
-    <message>
-        <source>Character correction after mistake (by program)</source>
-        <translation>Zeichenkorrektur nach einem Fehler (durch das Programm)</translation>
-    </message>
-    <message>
-        <source>Dark theme</source>
-        <translation>Dunkles Thema</translation>
-    </message>
-</context>
-<context>
-    <name>OptionsWindow</name>
     <message>
         <source>Options</source>
         <translation>Optionen</translation>
     </message>
     <message>
-        <source>Settings are locked.</source>
-        <translation>Die Einstellungen sind verschlossen.</translation>
+        <source>Print</source>
+        <translation>Drucken</translation>
     </message>
     <message>
-        <source>Unlock settings</source>
-        <translation>Schließ die Einstellungen auf</translation>
+        <source>Reverse text</source>
+        <translation>Text umkehren</translation>
     </message>
     <message>
-        <source>Language</source>
-        <translation>Sprache</translation>
+        <source>Repeat exercise</source>
+        <translation>Aufgabe wiederholen</translation>
     </message>
     <message>
-        <source>Behavior</source>
-        <translation>Verhalten</translation>
+        <source>Close loaded exercise</source>
+        <translation>Geladene Aufgabe schließen</translation>
     </message>
     <message>
-        <source>Keyboard</source>
-        <translation>Tastatur</translation>
+        <source>Previous exercise</source>
+        <translation>Vorherige Aufgabe</translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation>Aussehen</translation>
+        <source>Next exercise</source>
+        <translation>Nächste Aufgabe</translation>
     </message>
     <message>
-        <source>Settings lock password:</source>
-        <translation>Passwort des Einstellungenschlosses:</translation>
+        <source>Stop</source>
+        <translation>Halten</translation>
     </message>
     <message>
-        <source>Incorrect password!</source>
-        <translation>Falsches Passwort!</translation>
+        <source>Error</source>
+        <translation>Error</translation>
+    </message>
+    <message>
+        <source>No error words</source>
+        <translation>Keine Fehlerwörter</translation>
     </message>
 </context>
 <context>
@@ -603,94 +440,18 @@
     </message>
 </context>
 <context>
-    <name>QmlWindow</name>
+    <name>SettingsDialog</name>
     <message>
-        <source>Options</source>
-        <translation>Optionen</translation>
+        <source>Settings</source>
+        <translation>Einstellungen</translation>
     </message>
     <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Drucken</translation>
-    </message>
-    <message>
-        <source>Typing test</source>
-        <translation>Tipp Test</translation>
-    </message>
-    <message>
-        <source>Timed exercise</source>
-        <translation>Zeitbegrenzte Aufgabe</translation>
-    </message>
-    <message>
-        <source>Text from error words</source>
-        <translation>Text aus Fehlerwörtern</translation>
-    </message>
-    <message>
-        <source>Reverse text</source>
-        <translation>Text umkehren</translation>
-    </message>
-    <message>
-        <source>Repeat exercise</source>
-        <translation>Aufgabe wiederholen</translation>
-    </message>
-    <message>
-        <source>Close loaded exercise</source>
-        <translation>Geladene Aufgabe schließen</translation>
-    </message>
-    <message>
-        <source>Previous exercise</source>
-        <translation>Vorherige Aufgabe</translation>
-    </message>
-    <message>
-        <source>Next exercise</source>
-        <translation>Nächste Aufgabe</translation>
-    </message>
-    <message>
-        <source>Exercise history</source>
-        <translation>Aufgabe Verlauf</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>Text Dateien</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Halten</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Error</translation>
-    </message>
-    <message>
-        <source>This file is too large!</source>
-        <translation>Diese Datei ist zu groß!</translation>
-    </message>
-    <message>
-        <source>No error words</source>
-        <translation>Keine Fehlerwörter</translation>
-    </message>
-    <message>
-        <source>You don&apos;t have any error words.</source>
-        <translation>Sie haben keine Fehlerwörter.</translation>
+        <source>Appearance</source>
+        <translation>Aussehen</translation>
     </message>
 </context>
 <context>
     <name>TimeDialog</name>
-    <message>
-        <source>Time</source>
-        <translation>Zeit</translation>
-    </message>
-    <message>
-        <source>Start</source>
-        <translation>Starten</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
-    </message>
     <message>
         <source>Time limit</source>
         <translation>Zeitlimit</translation>
@@ -709,10 +470,60 @@
     </message>
 </context>
 <context>
-    <name>UpdaterQuestion</name>
+    <name>TypingTestDialog</name>
     <message>
-        <source>There&apos;s a new update available. Would you like to download and install it?</source>
-        <translation>Es ist ein neues Update verfügbar. Möchtest du es herunterladen und installieren?</translation>
+        <source>Typing test</source>
+        <translation>Tipp Test</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <extracomment>Typing test text source</extracomment>
+        <translation>Quelle</translation>
+    </message>
+    <message>
+        <source>Selected exercise</source>
+        <translation>Ausgewählte Aufgabe</translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation>Vorschau</translation>
+    </message>
+    <message>
+        <source>From file</source>
+        <translation>Aus Datei</translation>
+    </message>
+    <message>
+        <source>Browse</source>
+        <translation>Durchsuchen</translation>
+    </message>
+    <message>
+        <source>This file is too large!</source>
+        <translation>Diese Datei ist zu groß!</translation>
+    </message>
+    <message>
+        <source>(no file selected)</source>
+        <translation>(keine Datei ausgewählt)</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <extracomment>Typing test options</extracomment>
+        <translation>Optionen</translation>
+    </message>
+    <message>
+        <source>Time limited</source>
+        <translation>Zeitbegrenzt</translation>
+    </message>
+    <message>
+        <source>Character correction after mistake (by program)</source>
+        <translation>Zeichenkorrektur nach einem Fehler (durch das Programm)</translation>
+    </message>
+    <message>
+        <source>Lock user interface</source>
+        <translation>Benutzeroberfläche sperren</translation>
+    </message>
+    <message>
+        <source>Hide text</source>
+        <translation>Text verstecken</translation>
     </message>
 </context>
 </TS>
