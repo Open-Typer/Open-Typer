@@ -191,7 +191,7 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("optionsWindow", &optionsWindow);
 	StatsDialog statsDialog(true, {}, QPair<int, int>(), QString(), 0, 0, 0);
 	engine.rootContext()->setContextProperty("statsDialog", &statsDialog);
-	engine.load("qrc:/qml/QmlWindow.qml");
+	engine.load("qrc:/qml/MainWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
 }
