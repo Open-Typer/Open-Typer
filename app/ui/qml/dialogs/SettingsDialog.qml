@@ -98,6 +98,8 @@ CustomDialog {
 			id: categoryContent
 			Flickable {
 				property url currentComponent
+				property int fixedWidth: stack.implicitWidth
+				property int fixedHeight: stack.implicitHeight
 				id: flickable
 				contentWidth: contentItem.childrenRect.width
 				contentHeight: contentItem.childrenRect.height
