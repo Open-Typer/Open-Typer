@@ -13,4 +13,4 @@ install_name_tool -change \
 	libopentyper-core.${VERSION_MAJOR}.dylib \
 	@rpath/libopentyper-core.${VERSION_MAJOR}.dylib \
 	${app_name}.app/Contents/MacOS/${executable_name}
-macdeployqt ${app_name}.app -qmldir app/ui/qml -dmg
+macdeployqt ${app_name}.app -qmldir=app/ui/qml -dmg
