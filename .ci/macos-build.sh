@@ -6,4 +6,4 @@ export LIBRARY_PATH=`echo /usr/local/Cellar/openssl@1.1/1.1.1*/lib`
 
 mkdir -p ${app_name}.app/Contents/Frameworks
 mv *.dylib ${app_name}.app/Contents/Frameworks/
-macdeployqt ${app_name}.app -dmg
+macdeployqt ${app_name}.app -qmldir app/ui/qml -dmg
