@@ -77,11 +77,12 @@ CustomDialog {
 				if(currentItem == null)
 					return;
 				if(stack.currentItem == null)
-					stack.push(currentItem.source);
+					stack.push(categoryContent);
 				else if(currentIndex > previousIndex)
-					stack.replace(stack.currentItem, currentItem.source, StackView.PushTransition);
+					stack.replace(stack.currentItem, categoryContent, StackView.PushTransition);
 				else
-					stack.replace(stack.currentItem, currentItem.source, StackView.PopTransition);
+					stack.replace(stack.currentItem, categoryContent, StackView.PopTransition);
+				stack.currentItem.currentComponent = currentItem.source;
 				previousIndex = currentIndex;
 			}
 			FontMetrics {
@@ -89,11 +90,31 @@ CustomDialog {
 			}
 		}
 		ToolSeparator { Layout.fillHeight: true }
+		Component {
+			id: categoryContent
+			Flickable {
+				property url currentComponent
+				id: flickable
+				contentWidth: contentItem.childrenRect.width
+				contentHeight: contentItem.childrenRect.height
+				flickableDirection: Flickable.AutoFlickIfNeeded
+				clip: true
+				ScrollBar.vertical: ScrollBar {
+					width: 10
+					position: flickable.visibleArea.yPosition
+					policy: ScrollBar.AlwaysOn
+				}
+				onCurrentComponentChanged: {
+					var component = Qt.createComponent(currentComponent);
+					component.createObject(contentItem);
+				}
+			}
+		}
 		VerticalStackView {
 			id: stack
 			Layout.fillWidth: true
-			implicitWidth: currentItem == null ? 0 : currentItem.implicitWidth
-			implicitHeight: currentItem == null ? 0 : currentItem.implicitHeight
+			implicitWidth: 600
+			implicitHeight: 400
 			initialItem: null
 		}
 	}
