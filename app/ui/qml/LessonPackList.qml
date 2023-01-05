@@ -38,7 +38,10 @@ ListView {
 				currentIndex = items.indexOf(Settings.lessonPack());
 			itemsLoaded();
 		}
-		Component.onCompleted: loadItems()
+		Component.onCompleted: {
+			loadItems();
+			onKeyboardLayoutChanged.connect(loadItems);
+		}
 	}
 	delegate: ItemDelegate {
 		text: name
