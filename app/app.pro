@@ -7,6 +7,9 @@ QTPLUGIN += qsvg
     QT += printsupport
     LIBS += -lssl -lcrypto
 }
+macx {
+    QT += svg
+}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
