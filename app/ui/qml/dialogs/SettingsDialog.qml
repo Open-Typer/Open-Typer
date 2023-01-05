@@ -61,6 +61,11 @@ CustomDialog {
 					sourceComponent: "../settings/BehaviorSettings.qml"
 				}
 				ListElement {
+					name: qsTr("Keyboard")
+					iconSource: "qrc:/res/images/KeyboardOptions.svg"
+					sourceComponent: "../settings/KeyboardSettings.qml"
+				}
+				ListElement {
 					name: qsTr("Appearance")
 					iconSource: "qrc:/res/images/AppearanceOptions.svg"
 					sourceComponent: "../settings/AppearanceSettings.qml"
