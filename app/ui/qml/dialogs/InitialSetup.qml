@@ -45,7 +45,7 @@ CustomDialog {
 		{
 			lastOperationNext = false;
 			currentIndex--;
-			contentItem.stack.push(pages[currentIndex], StackView.PopTransition);
+			contentItem.stack.replace(contentItem.currentItem, pages[currentIndex], StackView.PopTransition);
 		}
 	}
 	function nextPage() {
@@ -53,7 +53,7 @@ CustomDialog {
 		{
 			lastOperationNext = true;
 			currentIndex++;
-			contentItem.stack.push(pages[currentIndex]);
+			contentItem.stack.replace(contentItem.stack.currentItem, pages[currentIndex], StackView.PushTransition);
 		}
 	}
 	function skipPage() { skipPageTimer.start(); }
