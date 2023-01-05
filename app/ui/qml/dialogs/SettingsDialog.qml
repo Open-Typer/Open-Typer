@@ -26,6 +26,7 @@ import "../controls"
 import "../settings"
 
 CustomDialog {
+	signal settingsSynced()
 	id: control
 	windowTitle: qsTr("Settings")
 	standardButtons: Dialog.Cancel | Dialog.Ok
@@ -140,6 +141,12 @@ CustomDialog {
 		contentItem.listView.currentIndex = 0;
 		Settings.freeze();
 	}
-	onAccepted: Settings.saveChanges()
-	onRejected: Settings.discardChanges()
+	onAccepted: {
+		Settings.saveChanges();
+		settingsSynced();
+	}
+	onRejected: {
+		Settings.discardChanges();
+		settingsSynced();
+	}
 }
