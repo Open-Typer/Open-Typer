@@ -390,10 +390,14 @@ ApplicationWindow {
 		}
 	}
 
-	InitialSetup { id: initialSetup }
+	InitialSetup {
+		id: initialSetup
+		onAboutToHide: reload()
+	}
 
 	SettingsDialog {
 		id: settingsDialog
+		onSettingsSynced: reload()
 	}
 
 	MessageBox {
