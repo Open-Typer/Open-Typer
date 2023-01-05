@@ -47,7 +47,6 @@ INCLUDEPATH += \
 LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 
 SOURCES += \
-    src/options/KeyboardOptions.cpp \
     src/packEditor/PackEditor.cpp \
     src/packEditor/PackSelector.cpp \
     src/updater/Updater.cpp \
@@ -55,14 +54,12 @@ SOURCES += \
     src/widgets/KeyboardWidget.cpp
 
 HEADERS += \
-    src/include/options/KeyboardOptions.h \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h \
     src/include/widgets/KeyboardWidget.h
 
 FORMS += \
-    ui/options/KeyboardOptions.ui \
     ui/packEditor/PackEditor.ui \
     ui/packEditor/PackSelector.ui
 
