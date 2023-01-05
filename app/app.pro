@@ -91,7 +91,8 @@ DISTFILES += \
     ui/qml/Paper.qml \
     ui/qml/settings/AppearanceSettings.qml \
     ui/qml/settings/BehaviorSettings.qml \
-    ui/qml/settings/KeyboardSettings.qml
+    ui/qml/settings/KeyboardSettings.qml \
+    ui/qml/settings/LanguageSettings.qml
 
 TRANSLATIONS += \
     translations/Open-Typer_sk_SK.ts \

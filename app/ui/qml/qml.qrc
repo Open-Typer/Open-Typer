@@ -28,5 +28,6 @@
         <file>MainWindow.qml</file>
         <file>settings/BehaviorSettings.qml</file>
         <file>settings/KeyboardSettings.qml</file>
+        <file>settings/LanguageSettings.qml</file>
     </qresource>
 </RCC>
