@@ -19,6 +19,7 @@
  */
 
 #include "Settings.h"
+#include "LanguageManager.h"
 
 QSettings *Settings::settingsInstance = nullptr;
 QSettings *Settings::mainSettingsInstance = nullptr;
@@ -71,6 +72,8 @@ void Settings::discardChanges(void)
 	settingsInstance = mainSettingsInstance;
 	// Emit ThemeEngine signals to update UI
 	emit globalThemeEngine.themeChanged();
+	// Restore previous language
+	globalLanguageManager.setLanguage(globalLanguageManager.getBoxItems().indexOf(language()) - 1);
 	frozen = false;
 }
 
