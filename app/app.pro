@@ -93,7 +93,8 @@ DISTFILES += \
     ui/qml/MainWindow.qml \
     ui/qml/Paper.qml \
     ui/qml/settings/AppearanceSettings.qml \
-    ui/qml/settings/BehaviorSettings.qml
+    ui/qml/settings/BehaviorSettings.qml \
+    ui/qml/settings/KeyboardSettings.qml
 
 TRANSLATIONS += \
     translations/Open-Typer_sk_SK.ts \
