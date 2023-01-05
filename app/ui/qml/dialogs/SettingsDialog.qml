@@ -30,6 +30,8 @@ CustomDialog {
 	standardButtons: Dialog.Cancel | Dialog.Ok
 	dialog.closePolicy: Popup.NoAutoClose
 	contentComponent: RowLayout {
+		property alias listView: listView
+		property alias stack: stack
 		ListView {
 			property int previousIndex: -1
 			id: listView
@@ -72,6 +74,8 @@ CustomDialog {
 				onClicked: listView.currentIndex = index
 			}
 			onCurrentIndexChanged: {
+				if(currentItem == null)
+					return;
 				if(stack.currentItem == null)
 					stack.push(currentItem.source);
 				else if(currentIndex > previousIndex)
@@ -88,12 +92,17 @@ CustomDialog {
 		VerticalStackView {
 			id: stack
 			Layout.fillWidth: true
-			implicitWidth: currentItem.implicitWidth
-			implicitHeight: currentItem.implicitHeight
+			implicitWidth: currentItem == null ? 0 : currentItem.implicitWidth
+			implicitHeight: currentItem == null ? 0 : currentItem.implicitHeight
 			initialItem: null
 		}
 	}
-	onAboutToShow: Settings.freeze()
+	onAboutToShow: {
+		contentItem.stack.clear();
+		contentItem.listView.currentIndex = -1;
+		contentItem.listView.currentIndex = 0;
+		Settings.freeze();
+	}
 	onAccepted: Settings.saveChanges()
 	onRejected: Settings.discardChanges()
 }
