@@ -27,6 +27,9 @@
 #include <QQuickStyle>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#ifdef Q_OS_MACOS
+#include <QtSvg>
+#endif
 #include "Settings.h"
 #include "LanguageManager.h"
 #include "IAddon.h"
