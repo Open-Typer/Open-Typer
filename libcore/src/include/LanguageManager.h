@@ -2,7 +2,7 @@
  * LanguageManager.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
@@ -60,7 +60,6 @@ class CORE_LIB_EXPORT LanguageManager : public QObject
 		Q_INVOKABLE QStringList getBoxItems();
 
 	private:
-		QStringList boxItems {};
 		static const QList<LanguageCountry> supportedLanguagesList;
 		static const QString boxLangItemTemplate;
 		bool initComplete = false;

@@ -2,7 +2,7 @@
  * LanguageManager.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  * Copyright (C) 2022 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
@@ -31,11 +31,6 @@ void LanguageManager::init(void)
 {
 	if(initComplete)
 		return;
-	for(const auto &[lang, country] : supportedLanguagesList)
-	{
-		boxItems += boxLangItemTemplate.arg(QLocale::languageToString(lang), QLocale::countryToString(country));
-	}
-	boxItems.insert(0, tr("System (default)"));
 	initComplete = true;
 }
 
@@ -75,6 +70,10 @@ void LanguageManager::setLanguage(int index)
 /*! Returns list of human-readable items that can be added to a lists (e. g. a combo box). */
 QStringList LanguageManager::getBoxItems()
 {
+	QStringList boxItems;
+	for(const auto &[lang, country] : supportedLanguagesList)
+		boxItems += boxLangItemTemplate.arg(QLocale::languageToString(lang), QLocale::countryToString(country));
+	boxItems.insert(0, tr("System (default)"));
 	return boxItems;
 }
 
