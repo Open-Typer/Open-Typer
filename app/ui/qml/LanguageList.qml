@@ -2,7 +2,7 @@
  * LanguageList.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ ListView {
 	property var items: []
 	id: root
 	model: ListModel {
+		id: listModel
 		function loadItems() {
 			items = LanguageManager.getBoxItems();
 			clear();
@@ -36,7 +37,13 @@ ListView {
 			else
 				root.currentIndex = items.indexOf(Settings.language());
 		}
-		Component.onCompleted: loadItems()
+		Component.onCompleted: {
+			loadItems();
+			LanguageManager.onLanguageChanged.connect(function() {
+				if(listModel != null)
+					listModel.loadItems();
+			});
+		}
 	}
 	delegate: ItemDelegate {
 		text: name
