@@ -1029,6 +1029,7 @@ ApplicationWindow {
 					exerciseText += " " + line;
 			}
 		}
+		exerciseText = exerciseText.replace(/\t/g, " ");
 		customExerciseText = exerciseText;
 		customExerciseLoaded = true;
 		initExercise();
