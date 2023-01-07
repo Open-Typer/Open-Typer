@@ -21,6 +21,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
+import QtQuick.Window 2.2
 import OpenTyper 1.0
 
 // An auto-resizing ComboBox (based on its items)
@@ -44,6 +45,8 @@ ComboBox {
 		radius: 10
 	}
 	popup.implicitWidth: computeWidth(model)
+	popup.height: Math.min(popup.contentItem.implicitHeight, Window.height - popup.topMargin - popup.bottomMargin - mapToItem(Window.contentItem, x, y).y - height * 2)
+	onActivated: console.log(mapToItem(Window.contentItem, x, y).y)
 	popup.y: height
 	function computeWidth(mdl) {
 		if (mdl === null || mdl === undefined)
