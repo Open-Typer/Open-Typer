@@ -2,7 +2,7 @@
  * CustomMenu.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
+import OpenTyper 1.0
 
 Menu {
 	property bool isSubMenu: false
@@ -28,15 +29,10 @@ Menu {
 	y: isSubMenu ? 0 : parent.height
 	font.pointSize: 10
 	background: Rectangle {
-		color: backgroundColor();
+		color: ThemeEngine.bgColor;
+		border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+		radius: 10
 		implicitWidth: 200
 		implicitHeight: 40
-	}
-
-	function backgroundColor() {
-		if(Material.theme === Material.Light)
-			return Qt.rgba(1, 1, 1, 0.95);
-		else
-			return Qt.rgba(0, 0, 0, 0.95);
 	}
 }
