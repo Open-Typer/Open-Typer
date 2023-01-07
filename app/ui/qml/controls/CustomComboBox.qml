@@ -25,7 +25,6 @@ import OpenTyper 1.0
 
 // An auto-resizing ComboBox (based on its items)
 // Fixes: material style popup background color
-// The background is semi-transparent to match with CustomToolButton's design
 // Elevation (shadow) is disabled
 ComboBox {
 	id: control
