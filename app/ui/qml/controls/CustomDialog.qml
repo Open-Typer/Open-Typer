@@ -31,7 +31,7 @@ Item {
 	property Item blurSource: QmlUtils.blurSource
 	property string windowTitle: ""
 	property int standardButtons: Dialog.NoButton
-	readonly property var dialogColor: Material.theme === Material.Light ? "white" : "black"
+	readonly property var dialogColor: ThemeEngine.bgColor
 	readonly property alias dialog: control
 	property alias contentComponent: contentsLoader.sourceComponent
 	readonly property alias contentItem: contentsLoader.item
