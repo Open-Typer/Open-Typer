@@ -2,7 +2,7 @@
  * CustomComboBox.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
+import OpenTyper 1.0
 
 // An auto-resizing ComboBox (based on its items)
 // Fixes: material style popup background color
@@ -39,7 +40,9 @@ ComboBox {
 	background.layer.enabled: false
 
 	popup.background: Rectangle {
-		color: backgroundColor()
+		color: ThemeEngine.bgColor
+		border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+		radius: 10
 	}
 	popup.implicitWidth: computeWidth(model)
 	popup.y: height
@@ -56,11 +59,5 @@ ComboBox {
 		pwidth += control.contentItem.rightPadding + control.contentItem.leftPadding;
 		pwidth += control.indicator.width
 		return pwidth;
-	}
-	function backgroundColor() {
-		if(control.Material.theme === Material.Light)
-			return Qt.rgba(1, 1, 1, 0.85);
-		else
-			return Qt.rgba(0, 0, 0, 0.85);
 	}
 }
