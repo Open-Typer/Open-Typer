@@ -341,7 +341,7 @@ void ThemeEngine::resetBgColor(void)
 QColor ThemeEngine::defaultBgColor(bool dark)
 {
 	if(dark)
-		return QColor(25, 35, 45);
+		return QColor(31, 30, 28);
 	else
 		return QColor(255, 255, 255);
 }
@@ -383,7 +383,7 @@ void ThemeEngine::resetPaperColor(void)
 QColor ThemeEngine::defaultPaperColor(bool dark)
 {
 	if(dark)
-		return QColor(15, 25, 35);
+		return QColor(30, 30, 30);
 	else
 		return QColor(255, 255, 255);
 }
@@ -425,7 +425,7 @@ void ThemeEngine::resetPanelColor(void)
 QColor ThemeEngine::defaultPanelColor(bool dark)
 {
 	if(dark)
-		return QColor(20, 33, 47);
+		return QColor(41, 41, 41);
 	else
 		return QColor(255, 255, 255);
 }
