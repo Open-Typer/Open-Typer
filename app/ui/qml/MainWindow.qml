@@ -22,6 +22,8 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.2
+import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
 import "controls"
 import "dialogs"
@@ -175,6 +177,17 @@ ApplicationWindow {
 			loadLesson(currentLesson, currentSublesson);
 			loadSublesson(currentExercise);
 		}
+	}
+
+	DropShadow {
+		source: mainLayout
+		anchors.fill: mainLayout
+		horizontalOffset: 0
+		verticalOffset: 5
+		radius: 20
+		samples: 16
+		color: ThemeEngine.style === ThemeEngine.DarkStyle ? "#80000000" : "#80000022"
+		visible: true
 	}
 
 	ColumnLayout {
