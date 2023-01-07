@@ -927,8 +927,8 @@ ApplicationWindow {
 
 	function endExercise() {
 		exerciseInProgress = false;
-		fullInput.replace("‘", "'");
-		displayExercise.replace("‘", "'");
+		fullInput.replace(/‘/g, "'");
+		displayExercise.replace(/‘/g, "'");
 		var validator = Qt.createQmlObject("import OpenTyper 1.0; ExerciseValidator {}", root);
 		validator.exerciseText = displayExercise;
 		validator.inputText = fullInput;
