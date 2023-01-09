@@ -21,7 +21,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import OpenTyper 1.0
 import "../controls"
 import "../settings"
 
@@ -81,12 +80,9 @@ CustomDialog {
 				property string source: sourceComponent
 				text: name
 				width: listView.width
+				icon.source: iconSource
 				highlighted: ListView.isCurrentItem
 				onClicked: listView.currentIndex = index
-				Component.onCompleted: {
-					if(!((QmlUtils.qtVersionMajor() === 5) && (QmlUtils.qtVersionMinor() < 10)))
-						icon.source = iconSource;
-				}
 			}
 			onCurrentIndexChanged: {
 				if(currentItem == null)
