@@ -398,6 +398,7 @@ ApplicationWindow {
 			Layout.fillHeight: true
 			Layout.topMargin: 10
 			summary.visible: preview
+			blockInput: root.blockInput
 			onKeyPressed: keyPress(event);
 			onKeyReleased: console.log("released: " + event["text"]);
 		}
