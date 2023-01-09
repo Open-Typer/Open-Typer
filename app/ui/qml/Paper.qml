@@ -2,7 +2,7 @@
  * Paper.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,6 +39,7 @@ Item {
 	property string remaining: ""
 	property bool remainingVisible: true
 	property alias summary: summary
+	property bool blockInput: false
 	signal keyPressed(var event)
 	signal keyReleased(var event)
 	id: control
@@ -58,12 +59,13 @@ Item {
 	}
 
 	Rectangle {
+		property int textWidth: Math.max(currentLineText.textWidth, inputText.textWidth, remainingText.textWidth)
 		id: paperRect
 		radius: 10
 		border.color: Qt.rgba(materialColor.r, materialColor.g, materialColor.b, 0.25)
 		border.width: 0.5
 		anchors.centerIn: parent
-		width: textMargins * 3 + Math.max(currentLineText.textWidth, inputText.textWidth, remainingText.textWidth);
+		width: textMargins * 3 + textWidth;
 		height: parent.height
 		color: ThemeEngine.paperColor
 		clip: true
@@ -95,80 +97,101 @@ Item {
 				Layout.fillWidth: true
 				visible: currentLineVisible
 			}
-			TextEdit {
-				property int textWidth: Math.max(calculateTextWidth(text, inputTextMetrics), calculateTextWidth(errorText.text, errorTextMetrics));
-				property bool lockFocus: false
-				property bool cursorBlinkState: true
-				id: inputText
+			Flickable {
+				id: inputFlickable
 				Layout.fillWidth: true
+				Layout.fillHeight: true
 				Layout.alignment: Qt.AlignTop
-				topPadding: 0
-				text: input
-				font: ThemeEngine.font
-				color: ThemeEngine.inputTextColor
-				readOnly: false
-				selectByMouse: false
-				selectByKeyboard: false
-				clip: true
-				visible: inputVisible
-				onFocusChanged: {
-					if(focus && !lockFocus)
-					{
-						forceActiveFocus();
-						cursorVisible = true;
-						keyboardHandler.focus = true;
-					}
+				contentWidth: width
+				contentHeight: Math.max(inputText.text.split('\n').length * inputTextMetrics.height, errorText.text.split('\n').length * errorTextMetrics.height)
+				flickableDirection: Flickable.VerticalFlick
+				interactive: summary.visible
+				ScrollBar.vertical: ScrollBar {
+					width: 10
+					position: inputFlickable.visibleArea.yPosition
+					policy: ScrollBar.AlwaysOn
 				}
-				onCursorVisibleChanged: {
-					if(!cursorVisible)
-						cursorVisible = true;
-				}
-				onTextChanged: {
-					lockFocus = true;
-					forceActiveFocus();
-					cursorPosition = text.length;
-					lockFocus = false;
-					keyboardHandler.focus = true;
-					cursorTimer.restart();
-					cursorBlinkState = true;
-				}
-				cursorDelegate: Rectangle {
-					visible: parent.cursorVisible && parent.cursorBlinkState
-					color: Material.foreground
-					width: parent.cursorRectangle.width
-				}
-
-				Timer {
-					id: cursorTimer
-					interval: 500
-					repeat: true
-					running: true
-					onTriggered: parent.cursorBlinkState = !parent.cursorBlinkState;
-				}
-
-				MouseArea {
+				TextEdit {
+					property int textWidth: Math.max(calculateTextWidth(text, inputTextMetrics), calculateTextWidth(errorText.text, errorTextMetrics));
+					property bool lockFocus: false
+					property bool cursorBlinkState: true
+					id: inputText
 					anchors.fill: parent
-					cursorShape: Qt.IBeamCursor
-					onClicked: parent.forceActiveFocus();
-				}
-				Label {
-					id: errorText
-					anchors.fill: parent
-					background: null
-					text: mistake
+					topPadding: 0
+					text: input
 					font: ThemeEngine.font
-					color: Qt.rgba(0.84, 0.28, 0.06, 1)
+					color: ThemeEngine.inputTextColor
+					readOnly: blockInput
+					selectByMouse: false
+					selectByKeyboard: false
 					clip: true
-					visible: mistakeVisible
+					visible: inputVisible
+					onFocusChanged: {
+						if(focus && !lockFocus && !blockInput)
+						{
+							forceActiveFocus();
+							cursorVisible = true;
+							keyboardHandler.focus = true;
+						}
+					}
+					onCursorVisibleChanged: {
+						if(!cursorVisible && !blockInput)
+							cursorVisible = true;
+					}
+					onTextChanged: {
+						lockFocus = true;
+						forceActiveFocus();
+						cursorPosition = text.length;
+						lockFocus = false;
+						keyboardHandler.focus = true;
+						cursorTimer.restart();
+						cursorBlinkState = true;
+					}
+					cursorDelegate: Rectangle {
+						visible: parent.cursorVisible && parent.cursorBlinkState
+						color: Material.foreground
+						width: parent.cursorRectangle.width
+					}
+
+					Timer {
+						id: cursorTimer
+						interval: 500
+						repeat: true
+						running: true
+						onTriggered: parent.cursorBlinkState = !parent.cursorBlinkState;
+					}
+
+					MouseArea {
+						anchors.fill: parent
+						cursorShape: Qt.IBeamCursor
+						onClicked: {
+							if(!blockInput)
+								parent.forceActiveFocus();
+						}
+					}
+					Label {
+						id: errorText
+						anchors.fill: parent
+						background: null
+						text: mistake
+						font: ThemeEngine.font
+						color: Qt.rgba(0.84, 0.28, 0.06, 1)
+						clip: true
+						visible: mistakeVisible
+						FontMetrics {
+							id: errorTextMetrics
+							font: errorText.font
+						}
+					}
 					FontMetrics {
-						id: errorTextMetrics
-						font: errorText.font
+						id: inputTextMetrics
+						font: inputText.font
 					}
 				}
-				FontMetrics {
-					id: inputTextMetrics
-					font: inputText.font
-				}
+			}
+			Item {
+				// This is just a spacer between input text and remaining text
+				height: 25
 			}
 			Frame {
 				// The Label needs to be inside an Item for opacity gradient to work
@@ -212,8 +235,8 @@ Item {
 			}
 			ExerciseSummary {
 				id: summary
+				Layout.alignment: Qt.AlignBottom
 				Layout.fillWidth: true
-				Layout.fillHeight: true
 			}
 		}
 	}
