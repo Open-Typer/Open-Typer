@@ -257,19 +257,8 @@ Item {
 			height: control.height
 			radius: control.radius
 		}
-		Component {
-			id: overlayModal
-			Rectangle {
-				color: Qt.rgba(0, 0, 0, 0.25)
-			}
-		}
-		Component.onCompleted: {
-			if((QmlUtils.qtVersionMajor() === 5) && (QmlUtils.qtVersionMinor() < 10))
-				overlay.modal = overlayModal;
-			else
-				NewControls.Overlay.modal = overlayModal;
-			control.dim = false;
-			control.dim = true;
+		NewControls.Overlay.modal: Rectangle {
+			color: Qt.rgba(0, 0, 0, 0.25)
 		}
 		onAccepted: root.accepted()
 		onRejected: root.rejected()
