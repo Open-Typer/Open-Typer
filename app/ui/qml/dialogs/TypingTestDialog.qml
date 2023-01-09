@@ -171,10 +171,7 @@ CustomDialog {
 					var exercise = exerciseBox.currentIndex + 1;
 					var exerciseText = parserObj.initExercise(parserObj.exerciseText(lesson, sublesson, exercise),
 										  parserObj.exerciseLineLength(lesson, sublesson, exercise));
-					if((QmlUtils.qtVersionMajor() === 5) && (QmlUtils.qtVersionMinor(12) >= 12) || (QmlUtils.qtVersionMajor() > 5))
-						previewToolTip.show(exerciseText, 5000);
-					else
-						ToolTip.show(exerciseText, 5000);
+					previewToolTip.show(exerciseText, 5000);
 				}
 				ToolTip {
 					id: previewToolTip
