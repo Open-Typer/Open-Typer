@@ -48,6 +48,7 @@ ComboBox {
 	popup.height: Math.min(popup.contentItem.implicitHeight, Window.height - popup.topMargin - popup.bottomMargin - mapToItem(Window.contentItem, x, y).y - height * 2)
 	onActivated: console.log(mapToItem(Window.contentItem, x, y).y)
 	popup.y: height
+	background.clip: true
 	function computeWidth(mdl) {
 		if (mdl === null || mdl === undefined)
 			return 100; // width of an empty combo box
