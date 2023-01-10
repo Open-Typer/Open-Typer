@@ -223,7 +223,7 @@ Item {
 					source: remainingText
 					visible: false
 					gradient: Gradient {
-						GradientStop { position: 0; color: ThemeEngine.exerciseTextColor }
+						GradientStop { position: 0; color: Qt.rgba(ThemeEngine.exerciseTextColor.r, ThemeEngine.exerciseTextColor.g, ThemeEngine.exerciseTextColor.b, 0.6) }
 						GradientStop { position: 1; color: Qt.rgba(0, 0, 0, 0) }
 					}
 				}
