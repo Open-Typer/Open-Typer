@@ -21,9 +21,9 @@
 
 #include "LanguageManager.h"
 
-QTranslator *translator1 = nullptr;
-QTranslator *translator2 = nullptr;
-QTranslator *translator3 = nullptr;
+QTranslator *translator_app = nullptr;
+QTranslator *translator_libcore = nullptr;
+QTranslator *translator_qt = nullptr;
 LanguageManager globalLanguageManager;
 
 /*! Initializes the language manager. */
@@ -45,24 +45,24 @@ void LanguageManager::setLanguage(int index)
 		const auto [lang, country] = supportedLanguagesList.at(index);
 		targetLocale = QLocale(lang, country);
 	}
-	if(!translator1)
+	if(!translator_app)
 	{
-		translator1 = new QTranslator(qApp);
-		QCoreApplication::installTranslator(translator1);
+		translator_app = new QTranslator(qApp);
+		QCoreApplication::installTranslator(translator_app);
 	}
-	if(!translator2)
+	if(!translator_libcore)
 	{
-		translator2 = new QTranslator(qApp);
-		QCoreApplication::installTranslator(translator2);
+		translator_libcore = new QTranslator(qApp);
+		QCoreApplication::installTranslator(translator_libcore);
 	}
-	if(!translator3)
+	if(!translator_qt)
 	{
-		translator3 = new QTranslator(qApp);
-		QCoreApplication::installTranslator(translator3);
+		translator_qt = new QTranslator(qApp);
+		QCoreApplication::installTranslator(translator_qt);
 	}
-	translator1->load(targetLocale, "Open-Typer", "_", ":/res/lang");
-	translator2->load(targetLocale, "libcore", "_", ":/res/lang");
-	translator3->load(targetLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qtbase_");
+	translator_app->load(targetLocale, "Open-Typer", "_", ":/res/lang");
+	translator_libcore->load(targetLocale, "libcore", "_", ":/res/lang");
+	translator_qt->load(targetLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath) + "/qtbase_");
 	globalThemeEngine.updateThemeList();
 	emit languageChanged();
 }

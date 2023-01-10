@@ -36,9 +36,9 @@
 #include <QLibraryInfo>
 #include "ThemeEngine.h"
 
-extern QTranslator *translator1;
-extern QTranslator *translator2;
-extern QTranslator *translator3;
+extern QTranslator *translator_app;
+extern QTranslator *translator_libcore;
+extern QTranslator *translator_qt;
 
 /*!
  * \brief The LanguageManager class provides a list of supported languages.
