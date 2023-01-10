@@ -35,7 +35,7 @@ CustomDialog {
 	property bool firstLoad
 	id: control
 	windowTitle: qsTr("Typing test")
-	standardButtons: Dialog.Close | Dialog.Ok
+	standardButtons: Dialog.Cancel | Dialog.Ok
 	onAboutToShow: {
 		console.assert(parserObj != null);
 		firstLoad = true;
