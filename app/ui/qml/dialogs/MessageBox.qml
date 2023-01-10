@@ -25,22 +25,41 @@ import OpenTyper 1.0
 import "../controls"
 
 CustomDialog {
-	readonly property int noIcon: QmlUtils.NoIcon
-	readonly property int information: QmlUtils.Information
-	readonly property int warning: QmlUtils.Warning
-	readonly property int critical: QmlUtils.Critical
-	readonly property int question: QmlUtils.Question
+	enum Icon {
+		NoIcon,
+		Information,
+		Warning,
+		Critical,
+		Question
+	}
 	property string title: ""
-	property int icon: noIcon
+	property int icon: MessageBox.NoIcon
 	standardButtons: Dialog.Ok
 	contentComponent: RowLayout {
 		Image {
-			source: icon == noIcon ? null : QmlUtils.standardIconStr(icon)
+			source: icon === MessageBox.NoIcon ? null : QmlUtils.standardIconStr(getIcon(icon))
 		}
 		Label {
 			text: title
 			font.bold: true
 			font.pointSize: 14
+		}
+	}
+
+	function getIcon(icon) {
+		switch(icon) {
+			case MessageBox.NoIcon:
+				return QmlUtils.NoIcon;
+			case MessageBox.Information:
+				return QmlUtils.Information;
+			case MessageBox.Warning:
+				return QmlUtils.Warning;
+			case MessageBox.Critical:
+				return QmlUtils.Critical;
+			case MessageBox.Question:
+				return QmlUtils.Question;
+			default:
+				return QmlUtils.NoIcon;
 		}
 	}
 }
