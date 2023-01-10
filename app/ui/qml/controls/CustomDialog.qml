@@ -237,9 +237,6 @@ Item {
 				}
 				onAccepted: control.accept()
 				onRejected: control.reject()
-				function getStandardButton(button) {
-					return standardButton(button);
-				}
 			}
 		}
 		footer: Loader {
