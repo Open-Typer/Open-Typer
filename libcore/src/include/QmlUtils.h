@@ -61,6 +61,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		static QPixmap standardIcon(StandardIcon icon);
 		Q_INVOKABLE static QString standardIconStr(StandardIcon icon);
 		Q_INVOKABLE static QStringList fontFamilies(bool fixedPitch = false);
+		Q_INVOKABLE static QString translateStandardButton(QString buttonText);
 
 	private:
 		static QString convertPixmap(QPixmap pixmap);

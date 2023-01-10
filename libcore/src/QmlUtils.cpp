@@ -231,3 +231,13 @@ QStringList QmlUtils::fontFamilies(bool fixedPitch)
 	}
 	return out;
 }
+
+/*! Returns translated standard button text. */
+QString QmlUtils::translateStandardButton(QString buttonText)
+{
+	QString translated = QCoreApplication::translate("QDialogButtonBox", buttonText.toStdString().c_str());
+	if(translated == buttonText)
+		// Some button translations are in QPlatformTheme
+		translated = QCoreApplication::translate("QPlatformTheme", buttonText.toStdString().c_str());
+	return translated;
+}
