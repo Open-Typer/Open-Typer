@@ -241,6 +241,46 @@ Item {
 				onHelpRequested: control.helpRequested()
 				onRejected: control.reject()
 				onReset: control.reset()
+				function retranslateButtons() {
+					if(standardButton(Dialog.Ok))
+						standardButton(Dialog.Ok).text = QmlUtils.translateStandardButton("OK");
+					if(standardButton(Dialog.Open))
+						standardButton(Dialog.Open).text = QmlUtils.translateStandardButton("Open");
+					if(standardButton(Dialog.Save))
+						standardButton(Dialog.Save).text = QmlUtils.translateStandardButton("Save");
+					if(standardButton(Dialog.Cancel))
+						standardButton(Dialog.Cancel).text = QmlUtils.translateStandardButton("Cancel");
+					if(standardButton(Dialog.Close))
+						standardButton(Dialog.Close).text = QmlUtils.translateStandardButton("Close");
+					if(standardButton(Dialog.Discard))
+						standardButton(Dialog.Discard).text = QmlUtils.translateStandardButton("Discard");
+					if(standardButton(Dialog.Apply))
+						standardButton(Dialog.Apply).text = QmlUtils.translateStandardButton("Apply");
+					if(standardButton(Dialog.Reset))
+						standardButton(Dialog.Reset).text = QmlUtils.translateStandardButton("Reset");
+					if(standardButton(Dialog.RestoreDefaults))
+						standardButton(Dialog.RestoreDefaults).text = QmlUtils.translateStandardButton("Restore Defaults");
+					if(standardButton(Dialog.Help))
+						standardButton(Dialog.Help).text = QmlUtils.translateStandardButton("Help");
+					if(standardButton(Dialog.SaveAll))
+						standardButton(Dialog.SaveAll).text = QmlUtils.translateStandardButton("Save All");
+					if(standardButton(Dialog.Yes))
+						standardButton(Dialog.Yes).text = QmlUtils.translateStandardButton("Yes");
+					if(standardButton(Dialog.YesToAll))
+						standardButton(Dialog.YesToAll).text = QmlUtils.translateStandardButton("Yes to All");
+					if(standardButton(Dialog.No))
+						standardButton(Dialog.No).text = QmlUtils.translateStandardButton("No");
+					if(standardButton(Dialog.NoToAll))
+						standardButton(Dialog.NoToAll).text = QmlUtils.translateStandardButton("No to All");
+					if(standardButton(Dialog.Abort))
+						standardButton(Dialog.Abort).text = QmlUtils.translateStandardButton("Abort");
+					if(standardButton(Dialog.Retry))
+						standardButton(Dialog.Retry).text = QmlUtils.translateStandardButton("Retry");
+					if(standardButton(Dialog.Ignore))
+						standardButton(Dialog.Ignore).text = QmlUtils.translateStandardButton("Ignore");
+				}
+				Component.onCompleted: retranslateButtons()
+				onStandardButtonsChanged: retranslateButtons()
 			}
 		}
 		footer: Loader {
@@ -249,6 +289,15 @@ Item {
 			Connections {
 				target: LanguageManager
 				function onLanguageChanged() {
+					translationTimer.start();
+				}
+			}
+			Timer {
+				id: translationTimer
+				interval: 16
+				running: false
+				repeat: false
+				onTriggered: {
 					buttonBoxLoader.active = 0;
 					buttonBoxLoader.active = 1;
 				}
