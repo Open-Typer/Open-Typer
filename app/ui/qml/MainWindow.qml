@@ -418,7 +418,7 @@ ApplicationWindow {
 		id: largeFileBox
 		windowTitle: qsTr("Error");
 		title: qsTr("This file is too large!")
-		icon: critical
+		icon: MessageBox.Critical
 	}
 
 	TypingTestDialog {
@@ -436,7 +436,7 @@ ApplicationWindow {
 		id: noErrorWordsBox
 		windowTitle: qsTr("No error words");
 		title: qsTr("You don't have any error words.")
-		icon: information
+		icon: MessageBox.Information
 	}
 
 	function reload() {
