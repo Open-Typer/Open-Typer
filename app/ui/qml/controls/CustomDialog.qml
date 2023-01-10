@@ -236,7 +236,11 @@ Item {
 					radius: control.radius
 				}
 				onAccepted: control.accept()
+				onApplied: control.applied()
+				onDiscarded: control.discarded()
+				onHelpRequested: control.helpRequested()
 				onRejected: control.reject()
+				onReset: control.reset()
 			}
 		}
 		footer: Loader {
