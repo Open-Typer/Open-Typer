@@ -38,8 +38,11 @@ Item {
 	property bool draggable: true
 	property bool fillWindow: false
 	signal accepted()
-	// TODO: Add signals introduced in Qt 5.10
+	signal applied()
+	signal discarded()
+	signal helpRequested()
 	signal rejected()
+	signal reset()
 	signal aboutToShow()
 	signal aboutToHide()
 	id: root
@@ -260,6 +263,10 @@ Item {
 			color: Qt.rgba(0, 0, 0, 0.25)
 		}
 		onAccepted: root.accepted()
+		onApplied: root.applied()
+		onDiscarded: root.discarded()
+		onHelpRequested: root.helpRequested()
 		onRejected: root.rejected()
+		onReset: root.reset()
 	}
 }
