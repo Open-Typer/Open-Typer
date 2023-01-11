@@ -23,6 +23,7 @@ jobs:
     - uses: docker/setup-qemu-action@v1
     - name: Run lrelease
       run: |
+        sudo apt update
         sudo apt install -y qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools qttools5-dev-tools
         lrelease *.pro
       shell: bash
