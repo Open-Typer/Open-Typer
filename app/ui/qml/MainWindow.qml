@@ -217,17 +217,17 @@ ApplicationWindow {
 			enabled: !uiLocked
 			control: RowLayout {
 				CustomToolButton {
-					iconName: "settings"
+					icon.name: "settings"
 					toolTipText: qsTr("Options")
 					onClicked: settingsDialog.open()
 				}
 				CustomToolButton {
-					iconName: "open"
+					icon.name: "open"
 					toolTipText: qsTr("Open")
 					onClicked: customExFileDialog.getOpenFileContent()
 				}
 				CustomToolButton {
-					iconName: "print"
+					icon.name: "print"
 					toolTipText: qsTr("Print")
 					visible: !QmlUtils.osWasm();
 					onClicked: {
@@ -239,7 +239,7 @@ ApplicationWindow {
 				}
 				ToolSeparator {}
 				CustomToolButton {
-					iconName: "paper"
+					icon.name: "paper"
 					text: qsTr("Typing test")
 					onClicked: {
 						// TODO: Send events
@@ -255,12 +255,12 @@ ApplicationWindow {
 					}
 				}
 				CustomToolButton {
-					iconName: "time"
+					icon.name: "time"
 					text: qsTr("Timed exercise")
 					onClicked: timeDialog.open()
 				}
 				CustomToolButton {
-					iconName: "close"
+					icon.name: "close"
 					text: qsTr("Text from error words")
 					onClicked: {
 						if(errorWords.length == 0)
@@ -294,7 +294,7 @@ ApplicationWindow {
 					}
 				}
 				CustomToolButton {
-					iconName: "rewind"
+					icon.name: "rewind"
 					text: qsTr("Reverse text")
 					onClicked: {
 						var oldText = parser.initText(exerciseText);
@@ -318,13 +318,13 @@ ApplicationWindow {
 				property alias sublessonBox: sublessonBox
 				property alias exerciseBox: exerciseBox
 				CustomToolButton {
-					iconName: "repeat"
+					icon.name: "repeat"
 					toolTipText: qsTr("Repeat exercise")
 					onClicked: repeatExercise();
 				}
 				CustomToolButton {
 					id: closeLoadedExButton
-					iconName: "close"
+					icon.name: "close"
 					toolTipText: qsTr("Close loaded exercise")
 					onClicked: {
 						customExerciseLoaded = false
@@ -332,12 +332,12 @@ ApplicationWindow {
 					}
 				}
 				CustomToolButton {
-					iconName: "left"
+					icon.name: "left"
 					toolTipText: qsTr("Previous exercise")
 					onClicked: previousExercise();
 				}
 				CustomToolButton {
-					iconName: "right"
+					icon.name: "right"
 					toolTipText: qsTr("Next exercise")
 					onClicked: nextExercise();
 				}
@@ -347,7 +347,7 @@ ApplicationWindow {
 				ToolSeparator {}
 				CustomToolButton {
 					id: statsButton
-					iconName: "stats"
+					icon.name: "stats"
 					text: qsTr("Exercise history")
 					onClicked: {
 						// TODO: Send load stats event
@@ -373,7 +373,7 @@ ApplicationWindow {
 				}
 				CustomToolButton {
 					visible: !uiLocked
-					iconName: "close"
+					icon.name: "close"
 					toolTipText: qsTr("Stop")
 					onClicked: {
 						changeMode(0);
