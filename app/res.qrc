@@ -35,9 +35,5 @@
         <file>res/images/print.png</file>
         <file>res/images/new.png</file>
         <file>res/images/paper.png</file>
-        <file>res/images/languageOptions.svg</file>
-        <file>res/images/BehaviorOptions.svg</file>
-        <file>res/images/KeyboardOptions.svg</file>
-        <file>res/images/AppearanceOptions.svg</file>
     </qresource>
 </RCC>
