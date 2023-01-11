@@ -58,22 +58,22 @@ CustomDialog {
 			model: ListModel {
 				ListElement {
 					name: qsTr("Language")
-					iconSource: "qrc:/res/images/languageOptions.svg"
+					iconName: "language"
 					sourceComponent: "../settings/LanguageSettings.qml"
 				}
 				ListElement {
 					name: qsTr("Behavior")
-					iconSource: "qrc:/res/images/BehaviorOptions.svg"
+					iconName: "tweaks"
 					sourceComponent: "../settings/BehaviorSettings.qml"
 				}
 				ListElement {
 					name: qsTr("Keyboard")
-					iconSource: "qrc:/res/images/KeyboardOptions.svg"
+					iconName: "keyboard"
 					sourceComponent: "../settings/KeyboardSettings.qml"
 				}
 				ListElement {
 					name: qsTr("Appearance")
-					iconSource: "qrc:/res/images/AppearanceOptions.svg"
+					iconName: "appearance"
 					sourceComponent: "../settings/AppearanceSettings.qml"
 				}
 			}
@@ -81,7 +81,7 @@ CustomDialog {
 				property string source: sourceComponent
 				text: name
 				width: listView.width
-				icon.source: iconSource
+				icon.name: iconName
 				highlighted: ListView.isCurrentItem
 				onClicked: listView.currentIndex = index
 			}
