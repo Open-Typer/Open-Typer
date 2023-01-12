@@ -148,12 +148,22 @@ Panel {
 		}
 	}
 
-	control: RowLayout {
+	control: MenuBar {
 		id: uiMenuBar
-
-		Connections {
-			target: QmlUtils
-			function onMenuBarReloadTriggered() { reload(); }
+		background: null
+		delegate: MenuBarItem {
+			id: menuBarItem
+			implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
+			leftPadding: 10
+			rightPadding: 10
+			topPadding: 5
+			bottomPadding: 5
+			font.pointSize: 10
+			Material.background: Qt.rgba(0, 0, 0, 0)
+			contentItem: Label {
+				text: menuBarItem.text
+				font: menuBarItem.font
+			}
 		}
 
 		function reload() {
@@ -162,7 +172,7 @@ Panel {
 			for(var i = 0; i < menuObjects.length; i++)
 				menuObjects[i].destroy();
 			menuObjects = [];
-			createMenuBar(uiMenuBar, "MenuButton", "CustomMenu", "CustomMenuItem", "MenuSeparator");
+			createMenuBar(uiMenuBar, "", "CustomMenu", "CustomMenuItem", "MenuSeparator");
 		}
 		Component.onCompleted: reload();
 	}
