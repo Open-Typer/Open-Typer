@@ -178,6 +178,7 @@ Item {
 		onClosed: {
 			blur.visible = false;
 			dialogMask.resetPos();
+			QmlUtils.reloadMenuBar();
 		}
 		header: Rectangle {
 			color: dialogColor
