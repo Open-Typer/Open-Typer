@@ -18,11 +18,11 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.12
+import QtQuick.Controls 2.5
 import QtQuick.Controls 2.3 as NewControls
-import QtQuick.Controls.Material 2.2
-import QtQuick.Layouts 1.3
+import QtQuick.Controls.Material 2.5
+import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
