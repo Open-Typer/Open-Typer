@@ -1,5 +1,9 @@
 QT += widgets charts quick
 
+linux {
+        QT += dbus
+}
+
 !wasm {
 	QT += printsupport
 	LIBS += -lssl -lcrypto
