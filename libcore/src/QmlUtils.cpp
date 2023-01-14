@@ -30,6 +30,10 @@
 #include <QTextDocument>
 #include <QAbstractTextDocumentLayout>
 #endif
+#ifdef Q_OS_LINUX
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusConnectionInterface>
+#endif
 #include "QmlUtils.h"
 #include "ThemeEngine.h"
 #include "ConfigParser.h"
@@ -50,8 +54,18 @@ QQuickItem *QmlUtils::blurSource(void)
 /*! Returns true if the application uses native menu bar. */
 bool QmlUtils::nativeMenuBar(void)
 {
-	QMenuBar menuBar;
-	return menuBar.isNativeMenuBar();
+#if defined(Q_OS_MACOS)
+	return true;
+#elif defined(Q_OS_LINUX)
+	const QDBusConnection connection = QDBusConnection::sessionBus();
+	static const QString registrarService = QStringLiteral("com.canonical.AppMenu.Registrar");
+	if(const auto iface = connection.interface())
+		return iface->isServiceRegistered(registrarService);
+	else
+		return false;
+#else
+	return false;
+#endif
 }
 
 /*! Returns major version of Qt. */
