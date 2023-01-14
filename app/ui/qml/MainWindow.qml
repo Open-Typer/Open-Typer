@@ -77,7 +77,7 @@ ApplicationWindow {
 	property bool uiLocked: false
 	property string formattedExerciseTime
 	property string formattedExerciseRemainingTime
-	Material.theme: ThemeEngine.style === ThemeEngine.DarkStyle ? Material.Dark : Material.Light
+	Material.theme: ThemeEngine.theme === ThemeEngine.DarkTheme ? Material.Dark : Material.Light
 	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
 	color: ThemeEngine.bgColor
 	minimumWidth: mainLayout.minWidth
@@ -219,7 +219,7 @@ ApplicationWindow {
 		verticalOffset: 5
 		radius: 20
 		samples: 16
-		color: ThemeEngine.style === ThemeEngine.DarkStyle ? "#80000000" : "#80000022"
+		color: ThemeEngine.theme === ThemeEngine.DarkTheme ? "#80000000" : "#80000022"
 		visible: true
 	}
 
