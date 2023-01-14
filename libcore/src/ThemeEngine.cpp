@@ -581,7 +581,7 @@ void ThemeEngine::setSimpleTheme(SimpleTheme theme)
 	switch(theme)
 	{
 		case SimpleTheme::LightTheme:
-			setTheme(4); // light blue
+			setTheme(0); // light
 			break;
 		case SimpleTheme::DarkTheme:
 			setTheme(1); // dark
