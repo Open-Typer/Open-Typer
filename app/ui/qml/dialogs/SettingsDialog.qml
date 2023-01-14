@@ -139,11 +139,13 @@ CustomDialog {
 		Settings.freeze();
 	}
 	onAccepted: {
-		Settings.saveChanges();
+		if(Settings.isFrozen())
+			Settings.saveChanges();
 		settingsSynced();
 	}
 	onRejected: {
-		Settings.discardChanges();
+		if(Settings.isFrozen())
+			Settings.discardChanges();
 		settingsSynced();
 	}
 }
