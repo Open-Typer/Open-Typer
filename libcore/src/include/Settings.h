@@ -85,6 +85,7 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static void freeze(void);
 		Q_INVOKABLE static void saveChanges(void);
 		Q_INVOKABLE static void discardChanges(void);
+		Q_INVOKABLE static bool isFrozen(void);
 		// language
 		Q_INVOKABLE static QString language(void);
 		Q_INVOKABLE static bool containsLanguage(void);

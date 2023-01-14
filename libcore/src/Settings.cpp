@@ -77,6 +77,12 @@ void Settings::discardChanges(void)
 	frozen = false;
 }
 
+/*! Returns true if settings are frozen. \see freeze(). */
+bool Settings::isFrozen(void)
+{
+	return frozen;
+}
+
 /*! Returns the value of the given key. */
 QVariant Settings::get(QString key, QVariant defaultValue)
 {
