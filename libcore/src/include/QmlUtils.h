@@ -36,6 +36,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QQuickItem *blurSource READ blurSource WRITE setBlurSource NOTIFY blurSourceChanged)
+		Q_PROPERTY(QQuickItem *menuBarBlur READ menuBarBlur WRITE setMenuBarBlur NOTIFY menuBarBlurChanged)
 	public:
 		enum StandardIcon
 		{
@@ -49,6 +50,8 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 
 		void setBlurSource(QQuickItem *item);
 		QQuickItem *blurSource(void);
+		void setMenuBarBlur(QQuickItem *item);
+		QQuickItem *menuBarBlur(void);
 		Q_INVOKABLE static bool nativeMenuBar(void);
 		Q_INVOKABLE static int qtVersionMajor(void);
 		Q_INVOKABLE static int qtVersionMinor(void);
@@ -66,9 +69,11 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 	private:
 		static QString convertPixmap(QPixmap pixmap);
 		QQuickItem *m_blurSource = nullptr;
+		QQuickItem *m_menuBarBlur = nullptr;
 
 	signals:
 		void blurSourceChanged(QQuickItem *item);
+		void menuBarBlurChanged(QQuickItem *item);
 		void menuBarReloadTriggered(void);
 };
 

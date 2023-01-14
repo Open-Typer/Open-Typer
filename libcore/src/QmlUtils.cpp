@@ -51,6 +51,19 @@ QQuickItem *QmlUtils::blurSource(void)
 	return m_blurSource;
 }
 
+/*! Returns QML menu bar blur item. */
+QQuickItem *QmlUtils::menuBarBlur(void)
+{
+	return m_menuBarBlur;
+}
+
+/*! Sets QML menu bar blur item. */
+void QmlUtils::setMenuBarBlur(QQuickItem *item)
+{
+	m_menuBarBlur = item;
+	emit menuBarBlurChanged(item);
+}
+
 /*! Returns true if the application uses native menu bar. */
 bool QmlUtils::nativeMenuBar(void)
 {
