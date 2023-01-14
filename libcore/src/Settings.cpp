@@ -153,7 +153,9 @@ void Settings::set(QString key, QVariant value)
 /*! Copies values from source settings to target settings. */
 void Settings::copySettings(QSettings *source, QSettings *target)
 {
+#ifndef Q_OS_WASM
 	target->clear();
+#endif
 	QStringList keys = source->allKeys();
 	for(int i = 0; i < keys.count(); i++)
 		target->setValue(keys[i], source->value(keys[i]));
