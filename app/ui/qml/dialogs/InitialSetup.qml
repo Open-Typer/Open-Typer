@@ -58,7 +58,7 @@ CustomDialog {
 	}
 	function skipPage() { skipPageTimer.start(); }
 	onAboutToShow: {
-		if(!Settings.containsSimpleThemeId())
+		if(!Settings.containsAppTheme())
 			ThemeEngine.setDefaultTheme();
 		if(!Settings.containsLessonPack() || (Settings.lessonPack() === ""))
 		{
