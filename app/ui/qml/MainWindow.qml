@@ -88,9 +88,37 @@ ApplicationWindow {
 	visible: true
 	id: root
 
-	menuBar: CustomMenuBar {
-		id: customMenuBar
-		enabled: !uiLocked
+	menuBar: Item {
+		width: customMenuBar.width
+		height: customMenuBar.height
+		CustomMenuBar {
+			id: customMenuBar
+			width: root.width
+			enabled: !uiLocked
+		}
+		FastBlur {
+			readonly property alias blurInAnimation: menuBarBlurInAnimation
+			readonly property alias blurOutAnimation: menuBarBlurOutAnimation
+			id: menuBarBlur
+			anchors.fill: parent
+			source: customMenuBar
+			visible: false
+			radius: 0
+			PropertyAnimation {
+				id: menuBarBlurInAnimation
+				target: menuBarBlur
+				property: "radius"
+				to: 40
+				duration: 125
+			}
+			PropertyAnimation {
+				id: menuBarBlurOutAnimation
+				target: menuBarBlur
+				property: "radius"
+				to: 0
+				duration: 125
+			}
+		}
 	}
 
 	ConfigParser {
@@ -1100,6 +1128,7 @@ ApplicationWindow {
 
 	Component.onCompleted: {
 		QmlUtils.blurSource = mainLayout;
+		QmlUtils.menuBarBlur = menuBarBlur;
 		if(!Settings.initFinished())
 			initialSetup.open();
 		reload();
