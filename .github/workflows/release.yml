@@ -158,7 +158,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        qt-version: ['6.4.1']
+        qt-version: ['6.4.2']
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v3
