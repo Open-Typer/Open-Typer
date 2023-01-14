@@ -146,7 +146,7 @@ void StatsDialog::loadData(void)
 	timeChart->setTitle(tr("Time"));
 	// Set charts theme
 	QChart::ChartTheme theme;
-	if(Settings::applicationStyle() == ThemeEngine::Style::DarkStyle)
+	if(globalThemeEngine.theme() == ThemeEngine::Theme::DarkTheme)
 		theme = QChart::ChartThemeDark;
 	else
 		theme = QChart::ChartThemeLight;
