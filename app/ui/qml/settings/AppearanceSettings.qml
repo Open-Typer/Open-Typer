@@ -31,11 +31,11 @@ ColumnLayout {
 	//: Set custom color
 	readonly property string customColorStr: qsTr("Set custom")
 	function setLightTheme() {
-		ThemeEngine.setSimpleTheme(ThemeEngine.LightTheme);
+		ThemeEngine.setTheme(ThemeEngine.LightTheme);
 	}
 
 	function setDarkTheme() {
-		ThemeEngine.setSimpleTheme(ThemeEngine.DarkTheme);
+		ThemeEngine.setTheme(ThemeEngine.DarkTheme);
 	}
 
 	Platform.ColorDialog {
@@ -96,14 +96,14 @@ ColumnLayout {
 		RadioButton {
 			//: The light theme
 			text: qsTr("Light")
-			checked: ThemeEngine.style === ThemeEngine.LightStyle
+			checked: ThemeEngine.theme === ThemeEngine.LightTheme
 			onPressed: setLightTheme()
 		}
 
 		RadioButton {
 			//: The dark theme
 			text: qsTr("Dark")
-			checked: ThemeEngine.style === ThemeEngine.DarkStyle
+			checked: ThemeEngine.theme === ThemeEngine.DarkTheme
 			onPressed: setDarkTheme()
 		}
 	}
@@ -153,7 +153,7 @@ ColumnLayout {
 		}
 
 		ColorButton {
-			color: ThemeEngine.style === ThemeEngine.DarkStyle ? Qt.rgba(1, 1, 1, 1) : Qt.rgba(0, 0, 0, 1)
+			color: ThemeEngine.theme === ThemeEngine.DarkTheme ? Qt.rgba(1, 1, 1, 1) : Qt.rgba(0, 0, 0, 1)
 			checked: ThemeEngine.exerciseTextColor == color
 			autoExclusive: true
 			checkable: true
@@ -175,7 +175,7 @@ ColumnLayout {
 		}
 
 		ColorButton {
-			color: ThemeEngine.defaultInputTextColor(ThemeEngine.style === ThemeEngine.DarkStyle)
+			color: ThemeEngine.defaultInputTextColor(ThemeEngine.theme === ThemeEngine.DarkTheme)
 			checked: ThemeEngine.inputTextColor == color
 			autoExclusive: true
 			checkable: true
@@ -207,7 +207,7 @@ ColumnLayout {
 		}
 
 		ColorButton {
-			color: ThemeEngine.defaultBgColor(ThemeEngine.style === ThemeEngine.DarkStyle)
+			color: ThemeEngine.defaultBgColor(ThemeEngine.theme === ThemeEngine.DarkTheme)
 			checked: ThemeEngine.bgColor == color
 			autoExclusive: true
 			checkable: true
@@ -239,7 +239,7 @@ ColumnLayout {
 		}
 
 		ColorButton {
-			color: ThemeEngine.defaultPaperColor(ThemeEngine.style === ThemeEngine.DarkStyle)
+			color: ThemeEngine.defaultPaperColor(ThemeEngine.theme === ThemeEngine.DarkTheme)
 			checked: ThemeEngine.paperColor == color
 			autoExclusive: true
 			checkable: true
