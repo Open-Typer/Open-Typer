@@ -125,9 +125,6 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 	private:
 		void applyStyleSheetFromFile(const QString &stylePath);
 
-	private:
-		QList<QVariantMap> themes;
-
 	signals:
 		/*! A signal, which is emitted when the font changes. */
 		void fontChanged();
