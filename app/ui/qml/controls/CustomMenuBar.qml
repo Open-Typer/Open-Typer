@@ -74,6 +74,7 @@ Panel {
 			if(buttonType === "")
 			{
 				menu.title = menuList[i].text;
+				menuObjects[menuObjects.length] = menu;
 				parentItem.addMenu(menu);
 			}
 			else
@@ -160,6 +161,7 @@ Panel {
 			bottomPadding: 5
 			font.pointSize: 10
 			Material.background: Qt.rgba(0, 0, 0, 0)
+			Material.foreground: ThemeEngine.style === ThemeEngine.DarkStyle ? "white" : "black"
 			contentItem: Label {
 				text: menuBarItem.text
 				font: menuBarItem.font
@@ -168,12 +170,23 @@ Panel {
 
 		function reload() {
 			if(QmlUtils.nativeMenuBar())
+			{
 				root.visible = false;
+				return;
+			}
 			for(var i = 0; i < menuObjects.length; i++)
-				menuObjects[i].destroy();
+				removeMenu(menuObjects[i]);
 			menuObjects = [];
 			createMenuBar(uiMenuBar, "", "CustomMenu", "CustomMenuItem", "MenuSeparator");
 		}
+
+		Connections {
+			target: QmlUtils
+			function onMenuBarReloadTriggered() {
+				uiMenuBar.reload();
+			}
+		}
+
 		Component.onCompleted: reload();
 	}
 
@@ -183,9 +196,17 @@ Panel {
 		id: platformMenuBar
 		function reload() {
 			clear();
-			if(root.enabled)
+			if(QmlUtils.nativeMenuBar() && root.enabled)
 				createMenuBar(platformMenuBar, "", "Platform.Menu", "Platform.MenuItem", "Platform.MenuSeparator");
 		}
+
+		Connections {
+			target: QmlUtils
+			function onMenuBarReloadTriggered() {
+				platformMenuBar.reload();
+			}
+		}
+
 		Component.onCompleted: reload();
 	}
 }
