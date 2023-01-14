@@ -511,27 +511,16 @@ void Settings::setPanelColor(QRgb value)
 	set("theme/panelblue", color.blue());
 }
 
-// applicationStyle
+// appTheme
 
-/*! Getter for theme/theme. */
-ThemeEngine::Style Settings::applicationStyle(void) { return (ThemeEngine::Style) get("theme/theme", 0).toInt(); }
+/*! Getter for theme/apptheme. */
+ThemeEngine::Theme Settings::appTheme(void) { return (ThemeEngine::Theme) get("theme/apptheme", 0).toInt(); }
 
-/*! Returns true if there's a theme/theme key. */
-bool Settings::containsApplicationStyle(void) { return contains("theme/theme"); }
+/*! Returns true if there's a theme/apptheme key. */
+bool Settings::containsAppTheme(void) { return contains("theme/apptheme"); }
 
-/*! Setter for theme/theme. */
-void Settings::setApplicationStyle(ThemeEngine::Style value) { set("theme/theme", (int) value); }
-
-// applicationTheme
-
-/*! Getter for theme/fulltheme. */
-QString Settings::applicationTheme(void) { return get("theme/fulltheme", "default").toString(); }
-
-/*! Returns true if there's a theme/fulltheme key. */
-bool Settings::containsApplicationTheme(void) { return contains("theme/fulltheme"); }
-
-/*! Setter for theme/fulltheme. */
-void Settings::setApplicationTheme(QString value) { set("theme/fulltheme", value); }
+/*! Setter for theme/apptheme. */
+void Settings::setAppTheme(ThemeEngine::Theme value) { set("theme/apptheme", (int) value); }
 
 // settingsLockEnabled
 
@@ -565,17 +554,6 @@ bool Settings::containsAdvancedTheme(void) { return contains("theme/advancedthem
 
 /*! Setter for theme/advancedtheme. */
 void Settings::setAdvancedTheme(bool value) { set("theme/advancedtheme", value); }
-
-// simpleThemeId
-
-/*! Getter for theme/simpletheme. */
-ThemeEngine::SimpleTheme Settings::simpleThemeId(void) { return (ThemeEngine::SimpleTheme) get("theme/simpletheme", 0).toInt(); }
-
-/*! Returns true if there's a theme/simpletheme key. */
-bool Settings::containsSimpleThemeId(void) { return contains("theme/simpletheme"); }
-
-/*! Setter for theme/simpletheme. */
-void Settings::setSimpleThemeId(ThemeEngine::SimpleTheme value) { set("theme/simpletheme", (int) value); }
 
 // editorGeometry
 

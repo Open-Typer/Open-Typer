@@ -67,12 +67,10 @@
  *  - Settings#paperColor() - Paper color.
  *  - Settings#customPanelColor() - If false, the panel color is based on the theme.
  *  - Settings#panelColor() - Top and bottom panel color.
- *  - Settings#applicationStyle() - The application style (see ThemeEngine#Style).
- *  - Settings#applicationTheme() - The application theme (light, dark, light blue, etc.).
+ *  - Settings#appTheme() - The application theme (0 = light, 1 = dark).
  *  - Settings#settingsLockEnabled() - If true, settings will ask for a password before they can be accessed.
  *  - Settings#settingsLockPasswd() - Hashed password (SHA256) for settings lock.
  *  - Settings#advancedTheme() - Whether to allow the user to select advanced themes (dark, light, light blue, etc.).
- *  - Settings#simpleThemeId() - Simple theme (0 = light, 1 = dark).
  *  - Settings#editorGeometry() - Pack editor window geometry.
  *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
  *  - Settings#initFinished() - If true, initial setup has been finished.
@@ -182,14 +180,10 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static QRgb panelColor(void);
 		Q_INVOKABLE static bool containsPanelColor(void);
 		Q_INVOKABLE static void setPanelColor(QRgb value);
-		// applicationStyle
-		Q_INVOKABLE static ThemeEngine::Style applicationStyle(void);
-		Q_INVOKABLE static bool containsApplicationStyle(void);
-		Q_INVOKABLE static void setApplicationStyle(ThemeEngine::Style value);
-		// applicationTheme
-		Q_INVOKABLE static QString applicationTheme(void);
-		Q_INVOKABLE static bool containsApplicationTheme(void);
-		Q_INVOKABLE static void setApplicationTheme(QString value);
+		// appTheme
+		Q_INVOKABLE static ThemeEngine::Theme appTheme(void);
+		Q_INVOKABLE static bool containsAppTheme(void);
+		Q_INVOKABLE static void setAppTheme(ThemeEngine::Theme value);
 		// settingsLockEnabled
 		Q_INVOKABLE static bool settingsLockEnabled(void);
 		Q_INVOKABLE static bool containsSettingsLockEnabled(void);
@@ -202,10 +196,6 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static bool advancedTheme(void);
 		Q_INVOKABLE static bool containsAdvancedTheme(void);
 		Q_INVOKABLE static void setAdvancedTheme(bool value);
-		// simpleThemeId
-		Q_INVOKABLE static ThemeEngine::SimpleTheme simpleThemeId(void);
-		Q_INVOKABLE static bool containsSimpleThemeId(void);
-		Q_INVOKABLE static void setSimpleThemeId(ThemeEngine::SimpleTheme value);
 		// editorGeometry
 		Q_INVOKABLE static QByteArray editorGeometry(void);
 		Q_INVOKABLE static bool containsEditorGeometry(void);
