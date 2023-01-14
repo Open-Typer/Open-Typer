@@ -57,36 +57,20 @@ Panel {
 		return imports + " Component { " + typeName + " {} }";
 	}
 
-	function createMenuBar(parentItem, buttonType, menuType, menuItemType, menuSeparatorType) {
+	function createMenuBar(parentItem, menuType, menuItemType, menuSeparatorType) {
 		for(var i = 0; i < menuList.length; i++)
 		{
 			var menuParent = parentItem;
-			if(buttonType !== "")
-			{
-				var buttonComponent = Qt.createQmlObject(getComponentString(buttonType), parentItem);
-				var button = buttonComponent.createObject(parentItem);
-				menuObjects[menuObjects.length] = button;
-				button.text = menuList[i].text;
-				menuParent = button;
-			}
 			var menuComponent = Qt.createQmlObject(getComponentString(menuType), menuParent);
 			var menu = menuComponent.createObject(menuParent);
-			if(buttonType === "")
-			{
-				menu.title = menuList[i].text;
-				menuObjects[menuObjects.length] = menu;
-				parentItem.addMenu(menu);
-			}
-			else
-			{
-				menu.onClosed.connect(function() { QmlUtils.reloadMenuBar(); });
-				button.menu = menu;
-			}
-			createMenu(menu, menuList[i].itemList, buttonType, menuType, menuItemType, menuSeparatorType);
+			menu.title = menuList[i].text;
+			menuObjects[menuObjects.length] = menu;
+			parentItem.addMenu(menu);
+			createMenu(menu, menuList[i].itemList, menuType, menuItemType, menuSeparatorType);
 		}
 	}
 
-	function createMenu(parentItem, itemList, buttonType, menuType, menuItemType, menuSeparatorType) {
+	function createMenu(parentItem, itemList, menuType, menuItemType, menuSeparatorType) {
 		for(var j = 0; j < itemList.length; j++)
 		{
 			var itemData = itemList[j];
@@ -108,41 +92,12 @@ Panel {
 			}
 			else if(itemData.type === "menu")
 			{
-				if(buttonType === "")
-				{
-					itemComponent = Qt.createQmlObject(getComponentString(menuType), parentItem)
-					item = itemComponent.createObject(parentItem);
-					item.title = itemData.title;
-					parentItem.addMenu(item);
-					createMenu(item, itemData.itemList, buttonType, menuType, menuItemType, menuSeparatorType);
-					overrideAddItem = true;
-				}
-				else {
-					itemComponent = Qt.createQmlObject(getComponentString(buttonType), parentItem)
-					item = itemComponent.createObject(null);
-					item.text = itemData.title;
-					var buttonTextComponent = Qt.createQmlObject(getComponentString("Text"), item);
-					var buttonText = buttonTextComponent.createObject(item);
-					buttonText.text = Qt.binding(function() { return item.text });
-					buttonText.font = Qt.binding(function() { return item.font });
-					buttonText.color = Qt.binding(function() { return Material.foreground });
-					buttonText.horizontalAlignment = Qt.AlignLeft;
-					buttonText.verticalAlignment = Qt.AlignVCenter;
-					item.contentItem = buttonText;
-					item.implicitWidth = buttonText.implicitWidth;
-					item.implicitHeight = 50;
-					item.padding = 20;
-					var menuComponent = Qt.createQmlObject(getComponentString(menuType), item)
-					var menu = menuComponent.createObject(item);
-					menu.isSubMenu = true;
-					menu.onClosed.connect(function() {
-						if(!menu.parent.ignoreClosing)
-							parentItem.close();
-						menu.parent.ignoreClosing = false;
-					})
-					createMenu(menu, itemData.itemList, buttonType, menuType, menuItemType, menuSeparatorType);
-					item.menu = menu;
-				}
+				itemComponent = Qt.createQmlObject(getComponentString(menuType), parentItem)
+				item = itemComponent.createObject(parentItem);
+				item.title = itemData.title;
+				parentItem.addMenu(item);
+				createMenu(item, itemData.itemList, menuType, menuItemType, menuSeparatorType);
+				overrideAddItem = true;
 			}
 			if(!overrideAddItem)
 				parentItem.addItem(item);
@@ -177,7 +132,7 @@ Panel {
 			for(var i = 0; i < menuObjects.length; i++)
 				removeMenu(menuObjects[i]);
 			menuObjects = [];
-			createMenuBar(uiMenuBar, "", "CustomMenu", "CustomMenuItem", "MenuSeparator");
+			createMenuBar(uiMenuBar, "CustomMenu", "CustomMenuItem", "MenuSeparator");
 		}
 
 		Connections {
@@ -197,7 +152,7 @@ Panel {
 		function reload() {
 			clear();
 			if(QmlUtils.nativeMenuBar() && root.enabled)
-				createMenuBar(platformMenuBar, "", "Platform.Menu", "Platform.MenuItem", "Platform.MenuSeparator");
+				createMenuBar(platformMenuBar, "Platform.Menu", "Platform.MenuItem", "Platform.MenuSeparator");
 		}
 
 		Connections {
