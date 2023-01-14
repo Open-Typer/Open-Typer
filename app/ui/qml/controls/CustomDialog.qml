@@ -29,6 +29,7 @@ import OpenTyper 1.0
 
 Item {
 	property Item blurSource: QmlUtils.blurSource
+	property Item menuBarBlur: QmlUtils.menuBarBlur
 	property string windowTitle: ""
 	property int standardButtons: Dialog.NoButton
 	readonly property var dialogColor: ThemeEngine.bgColor
@@ -165,6 +166,8 @@ Item {
 		onAboutToShow: {
 			blur.visible = true;
 			blurInAnimation.running = true;
+			menuBarBlur.visible = true;
+			menuBarBlur.blurInAnimation.running = true;
 			shadowInAnimation.running = true;
 			shadow.visible = true;
 			root.aboutToShow();
@@ -172,11 +175,13 @@ Item {
 		onAboutToHide: {
 			blurOutAnimation.running = true;
 			shadowOutAnimation.running = true;
+			menuBarBlur.blurOutAnimation.running = true;
 			shadow.visible = false
 			root.aboutToHide();
 		}
 		onClosed: {
 			blur.visible = false;
+			menuBarBlur.visible = false;
 			dialogMask.resetPos();
 			QmlUtils.reloadMenuBar();
 		}
