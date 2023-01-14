@@ -25,7 +25,7 @@ import QtQuick.Layouts 1.12
 import Qt.labs.platform 1.1 as Platform
 import OpenTyper 1.0
 
-Panel {
+MenuBar {
 	id: root
 	property list<Item> menuList: [
 		Item {
@@ -104,46 +104,49 @@ Panel {
 		}
 	}
 
-	control: MenuBar {
-		id: uiMenuBar
-		background: null
-		delegate: MenuBarItem {
-			id: menuBarItem
-			implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
-			leftPadding: 10
-			rightPadding: 10
-			topPadding: 5
-			bottomPadding: 5
-			font.pointSize: 10
-			Material.background: Qt.rgba(0, 0, 0, 0)
-			Material.foreground: ThemeEngine.style === ThemeEngine.DarkStyle ? "white" : "black"
-			contentItem: Label {
-				text: menuBarItem.text
-				font: menuBarItem.font
-			}
-		}
-
-		function reload() {
-			if(QmlUtils.nativeMenuBar())
-			{
-				root.visible = false;
-				return;
-			}
-			for(var i = 0; i < menuObjects.length; i++)
-				removeMenu(menuObjects[i]);
-			menuObjects = [];
-			createMenuBar(uiMenuBar, "CustomMenu", "CustomMenuItem", "MenuSeparator");
-		}
-
-		Connections {
-			target: QmlUtils
-			function onMenuBarReloadTriggered() {
-				uiMenuBar.reload();
-			}
-		}
-
-		Component.onCompleted: reload();
+	background: Rectangle {
+		color: ThemeEngine.panelColor
 	}
+
+	delegate: MenuBarItem {
+		id: menuBarItem
+		implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
+		leftPadding: 10
+		rightPadding: 10
+		topPadding: 5
+		bottomPadding: 5
+		font.pointSize: 10
+		Material.background: Qt.rgba(0, 0, 0, 0)
+		Material.foreground: ThemeEngine.style === ThemeEngine.DarkStyle ? "white" : "black"
+		contentItem: Label {
+			text: menuBarItem.text
+			font: menuBarItem.font
+		}
+	}
+
+	function reload() {
+		if(QmlUtils.nativeMenuBar())
+		{
+			root.visible = false;
+			return;
+		}
+		var oldObjects = [];
+		for(var i = 0; i < menuObjects.length; i++)
+			oldObjects.push(menuObjects[i]);
+		menuObjects = [];
+		createMenuBar(root, "CustomMenu", "CustomMenuItem", "MenuSeparator");
+		for(i = 0; i < oldObjects.length; i++)
+			removeMenu(oldObjects[i]);
+	}
+
+	Connections {
+		target: QmlUtils
+		function onMenuBarReloadTriggered() {
+			root.reload();
+		}
+	}
+
+	Component.onCompleted: reload();
 
 	onEnabledChanged: platformMenuBar.reload();
 
