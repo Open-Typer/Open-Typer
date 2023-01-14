@@ -88,6 +88,11 @@ ApplicationWindow {
 	visible: true
 	id: root
 
+	menuBar: CustomMenuBar {
+		id: customMenuBar
+		enabled: !uiLocked
+	}
+
 	ConfigParser {
 		id: parser
 	}
@@ -196,12 +201,6 @@ ApplicationWindow {
 		id: mainLayout
 		anchors.fill: parent
 		spacing: 0
-
-		CustomMenuBar {
-			id: customMenuBar
-			Layout.fillWidth: true
-			enabled: !uiLocked
-		}
 
 		Rectangle {
 			visible: customMenuBar.visible
