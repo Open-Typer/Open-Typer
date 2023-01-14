@@ -66,59 +66,59 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_ENUM(Theme)
 
 		// Font
-		Q_INVOKABLE QFont font(void);
-		Q_INVOKABLE void setFont(QFont newFont);
+		QFont font(void);
+		void setFont(QFont newFont);
 		Q_INVOKABLE QFont errorFont(void);
-		Q_INVOKABLE QString fontFamily(void);
-		Q_INVOKABLE void setFontFamily(QString family);
-		Q_INVOKABLE int fontSize(void);
-		Q_INVOKABLE void setFontSize(int size);
+		QString fontFamily(void);
+		void setFontFamily(QString family);
+		int fontSize(void);
+		void setFontSize(int size);
 		Q_INVOKABLE void increaseFontSize(int delta);
 		Q_INVOKABLE int maxFontSize(void);
-		Q_INVOKABLE bool fontBold(void);
-		Q_INVOKABLE void setFontBold(bool value);
-		Q_INVOKABLE bool fontItalic(void);
-		Q_INVOKABLE void setFontItalic(bool value);
-		Q_INVOKABLE bool fontUnderline(void);
-		Q_INVOKABLE void setFontUnderline(bool value);
+		bool fontBold(void);
+		void setFontBold(bool value);
+		bool fontItalic(void);
+		void setFontItalic(bool value);
+		bool fontUnderline(void);
+		void setFontUnderline(bool value);
 		// Exercise text color
 		Q_INVOKABLE bool customExerciseTextColor(void);
-		Q_INVOKABLE QColor exerciseTextColor(void);
-		Q_INVOKABLE void setExerciseTextColor(QColor color);
+		QColor exerciseTextColor(void);
+		void setExerciseTextColor(QColor color);
 		Q_INVOKABLE void resetExerciseTextColor(void);
 		Q_INVOKABLE QColor defaultExerciseTextColor(bool dark = false);
 		Q_INVOKABLE QString exerciseTextStyleSheet(void);
 		// Input text color
 		Q_INVOKABLE bool customInputTextColor(void);
-		Q_INVOKABLE QColor inputTextColor(void);
-		Q_INVOKABLE void setInputTextColor(QColor color);
+		QColor inputTextColor(void);
+		void setInputTextColor(QColor color);
 		Q_INVOKABLE void resetInputTextColor(void);
 		Q_INVOKABLE QColor defaultInputTextColor(bool dark = false);
 		Q_INVOKABLE QString inputTextStyleSheet(void);
 		// Background color
 		Q_INVOKABLE bool customBgColor(void);
-		Q_INVOKABLE QColor bgColor(void);
-		Q_INVOKABLE void setBgColor(QColor color);
+		QColor bgColor(void);
+		void setBgColor(QColor color);
 		Q_INVOKABLE void resetBgColor(void);
 		Q_INVOKABLE QColor defaultBgColor(bool dark = false);
 		Q_INVOKABLE QString bgStyleSheet(void);
 		// Paper color
 		Q_INVOKABLE bool customPaperColor(void);
-		Q_INVOKABLE QColor paperColor(void);
-		Q_INVOKABLE void setPaperColor(QColor color);
+		QColor paperColor(void);
+		void setPaperColor(QColor color);
 		Q_INVOKABLE void resetPaperColor(void);
 		Q_INVOKABLE QColor defaultPaperColor(bool dark = false);
 		Q_INVOKABLE QString paperStyleSheet(void);
 		// Panel color
 		Q_INVOKABLE bool customPanelColor(void);
-		Q_INVOKABLE QColor panelColor(void);
-		Q_INVOKABLE void setPanelColor(QColor color);
+		QColor panelColor(void);
+		void setPanelColor(QColor color);
 		Q_INVOKABLE void resetPanelColor(void);
 		Q_INVOKABLE QColor defaultPanelColor(bool dark = false);
 		Q_INVOKABLE QString panelStyleSheet(void);
 		// Theme
-		Q_INVOKABLE ThemeEngine::Theme theme(void);
-		Q_INVOKABLE void setTheme(ThemeEngine::Theme newTheme);
+		ThemeEngine::Theme theme(void);
+		void setTheme(ThemeEngine::Theme newTheme);
 		Q_INVOKABLE void updateTheme(void);
 		Q_INVOKABLE void setDefaultTheme(void);
 
