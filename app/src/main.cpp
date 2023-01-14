@@ -159,8 +159,6 @@ int main(int argc, char *argv[])
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterModule("QtGraphicalEffects", 1, 0);
 #endif
-	// Set style
-	globalThemeEngine.updateStyle();
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
 	// Set icon
