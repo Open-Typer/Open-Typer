@@ -31,11 +31,11 @@ ColumnLayout {
 	//: Set custom color
 	readonly property string customColorStr: qsTr("Set custom")
 	function setLightTheme() {
-		ThemeEngine.setTheme(ThemeEngine.LightTheme);
+		ThemeEngine.theme = ThemeEngine.LightTheme;
 	}
 
 	function setDarkTheme() {
-		ThemeEngine.setTheme(ThemeEngine.DarkTheme);
+		ThemeEngine.theme = ThemeEngine.DarkTheme;
 	}
 
 	Platform.ColorDialog {
