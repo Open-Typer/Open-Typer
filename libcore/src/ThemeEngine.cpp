@@ -29,7 +29,6 @@ ThemeEngine globalThemeEngine;
 ThemeEngine::ThemeEngine(QObject *parent) :
 	QObject(parent)
 {
-	updateThemeList();
 	// Connections
 	connect(this, &ThemeEngine::fontBoldChanged, this, &ThemeEngine::fontStyleChanged);
 	connect(this, &ThemeEngine::fontItalicChanged, this, &ThemeEngine::fontStyleChanged);
@@ -42,65 +41,6 @@ ThemeEngine::ThemeEngine(QObject *parent) :
 	connect(this, &ThemeEngine::bgColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::paperColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::panelColorChanged, this, &ThemeEngine::colorChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::styleChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::fontBoldChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::fontItalicChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::fontUnderlineChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::fontFamilyChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::fontSizeChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::exerciseTextColorChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::inputTextColorChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::bgColorChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::paperColorChanged);
-	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::panelColorChanged);
-}
-
-/*! Regenerates the list of themes. */
-void ThemeEngine::updateThemeList(void)
-{
-	themes.clear();
-	QVariantMap themeMap;
-	// Default (obsolete)
-	themeMap.clear();
-	themes += themeMap;
-	// Dark
-	themeMap.clear();
-	themeMap.insert("name", tr("Dark"));
-	themeMap.insert("id", "dark");
-	themeMap.insert("icon", "dark.png");
-	themeMap.insert("style", static_cast<int>(Style::DarkStyle));
-	themes += themeMap;
-	// Light
-	themeMap.clear();
-	themeMap.insert("name", tr("Light"));
-	themeMap.insert("id", "light");
-	themeMap.insert("icon", "light.png");
-	themeMap.insert("style", static_cast<int>(Style::LightStyle));
-	themes += themeMap;
-	// Green
-	themeMap.clear();
-	themeMap.insert("name", tr("Green"));
-	themeMap.insert("id", "green");
-	themeMap.insert("icon", "green.png");
-	themeMap.insert("style", static_cast<int>(Style::LightStyle));
-	themeMap.insert("bgColor", qRgb(0, 108, 0));
-	themeMap.insert("panelColor", qRgb(175, 175, 175));
-	themes += themeMap;
-	// Light blue
-	themeMap.clear();
-	themeMap.insert("name", tr("Light blue"));
-	themeMap.insert("id", "light_blue");
-	themeMap.insert("icon", "light_blue.png");
-	themeMap.insert("style", static_cast<int>(Style::LightStyle));
-	themeMap.insert("bgColor", qRgb(228, 245, 255));
-	themeMap.insert("panelColor", qRgb(180, 229, 255));
-	themes += themeMap;
-	// Custom
-	themeMap.clear();
-	themeMap.insert("name", tr("Custom"));
-	themeMap.insert("id", "custom");
-	themeMap.insert("icon", "custom.png");
-	themes += themeMap;
 }
 
 /*! Returns selected font. */
@@ -250,7 +190,7 @@ void ThemeEngine::setExerciseTextColor(QColor color)
 /*! Resets exercise text color. */
 void ThemeEngine::resetExerciseTextColor(void)
 {
-	setExerciseTextColor(defaultExerciseTextColor(style() == Style::DarkStyle));
+	setExerciseTextColor(defaultExerciseTextColor(theme() == Theme::DarkTheme));
 	Settings::setCustomExerciseTextColor(false);
 }
 
@@ -291,7 +231,7 @@ void ThemeEngine::setInputTextColor(QColor color)
 /*! Resets input text color. */
 void ThemeEngine::resetInputTextColor(void)
 {
-	setInputTextColor(defaultInputTextColor(style() == Style::DarkStyle));
+	setInputTextColor(defaultInputTextColor(theme() == Theme::DarkTheme));
 	Settings::setCustomInputTextColor(false);
 }
 
@@ -333,7 +273,7 @@ void ThemeEngine::setBgColor(QColor color)
 /*! Resets background color. */
 void ThemeEngine::resetBgColor(void)
 {
-	setBgColor(defaultBgColor(style() == Style::DarkStyle));
+	setBgColor(defaultBgColor(theme() == Theme::DarkTheme));
 	Settings::setCustomBgColor(false);
 }
 
@@ -375,7 +315,7 @@ void ThemeEngine::setPaperColor(QColor color)
 /*! Resets paper color. */
 void ThemeEngine::resetPaperColor(void)
 {
-	setPaperColor(defaultPaperColor(style() == Style::DarkStyle));
+	setPaperColor(defaultPaperColor(theme() == Theme::DarkTheme));
 	Settings::setCustomPaperColor(false);
 }
 
@@ -417,7 +357,7 @@ void ThemeEngine::setPanelColor(QColor color)
 /*! Resets panel color. */
 void ThemeEngine::resetPanelColor(void)
 {
-	setPanelColor(defaultPanelColor(style() == Style::DarkStyle));
+	setPanelColor(defaultPanelColor(theme() == Theme::DarkTheme));
 	Settings::setCustomPanelColor(false);
 }
 
@@ -436,116 +376,49 @@ QString ThemeEngine::panelStyleSheet(void)
 	return "QMenuBar, QFrame, QCheckBox { background-color: rgb(" + QString::number(panelColor().red()) + ", " + QString::number(panelColor().green()) + ", " + QString::number(panelColor().blue()) + ");}";
 }
 
-/*! Returns current application style. */
-ThemeEngine::Style ThemeEngine::style(void)
+/*! Returns current application theme. */
+ThemeEngine::Theme ThemeEngine::theme(void)
 {
-	return Settings::applicationStyle();
+	return Settings::appTheme();
 }
 
-/*! Sets application style. */
-void ThemeEngine::setStyle(ThemeEngine::Style newStyle)
+/*! Sets application theme. */
+void ThemeEngine::setTheme(ThemeEngine::Theme newTheme)
 {
-	switch(newStyle)
+	// TODO: Remove style sheets
+	switch(newTheme)
 	{
-		case Style::SystemStyle:
-			// System (default)
-			qApp->setStyleSheet("");
-			break;
-		case Style::DarkStyle:
+		case Theme::DarkTheme:
 			// Dark
 			applyStyleSheetFromFile(":/dark-theme/style.qss");
 			break;
-		case Style::LightStyle:
+		case Theme::LightTheme:
 			// Light
 			applyStyleSheetFromFile(":/light-theme/style.qss");
 			break;
 	}
-	Settings::setApplicationStyle(newStyle);
-	emit styleChanged();
+	Settings::setAppTheme(newTheme);
+	resetExerciseTextColor();
+	resetInputTextColor();
+	resetBgColor();
+	resetPaperColor();
+	resetPanelColor();
+	emit themeChanged();
 }
 
 /*! Loads and sets application style. */
-void ThemeEngine::updateStyle(void)
+void ThemeEngine::updateTheme(void)
 {
-	setStyle(Settings::applicationStyle());
+	setTheme(Settings::appTheme());
 }
 
-/*! Returns current application theme. */
-int ThemeEngine::theme(void)
+/*! Sets theme based on system theme. */
+void ThemeEngine::setDefaultTheme(void)
 {
-	QString id = Settings::applicationTheme();
-	for(int i = 0; i < themes.count(); i++)
-	{
-		if(themes[i]["id"].toString() == id)
-			return i;
-	}
-	return 0;
-}
-
-/*! Sets application theme. */
-void ThemeEngine::setTheme(int index)
-{
-	blockSignals(true);
-	if(themeName(index) != "custom")
-	{
-		QVariantMap themeMap = themes[index];
-		// Style
-		if(themeMap.contains("style"))
-			setStyle(static_cast<Style>(themeMap["style"].toInt()));
-		else
-			setStyle(Style::SystemStyle);
-		// Font
-		if(themeMap.contains("font"))
-			setFontFamily(themeMap["font"].toString());
-		if(themeMap.contains("fontSize"))
-			setFontSize(themeMap["fontSize"].toInt());
-		if(themeMap.contains("fontBold"))
-			setFontBold(themeMap["fontBold"].toBool());
-		if(themeMap.contains("fontItalic"))
-			setFontItalic(themeMap["fontItalic"].toBool());
-		if(themeMap.contains("fontUnderline"))
-			setFontUnderline(themeMap["fontUnderline"].toBool());
-		// Colors
-		if(themeMap.contains("exerciseTextColor"))
-		{
-			QRgb color = themeMap["levelTextColor"].toUInt();
-			setExerciseTextColor(QColor(color));
-		}
-		else
-			resetExerciseTextColor();
-		if(themeMap.contains("inputTextColor"))
-		{
-			QRgb color = themeMap["inputTextColor"].toUInt();
-			setInputTextColor(QColor(color));
-		}
-		else
-			resetInputTextColor();
-		if(themeMap.contains("bgColor"))
-		{
-			QRgb color = themeMap["bgColor"].toUInt();
-			setBgColor(QColor(color));
-		}
-		else
-			resetBgColor();
-		if(themeMap.contains("paperColor"))
-		{
-			QRgb color = themeMap["paperColor"].toUInt();
-			setPaperColor(QColor(color));
-		}
-		else
-			resetPaperColor();
-		if(themeMap.contains("panelColor"))
-		{
-			QRgb color = themeMap["panelColor"].toUInt();
-			setPanelColor(QColor(color));
-		}
-		else
-			resetPanelColor();
-	}
-	Settings::setApplicationTheme(themeName(index));
-	blockSignals(false);
-	if(themeName(index) != "custom")
-		emit themeChanged();
+	if(qApp->palette().color(QPalette::Base).toHsv().value() < 50)
+		setTheme(Theme::DarkTheme);
+	else
+		setTheme(Theme::LightTheme);
 }
 
 void ThemeEngine::applyStyleSheetFromFile(const QString &stylePath)
@@ -554,49 +427,4 @@ void ThemeEngine::applyStyleSheetFromFile(const QString &stylePath)
 	styleFile.setFileName(stylePath);
 	if(styleFile.open(QFile::ReadOnly | QFile::Text))
 		qApp->setStyleSheet(styleFile.readAll());
-}
-
-/*! Returns the name of the theme. */
-QString ThemeEngine::themeName(int index)
-{
-	return themes[index]["id"].toString();
-}
-
-/*! Returns list of themes. */
-const QList<QVariantMap> &ThemeEngine::themeList(void)
-{
-	return themes;
-}
-
-/*! Returns current simple theme. */
-ThemeEngine::SimpleTheme ThemeEngine::simpleTheme(void)
-{
-	return Settings::simpleThemeId();
-}
-
-/*! Sets simple theme. */
-void ThemeEngine::setSimpleTheme(SimpleTheme theme)
-{
-	Settings::setSimpleThemeId(theme);
-	switch(theme)
-	{
-		case SimpleTheme::LightTheme:
-			setTheme(0); // light
-			break;
-		case SimpleTheme::DarkTheme:
-			setTheme(1); // dark
-			break;
-		default:
-			break;
-	}
-	emit simpleThemeChanged();
-}
-
-/*! Sets simple theme based on system style. */
-void ThemeEngine::setDefaultTheme(void)
-{
-	if(qApp->palette().color(QPalette::Base).toHsv().value() < 50)
-		setSimpleTheme(SimpleTheme::DarkTheme);
-	else
-		setSimpleTheme(SimpleTheme::LightTheme);
 }

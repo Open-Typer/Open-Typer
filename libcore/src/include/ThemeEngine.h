@@ -54,27 +54,16 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_PROPERTY(QColor bgColor READ bgColor WRITE setBgColor NOTIFY bgColorChanged)
 		Q_PROPERTY(QColor paperColor READ paperColor WRITE setPaperColor NOTIFY paperColorChanged)
 		Q_PROPERTY(QColor panelColor READ panelColor WRITE setPanelColor NOTIFY panelColorChanged)
-		Q_PROPERTY(Style style READ style WRITE setStyle NOTIFY styleChanged)
-		Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged)
-		Q_PROPERTY(SimpleTheme simpleTheme READ simpleTheme WRITE setSimpleTheme NOTIFY simpleThemeChanged)
+		Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
 	public:
 		ThemeEngine(QObject *parent = nullptr);
-		void updateThemeList(void);
 
-		enum class Style
+		enum class Theme
 		{
-			SystemStyle = 0,
-			DarkStyle = 1,
-			LightStyle = 2
+			LightTheme = 1,
+			DarkTheme = 0
 		};
-		Q_ENUM(Style)
-
-		enum class SimpleTheme
-		{
-			LightTheme = 0,
-			DarkTheme = 1
-		};
-		Q_ENUM(SimpleTheme)
+		Q_ENUM(Theme)
 
 		// Font
 		Q_INVOKABLE QFont font(void);
@@ -127,18 +116,10 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_INVOKABLE void resetPanelColor(void);
 		Q_INVOKABLE QColor defaultPanelColor(bool dark = false);
 		Q_INVOKABLE QString panelStyleSheet(void);
-		// Style
-		Q_INVOKABLE ThemeEngine::Style style(void);
-		Q_INVOKABLE void setStyle(ThemeEngine::Style newStyle);
-		Q_INVOKABLE void updateStyle(void);
 		// Theme
-		Q_INVOKABLE int theme(void);
-		Q_INVOKABLE void setTheme(int index);
-		Q_INVOKABLE QString themeName(int index);
-		Q_INVOKABLE const QList<QVariantMap> &themeList(void);
-		// Simple theme
-		Q_INVOKABLE ThemeEngine::SimpleTheme simpleTheme(void);
-		Q_INVOKABLE void setSimpleTheme(ThemeEngine::SimpleTheme theme);
+		Q_INVOKABLE ThemeEngine::Theme theme(void);
+		Q_INVOKABLE void setTheme(ThemeEngine::Theme newTheme);
+		Q_INVOKABLE void updateTheme(void);
 		Q_INVOKABLE void setDefaultTheme(void);
 
 	private:
@@ -174,12 +155,8 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		void paperColorChanged();
 		/*! A signal, which is emitted when panel color changes. */
 		void panelColorChanged();
-		/*! A signal, which is emitted when the application style changes. */
-		void styleChanged();
 		/*! A signal, which is emitted when the application theme changes. */
 		void themeChanged();
-		/*! A signal, which is emitted when the simple theme changes. */
-		void simpleThemeChanged();
 };
 
 extern ThemeEngine CORE_LIB_EXPORT globalThemeEngine;
