@@ -117,7 +117,7 @@ MenuBar {
 		bottomPadding: 5
 		font.pointSize: 10
 		Material.background: Qt.rgba(0, 0, 0, 0)
-		Material.foreground: ThemeEngine.style === ThemeEngine.DarkStyle ? "white" : "black"
+		Material.foreground: ThemeEngine.theme === ThemeEngine.DarkTheme ? "white" : "black"
 		contentItem: Label {
 			text: menuBarItem.text
 			font: menuBarItem.font
