@@ -42,6 +42,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: build-ubuntu
-        path: |
-          ${{ env.executable_name }}
-          *.AppImage
+        path: '*.AppImage'
