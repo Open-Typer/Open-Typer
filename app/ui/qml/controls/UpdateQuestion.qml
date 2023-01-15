@@ -24,9 +24,10 @@ import QtQuick.Controls.Material 2.5
 import QtQuick.Layouts 1.12
 
 Rectangle {
+	readonly property color accent: Material.accent
 	id: root
 	height: rowLayout.implicitHeight
-	color: Qt.rgba(0, 0.39, 1, 0.1); // TODO: Use accent color
+	color: Qt.rgba(accent.r, accent.g, accent.b, 0.15)
 	border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
 	radius: 10
 	signal accepted()
