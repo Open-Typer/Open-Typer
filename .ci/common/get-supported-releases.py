@@ -7,6 +7,6 @@ from datetime import date
 ### This Python script prints currently supported Ubuntu versions
 launchpad = Launchpad.login_anonymously('get-supported-releases', 'production') # login
 for series in launchpad.projects['ubuntu'].series:
-	# We support LTS releases with extended support, but only since Ubuntu 18.04 LTS
-	if series.supported and series.datereleased.year >= 2018:
+	# Support Ubuntu 20.04 or later
+	if series.supported and series.datereleased.year >= 2020:
 		print(series.name)
