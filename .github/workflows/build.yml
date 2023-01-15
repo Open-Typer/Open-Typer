@@ -15,11 +15,6 @@ jobs:
         os: [macos-latest]
         qt-version: ['5.15.2']
         qt-target: ['desktop']
-        include:
-          - os: windows-latest
-            qt-version: '5.15.2'
-            qt-target: 'desktop'
-            mingw-version: 81
     steps:
     - uses: actions/checkout@v3
       with:
@@ -38,21 +33,6 @@ jobs:
         echo "os_name=${arr[0]}" >> "${GITHUB_ENV}"
       shell: bash
     ## Install Qt
-    # Windows
-    - if: contains(matrix.os, 'windows')
-      name: Install Qt (Windows)
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: ${{ matrix.qt-version }}
-        host: 'windows'
-        arch: 'win64_mingw${{ matrix.mingw-version }}'
-        target: ${{ matrix.qt-target }}
-        modules: 'qtcharts'
-    - if: contains(matrix.os, 'windows')
-      name: Install MinGW
-      uses: egor-tensin/setup-mingw@v2
-      with:
-        platform: x64
     # MacOS
     - if: contains(matrix.os, 'macos')
       name: Install Qt (macOS)
@@ -66,31 +46,7 @@ jobs:
     - name: Build
       run: .ci/${{ env.os_name }}-build.sh
       shell: bash
-    - if: contains(matrix.os, 'windows')
-      name: Windows build
-      run: |
-        lrelease ${{ env.app_name }}.pro || exit 2
-        qmake INCLUDEPATH+=C:\OpenSSL\include LIBS+=-LC:\OpenSSL\lib || exit 3
-        mingw32-make -j4 || exit 4
-        mkdir release
-        move ${{ env.executable_name }}.exe release/
-        move *.dll release/
-        cd release
-        windeployqt ${{ env.executable_name }}.exe --qmldir ..\app\ui\qml || exit 5
-        windeployqt opentyper-core.dll || exit 5
-      shell: cmd
-    - if: contains(matrix.os, 'windows')
-      name: Finalize Windows build
-      run: .ci/${{ env.os_name }}-build.sh 1
-      shell: bash
     ## Package
-    # Windows
-    - if: contains(matrix.os, 'windows')
-      name: Package (Windows)
-      uses: vimtor/action-zip@v1
-      with:
-        files: ../release/
-        dest: ${{ env.app_name }}-win32.zip
     ## Upload
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
