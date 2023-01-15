@@ -1,0 +1,47 @@
+name: Linux build
+
+on:
+  push:
+    branches: '*'
+    tags: '*'
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        qt-version: ['5.15.2']
+        qt-target: ['desktop']
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        submodules: true
+    - name: Setup environment
+      run: |
+        sed -i -e '/^#/d' .github/config.env
+        sed -i -e '/^$/d' .github/config.env
+        cat .github/config.env >> "${GITHUB_ENV}"
+      shell: bash
+    ## Install Qt
+    - name: Install Qt (Ubuntu)
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt-version }}
+        host: 'linux'
+        target: ${{ matrix.qt-target }}
+        modules: 'qtcharts'
+    ## Build
+    - name: Build
+      run: .ci/ubuntu-build.sh
+      shell: bash
+    ## Upload
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-ubuntu
+        path: |
+          ${{ env.executable_name }}
+          *.AppImage
