@@ -44,7 +44,7 @@ Rectangle {
 			font.bold: true
 		}
 
-		DialogButtonBox {
+		AccentButtonBox {
 			standardButtons: Dialog.Yes | Dialog.No
 			font.capitalization: Font.MixedCase
 			background: null
