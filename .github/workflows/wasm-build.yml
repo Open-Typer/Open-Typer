@@ -1,4 +1,4 @@
-name: Build
+name: WebAssembly build
 
 on:
   push:
