@@ -511,6 +511,17 @@ void Settings::setPanelColor(QRgb value)
 	set("theme/panelblue", color.blue());
 }
 
+// accentColorId
+
+/*! Getter for theme/accentcolorid. */
+ThemeEngine::AccentColor Settings::accentColorId(void) { return (ThemeEngine::AccentColor) get("theme/accentcolorid", 4).toInt(); }
+
+/*! Returns true if there's a theme/accentcolorid key. */
+bool Settings::containsAccentColorId(void) { return contains("theme/accentcolorid"); }
+
+/*! Setter for theme/accentcolorid. */
+void Settings::setAccentColorId(ThemeEngine::AccentColor value) { set("theme/accentcolorid", (int) value); }
+
 // appTheme
 
 /*! Getter for theme/apptheme. */

@@ -67,6 +67,7 @@
  *  - Settings#paperColor() - Paper color.
  *  - Settings#customPanelColor() - If false, the panel color is based on the theme.
  *  - Settings#panelColor() - Top and bottom panel color.
+ *  - Settings#accentColorId() - Current accent color (accent colors are defined in ThemeEngine).
  *  - Settings#appTheme() - The application theme (0 = light, 1 = dark).
  *  - Settings#settingsLockEnabled() - If true, settings will ask for a password before they can be accessed.
  *  - Settings#settingsLockPasswd() - Hashed password (SHA256) for settings lock.
@@ -180,6 +181,10 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static QRgb panelColor(void);
 		Q_INVOKABLE static bool containsPanelColor(void);
 		Q_INVOKABLE static void setPanelColor(QRgb value);
+		// accentColorId
+		Q_INVOKABLE static ThemeEngine::AccentColor accentColorId(void);
+		Q_INVOKABLE static bool containsAccentColorId(void);
+		Q_INVOKABLE static void setAccentColorId(ThemeEngine::AccentColor value);
 		// appTheme
 		Q_INVOKABLE static ThemeEngine::Theme appTheme(void);
 		Q_INVOKABLE static bool containsAppTheme(void);
