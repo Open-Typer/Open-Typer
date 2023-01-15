@@ -54,9 +54,25 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_PROPERTY(QColor bgColor READ bgColor WRITE setBgColor NOTIFY bgColorChanged)
 		Q_PROPERTY(QColor paperColor READ paperColor WRITE setPaperColor NOTIFY paperColorChanged)
 		Q_PROPERTY(QColor panelColor READ panelColor WRITE setPanelColor NOTIFY panelColorChanged)
+		Q_PROPERTY(AccentColor accentColor READ accentColor WRITE setAccentColor NOTIFY accentColorChanged)
+		Q_PROPERTY(QColor currentAccentColor READ currentAccentColor NOTIFY currentAccentColorChanged)
 		Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
 	public:
 		ThemeEngine(QObject *parent = nullptr);
+
+		// Note: Default accent color is defined in Settings::accentColorId()
+		// The actual colors are defined in getAccentColor()
+		enum AccentColor
+		{
+			Accent_Red = 0,
+			Accent_Orange = 1,
+			Accent_Yellow = 2,
+			Accent_Green = 3,
+			Accent_LightBlue = 4,
+			Accent_Purple = 5,
+			Accent_Pink = 6
+		};
+		Q_ENUM(AccentColor)
 
 		enum class Theme
 		{
@@ -116,6 +132,11 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_INVOKABLE void resetPanelColor(void);
 		Q_INVOKABLE QColor defaultPanelColor(bool dark = false);
 		Q_INVOKABLE QString panelStyleSheet(void);
+		// Accent color
+		AccentColor accentColor(void);
+		void setAccentColor(AccentColor color);
+		Q_INVOKABLE QColor getAccentColor(AccentColor colorId);
+		QColor currentAccentColor(void);
 		// Theme
 		ThemeEngine::Theme theme(void);
 		void setTheme(ThemeEngine::Theme newTheme);
@@ -152,6 +173,10 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		void paperColorChanged();
 		/*! A signal, which is emitted when panel color changes. */
 		void panelColorChanged();
+		/*! A signal, which is emitted when accent color ID changes. */
+		void accentColorChanged();
+		/*! A signal, which is emitted when current accent color changes. */
+		void currentAccentColorChanged();
 		/*! A signal, which is emitted when the application theme changes. */
 		void themeChanged();
 };

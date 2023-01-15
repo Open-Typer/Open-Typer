@@ -41,6 +41,7 @@ ThemeEngine::ThemeEngine(QObject *parent) :
 	connect(this, &ThemeEngine::bgColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::paperColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::panelColorChanged, this, &ThemeEngine::colorChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::currentAccentColorChanged);
 }
 
 /*! Returns selected font. */
@@ -374,6 +375,59 @@ QColor ThemeEngine::defaultPanelColor(bool dark)
 QString ThemeEngine::panelStyleSheet(void)
 {
 	return "QMenuBar, QFrame, QCheckBox { background-color: rgb(" + QString::number(panelColor().red()) + ", " + QString::number(panelColor().green()) + ", " + QString::number(panelColor().blue()) + ");}";
+}
+
+/*! Returns current accent color ID. */
+ThemeEngine::AccentColor ThemeEngine::accentColor(void)
+{
+	return Settings::accentColorId();
+}
+
+/*! Sets accent color. */
+void ThemeEngine::setAccentColor(ThemeEngine::AccentColor color)
+{
+	Settings::setAccentColorId(color);
+	emit accentColorChanged();
+	emit currentAccentColorChanged();
+}
+
+/*! Returns the accent color of the given ID. */
+QColor ThemeEngine::getAccentColor(AccentColor colorId)
+{
+	bool light = theme() == Theme::LightTheme;
+	switch(colorId)
+	{
+		case Accent_Red:
+			return light ? QColor(191, 19, 24) : QColor(217, 80, 84);
+			break;
+		case Accent_Orange:
+			return light ? QColor(191, 119, 19) : QColor(217, 159, 80);
+			break;
+		case Accent_Yellow:
+			return light ? QColor(191, 188, 19) : QColor(217, 214, 80);
+			break;
+		case Accent_Green:
+			return light ? QColor(43, 191, 19) : QColor(99, 217, 80);
+			break;
+		case Accent_LightBlue:
+			return light ? QColor(19, 160, 191) : QColor(80, 192, 217);
+			break;
+		case Accent_Purple:
+			return light ? QColor(19, 19, 191) : QColor(81, 81, 217);
+			break;
+		case Accent_Pink:
+			return light ? QColor(138, 19, 191) : QColor(174, 80, 217);
+			break;
+		default:
+			return QColor(0, 0, 0);
+			break;
+	}
+}
+
+/*! Returns current accent color */
+QColor ThemeEngine::currentAccentColor(void)
+{
+	return getAccentColor(accentColor());
 }
 
 /*! Returns current application theme. */
