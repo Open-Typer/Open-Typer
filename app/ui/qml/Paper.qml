@@ -109,7 +109,7 @@ Item {
 				ScrollBar.vertical: ScrollBar {
 					width: 10
 					position: inputFlickable.visibleArea.yPosition
-					policy: ScrollBar.AlwaysOn
+					policy: summary.visible ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
 				}
 				TextEdit {
 					property int textWidth: Math.max(calculateTextWidth(text, inputTextMetrics), calculateTextWidth(errorText.text, errorTextMetrics));
