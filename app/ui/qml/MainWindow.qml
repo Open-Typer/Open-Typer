@@ -78,7 +78,7 @@ ApplicationWindow {
 	property string formattedExerciseTime
 	property string formattedExerciseRemainingTime
 	Material.theme: ThemeEngine.theme === ThemeEngine.DarkTheme ? Material.Dark : Material.Light
-	Material.accent: Material.LightBlue // TODO: Use accent color (maybe from ThemeEngine)
+	Material.accent: ThemeEngine.currentAccentColor
 	color: ThemeEngine.bgColor
 	minimumWidth: mainLayout.minWidth
 	minimumHeight: mainLayout.minHeight
