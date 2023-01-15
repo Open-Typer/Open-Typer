@@ -28,6 +28,7 @@ import OpenTyper 1.0
 // Fixes: material style popup background color
 // Elevation (shadow) is disabled
 ComboBox {
+	readonly property color accent: Material.accent
 	id: control
 	FontMetrics {
 		id: fontMetric
@@ -36,7 +37,7 @@ ComboBox {
 	Binding on implicitWidth {
 		value: computeWidth(model)
 	}
-	Material.background: Qt.rgba(0.13, 0.58, 1, 0.25) // TODO: Use accent color
+	Material.background: Qt.rgba(accent.r, accent.g, accent.b, 0.3);
 	background.layer.enabled: false
 
 	popup.background: Rectangle {
