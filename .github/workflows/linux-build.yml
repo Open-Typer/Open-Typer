@@ -41,5 +41,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: build-ubuntu
+        name: build-Qt-${{ matrix.qt-version }}
         path: '*.AppImage'
