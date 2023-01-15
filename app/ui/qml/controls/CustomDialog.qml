@@ -26,6 +26,7 @@ import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
+import "../controls"
 
 Item {
 	property Item blurSource: QmlUtils.blurSource
@@ -233,7 +234,7 @@ Item {
 		}
 		Component {
 			id: buttonBoxComponent
-			DialogButtonBox {
+			AccentButtonBox {
 				id: dialogButtonBox
 				font.capitalization: Font.MixedCase
 				standardButtons: control.standardButtons
