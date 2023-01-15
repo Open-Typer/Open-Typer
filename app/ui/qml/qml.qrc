@@ -30,5 +30,6 @@
         <file>settings/KeyboardSettings.qml</file>
         <file>settings/LanguageSettings.qml</file>
         <file>controls/AccentButton.qml</file>
+        <file>controls/AccentButtonBox.qml</file>
     </qresource>
 </RCC>

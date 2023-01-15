@@ -68,6 +68,7 @@ FORMS += \
 
 DISTFILES += \
     ui/qml/controls/AccentButton.qml \
+    ui/qml/controls/AccentButtonBox.qml \
     ui/qml/controls/ColorButton.qml \
     ui/qml/controls/CustomComboBox.qml \
     ui/qml/controls/CustomDialog.qml \
