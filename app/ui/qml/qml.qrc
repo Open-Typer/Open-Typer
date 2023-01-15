@@ -29,5 +29,6 @@
         <file>settings/BehaviorSettings.qml</file>
         <file>settings/KeyboardSettings.qml</file>
         <file>settings/LanguageSettings.qml</file>
+        <file>controls/AccentButton.qml</file>
     </qresource>
 </RCC>
