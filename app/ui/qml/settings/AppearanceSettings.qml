@@ -92,7 +92,9 @@ ColumnLayout {
 		font.pointSize: 12
 	}
 
-	RowLayout {
+	GridLayout {
+		columns: 2
+
 		RadioButton {
 			//: The light theme
 			text: qsTr("Light")
@@ -105,6 +107,30 @@ ColumnLayout {
 			text: qsTr("Dark")
 			checked: ThemeEngine.theme === ThemeEngine.DarkTheme
 			onPressed: setDarkTheme()
+		}
+
+		Label {
+			text: "Accent color:"
+		}
+
+		RowLayout {
+			Repeater {
+				model: [ThemeEngine.Accent_Red, ThemeEngine.Accent_Orange, ThemeEngine.Accent_Yellow,
+					ThemeEngine.Accent_Green, ThemeEngine.Accent_LightBlue,
+					ThemeEngine.Accent_Purple, ThemeEngine.Accent_Pink]
+				ColorButton {
+					readonly property int accentColor: modelData
+					color: {
+						// "use" ThemeEngine.theme so that this property reevaluates when it changes
+						if(ThemeEngine.theme == ThemeEngine.DarkTheme);
+						return ThemeEngine.getAccentColor(accentColor);
+					}
+					checked: ThemeEngine.accentColor == accentColor
+					autoExclusive: true
+					checkable: true
+					onPressed: ThemeEngine.accentColor = accentColor
+				}
+			}
 		}
 	}
 
