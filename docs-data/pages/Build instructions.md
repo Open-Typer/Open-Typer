@@ -2,7 +2,10 @@
 
 **Install dependencies (Ubuntu):**
 
-`sudo apt-get install -y git build-essential qtbase5-dev libqt5charts-dev qttools5-dev-tools libssl-dev`
+```
+sudo apt-get install -y git build-essential qtbase5-dev libqt5charts5-dev \
+	qttools5-dev-tools libssl-dev qtdeclarative5-dev qtquickcontrols2-5-dev
+```
 
 Qt can be installed using the official installer as well.
 
