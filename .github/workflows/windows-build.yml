@@ -16,7 +16,13 @@ jobs:
           - os: windows-latest
             qt-version: '5.15.2'
             qt-target: 'desktop'
-            mingw-version: 81
+            qt-mingw-version: 81
+            mingw-version: '8.1.0'
+          - os: windows-latest
+            qt-version: '6.4.2'
+            qt-target: 'desktop'
+            qt-mingw-version: ''
+            mingw-version: '11.2.0'
     steps:
     - uses: actions/checkout@v3
       with:
@@ -35,7 +41,7 @@ jobs:
       with:
         version: ${{ matrix.qt-version }}
         host: 'windows'
-        arch: 'win64_mingw${{ matrix.mingw-version }}'
+        arch: 'win64_mingw${{ matrix.qt-mingw-version }}'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
     - if: contains(matrix.os, 'windows')
@@ -43,6 +49,7 @@ jobs:
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: x64
+        version: ${{ matrix.mingw-version }}
     ## Build
     - name: Build
       run: .ci/windows-build.sh
