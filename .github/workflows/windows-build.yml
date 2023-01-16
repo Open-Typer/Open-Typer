@@ -44,6 +44,13 @@ jobs:
         arch: 'win64_mingw${{ matrix.qt-mingw-version }}'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
+    - name: Install Qt IFW (Windows)
+      run: |
+        curl -o aqt.exe -L https://github.com/miurahr/aqtinstall/releases/download/v2.2.1/aqt.exe
+        ./aqt.exe install-tool windows desktop tools_ifw
+        mv Tools ..
+        echo ${pwd}/../Tools/QtInstallerFramework/*/bin >> "${GITHUB_PATH}"
+      shell: bash
     - if: contains(matrix.os, 'windows')
       name: Install MinGW
       uses: egor-tensin/setup-mingw@v2
@@ -52,7 +59,9 @@ jobs:
         version: ${{ matrix.mingw-version }}
     ## Build
     - name: Build
-      run: .ci/windows-build.sh
+      run: |
+        cp .ci/windows-repo.sh ..
+        .ci/windows-build.sh
       shell: bash
     - name: Windows build
       run: |
@@ -74,10 +83,34 @@ jobs:
       uses: vimtor/action-zip@v1
       with:
         files: ../release/
-        dest: ${{ env.app_name }}-win32.zip
+        dest: ../${{ env.app_name }}-win32.zip
+    ## Build installer
+    - if: env.create_windows_installer == 1
+      name: Get installer configuration
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ github.repository_owner }}/${{ env.windows_installer_repo }}
+        fetch-depth: 0
+    - if: env.create_windows_installer == 1
+      name: Disable repository update
+      run: |
+        echo "update_windows_installer=0" >> "${GITHUB_ENV}"
+        echo "update_windows_repository=0" >> "${GITHUB_ENV}"
+      shell: bash
+    - if: env.create_windows_installer == 1
+      name: Build installer
+      run: |
+        ../windows-repo.sh
+        mv ../*.zip ./
+      shell: bash
     ## Upload
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: build-Qt-${{ matrix.qt-version }}
         path: '*.zip'
+    - name: Upload installer
+      uses: actions/upload-artifact@v3
+      with:
+        name: installer-Qt-${{ matrix.qt-version }}
+        path: '*.exe'
