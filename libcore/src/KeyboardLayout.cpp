@@ -86,12 +86,12 @@ void KeyboardLayout::init(void)
 		if(buffer.length() >= 2 && buffer.right(2) == "//")
 #endif
 		{
-			while(i < rawData.length() && rawData[i] != "\n")
+			while(i < rawData.length() && rawData[i] != '\n')
 				i++;
 			buffer.clear();
 			continue;
 		}
-		if(rawData[i] == "\n")
+		if(rawData[i] == '\n')
 		{
 			data += buffer + "\n";
 			buffer.clear();
@@ -157,7 +157,7 @@ QVariantList KeyboardLayout::parse(QString data)
 	{
 		if(quotes)
 		{
-			if(data[i] == "\"")
+			if(data[i] == '\"')
 			{
 				args.append("str");
 				args.append(buffer);
@@ -167,12 +167,12 @@ QVariantList KeyboardLayout::parse(QString data)
 			else
 				buffer += data[i];
 		}
-		else if(data[i] == "\"")
+		else if(data[i] == '\"')
 		{
 			buffer.clear();
 			quotes = true;
 		}
-		else if(data[i] == " " || data[i] == "\t" || (data[i] == "\n" && !skipEntry))
+		else if(data[i] == ' ' || data[i] == '\t' || (data[i] == '\n' && !skipEntry))
 		{
 			if(!buffer.isEmpty())
 			{
@@ -182,17 +182,17 @@ QVariantList KeyboardLayout::parse(QString data)
 				buffer.clear();
 			}
 		}
-		else if(data[i] == "{")
+		else if(data[i] == '{')
 		{
 			args.append("{}");
 			args.append((QVariant) parse(nestedData(&i, data, "{", "}")));
 		}
-		else if(data[i] == "[")
+		else if(data[i] == '[')
 		{
 			args.append("[]");
 			args.append((QVariant) parse(nestedData(&i, data, "[", "]")));
 		}
-		else if((data[i] == ";" || data[i] == ",") || (data[i] == "\n" && skipEntry))
+		else if((data[i] == ';' || data[i] == ',') || (data[i] == '\n' && skipEntry))
 		{
 			if(!buffer.isEmpty())
 				args.append(buffer);
@@ -201,7 +201,7 @@ QVariantList KeyboardLayout::parse(QString data)
 			buffer.clear();
 			skipEntry = false;
 		}
-		else if(data[i] != "\n")
+		else if(data[i] != '\n')
 			buffer += data[i];
 	}
 	return out;
@@ -226,7 +226,7 @@ QString KeyboardLayout::nestedData(int *pos, QString data, QString startToken, Q
 		}
 		if(quotes)
 		{
-			if(data[i] == "\"")
+			if(data[i] == '\"')
 			{
 				out += "\"";
 				quotes = false;
@@ -234,7 +234,7 @@ QString KeyboardLayout::nestedData(int *pos, QString data, QString startToken, Q
 			else
 				out += data[i];
 		}
-		else if(data[i] == "\"")
+		else if(data[i] == '\"')
 		{
 			out += "\"";
 			quotes = true;
@@ -246,7 +246,7 @@ QString KeyboardLayout::nestedData(int *pos, QString data, QString startToken, Q
 	Q_ASSERT(data[i] == endToken);
 	*pos = i;
 	Q_ASSERT(!out.isEmpty());
-	if(out.back() != ";")
+	if(out.back() != ';')
 		out += ";";
 	return out;
 }
