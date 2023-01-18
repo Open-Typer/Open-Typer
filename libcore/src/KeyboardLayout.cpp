@@ -19,8 +19,8 @@
  */
 
 #include <QFile>
-#include <xkbcommon.h>
-#include <xkbcommon-keysyms.h>
+#include <xkbcommon/xkbcommon.h>
+#include <xkbcommon/xkbcommon-keysyms.h>
 #include <ks_tables.h>
 #include <keysym.h>
 #include "KeyboardLayout.h"
