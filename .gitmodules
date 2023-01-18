@@ -1,0 +1,3 @@
+[submodule "3rdparty/xkeyboard-config"]
+	path = 3rdparty/xkeyboard-config
+	url = https://github.com/Open-Typer/xkeyboard-config
