@@ -73,7 +73,6 @@ void KeyboardLayout::init(void)
 	QFile layoutFile(":/res/xkeyboard-config/symbols/" + m_layoutId);
 	Q_ASSERT(layoutFile.open(QFile::ReadOnly | QFile::Text));
 	QString rawData = QString::fromUtf8(layoutFile.readAll());
-	//QString data = " [      plus,          1,       exclam,   dead_tilde ] ";
 
 	// Remove comments
 	QString data;
