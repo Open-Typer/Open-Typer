@@ -31,6 +31,7 @@ SOURCES += \
     src/FileUtils.cpp \
     src/HistoryParser.cpp \
     src/Key.cpp \
+    src/KeyboardLayout.cpp \
     src/KeyboardUtils.cpp \
     src/LanguageManager.cpp \
     src/MistakeRecord.cpp \
@@ -55,6 +56,7 @@ HEADERS += \
     src/include/FileUtils.h \
     src/include/HistoryParser.h \
     src/include/Key.h \
+    src/include/KeyboardLayout.h \
     src/include/KeyboardUtils.h \
     src/include/LanguageManager.h \
     src/include/MistakeRecord.h \
