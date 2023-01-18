@@ -81,3 +81,7 @@ RESOURCES += \
     translations/core-translations.qrc
 
 DEFINES += CORE_SHARED_LIB
+
+# Third party
+include(../3rdparty/xkeyboard-config/xkeyboard-config.pri)
+include(../3rdparty/libxkbcommon/libxkbcommon.pri)
