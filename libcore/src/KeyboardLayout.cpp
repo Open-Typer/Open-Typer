@@ -19,11 +19,13 @@
  */
 
 #include <QFile>
+#include <QMetaEnum>
 #include <xkbcommon/xkbcommon.h>
 #include <xkbcommon/xkbcommon-keysyms.h>
 #include <ks_tables.h>
 #include <keysym.h>
 #include "KeyboardLayout.h"
+#include "KeyboardUtils.h"
 
 /*! Constructs KeyboardLayout. */
 KeyboardLayout::KeyboardLayout(QObject *parent) :
@@ -253,6 +255,28 @@ QString KeyboardLayout::nestedData(int *pos, QString data, QString startToken, Q
 /*! Convert key ID (e. g. "backslash" or "bracketleft") to unicode representation of the key. */
 QString KeyboardLayout::keyText(QString id)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	bool dead = id.length() > 5 && id.first(5) == "dead_";
+#else
+	bool dead = id.length() > 5 && id.left(5) == "dead_";
+#endif
+	if(dead)
+	{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		QString idPart = id.last(id.length() - 5);
+#else
+		QString idPart = id.right(id.length() - 5);
+#endif
+		idPart.replace(0, 1, idPart[0].toUpper());
+		QMetaEnum metaEnum = QMetaEnum::fromType<Qt::Key>();
+		bool ok = false;
+		Qt::Key keyId = (Qt::Key) metaEnum.keyToValue(QString("Key_Dead_" + idPart).toStdString().c_str(), &ok);
+		if(!ok)
+			qCritical("%s", QString("Unsupported dead key: " + id).toStdString().c_str());
+		Q_ASSERT(ok);
+		return KeyboardUtils::deadKeyToString(keyId);
+	}
+
 	char *buffer = (char *) malloc(8);
 	memset(buffer, 0, 8);
 	xkb_keysym_t keysym = xkb_keysym_from_name(id.toStdString().c_str(), XKB_KEYSYM_CASE_INSENSITIVE);
