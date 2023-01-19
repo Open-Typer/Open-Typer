@@ -119,7 +119,17 @@ void KeyboardLayout::init(void)
 	bool ret = layoutFile.open(QFile::ReadOnly | QFile::Text);
 	Q_ASSERT(ret);
 	QString rawData = QString::fromUtf8(layoutFile.readAll());
+	loadLayout(rawData, m_variant);
+	emit rowAChanged(m_rowA);
+	emit rowBChanged(m_rowB);
+	emit rowCChanged(m_rowC);
+	emit rowDChanged(m_rowD);
+	emit rowEChanged(m_rowE);
+}
 
+/*! Loads keyboard layout from the given text. */
+void KeyboardLayout::loadLayout(QString rawData, QString variantName)
+{
 	// Remove comments
 	QString data;
 	QString buffer;
@@ -155,11 +165,10 @@ void KeyboardLayout::init(void)
 		QVariantList entry = config[i].toList();
 		if(entry.contains("xkb_symbols"))
 		{
-			// TODO: Implement inclusion of common layouts
 			Q_ASSERT(entry.indexOf("xkb_symbols") + 4 < entry.length());
 			Q_ASSERT(entry[entry.indexOf("xkb_symbols") + 1] == "str");
 			Q_ASSERT(entry[entry.indexOf("xkb_symbols") + 3] == "{}");
-			if(m_variant == entry[entry.indexOf("xkb_symbols") + 2])
+			if(variantName == entry[entry.indexOf("xkb_symbols") + 2])
 			{
 				QVariantList layoutEntries = entry[entry.indexOf("xkb_symbols") + 4].toList();
 				for(int j = 0; j < layoutEntries.length(); j++)
@@ -188,15 +197,36 @@ void KeyboardLayout::init(void)
 						key.setTypeFromEnum(keyType);
 						addKey(key, pos.x(), pos.y());
 					}
+					else if(layoutEntry.length() > 0 && layoutEntry[0] == "include")
+					{
+						Q_ASSERT(layoutEntry.length() == 3);
+						Q_ASSERT(layoutEntry[1] == "str");
+						QString includeDest = layoutEntry[2].toString();
+						bool bracket = false;
+						QString destFile, destVariant;
+						for(int k = 0; k < includeDest.length(); k++)
+						{
+							if(includeDest[k] == "(")
+								bracket = true;
+							else if(includeDest[k] == ")")
+								bracket = false;
+							else if(bracket)
+								destVariant += includeDest[k];
+							else
+								destFile += includeDest[k];
+						}
+						if(destVariant.isEmpty())
+							destVariant = "basic";
+						QFile layoutFile(":/res/xkeyboard-config/symbols/" + destFile);
+						bool ret = layoutFile.open(QFile::ReadOnly | QFile::Text);
+						Q_ASSERT(ret);
+						QString layoutData = QString::fromUtf8(layoutFile.readAll());
+						loadLayout(layoutData, destVariant);
+					}
 				}
 			}
 		}
 	}
-	emit rowAChanged(m_rowA);
-	emit rowBChanged(m_rowB);
-	emit rowCChanged(m_rowC);
-	emit rowDChanged(m_rowD);
-	emit rowEChanged(m_rowE);
 }
 
 /*! Reads keyboard layout configuration. */
