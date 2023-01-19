@@ -40,6 +40,7 @@ QString Key::text(void)
 void Key::setText(QString text)
 {
 	m_text = text;
+	updateDisplayText();
 }
 
 /*! The text for this key when pressed with shift. */
@@ -51,12 +52,13 @@ QString Key::shiftText(void)
 void Key::setShiftText(QString text)
 {
 	m_shiftText = text;
+	updateDisplayShiftText();
 }
 
 /*! The type of the key (string representation of a Type enum member). */
 QString Key::type(void)
 {
-	QMetaEnum metaEnum = QMetaEnum::fromType<Qt::Key>();
+	QMetaEnum metaEnum = QMetaEnum::fromType<Type>();
 	return metaEnum.valueToKey(m_type);
 }
 
@@ -64,4 +66,28 @@ QString Key::type(void)
 void Key::setTypeFromEnum(Type type)
 {
 	m_type = type;
+}
+
+/*! The text visible on the keyboard. */
+QString Key::displayText(void)
+{
+	return m_displayText;
+}
+
+/*! The text (for combination with the shift key) visible on the keyboard. */
+QString Key::displayShiftText(void)
+{
+	return m_displayShiftText;
+}
+
+/*! Updates display text. \see displayText() */
+void Key::updateDisplayText(void)
+{
+	m_displayText = m_text;
+}
+
+/*! Updates display shift text. \see displayShiftText() */
+void Key::updateDisplayShiftText(void)
+{
+	m_displayShiftText = m_shiftText;
 }

@@ -35,6 +35,8 @@ class CORE_LIB_EXPORT Key
 		Q_PROPERTY(QString text READ text WRITE setText)
 		Q_PROPERTY(QString shiftText READ shiftText WRITE setShiftText)
 		Q_PROPERTY(QString type READ type)
+		Q_PROPERTY(QString displayText READ displayText)
+		Q_PROPERTY(QString displayShiftText READ displayShiftText)
 	public:
 		enum Type
 		{
@@ -58,11 +60,17 @@ class CORE_LIB_EXPORT Key
 		void setShiftText(QString text);
 		QString type(void);
 		void setTypeFromEnum(Type type);
+		QString displayText(void);
+		QString displayShiftText(void);
 
 	private:
+		void updateDisplayText(void);
+		void updateDisplayShiftText(void);
 		QString m_text;
 		QString m_shiftText;
-		Type m_type;
+		Type m_type = Type_Any;
+		QString m_displayText;
+		QString m_displayShiftText;
 };
 
 typedef QList<Key> KeyboardRow;
