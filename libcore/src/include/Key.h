@@ -34,17 +34,35 @@ class CORE_LIB_EXPORT Key
 		Q_GADGET
 		Q_PROPERTY(QString text READ text WRITE setText)
 		Q_PROPERTY(QString shiftText READ shiftText WRITE setShiftText)
+		Q_PROPERTY(QString type READ type)
 	public:
+		enum Type
+		{
+			Type_Any = 0,
+			Type_Tab = 1,
+			Type_CapsLock = 2,
+			Type_Return = 3,
+			Type_LShift = 4,
+			Type_RShift = 5,
+			Type_Ctrl = 6,
+			Type_Alt = 7,
+			Type_Space = 8
+		};
+		Q_ENUM(Type)
+
 		explicit Key();
 		Key(QString text, QString shiftText);
 		QString text(void);
 		void setText(QString text);
 		QString shiftText(void);
 		void setShiftText(QString text);
+		QString type(void);
+		void setTypeFromEnum(Type type);
 
 	private:
 		QString m_text;
 		QString m_shiftText;
+		Type m_type;
 };
 
 typedef QList<Key> KeyboardRow;

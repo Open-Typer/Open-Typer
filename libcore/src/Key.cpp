@@ -18,6 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QMetaEnum>
 #include "Key.h"
 
 /*! Constructs Key. */
@@ -50,4 +51,17 @@ QString Key::shiftText(void)
 void Key::setShiftText(QString text)
 {
 	m_shiftText = text;
+}
+
+/*! The type of the key (string representation of a Type enum member). */
+QString Key::type(void)
+{
+	QMetaEnum metaEnum = QMetaEnum::fromType<Qt::Key>();
+	return metaEnum.valueToKey(m_type);
+}
+
+/*! Sets the key type using a Type value. */
+void Key::setTypeFromEnum(Type type)
+{
+	m_type = type;
 }
