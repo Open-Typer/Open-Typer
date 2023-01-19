@@ -70,67 +70,67 @@ QString KeyboardUtils::deadKeyToString(Qt::Key key)
 	switch(key)
 	{
 		case Qt::Key_Dead_Grave:
-			return QChar(0x0300);
+			return QChar(0x0060);
 		case Qt::Key_Dead_Acute:
-			return QChar(0x0301);
+			return QChar(0x00B4);
 		case Qt::Key_Dead_Circumflex:
-			return QChar(0x0302);
+			return QChar(0x005E);
 		case Qt::Key_Dead_Tilde:
-			return QChar(0x0303);
+			return QChar(0x02DC);
 		case Qt::Key_Dead_Macron:
-			return QChar(0x0304);
+			return QChar(0x00AF);
 		case Qt::Key_Dead_Breve:
-			return QChar(0x0306);
+			return QChar(0x02D8);
 		case Qt::Key_Dead_Abovedot:
-			return QChar(0x0307);
+			return QChar(0x02D9);
 		case Qt::Key_Dead_Diaeresis:
-			return QChar(0x0308);
+			return QChar(0x00A8);
 		case Qt::Key_Dead_Abovering:
-			return QChar(0x030A);
+			return QChar(0x02DA);
 		case Qt::Key_Dead_Doubleacute:
-			return QChar(0x030B);
+			return QChar(0x02DD);
 		case Qt::Key_Dead_Caron:
-			return QChar(0x030C);
+			return QChar(0x02C7);
 		case Qt::Key_Dead_Cedilla:
-			return QChar(0x0327);
+			return QChar(0x00B8);
 		case Qt::Key_Dead_Ogonek:
-			return QChar(0x0328);
+			return QChar(0x02DB);
 		case Qt::Key_Dead_Iota:
-			return QChar(0x0345);
+			return QChar(0x037A);
 		case Qt::Key_Dead_Voiced_Sound:
-			return QChar(0x3099);
+			return QChar(0x309B);
 		case Qt::Key_Dead_Semivoiced_Sound:
-			return QChar(0x309A);
+			return QChar(0x309C);
 		case Qt::Key_Dead_Belowdot:
-			return QChar(0x0323);
-		case Qt::Key_Dead_Hook:
-			return QChar(0x0309);
+			return QChar(0xFBB3);
+		/*case Qt::Key_Dead_Hook:
+			return QChar(0x0294); // U+0294 is the most similar character to U+0309
 		case Qt::Key_Dead_Horn:
-			return QChar(0x031B);
+			return QChar(0x2019); // U+2019 is the most similar character to U+031B
 		case Qt::Key_Dead_Stroke:
 			return QChar(0x0338);
 		case Qt::Key_Dead_Abovecomma:
 			return QChar(0x0313);
 		case Qt::Key_Dead_Abovereversedcomma:
-			return QChar(0x0314);
+			return QChar(0x0314);*/
 		case Qt::Key_Dead_Doublegrave:
-			return QChar(0x030F);
+			return QChar(0x02F5);
 		case Qt::Key_Dead_Belowring:
-			return QChar(0x0325);
+			return QChar(0x02DA); // same as ring above because it doesn't matter on a keyboard
 		case Qt::Key_Dead_Belowmacron:
-			return QChar(0x0331);
+			return QChar(0x00AF); // same as macron because it doesn't matter on a keyboard
 		case Qt::Key_Dead_Belowcircumflex:
-			return QChar(0x032D);
+			return QChar(0xA788);
 		case Qt::Key_Dead_Belowtilde:
-			return QChar(0x0330);
+			return QChar(0x02F7);
 		case Qt::Key_Dead_Belowbreve:
-			return QChar(0x032E);
+			return QChar(0x23D1);
 		case Qt::Key_Dead_Belowdiaeresis:
-			return QChar(0x0324);
-		case Qt::Key_Dead_Invertedbreve:
-			return QChar(0x0311);
+			return QChar(0x00A8); // same as diaeresis because it doesn't matter on a keyboard
+		/*case Qt::Key_Dead_Invertedbreve:
+			return QChar(0x0311);*/
 		case Qt::Key_Dead_Belowcomma:
-			return QChar(0x0326);
+			return QChar(0x002C);
 		case Qt::Key_Dead_Currency:
 			return QChar(0x00A4);
 		case Qt::Key_Dead_Greek:
