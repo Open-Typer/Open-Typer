@@ -102,13 +102,13 @@ void KeyboardLayout::init(void)
 	m_rowC.clear();
 	m_rowD.clear();
 	m_rowE.clear();
-	for(int i = 0; i < 14; i++)
+	for(int i = 0; i < 13; i++)
 		m_rowE.append(Key());
-	for(int i = 0; i < 13; i++)
+	for(int i = 0; i < 12; i++)
 		m_rowD.append(Key());
-	for(int i = 0; i < 13; i++)
+	for(int i = 0; i < 12; i++)
 		m_rowC.append(Key());
-	for(int i = 0; i < 13; i++)
+	for(int i = 0; i < 11; i++)
 		m_rowB.append(Key());
 	for(int i = 0; i < 8; i++)
 		m_rowA.append(Key());
@@ -412,6 +412,7 @@ QPoint KeyboardLayout::keyPos(QString keyId, Key::Type *type)
 void KeyboardLayout::addKey(Key key, int x, int y)
 {
 	KeyboardRow *row;
+	int offset = 0;
 	switch(y)
 	{
 		case 0:
@@ -422,9 +423,11 @@ void KeyboardLayout::addKey(Key key, int x, int y)
 			break;
 		case 2:
 			row = &m_rowC;
+			offset = -1;
 			break;
 		case 3:
 			row = &m_rowD;
+			offset = -1;
 			break;
 		case 4:
 			row = &m_rowE;
@@ -434,5 +437,5 @@ void KeyboardLayout::addKey(Key key, int x, int y)
 			break;
 	}
 	Q_ASSERT(row != nullptr);
-	row->replace(x, key);
+	row->replace(x + offset, key);
 }
