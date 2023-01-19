@@ -48,7 +48,8 @@ class CORE_LIB_EXPORT Key
 			Type_RShift = 5,
 			Type_Ctrl = 6,
 			Type_Alt = 7,
-			Type_Space = 8
+			Type_Space = 8,
+			Type_Backspace = 9
 		};
 		Q_ENUM(Type)
 
