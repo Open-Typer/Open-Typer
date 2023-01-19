@@ -72,8 +72,11 @@ void KeyboardLayout::init(void)
 	rowD.clear();
 	rowE.clear();
 
+	if(m_layoutId.isEmpty() || m_variant.isEmpty())
+		return;
 	QFile layoutFile(":/res/xkeyboard-config/symbols/" + m_layoutId);
-	Q_ASSERT(layoutFile.open(QFile::ReadOnly | QFile::Text));
+	bool ret = layoutFile.open(QFile::ReadOnly | QFile::Text);
+	Q_ASSERT(ret);
 	QString rawData = QString::fromUtf8(layoutFile.readAll());
 
 	// Remove comments
