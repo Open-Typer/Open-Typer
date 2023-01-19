@@ -49,4 +49,7 @@ class CORE_LIB_EXPORT Key
 
 typedef QList<Key> KeyboardRow;
 
+Q_DECLARE_METATYPE(Key)
+Q_DECLARE_METATYPE(KeyboardRow)
+
 #endif // KEY_H
