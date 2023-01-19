@@ -186,16 +186,21 @@ void KeyboardLayout::loadLayout(QString rawData, QString variantName)
 #endif
 						Q_ASSERT(layoutEntry[2] == "{}");
 						Q_ASSERT(layoutEntry[3].toList().length() >= 1);
-						Q_ASSERT(layoutEntry[3].toList()[0].toList().length() == 2);
-						Q_ASSERT(layoutEntry[3].toList()[0].toList()[0] == "[]");
-						QVariantList keyData = layoutEntry[3].toList()[0].toList()[1].toList();
-						Key key;
-						key.setText(keyText(keyData[0].toList()[0].toString()));
-						key.setShiftText(keyText(keyData[1].toList()[0].toString()));
-						Key::Type keyType;
-						QPoint pos = keyPos(keyId, &keyType);
-						key.setTypeFromEnum(keyType);
-						addKey(key, pos.x(), pos.y());
+						Q_ASSERT(layoutEntry[3].toList()[0].toList().length() >= 2);
+						if(layoutEntry[3].toList()[0].toList()[0] == "[]")
+						{
+							QVariantList keyData = layoutEntry[3].toList()[0].toList()[1].toList();
+							if(keyData.length() >= 2)
+							{
+								Key key;
+								key.setText(keyText(keyData[0].toList()[0].toString()));
+								key.setShiftText(keyText(keyData[1].toList()[0].toString()));
+								Key::Type keyType;
+								QPoint pos = keyPos(keyId, &keyType);
+								key.setTypeFromEnum(keyType);
+								addKey(key, pos.x(), pos.y());
+							}
+						}
 					}
 					else if(layoutEntry.length() > 0 && layoutEntry[0] == "include")
 					{
