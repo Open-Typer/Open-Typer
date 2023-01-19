@@ -176,7 +176,7 @@ void KeyboardLayout::init(void)
 						QString keyId = rawKeyId.mid(1, rawKeyId.length() - 2); // Remove '<' and '>'
 #endif
 						Q_ASSERT(layoutEntry[2] == "{}");
-						Q_ASSERT(layoutEntry[3].toList().length() == 1);
+						Q_ASSERT(layoutEntry[3].toList().length() >= 1);
 						Q_ASSERT(layoutEntry[3].toList()[0].toList().length() == 2);
 						Q_ASSERT(layoutEntry[3].toList()[0].toList()[0] == "[]");
 						QVariantList keyData = layoutEntry[3].toList()[0].toList()[1].toList();
