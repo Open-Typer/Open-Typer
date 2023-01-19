@@ -211,9 +211,9 @@ void KeyboardLayout::loadLayout(QString rawData, QString variantName)
 						QString destFile, destVariant;
 						for(int k = 0; k < includeDest.length(); k++)
 						{
-							if(includeDest[k] == "(")
+							if(includeDest[k] == '(')
 								bracket = true;
-							else if(includeDest[k] == ")")
+							else if(includeDest[k] == ')')
 								bracket = false;
 							else if(bracket)
 								destVariant += includeDest[k];
