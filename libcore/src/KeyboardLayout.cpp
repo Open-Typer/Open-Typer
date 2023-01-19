@@ -183,7 +183,9 @@ void KeyboardLayout::init(void)
 						Key key;
 						key.setText(keyText(keyData[0].toList()[0].toString()));
 						key.setShiftText(keyText(keyData[1].toList()[0].toString()));
-						QPoint pos = keyPos(keyId);
+						Key::Type keyType;
+						QPoint pos = keyPos(keyId, &keyType);
+						key.setTypeFromEnum(keyType);
 						addKey(key, pos.x(), pos.y());
 					}
 				}
@@ -337,9 +339,14 @@ QString KeyboardLayout::keyText(QString id)
 	return out;
 }
 
-/*! Returns the position of the key (key - left to right, row - bottom to top, ). */
-QPoint KeyboardLayout::keyPos(QString keyId)
+/*!
+ * Returns the position of the key (key - left to right, row - bottom to top, ).\n
+ * Optionally gets key type.
+ */
+QPoint KeyboardLayout::keyPos(QString keyId, Key::Type *type)
 {
+	if(type)
+		*type = Key::Type_Any;
 	if(keyId == "TLDE")
 		return QPoint(0, 4);
 	else if(keyId == "BKSL")
@@ -347,7 +354,11 @@ QPoint KeyboardLayout::keyPos(QString keyId)
 	else if(keyId == "LSGT")
 		return QPoint(0, 1);
 	else if(keyId == "SPCE")
-		return QPoint(0, 0);
+	{
+		if(type)
+			*type = Key::Type_Space;
+		return QPoint(3, 0);
+	}
 	else if(keyId[0] == 'A')
 	{
 		QString alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
