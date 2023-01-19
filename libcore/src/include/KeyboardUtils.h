@@ -2,7 +2,7 @@
  * KeyboardUtils.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,6 +39,7 @@ class CORE_LIB_EXPORT KeyboardUtils : public QObject
 		static bool isSpecialKey(QKeyEvent *event);
 		Q_INVOKABLE static bool isSpecialKey(QVariantMap event);
 		Q_INVOKABLE static bool isDeadKey(int key);
+		static QString deadKeyToString(Qt::Key key);
 };
 
 #endif // KEYBOARDUTILS_H
