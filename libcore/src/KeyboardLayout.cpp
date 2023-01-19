@@ -135,8 +135,8 @@ void KeyboardLayout::init(void)
 						Q_ASSERT(layoutEntry[3].toList()[0].toList()[0] == "[]");
 						QVariantList keyData = layoutEntry[3].toList()[0].toList()[1].toList();
 						Key key;
-						key.setText(keyChar(keyData[0].toList()[0].toString()));
-						key.setShiftText(keyChar(keyData[1].toList()[0].toString()));
+						key.setText(keyText(keyData[0].toList()[0].toString()));
+						key.setShiftText(keyText(keyData[1].toList()[0].toString()));
 						// TODO: Get key position
 					}
 				}
@@ -250,8 +250,15 @@ QString KeyboardLayout::nestedData(int *pos, QString data, QString startToken, Q
 	return out;
 }
 
-/*! Convert key ID (e. g. "backslash" or "bracketleft") to QChar. */
-QChar KeyboardLayout::keyChar(QString id)
+/*! Convert key ID (e. g. "backslash" or "bracketleft") to unicode representation of the key. */
+QString KeyboardLayout::keyText(QString id)
 {
-	return QChar(xkb_keysym_from_name(id.toStdString().c_str(), XKB_KEYSYM_CASE_INSENSITIVE));
+	char *buffer = (char *) malloc(8);
+	memset(buffer, 0, 8);
+	xkb_keysym_t keysym = xkb_keysym_from_name(id.toStdString().c_str(), XKB_KEYSYM_CASE_INSENSITIVE);
+	int ret = xkb_keysym_to_utf8(keysym, buffer, 8);
+	Q_ASSERT(ret >= 0);
+	QString out = QString::fromUtf8(buffer, ret - 1);
+	free(buffer);
+	return out;
 }

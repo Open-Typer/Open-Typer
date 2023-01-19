@@ -49,7 +49,7 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 		void init(void);
 		QVariantList parse(QString data);
 		QString nestedData(int *pos, QString data, QString startToken, QString endToken);
-		QChar keyChar(QString id);
+		QString keyText(QString id);
 		QString m_layoutId;
 		QString m_variant;
 		KeyboardRow rowB;
