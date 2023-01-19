@@ -305,6 +305,12 @@ QString KeyboardLayout::nestedData(int *pos, QString data, QString startToken, Q
 	while(i < data.length() && !(data[i] == endToken && bracketCount == 0))
 	{
 		i++;
+		if(i >= data.length())
+		{
+			Q_ASSERT(true);
+			i--;
+			break;
+		}
 		if(!quotes)
 		{
 			if(data[i] == startToken)
@@ -331,7 +337,12 @@ QString KeyboardLayout::nestedData(int *pos, QString data, QString startToken, Q
 			out += data[i];
 		Q_ASSERT(bracketCount >= -1);
 	}
-	Q_ASSERT(data[i] == endToken);
+	while(data[i] == '\n')
+	{
+		data.remove(i, 1);
+		if(i >= data.length())
+			i--;
+	}
 	*pos = i;
 	Q_ASSERT(!out.isEmpty());
 	if(out.back() != ';')
@@ -437,5 +448,6 @@ void KeyboardLayout::addKey(Key key, int x, int y)
 			break;
 	}
 	Q_ASSERT(row != nullptr);
-	row->replace(x + offset, key);
+	if(row)
+		row->replace(x + offset, key);
 }
