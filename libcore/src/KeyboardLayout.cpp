@@ -64,24 +64,54 @@ void KeyboardLayout::setVariant(QString variant)
 	emit variantChanged(variant);
 }
 
+/*! Row A (control, alt, space, etc.) */
+KeyboardRow KeyboardLayout::rowA(void)
+{
+	return m_rowA;
+}
+
+/*! Row B (shift, backslash, y/z, x, c, etc.) */
+KeyboardRow KeyboardLayout::rowB(void)
+{
+	return m_rowB;
+}
+
+/*! Row C (caps lock, a, s, d, f, etc.) */
+KeyboardRow KeyboardLayout::rowC(void)
+{
+	return m_rowC;
+}
+
+/*! Row D (tab, q, w, e, r, t, z/y, etc.) */
+KeyboardRow KeyboardLayout::rowD(void)
+{
+	return m_rowD;
+}
+
+/*! Row E (tilde, 1, 2, 3, 4, 5, etc.) */
+KeyboardRow KeyboardLayout::rowE(void)
+{
+	return m_rowE;
+}
+
 /*! Initializes the keyboard layout (reads all keys from xkeyboard-config). */
 void KeyboardLayout::init(void)
 {
-	rowA.clear();
-	rowB.clear();
-	rowC.clear();
-	rowD.clear();
-	rowE.clear();
+	m_rowA.clear();
+	m_rowB.clear();
+	m_rowC.clear();
+	m_rowD.clear();
+	m_rowE.clear();
 	for(int i = 0; i < 14; i++)
-		rowE.append(Key());
+		m_rowE.append(Key());
 	for(int i = 0; i < 13; i++)
-		rowD.append(Key());
+		m_rowD.append(Key());
 	for(int i = 0; i < 13; i++)
-		rowC.append(Key());
+		m_rowC.append(Key());
 	for(int i = 0; i < 13; i++)
-		rowB.append(Key());
+		m_rowB.append(Key());
 	for(int i = 0; i < 8; i++)
-		rowA.append(Key());
+		m_rowA.append(Key());
 
 	if(m_layoutId.isEmpty() || m_variant.isEmpty())
 		return;
@@ -160,6 +190,11 @@ void KeyboardLayout::init(void)
 			}
 		}
 	}
+	emit rowAChanged(m_rowA);
+	emit rowBChanged(m_rowB);
+	emit rowCChanged(m_rowC);
+	emit rowDChanged(m_rowD);
+	emit rowEChanged(m_rowE);
 }
 
 /*! Reads keyboard layout configuration. */
@@ -334,19 +369,19 @@ void KeyboardLayout::addKey(Key key, int x, int y)
 	switch(y)
 	{
 		case 0:
-			row = &rowA;
+			row = &m_rowA;
 			break;
 		case 1:
-			row = &rowB;
+			row = &m_rowB;
 			break;
 		case 2:
-			row = &rowC;
+			row = &m_rowC;
 			break;
 		case 3:
-			row = &rowD;
+			row = &m_rowD;
 			break;
 		case 4:
-			row = &rowE;
+			row = &m_rowE;
 			break;
 		default:
 			row = nullptr;
