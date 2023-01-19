@@ -67,10 +67,21 @@ void KeyboardLayout::setVariant(QString variant)
 /*! Initializes the keyboard layout (reads all keys from xkeyboard-config). */
 void KeyboardLayout::init(void)
 {
+	rowA.clear();
 	rowB.clear();
 	rowC.clear();
 	rowD.clear();
 	rowE.clear();
+	for(int i = 0; i < 14; i++)
+		rowE.append(Key());
+	for(int i = 0; i < 13; i++)
+		rowD.append(Key());
+	for(int i = 0; i < 13; i++)
+		rowC.append(Key());
+	for(int i = 0; i < 13; i++)
+		rowB.append(Key());
+	for(int i = 0; i < 8; i++)
+		rowA.append(Key());
 
 	if(m_layoutId.isEmpty() || m_variant.isEmpty())
 		return;
@@ -142,7 +153,8 @@ void KeyboardLayout::init(void)
 						Key key;
 						key.setText(keyText(keyData[0].toList()[0].toString()));
 						key.setShiftText(keyText(keyData[1].toList()[0].toString()));
-						// TODO: Get key position
+						QPoint pos = keyPos(keyId);
+						addKey(key, pos.x(), pos.y());
 					}
 				}
 			}
@@ -288,4 +300,58 @@ QString KeyboardLayout::keyText(QString id)
 	QString out = QString::fromUtf8(buffer, ret - 1);
 	free(buffer);
 	return out;
+}
+
+/*! Returns the position of the key (key - left to right, row - bottom to top, ). */
+QPoint KeyboardLayout::keyPos(QString keyId)
+{
+	if(keyId == "TLDE")
+		return QPoint(0, 4);
+	else if(keyId == "BKSL")
+		return QPoint(12, 2);
+	else if(keyId == "LSGT")
+		return QPoint(0, 1);
+	else if(keyId == "SPCE")
+		return QPoint(0, 0);
+	else if(keyId[0] == 'A')
+	{
+		QString alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		return QPoint(QString(QString(keyId[2]) + keyId[3]).toInt(), alphabet.indexOf(keyId[1]));
+	}
+	else
+	{
+		// This shouldn't happen...
+		qCritical("%s", QString("Unsupported key: " + keyId).toStdString().c_str());
+		Q_ASSERT(false);
+		return QPoint(-1, -1);
+	}
+}
+
+/*! Adds a key to the layout. */
+void KeyboardLayout::addKey(Key key, int x, int y)
+{
+	KeyboardRow *row;
+	switch(y)
+	{
+		case 0:
+			row = &rowA;
+			break;
+		case 1:
+			row = &rowB;
+			break;
+		case 2:
+			row = &rowC;
+			break;
+		case 3:
+			row = &rowD;
+			break;
+		case 4:
+			row = &rowE;
+			break;
+		default:
+			row = nullptr;
+			break;
+	}
+	Q_ASSERT(row != nullptr);
+	row->replace(x, key);
 }
