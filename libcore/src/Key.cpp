@@ -55,15 +55,14 @@ void Key::setShiftText(QString text)
 	updateDisplayShiftText();
 }
 
-/*! The type of the key (string representation of a Type enum member). */
-QString Key::type(void)
+/*! The type of the key. */
+KeyboardUtils::KeyType Key::type(void)
 {
-	QMetaEnum metaEnum = QMetaEnum::fromType<Type>();
-	return metaEnum.valueToKey(m_type);
+	return m_type;
 }
 
-/*! Sets the key type using a Type value. */
-void Key::setTypeFromEnum(Type type)
+/*! Sets the key type. */
+void Key::setType(KeyboardUtils::KeyType type)
 {
 	m_type = type;
 }

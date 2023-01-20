@@ -22,6 +22,7 @@
 #define KEY_H
 
 #include <QObject>
+#include "KeyboardUtils.h"
 
 #if defined CORE_SHARED_LIB
 #define CORE_LIB_EXPORT Q_DECL_EXPORT
@@ -34,34 +35,18 @@ class CORE_LIB_EXPORT Key
 		Q_GADGET
 		Q_PROPERTY(QString text READ text WRITE setText)
 		Q_PROPERTY(QString shiftText READ shiftText WRITE setShiftText)
-		Q_PROPERTY(QString type READ type)
+		Q_PROPERTY(KeyboardUtils::KeyType type READ type WRITE setType)
 		Q_PROPERTY(QString displayText READ displayText)
 		Q_PROPERTY(QString displayShiftText READ displayShiftText)
 	public:
-		enum Type
-		{
-			Type_Any = 0,
-			Type_Tab = 1,
-			Type_CapsLock = 2,
-			Type_Return = 3,
-			Type_LShift = 4,
-			Type_RShift = 5,
-			Type_Ctrl = 6,
-			Type_LAlt = 7,
-			Type_RAlt = 8,
-			Type_Space = 9,
-			Type_Backspace = 10
-		};
-		Q_ENUM(Type)
-
 		explicit Key();
 		Key(QString text, QString shiftText);
 		QString text(void);
 		void setText(QString text);
 		QString shiftText(void);
 		void setShiftText(QString text);
-		QString type(void);
-		void setTypeFromEnum(Type type);
+		KeyboardUtils::KeyType type(void);
+		void setType(KeyboardUtils::KeyType type);
 		QString displayText(void);
 		QString displayShiftText(void);
 
@@ -70,7 +55,7 @@ class CORE_LIB_EXPORT Key
 		void updateDisplayShiftText(void);
 		QString m_text;
 		QString m_shiftText;
-		Type m_type = Type_Any;
+		KeyboardUtils::KeyType m_type = KeyboardUtils::KeyType_Any;
 		QString m_displayText;
 		QString m_displayShiftText;
 };

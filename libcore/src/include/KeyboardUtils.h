@@ -36,6 +36,22 @@ class CORE_LIB_EXPORT KeyboardUtils : public QObject
 {
 		Q_OBJECT
 	public:
+		enum KeyType
+		{
+			KeyType_Any = 0,
+			KeyType_Tab = 1,
+			KeyType_CapsLock = 2,
+			KeyType_Return = 3,
+			KeyType_LShift = 4,
+			KeyType_RShift = 5,
+			KeyType_Ctrl = 6,
+			KeyType_LAlt = 7,
+			KeyType_RAlt = 8,
+			KeyType_Space = 9,
+			KeyType_Backspace = 10
+		};
+		Q_ENUM(KeyType)
+
 		static bool isSpecialKey(QKeyEvent *event);
 		Q_INVOKABLE static bool isSpecialKey(QVariantMap event);
 		Q_INVOKABLE static bool isDeadKey(int key);

@@ -195,9 +195,9 @@ void KeyboardLayout::loadLayout(QString rawData, QString variantName)
 								Key key;
 								key.setText(keyText(keyData[0].toList()[0].toString()));
 								key.setShiftText(keyText(keyData[1].toList()[0].toString()));
-								Key::Type keyType;
+								KeyboardUtils::KeyType keyType;
 								QPoint pos = keyPos(keyId, &keyType);
-								key.setTypeFromEnum(keyType);
+								key.setType(keyType);
 								addKey(key, pos.x(), pos.y());
 							}
 						}
@@ -389,10 +389,10 @@ QString KeyboardLayout::keyText(QString id)
  * Returns the position of the key (key - left to right, row - bottom to top, ).\n
  * Optionally gets key type.
  */
-QPoint KeyboardLayout::keyPos(QString keyId, Key::Type *type)
+QPoint KeyboardLayout::keyPos(QString keyId, KeyboardUtils::KeyType *type)
 {
 	if(type)
-		*type = Key::Type_Any;
+		*type = KeyboardUtils::KeyType_Any;
 	if(keyId == "TLDE")
 		return QPoint(0, 4);
 	else if(keyId == "BKSL")
@@ -402,7 +402,7 @@ QPoint KeyboardLayout::keyPos(QString keyId, Key::Type *type)
 	else if(keyId == "SPCE")
 	{
 		if(type)
-			*type = Key::Type_Space;
+			*type = KeyboardUtils::KeyType_Space;
 		return QPoint(3, 0);
 	}
 	else if(keyId[0] == 'A')
