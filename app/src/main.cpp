@@ -139,6 +139,9 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalThemeEngine;
 	});
+	qmlRegisterSingletonType<KeyboardUtils>("OpenTyper", 1, 0, "KeyboardUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return new KeyboardUtils;
+	});
 	qmlRegisterSingletonType<QmlUtils>("OpenTyper", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		QmlUtils *qmlUtils = new QmlUtils;
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
@@ -182,8 +185,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
 	StringUtils stringUtils;
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
-	KeyboardUtils keyboardUtils;
-	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
 	HistoryParser historyParser;
 	engine.rootContext()->setContextProperty("HistoryParser", &historyParser);
 	StatsDialog statsDialog(true, {}, QPair<int, int>(), QString(), 0, 0, 0);
