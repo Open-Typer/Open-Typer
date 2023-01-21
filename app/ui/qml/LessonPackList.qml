@@ -50,6 +50,7 @@ ListView {
 		onClicked: {
 			root.currentIndex = index;
 			Settings.setLessonPack(items[currentIndex]);
+			QmlUtils.screenKeyboardChanged(true);
 		}
 	}
 	clip: true
