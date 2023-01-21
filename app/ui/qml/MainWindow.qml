@@ -622,6 +622,7 @@ ApplicationWindow {
 		fullInput = "";
 		paper.input = "";
 		updateText();
+		highlightNextKey();
 		// Enable/disable stats
 		var enableStats = !customExerciseLoaded && !customPack && (currentMode == 0);
 		panel2.contents.statsButton.enabled = enableStats;
@@ -964,14 +965,8 @@ ApplicationWindow {
 		}
 		if(!mistake && ignoreMistakeAppend && !ignoreBackspace)
 			paper.mistake += "_";
-		if(!mistake && correctMistakes && fullInput.length < exerciseText.length)
-		{
-			keyboard.dehighlightAllKeys();
-			var futureEvent = { "text": displayExercise[displayPos] };
-			// TODO: Get the keys that should be highlighted (shift, dead keys)
-			keyboard.highlightKey(futureEvent);
-			// TODO: Get shift key based on next character
-		}
+		if(!mistake && correctMistakes)
+			highlightNextKey();
 		if(((displayPos >= displayExercise.length) && correctMistakes) || (currentLine >= lineCount + 1))
 		{
 			if(currentLine >= lineCount + 1)
@@ -1149,6 +1144,17 @@ ApplicationWindow {
 		updateTimer.restart();
 		repeatExercise();
 		exerciseInProgress = true;
+	}
+
+	function highlightNextKey() {
+		if(fullInput.length < exerciseText.length)
+		{
+			keyboard.dehighlightAllKeys();
+			var futureEvent = { "text": displayExercise[displayPos] };
+			// TODO: Get the keys that should be highlighted (shift, dead keys)
+			keyboard.highlightKey(futureEvent);
+			// TODO: Get shift key based on next character
+		}
 	}
 
 	Component.onCompleted: {
