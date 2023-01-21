@@ -90,7 +90,12 @@ Item {
 
 	Rectangle {
 		readonly property bool isReturn: type == KeyboardUtils.KeyType_Return
-		readonly property color keyColor: {
+		property color keyColor: getKeyColor()
+		property real tintAlpha: 0.15
+		readonly property color tintColor: Qt.rgba(highlightColor.r, highlightColor.g, highlightColor.b, tintAlpha)
+		readonly property int keyWidth: parent.width
+		readonly property int keyHeight: isReturn ? 105 : parent.height
+		function getKeyColor() {
 			if(Settings.keyboardFingerColors())
 			{
 				var finger = layout.keyFinger(keyRow, keyId);
@@ -114,12 +119,11 @@ Item {
 				}
 			}
 			else
-				Qt.rgba(ThemeEngine.currentAccentColor.r, ThemeEngine.currentAccentColor.g, ThemeEngine.currentAccentColor.b, 0.3);
+				return Qt.rgba(ThemeEngine.currentAccentColor.r, ThemeEngine.currentAccentColor.g, ThemeEngine.currentAccentColor.b, 0.3);
 		}
-		property real tintAlpha: 0.15
-		readonly property color tintColor: Qt.rgba(highlightColor.r, highlightColor.g, highlightColor.b, tintAlpha)
-		readonly property int keyWidth: parent.width
-		readonly property int keyHeight: isReturn ? 105 : parent.height
+		function updateKeyColor() {
+			keyColor = getKeyColor();
+		}
 		id: keyRect
 		color: {
 			var finalColor = keyColor;
@@ -135,6 +139,20 @@ Item {
 		width: keyWidth
 		height: keyHeight
 		y: isReturn ? -55 : 0
+
+		Connections {
+			target: QmlUtils
+			function onScreenKeyboardChanged() {
+				keyRect.updateKeyColor();
+			}
+		}
+
+		Connections {
+			target: ThemeEngine
+			function onCurrentAccentColorChanged() {
+				keyRect.updateKeyColor();
+			}
+		}
 
 		Label {
 			id: label
