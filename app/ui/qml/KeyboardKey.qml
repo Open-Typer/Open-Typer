@@ -23,6 +23,9 @@ import QtQuick.Controls 2.5
 import OpenTyper 1.0
 
 Item {
+	property int keyRow
+	property int keyId
+	property KeyboardLayout layout
 	property string text
 	property string shiftText
 	property int type: KeyboardUtils.KeyType_Any
@@ -87,7 +90,32 @@ Item {
 
 	Rectangle {
 		readonly property bool isReturn: type == KeyboardUtils.KeyType_Return
-		readonly property color keyColor: Qt.rgba(ThemeEngine.currentAccentColor.r, ThemeEngine.currentAccentColor.g, ThemeEngine.currentAccentColor.b, 0.3)
+		readonly property color keyColor: {
+			if(Settings.keyboardFingerColors())
+			{
+				var finger = layout.keyFinger(keyRow, keyId);
+				var darkFactor = ThemeEngine.theme == ThemeEngine.DarkTheme ? 0.85 : 1.55
+				switch(finger)
+				{
+					case KeyboardLayout.Finger_LeftIndex:
+					case KeyboardLayout.Finger_RightIndex:
+						return Qt.darker(Qt.rgba(1, 1, 0, 0.25), darkFactor);
+					case KeyboardLayout.Finger_LeftMiddle:
+					case KeyboardLayout.Finger_RightMiddle:
+						return Qt.darker(Qt.rgba(0.39, 1, 0, 0.25), darkFactor);
+					case KeyboardLayout.Finger_LeftRing:
+					case KeyboardLayout.Finger_RightRing:
+						return Qt.darker(Qt.rgba(0, 0.39, 1, 0.25), darkFactor);
+					case KeyboardLayout.Finger_LeftLittle:
+					case KeyboardLayout.Finger_RightLittle:
+						return Qt.darker(Qt.rgba(1, 0.098, 0.098, 0.25), darkFactor);
+					default:
+						return Qt.darker(Qt.rgba(50, 50, 50, 0.25), darkFactor);
+				}
+			}
+			else
+				Qt.rgba(ThemeEngine.currentAccentColor.r, ThemeEngine.currentAccentColor.g, ThemeEngine.currentAccentColor.b, 0.3);
+		}
 		property real tintAlpha: 0.15
 		readonly property color tintColor: Qt.rgba(highlightColor.r, highlightColor.g, highlightColor.b, tintAlpha)
 		readonly property int keyWidth: parent.width
