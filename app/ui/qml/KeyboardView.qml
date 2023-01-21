@@ -30,6 +30,124 @@ ColumnLayout {
 		layout.xkbLayout = BuiltInPacks.keyboardLayoutXkb(BuiltInPacks.keyboardLayoutForPack(Settings.lessonPack()));
 	}
 
+	function findKeyInRow(key, rowRepeater) {
+		for(var i = 0; i < rowRepeater.count; i++)
+		{
+			var item = rowRepeater.itemAt(i);
+			if(item.type === KeyboardUtils.KeyType_Any && item.text === key.text && item.shiftText === key.shiftText)
+				return item;
+		}
+		return null;
+	}
+
+	function findKey(key) {
+		var ret = findKeyInRow(key, rowB);
+		if(ret !== null)
+			return ret;
+		ret = findKeyInRow(key, rowC);
+		if(ret !== null)
+			return ret;
+		ret = findKeyInRow(key, rowD);
+		if(ret !== null)
+			return ret;
+		ret = findKeyInRow(key, rowE);
+		return ret;
+	}
+
+	function getKeyFromRow(keyText, rowKeys) {
+		for(var i = 0; i < rowKeys.length; i++)
+		{
+			if(rowKeys[i].text === keyText || rowKeys[i].shiftText === keyText)
+				return findKey(rowKeys[i]);
+		}
+		return null;
+	}
+
+	function getKey(event) {
+		if(event["key"] === Qt.Key_Backspace)
+			return backspace;
+		else if(event["key"] === Qt.Key_Tab || event["text"] === "\t")
+			return tab;
+		else if(event["key"] === Qt.Key_CapsLock)
+			return capsLock;
+		else if(event["key"] === Qt.Key_Return || event["text"] === "\n")
+			return returnKey;
+		else if(event["key"] === Qt.Key_Shift)
+			return lShift; // TODO: Add support for rShift
+		else if(event["key"] === Qt.Key_Control)
+			return lCtrl; // TODO: Add support for rCtrl
+		else if(event["key"] === Qt.Key_Alt)
+			return lAlt;
+		else if(event["key"] === Qt.Key_AltGr)
+			return rAlt;
+		else if(event["key"] === Qt.Key_Space || event["text"] === " ")
+			return space;
+		if(event["text"] === undefined)
+			return;
+		var keyText = event["text"].toLowerCase();
+		var ret = getKeyFromRow(keyText, layout.rowB);
+		if(ret !== null)
+			return ret;
+		ret = getKeyFromRow(keyText, layout.rowC);
+		if(ret !== null)
+			return ret;
+		ret = getKeyFromRow(keyText, layout.rowD);
+		if(ret !== null)
+			return ret;
+		ret = getKeyFromRow(keyText, layout.rowE);
+		return ret;
+	}
+
+	function highlightKey(event) {
+		var key = getKey(event);
+		console.assert(key !== null);
+		if(key !== null)
+			key.highlighted = true;
+	}
+
+	function dehighlightKey(event) {
+		var key = getKey(event);
+		console.assert(key !== null);
+		if(key !== null)
+			key.highlighted = false;
+	}
+
+	function dehighlightAllKeys() {
+		for(var i = 0; i < rowB.count; i++)
+			rowB.itemAt(i).highlighted = false;
+		for(i = 0; i < rowC.count; i++)
+			rowC.itemAt(i).highlighted = false;
+		for(i = 0; i < rowD.count; i++)
+			rowD.itemAt(i).highlighted = false;
+		for(i = 0; i < rowE.count; i++)
+			rowE.itemAt(i).highlighted = false;
+		backspace.highlighted = false;
+		tab.highlighted = false;
+		capsLock.highlighted = false;
+		returnKey.highlighted = false;
+		lShift.highlighted = false;
+		rShift.highlighted = false;
+		lCtrl.highlighted = false;
+		lAlt.highlighted = false;
+		space.highlighted = false;
+		rAlt.highlighted = false;
+		rCtrl.highlighted = false;
+	}
+
+	function pressKey(event) {
+		var key = getKey(event);
+		console.assert(key !== null);
+		if(key !== null)
+			getKey(event).pressed = true;
+	}
+
+	function releaseKey(event) {
+		var key = getKey(event);
+		console.assert(key !== null);
+		if(key !== null)
+			getKey(event).pressed = false;
+	}
+
 	KeyboardLayout {
 		property var xkbLayout: ["", ""]
 		id: layout
@@ -42,6 +160,7 @@ ColumnLayout {
 		spacing: keySpacing
 
 		Repeater {
+			id: rowE
 			model: layout.rowE
 			KeyboardKey {
 				text: modelData.displayText
@@ -51,6 +170,7 @@ ColumnLayout {
 		}
 
 		KeyboardKey {
+			id: backspace
 			text: ""
 			shiftText: "⌫"
 			type: KeyboardUtils.KeyType_Backspace
@@ -62,12 +182,14 @@ ColumnLayout {
 		spacing: keySpacing
 
 		KeyboardKey {
+			id: tab
 			text: ""
 			shiftText: "Tab ⭾"
 			type: KeyboardUtils.KeyType_Tab
 		}
 
 		Repeater {
+			id: rowD
 			model: layout.rowD
 			KeyboardKey {
 				text: modelData.displayText
@@ -82,12 +204,14 @@ ColumnLayout {
 		spacing: keySpacing
 
 		KeyboardKey {
+			id: capsLock
 			text: ""
 			shiftText: "Caps Lock"
 			type: KeyboardUtils.KeyType_CapsLock
 		}
 
 		Repeater {
+			id: rowC
 			model: layout.rowC
 			KeyboardKey {
 				text: modelData.displayText
@@ -97,6 +221,7 @@ ColumnLayout {
 		}
 
 		KeyboardKey {
+			id: returnKey
 			text: ""
 			shiftText: "⏎"
 			type: KeyboardUtils.KeyType_Return
@@ -108,12 +233,14 @@ ColumnLayout {
 		spacing: keySpacing
 
 		KeyboardKey {
+			id: lShift
 			text: ""
 			shiftText: "⇧ Shift"
 			type: KeyboardUtils.KeyType_LShift
 		}
 
 		Repeater {
+			id: rowB
 			model: layout.rowB
 			KeyboardKey {
 				text: modelData.displayText
@@ -123,6 +250,7 @@ ColumnLayout {
 		}
 
 		KeyboardKey {
+			id: rShift
 			text: ""
 			shiftText: "Shift ⇧"
 			type: KeyboardUtils.KeyType_RShift
@@ -134,30 +262,35 @@ ColumnLayout {
 		spacing: keySpacing
 
 		KeyboardKey {
+			id: lCtrl
 			text: ""
 			shiftText: "Ctrl"
 			type: KeyboardUtils.KeyType_Ctrl
 		}
 
 		KeyboardKey {
+			id: lAlt
 			text: ""
 			shiftText: "Alt"
 			type: KeyboardUtils.KeyType_LAlt
 		}
 
 		KeyboardKey {
+			id: space
 			text: ""
 			shiftText: ""
 			type: KeyboardUtils.KeyType_Space
 		}
 
 		KeyboardKey {
+			id: rAlt
 			text: ""
 			shiftText: "Alt"
 			type: KeyboardUtils.KeyType_RAlt
 		}
 
 		KeyboardKey {
+			id: rCtrl
 			text: ""
 			shiftText: "Ctrl"
 			type: KeyboardUtils.KeyType_Ctrl
