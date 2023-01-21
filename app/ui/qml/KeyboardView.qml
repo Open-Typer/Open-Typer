@@ -24,6 +24,8 @@ import OpenTyper 1.0
 
 ColumnLayout {
 	property int keySpacing: 7
+	readonly property alias layout: layout
+	id: root
 	spacing: keySpacing
 
 	function loadLayout() {
@@ -163,6 +165,9 @@ ColumnLayout {
 			id: rowE
 			model: layout.rowE
 			KeyboardKey {
+				keyRow: KeyboardLayout.Row_E
+				keyId: index
+				layout: root.layout
 				text: modelData.displayText
 				shiftText: modelData.displayShiftText
 				type: modelData.type
@@ -171,6 +176,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: backspace
+			keyRow: KeyboardLayout.Row_E
+			keyId: rowE.count
+			layout: root.layout
 			text: ""
 			shiftText: "⌫"
 			type: KeyboardUtils.KeyType_Backspace
@@ -183,6 +191,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: tab
+			keyRow: KeyboardLayout.Row_D
+			keyId: 0
+			layout: root.layout
 			text: ""
 			shiftText: "Tab ⭾"
 			type: KeyboardUtils.KeyType_Tab
@@ -192,6 +203,9 @@ ColumnLayout {
 			id: rowD
 			model: layout.rowD
 			KeyboardKey {
+				keyRow: KeyboardLayout.Row_D
+				keyId: index + 1
+				layout: root.layout
 				text: modelData.displayText
 				shiftText: modelData.displayShiftText
 				type: modelData.type
@@ -205,6 +219,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: capsLock
+			keyRow: KeyboardLayout.Row_C
+			keyId: 0
+			layout: root.layout
 			text: ""
 			shiftText: "Caps Lock"
 			type: KeyboardUtils.KeyType_CapsLock
@@ -214,6 +231,9 @@ ColumnLayout {
 			id: rowC
 			model: layout.rowC
 			KeyboardKey {
+				keyRow: KeyboardLayout.Row_C
+				keyId: index + 1
+				layout: root.layout
 				text: modelData.displayText
 				shiftText: modelData.displayShiftText
 				type: modelData.type
@@ -222,6 +242,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: returnKey
+			keyRow: KeyboardLayout.Row_C
+			keyId: rowC.count + 1
+			layout: root.layout
 			text: ""
 			shiftText: "⏎"
 			type: KeyboardUtils.KeyType_Return
@@ -234,6 +257,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: lShift
+			keyRow: KeyboardLayout.Row_B
+			keyId: 0
+			layout: root.layout
 			text: ""
 			shiftText: "⇧ Shift"
 			type: KeyboardUtils.KeyType_LShift
@@ -243,6 +269,9 @@ ColumnLayout {
 			id: rowB
 			model: layout.rowB
 			KeyboardKey {
+				keyRow: KeyboardLayout.Row_B
+				keyId: index + 1
+				layout: root.layout
 				text: modelData.displayText
 				shiftText: modelData.displayShiftText
 				type: modelData.type
@@ -251,6 +280,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: rShift
+			keyRow: KeyboardLayout.Row_B
+			keyId: rowB.count + 1
+			layout: root.layout
 			text: ""
 			shiftText: "Shift ⇧"
 			type: KeyboardUtils.KeyType_RShift
@@ -263,6 +295,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: lCtrl
+			keyRow: KeyboardLayout.Row_A
+			keyId: 0
+			layout: root.layout
 			text: ""
 			shiftText: "Ctrl"
 			type: KeyboardUtils.KeyType_Ctrl
@@ -270,6 +305,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: lAlt
+			keyRow: KeyboardLayout.Row_A
+			keyId: 1
+			layout: root.layout
 			text: ""
 			shiftText: "Alt"
 			type: KeyboardUtils.KeyType_LAlt
@@ -277,6 +315,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: space
+			keyRow: KeyboardLayout.Row_A
+			keyId: 2
+			layout: root.layout
 			text: ""
 			shiftText: ""
 			type: KeyboardUtils.KeyType_Space
@@ -284,6 +325,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: rAlt
+			keyRow: KeyboardLayout.Row_A
+			keyId: 3
+			layout: root.layout
 			text: ""
 			shiftText: "Alt"
 			type: KeyboardUtils.KeyType_RAlt
@@ -291,6 +335,9 @@ ColumnLayout {
 
 		KeyboardKey {
 			id: rCtrl
+			keyRow: KeyboardLayout.Row_A
+			keyId: 4
+			layout: root.layout
 			text: ""
 			shiftText: "Ctrl"
 			type: KeyboardUtils.KeyType_Ctrl
