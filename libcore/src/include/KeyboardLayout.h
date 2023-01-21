@@ -72,7 +72,6 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 	signals:
 		void layoutIdChanged(QString id);
 		void variantChanged(QString variant);
-		void rowAChanged(KeyboardRow row);
 		void rowBChanged(KeyboardRow row);
 		void rowCChanged(KeyboardRow row);
 		void rowDChanged(KeyboardRow row);
