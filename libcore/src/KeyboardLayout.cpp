@@ -88,6 +88,65 @@ KeyboardRow KeyboardLayout::rowE(void)
 	return m_rowE;
 }
 
+/*! Returns the finger which should be used for the given key (id starts with 0). */
+KeyboardLayout::Finger KeyboardLayout::keyFinger(Row row, int id)
+{
+	switch(row)
+	{
+		case Row_E:
+		case Row_B:
+			if(id < 3)
+				return Finger_LeftLittle;
+			else if(id < 6)
+				return (Finger) (Finger_LeftLittle + (id - 2));
+			else if(id == 6)
+				return Finger_LeftIndex;
+			else if(id == 7)
+				return Finger_RightIndex;
+			else if(id < 12)
+				return (Finger) (Finger_RightLittle - (11 - id));
+			else
+				return Finger_RightLittle;
+			break;
+		case Row_D:
+		case Row_C:
+			if(id < 2)
+				return Finger_LeftLittle;
+			else if(id < 5)
+				return (Finger) (Finger_LeftLittle + (id - 1));
+			else if(id == 5)
+				return Finger_LeftIndex;
+			else if(id == 6)
+				return Finger_RightIndex;
+			else if(id < 11)
+				return (Finger) (Finger_RightLittle - (10 - id));
+			else
+				return Finger_RightLittle;
+			break;
+		case Row_A:
+			if(id == 2)
+				// TODO: Add an option to set left thumb finger for space bar
+				return Finger_RightThumb;
+			else
+				return Finger_Invalid;
+			break;
+		default:
+			return Finger_Invalid;
+			break;
+	}
+}
+
+/*! Returns the hand of the given finger. */
+KeyboardLayout::Hand KeyboardLayout::fingerHand(Finger finger)
+{
+	if(finger == Finger_Invalid)
+		return Hand_Invalid;
+	if(finger < Finger_RightThumb)
+		return Hand_Left;
+	else
+		return Hand_Right;
+}
+
 /*! Initializes the keyboard layout (reads all keys from xkeyboard-config). */
 void KeyboardLayout::init(void)
 {

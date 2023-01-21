@@ -43,6 +43,40 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 		Q_PROPERTY(KeyboardRow rowD READ rowD NOTIFY rowDChanged)
 		Q_PROPERTY(KeyboardRow rowE READ rowE NOTIFY rowEChanged)
 	public:
+		enum Hand
+		{
+			Hand_Invalid = 0,
+			Hand_Left = -1,
+			Hand_Right = 1
+		};
+		Q_ENUM(Hand)
+
+		enum Finger
+		{
+			Finger_Invalid = 0,
+			Finger_LeftLittle = -5,
+			Finger_LeftRing = -4,
+			Finger_LeftMiddle = -3,
+			Finger_LeftIndex = -2,
+			Finger_LeftThumb = -1,
+			Finger_RightThumb = 1,
+			Finger_RightIndex = 2,
+			Finger_RightMiddle = 3,
+			Finger_RightRing = 4,
+			Finger_RightLittle = 5
+		};
+		Q_ENUM(Finger)
+
+		enum Row
+		{
+			Row_A = 0,
+			Row_B = 1,
+			Row_C = 2,
+			Row_D = 3,
+			Row_E = 4
+		};
+		Q_ENUM(Row)
+
 		explicit KeyboardLayout(QObject *parent = nullptr);
 		KeyboardLayout(QString id, QObject *parent = nullptr);
 		QString layoutId(void);
@@ -53,6 +87,8 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 		KeyboardRow rowC(void);
 		KeyboardRow rowD(void);
 		KeyboardRow rowE(void);
+		Q_INVOKABLE Finger keyFinger(Row row, int id);
+		Q_INVOKABLE Hand fingerHand(Finger finger);
 
 	private:
 		void init(void);
