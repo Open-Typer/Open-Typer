@@ -428,6 +428,13 @@ ApplicationWindow {
 			blockInput: root.blockInput
 			onKeyPressed: keyPress(event);
 			onKeyReleased: console.log("released: " + event["text"]);
+			KeyboardView {
+				id: keyboard
+				visible: !preview
+				anchors.bottom: parent.bottom
+				anchors.bottomMargin: 20
+				x: parent.width / 2 - width / 2
+			}
 		}
 	}
 
@@ -478,6 +485,8 @@ ApplicationWindow {
 		oldPackName = packName;
 		// Custom pack
 		customPack = Settings.customLessonPack();
+		// Load on screen keyboard layout
+		keyboard.loadLayout();
 		// Load the pack and start
 		if(packChanged)
 		{
