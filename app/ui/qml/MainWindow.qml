@@ -212,6 +212,14 @@ ApplicationWindow {
 		}
 	}
 
+	Connections {
+		target: QmlUtils
+		function onScreenKeyboardChanged(layoutChanged) {
+			if(layoutChanged)
+				keyboard.loadLayout();
+		}
+	}
+
 	DropShadow {
 		source: mainLayout
 		anchors.fill: mainLayout
