@@ -20,11 +20,14 @@
 
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.5
 import OpenTyper 1.0
+import "controls"
 
 ColumnLayout {
 	property int keySpacing: 7
 	readonly property alias layout: layout
+	property bool opened: Settings.keyboardVisible()
 	id: root
 	spacing: keySpacing
 
@@ -157,190 +160,243 @@ ColumnLayout {
 		variant: xkbLayout[1]
 	}
 
-	// Row E (number row)
-	RowLayout {
-		spacing: keySpacing
+	ColumnLayout {
+		property real yScale: Settings.keyboardVisible() ? 1 : 0
+		id: mainLayout
+		transform: Scale {
+			yScale: mainLayout.yScale
+			origin.y: mainLayout.height
+		}
 
-		Repeater {
-			id: rowE
-			model: layout.rowE
+		// Row E (number row)
+		RowLayout {
+			spacing: keySpacing
+
+			Repeater {
+				id: rowE
+				model: layout.rowE
+				KeyboardKey {
+					keyRow: KeyboardLayout.Row_E
+					keyId: index
+					layout: root.layout
+					text: modelData.displayText
+					shiftText: modelData.displayShiftText
+					type: modelData.type
+				}
+			}
+
 			KeyboardKey {
+				id: backspace
 				keyRow: KeyboardLayout.Row_E
-				keyId: index
+				keyId: rowE.count
 				layout: root.layout
-				text: modelData.displayText
-				shiftText: modelData.displayShiftText
-				type: modelData.type
+				text: ""
+				shiftText: "⌫"
+				type: KeyboardUtils.KeyType_Backspace
 			}
 		}
 
-		KeyboardKey {
-			id: backspace
-			keyRow: KeyboardLayout.Row_E
-			keyId: rowE.count
-			layout: root.layout
-			text: ""
-			shiftText: "⌫"
-			type: KeyboardUtils.KeyType_Backspace
-		}
-	}
+		// Row D
+		RowLayout {
+			spacing: keySpacing
 
-	// Row D
-	RowLayout {
-		spacing: keySpacing
-
-		KeyboardKey {
-			id: tab
-			keyRow: KeyboardLayout.Row_D
-			keyId: 0
-			layout: root.layout
-			text: ""
-			shiftText: "Tab ⭾"
-			type: KeyboardUtils.KeyType_Tab
-		}
-
-		Repeater {
-			id: rowD
-			model: layout.rowD
 			KeyboardKey {
+				id: tab
 				keyRow: KeyboardLayout.Row_D
-				keyId: index + 1
+				keyId: 0
 				layout: root.layout
-				text: modelData.displayText
-				shiftText: modelData.displayShiftText
-				type: modelData.type
+				text: ""
+				shiftText: "Tab ⭾"
+				type: KeyboardUtils.KeyType_Tab
+			}
+
+			Repeater {
+				id: rowD
+				model: layout.rowD
+				KeyboardKey {
+					keyRow: KeyboardLayout.Row_D
+					keyId: index + 1
+					layout: root.layout
+					text: modelData.displayText
+					shiftText: modelData.displayShiftText
+					type: modelData.type
+				}
 			}
 		}
-	}
 
-	// Row C (home row)
-	RowLayout {
-		spacing: keySpacing
+		// Row C (home row)
+		RowLayout {
+			spacing: keySpacing
 
-		KeyboardKey {
-			id: capsLock
-			keyRow: KeyboardLayout.Row_C
-			keyId: 0
-			layout: root.layout
-			text: ""
-			shiftText: "Caps Lock"
-			type: KeyboardUtils.KeyType_CapsLock
-		}
-
-		Repeater {
-			id: rowC
-			model: layout.rowC
 			KeyboardKey {
+				id: capsLock
 				keyRow: KeyboardLayout.Row_C
-				keyId: index + 1
+				keyId: 0
 				layout: root.layout
-				text: modelData.displayText
-				shiftText: modelData.displayShiftText
-				type: modelData.type
+				text: ""
+				shiftText: "Caps Lock"
+				type: KeyboardUtils.KeyType_CapsLock
 			}
-		}
 
-		KeyboardKey {
-			id: returnKey
-			keyRow: KeyboardLayout.Row_C
-			keyId: rowC.count + 1
-			layout: root.layout
-			text: ""
-			shiftText: "⏎"
-			type: KeyboardUtils.KeyType_Return
-		}
-	}
+			Repeater {
+				id: rowC
+				model: layout.rowC
+				KeyboardKey {
+					keyRow: KeyboardLayout.Row_C
+					keyId: index + 1
+					layout: root.layout
+					text: modelData.displayText
+					shiftText: modelData.displayShiftText
+					type: modelData.type
+				}
+			}
 
-	// Row B
-	RowLayout {
-		spacing: keySpacing
-
-		KeyboardKey {
-			id: lShift
-			keyRow: KeyboardLayout.Row_B
-			keyId: 0
-			layout: root.layout
-			text: ""
-			shiftText: "⇧ Shift"
-			type: KeyboardUtils.KeyType_LShift
-		}
-
-		Repeater {
-			id: rowB
-			model: layout.rowB
 			KeyboardKey {
-				keyRow: KeyboardLayout.Row_B
-				keyId: index + 1
+				id: returnKey
+				keyRow: KeyboardLayout.Row_C
+				keyId: rowC.count + 1
 				layout: root.layout
-				text: modelData.displayText
-				shiftText: modelData.displayShiftText
-				type: modelData.type
+				text: ""
+				shiftText: "⏎"
+				type: KeyboardUtils.KeyType_Return
 			}
 		}
 
-		KeyboardKey {
-			id: rShift
-			keyRow: KeyboardLayout.Row_B
-			keyId: rowB.count + 1
-			layout: root.layout
-			text: ""
-			shiftText: "Shift ⇧"
-			type: KeyboardUtils.KeyType_RShift
+		// Row B
+		RowLayout {
+			spacing: keySpacing
+
+			KeyboardKey {
+				id: lShift
+				keyRow: KeyboardLayout.Row_B
+				keyId: 0
+				layout: root.layout
+				text: ""
+				shiftText: "⇧ Shift"
+				type: KeyboardUtils.KeyType_LShift
+			}
+
+			Repeater {
+				id: rowB
+				model: layout.rowB
+				KeyboardKey {
+					keyRow: KeyboardLayout.Row_B
+					keyId: index + 1
+					layout: root.layout
+					text: modelData.displayText
+					shiftText: modelData.displayShiftText
+					type: modelData.type
+				}
+			}
+
+			KeyboardKey {
+				id: rShift
+				keyRow: KeyboardLayout.Row_B
+				keyId: rowB.count + 1
+				layout: root.layout
+				text: ""
+				shiftText: "Shift ⇧"
+				type: KeyboardUtils.KeyType_RShift
+			}
+		}
+
+		// Row A
+		RowLayout {
+			spacing: keySpacing
+
+			KeyboardKey {
+				id: lCtrl
+				keyRow: KeyboardLayout.Row_A
+				keyId: 0
+				layout: root.layout
+				text: ""
+				shiftText: "Ctrl"
+				type: KeyboardUtils.KeyType_Ctrl
+			}
+
+			KeyboardKey {
+				id: lAlt
+				keyRow: KeyboardLayout.Row_A
+				keyId: 1
+				layout: root.layout
+				text: ""
+				shiftText: "Alt"
+				type: KeyboardUtils.KeyType_LAlt
+			}
+
+			KeyboardKey {
+				id: space
+				keyRow: KeyboardLayout.Row_A
+				keyId: 2
+				layout: root.layout
+				text: ""
+				shiftText: ""
+				type: KeyboardUtils.KeyType_Space
+			}
+
+			KeyboardKey {
+				id: rAlt
+				keyRow: KeyboardLayout.Row_A
+				keyId: 3
+				layout: root.layout
+				text: ""
+				shiftText: "Alt"
+				type: KeyboardUtils.KeyType_RAlt
+			}
+
+			KeyboardKey {
+				id: rCtrl
+				keyRow: KeyboardLayout.Row_A
+				keyId: 4
+				layout: root.layout
+				text: ""
+				shiftText: "Ctrl"
+				type: KeyboardUtils.KeyType_Ctrl
+			}
 		}
 	}
 
-	// Row A
-	RowLayout {
-		spacing: keySpacing
+	PropertyAnimation {
+		id: openAnimation
+		target: mainLayout
+		property: "yScale"
+		to: 1
+		duration: 250
+		easing.type: Easing.OutCubic
+	}
 
-		KeyboardKey {
-			id: lCtrl
-			keyRow: KeyboardLayout.Row_A
-			keyId: 0
-			layout: root.layout
-			text: ""
-			shiftText: "Ctrl"
-			type: KeyboardUtils.KeyType_Ctrl
-		}
+	PropertyAnimation {
+		id: closeAnimation
+		target: mainLayout
+		property: "yScale"
+		to: 0
+		duration: 250
+		easing.type: Easing.OutCubic
+	}
 
-		KeyboardKey {
-			id: lAlt
-			keyRow: KeyboardLayout.Row_A
-			keyId: 1
-			layout: root.layout
-			text: ""
-			shiftText: "Alt"
-			type: KeyboardUtils.KeyType_LAlt
+	// Close button
+	Button {
+		signal clicked()
+		Layout.alignment: Qt.AlignHCenter
+		icon.name: opened ? "down" : "up"
+		onClicked: {
+			opened = !opened
+			Settings.setKeyboardVisible(opened);
+			if(opened)
+			{
+				closeAnimation.stop();
+				openAnimation.start();
+			}
+			else
+			{
+				openAnimation.stop();
+				closeAnimation.start();
+			}
 		}
+		onReleased: clicked()
 
-		KeyboardKey {
-			id: space
-			keyRow: KeyboardLayout.Row_A
-			keyId: 2
-			layout: root.layout
-			text: ""
-			shiftText: ""
-			type: KeyboardUtils.KeyType_Space
-		}
-
-		KeyboardKey {
-			id: rAlt
-			keyRow: KeyboardLayout.Row_A
-			keyId: 3
-			layout: root.layout
-			text: ""
-			shiftText: "Alt"
-			type: KeyboardUtils.KeyType_RAlt
-		}
-
-		KeyboardKey {
-			id: rCtrl
-			keyRow: KeyboardLayout.Row_A
-			keyId: 4
-			layout: root.layout
-			text: ""
-			shiftText: "Ctrl"
-			type: KeyboardUtils.KeyType_Ctrl
-		}
+		ToolTip.text: opened ? qsTr("Hide keyboard") : qsTr("Show keyboard")
+		ToolTip.visible: hovered
+		ToolTip.delay: 500
 	}
 }
