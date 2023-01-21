@@ -64,12 +64,6 @@ void KeyboardLayout::setVariant(QString variant)
 	emit variantChanged(variant);
 }
 
-/*! Row A (control, alt, space, etc.) */
-KeyboardRow KeyboardLayout::rowA(void)
-{
-	return m_rowA;
-}
-
 /*! Row B (shift, backslash, y/z, x, c, etc.) */
 KeyboardRow KeyboardLayout::rowB(void)
 {
@@ -97,7 +91,6 @@ KeyboardRow KeyboardLayout::rowE(void)
 /*! Initializes the keyboard layout (reads all keys from xkeyboard-config). */
 void KeyboardLayout::init(void)
 {
-	m_rowA.clear();
 	m_rowB.clear();
 	m_rowC.clear();
 	m_rowD.clear();
@@ -110,8 +103,6 @@ void KeyboardLayout::init(void)
 		m_rowC.append(Key());
 	for(int i = 0; i < 11; i++)
 		m_rowB.append(Key());
-	for(int i = 0; i < 8; i++)
-		m_rowA.append(Key());
 
 	if(m_layoutId.isEmpty() || m_variant.isEmpty())
 		return;
@@ -120,7 +111,6 @@ void KeyboardLayout::init(void)
 	Q_ASSERT(ret);
 	QString rawData = QString::fromUtf8(layoutFile.readAll());
 	loadLayout(rawData, m_variant);
-	emit rowAChanged(m_rowA);
 	emit rowBChanged(m_rowB);
 	emit rowCChanged(m_rowC);
 	emit rowDChanged(m_rowD);
@@ -427,7 +417,7 @@ void KeyboardLayout::addKey(Key key, int x, int y)
 	switch(y)
 	{
 		case 0:
-			row = &m_rowA;
+			return;
 			break;
 		case 1:
 			row = &m_rowB;

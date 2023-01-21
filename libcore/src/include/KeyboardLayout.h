@@ -38,7 +38,6 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 		Q_OBJECT
 		Q_PROPERTY(QString layoutId READ layoutId WRITE setLayoutId NOTIFY layoutIdChanged)
 		Q_PROPERTY(QString variant READ variant WRITE setVariant NOTIFY variantChanged)
-		Q_PROPERTY(KeyboardRow rowA READ rowA NOTIFY rowAChanged)
 		Q_PROPERTY(KeyboardRow rowB READ rowB NOTIFY rowBChanged)
 		Q_PROPERTY(KeyboardRow rowC READ rowC NOTIFY rowCChanged)
 		Q_PROPERTY(KeyboardRow rowD READ rowD NOTIFY rowDChanged)
@@ -50,7 +49,6 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 		void setLayoutId(QString id);
 		QString variant(void);
 		void setVariant(QString variant);
-		KeyboardRow rowA(void);
 		KeyboardRow rowB(void);
 		KeyboardRow rowC(void);
 		KeyboardRow rowD(void);
@@ -66,7 +64,6 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 		void addKey(Key key, int x, int y);
 		QString m_layoutId;
 		QString m_variant;
-		KeyboardRow m_rowA;
 		KeyboardRow m_rowB;
 		KeyboardRow m_rowC;
 		KeyboardRow m_rowD;
