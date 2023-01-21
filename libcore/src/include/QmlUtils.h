@@ -75,6 +75,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		void blurSourceChanged(QQuickItem *item);
 		void menuBarBlurChanged(QQuickItem *item);
 		void menuBarReloadTriggered(void);
+		void screenKeyboardChanged(bool layoutChanged); // used to update the keyboard after changing settings related to it
 };
 
 #endif // QMLUTILS_H
