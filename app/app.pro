@@ -68,6 +68,7 @@ FORMS += \
 
 DISTFILES += \
     ui/qml/KeyboardKey.qml \
+    ui/qml/KeyboardView.qml \
     ui/qml/controls/AccentButton.qml \
     ui/qml/controls/AccentButtonBox.qml \
     ui/qml/controls/ColorButton.qml \
