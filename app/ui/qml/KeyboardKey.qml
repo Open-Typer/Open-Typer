@@ -26,6 +26,9 @@ Item {
 	property string text
 	property string shiftText
 	property int type: KeyboardUtils.KeyType_Any
+	property color highlightColor: ThemeEngine.theme == ThemeEngine.DarkTheme ? "white" : "black"
+	property bool highlighted: false
+	property bool pressed: false
 
 	id: root
 	width: {
@@ -57,15 +60,52 @@ Item {
 		return 50;
 	}
 	height: Math.max(label.height, 50)
+	onHighlightedChanged: {
+		if(highlighted)
+		{
+			dehighlightAnimation.stop();
+			highlightAnimation.start();
+		}
+		else
+		{
+			highlightAnimation.stop();
+			dehighlightAnimation.start();
+		}
+	}
+	onPressedChanged: {
+		if(pressed)
+		{
+			releaseAnimation.stop();
+			pressAnimation.start();
+		}
+		else
+		{
+			pressAnimation.stop();
+			releaseAnimation.start();
+		}
+	}
 
 	Rectangle {
 		readonly property bool isReturn: type == KeyboardUtils.KeyType_Return
-		color: Qt.rgba(ThemeEngine.currentAccentColor.r, ThemeEngine.currentAccentColor.g, ThemeEngine.currentAccentColor.b, 0.3)
+		readonly property color keyColor: Qt.rgba(ThemeEngine.currentAccentColor.r, ThemeEngine.currentAccentColor.g, ThemeEngine.currentAccentColor.b, 0.3)
+		property real tintAlpha: 0.15
+		readonly property color tintColor: Qt.rgba(highlightColor.r, highlightColor.g, highlightColor.b, tintAlpha)
+		readonly property int keyWidth: parent.width
+		readonly property int keyHeight: isReturn ? 105 : parent.height
+		id: keyRect
+		color: {
+			var finalColor = keyColor;
+			if(highlighted)
+				finalColor = Qt.tint(finalColor, tintColor);
+			if(pressed)
+				finalColor = Qt.rgba(finalColor.r, finalColor.g, finalColor.b, 0.4);
+			return finalColor;
+		}
 		radius: 10
 		border.width: 2
 		border.color: ThemeEngine.theme == ThemeEngine.DarkTheme ? Qt.lighter(color, 1.3) : Qt.darker(color, 1.3)
-		width: parent.width
-		height: isReturn ? 105 : parent.height
+		width: keyWidth
+		height: keyHeight
 		y: isReturn ? -55 : 0
 
 		Label {
@@ -81,6 +121,42 @@ Item {
 			padding: 5
 			anchors.top: parent.top
 			text: root.text == root.shiftText ? root.shiftText.toUpperCase() : root.shiftText
+		}
+
+		PropertyAnimation {
+			id: highlightAnimation
+			target: keyRect
+			property: "tintAlpha"
+			to: 0.15
+			duration: 500
+			easing.type: Easing.OutCubic
+		}
+
+		PropertyAnimation {
+			id: dehighlightAnimation
+			target: keyRect
+			property: "tintAlpha"
+			to: 0
+			duration: 500
+			easing.type: Easing.InCubic
+		}
+
+		PropertyAnimation {
+			id: pressAnimation
+			target: keyRect
+			property: "scale"
+			to: 0.85
+			duration: 125
+			easing.type: Easing.OutCubic
+		}
+
+		PropertyAnimation {
+			id: releaseAnimation
+			target: keyRect
+			property: "scale"
+			to: 1
+			duration: 125
+			easing.type: Easing.InCubic
 		}
 	}
 }
