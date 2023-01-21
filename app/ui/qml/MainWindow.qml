@@ -427,7 +427,7 @@ ApplicationWindow {
 			summary.visible: preview
 			blockInput: root.blockInput
 			onKeyPressed: keyPress(event);
-			onKeyReleased: console.log("released: " + event["text"]);
+			onKeyReleased: keyRelease(event);
 			KeyboardView {
 				id: keyboard
 				visible: !preview
@@ -778,12 +778,7 @@ ApplicationWindow {
 		if(eventInProgress || blockInput || ((currentMode == 1) && !timedExStarted))
 			return;
 		var keyID = event["key"];
-		var highlightID = keyID;
-		if((fullInput.length < exerciseText.length) && (keyID === Qt.Key_Shift))
-		{
-			// TODO: Get shift key based on next character and set a special highlight ID
-		}
-		// TODO: Highlight the key on the keyboard
+		keyboard.pressKey(event);
 		if(event["isAutoRepeat"])
 			return;
 		if(KeyboardUtils.isDeadKey(keyID))
@@ -952,6 +947,8 @@ ApplicationWindow {
 					if((errorWord !== "") && (errorWords.indexOf(errorWord) === -1))
 						errorWords[errorWords.length] = errorWord;
 					deadKeys = 0;
+					keyboard.dehighlightAllKeys();
+					keyboard.highlightKey({ "key": Qt.Key_Backspace });
 				}
 				if(keyID === Qt.Key_Backspace)
 					ignoreBackspace = true;
@@ -959,6 +956,14 @@ ApplicationWindow {
 		}
 		if(!mistake && ignoreMistakeAppend && !ignoreBackspace)
 			paper.mistake += "_";
+		if(!mistake && correctMistakes && fullInput.length < exerciseText.length)
+		{
+			keyboard.dehighlightAllKeys();
+			var futureEvent = { "text": displayExercise[displayPos] };
+			// TODO: Get the keys that should be highlighted (shift, dead keys)
+			keyboard.highlightKey(futureEvent);
+			// TODO: Get shift key based on next character
+		}
 		if(((displayPos >= displayExercise.length) && correctMistakes) || (currentLine >= lineCount + 1))
 		{
 			if(currentLine >= lineCount + 1)
@@ -966,13 +971,16 @@ ApplicationWindow {
 				paper.input = paper.input.substring(0, paper.input.length - 1);
 				fullInput = fullInput.substring(0, fullInput.length - 1);
 			}
-			// TODO: Add keyRelease() method
-			//keyRelease(event);
+			keyRelease(event);
 			exerciseTimer.stop();
 			lastTime = exerciseTimer.elapsed / 1000.0;
 			endExercise();
 		}
 		eventInProgress = false;
+	}
+
+	function keyRelease(event) {
+		keyboard.releaseKey(event);
 	}
 
 	function endExercise() {
