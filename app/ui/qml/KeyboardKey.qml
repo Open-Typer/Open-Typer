@@ -145,7 +145,7 @@ Item {
 			id: pressAnimation
 			target: keyRect
 			property: "scale"
-			to: 0.85
+			to: 1 - 1 / (keyRect.keyWidth / 5)
 			duration: 125
 			easing.type: Easing.OutCubic
 		}
