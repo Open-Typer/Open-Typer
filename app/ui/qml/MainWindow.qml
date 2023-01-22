@@ -244,8 +244,8 @@ ApplicationWindow {
 			y: getY()
 			horizontalOffset: 0
 			verticalOffset: 5
-			radius: 20
-			samples: 16
+			radius: 17
+			samples: 13
 			color: ThemeEngine.theme === ThemeEngine.DarkTheme ? "#80000000" : "#80000022"
 			visible: modelData.visible
 		}
