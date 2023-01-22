@@ -68,7 +68,7 @@ ColumnLayout {
 		return null;
 	}
 
-	function getKey(event) {
+	function getKey(event, normalizeText = false) {
 		if(event["key"] === Qt.Key_Backspace)
 			return backspace;
 		else if(event["key"] === Qt.Key_Tab || event["text"] === "\t")
@@ -89,7 +89,12 @@ ColumnLayout {
 			return space;
 		if(event["text"] === undefined)
 			return;
-		var keyText = event["text"].toLowerCase();
+		var keyText;
+		var normalized = StringUtils.normalizeString(event["text"]);
+		if(normalizeText && normalized.length > 0)
+			keyText = normalized[0].toLowerCase();
+		else
+			keyText = event["text"].toLowerCase();
 		var ret = getKeyFromRow(keyText, layout.rowB);
 		if(ret !== null)
 			return ret;
@@ -100,19 +105,19 @@ ColumnLayout {
 		if(ret !== null)
 			return ret;
 		ret = getKeyFromRow(keyText, layout.rowE);
+		if(ret === null && !normalizeText)
+			return getKey(event, true);
 		return ret;
 	}
 
 	function highlightKey(event) {
 		var key = getKey(event);
-		console.assert(key !== null);
 		if(key !== null)
 			key.highlighted = true;
 	}
 
 	function dehighlightKey(event) {
 		var key = getKey(event);
-		console.assert(key !== null);
 		if(key !== null)
 			key.highlighted = false;
 	}
@@ -141,14 +146,12 @@ ColumnLayout {
 
 	function pressKey(event) {
 		var key = getKey(event);
-		console.assert(key !== null);
 		if(key !== null)
 			getKey(event).pressed = true;
 	}
 
 	function releaseKey(event) {
 		var key = getKey(event);
-		console.assert(key !== null);
 		if(key !== null)
 			getKey(event).pressed = false;
 	}
