@@ -808,15 +808,23 @@ ApplicationWindow {
 		if(eventInProgress || blockInput || ((currentMode == 1) && !timedExStarted))
 			return;
 		var keyID = event["key"];
-		keyboard.pressKey(event);
+		var isDeadKey = KeyboardUtils.isDeadKey(keyID);
+		if(!isDeadKey)
+		{
+			if(deadKeys > 0)
+				keyboard.releaseAllKeys()
+			keyboard.pressKey(event);
+		}
 		if(event["isAutoRepeat"])
 			return;
-		if(KeyboardUtils.isDeadKey(keyID))
+		if(isDeadKey)
 		{
 			deadKeys++;
 			// Count modifier key used with the dead key
 			if(event["modifiers"] !== Qt.NoModifier)
 				deadKeys++;
+			event["text"] = KeyboardUtils.deadKeyToString(event["key"]);
+			keyboard.pressKey(event);
 			return;
 		}
 		if(KeyboardUtils.isSpecialKey(event) && (keyID !== Qt.Key_Backspace))
@@ -1171,6 +1179,7 @@ ApplicationWindow {
 		if(fullInput.length < exerciseText.length)
 		{
 			keyboard.dehighlightAllKeys();
+			keyboard.releaseAllKeys();
 			var futureEvent = { "text": displayExercise[displayPos] };
 			// TODO: Get the keys that should be highlighted (shift, dead keys)
 			keyboard.highlightKey(futureEvent);
