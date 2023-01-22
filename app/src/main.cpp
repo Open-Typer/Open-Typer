@@ -44,6 +44,8 @@
 #include "BuiltInPacks.h"
 #include "HistoryParser.h"
 #include "StatsDialog.h"
+#include "KeyboardLayout.h"
+#include "Key.h"
 #include "updater/Updater.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
@@ -137,6 +139,9 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalThemeEngine;
 	});
+	qmlRegisterSingletonType<KeyboardUtils>("OpenTyper", 1, 0, "KeyboardUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return new KeyboardUtils;
+	});
 	qmlRegisterSingletonType<QmlUtils>("OpenTyper", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		QmlUtils *qmlUtils = new QmlUtils;
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
@@ -153,6 +158,9 @@ int main(int argc, char *argv[])
 	qmlRegisterType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord");
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
+	qmlRegisterType<KeyboardLayout>("OpenTyper", 1, 0, "KeyboardLayout");
+	qRegisterMetaType<Key>();
+	qRegisterMetaType<KeyboardRow>();
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
 	// TODO: Remove this after fully switching to Qt 6
 	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
@@ -177,8 +185,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
 	StringUtils stringUtils;
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
-	KeyboardUtils keyboardUtils;
-	engine.rootContext()->setContextProperty("KeyboardUtils", &keyboardUtils);
 	HistoryParser historyParser;
 	engine.rootContext()->setContextProperty("HistoryParser", &historyParser);
 	StatsDialog statsDialog(true, {}, QPair<int, int>(), QString(), 0, 0, 0);

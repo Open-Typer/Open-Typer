@@ -75,6 +75,7 @@
  *  - Settings#editorGeometry() - Pack editor window geometry.
  *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
  *  - Settings#initFinished() - If true, initial setup has been finished.
+ *  - Settings#keyboardFingerColors() - If true, the keys on the screen keyboard use a different color for fingers.
  */
 class CORE_LIB_EXPORT Settings : public QObject
 {
@@ -213,6 +214,10 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static bool initFinished(void);
 		Q_INVOKABLE static bool containsInitFinished(void);
 		Q_INVOKABLE static void setInitFinished(bool value);
+		// keyboardFingerColors
+		Q_INVOKABLE static bool keyboardFingerColors(void);
+		Q_INVOKABLE static bool containsKeyboardFingerColors(void);
+		Q_INVOKABLE static void setKeyboardFingerColors(bool value);
 
 	protected:
 		static QVariant get(QString key, QVariant defaultValue);

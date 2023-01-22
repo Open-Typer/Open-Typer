@@ -291,4 +291,23 @@ ColumnLayout {
 			onPressed: ThemeEngine.paperColor = color
 		}
 	}
+
+	MenuSeparator { visible: !simple; Layout.fillWidth: true }
+
+	// Keyboard section
+	Label {
+		visible: !simple
+		text: qsTr("Keyboard")
+		font.bold: true
+		font.pointSize: 12
+	}
+
+	CheckBox {
+		text: qsTr("Use key colors based on fingers")
+		checked: Settings.keyboardFingerColors()
+		onCheckedChanged: {
+			Settings.setKeyboardFingerColors(checked);
+			QmlUtils.screenKeyboardChanged(false);
+		}
+	}
 }

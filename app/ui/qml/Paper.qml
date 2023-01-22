@@ -43,6 +43,7 @@ Item {
 	signal keyPressed(var event)
 	signal keyReleased(var event)
 	id: control
+	clip: true
 
 	function calculateTextWidth(text, metrics) {
 		var lines = text.split("\n");

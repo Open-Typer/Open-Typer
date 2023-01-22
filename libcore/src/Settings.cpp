@@ -598,3 +598,14 @@ bool Settings::containsInitFinished(void) { return contains("main/initfinished")
 
 /*! Setter for main/initfinished. */
 void Settings::setInitFinished(bool value) { set("main/initfinished", value); }
+
+// keyboardFingerColors
+
+/*! Getter for theme/keyboardfingercolors. */
+bool Settings::keyboardFingerColors(void) { return get("theme/keyboardfingercolors", true).toBool(); }
+
+/*! Returns true if there's a theme/keyboardfingercolors key. */
+bool Settings::containsKeyboardFingerColors(void) { return contains("theme/keyboardfingercolors"); }
+
+/*! Setter for theme/keyboardfingercolors. */
+void Settings::setKeyboardFingerColors(bool value) { set("theme/keyboardfingercolors", value); }

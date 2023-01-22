@@ -53,20 +53,20 @@ SOURCES += \
     src/packEditor/PackEditor.cpp \
     src/packEditor/PackSelector.cpp \
     src/updater/Updater.cpp \
-    src/main.cpp \
-    src/widgets/KeyboardWidget.cpp
+    src/main.cpp
 
 HEADERS += \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
-    src/include/updater/Updater.h \
-    src/include/widgets/KeyboardWidget.h
+    src/include/updater/Updater.h
 
 FORMS += \
     ui/packEditor/PackEditor.ui \
     ui/packEditor/PackSelector.ui
 
 DISTFILES += \
+    ui/qml/KeyboardKey.qml \
+    ui/qml/KeyboardView.qml \
     ui/qml/controls/AccentButton.qml \
     ui/qml/controls/AccentButtonBox.qml \
     ui/qml/controls/ColorButton.qml \

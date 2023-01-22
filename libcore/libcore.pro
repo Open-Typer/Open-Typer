@@ -30,6 +30,8 @@ SOURCES += \
     src/ExportDialog.cpp \
     src/FileUtils.cpp \
     src/HistoryParser.cpp \
+    src/Key.cpp \
+    src/KeyboardLayout.cpp \
     src/KeyboardUtils.cpp \
     src/LanguageManager.cpp \
     src/MistakeRecord.cpp \
@@ -53,6 +55,8 @@ HEADERS += \
     src/include/ExportDialog.h \
     src/include/FileUtils.h \
     src/include/HistoryParser.h \
+    src/include/Key.h \
+    src/include/KeyboardLayout.h \
     src/include/KeyboardUtils.h \
     src/include/LanguageManager.h \
     src/include/MistakeRecord.h \
@@ -79,3 +83,7 @@ RESOURCES += \
     translations/core-translations.qrc
 
 DEFINES += CORE_SHARED_LIB
+
+# Third party
+include(../3rdparty/xkeyboard-config/xkeyboard-config.pri)
+include(../3rdparty/libxkbcommon/libxkbcommon.pri)

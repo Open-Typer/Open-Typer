@@ -212,6 +212,14 @@ ApplicationWindow {
 		}
 	}
 
+	Connections {
+		target: QmlUtils
+		function onScreenKeyboardChanged(layoutChanged) {
+			if(layoutChanged)
+				keyboard.loadLayout();
+		}
+	}
+
 	DropShadow {
 		source: mainLayout
 		anchors.fill: mainLayout
@@ -427,7 +435,14 @@ ApplicationWindow {
 			summary.visible: preview
 			blockInput: root.blockInput
 			onKeyPressed: keyPress(event);
-			onKeyReleased: console.log("released: " + event["text"]);
+			onKeyReleased: keyRelease(event);
+			KeyboardView {
+				id: keyboard
+				visible: !preview
+				anchors.bottom: parent.bottom
+				anchors.bottomMargin: 20
+				x: parent.width / 2 - width / 2
+			}
 		}
 	}
 
@@ -478,6 +493,8 @@ ApplicationWindow {
 		oldPackName = packName;
 		// Custom pack
 		customPack = Settings.customLessonPack();
+		// Load on screen keyboard layout
+		keyboard.loadLayout();
 		// Load the pack and start
 		if(packChanged)
 		{
@@ -493,6 +510,7 @@ ApplicationWindow {
 			updateLessonList();
 			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
 		}
+		highlightNextKey();
 	}
 
 	function loadPack(name) {
@@ -605,6 +623,7 @@ ApplicationWindow {
 		fullInput = "";
 		paper.input = "";
 		updateText();
+		highlightNextKey();
 		// Enable/disable stats
 		var enableStats = !customExerciseLoaded && !customPack && (currentMode == 0);
 		panel2.contents.statsButton.enabled = enableStats;
@@ -769,12 +788,7 @@ ApplicationWindow {
 		if(eventInProgress || blockInput || ((currentMode == 1) && !timedExStarted))
 			return;
 		var keyID = event["key"];
-		var highlightID = keyID;
-		if((fullInput.length < exerciseText.length) && (keyID === Qt.Key_Shift))
-		{
-			// TODO: Get shift key based on next character and set a special highlight ID
-		}
-		// TODO: Highlight the key on the keyboard
+		keyboard.pressKey(event);
 		if(event["isAutoRepeat"])
 			return;
 		if(KeyboardUtils.isDeadKey(keyID))
@@ -943,6 +957,8 @@ ApplicationWindow {
 					if((errorWord !== "") && (errorWords.indexOf(errorWord) === -1))
 						errorWords[errorWords.length] = errorWord;
 					deadKeys = 0;
+					keyboard.dehighlightAllKeys();
+					keyboard.highlightKey({ "key": Qt.Key_Backspace });
 				}
 				if(keyID === Qt.Key_Backspace)
 					ignoreBackspace = true;
@@ -950,6 +966,8 @@ ApplicationWindow {
 		}
 		if(!mistake && ignoreMistakeAppend && !ignoreBackspace)
 			paper.mistake += "_";
+		if(!mistake && correctMistakes)
+			highlightNextKey();
 		if(((displayPos >= displayExercise.length) && correctMistakes) || (currentLine >= lineCount + 1))
 		{
 			if(currentLine >= lineCount + 1)
@@ -957,13 +975,16 @@ ApplicationWindow {
 				paper.input = paper.input.substring(0, paper.input.length - 1);
 				fullInput = fullInput.substring(0, fullInput.length - 1);
 			}
-			// TODO: Add keyRelease() method
-			//keyRelease(event);
+			keyRelease(event);
 			exerciseTimer.stop();
 			lastTime = exerciseTimer.elapsed / 1000.0;
 			endExercise();
 		}
 		eventInProgress = false;
+	}
+
+	function keyRelease(event) {
+		keyboard.releaseKey(event);
 	}
 
 	function endExercise() {
@@ -1124,6 +1145,17 @@ ApplicationWindow {
 		updateTimer.restart();
 		repeatExercise();
 		exerciseInProgress = true;
+	}
+
+	function highlightNextKey() {
+		if(fullInput.length < exerciseText.length)
+		{
+			keyboard.dehighlightAllKeys();
+			var futureEvent = { "text": displayExercise[displayPos] };
+			// TODO: Get the keys that should be highlighted (shift, dead keys)
+			keyboard.highlightKey(futureEvent);
+			// TODO: Get shift key based on next character
+		}
 	}
 
 	Component.onCompleted: {
