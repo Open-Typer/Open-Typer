@@ -510,6 +510,7 @@ ApplicationWindow {
 			updateLessonList();
 			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
 		}
+		highlightNextKey();
 	}
 
 	function loadPack(name) {
