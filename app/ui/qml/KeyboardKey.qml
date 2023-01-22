@@ -91,7 +91,8 @@ Item {
 	Rectangle {
 		readonly property bool isReturn: type == KeyboardUtils.KeyType_Return
 		property color keyColor: getKeyColor()
-		property real tintAlpha: 0.15
+		readonly property real defaultTintAlpha: ThemeEngine.theme == ThemeEngine.DarkTheme ? 0.15 : 0.23
+		property real tintAlpha: defaultTintAlpha
 		readonly property color tintColor: Qt.rgba(highlightColor.r, highlightColor.g, highlightColor.b, tintAlpha)
 		readonly property int keyWidth: parent.width
 		readonly property int keyHeight: isReturn ? 105 : parent.height
@@ -99,7 +100,7 @@ Item {
 			if(Settings.keyboardFingerColors())
 			{
 				var finger = layout.keyFinger(keyRow, keyId);
-				var darkFactor = ThemeEngine.theme == ThemeEngine.DarkTheme ? 0.85 : 1.55
+				var darkFactor = ThemeEngine.theme == ThemeEngine.DarkTheme ? 0.85 : 1.73
 				switch(finger)
 				{
 					case KeyboardLayout.Finger_LeftIndex:
@@ -173,7 +174,7 @@ Item {
 			id: highlightAnimation
 			target: keyRect
 			property: "tintAlpha"
-			to: 0.15
+			to: keyRect.defaultTintAlpha
 			duration: 500
 			easing.type: Easing.OutCubic
 		}
