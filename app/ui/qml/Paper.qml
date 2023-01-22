@@ -67,6 +67,11 @@ Item {
 		}
 	}
 
+	onFocusChanged: {
+		if(focus)
+			inputText.forceActiveFocus();
+	}
+
 	function calculateTextWidth(text, metrics) {
 		var lines = text.split("\n");
 		var maxValue = 0;
@@ -77,7 +82,12 @@ Item {
 
 	KeyboardHandler {
 		id: keyboardHandler
-		onKeyPressed: control.keyPressed(event);
+		onKeyPressed: {
+			if(event["key"] === Qt.Key_Tab)
+				control.parent.forceActiveFocus();
+			else
+				control.keyPressed(event);
+		}
 		onKeyReleased: control.keyReleased(event);
 	}
 
