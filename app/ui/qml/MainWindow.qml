@@ -220,15 +220,34 @@ ApplicationWindow {
 		}
 	}
 
-	DropShadow {
-		source: mainLayout
-		anchors.fill: mainLayout
-		horizontalOffset: 0
-		verticalOffset: 5
-		radius: 20
-		samples: 16
-		color: ThemeEngine.theme === ThemeEngine.DarkTheme ? "#80000000" : "#80000022"
-		visible: true
+	Repeater {
+		id: shadowRepeater
+		model: [panel1, panel2, timedExPanel, paper]
+		DropShadow {
+			function getY() {
+				var out = 0;
+				for(var i = 0; i < shadowRepeater.model.length; i++)
+				{
+					if(shadowRepeater.model[i] === paper)
+						out += paper.Layout.topMargin;
+					if(i === index)
+						return out;
+					if(shadowRepeater.model[i].visible)
+						out += shadowRepeater.model[i].height;
+				}
+				return out;
+			}
+			source: modelData
+			width: modelData.width
+			height: modelData.height
+			y: getY()
+			horizontalOffset: 0
+			verticalOffset: 5
+			radius: 20
+			samples: 16
+			color: ThemeEngine.theme === ThemeEngine.DarkTheme ? "#80000000" : "#80000022"
+			visible: modelData.visible
+		}
 	}
 
 	ColumnLayout {
