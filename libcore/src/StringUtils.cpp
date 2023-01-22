@@ -2,7 +2,7 @@
  * StringUtils.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -635,4 +635,10 @@ QString StringUtils::addMistakes(QString exerciseText, QList<MistakeRecord *> re
 			out += i < exerciseText.count() ? QString(exerciseText[i]) : QString();
 	}
 	return out;
+}
+
+/*! Normalizes the given string. */
+QString StringUtils::normalizeString(QString str)
+{
+	return str.normalized(QString::NormalizationForm_D);
 }
