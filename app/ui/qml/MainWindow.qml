@@ -221,11 +221,12 @@ ApplicationWindow {
 	}
 
 	Repeater {
+		readonly property int minY: timedExPanel.visible ? 0 : panel1.height
 		id: shadowRepeater
-		model: [panel1, panel2, timedExPanel, paper]
+		model: timedExPanel.visible ? [timedExPanel, paper] : [panel2, paper]
 		DropShadow {
 			function getY() {
-				var out = 0;
+				var out = shadowRepeater.minY;
 				for(var i = 0; i < shadowRepeater.model.length; i++)
 				{
 					if(shadowRepeater.model[i] === paper)
