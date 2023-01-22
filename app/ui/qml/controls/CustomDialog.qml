@@ -129,8 +129,8 @@ Item {
 		anchors.fill: dialogMask
 		horizontalOffset: 20
 		verticalOffset: 20
-		radius: 16
-		samples: 16
+		radius: 10
+		samples: 10
 		color: "#80000000"
 		source: dialogMask
 		opacity: 0
