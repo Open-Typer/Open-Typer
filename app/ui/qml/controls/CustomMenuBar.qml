@@ -110,6 +110,13 @@ MenuBar {
 
 	delegate: MenuBarItem {
 		id: menuBarItem
+		function replaceText(txt)
+		{
+			var index = txt.indexOf("&");
+			if(index >= 0)
+				txt = txt.replace(txt.substr(index, 2), ("<u>" + txt.substr(index + 1, 1) +"</u>"));
+			return txt;
+		}
 		implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
 		leftPadding: 10
 		rightPadding: 10
@@ -119,7 +126,7 @@ MenuBar {
 		Material.background: Qt.rgba(0, 0, 0, 0)
 		Material.foreground: ThemeEngine.theme === ThemeEngine.DarkTheme ? "white" : "black"
 		contentItem: Label {
-			text: menuBarItem.text
+			text: replaceText(menuBarItem.text)
 			font: menuBarItem.font
 		}
 	}
