@@ -153,6 +153,28 @@ ColumnLayout {
 			getKey(event).pressed = false;
 	}
 
+	function releaseAllKeys() {
+		for(var i = 0; i < rowB.count; i++)
+			rowB.itemAt(i).pressed = false;
+		for(i = 0; i < rowC.count; i++)
+			rowC.itemAt(i).pressed = false;
+		for(i = 0; i < rowD.count; i++)
+			rowD.itemAt(i).pressed = false;
+		for(i = 0; i < rowE.count; i++)
+			rowE.itemAt(i).pressed = false;
+		backspace.pressed = false;
+		tab.pressed = false;
+		capsLock.pressed = false;
+		returnKey.pressed = false;
+		lShift.pressed = false;
+		rShift.pressed = false;
+		lCtrl.pressed = false;
+		lAlt.pressed = false;
+		space.pressed = false;
+		rAlt.pressed = false;
+		rCtrl.pressed = false;
+	}
+
 	KeyboardLayout {
 		property var xkbLayout: ["", ""]
 		id: layout
