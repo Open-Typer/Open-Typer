@@ -131,7 +131,7 @@ Item {
 		verticalOffset: 20
 		radius: 10
 		samples: 10
-		color: "#80000000"
+		color: ThemeEngine.theme == ThemeEngine.DarkTheme ? "#80000000" : "#50000000"
 		source: dialogMask
 		opacity: 0
 		visible: false
