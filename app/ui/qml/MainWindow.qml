@@ -290,6 +290,10 @@ ApplicationWindow {
 		id: mainLayout
 		anchors.fill: parent
 		spacing: 0
+		onFocusChanged: {
+			if(focus)
+				panel1.contents.settingsButton.forceActiveFocus();
+		}
 
 		Rectangle {
 			visible: customMenuBar.visible
@@ -304,6 +308,7 @@ ApplicationWindow {
 			visible: currentMode == 0
 			enabled: !uiLocked
 			control: RowLayout {
+				readonly property alias settingsButton: settingsButton
 				readonly property alias openButton: openButton
 				readonly property alias printButton: printButton
 				readonly property alias typingTestButton: typingTestButton
@@ -311,6 +316,7 @@ ApplicationWindow {
 				readonly property alias errorWordsButton: errorWordsButton
 				readonly property alias reverseTextButton: reverseTextButton
 				CustomToolButton {
+					id: settingsButton
 					icon.name: "settings"
 					toolTipText: qsTr("Options")
 					onClicked: settingsDialog.open()
@@ -811,6 +817,7 @@ ApplicationWindow {
 
 	function repeatExercise() {
 		startExercise(currentLesson, currentSublesson, currentExercise);
+		paper.forceActiveFocus();
 	}
 
 	function nextExercise() {
