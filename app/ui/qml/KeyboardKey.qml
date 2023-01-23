@@ -157,7 +157,7 @@ Item {
 
 		Label {
 			id: label
-			visible: root.text != root.shiftText
+			visible: root.text != root.shiftText.toLowerCase()
 			padding: 5
 			anchors.bottom: parent.bottom
 			text: root.text
@@ -167,7 +167,7 @@ Item {
 			id: shiftLabel
 			padding: 5
 			anchors.top: parent.top
-			text: root.text == root.shiftText ? root.shiftText.toUpperCase() : root.shiftText
+			text: root.shiftText
 		}
 
 		PropertyAnimation {
