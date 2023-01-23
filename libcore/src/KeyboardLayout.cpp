@@ -242,8 +242,9 @@ void KeyboardLayout::loadLayout(QString rawData, QString variantName)
 							if(keyData.length() >= 2)
 							{
 								Key key;
-								auto text = keyText(keyData[0].toList()[0].toString());
-								auto shiftText = keyText(keyData[1].toList()[0].toString());
+								bool dead, shiftDead;
+								auto text = keyText(keyData[0].toList()[0].toString(), &dead);
+								auto shiftText = keyText(keyData[1].toList()[0].toString(), &shiftDead);
 								key.setText(text.first);
 								key.setDisplayText(text.second);
 								key.setShiftText(shiftText.first);
@@ -407,7 +408,7 @@ QString KeyboardLayout::nestedData(int *pos, QString data, QString startToken, Q
  * Converts key ID (e. g. "backslash" or "bracketleft") to
  * unicode representation of the key (key text and readable text that should be displayed on the keyboard).
  */
-QPair<QString, QString> KeyboardLayout::keyText(QString id)
+QPair<QString, QString> KeyboardLayout::keyText(QString id, bool *isDead)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	bool dead = id.length() > 5 && id.first(5) == "dead_";
@@ -430,6 +431,8 @@ QPair<QString, QString> KeyboardLayout::keyText(QString id)
 		Q_ASSERT(ok);
 		QString text = KeyboardUtils::deadKeyToString(keyId);
 		QString readable = KeyboardUtils::deadKeyToReadableString(keyId);
+		if(isDead)
+			*isDead = true;
 		return QPair<QString, QString>(text, readable);
 	}
 
@@ -440,6 +443,8 @@ QPair<QString, QString> KeyboardLayout::keyText(QString id)
 	Q_ASSERT(ret >= 0);
 	QString out = QString::fromUtf8(buffer, ret - 1);
 	free(buffer);
+	if(isDead)
+		*isDead = false;
 	return QPair<QString, QString>(out, out);
 }
 
