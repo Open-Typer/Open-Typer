@@ -1204,10 +1204,20 @@ ApplicationWindow {
 		if(fullInput.length < exerciseText.length)
 		{
 			keyboard.dehighlightAllKeys();
-			var futureEvent = { "text": displayExercise[displayPos] };
-			// TODO: Get the keys that should be highlighted (shift, dead keys)
-			keyboard.highlightKey(futureEvent);
-			// TODO: Get shift key based on next character
+			var keys = keyboard.layout.characterKeys(displayExercise[displayPos]);
+			for(var i = 0; i < keys.length; i++)
+			{
+				var futureEvent;
+				if(keys[i].type === KeyboardUtils.KeyType_Any)
+					futureEvent = { "text": keys[i].displayText };
+				else if(keys[i].type === KeyboardUtils.KeyType_RShift)
+					futureEvent = { "text": "", "key": Qt.Key_Shift, "rShift": true };
+				else if(keys[i].type === KeyboardUtils.KeyType_LShift)
+					futureEvent = { "text": "", "key": Qt.Key_Shift };
+				else
+					futureEvent = { "text": "\n", "key": Qt.Key_Return };
+				keyboard.highlightKey(futureEvent);
+			}
 		}
 	}
 
