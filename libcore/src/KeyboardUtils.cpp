@@ -162,7 +162,7 @@ QString KeyboardUtils::deadKeyToReadableString(Qt::Key key)
 		case Qt::Key_Dead_Diaeresis:
 			return QChar(0x00A8);
 		case Qt::Key_Dead_Abovering:
-			return QChar(0x02DA);
+			return QChar(0x00B0);
 		case Qt::Key_Dead_Doubleacute:
 			return QChar(0x02DD);
 		case Qt::Key_Dead_Caron:
