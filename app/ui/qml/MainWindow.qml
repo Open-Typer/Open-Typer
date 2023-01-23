@@ -75,6 +75,7 @@ ApplicationWindow {
 	property bool eventInProgress: false
 	property bool blockNextDeadKey: false
 	property string lastDeadKey
+	property string lastKey
 	property bool testLoaded: false
 	property bool uiLocked: false
 	property string formattedExerciseTime
@@ -855,6 +856,7 @@ ApplicationWindow {
 		}
 		var ignoreBackspace = false;
 		var keyText = event["text"];
+		var rawKeyText = keyText;
 		if((keyText === "'") && (displayExercise[displayPos] === "‘"))
 			keyText = "‘";
 		if((keyText === "‘") && (displayExercise[displayPos] === '\''))
@@ -1013,6 +1015,7 @@ ApplicationWindow {
 			paper.mistake += "_";
 		if(!mistake && correctMistakes)
 			highlightNextKey();
+		lastKey = rawKeyText;
 		if(((displayPos >= displayExercise.length) && correctMistakes) || (currentLine >= lineCount + 1))
 		{
 			if(currentLine >= lineCount + 1)
@@ -1030,6 +1033,11 @@ ApplicationWindow {
 
 	function keyRelease(event) {
 		keyboard.releaseKey(event);
+		if(lastKey !== event["text"])
+		{
+			event["text"] = lastKey;
+			keyboard.releaseKey(event);
+		}
 	}
 
 	function endExercise() {
