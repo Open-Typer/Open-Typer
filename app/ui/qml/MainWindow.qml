@@ -73,6 +73,8 @@ ApplicationWindow {
 	property var errorWords: []
 	property bool correctMistakes: true
 	property bool eventInProgress: false
+	property bool blockNextDeadKey: false
+	property string lastDeadKey
 	property bool testLoaded: false
 	property bool uiLocked: false
 	property string formattedExerciseTime
@@ -531,6 +533,7 @@ ApplicationWindow {
 			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
 		}
 		highlightNextKey();
+		keyboard.releaseAllKeys();
 	}
 
 	function loadPack(name) {
@@ -644,6 +647,7 @@ ApplicationWindow {
 		paper.input = "";
 		updateText();
 		highlightNextKey();
+		keyboard.releaseAllKeys();
 		// Enable/disable stats
 		var enableStats = !customExerciseLoaded && !customPack && (currentMode == 0);
 		panel2.contents.statsButton.enabled = enableStats;
@@ -812,14 +816,27 @@ ApplicationWindow {
 		if(!isDeadKey)
 		{
 			if(deadKeys > 0)
-				keyboard.releaseAllKeys()
+			{
+				keyboard.releaseAllKeys();
+				if(lastDeadKey === event["text"])
+					blockNextDeadKey = true;
+			}
+			else
+				blockNextDeadKey = false;
 			keyboard.pressKey(event);
 		}
 		if(event["isAutoRepeat"])
 			return;
 		if(isDeadKey)
 		{
+			if(blockNextDeadKey)
+			{
+				keyboard.releaseAllKeys();
+				blockNextDeadKey = false;
+				return;
+			}
 			deadKeys++;
+			lastDeadKey = KeyboardUtils.deadKeyToReadableString(event["key"]);
 			// Count modifier key used with the dead key
 			if(event["modifiers"] !== Qt.NoModifier)
 				deadKeys++;
@@ -1179,7 +1196,6 @@ ApplicationWindow {
 		if(fullInput.length < exerciseText.length)
 		{
 			keyboard.dehighlightAllKeys();
-			keyboard.releaseAllKeys();
 			var futureEvent = { "text": displayExercise[displayPos] };
 			// TODO: Get the keys that should be highlighted (shift, dead keys)
 			keyboard.highlightKey(futureEvent);
