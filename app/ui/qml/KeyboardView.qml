@@ -148,13 +148,13 @@ ColumnLayout {
 	function pressKey(event) {
 		var key = getKey(event);
 		if(key !== null)
-			getKey(event).pressed = true;
+			key.pressed = true;
 	}
 
 	function releaseKey(event) {
 		var key = getKey(event);
 		if(key !== null)
-			getKey(event).pressed = false;
+			key.pressed = false;
 	}
 
 	function releaseAllKeys() {
