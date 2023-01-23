@@ -438,7 +438,7 @@ QPair<QString, QString> KeyboardLayout::keyText(QString id, bool *isDead)
 
 	char *buffer = (char *) malloc(8);
 	memset(buffer, 0, 8);
-	xkb_keysym_t keysym = xkb_keysym_from_name(id.toStdString().c_str(), XKB_KEYSYM_CASE_INSENSITIVE);
+	xkb_keysym_t keysym = xkb_keysym_from_name(id.toStdString().c_str(), (xkb_keysym_flags) 0);
 	int ret = xkb_keysym_to_utf8(keysym, buffer, 8);
 	Q_ASSERT(ret >= 0);
 	QString out = QString::fromUtf8(buffer, ret - 1);
