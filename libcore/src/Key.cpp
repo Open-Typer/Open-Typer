@@ -99,3 +99,14 @@ void Key::setDead(bool dead)
 {
 	m_dead = dead;
 }
+
+/*! True if this is a dead key when pressed with shift. */
+bool Key::isShiftDead(void)
+{
+	return m_shiftDead;
+}
+
+void Key::setShiftDead(bool dead)
+{
+	m_shiftDead = dead;
+}
