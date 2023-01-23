@@ -28,7 +28,9 @@ Key::Key() { }
 Key::Key(QString text, QString shiftText)
 {
 	setText(text);
+	setDisplayText(text);
 	setShiftText(shiftText);
+	setDisplayShiftText(shiftText);
 }
 
 /*! The text for this key. */
