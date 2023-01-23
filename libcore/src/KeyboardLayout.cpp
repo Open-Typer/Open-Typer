@@ -247,8 +247,10 @@ void KeyboardLayout::loadLayout(QString rawData, QString variantName)
 								auto shiftText = keyText(keyData[1].toList()[0].toString(), &shiftDead);
 								key.setText(text.first);
 								key.setDisplayText(text.second);
+								key.setDead(dead);
 								key.setShiftText(shiftText.first);
 								key.setDisplayShiftText(shiftText.second);
+								key.setShiftDead(shiftDead);
 								KeyboardUtils::KeyType keyType;
 								QPoint pos = keyPos(keyId, &keyType);
 								key.setType(keyType);
