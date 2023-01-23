@@ -40,7 +40,6 @@ QString Key::text(void)
 void Key::setText(QString text)
 {
 	m_text = text;
-	updateDisplayText();
 }
 
 /*! The text for this key when pressed with shift. */
@@ -52,7 +51,6 @@ QString Key::shiftText(void)
 void Key::setShiftText(QString text)
 {
 	m_shiftText = text;
-	updateDisplayShiftText();
 }
 
 /*! The type of the key. */
@@ -73,20 +71,18 @@ QString Key::displayText(void)
 	return m_displayText;
 }
 
+void Key::setDisplayText(QString text)
+{
+	m_displayText = text;
+}
+
 /*! The text (for combination with the shift key) visible on the keyboard. */
 QString Key::displayShiftText(void)
 {
 	return m_displayShiftText;
 }
 
-/*! Updates display text. \see displayText() */
-void Key::updateDisplayText(void)
+void Key::setDisplayShiftText(QString text)
 {
-	m_displayText = m_text;
-}
-
-/*! Updates display shift text. \see displayShiftText() */
-void Key::updateDisplayShiftText(void)
-{
-	m_displayShiftText = m_shiftText;
+	m_displayShiftText = text;
 }
