@@ -39,7 +39,7 @@ ColumnLayout {
 		for(var i = 0; i < rowRepeater.count; i++)
 		{
 			var item = rowRepeater.itemAt(i);
-			if(item.type === KeyboardUtils.KeyType_Any && item.text === key.text && item.shiftText === key.shiftText)
+			if(item.type === KeyboardUtils.KeyType_Any && item.text === key.displayText && item.shiftText === key.displayShiftText)
 				return item;
 		}
 		return null;
@@ -62,7 +62,8 @@ ColumnLayout {
 	function getKeyFromRow(keyText, rowKeys) {
 		for(var i = 0; i < rowKeys.length; i++)
 		{
-			if(rowKeys[i].text === keyText || rowKeys[i].shiftText === keyText)
+			if(rowKeys[i].text === keyText || rowKeys[i].shiftText === keyText ||
+				rowKeys[i].displayText === keyText || rowKeys[i].displayShiftText === keyText)
 				return findKey(rowKeys[i]);
 		}
 		return null;
