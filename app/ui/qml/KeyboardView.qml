@@ -79,7 +79,12 @@ ColumnLayout {
 		else if(event["key"] === Qt.Key_Return || event["text"] === "\n")
 			return returnKey;
 		else if(event["key"] === Qt.Key_Shift)
-			return lShift; // TODO: Add support for rShift
+		{
+			if(event["rShift"] === true)
+				return rShift;
+			else
+				return lShift; // TODO: Add support for rShift (pressed key)
+		}
 		else if(event["key"] === Qt.Key_Control)
 			return lCtrl; // TODO: Add support for rCtrl
 		else if(event["key"] === Qt.Key_Alt)
