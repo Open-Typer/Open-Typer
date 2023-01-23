@@ -147,6 +147,153 @@ KeyboardLayout::Hand KeyboardLayout::fingerHand(Finger finger)
 		return Hand_Right;
 }
 
+/*!
+ * Returns list of keys that should be used to compose the given character.\n
+ * For example:\n
+ * ó -> o + ´\n
+ * Ď -> LShift + ´ (ˇ) + RShift + d\n
+ * (on Slovak keyboard layout)
+ */
+KeyboardRow KeyboardLayout::characterKeys(QChar character)
+{
+	if(character == ' ')
+		return { Key(" ", " ") };
+	else if(character == '\n')
+	{
+		Key returnKey("\n", "\n");
+		returnKey.setType(KeyboardUtils::KeyType_Return);
+		return { returnKey };
+	}
+	QList<Key> keys;
+	Row row;
+	int id;
+	bool shift, ok;
+	Key k = findKey(character, &row, &id, &shift, &ok);
+	if(ok)
+	{
+		if(shift)
+		{
+			Key shiftKey;
+			shiftKey.setType(getShiftKey(row, id));
+			keys.append(shiftKey);
+		}
+		keys.append(k);
+		if(k.isDead())
+			keys.append(Key(" ", ""));
+	}
+	else
+	{
+		QString normalized = QString(character).normalized(QString::NormalizationForm_D);
+		for(int i = 0; i < normalized.length(); i++)
+		{
+			k = findKey(normalized[i], &row, &id, &shift, &ok);
+			if(ok)
+			{
+				keys.prepend(k);
+				if(shift)
+				{
+					Key shiftKey;
+					shiftKey.setType(getShiftKey(row, id));
+					keys.prepend(shiftKey);
+				}
+			}
+		}
+	}
+	return keys;
+}
+
+/*!
+ * Returns the key with the given character in (from the given row).
+ * \param[out] isShifted True if this key has to be composed using shift.
+ * \param[out] ok True if this key exists.
+ */
+Key KeyboardLayout::findKeyInRow(QChar character, KeyboardRow row, int *id, bool *isShifted, bool *ok)
+{
+	for(int i = 0; i < row.length(); i++)
+	{
+		Key key = row[i];
+		if(id)
+			*id = i;
+		if((key.text() == character) || (key.displayText() == character))
+		{
+			if(ok)
+				*ok = true;
+			if(isShifted)
+				*isShifted = false;
+			return key;
+		}
+		if((key.shiftText() == character) || (key.displayShiftText() == character))
+		{
+			if(ok)
+				*ok = true;
+			if(isShifted)
+				*isShifted = true;
+			return key;
+		}
+	}
+	if(ok)
+		*ok = false;
+	return Key();
+}
+
+/*!
+ * Returns the key with the given character.
+ * \param[out] isShifted True if this key has to be composed using shift.
+ * \param[out] ok True if this key exists.
+ */
+Key KeyboardLayout::findKey(QChar character, Row *row, int *id, bool *isShifted, bool *ok)
+{
+	bool tmpOk = false;
+	Row currentRow;
+	Key key;
+	// B
+	currentRow = Row_B;
+	key = findKeyInRow(character, m_rowB, id, isShifted, &tmpOk);
+	if(tmpOk)
+		goto end;
+	// C
+	currentRow = Row_C;
+	key = findKeyInRow(character, m_rowC, id, isShifted, &tmpOk);
+	if(tmpOk)
+		goto end;
+	// D
+	currentRow = Row_D;
+	key = findKeyInRow(character, m_rowD, id, isShifted, &tmpOk);
+	if(tmpOk)
+		goto end;
+	// E
+	currentRow = Row_E;
+	key = findKeyInRow(character, m_rowE, id, isShifted, &tmpOk);
+	if(tmpOk)
+		goto end;
+	if(ok)
+		*ok = false;
+	return Key();
+
+end:
+	if(ok)
+		*ok = true;
+	if(row)
+	{
+		*row = currentRow;
+		if(id)
+		{
+			if(*row != Row_E)
+				*id = *id + 1;
+		}
+	}
+	return key;
+}
+
+/*! Returns the shift key that should be used with the given key. */
+KeyboardUtils::KeyType KeyboardLayout::getShiftKey(Row row, int id)
+{
+	if(fingerHand(keyFinger(row, id)) == Hand_Left)
+		return KeyboardUtils::KeyType_RShift;
+	else
+		return KeyboardUtils::KeyType_LShift;
+}
+
 /*! Initializes the keyboard layout (reads all keys from xkeyboard-config). */
 void KeyboardLayout::init(void)
 {
