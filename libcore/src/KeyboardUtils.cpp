@@ -66,6 +66,82 @@ bool KeyboardUtils::isDeadKey(int key)
 /*! Returns the text for the given dead key. */
 QString KeyboardUtils::deadKeyToString(Qt::Key key)
 {
+	switch(key)
+	{
+		case Qt::Key_Dead_Grave:
+			return QChar(0x0300);
+		case Qt::Key_Dead_Acute:
+			return QChar(0x0301);
+		case Qt::Key_Dead_Circumflex:
+			return QChar(0x0302);
+		case Qt::Key_Dead_Tilde:
+			return QChar(0x0303);
+		case Qt::Key_Dead_Macron:
+			return QChar(0x0304);
+		case Qt::Key_Dead_Breve:
+			return QChar(0x0306);
+		case Qt::Key_Dead_Abovedot:
+			return QChar(0x0307);
+		case Qt::Key_Dead_Diaeresis:
+			return QChar(0x0308);
+		case Qt::Key_Dead_Abovering:
+			return QChar(0x030A);
+		case Qt::Key_Dead_Doubleacute:
+			return QChar(0x030B);
+		case Qt::Key_Dead_Caron:
+			return QChar(0x030C);
+		case Qt::Key_Dead_Cedilla:
+			return QChar(0x0327);
+		case Qt::Key_Dead_Ogonek:
+			return QChar(0x0328);
+		case Qt::Key_Dead_Iota:
+			return QChar(0x0345);
+		case Qt::Key_Dead_Voiced_Sound:
+			return QChar(0x3099);
+		case Qt::Key_Dead_Semivoiced_Sound:
+			return QChar(0x309A);
+		case Qt::Key_Dead_Belowdot:
+			return QChar(0x0323);
+		case Qt::Key_Dead_Hook:
+			return QChar(0x0309);
+		case Qt::Key_Dead_Horn:
+			return QChar(0x031B);
+		case Qt::Key_Dead_Stroke:
+			return QChar(0x0338);
+		case Qt::Key_Dead_Abovecomma:
+			return QChar(0x0313);
+		case Qt::Key_Dead_Abovereversedcomma:
+			return QChar(0x0314);
+		case Qt::Key_Dead_Doublegrave:
+			return QChar(0x030F);
+		case Qt::Key_Dead_Belowring:
+			return QChar(0x0325);
+		case Qt::Key_Dead_Belowmacron:
+			return QChar(0x0331);
+		case Qt::Key_Dead_Belowcircumflex:
+			return QChar(0x032D);
+		case Qt::Key_Dead_Belowtilde:
+			return QChar(0x0330);
+		case Qt::Key_Dead_Belowbreve:
+			return QChar(0x032E);
+		case Qt::Key_Dead_Belowdiaeresis:
+			return QChar(0x0324);
+		case Qt::Key_Dead_Invertedbreve:
+			return QChar(0x0311);
+		case Qt::Key_Dead_Belowcomma:
+			return QChar(0x0326);
+		case Qt::Key_Dead_Currency:
+			return QChar(0x00A4);
+		case Qt::Key_Dead_Greek:
+			return QChar(0x037E);
+		default:
+			return QChar();
+	}
+}
+
+/*! Returns the human readable text for the given dead key. */
+QString KeyboardUtils::deadKeyToReadableString(Qt::Key key)
+{
 	// Source: https://github.com/qt/qtwebengine/blob/9ef040a6bef904cbbf9e39135135333cbbae80b1/src/core/web_event_factory.cpp#L917-L983
 	switch(key)
 	{
