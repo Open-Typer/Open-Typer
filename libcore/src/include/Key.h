@@ -38,6 +38,7 @@ class CORE_LIB_EXPORT Key
 		Q_PROPERTY(KeyboardUtils::KeyType type READ type WRITE setType)
 		Q_PROPERTY(QString displayText READ displayText WRITE setDisplayText)
 		Q_PROPERTY(QString displayShiftText READ displayShiftText WRITE setDisplayShiftText)
+		Q_PROPERTY(bool dead READ isDead WRITE setDead)
 	public:
 		explicit Key();
 		Key(QString text, QString shiftText);
@@ -51,6 +52,8 @@ class CORE_LIB_EXPORT Key
 		void setDisplayText(QString text);
 		QString displayShiftText(void);
 		void setDisplayShiftText(QString text);
+		bool isDead(void);
+		void setDead(bool dead);
 
 	private:
 		QString m_text;
@@ -58,6 +61,7 @@ class CORE_LIB_EXPORT Key
 		KeyboardUtils::KeyType m_type = KeyboardUtils::KeyType_Any;
 		QString m_displayText;
 		QString m_displayShiftText;
+		bool m_dead;
 };
 
 typedef QList<Key> KeyboardRow;

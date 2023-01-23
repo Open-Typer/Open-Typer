@@ -86,3 +86,14 @@ void Key::setDisplayShiftText(QString text)
 {
 	m_displayShiftText = text;
 }
+
+/*! True if this is a dead key. */
+bool Key::isDead(void)
+{
+	return m_dead;
+}
+
+void Key::setDead(bool dead)
+{
+	m_dead = dead;
+}
