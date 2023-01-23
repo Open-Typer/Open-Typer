@@ -95,7 +95,7 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 		void loadLayout(QString rawData, QString variantName);
 		QVariantList parse(QString data);
 		QString nestedData(int *pos, QString data, QString startToken, QString endToken);
-		QString keyText(QString id);
+		QPair<QString, QString> keyText(QString id);
 		QPoint keyPos(QString keyId, KeyboardUtils::KeyType *type = nullptr);
 		void addKey(Key key, int x, int y);
 		QString m_layoutId;

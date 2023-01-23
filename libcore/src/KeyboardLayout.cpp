@@ -242,8 +242,12 @@ void KeyboardLayout::loadLayout(QString rawData, QString variantName)
 							if(keyData.length() >= 2)
 							{
 								Key key;
-								key.setText(keyText(keyData[0].toList()[0].toString()));
-								key.setShiftText(keyText(keyData[1].toList()[0].toString()));
+								auto text = keyText(keyData[0].toList()[0].toString());
+								auto shiftText = keyText(keyData[1].toList()[0].toString());
+								key.setText(text.first);
+								key.setDisplayText(text.second);
+								key.setShiftText(shiftText.first);
+								key.setDisplayShiftText(shiftText.second);
 								KeyboardUtils::KeyType keyType;
 								QPoint pos = keyPos(keyId, &keyType);
 								key.setType(keyType);
@@ -399,8 +403,11 @@ QString KeyboardLayout::nestedData(int *pos, QString data, QString startToken, Q
 	return out;
 }
 
-/*! Convert key ID (e. g. "backslash" or "bracketleft") to unicode representation of the key. */
-QString KeyboardLayout::keyText(QString id)
+/*!
+ * Converts key ID (e. g. "backslash" or "bracketleft") to
+ * unicode representation of the key (key text and readable text that should be displayed on the keyboard).
+ */
+QPair<QString, QString> KeyboardLayout::keyText(QString id)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	bool dead = id.length() > 5 && id.first(5) == "dead_";
@@ -421,7 +428,9 @@ QString KeyboardLayout::keyText(QString id)
 		if(!ok)
 			qCritical("%s", QString("Unsupported dead key: " + id).toStdString().c_str());
 		Q_ASSERT(ok);
-		return KeyboardUtils::deadKeyToString(keyId);
+		QString text = KeyboardUtils::deadKeyToString(keyId);
+		QString readable = KeyboardUtils::deadKeyToReadableString(keyId);
+		return QPair<QString, QString>(text, readable);
 	}
 
 	char *buffer = (char *) malloc(8);
@@ -431,7 +440,7 @@ QString KeyboardLayout::keyText(QString id)
 	Q_ASSERT(ret >= 0);
 	QString out = QString::fromUtf8(buffer, ret - 1);
 	free(buffer);
-	return out;
+	return QPair<QString, QString>(out, out);
 }
 
 /*!
