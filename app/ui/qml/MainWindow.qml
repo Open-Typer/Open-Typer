@@ -407,11 +407,7 @@ ApplicationWindow {
 					id: statsButton
 					icon.name: "stats"
 					text: qsTr("Exercise history")
-					onClicked: {
-						// TODO: Send load stats event
-						statsDialog.loadData();
-						statsDialog.exec();
-					}
+					checkable: true
 				}
 			}
 		}
@@ -456,9 +452,41 @@ ApplicationWindow {
 			Layout.fillHeight: true
 			Layout.topMargin: 10
 			summary.visible: preview
+			exerciseHistory: panel2.contents.statsButton.checked
 			blockInput: root.blockInput
 			onKeyPressed: keyPress(event);
 			onKeyReleased: keyRelease(event);
+			onExerciseHistoryChanged: {
+				if(exerciseHistory)
+				{
+					showKeyboardAnimation.stop();
+					hideKeyboardAnimation.start();
+				}
+				else
+				{
+					hideKeyboardAnimation.stop();
+					showKeyboardAnimation.start();
+				}
+			}
+
+			PropertyAnimation {
+				id: showKeyboardAnimation
+				target: keyboard
+				property: "scale"
+				to: 1
+				duration: 125
+				easing.type: Easing.OutCubic
+			}
+
+			PropertyAnimation {
+				id: hideKeyboardAnimation
+				target: keyboard
+				property: "scale"
+				to: 0
+				duration: 125
+				easing.type: Easing.InCubic
+			}
+
 			KeyboardView {
 				id: keyboard
 				visible: !preview
