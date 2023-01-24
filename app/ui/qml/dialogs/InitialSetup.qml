@@ -78,28 +78,25 @@ CustomDialog {
 		MenuSeparator { Layout.fillWidth: true }
 		RowLayout {
 			Layout.fillWidth: true
-			CustomToolButton {
+			AccentButton {
 				visible: currentIndex > 0
 				//: %1 is the left arrow
 				text: qsTr("%1 Previous").arg("◀")
-				foregroundColor: Material.accent
 				onClicked: previousPage()
 			}
 			Item { Layout.fillWidth: true }
-			CustomToolButton {
+			AccentButton {
 				visible: (currentIndex < pages.length - 1)
 				enabled: stack.currentItem.finished
 				//: %1 is the right arrow
 				text: qsTr("Next %1").arg("▶")
-				foregroundColor: Material.accent
 				onClicked: nextPage()
 			}
-			CustomToolButton {
+			AccentButton {
 				visible: currentIndex == pages.length - 1
 				enabled: stack.currentItem.finished
 				//: To finish the initial setup
 				text: qsTr("Finish")
-				foregroundColor: Material.accent
 				onClicked: {
 					Settings.setInitFinished(true);
 					root.close();
