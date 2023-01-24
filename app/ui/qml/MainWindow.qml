@@ -378,7 +378,7 @@ ApplicationWindow {
 				CustomToolButton {
 					icon.name: "repeat"
 					toolTipText: qsTr("Repeat exercise")
-					onClicked: repeatExercise();
+					onClicked: repeatExerciseClicked();
 				}
 				CustomToolButton {
 					id: closeLoadedExButton
@@ -721,6 +721,11 @@ ApplicationWindow {
 			paper.remaining = "";
 		}
 		blockInput = false;
+	}
+
+	function repeatExerciseClicked() {
+		repeatExercise();
+		panel2.contents.statsButton.checked = false;
 	}
 
 	function repeatExercise() {
@@ -1175,6 +1180,7 @@ ApplicationWindow {
 		exerciseText = exerciseText.replace(/\t/g, " ");
 		customExerciseText = exerciseText;
 		customExerciseLoaded = true;
+		panel2.contents.statsButton.checked = false;
 		initExercise();
 	}
 
