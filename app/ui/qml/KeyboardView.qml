@@ -371,7 +371,7 @@ ColumnLayout {
 		property: "yScale"
 		to: 0
 		duration: 250
-		easing.type: Easing.OutCubic
+		easing.type: Easing.InCubic
 	}
 
 	// Close button
