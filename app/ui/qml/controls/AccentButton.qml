@@ -28,4 +28,5 @@ Button {
 	Material.foreground: ThemeEngine.theme == ThemeEngine.DarkTheme ? "white" : "black"
 	Material.background: Qt.rgba(accent.r, accent.g, accent.b, 0.3)
 	background.layer.enabled: false
+	font.capitalization: Font.MixedCase
 }
