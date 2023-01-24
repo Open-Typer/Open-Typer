@@ -65,6 +65,7 @@ FORMS += \
     ui/packEditor/PackSelector.ui
 
 DISTFILES += \
+    ui/qml/ExerciseHistory.qml \
     ui/qml/KeyboardKey.qml \
     ui/qml/KeyboardView.qml \
     ui/qml/controls/AccentButton.qml \
