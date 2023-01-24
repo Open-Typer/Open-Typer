@@ -303,6 +303,7 @@ ColumnLayout {
 	}
 
 	CheckBox {
+		visible: !simple
 		text: qsTr("Use key colors based on fingers")
 		checked: Settings.keyboardFingerColors()
 		onCheckedChanged: {
