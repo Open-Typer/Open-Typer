@@ -430,6 +430,10 @@ ApplicationWindow {
 			summary.visible: preview
 			exerciseHistory: panel2.contents.statsButton.checked
 			blockInput: root.blockInput
+			lessonPack: packName
+			lesson: root.currentLesson
+			sublesson: root.currentAbsoluteSublesson
+			exercise: root.currentExercise
 			onKeyPressed: keyPress(event);
 			onKeyReleased: keyRelease(event);
 			onExerciseHistoryChanged: {
@@ -537,6 +541,7 @@ ApplicationWindow {
 			updateLessonList();
 			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
 		}
+		paper.errorPenalty = Settings.errorPenalty();
 		highlightNextKey();
 		keyboard.releaseAllKeys();
 	}
