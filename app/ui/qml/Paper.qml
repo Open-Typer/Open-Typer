@@ -48,8 +48,10 @@ Item {
 	property int errorPenalty
 	signal keyPressed(var event)
 	signal keyReleased(var event)
+	signal historyChanged()
 	id: control
 	clip: true
+	onHistoryChanged: history.loadData()
 
 	onExerciseHistoryChanged: {
 		if(exerciseHistory)
