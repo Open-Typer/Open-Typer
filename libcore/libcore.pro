@@ -29,6 +29,7 @@ SOURCES += \
     src/ExerciseValidator.cpp \
     src/ExportDialog.cpp \
     src/FileUtils.cpp \
+    src/HistoryEntry.cpp \
     src/HistoryParser.cpp \
     src/Key.cpp \
     src/KeyboardLayout.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     src/include/ExerciseValidator.h \
     src/include/ExportDialog.h \
     src/include/FileUtils.h \
+    src/include/HistoryEntry.h \
     src/include/HistoryParser.h \
     src/include/Key.h \
     src/include/KeyboardLayout.h \
