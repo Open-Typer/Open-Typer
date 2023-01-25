@@ -73,6 +73,9 @@ ApplicationWindow {
 	property var errorWords: []
 	property bool correctMistakes: true
 	property bool eventInProgress: false
+	property bool blockNextDeadKey: false
+	property string lastDeadKey
+	property string lastKey
 	property bool testLoaded: false
 	property bool uiLocked: false
 	property string formattedExerciseTime
@@ -531,6 +534,7 @@ ApplicationWindow {
 			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
 		}
 		highlightNextKey();
+		keyboard.releaseAllKeys();
 	}
 
 	function loadPack(name) {
@@ -644,6 +648,7 @@ ApplicationWindow {
 		paper.input = "";
 		updateText();
 		highlightNextKey();
+		keyboard.releaseAllKeys();
 		// Enable/disable stats
 		var enableStats = !customExerciseLoaded && !customPack && (currentMode == 0);
 		panel2.contents.statsButton.enabled = enableStats;
@@ -808,15 +813,36 @@ ApplicationWindow {
 		if(eventInProgress || blockInput || ((currentMode == 1) && !timedExStarted))
 			return;
 		var keyID = event["key"];
-		keyboard.pressKey(event);
+		var isDeadKey = KeyboardUtils.isDeadKey(keyID);
+		if(!isDeadKey)
+		{
+			if(deadKeys > 0)
+			{
+				keyboard.releaseAllKeys();
+				if(lastDeadKey === event["text"])
+					blockNextDeadKey = true;
+			}
+			else
+				blockNextDeadKey = false;
+			keyboard.pressKey(event);
+		}
 		if(event["isAutoRepeat"])
 			return;
-		if(KeyboardUtils.isDeadKey(keyID))
+		if(isDeadKey)
 		{
+			if(blockNextDeadKey)
+			{
+				keyboard.releaseAllKeys();
+				blockNextDeadKey = false;
+				return;
+			}
 			deadKeys++;
+			lastDeadKey = KeyboardUtils.deadKeyToReadableString(event["key"]);
 			// Count modifier key used with the dead key
 			if(event["modifiers"] !== Qt.NoModifier)
 				deadKeys++;
+			event["text"] = KeyboardUtils.deadKeyToString(event["key"]);
+			keyboard.pressKey(event);
 			return;
 		}
 		if(KeyboardUtils.isSpecialKey(event) && (keyID !== Qt.Key_Backspace))
@@ -830,6 +856,7 @@ ApplicationWindow {
 		}
 		var ignoreBackspace = false;
 		var keyText = event["text"];
+		var rawKeyText = keyText;
 		if((keyText === "'") && (displayExercise[displayPos] === "‘"))
 			keyText = "‘";
 		if((keyText === "‘") && (displayExercise[displayPos] === '\''))
@@ -988,6 +1015,7 @@ ApplicationWindow {
 			paper.mistake += "_";
 		if(!mistake && correctMistakes)
 			highlightNextKey();
+		lastKey = rawKeyText;
 		if(((displayPos >= displayExercise.length) && correctMistakes) || (currentLine >= lineCount + 1))
 		{
 			if(currentLine >= lineCount + 1)
@@ -1005,6 +1033,11 @@ ApplicationWindow {
 
 	function keyRelease(event) {
 		keyboard.releaseKey(event);
+		if(lastKey !== event["text"])
+		{
+			event["text"] = lastKey;
+			keyboard.releaseKey(event);
+		}
 	}
 
 	function endExercise() {
@@ -1171,10 +1204,20 @@ ApplicationWindow {
 		if(fullInput.length < exerciseText.length)
 		{
 			keyboard.dehighlightAllKeys();
-			var futureEvent = { "text": displayExercise[displayPos] };
-			// TODO: Get the keys that should be highlighted (shift, dead keys)
-			keyboard.highlightKey(futureEvent);
-			// TODO: Get shift key based on next character
+			var keys = keyboard.layout.characterKeys(displayExercise[displayPos]);
+			for(var i = 0; i < keys.length; i++)
+			{
+				var futureEvent;
+				if(keys[i].type === KeyboardUtils.KeyType_Any)
+					futureEvent = { "text": keys[i].displayText };
+				else if(keys[i].type === KeyboardUtils.KeyType_RShift)
+					futureEvent = { "text": "", "key": Qt.Key_Shift, "rShift": true };
+				else if(keys[i].type === KeyboardUtils.KeyType_LShift)
+					futureEvent = { "text": "", "key": Qt.Key_Shift };
+				else
+					futureEvent = { "text": "\n", "key": Qt.Key_Return };
+				keyboard.highlightKey(futureEvent);
+			}
 		}
 	}
 

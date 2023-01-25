@@ -55,7 +55,8 @@ class CORE_LIB_EXPORT KeyboardUtils : public QObject
 		static bool isSpecialKey(QKeyEvent *event);
 		Q_INVOKABLE static bool isSpecialKey(QVariantMap event);
 		Q_INVOKABLE static bool isDeadKey(int key);
-		static QString deadKeyToString(Qt::Key key);
+		Q_INVOKABLE static QString deadKeyToString(Qt::Key key);
+		Q_INVOKABLE static QString deadKeyToReadableString(Qt::Key key);
 };
 
 #endif // KEYBOARDUTILS_H

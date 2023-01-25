@@ -39,7 +39,7 @@ ColumnLayout {
 		for(var i = 0; i < rowRepeater.count; i++)
 		{
 			var item = rowRepeater.itemAt(i);
-			if(item.type === KeyboardUtils.KeyType_Any && item.text === key.text && item.shiftText === key.shiftText)
+			if(item.type === KeyboardUtils.KeyType_Any && item.text === key.displayText && item.shiftText === key.displayShiftText)
 				return item;
 		}
 		return null;
@@ -62,13 +62,14 @@ ColumnLayout {
 	function getKeyFromRow(keyText, rowKeys) {
 		for(var i = 0; i < rowKeys.length; i++)
 		{
-			if(rowKeys[i].text === keyText || rowKeys[i].shiftText === keyText)
+			if(rowKeys[i].text === keyText || rowKeys[i].shiftText === keyText ||
+				rowKeys[i].displayText === keyText || rowKeys[i].displayShiftText === keyText)
 				return findKey(rowKeys[i]);
 		}
 		return null;
 	}
 
-	function getKey(event) {
+	function getKey(event, normalizeText = false) {
 		if(event["key"] === Qt.Key_Backspace)
 			return backspace;
 		else if(event["key"] === Qt.Key_Tab || event["text"] === "\t")
@@ -78,7 +79,12 @@ ColumnLayout {
 		else if(event["key"] === Qt.Key_Return || event["text"] === "\n")
 			return returnKey;
 		else if(event["key"] === Qt.Key_Shift)
-			return lShift; // TODO: Add support for rShift
+		{
+			if(event["rShift"] === true)
+				return rShift;
+			else
+				return lShift; // TODO: Add support for rShift (pressed key)
+		}
 		else if(event["key"] === Qt.Key_Control)
 			return lCtrl; // TODO: Add support for rCtrl
 		else if(event["key"] === Qt.Key_Alt)
@@ -89,7 +95,12 @@ ColumnLayout {
 			return space;
 		if(event["text"] === undefined)
 			return;
-		var keyText = event["text"].toLowerCase();
+		var keyText;
+		var normalized = StringUtils.normalizeString(event["text"]);
+		if(normalizeText && normalized.length > 0)
+			keyText = normalized[0].toLowerCase();
+		else
+			keyText = event["text"].toLowerCase();
 		var ret = getKeyFromRow(keyText, layout.rowB);
 		if(ret !== null)
 			return ret;
@@ -100,19 +111,19 @@ ColumnLayout {
 		if(ret !== null)
 			return ret;
 		ret = getKeyFromRow(keyText, layout.rowE);
+		if(ret === null && !normalizeText)
+			return getKey(event, true);
 		return ret;
 	}
 
 	function highlightKey(event) {
 		var key = getKey(event);
-		console.assert(key !== null);
 		if(key !== null)
 			key.highlighted = true;
 	}
 
 	function dehighlightKey(event) {
 		var key = getKey(event);
-		console.assert(key !== null);
 		if(key !== null)
 			key.highlighted = false;
 	}
@@ -141,16 +152,36 @@ ColumnLayout {
 
 	function pressKey(event) {
 		var key = getKey(event);
-		console.assert(key !== null);
 		if(key !== null)
-			getKey(event).pressed = true;
+			key.pressed = true;
 	}
 
 	function releaseKey(event) {
 		var key = getKey(event);
-		console.assert(key !== null);
 		if(key !== null)
-			getKey(event).pressed = false;
+			key.pressed = false;
+	}
+
+	function releaseAllKeys() {
+		for(var i = 0; i < rowB.count; i++)
+			rowB.itemAt(i).pressed = false;
+		for(i = 0; i < rowC.count; i++)
+			rowC.itemAt(i).pressed = false;
+		for(i = 0; i < rowD.count; i++)
+			rowD.itemAt(i).pressed = false;
+		for(i = 0; i < rowE.count; i++)
+			rowE.itemAt(i).pressed = false;
+		backspace.pressed = false;
+		tab.pressed = false;
+		capsLock.pressed = false;
+		returnKey.pressed = false;
+		lShift.pressed = false;
+		rShift.pressed = false;
+		lCtrl.pressed = false;
+		lAlt.pressed = false;
+		space.pressed = false;
+		rAlt.pressed = false;
+		rCtrl.pressed = false;
 	}
 
 	KeyboardLayout {

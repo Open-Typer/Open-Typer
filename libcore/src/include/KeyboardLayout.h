@@ -89,15 +89,19 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 		KeyboardRow rowE(void);
 		Q_INVOKABLE Finger keyFinger(Row row, int id);
 		Q_INVOKABLE Hand fingerHand(Finger finger);
+		Q_INVOKABLE KeyboardRow characterKeys(QChar character);
 
 	private:
 		void init(void);
 		void loadLayout(QString rawData, QString variantName);
 		QVariantList parse(QString data);
 		QString nestedData(int *pos, QString data, QString startToken, QString endToken);
-		QString keyText(QString id);
+		QPair<QString, QString> keyText(QString id, bool *isDead = nullptr);
 		QPoint keyPos(QString keyId, KeyboardUtils::KeyType *type = nullptr);
 		void addKey(Key key, int x, int y);
+		Key findKeyInRow(QChar character, KeyboardRow row, int *id = nullptr, bool *isShifted = nullptr, bool *ok = nullptr);
+		Key findKey(QChar character, Row *row = nullptr, int *id = nullptr, bool *isShifted = nullptr, bool *ok = nullptr);
+		KeyboardUtils::KeyType getShiftKey(Row row, int id);
 		QString m_layoutId;
 		QString m_variant;
 		KeyboardRow m_rowB;

@@ -2,7 +2,7 @@
  * StringUtils.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,6 +52,7 @@ class CORE_LIB_EXPORT StringUtils : public QObject
 		Q_INVOKABLE static QList<MistakeRecord *> findMistakes(QString exerciseText, QString input, QVector<CharacterRecord *> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
 		Q_INVOKABLE static QList<MistakeRecord *> validateExercise(QString exerciseText, QString inputText, QVector<CharacterRecord *> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords = nullptr, bool timed = false, int timeSecs = 0);
 		Q_INVOKABLE static QString addMistakes(QString exerciseText, QList<MistakeRecord *> recordedMistakes);
+		Q_INVOKABLE static QString normalizeString(QString str);
 
 	private:
 		static int lcsLen(QList<QVariant> source, QList<QVariant> target);

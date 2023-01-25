@@ -28,7 +28,9 @@ Key::Key() { }
 Key::Key(QString text, QString shiftText)
 {
 	setText(text);
+	setDisplayText(text);
 	setShiftText(shiftText);
+	setDisplayShiftText(shiftText);
 }
 
 /*! The text for this key. */
@@ -40,7 +42,6 @@ QString Key::text(void)
 void Key::setText(QString text)
 {
 	m_text = text;
-	updateDisplayText();
 }
 
 /*! The text for this key when pressed with shift. */
@@ -52,7 +53,6 @@ QString Key::shiftText(void)
 void Key::setShiftText(QString text)
 {
 	m_shiftText = text;
-	updateDisplayShiftText();
 }
 
 /*! The type of the key. */
@@ -73,20 +73,40 @@ QString Key::displayText(void)
 	return m_displayText;
 }
 
+void Key::setDisplayText(QString text)
+{
+	m_displayText = text;
+}
+
 /*! The text (for combination with the shift key) visible on the keyboard. */
 QString Key::displayShiftText(void)
 {
 	return m_displayShiftText;
 }
 
-/*! Updates display text. \see displayText() */
-void Key::updateDisplayText(void)
+void Key::setDisplayShiftText(QString text)
 {
-	m_displayText = m_text;
+	m_displayShiftText = text;
 }
 
-/*! Updates display shift text. \see displayShiftText() */
-void Key::updateDisplayShiftText(void)
+/*! True if this is a dead key. */
+bool Key::isDead(void)
 {
-	m_displayShiftText = m_shiftText;
+	return m_dead;
+}
+
+void Key::setDead(bool dead)
+{
+	m_dead = dead;
+}
+
+/*! True if this is a dead key when pressed with shift. */
+bool Key::isShiftDead(void)
+{
+	return m_shiftDead;
+}
+
+void Key::setShiftDead(bool dead)
+{
+	m_shiftDead = dead;
 }
