@@ -46,7 +46,7 @@ ColumnLayout {
 			if(mins == 0)
 				netHits = 0;
 			else
-				netHits = (grossHits * mins - entry.mistakes) / mins;
+				netHits = (grossHits * mins - entry.mistakes * errorPenalty) / mins;
 			netHitsSeries.append(i + 1, netHits);
 			grossHitsSeries.append(i + 1, grossHits);
 		}
