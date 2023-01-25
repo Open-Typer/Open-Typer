@@ -44,7 +44,7 @@ class CORE_LIB_EXPORT HistoryParser : public QObject
 		Q_PROPERTY(int lesson READ lesson WRITE setLesson NOTIFY lessonChanged)
 		Q_PROPERTY(int sublesson READ sublesson WRITE setSublesson NOTIFY sublessonChanged)
 		Q_PROPERTY(int exercise READ exercise WRITE setExercise NOTIFY exerciseChanged)
-		Q_PROPERTY(int count READ count)
+		Q_PROPERTY(int count READ count NOTIFY countChanged)
 	public:
 		QString lessonPack(void);
 		void setLessonPack(QString value);
