@@ -25,10 +25,49 @@ import QtCharts 2.3
 import OpenTyper 1.0
 
 ColumnLayout {
+	id: root
 	property int errorPenalty: Settings.errorPenalty()
+	property string lessonPack
 	property int lesson
 	property int sublesson
 	property int exercise
+	onErrorPenaltyChanged: loadData()
+
+	function loadData() {
+		netHitsSeries.clear();
+		grossHitsSeries.clear();
+		var count = parser.count;
+		for(var i = 0; i < count; i++)
+		{
+			var entry = parser.at(i);
+			var grossHits = entry.grossHitsPerMinute;
+			var mins = entry.timeSecs / 60;
+			var netHits;
+			if(mins == 0)
+				netHits = 0;
+			else
+				netHits = (grossHits * mins - entry.mistakes) / mins;
+			netHitsSeries.append(i + 1, netHits);
+			grossHitsSeries.append(i + 1, grossHits);
+		}
+		netHitsSeries.axisX.min = 1;
+		netHitsSeries.axisX.max = count;
+		netHitsSeries.axisX.tickCount = Math.min(count, 15);
+		var maxY = Math.max(chartView.getMaxY(netHitsSeries), chartView.getMaxY(grossHitsSeries));
+		netHitsSeries.axisY.max = maxY + 50 * (maxY / 250);
+	}
+
+	HistoryParser {
+		id: parser
+		lessonPack: root.lessonPack
+		lesson: root.lesson
+		sublesson: root.sublesson
+		exercise: root.exercise
+		onLessonPackChanged: loadData()
+		onLessonChanged: loadData()
+		onSublessonChanged: loadData()
+		onExerciseChanged: loadData()
+	}
 
 	Label {
 		text: qsTr("Error penalty: %1").arg(errorPenalty);
@@ -43,6 +82,7 @@ ColumnLayout {
 		theme: ThemeEngine.theme == ThemeEngine.DarkTheme ? ChartView.ChartThemeDark : ChartView.ChartThemeLight
 		backgroundColor: ThemeEngine.paperColor
 		antialiasing: true
+		visible: parser.count > 0
 
 		function getMaxY(series) {
 			var out = 0;
@@ -55,29 +95,28 @@ ColumnLayout {
 			id: netHitsSeries
 			name: qsTr("Net hits per minute")
 			axisX: ValueAxis {
+				titleText: qsTr("Attempt")
 				labelFormat: "%d"
 			}
 			axisY: ValueAxis {
 				labelFormat: "%d"
-				max: Math.max(chartView.getMaxY(netHitsSeries), chartView.getMaxY(grossHitsSeries)) + 50
 			}
-
-			XYPoint { x: 0; y: 250 }
-			XYPoint { x: 1; y: 300 }
-			XYPoint { x: 2; y: 335 }
-			XYPoint { x: 3; y: 340 }
-			XYPoint { x: 4; y: 320 }
 		}
 
 		SplineSeries {
 			id: grossHitsSeries
 			name: qsTr("Gross hits per minute")
-
-			XYPoint { x: 0; y: 275 }
-			XYPoint { x: 1; y: 315 }
-			XYPoint { x: 2; y: 335 }
-			XYPoint { x: 3; y: 350 }
-			XYPoint { x: 4; y: 340 }
 		}
+	}
+
+	Label {
+		//: When there's nothing to show in the exercise history chart
+		text: qsTr("No data yet...")
+		Layout.fillWidth: true
+		Layout.fillHeight: true
+		horizontalAlignment: Qt.AlignHCenter
+		verticalAlignment: Qt.AlignVCenter
+		visible: parser.count == 0
+		font.pointSize: 20
 	}
 }
