@@ -128,6 +128,15 @@ ApplicationWindow {
 		id: parser
 	}
 
+	HistoryParser {
+		id: historyParser
+		lessonPack: packName
+		lesson: currentLesson
+		sublesson: currentAbsoluteSublesson
+		exercise: currentExercise
+		onCountChanged: paper.historyChanged()
+	}
+
 	ExerciseTimer {
 		id: exerciseTimer
 	}
@@ -1101,8 +1110,7 @@ ApplicationWindow {
 			eventArgs["time"] = time;
 			AddonApi::sendEvent(IAddon::Event_EndStockExercise, eventArgs);*/
 			// The result will always be saved locally - even if an addon uses it
-			var result = [grossHitsPerMinute, exerciseMistakes, time];
-			HistoryParser.addHistoryEntry(packName, currentLesson, currentAbsoluteSublesson, currentExercise, result);
+			historyParser.append(grossHitsPerMinute, exerciseMistakes, time);
 		}
 		if(testLoaded)
 		{
