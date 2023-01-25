@@ -181,30 +181,6 @@ ApplicationWindow {
 		}
 	}
 
-	Binding {
-		target: statsDialog
-		property: "packName"
-		value: packName
-	}
-
-	Binding {
-		target: statsDialog
-		property: "lesson"
-		value: currentLesson
-	}
-
-	Binding {
-		target: statsDialog
-		property: "sublesson"
-		value: currentAbsoluteSublesson
-	}
-
-	Binding {
-		target: statsDialog
-		property: "exercise"
-		value: currentExercise
-	}
-
 	Connections {
 		target: rootItem
 		function onLanguageChanged() {
