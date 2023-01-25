@@ -39,7 +39,6 @@ SOURCES += \
     src/QmlKeyboardHandler.cpp \
     src/QmlUtils.cpp \
     src/Settings.cpp \
-    src/StatsDialog.cpp \
     src/StringUtils.cpp \
     src/widgets/TextView.cpp \
     src/ThemeEngine.cpp \
@@ -64,15 +63,13 @@ HEADERS += \
     src/include/QmlKeyboardHandler.h \
     src/include/QmlUtils.h \
     src/include/Settings.h \
-    src/include/StatsDialog.h \
     src/include/StringUtils.h \
     src/include/widgets/TextView.h \
     src/include/ThemeEngine.h \
     src/include/IAddon.h
 
 FORMS += \
-    ui/ExportDialog.ui \
-    ui/StatsDialog.ui
+    ui/ExportDialog.ui
 
 TRANSLATIONS += \
     translations/libcore_sk_SK.ts \

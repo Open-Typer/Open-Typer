@@ -34,6 +34,7 @@
 #include "LanguageManager.h"
 #include "IAddon.h"
 #include "AddonApi.h"
+#include "ConfigParser.h"
 #include "QmlKeyboardHandler.h"
 #include "ExerciseTimer.h"
 #include "CharacterRecord.h"
@@ -43,7 +44,6 @@
 #include "QmlFileDialog.h"
 #include "BuiltInPacks.h"
 #include "HistoryParser.h"
-#include "StatsDialog.h"
 #include "KeyboardLayout.h"
 #include "Key.h"
 #include "updater/Updater.h"
@@ -187,8 +187,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
 	HistoryParser historyParser;
 	engine.rootContext()->setContextProperty("HistoryParser", &historyParser);
-	StatsDialog statsDialog(true, {}, QPair<int, int>(), QString(), 0, 0, 0);
-	engine.rootContext()->setContextProperty("statsDialog", &statsDialog);
 	engine.load("qrc:/qml/MainWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
