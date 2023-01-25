@@ -128,6 +128,15 @@ ApplicationWindow {
 		id: parser
 	}
 
+	HistoryParser {
+		id: historyParser
+		lessonPack: packName
+		lesson: currentLesson
+		sublesson: currentAbsoluteSublesson
+		exercise: currentExercise
+		onCountChanged: paper.historyChanged()
+	}
+
 	ExerciseTimer {
 		id: exerciseTimer
 	}
@@ -179,30 +188,6 @@ ApplicationWindow {
 				loadText(content, true);
 			}
 		}
-	}
-
-	Binding {
-		target: statsDialog
-		property: "packName"
-		value: packName
-	}
-
-	Binding {
-		target: statsDialog
-		property: "lesson"
-		value: currentLesson
-	}
-
-	Binding {
-		target: statsDialog
-		property: "sublesson"
-		value: currentAbsoluteSublesson
-	}
-
-	Binding {
-		target: statsDialog
-		property: "exercise"
-		value: currentExercise
 	}
 
 	Connections {
@@ -378,7 +363,7 @@ ApplicationWindow {
 				CustomToolButton {
 					icon.name: "repeat"
 					toolTipText: qsTr("Repeat exercise")
-					onClicked: repeatExercise();
+					onClicked: repeatExerciseClicked();
 				}
 				CustomToolButton {
 					id: closeLoadedExButton
@@ -407,11 +392,7 @@ ApplicationWindow {
 					id: statsButton
 					icon.name: "stats"
 					text: qsTr("Exercise history")
-					onClicked: {
-						// TODO: Send load stats event
-						statsDialog.loadData();
-						statsDialog.exec();
-					}
+					checkable: true
 				}
 			}
 		}
@@ -456,9 +437,45 @@ ApplicationWindow {
 			Layout.fillHeight: true
 			Layout.topMargin: 10
 			summary.visible: preview
+			exerciseHistory: panel2.contents.statsButton.checked
 			blockInput: root.blockInput
+			lessonPack: packName
+			lesson: root.currentLesson
+			sublesson: root.currentAbsoluteSublesson
+			exercise: root.currentExercise
 			onKeyPressed: keyPress(event);
 			onKeyReleased: keyRelease(event);
+			onExerciseHistoryChanged: {
+				if(exerciseHistory)
+				{
+					showKeyboardAnimation.stop();
+					hideKeyboardAnimation.start();
+				}
+				else
+				{
+					hideKeyboardAnimation.stop();
+					showKeyboardAnimation.start();
+				}
+			}
+
+			PropertyAnimation {
+				id: showKeyboardAnimation
+				target: keyboard
+				property: "scale"
+				to: 1
+				duration: 125
+				easing.type: Easing.OutCubic
+			}
+
+			PropertyAnimation {
+				id: hideKeyboardAnimation
+				target: keyboard
+				property: "scale"
+				to: 0
+				duration: 125
+				easing.type: Easing.InCubic
+			}
+
 			KeyboardView {
 				id: keyboard
 				visible: !preview
@@ -533,6 +550,7 @@ ApplicationWindow {
 			updateLessonList();
 			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
 		}
+		paper.errorPenalty = Settings.errorPenalty();
 		highlightNextKey();
 		keyboard.releaseAllKeys();
 	}
@@ -693,6 +711,11 @@ ApplicationWindow {
 			paper.remaining = "";
 		}
 		blockInput = false;
+	}
+
+	function repeatExerciseClicked() {
+		repeatExercise();
+		panel2.contents.statsButton.checked = false;
 	}
 
 	function repeatExercise() {
@@ -1087,8 +1110,7 @@ ApplicationWindow {
 			eventArgs["time"] = time;
 			AddonApi::sendEvent(IAddon::Event_EndStockExercise, eventArgs);*/
 			// The result will always be saved locally - even if an addon uses it
-			var result = [grossHitsPerMinute, exerciseMistakes, time];
-			HistoryParser.addHistoryEntry(packName, currentLesson, currentAbsoluteSublesson, currentExercise, result);
+			historyParser.append(grossHitsPerMinute, exerciseMistakes, time);
 		}
 		if(testLoaded)
 		{
@@ -1147,6 +1169,7 @@ ApplicationWindow {
 		exerciseText = exerciseText.replace(/\t/g, " ");
 		customExerciseText = exerciseText;
 		customExerciseLoaded = true;
+		panel2.contents.statsButton.checked = false;
 		initExercise();
 	}
 

@@ -29,6 +29,7 @@ SOURCES += \
     src/ExerciseValidator.cpp \
     src/ExportDialog.cpp \
     src/FileUtils.cpp \
+    src/HistoryEntry.cpp \
     src/HistoryParser.cpp \
     src/Key.cpp \
     src/KeyboardLayout.cpp \
@@ -39,7 +40,6 @@ SOURCES += \
     src/QmlKeyboardHandler.cpp \
     src/QmlUtils.cpp \
     src/Settings.cpp \
-    src/StatsDialog.cpp \
     src/StringUtils.cpp \
     src/widgets/TextView.cpp \
     src/ThemeEngine.cpp \
@@ -54,6 +54,7 @@ HEADERS += \
     src/include/ExerciseValidator.h \
     src/include/ExportDialog.h \
     src/include/FileUtils.h \
+    src/include/HistoryEntry.h \
     src/include/HistoryParser.h \
     src/include/Key.h \
     src/include/KeyboardLayout.h \
@@ -64,15 +65,13 @@ HEADERS += \
     src/include/QmlKeyboardHandler.h \
     src/include/QmlUtils.h \
     src/include/Settings.h \
-    src/include/StatsDialog.h \
     src/include/StringUtils.h \
     src/include/widgets/TextView.h \
     src/include/ThemeEngine.h \
     src/include/IAddon.h
 
 FORMS += \
-    ui/ExportDialog.ui \
-    ui/StatsDialog.ui
+    ui/ExportDialog.ui
 
 TRANSLATIONS += \
     translations/libcore_sk_SK.ts \

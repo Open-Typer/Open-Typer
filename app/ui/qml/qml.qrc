@@ -33,5 +33,6 @@
         <file>controls/AccentButtonBox.qml</file>
         <file>KeyboardView.qml</file>
         <file>KeyboardKey.qml</file>
+        <file>ExerciseHistory.qml</file>
     </qresource>
 </RCC>

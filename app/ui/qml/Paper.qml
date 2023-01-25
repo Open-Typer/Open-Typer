@@ -40,10 +40,31 @@ Item {
 	property bool remainingVisible: true
 	property alias summary: summary
 	property bool blockInput: false
+	property bool exerciseHistory: false
+	property string lessonPack
+	property int lesson
+	property int sublesson
+	property int exercise
+	property int errorPenalty
 	signal keyPressed(var event)
 	signal keyReleased(var event)
+	signal historyChanged()
 	id: control
 	clip: true
+	onHistoryChanged: history.loadData()
+
+	onExerciseHistoryChanged: {
+		if(exerciseHistory)
+		{
+			closeHistoryAnimation.stop();
+			openHistoryAnimation.start();
+		}
+		else
+		{
+			openHistoryAnimation.stop();
+			closeHistoryAnimation.start();
+		}
+	}
 
 	function calculateTextWidth(text, metrics) {
 		var lines = text.split("\n");
@@ -59,6 +80,50 @@ Item {
 		onKeyReleased: control.keyReleased(event);
 	}
 
+	PropertyAnimation {
+		id: openHistoryAnimation
+		target: history
+		property: "yScale"
+		to: 1
+		duration: 250
+		easing.type: Easing.InOutQuad
+		onStarted: {
+			openPaperAnimation.stop();
+			closePaperAnimation.start();
+		}
+	}
+
+	PropertyAnimation {
+		id: closeHistoryAnimation
+		target: history
+		property: "yScale"
+		to: 0
+		duration: 250
+		easing.type: Easing.InOutQuad
+		onStarted: {
+			closePaperAnimation.stop();
+			openPaperAnimation.start();
+		}
+	}
+
+	PropertyAnimation {
+		id: openPaperAnimation
+		target: mainLayout
+		property: "yScale"
+		to: 1
+		duration: 250
+		easing.type: Easing.InOutQuad
+	}
+
+	PropertyAnimation {
+		id: closePaperAnimation
+		target: mainLayout
+		property: "yScale"
+		to: 0
+		duration: 250
+		easing.type: Easing.InOutQuad
+	}
+
 	Rectangle {
 		property int textWidth: Math.max(currentLineText.textWidth, inputText.textWidth, remainingText.textWidth)
 		id: paperRect
@@ -71,10 +136,39 @@ Item {
 		color: ThemeEngine.paperColor
 		clip: true
 
+		ExerciseHistory {
+			property real yScale: 0
+			id: history
+			anchors.fill: parent
+			anchors.margins: 20
+			lessonPack: control.lessonPack
+			lesson: control.lesson
+			sublesson: control.sublesson
+			exercise: control.exercise
+			errorPenalty: control.errorPenalty
+			transform: Scale {
+				yScale: history.yScale
+			}
+			Component.onCompleted: {
+				if(exerciseHistory)
+					yScale = 1;
+			}
+		}
+
 		ColumnLayout {
+			property real yScale: 0
+			id: mainLayout
 			anchors.fill: parent
 			anchors.margins: control.textMargins
 			spacing: 0
+			transform: Scale {
+				yScale: mainLayout.yScale
+				origin.y: mainLayout.height
+			}
+			Component.onCompleted: {
+				if(!exerciseHistory)
+					yScale = 1;
+			}
 			TextEdit {
 				property int textWidth: calculateTextWidth(text, currentLineTextMetrics);
 				id: currentLineText

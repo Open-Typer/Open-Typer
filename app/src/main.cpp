@@ -34,6 +34,7 @@
 #include "LanguageManager.h"
 #include "IAddon.h"
 #include "AddonApi.h"
+#include "ConfigParser.h"
 #include "QmlKeyboardHandler.h"
 #include "ExerciseTimer.h"
 #include "CharacterRecord.h"
@@ -43,7 +44,6 @@
 #include "QmlFileDialog.h"
 #include "BuiltInPacks.h"
 #include "HistoryParser.h"
-#include "StatsDialog.h"
 #include "KeyboardLayout.h"
 #include "Key.h"
 #include "updater/Updater.h"
@@ -159,6 +159,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
 	qmlRegisterType<KeyboardLayout>("OpenTyper", 1, 0, "KeyboardLayout");
+	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
+	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<Key>();
 	qRegisterMetaType<KeyboardRow>();
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
@@ -185,10 +187,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
 	StringUtils stringUtils;
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
-	HistoryParser historyParser;
-	engine.rootContext()->setContextProperty("HistoryParser", &historyParser);
-	StatsDialog statsDialog(true, {}, QPair<int, int>(), QString(), 0, 0, 0);
-	engine.rootContext()->setContextProperty("statsDialog", &statsDialog);
 	engine.load("qrc:/qml/MainWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
