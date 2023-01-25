@@ -41,6 +41,11 @@ Item {
 	property alias summary: summary
 	property bool blockInput: false
 	property bool exerciseHistory: false
+	property string lessonPack
+	property int lesson
+	property int sublesson
+	property int exercise
+	property int errorPenalty
 	signal keyPressed(var event)
 	signal keyReleased(var event)
 	id: control
@@ -134,6 +139,11 @@ Item {
 			id: history
 			anchors.fill: parent
 			anchors.margins: 20
+			lessonPack: control.lessonPack
+			lesson: control.lesson
+			sublesson: control.sublesson
+			exercise: control.exercise
+			errorPenalty: control.errorPenalty
 			transform: Scale {
 				yScale: history.yScale
 			}
