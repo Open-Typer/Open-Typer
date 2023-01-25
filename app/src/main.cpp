@@ -159,6 +159,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
 	qmlRegisterType<KeyboardLayout>("OpenTyper", 1, 0, "KeyboardLayout");
+	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
+	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<Key>();
 	qRegisterMetaType<KeyboardRow>();
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
@@ -185,8 +187,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
 	StringUtils stringUtils;
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
-	HistoryParser historyParser;
-	engine.rootContext()->setContextProperty("HistoryParser", &historyParser);
 	engine.load("qrc:/qml/MainWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
