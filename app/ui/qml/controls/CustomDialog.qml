@@ -32,7 +32,7 @@ Item {
 	property Item menuBarBlur: QmlUtils.menuBarBlur
 	property string windowTitle: ""
 	property int standardButtons: Dialog.NoButton
-	readonly property var dialogColor: ThemeEngine.bgColor
+	readonly property color dialogColor: ThemeEngine.bgColor
 	readonly property alias dialog: control
 	property alias contentComponent: contentsLoader.sourceComponent
 	readonly property alias contentItem: contentsLoader.item
