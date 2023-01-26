@@ -190,7 +190,7 @@ Item {
 			ColumnLayout {
 				id: headerLayout
 				width: fillWindow ? control.width : undefined
-				height: fillWindow ? control.height : undefined
+				height: fillWindow ? control.height - control.footer.height : undefined
 				spacing: 0
 				Label {
 					id: windowTitleLabel
