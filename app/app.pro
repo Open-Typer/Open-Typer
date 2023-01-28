@@ -52,6 +52,7 @@ LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 SOURCES += \
     src/ExportTable.cpp \
     src/ExportTableModel.cpp \
+    src/QmlWidget.cpp \
     src/packEditor/PackEditor.cpp \
     src/packEditor/PackSelector.cpp \
     src/updater/Updater.cpp \
@@ -60,6 +61,7 @@ SOURCES += \
 HEADERS += \
     src/include/ExportTable.h \
     src/include/ExportTableModel.h \
+    src/include/QmlWidget.h \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h
