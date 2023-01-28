@@ -93,6 +93,7 @@ DISTFILES += \
     ui/qml/controls/UpdateQuestion.qml \
     ui/qml/controls/VerticalStackView.qml \
     ui/qml/dialogs/ExerciseSummary.qml \
+    ui/qml/dialogs/ExportDialog.qml \
     ui/qml/dialogs/InitialSetup.qml \
     ui/qml/dialogs/MessageBox.qml \
     ui/qml/dialogs/SettingsDialog.qml \
