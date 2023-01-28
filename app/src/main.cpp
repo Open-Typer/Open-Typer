@@ -46,6 +46,8 @@
 #include "HistoryParser.h"
 #include "KeyboardLayout.h"
 #include "Key.h"
+#include "QmlWidget.h"
+#include "ExportTable.h"
 #include "updater/Updater.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
@@ -160,6 +162,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
 	qmlRegisterType<KeyboardLayout>("OpenTyper", 1, 0, "KeyboardLayout");
 	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
+	qmlRegisterType<QmlWidget>("OpenTyper", 1, 0, "Widget");
+	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<Key>();
 	qRegisterMetaType<KeyboardRow>();
@@ -187,6 +191,8 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
 	StringUtils stringUtils;
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
+	ExportTable table;
+	engine.rootContext()->setContextProperty("exportTable", &table);
 	engine.load("qrc:/qml/MainWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
