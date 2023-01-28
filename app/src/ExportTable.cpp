@@ -83,7 +83,10 @@ void ExportTable::updateModel(void)
 	}
 	resizeColumnsToContents();
 	resizeRowsToContents();
+	adjustSize();
 	emit modelChanged();
+	emit contentWidthChanged(contentWidth());
+	emit contentHeightChanged(contentHeight());
 }
 
 /*! Updates the style sheet. */
@@ -104,13 +107,19 @@ void ExportTable::updateStyle(bool forceLight)
 /*! Table width. */
 int ExportTable::contentWidth(void)
 {
-	return viewport()->width();
+	if(viewport()->width() > size().width())
+		return viewport()->width();
+	else
+		return size().width();
 }
 
 /*! Table height. */
 int ExportTable::contentHeight(void)
 {
-	return viewport()->height();
+	if(viewport()->height() > size().height())
+		return viewport()->height();
+	else
+		return size().height();
 }
 
 /*! The name of the student. */
