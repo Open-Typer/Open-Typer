@@ -50,6 +50,7 @@ INCLUDEPATH += \
 LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 
 SOURCES += \
+    src/ExportProvider.cpp \
     src/ExportTable.cpp \
     src/ExportTableModel.cpp \
     src/QmlWidget.cpp \
@@ -59,6 +60,7 @@ SOURCES += \
     src/main.cpp
 
 HEADERS += \
+    src/include/ExportProvider.h \
     src/include/ExportTable.h \
     src/include/ExportTableModel.h \
     src/include/QmlWidget.h \
