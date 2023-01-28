@@ -50,12 +50,14 @@ INCLUDEPATH += \
 LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 
 SOURCES += \
+    src/ExportTableModel.cpp \
     src/packEditor/PackEditor.cpp \
     src/packEditor/PackSelector.cpp \
     src/updater/Updater.cpp \
     src/main.cpp
 
 HEADERS += \
+    src/include/ExportTableModel.h \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h
