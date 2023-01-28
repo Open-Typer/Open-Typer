@@ -211,7 +211,7 @@ ApplicationWindow {
 	Repeater {
 		readonly property int minY: timedExPanel.visible ? 0 : panel1.height
 		id: shadowRepeater
-		model: timedExPanel.visible ? [timedExPanel, paper] : [panel2, paper]
+		model: timedExPanel.visible ? [timedExPanel, paper] : [panel2, exportButton, paper]
 		DropShadow {
 			function getY() {
 				var out = shadowRepeater.minY;
@@ -235,7 +235,7 @@ ApplicationWindow {
 			radius: 17
 			samples: 13
 			color: ThemeEngine.theme === ThemeEngine.DarkTheme ? "#80000000" : "#80000022"
-			visible: modelData.visible
+			visible: modelData.visible && modelData != exportButton
 		}
 	}
 
@@ -431,6 +431,14 @@ ApplicationWindow {
 					visible = true;
 			}
 		}
+		AccentButton {
+			id: exportButton
+			Layout.alignment: Qt.AlignHCenter
+			text: qsTr("Export")
+			icon.name: "download"
+			visible: preview
+			onClicked: exportDialog.open()
+		}
 		Paper {
 			id: paper
 			Layout.fillWidth: true
@@ -519,6 +527,10 @@ ApplicationWindow {
 		windowTitle: qsTr("No error words");
 		title: qsTr("You don't have any error words.")
 		icon: MessageBox.Information
+	}
+
+	ExportDialog {
+		id: exportDialog
 	}
 
 	function reload() {
@@ -1139,7 +1151,7 @@ ApplicationWindow {
 		paper.summary.mistakes = exerciseMistakes;
 		paper.summary.accuracy = 1.0 - exerciseMistakes / totalHits;
 		changeMode(0);
-		// TODO: Show export button
+		exportDialog.validator = validator;
 		preview = true;
 		// Load saved text
 		paper.input = validator.generatedInputText();
