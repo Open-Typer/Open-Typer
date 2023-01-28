@@ -82,7 +82,7 @@ bool ExportTableModel::setData(const QModelIndex &index, const QVariant &value, 
 			return false;
 	}
 }
-#include <QDebug>
+
 /*! Loads the table data. */
 void ExportTableModel::loadData(void)
 {
@@ -94,7 +94,6 @@ void ExportTableModel::loadData(void)
 	qreal timeMins = m_validator->time() / 60.0;
 	qreal netHitsPerMinute = netHits / timeMins;
 	// Caption
-	qDebug() << m_studentName;
 	tableData.insert({ 0, 0 }, "<h1><b><center>" + tr("Typewriting performance result") + "</center></b></h1>");
 	// Name
 	tableData.insert({ 1, 0 }, "<b>" + tr("Name: %1").arg(m_studentName) + "</b>");
