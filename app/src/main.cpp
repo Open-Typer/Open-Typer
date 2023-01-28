@@ -47,6 +47,7 @@
 #include "KeyboardLayout.h"
 #include "Key.h"
 #include "QmlWidget.h"
+#include "ExportProvider.h"
 #include "ExportTable.h"
 #include "updater/Updater.h"
 
@@ -164,6 +165,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
 	qmlRegisterType<QmlWidget>("OpenTyper", 1, 0, "Widget");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
+	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
 	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<Key>();
 	qRegisterMetaType<KeyboardRow>();
