@@ -37,7 +37,15 @@ jobs:
       with:
         name: snap_${{ matrix.arch }}
         path: ${{ steps.build.outputs.snap }}
-    - if: startsWith(github.ref, 'refs/tags/v')
+    - if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, '-')
+      name: Publish the package to the Snap Store (beta)
+      uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAP_STORE_LOGIN }}
+      with:
+        snap: ${{ steps.build.outputs.snap }}
+        release: beta
+    - if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-')
       name: Publish the package to the Snap Store
       uses: snapcore/action-publish@v1
       env:
