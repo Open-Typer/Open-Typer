@@ -18,7 +18,8 @@ parts:
     override-pull: |
       craftctl default
       git config --global --add safe.directory /root/parts/open-typer/src
-      version=$(git describe --tags --abbrev=0 | sed 's/v//')
+      version=$(head -n 1 .qmake.conf)
+      version=${version:8}
       craftctl set version="$version"
       craftctl set grade=stable
     override-build: |
