@@ -155,8 +155,9 @@ jobs:
       name: Do not upload packages to the PPA if this is a pre-release
       run: |
         if (( ${{ env.is_prerelease }} == 1 )); then
-	        echo upload_to_ppa=0 >> "${GITHUB_ENV}"
-	fi
+                echo upload_to_ppa=0 >> "${GITHUB_ENV}"
+        fi
+      shell: bash
     - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
       name: Import GPG key
       id: gpgkey
