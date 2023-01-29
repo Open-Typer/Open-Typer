@@ -41,6 +41,7 @@ CustomDialog {
 	ExportProvider {
 		id: provider
 		validator: root.validator
+		table: exportTable
 	}
 
 	Timer {
@@ -59,6 +60,7 @@ CustomDialog {
 			AccentButton {
 				text: qsTr("Print")
 				icon.name: "print"
+				onClicked: provider.print()
 			}
 		}
 
