@@ -58,8 +58,11 @@ CustomDialog {
 	}
 	function skipPage() { skipPageTimer.start(); }
 	onAboutToShow: {
-		if(!Settings.containsAppTheme())
+		if(!Settings.containsAppTheme() || !Settings.containsInitFinished())
+		{
 			ThemeEngine.setDefaultTheme();
+			Settings.setInitFinished(false);
+		}
 		if(!Settings.containsLessonPack() || (Settings.lessonPack() === ""))
 		{
 			Settings.setLessonPack("en_US-default-A"); // lesson pack will be changed during initial setup anyway
