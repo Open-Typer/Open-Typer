@@ -60,6 +60,7 @@ CustomDialog {
 			AccentButton {
 				text: qsTr("Print")
 				icon.name: "print"
+				visible: !QmlUtils.osWasm()
 				onClicked: provider.print()
 			}
 		}
