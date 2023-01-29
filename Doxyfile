@@ -26,8 +26,8 @@ ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
 STRIP_FROM_PATH        =
-STRIP_FROM_INC_PATH    = app/src/include \
-                         libcore/src/include
+STRIP_FROM_INC_PATH    = app/src \
+                         libcore/src
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
 JAVADOC_BANNER         = NO
