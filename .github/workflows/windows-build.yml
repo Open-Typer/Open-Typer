@@ -23,7 +23,7 @@ jobs:
             qt-version: '6.4.2'
             qt-target: 'desktop'
             qt-mingw-version: ''
-            qt-modules: 'qtcharts qt5compat'
+            qt-modules: 'qtcharts qt5compat qtshadertools'
             mingw-version: '11.2.0'
     steps:
     - uses: actions/checkout@v3
