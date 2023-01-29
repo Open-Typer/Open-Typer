@@ -27,8 +27,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 INCLUDEPATH += \
-    src/include \
-    ../libcore/src/include
+    src \
+    ../libcore/src
 
 LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 
@@ -43,13 +43,13 @@ SOURCES += \
     src/main.cpp
 
 HEADERS += \
-    src/include/ExportProvider.h \
-    src/include/ExportTable.h \
-    src/include/ExportTableModel.h \
-    src/include/QmlWidget.h \
-    src/include/packEditor/PackEditor.h \
-    src/include/packEditor/PackSelector.h \
-    src/include/updater/Updater.h
+    src/ExportProvider.h \
+    src/ExportTable.h \
+    src/ExportTableModel.h \
+    src/QmlWidget.h \
+    src/packEditor/PackEditor.h \
+    src/packEditor/PackSelector.h \
+    src/updater/Updater.h
 
 FORMS += \
     ui/packEditor/PackEditor.ui \
