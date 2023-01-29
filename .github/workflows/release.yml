@@ -17,6 +17,9 @@ jobs:
             qt-version: '5.15.2'
             qt-target: 'desktop'
             mingw-version: 81
+          - os: macos-latest
+            qt-version: '6.4.2'
+            qt-target: 'desktop'
     steps:
     - uses: actions/checkout@v3
       with:
@@ -77,14 +80,14 @@ jobs:
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
     # MacOS
-    #- if: contains(matrix.os, 'macos')
-    #  name: Install Qt
-    #  uses: jurplel/install-qt-action@v3
-    #  with:
-    #    version: ${{ matrix.qt-version }}
-    #    host: 'mac'
-    #    target: ${{ matrix.qt-target }}
-    #    modules: 'qtcharts'
+    - if: contains(matrix.os, 'macos')
+      name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt-version }}
+        host: 'mac'
+        target: ${{ matrix.qt-target }}
+        modules: 'qtcharts qt5compat'
     ## Build
     - if: contains(matrix.os, 'windows')
       name: Build (Windows)
@@ -255,7 +258,7 @@ jobs:
       name: Create release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "build-windows/*.exe,build-ubuntu/*.AppImage,build-ubuntu/*.zsync,*.deb"
+        artifacts: "build-windows/*.exe,build-ubuntu/*.AppImage,build-ubuntu/*.zsync,*.deb,build-macos/*.dmg"
         name: "${{ env.app_name }} ${{ github.ref_name }}"
         owner: ${{ github.event.pusher.name }}
         draft: true
