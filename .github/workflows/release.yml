@@ -152,6 +152,12 @@ jobs:
           *.zsync
           *.dmg
     - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
+      name: Do not upload packages to the PPA if this is a pre-release
+      run: |
+        if (( ${{ env.is_prerelease }} == 1 )); then
+	        echo upload_to_ppa=0 >> "${GITHUB_ENV}"
+	fi
+    - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
       name: Import GPG key
       id: gpgkey
       uses: crazy-max/ghaction-import-gpg@v5
