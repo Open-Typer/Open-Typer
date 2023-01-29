@@ -18,7 +18,14 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef Q_OS_WASM
+#include <QPrinter>
+#include <QPrintPreviewDialog>
+#include <QPainter>
+#include <QAbstractTextDocumentLayout>
+#endif // Q_OS_WASM
 #include "ExportProvider.h"
+#include "ThemeEngine.h"
 
 /*! Constructs ExportProvider. */
 ExportProvider::ExportProvider(QObject *parent) :
@@ -97,4 +104,82 @@ void ExportProvider::setTable(ExportTable *table)
 {
 	m_table = table;
 	emit tableChanged(table);
+}
+
+/*! Prints the exported text and table. */
+void ExportProvider::print(void)
+{
+#ifndef Q_OS_WASM
+	// Set up printer
+	QPrinter printer(QPrinter::HighResolution);
+	QPrinter *printerPtr = &printer;
+	QPrintPreviewDialog dialog(&printer);
+	connect(&dialog, &QPrintPreviewDialog::paintRequested, this, [this, printerPtr]() {
+		// Print
+		printerPtr->setPageMargins(QMarginsF(25, 25, 15, 25), QPageLayout::Millimeter);
+		QPainter painter;
+		painter.begin(printerPtr);
+		QFont font = globalThemeEngine.font();
+		font.setPointSize(12);
+		painter.setFont(font);
+		QTextEdit *textEdit = new QTextEdit;
+		textEdit->setHtml(m_exportText);
+		textEdit->setFont(font);
+		textEdit->setLineWrapMode(QTextEdit::NoWrap);
+		//textEdit->show();
+		textEdit->adjustSize();
+		QTextDocument *document = textEdit->document()->clone(this);
+		document->documentLayout()->setPaintDevice(printerPtr);
+		document->setDefaultStyleSheet("body { color: black; }");
+		font = document->defaultFont();
+		font.setPointSize(50);
+		document->setDefaultFont(font);
+		double textScale = printerPtr->pageRect(QPrinter::DevicePixel).width() / double(document->size().width());
+		int fontHeight = QFontMetrics(font, printerPtr).height();
+		QStringList lines = m_exportText.split("<br>");
+		int relativeLine = 0, page = 0, fromPage = printerPtr->fromPage() - 1, toPage = printerPtr->toPage() - 1;
+		for(int i = 0; i < lines.count(); i++)
+		{
+			int rangeEnd = toPage;
+			if(rangeEnd == -1)
+				rangeEnd = page + 1;
+			if(fontHeight * textScale * (relativeLine + 1) > printerPtr->pageRect(QPrinter::DevicePixel).height())
+			{
+				if(((page + 1 >= fromPage) && (page + 1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
+					printerPtr->newPage();
+				relativeLine = 0;
+				page++;
+			}
+			document->setHtml("<body>" + lines[i] + "</body>");
+			if((page >= fromPage) && (page <= rangeEnd))
+			{
+				painter.resetTransform();
+				painter.scale(textScale, textScale);
+				painter.translate(0, fontHeight * relativeLine);
+				document->drawContents(&painter);
+			}
+			relativeLine++;
+		}
+		painter.resetTransform();
+		m_table->updateStyle(true);
+		m_table->setGeometry(0, 0, m_table->contentWidth(), m_table->contentHeight());
+		double scale = printerPtr->pageRect(QPrinter::DevicePixel).width() / double(m_table->width());
+		painter.scale(scale, scale);
+		int tablePos = (printerPtr->pageRect(QPrinter::DevicePixel).height() - (m_table->height() * scale)) / scale;
+		int rangeEnd = toPage;
+		if(rangeEnd == -1)
+			rangeEnd = page + 1;
+		if(((fontHeight * relativeLine) / scale > tablePos) || (page == 0))
+		{
+			if(((page + 1 >= fromPage) && (page + 1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
+				printerPtr->newPage();
+			page++;
+		}
+		if((page >= fromPage) && (page <= rangeEnd))
+			m_table->render(&painter, QPoint(0, tablePos), QRegion(0, 0, m_table->width(), m_table->height()));
+		m_table->updateStyle(false);
+		painter.end();
+	});
+	dialog.exec();
+#endif // Q_OS_WASM
 }

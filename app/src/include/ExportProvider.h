@@ -40,6 +40,7 @@ class ExportProvider : public QObject
 		QString exportText(void);
 		ExportTable *table(void);
 		void setTable(ExportTable *table);
+		Q_INVOKABLE void print(void);
 
 	private:
 		ExerciseValidator *m_validator;
