@@ -17,11 +17,13 @@ jobs:
             qt-version: '5.15.2'
             qt-target: 'desktop'
             qt-mingw-version: 81
+            qt-modules: 'qtcharts'
             mingw-version: '8.1.0'
           - os: windows-latest
             qt-version: '6.4.2'
             qt-target: 'desktop'
             qt-mingw-version: ''
+            qt-modules: 'qtcharts qt5compat'
             mingw-version: '11.2.0'
     steps:
     - uses: actions/checkout@v3
@@ -43,7 +45,7 @@ jobs:
         host: 'windows'
         arch: 'win64_mingw${{ matrix.qt-mingw-version }}'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts'
+        modules: ${{ matrix.qt-modules }}
     - name: Install Qt IFW (Windows)
       run: |
         curl -o aqt.exe -L https://github.com/miurahr/aqtinstall/releases/download/v2.2.1/aqt.exe
