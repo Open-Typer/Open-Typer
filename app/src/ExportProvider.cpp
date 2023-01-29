@@ -18,6 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QObject>
 #ifndef Q_OS_WASM
 #include <QPrinter>
 #include <QPrintPreviewDialog>
