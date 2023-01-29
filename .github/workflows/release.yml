@@ -247,6 +247,10 @@ jobs:
         fetch-depth: 0
         token: ${{ secrets.PUSH_TOKEN }}
         path: online-app
+    - if: contains(github.ref, '-')
+      name: Check if this is a pre-release
+      run: echo is_prerelease=1 >> "${GITHUB_ENV}"
+      shell: bash
     - if: env.is_prerelease == 1
       name: Do not upload packages to the PPA if this is a pre-release
       run: |
