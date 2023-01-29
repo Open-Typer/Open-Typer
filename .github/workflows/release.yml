@@ -39,6 +39,11 @@ jobs:
         version=$(head -n 1 .qmake.conf)
         version=${version:8}
         echo previous_tag=$version >> "${GITHUB_ENV}"
+        if [[ "${version%%-*}" == "$version" ]]; then
+        	echo is_prerelease=0 >> "${GITHUB_ENV}"
+        else
+        	echo is_prerelease=1 >> "${GITHUB_ENV}"
+        fi
       shell: bash
     - name: Get OS name
       run: |
