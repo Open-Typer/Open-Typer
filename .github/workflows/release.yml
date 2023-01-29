@@ -87,7 +87,7 @@ jobs:
         version: ${{ matrix.qt-version }}
         host: 'mac'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts qt5compat'
+        modules: 'qtcharts qt5compat qtshadertools'
     ## Build
     - if: contains(matrix.os, 'windows')
       name: Build (Windows)
