@@ -33,12 +33,20 @@ INCLUDEPATH += \
 LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 
 SOURCES += \
+    src/ExportProvider.cpp \
+    src/ExportTable.cpp \
+    src/ExportTableModel.cpp \
+    src/QmlWidget.cpp \
     src/packEditor/PackEditor.cpp \
     src/packEditor/PackSelector.cpp \
     src/updater/Updater.cpp \
     src/main.cpp
 
 HEADERS += \
+    src/include/ExportProvider.h \
+    src/include/ExportTable.h \
+    src/include/ExportTableModel.h \
+    src/include/QmlWidget.h \
     src/include/packEditor/PackEditor.h \
     src/include/packEditor/PackSelector.h \
     src/include/updater/Updater.h
@@ -68,6 +76,7 @@ DISTFILES += \
     ui/qml/controls/UpdateQuestion.qml \
     ui/qml/controls/VerticalStackView.qml \
     ui/qml/dialogs/ExerciseSummary.qml \
+    ui/qml/dialogs/ExportDialog.qml \
     ui/qml/dialogs/InitialSetup.qml \
     ui/qml/dialogs/MessageBox.qml \
     ui/qml/dialogs/SettingsDialog.qml \

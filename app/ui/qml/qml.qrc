@@ -34,5 +34,6 @@
         <file>KeyboardView.qml</file>
         <file>KeyboardKey.qml</file>
         <file>ExerciseHistory.qml</file>
+        <file>dialogs/ExportDialog.qml</file>
     </qresource>
 </RCC>
