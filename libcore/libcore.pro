@@ -9,6 +9,10 @@ linux {
 	LIBS += -lssl -lcrypto
 }
 
+win32 {
+        VERSION=""
+}
+
 CONFIG += c++17
 
 TEMPLATE = lib
