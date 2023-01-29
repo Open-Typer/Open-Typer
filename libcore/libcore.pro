@@ -13,9 +13,6 @@ CONFIG += c++17
 
 TEMPLATE = lib
 TARGET = opentyper-core
-!win32 {
-	VERSION = $$system(git describe --tags --abbrev=0 | sed -e 's/v//g')
-}
 DESTDIR = $$_PRO_FILE_PWD_/..
 
 INCLUDEPATH += src/include
