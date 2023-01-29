@@ -43,5 +43,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: build-macos
+        name: build-Qt-${{ matrix.qt-version }}
         path: '*.dmg'
