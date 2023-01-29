@@ -250,6 +250,14 @@ jobs:
         token: ${{ secrets.PUSH_TOKEN }}
         path: online-app
     - if: env.upload_to_ppa == 1
+      name: Do not upload packages to the PPA if this is a pre-release
+      run: |
+        if (( ${{ env.is_prerelease }} == 1 )); then
+	        echo upload_to_ppa=0 >> "${GITHUB_ENV}"
+	        echo upload_online_app=0 >> "${GITHUB_ENV}"
+	fi
+      shell: bash
+    - if: env.upload_to_ppa == 1
       name: Download Ubuntu packages from Launchpad
       run: |
         ./.ci/ubuntu-ppa-wait.sh
