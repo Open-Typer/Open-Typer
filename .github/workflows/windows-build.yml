@@ -36,6 +36,12 @@ jobs:
         sed -i -e '/^$/d' .github/config.env
         cat .github/config.env >> "${GITHUB_ENV}"
       shell: bash
+    - name: Get version
+      run: |
+        version=$(head -n 1 .qmake.conf)
+        version=${version:8}
+        echo previous_tag=$version >> "${GITHUB_ENV}"
+      shell: bash
     ## Install Qt
     # Windows
     - name: Install Qt (Windows)
