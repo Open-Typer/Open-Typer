@@ -39,11 +39,10 @@ jobs:
         version=$(head -n 1 .qmake.conf)
         version=${version:8}
         echo previous_tag=$version >> "${GITHUB_ENV}"
-        if [[ "${version%%-*}" == "$version" ]]; then
-        	echo is_prerelease=0 >> "${GITHUB_ENV}"
-        else
-        	echo is_prerelease=1 >> "${GITHUB_ENV}"
-        fi
+      shell: bash
+    - if: contains(github.ref, '-')
+      name: Check if this is a pre-release
+      run: echo is_prerelease=1 >> "${GITHUB_ENV}"
       shell: bash
     - name: Get OS name
       run: |
@@ -129,13 +128,11 @@ jobs:
         repository: ${{ github.repository_owner }}/${{ env.windows_installer_repo }}
         fetch-depth: 0
         token: ${{ secrets.PUSH_TOKEN }}
-    - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1
+    - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1 && env.is_prerelease == 1
       name: Do not update Windows repo if this is a pre-release
       run: |
-        if (( ${{ env.is_prerelease }} == 1 )); then
-	        echo update_windows_installer=0 >> "${GITHUB_ENV}"
-	        echo update_windows_repository=0 >> "${GITHUB_ENV}"
-	fi
+        echo update_windows_installer=0 >> "${GITHUB_ENV}"
+        echo update_windows_repository=0 >> "${GITHUB_ENV}"
       shell: bash
     - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1
       name: Build installer and repository for Windows
@@ -151,12 +148,9 @@ jobs:
           *.AppImage
           *.zsync
           *.dmg
-    - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
+    - if: contains(matrix.os, 'ubuntu') && env.is_prerelease == 1
       name: Do not upload packages to the PPA if this is a pre-release
-      run: |
-        if (( ${{ env.is_prerelease }} == 1 )); then
-                echo upload_to_ppa=0 >> "${GITHUB_ENV}"
-        fi
+      run: echo upload_to_ppa=0 >> "${GITHUB_ENV}"
       shell: bash
     - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
       name: Import GPG key
@@ -249,13 +243,11 @@ jobs:
         fetch-depth: 0
         token: ${{ secrets.PUSH_TOKEN }}
         path: online-app
-    - if: env.upload_to_ppa == 1
+    - if: env.is_prerelease == 1
       name: Do not upload packages to the PPA if this is a pre-release
       run: |
-        if (( ${{ env.is_prerelease }} == 1 )); then
-	        echo upload_to_ppa=0 >> "${GITHUB_ENV}"
-	        echo upload_online_app=0 >> "${GITHUB_ENV}"
-	fi
+        echo upload_to_ppa=0 >> "${GITHUB_ENV}"
+        echo upload_online_app=0 >> "${GITHUB_ENV}"
       shell: bash
     - if: env.upload_to_ppa == 1
       name: Download Ubuntu packages from Launchpad
