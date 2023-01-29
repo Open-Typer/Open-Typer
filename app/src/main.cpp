@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 	QCoreApplication::setOrganizationName("Open-Typer");
 	QCoreApplication::setApplicationName("Open-Typer");
 #ifdef BUILD_VERSION
-	QCoreApplication::setApplicationVersion(QString(BUILD_VERSION).remove(0, 1));
+	QCoreApplication::setApplicationVersion(BUILD_VERSION);
 #endif // BUILD_VERSION
 	// Initialize settings
 	Settings::init();
