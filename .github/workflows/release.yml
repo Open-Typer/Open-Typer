@@ -120,6 +120,10 @@ jobs:
       name: Build (Ubuntu)
       run: .ci/ubuntu-build.sh
       shell: bash
+    - if: contains(matrix.os, 'macos')
+      name: Build (macOS)
+      run: .ci/macos-build.sh
+      shell: bash
     ## Update Windows repository
     - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1
       name: Get installer configuration
