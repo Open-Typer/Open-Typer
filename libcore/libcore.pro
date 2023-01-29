@@ -28,7 +28,6 @@ SOURCES += \
     src/ConfigParser.cpp \
     src/ExerciseTimer.cpp \
     src/ExerciseValidator.cpp \
-    src/ExportDialog.cpp \
     src/FileUtils.cpp \
     src/HistoryEntry.cpp \
     src/HistoryParser.cpp \
@@ -53,7 +52,6 @@ HEADERS += \
     src/ConfigParser.h \
     src/ExerciseTimer.h \
     src/ExerciseValidator.h \
-    src/ExportDialog.h \
     src/FileUtils.h \
     src/HistoryEntry.h \
     src/HistoryParser.h \
@@ -70,9 +68,6 @@ HEADERS += \
     src/widgets/TextView.h \
     src/ThemeEngine.h \
     src/IAddon.h
-
-FORMS += \
-    ui/ExportDialog.ui
 
 TRANSLATIONS += \
     translations/libcore_sk_SK.ts \
