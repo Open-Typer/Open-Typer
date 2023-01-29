@@ -2,8 +2,8 @@
 
 export CPATH=$CPATH:`echo /usr/local/Cellar/openssl@1.1/1.1.1*/include`
 export LIBRARY_PATH=`echo /usr/local/Cellar/openssl@1.1/1.1.1*/lib`
-VERSION=`git describe --tags --abbrev=0`
-VERSION=${VERSION//v}
+VERSION=$(head -n 1 .qmake.conf)
+VERSION=${VERSION:8}
 VERSION_MAJOR=$(echo $VERSION | sed 's/\..*//')
 . .ci/common/build.sh macos
 

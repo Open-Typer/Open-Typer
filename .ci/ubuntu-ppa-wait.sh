@@ -2,8 +2,8 @@
 
 ### This script waits until the new release is available in the PPA for Ubuntu
 sudo apt install -y python3-launchpadlib
-VERSION=`git describe --tags --abbrev=0`
-VERSION=${VERSION//v}
+VERSION=$(head -n 1 .qmake.conf)
+VERSION=${VERSION:8}
 echo VERSION=$VERSION
 echo launchpad_name=$launchpad_name
 echo ppa_name=$ppa_name

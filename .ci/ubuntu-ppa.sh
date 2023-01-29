@@ -3,8 +3,8 @@
 sudo apt install -y devscripts dput debhelper python3-launchpadlib
 
 CHANNELS=( $(./.ci/common/get-supported-releases.py) )
-VERSION=`git describe --tags --abbrev=0`
-VERSION=${VERSION//v}
+VERSION=$(head -n 1 .qmake.conf)
+VERSION=${VERSION:8}
 CURRENT_DIR=`pwd`
 rm -rf AppDir *.AppImage
 
