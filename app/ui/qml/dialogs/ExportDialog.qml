@@ -36,10 +36,18 @@ CustomDialog {
 	standardButtons: Dialog.Close
 	fillWindow: true
 	draggable: false
+	onAboutToShow: repaintTimer.start()
 
 	ExportProvider {
 		id: provider
 		validator: root.validator
+	}
+
+	Timer {
+		id: repaintTimer
+		interval: 16
+		repeat: false
+		onTriggered: exportTable.updateModel()
 	}
 
 	contentComponent: ColumnLayout {
