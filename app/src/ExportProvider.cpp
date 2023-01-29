@@ -86,3 +86,15 @@ QString ExportProvider::exportText(void)
 {
 	return m_exportText;
 }
+
+/*! The ExportTable that is going to be printed. */
+ExportTable *ExportProvider::table(void)
+{
+	return m_table;
+}
+
+void ExportProvider::setTable(ExportTable *table)
+{
+	m_table = table;
+	emit tableChanged(table);
+}

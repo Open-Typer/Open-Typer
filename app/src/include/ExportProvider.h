@@ -32,19 +32,24 @@ class ExportProvider : public QObject
 		Q_OBJECT
 		Q_PROPERTY(ExerciseValidator *validator READ validator WRITE setValidator NOTIFY validatorChanged)
 		Q_PROPERTY(QString exportText READ exportText NOTIFY exportTextChanged)
+		Q_PROPERTY(ExportTable *table READ table WRITE setTable NOTIFY tableChanged)
 	public:
 		explicit ExportProvider(QObject *parent = nullptr);
 		ExerciseValidator *validator(void);
 		void setValidator(ExerciseValidator *validator);
 		QString exportText(void);
+		ExportTable *table(void);
+		void setTable(ExportTable *table);
 
 	private:
 		ExerciseValidator *m_validator;
 		QString m_exportText;
+		ExportTable *m_table;
 
 	signals:
 		void validatorChanged(ExerciseValidator *validator);
 		void exportTextChanged(QString text);
+		void tableChanged(ExportTable *table);
 };
 
 #endif // EXPORTPROVIDER_H
