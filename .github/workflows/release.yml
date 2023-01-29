@@ -31,11 +31,11 @@ jobs:
     - if: env.build_on_new_tags != 1
       name: Cancel if build on new tags is disabled
       uses: andymckay/cancel-action@0.2
-    - name: 'Get Previous tag'
-      id: previoustag
-      uses: WyriHaximus/github-action-get-previous-tag@v1
-    - name: Save previous tag
-      run: echo previous_tag=${{ steps.previoustag.outputs.tag }} >> "${GITHUB_ENV}"
+    - name: Get version
+      run: |
+        version=$(head -n 1 .qmake.conf)
+        version=${version:8}
+        echo previous_tag=$version >> "${GITHUB_ENV}"
       shell: bash
     - name: Get OS name
       run: |
