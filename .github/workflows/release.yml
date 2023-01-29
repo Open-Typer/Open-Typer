@@ -130,6 +130,14 @@ jobs:
         fetch-depth: 0
         token: ${{ secrets.PUSH_TOKEN }}
     - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1
+      name: Do not update Windows repo if this is a pre-release
+      run: |
+        if (( ${{ env.is_prerelease }} == 1 )); then
+	        echo update_windows_installer=0 >> "${GITHUB_ENV}"
+	        echo update_windows_repository=0 >> "${GITHUB_ENV}"
+	fi
+      shell: bash
+    - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1
       name: Build installer and repository for Windows
       run: ../windows-repo.sh
       shell: bash
