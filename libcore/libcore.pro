@@ -19,7 +19,7 @@ TEMPLATE = lib
 TARGET = opentyper-core
 DESTDIR = $$_PRO_FILE_PWD_/..
 
-INCLUDEPATH += src/include
+INCLUDEPATH += src
 
 SOURCES += \
     src/AddonApi.cpp \
@@ -47,29 +47,29 @@ SOURCES += \
     src/IAddon.cpp
 
 HEADERS += \
-    src/include/AddonApi.h \
-    src/include/BuiltInPacks.h \
-    src/include/CharacterRecord.h \
-    src/include/ConfigParser.h \
-    src/include/ExerciseTimer.h \
-    src/include/ExerciseValidator.h \
-    src/include/ExportDialog.h \
-    src/include/FileUtils.h \
-    src/include/HistoryEntry.h \
-    src/include/HistoryParser.h \
-    src/include/Key.h \
-    src/include/KeyboardLayout.h \
-    src/include/KeyboardUtils.h \
-    src/include/LanguageManager.h \
-    src/include/MistakeRecord.h \
-    src/include/QmlFileDialog.h \
-    src/include/QmlKeyboardHandler.h \
-    src/include/QmlUtils.h \
-    src/include/Settings.h \
-    src/include/StringUtils.h \
-    src/include/widgets/TextView.h \
-    src/include/ThemeEngine.h \
-    src/include/IAddon.h
+    src/AddonApi.h \
+    src/BuiltInPacks.h \
+    src/CharacterRecord.h \
+    src/ConfigParser.h \
+    src/ExerciseTimer.h \
+    src/ExerciseValidator.h \
+    src/ExportDialog.h \
+    src/FileUtils.h \
+    src/HistoryEntry.h \
+    src/HistoryParser.h \
+    src/Key.h \
+    src/KeyboardLayout.h \
+    src/KeyboardUtils.h \
+    src/LanguageManager.h \
+    src/MistakeRecord.h \
+    src/QmlFileDialog.h \
+    src/QmlKeyboardHandler.h \
+    src/QmlUtils.h \
+    src/Settings.h \
+    src/StringUtils.h \
+    src/widgets/TextView.h \
+    src/ThemeEngine.h \
+    src/IAddon.h
 
 FORMS += \
     ui/ExportDialog.ui
