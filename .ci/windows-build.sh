@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ "$1" != "1" ]]; then
-	curl -o openssl.zip -LJO https://github.com/CristiFati/Prebuilt-Binaries/raw/master/OpenSSL/v1.1.1/OpenSSL-1.1.1q-Win-pc064.zip
+	curl -o openssl.zip -LJO https://github.com/CristiFati/Prebuilt-Binaries/raw/master/OpenSSL/v3.0/OpenSSL-3.0.7-Win-pc064.zip
 	mkdir ../openssl
 	unzip openssl.zip -d ../openssl
 	mv ../openssl/OpenSSL/OpenSSL/* C:/OpenSSL
