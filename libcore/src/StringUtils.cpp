@@ -167,9 +167,9 @@ QString StringUtils::longestCommonSubsequence(QString source, QString target)
 }
 
 /*! Compares 2 lists using longest common subsequence. */
-QList<MistakeRecord *> StringUtils::compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord *> *recordedCharacters, int *hits, int *inputPos)
+QList<MistakeRecord> StringUtils::compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord *> *recordedCharacters, int *hits, int *inputPos)
 {
-	QList<MistakeRecord *> out;
+	QList<MistakeRecord> out;
 	auto lcs = longestCommonSubsequence(source, target);
 	int sourcePos = 0, targetPos = 0;
 	int count = std::max(source.count(), target.count());
@@ -216,11 +216,11 @@ QList<MistakeRecord *> StringUtils::compareLists(QList<QVariant> source, QList<Q
 		if(!lcsSrc && !lcsTarget)
 		{
 			// Changed character
-			MistakeRecord *diff = new MistakeRecord;
-			diff->setPosition(targetPos);
-			diff->setType(MistakeRecord::Type_Change);
-			diff->setPreviousVariant(sourceSubseq);
-			diff->setPreviousPosition(sourcePos);
+			MistakeRecord diff;
+			diff.setPosition(targetPos);
+			diff.setType(MistakeRecord::Type_Change);
+			diff.setPreviousVariant(sourceSubseq);
+			diff.setPreviousPosition(sourcePos);
 			out += diff;
 			targetPos++;
 			if(inputPos)
@@ -231,11 +231,11 @@ QList<MistakeRecord *> StringUtils::compareLists(QList<QVariant> source, QList<Q
 		else if(!lcsSrc)
 		{
 			// Deleted character
-			MistakeRecord *diff = new MistakeRecord;
-			diff->setPosition(targetPos);
-			diff->setType(MistakeRecord::Type_Deletion);
-			diff->setPreviousVariant(sourceSubseq);
-			diff->setPreviousPosition(sourcePos);
+			MistakeRecord diff;
+			diff.setPosition(targetPos);
+			diff.setType(MistakeRecord::Type_Deletion);
+			diff.setPreviousVariant(sourceSubseq);
+			diff.setPreviousPosition(sourcePos);
 			out += diff;
 			sourcePos++;
 			if(inputPos)
@@ -245,9 +245,9 @@ QList<MistakeRecord *> StringUtils::compareLists(QList<QVariant> source, QList<Q
 		else if(!lcsTarget)
 		{
 			// Added character
-			MistakeRecord *diff = new MistakeRecord;
-			diff->setPosition(targetPos);
-			diff->setType(MistakeRecord::Type_Addition);
+			MistakeRecord diff;
+			diff.setPosition(targetPos);
+			diff.setType(MistakeRecord::Type_Addition);
 			out += diff;
 			targetPos++;
 			if(inputPos)
@@ -269,7 +269,7 @@ QList<MistakeRecord *> StringUtils::compareLists(QList<QVariant> source, QList<Q
 }
 
 /*! Compares 2 strings using longest common subsequence. */
-QList<MistakeRecord *> StringUtils::compareStrings(QString source, QString target, QVector<CharacterRecord *> *recordedCharacters, int *hits, int *inputPos)
+QList<MistakeRecord> StringUtils::compareStrings(QString source, QString target, QVector<CharacterRecord *> *recordedCharacters, int *hits, int *inputPos)
 {
 	QList<QVariant> sourceList, targetList;
 	int i;
@@ -317,7 +317,7 @@ QStringList StringUtils::splitWordsByPunct(QStringList source)
 }
 
 /*! Recursively generates a diff list from source and target word list. */
-QMap<int, MistakeRecord *> StringUtils::generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList)
+QMap<int, MistakeRecord> StringUtils::generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList)
 {
 	// Compare word lists
 	QList<QVariant> sourceList, targetList;
@@ -325,21 +325,21 @@ QMap<int, MistakeRecord *> StringUtils::generateDiffList(QStringList *sourceWord
 		sourceList += sourceWords->at(i);
 	for(int i = 0; i < targetWords->count(); i++)
 		targetList += targetWords->at(i);
-	QList<MistakeRecord *> wordDiff = compareLists(sourceList, targetList);
-	QMap<int, MistakeRecord *> differences;
+	QList<MistakeRecord> wordDiff = compareLists(sourceList, targetList);
+	QMap<int, MistakeRecord> differences;
 	QList<int> newMergeList;
 	if(mergeList == nullptr || !mergeList)
 		mergeList = &newMergeList;
 	for(int i = 0; i < wordDiff.count(); i++)
 	{
-		if(mergeList->contains(wordDiff[i]->position()))
-			wordDiff[i]->setMerged(true);
+		if(mergeList->contains(wordDiff[i].position()))
+			wordDiff[i].setMerged(true);
 		// If current diff is a change and the next one is a deletion or a change,
 		// there might be a "deleted space" between the 2 words.
-		if((i < wordDiff.count() - 1) && (wordDiff[i + 1]->position() == wordDiff[i]->position() + 1) && !mergeList->contains(wordDiff[i]->position()))
+		if((i < wordDiff.count() - 1) && (wordDiff[i + 1].position() == wordDiff[i].position() + 1) && !mergeList->contains(wordDiff[i].position()))
 		{
-			auto currentDiff = wordDiff[i];
-			auto nextDiff = wordDiff[i + 1];
+			auto currentDiff = &wordDiff[i];
+			auto nextDiff = &wordDiff[i + 1];
 			auto type1 = currentDiff->type();
 			auto type2 = nextDiff->type();
 			QString newWord = currentDiff->previousText() + " " + nextDiff->previousText();
@@ -356,30 +356,30 @@ QMap<int, MistakeRecord *> StringUtils::generateDiffList(QStringList *sourceWord
 				return generateDiffList(sourceWords, targetWords, mergeList);
 			}
 		}
-		if(differences.contains(wordDiff[i]->position()))
+		if(differences.contains(wordDiff[i].position()))
 		{
-			auto currentMistake = differences[wordDiff[i]->position()];
-			if(!currentMistake->previousText().isNull())
+			auto currentMistake = differences[wordDiff[i].position()];
+			if(!currentMistake.previousText().isNull())
 			{
-				QString previous = wordDiff[i]->previousText();
+				QString previous = wordDiff[i].previousText();
 				QString tmpPrevious = previous;
 				if((previous == " ") || previous[0].isPunct() || (tmpPrevious == " "))
-					currentMistake->setPreviousText(currentMistake->previousText() + previous);
+					currentMistake.setPreviousText(currentMistake.previousText() + previous);
 				else
-					currentMistake->setPreviousText(currentMistake->previousText() + " " + previous);
+					currentMistake.setPreviousText(currentMistake.previousText() + " " + previous);
 			}
-			differences[wordDiff[i]->position()] = currentMistake;
+			differences[wordDiff[i].position()] = currentMistake;
 		}
 		else
-			differences[wordDiff[i]->position()] = wordDiff[i];
+			differences[wordDiff[i].position()] = wordDiff[i];
 	}
 	return differences;
 }
 
 /*! Compares input text with exercise text and finds mistakes. */
-QList<MistakeRecord *> StringUtils::findMistakes(QString exerciseText, QString input, QVector<CharacterRecord *> recordedCharacters, int *totalHits, QStringList *errorWords)
+QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString input, QVector<CharacterRecord *> recordedCharacters, int *totalHits, QStringList *errorWords)
 {
-	QList<MistakeRecord *> out;
+	QList<MistakeRecord> out;
 	int i;
 	// Split lines
 	QStringList exerciseLines = exerciseText.split('\n');
@@ -423,11 +423,11 @@ QList<MistakeRecord *> StringUtils::findMistakes(QString exerciseText, QString i
 		if(differences.contains(i))
 		{
 			if(errorWords)
-				errorWords->append(differences[i]->previousText());
-			if(differences[i]->type() == MistakeRecord::Type_Change)
+				errorWords->append(differences[i].previousText());
+			if(differences[i].type() == MistakeRecord::Type_Change)
 			{
 				int wordStart = pos;
-				auto diff = compareStrings(differences[i]->previousText(), inputWords[i], &recordedCharacters, &hits, &pos);
+				auto diff = compareStrings(differences[i].previousText(), inputWords[i], &recordedCharacters, &hits, &pos);
 				// Ensure there's max. one mistake per n characters (depends on settings)
 				if(Settings::mistakeLimit())
 				{
@@ -435,40 +435,40 @@ QList<MistakeRecord *> StringUtils::findMistakes(QString exerciseText, QString i
 					int lastMistakePos = -1;
 					for(int i2 = 0; i2 < diff.count(); i2++)
 					{
-						if((lastMistakePos != -1) && (diff[i2]->position() / charCount == lastMistakePos / charCount))
-							diff[i2]->setEnabled(false);
+						if((lastMistakePos != -1) && (diff[i2].position() / charCount == lastMistakePos / charCount))
+							diff[i2].setEnabled(false);
 						else
-							lastMistakePos = diff[i2]->position();
+							lastMistakePos = diff[i2].position();
 					}
 				}
-				bool merged = differences[i]->isMerged();
+				bool merged = differences[i].isMerged();
 				// Translate mistake position
 				for(int i2 = 0; i2 < diff.count(); i2++)
 				{
 					auto currentMistake = diff[i2];
-					if((currentMistake->type() == MistakeRecord::Type_Deletion) && (currentMistake->previousText() == " ") && !merged)
-						currentMistake->setPosition(currentMistake->position() - 1);
-					currentMistake->setPosition(wordStart + currentMistake->position());
+					if((currentMistake.type() == MistakeRecord::Type_Deletion) && (currentMistake.previousText() == " ") && !merged)
+						currentMistake.setPosition(currentMistake.position() - 1);
+					currentMistake.setPosition(wordStart + currentMistake.position());
 				}
 				out += diff;
 				pos = wordStart + inputWords[i].count();
 			}
-			else if(differences[i]->type() == MistakeRecord::Type_Deletion)
+			else if(differences[i].type() == MistakeRecord::Type_Deletion)
 			{
 				auto currentMistake = differences[i];
-				currentMistake->setPosition(pos > 0 && !inputWords[i][0].isPunct() ? pos - 1 : pos);
-				QString previous = currentMistake->previousText();
+				currentMistake.setPosition(pos > 0 && !inputWords[i][0].isPunct() ? pos - 1 : pos);
+				QString previous = currentMistake.previousText();
 				if((i > 0) && (previous != " ") && !previous[0].isPunct())
 				{
 					if(inputWords[i - 1] == "\n")
-						currentMistake->setPreviousText(previous.prepend("\n"));
+						currentMistake.setPreviousText(previous.prepend("\n"));
 					else
-						currentMistake->setPreviousText(previous.prepend(" "));
+						currentMistake.setPreviousText(previous.prepend(" "));
 				}
 				out += currentMistake;
 				pos += inputWords[i].count();
 			}
-			else if(differences[i]->type() == MistakeRecord::Type_Addition)
+			else if(differences[i].type() == MistakeRecord::Type_Addition)
 			{
 				int k = i, previousPos = -1;
 				bool disable = false;
@@ -488,8 +488,8 @@ QList<MistakeRecord *> StringUtils::findMistakes(QString exerciseText, QString i
 						for(int l = 0; l < pos - previousPos; l++)
 						{
 							auto currentMistake = differences[k];
-							currentMistake->setPosition(previousPos + l);
-							currentMistake->setEnabled(!disable);
+							currentMistake.setPosition(previousPos + l);
+							currentMistake.setEnabled(!disable);
 							disable = true;
 							out += currentMistake;
 						}
@@ -497,8 +497,8 @@ QList<MistakeRecord *> StringUtils::findMistakes(QString exerciseText, QString i
 					if(inputWords[k].count() == 0)
 					{
 						auto currentMistake = differences[k];
-						currentMistake->setPosition(pos);
-						currentMistake->setEnabled(!disable);
+						currentMistake.setPosition(pos);
+						currentMistake.setEnabled(!disable);
 						disable = true;
 						out += currentMistake;
 					}
@@ -507,8 +507,8 @@ QList<MistakeRecord *> StringUtils::findMistakes(QString exerciseText, QString i
 						for(int j = 0; j < inputWords[k].count(); j++)
 						{
 							auto currentMistake = differences[k];
-							currentMistake->setPosition(pos);
-							currentMistake->setEnabled(!disable);
+							currentMistake.setPosition(pos);
+							currentMistake.setEnabled(!disable);
 							disable = true;
 							out += currentMistake;
 							pos++;
@@ -516,7 +516,7 @@ QList<MistakeRecord *> StringUtils::findMistakes(QString exerciseText, QString i
 					}
 					previousPos = pos;
 					k++;
-				} while((differences.contains(k)) && (differences[k]->type() == MistakeRecord::Type_Addition));
+				} while((differences.contains(k)) && (differences[k].type() == MistakeRecord::Type_Addition));
 				i = k - 1;
 				// TODO: Should we count hits in added words?
 			}
@@ -537,25 +537,25 @@ QList<MistakeRecord *> StringUtils::findMistakes(QString exerciseText, QString i
 	QMap<int, MistakeRecord *> mistakesMap;
 	for(int i = 0; i < out.count(); i++)
 	{
-		int pos = out[i]->position();
+		int pos = out[i].position();
 		if(mistakesMap.contains(pos))
-			mistakesMap[pos]->setPreviousText(mistakesMap[pos]->previousText() + out[i]->previousText());
+			mistakesMap[pos]->setPreviousText(mistakesMap[pos]->previousText() + out[i].previousText());
 		else
-			mistakesMap[pos] = out[i];
+			mistakesMap[pos] = &out[i];
 	}
-	QList<MistakeRecord *> finalList;
+	QList<MistakeRecord> finalList;
 	for(int i = 0; i < mistakesMap.keys().count(); i++)
-		finalList.append(mistakesMap[mistakesMap.keys().at(i)]);
+		finalList.append(*mistakesMap[mistakesMap.keys().at(i)]);
 	return finalList;
 }
 
 /*! Validates a typing test. */
-QList<MistakeRecord *> StringUtils::validateExercise(QString exerciseText, QString inputText, QVector<CharacterRecord *> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords, bool timed, int timeSecs)
+QList<MistakeRecord> StringUtils::validateExercise(QString exerciseText, QString inputText, QVector<CharacterRecord *> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords, bool timed, int timeSecs)
 {
-	QList<MistakeRecord *> recordedMistakes;
+	QList<MistakeRecord> recordedMistakes;
 	if(timed)
 	{
-		QMap<int, QList<MistakeRecord *>> attempts;
+		QMap<int, QList<MistakeRecord>> attempts;
 		QString newText = "";
 		int minValue = -1, minId = -1;
 		if(exerciseText.count() > 0)
@@ -581,24 +581,24 @@ QList<MistakeRecord *> StringUtils::validateExercise(QString exerciseText, QStri
 				}
 			}
 			if(minId == -1)
-				recordedMistakes = QList<MistakeRecord *>();
+				recordedMistakes = QList<MistakeRecord>();
 			else
 				recordedMistakes = attempts[minId];
 		}
 		else
-			recordedMistakes = QList<MistakeRecord *>();
+			recordedMistakes = QList<MistakeRecord>();
 	}
 	else
 		recordedMistakes = StringUtils::findMistakes(exerciseText, inputText, recordedCharacters, totalHits, errorWords);
-	QList<MistakeRecord *> mistakesToRemove;
+	QList<MistakeRecord> mistakesToRemove;
 	*mistakeCount = 0;
 	for(int i = 0; i < recordedMistakes.count(); i++)
 	{
-		if(recordedMistakes[i]->position() >= inputText.count())
+		if(recordedMistakes[i].position() >= inputText.count())
 			mistakesToRemove += recordedMistakes[i];
 		else
 		{
-			if(recordedMistakes[i]->isEnabled())
+			if(recordedMistakes[i].isEnabled())
 				*mistakeCount = (*mistakeCount) + 1;
 		}
 	}
