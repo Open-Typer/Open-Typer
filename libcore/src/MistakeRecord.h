@@ -65,14 +65,6 @@ class CORE_LIB_EXPORT MistakeRecord
 		void setMerged(bool merged);
 		bool isMerged(void);
 
-		int operator==(MistakeRecord x)
-		{
-			if(position() == x.position() && type() == x.type() && previousText() == x.previousText() && previousVariant() == x.previousVariant() && previousPosition() == x.previousPosition() && isEnabled() == x.isEnabled() && isMerged() == x.isMerged())
-				return 1;
-			else
-				return 0;
-		}
-
 	private:
 		int m_position;
 		Type m_type;
@@ -81,6 +73,18 @@ class CORE_LIB_EXPORT MistakeRecord
 		int m_previousPosition;
 		bool m_isEnabled = true;
 		bool m_isMerged = false;
+
+		friend inline bool operator==(const MistakeRecord &r1, const MistakeRecord &r2)
+		{
+			bool posCheck = r1.m_position == r2.m_position;
+			bool typeCheck = r1.m_type == r2.m_type;
+			bool previousTextCheck = r1.m_previousText == r2.m_previousText;
+			bool previousVariantCheck = r1.m_previousVariant == r2.m_previousVariant;
+			bool previousPositionCheck = r1.m_previousPosition == r2.m_previousPosition;
+			bool enabledCheck = r1.m_isEnabled == r2.m_isEnabled;
+			bool mergedCheck = r1.m_isMerged == r2.m_isMerged;
+			return (posCheck && typeCheck && previousTextCheck && previousVariantCheck && previousPositionCheck && enabledCheck && mergedCheck);
+		}
 };
 
 #endif // MISTAKERECORD_H
