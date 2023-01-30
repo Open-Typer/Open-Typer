@@ -166,6 +166,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
 	qRegisterMetaType<MistakeRecord>();
+	qRegisterMetaType<QList<MistakeRecord>>();
 	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<Key>();
 	qRegisterMetaType<KeyboardRow>();
