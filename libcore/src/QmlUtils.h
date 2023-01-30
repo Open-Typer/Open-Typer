@@ -30,6 +30,7 @@
 #include <QObject>
 #include <QQuickItem>
 #include <QFont>
+#include "MistakeRecord.h"
 
 /*! \brief The QmlUtils class acts like a bridge for QML code. */
 class CORE_LIB_EXPORT QmlUtils : public QObject
@@ -65,6 +66,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_INVOKABLE static QString standardIconStr(StandardIcon icon);
 		Q_INVOKABLE static QStringList fontFamilies(bool fixedPitch = false);
 		Q_INVOKABLE static QString translateStandardButton(QString buttonText);
+		Q_INVOKABLE static MistakeRecord createMistakeRecord(void);
 
 	private:
 		static QString convertPixmap(QPixmap pixmap);

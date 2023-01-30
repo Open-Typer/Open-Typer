@@ -268,3 +268,8 @@ QString QmlUtils::translateStandardButton(QString buttonText)
 		translated = QCoreApplication::translate("QPlatformTheme", buttonText.toStdString().c_str());
 	return translated;
 }
+
+/*! Returns an empty MistakeRecord. */
+MistakeRecord QmlUtils::createMistakeRecord(void) {
+	return MistakeRecord();
+}
