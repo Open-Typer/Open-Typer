@@ -65,6 +65,14 @@ class CORE_LIB_EXPORT MistakeRecord
 		void setMerged(bool merged);
 		bool isMerged(void);
 
+		int operator==(MistakeRecord x)
+		{
+			if(position() == x.position() && type() == x.type() && previousText() == x.previousText() && previousVariant() == x.previousVariant() && previousPosition() == x.previousPosition() && isEnabled() == x.isEnabled() && isMerged() == x.isMerged())
+				return 1;
+			else
+				return 0;
+		}
+
 	private:
 		int m_position;
 		Type m_type;
