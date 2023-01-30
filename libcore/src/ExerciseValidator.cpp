@@ -48,7 +48,7 @@ QString ExerciseValidator::inputText(void)
 }
 
 /*! Sets list of mistakes. */
-void ExerciseValidator::setMistakes(QList<MistakeRecord *> mistakeList)
+void ExerciseValidator::setMistakes(QList<MistakeRecord> mistakeList)
 {
 	m_mistakes = mistakeList;
 	emit mistakesChanged(mistakeList);
@@ -62,14 +62,14 @@ void ExerciseValidator::clearMistakes(void)
 }
 
 /*! Adds a mistake. */
-void ExerciseValidator::addMistake(MistakeRecord *mistake)
+void ExerciseValidator::addMistake(MistakeRecord mistake)
 {
 	m_mistakes.append(mistake);
 	emit mistakesChanged(m_mistakes);
 }
 
 /*! Returns list of mistakes. */
-QList<MistakeRecord *> ExerciseValidator::mistakes(void)
+QList<MistakeRecord> ExerciseValidator::mistakes(void)
 {
 	return m_mistakes;
 }
@@ -161,7 +161,7 @@ void ExerciseValidator::generateMistakeText(bool correctMistakes)
 {
 	QMap<int, MistakeRecord *> mistakesMap;
 	for(int i = 0; i < m_mistakes.count(); i++)
-		mistakesMap[m_mistakes[i]->position()] = m_mistakes[i];
+		mistakesMap[m_mistakes[i].position()] = &m_mistakes[i];
 	QString inputTxt = "";
 	QStringList lines = m_inputText.split("\n");
 	int pos = 0, delta = 0;
@@ -262,5 +262,8 @@ QString ExerciseValidator::generatedMistakeText(void)
 /*! Adds mistakes to the exercise text. */
 QString ExerciseValidator::textWithMistakes(void)
 {
-	return StringUtils::addMistakes(m_inputText, m_mistakes);
+	QList<MistakeRecord *> mistakePtrList;
+	for(int i = 0; i < m_mistakes.length(); i++)
+		mistakePtrList.append(&m_mistakes[i]);
+	return StringUtils::addMistakes(m_inputText, mistakePtrList);
 }

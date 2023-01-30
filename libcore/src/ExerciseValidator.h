@@ -2,7 +2,7 @@
  * ExerciseValidator.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		Q_OBJECT
 		Q_PROPERTY(QString exerciseText READ exerciseText WRITE setExerciseText NOTIFY exerciseTextChanged)
 		Q_PROPERTY(QString inputText READ inputText WRITE setInputText NOTIFY inputTextChanged)
-		Q_PROPERTY(QList<MistakeRecord *> mistakes READ mistakes WRITE setMistakes NOTIFY mistakesChanged)
+		Q_PROPERTY(QList<MistakeRecord> mistakes READ mistakes WRITE setMistakes NOTIFY mistakesChanged)
 		Q_PROPERTY(QList<CharacterRecord *> characters READ characters WRITE setCharacters NOTIFY charactersChanged)
 		Q_PROPERTY(bool timed READ isTimed WRITE setTimed NOTIFY timedChanged)
 		Q_PROPERTY(int time READ time WRITE setTime NOTIFY timeChanged)
@@ -46,10 +46,10 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		QString exerciseText(void);
 		void setInputText(QString text);
 		QString inputText(void);
-		void setMistakes(QList<MistakeRecord *> mistakeList);
+		void setMistakes(QList<MistakeRecord> mistakeList);
 		Q_INVOKABLE void clearMistakes(void);
-		Q_INVOKABLE void addMistake(MistakeRecord *mistake);
-		QList<MistakeRecord *> mistakes(void);
+		Q_INVOKABLE void addMistake(MistakeRecord mistake);
+		QList<MistakeRecord> mistakes(void);
 		void setCharacters(QList<CharacterRecord *> characterList);
 		Q_INVOKABLE void clearCharacters(void);
 		Q_INVOKABLE void addCharacter(CharacterRecord *character);
@@ -70,7 +70,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 	private:
 		QString m_exerciseText;
 		QString m_inputText;
-		QList<MistakeRecord *> m_mistakes;
+		QList<MistakeRecord> m_mistakes;
 		QList<CharacterRecord *> m_characters;
 		bool m_isTimed = false;
 		qreal m_time = 0;
@@ -83,7 +83,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 	signals:
 		void exerciseTextChanged(QString text);
 		void inputTextChanged(QString text);
-		void mistakesChanged(QList<MistakeRecord *> mistakeList);
+		void mistakesChanged(QList<MistakeRecord> mistakeList);
 		void charactersChanged(QList<CharacterRecord *> characterList);
 		void timedChanged(bool value);
 		void timeChanged(qreal seconds);
