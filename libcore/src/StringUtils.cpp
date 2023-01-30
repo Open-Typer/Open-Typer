@@ -449,6 +449,7 @@ QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString inp
 					if((currentMistake.type() == MistakeRecord::Type_Deletion) && (currentMistake.previousText() == " ") && !merged)
 						currentMistake.setPosition(currentMistake.position() - 1);
 					currentMistake.setPosition(wordStart + currentMistake.position());
+					diff[i2] = currentMistake;
 				}
 				out += diff;
 				pos = wordStart + inputWords[i].count();
