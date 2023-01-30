@@ -2,7 +2,7 @@
  * MistakeRecord.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,18 +21,10 @@
 #include <QQmlEngine>
 #include "MistakeRecord.h"
 
-/*! Constructs MistakeRecord. */
-MistakeRecord::MistakeRecord(QObject *parent) :
-	QObject(parent)
-{
-	QQmlEngine::setObjectOwnership(this, QQmlEngine::JavaScriptOwnership);
-}
-
 /*! Sets mistake position. */
 void MistakeRecord::setPosition(int pos)
 {
 	m_position = pos;
-	emit positionChanged(pos);
 }
 
 /*! Returns mistake position. */
@@ -45,7 +37,6 @@ int MistakeRecord::position(void)
 void MistakeRecord::setType(MistakeRecord::Type type)
 {
 	m_type = type;
-	emit typeChanged(type);
 }
 
 /*! Returns mistake type. */
@@ -59,7 +50,6 @@ void MistakeRecord::setPreviousText(QString text)
 {
 	m_previousText = text;
 	setPreviousVariant(text);
-	emit previousTextChanged(text);
 }
 
 /*! Returns previous text. */
@@ -72,12 +62,8 @@ QString MistakeRecord::previousText(void)
 void MistakeRecord::setPreviousVariant(QVariant value)
 {
 	m_previousVariant = value;
-	emit previousVariantChanged(value);
 	if(strcmp(value.typeName(), "QString") == 0)
-	{
 		m_previousText = value.toString();
-		emit previousTextChanged(m_previousText);
-	}
 }
 
 /*! Returns previous value (useful if you need to support non-QString values). */
@@ -90,7 +76,6 @@ QVariant MistakeRecord::previousVariant(void)
 void MistakeRecord::setPreviousPosition(int pos)
 {
 	m_previousPosition = pos;
-	emit previousPositionChanged(pos);
 }
 
 /*! Returns previous position. */
@@ -103,7 +88,6 @@ int MistakeRecord::previousPosition(void)
 void MistakeRecord::setEnabled(bool enabled)
 {
 	m_isEnabled = enabled;
-	emit enabledChanged(enabled);
 }
 
 /*! Returns true if this mistake is enabled. */
@@ -116,7 +100,6 @@ bool MistakeRecord::isEnabled(void)
 void MistakeRecord::setMerged(bool merged)
 {
 	m_isMerged = merged;
-	emit mergedChanged(merged);
 }
 
 /*! Returns true if this mistake is merged. */
