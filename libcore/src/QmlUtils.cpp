@@ -270,6 +270,7 @@ QString QmlUtils::translateStandardButton(QString buttonText)
 }
 
 /*! Returns an empty MistakeRecord. */
-MistakeRecord QmlUtils::createMistakeRecord(void) {
+MistakeRecord QmlUtils::createMistakeRecord(void)
+{
 	return MistakeRecord();
 }
