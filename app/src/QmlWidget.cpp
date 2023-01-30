@@ -34,7 +34,8 @@ QWidget *QmlWidget::widget(void)
 void QmlWidget::setWidget(QWidget *widget)
 {
 	m_widget = widget;
-	m_widget->setParent(nullptr);
+	if(m_widget)
+		m_widget->setParent(nullptr);
 	emit widgetChanged(widget);
 }
 
