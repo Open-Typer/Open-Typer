@@ -1019,7 +1019,7 @@ ApplicationWindow {
 					}
 					exerciseMistakes -= removeCount;
 					recordedMistakes = newRecordedMistakes;
-					var currentMistake = Qt.createQmlObject("import OpenTyper 1.0; MistakeRecord {}", root);
+					var currentMistake = QmlUtils.createMistakeRecord();
 					currentMistake.position = absolutePos;
 					currentMistake.previousText = keyText;
 					currentMistake.type = MistakeRecord.Type_Change;
