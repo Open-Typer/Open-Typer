@@ -2,7 +2,7 @@
  * ExerciseValidator.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -57,8 +57,6 @@ void ExerciseValidator::setMistakes(QList<MistakeRecord *> mistakeList)
 /*! Removes all mistakes. */
 void ExerciseValidator::clearMistakes(void)
 {
-	for(int i = 0; i < m_mistakes.size(); i++)
-		m_mistakes[i]->deleteLater();
 	m_mistakes.clear();
 	emit mistakesChanged(m_mistakes);
 }
