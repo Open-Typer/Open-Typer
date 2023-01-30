@@ -158,7 +158,6 @@ int main(int argc, char *argv[])
 	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
 	qmlRegisterType<CharacterRecord>("OpenTyper", 1, 0, "CharacterRecord");
-	qmlRegisterType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord");
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
 	qmlRegisterType<KeyboardLayout>("OpenTyper", 1, 0, "KeyboardLayout");
@@ -166,6 +165,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<QmlWidget>("OpenTyper", 1, 0, "Widget");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
+	qRegisterMetaType<MistakeRecord>();
 	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<Key>();
 	qRegisterMetaType<KeyboardRow>();
