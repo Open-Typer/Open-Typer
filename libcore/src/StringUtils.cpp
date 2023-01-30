@@ -595,10 +595,7 @@ QList<MistakeRecord *> StringUtils::validateExercise(QString exerciseText, QStri
 	for(int i = 0; i < recordedMistakes.count(); i++)
 	{
 		if(recordedMistakes[i]->position() >= inputText.count())
-		{
 			mistakesToRemove += recordedMistakes[i];
-			recordedMistakes[i]->deleteLater();
-		}
 		else
 		{
 			if(recordedMistakes[i]->isEnabled())
