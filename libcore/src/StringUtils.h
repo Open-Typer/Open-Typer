@@ -47,10 +47,10 @@ class CORE_LIB_EXPORT StringUtils : public QObject
 		Q_INVOKABLE static QString repeatString(QString string, int n);
 		Q_INVOKABLE static QList<QVariant> longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target);
 		Q_INVOKABLE static QString longestCommonSubsequence(QString source, QString target);
-		Q_INVOKABLE static QList<MistakeRecord> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord *> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
-		Q_INVOKABLE static QList<MistakeRecord> compareStrings(QString source, QString target, QVector<CharacterRecord *> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
-		Q_INVOKABLE static QList<MistakeRecord> findMistakes(QString exerciseText, QString input, QVector<CharacterRecord *> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
-		Q_INVOKABLE static QList<MistakeRecord> validateExercise(QString exerciseText, QString inputText, QVector<CharacterRecord *> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords = nullptr, bool timed = false, int timeSecs = 0);
+		Q_INVOKABLE static QList<MistakeRecord> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
+		Q_INVOKABLE static QList<MistakeRecord> compareStrings(QString source, QString target, QVector<CharacterRecord> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
+		Q_INVOKABLE static QList<MistakeRecord> findMistakes(QString exerciseText, QString input, QVector<CharacterRecord> recordedCharacters, int *totalHits = nullptr, QStringList *errorWords = nullptr);
+		Q_INVOKABLE static QList<MistakeRecord> validateExercise(QString exerciseText, QString inputText, QVector<CharacterRecord> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords = nullptr, bool timed = false, int timeSecs = 0);
 		Q_INVOKABLE static QString addMistakes(QString exerciseText, QList<MistakeRecord *> recordedMistakes);
 		Q_INVOKABLE static QString normalizeString(QString str);
 

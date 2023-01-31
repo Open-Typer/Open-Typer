@@ -167,7 +167,7 @@ QString StringUtils::longestCommonSubsequence(QString source, QString target)
 }
 
 /*! Compares 2 lists using longest common subsequence. */
-QList<MistakeRecord> StringUtils::compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord *> *recordedCharacters, int *hits, int *inputPos)
+QList<MistakeRecord> StringUtils::compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord> *recordedCharacters, int *hits, int *inputPos)
 {
 	QList<MistakeRecord> out;
 	auto lcs = longestCommonSubsequence(source, target);
@@ -258,7 +258,8 @@ QList<MistakeRecord> StringUtils::compareLists(QList<QVariant> source, QList<QVa
 		{
 			if(recordedCharacters && (*inputPos < recordedCharacters->count()) && hits && inputPos)
 			{
-				*hits += recordedCharacters->at(*inputPos)->hits();
+				auto character = recordedCharacters->at(*inputPos);
+				*hits += character.hits();
 				*inputPos += 1;
 			}
 			sourcePos++;
@@ -269,7 +270,7 @@ QList<MistakeRecord> StringUtils::compareLists(QList<QVariant> source, QList<QVa
 }
 
 /*! Compares 2 strings using longest common subsequence. */
-QList<MistakeRecord> StringUtils::compareStrings(QString source, QString target, QVector<CharacterRecord *> *recordedCharacters, int *hits, int *inputPos)
+QList<MistakeRecord> StringUtils::compareStrings(QString source, QString target, QVector<CharacterRecord> *recordedCharacters, int *hits, int *inputPos)
 {
 	QList<QVariant> sourceList, targetList;
 	int i;
@@ -377,7 +378,7 @@ QMap<int, MistakeRecord> StringUtils::generateDiffList(QStringList *sourceWords,
 }
 
 /*! Compares input text with exercise text and finds mistakes. */
-QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString input, QVector<CharacterRecord *> recordedCharacters, int *totalHits, QStringList *errorWords)
+QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString input, QVector<CharacterRecord> recordedCharacters, int *totalHits, QStringList *errorWords)
 {
 	QList<MistakeRecord> out;
 	int i;
@@ -409,7 +410,7 @@ QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString inp
 		if((i > 0) && (inputWords[i] != "\n"))
 		{
 			if((inputWords[i] != " ") && (pos < recordedCharacters.count()))
-				hits += recordedCharacters[pos]->hits();
+				hits += recordedCharacters[pos].hits();
 			pos++;
 		}
 		if(inputWords[i][0].isPunct())
@@ -527,7 +528,7 @@ QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString inp
 			for(int i2 = 0; i2 < inputWords[i].count(); i2++)
 			{
 				if(pos < recordedCharacters.count())
-					hits += recordedCharacters[pos]->hits();
+					hits += recordedCharacters[pos].hits();
 				pos++;
 			}
 		}
@@ -551,7 +552,7 @@ QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString inp
 }
 
 /*! Validates a typing test. */
-QList<MistakeRecord> StringUtils::validateExercise(QString exerciseText, QString inputText, QVector<CharacterRecord *> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords, bool timed, int timeSecs)
+QList<MistakeRecord> StringUtils::validateExercise(QString exerciseText, QString inputText, QVector<CharacterRecord> recordedCharacters, int *totalHits, int *mistakeCount, QStringList *errorWords, bool timed, int timeSecs)
 {
 	QList<MistakeRecord> recordedMistakes;
 	if(timed)
