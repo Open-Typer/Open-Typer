@@ -84,8 +84,6 @@ void ExerciseValidator::setCharacters(QList<CharacterRecord *> characterList)
 /*! Removes all characters. */
 void ExerciseValidator::clearCharacters(void)
 {
-	for(int i = 0; i < m_characters.size(); i++)
-		m_characters[i]->deleteLater();
 	m_characters.clear();
 	emit charactersChanged(m_characters);
 }
