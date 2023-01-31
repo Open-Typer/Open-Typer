@@ -2,7 +2,7 @@
  * CharacterRecord.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,11 +33,11 @@
  * \brief The CharacterRecord class can be used to store character records.
  * A character record consists of key text (usually a single character) and number of key hits used to compose the character.
  */
-class CORE_LIB_EXPORT CharacterRecord : public QObject
+class CORE_LIB_EXPORT CharacterRecord
 {
-		Q_OBJECT
-		Q_PROPERTY(QString keyText READ keyText WRITE setKeyText NOTIFY keyTextChanged)
-		Q_PROPERTY(int hits READ hits WRITE setHits NOTIFY hitsChanged)
+		Q_GADGET
+		Q_PROPERTY(QString keyText READ keyText WRITE setKeyText)
+		Q_PROPERTY(int hits READ hits WRITE setHits)
 	public:
 		void setKeyText(QString text);
 		QString keyText(void);
@@ -47,10 +47,6 @@ class CORE_LIB_EXPORT CharacterRecord : public QObject
 	private:
 		QString m_keyText;
 		int m_hits;
-
-	signals:
-		void keyTextChanged(QString text);
-		void hitsChanged(int count);
 };
 
 #endif // CHARACTERRECORD_H
