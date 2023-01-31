@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<QmlWidget>("OpenTyper", 1, 0, "Widget");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
-	qRegisterMetaType<MistakeRecord>();
+	qmlRegisterUncreatableType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
 	qRegisterMetaType<QList<MistakeRecord>>();
 	qRegisterMetaType<CharacterRecord>();
 	qRegisterMetaType<HistoryEntry>();
@@ -196,8 +196,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
 	ExportTable table;
 	engine.rootContext()->setContextProperty("exportTable", &table);
-	MistakeRecord mistakeRecord;
-	engine.rootContext()->setContextProperty("MistakeRecord", QVariant::fromValue(mistakeRecord));
 	engine.load("qrc:/qml/MainWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
