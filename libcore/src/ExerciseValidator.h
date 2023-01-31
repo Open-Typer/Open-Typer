@@ -38,7 +38,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		Q_PROPERTY(QString exerciseText READ exerciseText WRITE setExerciseText NOTIFY exerciseTextChanged)
 		Q_PROPERTY(QString inputText READ inputText WRITE setInputText NOTIFY inputTextChanged)
 		Q_PROPERTY(QList<MistakeRecord> mistakes READ mistakes WRITE setMistakes NOTIFY mistakesChanged)
-		Q_PROPERTY(QList<CharacterRecord *> characters READ characters WRITE setCharacters NOTIFY charactersChanged)
+		Q_PROPERTY(QList<CharacterRecord> characters READ characters WRITE setCharacters NOTIFY charactersChanged)
 		Q_PROPERTY(bool timed READ isTimed WRITE setTimed NOTIFY timedChanged)
 		Q_PROPERTY(int time READ time WRITE setTime NOTIFY timeChanged)
 	public:
@@ -50,10 +50,10 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		Q_INVOKABLE void clearMistakes(void);
 		Q_INVOKABLE void addMistake(MistakeRecord mistake);
 		QList<MistakeRecord> mistakes(void);
-		void setCharacters(QList<CharacterRecord *> characterList);
+		void setCharacters(QList<CharacterRecord> characterList);
 		Q_INVOKABLE void clearCharacters(void);
-		Q_INVOKABLE void addCharacter(CharacterRecord *character);
-		QList<CharacterRecord *> characters(void);
+		Q_INVOKABLE void addCharacter(CharacterRecord character);
+		QList<CharacterRecord> characters(void);
 		void setTimed(bool value);
 		bool isTimed(void);
 		void setTime(qreal seconds);
@@ -71,7 +71,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		QString m_exerciseText;
 		QString m_inputText;
 		QList<MistakeRecord> m_mistakes;
-		QList<CharacterRecord *> m_characters;
+		QList<CharacterRecord> m_characters;
 		bool m_isTimed = false;
 		qreal m_time = 0;
 		int m_grossHits = 0;
@@ -84,7 +84,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		void exerciseTextChanged(QString text);
 		void inputTextChanged(QString text);
 		void mistakesChanged(QList<MistakeRecord> mistakeList);
-		void charactersChanged(QList<CharacterRecord *> characterList);
+		void charactersChanged(QList<CharacterRecord> characterList);
 		void timedChanged(bool value);
 		void timeChanged(qreal seconds);
 };

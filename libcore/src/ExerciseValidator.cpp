@@ -75,7 +75,7 @@ QList<MistakeRecord> ExerciseValidator::mistakes(void)
 }
 
 /*! Sets list of characters. */
-void ExerciseValidator::setCharacters(QList<CharacterRecord *> characterList)
+void ExerciseValidator::setCharacters(QList<CharacterRecord> characterList)
 {
 	m_characters = characterList;
 	emit charactersChanged(characterList);
@@ -89,14 +89,14 @@ void ExerciseValidator::clearCharacters(void)
 }
 
 /*! Adds a character. */
-void ExerciseValidator::addCharacter(CharacterRecord *character)
+void ExerciseValidator::addCharacter(CharacterRecord character)
 {
 	m_characters.append(character);
 	emit charactersChanged(m_characters);
 }
 
 /*! Returns list of characters. */
-QList<CharacterRecord *> ExerciseValidator::characters(void)
+QList<CharacterRecord> ExerciseValidator::characters(void)
 {
 	return m_characters;
 }
