@@ -984,7 +984,7 @@ ApplicationWindow {
 				// Count dead keys
 				charHits += deadKeys;
 				totalHits += charHits;
-				var charRecord = Qt.createQmlObject("import OpenTyper 1.0; CharacterRecord {}", root);
+				var charRecord = QmlUtils.createCharacterRecord();
 				charRecord.keyText = keyText;
 				charRecord.hits = charHits;
 				recordedCharacters[recordedCharacters.length] = charRecord;
