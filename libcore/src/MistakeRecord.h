@@ -44,9 +44,9 @@ class CORE_LIB_EXPORT MistakeRecord
 	public:
 		enum Type
 		{
-			Type_Addition,
-			Type_Deletion,
-			Type_Change
+			Type_Addition = 0,
+			Type_Deletion = 1,
+			Type_Change = 2
 		};
 		Q_ENUM(Type)
 
