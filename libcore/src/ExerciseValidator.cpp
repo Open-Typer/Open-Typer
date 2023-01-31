@@ -171,7 +171,7 @@ void ExerciseValidator::generateMistakeText(bool correctMistakes)
 		// Add line with correct characters
 		int oldPos = pos;
 		int count = lines[i].count();
-		for(int j = 0; j <= lines[i].count(); j++)
+		for(int j = 0; j <= count; j++)
 		{
 			QString inputChar;
 			if(j < count)
