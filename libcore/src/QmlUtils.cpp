@@ -274,3 +274,9 @@ MistakeRecord QmlUtils::createMistakeRecord(void)
 {
 	return MistakeRecord();
 }
+
+/*! Returns an empty CharacterRecord. */
+CharacterRecord QmlUtils::createCharacterRecord(void)
+{
+	return CharacterRecord();
+}
