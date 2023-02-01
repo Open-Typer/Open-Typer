@@ -36,20 +36,14 @@
 #define CORE_LIB_EXPORT Q_DECL_IMPORT
 #endif
 
+class AddonButton;
+
 /*! \brief The AddonApi class provides an API for addons. */
 class CORE_LIB_EXPORT AddonApi : public QObject
 {
 		Q_OBJECT
+		Q_PROPERTY(QList<AddonButton *> buttons READ buttons WRITE setButtons NOTIFY buttonsChanged)
 	public:
-		enum TopBarSection
-		{
-			TopBarSection_Home,
-			TopBarSection_Navigation,
-			TopBarSection_ExOptions,
-			TopBarSection_State,
-			TopBarSecion_LastValue // do not use this
-		};
-
 		static AddonApi *instance(void);
 		static void addLoadExTarget(int id, QString name);
 		static void clearLoadExTargets(void);
@@ -66,11 +60,10 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static void registerMenu(QString id, QMenu *menu);
 		static QMap<QString, QPair<QString, QMenu *>> menus(void);
 		static QMenu *menu(QString id);
-		static void deleteButtons(void);
-		static void addButton(QString id, QIcon icon, QString toolTip, TopBarSection section);
-		static void registerButton(QString id, QPushButton *button);
-		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> buttons(void);
-		static QPushButton *button(QString id);
+		void deleteButtons(void);
+		AddonButton *addButton(QString text, QString toolTip, QString iconName, QString iconSource);
+		QList<AddonButton *> buttons(void);
+		void setButtons(QList<AddonButton *> buttons);
 
 	private:
 		static AddonApi m_instance;
@@ -78,11 +71,12 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static bool m_blockLoadedEx;
 		static QList<QVariantMap> m_settingsCategories;
 		static QMap<QString, QPair<QString, QMenu *>> m_menus;
-		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> m_buttons;
+		QList<AddonButton *> m_buttons;
 
 	signals:
 		void changeMode(int mode);
 		void startTypingTest(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
+		void buttonsChanged(QList<AddonButton *> buttons);
 };
 
 #endif // ADDONAPI_H

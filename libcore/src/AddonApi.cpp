@@ -18,14 +18,15 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QApplication>
 #include "AddonApi.h"
+#include "AddonButton.h"
 
 AddonApi AddonApi::m_instance;
 QMap<int, QString> AddonApi::m_loadExTargets;
 bool AddonApi::m_blockLoadedEx;
 QList<QVariantMap> AddonApi::m_settingsCategories;
 QMap<QString, QPair<QString, QMenu *>> AddonApi::m_menus;
-QMap<QString, QPair<QPair<QIcon, QString>, QPair<AddonApi::TopBarSection, QPushButton *>>> AddonApi::m_buttons;
 
 /*! Returns pointer to the global instance of AddonApi. Can be used to emit signals. */
 AddonApi *AddonApi::instance(void)
@@ -149,45 +150,41 @@ QMenu *AddonApi::menu(QString id)
 /*! Deletes all buttons. */
 void AddonApi::deleteButtons(void)
 {
-	QStringList keys = m_buttons.keys();
-	for(int i = 0; i < keys.count(); i++)
+	auto oldList = m_buttons;
+	m_buttons.clear();
+	emit buttonsChanged(m_buttons);
+	for(int i = 0; i < oldList.length(); i++)
 	{
-		QPushButton *button = m_buttons[keys[i]].second.second;
+		AddonButton *button = oldList[i];
 		if(button != nullptr)
 			button->deleteLater();
 	}
-	m_buttons.clear();
 }
 
-/*! Adds a button with the given icon and tool tip to the list of buttons. Use registerButton() to assign a QPushButton to the ID. */
-void AddonApi::addButton(QString id, QIcon icon, QString toolTip, AddonApi::TopBarSection section)
+/*!
+ * Adds a button with the given text, tool tip and icon to the list of buttons.
+ * Use AddonButton#setTopBarSection() to set the section for the button.
+ */
+AddonButton *AddonApi::addButton(QString text, QString toolTip, QString iconName, QString iconSource)
 {
-	QPair<QIcon, QString> buttonPair1;
-	QPair<TopBarSection, QPushButton *> buttonPair2;
-	buttonPair1.first = icon;
-	buttonPair1.second = toolTip;
-	buttonPair2.first = section;
-	buttonPair2.second = nullptr;
-	m_buttons[id] = QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>(buttonPair1, buttonPair2);
+	AddonButton *button = new AddonButton(qApp);
+	button->setText(text);
+	button->setToolTip(toolTip);
+	button->setIconName(iconName);
+	button->setIconSource(iconSource);
+	m_buttons.append(button);
+	emit buttonsChanged(m_buttons);
+	return button;
 }
 
-/*! Assigns a QPushButton to a button with the given ID. */
-void AddonApi::registerButton(QString id, QPushButton *button)
-{
-	QPair<QIcon, QString> buttonPair1 = m_buttons[id].first;
-	QPair<TopBarSection, QPushButton *> buttonPair2 = m_buttons[id].second;
-	buttonPair2.second = button;
-	m_buttons[id] = QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>(buttonPair1, buttonPair2);
-}
-
-/*! Returns the map of buttons. */
-QMap<QString, QPair<QPair<QIcon, QString>, QPair<AddonApi::TopBarSection, QPushButton *>>> AddonApi::buttons(void)
+/*! The list of buttons. */
+QList<AddonButton *> AddonApi::buttons(void)
 {
 	return m_buttons;
 }
 
-/*! Convenience function, which returns button with the given ID. */
-QPushButton *AddonApi::button(QString id)
+void AddonApi::setButtons(QList<AddonButton *> buttons)
 {
-	return m_buttons[id].second.second;
+	m_buttons = buttons;
+	emit buttonsChanged(buttons);
 }
