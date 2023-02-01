@@ -29,14 +29,13 @@
 #include <QPushButton>
 #include <QLayout>
 #include "IAddon.h"
+#include "AddonButton.h"
 
 #if defined CORE_SHARED_LIB
 #define CORE_LIB_EXPORT Q_DECL_EXPORT
 #else
 #define CORE_LIB_EXPORT Q_DECL_IMPORT
 #endif
-
-class AddonButton;
 
 /*! \brief The AddonApi class provides an API for addons. */
 class CORE_LIB_EXPORT AddonApi : public QObject

@@ -20,7 +20,6 @@
 
 #include <QApplication>
 #include "AddonApi.h"
-#include "AddonButton.h"
 
 AddonApi AddonApi::m_instance;
 QMap<int, QString> AddonApi::m_loadExTargets;
