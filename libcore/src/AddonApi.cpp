@@ -147,44 +147,97 @@ QMenu *AddonApi::menu(QString id)
 	return m_menus[id].second;
 }
 
-/*! Deletes all buttons. */
-void AddonApi::deleteButtons(void)
+/*! Adds a new button to the main section. */
+AddonButton *AddonApi::addMainButton(QString text, QString toolTip, QString iconName, QString iconSource)
 {
-	auto oldList = m_buttons;
-	m_buttons.clear();
-	emit buttonsChanged(m_buttons);
-	for(int i = 0; i < oldList.length(); i++)
-	{
-		AddonButton *button = oldList[i];
-		if(button != nullptr)
-			button->deleteLater();
-	}
+	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
+	m_mainButtons.append(button);
+	emit mainButtonsChanged(m_mainButtons);
+	return button;
 }
 
-/*!
- * Adds a button with the given text, tool tip and icon to the list of buttons.
- * Use AddonButton#setTopBarSection() to set the section for the button.
- */
-AddonButton *AddonApi::addButton(QString text, QString toolTip, QString iconName, QString iconSource)
+/*! The list of buttons in the main section. */
+QList<AddonButton *> AddonApi::mainButtons(void)
+{
+	return m_mainButtons;
+}
+
+void AddonApi::setMainButtons(QList<AddonButton *> buttons)
+{
+	m_mainButtons = buttons;
+	emit mainButtonsChanged(buttons);
+}
+
+/*! Adds a new button to the exercise options section. */
+AddonButton *AddonApi::addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource)
+{
+	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
+	m_exOptionsButtons.append(button);
+	emit exOptionsButtonsChanged(m_exOptionsButtons);
+	return button;
+}
+
+/*! The list of buttons in the exercise options section. */
+QList<AddonButton *> AddonApi::exOptionsButtons(void)
+{
+	return m_exOptionsButtons;
+}
+
+void AddonApi::setExOptionsButtons(QList<AddonButton *> buttons)
+{
+	m_exOptionsButtons = buttons;
+	emit exOptionsButtonsChanged(buttons);
+}
+
+/*! Adds a new button to the navigation section. */
+AddonButton *AddonApi::addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource)
+{
+	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
+	m_navigationButtons.append(button);
+	emit navigationButtonsChanged(m_navigationButtons);
+	return button;
+}
+
+/*! The list of buttons in the navigation section. */
+QList<AddonButton *> AddonApi::navigationButtons(void)
+{
+	return m_navigationButtons;
+}
+
+void AddonApi::setNavigationButtons(QList<AddonButton *> buttons)
+{
+	m_navigationButtons = buttons;
+	emit navigationButtonsChanged(buttons);
+}
+
+/*! Adds a new button to the exercise info section. */
+AddonButton *AddonApi::addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource)
+{
+	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
+	m_exInfoButtons.append(button);
+	emit exInfoButtonsChanged(m_exInfoButtons);
+	return button;
+}
+
+/*! The list of buttons in the exercise info section. */
+QList<AddonButton *> AddonApi::exInfoButtons(void)
+{
+	return m_exInfoButtons;
+}
+
+void AddonApi::setExInfoButtons(QList<AddonButton *> buttons)
+{
+	m_exInfoButtons = buttons;
+	emit exInfoButtonsChanged(buttons);
+}
+
+/*! Creates a new button. */
+AddonButton *AddonApi::createButton(QString text, QString toolTip, QString iconName, QString iconSource)
 {
 	AddonButton *button = new AddonButton(qApp);
 	button->setText(text);
 	button->setToolTip(toolTip);
 	button->setIconName(iconName);
 	button->setIconSource(iconSource);
-	m_buttons.append(button);
-	emit buttonsChanged(m_buttons);
 	return button;
-}
-
-/*! The list of buttons. */
-QList<AddonButton *> AddonApi::buttons(void)
-{
-	return m_buttons;
-}
-
-void AddonApi::setButtons(QList<AddonButton *> buttons)
-{
-	m_buttons = buttons;
-	emit buttonsChanged(buttons);
 }
