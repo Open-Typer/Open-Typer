@@ -2,7 +2,7 @@
  * AddonApi.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,14 +50,6 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 			TopBarSecion_LastValue // do not use this
 		};
 
-		enum TopBarPos
-		{
-			TopBarPos_AboveButtons = 0,
-			TopBarPos_Buttons = 1,
-			TopBarPos_BelowButtons = 2,
-			TopBarPos_LastValue // do not use this
-		};
-
 		static AddonApi *instance(void);
 		static void addLoadExTarget(int id, QString name);
 		static void clearLoadExTargets(void);
@@ -79,12 +71,6 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static void registerButton(QString id, QPushButton *button);
 		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> buttons(void);
 		static QPushButton *button(QString id);
-		static void deleteTopBarWidgets(void);
-		static void addTopBarWidget(QString id, TopBarSection section, TopBarPos pos);
-		static void registerTopBarWidget(QString id, QWidget *widget);
-		static QMap<QString, QPair<QPair<TopBarSection, TopBarPos>, QWidget *>> topBarWidgets(void);
-		static QWidget *topBarWidget(QString id);
-		static void recreateWidget(QWidget *oldWidget, QWidget *newWidget);
 
 	private:
 		static AddonApi m_instance;
@@ -93,7 +79,6 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static QList<QVariantMap> m_settingsCategories;
 		static QMap<QString, QPair<QString, QMenu *>> m_menus;
 		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> m_buttons;
-		static QMap<QString, QPair<QPair<TopBarSection, TopBarPos>, QWidget *>> m_topBarWidgets;
 
 	signals:
 		void changeMode(int mode);
