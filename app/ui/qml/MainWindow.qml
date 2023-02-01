@@ -27,6 +27,7 @@ import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
 import "controls"
 import "dialogs"
+import "core"
 
 ApplicationWindow {
 	property string packName
@@ -280,6 +281,7 @@ ApplicationWindow {
 							QmlUtils.printExercise(currentLesson, currentAbsoluteSublesson, currentExercise, displayExercise);
 					}
 				}
+				AddonButtonRepeater { model: AddonApi.mainButtons }
 				ToolSeparator {}
 				CustomToolButton {
 					icon.name: "paper"
@@ -347,6 +349,7 @@ ApplicationWindow {
 						loadText(newText, true);
 					}
 				}
+				AddonButtonRepeater { model: AddonApi.exOptionsButtons }
 			}
 		}
 		Panel {
@@ -384,6 +387,7 @@ ApplicationWindow {
 					toolTipText: qsTr("Next exercise")
 					onClicked: nextExercise();
 				}
+				AddonButtonRepeater { model: AddonApi.navigationButtons }
 				CustomComboBox { id: lessonBox; onActivated: selectLesson(index); }
 				CustomComboBox { id: sublessonBox; onActivated: selectSublesson(index); }
 				CustomComboBox { id: exerciseBox; onActivated: selectExercise(index); }
@@ -394,6 +398,7 @@ ApplicationWindow {
 					text: qsTr("Exercise history")
 					checkable: true
 				}
+				AddonButtonRepeater { model: AddonApi.exInfoButtons }
 			}
 		}
 		Panel {
