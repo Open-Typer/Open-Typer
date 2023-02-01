@@ -75,6 +75,7 @@ DISTFILES += \
     ui/qml/controls/Panel.qml \
     ui/qml/controls/UpdateQuestion.qml \
     ui/qml/controls/VerticalStackView.qml \
+    ui/qml/core/AddonButtonRepeater.qml \
     ui/qml/dialogs/ExerciseSummary.qml \
     ui/qml/dialogs/ExportDialog.qml \
     ui/qml/dialogs/InitialSetup.qml \
