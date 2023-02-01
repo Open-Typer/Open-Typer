@@ -64,6 +64,7 @@ class AddonButton : public QObject
 		void toolTipChanged(QString text);
 		void iconNameChanged(QString name);
 		void iconSourceChanged(QString source);
+		void clicked();
 };
 
 #endif // ADDONBUTTON_H
