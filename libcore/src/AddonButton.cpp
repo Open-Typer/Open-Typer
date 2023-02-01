@@ -84,15 +84,3 @@ void AddonButton::setIconSource(QString newIconSource)
 	m_iconSource = newIconSource;
 	emit iconSourceChanged(newIconSource);
 }
-
-/*! The top bar section the button is placed at. */
-AddonButton::TopBarSection AddonButton::topBarSection()
-{
-	return m_topBarSection;
-}
-
-void AddonButton::setTopBarSection(AddonButton::TopBarSection newTopBarSection)
-{
-	m_topBarSection = newTopBarSection;
-	emit topBarSectionChanged(newTopBarSection);
-}

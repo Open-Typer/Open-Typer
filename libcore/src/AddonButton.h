@@ -34,19 +34,8 @@ class AddonButton : public QObject
 		Q_PROPERTY(QString toolTip READ toolTip WRITE setToolTip NOTIFY toolTipChanged)
 		Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
 		Q_PROPERTY(QString iconSource READ iconSource WRITE setIconSource NOTIFY iconSourceChanged)
-		Q_PROPERTY(AddonButton::TopBarSection topBarSection READ topBarSection WRITE setTopBarSection NOTIFY topBarSectionChanged)
 
 	public:
-		enum TopBarSection
-		{
-			TopBarSection_Home = 0,
-			TopBarSection_Navigation = 1,
-			TopBarSection_ExOptions = 2,
-			TopBarSection_ExOptionsBelow = 3,
-			TopBarSecion_LastValue = 4 // do not use this
-		};
-		Q_ENUM(TopBarSection)
-
 		explicit AddonButton(QObject *parent = nullptr);
 
 		bool visible() const;
@@ -64,16 +53,12 @@ class AddonButton : public QObject
 		QString iconSource();
 		void setIconSource(QString newIconSource);
 
-		TopBarSection topBarSection();
-		void setTopBarSection(TopBarSection newTopBarSection);
-
 	private:
 		bool m_visible;
 		QString m_text;
 		QString m_toolTip;
 		QString m_iconName;
 		QString m_iconSource;
-		TopBarSection m_topBarSection;
 
 	signals:
 		void visibleChanged(bool visible);
@@ -81,7 +66,6 @@ class AddonButton : public QObject
 		void toolTipChanged(QString text);
 		void iconNameChanged(QString name);
 		void iconSourceChanged(QString source);
-		void topBarSectionChanged(TopBarSection section);
 };
 
 #endif // ADDONBUTTON_H
