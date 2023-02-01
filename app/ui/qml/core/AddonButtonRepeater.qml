@@ -27,5 +27,6 @@ Repeater {
 		toolTipText: modelData.toolTip
 		icon.name: modelData.iconName
 		icon.source: modelData.iconSource
+		onClicked: modelData.clicked()
 	}
 }
