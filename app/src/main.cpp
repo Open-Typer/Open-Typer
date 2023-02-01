@@ -34,6 +34,7 @@
 #include "LanguageManager.h"
 #include "IAddon.h"
 #include "AddonApi.h"
+#include "AddonButton.h"
 #include "ConfigParser.h"
 #include "QmlKeyboardHandler.h"
 #include "ExerciseTimer.h"
@@ -166,10 +167,13 @@ int main(int argc, char *argv[])
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterUncreatableMetaObject(MistakeRecord::staticMetaObject, "OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
+	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
 #else
 	qmlRegisterUncreatableType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
+	qmlRegisterUncreatableType<AddonButton>("OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
 #endif
 	qRegisterMetaType<QList<MistakeRecord>>();
+	qRegisterMetaType<QList<AddonButton *>>();
 	qRegisterMetaType<CharacterRecord>();
 	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<Key>();
@@ -200,6 +204,8 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
 	ExportTable table;
 	engine.rootContext()->setContextProperty("exportTable", &table);
+	AddonApi addonApi;
+	engine.rootContext()->setContextProperty("AddonApi", &addonApi);
 	engine.load("qrc:/qml/MainWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
