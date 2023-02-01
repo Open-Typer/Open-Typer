@@ -19,7 +19,6 @@
  */
 
 #include "AddonButton.h"
-#include "AddonApi.h"
 
 /*! Constructs AddonButton. */
 AddonButton::AddonButton(QObject *parent) :

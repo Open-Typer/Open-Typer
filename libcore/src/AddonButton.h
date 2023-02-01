@@ -23,8 +23,6 @@
 
 #include <QObject>
 
-class AddonApi;
-
 /*! \brief The AddonButton class provides a button for addons. */
 class AddonButton : public QObject
 {
