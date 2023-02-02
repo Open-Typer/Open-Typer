@@ -50,6 +50,7 @@
 #include "QmlWidget.h"
 #include "ExportProvider.h"
 #include "ExportTable.h"
+#include "AppMenuBar.h"
 #include "updater/Updater.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
@@ -155,6 +156,10 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<LanguageManager>("OpenTyper", 1, 0, "LanguageManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalLanguageManager;
 	});
+	QQmlEngine::setObjectOwnership(&globalMenuBar, QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<AppMenuBar>("OpenTyper", 1, 0, "AppMenuBar", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return &globalMenuBar;
+	});
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
 	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
@@ -165,6 +170,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<QmlWidget>("OpenTyper", 1, 0, "Widget");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
+	qmlRegisterType<AppMenuModel>("OpenTyper", 1, 0, "AppMenuModel");
+	qmlRegisterType<AppMenuItem>("OpenTyper", 1, 0, "AppMenuItem");
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterUncreatableMetaObject(MistakeRecord::staticMetaObject, "OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
 	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
