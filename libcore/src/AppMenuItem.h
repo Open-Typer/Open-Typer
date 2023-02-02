@@ -28,7 +28,9 @@
 #endif
 
 #include <QObject>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 Q_MOC_INCLUDE("AppMenuModel.h")
+#endif
 
 class CORE_LIB_EXPORT AppMenuModel;
 
