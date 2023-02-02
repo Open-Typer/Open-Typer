@@ -28,6 +28,7 @@
 #endif
 
 #include <QObject>
+Q_MOC_INCLUDE("AppMenuModel.h")
 
 class CORE_LIB_EXPORT AppMenuModel;
 
