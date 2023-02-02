@@ -20,12 +20,12 @@
 
 #include <QApplication>
 #include "AddonApi.h"
+#include "AppMenuBar.h"
 
 AddonApi AddonApi::m_instance;
 QMap<int, QString> AddonApi::m_loadExTargets;
 bool AddonApi::m_blockLoadedEx;
 QList<QVariantMap> AddonApi::m_settingsCategories;
-QMap<QString, QPair<QString, QMenu *>> AddonApi::m_menus;
 
 /*! Returns pointer to the global instance of AddonApi. Can be used to emit signals. */
 AddonApi *AddonApi::instance(void)
@@ -112,38 +112,33 @@ void AddonApi::sendEvent(IAddon::Event type, QVariantMap args)
 /*! Deletes all menus. */
 void AddonApi::deleteMenus(void)
 {
-	QStringList keys = m_menus.keys();
-	for(int i = 0; i < keys.count(); i++)
+	globalMenuBar.blockSignals(true);
+	for(int i = 0; i < m_menus.length(); i++)
 	{
-		QMenu *menu = m_menus[keys[i]].second;
-		if(menu != nullptr)
+		auto *menu = m_menus[i];
+		if(menu)
+		{
+			globalMenuBar.removeMenu(menu);
 			menu->deleteLater();
+		}
 	}
+	globalMenuBar.blockSignals(false);
+	globalMenuBar.menusChanged(globalMenuBar.menus());
 	m_menus.clear();
+	emit menusChanged(m_menus);
 }
 
-/*! Adds a menu with the given name to the list of menus. Use registerMenu() to assign a QMenu to the ID. */
-void AddonApi::addMenu(QString id, QString name)
+/*! Adds a menu. */
+void AddonApi::addMenu(AppMenuModel *menu)
 {
-	m_menus[id] = QPair<QString, QMenu *>(name, nullptr);
+	globalMenuBar.addMenu(menu);
+	m_menus.append(menu);
 }
 
-/*! Assigns a QMenu to menu with the given ID. */
-void AddonApi::registerMenu(QString id, QMenu *menu)
-{
-	m_menus[id] = QPair<QString, QMenu *>(m_menus[id].first, menu);
-}
-
-/*! Returns the map of menus. */
-QMap<QString, QPair<QString, QMenu *>> AddonApi::menus(void)
+/*! List of menus. */
+QList<AppMenuModel *> AddonApi::menus(void)
 {
 	return m_menus;
-}
-
-/*! Convenience function, which returns menu with the given ID. */
-QMenu *AddonApi::menu(QString id)
-{
-	return m_menus[id].second;
 }
 
 /*! Adds a new button to the main section. */

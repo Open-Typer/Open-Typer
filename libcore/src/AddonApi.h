@@ -30,6 +30,7 @@
 #include <QLayout>
 #include "IAddon.h"
 #include "AddonButton.h"
+#include "AppMenuModel.h"
 
 #if defined CORE_SHARED_LIB
 #define CORE_LIB_EXPORT Q_DECL_EXPORT
@@ -41,6 +42,7 @@
 class CORE_LIB_EXPORT AddonApi : public QObject
 {
 		Q_OBJECT
+		Q_PROPERTY(QList<AppMenuModel *> menus READ menus NOTIFY menusChanged)
 		Q_PROPERTY(QList<AddonButton *> mainButtons READ mainButtons WRITE setMainButtons NOTIFY mainButtonsChanged)
 		Q_PROPERTY(QList<AddonButton *> exOptionsButtons READ exOptionsButtons WRITE setExOptionsButtons NOTIFY exOptionsButtonsChanged)
 		Q_PROPERTY(QList<AddonButton *> navigationButtons READ navigationButtons WRITE setNavigationButtons NOTIFY navigationButtonsChanged)
@@ -57,11 +59,11 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static void clearSettingsCategories(void);
 		static void initSettingsCategories(bool clear = false);
 		static void sendEvent(IAddon::Event type, QVariantMap args = QVariantMap());
-		static void deleteMenus(void);
-		static void addMenu(QString id, QString name);
-		static void registerMenu(QString id, QMenu *menu);
-		static QMap<QString, QPair<QString, QMenu *>> menus(void);
-		static QMenu *menu(QString id);
+
+		void deleteMenus(void);
+		void addMenu(AppMenuModel *menu);
+		QList<AppMenuModel *> menus(void);
+		void setMenus(QList<AppMenuModel *> menus);
 
 		AddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		QList<AddonButton *> mainButtons(void);
@@ -85,7 +87,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static QMap<int, QString> m_loadExTargets;
 		static bool m_blockLoadedEx;
 		static QList<QVariantMap> m_settingsCategories;
-		static QMap<QString, QPair<QString, QMenu *>> m_menus;
+		QList<AppMenuModel *> m_menus;
 		QList<AddonButton *> m_mainButtons;
 		QList<AddonButton *> m_exOptionsButtons;
 		QList<AddonButton *> m_navigationButtons;
@@ -94,6 +96,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 	signals:
 		void changeMode(int mode);
 		void startTypingTest(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
+		void menusChanged(QList<AppMenuModel *> menus);
 		void mainButtonsChanged(QList<AddonButton *> buttons);
 		void exOptionsButtonsChanged(QList<AddonButton *> buttons);
 		void navigationButtonsChanged(QList<AddonButton *> buttons);
