@@ -25,6 +25,7 @@ SOURCES += \
     src/AddonApi.cpp \
     src/AddonButton.cpp \
     src/AppMenuItem.cpp \
+    src/AppMenuModel.cpp \
     src/BuiltInPacks.cpp \
     src/CharacterRecord.cpp \
     src/ConfigParser.cpp \
@@ -51,6 +52,7 @@ HEADERS += \
     src/AddonApi.h \
     src/AddonButton.h \
     src/AppMenuItem.h \
+    src/AppMenuModel.h \
     src/BuiltInPacks.h \
     src/CharacterRecord.h \
     src/ConfigParser.h \
