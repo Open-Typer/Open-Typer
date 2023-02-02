@@ -24,6 +24,7 @@ INCLUDEPATH += src
 SOURCES += \
     src/AddonApi.cpp \
     src/AddonButton.cpp \
+    src/AppMenuBar.cpp \
     src/AppMenuItem.cpp \
     src/AppMenuModel.cpp \
     src/BuiltInPacks.cpp \
@@ -51,6 +52,7 @@ SOURCES += \
 HEADERS += \
     src/AddonApi.h \
     src/AddonButton.h \
+    src/AppMenuBar.h \
     src/AppMenuItem.h \
     src/AppMenuModel.h \
     src/BuiltInPacks.h \
