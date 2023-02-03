@@ -39,20 +39,14 @@ class CORE_LIB_EXPORT IAddon
 			Event_InitSettings,
 			Event_InitApp,
 			Event_InitMenu,
-			Event_InitMenuActions,
 			Event_InitButtons,
-			Event_InitButtonsFinalize,
 			Event_RefreshApp,
 			Event_InitExercise,
-			Event_InitTopBarWidgets,
-			Event_InitTopBarWidgetsFinalize,
 			Event_ExerciseFinalInit,
 			Event_EndStockExercise,
 			Event_EndTypingTest,
 			Event_ChangeMode,
-			Event_OpenLoadExDialog,
-			Event_CustomExLoaded,
-			Event_LoadExStats
+			Event_CustomExLoaded
 		};
 
 		virtual ~IAddon(void) = default;
