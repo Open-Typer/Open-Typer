@@ -58,7 +58,7 @@ class CORE_LIB_EXPORT AddonButton : public QObject
 		void setIconSource(QString newIconSource);
 
 	private:
-		bool m_visible;
+		bool m_visible = true;
 		QString m_text;
 		QString m_toolTip;
 		QString m_iconName;
