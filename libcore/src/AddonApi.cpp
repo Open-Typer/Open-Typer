@@ -22,16 +22,10 @@
 #include "AddonApi.h"
 #include "AppMenuBar.h"
 
-AddonApi AddonApi::m_instance;
+AddonApi globalAddonApi;
 QMap<int, QString> AddonApi::m_loadExTargets;
 bool AddonApi::m_blockLoadedEx;
 QList<QVariantMap> AddonApi::m_settingsCategories;
-
-/*! Returns pointer to the global instance of AddonApi. Can be used to emit signals. */
-AddonApi *AddonApi::instance(void)
-{
-	return &m_instance;
-}
 
 /*! Adds a load exercise target. */
 void AddonApi::addLoadExTarget(int id, QString name)

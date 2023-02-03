@@ -48,7 +48,6 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		Q_PROPERTY(QList<AddonButton *> navigationButtons READ navigationButtons NOTIFY navigationButtonsChanged)
 		Q_PROPERTY(QList<AddonButton *> exInfoButtons READ exInfoButtons NOTIFY exInfoButtonsChanged)
 	public:
-		static AddonApi *instance(void);
 		static void addLoadExTarget(int id, QString name);
 		static void clearLoadExTargets(void);
 		static QMap<int, QString> loadExTargets(void);
@@ -83,7 +82,6 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		void deleteExInfoButtons(void);
 		void deleteButtons(QList<AddonButton *> *buttonList);
 		AddonButton *createButton(QString text, QString toolTip, QString iconName, QString iconSource);
-		static AddonApi m_instance;
 		static QMap<int, QString> m_loadExTargets;
 		static bool m_blockLoadedEx;
 		static QList<QVariantMap> m_settingsCategories;
@@ -102,5 +100,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		void navigationButtonsChanged(QList<AddonButton *> buttons);
 		void exInfoButtonsChanged(QList<AddonButton *> buttons);
 };
+
+extern AddonApi CORE_LIB_EXPORT globalAddonApi;
 
 #endif // ADDONAPI_H
