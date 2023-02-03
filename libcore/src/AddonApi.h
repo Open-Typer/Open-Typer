@@ -60,28 +60,28 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static void initSettingsCategories(bool clear = false);
 		static void sendEvent(IAddon::Event type, QVariantMap args = QVariantMap());
 
-		void deleteMenus(void);
 		void addMenu(AppMenuModel *menu);
 		QList<AppMenuModel *> menus(void);
 		void setMenus(QList<AppMenuModel *> menus);
 
-		void deleteMainButtons(void);
 		AddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		QList<AddonButton *> mainButtons(void);
 
-		void deleteExOptionsButtons(void);
 		AddonButton *addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		QList<AddonButton *> exOptionsButtons(void);
 
-		void deleteNavigationButtons(void);
 		AddonButton *addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		QList<AddonButton *> navigationButtons(void);
 
-		void deleteExInfoButtons(void);
 		AddonButton *addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		QList<AddonButton *> exInfoButtons(void);
 
 	private:
+		void deleteMenus(void);
+		void deleteMainButtons(void);
+		void deleteExOptionsButtons(void);
+		void deleteNavigationButtons(void);
+		void deleteExInfoButtons(void);
 		void deleteButtons(QList<AddonButton *> *buttonList);
 		AddonButton *createButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		static AddonApi m_instance;
