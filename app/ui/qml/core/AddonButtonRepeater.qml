@@ -23,6 +23,7 @@ import "../controls"
 
 Repeater {
 	CustomToolButton {
+		visible: modelData.visible
 		text: modelData.text
 		toolTipText: modelData.toolTip
 		icon.name: modelData.iconName
