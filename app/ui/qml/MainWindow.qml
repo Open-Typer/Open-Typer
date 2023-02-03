@@ -1264,6 +1264,7 @@ ApplicationWindow {
 	Component.onCompleted: {
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.menuBarBlur = menuBarBlur;
+		AddonApi.sendEvent(AddonApi.Event_InitApp);
 		if(!Settings.initFinished())
 			initialSetup.open();
 		reload();
