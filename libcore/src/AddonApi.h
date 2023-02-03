@@ -28,7 +28,6 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QLayout>
-#include "IAddon.h"
 #include "AddonButton.h"
 #include "AppMenuModel.h"
 
@@ -48,6 +47,22 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		Q_PROPERTY(QList<AddonButton *> navigationButtons READ navigationButtons NOTIFY navigationButtonsChanged)
 		Q_PROPERTY(QList<AddonButton *> exInfoButtons READ exInfoButtons NOTIFY exInfoButtonsChanged)
 	public:
+		enum Event
+		{
+			Event_InitSettings = 0,
+			Event_InitApp = 1,
+			Event_InitMenu = 2,
+			Event_InitButtons = 3,
+			Event_RefreshApp = 4,
+			Event_InitExercise = 5,
+			Event_ExerciseFinalInit = 6,
+			Event_EndStockExercise = 7,
+			Event_EndTypingTest = 8,
+			Event_ChangeMode = 9,
+			Event_CustomExLoaded = 10
+		};
+		Q_ENUM(Event)
+
 		static void addLoadExTarget(int id, QString name);
 		static void clearLoadExTargets(void);
 		static QMap<int, QString> loadExTargets(void);
@@ -57,7 +72,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static QList<QVariantMap> settingsCategories(void);
 		static void clearSettingsCategories(void);
 		static void initSettingsCategories(bool clear = false);
-		static void sendEvent(IAddon::Event type, QVariantMap args = QVariantMap());
+		static void sendEvent(Event type, QVariantMap args = QVariantMap());
 
 		void addMenu(AppMenuModel *menu);
 		QList<AppMenuModel *> menus(void);

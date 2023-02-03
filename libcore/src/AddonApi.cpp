@@ -20,6 +20,7 @@
 
 #include <QApplication>
 #include "AddonApi.h"
+#include "IAddon.h"
 #include "AppMenuBar.h"
 
 AddonApi globalAddonApi;
@@ -93,11 +94,11 @@ void AddonApi::initSettingsCategories(bool clear)
 {
 	if(clear)
 		clearSettingsCategories();
-	sendEvent(IAddon::Event_InitSettings);
+	sendEvent(Event_InitSettings);
 }
 
 /*! Sends an event with the given type to each loaded addon. */
-void AddonApi::sendEvent(IAddon::Event type, QVariantMap args)
+void AddonApi::sendEvent(Event type, QVariantMap args)
 {
 	for(int i = 0; i < loadedAddons.count(); i++)
 		loadedAddons[i]->addonEvent(type, args);

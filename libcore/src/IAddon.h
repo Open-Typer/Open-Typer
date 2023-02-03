@@ -2,7 +2,7 @@
  * IAddon.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@
 
 #include <QVector>
 #include <QtPlugin>
+#include "AddonApi.h"
 
 #if defined CORE_SHARED_LIB
 #define CORE_LIB_EXPORT Q_DECL_EXPORT
@@ -34,23 +35,8 @@
 class CORE_LIB_EXPORT IAddon
 {
 	public:
-		enum Event
-		{
-			Event_InitSettings,
-			Event_InitApp,
-			Event_InitMenu,
-			Event_InitButtons,
-			Event_RefreshApp,
-			Event_InitExercise,
-			Event_ExerciseFinalInit,
-			Event_EndStockExercise,
-			Event_EndTypingTest,
-			Event_ChangeMode,
-			Event_CustomExLoaded
-		};
-
 		virtual ~IAddon(void) = default;
-		virtual void addonEvent(Event type, QVariantMap args) = 0;
+		virtual void addonEvent(AddonApi::Event type, QVariantMap args) = 0;
 };
 
 Q_DECLARE_INTERFACE(IAddon, "opentyper.addon")
