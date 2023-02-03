@@ -62,7 +62,6 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 
 		void addMenu(AppMenuModel *menu);
 		QList<AppMenuModel *> menus(void);
-		void setMenus(QList<AppMenuModel *> menus);
 
 		AddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		QList<AddonButton *> mainButtons(void);
