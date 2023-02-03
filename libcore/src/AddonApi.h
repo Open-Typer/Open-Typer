@@ -43,10 +43,10 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QList<AppMenuModel *> menus READ menus NOTIFY menusChanged)
-		Q_PROPERTY(QList<AddonButton *> mainButtons READ mainButtons WRITE setMainButtons NOTIFY mainButtonsChanged)
-		Q_PROPERTY(QList<AddonButton *> exOptionsButtons READ exOptionsButtons WRITE setExOptionsButtons NOTIFY exOptionsButtonsChanged)
-		Q_PROPERTY(QList<AddonButton *> navigationButtons READ navigationButtons WRITE setNavigationButtons NOTIFY navigationButtonsChanged)
-		Q_PROPERTY(QList<AddonButton *> exInfoButtons READ exInfoButtons WRITE setExInfoButtons NOTIFY exInfoButtonsChanged)
+		Q_PROPERTY(QList<AddonButton *> mainButtons READ mainButtons NOTIFY mainButtonsChanged)
+		Q_PROPERTY(QList<AddonButton *> exOptionsButtons READ exOptionsButtons NOTIFY exOptionsButtonsChanged)
+		Q_PROPERTY(QList<AddonButton *> navigationButtons READ navigationButtons NOTIFY navigationButtonsChanged)
+		Q_PROPERTY(QList<AddonButton *> exInfoButtons READ exInfoButtons NOTIFY exInfoButtonsChanged)
 	public:
 		static AddonApi *instance(void);
 		static void addLoadExTarget(int id, QString name);
@@ -65,23 +65,24 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		QList<AppMenuModel *> menus(void);
 		void setMenus(QList<AppMenuModel *> menus);
 
+		void deleteMainButtons(void);
 		AddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		QList<AddonButton *> mainButtons(void);
-		void setMainButtons(QList<AddonButton *> buttons);
 
+		void deleteExOptionsButtons(void);
 		AddonButton *addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		QList<AddonButton *> exOptionsButtons(void);
-		void setExOptionsButtons(QList<AddonButton *> buttons);
 
+		void deleteNavigationButtons(void);
 		AddonButton *addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		QList<AddonButton *> navigationButtons(void);
-		void setNavigationButtons(QList<AddonButton *> buttons);
 
+		void deleteExInfoButtons(void);
 		AddonButton *addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		QList<AddonButton *> exInfoButtons(void);
-		void setExInfoButtons(QList<AddonButton *> buttons);
 
 	private:
+		void deleteButtons(QList<AddonButton *> *buttonList);
 		AddonButton *createButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		static AddonApi m_instance;
 		static QMap<int, QString> m_loadExTargets;

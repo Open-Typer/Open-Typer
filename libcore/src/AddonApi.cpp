@@ -141,6 +141,12 @@ QList<AppMenuModel *> AddonApi::menus(void)
 	return m_menus;
 }
 
+/*! Deletes all buttons in the main section. */
+void AddonApi::deleteMainButtons(void)
+{
+	deleteButtons(&m_mainButtons);
+}
+
 /*! Adds a new button to the main section. */
 AddonButton *AddonApi::addMainButton(QString text, QString toolTip, QString iconName, QString iconSource)
 {
@@ -156,10 +162,10 @@ QList<AddonButton *> AddonApi::mainButtons(void)
 	return m_mainButtons;
 }
 
-void AddonApi::setMainButtons(QList<AddonButton *> buttons)
+/*! Deletes all buttons in the exercise options section. */
+void AddonApi::deleteExOptionsButtons(void)
 {
-	m_mainButtons = buttons;
-	emit mainButtonsChanged(buttons);
+	deleteButtons(&m_exOptionsButtons);
 }
 
 /*! Adds a new button to the exercise options section. */
@@ -177,10 +183,10 @@ QList<AddonButton *> AddonApi::exOptionsButtons(void)
 	return m_exOptionsButtons;
 }
 
-void AddonApi::setExOptionsButtons(QList<AddonButton *> buttons)
+/*! Deletes all buttons in the navigation section. */
+void AddonApi::deleteNavigationButtons(void)
 {
-	m_exOptionsButtons = buttons;
-	emit exOptionsButtonsChanged(buttons);
+	deleteButtons(&m_navigationButtons);
 }
 
 /*! Adds a new button to the navigation section. */
@@ -198,10 +204,10 @@ QList<AddonButton *> AddonApi::navigationButtons(void)
 	return m_navigationButtons;
 }
 
-void AddonApi::setNavigationButtons(QList<AddonButton *> buttons)
+/*! Deletes all buttons in the exercise info section. */
+void AddonApi::deleteExInfoButtons(void)
 {
-	m_navigationButtons = buttons;
-	emit navigationButtonsChanged(buttons);
+	deleteButtons(&m_exInfoButtons);
 }
 
 /*! Adds a new button to the exercise info section. */
@@ -219,10 +225,16 @@ QList<AddonButton *> AddonApi::exInfoButtons(void)
 	return m_exInfoButtons;
 }
 
-void AddonApi::setExInfoButtons(QList<AddonButton *> buttons)
+/*! Deletes all buttons in the given list. */
+void AddonApi::deleteButtons(QList<AddonButton *> *buttonList)
 {
-	m_exInfoButtons = buttons;
-	emit exInfoButtonsChanged(buttons);
+	for(int i = 0; i < buttonList->length(); i++)
+	{
+		auto button = buttonList->at(i);
+		if(button)
+			button->deleteLater();
+	}
+	buttonList->clear();
 }
 
 /*! Creates a new button. */
