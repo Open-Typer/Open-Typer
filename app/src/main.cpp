@@ -160,6 +160,10 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<AppMenuBar>("OpenTyper", 1, 0, "AppMenuBar", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalMenuBar;
 	});
+	QQmlEngine::setObjectOwnership(&globalAddonApi, QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<AddonApi>("OpenTyper", 1, 0, "AddonApi", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return &globalAddonApi;
+	});
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
 	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
@@ -211,8 +215,6 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
 	ExportTable table;
 	engine.rootContext()->setContextProperty("exportTable", &table);
-	AddonApi addonApi;
-	engine.rootContext()->setContextProperty("AddonApi", &addonApi);
 	engine.load("qrc:/qml/MainWindow.qml");
 	splash.finish(nullptr);
 	return a.exec();
