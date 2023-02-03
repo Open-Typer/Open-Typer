@@ -62,16 +62,16 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		void addMenu(AppMenuModel *menu);
 		QList<AppMenuModel *> menus(void);
 
-		AddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource);
+		AddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
 		QList<AddonButton *> mainButtons(void);
 
-		AddonButton *addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource);
+		AddonButton *addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
 		QList<AddonButton *> exOptionsButtons(void);
 
-		AddonButton *addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource);
+		AddonButton *addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
 		QList<AddonButton *> navigationButtons(void);
 
-		AddonButton *addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource);
+		AddonButton *addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
 		QList<AddonButton *> exInfoButtons(void);
 
 	private:
