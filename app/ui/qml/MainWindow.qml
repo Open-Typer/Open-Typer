@@ -287,15 +287,6 @@ ApplicationWindow {
 					icon.name: "paper"
 					text: qsTr("Typing test")
 					onClicked: {
-						// TODO: Send events
-						/*AddonApi::clearLoadExTargets();
-						AddonApi::sendEvent(IAddon::Event_OpenLoadExDialog);*/
-						// TODO: Add targets support
-						/*QMap<int, QString> targets = AddonApi::loadExTargets();
-						if(targets.count() == 0)
-							dialog = new LoadExerciseDialog(this);
-						else
-							dialog = new LoadExerciseDialog(targets, this);*/
 						typingTestDialog.open();
 					}
 				}
@@ -570,6 +561,7 @@ ApplicationWindow {
 		paper.errorPenalty = Settings.errorPenalty();
 		highlightNextKey();
 		keyboard.releaseAllKeys();
+		AddonApi.sendEvent(AddonApi.Event_RefreshApp);
 	}
 
 	function loadPack(name) {
@@ -687,6 +679,7 @@ ApplicationWindow {
 		// Enable/disable stats
 		var enableStats = !customExerciseLoaded && !customPack && (currentMode == 0);
 		panel2.contents.statsButton.enabled = enableStats;
+		AddonApi.sendEvent(AddonApi.Event_InitExercise);
 	}
 
 	function updateText() {
@@ -1116,16 +1109,16 @@ ApplicationWindow {
 		var time = lastTime;
 		if(!customExerciseLoaded && !customPack && correctMistakes)
 		{
-			// TODO: Send end stock exercise event
-			/*QVariantMap eventArgs;
-			eventArgs["packName"] = publicConfigName;
-			eventArgs["lesson"] = currentLesson;
-			eventArgs["sublesson"] = currentAbsoluteSublesson;
-			eventArgs["exercise"] = currentLevel;
-			eventArgs["grossHitsPerMinute"] = grossHitsPerMinute;
-			eventArgs["mistakes"] = levelMistakes;
-			eventArgs["time"] = time;
-			AddonApi::sendEvent(IAddon::Event_EndStockExercise, eventArgs);*/
+			var eventArgs = {
+				"packName": packName,
+				"lesson": currentLesson,
+				"sublesson": currentAbsoluteSublesson,
+				"exercise": currentExercise,
+				"grossHitsPerMinute": grossHitsPerMinute,
+				"mistakes": exerciseMistakes,
+				"time": time
+			};
+			AddonApi.sendEvent(AddonApi.Event_EndStockExercise, eventArgs);
 			// The result will always be saved locally - even if an addon uses it
 			historyParser.append(grossHitsPerMinute, exerciseMistakes, time);
 		}
@@ -1134,18 +1127,12 @@ ApplicationWindow {
 			correctMistakes = true;
 			hideText = false;
 			// TODO: Restore window geometry if full screen
-			// TODO: Send end typing test event
-			/*QVariantMap args;
-			QList<QVariant> recordedCharactersList;
-			for(int i = 0; i < recordedCharacters.count(); i++)
-			{
-				QVariant record = QVariant::fromValue(recordedCharacters[i]);
-				recordedCharactersList.append(record);
-			}
-			args["recordedCharacters"] = recordedCharactersList;
-			args["inputText"] = input;
-			args["time"] = lastTimeF;
-			AddonApi::sendEvent(IAddon::Event_EndTypingTest, args);*/
+			var args = {
+				"recordedCharacters": recordedCharacters,
+				"inputText": fullInput,
+				"time": time
+			};
+			AddonApi.sendEvent(AddonApi.Event_EndTypingTest, args);
 			uiLocked = false;
 			testLoaded = false;
 		}
@@ -1191,14 +1178,7 @@ ApplicationWindow {
 	}
 
 	function loadTestFinished() {
-		// TODO: Send events
-		/*AddonApi::setBlockLoadedEx(false);
-		QVariantMap args;
-		args["loadExDialog"] = QVariant::fromValue((void *) dialog);
-		AddonApi::sendEvent(IAddon::Event_CustomExLoaded, args);
-		if(!AddonApi::blockLoadedEx())
-			initTest(dialog->exerciseText().toUtf8(), dialog->lineLength(), dialog->includeNewLines(),
-				dialog->mode(), QTime(0, 0, 0).secsTo(dialog->timeLimit()), dialog->correctMistakes(), dialog->lockUi(), dialog->hideText());*/
+		AddonApi.sendEvent(AddonApi.Event_CustomExLoaded);
 		initTest(typingTestDialog.exerciseText, parser.defaultLineLength(), true, (typingTestDialog.timed ? 1 : 0),
 			 typingTestDialog.timeLimitSecs, typingTestDialog.correctMistakes, typingTestDialog.lockUi, typingTestDialog.hideText);
 	}
@@ -1222,8 +1202,7 @@ ApplicationWindow {
 
 	function changeMode(mode) {
 		currentMode = mode;
-		// TODO: Send change mode event
-		//AddonApi::sendEvent(IAddon::Event_ChangeMode);
+		AddonApi.sendEvent(AddonApi.Event_ChangeMode);
 	}
 
 	function startTimedExercise(time)
