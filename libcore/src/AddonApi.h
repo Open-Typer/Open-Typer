@@ -67,7 +67,6 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static bool addSettingsCategory(QString categoryName, QIcon icon, QString className);
 		static QList<QVariantMap> settingsCategories(void);
 		static void clearSettingsCategories(void);
-		static void initSettingsCategories(bool clear = false);
 		Q_INVOKABLE static void sendEvent(Event type, QVariantMap args = QVariantMap());
 
 		void addMenu(AppMenuModel *menu);

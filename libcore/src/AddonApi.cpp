@@ -89,14 +89,6 @@ void AddonApi::clearSettingsCategories(void)
 	m_settingsCategories.clear();
 }
 
-/*! Sends IAddon#Event_InitSettings to each loaded addon. */
-void AddonApi::initSettingsCategories(bool clear)
-{
-	if(clear)
-		clearSettingsCategories();
-	sendEvent(Event_InitSettings);
-}
-
 /*! Sends an event with the given type to each loaded addon. */
 void AddonApi::sendEvent(Event type, QVariantMap args)
 {
