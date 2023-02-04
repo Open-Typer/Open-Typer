@@ -36,6 +36,28 @@ CustomDialog {
 		property alias stack: stack
 		ListView {
 			property int previousIndex: -1
+			readonly property list<SettingsCategory> categories: [
+				SettingsCategory {
+					name: qsTr("Language")
+					iconName: "language"
+					qmlFileName: "settings/LanguageSettings.qml"
+				},
+				SettingsCategory {
+					name: qsTr("Behavior")
+					iconName: "tweaks"
+					qmlFileName: "settings/BehaviorSettings.qml"
+				},
+				SettingsCategory {
+					name: qsTr("Keyboard")
+					iconName: "keyboard"
+					qmlFileName: "settings/KeyboardSettings.qml"
+				},
+				SettingsCategory {
+					name: qsTr("Appearance")
+					iconName: "appearance"
+					qmlFileName: "settings/AppearanceSettings.qml"
+				}
+			]
 			id: listView
 			Layout.fillHeight: true
 			Binding on implicitWidth {
@@ -55,33 +77,22 @@ CustomDialog {
 				}
 			}
 			implicitHeight: contentHeight
-			model: ListModel {
-				ListElement {
-					name: qsTr("Language")
-					iconName: "language"
-					sourceComponent: "../settings/LanguageSettings.qml"
-				}
-				ListElement {
-					name: qsTr("Behavior")
-					iconName: "tweaks"
-					sourceComponent: "../settings/BehaviorSettings.qml"
-				}
-				ListElement {
-					name: qsTr("Keyboard")
-					iconName: "keyboard"
-					sourceComponent: "../settings/KeyboardSettings.qml"
-				}
-				ListElement {
-					name: qsTr("Appearance")
-					iconName: "appearance"
-					sourceComponent: "../settings/AppearanceSettings.qml"
+			model: categories
+			Connections {
+				target: AddonApi
+				function onSettingsCategoriesChanged() {
+					for(var i = 0; i < AddonApi.settingsCategories.length; i++)
+					{
+						listView.categories.push(AddonApi.settingsCategories[i]);
+					}
 				}
 			}
 			delegate: ItemDelegate {
-				property string source: sourceComponent
-				text: name
+				property string source: "../" + modelData.qmlFileName
+				text: modelData.name
 				width: listView.width
-				icon.name: iconName
+				icon.name: modelData.iconName
+				icon.source: modelData.iconSource
 				highlighted: ListView.isCurrentItem
 				onClicked: listView.currentIndex = index
 			}
