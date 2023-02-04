@@ -182,16 +182,26 @@ QList<AddonButton *> AddonApi::exInfoButtons(void)
 	return m_exInfoButtons;
 }
 
-/*! Deletes all buttons in the given list. */
+/*! Deletes all buttons in the given list and clears it. */
 void AddonApi::deleteButtons(QList<AddonButton *> *buttonList)
 {
+	QList<QObject *> objList;
 	for(int i = 0; i < buttonList->length(); i++)
-	{
-		auto button = buttonList->at(i);
-		if(button)
-			button->deleteLater();
-	}
+		objList.append(buttonList->at(i));
+	deleteObjects(&objList);
 	buttonList->clear();
+}
+
+/*! Deletes all objects in the given list and clears it. */
+void AddonApi::deleteObjects(QList<QObject *> *objList)
+{
+	for(int i = 0; i < objList->length(); i++)
+	{
+		QObject *obj = objList->at(i);
+		if(obj)
+			obj->deleteLater();
+	}
+	objList->clear();
 }
 
 /*! Creates a new button. */

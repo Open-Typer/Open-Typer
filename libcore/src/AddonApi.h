@@ -86,6 +86,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		void deleteNavigationButtons(void);
 		void deleteExInfoButtons(void);
 		void deleteButtons(QList<AddonButton *> *buttonList);
+		void deleteObjects(QList<QObject *> *objList);
 		AddonButton *createButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		static QMap<int, QString> m_loadExTargets;
 		static bool m_blockLoadedEx;
