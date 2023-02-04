@@ -125,6 +125,11 @@ ApplicationWindow {
 		}
 	}
 
+	MenuBarManager {
+		onOpenToggled: panel1.contents.openButton.clicked()
+		onPrintToggled: panel1.contents.printButton.clicked()
+	}
+
 	ConfigParser {
 		id: parser
 	}
@@ -260,17 +265,21 @@ ApplicationWindow {
 			visible: currentMode == 0
 			enabled: !uiLocked
 			control: RowLayout {
+				readonly property alias openButton: openButton
+				readonly property alias printButton: printButton
 				CustomToolButton {
 					icon.name: "settings"
 					toolTipText: qsTr("Options")
 					onClicked: settingsDialog.open()
 				}
 				CustomToolButton {
+					id: openButton
 					icon.name: "open"
 					toolTipText: qsTr("Open")
 					onClicked: customExFileDialog.getOpenFileContent()
 				}
 				CustomToolButton {
+					id: printButton
 					icon.name: "print"
 					toolTipText: qsTr("Print")
 					visible: !QmlUtils.osWasm();
