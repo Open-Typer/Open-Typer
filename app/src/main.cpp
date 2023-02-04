@@ -175,6 +175,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
 	qmlRegisterType<AppMenuModel>("OpenTyper", 1, 0, "AppMenuModel");
 	qmlRegisterType<AppMenuItem>("OpenTyper", 1, 0, "AppMenuItem");
+	qmlRegisterType<AddonSettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterUncreatableMetaObject(MistakeRecord::staticMetaObject, "OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
 	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
