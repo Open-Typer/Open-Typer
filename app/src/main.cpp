@@ -136,7 +136,6 @@ int main(int argc, char *argv[])
 	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
 	a.processEvents();
 	loadAddons();
-	AddonApi::initSettingsCategories();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
