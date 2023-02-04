@@ -86,14 +86,17 @@ CustomDialog {
 				onClicked: listView.currentIndex = index
 			}
 			onCurrentIndexChanged: {
+				var noTransition = false;
+				if(currentIndex == previousIndex)
+					noTransition = true;
 				if(currentItem == null)
 					return;
 				if(stack.currentItem == null)
 					stack.push(categoryContent);
 				else if(currentIndex > previousIndex)
-					stack.replace(stack.currentItem, categoryContent, StackView.PushTransition);
+					stack.replace(stack.currentItem, categoryContent, noTransition ? StackView.Immediate : StackView.PushTransition);
 				else
-					stack.replace(stack.currentItem, categoryContent, StackView.PopTransition);
+					stack.replace(stack.currentItem, categoryContent, noTransition ? StackView.Immediate : StackView.PopTransition);
 				stack.currentItem.currentComponent = currentItem.source;
 				previousIndex = currentIndex;
 			}
