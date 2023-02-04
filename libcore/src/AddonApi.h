@@ -49,15 +49,13 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 	public:
 		enum Event
 		{
-			Event_InitSettings = 0,
-			Event_InitApp = 1,
-			Event_RefreshApp = 2,
-			Event_InitExercise = 3,
-			Event_ExerciseFinalInit = 4,
-			Event_EndStockExercise = 5,
-			Event_EndTypingTest = 6,
-			Event_ChangeMode = 7,
-			Event_CustomExLoaded = 8
+			Event_InitApp = 0,
+			Event_RefreshApp = 1,
+			Event_InitExercise = 2,
+			Event_EndStockExercise = 3,
+			Event_EndTypingTest = 4,
+			Event_ChangeMode = 5,
+			Event_CustomExLoaded = 6
 		};
 		Q_ENUM(Event)
 
