@@ -55,44 +55,6 @@ FORMS += \
     ui/packEditor/PackEditor.ui \
     ui/packEditor/PackSelector.ui
 
-DISTFILES += \
-    ui/qml/ExerciseHistory.qml \
-    ui/qml/KeyboardKey.qml \
-    ui/qml/KeyboardView.qml \
-    ui/qml/controls/AccentButton.qml \
-    ui/qml/controls/AccentButtonBox.qml \
-    ui/qml/controls/ColorButton.qml \
-    ui/qml/controls/CustomComboBox.qml \
-    ui/qml/controls/CustomDialog.qml \
-    ui/qml/controls/CustomMenu.qml \
-    ui/qml/controls/CustomMenuBar.qml \
-    ui/qml/controls/CustomMenuItem.qml \
-    ui/qml/controls/CustomMenuSeparator.qml \
-    ui/qml/controls/CustomToolButton.qml \
-    ui/qml/controls/FontComboBox.qml \
-    ui/qml/controls/HoverToolTip.qml \
-    ui/qml/controls/MenuButton.qml \
-    ui/qml/controls/Panel.qml \
-    ui/qml/controls/UpdateQuestion.qml \
-    ui/qml/controls/VerticalStackView.qml \
-    ui/qml/core/AddonButtonRepeater.qml \
-    ui/qml/dialogs/ExerciseSummary.qml \
-    ui/qml/dialogs/ExportDialog.qml \
-    ui/qml/dialogs/InitialSetup.qml \
-    ui/qml/dialogs/MessageBox.qml \
-    ui/qml/dialogs/SettingsDialog.qml \
-    ui/qml/dialogs/TimeDialog.qml \
-    ui/qml/dialogs/TypingTestDialog.qml \
-    ui/qml/KeyboardLayoutList.qml \
-    ui/qml/LanguageList.qml \
-    ui/qml/LessonPackList.qml \
-    ui/qml/MainWindow.qml \
-    ui/qml/Paper.qml \
-    ui/qml/settings/AppearanceSettings.qml \
-    ui/qml/settings/BehaviorSettings.qml \
-    ui/qml/settings/KeyboardSettings.qml \
-    ui/qml/settings/LanguageSettings.qml
-
 TRANSLATIONS += \
     translations/Open-Typer_sk_SK.ts \
     translations/Open-Typer_de_DE.ts \
