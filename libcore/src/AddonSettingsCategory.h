@@ -21,10 +21,16 @@
 #ifndef ADDONSETTINGSCATEGORY_H
 #define ADDONSETTINGSCATEGORY_H
 
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QObject>
 
 /*! \brief The AddonSettingsCategory provides a model for settings categories added by addons. */
-class AddonSettingsCategory : public QObject
+class CORE_LIB_EXPORT AddonSettingsCategory : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
