@@ -28,6 +28,7 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QLayout>
+#include "AddonSettingsCategory.h"
 #include "AddonButton.h"
 #include "AppMenuModel.h"
 
@@ -41,6 +42,7 @@
 class CORE_LIB_EXPORT AddonApi : public QObject
 {
 		Q_OBJECT
+		Q_PROPERTY(QList<AddonSettingsCategory *> settingsCategories READ settingsCategories NOTIFY settingsCategoriesChanged)
 		Q_PROPERTY(QList<AppMenuModel *> menus READ menus NOTIFY menusChanged)
 		Q_PROPERTY(QList<AddonButton *> mainButtons READ mainButtons NOTIFY mainButtonsChanged)
 		Q_PROPERTY(QList<AddonButton *> exOptionsButtons READ exOptionsButtons NOTIFY exOptionsButtonsChanged)
@@ -59,10 +61,10 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		};
 		Q_ENUM(Event)
 
-		static bool addSettingsCategory(QString categoryName, QIcon icon, QString className);
-		static QList<QVariantMap> settingsCategories(void);
-		static void clearSettingsCategories(void);
 		Q_INVOKABLE static void sendEvent(Event type, QVariantMap args = QVariantMap());
+
+		bool addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource = "");
+		QList<AddonSettingsCategory *> settingsCategories(void);
 
 		void addMenu(AppMenuModel *menu);
 		QList<AppMenuModel *> menus(void);
@@ -80,6 +82,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		QList<AddonButton *> exInfoButtons(void);
 
 	private:
+		void deleteSettingsCategories(void);
 		void deleteMenus(void);
 		void deleteMainButtons(void);
 		void deleteExOptionsButtons(void);
@@ -90,7 +93,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		AddonButton *createButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		static QMap<int, QString> m_loadExTargets;
 		static bool m_blockLoadedEx;
-		static QList<QVariantMap> m_settingsCategories;
+		QList<AddonSettingsCategory *> m_settingsCategories;
 		QList<AppMenuModel *> m_menus;
 		QList<AddonButton *> m_mainButtons;
 		QList<AddonButton *> m_exOptionsButtons;
@@ -100,6 +103,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 	signals:
 		void changeMode(int mode);
 		void startTypingTest(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
+		void settingsCategoriesChanged(QList<AddonSettingsCategory *>);
 		void menusChanged(QList<AppMenuModel *> menus);
 		void mainButtonsChanged(QList<AddonButton *> buttons);
 		void exOptionsButtonsChanged(QList<AddonButton *> buttons);

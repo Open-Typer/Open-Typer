@@ -19,6 +19,7 @@
  */
 
 #include <QApplication>
+#include <QFile>
 #include "AddonApi.h"
 #include "IAddon.h"
 #include "AppMenuBar.h"
@@ -26,37 +27,40 @@
 AddonApi globalAddonApi;
 QMap<int, QString> AddonApi::m_loadExTargets;
 bool AddonApi::m_blockLoadedEx;
-QList<QVariantMap> AddonApi::m_settingsCategories;
 
-/*! Adds settings category with widget of class className. */
-bool AddonApi::addSettingsCategory(QString categoryName, QIcon icon, QString className)
+/*! Adds a settings category with QML component with the given URL. */
+bool AddonApi::addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource)
 {
-	if(QMetaType::type(QString(className + "*").toStdString().c_str()) == QMetaType::UnknownType)
+	if(!QFile::exists(":/qml/" + qmlFileName))
 	{
-		QMessageBox::critical(nullptr, "Error", QString("Could not add settings category \"%1\": meta type \"%2\" not found").arg(categoryName, className));
+		QMessageBox::critical(nullptr, "Error", QString("Could not add settings category \"%1\": QML file \"%2\" not found").arg(categoryName, qmlFileName));
 		return false;
 	}
-	QVariantMap category;
-	category.insert("name", categoryName);
-	category.insert("icon", icon);
-	category.insert("class", className);
+	AddonSettingsCategory *category = new AddonSettingsCategory(this);
+	category->setName(categoryName);
+	category->setQmlFileName(qmlFileName);
+	category->setIconName(iconName);
+	category->setIconSource(iconSource);
 	m_settingsCategories.append(category);
+	emit settingsCategoriesChanged(m_settingsCategories);
 	return true;
 }
 
-/*!
- * Returns list of settings categories.\n
- * Every category is defined by a map consisting of "name", "icon" and "class" keys. \see addSettingsCategory
- */
-QList<QVariantMap> AddonApi::settingsCategories(void)
+/*! List of settings categories. */
+QList<AddonSettingsCategory *> AddonApi::settingsCategories(void)
 {
 	return m_settingsCategories;
 }
 
-/*! Removes all settings categories. */
-void AddonApi::clearSettingsCategories(void)
+/*! Deletes all settings categories. */
+void AddonApi::deleteSettingsCategories(void)
 {
+	QList<QObject *> objList;
+	for(int i = 0; i < m_settingsCategories.length(); i++)
+		objList.append(m_settingsCategories[i]);
+	deleteObjects(&objList);
 	m_settingsCategories.clear();
+	emit settingsCategoriesChanged(m_settingsCategories);
 }
 
 /*! Sends an event with the given type to each loaded addon. */
