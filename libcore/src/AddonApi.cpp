@@ -28,36 +28,6 @@ QMap<int, QString> AddonApi::m_loadExTargets;
 bool AddonApi::m_blockLoadedEx;
 QList<QVariantMap> AddonApi::m_settingsCategories;
 
-/*! Adds a load exercise target. */
-void AddonApi::addLoadExTarget(int id, QString name)
-{
-	m_loadExTargets[id] = name;
-}
-
-/*! Clears map of load exercise targets. */
-void AddonApi::clearLoadExTargets(void)
-{
-	m_loadExTargets.clear();
-}
-
-/*! Returns map of load exercise targets. */
-QMap<int, QString> AddonApi::loadExTargets(void)
-{
-	return m_loadExTargets;
-}
-
-/*! Returns true if an addon blocked starting the exercise loaded by LoadExerciseDialog. */
-bool AddonApi::blockLoadedEx(void)
-{
-	return m_blockLoadedEx;
-}
-
-/*! If set to true, the exercise loaded by LoadExerciseDialog will be ignored. */
-void AddonApi::setBlockLoadedEx(bool value)
-{
-	m_blockLoadedEx = value;
-}
-
 /*! Adds settings category with widget of class className. */
 bool AddonApi::addSettingsCategory(QString categoryName, QIcon icon, QString className)
 {

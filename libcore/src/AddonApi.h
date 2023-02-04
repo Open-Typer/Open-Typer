@@ -59,11 +59,6 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		};
 		Q_ENUM(Event)
 
-		static void addLoadExTarget(int id, QString name);
-		static void clearLoadExTargets(void);
-		static QMap<int, QString> loadExTargets(void);
-		static bool blockLoadedEx(void);
-		static void setBlockLoadedEx(bool value);
 		static bool addSettingsCategory(QString categoryName, QIcon icon, QString className);
 		static QList<QVariantMap> settingsCategories(void);
 		static void clearSettingsCategories(void);
