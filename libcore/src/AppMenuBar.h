@@ -40,6 +40,7 @@ class CORE_LIB_EXPORT AppMenuBar : public QObject
 		Q_OBJECT
 		Q_PROPERTY(QList<AppMenuModel *> menus READ menus WRITE setMenus NOTIFY menusChanged)
 		Q_PROPERTY(AppMenuItem *openAction READ openAction NOTIFY openActionChanged)
+		Q_PROPERTY(AppMenuItem *printAction READ printAction NOTIFY printActionChanged)
 
 	public:
 		explicit AppMenuBar(QObject *parent = nullptr);
@@ -51,6 +52,7 @@ class CORE_LIB_EXPORT AppMenuBar : public QObject
 		void updateMenus(void);
 
 		AppMenuItem *openAction(void);
+		AppMenuItem *printAction(void);
 
 	private:
 		void createMenus(void);
@@ -58,12 +60,15 @@ class CORE_LIB_EXPORT AppMenuBar : public QObject
 
 		AppMenuModel fileMenu;
 		AppMenuItem m_openAction;
-		AppMenuItem fileSeparator;
+		AppMenuItem fileSeparator1;
+		AppMenuItem fileSeparator2;
+		AppMenuItem m_printAction;
 		AppMenuItem quitAction;
 
 	signals:
 		void menusChanged(QList<AppMenuModel *> menus);
 		void openActionChanged();
+		void printActionChanged();
 };
 
 extern AppMenuBar CORE_LIB_EXPORT globalMenuBar;

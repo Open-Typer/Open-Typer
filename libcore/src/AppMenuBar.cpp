@@ -36,8 +36,13 @@ void AppMenuBar::createMenus(void)
 	m_menus.clear();
 	// File
 	fileMenu.addItem(&m_openAction);
-	fileSeparator.setIsSeparator(true);
-	fileMenu.addItem(&fileSeparator);
+	fileSeparator1.setIsSeparator(true);
+	fileMenu.addItem(&fileSeparator1);
+#ifndef Q_OS_WASM
+	fileMenu.addItem(&m_printAction);
+	fileSeparator2.setIsSeparator(true);
+	fileMenu.addItem(&fileSeparator2);
+#endif
 	fileMenu.addItem(&quitAction);
 	connect(&quitAction, &AppMenuItem::clicked, this, []() {
 		qApp->quit();
@@ -52,6 +57,7 @@ void AppMenuBar::updateMenus(void)
 	// File
 	fileMenu.setTitle(tr("&File"));
 	m_openAction.setText(tr("Open..."));
+	m_printAction.setText(tr("Print"));
 	quitAction.setText(tr("Quit"));
 	emit menusChanged(m_menus);
 }
@@ -85,4 +91,9 @@ void AppMenuBar::removeMenu(AppMenuModel *menu)
 AppMenuItem *AppMenuBar::openAction(void)
 {
 	return &m_openAction;
+}
+
+AppMenuItem *AppMenuBar::printAction(void)
+{
+	return &m_printAction;
 }
