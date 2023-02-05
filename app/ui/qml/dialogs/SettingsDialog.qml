@@ -130,7 +130,7 @@ CustomDialog {
 				ScrollBar.vertical: ScrollBar {
 					width: 10
 					position: flickable.visibleArea.yPosition
-					policy: ScrollBar.AlwaysOn
+					policy: ScrollBar.AsNeeded
 				}
 				onCurrentComponentChanged: {
 					var component = Qt.createComponent(currentComponent);
