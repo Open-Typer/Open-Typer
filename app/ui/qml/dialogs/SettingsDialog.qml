@@ -56,6 +56,11 @@ CustomDialog {
 					name: qsTr("Appearance")
 					iconName: "appearance"
 					qmlFileName: "settings/AppearanceSettings.qml"
+				},
+				SettingsCategory {
+					name: qsTr("Addons")
+					iconName: "add"
+					qmlFileName: "settings/AddonSettings.qml"
 				}
 			]
 			id: listView
