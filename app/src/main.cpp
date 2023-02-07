@@ -76,6 +76,12 @@ void loadAddons(QString path)
 			if(addonInterface)
 			{
 				QString className = plugin->metaObject()->className();
+				QStringList addonMinVersion = addonInterface->version().split(".");
+				QStringList appVersion = QCoreApplication::applicationVersion().split(".");
+				if(addonMinVersion[0].toInt() != appVersion[0].toInt())
+					continue;
+				if(addonMinVersion[1].toInt() > appVersion[1].toInt())
+					continue;
 				if(loadedAddonsClasses.contains(className))
 					continue;
 				loadedAddons.append(addonInterface);
