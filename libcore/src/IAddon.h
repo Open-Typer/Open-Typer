@@ -37,6 +37,7 @@ class CORE_LIB_EXPORT IAddon
 	public:
 		virtual ~IAddon(void) = default;
 		virtual void addonEvent(AddonApi::Event type, QVariantMap args) = 0;
+		virtual QString version() = 0;
 };
 
 Q_DECLARE_INTERFACE(IAddon, "opentyper.addon")
