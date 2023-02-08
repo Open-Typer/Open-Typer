@@ -155,6 +155,7 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<QmlUtils>("OpenTyper", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		QmlUtils *qmlUtils = new QmlUtils;
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
+		QObject::connect(&globalThemeEngine, &ThemeEngine::themeChanged, qmlUtils, &QmlUtils::reloadMenuBar);
 		return qmlUtils;
 	});
 	QQmlEngine::setObjectOwnership(&globalLanguageManager, QQmlEngine::CppOwnership);
