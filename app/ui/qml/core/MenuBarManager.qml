@@ -24,6 +24,7 @@ import OpenTyper 1.0
 Item {
 	signal openToggled()
 	signal printToggled()
+	signal typingTestToggled()
 
 	Connections {
 		target: AppMenuBar.openAction
@@ -38,6 +39,14 @@ Item {
 
 		function onClicked() {
 			printToggled();
+		}
+	}
+
+	Connections {
+		target: AppMenuBar.typingTestAction
+
+		function onClicked() {
+			typingTestToggled();
 		}
 	}
 }
