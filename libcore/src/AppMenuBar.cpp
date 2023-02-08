@@ -69,6 +69,10 @@ void AppMenuBar::createMenus(void)
 	viewMenu.addItem(&uiMenuAction);
 	m_menus.append(&viewMenu);
 
+	// Tools
+	toolsMenu.addItem(&m_typingTestAction);
+	m_menus.append(&toolsMenu);
+
 	updateMenus();
 }
 
@@ -86,6 +90,10 @@ void AppMenuBar::updateMenus(void)
 	viewMenu.setTitle(tr("&View"));
 	uiMenuAction.setText(tr("User interface"));
 	darkThemeAction.setText(tr("Dark theme"));
+
+	// Tools
+	toolsMenu.setTitle(tr("&Tools"));
+	m_typingTestAction.setText(tr("Typing test"));
 }
 
 /*! List of menus in the menu bar. */
@@ -122,4 +130,9 @@ AppMenuItem *AppMenuBar::openAction(void)
 AppMenuItem *AppMenuBar::printAction(void)
 {
 	return &m_printAction;
+}
+
+AppMenuItem *AppMenuBar::typingTestAction(void)
+{
+	return &m_typingTestAction;
 }

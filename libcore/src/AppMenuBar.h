@@ -41,6 +41,7 @@ class CORE_LIB_EXPORT AppMenuBar : public QObject
 		Q_PROPERTY(QList<AppMenuModel *> menus READ menus WRITE setMenus NOTIFY menusChanged)
 		Q_PROPERTY(AppMenuItem *openAction READ openAction NOTIFY openActionChanged)
 		Q_PROPERTY(AppMenuItem *printAction READ printAction NOTIFY printActionChanged)
+		Q_PROPERTY(AppMenuItem *typingTestAction READ typingTestAction NOTIFY typingTestActionChanged)
 
 	public:
 		explicit AppMenuBar(QObject *parent = nullptr);
@@ -53,6 +54,7 @@ class CORE_LIB_EXPORT AppMenuBar : public QObject
 
 		AppMenuItem *openAction(void);
 		AppMenuItem *printAction(void);
+		AppMenuItem *typingTestAction(void);
 
 	private:
 		Q_INVOKABLE void createMenus(void);
@@ -73,10 +75,15 @@ class CORE_LIB_EXPORT AppMenuBar : public QObject
 		AppMenuModel uiMenu;
 		AppMenuItem darkThemeAction;
 
+		// Tools
+		AppMenuModel toolsMenu;
+		AppMenuItem m_typingTestAction;
+
 	signals:
 		void menusChanged(QList<AppMenuModel *> menus);
 		void openActionChanged();
 		void printActionChanged();
+		void typingTestActionChanged();
 };
 
 extern AppMenuBar CORE_LIB_EXPORT globalMenuBar;
