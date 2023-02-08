@@ -60,3 +60,25 @@ void AppMenuItem::setIsSeparator(bool newIsSeparator)
 	m_isSeparator = newIsSeparator;
 	emit isSeparatorChanged(newIsSeparator);
 }
+
+bool AppMenuItem::checkable(void)
+{
+	return m_checkable;
+}
+
+void AppMenuItem::setCheckable(bool newCheckable)
+{
+	m_checkable = newCheckable;
+	emit checkableChanged(newCheckable);
+}
+
+bool AppMenuItem::checked(void)
+{
+	return m_checked;
+}
+
+void AppMenuItem::setChecked(bool newChecked)
+{
+	m_checked = newChecked;
+	emit checkedChanged(newChecked);
+}
