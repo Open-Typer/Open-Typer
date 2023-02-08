@@ -28,37 +28,29 @@
 #endif
 
 #include <QObject>
-#include "AppMenuModel.h"
+#include "AbstractMenuBar.h"
 
 /*!
  * \brief The AppMenuBar class provides a model for the application menu bar.
  * Note: This model shouldn't be created more than once because the application is intended to have only one menu bar.
  * Use globalMenuBar to access the model.
  */
-class CORE_LIB_EXPORT AppMenuBar : public QObject
+class CORE_LIB_EXPORT AppMenuBar : public AbstractMenuBar
 {
 		Q_OBJECT
-		Q_PROPERTY(QList<AppMenuModel *> menus READ menus WRITE setMenus NOTIFY menusChanged)
 		Q_PROPERTY(AppMenuItem *openAction READ openAction NOTIFY openActionChanged)
 		Q_PROPERTY(AppMenuItem *printAction READ printAction NOTIFY printActionChanged)
 		Q_PROPERTY(AppMenuItem *typingTestAction READ typingTestAction NOTIFY typingTestActionChanged)
 
 	public:
-		explicit AppMenuBar(QObject *parent = nullptr);
-
-		QList<AppMenuModel *> menus(void);
-		void setMenus(QList<AppMenuModel *> newMenus);
-		Q_INVOKABLE void addMenu(AppMenuModel *menu);
-		Q_INVOKABLE void removeMenu(AppMenuModel *menu);
-		void updateMenus(void);
+		void updateMenus(void) override;
 
 		AppMenuItem *openAction(void);
 		AppMenuItem *printAction(void);
 		AppMenuItem *typingTestAction(void);
 
 	private:
-		Q_INVOKABLE void createMenus(void);
-		QList<AppMenuModel *> m_menus;
+		void createMenus(void) override;
 		bool blockDarkThemeActionConnection = false;
 
 		// File
@@ -80,7 +72,6 @@ class CORE_LIB_EXPORT AppMenuBar : public QObject
 		AppMenuItem m_typingTestAction;
 
 	signals:
-		void menusChanged(QList<AppMenuModel *> menus);
 		void openActionChanged();
 		void printActionChanged();
 		void typingTestActionChanged();

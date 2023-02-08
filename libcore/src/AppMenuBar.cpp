@@ -24,13 +24,6 @@
 
 AppMenuBar globalMenuBar;
 
-/*! Constructs AppMenuBar. */
-AppMenuBar::AppMenuBar(QObject *parent) :
-	QObject(parent)
-{
-	QMetaObject::invokeMethod(this, "createMenus", Qt::QueuedConnection);
-}
-
 /*! Creates default menus. */
 void AppMenuBar::createMenus(void)
 {
@@ -94,32 +87,6 @@ void AppMenuBar::updateMenus(void)
 	// Tools
 	toolsMenu.setTitle(tr("&Tools"));
 	m_typingTestAction.setText(tr("Typing test"));
-}
-
-/*! List of menus in the menu bar. */
-QList<AppMenuModel *> AppMenuBar::menus(void)
-{
-	return m_menus;
-}
-
-void AppMenuBar::setMenus(QList<AppMenuModel *> newMenus)
-{
-	m_menus = newMenus;
-	emit menusChanged(newMenus);
-}
-
-/*! Adds a menu. */
-void AppMenuBar::addMenu(AppMenuModel *menu)
-{
-	m_menus.append(menu);
-	emit menusChanged(m_menus);
-}
-
-/*! Removes a menu. */
-void AppMenuBar::removeMenu(AppMenuModel *menu)
-{
-	m_menus.removeAll(menu);
-	emit menusChanged(m_menus);
 }
 
 AppMenuItem *AppMenuBar::openAction(void)
