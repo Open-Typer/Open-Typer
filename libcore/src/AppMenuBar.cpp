@@ -20,6 +20,7 @@
 
 #include <QApplication>
 #include "AppMenuBar.h"
+#include "ThemeEngine.h"
 
 AppMenuBar globalMenuBar;
 
@@ -34,6 +35,7 @@ AppMenuBar::AppMenuBar(QObject *parent) :
 void AppMenuBar::createMenus(void)
 {
 	m_menus.clear();
+
 	// File
 	fileMenu.addItem(&m_openAction);
 	fileSeparator1.setIsSeparator(true);
@@ -48,6 +50,25 @@ void AppMenuBar::createMenus(void)
 		qApp->quit();
 	});
 	m_menus.append(&fileMenu);
+
+	// View
+	darkThemeAction.setCheckable(true);
+	darkThemeAction.setChecked(globalThemeEngine.theme() == ThemeEngine::Theme::DarkTheme);
+	connect(&darkThemeAction, &AppMenuItem::checkedChanged, [this](bool checked) {
+		if(blockDarkThemeActionConnection)
+			return;
+		globalThemeEngine.setTheme(checked ? ThemeEngine::Theme::DarkTheme : ThemeEngine::Theme::LightTheme);
+	});
+	connect(&globalThemeEngine, &ThemeEngine::themeChanged, [this]() {
+		blockDarkThemeActionConnection = true;
+		darkThemeAction.setChecked(globalThemeEngine.theme() == ThemeEngine::Theme::DarkTheme);
+		blockDarkThemeActionConnection = false;
+	});
+	uiMenu.addItem(&darkThemeAction);
+	uiMenuAction.setSubmenu(&uiMenu);
+	viewMenu.addItem(&uiMenuAction);
+	m_menus.append(&viewMenu);
+
 	updateMenus();
 }
 
@@ -60,6 +81,11 @@ void AppMenuBar::updateMenus(void)
 	m_printAction.setText(tr("Print"));
 	quitAction.setText(tr("Quit"));
 	emit menusChanged(m_menus);
+
+	// View
+	viewMenu.setTitle(tr("&View"));
+	uiMenuAction.setText(tr("User interface"));
+	darkThemeAction.setText(tr("Dark theme"));
 }
 
 /*! List of menus in the menu bar. */

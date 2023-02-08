@@ -57,13 +57,21 @@ class CORE_LIB_EXPORT AppMenuBar : public QObject
 	private:
 		Q_INVOKABLE void createMenus(void);
 		QList<AppMenuModel *> m_menus;
+		bool blockDarkThemeActionConnection = false;
 
+		// File
 		AppMenuModel fileMenu;
 		AppMenuItem m_openAction;
 		AppMenuItem fileSeparator1;
 		AppMenuItem fileSeparator2;
 		AppMenuItem m_printAction;
 		AppMenuItem quitAction;
+
+		// View
+		AppMenuModel viewMenu;
+		AppMenuItem uiMenuAction;
+		AppMenuModel uiMenu;
+		AppMenuItem darkThemeAction;
 
 	signals:
 		void menusChanged(QList<AppMenuModel *> menus);
