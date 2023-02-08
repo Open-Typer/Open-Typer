@@ -128,6 +128,7 @@ ApplicationWindow {
 	MenuBarManager {
 		onOpenToggled: panel1.contents.openButton.clicked()
 		onPrintToggled: panel1.contents.printButton.clicked()
+		onTypingTestToggled: panel1.contents.typingTestButton.clicked()
 	}
 
 	ConfigParser {
@@ -267,6 +268,7 @@ ApplicationWindow {
 			control: RowLayout {
 				readonly property alias openButton: openButton
 				readonly property alias printButton: printButton
+				readonly property alias typingTestButton: typingTestButton
 				CustomToolButton {
 					icon.name: "settings"
 					toolTipText: qsTr("Options")
@@ -293,6 +295,7 @@ ApplicationWindow {
 				AddonButtonRepeater { model: AddonApi.mainButtons }
 				ToolSeparator {}
 				CustomToolButton {
+					id: typingTestButton
 					icon.name: "paper"
 					text: qsTr("Typing test")
 					onClicked: {
