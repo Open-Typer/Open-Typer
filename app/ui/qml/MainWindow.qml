@@ -129,6 +129,10 @@ ApplicationWindow {
 		onOpenToggled: panel1.contents.openButton.clicked()
 		onPrintToggled: panel1.contents.printButton.clicked()
 		onTypingTestToggled: panel1.contents.typingTestButton.clicked()
+		onExerciseHistoryToggled: panel2.contents.statsButton.checked = true
+		onTimedExToggled: panel1.contents.timedExButton.clicked()
+		onErrorWordsToggled: panel1.contents.errorWordsButton.clicked()
+		onReverseTextToggled: panel1.contents.reverseTextButton.clicked()
 	}
 
 	ConfigParser {
@@ -269,6 +273,9 @@ ApplicationWindow {
 				readonly property alias openButton: openButton
 				readonly property alias printButton: printButton
 				readonly property alias typingTestButton: typingTestButton
+				readonly property alias timedExButton: timedExButton
+				readonly property alias errorWordsButton: errorWordsButton
+				readonly property alias reverseTextButton: reverseTextButton
 				CustomToolButton {
 					icon.name: "settings"
 					toolTipText: qsTr("Options")
@@ -303,11 +310,13 @@ ApplicationWindow {
 					}
 				}
 				CustomToolButton {
+					id: timedExButton
 					icon.name: "time"
 					text: qsTr("Timed exercise")
 					onClicked: timeDialog.open()
 				}
 				CustomToolButton {
+					id: errorWordsButton
 					icon.name: "close"
 					text: qsTr("Text from error words")
 					onClicked: {
@@ -342,6 +351,7 @@ ApplicationWindow {
 					}
 				}
 				CustomToolButton {
+					id: reverseTextButton
 					icon.name: "rewind"
 					text: qsTr("Reverse text")
 					onClicked: {
