@@ -196,10 +196,30 @@ void ThemeEngine::resetExerciseTextColor(void)
 }
 
 /*! Returns default exercise text color. */
+QColor ThemeEngine::defaultExerciseTextColor(void)
+{
+	return defaultExerciseTextColor(theme() == Theme::DarkTheme);
+}
+
+/*! Returns default exercise text color for light or dark theme. */
 QColor ThemeEngine::defaultExerciseTextColor(bool dark)
 {
-	Q_UNUSED(dark);
-	return QColor(0, 125, 175);
+	return defaultExerciseTextColor(currentAccentColor(), dark);
+}
+
+/*! Returns default exercise text color for the given accent color. */
+QColor ThemeEngine::defaultExerciseTextColor(QColor accent)
+{
+	return defaultExerciseTextColor(accent, theme() == Theme::DarkTheme);
+}
+
+/*! Returns default exercise text color for the given accent color and light or dark theme. */
+QColor ThemeEngine::defaultExerciseTextColor(QColor accent, bool dark)
+{
+	if(dark)
+		return accent.lighter(110);
+	else
+		return accent.darker(150);
 }
 
 /*! Returns exercise text style sheet. */
