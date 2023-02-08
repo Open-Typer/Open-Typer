@@ -701,6 +701,8 @@ ApplicationWindow {
 		// Enable/disable stats
 		var enableStats = !customExerciseLoaded && !customPack && (currentMode == 0);
 		panel2.contents.statsButton.enabled = enableStats;
+		// Reload menu bar
+		QmlUtils.reloadMenuBar();
 		AddonApi.sendEvent(AddonApi.Event_InitExercise);
 	}
 
