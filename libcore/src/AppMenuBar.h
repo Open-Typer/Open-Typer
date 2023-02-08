@@ -55,7 +55,7 @@ class CORE_LIB_EXPORT AppMenuBar : public QObject
 		AppMenuItem *printAction(void);
 
 	private:
-		void createMenus(void);
+		Q_INVOKABLE void createMenus(void);
 		QList<AppMenuModel *> m_menus;
 
 		AppMenuModel fileMenu;

@@ -27,7 +27,7 @@ AppMenuBar globalMenuBar;
 AppMenuBar::AppMenuBar(QObject *parent) :
 	QObject(parent)
 {
-	createMenus();
+	QMetaObject::invokeMethod(this, "createMenus", Qt::QueuedConnection);
 }
 
 /*! Creates default menus. */
