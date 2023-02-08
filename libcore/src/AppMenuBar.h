@@ -41,6 +41,10 @@ class CORE_LIB_EXPORT AppMenuBar : public AbstractMenuBar
 		Q_PROPERTY(AppMenuItem *openAction READ openAction NOTIFY openActionChanged)
 		Q_PROPERTY(AppMenuItem *printAction READ printAction NOTIFY printActionChanged)
 		Q_PROPERTY(AppMenuItem *typingTestAction READ typingTestAction NOTIFY typingTestActionChanged)
+		Q_PROPERTY(AppMenuItem *exerciseHistoryAction READ exerciseHistoryAction NOTIFY exerciseHistoryActionChanged)
+		Q_PROPERTY(AppMenuItem *timedExAction READ timedExAction NOTIFY timedExActionChanged)
+		Q_PROPERTY(AppMenuItem *errorWordsAction READ errorWordsAction NOTIFY errorWordsActionChanged)
+		Q_PROPERTY(AppMenuItem *reverseTextAction READ reverseTextAction NOTIFY reverseTextActionChanged)
 
 	public:
 		void updateMenus(void) override;
@@ -48,6 +52,10 @@ class CORE_LIB_EXPORT AppMenuBar : public AbstractMenuBar
 		AppMenuItem *openAction(void);
 		AppMenuItem *printAction(void);
 		AppMenuItem *typingTestAction(void);
+		AppMenuItem *exerciseHistoryAction(void);
+		AppMenuItem *timedExAction(void);
+		AppMenuItem *errorWordsAction(void);
+		AppMenuItem *reverseTextAction(void);
 
 	private:
 		void createMenus(void) override;
@@ -71,10 +79,21 @@ class CORE_LIB_EXPORT AppMenuBar : public AbstractMenuBar
 		AppMenuModel toolsMenu;
 		AppMenuItem m_typingTestAction;
 
+		// Exercise
+		AppMenuModel exerciseMenu;
+		AppMenuItem m_exerciseHistoryAction;
+		AppMenuItem m_timedExAction;
+		AppMenuItem m_errorWordsAction;
+		AppMenuItem m_reverseTextAction;
+
 	signals:
 		void openActionChanged();
 		void printActionChanged();
 		void typingTestActionChanged();
+		void exerciseHistoryActionChanged();
+		void timedExActionChanged();
+		void errorWordsActionChanged();
+		void reverseTextActionChanged();
 };
 
 extern AppMenuBar CORE_LIB_EXPORT globalMenuBar;

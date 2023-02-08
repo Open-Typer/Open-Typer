@@ -66,6 +66,13 @@ void AppMenuBar::createMenus(void)
 	toolsMenu.addItem(&m_typingTestAction);
 	m_menus.append(&toolsMenu);
 
+	// Exercise
+	exerciseMenu.addItem(&m_exerciseHistoryAction);
+	exerciseMenu.addItem(&m_timedExAction);
+	exerciseMenu.addItem(&m_errorWordsAction);
+	exerciseMenu.addItem(&m_reverseTextAction);
+	m_menus.append(&exerciseMenu);
+
 	updateMenus();
 }
 
@@ -87,6 +94,13 @@ void AppMenuBar::updateMenus(void)
 	toolsMenu.setTitle(tr("&Tools"));
 	m_typingTestAction.setText(tr("Typing test"));
 
+	// Exercise
+	exerciseMenu.setTitle(tr("&Exercise"));
+	m_exerciseHistoryAction.setText(tr("Exercise history"));
+	m_timedExAction.setText(tr("Timed exercise"));
+	m_errorWordsAction.setText(tr("Text from error words"));
+	m_reverseTextAction.setText(tr("Reverse text"));
+
 	emit menusChanged(m_menus);
 }
 
@@ -103,4 +117,24 @@ AppMenuItem *AppMenuBar::printAction(void)
 AppMenuItem *AppMenuBar::typingTestAction(void)
 {
 	return &m_typingTestAction;
+}
+
+AppMenuItem *AppMenuBar::exerciseHistoryAction(void)
+{
+	return &m_exerciseHistoryAction;
+}
+
+AppMenuItem *AppMenuBar::timedExAction(void)
+{
+	return &m_timedExAction;
+}
+
+AppMenuItem *AppMenuBar::errorWordsAction(void)
+{
+	return &m_errorWordsAction;
+}
+
+AppMenuItem *AppMenuBar::reverseTextAction(void)
+{
+	return &m_reverseTextAction;
 }
