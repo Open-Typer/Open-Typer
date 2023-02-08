@@ -25,6 +25,10 @@ Item {
 	signal openToggled()
 	signal printToggled()
 	signal typingTestToggled()
+	signal exerciseHistoryToggled()
+	signal timedExToggled()
+	signal errorWordsToggled()
+	signal reverseTextToggled()
 
 	Connections {
 		target: AppMenuBar.openAction
@@ -47,6 +51,38 @@ Item {
 
 		function onClicked() {
 			typingTestToggled();
+		}
+	}
+
+	Connections {
+		target: AppMenuBar.exerciseHistoryAction
+
+		function onClicked() {
+			exerciseHistoryToggled();
+		}
+	}
+
+	Connections {
+		target: AppMenuBar.timedExAction
+
+		function onClicked() {
+			timedExToggled();
+		}
+	}
+
+	Connections {
+		target: AppMenuBar.errorWordsAction
+
+		function onClicked() {
+			errorWordsToggled();
+		}
+	}
+
+	Connections {
+		target: AppMenuBar.reverseTextAction
+
+		function onClicked() {
+			reverseTextToggled();
 		}
 	}
 }
