@@ -77,7 +77,6 @@ void AppMenuBar::updateMenus(void)
 	m_openAction.setText(tr("Open..."));
 	m_printAction.setText(tr("Print"));
 	quitAction.setText(tr("Quit"));
-	emit menusChanged(m_menus);
 
 	// View
 	viewMenu.setTitle(tr("&View"));
@@ -87,6 +86,8 @@ void AppMenuBar::updateMenus(void)
 	// Tools
 	toolsMenu.setTitle(tr("&Tools"));
 	m_typingTestAction.setText(tr("Typing test"));
+
+	emit menusChanged(m_menus);
 }
 
 AppMenuItem *AppMenuBar::openAction(void)
