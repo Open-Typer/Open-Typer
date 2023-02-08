@@ -65,6 +65,10 @@ MenuBar {
 				itemComponent = Qt.createQmlObject(getComponentString(menuItemType), parentItem);
 				item = itemComponent.createObject(null);
 				item.text = itemData.text;
+				item.checkable = itemData.checkable;
+				item.checked = itemData.checked;
+				item.onCheckedChanged.connect(function() { itemData.checked = item.checked; });
+				itemData.onCheckedChanged.connect(function() { item.checked = itemData.checked; });
 				if(typeof itemData.onClicked != "undefined")
 					item.onTriggered.connect(itemData.onClicked);
 			}
