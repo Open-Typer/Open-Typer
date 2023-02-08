@@ -1176,6 +1176,8 @@ ApplicationWindow {
 		paper.currentLineVisible = false;
 		paper.remainingVisible = false;
 		blockInput = true;
+		// Reload menu bar
+		QmlUtils.reloadMenuBar();
 	}
 
 	function loadText(text, includeNewLines) {
