@@ -33,6 +33,7 @@ INCLUDEPATH += \
 LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 
 SOURCES += \
+    src/AddonItemModel.cpp \
     src/ExportProvider.cpp \
     src/ExportTable.cpp \
     src/ExportTableModel.cpp \
@@ -43,6 +44,7 @@ SOURCES += \
     src/main.cpp
 
 HEADERS += \
+    src/AddonItemModel.h \
     src/ExportProvider.h \
     src/ExportTable.h \
     src/ExportTableModel.h \
