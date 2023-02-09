@@ -37,5 +37,6 @@
         <file>dialogs/ExportDialog.qml</file>
         <file>core/AddonButtonRepeater.qml</file>
         <file>core/MenuBarManager.qml</file>
+        <file>dialogs/AboutDialog.qml</file>
     </qresource>
 </RCC>
