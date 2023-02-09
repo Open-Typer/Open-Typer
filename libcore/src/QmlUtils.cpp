@@ -108,6 +108,18 @@ QString QmlUtils::applicationRevision(void)
 	return BUILD_REVISION;
 }
 
+/*! Returns build year of the application. */
+int QmlUtils::applicationBuildYear(void)
+{
+	QString buildDate = __DATE__;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	QString buildYear = buildDate.sliced(7, 4);
+#else
+	QString buildYear = buildDate.mid(7, 4);
+#endif
+	return buildYear.toInt();
+}
+
 /*! Returns true if the platform is Windows. */
 bool QmlUtils::osWindows(void)
 {
