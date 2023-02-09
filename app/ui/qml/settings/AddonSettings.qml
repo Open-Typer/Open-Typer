@@ -22,11 +22,23 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import OpenTyper 1.0
+import ".."
 import "../controls"
 
 // This settings page can be used only in SettingsDialog!
 ColumnLayout {
 	id: root
+
+	AddonListModel {
+		id: listModel
+		onLoaded: spinner.running = false
+		Component.onCompleted: reload()
+	}
+
+	function reload() {
+		spinner.running = true;
+		listModel.load();
+	}
 
 	RowLayout {
 		Layout.fillWidth: true
@@ -41,64 +53,56 @@ ColumnLayout {
 		}
 	}
 
-	TabBar {
-		id: bar
+	Item {
 		Layout.fillWidth: true
-		background: null
+		Layout.fillHeight: true
 
-		TabButton {
-			text: qsTr("Online")
-			font.capitalization: Font.MixedCase
+		TabBar {
+			id: bar
+			enabled: !spinner.running
+			width: parent.width
+			background: null
+
+			TabButton {
+				text: qsTr("Online")
+				font.capitalization: Font.MixedCase
+			}
+
+			TabButton {
+				text: qsTr("My addons")
+				font.capitalization: Font.MixedCase
+			}
 		}
 
-		TabButton {
-			text: qsTr("My addons")
-			font.capitalization: Font.MixedCase
-		}
-	}
+		StackLayout {
+			enabled: !spinner.running
+			anchors.top: bar.bottom
+			anchors.bottom: parent.bottom
+			width: parent.width
+			currentIndex: bar.currentIndex
 
-	StackLayout {
-		Layout.fillWidth: true
-		currentIndex: bar.currentIndex
+			Item {
+				id: onlineAddonsTab
 
-		Item {
-			id: onlineAddonsTab
-
-			ColumnLayout {
-				anchors.fill: parent
-				Flickable {
-					Layout.fillWidth: true
-					Layout.fillHeight: true
-					contentWidth: addonsLayout.width
-					contentHeight: addonsLayout.height
-					flickableDirection: Flickable.VerticalFlick
+				ListView {
+					id: onlineList
+					anchors.fill: parent
+					model: listModel.items
+					topMargin: 15
+					spacing: 15
 					clip: true
-					ScrollBar.vertical: ScrollBar {
-						width: 10
-						position: flickable.visibleArea.yPosition
-						policy: ScrollBar.AlwaysOn
-					}
-
-					GridLayout {
-						id: addonsLayout
-						columnSpacing: 10
-						rowSpacing: 10
-						columns: 4
-
-						Repeater {
-							model: 50
-							Frame {
-								width: 250
-								height: 250
-								Label {
-									text: "Some addon\nfor Open-Typer"
-									font.bold: true
-								}
-							}
-						}
+					delegate: AddonItem {
+						width: onlineList.width
+						model: modelData
 					}
 				}
 			}
+		}
+
+		BusyIndicator {
+			id: spinner
+			anchors.centerIn: parent
+			running: false
 		}
 	}
 
