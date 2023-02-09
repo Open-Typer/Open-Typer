@@ -30,6 +30,7 @@ Item {
 	signal errorWordsToggled()
 	signal reverseTextToggled()
 	signal preferencesToggled()
+	signal aboutProgramToggled()
 
 	Connections {
 		target: AppMenuBar.openAction
@@ -92,6 +93,14 @@ Item {
 
 		function onClicked() {
 			preferencesToggled();
+		}
+	}
+
+	Connections {
+	target: AppMenuBar.aboutProgramAction
+
+		function onClicked() {
+			aboutProgramToggled();
 		}
 	}
 }
