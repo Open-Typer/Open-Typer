@@ -19,6 +19,8 @@
  */
 
 #include <QApplication>
+#include <QDesktopServices>
+#include <QUrl>
 #include "AppMenuBar.h"
 #include "ThemeEngine.h"
 
@@ -77,6 +79,16 @@ void AppMenuBar::createMenus(void)
 	optionsMenu.addItem(&m_preferencesAction);
 	m_menus.append(&optionsMenu);
 
+	// Help
+	helpMenu.addItem(&docsAction);
+	connect(&docsAction, &AppMenuItem::clicked, []() {
+		QDesktopServices::openUrl(QUrl("https://open-typer.github.io/docs"));
+	});
+	helpMenu.addItem(&m_aboutProgramAction);
+	helpMenu.addItem(&aboutQtAction);
+	connect(&aboutQtAction, &AppMenuItem::clicked, qApp, &QApplication::aboutQt);
+	m_menus.append(&helpMenu);
+
 	updateMenus();
 }
 
@@ -108,6 +120,12 @@ void AppMenuBar::updateMenus(void)
 	// Options
 	optionsMenu.setTitle(tr("&Options"));
 	m_preferencesAction.setText(tr("Preferences"));
+
+	// Help
+	helpMenu.setTitle(tr("&Help"));
+	docsAction.setText(tr("&Online documentation"));
+	m_aboutProgramAction.setText(tr("About program..."));
+	aboutQtAction.setText(tr("About Qt..."));
 
 	emit menusChanged(m_menus);
 }
@@ -150,4 +168,9 @@ AppMenuItem *AppMenuBar::reverseTextAction(void)
 AppMenuItem *AppMenuBar::preferencesAction(void)
 {
 	return &m_preferencesAction;
+}
+
+AppMenuItem *AppMenuBar::aboutProgramAction(void)
+{
+	return &m_aboutProgramAction;
 }
