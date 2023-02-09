@@ -134,6 +134,7 @@ ApplicationWindow {
 		onErrorWordsToggled: panel1.contents.errorWordsButton.clicked()
 		onReverseTextToggled: panel1.contents.reverseTextButton.clicked()
 		onPreferencesToggled: settingsDialog.open()
+		onAboutProgramToggled: aboutDialog.open()
 	}
 
 	ConfigParser {
@@ -550,6 +551,10 @@ ApplicationWindow {
 
 	ExportDialog {
 		id: exportDialog
+	}
+
+	AboutDialog {
+		id: aboutDialog
 	}
 
 	function reload() {
