@@ -45,6 +45,7 @@ class CORE_LIB_EXPORT AppMenuBar : public AbstractMenuBar
 		Q_PROPERTY(AppMenuItem *timedExAction READ timedExAction NOTIFY timedExActionChanged)
 		Q_PROPERTY(AppMenuItem *errorWordsAction READ errorWordsAction NOTIFY errorWordsActionChanged)
 		Q_PROPERTY(AppMenuItem *reverseTextAction READ reverseTextAction NOTIFY reverseTextActionChanged)
+		Q_PROPERTY(AppMenuItem *preferencesAction READ preferencesAction NOTIFY preferencesActionChanged)
 
 	public:
 		void updateMenus(void) override;
@@ -56,6 +57,7 @@ class CORE_LIB_EXPORT AppMenuBar : public AbstractMenuBar
 		AppMenuItem *timedExAction(void);
 		AppMenuItem *errorWordsAction(void);
 		AppMenuItem *reverseTextAction(void);
+		AppMenuItem *preferencesAction(void);
 
 	private:
 		void createMenus(void) override;
@@ -86,6 +88,10 @@ class CORE_LIB_EXPORT AppMenuBar : public AbstractMenuBar
 		AppMenuItem m_errorWordsAction;
 		AppMenuItem m_reverseTextAction;
 
+		// Options
+		AppMenuModel optionsMenu;
+		AppMenuItem m_preferencesAction;
+
 	signals:
 		void openActionChanged();
 		void printActionChanged();
@@ -94,6 +100,7 @@ class CORE_LIB_EXPORT AppMenuBar : public AbstractMenuBar
 		void timedExActionChanged();
 		void errorWordsActionChanged();
 		void reverseTextActionChanged();
+		void preferencesActionChanged();
 };
 
 extern AppMenuBar CORE_LIB_EXPORT globalMenuBar;

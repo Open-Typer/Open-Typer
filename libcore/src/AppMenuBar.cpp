@@ -73,6 +73,10 @@ void AppMenuBar::createMenus(void)
 	exerciseMenu.addItem(&m_reverseTextAction);
 	m_menus.append(&exerciseMenu);
 
+	// Options
+	optionsMenu.addItem(&m_preferencesAction);
+	m_menus.append(&optionsMenu);
+
 	updateMenus();
 }
 
@@ -100,6 +104,10 @@ void AppMenuBar::updateMenus(void)
 	m_timedExAction.setText(tr("Timed exercise"));
 	m_errorWordsAction.setText(tr("Text from error words"));
 	m_reverseTextAction.setText(tr("Reverse text"));
+
+	// Options
+	optionsMenu.setTitle(tr("&Options"));
+	m_preferencesAction.setText(tr("Preferences"));
 
 	emit menusChanged(m_menus);
 }
@@ -137,4 +145,9 @@ AppMenuItem *AppMenuBar::errorWordsAction(void)
 AppMenuItem *AppMenuBar::reverseTextAction(void)
 {
 	return &m_reverseTextAction;
+}
+
+AppMenuItem *AppMenuBar::preferencesAction(void)
+{
+	return &m_preferencesAction;
 }
