@@ -51,6 +51,7 @@
 #include "ExportProvider.h"
 #include "ExportTable.h"
 #include "AppMenuBar.h"
+#include "AddonListModel.h"
 #include "updater/Updater.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
@@ -183,6 +184,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<AppMenuModel>("OpenTyper", 1, 0, "AppMenuModel");
 	qmlRegisterType<AppMenuItem>("OpenTyper", 1, 0, "AppMenuItem");
 	qmlRegisterType<AddonSettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
+	qmlRegisterType<AddonItemModel>("OpenTyper", 1, 0, "AddonItemModel");
+	qmlRegisterType<AddonListModel>("OpenTyper", 1, 0, "AddonListModel");
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterUncreatableMetaObject(MistakeRecord::staticMetaObject, "OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
 	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
