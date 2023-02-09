@@ -47,7 +47,6 @@ SOURCES += \
     src/QmlUtils.cpp \
     src/Settings.cpp \
     src/StringUtils.cpp \
-    src/widgets/TextView.cpp \
     src/ThemeEngine.cpp \
     src/IAddon.cpp
 
@@ -77,7 +76,6 @@ HEADERS += \
     src/QmlUtils.h \
     src/Settings.h \
     src/StringUtils.h \
-    src/widgets/TextView.h \
     src/ThemeEngine.h \
     src/IAddon.h
 
