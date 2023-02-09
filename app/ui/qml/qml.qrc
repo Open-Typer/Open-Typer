@@ -39,5 +39,6 @@
         <file>core/MenuBarManager.qml</file>
         <file>dialogs/AboutDialog.qml</file>
         <file>settings/AddonSettings.qml</file>
+        <file>AddonItem.qml</file>
     </qresource>
 </RCC>
