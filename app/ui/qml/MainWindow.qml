@@ -133,6 +133,7 @@ ApplicationWindow {
 		onTimedExToggled: panel1.contents.timedExButton.clicked()
 		onErrorWordsToggled: panel1.contents.errorWordsButton.clicked()
 		onReverseTextToggled: panel1.contents.reverseTextButton.clicked()
+		onPreferencesToggled: settingsDialog.open()
 	}
 
 	ConfigParser {
