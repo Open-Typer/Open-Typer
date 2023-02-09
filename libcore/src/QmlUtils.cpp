@@ -99,6 +99,15 @@ int QmlUtils::qtVersionPatch(void)
 	return QT_VERSION_PATCH;
 }
 
+/*!
+ * Returns the application git revision.\n
+ * Use QCoreApplication#applicationVersion() or Qt.application.version in QML to get the version.
+ */
+QString QmlUtils::applicationRevision(void)
+{
+	return BUILD_REVISION;
+}
+
 /*! Returns true if the platform is Windows. */
 bool QmlUtils::osWindows(void)
 {
