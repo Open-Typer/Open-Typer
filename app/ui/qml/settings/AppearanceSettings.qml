@@ -114,7 +114,7 @@ ColumnLayout {
 		}
 
 		Label {
-			text: "Accent color:"
+			text: qsTr("Accent color:")
 		}
 
 		RowLayout {
