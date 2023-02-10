@@ -161,6 +161,7 @@ Item {
 		standardButtons: root.standardButtons
 		modal: true
 		onAboutToShow: {
+			contentsLoader.active = 1;
 			blur.visible = true;
 			blurInAnimation.running = true;
 			menuBarBlur.visible = true;
@@ -177,6 +178,7 @@ Item {
 			root.aboutToHide();
 		}
 		onClosed: {
+			contentsLoader.active = 0;
 			blur.visible = false;
 			menuBarBlur.visible = false;
 			dialogMask.resetPos();
@@ -219,6 +221,7 @@ Item {
 					Layout.fillHeight: true
 					Loader {
 						id: contentsLoader
+						active: false
 						anchors.fill: parent
 					}
 				}
