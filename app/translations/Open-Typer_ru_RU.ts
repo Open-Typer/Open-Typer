@@ -2,6 +2,35 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>AboutDialog</name>
+    <message>
+        <location filename="../ui/qml/dialogs/AboutDialog.qml" line="29"/>
+        <source>About %1</source>
+        <extracomment>For example &quot;About Open-Typer&quot; (%1 is the app name)</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/AboutDialog.qml" line="51"/>
+        <source>Version: %1</source>
+        <translation>Версия: %1</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/AboutDialog.qml" line="55"/>
+        <source>Revision: %1</source>
+        <translation>Ревизия: %1</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/AboutDialog.qml" line="60"/>
+        <source>Source code: %1</source>
+        <translation>Исходный код: %1</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/AboutDialog.qml" line="71"/>
+        <source>Published with the GNU General Public License.</source>
+        <translation>Опубликовано с GNU General Public License.</translation>
+    </message>
+</context>
+<context>
     <name>AppearanceSettings</name>
     <message>
         <location filename="../ui/qml/settings/AppearanceSettings.qml" line="32"/>
@@ -10,172 +39,137 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="90"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="94"/>
         <source>Themes</source>
         <translation>Темы</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="98"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="104"/>
         <source>Light</source>
         <extracomment>The light theme</extracomment>
         <translation>Светл.</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="105"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="111"/>
         <source>Dark</source>
         <extracomment>The dark theme</extracomment>
         <translation>Темн.</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="115"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="117"/>
+        <source>Accent color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="149"/>
         <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="122"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="156"/>
         <source>Font:</source>
         <translation>Шрифт:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="137"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="171"/>
         <source>Exercise text color:</source>
         <translation>Цвет текста упражнения:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="167"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="205"/>
         <source>Input text color:</source>
         <translation>Цвет вводимого текста:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="191"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="229"/>
         <source>Background</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="199"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="237"/>
         <source>Background color:</source>
         <translation>Цвет фона:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="223"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="261"/>
         <source>Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="231"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="269"/>
         <source>Paper color:</source>
         <translation>Цвет текстовой подложки:</translation>
     </message>
+    <message>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="293"/>
+        <source>Keyboard</source>
+        <translation>Клавиатура</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="300"/>
+        <source>Use key colors based on fingers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>BehaviorOptions</name>
+    <name>BehaviorSettings</name>
     <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="42"/>
-        <source>Settings lock</source>
-        <translation>Блокировка настроек</translation>
-    </message>
-    <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="48"/>
-        <source>Lock settings</source>
-        <translation>Заблокировать настройки</translation>
-    </message>
-    <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="55"/>
-        <source>Old password:</source>
-        <translation>Старый пароль:</translation>
-    </message>
-    <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="69"/>
-        <source>New password:</source>
-        <translation>Новый пароль:</translation>
-    </message>
-    <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="83"/>
-        <source>Repeat password:</source>
-        <translation>Повторите пароль:</translation>
-    </message>
-    <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="97"/>
-        <source>Apply</source>
-        <translation>Применить</translation>
-    </message>
-    <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="113"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="28"/>
         <source>Exercise validation</source>
         <translation>Проверка выполнения упражнения</translation>
     </message>
     <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="131"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="35"/>
         <source>Error penalty:</source>
         <translation>Штраф за ошибку:</translation>
     </message>
     <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="148"/>
-        <source>Number of characters in one word with max. 1 mistake:</source>
-        <translation>Количество символов в одном слове с макс. 1 ошибкой:</translation>
-    </message>
-    <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="171"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="47"/>
         <source>Limit number of mistakes</source>
         <translation>Включить лимит количества ошибок</translation>
     </message>
     <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="187"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="55"/>
+        <source>Number of characters in one word with max. 1 mistake:</source>
+        <translation>Количество символов в одном слове с макс. 1 ошибкой:</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="67"/>
         <source>Updates</source>
         <translation>Обновления</translation>
     </message>
     <message>
-        <location filename="../ui/options/BehaviorOptions.ui" line="193"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="73"/>
         <source>Check for updates on startup</source>
         <translation>Проверять обновления при запуске приложения</translation>
     </message>
-    <message>
-        <location filename="../src/options/BehaviorOptions.cpp" line="129"/>
-        <source>Settings lock password:</source>
-        <translation>Пароль блокировки настроек:</translation>
-    </message>
-    <message>
-        <location filename="../src/options/BehaviorOptions.cpp" line="152"/>
-        <location filename="../src/options/BehaviorOptions.cpp" line="184"/>
-        <source>Incorrect password!</source>
-        <translation>Неверный пароль!</translation>
-    </message>
-    <message>
-        <location filename="../src/options/BehaviorOptions.cpp" line="191"/>
-        <source>The passwords do not match.</source>
-        <translation>Пароли не совпадают.</translation>
-    </message>
-    <message>
-        <location filename="../src/options/BehaviorOptions.cpp" line="204"/>
-        <source>Settings lock enabled</source>
-        <translation>Блокировка настроек включена</translation>
-    </message>
-    <message>
-        <location filename="../src/options/BehaviorOptions.cpp" line="206"/>
-        <source>Password changed</source>
-        <translation>Пароль изменен</translation>
-    </message>
 </context>
 <context>
-    <name>CustomMenuBar</name>
+    <name>ExerciseHistory</name>
     <message>
-        <location filename="../ui/qml/controls/CustomMenuBar.qml" line="32"/>
-        <source>File</source>
-        <translation>Файл</translation>
+        <location filename="../ui/qml/ExerciseHistory.qml" line="73"/>
+        <source>Error penalty: %1</source>
+        <translation>Штраф за ошибку: %1</translation>
     </message>
     <message>
-        <location filename="../ui/qml/controls/CustomMenuBar.qml" line="36"/>
-        <source>New...</source>
-        <translation>Новый...</translation>
+        <location filename="../ui/qml/ExerciseHistory.qml" line="108"/>
+        <source>Net hits per minute</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/controls/CustomMenuBar.qml" line="40"/>
-        <source>Open...</source>
-        <translation>Открыть...</translation>
+        <location filename="../ui/qml/ExerciseHistory.qml" line="110"/>
+        <source>Attempt</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/controls/CustomMenuBar.qml" line="47"/>
-        <source>Quit</source>
+        <location filename="../ui/qml/ExerciseHistory.qml" line="120"/>
+        <source>Gross hits per minute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/ExerciseHistory.qml" line="126"/>
+        <source>No data yet...</source>
+        <extracomment>When there&apos;s nothing to show in the exercise history chart</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -213,6 +207,119 @@
     </message>
 </context>
 <context>
+    <name>ExportDialog</name>
+    <message>
+        <location filename="../ui/qml/dialogs/ExportDialog.qml" line="35"/>
+        <source>Export text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/ExportDialog.qml" line="61"/>
+        <source>Print</source>
+        <translation>Распечатать</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/ExportDialog.qml" line="72"/>
+        <source>Name:</source>
+        <translation>Имя:</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/ExportDialog.qml" line="83"/>
+        <source>Class:</source>
+        <translatorcomment>В СНГ это была бы буква класса</translatorcomment>
+        <translation>Класс:</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/ExportDialog.qml" line="94"/>
+        <source>Typing test number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/ExportDialog.qml" line="105"/>
+        <source>Grade:</source>
+        <translatorcomment>В СНГ это был бы номер класса</translatorcomment>
+        <translation>Ступень обучения:</translation>
+    </message>
+</context>
+<context>
+    <name>ExportTableModel</name>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="97"/>
+        <source>Typewriting performance result</source>
+        <translation>Результат скорости печати</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="99"/>
+        <source>Name: %1</source>
+        <translation>Имя: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="101"/>
+        <source>Class: %1</source>
+        <translation>Класс: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="103"/>
+        <source>Date: %1</source>
+        <translation>Дата: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="105"/>
+        <source>Number: %1</source>
+        <translation>Номер: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="107"/>
+        <source>Number of gross hits</source>
+        <translation>Количество грубых попаданий</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="110"/>
+        <source>Number of mistakes</source>
+        <translation>Количество ошибок</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="113"/>
+        <source>Mistake penalty</source>
+        <translation>Штраф за ошибку</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="116"/>
+        <source>Number of penalty hits</source>
+        <translation>Количество штрафных попаданий</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="119"/>
+        <source>Number of net hits</source>
+        <translation>Количество чистых попаданий</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="122"/>
+        <source>Time (min)</source>
+        <translation>Время (мин.)</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="125"/>
+        <source>Number of net hits per minute</source>
+        <translation>Количество точных попаданий в минуту</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="128"/>
+        <source>Inaccuracy</source>
+        <translation>Неточность</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="131"/>
+        <source>Achieved performance</source>
+        <translation>Достигнутая скорость</translation>
+    </message>
+    <message>
+        <location filename="../src/ExportTableModel.cpp" line="134"/>
+        <source>Grade</source>
+        <translation>Ступень обучения</translation>
+    </message>
+</context>
+<context>
     <name>InitialSetup</name>
     <message>
         <location filename="../ui/qml/dialogs/InitialSetup.qml" line="39"/>
@@ -221,19 +328,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="84"/>
+        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="87"/>
         <source>%1 Previous</source>
         <extracomment>%1 is the left arrow</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="93"/>
+        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="95"/>
         <source>Next %1</source>
         <extracomment>%1 is the right arrow</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="101"/>
+        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="102"/>
         <source>Finish</source>
         <extracomment>To finish the initial setup</extracomment>
         <translation type="unfinished"></translation>
@@ -256,107 +363,133 @@
     </message>
 </context>
 <context>
-    <name>KeyboardWidget</name>
+    <name>KeyboardSettings</name>
     <message>
-        <location filename="../src/widgets/KeyboardWidget.cpp" line="588"/>
+        <location filename="../ui/qml/settings/KeyboardSettings.qml" line="32"/>
+        <source>Keyboard layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/settings/KeyboardSettings.qml" line="48"/>
+        <source>Lesson pack</source>
+        <translation>Набор уроков</translation>
+    </message>
+</context>
+<context>
+    <name>KeyboardView</name>
+    <message>
+        <location filename="../ui/qml/KeyboardView.qml" line="429"/>
         <source>Hide keyboard</source>
         <translation>Скрыть клавиатуру</translation>
     </message>
     <message>
-        <location filename="../src/widgets/KeyboardWidget.cpp" line="593"/>
+        <location filename="../ui/qml/KeyboardView.qml" line="429"/>
         <source>Show keyboard</source>
         <translation>Показать клавиатуру</translation>
     </message>
 </context>
 <context>
+    <name>LanguageSettings</name>
+    <message>
+        <location filename="../ui/qml/settings/LanguageSettings.qml" line="29"/>
+        <source>Language</source>
+        <translation>Язык</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="208"/>
+        <location filename="../ui/qml/MainWindow.qml" line="283"/>
         <source>Options</source>
         <translation>Опции</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="218"/>
+        <location filename="../ui/qml/MainWindow.qml" line="295"/>
         <source>Print</source>
         <translation>Распечатать</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="230"/>
+        <location filename="../ui/qml/MainWindow.qml" line="309"/>
         <source>Typing test</source>
         <translation>Вводимый тест</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="285"/>
+        <location filename="../ui/qml/MainWindow.qml" line="358"/>
         <source>Reverse text</source>
         <translation>Перевернуть текст</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="309"/>
+        <location filename="../ui/qml/MainWindow.qml" line="383"/>
         <source>Repeat exercise</source>
         <translation>Повторить упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="315"/>
+        <location filename="../ui/qml/MainWindow.qml" line="389"/>
         <source>Close loaded exercise</source>
         <translation>Закрыть загруженное упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="323"/>
+        <location filename="../ui/qml/MainWindow.qml" line="397"/>
         <source>Previous exercise</source>
         <translation>Предыдущее упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="328"/>
+        <location filename="../ui/qml/MainWindow.qml" line="402"/>
         <source>Next exercise</source>
         <translation>Следующее упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="364"/>
+        <location filename="../ui/qml/MainWindow.qml" line="436"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="401"/>
+        <location filename="../ui/qml/MainWindow.qml" line="457"/>
+        <source>Export</source>
+        <translation>Экспорт</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/MainWindow.qml" line="529"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="419"/>
+        <location filename="../ui/qml/MainWindow.qml" line="547"/>
         <source>No error words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="246"/>
+        <location filename="../ui/qml/MainWindow.qml" line="317"/>
         <source>Timed exercise</source>
         <translation>Упражнение на время</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="213"/>
+        <location filename="../ui/qml/MainWindow.qml" line="289"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="251"/>
+        <location filename="../ui/qml/MainWindow.qml" line="323"/>
         <source>Text from error words</source>
         <translation>Текст из слов с ошибками</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="338"/>
+        <location filename="../ui/qml/MainWindow.qml" line="413"/>
         <source>Exercise history</source>
         <translation>История урока</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="402"/>
+        <location filename="../ui/qml/MainWindow.qml" line="530"/>
         <source>This file is too large!</source>
         <translation>Этот файл слишком большой!</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="134"/>
+        <location filename="../ui/qml/MainWindow.qml" line="194"/>
         <source>Text files</source>
         <translation>Текстовые файлы</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="420"/>
+        <location filename="../ui/qml/MainWindow.qml" line="548"/>
         <source>You don&apos;t have any error words.</source>
         <translation>У Вас нет никаких ошибочных слов.</translation>
     </message>
@@ -526,17 +659,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="51"/>
+        <location filename="../src/main.cpp" line="61"/>
         <source>Version: %1</source>
         <translation>Версия: %1</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="126"/>
+        <location filename="../src/main.cpp" line="142"/>
         <source>Loading addons...</source>
         <translation>Загрузка аддонов...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="130"/>
+        <location filename="../src/main.cpp" line="145"/>
         <source>Opening main window...</source>
         <translation>Открывается главное окно...</translation>
     </message>
@@ -544,9 +677,24 @@
 <context>
     <name>SettingsDialog</name>
     <message>
-        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="29"/>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="31"/>
         <source>Settings</source>
         <translation>Настройки</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="41"/>
+        <source>Language</source>
+        <translation>Язык</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="46"/>
+        <source>Behavior</source>
+        <translation>Поведение</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="51"/>
+        <source>Keyboard</source>
+        <translation>Клавиатура</translation>
     </message>
     <message>
         <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="56"/>
@@ -601,48 +749,48 @@
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="202"/>
+        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="199"/>
         <source>From file</source>
         <translation>Из файла</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="208"/>
+        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="205"/>
         <source>Browse</source>
         <translation>Выбрать</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="212"/>
+        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="209"/>
         <source>This file is too large!</source>
         <translation>Этот файл слишком большой!</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="217"/>
+        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="214"/>
         <source>(no file selected)</source>
         <translation>(файл не выбран)</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="223"/>
+        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="220"/>
         <source>Options</source>
         <extracomment>Typing test options</extracomment>
         <translation>Опции</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="229"/>
+        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="226"/>
         <source>Time limited</source>
         <translation>С ограничением по времени</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="239"/>
+        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="236"/>
         <source>Character correction after mistake (by program)</source>
         <translation>Исправление символа после ошибки (программой)</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="248"/>
+        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="245"/>
         <source>Lock user interface</source>
         <translation>Заблокировать пользовательский интерфейс</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="253"/>
+        <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="250"/>
         <source>Hide text</source>
         <translation>Скрыть текст</translation>
     </message>
