@@ -27,6 +27,7 @@
 #include "AddonItemModel.h"
 
 class QPluginLoader;
+class IAddon;
 
 /*!
  * \brief The AddonManager class is used to load, install, uninstall and update addons.
@@ -54,6 +55,8 @@ class AddonManager : public QObject
 		QList<AddonModel *> m_addons;
 		QJsonDocument document;
 		QMap<QString, QList<QPluginLoader *>> pluginLoaders;
+		QVector<IAddon *> loadedAddons;
+		QStringList loadedAddonsClasses;
 
 	signals:
 		void addonsChanged();
