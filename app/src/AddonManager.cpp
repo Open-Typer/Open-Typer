@@ -104,6 +104,7 @@ void AddonManager::installAddon(AddonItemModel *itemModel)
 /*! Uninstalls an addon. */
 void AddonManager::uninstallAddon(QString id)
 {
+	unloadAddon(id);
 	auto model = findAddon(id);
 	if(model == nullptr)
 		return;
