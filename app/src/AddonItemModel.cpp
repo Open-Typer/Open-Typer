@@ -21,6 +21,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QVariant>
 #include "AddonItemModel.h"
 
 /*! Constructs AddonItemModel. */
