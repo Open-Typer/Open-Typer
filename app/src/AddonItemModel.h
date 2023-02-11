@@ -35,6 +35,7 @@ class AddonItemModel : public QObject
 		Q_PROPERTY(QString iconUrl READ iconUrl WRITE setIconUrl NOTIFY iconUrlChanged)
 		Q_PROPERTY(bool proprietary READ proprietary WRITE setProprietary NOTIFY proprietaryChanged)
 		Q_PROPERTY(QStringList downloadUrls READ downloadUrls WRITE setDownloadUrls NOTIFY downloadUrlsChanged)
+		Q_PROPERTY(QString repositoryUrl READ repositoryUrl WRITE setRepositoryUrl NOTIFY repositoryUrlChanged)
 	public:
 		explicit AddonItemModel(QObject *parent = nullptr);
 		static AddonItemModel *fromJson(QByteArray json, QObject *parent = nullptr);
@@ -62,6 +63,9 @@ class AddonItemModel : public QObject
 		QStringList downloadUrls(void);
 		void setDownloadUrls(QStringList newDownloadUrls);
 
+		QString repositoryUrl(void);
+		void setRepositoryUrl(QString newRepositoryUrl);
+
 	private:
 		QString m_id;
 		QString m_name;
@@ -70,6 +74,7 @@ class AddonItemModel : public QObject
 		QString m_iconUrl;
 		bool m_proprietary = true;
 		QStringList m_downloadUrls;
+		QString m_repositoryUrl;
 
 	signals:
 		void idChanged();
@@ -80,6 +85,7 @@ class AddonItemModel : public QObject
 		void proprietaryChanged();
 		void versionChanged();
 		void downloadUrlsChanged();
+		void repositoryUrlChanged();
 };
 
 #endif // ADDONITEMMODEL_H

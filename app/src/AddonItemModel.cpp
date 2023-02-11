@@ -172,3 +172,17 @@ void AddonItemModel::setDownloadUrls(QStringList newDownloadUrls)
 	m_downloadUrls = newDownloadUrls;
 	emit downloadUrlsChanged();
 }
+
+/*! URL of the addon repository. */
+QString AddonItemModel::repositoryUrl(void)
+{
+	return m_repositoryUrl;
+}
+
+void AddonItemModel::setRepositoryUrl(QString newRepositoryUrl)
+{
+	if(m_repositoryUrl == newRepositoryUrl)
+		return;
+	m_repositoryUrl = newRepositoryUrl;
+	emit repositoryUrlChanged();
+}
