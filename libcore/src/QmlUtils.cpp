@@ -37,6 +37,7 @@
 #include "QmlUtils.h"
 #include "ThemeEngine.h"
 #include "ConfigParser.h"
+#include "global.h"
 
 /*! Sets QML root item. */
 void QmlUtils::setBlurSource(QQuickItem *item)
@@ -118,6 +119,12 @@ int QmlUtils::applicationBuildYear(void)
 	QString buildYear = buildDate.mid(7, 4);
 #endif
 	return buildYear.toInt();
+}
+
+/*! Restarts the application. */
+void QmlUtils::restartApplication(void)
+{
+	qApp->exit(EXIT_CODE_REBOOT);
 }
 
 /*! Returns true if the platform is Windows. */
