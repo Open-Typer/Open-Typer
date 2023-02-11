@@ -51,8 +51,10 @@
 #include "ExportProvider.h"
 #include "ExportTable.h"
 #include "AppMenuBar.h"
+#ifndef Q_OS_WASM
 #include "AddonListModel.h"
 #include "AddonManager.h"
+#endif
 #include "updater/Updater.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
@@ -172,10 +174,12 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<AddonApi>("OpenTyper", 1, 0, "AddonApi", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalAddonApi;
 	});
+#ifndef Q_OS_WASM
 	QQmlEngine::setObjectOwnership(&globalAddonManager, QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<AddonManager>("OpenTyper", 1, 0, "AddonManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalAddonManager;
 	});
+#endif
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
 	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
@@ -189,9 +193,11 @@ int main(int argc, char *argv[])
 	qmlRegisterType<AppMenuModel>("OpenTyper", 1, 0, "AppMenuModel");
 	qmlRegisterType<AppMenuItem>("OpenTyper", 1, 0, "AppMenuItem");
 	qmlRegisterType<AddonSettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
+#ifndef Q_OS_WASM
 	qmlRegisterType<AddonItemModel>("OpenTyper", 1, 0, "AddonItemModel");
 	qmlRegisterType<AddonListModel>("OpenTyper", 1, 0, "AddonListModel");
 	qmlRegisterType<AddonModel>("OpenTyper", 1, 0, "AddonModel");
+#endif
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterUncreatableMetaObject(MistakeRecord::staticMetaObject, "OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
 	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");

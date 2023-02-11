@@ -32,11 +32,15 @@ INCLUDEPATH += \
 
 LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 
+!wasm {
+    SOURCES += \
+        src/AddonItemModel.cpp \
+	src/AddonListModel.cpp \
+	src/AddonManager.cpp \
+	src/AddonModel.cpp
+}
+
 SOURCES += \
-    src/AddonItemModel.cpp \
-    src/AddonListModel.cpp \
-    src/AddonManager.cpp \
-    src/AddonModel.cpp \
     src/ExportProvider.cpp \
     src/ExportTable.cpp \
     src/ExportTableModel.cpp \
@@ -46,11 +50,15 @@ SOURCES += \
     src/updater/Updater.cpp \
     src/main.cpp
 
+!wasm {
+    HEADERS += \
+        src/AddonItemModel.h \
+	src/AddonListModel.h \
+	src/AddonManager.h \
+	src/AddonModel.h
+}
+
 HEADERS += \
-    src/AddonItemModel.h \
-    src/AddonListModel.h \
-    src/AddonManager.h \
-    src/AddonModel.h \
     src/ExportProvider.h \
     src/ExportTable.h \
     src/ExportTableModel.h \
