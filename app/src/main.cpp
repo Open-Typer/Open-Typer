@@ -53,6 +53,7 @@
 #include "AddonListModel.h"
 #include "AddonManager.h"
 #endif
+#include "global.h"
 #include "updater/Updater.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
@@ -90,6 +91,7 @@ int main(int argc, char *argv[])
 	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
 	a.processEvents();
 	globalAddonManager.loadAddons();
+	bool addonsLoaded = true;
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
@@ -166,22 +168,34 @@ int main(int argc, char *argv[])
 	// Set icon
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
 	QQuickStyle::setStyle("Material");
-	QQmlApplicationEngine engine;
-	engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
-	QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
-	Settings settings;
-	engine.rootContext()->setContextProperty("Settings", &settings);
-	Updater updater;
-	engine.rootContext()->setContextProperty("Updater", &updater);
-	FileUtils fileUtils;
-	engine.rootContext()->setContextProperty("FileUtils", &fileUtils);
-	BuiltInPacks builtInPacks;
-	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
-	StringUtils stringUtils;
-	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
-	ExportTable table;
-	engine.rootContext()->setContextProperty("exportTable", &table);
-	engine.load("qrc:/qml/MainWindow.qml");
-	splash.finish(nullptr);
-	return a.exec();
+
+	int currentExitCode;
+	do
+	{
+		if(!addonsLoaded)
+			globalAddonManager.loadAddons();
+		QQmlApplicationEngine engine;
+		engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
+		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
+		Settings settings;
+		engine.rootContext()->setContextProperty("Settings", &settings);
+		Updater updater;
+		engine.rootContext()->setContextProperty("Updater", &updater);
+		FileUtils fileUtils;
+		engine.rootContext()->setContextProperty("FileUtils", &fileUtils);
+		BuiltInPacks builtInPacks;
+		engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
+		StringUtils stringUtils;
+		engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
+		ExportTable table;
+		engine.rootContext()->setContextProperty("exportTable", &table);
+		engine.load("qrc:/qml/MainWindow.qml");
+		if(splash.isVisible())
+			splash.finish(nullptr);
+		currentExitCode = a.exec();
+		globalAddonManager.unloadAddons();
+		addonsLoaded = false;
+		if(Settings::isFrozen())
+			Settings::saveChanges();
+	} while(currentExitCode == EXIT_CODE_REBOOT);
 }
