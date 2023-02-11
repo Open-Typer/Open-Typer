@@ -27,82 +27,104 @@ import "../controls"
 
 // This settings page can be used only in SettingsDialog!
 ColumnLayout {
+	property bool spinnerRunning: false
 	id: root
 
 	AddonListModel {
 		id: listModel
-		onLoaded: spinner.running = false
+		onLoaded: spinnerRunning = false
 		Component.onCompleted: reload()
 	}
 
 	function reload() {
-		spinner.running = true;
+		spinnerRunning = true;
 		listModel.load();
 	}
 
-	RowLayout {
-		Layout.fillWidth: true
-
-		TextField {
-			Layout.fillWidth: true
-			placeholderText: qsTr("Search")
-		}
-
-		CustomToolButton {
-			icon.name: "open"
-		}
-	}
-
-	Item {
+	StackView {
+		id: stackView
 		Layout.fillWidth: true
 		Layout.fillHeight: true
+		initialItem: addonListComponent
+	}
 
-		TabBar {
-			id: bar
-			enabled: !spinner.running
-			width: parent.width
-			background: null
+	Component {
+		id: addonListComponent
 
-			TabButton {
-				text: qsTr("Online")
-				font.capitalization: Font.MixedCase
-			}
+		Item {
+			ColumnLayout {
+				anchors.fill: parent
 
-			TabButton {
-				text: qsTr("My addons")
-				font.capitalization: Font.MixedCase
-			}
-		}
+				RowLayout {
+					Layout.fillWidth: true
 
-		StackLayout {
-			enabled: !spinner.running
-			anchors.top: bar.bottom
-			anchors.bottom: parent.bottom
-			width: parent.width
-			currentIndex: bar.currentIndex
+					TextField {
+						Layout.fillWidth: true
+						placeholderText: qsTr("Search")
+					}
 
-			Item {
-				id: onlineAddonsTab
-
-				ListView {
-					id: onlineList
-					anchors.fill: parent
-					model: listModel.items
-					topMargin: 15
-					spacing: 15
-					clip: true
-					delegate: AddonItem {
-						width: onlineList.width
-						model: modelData
+					CustomToolButton {
+						icon.name: "open"
 					}
 				}
-			}
-		}
 
-		BusyIndicator {
-			id: spinner
-			anchors.centerIn: parent
-			running: false
+				TabBar {
+					id: bar
+					enabled: !spinner.running
+					Layout.fillWidth: true
+					background: null
+
+					TabButton {
+						text: qsTr("Online")
+						font.capitalization: Font.MixedCase
+					}
+
+					TabButton {
+						text: qsTr("My addons")
+						font.capitalization: Font.MixedCase
+					}
+				}
+
+				StackLayout {
+					enabled: !spinner.running
+					Layout.fillWidth: true
+					Layout.fillHeight: true
+					currentIndex: bar.currentIndex
+
+					Item {
+						id: onlineAddonsTab
+
+						ListView {
+							id: onlineList
+							anchors.fill: parent
+							model: listModel.items
+							topMargin: 15
+							spacing: 15
+							clip: true
+							delegate: AddonItem {
+								id: addonItem
+								width: onlineList.width
+								model: modelData
+								onClicked: stackView.push(addonInfo)
+
+								Component {
+									id: addonInfo
+									AddonInfo {
+										itemModel: addonItem.model
+										onClosed: stackView.pop()
+									}
+								}
+							}
+						}
+					}
+				}
+
+				BusyIndicator {
+					id: spinner
+					Layout.alignment: Qt.AlignCenter
+					running: spinnerRunning
+				}
+			}
 		}
 	}
 
