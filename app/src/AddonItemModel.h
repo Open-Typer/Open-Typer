@@ -39,7 +39,7 @@ class AddonItemModel : public QObject
 		Q_PROPERTY(QString repositoryUrl READ repositoryUrl WRITE setRepositoryUrl NOTIFY repositoryUrlChanged)
 	public:
 		explicit AddonItemModel(QObject *parent = nullptr);
-		static AddonItemModel *fromJson(QByteArray json, QObject *parent = nullptr);
+		static AddonItemModel *fromJson(QByteArray json, QString id, QObject *parent = nullptr);
 
 		QString id(void);
 		void setId(QString newId);

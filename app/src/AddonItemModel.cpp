@@ -28,7 +28,7 @@ AddonItemModel::AddonItemModel(QObject *parent) :
 	QObject(parent) { }
 
 /*! Creates an AddonItemModel from the given JSON. */
-AddonItemModel *AddonItemModel::fromJson(QByteArray json, QObject *parent)
+AddonItemModel *AddonItemModel::fromJson(QByteArray json, QString id, QObject *parent)
 {
 #if defined(Q_OS_LINUX)
 	QString osName = "linux";
@@ -44,6 +44,7 @@ AddonItemModel *AddonItemModel::fromJson(QByteArray json, QObject *parent)
 	QJsonDocument document = QJsonDocument::fromJson(json);
 	QJsonObject rootObj = document.object();
 	AddonItemModel *ret = new AddonItemModel(parent);
+	ret->setId(id);
 	ret->setName(rootObj["name"].toString());
 	ret->setDescription(rootObj["description"].toString());
 	ret->setVersion(QVersionNumber::fromString(rootObj["version"].toString()));
