@@ -38,14 +38,26 @@ void AddonListModel::load(void)
 	addonCount = 0;
 
 	QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-	connect(manager, &QNetworkAccessManager::finished, [this, repoUrl](QNetworkReply *reply) {
+	connect(manager, &QNetworkAccessManager::finished, [this, manager, repoUrl](QNetworkReply *reply) {
+		auto redirectAttribute = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+		if(redirectAttribute.isValid())
+		{
+			manager->get(QNetworkRequest(redirectAttribute.toUrl()));
+			return;
+		}
 		// Loop through all addon JSON files
 		while(!reply->atEnd())
 		{
 			QString line = reply->readLine();
 			line = line.remove("\n");
 			QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-			connect(manager, &QNetworkAccessManager::finished, [this](QNetworkReply *reply) {
+			connect(manager, &QNetworkAccessManager::finished, [this, manager](QNetworkReply *reply) {
+				auto redirectAttribute = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+				if(redirectAttribute.isValid())
+				{
+					manager->get(QNetworkRequest(redirectAttribute.toUrl()));
+					return;
+				}
 				// Create item model
 				QByteArray json = reply->readAll();
 				auto item = AddonItemModel::fromJson(json, this);
