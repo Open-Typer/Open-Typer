@@ -35,6 +35,7 @@ LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 SOURCES += \
     src/AddonItemModel.cpp \
     src/AddonListModel.cpp \
+    src/AddonManager.cpp \
     src/AddonModel.cpp \
     src/ExportProvider.cpp \
     src/ExportTable.cpp \
@@ -48,6 +49,7 @@ SOURCES += \
 HEADERS += \
     src/AddonItemModel.h \
     src/AddonListModel.h \
+    src/AddonManager.h \
     src/AddonModel.h \
     src/ExportProvider.h \
     src/ExportTable.h \
