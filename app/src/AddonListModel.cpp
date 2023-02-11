@@ -51,7 +51,7 @@ void AddonListModel::load(void)
 			QString line = reply->readLine();
 			line = line.remove("\n");
 			QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-			connect(manager, &QNetworkAccessManager::finished, [this, manager](QNetworkReply *reply) {
+			connect(manager, &QNetworkAccessManager::finished, [this, line, manager](QNetworkReply *reply) {
 				auto redirectAttribute = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 				if(redirectAttribute.isValid())
 				{
@@ -60,7 +60,7 @@ void AddonListModel::load(void)
 				}
 				// Create item model
 				QByteArray json = reply->readAll();
-				auto item = AddonItemModel::fromJson(json, this);
+				auto item = AddonItemModel::fromJson(json, line, this);
 				if(item->downloadUrls().isEmpty())
 					item->deleteLater();
 				else
