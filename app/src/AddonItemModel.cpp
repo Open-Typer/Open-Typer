@@ -20,6 +20,7 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 #include "AddonItemModel.h"
 
 /*! Constructs AddonItemModel. */
@@ -29,6 +30,17 @@ AddonItemModel::AddonItemModel(QObject *parent) :
 /*! Creates an AddonItemModel from the given JSON. */
 AddonItemModel *AddonItemModel::fromJson(QByteArray json, QObject *parent)
 {
+#if defined(Q_OS_LINUX)
+	QString osName = "linux";
+#elif defined(Q_OS_MACOS)
+	QString osName = "macos";
+#elif defined(Q_OS_WINDOWS)
+	QString osName = "windows";
+#endif
+	QString qtMajor = QString::number(QT_VERSION_MAJOR);
+	QString arch = QSysInfo::buildCpuArchitecture();
+	QString downloadLinkEntry = "download_" + osName + "_qt" + qtMajor + "_" + arch;
+
 	QJsonDocument document = QJsonDocument::fromJson(json);
 	QJsonObject rootObj = document.object();
 	AddonItemModel *ret = new AddonItemModel(parent);
@@ -38,6 +50,14 @@ AddonItemModel *AddonItemModel::fromJson(QByteArray json, QObject *parent)
 	ret->setIconUrl(rootObj["icon"].toString());
 	if(rootObj.contains("proprietary"))
 		ret->setProprietary(rootObj["proprietary"].toBool());
+	if(rootObj.contains(downloadLinkEntry))
+	{
+		QVariantList list = rootObj[downloadLinkEntry].toArray().toVariantList();
+		QStringList urlList;
+		for(int i = 0; i < list.length(); i++)
+			urlList.append(list[i].toString());
+		ret->setDownloadUrls(urlList);
+	}
 	return ret;
 }
 
@@ -123,4 +143,18 @@ void AddonItemModel::setProprietary(bool newProprietary)
 		return;
 	m_proprietary = newProprietary;
 	emit proprietaryChanged();
+}
+
+/*! List of download links of the files for the addon. */
+QStringList AddonItemModel::downloadUrls(void)
+{
+	return m_downloadUrls;
+}
+
+void AddonItemModel::setDownloadUrls(QStringList newDownloadUrls)
+{
+	if(m_downloadUrls == newDownloadUrls)
+		return;
+	m_downloadUrls = newDownloadUrls;
+	emit downloadUrlsChanged();
 }
