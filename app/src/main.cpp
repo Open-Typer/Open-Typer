@@ -22,8 +22,6 @@
 #include <QApplication>
 #include <QSettings>
 #include <QSplashScreen>
-#include <QPluginLoader>
-#include <QProcessEnvironment>
 #include <QQuickStyle>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -66,60 +64,6 @@ void changeSplashMessage(QSplashScreen *splash, QString message)
 	splash->showMessage(versionStr + "\n" + message, Qt::AlignHCenter | Qt::AlignBottom, Qt::white);
 }
 
-void loadAddons(QString path)
-{
-	QDir pluginsDir(path);
-	const QStringList entries = pluginsDir.entryList(QDir::Files);
-	for(const QString &fileName : entries)
-	{
-		QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
-		QObject *plugin = pluginLoader.instance();
-		if(plugin)
-		{
-			IAddon *addonInterface = qobject_cast<IAddon *>(plugin);
-			if(addonInterface)
-			{
-				QString className = plugin->metaObject()->className();
-				QStringList addonMinVersion = addonInterface->version().split(".");
-				QStringList appVersion = QCoreApplication::applicationVersion().split(".");
-				if(addonMinVersion[0].toInt() != appVersion[0].toInt())
-					continue;
-				if(addonMinVersion[1].toInt() > appVersion[1].toInt())
-					continue;
-				if(loadedAddonsClasses.contains(className))
-					continue;
-				loadedAddons.append(addonInterface);
-				loadedAddonsClasses += className;
-			}
-			else
-				pluginLoader.unload();
-		}
-	}
-}
-
-void loadAddons(void)
-{
-	QDir pluginsDir(QCoreApplication::applicationDirPath());
-#if defined(Q_OS_WIN)
-	if(pluginsDir.dirName().toLower() == "debug" || pluginsDir.dirName().toLower() == "release")
-		pluginsDir.cdUp();
-#elif defined(Q_OS_MAC)
-	if(pluginsDir.dirName() == "MacOS")
-	{
-		pluginsDir.cdUp();
-		pluginsDir.cdUp();
-		pluginsDir.cdUp();
-	}
-#elif defined(Q_OS_UNIX)
-	QString AppImageDir = QProcessEnvironment::systemEnvironment().value(QStringLiteral("APPIMAGE"));
-	if(!AppImageDir.isEmpty())
-		pluginsDir.cd(AppImageDir + "/..");
-#endif
-	loadAddons(pluginsDir.path());
-	pluginsDir.cd("plugins");
-	loadAddons(pluginsDir.path());
-}
-
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -145,7 +89,7 @@ int main(int argc, char *argv[])
 	splash.show();
 	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
 	a.processEvents();
-	loadAddons();
+	globalAddonManager.loadAddons();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types

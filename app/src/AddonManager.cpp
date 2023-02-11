@@ -21,8 +21,12 @@
 #include <QFile>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QPluginLoader>
+#include <QProcessEnvironment>
+#include <QCoreApplication>
 #include "AddonManager.h"
 #include "FileUtils.h"
+#include "IAddon.h"
 
 AddonManager globalAddonManager;
 
@@ -117,6 +121,60 @@ void AddonManager::uninstallAddon(QString id)
 	QFile jsonFile(FileUtils::addonConfigLocation());
 	if(jsonFile.open(QFile::WriteOnly | QFile::Text))
 		jsonFile.write(document.toJson(QJsonDocument::Compact));
+}
+
+/*! Loads an addon from the given path. */
+QList<QPluginLoader *> AddonManager::loadAddons(QString path)
+{
+	QList<QPluginLoader *> loaderList;
+	QDir pluginsDir(path);
+	const QStringList entries = pluginsDir.entryList(QDir::Files);
+	for(const QString &fileName : entries)
+	{
+		QPluginLoader *pluginLoader = new QPluginLoader(pluginsDir.absoluteFilePath(fileName), this);
+		QObject *plugin = pluginLoader->instance();
+		if(plugin)
+		{
+			IAddon *addonInterface = qobject_cast<IAddon *>(plugin);
+			if(addonInterface)
+			{
+				QString className = plugin->metaObject()->className();
+				QStringList addonMinVersion = addonInterface->version().split(".");
+				QStringList appVersion = QCoreApplication::applicationVersion().split(".");
+				if(addonMinVersion[0].toInt() != appVersion[0].toInt())
+					continue;
+				if(addonMinVersion[1].toInt() > appVersion[1].toInt())
+					continue;
+				if(loadedAddonsClasses.contains(className))
+					continue;
+				loadedAddons.append(addonInterface);
+				loadedAddonsClasses += className;
+				loaderList.append(pluginLoader);
+			}
+			else
+			{
+				pluginLoader->unload();
+				pluginLoader->deleteLater();
+			}
+		}
+	}
+	return loaderList;
+}
+
+/*! Loads all installed addons. */
+void AddonManager::loadAddons(void)
+{
+	pluginLoaders.clear();
+	for(int i = 0; i < m_addons.length(); i++)
+		pluginLoaders.insert(m_addons[i]->id(), loadAddons(FileUtils::addonDirectory() + "/" + m_addons[i]->id()));
+}
+
+/*! Unloads the addon with the given id. */
+void AddonManager::unloadAddon(QString id)
+{
+	auto list = pluginLoaders[id];
+	for(int i = 0; i < list.length(); i++)
+		list[i]->unload();
 }
 
 /*! Saves the installed addon in the JSON file. */
