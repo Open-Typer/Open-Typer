@@ -45,6 +45,7 @@ class AddonManager : public QObject
 		Q_INVOKABLE void installAddon(AddonItemModel *itemModel);
 		Q_INVOKABLE void uninstallAddon(QString id);
 		Q_INVOKABLE void loadAddons(void);
+		Q_INVOKABLE void unloadAddons(void);
 
 	private:
 		QList<QPluginLoader *> loadAddons(QString path);

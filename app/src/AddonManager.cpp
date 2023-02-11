@@ -170,12 +170,25 @@ void AddonManager::loadAddons(void)
 		pluginLoaders.insert(m_addons[i]->id(), loadAddons(FileUtils::addonDirectory() + "/" + m_addons[i]->id()));
 }
 
+/*! Unloads all addons. */
+void AddonManager::unloadAddons(void)
+{
+	QStringList keys = pluginLoaders.keys();
+	for(int i = 0; i < keys.length(); i++)
+		unloadAddon(keys[i]);
+	Q_ASSERT(pluginLoaders.count() == 0);
+}
+
 /*! Unloads the addon with the given id. */
 void AddonManager::unloadAddon(QString id)
 {
 	auto list = pluginLoaders[id];
 	for(int i = 0; i < list.length(); i++)
+	{
 		list[i]->unload();
+		list[i]->deleteLater();
+	}
+	pluginLoaders.remove(id);
 }
 
 /*! Saves the installed addon in the JSON file. */
