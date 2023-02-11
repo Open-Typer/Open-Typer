@@ -77,7 +77,8 @@ HEADERS += \
     src/Settings.h \
     src/StringUtils.h \
     src/ThemeEngine.h \
-    src/IAddon.h
+    src/IAddon.h \
+    src/global.h
 
 TRANSLATIONS += \
     translations/libcore_sk_SK.ts \
