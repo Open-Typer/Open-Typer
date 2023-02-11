@@ -49,8 +49,13 @@ void AddonListModel::load(void)
 				// Create item model
 				QByteArray json = reply->readAll();
 				auto item = AddonItemModel::fromJson(json, this);
-				// Append addonCounter to the list to avoid duplicate keys
-				itemMap.insert(item->name() + QString::number(addonCounter), item);
+				if(item->downloadUrls().isEmpty())
+					item->deleteLater();
+				else
+				{
+					// Append addonCounter to the list to avoid duplicate keys
+					itemMap.insert(item->name() + QString::number(addonCounter), item);
+				}
 				addonCounter++;
 				if(addonCounter >= addonCount)
 				{
