@@ -27,6 +27,7 @@
 class AddonItemModel : public QObject
 {
 		Q_OBJECT
+		Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)
 		Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 		Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 		Q_PROPERTY(QString shortDescription READ shortDescription NOTIFY shortDescriptionChanged)
@@ -37,6 +38,9 @@ class AddonItemModel : public QObject
 	public:
 		explicit AddonItemModel(QObject *parent = nullptr);
 		static AddonItemModel *fromJson(QByteArray json, QObject *parent = nullptr);
+
+		QString id(void);
+		void setId(QString newId);
 
 		QString name(void);
 		void setName(QString newName);
@@ -59,6 +63,7 @@ class AddonItemModel : public QObject
 		void setDownloadUrls(QStringList newDownloadUrls);
 
 	private:
+		QString m_id;
 		QString m_name;
 		QString m_description;
 		QString m_version;
@@ -67,6 +72,7 @@ class AddonItemModel : public QObject
 		QStringList m_downloadUrls;
 
 	signals:
+		void idChanged();
 		void nameChanged();
 		void descriptionChanged();
 		void shortDescriptionChanged();

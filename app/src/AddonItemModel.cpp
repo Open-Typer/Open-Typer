@@ -61,6 +61,20 @@ AddonItemModel *AddonItemModel::fromJson(QByteArray json, QObject *parent)
 	return ret;
 }
 
+/*! Addon ID. */
+QString AddonItemModel::id(void)
+{
+	return m_id;
+}
+
+void AddonItemModel::setId(QString newId)
+{
+	if(m_id == newId)
+		return;
+	m_id = newId;
+	emit idChanged();
+}
+
 /*! The addon name. */
 QString AddonItemModel::name(void)
 {
