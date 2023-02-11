@@ -22,6 +22,7 @@
 #define ADDONITEMMODEL_H
 
 #include <QObject>
+#include <QVersionNumber>
 
 /*! \brief The AddonItemModel class provides a model for a single item in a list of addons. */
 class AddonItemModel : public QObject
@@ -31,7 +32,7 @@ class AddonItemModel : public QObject
 		Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 		Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 		Q_PROPERTY(QString shortDescription READ shortDescription NOTIFY shortDescriptionChanged)
-		Q_PROPERTY(QString version READ version WRITE setVersion NOTIFY versionChanged)
+		Q_PROPERTY(QVersionNumber version READ version WRITE setVersion NOTIFY versionChanged)
 		Q_PROPERTY(QString iconUrl READ iconUrl WRITE setIconUrl NOTIFY iconUrlChanged)
 		Q_PROPERTY(bool proprietary READ proprietary WRITE setProprietary NOTIFY proprietaryChanged)
 		Q_PROPERTY(QStringList downloadUrls READ downloadUrls WRITE setDownloadUrls NOTIFY downloadUrlsChanged)
@@ -51,8 +52,8 @@ class AddonItemModel : public QObject
 
 		QString shortDescription(void);
 
-		QString version(void);
-		void setVersion(QString newVersion);
+		QVersionNumber version(void);
+		void setVersion(QVersionNumber newVersion);
 
 		QString iconUrl(void);
 		void setIconUrl(QString newIconUrl);
@@ -70,7 +71,7 @@ class AddonItemModel : public QObject
 		QString m_id;
 		QString m_name;
 		QString m_description;
-		QString m_version;
+		QVersionNumber m_version;
 		QString m_iconUrl;
 		bool m_proprietary = true;
 		QStringList m_downloadUrls;

@@ -46,7 +46,7 @@ AddonItemModel *AddonItemModel::fromJson(QByteArray json, QObject *parent)
 	AddonItemModel *ret = new AddonItemModel(parent);
 	ret->setName(rootObj["name"].toString());
 	ret->setDescription(rootObj["description"].toString());
-	ret->setVersion(rootObj["version"].toString());
+	ret->setVersion(QVersionNumber::fromString(rootObj["version"].toString()));
 	ret->setIconUrl(rootObj["icon"].toString());
 	if(rootObj.contains("proprietary"))
 		ret->setProprietary(rootObj["proprietary"].toBool());
@@ -118,12 +118,12 @@ QString AddonItemModel::shortDescription(void)
 }
 
 /*! The addon version. */
-QString AddonItemModel::version(void)
+QVersionNumber AddonItemModel::version(void)
 {
 	return m_version;
 }
 
-void AddonItemModel::setVersion(QString newVersion)
+void AddonItemModel::setVersion(QVersionNumber newVersion)
 {
 	if(m_version == newVersion)
 		return;
