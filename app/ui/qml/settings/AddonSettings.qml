@@ -63,9 +63,10 @@ ColumnLayout {
 						placeholderText: qsTr("Search")
 					}
 
-					CustomToolButton {
+					// TODO: Implement open button
+					/*CustomToolButton {
 						icon.name: "open"
-					}
+					}*/
 				}
 
 				TabBar {
