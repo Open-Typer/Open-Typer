@@ -80,6 +80,15 @@ void AddonApi::deleteSettingsCategories(void)
 /*! Sends an event with the given type to each loaded addon. */
 void AddonApi::sendEvent(Event type, QVariantMap args)
 {
+	if(type == Event_InitApp)
+	{
+		globalAddonApi.deleteSettingsCategories();
+		globalAddonApi.deleteMenus();
+		globalAddonApi.deleteMainButtons();
+		globalAddonApi.deleteExOptionsButtons();
+		globalAddonApi.deleteNavigationButtons();
+		globalAddonApi.deleteExInfoButtons();
+	}
 	for(int i = 0; i < m_loadedAddons.count(); i++)
 		m_loadedAddons[i]->addonEvent(type, args);
 }
@@ -120,6 +129,7 @@ QList<AppMenuModel *> AddonApi::menus(void)
 void AddonApi::deleteMainButtons(void)
 {
 	deleteButtons(&m_mainButtons);
+	emit mainButtonsChanged(m_mainButtons);
 }
 
 /*! Adds a new button to the main section. */
@@ -141,6 +151,7 @@ QList<AddonButton *> AddonApi::mainButtons(void)
 void AddonApi::deleteExOptionsButtons(void)
 {
 	deleteButtons(&m_exOptionsButtons);
+	emit exOptionsButtonsChanged(m_exOptionsButtons);
 }
 
 /*! Adds a new button to the exercise options section. */
@@ -162,6 +173,7 @@ QList<AddonButton *> AddonApi::exOptionsButtons(void)
 void AddonApi::deleteNavigationButtons(void)
 {
 	deleteButtons(&m_navigationButtons);
+	emit navigationButtonsChanged(m_navigationButtons);
 }
 
 /*! Adds a new button to the navigation section. */
@@ -183,6 +195,7 @@ QList<AddonButton *> AddonApi::navigationButtons(void)
 void AddonApi::deleteExInfoButtons(void)
 {
 	deleteButtons(&m_exInfoButtons);
+	emit exInfoButtonsChanged(m_exInfoButtons);
 }
 
 /*! Adds a new button to the exercise info section. */
