@@ -21,6 +21,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include "AddonListModel.h"
+#include "AddonManager.h"
+#include "FileUtils.h"
 
 /*! Constructs AddonListModel. */
 AddonListModel::AddonListModel(QObject *parent) :
@@ -29,8 +31,45 @@ AddonListModel::AddonListModel(QObject *parent) :
 /*! Loads the available addons. Emits loaded() when loaded. */
 void AddonListModel::load(void)
 {
-	m_items.clear();
-	emit itemsChanged();
+	emit loadingAborted();
+	if(m_localAddons)
+	{
+		localItemMap.clear();
+		auto addons = globalAddonManager.addons();
+		for(int i = 0; i < addons.length(); i++)
+		{
+			auto model = addons[i];
+			AddonItemModel *itemModel = new AddonItemModel(this);
+			itemModel->setId(model->id());
+			itemModel->setName(model->name());
+			itemModel->setDescription(model->description());
+			itemModel->setVersion(model->version());
+			itemModel->setIconUrl("file://" + FileUtils::addonDirectory() + "/" + model->id() + "/" + model->iconFileName());
+			QStringList downloadUrls;
+			QDir addonDir(FileUtils::addonDirectory() + "/" + model->id());
+			QStringList addonFiles = addonDir.entryList(QDir::Files);
+			addonFiles.removeAll(model->iconFileName());
+			for(int i = 0; i < addonFiles.length(); i++)
+				downloadUrls.append("file://" + FileUtils::addonDirectory() + "/" + model->id() + "/" + addonFiles[i]);
+			itemModel->setDownloadUrls(downloadUrls);
+			// Append i to the name to avoid duplicate keys
+			localItemMap.insert(itemModel->name() + QString::number(i), itemModel);
+		}
+		int i;
+		for(i = 0; i < m_localItems.length(); i++)
+		{
+			if(m_localItems[i])
+				m_localItems[i]->deleteLater();
+		}
+		m_localItems.clear();
+		// Append item pointers from sorted map
+		QStringList keys = localItemMap.keys();
+		for(i = 0; i < keys.length(); i++)
+			m_localItems.append(localItemMap[keys[i]]);
+		emit itemsChanged();
+		emit loaded();
+		return;
+	}
 
 	QString repoUrl = "https://raw.githubusercontent.com/Open-Typer/addons/test";
 	itemMap.clear();
@@ -39,6 +78,8 @@ void AddonListModel::load(void)
 
 	QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 	connect(manager, &QNetworkAccessManager::finished, [this, manager, repoUrl](QNetworkReply *reply) {
+		if(reply->error() != QNetworkReply::NoError)
+			return;
 		auto redirectAttribute = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 		if(redirectAttribute.isValid())
 		{
@@ -52,6 +93,8 @@ void AddonListModel::load(void)
 			line = line.remove("\n");
 			QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 			connect(manager, &QNetworkAccessManager::finished, [this, line, manager](QNetworkReply *reply) {
+				if(reply->error() != QNetworkReply::NoError)
+					return;
 				auto redirectAttribute = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 				if(redirectAttribute.isValid())
 				{
@@ -65,7 +108,7 @@ void AddonListModel::load(void)
 					item->deleteLater();
 				else
 				{
-					// Append addonCounter to the list to avoid duplicate keys
+					// Append addonCounter to the name to avoid duplicate keys
 					itemMap.insert(item->name() + QString::number(addonCounter), item);
 				}
 				addonCounter++;
@@ -86,19 +129,41 @@ void AddonListModel::load(void)
 					emit loaded();
 				}
 			});
-			manager->get(QNetworkRequest(QUrl(repoUrl + "/" + line + ".json")));
+			auto nextReply = manager->get(QNetworkRequest(QUrl(repoUrl + "/" + line + ".json")));
+			connect(this, &AddonListModel::loadingAborted, nextReply, &QNetworkReply::abort);
 		}
 	});
 	// Download list of addons
-	manager->get(QNetworkRequest(QUrl(repoUrl + "/addon-list")));
+	auto reply = manager->get(QNetworkRequest(QUrl(repoUrl + "/addon-list")));
+	connect(this, &AddonListModel::loadingAborted, reply, &QNetworkReply::abort);
 }
 
 /*! List of currently loaded items. */
 QQmlListProperty<AddonItemModel> AddonListModel::items()
 {
+	QList<AddonItemModel *> *list;
+	if(m_localAddons)
+		list = &m_localItems;
+	else
+		list = &m_items;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-	return QQmlListProperty<AddonItemModel>(this, &m_items);
+	return QQmlListProperty<AddonItemModel>(this, list);
 #else
-	return QQmlListProperty<AddonItemModel>(this, m_items);
+	return QQmlListProperty<AddonItemModel>(this, *list);
 #endif
+}
+
+/*! Whether to load installed addons instead of online addons. */
+bool AddonListModel::localAddons(void)
+{
+	return m_localAddons;
+}
+
+void AddonListModel::setLocalAddons(bool newLocalAddons)
+{
+	if(m_localAddons == newLocalAddons)
+		return;
+	m_localAddons = newLocalAddons;
+	load();
+	emit localAddonsChanged();
 }

@@ -31,20 +31,29 @@ class AddonListModel : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QQmlListProperty<AddonItemModel> items READ items NOTIFY itemsChanged)
+		Q_PROPERTY(bool localAddons READ localAddons WRITE setLocalAddons NOTIFY localAddonsChanged)
 	public:
 		explicit AddonListModel(QObject *parent = nullptr);
 		Q_INVOKABLE void load(void);
 
 		QQmlListProperty<AddonItemModel> items();
 
+		bool localAddons(void);
+		void setLocalAddons(bool newLocalAddons);
+
 	private:
 		QList<AddonItemModel *> m_items;
 		QMap<QString, AddonItemModel *> itemMap;
+		QList<AddonItemModel *> m_localItems;
+		QMap<QString, AddonItemModel *> localItemMap;
+		bool m_localAddons = false;
 		int addonCounter, addonCount;
 
 	signals:
 		void loaded();
 		void itemsChanged();
+		void localAddonsChanged();
+		void loadingAborted();
 };
 
 #endif // ADDONLISTMODEL_H
