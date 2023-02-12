@@ -94,7 +94,9 @@ void AddonListModel::load(QString filter)
 		return;
 	}
 
-	QString repoUrl = "https://raw.githubusercontent.com/Open-Typer/addons/test";
+	QVersionNumber appVersion = QVersionNumber::fromString(QCoreApplication::applicationVersion());
+	QVersionNumber appMinorVersion(appVersion.majorVersion(), appVersion.minorVersion(), 0);
+	QString repoUrl = "https://raw.githubusercontent.com/Open-Typer/addons/" + appMinorVersion.toString();
 	itemMap.clear();
 	addonCounter = 0;
 	addonCount = 0;
@@ -102,7 +104,10 @@ void AddonListModel::load(QString filter)
 	QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 	connect(manager, &QNetworkAccessManager::finished, [this, manager, repoUrl, filter](QNetworkReply *reply) {
 		if(reply->error() != QNetworkReply::NoError)
+		{
+			emit loaded();
 			return;
+		}
 		auto redirectAttribute = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 		if(redirectAttribute.isValid())
 		{
@@ -117,7 +122,10 @@ void AddonListModel::load(QString filter)
 			QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 			connect(manager, &QNetworkAccessManager::finished, [this, line, manager, filter](QNetworkReply *reply) {
 				if(reply->error() != QNetworkReply::NoError)
+				{
+					emit loaded();
 					return;
+				}
 				auto redirectAttribute = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 				if(redirectAttribute.isValid())
 				{
