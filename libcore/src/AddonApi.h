@@ -31,6 +31,9 @@
 #include "AddonSettingsCategory.h"
 #include "AddonButton.h"
 #include "AppMenuModel.h"
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+Q_MOC_INCLUDE("IAddon.h")
+#endif
 
 #if defined CORE_SHARED_LIB
 #define CORE_LIB_EXPORT Q_DECL_EXPORT
@@ -38,7 +41,7 @@
 #define CORE_LIB_EXPORT Q_DECL_IMPORT
 #endif
 
-class IAddon;
+class CORE_LIB_EXPORT IAddon;
 
 /*! \brief The AddonApi class provides an API for addons. */
 class CORE_LIB_EXPORT AddonApi : public QObject
