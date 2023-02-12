@@ -88,10 +88,12 @@ int main(int argc, char *argv[])
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();
+#ifndef Q_OS_WASM
 	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
 	a.processEvents();
 	globalAddonManager.loadAddons();
 	bool addonsLoaded = true;
+#endif
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
@@ -172,8 +174,10 @@ int main(int argc, char *argv[])
 	int currentExitCode;
 	do
 	{
+#ifndef Q_OS_WASM
 		if(!addonsLoaded)
 			globalAddonManager.loadAddons();
+#endif
 		QQmlApplicationEngine engine;
 		engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
@@ -193,8 +197,10 @@ int main(int argc, char *argv[])
 		if(splash.isVisible())
 			splash.finish(nullptr);
 		currentExitCode = a.exec();
+#ifndef Q_OS_WASM
 		globalAddonManager.unloadAddons();
 		addonsLoaded = false;
+#endif
 		if(Settings::isFrozen())
 			Settings::saveChanges();
 	} while(currentExitCode == EXIT_CODE_REBOOT);
