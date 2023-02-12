@@ -47,6 +47,9 @@ void AddonModel::downloadIcon(QString url)
 		QFile iconFile(addonDirectory() + "/icon." + reader.format());
 		if(iconFile.open(QFile::WriteOnly))
 			iconFile.write(reply->readAll());
+		QFileInfo fileInfo(iconFile.fileName());
+		setIconFileName(fileInfo.fileName());
+		updateProgress();
 	});
 
 	auto reply = manager->get(QNetworkRequest(QUrl(url)));
@@ -110,7 +113,7 @@ void AddonModel::updateProgress(void)
 	for(int i = 0; i < fileDownloadProgress.length(); i++)
 		progress += fileDownloadProgress[i];
 	setInstallationProgress(progress / (1 + fileDownloadProgress.length()));
-	if(m_installationProgress == 1)
+	if(m_installationProgress == 1 && !iconFileName().isEmpty())
 		setInstalled(true);
 }
 
