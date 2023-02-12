@@ -24,6 +24,7 @@
 #include "AddonManager.h"
 #include "FileUtils.h"
 #include "StringUtils.h"
+#include "global.h"
 
 /*! Constructs AddonListModel. */
 AddonListModel::AddonListModel(QObject *parent) :
@@ -74,6 +75,20 @@ void AddonListModel::load(QString filter)
 		QStringList keys = localItemMap.keys();
 		for(i = 0; i < keys.length(); i++)
 			m_localItems.append(localItemMap[keys[i]]);
+		emit itemsChanged();
+		emit loaded();
+		return;
+	}
+
+	if(!internetConnected())
+	{
+		int i;
+		for(i = 0; i < m_items.length(); i++)
+		{
+			if(m_items[i])
+				m_items[i]->deleteLater();
+		}
+		m_items.clear();
 		emit itemsChanged();
 		emit loaded();
 		return;
