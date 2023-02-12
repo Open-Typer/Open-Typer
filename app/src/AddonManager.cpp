@@ -186,6 +186,7 @@ void AddonManager::unloadAddon(QString id)
 	auto list = pluginLoaders[id];
 	for(int i = 0; i < list.length(); i++)
 	{
+		loadedAddonsClasses.removeAll(list[i]->instance()->metaObject()->className());
 		loadedAddons.removeAll(qobject_cast<IAddon *>(list[i]->instance()));
 		list[i]->unload();
 		list[i]->deleteLater();
