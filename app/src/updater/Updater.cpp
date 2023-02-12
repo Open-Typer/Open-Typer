@@ -72,6 +72,8 @@ void Updater::installUpdate(void)
 /*! Checks for addon updates. */
 void Updater::getAddonUpdates(void)
 {
+	if(!internetConnected())
+		return;
 	// Get installed addons
 	listModel.setLocalAddons(true);
 	listModel.load(); // load() is synchronous with local addons
