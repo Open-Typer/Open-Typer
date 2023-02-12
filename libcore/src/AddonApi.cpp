@@ -27,6 +27,20 @@
 AddonApi globalAddonApi;
 QMap<int, QString> AddonApi::m_loadExTargets;
 bool AddonApi::m_blockLoadedEx;
+QVector<IAddon *> AddonApi::m_loadedAddons;
+
+/*! List of loaded addon interfaces. Automatically set by AddonManager. */
+QVector<IAddon *> AddonApi::loadedAddons(void)
+{
+	return m_loadedAddons;
+}
+
+void AddonApi::setLoadedAddons(QVector<IAddon *> newLoadedAddons)
+{
+	if(m_loadedAddons == newLoadedAddons)
+		return;
+	m_loadedAddons = newLoadedAddons;
+}
 
 /*! Adds a settings category with QML component with the given URL. */
 bool AddonApi::addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource)
@@ -66,8 +80,8 @@ void AddonApi::deleteSettingsCategories(void)
 /*! Sends an event with the given type to each loaded addon. */
 void AddonApi::sendEvent(Event type, QVariantMap args)
 {
-	for(int i = 0; i < loadedAddons.count(); i++)
-		loadedAddons[i]->addonEvent(type, args);
+	for(int i = 0; i < m_loadedAddons.count(); i++)
+		m_loadedAddons[i]->addonEvent(type, args);
 }
 
 /*! Deletes all menus. */

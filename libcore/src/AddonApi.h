@@ -38,10 +38,13 @@
 #define CORE_LIB_EXPORT Q_DECL_IMPORT
 #endif
 
+class IAddon;
+
 /*! \brief The AddonApi class provides an API for addons. */
 class CORE_LIB_EXPORT AddonApi : public QObject
 {
 		Q_OBJECT
+		Q_PROPERTY(QVector<IAddon *> loadedAddons READ loadedAddons WRITE setLoadedAddons)
 		Q_PROPERTY(QList<AddonSettingsCategory *> settingsCategories READ settingsCategories NOTIFY settingsCategoriesChanged)
 		Q_PROPERTY(QList<AppMenuModel *> menus READ menus NOTIFY menusChanged)
 		Q_PROPERTY(QList<AddonButton *> mainButtons READ mainButtons NOTIFY mainButtonsChanged)
@@ -62,6 +65,9 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		Q_ENUM(Event)
 
 		Q_INVOKABLE static void sendEvent(Event type, QVariantMap args = QVariantMap());
+
+		static QVector<IAddon *> loadedAddons(void);
+		static void setLoadedAddons(QVector<IAddon *> newLoadedAddons);
 
 		bool addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource = "");
 		QList<AddonSettingsCategory *> settingsCategories(void);
@@ -93,6 +99,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		AddonButton *createButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		static QMap<int, QString> m_loadExTargets;
 		static bool m_blockLoadedEx;
+		static QVector<IAddon *> m_loadedAddons;
 		QList<AddonSettingsCategory *> m_settingsCategories;
 		QList<AppMenuModel *> m_menus;
 		QList<AddonButton *> m_mainButtons;
