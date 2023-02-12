@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
 	qmlRegisterType<AppMenuModel>("OpenTyper", 1, 0, "AppMenuModel");
 	qmlRegisterType<AppMenuItem>("OpenTyper", 1, 0, "AppMenuItem");
-	qmlRegisterType<AddonSettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
+	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
 #ifndef Q_OS_WASM
 	qmlRegisterType<AddonItemModel>("OpenTyper", 1, 0, "AddonItemModel");
 	qmlRegisterType<AddonListModel>("OpenTyper", 1, 0, "AddonListModel");

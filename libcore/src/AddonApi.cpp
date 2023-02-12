@@ -50,7 +50,7 @@ bool AddonApi::addSettingsCategory(QString categoryName, QString qmlFileName, QS
 		QMessageBox::critical(nullptr, "Error", QString("Could not add settings category \"%1\": QML file \"%2\" not found").arg(categoryName, qmlFileName));
 		return false;
 	}
-	AddonSettingsCategory *category = new AddonSettingsCategory(this);
+	SettingsCategory *category = new SettingsCategory(this);
 	category->setName(categoryName);
 	category->setQmlFileName(qmlFileName);
 	category->setIconName(iconName);
@@ -61,7 +61,7 @@ bool AddonApi::addSettingsCategory(QString categoryName, QString qmlFileName, QS
 }
 
 /*! List of settings categories. */
-QList<AddonSettingsCategory *> AddonApi::settingsCategories(void)
+QList<SettingsCategory *> AddonApi::settingsCategories(void)
 {
 	return m_settingsCategories;
 }

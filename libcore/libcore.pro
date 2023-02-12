@@ -24,7 +24,6 @@ INCLUDEPATH += src
 SOURCES += \
     src/AddonApi.cpp \
     src/AddonButton.cpp \
-    src/AddonSettingsCategory.cpp \
     src/AbstractMenuBar.cpp \
     src/AppMenuBar.cpp \
     src/AppMenuItem.cpp \
@@ -46,6 +45,7 @@ SOURCES += \
     src/QmlKeyboardHandler.cpp \
     src/QmlUtils.cpp \
     src/Settings.cpp \
+    src/SettingsCategory.cpp \
     src/StringUtils.cpp \
     src/ThemeEngine.cpp \
     src/global.cpp
@@ -53,7 +53,6 @@ SOURCES += \
 HEADERS += \
     src/AddonApi.h \
     src/AddonButton.h \
-    src/AddonSettingsCategory.h \
     src/AbstractMenuBar.h \
     src/AppMenuBar.h \
     src/AppMenuItem.h \
@@ -75,6 +74,7 @@ HEADERS += \
     src/QmlKeyboardHandler.h \
     src/QmlUtils.h \
     src/Settings.h \
+    src/SettingsCategory.h \
     src/StringUtils.h \
     src/ThemeEngine.h \
     src/IAddon.h \

@@ -1,5 +1,5 @@
 /*
- * AddonSettingsCategory.cpp
+ * SettingsCategory.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,57 +18,57 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "AddonSettingsCategory.h"
+#include "SettingsCategory.h"
 
-/*! Constructs AddonSettingsCategory. */
-AddonSettingsCategory::AddonSettingsCategory(QObject *parent) :
+/*! Constructs SettingsCategory. */
+SettingsCategory::SettingsCategory(QObject *parent) :
 	QObject(parent)
 {
 }
 
 /*! Category name. */
-QString AddonSettingsCategory::name(void)
+QString SettingsCategory::name(void)
 {
 	return m_name;
 }
 
-void AddonSettingsCategory::setName(QString newName)
+void SettingsCategory::setName(QString newName)
 {
 	m_name = newName;
 	emit nameChanged(newName);
 }
 
 /*! The icon name. */
-QString AddonSettingsCategory::iconName(void)
+QString SettingsCategory::iconName(void)
 {
 	return m_iconName;
 }
 
-void AddonSettingsCategory::setIconName(QString newIconName)
+void SettingsCategory::setIconName(QString newIconName)
 {
 	m_iconName = newIconName;
 	emit iconNameChanged(newIconName);
 }
 
 /*! The icon source (URL). */
-QString AddonSettingsCategory::iconSource(void)
+QString SettingsCategory::iconSource(void)
 {
 	return m_iconSource;
 }
 
-void AddonSettingsCategory::setIconSource(QString newIconSource)
+void SettingsCategory::setIconSource(QString newIconSource)
 {
 	m_iconSource = newIconSource;
 	emit iconSourceChanged(newIconSource);
 }
 
 /*! The name of the QML file of the settings category. */
-QString AddonSettingsCategory::qmlFileName(void)
+QString SettingsCategory::qmlFileName(void)
 {
 	return m_qmlFileName;
 }
 
-void AddonSettingsCategory::setQmlFileName(QString newQmlFileName)
+void SettingsCategory::setQmlFileName(QString newQmlFileName)
 {
 	m_qmlFileName = newQmlFileName;
 	emit qmlFileNameChanged(newQmlFileName);

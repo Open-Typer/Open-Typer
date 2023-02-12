@@ -28,7 +28,7 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QLayout>
-#include "AddonSettingsCategory.h"
+#include "SettingsCategory.h"
 #include "AddonButton.h"
 #include "AppMenuModel.h"
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -48,7 +48,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QVector<IAddon *> loadedAddons READ loadedAddons WRITE setLoadedAddons)
-		Q_PROPERTY(QList<AddonSettingsCategory *> settingsCategories READ settingsCategories NOTIFY settingsCategoriesChanged)
+		Q_PROPERTY(QList<SettingsCategory *> settingsCategories READ settingsCategories NOTIFY settingsCategoriesChanged)
 		Q_PROPERTY(QList<AppMenuModel *> menus READ menus NOTIFY menusChanged)
 		Q_PROPERTY(QList<AddonButton *> mainButtons READ mainButtons NOTIFY mainButtonsChanged)
 		Q_PROPERTY(QList<AddonButton *> exOptionsButtons READ exOptionsButtons NOTIFY exOptionsButtonsChanged)
@@ -73,7 +73,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static void setLoadedAddons(QVector<IAddon *> newLoadedAddons);
 
 		bool addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource = "");
-		QList<AddonSettingsCategory *> settingsCategories(void);
+		QList<SettingsCategory *> settingsCategories(void);
 
 		void addMenu(AppMenuModel *menu);
 		QList<AppMenuModel *> menus(void);
@@ -103,7 +103,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		static QMap<int, QString> m_loadExTargets;
 		static bool m_blockLoadedEx;
 		static QVector<IAddon *> m_loadedAddons;
-		QList<AddonSettingsCategory *> m_settingsCategories;
+		QList<SettingsCategory *> m_settingsCategories;
 		QList<AppMenuModel *> m_menus;
 		QList<AddonButton *> m_mainButtons;
 		QList<AddonButton *> m_exOptionsButtons;
@@ -113,7 +113,7 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 	signals:
 		void changeMode(int mode);
 		void startTypingTest(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
-		void settingsCategoriesChanged(QList<AddonSettingsCategory *>);
+		void settingsCategoriesChanged(QList<SettingsCategory *>);
 		void menusChanged(QList<AppMenuModel *> menus);
 		void mainButtonsChanged(QList<AddonButton *> buttons);
 		void exOptionsButtonsChanged(QList<AddonButton *> buttons);
