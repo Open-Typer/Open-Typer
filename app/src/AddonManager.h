@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QJsonDocument>
 #include <QPluginLoader>
+#include <QMap>
 #include "AddonModel.h"
 #include "AddonItemModel.h"
 
