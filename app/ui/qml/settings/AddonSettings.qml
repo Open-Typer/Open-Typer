@@ -28,6 +28,7 @@ import "../controls"
 // This settings page can be used only in SettingsDialog!
 ColumnLayout {
 	property bool spinnerRunning: false
+	property string filter: ""
 	id: root
 
 	AddonListModel {
@@ -38,7 +39,7 @@ ColumnLayout {
 
 	function reload() {
 		spinnerRunning = true;
-		listModel.load();
+		listModel.load(filter);
 	}
 
 	StackView {
@@ -61,6 +62,11 @@ ColumnLayout {
 					TextField {
 						Layout.fillWidth: true
 						placeholderText: qsTr("Search")
+						onTextChanged: {
+							spinnerRunning = true;
+							listModel.load(text)
+							filter = text;
+						}
 					}
 
 					// TODO: Implement open button
@@ -94,6 +100,7 @@ ColumnLayout {
 					onCurrentIndexChanged: {
 						spinnerRunning = true;
 						listModel.localAddons = (currentIndex == 1);
+						listModel.load(filter);
 					}
 
 					Repeater {
