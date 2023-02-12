@@ -90,40 +90,46 @@ ColumnLayout {
 					Layout.fillWidth: true
 					Layout.fillHeight: true
 					currentIndex: bar.currentIndex
+					onCurrentIndexChanged: {
+						spinnerRunning = true;
+						listModel.localAddons = (currentIndex == 1);
+					}
 
-					Item {
-						id: onlineAddonsTab
+					Repeater {
+						model: 2
 
-						ListView {
-							id: onlineList
-							anchors.fill: parent
-							model: listModel.items
-							topMargin: 15
-							spacing: 15
-							clip: true
-							delegate: AddonItem {
-								id: addonItem
-								width: onlineList.width
-								model: modelData
-								onClicked: stackView.push(addonInfo)
+						Item {
+							ListView {
+								id: onlineList
+								anchors.fill: parent
+								model: listModel.items
+								topMargin: 15
+								spacing: 15
+								clip: true
+								delegate: AddonItem {
+									id: addonItem
+									width: onlineList.width
+									model: modelData
+									onClicked: stackView.push(addonInfo)
 
-								Component {
-									id: addonInfo
-									AddonInfo {
-										itemModel: addonItem.model
-										onClosed: stackView.pop()
+									Component {
+										id: addonInfo
+										AddonInfo {
+											itemModel: addonItem.model
+											onClosed: stackView.pop()
+										}
 									}
 								}
 							}
 						}
 					}
 				}
+			}
 
-				BusyIndicator {
-					id: spinner
-					Layout.alignment: Qt.AlignCenter
-					running: spinnerRunning
-				}
+			BusyIndicator {
+				id: spinner
+				anchors.centerIn: parent
+				running: spinnerRunning
 			}
 		}
 	}
