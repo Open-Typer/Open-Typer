@@ -168,6 +168,15 @@ QQmlListProperty<AddonItemModel> AddonListModel::items()
 #endif
 }
 
+/*! Returns the list of currently loaded items. */
+QList<AddonItemModel *> AddonListModel::getItems()
+{
+	if(m_localAddons)
+		return m_localItems;
+	else
+		return m_items;
+}
+
 /*! Whether to load installed addons instead of online addons. */
 bool AddonListModel::localAddons(void)
 {

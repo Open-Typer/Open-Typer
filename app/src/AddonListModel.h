@@ -37,6 +37,7 @@ class AddonListModel : public QObject
 		Q_INVOKABLE void load(QString filter = QString());
 
 		QQmlListProperty<AddonItemModel> items();
+		QList<AddonItemModel *> getItems(void);
 
 		bool localAddons(void);
 		void setLocalAddons(bool newLocalAddons);
