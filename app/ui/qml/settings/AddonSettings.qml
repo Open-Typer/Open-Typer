@@ -80,7 +80,7 @@ ColumnLayout {
 					}
 
 					TabButton {
-						text: qsTr("My addons")
+						text: qsTr("Installed addons")
 						font.capitalization: Font.MixedCase
 					}
 				}
