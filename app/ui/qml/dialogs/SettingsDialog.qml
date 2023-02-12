@@ -56,6 +56,12 @@ CustomDialog {
 					name: qsTr("Appearance")
 					iconName: "appearance"
 					qmlFileName: "settings/AppearanceSettings.qml"
+				},
+				SettingsCategory {
+					name: qsTr("Addons")
+					iconName: "add"
+					qmlFileName: "settings/AddonSettings.qml"
+					visible: !QmlUtils.osWasm()
 				}
 			]
 			id: listView
@@ -91,6 +97,7 @@ CustomDialog {
 				property string source: "../" + modelData.qmlFileName
 				text: modelData.name
 				width: listView.width
+				visible: modelData.visible
 				icon.name: modelData.iconName
 				icon.source: modelData.iconSource
 				highlighted: ListView.isCurrentItem

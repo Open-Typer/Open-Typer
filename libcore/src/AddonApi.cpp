@@ -27,6 +27,20 @@
 AddonApi globalAddonApi;
 QMap<int, QString> AddonApi::m_loadExTargets;
 bool AddonApi::m_blockLoadedEx;
+QVector<IAddon *> AddonApi::m_loadedAddons;
+
+/*! List of loaded addon interfaces. Automatically set by AddonManager. */
+QVector<IAddon *> AddonApi::loadedAddons(void)
+{
+	return m_loadedAddons;
+}
+
+void AddonApi::setLoadedAddons(QVector<IAddon *> newLoadedAddons)
+{
+	if(m_loadedAddons == newLoadedAddons)
+		return;
+	m_loadedAddons = newLoadedAddons;
+}
 
 /*! Adds a settings category with QML component with the given URL. */
 bool AddonApi::addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource)
@@ -36,7 +50,7 @@ bool AddonApi::addSettingsCategory(QString categoryName, QString qmlFileName, QS
 		QMessageBox::critical(nullptr, "Error", QString("Could not add settings category \"%1\": QML file \"%2\" not found").arg(categoryName, qmlFileName));
 		return false;
 	}
-	AddonSettingsCategory *category = new AddonSettingsCategory(this);
+	SettingsCategory *category = new SettingsCategory(this);
 	category->setName(categoryName);
 	category->setQmlFileName(qmlFileName);
 	category->setIconName(iconName);
@@ -47,7 +61,7 @@ bool AddonApi::addSettingsCategory(QString categoryName, QString qmlFileName, QS
 }
 
 /*! List of settings categories. */
-QList<AddonSettingsCategory *> AddonApi::settingsCategories(void)
+QList<SettingsCategory *> AddonApi::settingsCategories(void)
 {
 	return m_settingsCategories;
 }
@@ -66,8 +80,17 @@ void AddonApi::deleteSettingsCategories(void)
 /*! Sends an event with the given type to each loaded addon. */
 void AddonApi::sendEvent(Event type, QVariantMap args)
 {
-	for(int i = 0; i < loadedAddons.count(); i++)
-		loadedAddons[i]->addonEvent(type, args);
+	if(type == Event_InitApp)
+	{
+		globalAddonApi.deleteSettingsCategories();
+		globalAddonApi.deleteMenus();
+		globalAddonApi.deleteMainButtons();
+		globalAddonApi.deleteExOptionsButtons();
+		globalAddonApi.deleteNavigationButtons();
+		globalAddonApi.deleteExInfoButtons();
+	}
+	for(int i = 0; i < m_loadedAddons.count(); i++)
+		m_loadedAddons[i]->addonEvent(type, args);
 }
 
 /*! Deletes all menus. */
@@ -106,6 +129,7 @@ QList<AppMenuModel *> AddonApi::menus(void)
 void AddonApi::deleteMainButtons(void)
 {
 	deleteButtons(&m_mainButtons);
+	emit mainButtonsChanged(m_mainButtons);
 }
 
 /*! Adds a new button to the main section. */
@@ -127,6 +151,7 @@ QList<AddonButton *> AddonApi::mainButtons(void)
 void AddonApi::deleteExOptionsButtons(void)
 {
 	deleteButtons(&m_exOptionsButtons);
+	emit exOptionsButtonsChanged(m_exOptionsButtons);
 }
 
 /*! Adds a new button to the exercise options section. */
@@ -148,6 +173,7 @@ QList<AddonButton *> AddonApi::exOptionsButtons(void)
 void AddonApi::deleteNavigationButtons(void)
 {
 	deleteButtons(&m_navigationButtons);
+	emit navigationButtonsChanged(m_navigationButtons);
 }
 
 /*! Adds a new button to the navigation section. */
@@ -169,6 +195,7 @@ QList<AddonButton *> AddonApi::navigationButtons(void)
 void AddonApi::deleteExInfoButtons(void)
 {
 	deleteButtons(&m_exInfoButtons);
+	emit exInfoButtonsChanged(m_exInfoButtons);
 }
 
 /*! Adds a new button to the exercise info section. */

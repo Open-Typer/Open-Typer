@@ -1,5 +1,5 @@
 /*
- * AddonSettingsCategory.h
+ * SettingsCategory.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,8 +18,8 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ADDONSETTINGSCATEGORY_H
-#define ADDONSETTINGSCATEGORY_H
+#ifndef SETTINGSCATEGORY_H
+#define SETTINGSCATEGORY_H
 
 #if defined CORE_SHARED_LIB
 #define CORE_LIB_EXPORT Q_DECL_EXPORT
@@ -29,17 +29,18 @@
 
 #include <QObject>
 
-/*! \brief The AddonSettingsCategory provides a model for settings categories added by addons. */
-class CORE_LIB_EXPORT AddonSettingsCategory : public QObject
+/*! \brief The SettingsCategory provides a model for settings categories. */
+class CORE_LIB_EXPORT SettingsCategory : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 		Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
 		Q_PROPERTY(QString iconSource READ iconSource WRITE setIconSource NOTIFY iconSourceChanged)
 		Q_PROPERTY(QString qmlFileName READ qmlFileName WRITE setQmlFileName NOTIFY qmlFileNameChanged)
+		Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 
 	public:
-		explicit AddonSettingsCategory(QObject *parent = nullptr);
+		explicit SettingsCategory(QObject *parent = nullptr);
 
 		QString name(void);
 		void setName(QString newName);
@@ -53,17 +54,22 @@ class CORE_LIB_EXPORT AddonSettingsCategory : public QObject
 		QString qmlFileName(void);
 		void setQmlFileName(QString newQmlFileName);
 
+		bool visible(void);
+		void setVisible(bool newVisible);
+
 	private:
 		QString m_name;
 		QString m_iconName;
 		QString m_iconSource;
 		QString m_qmlFileName;
+		bool m_visible = true;
 
 	signals:
 		void nameChanged(QString name);
 		void iconNameChanged(QString iconName);
 		void iconSourceChanged(QString iconSource);
 		void qmlFileNameChanged(QString qmlFileName);
+		void visibleChanged(bool visible);
 };
 
-#endif // ADDONSETTINGSCATEGORY_H
+#endif // SETTINGSCATEGORY_H

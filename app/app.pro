@@ -1,7 +1,7 @@
 TARGET = open-typer
 DESTDIR = $$_PRO_FILE_PWD_/..
 
-QT += core gui quick quickcontrols2 charts
+QT += core gui quick quickcontrols2 charts network
 QTPLUGIN += qsvg
 !wasm {
     QT += printsupport
@@ -32,6 +32,14 @@ INCLUDEPATH += \
 
 LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 
+!wasm {
+    SOURCES += \
+        src/AddonItemModel.cpp \
+	src/AddonListModel.cpp \
+	src/AddonManager.cpp \
+	src/AddonModel.cpp
+}
+
 SOURCES += \
     src/ExportProvider.cpp \
     src/ExportTable.cpp \
@@ -41,6 +49,14 @@ SOURCES += \
     src/packEditor/PackSelector.cpp \
     src/updater/Updater.cpp \
     src/main.cpp
+
+!wasm {
+    HEADERS += \
+        src/AddonItemModel.h \
+	src/AddonListModel.h \
+	src/AddonManager.h \
+	src/AddonModel.h
+}
 
 HEADERS += \
     src/ExportProvider.h \

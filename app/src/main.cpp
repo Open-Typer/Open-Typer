@@ -22,8 +22,6 @@
 #include <QApplication>
 #include <QSettings>
 #include <QSplashScreen>
-#include <QPluginLoader>
-#include <QProcessEnvironment>
 #include <QQuickStyle>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -51,6 +49,11 @@
 #include "ExportProvider.h"
 #include "ExportTable.h"
 #include "AppMenuBar.h"
+#ifndef Q_OS_WASM
+#include "AddonListModel.h"
+#include "AddonManager.h"
+#endif
+#include "global.h"
 #include "updater/Updater.h"
 
 void changeSplashMessage(QSplashScreen *splash, QString message)
@@ -60,60 +63,6 @@ void changeSplashMessage(QSplashScreen *splash, QString message)
 	if(!QCoreApplication::applicationVersion().isEmpty())
 		versionStr = QObject::tr("Version: %1").arg(QCoreApplication::applicationVersion());
 	splash->showMessage(versionStr + "\n" + message, Qt::AlignHCenter | Qt::AlignBottom, Qt::white);
-}
-
-void loadAddons(QString path)
-{
-	QDir pluginsDir(path);
-	const QStringList entries = pluginsDir.entryList(QDir::Files);
-	for(const QString &fileName : entries)
-	{
-		QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
-		QObject *plugin = pluginLoader.instance();
-		if(plugin)
-		{
-			IAddon *addonInterface = qobject_cast<IAddon *>(plugin);
-			if(addonInterface)
-			{
-				QString className = plugin->metaObject()->className();
-				QStringList addonMinVersion = addonInterface->version().split(".");
-				QStringList appVersion = QCoreApplication::applicationVersion().split(".");
-				if(addonMinVersion[0].toInt() != appVersion[0].toInt())
-					continue;
-				if(addonMinVersion[1].toInt() > appVersion[1].toInt())
-					continue;
-				if(loadedAddonsClasses.contains(className))
-					continue;
-				loadedAddons.append(addonInterface);
-				loadedAddonsClasses += className;
-			}
-			else
-				pluginLoader.unload();
-		}
-	}
-}
-
-void loadAddons(void)
-{
-	QDir pluginsDir(QCoreApplication::applicationDirPath());
-#if defined(Q_OS_WIN)
-	if(pluginsDir.dirName().toLower() == "debug" || pluginsDir.dirName().toLower() == "release")
-		pluginsDir.cdUp();
-#elif defined(Q_OS_MAC)
-	if(pluginsDir.dirName() == "MacOS")
-	{
-		pluginsDir.cdUp();
-		pluginsDir.cdUp();
-		pluginsDir.cdUp();
-	}
-#elif defined(Q_OS_UNIX)
-	QString AppImageDir = QProcessEnvironment::systemEnvironment().value(QStringLiteral("APPIMAGE"));
-	if(!AppImageDir.isEmpty())
-		pluginsDir.cd(AppImageDir + "/..");
-#endif
-	loadAddons(pluginsDir.path());
-	pluginsDir.cd("plugins");
-	loadAddons(pluginsDir.path());
 }
 
 int main(int argc, char *argv[])
@@ -139,9 +88,13 @@ int main(int argc, char *argv[])
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();
+#ifndef Q_OS_WASM
 	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
 	a.processEvents();
-	loadAddons();
+	globalAddonManager.loadAddons();
+	Updater::getAddonUpdates();
+	bool addonsLoaded = true;
+#endif
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
@@ -170,6 +123,12 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<AddonApi>("OpenTyper", 1, 0, "AddonApi", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalAddonApi;
 	});
+#ifndef Q_OS_WASM
+	QQmlEngine::setObjectOwnership(&globalAddonManager, QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<AddonManager>("OpenTyper", 1, 0, "AddonManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return &globalAddonManager;
+	});
+#endif
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
 	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
@@ -182,7 +141,12 @@ int main(int argc, char *argv[])
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
 	qmlRegisterType<AppMenuModel>("OpenTyper", 1, 0, "AppMenuModel");
 	qmlRegisterType<AppMenuItem>("OpenTyper", 1, 0, "AppMenuItem");
-	qmlRegisterType<AddonSettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
+	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
+#ifndef Q_OS_WASM
+	qmlRegisterType<AddonItemModel>("OpenTyper", 1, 0, "AddonItemModel");
+	qmlRegisterType<AddonListModel>("OpenTyper", 1, 0, "AddonListModel");
+	qmlRegisterType<AddonModel>("OpenTyper", 1, 0, "AddonModel");
+#endif
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterUncreatableMetaObject(MistakeRecord::staticMetaObject, "OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
 	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
@@ -207,22 +171,38 @@ int main(int argc, char *argv[])
 	// Set icon
 	a.setWindowIcon(QIcon(":/res/images/icon.ico"));
 	QQuickStyle::setStyle("Material");
-	QQmlApplicationEngine engine;
-	engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
-	QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
-	Settings settings;
-	engine.rootContext()->setContextProperty("Settings", &settings);
-	Updater updater;
-	engine.rootContext()->setContextProperty("Updater", &updater);
-	FileUtils fileUtils;
-	engine.rootContext()->setContextProperty("FileUtils", &fileUtils);
-	BuiltInPacks builtInPacks;
-	engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
-	StringUtils stringUtils;
-	engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
-	ExportTable table;
-	engine.rootContext()->setContextProperty("exportTable", &table);
-	engine.load("qrc:/qml/MainWindow.qml");
-	splash.finish(nullptr);
-	return a.exec();
+
+	int currentExitCode;
+	do
+	{
+#ifndef Q_OS_WASM
+		if(!addonsLoaded)
+			globalAddonManager.loadAddons();
+#endif
+		QQmlApplicationEngine engine;
+		engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
+		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
+		Settings settings;
+		engine.rootContext()->setContextProperty("Settings", &settings);
+		Updater updater;
+		engine.rootContext()->setContextProperty("Updater", &updater);
+		FileUtils fileUtils;
+		engine.rootContext()->setContextProperty("FileUtils", &fileUtils);
+		BuiltInPacks builtInPacks;
+		engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
+		StringUtils stringUtils;
+		engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
+		ExportTable table;
+		engine.rootContext()->setContextProperty("exportTable", &table);
+		engine.load("qrc:/qml/MainWindow.qml");
+		if(splash.isVisible())
+			splash.finish(nullptr);
+		currentExitCode = a.exec();
+#ifndef Q_OS_WASM
+		globalAddonManager.unloadAddons();
+		addonsLoaded = false;
+#endif
+		if(Settings::isFrozen())
+			Settings::saveChanges();
+	} while(currentExitCode == EXIT_CODE_REBOOT);
 }

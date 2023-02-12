@@ -1,8 +1,8 @@
 /*
- * IAddon.cpp
+ * global.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,19 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "IAddon.h"
+#ifndef GLOBAL_H
+#define GLOBAL_H
 
-QVector<IAddon *> loadedAddons;
-QStringList loadedAddonsClasses;
+#include <QObject>
+
+#if defined CORE_SHARED_LIB
+#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#else
+#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#endif
+
+static int const EXIT_CODE_REBOOT = -123456789;
+
+bool CORE_LIB_EXPORT internetConnected(void);
+
+#endif // GLOBAL_H

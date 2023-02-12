@@ -42,7 +42,4 @@ class CORE_LIB_EXPORT IAddon
 
 Q_DECLARE_INTERFACE(IAddon, "opentyper.addon")
 
-extern QVector<IAddon *> CORE_LIB_EXPORT loadedAddons;
-extern QStringList CORE_LIB_EXPORT loadedAddonsClasses;
-
 #endif // IADDON_H

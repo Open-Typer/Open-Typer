@@ -38,5 +38,8 @@
         <file>core/AddonButtonRepeater.qml</file>
         <file>core/MenuBarManager.qml</file>
         <file>dialogs/AboutDialog.qml</file>
+        <file>settings/AddonSettings.qml</file>
+        <file>AddonItem.qml</file>
+        <file>AddonInfo.qml</file>
     </qresource>
 </RCC>
