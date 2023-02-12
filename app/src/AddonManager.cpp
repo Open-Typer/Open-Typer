@@ -159,6 +159,7 @@ QList<QPluginLoader *> AddonManager::loadAddons(QString path)
 			}
 		}
 	}
+	AddonApi::setLoadedAddons(loadedAddons);
 	return loaderList;
 }
 
@@ -185,10 +186,12 @@ void AddonManager::unloadAddon(QString id)
 	auto list = pluginLoaders[id];
 	for(int i = 0; i < list.length(); i++)
 	{
+		loadedAddons.removeAll(qobject_cast<IAddon *>(list[i]->instance()));
 		list[i]->unload();
 		list[i]->deleteLater();
 	}
 	pluginLoaders.remove(id);
+	AddonApi::setLoadedAddons(loadedAddons);
 }
 
 /*! Saves the installed addon in the JSON file. */
