@@ -23,10 +23,10 @@
 
 #include <QObject>
 #include <QJsonDocument>
+#include <QPluginLoader>
 #include "AddonModel.h"
 #include "AddonItemModel.h"
 
-class QPluginLoader;
 class IAddon;
 
 /*!

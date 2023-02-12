@@ -21,7 +21,6 @@
 #include <QFile>
 #include <QJsonObject>
 #include <QJsonArray>
-#include <QPluginLoader>
 #include <QProcessEnvironment>
 #include <QCoreApplication>
 #include "AddonManager.h"
