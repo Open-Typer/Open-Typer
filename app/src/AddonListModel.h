@@ -23,18 +23,19 @@
 
 #include <QObject>
 #include <QMap>
+#include <QQmlListProperty>
 #include "AddonItemModel.h"
 
 /*! \brief The AddonListModel class provides a model for the addon list in addon settings. */
 class AddonListModel : public QObject
 {
 		Q_OBJECT
-		Q_PROPERTY(QList<AddonItemModel *> items READ items NOTIFY itemsChanged)
+		Q_PROPERTY(QQmlListProperty<AddonItemModel> items READ items NOTIFY itemsChanged)
 	public:
 		explicit AddonListModel(QObject *parent = nullptr);
 		Q_INVOKABLE void load(void);
 
-		QList<AddonItemModel *> items();
+		QQmlListProperty<AddonItemModel> items();
 
 	private:
 		QList<AddonItemModel *> m_items;

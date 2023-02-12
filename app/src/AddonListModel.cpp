@@ -94,7 +94,11 @@ void AddonListModel::load(void)
 }
 
 /*! List of currently loaded items. */
-QList<AddonItemModel *> AddonListModel::items()
+QQmlListProperty<AddonItemModel> AddonListModel::items()
 {
-	return m_items;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	return QQmlListProperty<AddonItemModel>(this, &m_items);
+#else
+	return QQmlListProperty<AddonItemModel>(this, m_items);
+#endif
 }
