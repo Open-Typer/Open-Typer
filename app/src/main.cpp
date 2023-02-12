@@ -92,6 +92,7 @@ int main(int argc, char *argv[])
 	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
 	a.processEvents();
 	globalAddonManager.loadAddons();
+	Updater::getAddonUpdates();
 	bool addonsLoaded = true;
 #endif
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
