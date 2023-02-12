@@ -44,7 +44,7 @@ class AddonManager : public QObject
 		QList<AddonModel *> addons(void);
 
 		Q_INVOKABLE AddonModel *findAddon(QString addonId);
-		Q_INVOKABLE void installAddon(AddonItemModel *itemModel);
+		Q_INVOKABLE AddonModel *installAddon(AddonItemModel *itemModel);
 		Q_INVOKABLE void uninstallAddon(QString id);
 		Q_INVOKABLE void loadAddons(void);
 		Q_INVOKABLE void unloadAddons(void);

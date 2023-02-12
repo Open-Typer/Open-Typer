@@ -78,7 +78,7 @@ AddonModel *AddonManager::findAddon(QString addonId)
 }
 
 /*! Installs a new addon. */
-void AddonManager::installAddon(AddonItemModel *itemModel)
+AddonModel *AddonManager::installAddon(AddonItemModel *itemModel)
 {
 	AddonModel *model = new AddonModel(this);
 	model->setId(itemModel->id());
@@ -98,6 +98,7 @@ void AddonManager::installAddon(AddonItemModel *itemModel)
 		if(model->installed())
 			saveAddon(model);
 	});
+	return model;
 }
 
 /*! Uninstalls an addon. */
