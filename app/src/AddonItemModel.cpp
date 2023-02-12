@@ -22,6 +22,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QVariant>
+#include <QApplication>
 #include "AddonItemModel.h"
 
 /*! Constructs AddonItemModel. */
@@ -44,6 +45,10 @@ AddonItemModel *AddonItemModel::fromJson(QByteArray json, QString id, QObject *p
 
 	QJsonDocument document = QJsonDocument::fromJson(json);
 	QJsonObject rootObj = document.object();
+	QVersionNumber version = QVersionNumber::fromString(rootObj["app_version"].toString());
+	QVersionNumber appVersion = QVersionNumber::fromString(qApp->applicationVersion());
+	if(version > appVersion || appVersion.majorVersion() != version.majorVersion())
+		return new AddonItemModel(parent);
 	AddonItemModel *ret = new AddonItemModel(parent);
 	ret->setId(id);
 	ret->setName(rootObj["name"].toString());
