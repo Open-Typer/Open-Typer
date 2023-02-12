@@ -47,7 +47,8 @@ SOURCES += \
     src/QmlUtils.cpp \
     src/Settings.cpp \
     src/StringUtils.cpp \
-    src/ThemeEngine.cpp
+    src/ThemeEngine.cpp \
+    src/global.cpp
 
 HEADERS += \
     src/AddonApi.h \

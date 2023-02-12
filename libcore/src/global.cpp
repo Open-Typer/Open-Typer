@@ -1,5 +1,5 @@
 /*
- * global.h
+ * global.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,19 +18,33 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GLOBAL_H
-#define GLOBAL_H
-
-#include <QObject>
-
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
+#include <QTcpSocket>
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+#include <QNetworkInformation>
 #else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
+#include <QNetworkConfigurationManager>
 #endif
+#include "global.h"
 
-static int const EXIT_CODE_REBOOT = -123456789;
-
-bool CORE_LIB_EXPORT internetConnected(void);
-
-#endif // GLOBAL_H
+bool internetConnected(void)
+{
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+	QNetworkInformation::loadDefaultBackend();
+	Q_ASSERT(QNetworkInformation::instance());
+	return QNetworkInformation::instance()->reachability() == QNetworkInformation::Reachability::Online;
+#else
+	QNetworkConfigurationManager mgr;
+	if(!mgr.isOnline())
+		return false;
+	QTcpSocket sock;
+	sock.connectToHost("8.8.8.8", 53);
+	bool connected = sock.waitForConnected(30000); //ms
+	if(!connected)
+	{
+		sock.abort();
+		return false;
+	}
+	sock.close();
+	return true;
+#endif
+}
