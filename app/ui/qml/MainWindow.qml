@@ -223,6 +223,7 @@ ApplicationWindow {
 
 	Repeater {
 		readonly property int minY: timedExPanel.visible ? 0 : panel1.height
+		readonly property bool hidden: appUpdateQuestion.visible || addonUpdateQuestion.visible
 		id: shadowRepeater
 		model: timedExPanel.visible ? [timedExPanel, paper] : [panel2, exportButton, paper]
 		DropShadow {
@@ -248,7 +249,7 @@ ApplicationWindow {
 			radius: 17
 			samples: 13
 			color: ThemeEngine.theme === ThemeEngine.DarkTheme ? "#80000000" : "#80000022"
-			visible: modelData.visible && modelData != exportButton
+			visible: modelData.visible && modelData != exportButton && !shadowRepeater.hidden
 		}
 	}
 
@@ -443,11 +444,23 @@ ApplicationWindow {
 			}
 		}
 		UpdateQuestion {
+			id: appUpdateQuestion
 			visible: false
 			Layout.fillWidth: true
 			onAccepted: Updater.installUpdate()
 			Component.onCompleted: {
 				if(Updater.updateAvailable())
+					visible = true;
+			}
+		}
+		UpdateQuestion {
+			id: addonUpdateQuestion
+			visible: false
+			addons: true
+			Layout.fillWidth: true
+			onAccepted: Updater.updateAddons()
+			Component.onCompleted: {
+				if(Updater.addonUpdateAvailable())
 					visible = true;
 			}
 		}
