@@ -23,8 +23,9 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.2
 import OpenTyper 1.0
 import "controls"
+import "dialogs"
 
-ColumnLayout {
+Item {
 	property AddonItemModel itemModel
 	property AddonModel model: AddonManager.findAddon(itemModel.id)
 	readonly property bool installed: model == null ? false : model.installed
@@ -35,59 +36,77 @@ ColumnLayout {
 		model = AddonManager.findAddon(itemModel.id);
 	}
 
-	AccentButton {
-		icon.name: "left"
-		onClicked: closed()
-	}
+	ColumnLayout {
+		id: layout
+		anchors.fill: parent
 
-	RowLayout {
-		Image {
-			source: itemModel.iconUrl
-			sourceSize.width: 64
-			sourceSize.height: 64
+		AccentButton {
+			icon.name: "left"
+			onClicked: closed()
+		}
+
+		RowLayout {
+			Image {
+				source: itemModel.iconUrl
+				sourceSize.width: 64
+				sourceSize.height: 64
+			}
+
+			Label {
+				text: itemModel.name
+				font.bold: true
+				font.pointSize: 20
+			}
+		}
+
+		RowLayout {
+			Layout.fillWidth: true
+
+			ProgressBar {
+				id: progressBar
+				Layout.fillWidth: true
+				visible: model != null && !model.installed
+				value: model == null ? 0 : model.installationProgress
+			}
+
+			Item {
+				Layout.fillWidth: true
+				visible: !progressBar.visible
+			}
+
+			AccentButton {
+				icon.name: installed ? "delete" : "download"
+				text: installed ? qsTr("Uninstall") : (installing ? qsTr("Installing...") : qsTr("Install"))
+				enabled: !installing
+				onClicked: {
+					if(installed)
+					{
+						AddonManager.uninstallAddon(itemModel.id);
+						restartAppMessageBox.open();
+					}
+					else
+						AddonManager.installAddon(itemModel);
+					updateModel();
+				}
+			}
 		}
 
 		Label {
-			text: itemModel.name
-			font.bold: true
-			font.pointSize: 20
-		}
-	}
-
-	RowLayout {
-		Layout.fillWidth: true
-
-		ProgressBar {
-			id: progressBar
-			Layout.fillWidth: true
-			visible: model != null && !model.installed
-			value: model == null ? 0 : model.installationProgress
+			text: itemModel.description
 		}
 
 		Item {
-			Layout.fillWidth: true
-			visible: !progressBar.visible
-		}
-
-		AccentButton {
-			icon.name: installed ? "delete" : "download"
-			text: installed ? qsTr("Uninstall") : (installing ? qsTr("Installing...") : qsTr("Install"))
-			enabled: !installing
-			onClicked: {
-				if(installed)
-					AddonManager.uninstallAddon(itemModel.id)
-				else
-					AddonManager.installAddon(itemModel);
-				updateModel();
-			}
+			Layout.fillHeight: true
 		}
 	}
 
-	Label {
-		text: itemModel.description
-	}
-
-	Item {
-		Layout.fillHeight: true
+	MessageBox {
+		id: restartAppMessageBox
+		anchors.fill: parent
+		blurSource: layout
+		windowTitle: Qt.application.displayName
+		title: qsTr("The application needs to restart.")
+		icon: MessageBox.Information
+		onAboutToHide: QmlUtils.restartApplication()
 	}
 }
