@@ -37,6 +37,7 @@ class CORE_LIB_EXPORT SettingsCategory : public QObject
 		Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
 		Q_PROPERTY(QString iconSource READ iconSource WRITE setIconSource NOTIFY iconSourceChanged)
 		Q_PROPERTY(QString qmlFileName READ qmlFileName WRITE setQmlFileName NOTIFY qmlFileNameChanged)
+		Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 
 	public:
 		explicit SettingsCategory(QObject *parent = nullptr);
@@ -53,17 +54,22 @@ class CORE_LIB_EXPORT SettingsCategory : public QObject
 		QString qmlFileName(void);
 		void setQmlFileName(QString newQmlFileName);
 
+		bool visible(void);
+		void setVisible(bool newVisible);
+
 	private:
 		QString m_name;
 		QString m_iconName;
 		QString m_iconSource;
 		QString m_qmlFileName;
+		bool m_visible = true;
 
 	signals:
 		void nameChanged(QString name);
 		void iconNameChanged(QString iconName);
 		void iconSourceChanged(QString iconSource);
 		void qmlFileNameChanged(QString qmlFileName);
+		void visibleChanged(bool visible);
 };
 
 #endif // SETTINGSCATEGORY_H

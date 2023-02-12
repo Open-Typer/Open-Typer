@@ -73,3 +73,17 @@ void SettingsCategory::setQmlFileName(QString newQmlFileName)
 	m_qmlFileName = newQmlFileName;
 	emit qmlFileNameChanged(newQmlFileName);
 }
+
+/*! Whether the settings category is visible. */
+bool SettingsCategory::visible(void)
+{
+	return m_visible;
+}
+
+void SettingsCategory::setVisible(bool newVisible)
+{
+	if(m_visible == newVisible)
+		return;
+	m_visible = newVisible;
+	emit visibleChanged(newVisible);
+}
