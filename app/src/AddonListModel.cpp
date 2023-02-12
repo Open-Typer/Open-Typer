@@ -23,13 +23,14 @@
 #include "AddonListModel.h"
 #include "AddonManager.h"
 #include "FileUtils.h"
+#include "StringUtils.h"
 
 /*! Constructs AddonListModel. */
 AddonListModel::AddonListModel(QObject *parent) :
 	QObject(parent) { }
 
 /*! Loads the available addons. Emits loaded() when loaded. */
-void AddonListModel::load(void)
+void AddonListModel::load(QString filter)
 {
 	emit loadingAborted();
 	if(m_localAddons)
@@ -39,6 +40,13 @@ void AddonListModel::load(void)
 		for(int i = 0; i < addons.length(); i++)
 		{
 			auto model = addons[i];
+			if(!filter.isEmpty())
+			{
+				bool nameMatches = model->name().contains(filter, Qt::CaseInsensitive);
+				bool descMatches = model->description().contains(filter, Qt::CaseInsensitive);
+				if(!(nameMatches || descMatches))
+					continue;
+			}
 			AddonItemModel *itemModel = new AddonItemModel(this);
 			itemModel->setId(model->id());
 			itemModel->setName(model->name());
@@ -77,7 +85,7 @@ void AddonListModel::load(void)
 	addonCount = 0;
 
 	QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-	connect(manager, &QNetworkAccessManager::finished, [this, manager, repoUrl](QNetworkReply *reply) {
+	connect(manager, &QNetworkAccessManager::finished, [this, manager, repoUrl, filter](QNetworkReply *reply) {
 		if(reply->error() != QNetworkReply::NoError)
 			return;
 		auto redirectAttribute = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
@@ -92,7 +100,7 @@ void AddonListModel::load(void)
 			QString line = reply->readLine();
 			line = line.remove("\n");
 			QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-			connect(manager, &QNetworkAccessManager::finished, [this, line, manager](QNetworkReply *reply) {
+			connect(manager, &QNetworkAccessManager::finished, [this, line, manager, filter](QNetworkReply *reply) {
 				if(reply->error() != QNetworkReply::NoError)
 					return;
 				auto redirectAttribute = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
@@ -104,7 +112,14 @@ void AddonListModel::load(void)
 				// Create item model
 				QByteArray json = reply->readAll();
 				auto item = AddonItemModel::fromJson(json, line, this);
-				if(item->downloadUrls().isEmpty())
+				bool matches = true;
+				if(!filter.isEmpty())
+				{
+					bool nameMatches = item->name().contains(filter, Qt::CaseInsensitive);
+					bool descMatches = item->description().contains(filter, Qt::CaseInsensitive);
+					matches = (nameMatches || descMatches);
+				}
+				if(!matches || item->downloadUrls().isEmpty())
 					item->deleteLater();
 				else
 				{
@@ -164,6 +179,5 @@ void AddonListModel::setLocalAddons(bool newLocalAddons)
 	if(m_localAddons == newLocalAddons)
 		return;
 	m_localAddons = newLocalAddons;
-	load();
 	emit localAddonsChanged();
 }

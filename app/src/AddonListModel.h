@@ -34,7 +34,7 @@ class AddonListModel : public QObject
 		Q_PROPERTY(bool localAddons READ localAddons WRITE setLocalAddons NOTIFY localAddonsChanged)
 	public:
 		explicit AddonListModel(QObject *parent = nullptr);
-		Q_INVOKABLE void load(void);
+		Q_INVOKABLE void load(QString filter = QString());
 
 		QQmlListProperty<AddonItemModel> items();
 
