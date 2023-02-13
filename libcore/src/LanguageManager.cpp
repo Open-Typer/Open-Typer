@@ -20,6 +20,7 @@
  */
 
 #include "LanguageManager.h"
+#include "AppMenuBar.h"
 
 QTranslator *translator_app = nullptr;
 QTranslator *translator_libcore = nullptr;
@@ -63,6 +64,7 @@ void LanguageManager::setLanguage(int index)
 	translator_app->load(targetLocale, "Open-Typer", "_", ":/res/lang");
 	translator_libcore->load(targetLocale, "libcore", "_", ":/res/lang");
 	translator_qt->load(targetLocale.language(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+	globalMenuBar.updateMenus();
 	emit languageChanged();
 }
 
