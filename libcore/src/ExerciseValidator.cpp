@@ -185,6 +185,8 @@ void ExerciseValidator::generateMistakeText(bool correctMistakes)
 					correct = m_exerciseText[(pos - delta) % (m_exerciseText.count() - 1)];
 				else
 					correct = mistakesMap[pos]->previousText();
+				if(correct == "\n")
+					correct = "↵";
 				auto type = mistakesMap[pos]->type();
 				if(type == MistakeRecord::Type_Deletion)
 				{
@@ -193,12 +195,7 @@ void ExerciseValidator::generateMistakeText(bool correctMistakes)
 				}
 				else
 					mistakeTxt += correct;
-				if(type == MistakeRecord::Type_Change)
-				{
-					if(correct == "\n")
-						delta++;
-				}
-				else
+				if(type != MistakeRecord::Type_Change)
 					mistakeTxt += " ";
 				inputTxt += inputChar;
 			}
