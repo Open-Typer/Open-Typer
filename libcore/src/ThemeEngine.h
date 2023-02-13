@@ -102,7 +102,10 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		QColor exerciseTextColor(void);
 		void setExerciseTextColor(QColor color);
 		Q_INVOKABLE void resetExerciseTextColor(void);
-		Q_INVOKABLE QColor defaultExerciseTextColor(bool dark = false);
+		Q_INVOKABLE QColor defaultExerciseTextColor(void);
+		Q_INVOKABLE QColor defaultExerciseTextColor(bool dark);
+		Q_INVOKABLE QColor defaultExerciseTextColor(QColor accent);
+		Q_INVOKABLE QColor defaultExerciseTextColor(QColor accent, bool dark);
 		Q_INVOKABLE QString exerciseTextStyleSheet(void);
 		// Input text color
 		Q_INVOKABLE bool customInputTextColor(void);

@@ -1,8 +1,8 @@
 /*
- * IAddon.cpp
+ * AddonButtonRepeater.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,16 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "IAddon.h"
+import QtQuick 2.12
+import "../controls"
 
-QVector<IAddon *> loadedAddons;
-QStringList loadedAddonsClasses;
+Repeater {
+	CustomToolButton {
+		visible: modelData.visible
+		text: modelData.text
+		toolTipText: modelData.toolTip
+		icon.name: modelData.iconName
+		icon.source: modelData.iconSource
+		onClicked: modelData.clicked()
+	}
+}

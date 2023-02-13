@@ -27,29 +27,7 @@ import OpenTyper 1.0
 
 MenuBar {
 	id: root
-	property list<Item> menuList: [
-		Item {
-			property string text: qsTr("File");
-			property list<Item> itemList: [
-				Item {
-					property string type: "item"
-					property string text: qsTr("New...")
-				},
-				Item {
-					property string type: "item"
-					property string text: qsTr("Open...")
-				},
-				Item {
-					property string type: "separator"
-				},
-				Item {
-					property string type: "item"
-					property string text: qsTr("Quit")
-					function onClicked() { Qt.quit(); }
-				}
-			]
-		}
-	]
+	readonly property var menuList: AppMenuBar.menus
 	property var menuObjects: []
 
 	function getComponentString(typeName) {
@@ -63,10 +41,10 @@ MenuBar {
 			var menuParent = parentItem;
 			var menuComponent = Qt.createQmlObject(getComponentString(menuType), menuParent);
 			var menu = menuComponent.createObject(menuParent);
-			menu.title = menuList[i].text;
+			menu.title = menuList[i].title;
 			menuObjects[menuObjects.length] = menu;
 			parentItem.addMenu(menu);
-			createMenu(menu, menuList[i].itemList, menuType, menuItemType, menuSeparatorType);
+			createMenu(menu, menuList[i].items, menuType, menuItemType, menuSeparatorType);
 		}
 	}
 
@@ -77,26 +55,30 @@ MenuBar {
 			var itemComponent;
 			var item;
 			var overrideAddItem = false;
-			if(itemData.type === "item")
-			{
-				itemComponent = Qt.createQmlObject(getComponentString(menuItemType), parentItem);
-				item = itemComponent.createObject(null);
-				item.text = itemData.text;
-				if(typeof itemData.onClicked != "undefined")
-					item.onTriggered.connect(itemData.onClicked);
-			}
-			else if(itemData.type === "separator")
+			if(itemData.isSeparator)
 			{
 				itemComponent = Qt.createQmlObject(getComponentString(menuSeparatorType), parentItem);
 				item = itemComponent.createObject(null);
 			}
-			else if(itemData.type === "menu")
+			else if(itemData.submenu === null)
+			{
+				itemComponent = Qt.createQmlObject(getComponentString(menuItemType), parentItem);
+				item = itemComponent.createObject(null);
+				item.text = itemData.text;
+				item.checkable = itemData.checkable;
+				item.checked = itemData.checked;
+				item.onCheckedChanged.connect(function() { itemData.checked = item.checked; });
+				itemData.onCheckedChanged.connect(function() { item.checked = itemData.checked; });
+				if(typeof itemData.onClicked != "undefined")
+					item.onTriggered.connect(itemData.onClicked);
+			}
+			else
 			{
 				itemComponent = Qt.createQmlObject(getComponentString(menuType), parentItem)
 				item = itemComponent.createObject(parentItem);
-				item.title = itemData.title;
+				item.title = itemData.text;
 				parentItem.addMenu(item);
-				createMenu(item, itemData.itemList, menuType, menuItemType, menuSeparatorType);
+				createMenu(item, itemData.submenu.items, menuType, menuItemType, menuSeparatorType);
 				overrideAddItem = true;
 			}
 			if(!overrideAddItem)
@@ -149,6 +131,8 @@ MenuBar {
 	Connections {
 		target: QmlUtils
 		function onMenuBarReloadTriggered() {
+			for(var i = 0; i < root.count; i++)
+				root.menuAt(i).close();
 			root.reload();
 		}
 	}

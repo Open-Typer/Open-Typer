@@ -2,7 +2,7 @@
  * ExerciseValidator.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ QString ExerciseValidator::inputText(void)
 }
 
 /*! Sets list of mistakes. */
-void ExerciseValidator::setMistakes(QList<MistakeRecord *> mistakeList)
+void ExerciseValidator::setMistakes(QList<MistakeRecord> mistakeList)
 {
 	m_mistakes = mistakeList;
 	emit mistakesChanged(mistakeList);
@@ -57,27 +57,25 @@ void ExerciseValidator::setMistakes(QList<MistakeRecord *> mistakeList)
 /*! Removes all mistakes. */
 void ExerciseValidator::clearMistakes(void)
 {
-	for(int i = 0; i < m_mistakes.size(); i++)
-		m_mistakes[i]->deleteLater();
 	m_mistakes.clear();
 	emit mistakesChanged(m_mistakes);
 }
 
 /*! Adds a mistake. */
-void ExerciseValidator::addMistake(MistakeRecord *mistake)
+void ExerciseValidator::addMistake(MistakeRecord mistake)
 {
 	m_mistakes.append(mistake);
 	emit mistakesChanged(m_mistakes);
 }
 
 /*! Returns list of mistakes. */
-QList<MistakeRecord *> ExerciseValidator::mistakes(void)
+QList<MistakeRecord> ExerciseValidator::mistakes(void)
 {
 	return m_mistakes;
 }
 
 /*! Sets list of characters. */
-void ExerciseValidator::setCharacters(QList<CharacterRecord *> characterList)
+void ExerciseValidator::setCharacters(QList<CharacterRecord> characterList)
 {
 	m_characters = characterList;
 	emit charactersChanged(characterList);
@@ -86,21 +84,19 @@ void ExerciseValidator::setCharacters(QList<CharacterRecord *> characterList)
 /*! Removes all characters. */
 void ExerciseValidator::clearCharacters(void)
 {
-	for(int i = 0; i < m_characters.size(); i++)
-		m_characters[i]->deleteLater();
 	m_characters.clear();
 	emit charactersChanged(m_characters);
 }
 
 /*! Adds a character. */
-void ExerciseValidator::addCharacter(CharacterRecord *character)
+void ExerciseValidator::addCharacter(CharacterRecord character)
 {
 	m_characters.append(character);
 	emit charactersChanged(m_characters);
 }
 
 /*! Returns list of characters. */
-QList<CharacterRecord *> ExerciseValidator::characters(void)
+QList<CharacterRecord> ExerciseValidator::characters(void)
 {
 	return m_characters;
 }
@@ -163,7 +159,7 @@ void ExerciseValidator::generateMistakeText(bool correctMistakes)
 {
 	QMap<int, MistakeRecord *> mistakesMap;
 	for(int i = 0; i < m_mistakes.count(); i++)
-		mistakesMap[m_mistakes[i]->position()] = m_mistakes[i];
+		mistakesMap[m_mistakes[i].position()] = &m_mistakes[i];
 	QString inputTxt = "";
 	QStringList lines = m_inputText.split("\n");
 	int pos = 0, delta = 0;
@@ -175,7 +171,7 @@ void ExerciseValidator::generateMistakeText(bool correctMistakes)
 		// Add line with correct characters
 		int oldPos = pos;
 		int count = lines[i].count();
-		for(int j = 0; j <= lines[i].count(); j++)
+		for(int j = 0; j <= count; j++)
 		{
 			QString inputChar;
 			if(j < count)
@@ -264,5 +260,8 @@ QString ExerciseValidator::generatedMistakeText(void)
 /*! Adds mistakes to the exercise text. */
 QString ExerciseValidator::textWithMistakes(void)
 {
-	return StringUtils::addMistakes(m_inputText, m_mistakes);
+	QList<MistakeRecord *> mistakePtrList;
+	for(int i = 0; i < m_mistakes.length(); i++)
+		mistakePtrList.append(&m_mistakes[i]);
+	return StringUtils::addMistakes(m_inputText, mistakePtrList);
 }

@@ -37,6 +37,7 @@
 #include "QmlUtils.h"
 #include "ThemeEngine.h"
 #include "ConfigParser.h"
+#include "global.h"
 
 /*! Sets QML root item. */
 void QmlUtils::setBlurSource(QQuickItem *item)
@@ -97,6 +98,33 @@ int QmlUtils::qtVersionMinor(void)
 int QmlUtils::qtVersionPatch(void)
 {
 	return QT_VERSION_PATCH;
+}
+
+/*!
+ * Returns the application git revision.\n
+ * Use QCoreApplication#applicationVersion() or Qt.application.version in QML to get the version.
+ */
+QString QmlUtils::applicationRevision(void)
+{
+	return BUILD_REVISION;
+}
+
+/*! Returns build year of the application. */
+int QmlUtils::applicationBuildYear(void)
+{
+	QString buildDate = __DATE__;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	QString buildYear = buildDate.sliced(7, 4);
+#else
+	QString buildYear = buildDate.mid(7, 4);
+#endif
+	return buildYear.toInt();
+}
+
+/*! Restarts the application. */
+void QmlUtils::restartApplication(void)
+{
+	qApp->exit(EXIT_CODE_REBOOT);
 }
 
 /*! Returns true if the platform is Windows. */
@@ -267,4 +295,16 @@ QString QmlUtils::translateStandardButton(QString buttonText)
 		// Some button translations are in QPlatformTheme
 		translated = QCoreApplication::translate("QPlatformTheme", buttonText.toStdString().c_str());
 	return translated;
+}
+
+/*! Returns an empty MistakeRecord. */
+MistakeRecord QmlUtils::createMistakeRecord(void)
+{
+	return MistakeRecord();
+}
+
+/*! Returns an empty CharacterRecord. */
+CharacterRecord QmlUtils::createCharacterRecord(void)
+{
+	return CharacterRecord();
 }

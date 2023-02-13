@@ -75,6 +75,17 @@ ColumnLayout {
 		font.pointSize: 12
 	}
 
+	Timer {
+		/*
+		 * Fixes incorrect background color after
+		 * switching to dark theme from menu bar.
+		 */
+		id: bgColorTimer
+		interval: 16
+		repeat: false
+		onTriggered: ThemeEngine.paperColorChanged()
+	}
+
 	ChartView {
 		id: chartView
 		Layout.fillWidth: true
@@ -83,6 +94,7 @@ ColumnLayout {
 		backgroundColor: ThemeEngine.paperColor
 		antialiasing: true
 		visible: parser.count > 0
+		onBackgroundColorChanged: bgColorTimer.start()
 
 		function getMaxY(series) {
 			var out = 0;

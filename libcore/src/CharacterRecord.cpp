@@ -2,7 +2,7 @@
  * CharacterRecord.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@
 void CharacterRecord::setKeyText(QString text)
 {
 	m_keyText = text;
-	emit keyTextChanged(text);
 }
 
 /*! Returns key text. */
@@ -37,7 +36,6 @@ QString CharacterRecord::keyText(void)
 void CharacterRecord::setHits(int count)
 {
 	m_hits = count;
-	emit hitsChanged(count);
 }
 
 /*! Returns number of key hits used to compose the character. */

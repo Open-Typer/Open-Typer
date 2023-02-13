@@ -2,6 +2,109 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>AppMenuBar</name>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="99"/>
+        <source>&amp;File</source>
+        <translation>&amp;Файл</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="100"/>
+        <source>Open...</source>
+        <translation>Открыть...</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="101"/>
+        <source>Print</source>
+        <translation>Печать</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="102"/>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="105"/>
+        <source>&amp;View</source>
+        <translation>&amp;Вид</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="106"/>
+        <source>User interface</source>
+        <translation>Пользовательский интерфейс</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="107"/>
+        <source>Dark theme</source>
+        <translation>Темная тема</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="110"/>
+        <source>&amp;Tools</source>
+        <translation>&amp;Инструменты</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="111"/>
+        <source>Typing test</source>
+        <translation>Вводимый тест</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="114"/>
+        <source>&amp;Exercise</source>
+        <translation>&amp;Упражнение</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="115"/>
+        <source>Exercise history</source>
+        <translation>История урока</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="116"/>
+        <source>Timed exercise</source>
+        <translation>Упражнение на время</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="117"/>
+        <source>Text from error words</source>
+        <translation>Сгенерировать текст из слов с ошибками</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="118"/>
+        <source>Reverse text</source>
+        <translation>Перевернуть текст</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="121"/>
+        <source>&amp;Options</source>
+        <translation>&amp;Опции</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="122"/>
+        <source>Preferences</source>
+        <translation>Персональные настройки</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="125"/>
+        <source>&amp;Help</source>
+        <translation>&amp;Помощь</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="126"/>
+        <source>&amp;Online documentation</source>
+        <translation>&amp;Онлайн документация</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="127"/>
+        <source>About program...</source>
+        <translation>О программе...</translation>
+    </message>
+    <message>
+        <location filename="../src/AppMenuBar.cpp" line="128"/>
+        <source>About Qt...</source>
+        <translation>О Qt...</translation>
+    </message>
+</context>
+<context>
     <name>ConfigParser</name>
     <message>
         <location filename="../src/ConfigParser.cpp" line="308"/>
@@ -40,125 +143,9 @@
     </message>
 </context>
 <context>
-    <name>ExportDialog</name>
-    <message>
-        <location filename="../ui/ExportDialog.ui" line="14"/>
-        <source>Export text</source>
-        <translation>Экспортировать текст</translation>
-    </message>
-    <message>
-        <location filename="../ui/ExportDialog.ui" line="29"/>
-        <source>Print</source>
-        <translation>Печать</translation>
-    </message>
-    <message>
-        <location filename="../ui/ExportDialog.ui" line="61"/>
-        <source>Name:</source>
-        <translation>Имя:</translation>
-    </message>
-    <message>
-        <location filename="../ui/ExportDialog.ui" line="78"/>
-        <source>Class:</source>
-        <translatorcomment>В СНГ это была бы буква класса</translatorcomment>
-        <translation>Класс:</translation>
-    </message>
-    <message>
-        <location filename="../ui/ExportDialog.ui" line="92"/>
-        <source>Number:</source>
-        <translation>Номер:</translation>
-    </message>
-    <message>
-        <location filename="../ui/ExportDialog.ui" line="106"/>
-        <source>Grade:</source>
-        <translatorcomment>В СНГ это был бы номер класса</translatorcomment>
-        <translation>Ступень обучения:</translation>
-    </message>
-    <message>
-        <location filename="../ui/ExportDialog.ui" line="296"/>
-        <source>Close</source>
-        <translation>Закрыть</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="120"/>
-        <source>Typewriting performance result</source>
-        <translation>Результат скорости печати</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="125"/>
-        <source>Name: %1</source>
-        <translation>Имя: %1</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="129"/>
-        <source>Class: %1</source>
-        <translation>Класс: %1</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="133"/>
-        <source>Date: %1</source>
-        <translation>Дата: %1</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="137"/>
-        <source>Number: %1</source>
-        <translation>Номер: %1</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="141"/>
-        <source>Number of gross hits</source>
-        <translation>Количество грубых попаданий</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="146"/>
-        <source>Number of mistakes</source>
-        <translation>Количество ошибок</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="149"/>
-        <source>Mistake penalty</source>
-        <translation>Штраф за ошибку</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="152"/>
-        <source>Number of penalty hits</source>
-        <translation>Количество штрафных попаданий</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="156"/>
-        <source>Number of net hits</source>
-        <translation>Количество чистых попаданий</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="159"/>
-        <source>Time (min)</source>
-        <comment>How many minutes the exercise took</comment>
-        <translation>Время (мин.)</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="162"/>
-        <source>Number of net hits per minute</source>
-        <translation>Количество точных попаданий в минуту</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="167"/>
-        <source>Inaccuracy</source>
-        <translation>Неточность</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="171"/>
-        <source>Achieved performance</source>
-        <translation>Достигнутая скорость</translation>
-    </message>
-    <message>
-        <location filename="../src/ExportDialog.cpp" line="174"/>
-        <source>Grade</source>
-        <translation>Ступень обучения</translation>
-    </message>
-</context>
-<context>
     <name>LanguageManager</name>
     <message>
-        <location filename="../src/LanguageManager.cpp" line="38"/>
+        <location filename="../src/LanguageManager.cpp" line="75"/>
         <source>System (default)</source>
         <translation>Системный (стандартный)</translation>
     </message>
@@ -177,12 +164,12 @@
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../src/BuiltInPacks.cpp" line="26"/>
+        <location filename="../src/BuiltInPacks.cpp" line="115"/>
         <source>auto-generated</source>
         <translation>сгенерированно автоматически</translation>
     </message>
     <message>
-        <location filename="../src/BuiltInPacks.cpp" line="45"/>
+        <location filename="../src/BuiltInPacks.cpp" line="31"/>
         <source>Unknown pack</source>
         <translation>Неизвестный набор</translation>
     </message>
@@ -192,81 +179,7 @@
     <message>
         <location filename="../src/QmlFileDialog.cpp" line="87"/>
         <source>All files</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StatsDialog</name>
-    <message>
-        <location filename="../ui/StatsDialog.ui" line="14"/>
-        <source>Exercise history</source>
-        <translation>История урока</translation>
-    </message>
-    <message>
-        <location filename="../ui/StatsDialog.ui" line="77"/>
-        <source>Table</source>
-        <translation>Таблица</translation>
-    </message>
-    <message>
-        <location filename="../ui/StatsDialog.ui" line="106"/>
-        <source>Charts</source>
-        <translation>Диаграммы</translation>
-    </message>
-    <message>
-        <location filename="../src/StatsDialog.cpp" line="80"/>
-        <location filename="../src/StatsDialog.cpp" line="126"/>
-        <source>Speed</source>
-        <translation>Скорость</translation>
-    </message>
-    <message>
-        <location filename="../src/StatsDialog.cpp" line="80"/>
-        <location filename="../src/StatsDialog.cpp" line="136"/>
-        <source>Mistakes</source>
-        <translation>Ошибки</translation>
-    </message>
-    <message>
-        <location filename="../src/StatsDialog.cpp" line="80"/>
-        <location filename="../src/StatsDialog.cpp" line="146"/>
-        <source>Time</source>
-        <translation>Время</translation>
-    </message>
-    <message>
-        <location filename="../src/StatsDialog.cpp" line="165"/>
-        <source>Better students: %1</source>
-        <translation>Лучшие студенты: %1</translation>
-    </message>
-    <message>
-        <location filename="../src/StatsDialog.cpp" line="166"/>
-        <source>Worse students: %1</source>
-        <translation>Худшие студенты: %1</translation>
-    </message>
-</context>
-<context>
-    <name>ThemeEngine</name>
-    <message>
-        <location filename="../src/ThemeEngine.cpp" line="68"/>
-        <source>Dark</source>
-        <translation>Темная</translation>
-    </message>
-    <message>
-        <location filename="../src/ThemeEngine.cpp" line="75"/>
-        <source>Light</source>
-        <translation>Светлая</translation>
-    </message>
-    <message>
-        <location filename="../src/ThemeEngine.cpp" line="82"/>
-        <source>Green</source>
-        <translation>Зеленая</translation>
-    </message>
-    <message>
-        <location filename="../src/ThemeEngine.cpp" line="91"/>
-        <source>Light blue</source>
-        <translation>Голубая</translation>
-    </message>
-    <message>
-        <location filename="../src/ThemeEngine.cpp" line="100"/>
-        <source>Custom</source>
-        <translation>Кастомная</translation>
+        <translation>Все файлы</translation>
     </message>
 </context>
 </TS>

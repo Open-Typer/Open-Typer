@@ -2,7 +2,7 @@
  * FileUtils.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,6 +40,18 @@ QString FileUtils::configLocation(void)
 QString FileUtils::mainSettingsLocation(void)
 {
 	return configLocation() + "/config.ini";
+}
+
+/*! Returns the path to the addon configuration JSON file. */
+QString FileUtils::addonConfigLocation(void)
+{
+	return configLocation() + "/addons.json";
+}
+
+/*! Returns the path to the directory where installed addons are stored. */
+QString FileUtils::addonDirectory(void)
+{
+	return configLocation() + "/addons";
 }
 
 /*! Uses QFileInfo to get the file name of a file. */

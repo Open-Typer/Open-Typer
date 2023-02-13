@@ -2,7 +2,7 @@
  * Updater.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,9 @@
 #include <QFileInfo>
 #include <QProcess>
 #include <QDateTime>
+#ifndef Q_OS_WASM
+#include "AddonListModel.h"
+#endif
 
 /*! \brief The Updater class is used to check for updates and download new versions of the program. */
 class Updater : public QObject
@@ -34,6 +37,17 @@ class Updater : public QObject
 	public:
 		Q_INVOKABLE static bool updateAvailable(void);
 		Q_INVOKABLE static void installUpdate(void);
+#ifndef Q_OS_WASM
+		Q_INVOKABLE static void getAddonUpdates(void);
+		Q_INVOKABLE static bool addonUpdateAvailable(void);
+		Q_INVOKABLE static void updateAddons(void);
+#endif
+
+	private:
+#ifndef Q_OS_WASM
+		static AddonListModel listModel;
+		static QList<AddonItemModel *> updatableAddons;
+#endif
 };
 
 #endif // UPDATER_H

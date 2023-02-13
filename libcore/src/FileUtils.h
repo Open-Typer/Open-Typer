@@ -2,7 +2,7 @@
  * FileUtils.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,6 +38,8 @@ class CORE_LIB_EXPORT FileUtils : public QObject
 	public:
 		Q_INVOKABLE static QString configLocation(void);
 		Q_INVOKABLE static QString mainSettingsLocation(void);
+		Q_INVOKABLE static QString addonConfigLocation(void);
+		Q_INVOKABLE static QString addonDirectory(void);
 		Q_INVOKABLE static QString fileName(QString path);
 };
 

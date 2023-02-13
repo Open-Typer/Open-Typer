@@ -55,7 +55,7 @@ void ExportProvider::setValidator(ExerciseValidator *validator)
 	}
 	QMap<int, MistakeRecord *> mistakesMap;
 	for(int i = 0; i < mistakes.length(); i++)
-		mistakesMap[mistakes[i]->position()] = mistakes[i];
+		mistakesMap[mistakes[i].position()] = &mistakes[i];
 	int pos = 0;
 	for(int i = 0; i < lines.count(); i++)
 	{

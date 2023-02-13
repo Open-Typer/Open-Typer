@@ -2,7 +2,7 @@
  * AddonApi.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,12 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QLayout>
-#include "IAddon.h"
+#include "SettingsCategory.h"
+#include "AddonButton.h"
+#include "AppMenuModel.h"
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+Q_MOC_INCLUDE("IAddon.h")
+#endif
 
 #if defined CORE_SHARED_LIB
 #define CORE_LIB_EXPORT Q_DECL_EXPORT
@@ -36,68 +41,86 @@
 #define CORE_LIB_EXPORT Q_DECL_IMPORT
 #endif
 
+class CORE_LIB_EXPORT IAddon;
+
 /*! \brief The AddonApi class provides an API for addons. */
 class CORE_LIB_EXPORT AddonApi : public QObject
 {
 		Q_OBJECT
+		Q_PROPERTY(QVector<IAddon *> loadedAddons READ loadedAddons WRITE setLoadedAddons)
+		Q_PROPERTY(QList<SettingsCategory *> settingsCategories READ settingsCategories NOTIFY settingsCategoriesChanged)
+		Q_PROPERTY(QList<AppMenuModel *> menus READ menus NOTIFY menusChanged)
+		Q_PROPERTY(QList<AddonButton *> mainButtons READ mainButtons NOTIFY mainButtonsChanged)
+		Q_PROPERTY(QList<AddonButton *> exOptionsButtons READ exOptionsButtons NOTIFY exOptionsButtonsChanged)
+		Q_PROPERTY(QList<AddonButton *> navigationButtons READ navigationButtons NOTIFY navigationButtonsChanged)
+		Q_PROPERTY(QList<AddonButton *> exInfoButtons READ exInfoButtons NOTIFY exInfoButtonsChanged)
 	public:
-		enum TopBarSection
+		enum Event
 		{
-			TopBarSection_Home,
-			TopBarSection_Navigation,
-			TopBarSection_ExOptions,
-			TopBarSection_State,
-			TopBarSecion_LastValue // do not use this
+			Event_InitApp = 0,
+			Event_RefreshApp = 1,
+			Event_InitExercise = 2,
+			Event_EndStockExercise = 3,
+			Event_EndTypingTest = 4,
+			Event_ChangeMode = 5,
+			Event_CustomExLoaded = 6
 		};
+		Q_ENUM(Event)
 
-		enum TopBarPos
-		{
-			TopBarPos_AboveButtons = 0,
-			TopBarPos_Buttons = 1,
-			TopBarPos_BelowButtons = 2,
-			TopBarPos_LastValue // do not use this
-		};
+		Q_INVOKABLE static void sendEvent(Event type, QVariantMap args = QVariantMap());
 
-		static AddonApi *instance(void);
-		static void addLoadExTarget(int id, QString name);
-		static void clearLoadExTargets(void);
-		static QMap<int, QString> loadExTargets(void);
-		static bool blockLoadedEx(void);
-		static void setBlockLoadedEx(bool value);
-		static bool addSettingsCategory(QString categoryName, QIcon icon, QString className);
-		static QList<QVariantMap> settingsCategories(void);
-		static void clearSettingsCategories(void);
-		static void initSettingsCategories(bool clear = false);
-		static void sendEvent(IAddon::Event type, QVariantMap args = QVariantMap());
-		static void deleteMenus(void);
-		static void addMenu(QString id, QString name);
-		static void registerMenu(QString id, QMenu *menu);
-		static QMap<QString, QPair<QString, QMenu *>> menus(void);
-		static QMenu *menu(QString id);
-		static void deleteButtons(void);
-		static void addButton(QString id, QIcon icon, QString toolTip, TopBarSection section);
-		static void registerButton(QString id, QPushButton *button);
-		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> buttons(void);
-		static QPushButton *button(QString id);
-		static void deleteTopBarWidgets(void);
-		static void addTopBarWidget(QString id, TopBarSection section, TopBarPos pos);
-		static void registerTopBarWidget(QString id, QWidget *widget);
-		static QMap<QString, QPair<QPair<TopBarSection, TopBarPos>, QWidget *>> topBarWidgets(void);
-		static QWidget *topBarWidget(QString id);
-		static void recreateWidget(QWidget *oldWidget, QWidget *newWidget);
+		static QVector<IAddon *> loadedAddons(void);
+		static void setLoadedAddons(QVector<IAddon *> newLoadedAddons);
+
+		bool addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource = "");
+		QList<SettingsCategory *> settingsCategories(void);
+
+		void addMenu(AppMenuModel *menu);
+		QList<AppMenuModel *> menus(void);
+
+		AddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
+		QList<AddonButton *> mainButtons(void);
+
+		AddonButton *addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
+		QList<AddonButton *> exOptionsButtons(void);
+
+		AddonButton *addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
+		QList<AddonButton *> navigationButtons(void);
+
+		AddonButton *addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
+		QList<AddonButton *> exInfoButtons(void);
 
 	private:
-		static AddonApi m_instance;
+		void deleteSettingsCategories(void);
+		void deleteMenus(void);
+		void deleteMainButtons(void);
+		void deleteExOptionsButtons(void);
+		void deleteNavigationButtons(void);
+		void deleteExInfoButtons(void);
+		void deleteButtons(QList<AddonButton *> *buttonList);
+		void deleteObjects(QList<QObject *> *objList);
+		AddonButton *createButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		static QMap<int, QString> m_loadExTargets;
 		static bool m_blockLoadedEx;
-		static QList<QVariantMap> m_settingsCategories;
-		static QMap<QString, QPair<QString, QMenu *>> m_menus;
-		static QMap<QString, QPair<QPair<QIcon, QString>, QPair<TopBarSection, QPushButton *>>> m_buttons;
-		static QMap<QString, QPair<QPair<TopBarSection, TopBarPos>, QWidget *>> m_topBarWidgets;
+		static QVector<IAddon *> m_loadedAddons;
+		QList<SettingsCategory *> m_settingsCategories;
+		QList<AppMenuModel *> m_menus;
+		QList<AddonButton *> m_mainButtons;
+		QList<AddonButton *> m_exOptionsButtons;
+		QList<AddonButton *> m_navigationButtons;
+		QList<AddonButton *> m_exInfoButtons;
 
 	signals:
 		void changeMode(int mode);
 		void startTypingTest(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
+		void settingsCategoriesChanged(QList<SettingsCategory *>);
+		void menusChanged(QList<AppMenuModel *> menus);
+		void mainButtonsChanged(QList<AddonButton *> buttons);
+		void exOptionsButtonsChanged(QList<AddonButton *> buttons);
+		void navigationButtonsChanged(QList<AddonButton *> buttons);
+		void exInfoButtonsChanged(QList<AddonButton *> buttons);
 };
+
+extern AddonApi CORE_LIB_EXPORT globalAddonApi;
 
 #endif // ADDONAPI_H

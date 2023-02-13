@@ -240,6 +240,8 @@ jobs:
         sed -i -e '/^#/d' .github/config.env
         sed -i -e '/^$/d' .github/config.env
         cat .github/config.env >> "${GITHUB_ENV}"
+        GITHUB_REF_NAME="${{ github.ref_name }}"
+        echo "version=${GITHUB_REF_NAME//v/}" >> $GITHUB_ENV
       shell: bash
     - uses: actions/checkout@v3
       with:
@@ -287,7 +289,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: "build-windows/*.exe,build-ubuntu/*.AppImage,build-ubuntu/*.zsync,*.deb,build-macos/*.dmg"
-        name: "${{ env.app_name }} ${{ github.ref_name }}"
+        name: "${{ env.app_name }} ${{ env.version }}"
         owner: ${{ github.event.pusher.name }}
         draft: true
         token: ${{ secrets.GITHUB_TOKEN }}

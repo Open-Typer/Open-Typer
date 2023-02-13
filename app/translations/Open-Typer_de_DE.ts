@@ -2,6 +2,30 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>AboutDialog</name>
+    <message>
+        <source>About %1</source>
+        <extracomment>For example &quot;About Open-Typer&quot; (%1 is the app name)</extracomment>
+        <translation>Über %1</translation>
+    </message>
+    <message>
+        <source>Version: %1</source>
+        <translation>Version: %1</translation>
+    </message>
+    <message>
+        <source>Revision: %1</source>
+        <translation>Revision: %1</translation>
+    </message>
+    <message>
+        <source>Source code: %1</source>
+        <translation>Quellcode: %1</translation>
+    </message>
+    <message>
+        <source>Published with the GNU General Public License.</source>
+        <translation>Veröffentlicht unter der GNU General Public License.</translation>
+    </message>
+</context>
+<context>
     <name>AppearanceSettings</name>
     <message>
         <source>Set custom</source>
@@ -54,9 +78,21 @@
         <source>Paper color:</source>
         <translation>Papier Farbe:</translation>
     </message>
+    <message>
+        <source>Keyboard</source>
+        <translation>Tastatur</translation>
+    </message>
+    <message>
+        <source>Use key colors based on fingers</source>
+        <translation>Benutzen Sie Tastenfarben basierend auf Fingern</translation>
+    </message>
+    <message>
+        <source>Accent color:</source>
+        <translation>Akzentfarbe:</translation>
+    </message>
 </context>
 <context>
-    <name>BehaviorOptions</name>
+    <name>BehaviorSettings</name>
     <message>
         <source>Exercise validation</source>
         <translation>Validierung der Übung</translation>
@@ -66,12 +102,12 @@
         <translation>Fehlerstrafe:</translation>
     </message>
     <message>
-        <source>Number of characters in one word with max. 1 mistake:</source>
-        <translation>Anzahl der Zeichen in einem Wort mit max. 1 Fehler:</translation>
-    </message>
-    <message>
         <source>Limit number of mistakes</source>
         <translation>Die Anzahl der Fehler begrenzen</translation>
+    </message>
+    <message>
+        <source>Number of characters in one word with max. 1 mistake:</source>
+        <translation>Anzahl der Zeichen in einem Wort mit max. 1 Fehler:</translation>
     </message>
     <message>
         <source>Updates</source>
@@ -81,68 +117,29 @@
         <source>Check for updates on startup</source>
         <translation>Beim Start nach Aktualisierung suchen</translation>
     </message>
-    <message>
-        <source>Settings lock</source>
-        <translation>Einstellungenschloss</translation>
-    </message>
-    <message>
-        <source>Lock settings</source>
-        <translation>Sperr die Einstellungen</translation>
-    </message>
-    <message>
-        <source>Old password:</source>
-        <translation>Altes Passwort:</translation>
-    </message>
-    <message>
-        <source>New password:</source>
-        <translation>Neues Passwort:</translation>
-    </message>
-    <message>
-        <source>Repeat password:</source>
-        <translation>Passwort wiederholen:</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>Anwenden</translation>
-    </message>
-    <message>
-        <source>Settings lock password:</source>
-        <translation>Passwort des Einstellungenschlosses:</translation>
-    </message>
-    <message>
-        <source>Incorrect password!</source>
-        <translation>Falsches Passwort!</translation>
-    </message>
-    <message>
-        <source>The passwords do not match.</source>
-        <translation>Die Passwörter stimmen nicht miteinander überein.</translation>
-    </message>
-    <message>
-        <source>Settings lock enabled</source>
-        <translation>Das Einstellungenschloss ist eingeschaltet</translation>
-    </message>
-    <message>
-        <source>Password changed</source>
-        <translation>Das Passwort wurde verändert</translation>
-    </message>
 </context>
 <context>
-    <name>CustomMenuBar</name>
+    <name>ExerciseHistory</name>
     <message>
-        <source>File</source>
-        <translation>Datei</translation>
+        <source>Error penalty: %1</source>
+        <translation>Fehlerstrafe: %1</translation>
     </message>
     <message>
-        <source>New...</source>
-        <translation>Neu...</translation>
+        <source>Net hits per minute</source>
+        <translation>Nettoschläge pro Minute</translation>
     </message>
     <message>
-        <source>Open...</source>
-        <translation>Öffnen...</translation>
+        <source>Attempt</source>
+        <translation>Versuch</translation>
     </message>
     <message>
-        <source>Quit</source>
-        <translation>Beenden</translation>
+        <source>Gross hits per minute</source>
+        <translation>Bruttoschläge pro Minute</translation>
+    </message>
+    <message>
+        <source>No data yet...</source>
+        <extracomment>When there&apos;s nothing to show in the exercise history chart</extracomment>
+        <translation>Noch keine Daten...</translation>
     </message>
 </context>
 <context>
@@ -170,6 +167,96 @@
     <message>
         <source>Accuracy:</source>
         <translation>Richtigkeit:</translation>
+    </message>
+</context>
+<context>
+    <name>ExportDialog</name>
+    <message>
+        <source>Export text</source>
+        <translation>Text Exportieren</translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation>Drucken</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Name:</translation>
+    </message>
+    <message>
+        <source>Class:</source>
+        <translation>Klasse:</translation>
+    </message>
+    <message>
+        <source>Typing test number:</source>
+        <translation>Tipptestnummer:</translation>
+    </message>
+    <message>
+        <source>Grade:</source>
+        <translation>Kennzeichen:</translation>
+    </message>
+</context>
+<context>
+    <name>ExportTableModel</name>
+    <message>
+        <source>Typewriting performance result</source>
+        <translation>Schreibleistungsergebnis</translation>
+    </message>
+    <message>
+        <source>Name: %1</source>
+        <translation>Name: %1</translation>
+    </message>
+    <message>
+        <source>Class: %1</source>
+        <translation>Klasse: %1</translation>
+    </message>
+    <message>
+        <source>Date: %1</source>
+        <translation>Datum: %1</translation>
+    </message>
+    <message>
+        <source>Number: %1</source>
+        <translation>Nummer: %1</translation>
+    </message>
+    <message>
+        <source>Number of gross hits</source>
+        <translation>Anzahl der Bruttoschläge</translation>
+    </message>
+    <message>
+        <source>Number of mistakes</source>
+        <translation>Anzahl der Fehler</translation>
+    </message>
+    <message>
+        <source>Mistake penalty</source>
+        <translation>Fehlerstrafe</translation>
+    </message>
+    <message>
+        <source>Number of penalty hits</source>
+        <translation>Anzahl der Straftschläge</translation>
+    </message>
+    <message>
+        <source>Number of net hits</source>
+        <translation>Anzahl Nettoschläge</translation>
+    </message>
+    <message>
+        <source>Time (min)</source>
+        <translation>Zeit (min)</translation>
+    </message>
+    <message>
+        <source>Number of net hits per minute</source>
+        <translation>Anzahl Nettoschläge pro Minute</translation>
+    </message>
+    <message>
+        <source>Inaccuracy</source>
+        <translation>Unrichtigkeit</translation>
+    </message>
+    <message>
+        <source>Achieved performance</source>
+        <translation>Erreichte Leistung</translation>
+    </message>
+    <message>
+        <source>Grade</source>
+        <translation>Kennzeichen</translation>
     </message>
 </context>
 <context>
@@ -209,7 +296,18 @@
     </message>
 </context>
 <context>
-    <name>KeyboardWidget</name>
+    <name>KeyboardSettings</name>
+    <message>
+        <source>Keyboard layout</source>
+        <translation>Tastaturbelegung</translation>
+    </message>
+    <message>
+        <source>Lesson pack</source>
+        <translation>Lektion Paket</translation>
+    </message>
+</context>
+<context>
+    <name>KeyboardView</name>
     <message>
         <source>Hide keyboard</source>
         <translation>Verstecken die Tastatur</translation>
@@ -217,6 +315,13 @@
     <message>
         <source>Show keyboard</source>
         <translation>Anzeigen die Tastatur</translation>
+    </message>
+</context>
+<context>
+    <name>LanguageSettings</name>
+    <message>
+        <source>Language</source>
+        <translation>Sprache</translation>
     </message>
 </context>
 <context>
@@ -292,6 +397,10 @@
     <message>
         <source>No error words</source>
         <translation>Keine Fehlerwörter</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>Exportieren</translation>
     </message>
 </context>
 <context>
@@ -448,6 +557,18 @@
     <message>
         <source>Appearance</source>
         <translation>Aussehen</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation>Sprache</translation>
+    </message>
+    <message>
+        <source>Behavior</source>
+        <translation>Verhalten</translation>
+    </message>
+    <message>
+        <source>Keyboard</source>
+        <translation>Tastatur</translation>
     </message>
 </context>
 <context>

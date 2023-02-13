@@ -25,6 +25,7 @@ import QtQuick.Layouts 1.12
 
 Rectangle {
 	readonly property color accent: Material.accent
+	property bool addons: false
 	id: root
 	height: rowLayout.implicitHeight
 	color: Qt.rgba(accent.r, accent.g, accent.b, 0.15)
@@ -38,9 +39,11 @@ Rectangle {
 		width: parent.width
 
 		Label {
+			readonly property string appUpdate: "There's a new update available. Would you like to download and install it?"
+			readonly property string addonUpdate: "There's a new update of one or more addons available. Would you like to update them?"
 			Layout.fillWidth: true
 			padding: 10
-			text: "There's a new update available. Would you like to download and install it?"
+			text: addons ? addonUpdate : appUpdate
 			font.bold: true
 		}
 

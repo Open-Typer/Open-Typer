@@ -23,6 +23,11 @@ INCLUDEPATH += src
 
 SOURCES += \
     src/AddonApi.cpp \
+    src/AddonButton.cpp \
+    src/AbstractMenuBar.cpp \
+    src/AppMenuBar.cpp \
+    src/AppMenuItem.cpp \
+    src/AppMenuModel.cpp \
     src/BuiltInPacks.cpp \
     src/CharacterRecord.cpp \
     src/ConfigParser.cpp \
@@ -40,13 +45,18 @@ SOURCES += \
     src/QmlKeyboardHandler.cpp \
     src/QmlUtils.cpp \
     src/Settings.cpp \
+    src/SettingsCategory.cpp \
     src/StringUtils.cpp \
-    src/widgets/TextView.cpp \
     src/ThemeEngine.cpp \
-    src/IAddon.cpp
+    src/global.cpp
 
 HEADERS += \
     src/AddonApi.h \
+    src/AddonButton.h \
+    src/AbstractMenuBar.h \
+    src/AppMenuBar.h \
+    src/AppMenuItem.h \
+    src/AppMenuModel.h \
     src/BuiltInPacks.h \
     src/CharacterRecord.h \
     src/ConfigParser.h \
@@ -64,10 +74,11 @@ HEADERS += \
     src/QmlKeyboardHandler.h \
     src/QmlUtils.h \
     src/Settings.h \
+    src/SettingsCategory.h \
     src/StringUtils.h \
-    src/widgets/TextView.h \
     src/ThemeEngine.h \
-    src/IAddon.h
+    src/IAddon.h \
+    src/global.h
 
 TRANSLATIONS += \
     translations/libcore_sk_SK.ts \

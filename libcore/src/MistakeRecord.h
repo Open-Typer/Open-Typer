@@ -2,7 +2,7 @@
  * MistakeRecord.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,23 +31,22 @@
 #include <QVariant>
 
 /*! \brief The MistakeRecord class can be used to store mistake records. */
-class CORE_LIB_EXPORT MistakeRecord : public QObject
+class CORE_LIB_EXPORT MistakeRecord
 {
-		Q_OBJECT
-		Q_PROPERTY(int position READ position WRITE setPosition NOTIFY positionChanged)
-		Q_PROPERTY(Type type READ type WRITE setType NOTIFY typeChanged)
-		Q_PROPERTY(QString previousText READ previousText WRITE setPreviousText NOTIFY previousTextChanged)
-		Q_PROPERTY(QVariant previousVariant READ previousVariant WRITE setPreviousVariant NOTIFY previousVariantChanged)
-		Q_PROPERTY(int previousPosition READ previousPosition WRITE setPreviousPosition NOTIFY previousPositionChanged)
-		Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
-		Q_PROPERTY(bool merged READ isMerged WRITE setMerged NOTIFY mergedChanged)
+		Q_GADGET
+		Q_PROPERTY(int position READ position WRITE setPosition)
+		Q_PROPERTY(Type type READ type WRITE setType)
+		Q_PROPERTY(QString previousText READ previousText WRITE setPreviousText)
+		Q_PROPERTY(QVariant previousVariant READ previousVariant WRITE setPreviousVariant)
+		Q_PROPERTY(int previousPosition READ previousPosition WRITE setPreviousPosition)
+		Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled)
+		Q_PROPERTY(bool merged READ isMerged WRITE setMerged)
 	public:
-		explicit MistakeRecord(QObject *parent = nullptr);
 		enum Type
 		{
-			Type_Addition,
-			Type_Deletion,
-			Type_Change
+			Type_Addition = 0,
+			Type_Deletion = 1,
+			Type_Change = 2
 		};
 		Q_ENUM(Type)
 
@@ -75,14 +74,17 @@ class CORE_LIB_EXPORT MistakeRecord : public QObject
 		bool m_isEnabled = true;
 		bool m_isMerged = false;
 
-	signals:
-		void positionChanged(int pos);
-		void typeChanged(MistakeRecord::Type type);
-		void previousTextChanged(QString text);
-		void previousVariantChanged(QVariant value);
-		void previousPositionChanged(int pos);
-		void enabledChanged(bool enabled);
-		void mergedChanged(bool merged);
+		friend inline bool operator==(const MistakeRecord &r1, const MistakeRecord &r2)
+		{
+			bool posCheck = r1.m_position == r2.m_position;
+			bool typeCheck = r1.m_type == r2.m_type;
+			bool previousTextCheck = r1.m_previousText == r2.m_previousText;
+			bool previousVariantCheck = r1.m_previousVariant == r2.m_previousVariant;
+			bool previousPositionCheck = r1.m_previousPosition == r2.m_previousPosition;
+			bool enabledCheck = r1.m_isEnabled == r2.m_isEnabled;
+			bool mergedCheck = r1.m_isMerged == r2.m_isMerged;
+			return (posCheck && typeCheck && previousTextCheck && previousVariantCheck && previousPositionCheck && enabledCheck && mergedCheck);
+		}
 };
 
 #endif // MISTAKERECORD_H

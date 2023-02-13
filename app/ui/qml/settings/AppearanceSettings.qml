@@ -33,20 +33,13 @@ ColumnLayout {
 	function setLightTheme() {
 		var exTextAccentChecked = exTextColorAccent.checked;
 		ThemeEngine.theme = ThemeEngine.LightTheme;
-		ThemeEngine.exerciseTextColor = exTextColorForAccentColor(ThemeEngine.currentAccentColor);
+		ThemeEngine.exerciseTextColor = ThemeEngine.defaultExerciseTextColor(ThemeEngine.currentAccentColor);
 	}
 
 	function setDarkTheme() {
 		var exTextAccentChecked = exTextColorAccent.checked;
 		ThemeEngine.theme = ThemeEngine.DarkTheme;
-		ThemeEngine.exerciseTextColor = exTextColorForAccentColor(ThemeEngine.currentAccentColor);
-	}
-
-	function exTextColorForAccentColor(color) {
-		if(ThemeEngine.theme == ThemeEngine.DarkTheme)
-			return Qt.lighter(color, 1.1);
-		else
-			return Qt.darker(color, 1.5);
+		ThemeEngine.exerciseTextColor = ThemeEngine.defaultExerciseTextColor(ThemeEngine.currentAccentColor);
 	}
 
 	Platform.ColorDialog {
@@ -121,7 +114,7 @@ ColumnLayout {
 		}
 
 		Label {
-			text: "Accent color:"
+			text: qsTr("Accent color:")
 		}
 
 		RowLayout {
@@ -141,7 +134,7 @@ ColumnLayout {
 					checkable: true
 					onPressed: {
 						if(exTextColorAccent.checked)
-							ThemeEngine.exerciseTextColor = exTextColorForAccentColor(color);
+							ThemeEngine.exerciseTextColor = ThemeEngine.defaultExerciseTextColor(color);
 						ThemeEngine.accentColor = accentColor;
 					}
 				}
@@ -188,7 +181,7 @@ ColumnLayout {
 		ColorButton {
 			property bool wasChecked: checked
 			id: exTextColorAccent
-			color: exTextColorForAccentColor(ThemeEngine.currentAccentColor)
+			color: ThemeEngine.defaultExerciseTextColor(ThemeEngine.currentAccentColor)
 			// For some reason checking for color equality here works only after converting the colors to strings
 			// (this happens only after using Qt.darker() with any of the colors)
 			checked: ThemeEngine.exerciseTextColor + "" == color + ""

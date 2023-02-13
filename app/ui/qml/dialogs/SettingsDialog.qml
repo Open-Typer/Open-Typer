@@ -36,6 +36,34 @@ CustomDialog {
 		property alias stack: stack
 		ListView {
 			property int previousIndex: -1
+			readonly property list<SettingsCategory> categories: [
+				SettingsCategory {
+					name: qsTr("Language")
+					iconName: "language"
+					qmlFileName: "settings/LanguageSettings.qml"
+				},
+				SettingsCategory {
+					name: qsTr("Behavior")
+					iconName: "tweaks"
+					qmlFileName: "settings/BehaviorSettings.qml"
+				},
+				SettingsCategory {
+					name: qsTr("Keyboard")
+					iconName: "keyboard"
+					qmlFileName: "settings/KeyboardSettings.qml"
+				},
+				SettingsCategory {
+					name: qsTr("Appearance")
+					iconName: "appearance"
+					qmlFileName: "settings/AppearanceSettings.qml"
+				},
+				SettingsCategory {
+					name: qsTr("Addons")
+					iconName: "add"
+					qmlFileName: "settings/AddonSettings.qml"
+					visible: !QmlUtils.osWasm()
+				}
+			]
 			id: listView
 			Layout.fillHeight: true
 			Binding on implicitWidth {
@@ -55,45 +83,38 @@ CustomDialog {
 				}
 			}
 			implicitHeight: contentHeight
-			model: ListModel {
-				ListElement {
-					name: qsTr("Language")
-					iconName: "language"
-					sourceComponent: "../settings/LanguageSettings.qml"
-				}
-				ListElement {
-					name: qsTr("Behavior")
-					iconName: "tweaks"
-					sourceComponent: "../settings/BehaviorSettings.qml"
-				}
-				ListElement {
-					name: qsTr("Keyboard")
-					iconName: "keyboard"
-					sourceComponent: "../settings/KeyboardSettings.qml"
-				}
-				ListElement {
-					name: qsTr("Appearance")
-					iconName: "appearance"
-					sourceComponent: "../settings/AppearanceSettings.qml"
+			model: categories
+			Connections {
+				target: AddonApi
+				function onSettingsCategoriesChanged() {
+					for(var i = 0; i < AddonApi.settingsCategories.length; i++)
+					{
+						listView.categories.push(AddonApi.settingsCategories[i]);
+					}
 				}
 			}
 			delegate: ItemDelegate {
-				property string source: sourceComponent
-				text: name
+				property string source: "../" + modelData.qmlFileName
+				text: modelData.name
 				width: listView.width
-				icon.name: iconName
+				visible: modelData.visible
+				icon.name: modelData.iconName
+				icon.source: modelData.iconSource
 				highlighted: ListView.isCurrentItem
 				onClicked: listView.currentIndex = index
 			}
 			onCurrentIndexChanged: {
+				var noTransition = false;
+				if(currentIndex == previousIndex)
+					noTransition = true;
 				if(currentItem == null)
 					return;
 				if(stack.currentItem == null)
 					stack.push(categoryContent);
 				else if(currentIndex > previousIndex)
-					stack.replace(stack.currentItem, categoryContent, StackView.PushTransition);
+					stack.replace(stack.currentItem, categoryContent, noTransition ? StackView.Immediate : StackView.PushTransition);
 				else
-					stack.replace(stack.currentItem, categoryContent, StackView.PopTransition);
+					stack.replace(stack.currentItem, categoryContent, noTransition ? StackView.Immediate : StackView.PopTransition);
 				stack.currentItem.currentComponent = currentItem.source;
 				previousIndex = currentIndex;
 			}
@@ -116,7 +137,7 @@ CustomDialog {
 				ScrollBar.vertical: ScrollBar {
 					width: 10
 					position: flickable.visibleArea.yPosition
-					policy: ScrollBar.AlwaysOn
+					policy: ScrollBar.AsNeeded
 				}
 				onCurrentComponentChanged: {
 					var component = Qt.createComponent(currentComponent);
