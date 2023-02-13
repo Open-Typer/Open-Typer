@@ -136,6 +136,14 @@ void ExerciseValidator::validate(void)
 	setMistakes(StringUtils::validateExercise(m_exerciseText, m_inputText, m_characters.toVector(), &m_grossHits, &m_mistakeCount, &m_errorWords, m_isTimed, m_time));
 }
 
+/*! Sets a custom result without actually validating the exercise. */
+void ExerciseValidator::validate(int grossHits, QStringList errorWords)
+{
+	m_mistakeCount = m_mistakes.length();
+	m_grossHits = grossHits;
+	m_errorWords = errorWords;
+}
+
 /*! Returns number of gross hits. */
 int ExerciseValidator::grossHits(void)
 {

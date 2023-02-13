@@ -59,6 +59,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		void setTime(qreal seconds);
 		qreal time(void);
 		Q_INVOKABLE void validate(void);
+		Q_INVOKABLE void validate(int grossHits, QStringList errorWords);
 		Q_INVOKABLE int grossHits(void);
 		Q_INVOKABLE int mistakeCount(void);
 		Q_INVOKABLE QStringList errorWords(void);
