@@ -90,7 +90,7 @@ void ExportTableModel::loadData(void)
 	if(!m_validator)
 		return;
 	int penalty = Settings::errorPenalty();
-	int netHits = m_validator->grossHits() - m_validator->mistakeCount() * penalty;
+	int netHits = std::max(0, m_validator->grossHits() - m_validator->mistakeCount() * penalty);
 	qreal timeMins = m_validator->time() / 60.0;
 	qreal netHitsPerMinute = netHits / timeMins;
 	// Caption
