@@ -258,6 +258,8 @@ QList<MistakeRecord> StringUtils::compareLists(QList<QVariant> source, QList<QVa
 		{
 			if(recordedCharacters && (*inputPos < recordedCharacters->count()) && hits && inputPos)
 			{
+				if(*inputPos < 0)
+					*inputPos = 0;
 				auto character = recordedCharacters->at(*inputPos);
 				*hits += character.hits();
 				*inputPos += 1;
