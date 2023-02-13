@@ -40,7 +40,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		Q_PROPERTY(QList<MistakeRecord> mistakes READ mistakes WRITE setMistakes NOTIFY mistakesChanged)
 		Q_PROPERTY(QList<CharacterRecord> characters READ characters WRITE setCharacters NOTIFY charactersChanged)
 		Q_PROPERTY(bool timed READ isTimed WRITE setTimed NOTIFY timedChanged)
-		Q_PROPERTY(int time READ time WRITE setTime NOTIFY timeChanged)
+		Q_PROPERTY(qreal time READ time WRITE setTime NOTIFY timeChanged)
 	public:
 		void setExerciseText(QString text);
 		QString exerciseText(void);
