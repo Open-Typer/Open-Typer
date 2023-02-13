@@ -338,7 +338,7 @@ Item {
 
 		KeyboardView {
 			id: keyboard
-			visible: !preview
+			opacity: summary.visible ? 0 : 1
 			anchors.bottom: parent.bottom
 			anchors.bottomMargin: 20
 			x: parent.width / 2 - width / 2
