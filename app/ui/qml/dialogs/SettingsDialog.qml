@@ -120,7 +120,6 @@ CustomDialog {
 					stack.replace(stack.currentItem, categoryContent, StackView.PushTransition);
 				else
 					stack.replace(stack.currentItem, categoryContent, StackView.PopTransition);
-				console.log("replaced");
 				stack.currentItem.currentComponent = currentItem.source;
 				previousIndex = currentIndex;
 				if(noTransition)
