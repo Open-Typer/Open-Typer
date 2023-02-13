@@ -22,20 +22,21 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 
 StackView {
+	property int animationDuration: 250
 	id: control
 	pushEnter: Transition {
 		ParallelAnimation {
 			YAnimator {
 				from: (control.mirrored ? -1 : 1) * control.height
 				to: 0
-				duration: 250
+				duration: animationDuration
 				easing.type: Easing.OutCubic
 			}
 			PropertyAnimation {
 				property: "opacity"
 				from: 0
 				to: 1
-				duration: 250
+				duration: animationDuration
 			}
 		}
 	}
@@ -45,14 +46,14 @@ StackView {
 			YAnimator {
 				from: 0
 				to: (control.mirrored ? -1 : 1) * -control.height
-				duration: 250
+				duration: animationDuration
 				easing.type: Easing.OutCubic
 			}
 			PropertyAnimation {
 				property: "opacity"
 				from: 1
 				to: 0
-				duration: 250
+				duration: animationDuration
 			}
 		}
 	}
@@ -62,14 +63,14 @@ StackView {
 			YAnimator {
 				from: (control.mirrored ? -1 : 1) * -control.height
 				to: 0
-				duration: 250
+				duration: animationDuration
 				easing.type: Easing.OutCubic
 			}
 			PropertyAnimation {
 				property: "opacity"
 				from: 0
 				to: 1
-				duration: 250
+				duration: animationDuration
 			}
 		}
 	}
@@ -79,14 +80,14 @@ StackView {
 			YAnimator {
 				from: 0
 				to: (control.mirrored ? -1 : 1) * control.height
-				duration: 250
+				duration: animationDuration
 				easing.type: Easing.OutCubic
 			}
 			PropertyAnimation {
 				property: "opacity"
 				from: 1
 				to: 0
-				duration: 250
+				duration: animationDuration
 			}
 		}
 	}
