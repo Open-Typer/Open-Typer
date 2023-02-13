@@ -47,7 +47,6 @@ ComboBox {
 	}
 	popup.implicitWidth: computeWidth(model)
 	popup.height: Math.min(popup.contentItem.implicitHeight, Window.height - popup.topMargin - popup.bottomMargin - mapToItem(Window.contentItem, x, y).y - height * 2)
-	onActivated: console.log(mapToItem(Window.contentItem, x, y).y)
 	popup.y: height
 	background.clip: true
 	function computeWidth(mdl) {
