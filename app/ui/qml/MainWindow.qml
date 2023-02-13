@@ -1128,6 +1128,7 @@ ApplicationWindow {
 				validator.addMistake(recordedMistakes[j]);
 			fullInput = validator.textWithMistakes();
 			validator.inputText = fullInput;
+			validator.validate(totalHits, errorWords);
 		}
 		else
 		{
