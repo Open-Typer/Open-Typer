@@ -81,6 +81,7 @@ ApplicationWindow {
 	property bool uiLocked: false
 	property string formattedExerciseTime
 	property string formattedExerciseRemainingTime
+	readonly property alias keyboard: paper.keyboard
 	Material.theme: ThemeEngine.theme === ThemeEngine.DarkTheme ? Material.Dark : Material.Light
 	Material.accent: ThemeEngine.currentAccentColor
 	color: ThemeEngine.bgColor
@@ -515,14 +516,6 @@ ApplicationWindow {
 				to: 0
 				duration: 125
 				easing.type: Easing.InCubic
-			}
-
-			KeyboardView {
-				id: keyboard
-				visible: !preview
-				anchors.bottom: parent.bottom
-				anchors.bottomMargin: 20
-				x: parent.width / 2 - width / 2
 			}
 		}
 	}

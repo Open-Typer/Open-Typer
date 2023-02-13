@@ -46,6 +46,7 @@ Item {
 	property int sublesson
 	property int exercise
 	property int errorPenalty
+	readonly property alias keyboard: keyboard
 	signal keyPressed(var event)
 	signal keyReleased(var event)
 	signal historyChanged()
@@ -71,7 +72,7 @@ Item {
 		var maxValue = 0;
 		for(var i = 0; i < lines.length; i++)
 			maxValue = Math.max(maxValue, metrics.boundingRect(lines[i]).width);
-		return maxValue;
+		return Math.max(maxValue, keyboard.width);
 	}
 
 	KeyboardHandler {
@@ -333,6 +334,14 @@ Item {
 				Layout.alignment: Qt.AlignBottom
 				Layout.fillWidth: true
 			}
+		}
+
+		KeyboardView {
+			id: keyboard
+			visible: !preview
+			anchors.bottom: parent.bottom
+			anchors.bottomMargin: 20
+			x: parent.width / 2 - width / 2
 		}
 	}
 }
