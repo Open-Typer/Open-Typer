@@ -200,7 +200,7 @@ ColumnLayout {
 		}
 
 		// Row E (number row)
-		RowLayout {
+		Row {
 			spacing: keySpacing
 
 			Repeater {
@@ -228,7 +228,7 @@ ColumnLayout {
 		}
 
 		// Row D
-		RowLayout {
+		Row {
 			spacing: keySpacing
 
 			KeyboardKey {
@@ -256,7 +256,7 @@ ColumnLayout {
 		}
 
 		// Row C (home row)
-		RowLayout {
+		Row {
 			spacing: keySpacing
 
 			KeyboardKey {
@@ -294,7 +294,7 @@ ColumnLayout {
 		}
 
 		// Row B
-		RowLayout {
+		Row {
 			spacing: keySpacing
 
 			KeyboardKey {
@@ -332,7 +332,7 @@ ColumnLayout {
 		}
 
 		// Row A
-		RowLayout {
+		Row {
 			spacing: keySpacing
 
 			KeyboardKey {
