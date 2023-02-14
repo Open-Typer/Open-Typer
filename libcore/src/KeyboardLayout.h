@@ -38,10 +38,17 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 		Q_OBJECT
 		Q_PROPERTY(QString layoutId READ layoutId WRITE setLayoutId NOTIFY layoutIdChanged)
 		Q_PROPERTY(QString variant READ variant WRITE setVariant NOTIFY variantChanged)
+#if QT_VERSION > QT_VERSION_CHECK(5, 15, 0)
 		Q_PROPERTY(KeyboardRow rowB READ rowB NOTIFY rowBChanged)
 		Q_PROPERTY(KeyboardRow rowC READ rowC NOTIFY rowCChanged)
 		Q_PROPERTY(KeyboardRow rowD READ rowD NOTIFY rowDChanged)
 		Q_PROPERTY(KeyboardRow rowE READ rowE NOTIFY rowEChanged)
+#else
+		Q_PROPERTY(QVariantList rowB READ rowB NOTIFY rowBChanged)
+		Q_PROPERTY(QVariantList rowC READ rowC NOTIFY rowCChanged)
+		Q_PROPERTY(QVariantList rowD READ rowD NOTIFY rowDChanged)
+		Q_PROPERTY(QVariantList rowE READ rowE NOTIFY rowEChanged)
+#endif
 	public:
 		enum Hand
 		{
@@ -83,10 +90,17 @@ class CORE_LIB_EXPORT KeyboardLayout : public QObject
 		void setLayoutId(QString id);
 		QString variant(void);
 		void setVariant(QString variant);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 		KeyboardRow rowB(void);
 		KeyboardRow rowC(void);
 		KeyboardRow rowD(void);
 		KeyboardRow rowE(void);
+#else
+		QVariantList rowB(void);
+		QVariantList rowC(void);
+		QVariantList rowD(void);
+		QVariantList rowE(void);
+#endif
 		Q_INVOKABLE Finger keyFinger(Row row, int id);
 		Q_INVOKABLE Hand fingerHand(Finger finger);
 		Q_INVOKABLE KeyboardRow characterKeys(QChar character);
