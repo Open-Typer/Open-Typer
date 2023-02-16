@@ -31,8 +31,6 @@ ThemeEngine::ThemeEngine(QObject *parent) :
 {
 	// Connections
 	connect(this, &ThemeEngine::fontBoldChanged, this, &ThemeEngine::fontStyleChanged);
-	connect(this, &ThemeEngine::fontItalicChanged, this, &ThemeEngine::fontStyleChanged);
-	connect(this, &ThemeEngine::fontUnderlineChanged, this, &ThemeEngine::fontStyleChanged);
 	connect(this, &ThemeEngine::fontFamilyChanged, this, &ThemeEngine::fontChanged);
 	connect(this, &ThemeEngine::fontSizeChanged, this, &ThemeEngine::fontChanged);
 	connect(this, &ThemeEngine::fontStyleChanged, this, &ThemeEngine::fontChanged);
@@ -52,8 +50,6 @@ QFont ThemeEngine::font(void)
 		setFontFamily("");
 		setFontSize(20);
 		setFontBold(true);
-		setFontItalic(false);
-		setFontUnderline(false);
 	}
 	QFont _font;
 	_font.setFamily(Settings::themeFont());
@@ -70,8 +66,6 @@ void ThemeEngine::setFont(QFont newFont)
 	setFontFamily(newFont.family());
 	setFontSize(newFont.pointSize());
 	setFontBold(newFont.bold());
-	setFontItalic(newFont.italic());
-	setFontUnderline(newFont.underline());
 }
 
 /*! Returns selected font optimized for error text. */
@@ -140,32 +134,6 @@ void ThemeEngine::setFontBold(bool value)
 {
 	Settings::setThemeFontBold(value);
 	emit fontBoldChanged();
-}
-
-/*! Returns true if selected font style is set to italic. */
-bool ThemeEngine::fontItalic(void)
-{
-	return font().italic();
-}
-
-/*! Sets font style to italic if value is true. */
-void ThemeEngine::setFontItalic(bool value)
-{
-	Settings::setThemeFontItalic(value);
-	emit fontItalicChanged();
-}
-
-/*! Returns true if selected font's underline is enabled. */
-bool ThemeEngine::fontUnderline(void)
-{
-	return font().underline();
-}
-
-/*! Sets font underline. */
-void ThemeEngine::setFontUnderline(bool value)
-{
-	Settings::setThemeFontUnderline(value);
-	emit fontUnderlineChanged();
 }
 
 /*! Returns true if there's a custom exercise text color set. */

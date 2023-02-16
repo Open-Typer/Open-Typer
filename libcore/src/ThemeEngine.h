@@ -47,8 +47,6 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_PROPERTY(QString fontFamily READ fontFamily WRITE setFontFamily NOTIFY fontFamilyChanged)
 		Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
 		Q_PROPERTY(bool fontBold READ fontBold WRITE setFontBold NOTIFY fontBoldChanged)
-		Q_PROPERTY(bool fontItalic READ fontItalic WRITE setFontItalic NOTIFY fontItalicChanged)
-		Q_PROPERTY(bool fontUnderline READ fontUnderline WRITE setFontUnderline NOTIFY fontUnderlineChanged)
 		Q_PROPERTY(QColor exerciseTextColor READ exerciseTextColor WRITE setExerciseTextColor NOTIFY exerciseTextColorChanged)
 		Q_PROPERTY(QColor inputTextColor READ inputTextColor WRITE setInputTextColor NOTIFY inputTextColorChanged)
 		Q_PROPERTY(QColor bgColor READ bgColor WRITE setBgColor NOTIFY bgColorChanged)
@@ -93,10 +91,6 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		Q_INVOKABLE int maxFontSize(void);
 		bool fontBold(void);
 		void setFontBold(bool value);
-		bool fontItalic(void);
-		void setFontItalic(bool value);
-		bool fontUnderline(void);
-		void setFontUnderline(bool value);
 		// Exercise text color
 		Q_INVOKABLE bool customExerciseTextColor(void);
 		QColor exerciseTextColor(void);
@@ -160,10 +154,6 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		void fontStyleChanged();
 		/*! A signal, which is emitted when the font weight changes. */
 		void fontBoldChanged();
-		/*! A signal, which is emitted when the font italic style changes. */
-		void fontItalicChanged();
-		/*! A signal, which is emitted when the font underline changes. */
-		void fontUnderlineChanged();
 		/*! A signal, which is emitted when a color changes. */
 		void colorChanged();
 		/*! A signal, which is emitted when exercise text color changes. */
