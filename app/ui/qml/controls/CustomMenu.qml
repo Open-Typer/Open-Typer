@@ -25,6 +25,12 @@ import OpenTyper 1.0
 
 Menu {
 	property bool isSubMenu: false
+	function updateWidth() {
+		let maxWidth = 0;
+		for(let i = 0; i < count; i++)
+			maxWidth = Math.max(maxWidth, itemAt(i).implicitWidth);
+		background.implicitWidth = maxWidth;
+	}
 	x: isSubMenu ? parent.width : 0
 	y: isSubMenu ? 0 : parent.height
 	font.pointSize: 10
@@ -32,7 +38,8 @@ Menu {
 		color: ThemeEngine.bgColor;
 		border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
 		radius: 10
-		implicitWidth: 200
 		implicitHeight: 40
 	}
+	delegate: CustomMenuItem {}
+	onAboutToShow: updateWidth()
 }
