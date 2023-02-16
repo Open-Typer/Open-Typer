@@ -36,6 +36,9 @@ Thumbs.db
 release/
 *.qm
 moc_predefs.h
+qmlcache_loader.cpp
+ui_qml_*_qml.cpp
+ui_qml_*_qmlcache.qrc
 open-typer
 
 # qtcreator generated files

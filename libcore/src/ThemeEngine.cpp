@@ -31,8 +31,6 @@ ThemeEngine::ThemeEngine(QObject *parent) :
 {
 	// Connections
 	connect(this, &ThemeEngine::fontBoldChanged, this, &ThemeEngine::fontStyleChanged);
-	connect(this, &ThemeEngine::fontItalicChanged, this, &ThemeEngine::fontStyleChanged);
-	connect(this, &ThemeEngine::fontUnderlineChanged, this, &ThemeEngine::fontStyleChanged);
 	connect(this, &ThemeEngine::fontFamilyChanged, this, &ThemeEngine::fontChanged);
 	connect(this, &ThemeEngine::fontSizeChanged, this, &ThemeEngine::fontChanged);
 	connect(this, &ThemeEngine::fontStyleChanged, this, &ThemeEngine::fontChanged);
@@ -52,8 +50,6 @@ QFont ThemeEngine::font(void)
 		setFontFamily("");
 		setFontSize(20);
 		setFontBold(true);
-		setFontItalic(false);
-		setFontUnderline(false);
 	}
 	QFont _font;
 	_font.setFamily(Settings::themeFont());
@@ -70,16 +66,6 @@ void ThemeEngine::setFont(QFont newFont)
 	setFontFamily(newFont.family());
 	setFontSize(newFont.pointSize());
 	setFontBold(newFont.bold());
-	setFontItalic(newFont.italic());
-	setFontUnderline(newFont.underline());
-}
-
-/*! Returns selected font optimized for error text. */
-QFont ThemeEngine::errorFont(void)
-{
-	QFont _font = font();
-	_font.setUnderline(false);
-	return _font;
 }
 
 /*! Returns font family of selected font. */
@@ -142,32 +128,6 @@ void ThemeEngine::setFontBold(bool value)
 	emit fontBoldChanged();
 }
 
-/*! Returns true if selected font style is set to italic. */
-bool ThemeEngine::fontItalic(void)
-{
-	return font().italic();
-}
-
-/*! Sets font style to italic if value is true. */
-void ThemeEngine::setFontItalic(bool value)
-{
-	Settings::setThemeFontItalic(value);
-	emit fontItalicChanged();
-}
-
-/*! Returns true if selected font's underline is enabled. */
-bool ThemeEngine::fontUnderline(void)
-{
-	return font().underline();
-}
-
-/*! Sets font underline. */
-void ThemeEngine::setFontUnderline(bool value)
-{
-	Settings::setThemeFontUnderline(value);
-	emit fontUnderlineChanged();
-}
-
 /*! Returns true if there's a custom exercise text color set. */
 bool ThemeEngine::customExerciseTextColor(void)
 {
@@ -222,12 +182,6 @@ QColor ThemeEngine::defaultExerciseTextColor(QColor accent, bool dark)
 		return accent.darker(150);
 }
 
-/*! Returns exercise text style sheet. */
-QString ThemeEngine::exerciseTextStyleSheet(void)
-{
-	return "QWidget { color: rgb(" + QString::number(exerciseTextColor().red()) + ", " + QString::number(exerciseTextColor().green()) + ", " + QString::number(exerciseTextColor().blue()) + "); margin: 0px; padding: 0px; }";
-}
-
 /*! Returns true if there's a custom input text color set. */
 bool ThemeEngine::customInputTextColor(void)
 {
@@ -263,12 +217,6 @@ QColor ThemeEngine::defaultInputTextColor(bool dark)
 		return QColor(255, 255, 255);
 	else
 		return QColor(0, 0, 0);
-}
-
-/*! Returns input text style sheet. */
-QString ThemeEngine::inputTextStyleSheet(void)
-{
-	return "QWidget { color: rgb(" + QString::number(inputTextColor().red()) + ", " + QString::number(inputTextColor().green()) + ", " + QString::number(inputTextColor().blue()) + "); margin: 0px; padding: 0px; background-color: rgba(0,0,0,0); }";
 }
 
 /*! Returns true if there's a custom background color set. */
@@ -307,12 +255,6 @@ QColor ThemeEngine::defaultBgColor(bool dark)
 		return QColor(255, 255, 255);
 }
 
-/*! Returns background style sheet. */
-QString ThemeEngine::bgStyleSheet(void)
-{
-	return "QFrame, #centralwidget { background-color: rgb(" + QString::number(bgColor().red()) + ", " + QString::number(bgColor().green()) + ", " + QString::number(bgColor().blue()) + ");}";
-}
-
 /*! Returns true if there's a custom paper color set. */
 bool ThemeEngine::customPaperColor(void)
 {
@@ -349,12 +291,6 @@ QColor ThemeEngine::defaultPaperColor(bool dark)
 		return QColor(255, 255, 255);
 }
 
-/*! Returns paper style sheet. */
-QString ThemeEngine::paperStyleSheet(void)
-{
-	return "QFrame { background-color: rgb(" + QString::number(paperColor().red()) + ", " + QString::number(paperColor().green()) + ", " + QString::number(paperColor().blue()) + ");}";
-}
-
 /*! Returns true if there's a custom panel color set. */
 bool ThemeEngine::customPanelColor(void)
 {
@@ -389,12 +325,6 @@ QColor ThemeEngine::defaultPanelColor(bool dark)
 		return QColor(41, 41, 41);
 	else
 		return QColor(255, 255, 255);
-}
-
-/*! Returns panel style sheet. */
-QString ThemeEngine::panelStyleSheet(void)
-{
-	return "QMenuBar, QFrame, QCheckBox { background-color: rgb(" + QString::number(panelColor().red()) + ", " + QString::number(panelColor().green()) + ", " + QString::number(panelColor().blue()) + ");}";
 }
 
 /*! Returns current accent color ID. */

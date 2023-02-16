@@ -35,7 +35,7 @@ CustomDialog {
 		property alias listView: listView
 		property alias stack: stack
 		ListView {
-			property int previousIndex: -1
+			property int previousIndex: 0
 			readonly property list<SettingsCategory> categories: [
 				SettingsCategory {
 					name: qsTr("Language")
@@ -111,12 +111,19 @@ CustomDialog {
 					return;
 				if(stack.currentItem == null)
 					stack.push(categoryContent);
+				if(noTransition)
+				{
+					var previousDuration = stack.animationDuration;
+					stack.animationDuration = 16;
+				}
 				else if(currentIndex > previousIndex)
-					stack.replace(stack.currentItem, categoryContent, noTransition ? StackView.Immediate : StackView.PushTransition);
+					stack.replace(stack.currentItem, categoryContent, StackView.PushTransition);
 				else
-					stack.replace(stack.currentItem, categoryContent, noTransition ? StackView.Immediate : StackView.PopTransition);
+					stack.replace(stack.currentItem, categoryContent, StackView.PopTransition);
 				stack.currentItem.currentComponent = currentItem.source;
 				previousIndex = currentIndex;
+				if(noTransition)
+					stack.animationDuration = previousDuration;
 			}
 			FontMetrics {
 				id: metrics
@@ -150,13 +157,10 @@ CustomDialog {
 			Layout.fillWidth: true
 			implicitWidth: 600
 			implicitHeight: 400
-			initialItem: null
+			initialItem: categoryContent
 		}
 	}
 	onAboutToShow: {
-		contentItem.stack.clear();
-		contentItem.listView.currentIndex = -1;
-		contentItem.listView.currentIndex = 0;
 		Settings.freeze();
 	}
 	onAccepted: {

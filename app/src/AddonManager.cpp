@@ -133,6 +133,7 @@ QList<QPluginLoader *> AddonManager::loadAddons(QString path)
 	for(const QString &fileName : entries)
 	{
 		QPluginLoader *pluginLoader = new QPluginLoader(pluginsDir.absoluteFilePath(fileName), this);
+		pluginLoader->setLoadHints(QLibrary::ResolveAllSymbolsHint);
 		QObject *plugin = pluginLoader->instance();
 		if(plugin)
 		{

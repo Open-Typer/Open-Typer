@@ -64,6 +64,7 @@ void KeyboardLayout::setVariant(QString variant)
 	emit variantChanged(variant);
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 /*! Row B (shift, backslash, y/z, x, c, etc.) */
 KeyboardRow KeyboardLayout::rowB(void)
 {
@@ -87,6 +88,43 @@ KeyboardRow KeyboardLayout::rowE(void)
 {
 	return m_rowE;
 }
+#else
+/*! Row B (shift, backslash, y/z, x, c, etc.) */
+QVariantList KeyboardLayout::rowB(void)
+{
+	QVariantList list;
+	for(int i = 0; i < m_rowB.length(); i++)
+		list.append(QVariant::fromValue(m_rowB[i]));
+	return list;
+}
+
+/*! Row C (caps lock, a, s, d, f, etc.) */
+QVariantList KeyboardLayout::rowC(void)
+{
+	QVariantList list;
+	for(int i = 0; i < m_rowC.length(); i++)
+		list.append(QVariant::fromValue(m_rowC[i]));
+	return list;
+}
+
+/*! Row D (tab, q, w, e, r, t, z/y, etc.) */
+QVariantList KeyboardLayout::rowD(void)
+{
+	QVariantList list;
+	for(int i = 0; i < m_rowD.length(); i++)
+		list.append(QVariant::fromValue(m_rowD[i]));
+	return list;
+}
+
+/*! Row E (tilde, 1, 2, 3, 4, 5, etc.) */
+QVariantList KeyboardLayout::rowE(void)
+{
+	QVariantList list;
+	for(int i = 0; i < m_rowE.length(); i++)
+		list.append(QVariant::fromValue(m_rowE[i]));
+	return list;
+}
+#endif
 
 /*! Returns the finger which should be used for the given key (id starts with 0). */
 KeyboardLayout::Finger KeyboardLayout::keyFinger(Row row, int id)

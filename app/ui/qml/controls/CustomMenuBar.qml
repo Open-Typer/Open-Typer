@@ -111,6 +111,7 @@ MenuBar {
 			text: replaceText(menuBarItem.text)
 			font: menuBarItem.font
 		}
+		onDoubleClicked: clicked()
 	}
 
 	function reload() {

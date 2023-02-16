@@ -28,6 +28,30 @@ ColumnLayout {
 	property int keySpacing: 7
 	readonly property alias layout: layout
 	property bool opened: Settings.keyboardVisible()
+	readonly property var keys: {
+		let out = [];
+		for(var i = 0; i < rowB.count; i++)
+			out.push(rowB.itemAt(i));
+		for(i = 0; i < rowC.count; i++)
+			out.push(rowC.itemAt(i));
+		for(i = 0; i < rowD.count; i++)
+			out.push(rowD.itemAt(i));
+		for(i = 0; i < rowE.count; i++)
+			out.push(rowE.itemAt(i));
+		out.push(backspace);
+		out.push(tab);
+		out.push(capsLock);
+		out.push(returnKey);
+		out.push(lShift);
+		out.push(rShift);
+		out.push(lCtrl);
+		out.push(lAlt);
+		out.push(space);
+		out.push(rAlt);
+		out.push(rCtrl);
+		return out;
+	}
+
 	id: root
 	spacing: keySpacing
 
@@ -129,25 +153,8 @@ ColumnLayout {
 	}
 
 	function dehighlightAllKeys() {
-		for(var i = 0; i < rowB.count; i++)
-			rowB.itemAt(i).highlighted = false;
-		for(i = 0; i < rowC.count; i++)
-			rowC.itemAt(i).highlighted = false;
-		for(i = 0; i < rowD.count; i++)
-			rowD.itemAt(i).highlighted = false;
-		for(i = 0; i < rowE.count; i++)
-			rowE.itemAt(i).highlighted = false;
-		backspace.highlighted = false;
-		tab.highlighted = false;
-		capsLock.highlighted = false;
-		returnKey.highlighted = false;
-		lShift.highlighted = false;
-		rShift.highlighted = false;
-		lCtrl.highlighted = false;
-		lAlt.highlighted = false;
-		space.highlighted = false;
-		rAlt.highlighted = false;
-		rCtrl.highlighted = false;
+		for(var i = 0; i < keys.length; i++)
+			keys[i].highlighted = false;
 	}
 
 	function pressKey(event) {
@@ -163,25 +170,8 @@ ColumnLayout {
 	}
 
 	function releaseAllKeys() {
-		for(var i = 0; i < rowB.count; i++)
-			rowB.itemAt(i).pressed = false;
-		for(i = 0; i < rowC.count; i++)
-			rowC.itemAt(i).pressed = false;
-		for(i = 0; i < rowD.count; i++)
-			rowD.itemAt(i).pressed = false;
-		for(i = 0; i < rowE.count; i++)
-			rowE.itemAt(i).pressed = false;
-		backspace.pressed = false;
-		tab.pressed = false;
-		capsLock.pressed = false;
-		returnKey.pressed = false;
-		lShift.pressed = false;
-		rShift.pressed = false;
-		lCtrl.pressed = false;
-		lAlt.pressed = false;
-		space.pressed = false;
-		rAlt.pressed = false;
-		rCtrl.pressed = false;
+		for(var i = 0; i < keys.length; i++)
+			keys[i].pressed = false;
 	}
 
 	KeyboardLayout {
@@ -200,7 +190,7 @@ ColumnLayout {
 		}
 
 		// Row E (number row)
-		RowLayout {
+		Row {
 			spacing: keySpacing
 
 			Repeater {
@@ -228,7 +218,7 @@ ColumnLayout {
 		}
 
 		// Row D
-		RowLayout {
+		Row {
 			spacing: keySpacing
 
 			KeyboardKey {
@@ -256,7 +246,7 @@ ColumnLayout {
 		}
 
 		// Row C (home row)
-		RowLayout {
+		Row {
 			spacing: keySpacing
 
 			KeyboardKey {
@@ -294,7 +284,7 @@ ColumnLayout {
 		}
 
 		// Row B
-		RowLayout {
+		Row {
 			spacing: keySpacing
 
 			KeyboardKey {
@@ -332,7 +322,7 @@ ColumnLayout {
 		}
 
 		// Row A
-		RowLayout {
+		Row {
 			spacing: keySpacing
 
 			KeyboardKey {

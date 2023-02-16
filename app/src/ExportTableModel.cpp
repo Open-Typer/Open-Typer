@@ -90,9 +90,10 @@ void ExportTableModel::loadData(void)
 	if(!m_validator)
 		return;
 	int penalty = Settings::errorPenalty();
-	int netHits = m_validator->grossHits() - m_validator->mistakeCount() * penalty;
+	int netHits = std::max(0, m_validator->grossHits() - m_validator->mistakeCount() * penalty);
 	qreal timeMins = m_validator->time() / 60.0;
 	qreal netHitsPerMinute = netHits / timeMins;
+	qreal inaccuracy = (m_validator->mistakeCount() * 100) / (double) m_validator->grossHits();
 	// Caption
 	tableData.insert({ 0, 0 }, "<h1><b><center>" + tr("Typewriting performance result") + "</center></b></h1>");
 	// Name
@@ -123,10 +124,10 @@ void ExportTableModel::loadData(void)
 	tableData.insert({ 7, 1 }, QString::number(timeMins, 'g', 2));
 	// Number of net hits per minute
 	tableData.insert({ 8, 0 }, "<b>" + tr("Number of net hits per minute") + "</b>");
-	tableData.insert({ 8, 1 }, netHitsPerMinute);
+	tableData.insert({ 8, 1 }, ((int) (netHitsPerMinute * 100)) / 100.0);
 	// Inaccuracy
 	tableData.insert({ 2, 2 }, tr("Inaccuracy"));
-	tableData.insert({ 2, 3 }, (m_validator->mistakeCount() * 100) / (double) m_validator->grossHits());
+	tableData.insert({ 2, 3 }, ((int) (inaccuracy * 100)) / 100.0);
 	// Achieved performance
 	tableData.insert({ 4, 2 }, tr("Achieved performance"));
 	tableData.insert({ 4, 3 }, (int) netHitsPerMinute);
