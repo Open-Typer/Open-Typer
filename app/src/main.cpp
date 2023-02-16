@@ -68,7 +68,9 @@ void changeSplashMessage(QSplashScreen *splash, QString message)
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#ifndef Q_OS_WINDOWS
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
 #endif
 	QApplication a(argc, argv);
 	QCoreApplication::setOrganizationDomain("open-typer.sourceforge.io");
