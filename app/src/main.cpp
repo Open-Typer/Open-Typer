@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
 		engine.rootContext()->setContextProperty("exportTable", &table);
 		engine.load("qrc:/qml/MainWindow.qml");
 		if(splash.isVisible())
-			splash.finish(nullptr);
+			splash.close();
 		currentExitCode = a.exec();
 #ifndef Q_OS_WASM
 		globalAddonManager.unloadAddons();
