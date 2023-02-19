@@ -139,6 +139,7 @@ Item {
 		height: fillWindow ? parent.height - 100 : (standardButtons !== Dialog.NoButton ? headerLayout.implicitHeight + buttonBoxLoader.item.height : headerLayout.implicitHeight)
 		standardButtons: root.standardButtons
 		modal: true
+		Accessible.name: windowTitle
 		onAboutToShow: {
 			contentsLoader.active = 1;
 			blur.show();
@@ -198,6 +199,22 @@ Item {
 						id: contentsLoader
 						active: false
 						anchors.fill: parent
+						onActiveChanged: {
+							let found = null;
+							for(var i = 0; i < item.children.length; i++)
+							{
+								let element = item.children[i];
+								if(element.hovered !== undefined) // this is true for Controls
+								{
+									found = element;
+									break;
+								}
+							}
+							if(found == null)
+								item.forceActiveFocus(Qt.TabFocus);
+							else
+								found.forceActiveFocus(Qt.TabFocus);
+						}
 					}
 				}
 				MenuSeparator {
