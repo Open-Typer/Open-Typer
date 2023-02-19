@@ -294,6 +294,15 @@ ApplicationWindow {
 			if(focus)
 				panel1.contents.settingsButton.forceActiveFocus();
 		}
+		Keys.forwardTo: keyboardHandler
+
+		KeyboardHandler {
+			id: keyboardHandler
+			onKeyPressed: {
+				if(event["key"] !== Qt.Key_Tab && event["key"] !== Qt.Key_Enter && event["key"] !== Qt.Key_Return && event["key"] !== Qt.Key_Space)
+					paper.forceActiveFocus();
+			}
+		}
 
 		Rectangle {
 			visible: customMenuBar.visible
