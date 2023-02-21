@@ -26,6 +26,40 @@
     </message>
 </context>
 <context>
+    <name>AddonInfo</name>
+    <message>
+        <source>Uninstall</source>
+        <translation>Deinstallieren</translation>
+    </message>
+    <message>
+        <source>Installing...</source>
+        <translation>Installieren...</translation>
+    </message>
+    <message>
+        <source>Install</source>
+        <translation>Installieren</translation>
+    </message>
+    <message>
+        <source>The application needs to restart.</source>
+        <translation>Die Anwendung muss neu gestartet werden.</translation>
+    </message>
+</context>
+<context>
+    <name>AddonSettings</name>
+    <message>
+        <source>Search</source>
+        <translation>Suchen</translation>
+    </message>
+    <message>
+        <source>Online</source>
+        <translation>Online</translation>
+    </message>
+    <message>
+        <source>Installed addons</source>
+        <translation>Installierte Addons</translation>
+    </message>
+</context>
+<context>
     <name>AppearanceSettings</name>
     <message>
         <source>Set custom</source>
@@ -570,6 +604,10 @@
         <source>Keyboard</source>
         <translation>Tastatur</translation>
     </message>
+    <message>
+        <source>Addons</source>
+        <translation>Addons</translation>
+    </message>
 </context>
 <context>
     <name>TimeDialog</name>
@@ -645,6 +683,17 @@
     <message>
         <source>Hide text</source>
         <translation>Text verstecken</translation>
+    </message>
+</context>
+<context>
+    <name>UpdateQuestion</name>
+    <message>
+        <source>There&apos;s a new update available. Would you like to download and install it?</source>
+        <translation>Es ist ein neues Update verfügbar. Möchtest du es herunterladen und installieren?</translation>
+    </message>
+    <message>
+        <source>There&apos;s a new update of one or more addons available. Would you like to update them?</source>
+        <translation>Es ist ein neues Update von einem oder mehreren Addons verfügbar. Möchten Sie sie aktualisieren?</translation>
     </message>
 </context>
 </TS>
