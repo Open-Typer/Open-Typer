@@ -145,7 +145,7 @@
 <context>
     <name>LanguageManager</name>
     <message>
-        <location filename="../src/LanguageManager.cpp" line="75"/>
+        <location filename="../src/LanguageManager.cpp" line="77"/>
         <source>System (default)</source>
         <translation>Системный (стандартный)</translation>
     </message>
