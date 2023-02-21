@@ -207,7 +207,7 @@ ApplicationWindow {
 
 	Connections {
 		target: rootItem
-		function onLanguageChanged() {
+		onLanguageChanged: {
 			updateLessonList();
 			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
 			loadLesson(currentLesson, currentSublesson);
@@ -217,7 +217,7 @@ ApplicationWindow {
 
 	Connections {
 		target: QmlUtils
-		function onScreenKeyboardChanged(layoutChanged) {
+		onScreenKeyboardChanged: {
 			if(layoutChanged)
 				keyboard.loadLayout();
 		}
@@ -235,15 +235,15 @@ ApplicationWindow {
 
 		Connections {
 			target: root
-			function onWidthChanged() { mainLayoutSource.render(); }
-			function onHeightChanged() { mainLayoutSource.render(); }
-			function onPreviewChanged() { mainLayoutSource.render(); }
-			function onCurrentModeChanged() { mainLayoutSource.render(); }
+			onWidthChanged: { mainLayoutSource.render(); }
+			onHeightChanged: { mainLayoutSource.render(); }
+			onPreviewChanged: { mainLayoutSource.render(); }
+			onCurrentModeChanged: { mainLayoutSource.render(); }
 		}
 
 		Connections {
 			target: paper.paperRect
-			function onWidthChanged() { mainLayoutSource.render(); }
+			onWidthChanged: { mainLayoutSource.render(); }
 		}
 	}
 
