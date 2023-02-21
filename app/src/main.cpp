@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 	QCoreApplication::setOrganizationDomain("open-typer.sourceforge.io");
 	QCoreApplication::setOrganizationName("Open-Typer");
-	QCoreApplication::setApplicationName("Open-Typer");
+	QCoreApplication::setApplicationName("Open-Typer " + QString::number(QVersionNumber::fromString(BUILD_VERSION).majorVersion()));
 #ifdef BUILD_VERSION
 	QCoreApplication::setApplicationVersion(BUILD_VERSION);
 #endif // BUILD_VERSION
