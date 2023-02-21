@@ -107,6 +107,7 @@ ApplicationWindow {
 			id: menuBarBlur
 			anchors.fill: parent
 			source: customMenuBar
+			cached: true
 			visible: false
 			radius: 0
 			PropertyAnimation {
