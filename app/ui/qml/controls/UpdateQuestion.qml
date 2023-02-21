@@ -39,8 +39,8 @@ Rectangle {
 		width: parent.width
 
 		Label {
-			readonly property string appUpdate: "There's a new update available. Would you like to download and install it?"
-			readonly property string addonUpdate: "There's a new update of one or more addons available. Would you like to update them?"
+			readonly property string appUpdate: qsTr("There's a new update available. Would you like to download and install it?")
+			readonly property string addonUpdate: qsTr("There's a new update of one or more addons available. Would you like to update them?")
 			Layout.fillWidth: true
 			padding: 10
 			text: addons ? addonUpdate : appUpdate
