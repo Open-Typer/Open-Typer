@@ -223,36 +223,40 @@ ApplicationWindow {
 		}
 	}
 
-	Repeater {
-		readonly property int minY: timedExPanel.visible ? 0 : panel1.height
-		readonly property bool hidden: appUpdateQuestion.visible || addonUpdateQuestion.visible
-		id: shadowRepeater
-		model: timedExPanel.visible ? [timedExPanel, paper] : [panel2, exportButton, paper]
-		DropShadow {
-			function getY() {
-				var out = shadowRepeater.minY;
-				for(var i = 0; i < shadowRepeater.model.length; i++)
-				{
-					if(shadowRepeater.model[i] === paper)
-						out += paper.Layout.topMargin;
-					if(i === index)
-						return out;
-					if(shadowRepeater.model[i].visible)
-						out += shadowRepeater.model[i].height;
-				}
-				return out;
-			}
-			source: modelData
-			width: modelData.width
-			height: modelData.height
-			y: getY()
-			horizontalOffset: 0
-			verticalOffset: 5
-			radius: 17
-			samples: 13
-			color: ThemeEngine.theme === ThemeEngine.DarkTheme ? "#80000000" : "#80000022"
-			visible: modelData.visible && modelData != exportButton && !shadowRepeater.hidden
+	ShaderEffectSource {
+		id: mainLayoutSource
+		anchors.fill: mainLayout
+		sourceItem: mainLayout
+		live: false
+
+		function render() {
+			scheduleUpdate();
 		}
+
+		Connections {
+			target: root
+			function onWidthChanged() { mainLayoutSource.render(); }
+			function onHeightChanged() { mainLayoutSource.render(); }
+			function onPreviewChanged() { mainLayoutSource.render(); }
+			function onCurrentModeChanged() { mainLayoutSource.render(); }
+		}
+
+		Connections {
+			target: paper.paperRect
+			function onWidthChanged() { mainLayoutSource.render(); }
+		}
+	}
+
+	DropShadow {
+		source: mainLayoutSource
+		anchors.fill: mainLayoutSource
+		horizontalOffset: 0
+		verticalOffset: 5
+		radius: 17
+		samples: 13
+		cached: true
+		color: ThemeEngine.theme === ThemeEngine.DarkTheme ? "#80000000" : "#80000022"
+		visible: true
 	}
 
 	ColumnLayout {
@@ -454,6 +458,8 @@ ApplicationWindow {
 				if(Updater.updateAvailable())
 					visible = true;
 			}
+			onOpacityChanged: mainLayoutSource.render()
+			onVisibleChanged: mainLayoutSource.render()
 		}
 		UpdateQuestion {
 			id: addonUpdateQuestion
@@ -465,6 +471,8 @@ ApplicationWindow {
 				if(Updater.addonUpdateAvailable())
 					visible = true;
 			}
+			onOpacityChanged: mainLayoutSource.render()
+			onVisibleChanged: mainLayoutSource.render()
 		}
 		AccentButton {
 			id: exportButton
