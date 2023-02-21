@@ -108,6 +108,7 @@ Item {
 		source: blurSource
 		visible: false
 		radius: 0
+		cached: true
 		PropertyAnimation {
 			id: blurInAnimation
 			target: blur
@@ -133,6 +134,7 @@ Item {
 		samples: 10
 		color: ThemeEngine.theme == ThemeEngine.DarkTheme ? "#80000000" : "#50000000"
 		source: dialogMask
+		cached: true
 		opacity: 0
 		visible: false
 		PropertyAnimation {
