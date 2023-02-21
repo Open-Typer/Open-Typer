@@ -296,7 +296,7 @@ Item {
 			sourceComponent: buttonBoxComponent
 			Connections {
 				target: LanguageManager
-				function onLanguageChanged() {
+				onLanguageChanged: {
 					translationTimer.start();
 				}
 			}
