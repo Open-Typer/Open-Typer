@@ -28,18 +28,20 @@
 #endif
 
 #include <QObject>
+#include <QQmlListProperty>
 #include "AppMenuModel.h"
 
 /*! \brief The AbstractMenuBar class provides a model for a menu bar. */
 class CORE_LIB_EXPORT AbstractMenuBar : public QObject
 {
 		Q_OBJECT
-		Q_PROPERTY(QList<AppMenuModel *> menus READ menus WRITE setMenus NOTIFY menusChanged)
+		Q_PROPERTY(QQmlListProperty<AppMenuModel> menus READ menus NOTIFY menusChanged)
 
 	public:
 		AbstractMenuBar(QObject *parent = nullptr);
 
-		QList<AppMenuModel *> menus(void);
+		QQmlListProperty<AppMenuModel> menus(void);
+		QList<AppMenuModel *> getMenus(void);
 		void setMenus(QList<AppMenuModel *> newMenus);
 		Q_INVOKABLE void addMenu(AppMenuModel *menu);
 		Q_INVOKABLE void removeMenu(AppMenuModel *menu);
@@ -50,7 +52,7 @@ class CORE_LIB_EXPORT AbstractMenuBar : public QObject
 		QList<AppMenuModel *> m_menus;
 
 	signals:
-		void menusChanged(QList<AppMenuModel *> menus);
+		void menusChanged();
 };
 
 #endif // ABSTRACTMENUBAR_H

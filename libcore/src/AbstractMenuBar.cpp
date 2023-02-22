@@ -41,7 +41,17 @@ void AbstractMenuBar::updateMenus(void)
 }
 
 /*! List of menus in the menu bar. */
-QList<AppMenuModel *> AbstractMenuBar::menus(void)
+QQmlListProperty<AppMenuModel> AbstractMenuBar::menus(void)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	return QQmlListProperty<AppMenuModel>(this, &m_menus);
+#else
+	return QQmlListProperty<AppMenuModel>(this, m_menus);
+#endif
+}
+
+/*! Returns list of menus in the menu bar. */
+QList<AppMenuModel *> AbstractMenuBar::getMenus(void)
 {
 	return m_menus;
 }
@@ -49,19 +59,19 @@ QList<AppMenuModel *> AbstractMenuBar::menus(void)
 void AbstractMenuBar::setMenus(QList<AppMenuModel *> newMenus)
 {
 	m_menus = newMenus;
-	emit menusChanged(newMenus);
+	emit menusChanged();
 }
 
 /*! Adds a menu. */
 void AbstractMenuBar::addMenu(AppMenuModel *menu)
 {
 	m_menus.append(menu);
-	emit menusChanged(m_menus);
+	emit menusChanged();
 }
 
 /*! Removes a menu. */
 void AbstractMenuBar::removeMenu(AppMenuModel *menu)
 {
 	m_menus.removeAll(menu);
-	emit menusChanged(m_menus);
+	emit menusChanged();
 }
