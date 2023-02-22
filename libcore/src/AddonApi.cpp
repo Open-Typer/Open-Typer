@@ -61,9 +61,13 @@ bool AddonApi::addSettingsCategory(QString categoryName, QString qmlFileName, QS
 }
 
 /*! List of settings categories. */
-QList<SettingsCategory *> AddonApi::settingsCategories(void)
+QQmlListProperty<SettingsCategory> AddonApi::settingsCategories(void)
 {
-	return m_settingsCategories;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	return QQmlListProperty<SettingsCategory>(this, &m_settingsCategories);
+#else
+	return QQmlListProperty<SettingsCategory>(this, m_settingsCategories);
+#endif
 }
 
 /*! Deletes all settings categories. */
@@ -120,9 +124,13 @@ void AddonApi::addMenu(AppMenuModel *menu)
 }
 
 /*! List of menus. */
-QList<AppMenuModel *> AddonApi::menus(void)
+QQmlListProperty<AppMenuModel> AddonApi::menus(void)
 {
-	return m_menus;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	return QQmlListProperty<AppMenuModel>(this, &m_menus);
+#else
+	return QQmlListProperty<AppMenuModel>(this, m_menus);
+#endif
 }
 
 /*! Deletes all buttons in the main section. */
@@ -142,9 +150,13 @@ AddonButton *AddonApi::addMainButton(QString text, QString toolTip, QString icon
 }
 
 /*! The list of buttons in the main section. */
-QList<AddonButton *> AddonApi::mainButtons(void)
+QQmlListProperty<AddonButton> AddonApi::mainButtons(void)
 {
-	return m_mainButtons;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	return QQmlListProperty<AddonButton>(this, &m_mainButtons);
+#else
+	return QQmlListProperty<AddonButton>(this, m_mainButtons);
+#endif
 }
 
 /*! Deletes all buttons in the exercise options section. */
@@ -164,9 +176,13 @@ AddonButton *AddonApi::addExOptionsButton(QString text, QString toolTip, QString
 }
 
 /*! The list of buttons in the exercise options section. */
-QList<AddonButton *> AddonApi::exOptionsButtons(void)
+QQmlListProperty<AddonButton> AddonApi::exOptionsButtons(void)
 {
-	return m_exOptionsButtons;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	return QQmlListProperty<AddonButton>(this, &m_exOptionsButtons);
+#else
+	return QQmlListProperty<AddonButton>(this, m_exOptionsButtons);
+#endif
 }
 
 /*! Deletes all buttons in the navigation section. */
@@ -186,9 +202,13 @@ AddonButton *AddonApi::addNavigationButton(QString text, QString toolTip, QStrin
 }
 
 /*! The list of buttons in the navigation section. */
-QList<AddonButton *> AddonApi::navigationButtons(void)
+QQmlListProperty<AddonButton> AddonApi::navigationButtons(void)
 {
-	return m_navigationButtons;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	return QQmlListProperty<AddonButton>(this, &m_navigationButtons);
+#else
+	return QQmlListProperty<AddonButton>(this, m_navigationButtons);
+#endif
 }
 
 /*! Deletes all buttons in the exercise info section. */
@@ -208,9 +228,13 @@ AddonButton *AddonApi::addExInfoButton(QString text, QString toolTip, QString ic
 }
 
 /*! The list of buttons in the exercise info section. */
-QList<AddonButton *> AddonApi::exInfoButtons(void)
+QQmlListProperty<AddonButton> AddonApi::exInfoButtons(void)
 {
-	return m_exInfoButtons;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	return QQmlListProperty<AddonButton>(this, &m_exInfoButtons);
+#else
+	return QQmlListProperty<AddonButton>(this, m_exInfoButtons);
+#endif
 }
 
 /*! Deletes all buttons in the given list and clears it. */
