@@ -107,7 +107,7 @@ void AddonApi::deleteMenus(void)
 		}
 	}
 	globalMenuBar.blockSignals(false);
-	globalMenuBar.menusChanged(globalMenuBar.menus());
+	globalMenuBar.menusChanged();
 	m_menus.clear();
 	emit menusChanged(m_menus);
 }
