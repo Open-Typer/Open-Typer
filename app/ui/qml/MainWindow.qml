@@ -245,6 +245,16 @@ ApplicationWindow {
 			target: paper.paperRect
 			onWidthChanged: { mainLayoutSource.render(); }
 		}
+
+		Connections {
+			target: ThemeEngine
+			onCurrentAccentColorChanged: { mainLayoutSource.render(); }
+		}
+
+		Connections {
+			target: LanguageManager
+			onLanguageChanged: { mainLayoutSource.render(); }
+		}
 	}
 
 	DropShadow {
