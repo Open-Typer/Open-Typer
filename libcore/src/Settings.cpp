@@ -183,28 +183,6 @@ bool Settings::containsLanguage(void) { return contains("main/language"); }
 /*! Setter for main/language. */
 void Settings::setLanguage(QString value) { set("main/language", value); }
 
-// windowState
-
-/*! Getter for main/windowState. */
-QByteArray Settings::windowState(void) { return get("main/windowState", "").toByteArray(); }
-
-/*! Returns true if there's a main/windowState key. */
-bool Settings::containsWindowState(void) { return contains("main/windowState"); }
-
-/*! Setter for main/windowState. */
-void Settings::setWindowState(QByteArray value) { set("main/windowState", value); }
-
-// windowGeometry
-
-/*! Getter for main/windowGeometry. */
-QByteArray Settings::windowGeometry(void) { return get("main/windowGeometry", "").toByteArray(); }
-
-/*! Returns true if there's a main/windowGeometry key. */
-bool Settings::containsWindowGeometry(void) { return contains("main/windowGeometry"); }
-
-/*! Setter for main/windowGeometry. */
-void Settings::setWindowGeometry(QByteArray value) { set("main/windowGeometry", value); }
-
 // updateChecks
 
 /*! Getter for main/updatechecks. */
@@ -532,28 +510,6 @@ bool Settings::containsAppTheme(void) { return contains("theme/apptheme"); }
 
 /*! Setter for theme/apptheme. */
 void Settings::setAppTheme(ThemeEngine::Theme value) { set("theme/apptheme", (int) value); }
-
-// settingsLockEnabled
-
-/*! Getter for main/settingslock_enabled. */
-bool Settings::settingsLockEnabled(void) { return get("main/settingslock_enabled", false).toBool(); }
-
-/*! Returns true if there's a main/settingslock_enabled key. */
-bool Settings::containsSettingsLockEnabled(void) { return contains("main/settingslock_enabled"); }
-
-/*! Setter for main/settingslock_enabled. */
-void Settings::setSettingsLockEnabled(bool value) { set("main/settingslock_enabled", value); }
-
-// settingsLockPasswd
-
-/*! Getter for main/settingslock_passwd. */
-QByteArray Settings::settingsLockPasswd(void) { return get("main/settingslock_passwd", "").toByteArray(); }
-
-/*! Returns true if there's a main/settingslock_passwd key. */
-bool Settings::containsSettingsLockPasswd(void) { return contains("main/settingslock_passwd"); }
-
-/*! Setter for main/settingslock_passwd. */
-void Settings::setSettingsLockPasswd(QByteArray value) { set("main/settingslock_passwd", value); }
 
 // advancedTheme
 

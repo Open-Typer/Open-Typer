@@ -44,8 +44,6 @@
  * \n
  * <b>List of settings keys:</b>
  *  - Settings#language() - Application language name. Unset to use the system language.
- *  - Settings#windowState() - Main window state (see QMainWindow#saveState()).
- *  - Settings#windowGeometry() - Main window geometry.
  *  - Settings#updateChecks() - Whether automatic update checks are enabled (on supported platforms).
  *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
  *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
@@ -69,8 +67,6 @@
  *  - Settings#panelColor() - Top and bottom panel color.
  *  - Settings#accentColorId() - Current accent color (accent colors are defined in ThemeEngine).
  *  - Settings#appTheme() - The application theme (0 = light, 1 = dark).
- *  - Settings#settingsLockEnabled() - If true, settings will ask for a password before they can be accessed.
- *  - Settings#settingsLockPasswd() - Hashed password (SHA256) for settings lock.
  *  - Settings#advancedTheme() - Whether to allow the user to select advanced themes (dark, light, light blue, etc.).
  *  - Settings#editorGeometry() - Pack editor window geometry.
  *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
@@ -90,14 +86,6 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static QString language(void);
 		Q_INVOKABLE static bool containsLanguage(void);
 		Q_INVOKABLE static void setLanguage(QString value);
-		// windowState
-		Q_INVOKABLE static QByteArray windowState(void);
-		Q_INVOKABLE static bool containsWindowState(void);
-		Q_INVOKABLE static void setWindowState(QByteArray value);
-		// windowGeometry
-		Q_INVOKABLE static QByteArray windowGeometry(void);
-		Q_INVOKABLE static bool containsWindowGeometry(void);
-		Q_INVOKABLE static void setWindowGeometry(QByteArray value);
 		// updateChecks
 		Q_INVOKABLE static bool updateChecks(void);
 		Q_INVOKABLE static bool containsUpdateChecks(void);
@@ -190,14 +178,6 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static ThemeEngine::Theme appTheme(void);
 		Q_INVOKABLE static bool containsAppTheme(void);
 		Q_INVOKABLE static void setAppTheme(ThemeEngine::Theme value);
-		// settingsLockEnabled
-		Q_INVOKABLE static bool settingsLockEnabled(void);
-		Q_INVOKABLE static bool containsSettingsLockEnabled(void);
-		Q_INVOKABLE static void setSettingsLockEnabled(bool value);
-		// settingsLockPasswd
-		Q_INVOKABLE static QByteArray settingsLockPasswd(void);
-		Q_INVOKABLE static bool containsSettingsLockPasswd(void);
-		Q_INVOKABLE static void setSettingsLockPasswd(QByteArray value);
 		// advancedTheme
 		Q_INVOKABLE static bool advancedTheme(void);
 		Q_INVOKABLE static bool containsAdvancedTheme(void);
