@@ -209,7 +209,6 @@ jobs:
         arch: 'gcc_64'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts qt5compat qtshadertools'
-        set-env: false
     - name: Install WASM Qt
       uses: jurplel/install-qt-action@v3
       with:
