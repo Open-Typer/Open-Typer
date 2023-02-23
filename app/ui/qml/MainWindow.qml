@@ -85,11 +85,13 @@ ApplicationWindow {
 	Material.theme: ThemeEngine.theme === ThemeEngine.DarkTheme ? Material.Dark : Material.Light
 	Material.accent: ThemeEngine.currentAccentColor
 	color: ThemeEngine.bgColor
+	x: Settings.windowX()
+	y: Settings.windowY()
 	minimumWidth: mainLayout.minWidth
 	minimumHeight: mainLayout.minHeight
-	// TODO: Load window geometry from settings
-	width: 1200
-	height: 800
+	width: Settings.windowWidth()
+	height: Settings.windowHeight()
+	visibility: Settings.windowMaximized() ? ApplicationWindow.Maximized : ApplicationWindow.Windowed
 	visible: true
 	id: root
 
@@ -1305,5 +1307,15 @@ ApplicationWindow {
 		if(!Settings.initFinished())
 			initialSetup.open();
 		reload();
+	}
+
+	onClosing: {
+		Settings.setWindowX(root.x);
+		Settings.setWindowY(root.y);
+		Settings.setWindowWidth(root.width);
+		Settings.setWindowHeight(root.height);
+		let maximized = root.visibility == ApplicationWindow.Maximized;
+		let minimized = root.visibility == ApplicationWindow.Minimized;
+		Settings.setWindowMaximized(maximized || minimized);
 	}
 }
