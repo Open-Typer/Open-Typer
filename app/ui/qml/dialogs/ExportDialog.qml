@@ -177,14 +177,15 @@ CustomDialog {
 
 						Connections {
 							target: ThemeEngine
-							function onThemeChanged() {
+							onThemeChanged: {
 								exportTable.updateStyle();
+								tableWidget.update();
 							}
 						}
 
 						Connections {
 							target: exportTable
-							function onModelChanged() {
+							onModelChanged: {
 								tableWidget.update();
 							}
 						}

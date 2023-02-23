@@ -85,11 +85,13 @@ ApplicationWindow {
 	Material.theme: ThemeEngine.theme === ThemeEngine.DarkTheme ? Material.Dark : Material.Light
 	Material.accent: ThemeEngine.currentAccentColor
 	color: ThemeEngine.bgColor
+	x: Settings.windowX()
+	y: Settings.windowY()
 	minimumWidth: mainLayout.minWidth
 	minimumHeight: mainLayout.minHeight
-	// TODO: Load window geometry from settings
-	width: 1200
-	height: 800
+	width: Settings.windowWidth()
+	height: Settings.windowHeight()
+	visibility: Settings.windowMaximized() ? ApplicationWindow.Maximized : ApplicationWindow.Windowed
 	visible: true
 	id: root
 
@@ -107,6 +109,7 @@ ApplicationWindow {
 			id: menuBarBlur
 			anchors.fill: parent
 			source: customMenuBar
+			cached: true
 			visible: false
 			radius: 0
 			PropertyAnimation {
@@ -206,7 +209,7 @@ ApplicationWindow {
 
 	Connections {
 		target: rootItem
-		function onLanguageChanged() {
+		onLanguageChanged: {
 			updateLessonList();
 			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
 			loadLesson(currentLesson, currentSublesson);
@@ -216,42 +219,56 @@ ApplicationWindow {
 
 	Connections {
 		target: QmlUtils
-		function onScreenKeyboardChanged(layoutChanged) {
+		onScreenKeyboardChanged: {
 			if(layoutChanged)
 				keyboard.loadLayout();
 		}
 	}
 
-	Repeater {
-		readonly property int minY: timedExPanel.visible ? 0 : panel1.height
-		readonly property bool hidden: appUpdateQuestion.visible || addonUpdateQuestion.visible
-		id: shadowRepeater
-		model: timedExPanel.visible ? [timedExPanel, paper] : [panel2, exportButton, paper]
-		DropShadow {
-			function getY() {
-				var out = shadowRepeater.minY;
-				for(var i = 0; i < shadowRepeater.model.length; i++)
-				{
-					if(shadowRepeater.model[i] === paper)
-						out += paper.Layout.topMargin;
-					if(i === index)
-						return out;
-					if(shadowRepeater.model[i].visible)
-						out += shadowRepeater.model[i].height;
-				}
-				return out;
-			}
-			source: modelData
-			width: modelData.width
-			height: modelData.height
-			y: getY()
-			horizontalOffset: 0
-			verticalOffset: 5
-			radius: 17
-			samples: 13
-			color: ThemeEngine.theme === ThemeEngine.DarkTheme ? "#80000000" : "#80000022"
-			visible: modelData.visible && modelData != exportButton && !shadowRepeater.hidden
+	ShaderEffectSource {
+		id: mainLayoutSource
+		anchors.fill: mainLayout
+		sourceItem: mainLayout
+		live: false
+
+		function render() {
+			scheduleUpdate();
 		}
+
+		Connections {
+			target: root
+			onWidthChanged: { mainLayoutSource.render(); }
+			onHeightChanged: { mainLayoutSource.render(); }
+			onPreviewChanged: { mainLayoutSource.render(); }
+			onCurrentModeChanged: { mainLayoutSource.render(); }
+		}
+
+		Connections {
+			target: paper.paperRect
+			onWidthChanged: { mainLayoutSource.render(); }
+		}
+
+		Connections {
+			target: ThemeEngine
+			onCurrentAccentColorChanged: { mainLayoutSource.render(); }
+		}
+
+		Connections {
+			target: LanguageManager
+			onLanguageChanged: { mainLayoutSource.render(); }
+		}
+	}
+
+	DropShadow {
+		source: mainLayoutSource
+		anchors.fill: mainLayoutSource
+		horizontalOffset: 0
+		verticalOffset: 5
+		radius: 17
+		samples: 13
+		cached: true
+		color: ThemeEngine.theme === ThemeEngine.DarkTheme ? "#80000000" : "#80000022"
+		visible: true
 	}
 
 	ColumnLayout {
@@ -453,6 +470,8 @@ ApplicationWindow {
 				if(Updater.updateAvailable())
 					visible = true;
 			}
+			onOpacityChanged: mainLayoutSource.render()
+			onVisibleChanged: mainLayoutSource.render()
 		}
 		UpdateQuestion {
 			id: addonUpdateQuestion
@@ -464,6 +483,8 @@ ApplicationWindow {
 				if(Updater.addonUpdateAvailable())
 					visible = true;
 			}
+			onOpacityChanged: mainLayoutSource.render()
+			onVisibleChanged: mainLayoutSource.render()
 		}
 		AccentButton {
 			id: exportButton
@@ -1286,5 +1307,15 @@ ApplicationWindow {
 		if(!Settings.initFinished())
 			initialSetup.open();
 		reload();
+	}
+
+	onClosing: {
+		Settings.setWindowX(root.x);
+		Settings.setWindowY(root.y);
+		Settings.setWindowWidth(root.width);
+		Settings.setWindowHeight(root.height);
+		let maximized = root.visibility == ApplicationWindow.Maximized;
+		let minimized = root.visibility == ApplicationWindow.Minimized;
+		Settings.setWindowMaximized(maximized || minimized);
 	}
 }

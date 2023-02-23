@@ -28,6 +28,7 @@
 #endif
 
 #include <QObject>
+#include <QQmlListProperty>
 #include "AppMenuItem.h"
 
 /*! \brief The AppMenuModel class provides a menu model for the application menu bar. */
@@ -35,7 +36,7 @@ class CORE_LIB_EXPORT AppMenuModel : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
-		Q_PROPERTY(QList<AppMenuItem *> items READ items WRITE setItems NOTIFY itemsChanged)
+		Q_PROPERTY(QQmlListProperty<AppMenuItem> items READ items NOTIFY itemsChanged)
 
 	public:
 		explicit AppMenuModel(QObject *parent = nullptr);
@@ -43,7 +44,8 @@ class CORE_LIB_EXPORT AppMenuModel : public QObject
 		QString title(void);
 		void setTitle(QString newTitle);
 
-		QList<AppMenuItem *> items(void);
+		QQmlListProperty<AppMenuItem> items(void);
+		QList<AppMenuItem *> getItems(void);
 		void setItems(QList<AppMenuItem *> newItems);
 		void addItem(AppMenuItem *item);
 		void removeItem(AppMenuItem *item);

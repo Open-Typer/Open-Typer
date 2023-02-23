@@ -37,7 +37,17 @@ void AppMenuModel::setTitle(QString newTitle)
 }
 
 /*! The items in the menu. */
-QList<AppMenuItem *> AppMenuModel::items(void)
+QQmlListProperty<AppMenuItem> AppMenuModel::items(void)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	return QQmlListProperty<AppMenuItem>(this, &m_items);
+#else
+	return QQmlListProperty<AppMenuItem>(this, m_items);
+#endif
+}
+
+/*! Returns list of items in the menu. */
+QList<AppMenuItem *> AppMenuModel::getItems(void)
 {
 	return m_items;
 }

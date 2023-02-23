@@ -68,12 +68,14 @@ void changeSplashMessage(QSplashScreen *splash, QString message)
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#ifndef Q_OS_WINDOWS
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
 #endif
 	QApplication a(argc, argv);
 	QCoreApplication::setOrganizationDomain("open-typer.sourceforge.io");
 	QCoreApplication::setOrganizationName("Open-Typer");
-	QCoreApplication::setApplicationName("Open-Typer");
+	QCoreApplication::setApplicationName("Open-Typer " + QString::number(QVersionNumber::fromString(BUILD_VERSION).majorVersion()));
 #ifdef BUILD_VERSION
 	QCoreApplication::setApplicationVersion(BUILD_VERSION);
 #endif // BUILD_VERSION
@@ -196,7 +198,7 @@ int main(int argc, char *argv[])
 		engine.rootContext()->setContextProperty("exportTable", &table);
 		engine.load("qrc:/qml/MainWindow.qml");
 		if(splash.isVisible())
-			splash.finish(nullptr);
+			splash.close();
 		currentExitCode = a.exec();
 #ifndef Q_OS_WASM
 		globalAddonManager.unloadAddons();

@@ -44,8 +44,11 @@
  * \n
  * <b>List of settings keys:</b>
  *  - Settings#language() - Application language name. Unset to use the system language.
- *  - Settings#windowState() - Main window state (see QMainWindow#saveState()).
- *  - Settings#windowGeometry() - Main window geometry.
+ *  - Settings#windowX - Main window X position.
+ *  - Settings#windowY - Main window Y position.
+ *  - Settings#windowWidth - Main window width.
+ *  - Settings#windowHeight - Main window height.
+ *  - Settings#windowMaximized - Whether the main window was maximized when closed.
  *  - Settings#updateChecks() - Whether automatic update checks are enabled (on supported platforms).
  *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
  *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
@@ -69,10 +72,8 @@
  *  - Settings#panelColor() - Top and bottom panel color.
  *  - Settings#accentColorId() - Current accent color (accent colors are defined in ThemeEngine).
  *  - Settings#appTheme() - The application theme (0 = light, 1 = dark).
- *  - Settings#settingsLockEnabled() - If true, settings will ask for a password before they can be accessed.
- *  - Settings#settingsLockPasswd() - Hashed password (SHA256) for settings lock.
  *  - Settings#advancedTheme() - Whether to allow the user to select advanced themes (dark, light, light blue, etc.).
- *  - Settings#editorGeometry() - Pack editor window geometry.
+ *  - Settings#editorGeometry() - Deprecated, do not use in new code. There'll be a new pack editor window soon.
  *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
  *  - Settings#initFinished() - If true, initial setup has been finished.
  *  - Settings#keyboardFingerColors() - If true, the keys on the screen keyboard use a different color for fingers.
@@ -90,14 +91,26 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static QString language(void);
 		Q_INVOKABLE static bool containsLanguage(void);
 		Q_INVOKABLE static void setLanguage(QString value);
-		// windowState
-		Q_INVOKABLE static QByteArray windowState(void);
-		Q_INVOKABLE static bool containsWindowState(void);
-		Q_INVOKABLE static void setWindowState(QByteArray value);
-		// windowGeometry
-		Q_INVOKABLE static QByteArray windowGeometry(void);
-		Q_INVOKABLE static bool containsWindowGeometry(void);
-		Q_INVOKABLE static void setWindowGeometry(QByteArray value);
+		// windowX
+		Q_INVOKABLE static int windowX(void);
+		Q_INVOKABLE static bool containsWindowX(void);
+		Q_INVOKABLE static void setWindowX(int value);
+		// windowY
+		Q_INVOKABLE static int windowY(void);
+		Q_INVOKABLE static bool containsWindowY(void);
+		Q_INVOKABLE static void setWindowY(int value);
+		// windowWidth
+		Q_INVOKABLE static int windowWidth(void);
+		Q_INVOKABLE static bool containsWindowWidth(void);
+		Q_INVOKABLE static void setWindowWidth(int value);
+		// windowHeight
+		Q_INVOKABLE static int windowHeight(void);
+		Q_INVOKABLE static bool containsWindowHeight(void);
+		Q_INVOKABLE static void setWindowHeight(int value);
+		// windowMaximized
+		Q_INVOKABLE static bool windowMaximized(void);
+		Q_INVOKABLE static bool containsWindowMaximized(void);
+		Q_INVOKABLE static void setWindowMaximized(bool value);
 		// updateChecks
 		Q_INVOKABLE static bool updateChecks(void);
 		Q_INVOKABLE static bool containsUpdateChecks(void);
@@ -190,22 +203,14 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static ThemeEngine::Theme appTheme(void);
 		Q_INVOKABLE static bool containsAppTheme(void);
 		Q_INVOKABLE static void setAppTheme(ThemeEngine::Theme value);
-		// settingsLockEnabled
-		Q_INVOKABLE static bool settingsLockEnabled(void);
-		Q_INVOKABLE static bool containsSettingsLockEnabled(void);
-		Q_INVOKABLE static void setSettingsLockEnabled(bool value);
-		// settingsLockPasswd
-		Q_INVOKABLE static QByteArray settingsLockPasswd(void);
-		Q_INVOKABLE static bool containsSettingsLockPasswd(void);
-		Q_INVOKABLE static void setSettingsLockPasswd(QByteArray value);
 		// advancedTheme
 		Q_INVOKABLE static bool advancedTheme(void);
 		Q_INVOKABLE static bool containsAdvancedTheme(void);
 		Q_INVOKABLE static void setAdvancedTheme(bool value);
 		// editorGeometry
-		Q_INVOKABLE static QByteArray editorGeometry(void);
-		Q_INVOKABLE static bool containsEditorGeometry(void);
-		Q_INVOKABLE static void setEditorGeometry(QByteArray value);
+		Q_INVOKABLE Q_DECL_DEPRECATED static QByteArray editorGeometry(void);
+		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsEditorGeometry(void);
+		Q_INVOKABLE Q_DECL_DEPRECATED static void setEditorGeometry(QByteArray value);
 		// keyboardVisible
 		Q_INVOKABLE static bool keyboardVisible(void);
 		Q_INVOKABLE static bool containsKeyboardVisible(void);

@@ -25,6 +25,11 @@ jobs:
         sed -i -e '/^$/d' .github/config.env
         cat .github/config.env >> "${GITHUB_ENV}"
       shell: bash
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libxkbcommon-x11-0
+      shell: bash
     ## Install Qt
     - name: Install Qt (Ubuntu)
       uses: jurplel/install-qt-action@v3

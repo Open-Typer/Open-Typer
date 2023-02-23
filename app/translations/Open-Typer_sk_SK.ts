@@ -31,6 +31,47 @@
     </message>
 </context>
 <context>
+    <name>AddonInfo</name>
+    <message>
+        <location filename="../ui/qml/AddonInfo.qml" line="79"/>
+        <source>Uninstall</source>
+        <translation>Odinštalovať</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/AddonInfo.qml" line="79"/>
+        <source>Installing...</source>
+        <translation>Prebieha inštalácia...</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/AddonInfo.qml" line="79"/>
+        <source>Install</source>
+        <translation>Inštalovať</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/AddonInfo.qml" line="108"/>
+        <source>The application needs to restart.</source>
+        <translation>Aplikácia sa musí reštartovať.</translation>
+    </message>
+</context>
+<context>
+    <name>AddonSettings</name>
+    <message>
+        <location filename="../ui/qml/settings/AddonSettings.qml" line="64"/>
+        <source>Search</source>
+        <translation>Hľadať</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/settings/AddonSettings.qml" line="85"/>
+        <source>Online</source>
+        <translation>Online</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/settings/AddonSettings.qml" line="90"/>
+        <source>Installed addons</source>
+        <translation>Nainštalované rozšírenia</translation>
+    </message>
+</context>
+<context>
     <name>AppearanceSettings</name>
     <message>
         <location filename="../ui/qml/settings/AppearanceSettings.qml" line="32"/>
@@ -242,77 +283,77 @@
 <context>
     <name>ExportTableModel</name>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="97"/>
+        <location filename="../src/ExportTableModel.cpp" line="98"/>
         <source>Typewriting performance result</source>
         <translation>Hodnotenie strojopisného výkonu</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="99"/>
+        <location filename="../src/ExportTableModel.cpp" line="100"/>
         <source>Name: %1</source>
         <translation>Meno: %1</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="101"/>
+        <location filename="../src/ExportTableModel.cpp" line="102"/>
         <source>Class: %1</source>
         <translation>Trieda: %1</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="103"/>
+        <location filename="../src/ExportTableModel.cpp" line="104"/>
         <source>Date: %1</source>
         <translation>Dátum: %1</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="105"/>
+        <location filename="../src/ExportTableModel.cpp" line="106"/>
         <source>Number: %1</source>
         <translation>Číslo: %1</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="107"/>
+        <location filename="../src/ExportTableModel.cpp" line="108"/>
         <source>Number of gross hits</source>
         <translation>Počet hrubých úderov</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="110"/>
+        <location filename="../src/ExportTableModel.cpp" line="111"/>
         <source>Number of mistakes</source>
         <translation>Počet chýb</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="113"/>
+        <location filename="../src/ExportTableModel.cpp" line="114"/>
         <source>Mistake penalty</source>
         <translation>Penalizácia chyby</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="116"/>
+        <location filename="../src/ExportTableModel.cpp" line="117"/>
         <source>Number of penalty hits</source>
         <translation>Počet trestných úderov</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="119"/>
+        <location filename="../src/ExportTableModel.cpp" line="120"/>
         <source>Number of net hits</source>
         <translation>Počet čistých úderov</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="122"/>
+        <location filename="../src/ExportTableModel.cpp" line="123"/>
         <source>Time (min)</source>
         <translation>Čas (min)</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="125"/>
+        <location filename="../src/ExportTableModel.cpp" line="126"/>
         <source>Number of net hits per minute</source>
         <translation>Počet čistých úderov za minútu</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="128"/>
+        <location filename="../src/ExportTableModel.cpp" line="129"/>
         <source>Inaccuracy</source>
         <translation>Nepresnosť</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="131"/>
+        <location filename="../src/ExportTableModel.cpp" line="132"/>
         <source>Achieved performance</source>
         <translation>Dosiahnutý výkon</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="134"/>
+        <location filename="../src/ExportTableModel.cpp" line="135"/>
         <source>Grade</source>
         <translation>Známka</translation>
     </message>
@@ -376,12 +417,12 @@
 <context>
     <name>KeyboardView</name>
     <message>
-        <location filename="../ui/qml/KeyboardView.qml" line="429"/>
+        <location filename="../ui/qml/KeyboardView.qml" line="419"/>
         <source>Hide keyboard</source>
         <translation>Skryť klávesnicu</translation>
     </message>
     <message>
-        <location filename="../ui/qml/KeyboardView.qml" line="429"/>
+        <location filename="../ui/qml/KeyboardView.qml" line="419"/>
         <source>Show keyboard</source>
         <translation>Zobraziť klávesnicu</translation>
     </message>
@@ -397,97 +438,97 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="283"/>
+        <location filename="../ui/qml/MainWindow.qml" line="290"/>
         <source>Options</source>
         <translation>Možnosti</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="295"/>
+        <location filename="../ui/qml/MainWindow.qml" line="302"/>
         <source>Print</source>
         <translation>Tlačiť</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="309"/>
+        <location filename="../ui/qml/MainWindow.qml" line="316"/>
         <source>Typing test</source>
         <translation>Kontrolný odpis</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="358"/>
+        <location filename="../ui/qml/MainWindow.qml" line="365"/>
         <source>Reverse text</source>
         <translation>Obrátiť text</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="383"/>
+        <location filename="../ui/qml/MainWindow.qml" line="390"/>
         <source>Repeat exercise</source>
         <translation>Opakovať cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="389"/>
+        <location filename="../ui/qml/MainWindow.qml" line="396"/>
         <source>Close loaded exercise</source>
         <translation>Zatvoriť načítané cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="397"/>
+        <location filename="../ui/qml/MainWindow.qml" line="404"/>
         <source>Previous exercise</source>
         <translation>Predchádzajúce cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="402"/>
+        <location filename="../ui/qml/MainWindow.qml" line="409"/>
         <source>Next exercise</source>
         <translation>Nasledujúce cvičenie</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="436"/>
+        <location filename="../ui/qml/MainWindow.qml" line="443"/>
         <source>Stop</source>
         <translation>Zastaviť</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="457"/>
+        <location filename="../ui/qml/MainWindow.qml" line="480"/>
         <source>Export</source>
         <translation>Exportovať</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="529"/>
+        <location filename="../ui/qml/MainWindow.qml" line="544"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="547"/>
+        <location filename="../ui/qml/MainWindow.qml" line="562"/>
         <source>No error words</source>
         <translation>Žiadne chybné slová</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="317"/>
+        <location filename="../ui/qml/MainWindow.qml" line="324"/>
         <source>Timed exercise</source>
         <translation>Cvičenie na čas</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="289"/>
+        <location filename="../ui/qml/MainWindow.qml" line="296"/>
         <source>Open</source>
         <translation>Otvoriť</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="323"/>
+        <location filename="../ui/qml/MainWindow.qml" line="330"/>
         <source>Text from error words</source>
         <translation>Text z chybných slov</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="413"/>
+        <location filename="../ui/qml/MainWindow.qml" line="420"/>
         <source>Exercise history</source>
         <translation>História cvičenia</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="530"/>
+        <location filename="../ui/qml/MainWindow.qml" line="545"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="194"/>
+        <location filename="../ui/qml/MainWindow.qml" line="196"/>
         <source>Text files</source>
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="548"/>
+        <location filename="../ui/qml/MainWindow.qml" line="563"/>
         <source>You don&apos;t have any error words.</source>
         <translation>Nemáte žiadne chybné slová.</translation>
     </message>
@@ -657,17 +698,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="61"/>
+        <location filename="../src/main.cpp" line="64"/>
         <source>Version: %1</source>
         <translation>Verzia: %1</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="142"/>
+        <location filename="../src/main.cpp" line="94"/>
         <source>Loading addons...</source>
         <translation>Načítavajú sa rozšírenia...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="145"/>
+        <location filename="../src/main.cpp" line="100"/>
         <source>Opening main window...</source>
         <translation>Otváranie hlavného okna...</translation>
     </message>
@@ -698,6 +739,11 @@
         <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="56"/>
         <source>Appearance</source>
         <translation>Vzhľad</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="61"/>
+        <source>Addons</source>
+        <translation>Rozšírenia</translation>
     </message>
 </context>
 <context>
@@ -791,6 +837,19 @@
         <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="250"/>
         <source>Hide text</source>
         <translation>Skryť text</translation>
+    </message>
+</context>
+<context>
+    <name>UpdateQuestion</name>
+    <message>
+        <location filename="../ui/qml/controls/UpdateQuestion.qml" line="42"/>
+        <source>There&apos;s a new update available. Would you like to download and install it?</source>
+        <translation>Je dostupná nová verzia. Prajete si ju stiahnuť a nainštalovať?</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/controls/UpdateQuestion.qml" line="43"/>
+        <source>There&apos;s a new update of one or more addons available. Would you like to update them?</source>
+        <translation>Je dostupná nová verzia jedného alebo viac rozšírení. Prajete si ich aktualizovať?</translation>
     </message>
 </context>
 </TS>

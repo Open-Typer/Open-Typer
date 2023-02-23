@@ -18,33 +18,31 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QTcpSocket>
-#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
-#include <QNetworkInformation>
-#else
-#include <QNetworkConfigurationManager>
-#endif
+#include <QEventLoop>
+#include <QTimer>
+#include <QDnsLookup>
 #include "global.h"
 
 bool internetConnected(void)
 {
-#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
-	QNetworkInformation::loadDefaultBackend();
-	Q_ASSERT(QNetworkInformation::instance());
-	return QNetworkInformation::instance()->reachability() == QNetworkInformation::Reachability::Online;
-#else
-	QNetworkConfigurationManager mgr;
-	if(!mgr.isOnline())
-		return false;
-	QTcpSocket sock;
-	sock.connectToHost("8.8.8.8", 53);
-	bool connected = sock.waitForConnected(30000); //ms
-	if(!connected)
+	QTimer timer;
+	timer.setInterval(3000);
+	timer.setSingleShot(true);
+	QEventLoop eventLoop;
+	QObject::connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
+	QDnsLookup lookup;
+	QObject::connect(&lookup, &QDnsLookup::finished, &eventLoop, &QEventLoop::quit);
+	lookup.setType(QDnsLookup::A);
+	lookup.setName("dns.google.com");
+	lookup.lookup();
+	timer.start();
+	eventLoop.exec();
+	if(timer.remainingTime() == 0)
 	{
-		sock.abort();
+		lookup.abort();
 		return false;
 	}
-	sock.close();
+	if(lookup.error() != QDnsLookup::NoError)
+		return false;
 	return true;
-#endif
 }

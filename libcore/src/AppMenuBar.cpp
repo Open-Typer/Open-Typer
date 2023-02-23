@@ -127,7 +127,7 @@ void AppMenuBar::updateMenus(void)
 	m_aboutProgramAction.setText(tr("About program..."));
 	aboutQtAction.setText(tr("About Qt..."));
 
-	emit menusChanged(m_menus);
+	emit menusChanged();
 }
 
 AppMenuItem *AppMenuBar::openAction(void)

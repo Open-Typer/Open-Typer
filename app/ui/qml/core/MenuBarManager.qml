@@ -35,7 +35,7 @@ Item {
 	Connections {
 		target: AppMenuBar.openAction
 
-		function onClicked() {
+		onClicked: {
 			openToggled();
 		}
 	}
@@ -43,7 +43,7 @@ Item {
 	Connections {
 		target: AppMenuBar.printAction
 
-		function onClicked() {
+		onClicked: {
 			printToggled();
 		}
 	}
@@ -51,7 +51,7 @@ Item {
 	Connections {
 		target: AppMenuBar.typingTestAction
 
-		function onClicked() {
+		onClicked: {
 			typingTestToggled();
 		}
 	}
@@ -59,7 +59,7 @@ Item {
 	Connections {
 		target: AppMenuBar.exerciseHistoryAction
 
-		function onClicked() {
+		onClicked: {
 			exerciseHistoryToggled();
 		}
 	}
@@ -67,7 +67,7 @@ Item {
 	Connections {
 		target: AppMenuBar.timedExAction
 
-		function onClicked() {
+		onClicked: {
 			timedExToggled();
 		}
 	}
@@ -75,7 +75,7 @@ Item {
 	Connections {
 		target: AppMenuBar.errorWordsAction
 
-		function onClicked() {
+		onClicked: {
 			errorWordsToggled();
 		}
 	}
@@ -83,7 +83,7 @@ Item {
 	Connections {
 		target: AppMenuBar.reverseTextAction
 
-		function onClicked() {
+		onClicked: {
 			reverseTextToggled();
 		}
 	}
@@ -91,7 +91,7 @@ Item {
 	Connections {
 	target: AppMenuBar.preferencesAction
 
-		function onClicked() {
+		onClicked: {
 			preferencesToggled();
 		}
 	}
@@ -99,7 +99,7 @@ Item {
 	Connections {
 	target: AppMenuBar.aboutProgramAction
 
-		function onClicked() {
+		onClicked: {
 			aboutProgramToggled();
 		}
 	}

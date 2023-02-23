@@ -183,27 +183,50 @@ bool Settings::containsLanguage(void) { return contains("main/language"); }
 /*! Setter for main/language. */
 void Settings::setLanguage(QString value) { set("main/language", value); }
 
-// windowState
+/*! Getter for main/windowX. */
+int Settings::windowX(void) { return get("main/windowX", 0).toInt(); }
 
-/*! Getter for main/windowState. */
-QByteArray Settings::windowState(void) { return get("main/windowState", "").toByteArray(); }
+/*! Returns true if there's a main/windowX key. */
+bool Settings::containsWindowX(void) { return contains("main/windowX"); }
 
-/*! Returns true if there's a main/windowState key. */
-bool Settings::containsWindowState(void) { return contains("main/windowState"); }
+/*! Setter for main/windowX. */
+void Settings::setWindowX(int value) { set("main/windowX", value); }
 
-/*! Setter for main/windowState. */
-void Settings::setWindowState(QByteArray value) { set("main/windowState", value); }
+/*! Getter for main/windowY. */
+int Settings::windowY(void) { return get("main/windowY", 0).toInt(); }
 
-// windowGeometry
+/*! Returns true if there's a main/windowY key. */
+bool Settings::containsWindowY(void) { return contains("main/windowY"); }
 
-/*! Getter for main/windowGeometry. */
-QByteArray Settings::windowGeometry(void) { return get("main/windowGeometry", "").toByteArray(); }
+/*! Setter for main/windowY. */
+void Settings::setWindowY(int value) { set("main/windowY", value); }
 
-/*! Returns true if there's a main/windowGeometry key. */
-bool Settings::containsWindowGeometry(void) { return contains("main/windowGeometry"); }
+/*! Getter for main/windowWidth. */
+int Settings::windowWidth(void) { return get("main/windowWidth", 1200).toInt(); }
 
-/*! Setter for main/windowGeometry. */
-void Settings::setWindowGeometry(QByteArray value) { set("main/windowGeometry", value); }
+/*! Returns true if there's a main/windowWidth key. */
+bool Settings::containsWindowWidth(void) { return contains("main/windowWidth"); }
+
+/*! Setter for main/windowWidth. */
+void Settings::setWindowWidth(int value) { set("main/windowWidth", value); }
+
+/*! Getter for main/windowHeight. */
+int Settings::windowHeight(void) { return get("main/windowHeight", 800).toInt(); }
+
+/*! Returns true if there's a main/windowHeight key. */
+bool Settings::containsWindowHeight(void) { return contains("main/windowHeight"); }
+
+/*! Setter for main/windowHeight. */
+void Settings::setWindowHeight(int value) { set("main/windowHeight", value); }
+
+/*! Getter for main/windowMaximized. */
+bool Settings::windowMaximized(void) { return get("main/windowMaximized", true).toBool(); }
+
+/*! Returns true if there's a main/windowMaximized key. */
+bool Settings::containsWindowMaximized(void) { return contains("main/windowMaximized"); }
+
+/*! Setter for main/windowMaximized. */
+void Settings::setWindowMaximized(bool value) { set("main/windowMaximized", value); }
 
 // updateChecks
 
@@ -533,28 +556,6 @@ bool Settings::containsAppTheme(void) { return contains("theme/apptheme"); }
 /*! Setter for theme/apptheme. */
 void Settings::setAppTheme(ThemeEngine::Theme value) { set("theme/apptheme", (int) value); }
 
-// settingsLockEnabled
-
-/*! Getter for main/settingslock_enabled. */
-bool Settings::settingsLockEnabled(void) { return get("main/settingslock_enabled", false).toBool(); }
-
-/*! Returns true if there's a main/settingslock_enabled key. */
-bool Settings::containsSettingsLockEnabled(void) { return contains("main/settingslock_enabled"); }
-
-/*! Setter for main/settingslock_enabled. */
-void Settings::setSettingsLockEnabled(bool value) { set("main/settingslock_enabled", value); }
-
-// settingsLockPasswd
-
-/*! Getter for main/settingslock_passwd. */
-QByteArray Settings::settingsLockPasswd(void) { return get("main/settingslock_passwd", "").toByteArray(); }
-
-/*! Returns true if there's a main/settingslock_passwd key. */
-bool Settings::containsSettingsLockPasswd(void) { return contains("main/settingslock_passwd"); }
-
-/*! Setter for main/settingslock_passwd. */
-void Settings::setSettingsLockPasswd(QByteArray value) { set("main/settingslock_passwd", value); }
-
 // advancedTheme
 
 /*! Getter for theme/advancedtheme. */
@@ -568,13 +569,13 @@ void Settings::setAdvancedTheme(bool value) { set("theme/advancedtheme", value);
 
 // editorGeometry
 
-/*! Getter for main/editorGeometry. */
+/*! Getter for main/editorGeometry. \deprecated The pack editor window doesn't use "geometry" anymore. */
 QByteArray Settings::editorGeometry(void) { return get("main/editorGeometry", "").toByteArray(); }
 
-/*! Returns true if there's a main/editorGeometry key. */
+/*! Returns true if there's a main/editorGeometry key. \deprecated The pack editor window doesn't use "geometry" anymore. */
 bool Settings::containsEditorGeometry(void) { return contains("main/editorGeometry"); }
 
-/*! Setter for main/editorGeometry. */
+/*! Setter for main/editorGeometry. \deprecated The pack editor window doesn't use "geometry" anymore. */
 void Settings::setEditorGeometry(QByteArray value) { set("main/editorGeometry", value); }
 
 // keyboardVisible

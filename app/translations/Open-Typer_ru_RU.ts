@@ -31,6 +31,47 @@
     </message>
 </context>
 <context>
+    <name>AddonInfo</name>
+    <message>
+        <location filename="../ui/qml/AddonInfo.qml" line="79"/>
+        <source>Uninstall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/AddonInfo.qml" line="79"/>
+        <source>Installing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/AddonInfo.qml" line="79"/>
+        <source>Install</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/AddonInfo.qml" line="108"/>
+        <source>The application needs to restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AddonSettings</name>
+    <message>
+        <location filename="../ui/qml/settings/AddonSettings.qml" line="64"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/settings/AddonSettings.qml" line="85"/>
+        <source>Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/settings/AddonSettings.qml" line="90"/>
+        <source>Installed addons</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AppearanceSettings</name>
     <message>
         <location filename="../ui/qml/settings/AppearanceSettings.qml" line="32"/>
@@ -244,77 +285,77 @@
 <context>
     <name>ExportTableModel</name>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="97"/>
+        <location filename="../src/ExportTableModel.cpp" line="98"/>
         <source>Typewriting performance result</source>
         <translation>Результат скорости печати</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="99"/>
+        <location filename="../src/ExportTableModel.cpp" line="100"/>
         <source>Name: %1</source>
         <translation>Имя: %1</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="101"/>
+        <location filename="../src/ExportTableModel.cpp" line="102"/>
         <source>Class: %1</source>
         <translation>Класс: %1</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="103"/>
+        <location filename="../src/ExportTableModel.cpp" line="104"/>
         <source>Date: %1</source>
         <translation>Дата: %1</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="105"/>
+        <location filename="../src/ExportTableModel.cpp" line="106"/>
         <source>Number: %1</source>
         <translation>Номер: %1</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="107"/>
+        <location filename="../src/ExportTableModel.cpp" line="108"/>
         <source>Number of gross hits</source>
         <translation>Количество грубых попаданий</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="110"/>
+        <location filename="../src/ExportTableModel.cpp" line="111"/>
         <source>Number of mistakes</source>
         <translation>Количество ошибок</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="113"/>
+        <location filename="../src/ExportTableModel.cpp" line="114"/>
         <source>Mistake penalty</source>
         <translation>Штраф за ошибку</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="116"/>
+        <location filename="../src/ExportTableModel.cpp" line="117"/>
         <source>Number of penalty hits</source>
         <translation>Количество штрафных попаданий</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="119"/>
+        <location filename="../src/ExportTableModel.cpp" line="120"/>
         <source>Number of net hits</source>
         <translation>Количество чистых попаданий</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="122"/>
+        <location filename="../src/ExportTableModel.cpp" line="123"/>
         <source>Time (min)</source>
         <translation>Время (мин.)</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="125"/>
+        <location filename="../src/ExportTableModel.cpp" line="126"/>
         <source>Number of net hits per minute</source>
         <translation>Количество точных попаданий в минуту</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="128"/>
+        <location filename="../src/ExportTableModel.cpp" line="129"/>
         <source>Inaccuracy</source>
         <translation>Неточность</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="131"/>
+        <location filename="../src/ExportTableModel.cpp" line="132"/>
         <source>Achieved performance</source>
         <translation>Достигнутая скорость</translation>
     </message>
     <message>
-        <location filename="../src/ExportTableModel.cpp" line="134"/>
+        <location filename="../src/ExportTableModel.cpp" line="135"/>
         <source>Grade</source>
         <translation>Ступень обучения</translation>
     </message>
@@ -378,12 +419,12 @@
 <context>
     <name>KeyboardView</name>
     <message>
-        <location filename="../ui/qml/KeyboardView.qml" line="429"/>
+        <location filename="../ui/qml/KeyboardView.qml" line="419"/>
         <source>Hide keyboard</source>
         <translation>Скрыть клавиатуру</translation>
     </message>
     <message>
-        <location filename="../ui/qml/KeyboardView.qml" line="429"/>
+        <location filename="../ui/qml/KeyboardView.qml" line="419"/>
         <source>Show keyboard</source>
         <translation>Показать клавиатуру</translation>
     </message>
@@ -399,97 +440,97 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="283"/>
+        <location filename="../ui/qml/MainWindow.qml" line="290"/>
         <source>Options</source>
         <translation>Опции</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="295"/>
+        <location filename="../ui/qml/MainWindow.qml" line="302"/>
         <source>Print</source>
         <translation>Распечатать</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="309"/>
+        <location filename="../ui/qml/MainWindow.qml" line="316"/>
         <source>Typing test</source>
         <translation>Вводимый тест</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="358"/>
+        <location filename="../ui/qml/MainWindow.qml" line="365"/>
         <source>Reverse text</source>
         <translation>Перевернуть текст</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="383"/>
+        <location filename="../ui/qml/MainWindow.qml" line="390"/>
         <source>Repeat exercise</source>
         <translation>Повторить упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="389"/>
+        <location filename="../ui/qml/MainWindow.qml" line="396"/>
         <source>Close loaded exercise</source>
         <translation>Закрыть загруженное упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="397"/>
+        <location filename="../ui/qml/MainWindow.qml" line="404"/>
         <source>Previous exercise</source>
         <translation>Предыдущее упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="402"/>
+        <location filename="../ui/qml/MainWindow.qml" line="409"/>
         <source>Next exercise</source>
         <translation>Следующее упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="436"/>
+        <location filename="../ui/qml/MainWindow.qml" line="443"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="457"/>
+        <location filename="../ui/qml/MainWindow.qml" line="480"/>
         <source>Export</source>
         <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="529"/>
+        <location filename="../ui/qml/MainWindow.qml" line="544"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="547"/>
+        <location filename="../ui/qml/MainWindow.qml" line="562"/>
         <source>No error words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="317"/>
+        <location filename="../ui/qml/MainWindow.qml" line="324"/>
         <source>Timed exercise</source>
         <translation>Упражнение на время</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="289"/>
+        <location filename="../ui/qml/MainWindow.qml" line="296"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="323"/>
+        <location filename="../ui/qml/MainWindow.qml" line="330"/>
         <source>Text from error words</source>
         <translation>Текст из слов с ошибками</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="413"/>
+        <location filename="../ui/qml/MainWindow.qml" line="420"/>
         <source>Exercise history</source>
         <translation>История урока</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="530"/>
+        <location filename="../ui/qml/MainWindow.qml" line="545"/>
         <source>This file is too large!</source>
         <translation>Этот файл слишком большой!</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="194"/>
+        <location filename="../ui/qml/MainWindow.qml" line="196"/>
         <source>Text files</source>
         <translation>Текстовые файлы</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="548"/>
+        <location filename="../ui/qml/MainWindow.qml" line="563"/>
         <source>You don&apos;t have any error words.</source>
         <translation>У Вас нет никаких ошибочных слов.</translation>
     </message>
@@ -659,17 +700,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="61"/>
+        <location filename="../src/main.cpp" line="64"/>
         <source>Version: %1</source>
         <translation>Версия: %1</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="142"/>
+        <location filename="../src/main.cpp" line="94"/>
         <source>Loading addons...</source>
         <translation>Загрузка аддонов...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="145"/>
+        <location filename="../src/main.cpp" line="100"/>
         <source>Opening main window...</source>
         <translation>Открывается главное окно...</translation>
     </message>
@@ -700,6 +741,11 @@
         <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="56"/>
         <source>Appearance</source>
         <translation>Оформление</translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="61"/>
+        <source>Addons</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -793,6 +839,19 @@
         <location filename="../ui/qml/dialogs/TypingTestDialog.qml" line="250"/>
         <source>Hide text</source>
         <translation>Скрыть текст</translation>
+    </message>
+</context>
+<context>
+    <name>UpdateQuestion</name>
+    <message>
+        <location filename="../ui/qml/controls/UpdateQuestion.qml" line="42"/>
+        <source>There&apos;s a new update available. Would you like to download and install it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/controls/UpdateQuestion.qml" line="43"/>
+        <source>There&apos;s a new update of one or more addons available. Would you like to update them?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
