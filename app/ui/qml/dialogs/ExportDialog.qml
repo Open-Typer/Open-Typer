@@ -179,6 +179,7 @@ CustomDialog {
 							target: ThemeEngine
 							onThemeChanged: {
 								exportTable.updateStyle();
+								tableWidget.update();
 							}
 						}
 
