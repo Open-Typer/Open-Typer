@@ -44,6 +44,11 @@
  * \n
  * <b>List of settings keys:</b>
  *  - Settings#language() - Application language name. Unset to use the system language.
+ *  - Settings#windowX - Main window X position.
+ *  - Settings#windowY - Main window Y position.
+ *  - Settings#windowWidth - Main window width.
+ *  - Settings#windowHeight - Main window height.
+ *  - Settings#windowMaximized - Whether the main window was maximized when closed.
  *  - Settings#updateChecks() - Whether automatic update checks are enabled (on supported platforms).
  *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
  *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
@@ -86,6 +91,26 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static QString language(void);
 		Q_INVOKABLE static bool containsLanguage(void);
 		Q_INVOKABLE static void setLanguage(QString value);
+		// windowX
+		Q_INVOKABLE static int windowX(void);
+		Q_INVOKABLE static bool containsWindowX(void);
+		Q_INVOKABLE static void setWindowX(int value);
+		// windowY
+		Q_INVOKABLE static int windowY(void);
+		Q_INVOKABLE static bool containsWindowY(void);
+		Q_INVOKABLE static void setWindowY(int value);
+		// windowWidth
+		Q_INVOKABLE static int windowWidth(void);
+		Q_INVOKABLE static bool containsWindowWidth(void);
+		Q_INVOKABLE static void setWindowWidth(int value);
+		// windowHeight
+		Q_INVOKABLE static int windowHeight(void);
+		Q_INVOKABLE static bool containsWindowHeight(void);
+		Q_INVOKABLE static void setWindowHeight(int value);
+		// windowMaximized
+		Q_INVOKABLE static bool windowMaximized(void);
+		Q_INVOKABLE static bool containsWindowMaximized(void);
+		Q_INVOKABLE static void setWindowMaximized(bool value);
 		// updateChecks
 		Q_INVOKABLE static bool updateChecks(void);
 		Q_INVOKABLE static bool containsUpdateChecks(void);

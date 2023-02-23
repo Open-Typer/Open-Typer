@@ -183,6 +183,51 @@ bool Settings::containsLanguage(void) { return contains("main/language"); }
 /*! Setter for main/language. */
 void Settings::setLanguage(QString value) { set("main/language", value); }
 
+/*! Getter for main/windowX. */
+int Settings::windowX(void) { return get("main/windowX", 0).toInt(); }
+
+/*! Returns true if there's a main/windowX key. */
+bool Settings::containsWindowX(void) { return contains("main/windowX"); }
+
+/*! Setter for main/windowX. */
+void Settings::setWindowX(int value) { set("main/windowX", value); }
+
+/*! Getter for main/windowY. */
+int Settings::windowY(void) { return get("main/windowY", 0).toInt(); }
+
+/*! Returns true if there's a main/windowY key. */
+bool Settings::containsWindowY(void) { return contains("main/windowY"); }
+
+/*! Setter for main/windowY. */
+void Settings::setWindowY(int value) { set("main/windowY", value); }
+
+/*! Getter for main/windowWidth. */
+int Settings::windowWidth(void) { return get("main/windowWidth", 1200).toInt(); }
+
+/*! Returns true if there's a main/windowWidth key. */
+bool Settings::containsWindowWidth(void) { return contains("main/windowWidth"); }
+
+/*! Setter for main/windowWidth. */
+void Settings::setWindowWidth(int value) { set("main/windowWidth", value); }
+
+/*! Getter for main/windowHeight. */
+int Settings::windowHeight(void) { return get("main/windowHeight", 800).toInt(); }
+
+/*! Returns true if there's a main/windowHeight key. */
+bool Settings::containsWindowHeight(void) { return contains("main/windowHeight"); }
+
+/*! Setter for main/windowHeight. */
+void Settings::setWindowHeight(int value) { set("main/windowHeight", value); }
+
+/*! Getter for main/windowMaximized. */
+bool Settings::windowMaximized(void) { return get("main/windowMaximized", true).toBool(); }
+
+/*! Returns true if there's a main/windowMaximized key. */
+bool Settings::containsWindowMaximized(void) { return contains("main/windowMaximized"); }
+
+/*! Setter for main/windowMaximized. */
+void Settings::setWindowMaximized(bool value) { set("main/windowMaximized", value); }
+
 // updateChecks
 
 /*! Getter for main/updatechecks. */
