@@ -68,7 +68,7 @@
  *  - Settings#accentColorId() - Current accent color (accent colors are defined in ThemeEngine).
  *  - Settings#appTheme() - The application theme (0 = light, 1 = dark).
  *  - Settings#advancedTheme() - Whether to allow the user to select advanced themes (dark, light, light blue, etc.).
- *  - Settings#editorGeometry() - Pack editor window geometry.
+ *  - Settings#editorGeometry() - Deprecated, do not use in new code. There'll be a new pack editor window soon.
  *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
  *  - Settings#initFinished() - If true, initial setup has been finished.
  *  - Settings#keyboardFingerColors() - If true, the keys on the screen keyboard use a different color for fingers.
@@ -183,9 +183,9 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static bool containsAdvancedTheme(void);
 		Q_INVOKABLE static void setAdvancedTheme(bool value);
 		// editorGeometry
-		Q_INVOKABLE static QByteArray editorGeometry(void);
-		Q_INVOKABLE static bool containsEditorGeometry(void);
-		Q_INVOKABLE static void setEditorGeometry(QByteArray value);
+		Q_INVOKABLE Q_DECL_DEPRECATED static QByteArray editorGeometry(void);
+		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsEditorGeometry(void);
+		Q_INVOKABLE Q_DECL_DEPRECATED static void setEditorGeometry(QByteArray value);
 		// keyboardVisible
 		Q_INVOKABLE static bool keyboardVisible(void);
 		Q_INVOKABLE static bool containsKeyboardVisible(void);
