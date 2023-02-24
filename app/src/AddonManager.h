@@ -32,6 +32,7 @@ class IAddon;
 
 /*!
  * \brief The AddonManager class is used to load, install, uninstall and update addons.
+ *
  * Don't create instances of AddonManager. Use globalAddonManager instead.
  */
 class AddonManager : public QObject
