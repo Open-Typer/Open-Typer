@@ -27,6 +27,7 @@
 
 /*!
  * \brief The ExportTableModel class provides a table model for typing test results.
+ *
  * Note: QTableView doesn't support rich text, so you need to replace the cells with widgets that support it.
  */
 class ExportTableModel : public QAbstractTableModel
