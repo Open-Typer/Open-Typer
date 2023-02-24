@@ -29,7 +29,7 @@
 
 #include <QObject>
 
-/*! \brief The SettingsCategory provides a model for settings categories. */
+/*! \brief The SettingsCategory class provides a model for settings categories. */
 class CORE_LIB_EXPORT SettingsCategory : public QObject
 {
 		Q_OBJECT
