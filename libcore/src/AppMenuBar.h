@@ -32,6 +32,7 @@
 
 /*!
  * \brief The AppMenuBar class provides a model for the application menu bar.
+ *
  * Note: This model shouldn't be created more than once because the application is intended to have only one menu bar.
  * Use globalMenuBar to access the model.
  */
