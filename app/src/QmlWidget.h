@@ -26,6 +26,7 @@
 
 /*!
  * \brief The QmlWidget class provides a way to display QWidgets in a QML scene.
+ *
  * Note: It does not support any events and needs to be repainted manually.\n
  * The widget can be only created in C++ and used in QML using QQmlContext#setContextProperty().
  */
