@@ -69,7 +69,7 @@ class CORE_LIB_EXPORT Key
 		bool m_shiftDead;
 };
 
-typedef QList<Key> KeyboardRow;
+using KeyboardRow = QList<Key>;
 
 Q_DECLARE_METATYPE(Key)
 Q_DECLARE_METATYPE(KeyboardRow)
