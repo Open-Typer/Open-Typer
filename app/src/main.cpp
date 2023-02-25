@@ -30,7 +30,6 @@
 #endif
 #include "Settings.h"
 #include "LanguageManager.h"
-#include "IAddon.h"
 #include "AddonApi.h"
 #include "AddonButton.h"
 #include "ConfigParser.h"
@@ -207,4 +206,5 @@ int main(int argc, char *argv[])
 		if(Settings::isFrozen())
 			Settings::saveChanges();
 	} while(currentExitCode == EXIT_CODE_REBOOT);
+	return 0;
 }
