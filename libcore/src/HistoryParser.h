@@ -66,6 +66,11 @@ class CORE_LIB_EXPORT HistoryParser : public QObject
 		int m_sublesson;
 		int m_exercise;
 
+		static const QString historyFile;
+		static const QString speedProperty;
+		static const QString mistakesProperty;
+		static const QString timeProperty;
+
 	signals:
 		void lessonPackChanged(QString value);
 		void lessonChanged(int value);

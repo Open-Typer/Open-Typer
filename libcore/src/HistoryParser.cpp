@@ -21,6 +21,11 @@
 #include "HistoryParser.h"
 #include "FileUtils.h"
 
+const QString HistoryParser::historyFile = "/history.json";
+const QString HistoryParser::speedProperty = "speed";
+const QString HistoryParser::mistakesProperty = "mistakes";
+const QString HistoryParser::timeProperty = "time";
+
 /*! Current lesson pack raw name. \see BuiltInPacks */
 QString HistoryParser::lessonPack(void)
 {
@@ -88,9 +93,9 @@ HistoryEntry HistoryParser::at(int index)
 	HistoryEntry out;
 	QJsonArray exerciseArray = packValue.toObject().value(QString::number(m_lesson)).toObject().value(QString::number(m_sublesson)).toObject().value(QString::number(m_exercise)).toArray();
 	QJsonObject rowObject = exerciseArray[index].toObject();
-	out.setGrossHitsPerMinute(rowObject.value("speed").toInt());
-	out.setMistakes(rowObject.value("mistakes").toInt());
-	out.setTimeSecs(rowObject.value("time").toInt());
+	out.setGrossHitsPerMinute(rowObject.value(speedProperty).toInt());
+	out.setMistakes(rowObject.value(mistakesProperty).toInt());
+	out.setTimeSecs(rowObject.value(timeProperty).toInt());
 	return out;
 }
 
@@ -104,9 +109,9 @@ void HistoryParser::append(HistoryEntry entry)
 	QJsonArray exerciseArray = exerciseValue.toArray();
 	QJsonObject entryObject;
 	// Write entry
-	entryObject.insert("speed", entry.grossHitsPerMinute());
-	entryObject.insert("mistakes", entry.mistakes());
-	entryObject.insert("time", entry.timeSecs());
+	entryObject.insert(speedProperty, entry.grossHitsPerMinute());
+	entryObject.insert(mistakesProperty, entry.mistakes());
+	entryObject.insert(timeProperty, entry.timeSecs());
 	// Save objects
 	exerciseArray.append(entryObject);
 	exerciseValue = exerciseArray;
@@ -118,7 +123,8 @@ void HistoryParser::append(HistoryEntry entry)
 	docObject.insert(m_lessonPack, packObject);
 	// Save JSON document
 	QJsonDocument document(docObject);
-	QFile historyFile(FileUtils::configLocation() + "/history.json");
+	QString pathToHistoryFile = FileUtils::configLocation() + historyFile;
+	QFile historyFile(pathToHistoryFile);
 	if(historyFile.open(QIODevice::WriteOnly | QIODevice::Text))
 		historyFile.write(document.toJson(QJsonDocument::Indented));
 	emit countChanged(count());
@@ -133,7 +139,8 @@ void HistoryParser::append(int grossHitsPerMinute, int mistakes, int timeSecs)
 /*! Returns JSON document of the history JSON file. */
 QJsonDocument HistoryParser::historyDocument(void)
 {
-	QFile historyFile(FileUtils::configLocation() + "/history.json");
+	QString pathToHistoryFile = FileUtils::configLocation() + historyFile;
+	QFile historyFile(pathToHistoryFile);
 	if(historyFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		return QJsonDocument::fromJson(historyFile.readAll());
 	else if(historyFile.open(QIODevice::WriteOnly | QIODevice::Text))
