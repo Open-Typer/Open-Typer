@@ -19,6 +19,7 @@
  */
 
 #include "HistoryParser.h"
+#include "FileUtils.h"
 
 /*! Current lesson pack raw name. \see BuiltInPacks */
 QString HistoryParser::lessonPack(void)
