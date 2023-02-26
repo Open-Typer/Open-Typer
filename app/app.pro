@@ -88,7 +88,7 @@ RESOURCES += \
     dark-theme/dark-style.qrc \
     light-theme/light-style.qrc
 
-win32:RC_ICONS += res/images/icon.ico
+win32:RC_ICONS += res/icons/icon.ico
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
