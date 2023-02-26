@@ -79,7 +79,6 @@ TRANSLATIONS += \
 
 RESOURCES += \
     res/icons/icons.qrc \
-    res/keyboard-layouts/layouts.qrc \
     res/packs/packs.qrc \
     res/splash/splash.qrc \
     translations/translations.qrc \
