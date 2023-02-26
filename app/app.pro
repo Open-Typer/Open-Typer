@@ -80,7 +80,6 @@ TRANSLATIONS += \
 RESOURCES += \
     res.qrc \
     res/icons/icons.qrc \
-    res/images/class-icons/class-icons.qrc \
     res/keyboard-layouts/layouts.qrc \
     translations/translations.qrc \
     ui/qml/qml.qrc

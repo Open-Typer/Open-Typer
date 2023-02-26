@@ -9,31 +9,6 @@
         <file>res/configs/de_DE-QWERTZ-A</file>
         <file>res/configs/de_DE-QWERTY-A</file>
         <file>res/images/splash.png</file>
-        <file>res/images/repeat.png</file>
-        <file>res/images/closeCustom.png</file>
-        <file>res/images/next.png</file>
-        <file>res/images/previous.png</file>
         <file>res/images/icon.ico</file>
-        <file>res/images/open.png</file>
-        <file>res/images/packEditor.png</file>
-        <file>res/images/plus.png</file>
-        <file>res/images/remove.png</file>
-        <file>res/images/options.png</file>
-        <file>res/images/minus.png</file>
-        <file>res/images/clock.png</file>
-        <file>res/images/stats.png</file>
-        <file>res/images/themes/custom.png</file>
-        <file>res/images/themes/light.png</file>
-        <file>res/images/themes/dark.png</file>
-        <file>res/images/themes/green.png</file>
-        <file>res/images/themes/light_blue.png</file>
-        <file>res/images/back.png</file>
-        <file>res/images/up.png</file>
-        <file>res/images/down.png</file>
-        <file>res/images/errorWords.png</file>
-        <file>res/images/reversedExercise.png</file>
-        <file>res/images/print.png</file>
-        <file>res/images/new.png</file>
-        <file>res/images/paper.png</file>
     </qresource>
 </RCC>
