@@ -81,6 +81,7 @@ RESOURCES += \
     res.qrc \
     res/icons/icons.qrc \
     res/keyboard-layouts/layouts.qrc \
+    res/splash/splash.qrc \
     translations/translations.qrc \
     ui/qml/qml.qrc
 

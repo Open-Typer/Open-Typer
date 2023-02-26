@@ -8,6 +8,5 @@
         <file>res/configs/en_US-default-A</file>
         <file>res/configs/de_DE-QWERTZ-A</file>
         <file>res/configs/de_DE-QWERTY-A</file>
-        <file>res/images/splash.png</file>
     </qresource>
 </RCC>
