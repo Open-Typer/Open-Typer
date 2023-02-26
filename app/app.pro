@@ -78,9 +78,9 @@ TRANSLATIONS += \
     translations/Open-Typer_ru_RU.ts
 
 RESOURCES += \
-    res.qrc \
     res/icons/icons.qrc \
     res/keyboard-layouts/layouts.qrc \
+    res/packs/packs.qrc \
     res/splash/splash.qrc \
     translations/translations.qrc \
     ui/qml/qml.qrc
