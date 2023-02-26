@@ -26,6 +26,8 @@ jobs:
         sed -i -e '/^$/d' .github/config.env
         cat .github/config.env >> "${GITHUB_ENV}"
       shell: bash
+    - name: Set up node.js
+      uses: actions/setup-node@v3
     ## Install Qt
     - if: contains(matrix.qt-version, '5.15.2')
       name: Install Qt

@@ -31,6 +31,8 @@ jobs:
         sed -i -e '/^$/d' .github/config.env
         cat .github/config.env >> "${GITHUB_ENV}"
       shell: bash
+    - name: Set up node.js
+      uses: actions/setup-node@v3
     - if: env.build_on_new_tags != 1
       name: Cancel if build on new tags is disabled
       uses: andymckay/cancel-action@0.2
