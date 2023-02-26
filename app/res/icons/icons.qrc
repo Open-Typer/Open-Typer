@@ -24,4 +24,7 @@
     <qresource prefix="/icons/open-typer">
         <file>index.theme</file>
     </qresource>
+    <qresource prefix="/res/images">
+        <file>icon.ico</file>
+    </qresource>
 </RCC>
