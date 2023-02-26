@@ -89,6 +89,7 @@ RESOURCES += \
     light-theme/light-style.qrc
 
 win32:RC_ICONS += res/icons/icon.ico
+macx:ICON = res/macos-release/open-typer.icns
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
