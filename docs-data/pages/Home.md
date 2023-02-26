@@ -1,24 +1,34 @@
 # Open-Typer
 
-Open-Typer is a free and open source software for typewriting training and education.
-It works on Linux and Windows.
+Open-Typer is a free and open source typing tutor.
+It works on Linux, Windows and macOS.
 
 ## Features
 * Packs with exercises divided into lessons.
-* Every lesson consists of touch, word, sentence and text exercises.
-* Pack editor - allows anyone to create their own packs with lessons.
-* Custom exercise (from a text file).
+* Each lesson consists of touch, word, sentence and text exercises.
+[comment]: <> (TODO: Update this after implementing pack editor)
+[comment]: <> (* Pack editor - allows anyone to create their own packs with lessons.)
+* Custom exercises (from text files).
 * Timed exercises.
 * Multiple languages (still growing).
-* Customization (text font and size; colors; dark theme).
-* Automatic updates on Windows (shows a dialog window when a new update is found).
-* Can be used as a server to save student results on one computer.
+* Customization (text font, colors, dark and light themes).
 * Advanced exercise validation.
 
 ## Download
-Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typer/releases/latest) or [SourceForge](https://sourceforge.net/projects/open-typer/) or follow platform-specific instructions below.
+### Windows and macOS
+Download the latest release from [GitHub](https://github.com/Open-Typer/Open-Typer/releases/latest) or [SourceForge](https://sourceforge.net/projects/open-typer/).
+
+**Note:** We don't sign our binaries yet. You will see a warning when trying to start the installer. Choose "run anyway" on Windows or right click on the file and press "Open" on macOS.
+
 ### Any Linux distribution
-Download the AppImage [here](https://github.com/Open-Typer/Open-Typer/releases/latest/download/Open-Typer-x86_64.AppImage) or install from the Snap Store:
+Download the AppImage [here](https://github.com/Open-Typer/Open-Typer/releases/latest/download/Open-Typer-x86_64.AppImage) and make it executable:
+
+```
+chmod +x Open-Typer-x86_64.AppImage
+./Open-Typer-x86_64.AppImage
+```
+
+Open-Typer can be also installed using the Snap Store:
 
 `sudo snap install open-typer`
 ### Ubuntu
@@ -33,7 +43,6 @@ sudo apt insall -y open-typer
 ```
 
 ## Screenshots
-![Main window (light)](main/main_window_light.png)
-![Main window (dark)](main/main_window_dark.png)
-![Pack editor](main/pack_editor.png)
-![Options](optionsWindow.png)
+![Main window (light)](main_window_light.png)
+![Main window (dark)](main_window_dark.png)
+![Customization](appearance_settings.png)
