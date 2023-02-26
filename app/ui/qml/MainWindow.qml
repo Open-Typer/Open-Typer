@@ -742,7 +742,6 @@ ApplicationWindow {
 	function updateText() {
 		paper.currentLineVisible = true;
 		paper.remainingVisible = true;
-		// TODO: Hide export button here
 		displayExercise = parser.initExercise(exerciseText, exerciseLineLength);
 		lineCount = StringUtils.charCount(displayExercise, '\n');
 		// Process exercise text
