@@ -30,6 +30,10 @@ import "dialogs"
 import "core"
 
 ApplicationWindow {
+	property int oldWidth
+	property int oldHeight
+	property int oldX
+	property int oldY
 	property string packName
 	property string packFriendlyName
 	property string oldPackName: ""
@@ -89,6 +93,22 @@ ApplicationWindow {
 	minimumHeight: mainLayout.minHeight
 	visible: true
 	id: root
+	onVisibilityChanged: {
+		if(visibility == ApplicationWindow.Maximized)
+		{
+			width = oldWidth;
+			height = oldHeight;
+			x = oldX;
+			y = oldY;
+		}
+		else if(visibility == ApplicationWindow.Windowed)
+		{
+			oldWidth = width;
+			oldHeight = height;
+			oldX = x;
+			oldY = y;
+		}
+	}
 
 	menuBar: Item {
 		width: customMenuBar.width
@@ -1302,8 +1322,12 @@ ApplicationWindow {
 	Component.onCompleted: {
 		x = Settings.windowX();
 		y = Settings.windowY();
+		oldX = x;
+		oldY = y;
 		width = Settings.windowWidth();
 		height = Settings.windowHeight();
+		oldWidth = width;
+		oldHeight = height;
 		visibility = Settings.windowMaximized() ? ApplicationWindow.Maximized : ApplicationWindow.Windowed;
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.menuBarBlur = menuBarBlur;
@@ -1314,10 +1338,20 @@ ApplicationWindow {
 	}
 
 	onClosing: {
-		Settings.setWindowX(root.x);
-		Settings.setWindowY(root.y);
-		Settings.setWindowWidth(root.width);
-		Settings.setWindowHeight(root.height);
+		if(visibility != ApplicationWindow.Windowed)
+		{
+			Settings.setWindowX(oldX);
+			Settings.setWindowY(oldY);
+			Settings.setWindowWidth(oldWidth);
+			Settings.setWindowHeight(oldHeight);
+		}
+		else
+		{
+			Settings.setWindowX(root.x);
+			Settings.setWindowY(root.y);
+			Settings.setWindowWidth(root.width);
+			Settings.setWindowHeight(root.height);
+		}
 		let maximized = root.visibility == ApplicationWindow.Maximized;
 		let minimized = root.visibility == ApplicationWindow.Minimized;
 		Settings.setWindowMaximized(maximized || minimized);
