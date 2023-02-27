@@ -85,13 +85,8 @@ ApplicationWindow {
 	Material.theme: ThemeEngine.theme === ThemeEngine.DarkTheme ? Material.Dark : Material.Light
 	Material.accent: ThemeEngine.currentAccentColor
 	color: ThemeEngine.bgColor
-	x: Settings.windowX()
-	y: Settings.windowY()
 	minimumWidth: mainLayout.minWidth
 	minimumHeight: mainLayout.minHeight
-	width: Settings.windowWidth()
-	height: Settings.windowHeight()
-	visibility: Settings.windowMaximized() ? ApplicationWindow.Maximized : ApplicationWindow.Windowed
 	visible: true
 	id: root
 
@@ -1305,6 +1300,11 @@ ApplicationWindow {
 	}
 
 	Component.onCompleted: {
+		x = Settings.windowX();
+		y = Settings.windowY();
+		width = Settings.windowWidth();
+		height = Settings.windowHeight();
+		visibility = Settings.windowMaximized() ? ApplicationWindow.Maximized : ApplicationWindow.Windowed;
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.menuBarBlur = menuBarBlur;
 		AddonApi.sendEvent(AddonApi.Event_InitApp);
