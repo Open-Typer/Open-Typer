@@ -34,6 +34,7 @@ ApplicationWindow {
 	property int oldHeight
 	property int oldX
 	property int oldY
+	property bool wasMaximized
 	property string packName
 	property string packFriendlyName
 	property string oldPackName: ""
@@ -100,6 +101,7 @@ ApplicationWindow {
 			height = oldHeight;
 			x = oldX;
 			y = oldY;
+			wasMaximized = true;
 		}
 		else if(visibility == ApplicationWindow.Windowed)
 		{
@@ -107,6 +109,7 @@ ApplicationWindow {
 			oldHeight = height;
 			oldX = x;
 			oldY = y;
+			wasMaximized = false;
 		}
 	}
 
@@ -1329,6 +1332,7 @@ ApplicationWindow {
 		oldWidth = width;
 		oldHeight = height;
 		visibility = Settings.windowMaximized() ? ApplicationWindow.Maximized : ApplicationWindow.Windowed;
+		wasMaximized = (visibility == ApplicationWindow.Maximized);
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.menuBarBlur = menuBarBlur;
 		AddonApi.sendEvent(AddonApi.Event_InitApp);
@@ -1352,8 +1356,6 @@ ApplicationWindow {
 			Settings.setWindowWidth(root.width);
 			Settings.setWindowHeight(root.height);
 		}
-		let maximized = root.visibility == ApplicationWindow.Maximized;
-		let minimized = root.visibility == ApplicationWindow.Minimized;
-		Settings.setWindowMaximized(maximized || minimized);
+		Settings.setWindowMaximized(wasMaximized);
 	}
 }
