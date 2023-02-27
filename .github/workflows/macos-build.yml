@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest]
-        qt-version: ['5.15.2', '6.4.2']
+        qt-version: ['6.4.2']
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v3
@@ -29,16 +29,7 @@ jobs:
     - name: Set up node.js
       uses: actions/setup-node@v3
     ## Install Qt
-    - if: contains(matrix.qt-version, '5.15.2')
-      name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: ${{ matrix.qt-version }}
-        host: 'mac'
-        target: ${{ matrix.qt-target }}
-        modules: 'qtcharts'
-    - if: contains(matrix.qt-version, '6.4.2')
-      name: Install Qt
+    - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
