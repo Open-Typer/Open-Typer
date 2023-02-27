@@ -663,6 +663,11 @@ ApplicationWindow {
 	}
 
 	function startExercise(lessonID, sublessonID, exerciseID) {
+		if(!customExerciseLoaded)
+		{
+			correctMistakes = true;
+			hideText = false;
+		}
 		// Update selected lesson
 		panel2.contents.lessonBox.currentIndex = lessonID - 1;
 		// Get sublesson count
@@ -1245,11 +1250,11 @@ ApplicationWindow {
 	function initTest(text, lineLength, includeNewLines, mode, time, correctMistakes_, lockUi, hideText_) {
 		changeMode(mode);
 		exerciseLineLength = lineLength;
+		correctMistakes = correctMistakes_;
+		hideText = hideText_;
 		loadText(text, includeNewLines);
 		if(mode === 1)
 			startTimedExercise(time);
-		correctMistakes = correctMistakes_;
-		hideText = hideText_;
 		if(lockUi)
 		{
 			// TODO: Save window geometry
