@@ -1343,6 +1343,11 @@ ApplicationWindow {
 		oldY = Settings.windowY();
 		oldWidth = Settings.windowWidth();
 		oldHeight = Settings.windowHeight();
+		if(!Settings.containsWindowX() || !Settings.containsWindowY())
+		{
+			oldX = (screen.width - oldWidth) / 2;
+			oldY = (screen.height - oldHeight) / 2;
+		}
 		if(!wasMaximized)
 		{
 			x = oldX;
