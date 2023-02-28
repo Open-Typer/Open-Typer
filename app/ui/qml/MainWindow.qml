@@ -94,22 +94,36 @@ ApplicationWindow {
 	minimumHeight: mainLayout.minHeight
 	visible: true
 	id: root
+	onXChanged: geometryTimer.start()
+	onYChanged: geometryTimer.start()
+	onWidthChanged: geometryTimer.start()
+	onHeightChanged: geometryTimer.start()
 	onVisibilityChanged: {
 		if(visibility == ApplicationWindow.Maximized)
+			wasMaximized = true;
+		else if(visibility == ApplicationWindow.Windowed)
 		{
 			width = oldWidth;
 			height = oldHeight;
 			x = oldX;
 			y = oldY;
-			wasMaximized = true;
-		}
-		else if(visibility == ApplicationWindow.Windowed)
-		{
-			oldWidth = width;
-			oldHeight = height;
-			oldX = x;
-			oldY = y;
 			wasMaximized = false;
+		}
+	}
+
+	Timer {
+		id: geometryTimer
+		interval: 16
+		running: false
+		repeat: false
+		onTriggered: {
+			if(visibility == ApplicationWindow.Windowed)
+			{
+				oldWidth = width;
+				oldHeight = height;
+				oldX = x;
+				oldY = y;
+			}
 		}
 	}
 
@@ -1323,16 +1337,19 @@ ApplicationWindow {
 	}
 
 	Component.onCompleted: {
-		x = Settings.windowX();
-		y = Settings.windowY();
-		oldX = x;
-		oldY = y;
-		width = Settings.windowWidth();
-		height = Settings.windowHeight();
-		oldWidth = width;
-		oldHeight = height;
 		visibility = Settings.windowMaximized() ? ApplicationWindow.Maximized : ApplicationWindow.Windowed;
 		wasMaximized = (visibility == ApplicationWindow.Maximized);
+		oldX = Settings.windowX();
+		oldY = Settings.windowY();
+		oldWidth = Settings.windowWidth();
+		oldHeight = Settings.windowHeight();
+		if(!wasMaximized)
+		{
+			x = oldX;
+			y = oldY;
+			width = oldWidth;
+			height = oldHeight;
+		}
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.menuBarBlur = menuBarBlur;
 		AddonApi.sendEvent(AddonApi.Event_InitApp);
