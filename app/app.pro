@@ -78,10 +78,9 @@ TRANSLATIONS += \
     translations/Open-Typer_ru_RU.ts
 
 RESOURCES += \
-    res.qrc \
     res/icons/icons.qrc \
-    res/images/class-icons/class-icons.qrc \
-    res/keyboard-layouts/layouts.qrc \
+    res/packs/packs.qrc \
+    res/splash/splash.qrc \
     translations/translations.qrc \
     ui/qml/qml.qrc
 
@@ -89,7 +88,8 @@ RESOURCES += \
     dark-theme/dark-style.qrc \
     light-theme/light-style.qrc
 
-win32:RC_ICONS += res/images/icon.ico
+win32:RC_ICONS += res/icons/icon.ico
+macx:ICON = res/macos-release/open-typer.icns
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

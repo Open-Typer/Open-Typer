@@ -171,7 +171,10 @@ Item {
 					yScale = 1;
 			}
 			TextEdit {
-				property int textWidth: calculateTextWidth(text, currentLineTextMetrics);
+				property int textWidth: {
+					currentLineTextMetrics.font;
+					return calculateTextWidth(text, currentLineTextMetrics);
+				}
 				id: currentLineText
 				Layout.fillWidth: true
 				topPadding: 0
@@ -208,7 +211,10 @@ Item {
 					policy: summary.visible ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
 				}
 				TextEdit {
-					property int textWidth: Math.max(calculateTextWidth(text, inputTextMetrics), calculateTextWidth(errorText.text, errorTextMetrics));
+					property int textWidth: {
+						inputTextMetrics.font;
+						Math.max(calculateTextWidth(text, inputTextMetrics), calculateTextWidth(errorText.text, errorTextMetrics));
+					}
 					property bool lockFocus: false
 					property bool cursorBlinkState: true
 					id: inputText
@@ -298,7 +304,10 @@ Item {
 				background: null
 				visible: remainingVisible
 				TextEdit {
-					property int textWidth: calculateTextWidth(text, remainingTextMetrics);
+					property int textWidth: {
+						remainingTextMetrics.font;
+						calculateTextWidth(text, remainingTextMetrics);
+					}
 					id: remainingText
 					text: remaining
 					font: ThemeEngine.font

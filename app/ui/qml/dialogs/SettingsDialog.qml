@@ -84,13 +84,16 @@ CustomDialog {
 			}
 			implicitHeight: contentHeight
 			model: categories
+			function updateAddonCategories() {
+				for(var i = 0; i < AddonApi.settingsCategories.length; i++)
+				{
+					listView.categories.push(AddonApi.settingsCategories[i]);
+				}
+			}
 			Connections {
 				target: AddonApi
-				function onSettingsCategoriesChanged() {
-					for(var i = 0; i < AddonApi.settingsCategories.length; i++)
-					{
-						listView.categories.push(AddonApi.settingsCategories[i]);
-					}
+				onSettingsCategoriesChanged: {
+					updateAddonCategories();
 				}
 			}
 			delegate: ItemDelegate {
@@ -128,6 +131,7 @@ CustomDialog {
 			FontMetrics {
 				id: metrics
 			}
+			Component.onCompleted: updateAddonCategories()
 		}
 		ToolSeparator { Layout.fillHeight: true }
 		Component {

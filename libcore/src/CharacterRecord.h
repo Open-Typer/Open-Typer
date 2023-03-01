@@ -31,6 +31,7 @@
 
 /*!
  * \brief The CharacterRecord class can be used to store character records.
+ *
  * A character record consists of key text (usually a single character) and number of key hits used to compose the character.
  */
 class CORE_LIB_EXPORT CharacterRecord

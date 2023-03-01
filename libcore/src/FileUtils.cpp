@@ -26,11 +26,7 @@
  */
 QString FileUtils::configLocation(void)
 {
-#ifdef Q_OS_WINDOWS
-	QString path = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
-#else
-	QString path = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/Open-Typer";
-#endif
+	QString path = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + "/Open-Typer";
 	QDir dir;
 	dir.mkpath(path);
 	return path;

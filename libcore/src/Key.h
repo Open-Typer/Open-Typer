@@ -30,6 +30,7 @@
 #define CORE_LIB_EXPORT Q_DECL_IMPORT
 #endif
 
+/*! \brief The Key class is used for the keys on the on screen keyboard. */
 class CORE_LIB_EXPORT Key
 {
 		Q_GADGET

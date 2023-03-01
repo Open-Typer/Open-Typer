@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/res/configs">
+        <file>cs_CZ-QWERTY-A</file>
+        <file>cs_CZ-QWERTZ-A</file>
+        <file>de_DE-QWERTY-A</file>
+        <file>de_DE-QWERTZ-A</file>
+        <file>en_US-default-A</file>
+        <file>sk_SK-QWERTY-A</file>
+        <file>sk_SK-QWERTZ-A</file>
+        <file>sk_SK-QWERTZ-B1</file>
+    </qresource>
+</RCC>

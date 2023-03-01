@@ -30,6 +30,11 @@ import "dialogs"
 import "core"
 
 ApplicationWindow {
+	property int oldWidth
+	property int oldHeight
+	property int oldX
+	property int oldY
+	property bool wasMaximized
 	property string packName
 	property string packFriendlyName
 	property string oldPackName: ""
@@ -85,15 +90,42 @@ ApplicationWindow {
 	Material.theme: ThemeEngine.theme === ThemeEngine.DarkTheme ? Material.Dark : Material.Light
 	Material.accent: ThemeEngine.currentAccentColor
 	color: ThemeEngine.bgColor
-	x: Settings.windowX()
-	y: Settings.windowY()
 	minimumWidth: mainLayout.minWidth
 	minimumHeight: mainLayout.minHeight
-	width: Settings.windowWidth()
-	height: Settings.windowHeight()
-	visibility: Settings.windowMaximized() ? ApplicationWindow.Maximized : ApplicationWindow.Windowed
 	visible: true
 	id: root
+	onXChanged: geometryTimer.start()
+	onYChanged: geometryTimer.start()
+	onWidthChanged: geometryTimer.start()
+	onHeightChanged: geometryTimer.start()
+	onVisibilityChanged: {
+		if(visibility == ApplicationWindow.Maximized)
+			wasMaximized = true;
+		else if(visibility == ApplicationWindow.Windowed)
+		{
+			width = oldWidth;
+			height = oldHeight;
+			x = oldX;
+			y = oldY;
+			wasMaximized = false;
+		}
+	}
+
+	Timer {
+		id: geometryTimer
+		interval: 16
+		running: false
+		repeat: false
+		onTriggered: {
+			if(visibility == ApplicationWindow.Windowed)
+			{
+				oldWidth = width;
+				oldHeight = height;
+				oldX = x;
+				oldY = y;
+			}
+		}
+	}
 
 	menuBar: Item {
 		width: customMenuBar.width
@@ -663,6 +695,11 @@ ApplicationWindow {
 	}
 
 	function startExercise(lessonID, sublessonID, exerciseID) {
+		if(!customExerciseLoaded)
+		{
+			correctMistakes = true;
+			hideText = false;
+		}
 		// Update selected lesson
 		panel2.contents.lessonBox.currentIndex = lessonID - 1;
 		// Get sublesson count
@@ -742,7 +779,6 @@ ApplicationWindow {
 	function updateText() {
 		paper.currentLineVisible = true;
 		paper.remainingVisible = true;
-		// TODO: Hide export button here
 		displayExercise = parser.initExercise(exerciseText, exerciseLineLength);
 		lineCount = StringUtils.charCount(displayExercise, '\n');
 		// Process exercise text
@@ -1246,11 +1282,11 @@ ApplicationWindow {
 	function initTest(text, lineLength, includeNewLines, mode, time, correctMistakes_, lockUi, hideText_) {
 		changeMode(mode);
 		exerciseLineLength = lineLength;
+		correctMistakes = correctMistakes_;
+		hideText = hideText_;
 		loadText(text, includeNewLines);
 		if(mode === 1)
 			startTimedExercise(time);
-		correctMistakes = correctMistakes_;
-		hideText = hideText_;
 		if(lockUi)
 		{
 			// TODO: Save window geometry
@@ -1301,6 +1337,24 @@ ApplicationWindow {
 	}
 
 	Component.onCompleted: {
+		visibility = Settings.windowMaximized() ? ApplicationWindow.Maximized : ApplicationWindow.Windowed;
+		wasMaximized = (visibility == ApplicationWindow.Maximized);
+		oldX = Settings.windowX();
+		oldY = Settings.windowY();
+		oldWidth = Settings.windowWidth();
+		oldHeight = Settings.windowHeight();
+		if(!Settings.containsWindowX() || !Settings.containsWindowY())
+		{
+			oldX = (screen.width - oldWidth) / 2;
+			oldY = (screen.height - oldHeight) / 2;
+		}
+		if(!wasMaximized)
+		{
+			x = oldX;
+			y = oldY;
+			width = oldWidth;
+			height = oldHeight;
+		}
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.menuBarBlur = menuBarBlur;
 		AddonApi.sendEvent(AddonApi.Event_InitApp);
@@ -1310,12 +1364,20 @@ ApplicationWindow {
 	}
 
 	onClosing: {
-		Settings.setWindowX(root.x);
-		Settings.setWindowY(root.y);
-		Settings.setWindowWidth(root.width);
-		Settings.setWindowHeight(root.height);
-		let maximized = root.visibility == ApplicationWindow.Maximized;
-		let minimized = root.visibility == ApplicationWindow.Minimized;
-		Settings.setWindowMaximized(maximized || minimized);
+		if(visibility != ApplicationWindow.Windowed)
+		{
+			Settings.setWindowX(oldX);
+			Settings.setWindowY(oldY);
+			Settings.setWindowWidth(oldWidth);
+			Settings.setWindowHeight(oldHeight);
+		}
+		else
+		{
+			Settings.setWindowX(root.x);
+			Settings.setWindowY(root.y);
+			Settings.setWindowWidth(root.width);
+			Settings.setWindowHeight(root.height);
+		}
+		Settings.setWindowMaximized(wasMaximized);
 	}
 }
