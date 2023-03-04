@@ -135,29 +135,10 @@ ApplicationWindow {
 			width: root.width
 			enabled: !uiLocked
 		}
-		FastBlur {
-			readonly property alias blurInAnimation: menuBarBlurInAnimation
-			readonly property alias blurOutAnimation: menuBarBlurOutAnimation
+		BackgroundBlur {
 			id: menuBarBlur
 			anchors.fill: parent
 			source: customMenuBar
-			cached: true
-			visible: false
-			radius: 0
-			PropertyAnimation {
-				id: menuBarBlurInAnimation
-				target: menuBarBlur
-				property: "radius"
-				to: 40
-				duration: 125
-			}
-			PropertyAnimation {
-				id: menuBarBlurOutAnimation
-				target: menuBarBlur
-				property: "radius"
-				to: 0
-				duration: 125
-			}
 		}
 	}
 
@@ -571,6 +552,13 @@ ApplicationWindow {
 				easing.type: Easing.InCubic
 			}
 		}
+	}
+
+	BackgroundBlur {
+		id: bgBlur
+		anchors.fill: mainLayout
+		// TODO: Use mainLayout as the source after removing QmlUtils.blurSource
+		source: QmlUtils.blurSource
 	}
 
 	InitialSetup {
@@ -1356,6 +1344,7 @@ ApplicationWindow {
 			height = oldHeight;
 		}
 		QmlUtils.blurSource = mainLayout;
+		QmlUtils.bgBlur = bgBlur;
 		QmlUtils.menuBarBlur = menuBarBlur;
 		AddonApi.sendEvent(AddonApi.Event_InitApp);
 		if(!Settings.initFinished())
