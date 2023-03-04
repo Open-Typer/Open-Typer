@@ -37,7 +37,8 @@
 class CORE_LIB_EXPORT QmlUtils : public QObject
 {
 		Q_OBJECT
-		Q_PROPERTY(QQuickItem *blurSource READ blurSource WRITE setBlurSource NOTIFY blurSourceChanged)
+		Q_PROPERTY(QQuickItem *blurSource READ blurSource WRITE setBlurSource NOTIFY blurSourceChanged) // deprecated
+		Q_PROPERTY(QQuickItem *bgBlur READ bgBlur WRITE setBgBlur NOTIFY bgBlurChanged)
 		Q_PROPERTY(QQuickItem *menuBarBlur READ menuBarBlur WRITE setMenuBarBlur NOTIFY menuBarBlurChanged)
 	public:
 		enum StandardIcon
@@ -50,8 +51,10 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		};
 		Q_ENUM(StandardIcon)
 
-		void setBlurSource(QQuickItem *item);
-		QQuickItem *blurSource(void);
+		Q_DECL_DEPRECATED void setBlurSource(QQuickItem *item);
+		Q_DECL_DEPRECATED QQuickItem *blurSource(void);
+		void setBgBlur(QQuickItem *item);
+		QQuickItem *bgBlur(void);
 		void setMenuBarBlur(QQuickItem *item);
 		QQuickItem *menuBarBlur(void);
 		Q_INVOKABLE static bool nativeMenuBar(void);
@@ -75,11 +78,13 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 
 	private:
 		static QString convertPixmap(QPixmap pixmap);
-		QQuickItem *m_blurSource = nullptr;
+		Q_DECL_DEPRECATED QQuickItem *m_blurSource = nullptr;
+		QQuickItem *m_bgBlur = nullptr;
 		QQuickItem *m_menuBarBlur = nullptr;
 
 	signals:
-		void blurSourceChanged(QQuickItem *item);
+		Q_DECL_DEPRECATED void blurSourceChanged(QQuickItem *item);
+		void bgBlurChanged(QQuickItem *item);
 		void menuBarBlurChanged(QQuickItem *item);
 		void menuBarReloadTriggered(void);
 		void screenKeyboardChanged(bool layoutChanged); // used to update the keyboard after changing settings related to it

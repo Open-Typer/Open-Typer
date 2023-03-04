@@ -39,17 +39,35 @@
 #include "ConfigParser.h"
 #include "global.h"
 
-/*! Sets QML root item. */
+/*!
+ * Sets QML background blur source.
+ * \deprecated Use setBgBlur() to set a custom blur item instead.
+ */
 void QmlUtils::setBlurSource(QQuickItem *item)
 {
 	m_blurSource = item;
 	emit blurSourceChanged(item);
 }
 
-/*! Returns QML root item. */
+/*!
+ * Returns QML background blur source.
+ * \deprecated Use bgBlur() to get the background blur instead, or set a custom blur using setBgBlur().
+ */
 QQuickItem *QmlUtils::blurSource(void)
 {
 	return m_blurSource;
+}
+
+void QmlUtils::setBgBlur(QQuickItem *item)
+{
+	m_bgBlur = item;
+	emit bgBlurChanged(item);
+}
+
+/*! QML background blur. \since Open-Typer 5.1.0 */
+QQuickItem *QmlUtils::bgBlur(void)
+{
+	return m_bgBlur;
 }
 
 /*! Returns QML menu bar blur item. */
