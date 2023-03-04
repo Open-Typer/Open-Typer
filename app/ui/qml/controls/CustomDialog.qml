@@ -28,7 +28,7 @@ import OpenTyper 1.0
 import "../controls"
 
 Item {
-	property Item blurSource: QmlUtils.blurSource
+	property Item blur: QmlUtils.bgBlur
 	property Item menuBarBlur: QmlUtils.menuBarBlur
 	property string windowTitle: ""
 	property int standardButtons: Dialog.NoButton
@@ -102,29 +102,6 @@ Item {
 		}
 	}
 
-	FastBlur {
-		id: blur
-		anchors.fill: root
-		source: blurSource
-		visible: false
-		radius: 0
-		cached: true
-		PropertyAnimation {
-			id: blurInAnimation
-			target: blur
-			property: "radius"
-			to: 40
-			duration: 125
-		}
-		PropertyAnimation {
-			id: blurOutAnimation
-			target: blur
-			property: "radius"
-			to: 0
-			duration: 125
-		}
-	}
-
 	DropShadow {
 		id: shadow
 		anchors.fill: dialogMask
@@ -164,25 +141,21 @@ Item {
 		modal: true
 		onAboutToShow: {
 			contentsLoader.active = 1;
-			blur.visible = true;
-			blurInAnimation.running = true;
-			menuBarBlur.visible = true;
-			menuBarBlur.blurInAnimation.running = true;
+			blur.show();
+			menuBarBlur.show();
 			shadowInAnimation.running = true;
 			shadow.visible = true;
 			root.aboutToShow();
 		}
 		onAboutToHide: {
-			blurOutAnimation.running = true;
+			blur.hide();
 			shadowOutAnimation.running = true;
-			menuBarBlur.blurOutAnimation.running = true;
+			menuBarBlur.hide();
 			shadow.visible = false
 			root.aboutToHide();
 		}
 		onClosed: {
 			contentsLoader.active = 0;
-			blur.visible = false;
-			menuBarBlur.visible = false;
 			dialogMask.resetPos();
 			QmlUtils.reloadMenuBar();
 		}
