@@ -58,7 +58,7 @@ RowLayout {
 	}
 	Component.onCompleted: {
 		// Fill SettingsDialog's Flickable
-		implicitWidth = parent.parent.fixedWidth;
-		implicitHeight = parent.parent.fixedHeight;
+		implicitWidth = parent.fixedWidth;
+		implicitHeight = parent.fixedHeight;
 	}
 }
