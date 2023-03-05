@@ -36,7 +36,7 @@ ColumnLayout {
 	}
 	Component.onCompleted: {
 		// Fill SettingsDialog's Flickable
-		width = parent.parent.fixedWidth;
-		height = parent.parent.fixedHeight;
+		width = parent.fixedWidth;
+		height = parent.fixedHeight;
 	}
 }
