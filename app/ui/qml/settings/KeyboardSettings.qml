@@ -38,6 +38,7 @@ RowLayout {
 			id: layoutList
 			Layout.fillWidth: true
 			Layout.fillHeight: true
+			KeyNavigation.tab: packList
 		}
 	}
 	ToolSeparator { Layout.fillHeight: true }
@@ -51,10 +52,15 @@ RowLayout {
 			}
 		}
 		LessonPackList {
+			id: packList
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			keyboardLayout: layoutList.items[layoutList.currentIndex]
 		}
+	}
+	onActiveFocusChanged: {
+		if(activeFocus)
+			layoutList.forceActiveFocus(Qt.TabFocus);
 	}
 	Component.onCompleted: {
 		// Fill SettingsDialog's Flickable
