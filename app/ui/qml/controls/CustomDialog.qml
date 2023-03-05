@@ -297,6 +297,14 @@ Item {
 					if(standardButton(Dialog.Ignore))
 						standardButton(Dialog.Ignore).text = QmlUtils.translateStandardButton("Ignore");
 				}
+				Connections {
+					readonly property Item firstButton: dialogButtonBox.contentChildren[0]
+					target: firstButton
+					onActiveFocusChanged: {
+						if(!firstButton.activeFocus)
+							root.forceActiveFocus(Qt.TabFocus);
+					}
+				}
 				Component.onCompleted: retranslateButtons()
 				onStandardButtonsChanged: retranslateButtons()
 			}
