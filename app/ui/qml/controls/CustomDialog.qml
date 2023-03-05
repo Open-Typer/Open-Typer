@@ -200,20 +200,13 @@ Item {
 						active: false
 						anchors.fill: parent
 						onActiveChanged: {
-							let found = null;
-							for(var i = 0; i < item.children.length; i++)
-							{
-								let element = item.children[i];
-								if(element.hovered !== undefined) // this is true for Controls
-								{
-									found = element;
-									break;
-								}
-							}
-							if(found == null)
+							if(item == null)
+								return;
+							let target = QmlUtils.findFirstControl(item);
+							if(target === null)
 								item.forceActiveFocus(Qt.TabFocus);
 							else
-								found.forceActiveFocus(Qt.TabFocus);
+								target.forceActiveFocus(Qt.TabFocus);
 						}
 					}
 				}
