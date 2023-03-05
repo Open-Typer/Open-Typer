@@ -337,13 +337,22 @@ QQuickItem *QmlUtils::findFirstControl(QQuickItem *rootItem)
 /*! Returns true if the item has the child (this function searches recursively). \since Open-Typer 5.0.1 */
 bool QmlUtils::itemHasChild(QQuickItem *item, QQuickItem *child)
 {
+	if(!item || !child)
+		return false;
 	auto children = item->children();
 	for(int i = 0; i < children.length(); i++)
 	{
-		if(children[i]->children().length() > 0)
-			return itemHasChild(qobject_cast<QQuickItem *>(children[i]), child);
 		if(children[i] == child)
 			return true;
+		else if(children[i]->children().length() > 0)
+		{
+			auto castItem = qobject_cast<QQuickItem *>(children[i]);
+			if(castItem == nullptr)
+				continue;
+			bool hasChild = itemHasChild(castItem, child);
+			if(hasChild)
+				return true;
+		}
 	}
 	return false;
 }
