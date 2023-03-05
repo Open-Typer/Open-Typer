@@ -72,6 +72,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_INVOKABLE static QString translateStandardButton(QString buttonText);
 		Q_INVOKABLE static MistakeRecord createMistakeRecord(void);
 		Q_INVOKABLE static CharacterRecord createCharacterRecord(void);
+		Q_INVOKABLE static QQuickItem *findFirstControl(QQuickItem *rootItem);
 
 	private:
 		static QString convertPixmap(QPixmap pixmap);

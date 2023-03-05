@@ -308,3 +308,28 @@ CharacterRecord QmlUtils::createCharacterRecord(void)
 {
 	return CharacterRecord();
 }
+
+/*! Finds the first QML Control in children items of the given item. \since Open-Typer 5.0.1 */
+QQuickItem *QmlUtils::findFirstControl(QQuickItem *rootItem)
+{
+	if(!rootItem)
+		return nullptr;
+	QQuickItem *ret = nullptr;
+	auto children = rootItem->children();
+	for(int i = 0; i < children.length(); i++)
+	{
+		auto element = children[i];
+		if(element->property("hovered").isValid()) // all Controls have the "hovered" property
+		{
+			ret = qobject_cast<QQuickItem *>(element);
+			break;
+		}
+		else if(element->children().length() > 0)
+		{
+			auto control = findFirstControl(qobject_cast<QQuickItem *>(element));
+			if(control != nullptr)
+				return control;
+		}
+	}
+	return ret;
+}
