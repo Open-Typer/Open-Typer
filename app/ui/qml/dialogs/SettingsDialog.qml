@@ -21,6 +21,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
+import QtQuick.Window 2.12
 import OpenTyper 1.0
 import "../controls"
 import "../settings"
@@ -28,7 +29,6 @@ import "../settings"
 CustomDialog {
 	property bool focusFromList: false
 	property bool forceListFocus: false
-	property int listFocusCount: 0
 	signal settingsSynced()
 	id: control
 	windowTitle: qsTr("Settings")
@@ -130,6 +130,7 @@ CustomDialog {
 				previousIndex = currentIndex;
 				if(noTransition)
 					stack.animationDuration = previousDuration;
+				forceListFocus = false;
 			}
 			FontMetrics {
 				id: metrics
@@ -138,18 +139,24 @@ CustomDialog {
 			onActiveFocusChanged: {
 				if(forceListFocus)
 				{
-					listFocusCount++;
 					forceActiveFocus(Qt.TabFocus);
-					if(listFocusCount > 1)
-						forceListFocus = false;
+					currentIndex = currentIndex + 0;
 					return;
 				}
-				listFocusCount = 0;
 				if(!activeFocus)
 				{
 					focusFromList = true;
 					stack.currentItem.contentItem.children[0].forceActiveFocus(Qt.TabFocus);
 				}
+			}
+			onFocusChanged: {
+				if(focus)
+					forceActiveFocus(Qt.TabFocus);
+			}
+			Keys.onTabPressed: {
+				focusFromList = true;
+				forceListFocus = false;
+				stack.currentItem.contentItem.children[0].forceActiveFocus();
 			}
 		}
 		ToolSeparator { Layout.fillHeight: true }
@@ -192,10 +199,15 @@ CustomDialog {
 							else
 							{
 								let nextItem = item.nextItemInFocusChain();
-								if(QmlUtils.itemHasChild(item, nextItem))
-									nextItem.forceActiveFocus(Qt.TabFocus);
+								if(item.parent === nextItem.parent)
+									item.forceActiveFocus(Qt.TabFocus);
 								else
-									children[0].forceActiveFocus(Qt.TabFocus);
+								{
+									if(QmlUtils.itemHasChild(children[0], nextItem))
+										nextItem.forceActiveFocus(Qt.TabFocus);
+									else
+										children[0].forceActiveFocus(Qt.TabFocus);
+								}
 							}
 						}
 					}
