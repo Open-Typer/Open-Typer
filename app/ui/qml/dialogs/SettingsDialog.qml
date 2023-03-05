@@ -27,6 +27,8 @@ import "../settings"
 
 CustomDialog {
 	property bool focusFromList: false
+	property bool forceListFocus: false
+	property int listFocusCount: 0
 	signal settingsSynced()
 	id: control
 	windowTitle: qsTr("Settings")
@@ -134,6 +136,15 @@ CustomDialog {
 			}
 			Component.onCompleted: updateAddonCategories()
 			onActiveFocusChanged: {
+				if(forceListFocus)
+				{
+					listFocusCount++;
+					forceActiveFocus(Qt.TabFocus);
+					if(listFocusCount > 1)
+						forceListFocus = false;
+					return;
+				}
+				listFocusCount = 0;
 				if(!activeFocus)
 				{
 					focusFromList = true;
@@ -176,7 +187,9 @@ CustomDialog {
 							}
 							focusFromList = false;
 							let item = QmlUtils.findFirstControl(children[0]);
-							if(item !== null)
+							if(item === null)
+								children[0].forceActiveFocus(Qt.TabFocus);
+							else
 								item.nextItemInFocusChain().forceActiveFocus(Qt.TabFocus);
 						}
 					}
@@ -204,5 +217,13 @@ CustomDialog {
 		if(Settings.isFrozen())
 			Settings.discardChanges();
 		settingsSynced();
+	}
+	onActiveFocusChanged: {
+		if(activeFocus)
+		{
+			focusFromList = false;
+			forceListFocus = true;
+			contentItem.listView.forceActiveFocus(Qt.TabFocus);
+		}
 	}
 }
