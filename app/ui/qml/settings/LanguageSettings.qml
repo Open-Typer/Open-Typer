@@ -31,8 +31,13 @@ ColumnLayout {
 		font.capitalization: Font.MixedCase
 	}
 	LanguageList {
+		id: list
 		Layout.fillWidth: true
 		Layout.fillHeight: true
+	}
+	onActiveFocusChanged: {
+		if(activeFocus)
+			list.forceActiveFocus(Qt.TabFocus);
 	}
 	Component.onCompleted: {
 		// Fill SettingsDialog's Flickable
