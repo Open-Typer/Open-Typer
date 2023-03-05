@@ -76,6 +76,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_INVOKABLE static MistakeRecord createMistakeRecord(void);
 		Q_INVOKABLE static CharacterRecord createCharacterRecord(void);
 		Q_INVOKABLE static QQuickItem *findFirstControl(QQuickItem *rootItem);
+		Q_INVOKABLE static bool itemHasChild(QQuickItem *item, QQuickItem *child);
 
 	private:
 		static QString convertPixmap(QPixmap pixmap);
