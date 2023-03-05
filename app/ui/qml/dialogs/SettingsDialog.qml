@@ -190,7 +190,13 @@ CustomDialog {
 							if(item === null)
 								children[0].forceActiveFocus(Qt.TabFocus);
 							else
-								item.nextItemInFocusChain().forceActiveFocus(Qt.TabFocus);
+							{
+								let nextItem = item.nextItemInFocusChain();
+								if(QmlUtils.itemHasChild(item, nextItem))
+									nextItem.forceActiveFocus(Qt.TabFocus);
+								else
+									children[0].forceActiveFocus(Qt.TabFocus);
+							}
 						}
 					}
 				}
