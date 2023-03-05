@@ -26,6 +26,7 @@ import "../controls"
 import "../settings"
 
 CustomDialog {
+	property bool focusFromList: false
 	signal settingsSynced()
 	id: control
 	windowTitle: qsTr("Settings")
@@ -132,6 +133,13 @@ CustomDialog {
 				id: metrics
 			}
 			Component.onCompleted: updateAddonCategories()
+			onActiveFocusChanged: {
+				if(!activeFocus)
+				{
+					focusFromList = true;
+					stack.currentItem.contentItem.children[0].forceActiveFocus(Qt.TabFocus);
+				}
+			}
 		}
 		ToolSeparator { Layout.fillHeight: true }
 		Component {
@@ -152,7 +160,26 @@ CustomDialog {
 				}
 				onCurrentComponentChanged: {
 					var component = Qt.createComponent(currentComponent);
-					component.createObject(contentItem);
+					var obj = component.createObject(focusScope);
+				}
+				FocusScope {
+					property int fixedWidth: flickable.fixedWidth
+					property int fixedHeight: flickable.fixedHeight
+					id: focusScope
+					onActiveFocusChanged: {
+						if(activeFocus)
+						{
+							if(!focusFromList)
+							{
+								listView.currentItem.forceActiveFocus(Qt.TabFocus);
+								return;
+							}
+							focusFromList = false;
+							let item = QmlUtils.findFirstControl(children[0]);
+							if(item !== null)
+								item.nextItemInFocusChain().forceActiveFocus(Qt.TabFocus);
+						}
+					}
 				}
 			}
 		}
@@ -166,6 +193,7 @@ CustomDialog {
 	}
 	onAboutToShow: {
 		Settings.freeze();
+		contentItem.listView.forceActiveFocus(Qt.TabFocus);
 	}
 	onAccepted: {
 		if(Settings.isFrozen())
