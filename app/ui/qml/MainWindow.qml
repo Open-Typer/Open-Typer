@@ -124,6 +124,7 @@ ApplicationWindow {
 				oldX = x;
 				oldY = y;
 			}
+			mainLayoutSource.render();
 		}
 	}
 
