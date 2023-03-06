@@ -41,5 +41,6 @@
         <file>settings/AddonSettings.qml</file>
         <file>AddonItem.qml</file>
         <file>AddonInfo.qml</file>
+        <file>core/CustomFlickable.qml</file>
     </qresource>
 </RCC>
