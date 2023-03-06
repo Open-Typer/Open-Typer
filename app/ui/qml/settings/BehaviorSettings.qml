@@ -25,6 +25,7 @@ import OpenTyper 1.0
 
 ColumnLayout {
 	Label {
+		id: validationLabel
 		text: qsTr("Exercise validation")
 		font.bold: true
 		font.pointSize: 12
@@ -32,6 +33,7 @@ ColumnLayout {
 	RowLayout {
 		Layout.fillWidth: true
 		Label {
+			id: errorPenaltyLabel
 			text: qsTr("Error penalty:")
 			Layout.fillWidth: true
 		}
@@ -40,6 +42,7 @@ ColumnLayout {
 			to: 100
 			value: Settings.errorPenalty()
 			onValueChanged: Settings.setErrorPenalty(value)
+			Accessible.description: validationLabel.text + " " + errorPenaltyLabel.text
 		}
 	}
 	CheckBox {
@@ -52,6 +55,7 @@ ColumnLayout {
 		enabled: mistakeLimitCheckBox.checked
 		Layout.fillWidth: true
 		Label {
+			id: maxCharsLabel
 			text: qsTr("Number of characters in one word with max. 1 mistake:")
 			Layout.fillWidth: true
 		}
@@ -60,6 +64,7 @@ ColumnLayout {
 			to: 100
 			value: Settings.mistakeChars()
 			onValueChanged: Settings.setMistakeChars(value)
+			Accessible.description: maxCharsLabel.text
 		}
 	}
 	Label {
