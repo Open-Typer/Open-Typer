@@ -24,6 +24,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Window 2.12
 import OpenTyper 1.0
 import "../controls"
+import "../core"
 import "../settings"
 
 CustomDialog {
@@ -162,7 +163,7 @@ CustomDialog {
 		ToolSeparator { Layout.fillHeight: true }
 		Component {
 			id: categoryContent
-			Flickable {
+			CustomFlickable {
 				property url currentComponent
 				property int fixedWidth: stack.implicitWidth
 				property int fixedHeight: stack.implicitHeight
@@ -170,12 +171,8 @@ CustomDialog {
 				contentWidth: contentItem.children[0].childrenRect.width
 				contentHeight: contentItem.children[0].childrenRect.height
 				flickableDirection: Flickable.AutoFlickIfNeeded
+				showVerticalScrollBar: true
 				clip: true
-				ScrollBar.vertical: ScrollBar {
-					width: 10
-					position: flickable.visibleArea.yPosition
-					policy: ScrollBar.AsNeeded
-				}
 				onCurrentComponentChanged: {
 					var component = Qt.createComponent(currentComponent);
 					var obj = component.createObject(focusScope);
@@ -210,6 +207,14 @@ CustomDialog {
 								}
 							}
 						}
+					}
+				}
+				Connections {
+					target: QmlUtils
+					onActiveFocusItemChanged: {
+						let focusItem = QmlUtils.activeFocusItem;
+						if(QmlUtils.itemHasChild(focusScope, focusItem))
+							flickable.ensureVisible(focusItem);
 					}
 				}
 			}
