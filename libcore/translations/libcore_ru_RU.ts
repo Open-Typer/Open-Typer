@@ -21,7 +21,7 @@
     <message>
         <location filename="../src/AppMenuBar.cpp" line="102"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <location filename="../src/AppMenuBar.cpp" line="105"/>
