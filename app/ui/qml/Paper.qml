@@ -25,6 +25,7 @@ import QtQuick.Controls.Material 2.5
 import QtGraphicalEffects 1.0
 import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
+import "core"
 
 Item {
 	property alias paperRect: paperRect
@@ -206,7 +207,7 @@ Item {
 				Layout.fillWidth: true
 				visible: currentLineVisible
 			}
-			Flickable {
+			CustomFlickable {
 				id: inputFlickable
 				Layout.fillWidth: true
 				Layout.fillHeight: true
@@ -215,11 +216,7 @@ Item {
 				contentHeight: Math.max(inputText.text.split('\n').length * inputTextMetrics.height, errorText.text.split('\n').length * errorTextMetrics.height)
 				flickableDirection: Flickable.VerticalFlick
 				interactive: summary.visible
-				ScrollBar.vertical: ScrollBar {
-					width: 10
-					position: inputFlickable.visibleArea.yPosition
-					policy: summary.visible ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
-				}
+				showVerticalScrollBar: summary.visible
 				TextEdit {
 					property int textWidth: {
 						inputTextMetrics.font;
