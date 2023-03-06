@@ -68,13 +68,11 @@ QList<AddonModel *> AddonManager::addons(void)
 /*! Returns the addon with the given ID, or nullptr if it isn't in the list. */
 AddonModel *AddonManager::findAddon(const QString &addonId)
 {
-	for(int i = 0; i < m_addons.length(); i++)
-	{
-		auto addon = m_addons[i];
-		if(addon->id() == addonId)
-			return addon;
-	}
-	return nullptr;
+	const auto search_it = std::find_if(m_addons.begin(), m_addons.end(),
+		[&addonId](AddonModel *addon) {
+			return addon->id() == addonId;
+		});
+	return search_it != m_addons.end() ? *search_it : nullptr;
 }
 
 /*! Installs a new addon. */
