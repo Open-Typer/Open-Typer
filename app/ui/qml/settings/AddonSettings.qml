@@ -80,6 +80,10 @@ ColumnLayout {
 					enabled: !spinner.running
 					Layout.fillWidth: true
 					background: null
+					onActiveFocusChanged: {
+						if(!activeFocus)
+							stackLayout.children[bar.currentIndex].forceActiveFocus(Qt.TabFocus);
+					}
 
 					TabButton {
 						text: qsTr("Online")
@@ -93,6 +97,7 @@ ColumnLayout {
 				}
 
 				StackLayout {
+					id: stackLayout
 					enabled: !spinner.running
 					Layout.fillWidth: true
 					Layout.fillHeight: true
@@ -107,6 +112,12 @@ ColumnLayout {
 						model: 2
 
 						Item {
+							activeFocusOnTab: true
+							onActiveFocusChanged: {
+								if(activeFocus)
+									onlineList.forceActiveFocus(Qt.TabFocus);
+							}
+
 							ListView {
 								id: onlineList
 								anchors.fill: parent
