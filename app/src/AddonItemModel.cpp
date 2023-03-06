@@ -25,6 +25,14 @@
 #include <QApplication>
 #include "AddonItemModel.h"
 
+const QString AddonItemModel::downloadLinkEntryTemplate = "download_%1_qt%2_%3";
+const QString AddonItemModel::appVersionProperty = "app_version";
+const QString AddonItemModel::addonNameProperty = "name";
+const QString AddonItemModel::addonDescriptionProperty = "description";
+const QString AddonItemModel::addonVersionProperty = "version";
+const QString AddonItemModel::addonIconPathProperty = "icon";
+const QString AddonItemModel::addonIsProprietaryProperty = "proprietary";
+
 /*! Constructs AddonItemModel. */
 AddonItemModel::AddonItemModel(QObject *parent) :
 	QObject(parent) { }
@@ -41,22 +49,22 @@ AddonItemModel *AddonItemModel::fromJson(QByteArray json, QString id, QObject *p
 #endif
 	QString qtMajor = QString::number(QT_VERSION_MAJOR);
 	QString arch = QSysInfo::buildCpuArchitecture();
-	QString downloadLinkEntry = "download_" + osName + "_qt" + qtMajor + "_" + arch;
+	QString downloadLinkEntry = downloadLinkEntryTemplate.arg(osName, qtMajor, arch);
 
 	QJsonDocument document = QJsonDocument::fromJson(json);
 	QJsonObject rootObj = document.object();
-	QVersionNumber version = QVersionNumber::fromString(rootObj["app_version"].toString());
+	QVersionNumber version = QVersionNumber::fromString(rootObj[appVersionProperty].toString());
 	QVersionNumber appVersion = QVersionNumber::fromString(qApp->applicationVersion());
 	if(version > appVersion || appVersion.majorVersion() != version.majorVersion())
 		return new AddonItemModel(parent);
 	AddonItemModel *ret = new AddonItemModel(parent);
 	ret->setId(id);
-	ret->setName(rootObj["name"].toString());
-	ret->setDescription(rootObj["description"].toString());
-	ret->setVersion(QVersionNumber::fromString(rootObj["version"].toString()));
-	ret->setIconUrl(rootObj["icon"].toString());
-	if(rootObj.contains("proprietary"))
-		ret->setProprietary(rootObj["proprietary"].toBool());
+	ret->setName(rootObj[addonNameProperty].toString());
+	ret->setDescription(rootObj[addonDescriptionProperty].toString());
+	ret->setVersion(QVersionNumber::fromString(rootObj[addonVersionProperty].toString()));
+	ret->setIconUrl(rootObj[addonIconPathProperty].toString());
+	if(rootObj.contains(addonIsProprietaryProperty))
+		ret->setProprietary(rootObj[addonIsProprietaryProperty].toBool());
 	if(rootObj.contains(downloadLinkEntry))
 	{
 		QVariantList list = rootObj[downloadLinkEntry].toArray().toVariantList();
