@@ -99,7 +99,7 @@ AddonModel *AddonManager::installAddon(AddonItemModel *itemModel)
 	m_addons.append(model);
 	emit addonsChanged();
 
-	connect(model, &AddonModel::installedChanged, [this, model]() {
+	connect(model, &AddonModel::installedChanged, this, [this, model]() {
 		if(model->installed())
 			saveAddon(model);
 	});
