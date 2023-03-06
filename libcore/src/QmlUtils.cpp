@@ -83,6 +83,20 @@ void QmlUtils::setMenuBarBlur(QQuickItem *item)
 	emit menuBarBlurChanged(item);
 }
 
+/*! Same as Window.activeFocusItem. \since Open-Typer 5.0.1 */
+QQuickItem *QmlUtils::activeFocusItem(void)
+{
+	return m_activeFocusItem;
+}
+
+void QmlUtils::setActiveFocusItem(QQuickItem *newActiveFocusItem)
+{
+	if(m_activeFocusItem == newActiveFocusItem)
+		return;
+	m_activeFocusItem = newActiveFocusItem;
+	emit activeFocusItemChanged();
+}
+
 /*! Returns true if the application uses native menu bar. */
 bool QmlUtils::nativeMenuBar(void)
 {
