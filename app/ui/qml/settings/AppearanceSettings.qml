@@ -91,6 +91,7 @@ ColumnLayout {
 
 	// Theme section
 	Label {
+		id: themesLabel
 		text: qsTr("Themes")
 		font.bold: true
 		font.pointSize: 12
@@ -104,6 +105,7 @@ ColumnLayout {
 			text: qsTr("Light")
 			checked: ThemeEngine.theme === ThemeEngine.LightTheme
 			onPressed: setLightTheme()
+			Accessible.name: themesLabel.text + " " + text
 		}
 
 		RadioButton {
@@ -137,6 +139,8 @@ ColumnLayout {
 							ThemeEngine.exerciseTextColor = ThemeEngine.defaultExerciseTextColor(color);
 						ThemeEngine.accentColor = accentColor;
 					}
+					//: %1 is the number of current color, for example "Accent color 2"
+					Accessible.name: qsTr("Accent color %1").arg(index + 1)
 				}
 			}
 		}
@@ -153,10 +157,12 @@ ColumnLayout {
 
 	RowLayout {
 		Label {
+			id: fontLabel
 			text: qsTr("Font:")
 		}
 		FontComboBox {
 			fixedPitch: true
+			Accessible.name: fontLabel.text
 			Component.onCompleted: {
 				family = ThemeEngine.fontFamily
 				// This has to be connected after getting font family from settings
@@ -168,6 +174,7 @@ ColumnLayout {
 	RowLayout {
 		visible: !simple
 		Label {
+			id: exTextColorLabel
 			text: qsTr("Exercise text color:")
 		}
 
@@ -176,6 +183,7 @@ ColumnLayout {
 			text: customColorStr
 			font.capitalization: Font.MixedCase
 			onClicked: exerciseTextColorDialog.open()
+			Accessible.name: exTextColorLabel.text + " " + text
 		}
 
 		ColorButton {
@@ -202,6 +210,7 @@ ColumnLayout {
 	RowLayout {
 		visible: !simple
 		Label {
+			id: inTextColorLabel
 			text: qsTr("Input text color:")
 		}
 
@@ -210,6 +219,7 @@ ColumnLayout {
 			text: customColorStr
 			font.capitalization: Font.MixedCase
 			onClicked: inputTextColorDialog.open()
+			Accessible.name: inTextColorLabel.text + " " + text
 		}
 
 		ColorButton {
@@ -234,6 +244,7 @@ ColumnLayout {
 	RowLayout {
 		visible: !simple
 		Label {
+			id: bgColorLabel
 			text: qsTr("Background color:")
 		}
 
@@ -242,6 +253,7 @@ ColumnLayout {
 			text: customColorStr
 			font.capitalization: Font.MixedCase
 			onClicked: bgColorDialog.open()
+			Accessible.name: bgColorLabel.text + " " + text
 		}
 
 		ColorButton {
@@ -266,6 +278,7 @@ ColumnLayout {
 	RowLayout {
 		visible: !simple
 		Label {
+			id: paperColorLabel
 			text: qsTr("Paper color:")
 		}
 
@@ -274,6 +287,7 @@ ColumnLayout {
 			text: customColorStr
 			font.capitalization: Font.MixedCase
 			onClicked: paperColorDialog.open()
+			Accessible.name: paperColorLabel.text + " " + text
 		}
 
 		ColorButton {
