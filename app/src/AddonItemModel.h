@@ -77,6 +77,14 @@ class AddonItemModel : public QObject
 		QStringList m_downloadUrls;
 		QString m_repositoryUrl;
 
+		static const QString downloadLinkEntryTemplate;
+		static const QString appVersionProperty;
+		static const QString addonNameProperty;
+		static const QString addonDescriptionProperty;
+		static const QString addonVersionProperty;
+		static const QString addonIconPathProperty;
+		static const QString addonIsProprietaryProperty;
+
 	signals:
 		void idChanged();
 		void nameChanged();
