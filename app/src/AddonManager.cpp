@@ -66,7 +66,7 @@ QList<AddonModel *> AddonManager::addons(void)
 }
 
 /*! Returns the addon with the given ID, or nullptr if it isn't in the list. */
-AddonModel *AddonManager::findAddon(QString addonId)
+AddonModel *AddonManager::findAddon(const QString &addonId)
 {
 	for(int i = 0; i < m_addons.length(); i++)
 	{
@@ -102,7 +102,7 @@ AddonModel *AddonManager::installAddon(AddonItemModel *itemModel)
 }
 
 /*! Uninstalls an addon. */
-void AddonManager::uninstallAddon(QString id)
+void AddonManager::uninstallAddon(const QString &id)
 {
 	unloadAddon(id);
 	auto model = findAddon(id);
@@ -125,7 +125,7 @@ void AddonManager::uninstallAddon(QString id)
 }
 
 /*! Loads an addon from the given path. */
-QList<QPluginLoader *> AddonManager::loadAddons(QString path)
+QList<QPluginLoader *> AddonManager::loadAddons(const QString &path)
 {
 	QList<QPluginLoader *> loaderList;
 	QDir pluginsDir(path);
@@ -182,7 +182,7 @@ void AddonManager::unloadAddons(void)
 }
 
 /*! Unloads the addon with the given id. */
-void AddonManager::unloadAddon(QString id)
+void AddonManager::unloadAddon(const QString &id)
 {
 	auto list = pluginLoaders[id];
 	for(int i = 0; i < list.length(); i++)
