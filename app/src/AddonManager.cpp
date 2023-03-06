@@ -29,6 +29,13 @@
 
 AddonManager globalAddonManager;
 
+const QString AddonManager::addonModelNameProperty = "name";
+const QString AddonManager::addonModelDescriptionProperty = "description";
+const QString AddonManager::addonModelIconFileNameProperty = "iconFileName";
+const QString AddonManager::addonModelRepositoryUrlProperty = "repositoryUrl";
+const QString AddonManager::addonModelVersionProperty = "version";
+const QString AddonManager::addonModelQtMajorProperty = "qtMajor";
+
 /*! Constructs AddonManager. */
 AddonManager::AddonManager(QObject *parent) :
 	QObject(parent)
@@ -46,12 +53,12 @@ AddonManager::AddonManager(QObject *parent) :
 			QJsonObject addonObj = obj[keys[i]].toObject();
 			AddonModel *model = new AddonModel(this);
 			model->setId(keys[i]);
-			model->setName(addonObj["name"].toString());
-			model->setDescription(addonObj["description"].toString());
-			model->setIconFileName(addonObj["iconFileName"].toString());
-			model->setRepositoryUrl(addonObj["repositoryUrl"].toString());
-			model->setVersion(QVersionNumber::fromString(addonObj["version"].toString()));
-			model->setQtMajor(addonObj["qtMajor"].toInt());
+			model->setName(addonObj[addonModelNameProperty].toString());
+			model->setDescription(addonObj[addonModelDescriptionProperty].toString());
+			model->setIconFileName(addonObj[addonModelIconFileNameProperty].toString());
+			model->setRepositoryUrl(addonObj[addonModelRepositoryUrlProperty].toString());
+			model->setVersion(QVersionNumber::fromString(addonObj[addonModelVersionProperty].toString()));
+			model->setQtMajor(addonObj[addonModelQtMajorProperty].toInt());
 			model->setInstalled(true);
 			m_addons.append(model);
 		}
@@ -198,12 +205,12 @@ void AddonManager::unloadAddon(const QString &id)
 void AddonManager::saveAddon(AddonModel *model)
 {
 	QJsonObject addonObj;
-	addonObj["name"] = model->name();
-	addonObj["description"] = model->description();
-	addonObj["iconFileName"] = model->iconFileName();
-	addonObj["repositoryUrl"] = model->repositoryUrl();
-	addonObj["version"] = model->version().toString();
-	addonObj["qtMajor"] = model->qtMajor();
+	addonObj[addonModelNameProperty] = model->name();
+	addonObj[addonModelDescriptionProperty] = model->description();
+	addonObj[addonModelIconFileNameProperty] = model->iconFileName();
+	addonObj[addonModelRepositoryUrlProperty] = model->repositoryUrl();
+	addonObj[addonModelVersionProperty] = model->version().toString();
+	addonObj[addonModelQtMajorProperty] = model->qtMajor();
 	QJsonObject obj = document.object();
 	obj[model->id()] = addonObj;
 	document.setObject(obj);

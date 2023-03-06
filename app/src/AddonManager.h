@@ -60,6 +60,13 @@ class AddonManager : public QObject
 		QVector<IAddon *> loadedAddons;
 		QStringList loadedAddonsClasses;
 
+		static const QString addonModelNameProperty;
+		static const QString addonModelDescriptionProperty;
+		static const QString addonModelIconFileNameProperty;
+		static const QString addonModelRepositoryUrlProperty;
+		static const QString addonModelQtMajorProperty;
+		static const QString addonModelVersionProperty;
+
 	signals:
 		void addonsChanged();
 };
