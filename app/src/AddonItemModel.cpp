@@ -41,20 +41,20 @@ AddonItemModel::AddonItemModel(QObject *parent) :
 AddonItemModel *AddonItemModel::fromJson(QByteArray json, QString id, QObject *parent)
 {
 #if defined(Q_OS_LINUX)
-	QString osName = "linux";
+	const QString osName = "linux";
 #elif defined(Q_OS_MACOS)
-	QString osName = "macos";
+	const QString osName = "macos";
 #elif defined(Q_OS_WINDOWS)
-	QString osName = "windows";
+	const QString osName = "windows";
 #endif
-	QString qtMajor = QString::number(QT_VERSION_MAJOR);
-	QString arch = QSysInfo::buildCpuArchitecture();
-	QString downloadLinkEntry = downloadLinkEntryTemplate.arg(osName, qtMajor, arch);
+	const QString qtMajor = QString::number(QT_VERSION_MAJOR);
+	const QString arch = QSysInfo::buildCpuArchitecture();
+	const QString downloadLinkEntry = downloadLinkEntryTemplate.arg(osName, qtMajor, arch);
 
-	QJsonDocument document = QJsonDocument::fromJson(json);
-	QJsonObject rootObj = document.object();
-	QVersionNumber version = QVersionNumber::fromString(rootObj[appVersionProperty].toString());
-	QVersionNumber appVersion = QVersionNumber::fromString(qApp->applicationVersion());
+	const QJsonDocument document = QJsonDocument::fromJson(json);
+	const QJsonObject rootObj = document.object();
+	const QVersionNumber version = QVersionNumber::fromString(rootObj[appVersionProperty].toString());
+	const QVersionNumber appVersion = QVersionNumber::fromString(qApp->applicationVersion());
 	if(version > appVersion || appVersion.majorVersion() != version.majorVersion())
 		return new AddonItemModel(parent);
 	AddonItemModel *ret = new AddonItemModel(parent);
