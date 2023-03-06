@@ -83,6 +83,20 @@ void QmlUtils::setMenuBarBlur(QQuickItem *item)
 	emit menuBarBlurChanged(item);
 }
 
+/*! Same as Window.activeFocusItem. \since Open-Typer 5.0.1 */
+QQuickItem *QmlUtils::activeFocusItem(void)
+{
+	return m_activeFocusItem;
+}
+
+void QmlUtils::setActiveFocusItem(QQuickItem *newActiveFocusItem)
+{
+	if(m_activeFocusItem == newActiveFocusItem)
+		return;
+	m_activeFocusItem = newActiveFocusItem;
+	emit activeFocusItemChanged();
+}
+
 /*! Returns true if the application uses native menu bar. */
 bool QmlUtils::nativeMenuBar(void)
 {
@@ -325,4 +339,52 @@ MistakeRecord QmlUtils::createMistakeRecord(void)
 CharacterRecord QmlUtils::createCharacterRecord(void)
 {
 	return CharacterRecord();
+}
+
+/*! Finds the first QML Control in children items of the given item. \since Open-Typer 5.0.1 */
+QQuickItem *QmlUtils::findFirstControl(QQuickItem *rootItem)
+{
+	if(!rootItem)
+		return nullptr;
+	QQuickItem *ret = nullptr;
+	auto children = rootItem->children();
+	for(int i = 0; i < children.length(); i++)
+	{
+		auto element = children[i];
+		if(element->property("hovered").isValid()) // all Controls have the "hovered" property
+		{
+			ret = qobject_cast<QQuickItem *>(element);
+			break;
+		}
+		else if(element->children().length() > 0)
+		{
+			auto control = findFirstControl(qobject_cast<QQuickItem *>(element));
+			if(control != nullptr)
+				return control;
+		}
+	}
+	return ret;
+}
+
+/*! Returns true if the item has the child (this function searches recursively). \since Open-Typer 5.0.1 */
+bool QmlUtils::itemHasChild(QQuickItem *item, QQuickItem *child)
+{
+	if(!item || !child)
+		return false;
+	auto children = item->children();
+	for(int i = 0; i < children.length(); i++)
+	{
+		if(children[i] == child)
+			return true;
+		else if(children[i]->children().length() > 0)
+		{
+			auto castItem = qobject_cast<QQuickItem *>(children[i]);
+			if(castItem == nullptr)
+				continue;
+			bool hasChild = itemHasChild(castItem, child);
+			if(hasChild)
+				return true;
+		}
+	}
+	return false;
 }

@@ -27,6 +27,7 @@ import QtQuick.Controls.Material 2.5
 Button {
 	property color foregroundColor: Material.theme === Material.Dark ? "white" : "black"
 	property string toolTipText
+	property string accessibleDescription: ""
 	signal clicked()
 	id: control
 	font.capitalization: Font.MixedCase
@@ -35,4 +36,7 @@ Button {
 	icon.color: foregroundColor
 	onReleased: clicked()
 	HoverToolTip { text: toolTipText }
+	Accessible.role: Accessible.Button
+	Accessible.name: text
+	Accessible.description: accessibleDescription == "" ? toolTipText : accessibleDescription
 }

@@ -21,11 +21,15 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
+import QtQuick.Window 2.12
 import OpenTyper 1.0
 import "../controls"
+import "../core"
 import "../settings"
 
 CustomDialog {
+	property bool focusFromList: false
+	property bool forceListFocus: false
 	signal settingsSynced()
 	id: control
 	windowTitle: qsTr("Settings")
@@ -127,32 +131,91 @@ CustomDialog {
 				previousIndex = currentIndex;
 				if(noTransition)
 					stack.animationDuration = previousDuration;
+				forceListFocus = false;
 			}
 			FontMetrics {
 				id: metrics
 			}
 			Component.onCompleted: updateAddonCategories()
+			onActiveFocusChanged: {
+				if(forceListFocus)
+				{
+					forceActiveFocus(Qt.TabFocus);
+					currentIndex = currentIndex + 0;
+					return;
+				}
+				if(!activeFocus)
+				{
+					focusFromList = true;
+					stack.currentItem.contentItem.children[0].forceActiveFocus(Qt.TabFocus);
+				}
+			}
+			onFocusChanged: {
+				if(focus)
+					forceActiveFocus(Qt.TabFocus);
+			}
+			Keys.onTabPressed: {
+				focusFromList = true;
+				forceListFocus = false;
+				stack.currentItem.contentItem.children[0].forceActiveFocus();
+			}
 		}
 		ToolSeparator { Layout.fillHeight: true }
 		Component {
 			id: categoryContent
-			Flickable {
+			CustomFlickable {
 				property url currentComponent
 				property int fixedWidth: stack.implicitWidth
 				property int fixedHeight: stack.implicitHeight
 				id: flickable
-				contentWidth: contentItem.childrenRect.width
-				contentHeight: contentItem.childrenRect.height
+				contentWidth: contentItem.children[0].childrenRect.width
+				contentHeight: contentItem.children[0].childrenRect.height
 				flickableDirection: Flickable.AutoFlickIfNeeded
+				showVerticalScrollBar: true
 				clip: true
-				ScrollBar.vertical: ScrollBar {
-					width: 10
-					position: flickable.visibleArea.yPosition
-					policy: ScrollBar.AsNeeded
-				}
 				onCurrentComponentChanged: {
 					var component = Qt.createComponent(currentComponent);
-					component.createObject(contentItem);
+					var obj = component.createObject(focusScope);
+				}
+				FocusScope {
+					property int fixedWidth: flickable.fixedWidth
+					property int fixedHeight: flickable.fixedHeight
+					id: focusScope
+					onActiveFocusChanged: {
+						if(activeFocus)
+						{
+							if(!focusFromList)
+							{
+								listView.currentItem.forceActiveFocus(Qt.TabFocus);
+								return;
+							}
+							focusFromList = false;
+							let item = QmlUtils.findFirstControl(children[0]);
+							if(item === null)
+								children[0].forceActiveFocus(Qt.TabFocus);
+							else
+							{
+								let nextItem = item.nextItemInFocusChain();
+								if(item.parent === nextItem.parent)
+									item.forceActiveFocus(Qt.TabFocus);
+								else
+								{
+									if(QmlUtils.itemHasChild(children[0], nextItem))
+										nextItem.forceActiveFocus(Qt.TabFocus);
+									else
+										children[0].forceActiveFocus(Qt.TabFocus);
+								}
+							}
+						}
+					}
+				}
+				Connections {
+					target: QmlUtils
+					onActiveFocusItemChanged: {
+						let focusItem = QmlUtils.activeFocusItem;
+						if(QmlUtils.itemHasChild(focusScope, focusItem))
+							flickable.ensureVisible(focusItem);
+					}
 				}
 			}
 		}
@@ -166,6 +229,7 @@ CustomDialog {
 	}
 	onAboutToShow: {
 		Settings.freeze();
+		contentItem.listView.forceActiveFocus(Qt.TabFocus);
 	}
 	onAccepted: {
 		if(Settings.isFrozen())
@@ -176,5 +240,13 @@ CustomDialog {
 		if(Settings.isFrozen())
 			Settings.discardChanges();
 		settingsSynced();
+	}
+	onActiveFocusChanged: {
+		if(activeFocus)
+		{
+			focusFromList = false;
+			forceListFocus = true;
+			contentItem.listView.forceActiveFocus(Qt.TabFocus);
+		}
 	}
 }

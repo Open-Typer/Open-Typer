@@ -291,6 +291,19 @@ ApplicationWindow {
 		id: mainLayout
 		anchors.fill: parent
 		spacing: 0
+		onFocusChanged: {
+			if(focus)
+				panel1.contents.settingsButton.forceActiveFocus(Qt.TabFocus);
+		}
+		Keys.forwardTo: keyboardHandler
+
+		KeyboardHandler {
+			id: keyboardHandler
+			onKeyPressed: {
+				if(event["key"] !== Qt.Key_Tab && event["key"] !== Qt.Key_Enter && event["key"] !== Qt.Key_Return && event["key"] !== Qt.Key_Space)
+					paper.forceActiveFocus();
+			}
+		}
 
 		Rectangle {
 			visible: customMenuBar.visible
@@ -305,6 +318,7 @@ ApplicationWindow {
 			visible: currentMode == 0
 			enabled: !uiLocked
 			control: RowLayout {
+				readonly property alias settingsButton: settingsButton
 				readonly property alias openButton: openButton
 				readonly property alias printButton: printButton
 				readonly property alias typingTestButton: typingTestButton
@@ -312,6 +326,7 @@ ApplicationWindow {
 				readonly property alias errorWordsButton: errorWordsButton
 				readonly property alias reverseTextButton: reverseTextButton
 				CustomToolButton {
+					id: settingsButton
 					icon.name: "settings"
 					toolTipText: qsTr("Options")
 					onClicked: settingsDialog.open()
@@ -415,6 +430,7 @@ ApplicationWindow {
 					icon.name: "repeat"
 					toolTipText: qsTr("Repeat exercise")
 					onClicked: repeatExerciseClicked();
+					accessibleDescription: toolTipText + " " + qsTr("Start typing")
 				}
 				CustomToolButton {
 					id: closeLoadedExButton
@@ -812,6 +828,7 @@ ApplicationWindow {
 
 	function repeatExercise() {
 		startExercise(currentLesson, currentSublesson, currentExercise);
+		paper.forceActiveFocus();
 	}
 
 	function nextExercise() {
@@ -1347,10 +1364,12 @@ ApplicationWindow {
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.bgBlur = bgBlur;
 		QmlUtils.menuBarBlur = menuBarBlur;
+		QmlUtils.activeFocusItem = Qt.binding(function() { return root.activeFocusItem; });
 		AddonApi.sendEvent(AddonApi.Event_InitApp);
 		if(!Settings.initFinished())
 			initialSetup.open();
 		reload();
+		paper.forceActiveFocus();
 	}
 
 	onClosing: {

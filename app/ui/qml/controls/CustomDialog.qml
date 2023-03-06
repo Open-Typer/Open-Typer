@@ -139,6 +139,7 @@ Item {
 		height: fillWindow ? parent.height - 100 : (standardButtons !== Dialog.NoButton ? headerLayout.implicitHeight + buttonBoxLoader.item.height : headerLayout.implicitHeight)
 		standardButtons: root.standardButtons
 		modal: true
+		Accessible.name: windowTitle
 		onAboutToShow: {
 			contentsLoader.active = 1;
 			blur.show();
@@ -198,6 +199,15 @@ Item {
 						id: contentsLoader
 						active: false
 						anchors.fill: parent
+						onActiveChanged: {
+							if(item == null)
+								return;
+							let target = QmlUtils.findFirstControl(item);
+							if(target === null)
+								item.forceActiveFocus(Qt.TabFocus);
+							else
+								target.forceActiveFocus(Qt.TabFocus);
+						}
 					}
 				}
 				MenuSeparator {
@@ -259,6 +269,14 @@ Item {
 						standardButton(Dialog.Retry).text = QmlUtils.translateStandardButton("Retry");
 					if(standardButton(Dialog.Ignore))
 						standardButton(Dialog.Ignore).text = QmlUtils.translateStandardButton("Ignore");
+				}
+				Connections {
+					readonly property Item firstButton: dialogButtonBox.contentChildren[0]
+					target: firstButton
+					onActiveFocusChanged: {
+						if(!firstButton.activeFocus)
+							root.forceActiveFocus(Qt.TabFocus);
+					}
 				}
 				Component.onCompleted: retranslateButtons()
 				onStandardButtonsChanged: retranslateButtons()

@@ -40,6 +40,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_PROPERTY(QQuickItem *blurSource READ blurSource WRITE setBlurSource NOTIFY blurSourceChanged) // deprecated
 		Q_PROPERTY(QQuickItem *bgBlur READ bgBlur WRITE setBgBlur NOTIFY bgBlurChanged)
 		Q_PROPERTY(QQuickItem *menuBarBlur READ menuBarBlur WRITE setMenuBarBlur NOTIFY menuBarBlurChanged)
+		Q_PROPERTY(QQuickItem *activeFocusItem READ activeFocusItem WRITE setActiveFocusItem NOTIFY activeFocusItemChanged)
 	public:
 		enum StandardIcon
 		{
@@ -57,6 +58,8 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		QQuickItem *bgBlur(void);
 		void setMenuBarBlur(QQuickItem *item);
 		QQuickItem *menuBarBlur(void);
+		QQuickItem *activeFocusItem(void);
+		void setActiveFocusItem(QQuickItem *newActiveFocusItem);
 		Q_INVOKABLE static bool nativeMenuBar(void);
 		Q_INVOKABLE static int qtVersionMajor(void);
 		Q_INVOKABLE static int qtVersionMinor(void);
@@ -75,17 +78,21 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_INVOKABLE static QString translateStandardButton(QString buttonText);
 		Q_INVOKABLE static MistakeRecord createMistakeRecord(void);
 		Q_INVOKABLE static CharacterRecord createCharacterRecord(void);
+		Q_INVOKABLE static QQuickItem *findFirstControl(QQuickItem *rootItem);
+		Q_INVOKABLE static bool itemHasChild(QQuickItem *item, QQuickItem *child);
 
 	private:
 		static QString convertPixmap(QPixmap pixmap);
 		Q_DECL_DEPRECATED QQuickItem *m_blurSource = nullptr;
 		QQuickItem *m_bgBlur = nullptr;
 		QQuickItem *m_menuBarBlur = nullptr;
+		QQuickItem *m_activeFocusItem = nullptr;
 
 	signals:
 		Q_DECL_DEPRECATED void blurSourceChanged(QQuickItem *item);
 		void bgBlurChanged(QQuickItem *item);
 		void menuBarBlurChanged(QQuickItem *item);
+		void activeFocusItemChanged(void);
 		void menuBarReloadTriggered(void);
 		void screenKeyboardChanged(bool layoutChanged); // used to update the keyboard after changing settings related to it
 };
