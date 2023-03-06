@@ -167,8 +167,8 @@ CustomDialog {
 				property int fixedWidth: stack.implicitWidth
 				property int fixedHeight: stack.implicitHeight
 				id: flickable
-				contentWidth: contentItem.childrenRect.width
-				contentHeight: contentItem.childrenRect.height
+				contentWidth: contentItem.children[0].childrenRect.width
+				contentHeight: contentItem.children[0].childrenRect.height
 				flickableDirection: Flickable.AutoFlickIfNeeded
 				clip: true
 				ScrollBar.vertical: ScrollBar {
