@@ -1363,6 +1363,7 @@ ApplicationWindow {
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.bgBlur = bgBlur;
 		QmlUtils.menuBarBlur = menuBarBlur;
+		QmlUtils.activeFocusItem = Qt.binding(function() { return root.activeFocusItem; });
 		AddonApi.sendEvent(AddonApi.Event_InitApp);
 		if(!Settings.initFinished())
 			initialSetup.open();
