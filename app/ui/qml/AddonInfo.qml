@@ -43,6 +43,7 @@ Item {
 		AccentButton {
 			icon.name: "left"
 			onClicked: closed()
+			Accessible.name: QmlUtils.translateStandardButton("Close")
 		}
 
 		RowLayout {
