@@ -38,7 +38,7 @@ AddonItemModel::AddonItemModel(QObject *parent) :
 	QObject(parent) { }
 
 /*! Creates an AddonItemModel from the given JSON. */
-AddonItemModel *AddonItemModel::fromJson(QByteArray json, QString id, QObject *parent)
+AddonItemModel *AddonItemModel::fromJson(const QByteArray &json, const QString &id, QObject *parent)
 {
 #if defined(Q_OS_LINUX)
 	const QString osName = "linux";
@@ -77,12 +77,12 @@ AddonItemModel *AddonItemModel::fromJson(QByteArray json, QString id, QObject *p
 }
 
 /*! Addon ID. */
-QString AddonItemModel::id(void)
+const QString &AddonItemModel::id(void)
 {
 	return m_id;
 }
 
-void AddonItemModel::setId(QString newId)
+void AddonItemModel::setId(const QString &newId)
 {
 	if(m_id == newId)
 		return;
@@ -91,12 +91,12 @@ void AddonItemModel::setId(QString newId)
 }
 
 /*! The addon name. */
-QString AddonItemModel::name(void)
+const QString &AddonItemModel::name(void)
 {
 	return m_name;
 }
 
-void AddonItemModel::setName(QString newName)
+void AddonItemModel::setName(const QString &newName)
 {
 	if(m_name == newName)
 		return;
@@ -105,12 +105,12 @@ void AddonItemModel::setName(QString newName)
 }
 
 /*! The addon description. */
-QString AddonItemModel::description(void)
+const QString &AddonItemModel::description(void)
 {
 	return m_description;
 }
 
-void AddonItemModel::setDescription(QString newDescription)
+void AddonItemModel::setDescription(const QString &newDescription)
 {
 	if(m_description == newDescription)
 		return;
@@ -133,12 +133,12 @@ QString AddonItemModel::shortDescription(void)
 }
 
 /*! The addon version. */
-QVersionNumber AddonItemModel::version(void)
+const QVersionNumber &AddonItemModel::version(void)
 {
 	return m_version;
 }
 
-void AddonItemModel::setVersion(QVersionNumber newVersion)
+void AddonItemModel::setVersion(const QVersionNumber &newVersion)
 {
 	if(m_version == newVersion)
 		return;
@@ -147,12 +147,12 @@ void AddonItemModel::setVersion(QVersionNumber newVersion)
 }
 
 /*! The URL of the addon icon. */
-QString AddonItemModel::iconUrl(void)
+const QString &AddonItemModel::iconUrl(void)
 {
 	return m_iconUrl;
 }
 
-void AddonItemModel::setIconUrl(QString newIconUrl)
+void AddonItemModel::setIconUrl(const QString &newIconUrl)
 {
 	if(m_iconUrl == newIconUrl)
 		return;
@@ -189,12 +189,12 @@ void AddonItemModel::setDownloadUrls(QStringList newDownloadUrls)
 }
 
 /*! URL of the addon repository. */
-QString AddonItemModel::repositoryUrl(void)
+const QString &AddonItemModel::repositoryUrl(void)
 {
 	return m_repositoryUrl;
 }
 
-void AddonItemModel::setRepositoryUrl(QString newRepositoryUrl)
+void AddonItemModel::setRepositoryUrl(const QString &newRepositoryUrl)
 {
 	if(m_repositoryUrl == newRepositoryUrl)
 		return;
