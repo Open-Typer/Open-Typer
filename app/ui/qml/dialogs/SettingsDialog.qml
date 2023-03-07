@@ -202,6 +202,8 @@ CustomDialog {
 								{
 									if(QmlUtils.itemHasChild(children[0], nextItem))
 										nextItem.forceActiveFocus(Qt.TabFocus);
+									else if(item.activeFocusOnTab)
+										item.forceActiveFocus(Qt.TabFocus);
 									else
 										children[0].forceActiveFocus(Qt.TabFocus);
 								}
