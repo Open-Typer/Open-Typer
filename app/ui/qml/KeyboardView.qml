@@ -350,8 +350,8 @@ ColumnLayout {
 				keyRow: KeyboardLayout.Row_A
 				keyId: 2
 				layout: root.layout
-				text: ""
-				shiftText: ""
+				text: " "
+				shiftText: " "
 				type: KeyboardUtils.KeyType_Space
 			}
 
