@@ -247,6 +247,7 @@ ColumnLayout {
 
 		// Row C (home row)
 		Row {
+			id: rowC_row
 			spacing: keySpacing
 
 			KeyboardKey {
@@ -295,18 +296,24 @@ ColumnLayout {
 				text: ""
 				shiftText: "⇧ Shift"
 				type: KeyboardUtils.KeyType_LShift
+				width: rowC_row.width - rowB_repeaterRow.width - rShift.width - keySpacing * 2
 			}
 
-			Repeater {
-				id: rowB
-				model: layout.rowB
-				KeyboardKey {
-					keyRow: KeyboardLayout.Row_B
-					keyId: index + 1
-					layout: root.layout
-					text: modelData.displayText
-					shiftText: modelData.displayShiftText
-					type: modelData.type
+			Row {
+				id: rowB_repeaterRow
+				spacing: keySpacing
+
+				Repeater {
+					id: rowB
+					model: layout.rowB
+					KeyboardKey {
+						keyRow: KeyboardLayout.Row_B
+						keyId: index + 1
+						layout: root.layout
+						text: modelData.displayText
+						shiftText: modelData.displayShiftText
+						type: modelData.type
+					}
 				}
 			}
 
