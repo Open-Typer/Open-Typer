@@ -34,6 +34,7 @@ Item {
 	property bool pressed: false
 
 	id: root
+	visible: (text + shiftText != "")
 	width: {
 		switch(type)
 		{
