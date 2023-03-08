@@ -53,6 +53,11 @@ CustomDialog {
 					qmlFileName: "settings/BehaviorSettings.qml"
 				},
 				SettingsCategory {
+					name: qsTr("Grades")
+					iconName: "medal"
+					qmlFileName: "settings/GradeSettings.qml"
+				},
+				SettingsCategory {
 					name: qsTr("Keyboard")
 					iconName: "keyboard"
 					qmlFileName: "settings/KeyboardSettings.qml"
