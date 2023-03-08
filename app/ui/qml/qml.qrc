@@ -43,5 +43,6 @@
         <file>AddonInfo.qml</file>
         <file>core/BackgroundBlur.qml</file>
         <file>core/CustomFlickable.qml</file>
+        <file>settings/GradeSettings.qml</file>
     </qresource>
 </RCC>
