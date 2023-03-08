@@ -28,14 +28,14 @@
 #include "FileUtils.h"
 #include "IAddon.h"
 
-AddonManager globalAddonManager;
-
 const QString AddonManager::addonModelNameProperty = "name";
 const QString AddonManager::addonModelDescriptionProperty = "description";
 const QString AddonManager::addonModelIconFileNameProperty = "iconFileName";
 const QString AddonManager::addonModelRepositoryUrlProperty = "repositoryUrl";
 const QString AddonManager::addonModelVersionProperty = "version";
 const QString AddonManager::addonModelQtMajorProperty = "qtMajor";
+
+AddonManager globalAddonManager;
 
 /*! Constructs AddonManager. */
 AddonManager::AddonManager(QObject *parent) :
