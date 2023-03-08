@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
+ * Copyright (C) 2023 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +28,13 @@
 #include "FileUtils.h"
 #include "IAddon.h"
 
+const QString AddonManager::addonModelNameProperty = "name";
+const QString AddonManager::addonModelDescriptionProperty = "description";
+const QString AddonManager::addonModelIconFileNameProperty = "iconFileName";
+const QString AddonManager::addonModelRepositoryUrlProperty = "repositoryUrl";
+const QString AddonManager::addonModelVersionProperty = "version";
+const QString AddonManager::addonModelQtMajorProperty = "qtMajor";
+
 AddonManager globalAddonManager;
 
 /*! Constructs AddonManager. */
@@ -46,12 +54,12 @@ AddonManager::AddonManager(QObject *parent) :
 			QJsonObject addonObj = obj[keys[i]].toObject();
 			AddonModel *model = new AddonModel(this);
 			model->setId(keys[i]);
-			model->setName(addonObj["name"].toString());
-			model->setDescription(addonObj["description"].toString());
-			model->setIconFileName(addonObj["iconFileName"].toString());
-			model->setRepositoryUrl(addonObj["repositoryUrl"].toString());
-			model->setVersion(QVersionNumber::fromString(addonObj["version"].toString()));
-			model->setQtMajor(addonObj["qtMajor"].toInt());
+			model->setName(addonObj[addonModelNameProperty].toString());
+			model->setDescription(addonObj[addonModelDescriptionProperty].toString());
+			model->setIconFileName(addonObj[addonModelIconFileNameProperty].toString());
+			model->setRepositoryUrl(addonObj[addonModelRepositoryUrlProperty].toString());
+			model->setVersion(QVersionNumber::fromString(addonObj[addonModelVersionProperty].toString()));
+			model->setQtMajor(addonObj[addonModelQtMajorProperty].toInt());
 			model->setInstalled(true);
 			m_addons.append(model);
 		}
@@ -66,15 +74,13 @@ QList<AddonModel *> AddonManager::addons(void)
 }
 
 /*! Returns the addon with the given ID, or nullptr if it isn't in the list. */
-AddonModel *AddonManager::findAddon(QString addonId)
+AddonModel *AddonManager::findAddon(const QString &addonId)
 {
-	for(int i = 0; i < m_addons.length(); i++)
-	{
-		auto addon = m_addons[i];
-		if(addon->id() == addonId)
-			return addon;
-	}
-	return nullptr;
+	const auto search_it = std::find_if(m_addons.begin(), m_addons.end(),
+		[&addonId](AddonModel *addon) {
+			return addon->id() == addonId;
+		});
+	return search_it != m_addons.end() ? *search_it : nullptr;
 }
 
 /*! Installs a new addon. */
@@ -94,7 +100,7 @@ AddonModel *AddonManager::installAddon(AddonItemModel *itemModel)
 	m_addons.append(model);
 	emit addonsChanged();
 
-	connect(model, &AddonModel::installedChanged, [this, model]() {
+	connect(model, &AddonModel::installedChanged, this, [this, model]() {
 		if(model->installed())
 			saveAddon(model);
 	});
@@ -102,7 +108,7 @@ AddonModel *AddonManager::installAddon(AddonItemModel *itemModel)
 }
 
 /*! Uninstalls an addon. */
-void AddonManager::uninstallAddon(QString id)
+void AddonManager::uninstallAddon(const QString &id)
 {
 	unloadAddon(id);
 	auto model = findAddon(id);
@@ -125,7 +131,7 @@ void AddonManager::uninstallAddon(QString id)
 }
 
 /*! Loads an addon from the given path. */
-QList<QPluginLoader *> AddonManager::loadAddons(QString path)
+QList<QPluginLoader *> AddonManager::loadAddons(const QString &path)
 {
 	QList<QPluginLoader *> loaderList;
 	QDir pluginsDir(path);
@@ -182,7 +188,7 @@ void AddonManager::unloadAddons(void)
 }
 
 /*! Unloads the addon with the given id. */
-void AddonManager::unloadAddon(QString id)
+void AddonManager::unloadAddon(const QString &id)
 {
 	auto list = pluginLoaders[id];
 	for(int i = 0; i < list.length(); i++)
@@ -200,12 +206,12 @@ void AddonManager::unloadAddon(QString id)
 void AddonManager::saveAddon(AddonModel *model)
 {
 	QJsonObject addonObj;
-	addonObj["name"] = model->name();
-	addonObj["description"] = model->description();
-	addonObj["iconFileName"] = model->iconFileName();
-	addonObj["repositoryUrl"] = model->repositoryUrl();
-	addonObj["version"] = model->version().toString();
-	addonObj["qtMajor"] = model->qtMajor();
+	addonObj[addonModelNameProperty] = model->name();
+	addonObj[addonModelDescriptionProperty] = model->description();
+	addonObj[addonModelIconFileNameProperty] = model->iconFileName();
+	addonObj[addonModelRepositoryUrlProperty] = model->repositoryUrl();
+	addonObj[addonModelVersionProperty] = model->version().toString();
+	addonObj[addonModelQtMajorProperty] = model->qtMajor();
 	QJsonObject obj = document.object();
 	obj[model->id()] = addonObj;
 	document.setObject(obj);

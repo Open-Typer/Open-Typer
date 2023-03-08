@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
+ * Copyright (C) 2023 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,24 +40,24 @@ class AddonItemModel : public QObject
 		Q_PROPERTY(QString repositoryUrl READ repositoryUrl WRITE setRepositoryUrl NOTIFY repositoryUrlChanged)
 	public:
 		explicit AddonItemModel(QObject *parent = nullptr);
-		static AddonItemModel *fromJson(QByteArray json, QString id, QObject *parent = nullptr);
+		static AddonItemModel *fromJson(const QByteArray &json, const QString &id, QObject *parent = nullptr);
 
-		QString id(void);
-		void setId(QString newId);
+		const QString &id(void);
+		void setId(const QString &newId);
 
-		QString name(void);
-		void setName(QString newName);
+		const QString &name(void);
+		void setName(const QString &newName);
 
-		QString description(void);
-		void setDescription(QString newDescription);
+		const QString &description(void);
+		void setDescription(const QString &newDescription);
 
 		QString shortDescription(void);
 
-		QVersionNumber version(void);
-		void setVersion(QVersionNumber newVersion);
+		const QVersionNumber &version(void);
+		void setVersion(const QVersionNumber &newVersion);
 
-		QString iconUrl(void);
-		void setIconUrl(QString newIconUrl);
+		const QString &iconUrl(void);
+		void setIconUrl(const QString &newIconUrl);
 
 		bool proprietary(void);
 		void setProprietary(bool newProprietary);
@@ -64,8 +65,8 @@ class AddonItemModel : public QObject
 		QStringList downloadUrls(void);
 		void setDownloadUrls(QStringList newDownloadUrls);
 
-		QString repositoryUrl(void);
-		void setRepositoryUrl(QString newRepositoryUrl);
+		const QString &repositoryUrl(void);
+		void setRepositoryUrl(const QString &newRepositoryUrl);
 
 	private:
 		QString m_id;
@@ -76,6 +77,14 @@ class AddonItemModel : public QObject
 		bool m_proprietary = true;
 		QStringList m_downloadUrls;
 		QString m_repositoryUrl;
+
+		static const QString downloadLinkEntryTemplate;
+		static const QString appVersionProperty;
+		static const QString addonNameProperty;
+		static const QString addonDescriptionProperty;
+		static const QString addonVersionProperty;
+		static const QString addonIconPathProperty;
+		static const QString addonIsProprietaryProperty;
 
 	signals:
 		void idChanged();

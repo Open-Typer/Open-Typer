@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
+ * Copyright (C) 2023 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,21 +45,28 @@ class AddonManager : public QObject
 
 		QList<AddonModel *> addons(void);
 
-		Q_INVOKABLE AddonModel *findAddon(QString addonId);
+		Q_INVOKABLE AddonModel *findAddon(const QString &addonId);
 		Q_INVOKABLE AddonModel *installAddon(AddonItemModel *itemModel);
-		Q_INVOKABLE void uninstallAddon(QString id);
+		Q_INVOKABLE void uninstallAddon(const QString &id);
 		Q_INVOKABLE void loadAddons(void);
 		Q_INVOKABLE void unloadAddons(void);
 
 	private:
-		QList<QPluginLoader *> loadAddons(QString path);
-		void unloadAddon(QString id);
+		QList<QPluginLoader *> loadAddons(const QString &path);
+		void unloadAddon(const QString &id);
 		void saveAddon(AddonModel *model);
 		QList<AddonModel *> m_addons;
 		QJsonDocument document;
 		QMap<QString, QList<QPluginLoader *>> pluginLoaders;
 		QVector<IAddon *> loadedAddons;
 		QStringList loadedAddonsClasses;
+
+		static const QString addonModelNameProperty;
+		static const QString addonModelDescriptionProperty;
+		static const QString addonModelIconFileNameProperty;
+		static const QString addonModelRepositoryUrlProperty;
+		static const QString addonModelQtMajorProperty;
+		static const QString addonModelVersionProperty;
 
 	signals:
 		void addonsChanged();

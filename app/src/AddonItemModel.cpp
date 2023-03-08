@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
+ * Copyright (C) 2023 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,38 +26,46 @@
 #include <QApplication>
 #include "AddonItemModel.h"
 
+const QString AddonItemModel::downloadLinkEntryTemplate = "download_%1_qt%2_%3";
+const QString AddonItemModel::appVersionProperty = "app_version";
+const QString AddonItemModel::addonNameProperty = "name";
+const QString AddonItemModel::addonDescriptionProperty = "description";
+const QString AddonItemModel::addonVersionProperty = "version";
+const QString AddonItemModel::addonIconPathProperty = "icon";
+const QString AddonItemModel::addonIsProprietaryProperty = "proprietary";
+
 /*! Constructs AddonItemModel. */
 AddonItemModel::AddonItemModel(QObject *parent) :
 	QObject(parent) { }
 
 /*! Creates an AddonItemModel from the given JSON. */
-AddonItemModel *AddonItemModel::fromJson(QByteArray json, QString id, QObject *parent)
+AddonItemModel *AddonItemModel::fromJson(const QByteArray &json, const QString &id, QObject *parent)
 {
 #if defined(Q_OS_LINUX)
-	QString osName = "linux";
+	const QString osName = "linux";
 #elif defined(Q_OS_MACOS)
-	QString osName = "macos";
+	const QString osName = "macos";
 #elif defined(Q_OS_WINDOWS)
-	QString osName = "windows";
+	const QString osName = "windows";
 #endif
-	QString qtMajor = QString::number(QT_VERSION_MAJOR);
-	QString arch = QSysInfo::buildCpuArchitecture();
-	QString downloadLinkEntry = "download_" + osName + "_qt" + qtMajor + "_" + arch;
+	const QString qtMajor = QString::number(QT_VERSION_MAJOR);
+	const QString arch = QSysInfo::buildCpuArchitecture();
+	const QString downloadLinkEntry = downloadLinkEntryTemplate.arg(osName, qtMajor, arch);
 
-	QJsonDocument document = QJsonDocument::fromJson(json);
-	QJsonObject rootObj = document.object();
-	QVersionNumber version = QVersionNumber::fromString(rootObj["app_version"].toString());
-	QVersionNumber appVersion = QVersionNumber::fromString(qApp->applicationVersion());
+	const QJsonDocument document = QJsonDocument::fromJson(json);
+	const QJsonObject rootObj = document.object();
+	const QVersionNumber version = QVersionNumber::fromString(rootObj[appVersionProperty].toString());
+	const QVersionNumber appVersion = QVersionNumber::fromString(qApp->applicationVersion());
 	if(version > appVersion || appVersion.majorVersion() != version.majorVersion())
 		return new AddonItemModel(parent);
 	AddonItemModel *ret = new AddonItemModel(parent);
 	ret->setId(id);
-	ret->setName(rootObj["name"].toString());
-	ret->setDescription(rootObj["description"].toString());
-	ret->setVersion(QVersionNumber::fromString(rootObj["version"].toString()));
-	ret->setIconUrl(rootObj["icon"].toString());
-	if(rootObj.contains("proprietary"))
-		ret->setProprietary(rootObj["proprietary"].toBool());
+	ret->setName(rootObj[addonNameProperty].toString());
+	ret->setDescription(rootObj[addonDescriptionProperty].toString());
+	ret->setVersion(QVersionNumber::fromString(rootObj[addonVersionProperty].toString()));
+	ret->setIconUrl(rootObj[addonIconPathProperty].toString());
+	if(rootObj.contains(addonIsProprietaryProperty))
+		ret->setProprietary(rootObj[addonIsProprietaryProperty].toBool());
 	if(rootObj.contains(downloadLinkEntry))
 	{
 		QVariantList list = rootObj[downloadLinkEntry].toArray().toVariantList();
@@ -69,12 +78,12 @@ AddonItemModel *AddonItemModel::fromJson(QByteArray json, QString id, QObject *p
 }
 
 /*! Addon ID. */
-QString AddonItemModel::id(void)
+const QString &AddonItemModel::id(void)
 {
 	return m_id;
 }
 
-void AddonItemModel::setId(QString newId)
+void AddonItemModel::setId(const QString &newId)
 {
 	if(m_id == newId)
 		return;
@@ -83,12 +92,12 @@ void AddonItemModel::setId(QString newId)
 }
 
 /*! The addon name. */
-QString AddonItemModel::name(void)
+const QString &AddonItemModel::name(void)
 {
 	return m_name;
 }
 
-void AddonItemModel::setName(QString newName)
+void AddonItemModel::setName(const QString &newName)
 {
 	if(m_name == newName)
 		return;
@@ -97,12 +106,12 @@ void AddonItemModel::setName(QString newName)
 }
 
 /*! The addon description. */
-QString AddonItemModel::description(void)
+const QString &AddonItemModel::description(void)
 {
 	return m_description;
 }
 
-void AddonItemModel::setDescription(QString newDescription)
+void AddonItemModel::setDescription(const QString &newDescription)
 {
 	if(m_description == newDescription)
 		return;
@@ -125,12 +134,12 @@ QString AddonItemModel::shortDescription(void)
 }
 
 /*! The addon version. */
-QVersionNumber AddonItemModel::version(void)
+const QVersionNumber &AddonItemModel::version(void)
 {
 	return m_version;
 }
 
-void AddonItemModel::setVersion(QVersionNumber newVersion)
+void AddonItemModel::setVersion(const QVersionNumber &newVersion)
 {
 	if(m_version == newVersion)
 		return;
@@ -139,12 +148,12 @@ void AddonItemModel::setVersion(QVersionNumber newVersion)
 }
 
 /*! The URL of the addon icon. */
-QString AddonItemModel::iconUrl(void)
+const QString &AddonItemModel::iconUrl(void)
 {
 	return m_iconUrl;
 }
 
-void AddonItemModel::setIconUrl(QString newIconUrl)
+void AddonItemModel::setIconUrl(const QString &newIconUrl)
 {
 	if(m_iconUrl == newIconUrl)
 		return;
@@ -181,12 +190,12 @@ void AddonItemModel::setDownloadUrls(QStringList newDownloadUrls)
 }
 
 /*! URL of the addon repository. */
-QString AddonItemModel::repositoryUrl(void)
+const QString &AddonItemModel::repositoryUrl(void)
 {
 	return m_repositoryUrl;
 }
 
-void AddonItemModel::setRepositoryUrl(QString newRepositoryUrl)
+void AddonItemModel::setRepositoryUrl(const QString &newRepositoryUrl)
 {
 	if(m_repositoryUrl == newRepositoryUrl)
 		return;

@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022-2023 - adazem009
+ * Copyright (C) 2023 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +34,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QVariant>
-#include "FileUtils.h"
 #include "HistoryEntry.h"
 
 /*! \brief The HistoryParser class provides functions for exercise history and statistics. */
@@ -66,6 +66,11 @@ class CORE_LIB_EXPORT HistoryParser : public QObject
 		int m_lesson;
 		int m_sublesson;
 		int m_exercise;
+
+		static const QString historyFile;
+		static const QString speedProperty;
+		static const QString mistakesProperty;
+		static const QString timeProperty;
 
 	signals:
 		void lessonPackChanged(QString value);
