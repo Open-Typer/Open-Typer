@@ -20,6 +20,7 @@
         <file>appearance.svg</file>
         <file>tweaks.svg</file>
         <file>add.svg</file>
+        <file>medal.svg</file>
     </qresource>
     <qresource prefix="/icons/open-typer">
         <file>index.theme</file>
