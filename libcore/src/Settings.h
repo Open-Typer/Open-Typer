@@ -77,6 +77,8 @@
  *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
  *  - Settings#initFinished() - If true, initial setup has been finished.
  *  - Settings#keyboardFingerColors() - If true, the keys on the screen keyboard use a different color for fingers.
+ *  - Settings#targetHitsPerMinute() - Number of hits per minute for the best grade.
+ *  - Settings#gradeNetHits() - Whether to use net hits per minute for grading.
  */
 class CORE_LIB_EXPORT Settings : public QObject
 {
@@ -223,6 +225,14 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static bool keyboardFingerColors(void);
 		Q_INVOKABLE static bool containsKeyboardFingerColors(void);
 		Q_INVOKABLE static void setKeyboardFingerColors(bool value);
+		// targetHitsPerMinute
+		Q_INVOKABLE static int targetHitsPerMinute(void);
+		Q_INVOKABLE static bool containsTargetHitsPerMinute(void);
+		Q_INVOKABLE static void setTargetHitsPerMinute(int value);
+		// gradeNetHits
+		Q_INVOKABLE static bool gradeNetHits(void);
+		Q_INVOKABLE static bool containsGradeNetHits(void);
+		Q_INVOKABLE static void setGradeNetHits(bool value);
 
 	protected:
 		static QVariant get(QString key, QVariant defaultValue);

@@ -610,3 +610,23 @@ bool Settings::containsKeyboardFingerColors(void) { return contains("theme/keybo
 
 /*! Setter for theme/keyboardfingercolors. */
 void Settings::setKeyboardFingerColors(bool value) { set("theme/keyboardfingercolors", value); }
+
+/*! Getter for main/targethits. \since Open-Typer 5.1.0 */
+int Settings::targetHitsPerMinute(void) { return get("main/targethits", 130).toInt(); }
+
+/*! Returns true if there's a main/targethits key. \since Open-Typer 5.1.0 */
+bool Settings::containsTargetHitsPerMinute(void) { return contains("main/targethits"); }
+
+/*! Setter for main/targethits. \since Open-Typer 5.1.0 */
+void Settings::setTargetHitsPerMinute(int value) { set("main/targethits", value); }
+
+// gradeNetHits
+
+/*! Getter for main/gradenethits. \since Open-Typer 5.1.0 */
+bool Settings::gradeNetHits(void) { return get("main/gradenethits", true).toBool(); }
+
+/*! Returns true if there's a main/gradenethits key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeNetHits(void) { return contains("main/gradenethits"); }
+
+/*! Setter for main/gradenethits. \since Open-Typer 5.1.0 */
+void Settings::setGradeNetHits(bool value) { set("main/gradenethits", value); }
