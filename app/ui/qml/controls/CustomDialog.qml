@@ -39,6 +39,7 @@ Item {
 	readonly property alias contentItem: contentsLoader.item
 	property bool draggable: true
 	property bool fillWindow: false
+	property bool showShadow: true
 	signal accepted()
 	signal applied()
 	signal discarded()
@@ -150,14 +151,20 @@ Item {
 			contentsLoader.active = 1;
 			blur.show();
 			menuBarBlur.show();
-			shadowInAnimation.running = true;
-			shadow.visible = true;
+			if(showShadow)
+			{
+				shadowInAnimation.running = true;
+				shadow.visible = true;
+			}
 			root.aboutToShow();
 		}
 		onAboutToHide: {
 			blur.hide();
-			shadowOutAnimation.running = true;
-			menuBarBlur.hide();
+			if(showShadow)
+			{
+				shadowOutAnimation.running = true;
+				menuBarBlur.hide();
+			}
 			shadow.visible = false
 			root.aboutToHide();
 		}
