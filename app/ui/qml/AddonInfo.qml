@@ -103,7 +103,6 @@ Item {
 
 	MessageBox {
 		id: restartAppMessageBox
-		anchors.fill: parent
 		windowTitle: Qt.application.displayName
 		title: qsTr("The application needs to restart.")
 		icon: MessageBox.Information
