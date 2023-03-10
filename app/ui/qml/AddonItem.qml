@@ -19,47 +19,12 @@
  */
 
 import QtQuick 2.12
-import QtQuick.Controls 2.5
-import QtQuick.Controls.Material 2.5
-import QtQuick.Layouts 1.12
 import OpenTyper 1.0
+import "controls"
 
-ItemDelegate {
+ListButton {
 	property AddonItemModel model
-
-	Rectangle {
-		id: borderRect
-		anchors.fill: parent
-		color: "transparent"
-		radius: 10
-		border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
-	}
-
-	contentItem: RowLayout {
-		spacing: -50 // some weird Material style property is probably causing this...
-
-		Image {
-			source: model.iconUrl
-			sourceSize.width: 40
-			sourceSize.height: 40
-		}
-
-		ColumnLayout {
-			Layout.fillWidth: true
-
-			Label {
-				text: model.name
-				font.bold: true
-				font.pointSize: 14
-			}
-
-			Label {
-				text: model.shortDescription
-			}
-		}
-
-		Label {
-			text: "❯"
-		}
-	}
+	title: model.name
+	text: model.shortDescription
+	iconUrl: model.iconUrl
 }
