@@ -31,7 +31,6 @@ FastBlur {
 
 	function show() {
 		depth++;
-		console.log(depth);
 		if(visible)
 			return;
 		outAnimation.stop();
@@ -41,7 +40,6 @@ FastBlur {
 
 	function hide() {
 		depth--;
-		console.log(depth);
 		if(!visible || depth > 0)
 			return;
 		inAnimation.stop();
