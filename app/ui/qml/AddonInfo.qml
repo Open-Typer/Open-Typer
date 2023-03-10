@@ -106,6 +106,7 @@ Item {
 		windowTitle: Qt.application.displayName
 		title: qsTr("The application needs to restart.")
 		icon: MessageBox.Information
+		showShadow: false
 		onAboutToHide: QmlUtils.restartApplication()
 	}
 }
