@@ -44,5 +44,6 @@
         <file>core/BackgroundBlur.qml</file>
         <file>core/CustomFlickable.qml</file>
         <file>settings/GradeSettings.qml</file>
+        <file>controls/ListButton.qml</file>
     </qresource>
 </RCC>
