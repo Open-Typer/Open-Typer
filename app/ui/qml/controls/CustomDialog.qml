@@ -22,6 +22,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
 import QtQuick.Layouts 1.12
+import QtQuick.Window 2.12
 import QtGraphicalEffects 1.0
 import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
@@ -47,7 +48,12 @@ Item {
 	signal aboutToShow()
 	signal aboutToHide()
 	id: root
-	anchors.fill: parent
+	x: -mapToItem(Window.contentItem, 0, 0).x
+	y: -mapToItem(Window.contentItem, 0, 0).y
+	width: Window.width
+	height: Window.height
+	implicitWidth: Window.width
+	implicitHeight: Window.height
 
 	function open() {
 		control.open();
