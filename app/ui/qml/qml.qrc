@@ -45,5 +45,6 @@
         <file>core/CustomFlickable.qml</file>
         <file>settings/GradeSettings.qml</file>
         <file>controls/ListButton.qml</file>
+        <file>GradingConfig.qml</file>
     </qresource>
 </RCC>

@@ -1,5 +1,5 @@
 /*
- * GradeSettings.qml
+ * GradeConfig.qml
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -21,9 +21,40 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
-import "../controls"
-import ".."
 
 ColumnLayout {
-	GradingConfig {}
+	Label {
+		text: qsTr("Target number of hits per minute")
+		font.pointSize: 12
+		font.bold: true
+	}
+
+	SpinBox {
+		from: 25
+		to: 750
+		value: Settings.targetHitsPerMinute()
+		onValueChanged: Settings.setTargetHitsPerMinute(value)
+	}
+
+	MenuSeparator { Layout.fillWidth: true }
+
+	Label {
+		//: Type of something
+		text: qsTr("Type")
+		font.pointSize: 12
+		font.bold: true
+	}
+
+	RowLayout {
+		RadioButton {
+			text: qsTr("Net hits")
+			checked: Settings.gradeNetHits()
+			onCheckedChanged: Settings.setGradeNetHits(checked)
+		}
+
+		RadioButton {
+			text: qsTr("Gross hits")
+			checked: !Settings.gradeNetHits()
+		}
+	}
 }
