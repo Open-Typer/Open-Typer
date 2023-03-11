@@ -28,6 +28,8 @@ ItemDelegate {
 	property url iconUrl: ""
 	property string title: ""
 	id: control
+	implicitWidth: contentItem.childrenRect.width + 40
+	implicitHeight: contentItem.childrenRect.height + 20
 
 	Rectangle {
 		id: borderRect
