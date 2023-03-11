@@ -48,6 +48,7 @@
 #include "ExportProvider.h"
 #include "ExportTable.h"
 #include "AppMenuBar.h"
+#include "ClassManager.h"
 #ifndef Q_OS_WASM
 #include "AddonListModel.h"
 #include "AddonManager.h"
@@ -130,6 +131,10 @@ int main(int argc, char *argv[])
 		return &globalAddonManager;
 	});
 #endif
+	QQmlEngine::setObjectOwnership(&globalClassManager, QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<ClassManager>("OpenTyper", 1, 0, "ClassManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return &globalClassManager;
+	});
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
 	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
@@ -143,6 +148,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<AppMenuModel>("OpenTyper", 1, 0, "AppMenuModel");
 	qmlRegisterType<AppMenuItem>("OpenTyper", 1, 0, "AppMenuItem");
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
+	qmlRegisterType<Class>("OpenTyper", 1, 0, "Class");
 #ifndef Q_OS_WASM
 	qmlRegisterType<AddonItemModel>("OpenTyper", 1, 0, "AddonItemModel");
 	qmlRegisterType<AddonListModel>("OpenTyper", 1, 0, "AddonListModel");
