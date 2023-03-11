@@ -22,8 +22,23 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import "../controls"
+import "../dialogs"
 import ".."
 
 ColumnLayout {
 	GradingConfig {}
+
+	MenuSeparator { Layout.fillWidth: true }
+
+	Button {
+		text: qsTr("Configure grading for classes")
+		font.capitalization: Font.MixedCase
+		onClicked: classConfig.open()
+	}
+
+	Item {
+		GradingClassConfig {
+			id: classConfig
+		}
+	}
 }
