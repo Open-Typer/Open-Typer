@@ -49,12 +49,16 @@ Item {
 	signal aboutToShow()
 	signal aboutToHide()
 	id: root
-	x: -mapToItem(Window.contentItem, 0, 0).x
-	y: -mapToItem(Window.contentItem, 0, 0).y
-	width: Window.width
-	height: Window.height
-	implicitWidth: Window.width
-	implicitHeight: Window.height
+	x: {
+		Window.contentItem.width;
+		return mapFromItem(Window.contentItem, x, y).x;
+	}
+	y: {
+		Window.contentItem.height;
+		return mapFromItem(Window.contentItem, x, y).y;
+	}
+	width: Window.contentItem.width
+	height: Window.contentItem.height
 
 	function open() {
 		control.open();
