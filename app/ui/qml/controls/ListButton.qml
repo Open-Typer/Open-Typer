@@ -63,6 +63,7 @@ ItemDelegate {
 		}
 
 		Label {
+			Layout.alignment: Qt.AlignRight
 			text: "❯"
 		}
 	}
