@@ -42,6 +42,7 @@ LIBS += -L$$_PRO_FILE_PWD_/.. -lopentyper-core
 }
 
 SOURCES += \
+    src/Class.cpp \
     src/ExportProvider.cpp \
     src/ExportTable.cpp \
     src/ExportTableModel.cpp \
@@ -60,6 +61,7 @@ SOURCES += \
 }
 
 HEADERS += \
+    src/Class.h \
     src/ExportProvider.h \
     src/ExportTable.h \
     src/ExportTableModel.h \
