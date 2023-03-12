@@ -46,6 +46,7 @@ CustomDialog {
 			lastOperationNext = false;
 			currentIndex--;
 			contentItem.stack.replace(contentItem.currentItem, pages[currentIndex], StackView.PopTransition);
+			focusTimer.start();
 		}
 	}
 	function nextPage() {
@@ -54,6 +55,7 @@ CustomDialog {
 			lastOperationNext = true;
 			currentIndex++;
 			contentItem.stack.replace(contentItem.stack.currentItem, pages[currentIndex], StackView.PushTransition);
+			focusTimer.start();
 		}
 	}
 	function skipPage() { skipPageTimer.start(); }
@@ -68,6 +70,7 @@ CustomDialog {
 			Settings.setLessonPack("en_US-default-A"); // lesson pack will be changed during initial setup anyway
 			noAutoLayout = true;
 		}
+		focusTimer.start();
 	}
 	contentComponent: ColumnLayout {
 		property alias stack: stack
@@ -94,6 +97,7 @@ CustomDialog {
 				//: %1 is the right arrow
 				text: qsTr("Next %1").arg("▶")
 				onClicked: nextPage()
+				KeyNavigation.tab: stack.currentItem
 			}
 			AccentButton {
 				visible: currentIndex == pages.length - 1
@@ -104,6 +108,7 @@ CustomDialog {
 					Settings.setInitFinished(true);
 					root.close();
 				}
+				KeyNavigation.tab: stack.currentItem
 			}
 		}
 	}
@@ -117,6 +122,13 @@ CustomDialog {
 			else
 				previousPage();
 		}
+	}
+	Timer {
+		id: focusTimer
+		running: false
+		interval: 16
+		repeat: false
+		onTriggered: contentItem.stack.currentItem.forceActiveFocus(Qt.TabFocus)
 	}
 	Component {
 		id: localizationPage
@@ -136,8 +148,10 @@ CustomDialog {
 					}
 				}
 				LanguageList {
+					id: languageList
 					Layout.fillWidth: true
 					Layout.fillHeight: true
+					KeyNavigation.tab: layoutList
 				}
 			}
 			ToolSeparator { Layout.fillHeight: true }
@@ -163,7 +177,15 @@ CustomDialog {
 						keyboardLayoutName = currentItem.text;
 					}
 					onItemsLoaded: currentIndex = keyboardLayout
+					onActiveFocusChanged: {
+						if(currentIndex == -1)
+							currentIndex = 0;
+					}
 				}
+			}
+			onFocusChanged: {
+				if(focus)
+					languageList.forceActiveFocus(Qt.TabFocus);
 			}
 		}
 	}
@@ -189,6 +211,14 @@ CustomDialog {
 						skipPage();
 					}
 				}
+				onActiveFocusChanged: {
+					if(currentIndex == -1)
+						currentIndex = 0;
+				}
+			}
+			onFocusChanged: {
+				if(focus)
+					packList.forceActiveFocus(Qt.TabFocus);
 			}
 		}
 	}
