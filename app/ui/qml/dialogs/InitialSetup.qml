@@ -85,19 +85,23 @@ CustomDialog {
 		RowLayout {
 			Layout.fillWidth: true
 			AccentButton {
+				//: Previous page
+				readonly property string buttonText: qsTr("Previous")
 				visible: currentIndex > 0
-				//: %1 is the left arrow
-				text: qsTr("%1 Previous").arg("◀")
+				text: "◀ " + buttonText
 				onClicked: previousPage()
+				Accessible.name: buttonText
 			}
 			Item { Layout.fillWidth: true }
 			AccentButton {
+				//: Next page
+				readonly property string buttonText: qsTr("Next")
 				visible: (currentIndex < pages.length - 1)
 				enabled: stack.currentItem.finished
-				//: %1 is the right arrow
-				text: qsTr("Next %1").arg("▶")
+				text: buttonText + " ▶"
 				onClicked: nextPage()
 				KeyNavigation.tab: stack.currentItem
+				Accessible.name: buttonText
 			}
 			AccentButton {
 				visible: currentIndex == pages.length - 1
