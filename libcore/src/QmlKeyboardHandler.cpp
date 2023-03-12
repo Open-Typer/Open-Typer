@@ -2,7 +2,7 @@
  * QmlKeyboardHandler.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022 - adazem009
+ * Copyright (C) 2022-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,5 +72,7 @@ QVariantMap QmlKeyboardHandler::convertEvent(QKeyEvent *event)
 	out["text"] = event->text();
 	out["modifiers"] = (int) event->modifiers();
 	out["isAutoRepeat"] = event->isAutoRepeat();
+	out["nativeScanCode"] = event->nativeScanCode();
+	out["nativeVirtualKey"] = event->nativeVirtualKey();
 	return out;
 }
