@@ -19,6 +19,9 @@
  */
 
 #include <QMetaEnum>
+#ifdef Q_OS_MACOS
+#include <Carbon/Carbon.h>
+#endif
 #include "KeyboardUtils.h"
 
 /*!
@@ -214,4 +217,44 @@ QString KeyboardUtils::deadKeyToReadableString(Qt::Key key)
 		default:
 			return QChar();
 	}
+}
+
+/*!
+ * Returns true if the given native virtual key code or scan code belongs to right shift.\n
+ * Pass both values to this function; it'll use native scan code or virtual key depending on the platform.
+ * \since Open-Typer 5.0.1
+ */
+bool KeyboardUtils::isRShift(int nativeScanCode, int nativeVirtualKey)
+{
+	Q_UNUSED(nativeScanCode)
+	Q_UNUSED(nativeVirtualKey)
+#if defined(Q_OS_LINUX)
+	return nativeVirtualKey == 0xFFE2;
+#elif defined(Q_OS_WINDOWS)
+	return nativeScanCode == 0x36;
+#elif defined(Q_OS_MACOS)
+	return nativeVirtualKey == kVK_RightShift;
+#else
+	return false;
+#endif
+}
+
+/*!
+ * Returns true if the given native virtual key code or scan code belongs to right control.\n
+ * Pass both values to this function; it'll use native scan code or virtual key depending on the platform.
+ * \since Open-Typer 5.0.1
+ */
+bool KeyboardUtils::isRControl(int nativeScanCode, int nativeVirtualKey)
+{
+	Q_UNUSED(nativeScanCode)
+	Q_UNUSED(nativeVirtualKey)
+#if defined(Q_OS_LINUX)
+	return nativeVirtualKey == 0xFFE4;
+#elif defined(Q_OS_WINDOWS)
+	return nativeScanCode == 0x11D;
+#elif defined(Q_OS_MACOS)
+	return nativeVirtualKey == kVK_RightControl;
+#else
+	return false;
+#endif
 }

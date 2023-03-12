@@ -104,13 +104,18 @@ ColumnLayout {
 			return returnKey;
 		else if(event["key"] === Qt.Key_Shift)
 		{
-			if(event["rShift"] === true)
+			if(event["rShift"] || KeyboardUtils.isRShift(event["nativeScanCode"], event["nativeVirtualKey"]))
 				return rShift;
 			else
-				return lShift; // TODO: Add support for rShift (pressed key)
+				return lShift;
 		}
 		else if(event["key"] === Qt.Key_Control)
-			return lCtrl; // TODO: Add support for rCtrl
+		{
+			if(KeyboardUtils.isRControl(event["nativeScanCode"], event["nativeVirtualKey"]))
+				return rCtrl;
+			else
+				return lCtrl;
+		}
 		else if(event["key"] === Qt.Key_Alt)
 			return lAlt;
 		else if(event["key"] === Qt.Key_AltGr)
