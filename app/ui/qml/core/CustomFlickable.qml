@@ -24,6 +24,7 @@ import QtQuick.Controls 2.5
 Flickable {
 	property bool showHorizontalScrollBar: false
 	property bool showVerticalScrollBar: false
+	id: flickable
 
 	function ensureVisibleX(item) {
 		if (moving || dragging)
