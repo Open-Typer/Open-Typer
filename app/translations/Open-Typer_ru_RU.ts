@@ -33,22 +33,22 @@
 <context>
     <name>AddonInfo</name>
     <message>
-        <location filename="../ui/qml/AddonInfo.qml" line="79"/>
+        <location filename="../ui/qml/AddonInfo.qml" line="80"/>
         <source>Uninstall</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/AddonInfo.qml" line="79"/>
+        <location filename="../ui/qml/AddonInfo.qml" line="80"/>
         <source>Installing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/AddonInfo.qml" line="79"/>
+        <location filename="../ui/qml/AddonInfo.qml" line="80"/>
         <source>Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/AddonInfo.qml" line="108"/>
+        <location filename="../ui/qml/AddonInfo.qml" line="107"/>
         <source>The application needs to restart.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -61,12 +61,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AddonSettings.qml" line="85"/>
+        <location filename="../ui/qml/settings/AddonSettings.qml" line="89"/>
         <source>Online</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AddonSettings.qml" line="90"/>
+        <location filename="../ui/qml/settings/AddonSettings.qml" line="94"/>
         <source>Installed addons</source>
         <translation type="unfinished"></translation>
     </message>
@@ -80,74 +80,80 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="94"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="95"/>
         <source>Themes</source>
         <translation>Темы</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="104"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="105"/>
         <source>Light</source>
         <extracomment>The light theme</extracomment>
         <translation>Светл.</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="111"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="113"/>
         <source>Dark</source>
         <extracomment>The dark theme</extracomment>
         <translation>Темн.</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="117"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="119"/>
         <source>Accent color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="149"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="143"/>
+        <source>Accent color %1</source>
+        <extracomment>%1 is the number of current color, for example &quot;Accent color 2&quot;</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="153"/>
         <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="156"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="161"/>
         <source>Font:</source>
         <translation>Шрифт:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="171"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="178"/>
         <source>Exercise text color:</source>
         <translation>Цвет текста упражнения:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="205"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="214"/>
         <source>Input text color:</source>
         <translation>Цвет вводимого текста:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="229"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="239"/>
         <source>Background</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="237"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="248"/>
         <source>Background color:</source>
         <translation>Цвет фона:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="261"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="273"/>
         <source>Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="269"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="282"/>
         <source>Paper color:</source>
         <translation>Цвет текстовой подложки:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="293"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="307"/>
         <source>Keyboard</source>
         <translation>Клавиатура</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="300"/>
+        <location filename="../ui/qml/settings/AppearanceSettings.qml" line="314"/>
         <source>Use key colors based on fingers</source>
         <translation type="unfinished"></translation>
     </message>
@@ -155,32 +161,32 @@
 <context>
     <name>BehaviorSettings</name>
     <message>
-        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="28"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="29"/>
         <source>Exercise validation</source>
         <translation>Проверка выполнения упражнения</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="35"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="37"/>
         <source>Error penalty:</source>
         <translation>Штраф за ошибку:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="47"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="50"/>
         <source>Limit number of mistakes</source>
         <translation>Включить лимит количества ошибок</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="55"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="59"/>
         <source>Number of characters in one word with max. 1 mistake:</source>
         <translation>Количество символов в одном слове с макс. 1 ошибкой:</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="67"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="72"/>
         <source>Updates</source>
         <translation>Обновления</translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="73"/>
+        <location filename="../ui/qml/settings/BehaviorSettings.qml" line="78"/>
         <source>Check for updates on startup</source>
         <translation>Проверять обновления при запуске приложения</translation>
     </message>
@@ -369,36 +375,36 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="87"/>
-        <source>%1 Previous</source>
-        <extracomment>%1 is the left arrow</extracomment>
+        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="89"/>
+        <source>Previous</source>
+        <extracomment>Previous page</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="95"/>
-        <source>Next %1</source>
-        <extracomment>%1 is the right arrow</extracomment>
+        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="98"/>
+        <source>Next</source>
+        <extracomment>Next page</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="102"/>
+        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="110"/>
         <source>Finish</source>
         <extracomment>To finish the initial setup</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="133"/>
+        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="149"/>
         <source>User interface language</source>
         <extracomment>The language for the user interface</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="151"/>
+        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="169"/>
         <source>Keyboard layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="175"/>
+        <location filename="../ui/qml/dialogs/InitialSetup.qml" line="201"/>
         <source>Lesson pack</source>
         <translation>Набор уроков</translation>
     </message>
@@ -411,7 +417,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/settings/KeyboardSettings.qml" line="48"/>
+        <location filename="../ui/qml/settings/KeyboardSettings.qml" line="49"/>
         <source>Lesson pack</source>
         <translation>Набор уроков</translation>
     </message>
@@ -419,12 +425,12 @@
 <context>
     <name>KeyboardView</name>
     <message>
-        <location filename="../ui/qml/KeyboardView.qml" line="419"/>
+        <location filename="../ui/qml/KeyboardView.qml" line="431"/>
         <source>Hide keyboard</source>
         <translation>Скрыть клавиатуру</translation>
     </message>
     <message>
-        <location filename="../ui/qml/KeyboardView.qml" line="419"/>
+        <location filename="../ui/qml/KeyboardView.qml" line="431"/>
         <source>Show keyboard</source>
         <translation>Показать клавиатуру</translation>
     </message>
@@ -440,97 +446,102 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="290"/>
+        <location filename="../ui/qml/MainWindow.qml" line="331"/>
         <source>Options</source>
         <translation>Опции</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="302"/>
+        <location filename="../ui/qml/MainWindow.qml" line="343"/>
         <source>Print</source>
         <translation>Распечатать</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="316"/>
+        <location filename="../ui/qml/MainWindow.qml" line="357"/>
         <source>Typing test</source>
         <translation>Вводимый тест</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="365"/>
+        <location filename="../ui/qml/MainWindow.qml" line="406"/>
         <source>Reverse text</source>
         <translation>Перевернуть текст</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="390"/>
+        <location filename="../ui/qml/MainWindow.qml" line="431"/>
         <source>Repeat exercise</source>
         <translation>Повторить упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="396"/>
+        <location filename="../ui/qml/MainWindow.qml" line="433"/>
+        <source>Start typing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qml/MainWindow.qml" line="438"/>
         <source>Close loaded exercise</source>
         <translation>Закрыть загруженное упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="404"/>
+        <location filename="../ui/qml/MainWindow.qml" line="446"/>
         <source>Previous exercise</source>
         <translation>Предыдущее упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="409"/>
+        <location filename="../ui/qml/MainWindow.qml" line="451"/>
         <source>Next exercise</source>
         <translation>Следующее упражнение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="443"/>
+        <location filename="../ui/qml/MainWindow.qml" line="485"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="480"/>
+        <location filename="../ui/qml/MainWindow.qml" line="522"/>
         <source>Export</source>
         <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="544"/>
+        <location filename="../ui/qml/MainWindow.qml" line="593"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="562"/>
+        <location filename="../ui/qml/MainWindow.qml" line="611"/>
         <source>No error words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="324"/>
+        <location filename="../ui/qml/MainWindow.qml" line="365"/>
         <source>Timed exercise</source>
         <translation>Упражнение на время</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="296"/>
+        <location filename="../ui/qml/MainWindow.qml" line="337"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="330"/>
+        <location filename="../ui/qml/MainWindow.qml" line="371"/>
         <source>Text from error words</source>
         <translation>Текст из слов с ошибками</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="420"/>
+        <location filename="../ui/qml/MainWindow.qml" line="462"/>
         <source>Exercise history</source>
         <translation>История урока</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="545"/>
+        <location filename="../ui/qml/MainWindow.qml" line="594"/>
         <source>This file is too large!</source>
         <translation>Этот файл слишком большой!</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="196"/>
+        <location filename="../ui/qml/MainWindow.qml" line="212"/>
         <source>Text files</source>
         <translation>Текстовые файлы</translation>
     </message>
     <message>
-        <location filename="../ui/qml/MainWindow.qml" line="563"/>
+        <location filename="../ui/qml/MainWindow.qml" line="612"/>
         <source>You don&apos;t have any error words.</source>
         <translation>У Вас нет никаких ошибочных слов.</translation>
     </message>
@@ -700,17 +711,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="64"/>
+        <location filename="../src/main.cpp" line="63"/>
         <source>Version: %1</source>
         <translation>Версия: %1</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="94"/>
+        <location filename="../src/main.cpp" line="93"/>
         <source>Loading addons...</source>
         <translation>Загрузка аддонов...</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="100"/>
+        <location filename="../src/main.cpp" line="99"/>
         <source>Opening main window...</source>
         <translation>Открывается главное окно...</translation>
     </message>
@@ -718,32 +729,32 @@
 <context>
     <name>SettingsDialog</name>
     <message>
-        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="31"/>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="35"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="41"/>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="45"/>
         <source>Language</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="46"/>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="50"/>
         <source>Behavior</source>
         <translation>Поведение</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="51"/>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="55"/>
         <source>Keyboard</source>
         <translation>Клавиатура</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="56"/>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="60"/>
         <source>Appearance</source>
         <translation>Оформление</translation>
     </message>
     <message>
-        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="61"/>
+        <location filename="../ui/qml/dialogs/SettingsDialog.qml" line="65"/>
         <source>Addons</source>
         <translation type="unfinished"></translation>
     </message>

@@ -124,6 +124,11 @@
         <source>Accent color:</source>
         <translation>Akzentfarbe:</translation>
     </message>
+    <message>
+        <source>Accent color %1</source>
+        <extracomment>%1 is the number of current color, for example &quot;Accent color 2&quot;</extracomment>
+        <translation>Akzentfarbe %1</translation>
+    </message>
 </context>
 <context>
     <name>BehaviorSettings</name>
@@ -301,16 +306,6 @@
         <translation>%1 Setup</translation>
     </message>
     <message>
-        <source>%1 Previous</source>
-        <extracomment>%1 is the left arrow</extracomment>
-        <translation>%1 Früher</translation>
-    </message>
-    <message>
-        <source>Next %1</source>
-        <extracomment>%1 is the right arrow</extracomment>
-        <translation>Nächste %1</translation>
-    </message>
-    <message>
         <source>Finish</source>
         <extracomment>To finish the initial setup</extracomment>
         <translation>Beenden</translation>
@@ -327,6 +322,16 @@
     <message>
         <source>Lesson pack</source>
         <translation>Lektion Paket</translation>
+    </message>
+    <message>
+        <source>Previous</source>
+        <extracomment>Previous page</extracomment>
+        <translation>Früher</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <extracomment>Next page</extracomment>
+        <translation>Nächste</translation>
     </message>
 </context>
 <context>
@@ -435,6 +440,10 @@
     <message>
         <source>Export</source>
         <translation>Exportieren</translation>
+    </message>
+    <message>
+        <source>Start typing</source>
+        <translation>Anfangen zu tippen</translation>
     </message>
 </context>
 <context>
