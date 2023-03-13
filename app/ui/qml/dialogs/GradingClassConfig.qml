@@ -43,7 +43,7 @@ CustomDialog {
 				readonly property Class currentClass: ClassManager.classes[listView.currentIndex]
 
 				Label {
-					text: qsTr("Choose a class")
+					text: windowTitle
 					font.pointSize: 12
 					font.bold: true
 				}
