@@ -1359,12 +1359,16 @@ ApplicationWindow {
 			oldX = (screen.width - oldWidth) / 2;
 			oldY = (screen.height - oldHeight) / 2;
 		}
-		if(!wasMaximized)
+		showNormal();
+		x = oldX;
+		y = oldY;
+		width = oldWidth;
+		height = oldHeight;
+		if(Settings.windowMaximized())
 		{
-			x = oldX;
-			y = oldY;
-			width = oldWidth;
-			height = oldHeight;
+			if(QmlUtils.qtVersionMajor() < 6)
+				showFullScreen();
+			showMaximized();
 		}
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.bgBlur = bgBlur;
