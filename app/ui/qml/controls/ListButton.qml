@@ -30,6 +30,7 @@ ItemDelegate {
 	id: control
 	implicitWidth: contentItem.childrenRect.width + 40
 	implicitHeight: contentItem.childrenRect.height + 20
+	highlighted: ListView.isCurrentItem
 
 	Rectangle {
 		id: borderRect
