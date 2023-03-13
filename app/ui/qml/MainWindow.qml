@@ -1226,7 +1226,13 @@ ApplicationWindow {
 		{
 			correctMistakes = true;
 			hideText = false;
-			// TODO: Restore window geometry if full screen
+			if(visibility == ApplicationWindow.FullScreen)
+			{
+				if(wasMaximized)
+					showMaximized();
+				else
+					showNormal();
+			}
 			var args = {
 				"recordedCharacters": recordedCharacters,
 				"inputText": fullInput,
@@ -1295,7 +1301,6 @@ ApplicationWindow {
 			startTimedExercise(time);
 		if(lockUi)
 		{
-			// TODO: Save window geometry
 			showFullScreen();
 			uiLocked = true;
 		}
