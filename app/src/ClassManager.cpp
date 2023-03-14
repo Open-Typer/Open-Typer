@@ -22,6 +22,7 @@
 #include <QJsonObject>
 #include "ClassManager.h"
 #include "FileUtils.h"
+#include "Settings.h"
 
 const QString ClassManager::nameProperty = "name";
 const QString ClassManager::descriptionProperty = "description";
@@ -92,6 +93,25 @@ void ClassManager::setClasses(QList<Class *> newClasses)
 	if(m_classes == newClasses)
 		return;
 	m_classes = newClasses;
+	emit classesChanged();
+}
+
+/*! Creates a new class and adds it to the list of classes. */
+void ClassManager::createNewClass(void)
+{
+	Class *newClass = new Class(this);
+	newClass->setName(tr("Unnamed class"));
+	newClass->setTargetHitsPerMinute(Settings::targetHitsPerMinute());
+	m_classes.append(newClass);
+	write();
+	emit classesChanged();
+}
+
+/*! Removes the given class. */
+void ClassManager::removeClass(Class *classPtr)
+{
+	m_classes.removeAll(classPtr);
+	write();
 	emit classesChanged();
 }
 

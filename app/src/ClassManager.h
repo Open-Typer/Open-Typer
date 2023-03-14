@@ -41,6 +41,9 @@ class ClassManager : public QObject
 		QQmlListProperty<Class> classes(void);
 		void setClasses(QList<Class *> newClasses);
 
+		Q_INVOKABLE void createNewClass(void);
+		Q_INVOKABLE void removeClass(Class *classPtr);
+
 	signals:
 		void classesChanged();
 
