@@ -42,10 +42,34 @@ CustomDialog {
 			ColumnLayout {
 				readonly property Class currentClass: ClassManager.classes[listView.currentIndex]
 
-				Label {
-					text: windowTitle
-					font.pointSize: 12
-					font.bold: true
+				RowLayout {
+					Label {
+						Layout.fillWidth: true
+						text: windowTitle
+						font.pointSize: 12
+						font.bold: true
+					}
+
+					CustomToolButton {
+						id: editButton
+						icon.name: "edit"
+						toolTipText: qsTr("Edit")
+						visible: listView.currentIndex != -1
+						onClicked: stackView.push(configComponent)
+					}
+
+					CustomToolButton {
+						icon.name: "delete"
+						toolTipText: qsTr("Remove")
+						visible: listView.currentIndex != -1
+						onClicked: ClassManager.removeClass(currentClass)
+					}
+
+					CustomToolButton {
+						icon.name: "add"
+						text: qsTr("Add class")
+						onClicked: ClassManager.createNewClass()
+					}
 				}
 
 				ListView {
@@ -54,12 +78,14 @@ CustomDialog {
 					Layout.fillHeight: true
 					spacing: 15
 					model: ClassManager.classes
+					currentIndex: -1
 					clip: true
 					delegate: ListButton {
 						width: listView.width
 						title: model.name
 						text: model.description
-						onClicked: stackView.push(configComponent)
+						onClicked: listView.currentIndex = index;
+						onDoubleClicked: editButton.clicked()
 					}
 				}
 			}
