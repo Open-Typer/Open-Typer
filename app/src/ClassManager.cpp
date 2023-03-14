@@ -102,6 +102,7 @@ void ClassManager::createNewClass(void)
 	Class *newClass = new Class(this);
 	newClass->setName(tr("Unnamed class"));
 	newClass->setTargetHitsPerMinute(Settings::targetHitsPerMinute());
+	connect(newClass, &Class::modified, this, &ClassManager::write);
 	m_classes.append(newClass);
 	write();
 	emit classesChanged();
