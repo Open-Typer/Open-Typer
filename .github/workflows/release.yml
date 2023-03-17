@@ -18,7 +18,7 @@ jobs:
             qt-target: 'desktop'
             mingw-version: 81
           - os: macos-latest
-            qt-version: '6.4.2'
+            qt-version: '6.4.3'
             qt-target: 'desktop'
     steps:
     - uses: actions/checkout@v3
@@ -187,7 +187,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        qt-version: ['6.4.2']
+        qt-version: ['6.4.3']
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v3
