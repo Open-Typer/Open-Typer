@@ -86,3 +86,16 @@ void Class::setGradeConfig(const QMap<int, int> &newGradeConfig)
 	m_gradeConfig = newGradeConfig;
 	emit gradeConfigChanged();
 }
+
+/*! Returns target hits pre minute for the given month. */
+int Class::targetHitsForMonth(int month)
+{
+	return m_gradeConfig[month];
+}
+
+/*! Sets target hits per minute for the given month. */
+void Class::setTargetHitsForMonth(int month, int targetHits)
+{
+	m_gradeConfig[month] = targetHits;
+	emit gradeConfigChanged();
+}

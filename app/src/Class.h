@@ -52,6 +52,9 @@ class Class : public QObject
 		const QMap<int, int> &gradeConfig(void) const;
 		void setGradeConfig(const QMap<int, int> &newGradeConfig);
 
+		Q_INVOKABLE int targetHitsForMonth(int month);
+		Q_INVOKABLE void setTargetHitsForMonth(int month, int targetHits);
+
 	private:
 		QString m_name;
 		QString m_description;
