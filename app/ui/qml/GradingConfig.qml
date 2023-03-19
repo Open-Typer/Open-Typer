@@ -26,7 +26,7 @@ import OpenTyper 1.0
 
 ColumnLayout {
 	property Class currentClass: null
-	readonly property var locale: Qt.locale()
+	readonly property var locale: Qt.locale(LanguageManager.languageStr)
 
 	RowLayout {
 		id: nameLayout
