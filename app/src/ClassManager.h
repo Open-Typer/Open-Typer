@@ -35,21 +35,26 @@ class ClassManager : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QQmlListProperty<Class> classes READ classes NOTIFY classesChanged)
+		Q_PROPERTY(QStringList classNames READ classNames NOTIFY classNamesChanged)
 	public:
 		ClassManager(QObject *parent = nullptr);
 
 		QQmlListProperty<Class> classes(void);
 		void setClasses(QList<Class *> newClasses);
 
+		QStringList classNames(void);
+
 		Q_INVOKABLE void createNewClass(void);
 		Q_INVOKABLE void removeClass(Class *classPtr);
 
 	signals:
 		void classesChanged();
+		void classNamesChanged();
 
 	private:
 		void write(void);
 		QList<Class *> m_classes;
+		QStringList m_classNames;
 		QJsonDocument doc;
 
 		static const QString nameProperty;

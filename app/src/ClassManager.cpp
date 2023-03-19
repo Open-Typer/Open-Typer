@@ -74,6 +74,7 @@ ClassManager::ClassManager(QObject *parent) :
 		connect(currentClass, &Class::modified, this, &ClassManager::write);
 		m_classes.append(currentClass);
 	}
+	connect(this, &ClassManager::classesChanged, this, &ClassManager::classNamesChanged);
 	emit classesChanged();
 }
 
@@ -143,4 +144,13 @@ void ClassManager::write(void)
 	Q_ASSERT(ret);
 	if(ret)
 		file.write(doc.toJson(QJsonDocument::Compact));
+}
+
+/*! List of class names. */
+QStringList ClassManager::classNames(void)
+{
+	QStringList out;
+	for(int i = 0; i < m_classes.length(); i++)
+		out.append(m_classes[i]->name());
+	return out;
 }
