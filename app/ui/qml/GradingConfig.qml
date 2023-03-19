@@ -26,6 +26,7 @@ import OpenTyper 1.0
 
 ColumnLayout {
 	property Class currentClass: null
+	readonly property var locale: Qt.locale()
 
 	RowLayout {
 		id: nameLayout
@@ -80,6 +81,7 @@ ColumnLayout {
 	}
 
 	SpinBox {
+		id: targetHitsBox
 		from: 25
 		to: 750
 		value: currentClass == null ? Settings.targetHitsPerMinute() : currentClass.targetHitsPerMinute
@@ -109,5 +111,67 @@ ColumnLayout {
 			text: qsTr("Gross hits")
 			checked: !Settings.gradeNetHits()
 		}
+	}
+
+	MenuSeparator { Layout.fillWidth: true; visible: currentClass != null }
+
+	Label {
+		text: qsTr("Grading based on months")
+		font.pointSize: 12
+		font.bold: true
+		visible: currentClass != null
+	}
+
+	Component {
+		id: monthConfig
+
+		GridLayout {
+			columns: 3
+
+			Repeater {
+				model: 12
+
+				Frame {
+					Layout.fillWidth: true
+					background: Rectangle {
+						color: "transparent"
+						border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+						radius: 10
+					}
+
+					RowLayout {
+						anchors.fill: parent
+
+						Label {
+							Layout.fillWidth: true
+							text: locale.standaloneMonthName(index, Locale.LongFormat)
+						}
+
+						SpinBox {
+							value: {
+								let targetHits = currentClass.targetHitsForMonth(index + 1);
+								currentClass.gradeConfig;
+								if(targetHits === 0)
+									return targetHitsBox.value;
+								else
+									return targetHits;
+							}
+							from: targetHitsBox.from
+							to: targetHitsBox.to
+							editable: true
+							up.indicator: null
+							down.indicator: null
+							implicitWidth: 66
+							onValueModified: currentClass.setTargetHitsForMonth(index + 1, value);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	Loader {
+		sourceComponent: monthConfig
+		active: currentClass != null
 	}
 }
