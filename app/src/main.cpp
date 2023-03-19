@@ -163,6 +163,7 @@ int main(int argc, char *argv[])
 #endif
 	qRegisterMetaType<QList<MistakeRecord>>();
 	qRegisterMetaType<QList<AddonButton *>>();
+	qRegisterMetaType<QMap<int, int>>();
 	qRegisterMetaType<CharacterRecord>();
 	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<Key>();
