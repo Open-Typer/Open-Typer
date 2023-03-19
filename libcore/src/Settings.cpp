@@ -613,44 +613,44 @@ void Settings::setKeyboardFingerColors(bool value) { set("theme/keyboardfingerco
 
 // targetHitsPerMinute
 
-/*! Getter for main/targethits. \since Open-Typer 5.1.0 */
-int Settings::targetHitsPerMinute(void) { return get("main/targethits", 130).toInt(); }
+/*! Getter for grading/targethits. \since Open-Typer 5.1.0 */
+int Settings::targetHitsPerMinute(void) { return get("grading/targethits", 130).toInt(); }
 
-/*! Returns true if there's a main/targethits key. \since Open-Typer 5.1.0 */
-bool Settings::containsTargetHitsPerMinute(void) { return contains("main/targethits"); }
+/*! Returns true if there's a grading/targethits key. \since Open-Typer 5.1.0 */
+bool Settings::containsTargetHitsPerMinute(void) { return contains("grading/targethits"); }
 
-/*! Setter for main/targethits. \since Open-Typer 5.1.0 */
-void Settings::setTargetHitsPerMinute(int value) { set("main/targethits", value); }
+/*! Setter for grading/targethits. \since Open-Typer 5.1.0 */
+void Settings::setTargetHitsPerMinute(int value) { set("grading/targethits", value); }
 
 // gradeNetHits
 
-/*! Getter for main/gradenethits. \since Open-Typer 5.1.0 */
-bool Settings::gradeNetHits(void) { return get("main/gradenethits", true).toBool(); }
+/*! Getter for grading/gradenethits. \since Open-Typer 5.1.0 */
+bool Settings::gradeNetHits(void) { return get("grading/gradenethits", true).toBool(); }
 
-/*! Returns true if there's a main/gradenethits key. \since Open-Typer 5.1.0 */
-bool Settings::containsGradeNetHits(void) { return contains("main/gradenethits"); }
+/*! Returns true if there's a grading/gradenethits key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeNetHits(void) { return contains("grading/gradenethits"); }
 
-/*! Setter for main/gradenethits. \since Open-Typer 5.1.0 */
-void Settings::setGradeNetHits(bool value) { set("main/gradenethits", value); }
+/*! Setter for grading/gradenethits. \since Open-Typer 5.1.0 */
+void Settings::setGradeNetHits(bool value) { set("grading/gradenethits", value); }
 
 // selectedClass
 
-/*! Getter for main/class. \since Open-Typer 5.1.0 */
-int Settings::selectedClass(void) { return get("main/class", -1).toInt(); }
+/*! Getter for grading/class. \since Open-Typer 5.1.0 */
+int Settings::selectedClass(void) { return get("grading/class", -1).toInt(); }
 
-/*! Returns true if there's a main/class key. \since Open-Typer 5.1.0 */
-bool Settings::containsSelectedClass(void) { return contains("main/class"); }
+/*! Returns true if there's a grading/class key. \since Open-Typer 5.1.0 */
+bool Settings::containsSelectedClass(void) { return contains("grading/class"); }
 
-/*! Setter for main/targethits. \since Open-Typer 5.1.0 */
-void Settings::setSelectedClass(int value) { set("main/class", value); }
+/*! Setter for grading/targethits. \since Open-Typer 5.1.0 */
+void Settings::setSelectedClass(int value) { set("grading/class", value); }
 
 // gradingMethod
 
-/*! Getter for main/gradingmethod. \since Open-Typer 5.1.0 */
-QString Settings::gradingMethod(void) { return get("main/gradingmethod", "numbers").toString(); }
+/*! Getter for grading/gradingmethod. \since Open-Typer 5.1.0 */
+QString Settings::gradingMethod(void) { return get("grading/gradingmethod", "numbers").toString(); }
 
-/*! Returns true if there's a main/gradingmethod key. \since Open-Typer 5.1.0 */
-bool Settings::containsGradingMethod(void) { return contains("main/gradingmethod"); }
+/*! Returns true if there's a grading/gradingmethod key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradingMethod(void) { return contains("grading/gradingmethod"); }
 
-/*! Setter for main/gradingmethod. \since Open-Typer 5.1.0 */
-void Settings::setGradingMethod(QString value) { set("main/gradingmethod", value); }
+/*! Setter for grading/gradingmethod. \since Open-Typer 5.1.0 */
+void Settings::setGradingMethod(QString value) { set("grading/gradingmethod", value); }
