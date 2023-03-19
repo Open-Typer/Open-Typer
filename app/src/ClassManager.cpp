@@ -62,14 +62,13 @@ ClassManager::ClassManager(QObject *parent) :
 		currentClass->setDescription(obj[descriptionProperty].toString());
 		currentClass->setTargetHitsPerMinute(obj[targetHitsProperty].toInt());
 
-		QMap<int, int> gradingConfigMap;
 		Q_ASSERT(obj[gradingProperty].isObject());
 		QJsonObject gradingConfig = obj[gradingProperty].toObject();
 		QStringList keys = gradingConfig.keys();
 		for(int j = 0; j < keys.length(); j++)
 		{
 			QString key = keys[j];
-			gradingConfigMap.insert(key.toInt(), gradingConfig[key].toInt());
+			currentClass->setTargetHitsForMonth(key.toInt(), gradingConfig[key].toInt());
 		}
 
 		connect(currentClass, &Class::modified, this, &ClassManager::write);
