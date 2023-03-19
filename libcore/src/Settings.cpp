@@ -611,6 +611,8 @@ bool Settings::containsKeyboardFingerColors(void) { return contains("theme/keybo
 /*! Setter for theme/keyboardfingercolors. */
 void Settings::setKeyboardFingerColors(bool value) { set("theme/keyboardfingercolors", value); }
 
+// targetHitsPerMinute
+
 /*! Getter for main/targethits. \since Open-Typer 5.1.0 */
 int Settings::targetHitsPerMinute(void) { return get("main/targethits", 130).toInt(); }
 
