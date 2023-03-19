@@ -79,14 +79,6 @@ const QMap<int, int> &Class::gradeConfig(void) const
 	return m_gradeConfig;
 }
 
-void Class::setGradeConfig(const QMap<int, int> &newGradeConfig)
-{
-	if(m_gradeConfig == newGradeConfig)
-		return;
-	m_gradeConfig = newGradeConfig;
-	emit gradeConfigChanged();
-}
-
 /*! Returns target hits pre minute for the given month. */
 int Class::targetHitsForMonth(int month)
 {

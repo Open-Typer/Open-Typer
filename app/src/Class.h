@@ -35,7 +35,7 @@ class Class : public QObject
 		Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 		Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 		Q_PROPERTY(int targetHitsPerMinute READ targetHitsPerMinute WRITE setTargetHitsPerMinute NOTIFY targetHitsPerMinuteChanged)
-		Q_PROPERTY(QMap<int, int> gradeConfig READ gradeConfig WRITE setGradeConfig NOTIFY gradeConfigChanged)
+		Q_PROPERTY(QMap<int, int> gradeConfig READ gradeConfig NOTIFY gradeConfigChanged)
 
 	public:
 		Class(QObject *parent = nullptr);
@@ -50,7 +50,6 @@ class Class : public QObject
 		void setTargetHitsPerMinute(int newTargetHitsPerMinute);
 
 		const QMap<int, int> &gradeConfig(void) const;
-		void setGradeConfig(const QMap<int, int> &newGradeConfig);
 
 		Q_INVOKABLE int targetHitsForMonth(int month);
 		Q_INVOKABLE void setTargetHitsForMonth(int month, int targetHits);
