@@ -52,20 +52,27 @@ extern QTranslator *translator_qt;
 class CORE_LIB_EXPORT LanguageManager : public QObject
 {
 		Q_OBJECT
+		Q_PROPERTY(QString languageStr READ languageStr NOTIFY languageStrChanged)
 		using LanguageCountry = std::pair<QLocale::Language, QLocale::Country>;
 
 	public:
+		LanguageManager(QObject *parent = nullptr);
 		void init(void);
 		Q_INVOKABLE void setLanguage(int index);
 		Q_INVOKABLE QStringList getBoxItems();
+		QLocale getLocale(int index);
+
+		QString languageStr(void);
 
 	private:
 		static const QList<LanguageCountry> supportedLanguagesList;
 		static const QString boxLangItemTemplate;
 		bool initComplete = false;
+		int m_index = -1;
 
 	signals:
 		void languageChanged(void);
+		void languageStrChanged();
 };
 
 extern LanguageManager CORE_LIB_EXPORT globalLanguageManager;

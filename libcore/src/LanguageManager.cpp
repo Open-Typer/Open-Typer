@@ -27,6 +27,13 @@ QTranslator *translator_libcore = nullptr;
 QTranslator *translator_qt = nullptr;
 LanguageManager globalLanguageManager;
 
+/*! Constructs LanguageManager. */
+LanguageManager::LanguageManager(QObject *parent) :
+	QObject(parent)
+{
+	connect(this, &LanguageManager::languageChanged, this, &LanguageManager::languageStrChanged);
+}
+
 /*! Initializes the language manager. */
 void LanguageManager::init(void)
 {
@@ -38,14 +45,7 @@ void LanguageManager::init(void)
 /*! Changes the application language. */
 void LanguageManager::setLanguage(int index)
 {
-	QLocale targetLocale;
-	if(index < 0)
-		targetLocale = QLocale::system();
-	else
-	{
-		const auto [lang, country] = supportedLanguagesList.at(index);
-		targetLocale = QLocale(lang, country);
-	}
+	QLocale targetLocale = getLocale(index);
 	if(!translator_app)
 	{
 		translator_app = new QTranslator(qApp);
@@ -61,6 +61,7 @@ void LanguageManager::setLanguage(int index)
 		translator_qt = new QTranslator(qApp);
 		QCoreApplication::installTranslator(translator_qt);
 	}
+	m_index = index;
 	std::ignore = translator_app->load(targetLocale, "Open-Typer", "_", ":/res/lang");
 	std::ignore = translator_libcore->load(targetLocale, "libcore", "_", ":/res/lang");
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -82,6 +83,18 @@ QStringList LanguageManager::getBoxItems()
 	return boxItems;
 }
 
+/*! Returns the locale at the given index in list of languages. \since Open-Typer 5.1.0 */
+QLocale LanguageManager::getLocale(int index)
+{
+	if(index < 0)
+		return QLocale::system();
+	else
+	{
+		const auto [lang, country] = supportedLanguagesList.at(index);
+		return QLocale(lang, country);
+	}
+}
+
 const QString LanguageManager::boxLangItemTemplate = QString("%1 (%2)");
 
 const QList<LanguageManager::LanguageCountry> LanguageManager::supportedLanguagesList = {
@@ -90,3 +103,9 @@ const QList<LanguageManager::LanguageCountry> LanguageManager::supportedLanguage
 	{ QLocale::Slovak, QLocale::Slovakia },
 	{ QLocale::Russian, QLocale::Russia },
 };
+
+/*! The string representation of current locale. \since Open-Typer 5.1.0 */
+QString LanguageManager::languageStr(void)
+{
+	return getLocale(m_index).name();
+}
