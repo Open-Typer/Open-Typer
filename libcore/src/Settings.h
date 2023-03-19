@@ -79,6 +79,7 @@
  *  - Settings#keyboardFingerColors() - If true, the keys on the screen keyboard use a different color for fingers.
  *  - Settings#targetHitsPerMinute() - Number of hits per minute for the best grade.
  *  - Settings#gradeNetHits() - Whether to use net hits per minute for grading.
+ *  - Settings#selectedClass() - Index of selected class.
  */
 class CORE_LIB_EXPORT Settings : public QObject
 {
@@ -233,6 +234,10 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static bool gradeNetHits(void);
 		Q_INVOKABLE static bool containsGradeNetHits(void);
 		Q_INVOKABLE static void setGradeNetHits(bool value);
+		// selectedClass
+		Q_INVOKABLE static int selectedClass(void);
+		Q_INVOKABLE static bool containsSelectedClass(void);
+		Q_INVOKABLE static void setSelectedClass(int value);
 
 	protected:
 		static QVariant get(QString key, QVariant defaultValue);

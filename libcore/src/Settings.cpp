@@ -632,3 +632,14 @@ bool Settings::containsGradeNetHits(void) { return contains("main/gradenethits")
 
 /*! Setter for main/gradenethits. \since Open-Typer 5.1.0 */
 void Settings::setGradeNetHits(bool value) { set("main/gradenethits", value); }
+
+// selectedClass
+
+/*! Getter for main/class. \since Open-Typer 5.1.0 */
+int Settings::selectedClass(void) { return get("main/class", -1).toInt(); }
+
+/*! Returns true if there's a main/class key. \since Open-Typer 5.1.0 */
+bool Settings::containsSelectedClass(void) { return contains("main/class"); }
+
+/*! Setter for main/targethits. \since Open-Typer 5.1.0 */
+void Settings::setSelectedClass(int value) { set("main/class", value); }
