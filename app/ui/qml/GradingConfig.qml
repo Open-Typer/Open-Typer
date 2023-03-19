@@ -1,5 +1,5 @@
 /*
- * GradeConfig.qml
+ * GradingConfig.qml
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
