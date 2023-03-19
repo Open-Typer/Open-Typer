@@ -23,6 +23,7 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
 import QtQuick.Layouts 1.12
 import OpenTyper 1.0
+import "controls"
 
 ColumnLayout {
 	property Class currentClass: null
@@ -163,6 +164,18 @@ ColumnLayout {
 							down.indicator: null
 							implicitWidth: 66
 							onValueModified: currentClass.setTargetHitsForMonth(index + 1, value);
+						}
+
+						CustomToolButton {
+							icon.name: "repeat"
+							visible: {
+								let targetHits = currentClass.targetHitsForMonth(index + 1);
+								currentClass.gradeConfig;
+								return (targetHits !== 0);
+							}
+							//: To reset a value
+							toolTipText: qsTr("Reset")
+							onClicked: currentClass.setTargetHitsForMonth(index + 1, 0)
 						}
 					}
 				}
