@@ -80,6 +80,7 @@
  *  - Settings#targetHitsPerMinute() - Number of hits per minute for the best grade.
  *  - Settings#gradeNetHits() - Whether to use net hits per minute for grading.
  *  - Settings#selectedClass() - Index of selected class.
+ *  - Settings#gradingMethod() - The type of grades, for example letters or numbers.
  */
 class CORE_LIB_EXPORT Settings : public QObject
 {
@@ -238,6 +239,10 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static int selectedClass(void);
 		Q_INVOKABLE static bool containsSelectedClass(void);
 		Q_INVOKABLE static void setSelectedClass(int value);
+		// gradingMethod
+		Q_INVOKABLE static QString gradingMethod(void);
+		Q_INVOKABLE static bool containsGradingMethod(void);
+		Q_INVOKABLE static void setGradingMethod(QString value);
 
 	protected:
 		static QVariant get(QString key, QVariant defaultValue);

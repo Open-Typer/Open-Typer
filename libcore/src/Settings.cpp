@@ -643,3 +643,14 @@ bool Settings::containsSelectedClass(void) { return contains("main/class"); }
 
 /*! Setter for main/targethits. \since Open-Typer 5.1.0 */
 void Settings::setSelectedClass(int value) { set("main/class", value); }
+
+// gradingMethod
+
+/*! Getter for main/gradingmethod. \since Open-Typer 5.1.0 */
+QString Settings::gradingMethod(void) { return get("main/gradingmethod", "numbers").toString(); }
+
+/*! Returns true if there's a main/gradingmethod key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradingMethod(void) { return contains("main/gradingmethod"); }
+
+/*! Setter for main/gradingmethod. \since Open-Typer 5.1.0 */
+void Settings::setGradingMethod(QString value) { set("main/gradingmethod", value); }
