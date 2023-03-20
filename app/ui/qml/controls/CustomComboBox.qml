@@ -46,7 +46,12 @@ ComboBox {
 		radius: 10
 	}
 	popup.implicitWidth: computeWidth(model)
-	popup.height: Math.min(popup.contentItem.implicitHeight, Window.height - popup.topMargin - popup.bottomMargin - mapToItem(Window.contentItem, x, y).y - height * 2)
+	popup.height: {
+		let ret = Math.min(popup.contentItem.implicitHeight, Window.height - popup.topMargin - popup.bottomMargin - mapToItem(Window.contentItem, x, y).y - height * 2);
+		if(ret < 0)
+			ret = popup.contentItem.implicitHeight;
+		return ret;
+	}
 	popup.y: height
 	popup.focus: true
 	popup.contentItem.focus: true
