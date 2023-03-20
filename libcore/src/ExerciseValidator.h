@@ -41,7 +41,12 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		Q_PROPERTY(QList<CharacterRecord> characters READ characters WRITE setCharacters NOTIFY charactersChanged)
 		Q_PROPERTY(bool timed READ timed WRITE setTimed NOTIFY timedChanged)
 		Q_PROPERTY(qreal time READ time WRITE setTime NOTIFY timeChanged)
+		Q_PROPERTY(int targetHitsPerMinute READ targetHitsPerMinute WRITE setTargetHitsPerMinute NOTIFY targetHitsPerMinuteChanged)
+		Q_PROPERTY(bool useNetHitsForGrading READ useNetHitsForGrading WRITE setUseNetHitsForGrading NOTIFY useNetHitsForGradingChanged)
+		Q_PROPERTY(QString gradingMethod READ gradingMethod WRITE setGradingMethod NOTIFY gradingMethodChanged)
+		Q_PROPERTY(QString grade READ grade NOTIFY gradeChanged)
 	public:
+		ExerciseValidator(QObject *parent = nullptr);
 		QString exerciseText(void);
 		void setExerciseText(QString text);
 		QString inputText(void);
@@ -68,8 +73,16 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		Q_INVOKABLE QString generatedInputText(void);
 		Q_INVOKABLE QString generatedMistakeText(void);
 		Q_INVOKABLE QString textWithMistakes(void);
+		int targetHitsPerMinute(void) const;
+		void setTargetHitsPerMinute(int newTargetHitsPerMinute);
+		bool useNetHitsForGrading(void) const;
+		void setUseNetHitsForGrading(bool newUseNetHitsForGrading);
+		const QString &gradingMethod(void) const;
+		void setGradingMethod(const QString &newGradingMethod);
+		const QString &grade(void) const;
 
 	private:
+		void updateGrade(void);
 		QString m_exerciseText;
 		QString m_inputText;
 		QList<MistakeRecord> m_mistakes;
@@ -81,6 +94,10 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		QStringList m_errorWords;
 		QString m_generatedInputText;
 		QString m_generatedMistakeText;
+		int m_targetHitsPerMinute;
+		bool m_useNetHitsForGrading;
+		QString m_gradingMethod;
+		QString m_grade;
 
 	signals:
 		void exerciseTextChanged(QString text);
@@ -89,6 +106,10 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		void charactersChanged(QList<CharacterRecord> characterList);
 		void timedChanged(bool value);
 		void timeChanged(qreal seconds);
+		void targetHitsPerMinuteChanged();
+		void useNetHitsForGradingChanged();
+		void gradingMethodChanged();
+		void gradeChanged();
 };
 
 #endif // EXERCISEVALIDATOR_H
