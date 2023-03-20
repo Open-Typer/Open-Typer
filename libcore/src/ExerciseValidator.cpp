@@ -175,10 +175,10 @@ void ExerciseValidator::generateMistakeText(bool correctMistakes)
 	for(int i = 0; i < lines.count(); i++)
 	{
 		QString addLine = lines[i];
-		inputTxt += QString(" ").repeated(addLine.count()) + "\n";
+		inputTxt += QString(" ").repeated(addLine.length()) + "\n";
 		// Add line with correct characters
 		int oldPos = pos;
-		int count = lines[i].count();
+		int count = lines[i].length();
 		for(int j = 0; j <= count; j++)
 		{
 			QString inputChar;
@@ -190,7 +190,7 @@ void ExerciseValidator::generateMistakeText(bool correctMistakes)
 			{
 				QString correct;
 				if(correctMistakes)
-					correct = m_exerciseText[(pos - delta) % (m_exerciseText.count() - 1)];
+					correct = m_exerciseText[(pos - delta) % (m_exerciseText.length() - 1)];
 				else
 					correct = mistakesMap[pos]->previousText();
 				if(correct == "\n")
@@ -199,7 +199,7 @@ void ExerciseValidator::generateMistakeText(bool correctMistakes)
 				if(type == MistakeRecord::Type_Deletion)
 				{
 					mistakeTxt += correct.split("\n").at(0);
-					inputTxt += QString(" ").repeated(correct.split("\n").at(0).count());
+					inputTxt += QString(" ").repeated(correct.split("\n").at(0).length());
 				}
 				else
 					mistakeTxt += correct;
@@ -231,7 +231,7 @@ void ExerciseValidator::generateMistakeText(bool correctMistakes)
 				if((mistakesMap[pos]->type() == MistakeRecord::Type_Deletion) && correct.contains("\n"))
 					mistakeTxt += "_";
 				else
-					mistakeTxt += QString("_").repeated(std::max(1LL, (long long int) correct.count()));
+					mistakeTxt += QString("_").repeated(std::max(1LL, (long long int) correct.length()));
 			}
 			else if(j < count)
 				mistakeTxt += " ";
