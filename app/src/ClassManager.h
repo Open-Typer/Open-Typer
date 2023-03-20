@@ -46,6 +46,8 @@ class ClassManager : public QObject
 
 		Q_INVOKABLE void createNewClass(void);
 		Q_INVOKABLE void removeClass(Class *classPtr);
+		Q_INVOKABLE static int targetHitsPerMinute(void);
+		Q_INVOKABLE static int targetHitsPerMinute(int selectedClass);
 
 	signals:
 		void classesChanged();

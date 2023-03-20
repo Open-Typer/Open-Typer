@@ -116,6 +116,28 @@ void ClassManager::removeClass(Class *classPtr)
 	emit classesChanged();
 }
 
+/*! Returns target hits per minute based on selected class and current month. */
+int ClassManager::targetHitsPerMinute(void)
+{
+	return targetHitsPerMinute(Settings::selectedClass());
+}
+
+/*! Returns target hits per minute based on the given class and current month. */
+int ClassManager::targetHitsPerMinute(int selectedClass)
+{
+	if(selectedClass == -1)
+		return Settings::targetHitsPerMinute();
+	else
+	{
+		Class *classPtr = globalClassManager.m_classes[selectedClass];
+		int hitsForMonth = classPtr->targetHitsForMonth(QDate::currentDate().month());
+		if(hitsForMonth == 0)
+			return classPtr->targetHitsPerMinute();
+		else
+			return hitsForMonth;
+	}
+}
+
 /*! Writes all classes into the configuration file. */
 void ClassManager::write(void)
 {
