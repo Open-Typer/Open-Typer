@@ -20,6 +20,7 @@
 
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QDate>
 #include "ClassManager.h"
 #include "FileUtils.h"
 #include "Settings.h"
