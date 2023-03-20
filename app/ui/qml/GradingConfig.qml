@@ -28,6 +28,7 @@ import "controls"
 ColumnLayout {
 	property Class currentClass: null
 	readonly property var locale: Qt.locale(LanguageManager.languageStr)
+	readonly property string alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 	RowLayout {
 		id: nameLayout
@@ -87,6 +88,77 @@ ColumnLayout {
 		to: 750
 		value: currentClass == null ? Settings.targetHitsPerMinute() : currentClass.targetHitsPerMinute
 		onValueChanged: currentClass == null ? Settings.setTargetHitsPerMinute(value) : currentClass.targetHitsPerMinute = value
+	}
+
+	RadioButton {
+		id: numbersButton
+		text: qsTr("Use numbers")
+		visible: currentClass == null
+		checked: Settings.gradingMethod() === "numbers"
+		onCheckedChanged: {
+			if(checked)
+				Settings.setGradingMethod("numbers");
+		}
+	}
+
+	RadioButton {
+		id: lettersButton
+		//: Use "characters" would be valid too
+		text: qsTr("Use letters")
+		visible: currentClass == null
+		checked: Settings.gradingMethod() === "letters"
+		onCheckedChanged: {
+			if(checked)
+				Settings.setGradingMethod("letters");
+		}
+	}
+
+	RowLayout {
+		visible: currentClass == null
+
+		Label {
+			text: qsTr("Worst grade:")
+			Layout.alignment: Qt.AlignVCenter
+		}
+
+		SpinBox {
+			visible: numbersButton.checked
+			from: 0
+			to: 100
+			value: Settings.gradeStartNumber()
+			onValueChanged: Settings.setGradeStartNumber(value)
+		}
+
+		CustomComboBox {
+			visible: lettersButton.checked
+			model: alphabet.split("")
+			currentIndex: alphabet.indexOf(Settings.gradeStartLetter())
+			onCurrentTextChanged: Settings.setGradeStartLetter(currentText)
+		}
+	}
+
+	RowLayout {
+		visible: currentClass == null
+
+		Label {
+			text: qsTr("Best grade:")
+			Layout.alignment: Qt.AlignVCenter
+		}
+
+		SpinBox {
+			visible: numbersButton.checked
+			from: 0
+			to: 100
+			value: Settings.gradeEndNumber()
+			onValueChanged: Settings.setGradeEndNumber(value)
+		}
+
+		CustomComboBox {
+			visible: lettersButton.checked
+			model: alphabet.split("")
+			currentIndex: alphabet.indexOf(Settings.gradeEndLetter())
+			onCurrentTextChanged: Settings.setGradeEndLetter(currentText)
+		}
 	}
 
 	MenuSeparator { Layout.fillWidth: true; visible: currentClass == null }
