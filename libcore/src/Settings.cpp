@@ -654,3 +654,47 @@ bool Settings::containsGradingMethod(void) { return contains("grading/gradingmet
 
 /*! Setter for grading/gradingmethod. \since Open-Typer 5.1.0 */
 void Settings::setGradingMethod(QString value) { set("grading/gradingmethod", value); }
+
+// gradeStartNumber
+
+/*! Getter for grading/startnumber. \since Open-Typer 5.1.0 */
+int Settings::gradeStartNumber(void) { return get("grading/startnumber", 5).toInt(); }
+
+/*! Returns true if there's a grading/startnumber key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeStartNumber(void) { return contains("grading/startnumber"); }
+
+/*! Setter for grading/startnumber. \since Open-Typer 5.1.0 */
+void Settings::setGradeStartNumber(int value) { set("grading/startnumber", value); }
+
+// gradeEndNumber
+
+/*! Getter for grading/endnumber. \since Open-Typer 5.1.0 */
+int Settings::gradeEndNumber(void) { return get("grading/endnumber", 1).toInt(); }
+
+/*! Returns true if there's a grading/endnumber key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeEndNumber(void) { return contains("grading/endnumber"); }
+
+/*! Setter for grading/endnumber. \since Open-Typer 5.1.0 */
+void Settings::setGradeEndNumber(int value) { set("grading/endnumber", value); }
+
+// gradeStartLetter
+
+/*! Getter for grading/startletter. \since Open-Typer 5.1.0 */
+QChar Settings::gradeStartLetter(void) { return get("grading/startletter", 'F').toChar(); }
+
+/*! Returns true if there's a grading/startletter key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeStartLetter(void) { return contains("grading/startletter"); }
+
+/*! Setter for grading/startletter. \since Open-Typer 5.1.0 */
+void Settings::setGradeStartLetter(QChar value) { set("grading/startletter", value); }
+
+// gradeEndLetter
+
+/*! Getter for grading/endletter. \since Open-Typer 5.1.0 */
+QChar Settings::gradeEndLetter(void) { return get("grading/endletter", 'A').toChar(); }
+
+/*! Returns true if there's a grading/endletter key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeEndLetter(void) { return contains("grading/endletter"); }
+
+/*! Setter for grading/endletter. \since Open-Typer 5.1.0 */
+void Settings::setGradeEndLetter(QChar value) { set("grading/endletter", value); }

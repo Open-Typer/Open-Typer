@@ -81,6 +81,10 @@
  *  - Settings#gradeNetHits() - Whether to use net hits per minute for grading.
  *  - Settings#selectedClass() - Index of selected class.
  *  - Settings#gradingMethod() - The type of grades, for example letters or numbers.
+ *  - Settings#gradeStartNumber() - The number to start with during grading.
+ *  - Settings#gradeEndNumber() - The number to end with during grading.
+ *  - Settings#gradeStartLetter() - The letter to start with during grading.
+ *  - Settings#gradeEndLetter() - The letter to end with during grading.
  */
 class CORE_LIB_EXPORT Settings : public QObject
 {
@@ -243,6 +247,22 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static QString gradingMethod(void);
 		Q_INVOKABLE static bool containsGradingMethod(void);
 		Q_INVOKABLE static void setGradingMethod(QString value);
+		// gradeStartNumber
+		Q_INVOKABLE static int gradeStartNumber(void);
+		Q_INVOKABLE static bool containsGradeStartNumber(void);
+		Q_INVOKABLE static void setGradeStartNumber(int value);
+		// gradeEndNumber
+		Q_INVOKABLE static int gradeEndNumber(void);
+		Q_INVOKABLE static bool containsGradeEndNumber(void);
+		Q_INVOKABLE static void setGradeEndNumber(int value);
+		// gradeStartLetter
+		Q_INVOKABLE static QChar gradeStartLetter(void);
+		Q_INVOKABLE static bool containsGradeStartLetter(void);
+		Q_INVOKABLE static void setGradeStartLetter(QChar value);
+		// gradeEndLetter
+		Q_INVOKABLE static QChar gradeEndLetter(void);
+		Q_INVOKABLE static bool containsGradeEndLetter(void);
+		Q_INVOKABLE static void setGradeEndLetter(QChar value);
 
 	protected:
 		static QVariant get(QString key, QVariant defaultValue);
