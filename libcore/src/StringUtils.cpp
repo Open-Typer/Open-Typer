@@ -626,7 +626,7 @@ QString StringUtils::addMistakes(QString exerciseText, QList<MistakeRecord *> re
 			MistakeRecord *currentMistake = recordedMistakes.at(mistakesMap[i]);
 			out += currentMistake->previousText();
 			currentMistake->setPosition(currentMistake->position() + delta);
-			if(exerciseText[i] == '\n')
+			if((i < exerciseText.length()) && (exerciseText[i] == '\n'))
 			{
 				out += "\n";
 				delta++;
