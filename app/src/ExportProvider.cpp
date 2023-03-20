@@ -50,8 +50,8 @@ void ExportProvider::setValidator(ExerciseValidator *validator)
 	int longestLineLength = 0;
 	for(int i = 0; i < lines.count(); i++)
 	{
-		if(lines[i].count() > longestLineLength)
-			longestLineLength = lines[i].count();
+		if(lines[i].length() > longestLineLength)
+			longestLineLength = lines[i].length();
 	}
 	QMap<int, MistakeRecord *> mistakesMap;
 	for(int i = 0; i < mistakes.length(); i++)
@@ -61,10 +61,10 @@ void ExportProvider::setValidator(ExerciseValidator *validator)
 	{
 		QString line = lines[i];
 		int lineMistakes = 0;
-		for(int i2 = 0; i2 <= line.count(); i2++)
+		for(int i2 = 0; i2 <= line.length(); i2++)
 		{
 			QString append;
-			if(i2 < line.count())
+			if(i2 < line.length())
 				append = QString(line[i2]).toHtmlEscaped().replace(" ", "&nbsp;");
 			else
 				append = "";
@@ -81,7 +81,7 @@ void ExportProvider::setValidator(ExerciseValidator *validator)
 				finalText += append;
 			pos++;
 		}
-		finalText += QString("&nbsp;").repeated(longestLineLength - line.count() + 4) + QString("/").repeated(lineMistakes);
+		finalText += QString("&nbsp;").repeated(longestLineLength - line.length() + 4) + QString("/").repeated(lineMistakes);
 		finalText += "<br>";
 	}
 	m_exportText = finalText;

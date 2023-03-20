@@ -2,7 +2,7 @@
  * PackEditor.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -298,7 +298,7 @@ void PackEditor::refreshUi(bool newLesson, bool newSublesson, bool newExercise)
 		// Lesson description
 		QString lessonDesc = "";
 		QString rawLessonDesc = parser.lessonDesc(oldLesson + 1);
-		for(i = 0; i < rawLessonDesc.count(); i++)
+		for(i = 0; i < rawLessonDesc.length(); i++)
 		{
 			if((rawLessonDesc[i] == '%') && (rawLessonDesc[i + 1] == 'b'))
 			{
@@ -457,7 +457,7 @@ void PackEditor::deleteExerciseLine(int lesson, int sublesson, int level)
 void PackEditor::changeLessonDesc(const QString rawLessonDesc)
 {
 	QString lessonDesc = "";
-	for(int i = 0; i < rawLessonDesc.count(); i++)
+	for(int i = 0; i < rawLessonDesc.length(); i++)
 	{
 		if((rawLessonDesc[i] == ',') || (rawLessonDesc[i] == ';') || (rawLessonDesc[i] == '\\'))
 			lessonDesc += "\\";
@@ -517,7 +517,7 @@ void PackEditor::updateText(void)
 	deleteExerciseLine(lesson, sublesson, level);
 	QString sourceText = ui->levelTextEdit->toPlainText();
 	QString targetText = "";
-	for(int i = 0; i < sourceText.count(); i++)
+	for(int i = 0; i < sourceText.length(); i++)
 	{
 		if(sourceText[i] == '\n')
 			targetText += " ";
@@ -550,7 +550,7 @@ void PackEditor::restoreText(void)
 	QString textLengthStr = tr("Text length:") + " ";
 	if(skipTextRefresh)
 	{
-		ui->textLengthLabel->setText(textLengthStr + QString::number(ui->levelTextEdit->toPlainText().count()));
+		ui->textLengthLabel->setText(textLengthStr + QString::number(ui->levelTextEdit->toPlainText().length()));
 		return;
 	}
 	skipTextUpdates = true;
@@ -559,7 +559,7 @@ void PackEditor::restoreText(void)
 		ui->sublessonSelectionBox->currentIndex() + 1,
 		ui->exerciseSelectionBox->currentIndex() + 1));
 	skipTextUpdates = false;
-	ui->textLengthLabel->setText(textLengthStr + QString::number(ui->levelTextEdit->toPlainText().count()));
+	ui->textLengthLabel->setText(textLengthStr + QString::number(ui->levelTextEdit->toPlainText().length()));
 }
 
 /*!

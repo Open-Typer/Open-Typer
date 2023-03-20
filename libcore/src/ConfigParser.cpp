@@ -253,7 +253,7 @@ QString ConfigParser::parseDesc(QString desc)
 	QString out = "";
 	int i;
 	bool bracket = false;
-	for(i = 0; i < desc.count(); i++)
+	for(i = 0; i < desc.length(); i++)
 	{
 		if(desc[i] == '%')
 		{
@@ -375,7 +375,7 @@ QString ConfigParser::initExercise(QString exercise, int lineLength)
 {
 	int len, len2, i, line_pos = 0;
 	QString out = "";
-	len = exercise.count();
+	len = exercise.length();
 	QString word = "";
 	bool first_word = true;
 	for(i = 0; i < len; i++)
@@ -384,7 +384,7 @@ QString ConfigParser::initExercise(QString exercise, int lineLength)
 		{
 			if(i + 1 >= len)
 				word += exercise[i];
-			len2 = word.count();
+			len2 = word.length();
 			if(line_pos + len2 > lineLength)
 			{
 				out += '\n';
@@ -423,7 +423,7 @@ QString ConfigParser::initExercise(QString exercise, int lineLength, bool lineCo
 	QString text = initExercise(exercise, lineLength);
 	QString out = "";
 	int i, line = 0;
-	for(i = 0; i < text.count(); i++)
+	for(i = 0; i < text.length(); i++)
 	{
 		if(text[i] == '\n')
 		{
@@ -453,12 +453,12 @@ bool ConfigParser::exerciseRepeatBool(const QString config)
 {
 	QString out = "";
 	int i;
-	for(i = 0; i < config.count(); i++)
+	for(i = 0; i < config.length(); i++)
 	{
 		if(config[i] == '\\')
 		{
 			i++;
-			if(i < config.count())
+			if(i < config.length())
 				out += config[i];
 		}
 		else if(config[i] == ',')
@@ -475,12 +475,12 @@ QString ConfigParser::exerciseRepeatType(const QString config)
 	QString out = "";
 	bool repeatTypeReached = false;
 	int i;
-	for(i = 0; i < config.count(); i++)
+	for(i = 0; i < config.length(); i++)
 	{
 		if(config[i] == '\\')
 		{
 			i++;
-			if(i < config.count())
+			if(i < config.length())
 				out += config[i];
 		}
 		else if(config[i] == ',')
@@ -500,12 +500,12 @@ QString ConfigParser::exerciseRepeatConfig(const QString line)
 	QString out = "";
 	bool repeatConfigReached = false;
 	int i;
-	for(i = 0; i < line.count(); i++)
+	for(i = 0; i < line.length(); i++)
 	{
 		if(line[i] == '\\')
 		{
 			i++;
-			if(i < line.count())
+			if(i < line.length())
 				out += line[i];
 		}
 		else if(line[i] == ':')
@@ -526,12 +526,12 @@ QString ConfigParser::exerciseAttribute(const QString config, const int id)
 {
 	QString out = "";
 	int i, currentID = 0;
-	for(i = 0; i < config.count(); i++)
+	for(i = 0; i < config.length(); i++)
 	{
 		if(config[i] == '\\')
 		{
 			i++;
-			if(i < config.count())
+			if(i < config.length())
 				out += config[i];
 		}
 		else if(config[i] == ',')
@@ -556,12 +556,12 @@ QString ConfigParser::exerciseAttributes(const QString line)
 	QString out = "";
 	bool lengthConfigReached = false;
 	int i;
-	for(i = 0; i < line.count(); i++)
+	for(i = 0; i < line.length(); i++)
 	{
 		if(line[i] == '\\')
 		{
 			i++;
-			if(i < line.count())
+			if(i < line.length())
 				out += '\\' + line[i];
 		}
 		else if(line[i] == ';')
@@ -583,12 +583,12 @@ QString ConfigParser::exerciseRawText(const QString line)
 	QString out = "";
 	bool textReached = false;
 	int i;
-	for(i = 0; i < line.count(); i++)
+	for(i = 0; i < line.length(); i++)
 	{
 		if(line[i] == '\\')
 		{
 			i++;
-			if(i < line.count())
+			if(i < line.length())
 			{
 				if(line[i] == 'n')
 					out += "\\n";
@@ -617,7 +617,7 @@ int ConfigParser::exerciseID(const QString line, const int part)
 {
 	QString out = "";
 	int i, currentPart = 0;
-	for(i = 0; i < line.count(); i++)
+	for(i = 0; i < line.length(); i++)
 	{
 		if(line[i] == '\\')
 		{
@@ -680,9 +680,9 @@ QString ConfigParser::generateText(QString rawText, bool repeat, QString repeatT
 		{
 			QString nextWord = StringUtils::word(rawText, i);
 			int space = 0;
-			if(out.count() > 0)
+			if(out.length() > 0)
 				space = 1; // for space between current text and new word
-			if((out.count() + space + nextWord.count()) <= repeatLimit)
+			if((out.length() + space + nextWord.length()) <= repeatLimit)
 			{
 				if(space != 0)
 					out += ' ';
@@ -698,12 +698,12 @@ QString ConfigParser::generateText(QString rawText, bool repeat, QString repeatT
 	else
 	{
 		QString out = "";
-		for(int i2 = 0; i2 < rawText.count(); i2++)
+		for(int i2 = 0; i2 < rawText.length(); i2++)
 		{
 			if(rawText[i2] == '\\')
 			{
 				i2++;
-				if(i2 < rawText.count())
+				if(i2 < rawText.length())
 				{
 					if(rawText[i2] == 'n')
 						out += '\n';

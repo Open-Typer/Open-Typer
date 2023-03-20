@@ -2,7 +2,7 @@
  * PackSelector.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2022 - adazem009
+ * Copyright (C) 2021-2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ PackSelector::PackSelector(QWidget *parent) :
 	{
 		item = it.next();
 		current = "";
-		for(i = 14; i < item.count(); i++)
+		for(i = 14; i < item.length(); i++)
 			current += item[i];
 		rawItems += current;
 		items += BuiltInPacks::packName(current);

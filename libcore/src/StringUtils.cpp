@@ -24,7 +24,7 @@
 int StringUtils::wordCount(QString str)
 {
 	int i, out = 0;
-	for(i = 0; i < str.count(); i++)
+	for(i = 0; i < str.length(); i++)
 	{
 		if(str[i] == ' ')
 			out++;
@@ -45,12 +45,12 @@ QString StringUtils::word(QString str, int id)
 {
 	int i, cur = 0;
 	QString out = "";
-	for(i = 0; i < str.count(); i++)
+	for(i = 0; i < str.length(); i++)
 	{
-		if((str[i] == ' ') || (i + 1 == str.count()))
+		if((str[i] == ' ') || (i + 1 == str.length()))
 		{
 			cur++;
-			if(i + 1 == str.count())
+			if(i + 1 == str.length())
 				out += str[i];
 			if(cur == id)
 				return out;
@@ -68,11 +68,11 @@ QString StringUtils::wordAt(QString str, int index)
 	if(str[index] == ' ')
 		return "";
 	QString currentWord = "";
-	for(int i = 0; i < str.count(); i++)
+	for(int i = 0; i < str.length(); i++)
 	{
-		if((str[i] == ' ') || (i + 1 >= str.count()))
+		if((str[i] == ' ') || (i + 1 >= str.length()))
 		{
-			if(i + 1 >= str.count())
+			if(i + 1 >= str.length())
 				currentWord += str[i];
 			if(i > index)
 				return currentWord;
@@ -155,9 +155,9 @@ QString StringUtils::longestCommonSubsequence(QString source, QString target)
 {
 	QList<QVariant> sourceList, targetList;
 	int i;
-	for(i = 0; i < source.count(); i++)
+	for(i = 0; i < source.length(); i++)
 		sourceList += QString(source[i]);
-	for(i = 0; i < target.count(); i++)
+	for(i = 0; i < target.length(); i++)
 		targetList += QString(target[i]);
 	QList<QVariant> lcs = longestCommonSubsequence(sourceList, targetList);
 	QString out = "";
@@ -276,9 +276,9 @@ QList<MistakeRecord> StringUtils::compareStrings(QString source, QString target,
 {
 	QList<QVariant> sourceList, targetList;
 	int i;
-	for(i = 0; i < source.count(); i++)
+	for(i = 0; i < source.length(); i++)
 		sourceList += QString(source[i]);
-	for(i = 0; i < target.count(); i++)
+	for(i = 0; i < target.length(); i++)
 		targetList += QString(target[i]);
 	return compareLists(sourceList, targetList, recordedCharacters, hits, inputPos);
 }
@@ -290,8 +290,8 @@ QStringList StringUtils::splitWordsByPunct(QStringList source)
 	for(int i = 0; i < source.count(); i++)
 	{
 		QString part = "";
-		bool ignore = (source[i].count() > 0);
-		for(int j = 0; j < source[i].count(); j++)
+		bool ignore = (source[i].length() > 0);
+		for(int j = 0; j < source[i].length(); j++)
 		{
 			if(source[i][j].isPunct())
 			{
@@ -302,7 +302,7 @@ QStringList StringUtils::splitWordsByPunct(QStringList source)
 				if(j == 0)
 					out += " ";
 				out += QString(source[i][j]);
-				if(j + 1 == source[i].count())
+				if(j + 1 == source[i].length())
 					out += " ";
 			}
 			else
@@ -455,7 +455,7 @@ QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString inp
 					diff[i2] = currentMistake;
 				}
 				out += diff;
-				pos = wordStart + inputWords[i].count();
+				pos = wordStart + inputWords[i].length();
 			}
 			else if(differences[i].type() == MistakeRecord::Type_Deletion)
 			{
@@ -470,7 +470,7 @@ QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString inp
 						currentMistake.setPreviousText(previous.prepend(" "));
 				}
 				out += currentMistake;
-				pos += inputWords[i].count();
+				pos += inputWords[i].length();
 			}
 			else if(differences[i].type() == MistakeRecord::Type_Addition)
 			{
@@ -498,7 +498,7 @@ QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString inp
 							out += currentMistake;
 						}
 					}
-					if(inputWords[k].count() == 0)
+					if(inputWords[k].length() == 0)
 					{
 						auto currentMistake = differences[k];
 						currentMistake.setPosition(pos);
@@ -508,7 +508,7 @@ QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString inp
 					}
 					else
 					{
-						for(int j = 0; j < inputWords[k].count(); j++)
+						for(int j = 0; j < inputWords[k].length(); j++)
 						{
 							auto currentMistake = differences[k];
 							currentMistake.setPosition(pos);
@@ -527,7 +527,7 @@ QList<MistakeRecord> StringUtils::findMistakes(QString exerciseText, QString inp
 		}
 		else if(inputWords[i] != "\n")
 		{
-			for(int i2 = 0; i2 < inputWords[i].count(); i2++)
+			for(int i2 = 0; i2 < inputWords[i].length(); i2++)
 			{
 				if(pos < recordedCharacters.count())
 					hits += recordedCharacters[pos].hits();
@@ -562,19 +562,19 @@ QList<MistakeRecord> StringUtils::validateExercise(QString exerciseText, QString
 		QMap<int, QList<MistakeRecord>> attempts;
 		QString newText = "";
 		int minValue = -1, minId = -1;
-		if(exerciseText.count() > 0)
+		if(exerciseText.length() > 0)
 		{
 			int pos = 0, count = timeSecs * 10;
 			for(int i = 0; i < count; i++)
 			{
 				newText += exerciseText[pos];
 				pos++;
-				if(pos >= exerciseText.count())
+				if(pos >= exerciseText.length())
 				{
-					newText.remove(newText.count() - 1, 1);
+					newText.remove(newText.length() - 1, 1);
 					pos = 0;
 				}
-				if((i % std::max(exerciseText.count(), inputText.count()) == 0) || (i == exerciseText.count() - 1) || (i + 1 >= count))
+				if((i % std::max(exerciseText.length(), inputText.length()) == 0) || (i == exerciseText.length() - 1) || (i + 1 >= count))
 				{
 					attempts[i] = StringUtils::findMistakes(newText, inputText, recordedCharacters, totalHits, errorWords);
 					if((minValue == -1) || (attempts[i].count() < minValue))
@@ -598,7 +598,7 @@ QList<MistakeRecord> StringUtils::validateExercise(QString exerciseText, QString
 	*mistakeCount = 0;
 	for(int i = 0; i < recordedMistakes.count(); i++)
 	{
-		if(recordedMistakes[i].position() >= inputText.count())
+		if(recordedMistakes[i].position() >= inputText.length())
 			mistakesToRemove += recordedMistakes[i];
 		else
 		{
@@ -619,7 +619,7 @@ QString StringUtils::addMistakes(QString exerciseText, QList<MistakeRecord *> re
 		mistakesMap[recordedMistakes.at(i)->position()] = i;
 	int delta = 0;
 	QString out;
-	for(int i = 0; i <= exerciseText.count(); i++)
+	for(int i = 0; i <= exerciseText.length(); i++)
 	{
 		if(mistakesMap.contains(i))
 		{
@@ -633,7 +633,7 @@ QString StringUtils::addMistakes(QString exerciseText, QList<MistakeRecord *> re
 			}
 		}
 		else
-			out += i < exerciseText.count() ? QString(exerciseText[i]) : QString();
+			out += i < exerciseText.length() ? QString(exerciseText[i]) : QString();
 	}
 	return out;
 }
