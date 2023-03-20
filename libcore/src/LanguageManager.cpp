@@ -63,7 +63,11 @@ void LanguageManager::setLanguage(int index)
 	}
 	translator_app->load(targetLocale, "Open-Typer", "_", ":/res/lang");
 	translator_libcore->load(targetLocale, "libcore", "_", ":/res/lang");
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	translator_qt->load(targetLocale.language(), "qt", "_", QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+#else
 	translator_qt->load(targetLocale.language(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
 	globalMenuBar.updateMenus();
 	emit languageChanged();
 }
