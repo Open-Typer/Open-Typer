@@ -42,7 +42,7 @@ ThemeEngine::ThemeEngine(QObject *parent) :
 	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::currentAccentColorChanged);
 }
 
-/*! Returns selected font. */
+/*! The selected font. */
 QFont ThemeEngine::font(void)
 {
 	if(!Settings::containsThemeFont() || !Settings::containsThemeFontSize() || !Settings::containsThemeFontBold() || !Settings::containsThemeFontItalic() || !Settings::containsThemeFontUnderline())
@@ -60,7 +60,6 @@ QFont ThemeEngine::font(void)
 	return _font;
 }
 
-/*! Sets font. */
 void ThemeEngine::setFont(QFont newFont)
 {
 	setFontFamily(newFont.family());
@@ -68,13 +67,12 @@ void ThemeEngine::setFont(QFont newFont)
 	setFontBold(newFont.bold());
 }
 
-/*! Returns font family of selected font. */
+/*! Font family of the selected font. */
 QString ThemeEngine::fontFamily(void)
 {
 	return font().family();
 }
 
-/*! Sets font family. */
 void ThemeEngine::setFontFamily(QString family)
 {
 	QStringList families = QmlUtils::fontFamilies(true);
@@ -84,13 +82,12 @@ void ThemeEngine::setFontFamily(QString family)
 	emit fontFamilyChanged();
 }
 
-/*! Returns point size of selected font. */
+/*! Point size of the selected font. */
 int ThemeEngine::fontSize(void)
 {
 	return font().pointSize();
 }
 
-/*! Sets font point size. */
 void ThemeEngine::setFontSize(int size)
 {
 	Settings::setThemeFontSize(size);
@@ -115,13 +112,12 @@ int ThemeEngine::maxFontSize(void)
 	return 24;
 }
 
-/*! Returns true if selected font is bold. */
+/*! Whether the selected font is bold. */
 bool ThemeEngine::fontBold(void)
 {
 	return font().bold();
 }
 
-/*! Sets font weight. */
 void ThemeEngine::setFontBold(bool value)
 {
 	Settings::setThemeFontBold(value);
@@ -134,13 +130,12 @@ bool ThemeEngine::customExerciseTextColor(void)
 	return Settings::customExerciseTextColor();
 }
 
-/*! Returns exercise text color. */
+/*! Exercise text color. */
 QColor ThemeEngine::exerciseTextColor(void)
 {
 	return QColor(Settings::exerciseTextColor());
 }
 
-/*! Sets exercise text color. */
 void ThemeEngine::setExerciseTextColor(QColor color)
 {
 	Settings::setExerciseTextColor(color.rgb());
@@ -189,13 +184,12 @@ bool ThemeEngine::customInputTextColor(void)
 	return Settings::customInputTextColor();
 }
 
-/*! Returns input text color. */
+/*! Input text color. */
 QColor ThemeEngine::inputTextColor(void)
 {
 	return QColor(Settings::inputTextColor());
 }
 
-/*! Sets input text color. */
 void ThemeEngine::setInputTextColor(QColor color)
 {
 	Settings::setInputTextColor(color.rgb());
@@ -225,13 +219,12 @@ bool ThemeEngine::customBgColor(void)
 	return Settings::customBgColor();
 }
 
-/*! Returns background color. */
+/*! Background color. */
 QColor ThemeEngine::bgColor(void)
 {
 	return QColor(Settings::bgColor());
 }
 
-/*! Sets background color. */
 void ThemeEngine::setBgColor(QColor color)
 {
 	Settings::setBgColor(color.rgb());
@@ -261,13 +254,12 @@ bool ThemeEngine::customPaperColor(void)
 	return Settings::customPaperColor();
 }
 
-/*! Returns paper color. */
+/*! Paper color. */
 QColor ThemeEngine::paperColor(void)
 {
 	return QColor(Settings::paperColor());
 }
 
-/*! Sets paper color. */
 void ThemeEngine::setPaperColor(QColor color)
 {
 	Settings::setPaperColor(color.rgb());
@@ -297,13 +289,12 @@ bool ThemeEngine::customPanelColor(void)
 	return Settings::customPanelColor();
 }
 
-/*! Returns panel color. */
+/*! Panel color. */
 QColor ThemeEngine::panelColor(void)
 {
 	return QColor(Settings::panelColor());
 }
 
-/*! Sets panel color. */
 void ThemeEngine::setPanelColor(QColor color)
 {
 	Settings::setPanelColor(color.rgb());
@@ -327,13 +318,12 @@ QColor ThemeEngine::defaultPanelColor(bool dark)
 		return QColor(255, 255, 255);
 }
 
-/*! Returns current accent color ID. */
+/*! Current accent color ID. */
 ThemeEngine::AccentColor ThemeEngine::accentColor(void)
 {
 	return Settings::accentColorId();
 }
 
-/*! Sets accent color. */
 void ThemeEngine::setAccentColor(ThemeEngine::AccentColor color)
 {
 	Settings::setAccentColorId(color);
@@ -374,19 +364,18 @@ QColor ThemeEngine::getAccentColor(AccentColor colorId)
 	}
 }
 
-/*! Returns current accent color */
+/*! Current accent color. */
 QColor ThemeEngine::currentAccentColor(void)
 {
 	return getAccentColor(accentColor());
 }
 
-/*! Returns current application theme. */
+/*! Current application theme. */
 ThemeEngine::Theme ThemeEngine::theme(void)
 {
 	return Settings::appTheme();
 }
 
-/*! Sets application theme. */
 void ThemeEngine::setTheme(ThemeEngine::Theme newTheme)
 {
 	// TODO: Remove style sheets
