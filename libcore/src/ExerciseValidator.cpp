@@ -21,37 +21,28 @@
 #include "ExerciseValidator.h"
 #include "StringUtils.h"
 
-/*! Sets exercise text. */
+/*! The exercise text. */
+QString ExerciseValidator::exerciseText(void)
+{
+	return m_exerciseText;
+}
+
 void ExerciseValidator::setExerciseText(QString text)
 {
 	m_exerciseText = text;
 	emit exerciseTextChanged(text);
 }
 
-/*! Returns exercise text. */
-QString ExerciseValidator::exerciseText(void)
-{
-	return m_exerciseText;
-}
-
-/*! Sets input text. */
-void ExerciseValidator::setInputText(QString text)
-{
-	m_inputText = text;
-	emit inputTextChanged(text);
-}
-
-/*! Returns input text. */
+/*! The input text. */
 QString ExerciseValidator::inputText(void)
 {
 	return m_inputText;
 }
 
-/*! Sets list of mistakes. */
-void ExerciseValidator::setMistakes(QList<MistakeRecord> mistakeList)
+void ExerciseValidator::setInputText(QString text)
 {
-	m_mistakes = mistakeList;
-	emit mistakesChanged(mistakeList);
+	m_inputText = text;
+	emit inputTextChanged(text);
 }
 
 /*! Removes all mistakes. */
@@ -68,17 +59,16 @@ void ExerciseValidator::addMistake(MistakeRecord mistake)
 	emit mistakesChanged(m_mistakes);
 }
 
-/*! Returns list of mistakes. */
+/*! List of mistakes. */
 QList<MistakeRecord> ExerciseValidator::mistakes(void)
 {
 	return m_mistakes;
 }
 
-/*! Sets list of characters. */
-void ExerciseValidator::setCharacters(QList<CharacterRecord> characterList)
+void ExerciseValidator::setMistakes(QList<MistakeRecord> mistakeList)
 {
-	m_characters = characterList;
-	emit charactersChanged(characterList);
+	m_mistakes = mistakeList;
+	emit mistakesChanged(mistakeList);
 }
 
 /*! Removes all characters. */
@@ -95,30 +85,37 @@ void ExerciseValidator::addCharacter(CharacterRecord character)
 	emit charactersChanged(m_characters);
 }
 
-/*! Returns list of characters. */
+/*! List of characters. */
 QList<CharacterRecord> ExerciseValidator::characters(void)
 {
 	return m_characters;
 }
 
-/*! Toggles timed exercise. */
-void ExerciseValidator::setTimed(bool value)
+void ExerciseValidator::setCharacters(QList<CharacterRecord> characterList)
 {
-	m_isTimed = value;
-	emit timedChanged(value);
+	m_characters = characterList;
+	emit charactersChanged(characterList);
 }
 
-/*! Returns true if this is a timed exercise. */
+/*! Set this to true if this is a timed exercise. */
+bool ExerciseValidator::timed(void)
+{
+	return m_timed;
+}
+
+/*!
+ * Returns true if this is a timed exercise.
+ * \deprecated Use timed() instead.
+ */
 bool ExerciseValidator::isTimed(void)
 {
-	return m_isTimed;
+	return m_timed;
 }
 
-/*! Sets exercise time (in seconds). */
-void ExerciseValidator::setTime(qreal value)
+void ExerciseValidator::setTimed(bool value)
 {
-	m_time = value;
-	emit timeChanged(value);
+	m_timed = value;
+	emit timedChanged(value);
 }
 
 /*! Returns exercise time (in seconds). */
@@ -127,13 +124,19 @@ qreal ExerciseValidator::time(void)
 	return m_time;
 }
 
+void ExerciseValidator::setTime(qreal value)
+{
+	m_time = value;
+	emit timeChanged(value);
+}
+
 /*! Validates the exercise and calculates the results (list of mistakes, number of hits, etc.). */
 void ExerciseValidator::validate(void)
 {
 	m_mistakeCount = 0;
 	m_grossHits = 0;
 	m_errorWords.clear();
-	setMistakes(StringUtils::validateExercise(m_exerciseText, m_inputText, m_characters.toVector(), &m_grossHits, &m_mistakeCount, &m_errorWords, m_isTimed, m_time));
+	setMistakes(StringUtils::validateExercise(m_exerciseText, m_inputText, m_characters.toVector(), &m_grossHits, &m_mistakeCount, &m_errorWords, m_timed, m_time));
 }
 
 /*! Sets a custom result without actually validating the exercise. */

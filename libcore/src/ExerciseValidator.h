@@ -39,25 +39,26 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		Q_PROPERTY(QString inputText READ inputText WRITE setInputText NOTIFY inputTextChanged)
 		Q_PROPERTY(QList<MistakeRecord> mistakes READ mistakes WRITE setMistakes NOTIFY mistakesChanged)
 		Q_PROPERTY(QList<CharacterRecord> characters READ characters WRITE setCharacters NOTIFY charactersChanged)
-		Q_PROPERTY(bool timed READ isTimed WRITE setTimed NOTIFY timedChanged)
+		Q_PROPERTY(bool timed READ timed WRITE setTimed NOTIFY timedChanged)
 		Q_PROPERTY(qreal time READ time WRITE setTime NOTIFY timeChanged)
 	public:
-		void setExerciseText(QString text);
 		QString exerciseText(void);
-		void setInputText(QString text);
+		void setExerciseText(QString text);
 		QString inputText(void);
-		void setMistakes(QList<MistakeRecord> mistakeList);
+		void setInputText(QString text);
 		Q_INVOKABLE void clearMistakes(void);
 		Q_INVOKABLE void addMistake(MistakeRecord mistake);
 		QList<MistakeRecord> mistakes(void);
-		void setCharacters(QList<CharacterRecord> characterList);
+		void setMistakes(QList<MistakeRecord> mistakeList);
 		Q_INVOKABLE void clearCharacters(void);
 		Q_INVOKABLE void addCharacter(CharacterRecord character);
 		QList<CharacterRecord> characters(void);
+		void setCharacters(QList<CharacterRecord> characterList);
+		bool timed(void);
+		Q_DECL_DEPRECATED bool isTimed(void);
 		void setTimed(bool value);
-		bool isTimed(void);
-		void setTime(qreal seconds);
 		qreal time(void);
+		void setTime(qreal seconds);
 		Q_INVOKABLE void validate(void);
 		Q_INVOKABLE void validate(int grossHits, QStringList errorWords);
 		Q_INVOKABLE int grossHits(void);
@@ -73,7 +74,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		QString m_inputText;
 		QList<MistakeRecord> m_mistakes;
 		QList<CharacterRecord> m_characters;
-		bool m_isTimed = false;
+		bool m_timed = false;
 		qreal m_time = 0;
 		int m_grossHits = 0;
 		int m_mistakeCount = 0;
