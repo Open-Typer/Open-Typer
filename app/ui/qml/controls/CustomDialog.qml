@@ -46,6 +46,8 @@ Item {
 	signal reset()
 	signal aboutToShow()
 	signal aboutToHide()
+	signal opened()
+	signal closed()
 	id: root
 	anchors.fill: parent
 
@@ -180,12 +182,14 @@ Item {
 			shadow.visible = false
 			root.aboutToHide();
 		}
+		onOpened: root.opened();
 		onClosed: {
 			contentsLoader.active = 0;
 			blur.visible = false;
 			menuBarBlur.visible = false;
 			dialogMask.resetPos();
 			QmlUtils.reloadMenuBar();
+			root.closed();
 		}
 		header: Rectangle {
 			color: dialogColor
