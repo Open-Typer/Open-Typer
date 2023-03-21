@@ -30,6 +30,7 @@ import "../settings"
 CustomDialog {
 	property bool focusFromList: false
 	property bool forceListFocus: false
+	property bool freezeList: false
 	signal settingsSynced()
 	id: control
 	windowTitle: qsTr("Settings")
@@ -111,6 +112,8 @@ CustomDialog {
 				onClicked: listView.currentIndex = index
 			}
 			onCurrentIndexChanged: {
+				if(freezeList)
+					return;
 				var noTransition = false;
 				if(currentIndex == previousIndex)
 					noTransition = true;
@@ -233,6 +236,8 @@ CustomDialog {
 		Settings.freeze();
 		contentItem.listView.forceActiveFocus(Qt.TabFocus);
 	}
+	onAboutToHide: freezeList = true
+	onClosed: freezeList = false
 	onAccepted: {
 		if(Settings.isFrozen())
 			Settings.saveChanges();
