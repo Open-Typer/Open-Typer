@@ -61,7 +61,6 @@ KeyboardUtils::KeyType Key::type(void)
 	return m_type;
 }
 
-/*! Sets the key type. */
 void Key::setType(KeyboardUtils::KeyType type)
 {
 	m_type = type;
@@ -90,6 +89,15 @@ void Key::setDisplayShiftText(QString text)
 }
 
 /*! True if this is a dead key. */
+bool Key::dead(void)
+{
+	return m_dead;
+}
+
+/*!
+ * True if this is a dead key.
+ * \deprecated Use dead() instead.
+ */
 bool Key::isDead(void)
 {
 	return m_dead;
@@ -100,8 +108,17 @@ void Key::setDead(bool dead)
 	m_dead = dead;
 }
 
-/*! True if this is a dead key when pressed with shift. */
+/*!
+ * True if this is a dead key when pressed with shift.
+ * \deprecated Use shiftDead() instead.
+ */
 bool Key::isShiftDead(void)
+{
+	return m_shiftDead;
+}
+
+/*! True if this is a dead key when pressed with shift. */
+bool Key::shiftDead(void)
 {
 	return m_shiftDead;
 }
