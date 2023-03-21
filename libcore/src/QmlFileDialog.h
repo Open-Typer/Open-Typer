@@ -41,10 +41,10 @@ class CORE_LIB_EXPORT QmlFileDialog : public QObject
 		Q_PROPERTY(QString fileName READ fileName NOTIFY fileNameChanged)
 		Q_PROPERTY(QString shortFileName READ shortFileName NOTIFY shortFileNameChanged)
 	public:
-		void setNameFilters(QStringList filters);
 		QStringList nameFilters(void);
-		void setShowAllFiles(bool value);
+		void setNameFilters(QStringList filters);
 		bool showAllFiles(void);
+		void setShowAllFiles(bool value);
 		QString fileName(void);
 		QString shortFileName(void);
 		Q_INVOKABLE void getOpenFileContent(void);

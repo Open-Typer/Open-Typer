@@ -23,42 +23,40 @@
 #include "QmlFileDialog.h"
 
 /*!
- * Sets name filters, for example: [ "Image files (*.jpg *.png)", "Text files (*.txt)" ]\n
- * "All files" will be included by default. To disable it, use setShowAllFiles(false).
+ * List of name filters, for example: [ "Image files (*.jpg *.png)", "Text files (*.txt)" ]\n
+ * "All files" will be included by default. To disable it, set showAllFiles to false.
  */
+QStringList QmlFileDialog::nameFilters(void)
+{
+	return m_nameFilters;
+}
+
 void QmlFileDialog::setNameFilters(QStringList filters)
 {
 	m_nameFilters = filters;
 	emit nameFiltersChanged(filters);
 }
 
-/*! Returns list of name filters. */
-QStringList QmlFileDialog::nameFilters(void)
+/*! Set this to true to enable the "All files" name filter. */
+bool QmlFileDialog::showAllFiles(void)
 {
-	return m_nameFilters;
+	return m_showAllFiles;
 }
 
-/*! Toggles "All files" name filter. */
 void QmlFileDialog::setShowAllFiles(bool value)
 {
 	m_showAllFiles = value;
 	emit showAllFilesChanged(value);
 }
 
-/*! Returns true if "All files" name filter is enabled. */
-bool QmlFileDialog::showAllFiles(void)
-{
-	return m_showAllFiles;
-}
-
-/*! Returns the file name of the selected file (after running getOpenFileContent()). */
+/*! The file name of the selected file (after running getOpenFileContent()). */
 QString QmlFileDialog::fileName(void)
 {
 	return m_fileName;
 }
 
 /*!
- * Returns the short file name of the selected file (after running getOpenFileContent()).\n
+ * The short file name of the selected file (use this after running getOpenFileContent()).\n
  * A short file name doesn't contain parent directories.
  */
 QString QmlFileDialog::shortFileName(void)
