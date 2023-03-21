@@ -52,12 +52,12 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		};
 		Q_ENUM(StandardIcon)
 
-		Q_DECL_DEPRECATED void setBlurSource(QQuickItem *item);
 		Q_DECL_DEPRECATED QQuickItem *blurSource(void);
-		void setBgBlur(QQuickItem *item);
+		Q_DECL_DEPRECATED void setBlurSource(QQuickItem *item);
 		QQuickItem *bgBlur(void);
-		void setMenuBarBlur(QQuickItem *item);
+		void setBgBlur(QQuickItem *item);
 		QQuickItem *menuBarBlur(void);
+		void setMenuBarBlur(QQuickItem *item);
 		QQuickItem *activeFocusItem(void);
 		void setActiveFocusItem(QQuickItem *newActiveFocusItem);
 		Q_INVOKABLE static bool nativeMenuBar(void);

@@ -40,28 +40,18 @@
 #include "global.h"
 
 /*!
- * Sets QML background blur source.
- * \deprecated Use setBgBlur() to set a custom blur item instead.
- */
-void QmlUtils::setBlurSource(QQuickItem *item)
-{
-	m_blurSource = item;
-	emit blurSourceChanged(item);
-}
-
-/*!
  * Returns QML background blur source.
- * \deprecated Use bgBlur() to get the background blur instead, or set a custom blur using setBgBlur().
+ * \deprecated Use the bgBlur property to set a custom blur item.
  */
 QQuickItem *QmlUtils::blurSource(void)
 {
 	return m_blurSource;
 }
 
-void QmlUtils::setBgBlur(QQuickItem *item)
+void QmlUtils::setBlurSource(QQuickItem *item)
 {
-	m_bgBlur = item;
-	emit bgBlurChanged(item);
+	m_blurSource = item;
+	emit blurSourceChanged(item);
 }
 
 /*! QML background blur. \since Open-Typer 5.1.0 */
@@ -70,13 +60,18 @@ QQuickItem *QmlUtils::bgBlur(void)
 	return m_bgBlur;
 }
 
-/*! Returns QML menu bar blur item. */
+void QmlUtils::setBgBlur(QQuickItem *item)
+{
+	m_bgBlur = item;
+	emit bgBlurChanged(item);
+}
+
+/*! QML menu bar blur item. */
 QQuickItem *QmlUtils::menuBarBlur(void)
 {
 	return m_menuBarBlur;
 }
 
-/*! Sets QML menu bar blur item. */
 void QmlUtils::setMenuBarBlur(QQuickItem *item)
 {
 	m_menuBarBlur = item;
