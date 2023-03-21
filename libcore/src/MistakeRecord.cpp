@@ -21,44 +21,46 @@
 #include <QQmlEngine>
 #include "MistakeRecord.h"
 
-/*! Sets mistake position. */
-void MistakeRecord::setPosition(int pos)
-{
-	m_position = pos;
-}
-
-/*! Returns mistake position. */
+/*! Mistake position. */
 int MistakeRecord::position(void)
 {
 	return m_position;
 }
 
-/*! Sets mistake type. */
-void MistakeRecord::setType(MistakeRecord::Type type)
+void MistakeRecord::setPosition(int pos)
 {
-	m_type = type;
+	m_position = pos;
 }
 
-/*! Returns mistake type. */
+/*! Mistake type. */
 MistakeRecord::Type MistakeRecord::type(void)
 {
 	return m_type;
 }
 
-/*! Sets previous text. */
+void MistakeRecord::setType(MistakeRecord::Type type)
+{
+	m_type = type;
+}
+
+/*! Previous text. */
+QString MistakeRecord::previousText(void)
+{
+	return m_previousText;
+}
+
 void MistakeRecord::setPreviousText(QString text)
 {
 	m_previousText = text;
 	setPreviousVariant(text);
 }
 
-/*! Returns previous text. */
-QString MistakeRecord::previousText(void)
+/*! Previous value (useful if you need to support non-QString values). */
+QVariant MistakeRecord::previousVariant(void)
 {
-	return m_previousText;
+	return m_previousVariant;
 }
 
-/*! Sets previous value (useful if you need to support non-QString values). */
 void MistakeRecord::setPreviousVariant(QVariant value)
 {
 	m_previousVariant = value;
@@ -66,44 +68,53 @@ void MistakeRecord::setPreviousVariant(QVariant value)
 		m_previousText = value.toString();
 }
 
-/*! Returns previous value (useful if you need to support non-QString values). */
-QVariant MistakeRecord::previousVariant(void)
-{
-	return m_previousVariant;
-}
-
-/*! Sets previous position. */
-void MistakeRecord::setPreviousPosition(int pos)
-{
-	m_previousPosition = pos;
-}
-
-/*! Returns previous position. */
+/*! Previous position. */
 int MistakeRecord::previousPosition(void)
 {
 	return m_previousPosition;
 }
 
-/*! Enables or disables this mistake. */
-void MistakeRecord::setEnabled(bool enabled)
+void MistakeRecord::setPreviousPosition(int pos)
 {
-	m_isEnabled = enabled;
+	m_previousPosition = pos;
 }
 
-/*! Returns true if this mistake is enabled. */
+/*! Whether the mistake is enabled. */
+bool MistakeRecord::enabled(void)
+{
+	return m_enabled;
+}
+
+/*!
+ * Returns true if this mistake is enabled.
+ * \deprecated Use enabled() instead.
+ */
 bool MistakeRecord::isEnabled(void)
 {
-	return m_isEnabled;
+	return m_enabled;
 }
 
-/*! Toggles merged mistake. */
-void MistakeRecord::setMerged(bool merged)
+void MistakeRecord::setEnabled(bool enabled)
 {
-	m_isMerged = merged;
+	m_enabled = enabled;
 }
 
-/*! Returns true if this mistake is merged. */
+/*! Whether the mistake is merged. */
+bool MistakeRecord::merged(void)
+{
+	return m_merged;
+}
+
+/*!
+ * Returns true if this mistake is merged.
+ * \deprecated Use merged() instead.
+ */
 bool MistakeRecord::isMerged(void)
 {
-	return m_isMerged;
+	return m_merged;
+}
+
+void MistakeRecord::setMerged(bool merged)
+{
+	m_merged = merged;
 }

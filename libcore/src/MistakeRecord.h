@@ -39,8 +39,8 @@ class CORE_LIB_EXPORT MistakeRecord
 		Q_PROPERTY(QString previousText READ previousText WRITE setPreviousText)
 		Q_PROPERTY(QVariant previousVariant READ previousVariant WRITE setPreviousVariant)
 		Q_PROPERTY(int previousPosition READ previousPosition WRITE setPreviousPosition)
-		Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled)
-		Q_PROPERTY(bool merged READ isMerged WRITE setMerged)
+		Q_PROPERTY(bool enabled READ enabled WRITE setEnabled)
+		Q_PROPERTY(bool merged READ merged WRITE setMerged)
 	public:
 		enum Type
 		{
@@ -50,20 +50,22 @@ class CORE_LIB_EXPORT MistakeRecord
 		};
 		Q_ENUM(Type)
 
-		void setPosition(int pos);
 		int position(void);
-		void setType(Type type);
+		void setPosition(int pos);
 		Type type(void);
-		void setPreviousText(QString text);
+		void setType(Type type);
 		QString previousText(void);
-		void setPreviousVariant(QVariant value);
+		void setPreviousText(QString text);
 		QVariant previousVariant(void);
-		void setPreviousPosition(int pos);
+		void setPreviousVariant(QVariant value);
 		int previousPosition(void);
-		void setEnabled(bool enabled);
+		void setPreviousPosition(int pos);
+		bool enabled(void);
 		bool isEnabled(void);
-		void setMerged(bool merged);
+		void setEnabled(bool enabled);
+		bool merged(void);
 		bool isMerged(void);
+		void setMerged(bool merged);
 
 	private:
 		int m_position;
@@ -71,8 +73,8 @@ class CORE_LIB_EXPORT MistakeRecord
 		QString m_previousText;
 		QVariant m_previousVariant;
 		int m_previousPosition;
-		bool m_isEnabled = true;
-		bool m_isMerged = false;
+		bool m_enabled = true;
+		bool m_merged = false;
 
 		friend inline bool operator==(const MistakeRecord &r1, const MistakeRecord &r2)
 		{
@@ -81,8 +83,8 @@ class CORE_LIB_EXPORT MistakeRecord
 			bool previousTextCheck = r1.m_previousText == r2.m_previousText;
 			bool previousVariantCheck = r1.m_previousVariant == r2.m_previousVariant;
 			bool previousPositionCheck = r1.m_previousPosition == r2.m_previousPosition;
-			bool enabledCheck = r1.m_isEnabled == r2.m_isEnabled;
-			bool mergedCheck = r1.m_isMerged == r2.m_isMerged;
+			bool enabledCheck = r1.m_enabled == r2.m_enabled;
+			bool mergedCheck = r1.m_merged == r2.m_merged;
 			return (posCheck && typeCheck && previousTextCheck && previousVariantCheck && previousPositionCheck && enabledCheck && mergedCheck);
 		}
 };
