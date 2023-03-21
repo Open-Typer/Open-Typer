@@ -48,6 +48,8 @@ Item {
 	signal reset()
 	signal aboutToShow()
 	signal aboutToHide()
+	signal opened()
+	signal closed()
 	id: root
 	x: {
 		Window.contentItem.width;
@@ -172,10 +174,12 @@ Item {
 			shadow.visible = false
 			root.aboutToHide();
 		}
+		onOpened: root.opened();
 		onClosed: {
 			contentsLoader.active = 0;
 			dialogMask.resetPos();
 			QmlUtils.reloadMenuBar();
+			root.closed();
 		}
 		header: Rectangle {
 			color: dialogColor
