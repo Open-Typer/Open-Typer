@@ -79,7 +79,7 @@ void HistoryParser::setExercise(int value)
 	emit countChanged(count());
 }
 
-/*! Returns number of entries in the exercise history. */
+/*! Number of entries in the exercise history. */
 int HistoryParser::count(void)
 {
 	QJsonValue packValue = historyPackValue(m_lessonPack);
