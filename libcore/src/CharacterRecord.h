@@ -40,10 +40,10 @@ class CORE_LIB_EXPORT CharacterRecord
 		Q_PROPERTY(QString keyText READ keyText WRITE setKeyText)
 		Q_PROPERTY(int hits READ hits WRITE setHits)
 	public:
-		void setKeyText(QString text);
 		QString keyText(void);
-		void setHits(int count);
+		void setKeyText(QString text);
 		int hits(void);
+		void setHits(int count);
 
 	private:
 		QString m_keyText;

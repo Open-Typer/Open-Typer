@@ -20,26 +20,24 @@
 
 #include "CharacterRecord.h"
 
-/*! Sets key text (should be a single character). */
-void CharacterRecord::setKeyText(QString text)
-{
-	m_keyText = text;
-}
-
-/*! Returns key text. */
+/*! Key text (should be a single character). */
 QString CharacterRecord::keyText(void)
 {
 	return m_keyText;
 }
 
-/*! Sets number of key hits used to compose the character. */
-void CharacterRecord::setHits(int count)
+void CharacterRecord::setKeyText(QString text)
 {
-	m_hits = count;
+	m_keyText = text;
 }
 
-/*! Returns number of key hits used to compose the character. */
+/*! Number of key hits used to compose the character. */
 int CharacterRecord::hits(void)
 {
 	return m_hits;
+}
+
+void CharacterRecord::setHits(int count)
+{
+	m_hits = count;
 }
