@@ -647,13 +647,13 @@ void Settings::setSelectedClass(int value) { set("grading/class", value); }
 // gradingMethod
 
 /*! Getter for grading/gradingmethod. \since Open-Typer 5.1.0 */
-QString Settings::gradingMethod(void) { return get("grading/gradingmethod", "numbers").toString(); }
+ClassManager::GradingMethod Settings::gradingMethod(void) { return (ClassManager::GradingMethod) get("grading/gradingmethod", ClassManager::GradingMethod_Numbers).toInt(); }
 
 /*! Returns true if there's a grading/gradingmethod key. \since Open-Typer 5.1.0 */
 bool Settings::containsGradingMethod(void) { return contains("grading/gradingmethod"); }
 
 /*! Setter for grading/gradingmethod. \since Open-Typer 5.1.0 */
-void Settings::setGradingMethod(QString value) { set("grading/gradingmethod", value); }
+void Settings::setGradingMethod(ClassManager::GradingMethod value) { set("grading/gradingmethod", (int) value); }
 
 // gradeStartNumber
 

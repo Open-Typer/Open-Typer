@@ -33,6 +33,7 @@
 #include <QColor>
 #include "FileUtils.h"
 #include "ThemeEngine.h"
+#include "ClassManager.h"
 
 /*!
  * \brief The Settings class contains functions for application settings.
@@ -244,9 +245,9 @@ class CORE_LIB_EXPORT Settings : public QObject
 		Q_INVOKABLE static bool containsSelectedClass(void);
 		Q_INVOKABLE static void setSelectedClass(int value);
 		// gradingMethod
-		Q_INVOKABLE static QString gradingMethod(void);
+		Q_INVOKABLE static ClassManager::GradingMethod gradingMethod(void);
 		Q_INVOKABLE static bool containsGradingMethod(void);
-		Q_INVOKABLE static void setGradingMethod(QString value);
+		Q_INVOKABLE static void setGradingMethod(ClassManager::GradingMethod value);
 		// gradeStartNumber
 		Q_INVOKABLE static int gradeStartNumber(void);
 		Q_INVOKABLE static bool containsGradeStartNumber(void);
