@@ -43,6 +43,13 @@ class CORE_LIB_EXPORT ClassManager : public QObject
 		Q_PROPERTY(QQmlListProperty<Class> classes READ classes NOTIFY classesChanged)
 		Q_PROPERTY(QStringList classNames READ classNames NOTIFY classNamesChanged)
 	public:
+		enum GradingMethod
+		{
+			GradingMethod_Numbers = 0,
+			GradingMethod_Letters = 1
+		};
+		Q_ENUM(GradingMethod)
+
 		ClassManager(QObject *parent = nullptr);
 
 		QQmlListProperty<Class> classes(void);
