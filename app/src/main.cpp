@@ -168,6 +168,7 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<Key>();
 	qRegisterMetaType<KeyboardRow>();
+	qRegisterMetaType<ClassManager::GradingMethod>();
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
 	// TODO: Remove this after fully switching to Qt 6
 	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
