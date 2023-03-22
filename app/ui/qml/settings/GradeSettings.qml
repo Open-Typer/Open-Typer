@@ -34,7 +34,7 @@ ColumnLayout {
 	MenuSeparator { Layout.fillWidth: true }
 
 	RowLayout {
-		visible: model.length > 1
+		visible: classBox.count > 1
 
 		Label {
 			text: qsTr("Selected class:")
