@@ -90,6 +90,15 @@ ColumnLayout {
 		onValueChanged: currentClass == null ? Settings.setTargetHitsPerMinute(value) : currentClass.targetHitsPerMinute = value
 	}
 
+	MenuSeparator { Layout.fillWidth: true; visible: currentClass == null }
+
+	Label {
+		text: qsTr("Grades")
+		font.pointSize: 12
+		font.bold: true
+		visible: currentClass == null
+	}
+
 	RadioButton {
 		id: numbersButton
 		text: qsTr("Use numbers")
