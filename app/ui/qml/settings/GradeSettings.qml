@@ -21,6 +21,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
+import OpenTyper 1.0
 import "../controls"
 import "../dialogs"
 import ".."
@@ -29,6 +30,24 @@ ColumnLayout {
 	GradingConfig {}
 
 	MenuSeparator { Layout.fillWidth: true }
+
+	RowLayout {
+		visible: model.length > 1
+
+		Label {
+			text: qsTr("Selected class:")
+		}
+
+		CustomComboBox {
+			model: {
+				let arr1 = [qsTr("No class selected")];
+				let arr2 = ClassManager.classNames;
+				return arr1.concat(arr2);
+			}
+			currentIndex: Settings.selectedClass() + 1
+			onCurrentIndexChanged: Settings.setSelectedClass(currentIndex - 1)
+		}
+	}
 
 	Button {
 		text: qsTr("Configure grading for classes")
