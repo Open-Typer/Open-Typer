@@ -103,10 +103,10 @@ ColumnLayout {
 		id: numbersButton
 		text: qsTr("Use numbers")
 		visible: currentClass == null
-		checked: Settings.gradingMethod() === "numbers"
+		checked: Settings.gradingMethod() === ClassManager.GradingMethod_Numbers
 		onCheckedChanged: {
 			if(checked)
-				Settings.setGradingMethod("numbers");
+				Settings.setGradingMethod(ClassManager.GradingMethod_Numbers);
 		}
 	}
 
@@ -115,10 +115,10 @@ ColumnLayout {
 		//: Use "characters" would be valid too
 		text: qsTr("Use letters")
 		visible: currentClass == null
-		checked: Settings.gradingMethod() === "letters"
+		checked: Settings.gradingMethod() === ClassManager.GradingMethod_Letters
 		onCheckedChanged: {
 			if(checked)
-				Settings.setGradingMethod("letters");
+				Settings.setGradingMethod(ClassManager.GradingMethod_Letters);
 		}
 	}
 
