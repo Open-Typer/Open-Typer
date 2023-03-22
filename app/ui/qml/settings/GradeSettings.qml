@@ -27,6 +27,8 @@ import "../dialogs"
 import ".."
 
 ColumnLayout {
+	Control {} // fixes key navigation
+
 	GradingConfig {}
 
 	MenuSeparator { Layout.fillWidth: true }
