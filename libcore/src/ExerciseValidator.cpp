@@ -324,12 +324,12 @@ void ExerciseValidator::setUseNetHitsForGrading(bool newUseNetHitsForGrading)
  * Default value: Settings#gradingMethod
  * \since Open-Typer 5.1.0
  */
-const QString &ExerciseValidator::gradingMethod(void) const
+const ClassManager::GradingMethod &ExerciseValidator::gradingMethod(void) const
 {
 	return m_gradingMethod;
 }
 
-void ExerciseValidator::setGradingMethod(const QString &newGradingMethod)
+void ExerciseValidator::setGradingMethod(const ClassManager::GradingMethod &newGradingMethod)
 {
 	if(m_gradingMethod == newGradingMethod)
 		return;
@@ -349,7 +349,7 @@ void ExerciseValidator::updateGrade(void)
 	qreal hits = m_useNetHitsForGrading ? std::max(0, m_grossHits - m_mistakeCount * Settings::errorPenalty()) : m_grossHits;
 	qreal hpm = hits * (60 / m_time);
 	QVariantList grades;
-	if(m_gradingMethod == "numbers")
+	if(m_gradingMethod == ClassManager::GradingMethod_Numbers)
 	{
 		int start = Settings::gradeStartNumber();
 		int end = Settings::gradeEndNumber();
@@ -364,7 +364,7 @@ void ExerciseValidator::updateGrade(void)
 				grades.append(i);
 		}
 	}
-	else if(m_gradingMethod == "letters")
+	else if(m_gradingMethod == ClassManager::GradingMethod_Letters)
 	{
 		QString alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		int start = alphabet.indexOf(Settings::gradeStartLetter());
@@ -387,9 +387,9 @@ void ExerciseValidator::updateGrade(void)
 	if(index < 0)
 		index = 0;
 	QVariant grade = grades[index];
-	if(m_gradingMethod == "numbers")
+	if(m_gradingMethod == ClassManager::GradingMethod_Numbers)
 		m_grade = QString::number(grade.toInt());
-	else if(m_gradingMethod == "letters")
+	else if(m_gradingMethod == ClassManager::GradingMethod_Letters)
 		m_grade = grade.toChar();
 	emit gradeChanged();
 }

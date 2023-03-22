@@ -30,6 +30,7 @@
 #include <QObject>
 #include "MistakeRecord.h"
 #include "CharacterRecord.h"
+#include "ClassManager.h"
 
 /*! \brief The ExerciseValidator class provides methods for exercise validation to QML code. */
 class CORE_LIB_EXPORT ExerciseValidator : public QObject
@@ -43,7 +44,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		Q_PROPERTY(qreal time READ time WRITE setTime NOTIFY timeChanged)
 		Q_PROPERTY(int targetHitsPerMinute READ targetHitsPerMinute WRITE setTargetHitsPerMinute NOTIFY targetHitsPerMinuteChanged)
 		Q_PROPERTY(bool useNetHitsForGrading READ useNetHitsForGrading WRITE setUseNetHitsForGrading NOTIFY useNetHitsForGradingChanged)
-		Q_PROPERTY(QString gradingMethod READ gradingMethod WRITE setGradingMethod NOTIFY gradingMethodChanged)
+		Q_PROPERTY(ClassManager::GradingMethod gradingMethod READ gradingMethod WRITE setGradingMethod NOTIFY gradingMethodChanged)
 		Q_PROPERTY(QString grade READ grade NOTIFY gradeChanged)
 	public:
 		ExerciseValidator(QObject *parent = nullptr);
@@ -77,8 +78,8 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		void setTargetHitsPerMinute(int newTargetHitsPerMinute);
 		bool useNetHitsForGrading(void) const;
 		void setUseNetHitsForGrading(bool newUseNetHitsForGrading);
-		const QString &gradingMethod(void) const;
-		void setGradingMethod(const QString &newGradingMethod);
+		const ClassManager::GradingMethod &gradingMethod(void) const;
+		void setGradingMethod(const ClassManager::GradingMethod &newGradingMethod);
 		const QString &grade(void) const;
 
 	private:
@@ -96,7 +97,7 @@ class CORE_LIB_EXPORT ExerciseValidator : public QObject
 		QString m_generatedMistakeText;
 		int m_targetHitsPerMinute;
 		bool m_useNetHitsForGrading;
-		QString m_gradingMethod;
+		ClassManager::GradingMethod m_gradingMethod;
 		QString m_grade;
 
 	signals:
