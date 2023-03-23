@@ -37,10 +37,12 @@ ColumnLayout {
 		visible: classBox.count > 1
 
 		Label {
+			id: selectedClassLabel
 			text: qsTr("Selected class:")
 		}
 
 		CustomComboBox {
+			id: classBox
 			model: {
 				let arr1 = [qsTr("No class selected")];
 				let arr2 = ClassManager.classNames;
@@ -48,6 +50,7 @@ ColumnLayout {
 			}
 			currentIndex: Settings.selectedClass() + 1
 			onCurrentIndexChanged: Settings.setSelectedClass(currentIndex - 1)
+			Accessible.name: selectedClassLabel.text
 		}
 	}
 
