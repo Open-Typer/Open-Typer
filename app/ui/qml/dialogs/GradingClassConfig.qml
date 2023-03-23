@@ -27,10 +27,15 @@ import "../core"
 import ".."
 
 CustomDialog {
+	id: root
 	windowTitle: qsTr("Classes")
 	draggable: false
 	fillWindow: true
 	standardButtons: Dialog.Close
+	onActiveFocusChanged: {
+		if(activeFocus)
+			contentItem.currentItem.forceActiveFocus(Qt.TabFocus);
+	}
 
 	contentComponent: StackView {
 		id: stackView
@@ -50,6 +55,19 @@ CustomDialog {
 						font.bold: true
 					}
 
+					Control {
+						id: focusControl
+						onActiveFocusChanged: {
+							if(activeFocus)
+							{
+								if(editButton.visible)
+									editButton.forceActiveFocus(Qt.TabFocus);
+								else
+									addButton.forceActiveFocus(Qt.TabFocus);
+							}
+						}
+					}
+
 					CustomToolButton {
 						id: editButton
 						icon.name: "edit"
@@ -66,9 +84,11 @@ CustomDialog {
 					}
 
 					CustomToolButton {
+						id: addButton
 						icon.name: "add"
 						text: qsTr("Add class")
 						onClicked: ClassManager.createNewClass()
+						KeyNavigation.tab: listView
 					}
 				}
 
@@ -86,7 +106,22 @@ CustomDialog {
 						text: model.description
 						onClicked: listView.currentIndex = index;
 						onDoubleClicked: editButton.clicked()
+						Keys.onSpacePressed: doubleClicked()
 					}
+					onActiveFocusChanged: {
+						if(activeFocus)
+						{
+							if(count == 0)
+								editButton.forceActiveFocus(Qt.TabFocus);
+							else if(currentIndex == -1)
+								currentIndex = 0;
+						}
+					}
+				}
+
+				onFocusChanged: {
+					if(focus)
+						focusControl.forceActiveFocus(Qt.TabFocus);
 				}
 			}
 		}
@@ -96,12 +131,14 @@ CustomDialog {
 
 			ColumnLayout {
 				AccentButton {
+					id: backButton
 					icon.name: "left"
 					onClicked: stackView.pop()
 					Accessible.name: QmlUtils.translateStandardButton("Close")
 				}
 
 				CustomFlickable {
+					id: flickable
 					Layout.fillWidth: true
 					Layout.fillHeight: true
 					contentWidth: contentItem.childrenRect.width
@@ -111,10 +148,33 @@ CustomDialog {
 					clip: true
 
 					GradingConfig {
+						id: gradingConfig
 						currentClass: stackView.get(0).currentClass
 					}
+
+					Connections {
+						target: QmlUtils
+						onActiveFocusItemChanged: {
+							let focusItem = QmlUtils.activeFocusItem;
+							if(QmlUtils.itemHasChild(gradingConfig, focusItem))
+								flickable.ensureVisible(focusItem);
+						}
+					}
+				}
+
+				onFocusChanged: {
+					if(focus)
+						backButton.forceActiveFocus(Qt.TabFocus);
 				}
 			}
+		}
+	}
+
+	Connections {
+		target: standardButton(Dialog.Close)
+		onActiveFocusChanged: {
+			if(!target.activeFocus)
+				root.contentItem.currentItem.forceActiveFocus(Qt.TabFocus);
 		}
 	}
 }
