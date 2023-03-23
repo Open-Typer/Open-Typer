@@ -342,7 +342,7 @@ QQuickItem *QmlUtils::findFirstControl(QQuickItem *rootItem)
 	if(!rootItem)
 		return nullptr;
 	QQuickItem *ret = nullptr;
-	auto children = rootItem->children();
+	auto children = itemChildren(rootItem);
 	for(int i = 0; i < children.length(); i++)
 	{
 		auto element = children[i];
@@ -351,7 +351,7 @@ QQuickItem *QmlUtils::findFirstControl(QQuickItem *rootItem)
 			ret = qobject_cast<QQuickItem *>(element);
 			break;
 		}
-		else if(element->children().length() > 0)
+		else if(itemChildren(element).length() > 0)
 		{
 			auto control = findFirstControl(qobject_cast<QQuickItem *>(element));
 			if(control != nullptr)
@@ -366,12 +366,12 @@ bool QmlUtils::itemHasChild(QQuickItem *item, QQuickItem *child)
 {
 	if(!item || !child)
 		return false;
-	auto children = item->children();
+	auto children = itemChildren(item);
 	for(int i = 0; i < children.length(); i++)
 	{
 		if(children[i] == child)
 			return true;
-		else if(children[i]->children().length() > 0)
+		else if(itemChildren(children[i]).length() > 0)
 		{
 			auto castItem = qobject_cast<QQuickItem *>(children[i]);
 			if(castItem == nullptr)
@@ -382,4 +382,32 @@ bool QmlUtils::itemHasChild(QQuickItem *item, QQuickItem *child)
 		}
 	}
 	return false;
+}
+
+/*! Returns children items of the given items, including items in Repeaters (this function doesn't search recursively). \since Open-Typer 5.1.0 */
+QList<QQuickItem *> QmlUtils::itemChildren(QQuickItem *item)
+{
+	QList<QQuickItem *> out;
+	if(strcmp(item->metaObject()->className(), "QQuickRepeater") == 0)
+	{
+		int count = item->property("count").toInt();
+		for(int i = 0; i < count; i++)
+		{
+			QQuickItem *child;
+			QMetaObject::invokeMethod(item, "itemAt", Q_RETURN_ARG(QQuickItem *, child), Q_ARG(int, i));
+			out.append(child);
+		}
+	}
+	else
+	{
+		auto children = item->children();
+		for(int i = 0; i < children.length(); i++)
+		{
+			QQuickItem *currentItem = qobject_cast<QQuickItem *>(children[i]);
+			if(currentItem)
+				out.append(currentItem);
+		}
+	}
+	Q_ASSERT(!out.contains(nullptr));
+	return out;
 }

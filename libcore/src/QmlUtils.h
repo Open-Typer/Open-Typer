@@ -83,6 +83,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 
 	private:
 		static QString convertPixmap(QPixmap pixmap);
+		static QList<QQuickItem *> itemChildren(QQuickItem *item);
 		QQuickItem *m_blurSource = nullptr;
 		QQuickItem *m_bgBlur = nullptr;
 		QQuickItem *m_menuBarBlur = nullptr;
