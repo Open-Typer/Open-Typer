@@ -29,6 +29,7 @@ ColumnLayout {
 	property Class currentClass: null
 	readonly property var locale: Qt.locale(LanguageManager.languageStr)
 	readonly property string alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	id: root
 
 	RowLayout {
 		id: nameLayout
@@ -36,6 +37,7 @@ ColumnLayout {
 		Layout.fillWidth: true
 
 		Label {
+			id: classNameLabel
 			//: Class name
 			text: qsTr("Name:")
 		}
@@ -44,10 +46,12 @@ ColumnLayout {
 			text: nameLayout.visible ? currentClass.name : ""
 			onTextChanged: nameLayout.visible ? currentClass.name = text : {}
 			Layout.fillWidth: true
+			Accessible.name: classNameLabel.text + " " + text
 		}
 	}
 
 	Label {
+		id: descriptionLabel
 		text: qsTr("Description:")
 		visible: currentClass != null
 	}
@@ -72,11 +76,15 @@ ColumnLayout {
 			border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
 			radius: 10
 		}
+		KeyNavigation.priority: KeyNavigation.BeforeItem
+		KeyNavigation.tab: nextItemInFocusChain()
+		Accessible.name: descriptionLabel.text + " " + text
 	}
 
 	MenuSeparator { Layout.fillWidth: true; visible: currentClass != null }
 
 	Label {
+		id: targetHitsLabel
 		text: qsTr("Target number of hits per minute")
 		font.pointSize: 12
 		font.bold: true
@@ -88,6 +96,7 @@ ColumnLayout {
 		to: 750
 		value: currentClass == null ? Settings.targetHitsPerMinute() : currentClass.targetHitsPerMinute
 		onValueChanged: currentClass == null ? Settings.setTargetHitsPerMinute(value) : currentClass.targetHitsPerMinute = value
+		Accessible.description: targetHitsLabel.text
 	}
 
 	MenuSeparator { Layout.fillWidth: true; visible: currentClass == null }
@@ -126,6 +135,7 @@ ColumnLayout {
 		visible: currentClass == null
 
 		Label {
+			id: worstGradeLabel
 			text: qsTr("Worst grade:")
 			Layout.alignment: Qt.AlignVCenter
 		}
@@ -136,6 +146,7 @@ ColumnLayout {
 			to: 100
 			value: Settings.gradeStartNumber()
 			onValueChanged: Settings.setGradeStartNumber(value)
+			Accessible.description: worstGradeLabel.text
 		}
 
 		CustomComboBox {
@@ -143,6 +154,7 @@ ColumnLayout {
 			model: alphabet.split("")
 			currentIndex: alphabet.indexOf(Settings.gradeStartLetter())
 			onCurrentTextChanged: Settings.setGradeStartLetter(currentText)
+			Accessible.name: worstGradeLabel.text
 		}
 	}
 
@@ -150,6 +162,7 @@ ColumnLayout {
 		visible: currentClass == null
 
 		Label {
+			id: bestGradeLabel
 			text: qsTr("Best grade:")
 			Layout.alignment: Qt.AlignVCenter
 		}
@@ -160,6 +173,7 @@ ColumnLayout {
 			to: 100
 			value: Settings.gradeEndNumber()
 			onValueChanged: Settings.setGradeEndNumber(value)
+			Accessible.description: bestGradeLabel.text
 		}
 
 		CustomComboBox {
@@ -167,6 +181,7 @@ ColumnLayout {
 			model: alphabet.split("")
 			currentIndex: alphabet.indexOf(Settings.gradeEndLetter())
 			onCurrentTextChanged: Settings.setGradeEndLetter(currentText)
+			Accessible.name: bestGradeLabel.text
 		}
 	}
 
@@ -225,6 +240,7 @@ ColumnLayout {
 						anchors.fill: parent
 
 						Label {
+							id: monthLabel
 							Layout.fillWidth: true
 							text: locale.standaloneMonthName(index, Locale.LongFormat)
 						}
@@ -245,6 +261,7 @@ ColumnLayout {
 							down.indicator: null
 							implicitWidth: 66
 							onValueModified: currentClass.setTargetHitsForMonth(index + 1, value);
+							Accessible.name: targetHitsLabel.text + " " + monthLabel.text
 						}
 
 						CustomToolButton {
@@ -255,7 +272,7 @@ ColumnLayout {
 								return (targetHits !== 0);
 							}
 							//: To reset a value
-							toolTipText: qsTr("Reset")
+							toolTipText: qsTr("Reset (%1)").arg(monthLabel.text)
 							onClicked: currentClass.setTargetHitsForMonth(index + 1, 0)
 						}
 					}
@@ -267,5 +284,10 @@ ColumnLayout {
 	Loader {
 		sourceComponent: monthConfig
 		active: currentClass != null
+	}
+
+	onActiveFocusChanged: {
+		if(activeFocus)
+			QmlUtils.findFirstControl(root).forceActiveFocus(Qt.TabFocus);
 	}
 }
