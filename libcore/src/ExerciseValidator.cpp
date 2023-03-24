@@ -21,6 +21,17 @@
 #include "ExerciseValidator.h"
 #include "StringUtils.h"
 
+/*! Constructs ExerciseValidator. */
+ExerciseValidator::ExerciseValidator(QObject *parent) :
+	QObject(parent)
+{
+	m_useNetHitsForGrading = Settings::gradeNetHits();
+	m_gradingMethod = Settings::gradingMethod();
+	connect(this, &ExerciseValidator::targetHitsPerMinuteChanged, this, &ExerciseValidator::updateGrade);
+	connect(this, &ExerciseValidator::useNetHitsForGradingChanged, this, &ExerciseValidator::updateGrade);
+	connect(this, &ExerciseValidator::gradingMethodChanged, this, &ExerciseValidator::updateGrade);
+}
+
 /*! The exercise text. */
 QString ExerciseValidator::exerciseText(void)
 {
@@ -137,6 +148,7 @@ void ExerciseValidator::validate(void)
 	m_grossHits = 0;
 	m_errorWords.clear();
 	setMistakes(StringUtils::validateExercise(m_exerciseText, m_inputText, m_characters.toVector(), &m_grossHits, &m_mistakeCount, &m_errorWords, m_timed, m_time));
+	updateGrade();
 }
 
 /*! Sets a custom result without actually validating the exercise. */
@@ -145,6 +157,7 @@ void ExerciseValidator::validate(int grossHits, QStringList errorWords)
 	m_mistakeCount = m_mistakes.length();
 	m_grossHits = grossHits;
 	m_errorWords = errorWords;
+	updateGrade();
 }
 
 /*! Returns number of gross hits. */
@@ -272,4 +285,111 @@ QString ExerciseValidator::textWithMistakes(void)
 	for(int i = 0; i < m_mistakes.length(); i++)
 		mistakePtrList.append(&m_mistakes[i]);
 	return StringUtils::addMistakes(m_inputText, mistakePtrList);
+}
+
+/*! Number of hits per minute for the best grade. \since Open-Typer 5.1.0 */
+int ExerciseValidator::targetHitsPerMinute(void) const
+{
+	return m_targetHitsPerMinute;
+}
+
+void ExerciseValidator::setTargetHitsPerMinute(int newTargetHitsPerMinute)
+{
+	if(m_targetHitsPerMinute == newTargetHitsPerMinute)
+		return;
+	m_targetHitsPerMinute = newTargetHitsPerMinute;
+	emit targetHitsPerMinuteChanged();
+}
+
+/*!
+ * Whether to use net hits per minute instead of gross hits for grading.\n
+ * Default value: Settings#gradeNetHits()
+ * \since Open-Typer 5.1.0
+ */
+bool ExerciseValidator::useNetHitsForGrading(void) const
+{
+	return m_useNetHitsForGrading;
+}
+
+void ExerciseValidator::setUseNetHitsForGrading(bool newUseNetHitsForGrading)
+{
+	if(m_useNetHitsForGrading == newUseNetHitsForGrading)
+		return;
+	m_useNetHitsForGrading = newUseNetHitsForGrading;
+	emit useNetHitsForGradingChanged();
+}
+
+/*!
+ * The grading method, for example numbers or letters.\n
+ * Default value: Settings#gradingMethod
+ * \since Open-Typer 5.1.0
+ */
+const ClassManager::GradingMethod &ExerciseValidator::gradingMethod(void) const
+{
+	return m_gradingMethod;
+}
+
+void ExerciseValidator::setGradingMethod(const ClassManager::GradingMethod &newGradingMethod)
+{
+	if(m_gradingMethod == newGradingMethod)
+		return;
+	m_gradingMethod = newGradingMethod;
+	emit gradingMethodChanged();
+}
+
+/*! The grade. \since Open-Typer 5.1.0 */
+const QString &ExerciseValidator::grade(void) const
+{
+	return m_grade;
+}
+
+/*! Calculates the grade and updates the grade property. \since Open-Typer 5.1.0 */
+void ExerciseValidator::updateGrade(void)
+{
+	qreal hits = m_useNetHitsForGrading ? std::max(0, m_grossHits - m_mistakeCount * Settings::errorPenalty()) : m_grossHits;
+	qreal hpm = hits * (60 / m_time);
+	QVariantList grades;
+	if(m_gradingMethod == ClassManager::GradingMethod_Numbers)
+	{
+		int start = Settings::gradeStartNumber();
+		int end = Settings::gradeEndNumber();
+		if(start < end)
+		{
+			for(int i = start; i <= end; i++)
+				grades.append(i);
+		}
+		else
+		{
+			for(int i = start; i >= end; i--)
+				grades.append(i);
+		}
+	}
+	else if(m_gradingMethod == ClassManager::GradingMethod_Letters)
+	{
+		QString alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		int start = alphabet.indexOf(Settings::gradeStartLetter());
+		int end = alphabet.indexOf(Settings::gradeEndLetter());
+		Q_ASSERT(start >= 0);
+		Q_ASSERT(end >= 0);
+		if(start < end)
+		{
+			for(int i = start; i <= end; i++)
+				grades.append(QChar(alphabet[i]));
+		}
+		else
+		{
+			for(int i = start; i >= end; i--)
+				grades.append(QChar(alphabet[i]));
+		}
+	}
+	Q_ASSERT(grades.length() != 0);
+	int index = std::min(grades.length() - 1.0, hpm / m_targetHitsPerMinute * grades.length() - 1.0);
+	if(index < 0)
+		index = 0;
+	QVariant grade = grades[index];
+	if(m_gradingMethod == ClassManager::GradingMethod_Numbers)
+		m_grade = QString::number(grade.toInt());
+	else if(m_gradingMethod == ClassManager::GradingMethod_Letters)
+		m_grade = grade.toChar();
+	emit gradeChanged();
 }

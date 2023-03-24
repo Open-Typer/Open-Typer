@@ -30,6 +30,8 @@ SOURCES += \
     src/AppMenuModel.cpp \
     src/BuiltInPacks.cpp \
     src/CharacterRecord.cpp \
+    src/ClassManager.cpp \
+    src/Class.cpp \
     src/ConfigParser.cpp \
     src/ExerciseTimer.cpp \
     src/ExerciseValidator.cpp \
@@ -59,6 +61,8 @@ HEADERS += \
     src/AppMenuModel.h \
     src/BuiltInPacks.h \
     src/CharacterRecord.h \
+    src/ClassManager.h \
+    src/Class.h \
     src/ConfigParser.h \
     src/ExerciseTimer.h \
     src/ExerciseValidator.h \

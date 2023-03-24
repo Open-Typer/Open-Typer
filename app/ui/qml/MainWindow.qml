@@ -1184,6 +1184,7 @@ ApplicationWindow {
 			validator.addCharacter(recordedCharacters[i]);
 		validator.timed = (currentMode == 1);
 		validator.time = lastTime;
+		validator.targetHitsPerMinute = ClassManager.targetHitsPerMinute();
 		if(correctMistakes)
 		{
 			validator.clearMistakes();
@@ -1248,6 +1249,7 @@ ApplicationWindow {
 		paper.summary.totalHits = totalHits;
 		paper.summary.mistakes = exerciseMistakes;
 		paper.summary.accuracy = 1.0 - exerciseMistakes / totalHits;
+		paper.summary.validator = validator;
 		changeMode(0);
 		exportDialog.validator = validator;
 		preview = true;

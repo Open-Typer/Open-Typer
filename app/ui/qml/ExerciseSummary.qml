@@ -23,10 +23,12 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
 import QtQuick.Layouts 1.12
 import OpenTyper 1.0
+import "controls"
 
 Rectangle {
 	property int padding: 10
 	property int fontPointSize: 14
+	property ExerciseValidator validator: null
 	property int totalTime
 	property int totalHits
 	property int netHits
@@ -38,6 +40,18 @@ Rectangle {
 	color: ThemeEngine.panelColor
 	border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
 	clip: true
+	onValidatorChanged: {
+		resetClass();
+		updateGrade();
+	}
+
+	function resetClass() {
+		classComboBox.currentIndex = Settings.selectedClass() + 1;
+	}
+
+	function updateGrade() {
+		validator.targetHitsPerMinute = ClassManager.targetHitsPerMinute(classComboBox.currentIndex - 1);
+	}
 
 	ColumnLayout {
 		id: columnLayout
@@ -128,6 +142,39 @@ Rectangle {
 			}
 			Label {
 				text: Math.floor(accuracy * 10000) / 100 + " %"
+				font.pointSize: fontPointSize
+			}
+		}
+
+		RowLayout {
+			Layout.fillWidth: true
+			visible: classComboBox.model.length > 1
+			Label {
+				text: qsTr("Class:")
+				font.bold: true
+				font.pointSize: fontPointSize
+			}
+			CustomComboBox {
+				id: classComboBox
+				model: {
+					let arr1 = [qsTr("No class selected")];
+					let arr2 = ClassManager.classNames;
+					return arr1.concat(arr2);
+				}
+				currentIndex: Settings.selectedClass() + 1
+				onCurrentIndexChanged: updateGrade()
+			}
+		}
+
+		RowLayout {
+			Layout.fillWidth: true
+			Label {
+				text: qsTr("Grade:")
+				font.bold: true
+				font.pointSize: fontPointSize
+			}
+			Label {
+				text: validator == null ? "" : validator.grade
 				font.pointSize: fontPointSize
 			}
 		}

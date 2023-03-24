@@ -40,6 +40,7 @@ class CORE_LIB_EXPORT FileUtils : public QObject
 		Q_INVOKABLE static QString mainSettingsLocation(void);
 		Q_INVOKABLE static QString addonConfigLocation(void);
 		Q_INVOKABLE static QString addonDirectory(void);
+		Q_INVOKABLE static QString classConfigLocation(void);
 		Q_INVOKABLE static QString fileName(QString path);
 };
 

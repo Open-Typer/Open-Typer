@@ -610,3 +610,91 @@ bool Settings::containsKeyboardFingerColors(void) { return contains("theme/keybo
 
 /*! Setter for theme/keyboardfingercolors. */
 void Settings::setKeyboardFingerColors(bool value) { set("theme/keyboardfingercolors", value); }
+
+// targetHitsPerMinute
+
+/*! Getter for grading/targethits. \since Open-Typer 5.1.0 */
+int Settings::targetHitsPerMinute(void) { return get("grading/targethits", 130).toInt(); }
+
+/*! Returns true if there's a grading/targethits key. \since Open-Typer 5.1.0 */
+bool Settings::containsTargetHitsPerMinute(void) { return contains("grading/targethits"); }
+
+/*! Setter for grading/targethits. \since Open-Typer 5.1.0 */
+void Settings::setTargetHitsPerMinute(int value) { set("grading/targethits", value); }
+
+// gradeNetHits
+
+/*! Getter for grading/gradenethits. \since Open-Typer 5.1.0 */
+bool Settings::gradeNetHits(void) { return get("grading/gradenethits", true).toBool(); }
+
+/*! Returns true if there's a grading/gradenethits key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeNetHits(void) { return contains("grading/gradenethits"); }
+
+/*! Setter for grading/gradenethits. \since Open-Typer 5.1.0 */
+void Settings::setGradeNetHits(bool value) { set("grading/gradenethits", value); }
+
+// selectedClass
+
+/*! Getter for grading/class. \since Open-Typer 5.1.0 */
+int Settings::selectedClass(void) { return get("grading/class", -1).toInt(); }
+
+/*! Returns true if there's a grading/class key. \since Open-Typer 5.1.0 */
+bool Settings::containsSelectedClass(void) { return contains("grading/class"); }
+
+/*! Setter for grading/targethits. \since Open-Typer 5.1.0 */
+void Settings::setSelectedClass(int value) { set("grading/class", value); }
+
+// gradingMethod
+
+/*! Getter for grading/gradingmethod. \since Open-Typer 5.1.0 */
+ClassManager::GradingMethod Settings::gradingMethod(void) { return (ClassManager::GradingMethod) get("grading/gradingmethod", ClassManager::GradingMethod_Numbers).toInt(); }
+
+/*! Returns true if there's a grading/gradingmethod key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradingMethod(void) { return contains("grading/gradingmethod"); }
+
+/*! Setter for grading/gradingmethod. \since Open-Typer 5.1.0 */
+void Settings::setGradingMethod(ClassManager::GradingMethod value) { set("grading/gradingmethod", (int) value); }
+
+// gradeStartNumber
+
+/*! Getter for grading/startnumber. \since Open-Typer 5.1.0 */
+int Settings::gradeStartNumber(void) { return get("grading/startnumber", 5).toInt(); }
+
+/*! Returns true if there's a grading/startnumber key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeStartNumber(void) { return contains("grading/startnumber"); }
+
+/*! Setter for grading/startnumber. \since Open-Typer 5.1.0 */
+void Settings::setGradeStartNumber(int value) { set("grading/startnumber", value); }
+
+// gradeEndNumber
+
+/*! Getter for grading/endnumber. \since Open-Typer 5.1.0 */
+int Settings::gradeEndNumber(void) { return get("grading/endnumber", 1).toInt(); }
+
+/*! Returns true if there's a grading/endnumber key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeEndNumber(void) { return contains("grading/endnumber"); }
+
+/*! Setter for grading/endnumber. \since Open-Typer 5.1.0 */
+void Settings::setGradeEndNumber(int value) { set("grading/endnumber", value); }
+
+// gradeStartLetter
+
+/*! Getter for grading/startletter. \since Open-Typer 5.1.0 */
+QChar Settings::gradeStartLetter(void) { return get("grading/startletter", 'F').toChar(); }
+
+/*! Returns true if there's a grading/startletter key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeStartLetter(void) { return contains("grading/startletter"); }
+
+/*! Setter for grading/startletter. \since Open-Typer 5.1.0 */
+void Settings::setGradeStartLetter(QChar value) { set("grading/startletter", value); }
+
+// gradeEndLetter
+
+/*! Getter for grading/endletter. \since Open-Typer 5.1.0 */
+QChar Settings::gradeEndLetter(void) { return get("grading/endletter", 'A').toChar(); }
+
+/*! Returns true if there's a grading/endletter key. \since Open-Typer 5.1.0 */
+bool Settings::containsGradeEndLetter(void) { return contains("grading/endletter"); }
+
+/*! Setter for grading/endletter. \since Open-Typer 5.1.0 */
+void Settings::setGradeEndLetter(QChar value) { set("grading/endletter", value); }
