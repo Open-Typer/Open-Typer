@@ -51,16 +51,18 @@ Item {
 	signal opened()
 	signal closed()
 	id: root
-	x: {
-		Window.contentItem.width;
-		return mapFromItem(Window.contentItem, x, y).x;
-	}
-	y: {
-		Window.contentItem.height;
-		return mapFromItem(Window.contentItem, x, y).y;
-	}
 	width: Window.contentItem.width
 	height: Window.contentItem.height
+	onWidthChanged: updateX()
+	onHeightChanged: updateY()
+
+	function updateX() {
+		x = mapFromItem(Window.contentItem, x, y).x;
+	}
+
+	function updateY() {
+		y = mapFromItem(Window.contentItem, x, y).y;
+	}
 
 	function open() {
 		control.open();
