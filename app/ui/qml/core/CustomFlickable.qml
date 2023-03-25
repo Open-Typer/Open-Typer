@@ -66,6 +66,11 @@ Flickable {
 		ensureVisibleY(item);
 	}
 
+	function stopAnimations() {
+		xAnimation.stop();
+		yAnimation.stop();
+	}
+
 	NumberAnimation on contentX {
 		id: xAnimation
 		to: 0
