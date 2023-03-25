@@ -55,6 +55,10 @@ Item {
 	height: Window.contentItem.height
 	onWidthChanged: updateX()
 	onHeightChanged: updateY()
+	onAboutToShow: {
+		updateX();
+		updateY();
+	}
 
 	function updateX() {
 		x = mapFromItem(Window.contentItem, x, y).x;
