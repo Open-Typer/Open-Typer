@@ -225,6 +225,8 @@ CustomDialog {
 						let focusItem = QmlUtils.activeFocusItem;
 						if(QmlUtils.itemHasChild(focusScope, focusItem))
 							flickable.ensureVisible(focusItem);
+						else
+							flickable.stopAnimations();
 					}
 				}
 			}
