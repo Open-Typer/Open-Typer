@@ -73,7 +73,6 @@ jobs:
       shell: bash
     - name: Windows build
       run: |
-        lrelease ${{ env.app_name }}.pro || exit 2
         qmake INCLUDEPATH+=C:\OpenSSL\include LIBS+=-LC:\OpenSSL\lib || exit 3
         mingw32-make -j4 || exit 4
         mkdir release
