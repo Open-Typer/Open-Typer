@@ -1,25 +1,35 @@
-QT += widgets charts quick
+QT += core gui widgets quick quickcontrols2 charts network
+CONFIG += qtquickcompiler
 
 linux {
-        QT += dbus
+    QT += dbus
 }
 
 !wasm {
-	QT += printsupport
-	LIBS += -lssl -lcrypto
+    QT += printsupport
+    LIBS += -lssl -lcrypto
 }
 
 win32 {
-        VERSION=""
+    VERSION=""
 }
 
 CONFIG += c++17
+CONFIG += shared
 
 TEMPLATE = lib
-TARGET = opentyper-core
-DESTDIR = $$_PRO_FILE_PWD_/..
+TARGET = opentyper-main
+DESTDIR = $$_PRO_FILE_PWD_
 
 INCLUDEPATH += src
+
+!wasm {
+    SOURCES += \
+        src/AddonItemModel.cpp \
+	src/AddonListModel.cpp \
+	src/AddonManager.cpp \
+	src/AddonModel.cpp
+}
 
 SOURCES += \
     src/AddonApi.cpp \
@@ -35,6 +45,13 @@ SOURCES += \
     src/ConfigParser.cpp \
     src/ExerciseTimer.cpp \
     src/ExerciseValidator.cpp \
+    src/ExportProvider.cpp \
+    src/ExportTable.cpp \
+    src/ExportTableModel.cpp \
+    src/QmlWidget.cpp \
+    src/packEditor/PackEditor.cpp \
+    src/packEditor/PackSelector.cpp \
+    src/updater/Updater.cpp \
     src/FileUtils.cpp \
     src/HistoryEntry.cpp \
     src/HistoryParser.cpp \
@@ -52,6 +69,14 @@ SOURCES += \
     src/ThemeEngine.cpp \
     src/global.cpp
 
+!wasm {
+    HEADERS += \
+        src/AddonItemModel.h \
+	src/AddonListModel.h \
+	src/AddonManager.h \
+	src/AddonModel.h
+}
+
 HEADERS += \
     src/AddonApi.h \
     src/AddonButton.h \
@@ -66,6 +91,13 @@ HEADERS += \
     src/ConfigParser.h \
     src/ExerciseTimer.h \
     src/ExerciseValidator.h \
+    src/ExportProvider.h \
+    src/ExportTable.h \
+    src/ExportTableModel.h \
+    src/QmlWidget.h \
+    src/packEditor/PackEditor.h \
+    src/packEditor/PackSelector.h \
+    src/updater/Updater.h \
     src/FileUtils.h \
     src/HistoryEntry.h \
     src/HistoryParser.h \
@@ -84,6 +116,15 @@ HEADERS += \
     src/IAddon.h \
     src/global.h
 
+FORMS += \
+    src/packEditor/PackEditor.ui \
+    src/packEditor/PackSelector.ui
+
+TRANSLATIONS += \
+    translations/Open-Typer_sk_SK.ts \
+    translations/Open-Typer_de_DE.ts \
+    translations/Open-Typer_ru_RU.ts
+
 TRANSLATIONS += \
     translations/libcore_sk_SK.ts \
     translations/libcore_de_DE.ts \
@@ -92,8 +133,6 @@ TRANSLATIONS += \
 RESOURCES += \
     translations/core-translations.qrc
 
-DEFINES += CORE_SHARED_LIB
-
 # Third party
-include(../3rdparty/xkeyboard-config/xkeyboard-config.pri)
-include(../3rdparty/libxkbcommon/libxkbcommon.pri)
+include(3rdparty/xkeyboard-config/xkeyboard-config.pri)
+include(3rdparty/libxkbcommon/libxkbcommon.pri)
