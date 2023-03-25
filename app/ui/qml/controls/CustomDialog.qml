@@ -40,6 +40,7 @@ Item {
 	property bool draggable: true
 	property bool fillWindow: false
 	property bool showShadow: true
+	property Item previousFocusItem: null
 	signal accepted()
 	signal applied()
 	signal discarded()
@@ -51,18 +52,32 @@ Item {
 	signal opened()
 	signal closed()
 	id: root
-	x: {
-		Window.contentItem.width;
-		return mapFromItem(Window.contentItem, x, y).x;
-	}
-	y: {
-		Window.contentItem.height;
-		return mapFromItem(Window.contentItem, x, y).y;
-	}
 	width: Window.contentItem.width
 	height: Window.contentItem.height
+	onWidthChanged: updateX()
+	onHeightChanged: updateY()
+	onAboutToShow: {
+		updateX();
+		updateY();
+	}
+	onAboutToHide: restoreFocus()
+	onClosed: restoreFocus();
+
+	function updateX() {
+		x = mapFromItem(Window.contentItem, x, y).x;
+	}
+
+	function updateY() {
+		y = mapFromItem(Window.contentItem, x, y).y;
+	}
+
+	function restoreFocus() {
+		if(previousFocusItem != null)
+			previousFocusItem.forceActiveFocus(Qt.TabFocus);
+	}
 
 	function open() {
+		previousFocusItem = QmlUtils.activeFocusItem;
 		control.open();
 	}
 
