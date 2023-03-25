@@ -16,6 +16,8 @@ win32 {
 
 CONFIG += c++17
 CONFIG += shared
+CONFIG += lrelease
+CONFIG += embed_translations
 
 TEMPLATE = lib
 TARGET = opentyper-core
@@ -129,9 +131,6 @@ TRANSLATIONS += \
     ../translations/libcore_sk_SK.ts \
     ../translations/libcore_de_DE.ts \
     ../translations/libcore_ru_RU.ts
-
-RESOURCES += \
-    ../translations/core-translations.qrc
 
 # Third party
 include(../3rdparty/xkeyboard-config/xkeyboard-config.pri)

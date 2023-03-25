@@ -35,7 +35,6 @@ RESOURCES += \
     ../res/icons/icons.qrc \
     ../res/packs/packs.qrc \
     ../res/splash/splash.qrc \
-    ../translations/translations.qrc \
     ../src/ui/qml/qml.qrc
 
 RESOURCES += \
