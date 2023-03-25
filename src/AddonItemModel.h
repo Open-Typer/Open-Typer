@@ -26,7 +26,7 @@
 #include <QVersionNumber>
 
 /*! \brief The AddonItemModel class provides a model for a single item in a list of addons. */
-class AddonItemModel : public QObject
+class Q_DECL_EXPORT AddonItemModel : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)

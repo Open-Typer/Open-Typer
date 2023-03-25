@@ -23,14 +23,8 @@
 
 #include <QObject>
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 static int const EXIT_CODE_REBOOT = -123456789;
 
-bool CORE_LIB_EXPORT internetConnected(void);
+bool Q_DECL_EXPORT internetConnected(void);
 
 #endif // GLOBAL_H

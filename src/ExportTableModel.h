@@ -30,7 +30,7 @@
  *
  * Note: QTableView doesn't support rich text, so you need to replace the cells with widgets that support it.
  */
-class ExportTableModel : public QAbstractTableModel
+class Q_DECL_EXPORT ExportTableModel : public QAbstractTableModel
 {
 		Q_OBJECT
 		Q_PROPERTY(QString studentName READ studentName WRITE setStudentName NOTIFY studentNameChanged)

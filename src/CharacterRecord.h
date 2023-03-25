@@ -21,12 +21,6 @@
 #ifndef CHARACTERRECORD_H
 #define CHARACTERRECORD_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 
 /*!
@@ -34,7 +28,7 @@
  *
  * A character record consists of key text (usually a single character) and number of key hits used to compose the character.
  */
-class CORE_LIB_EXPORT CharacterRecord
+class Q_DECL_EXPORT CharacterRecord
 {
 		Q_GADGET
 		Q_PROPERTY(QString keyText READ keyText WRITE setKeyText)

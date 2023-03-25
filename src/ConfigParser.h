@@ -21,12 +21,6 @@
 #ifndef CONFIGPARSER_H
 #define CONFIGPARSER_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QFile>
 #include <QBuffer>
@@ -34,8 +28,8 @@
 #include "StringUtils.h"
 
 namespace publicPos {
-	CORE_LIB_EXPORT Q_NAMESPACE;
-	extern int CORE_LIB_EXPORT currentLesson, currentSublesson, currentExercise;
+	Q_DECL_EXPORT Q_NAMESPACE;
+	extern int Q_DECL_EXPORT currentLesson, currentSublesson, currentExercise;
 }
 
 // TODO: Add a link to pack file format documentation.
@@ -56,7 +50,7 @@ namespace publicPos {
  * parser.close();
  * \endcode
  */
-class CORE_LIB_EXPORT ConfigParser : public QObject
+class Q_DECL_EXPORT ConfigParser : public QObject
 {
 		Q_OBJECT
 	public:

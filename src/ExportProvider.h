@@ -27,7 +27,7 @@
 #include "ExportTable.h"
 
 /*! \brief The ExportProvider class provides methods for the export dialog. */
-class ExportProvider : public QObject
+class Q_DECL_EXPORT ExportProvider : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(ExerciseValidator *validator READ validator WRITE setValidator NOTIFY validatorChanged)

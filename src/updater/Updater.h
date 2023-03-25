@@ -31,7 +31,7 @@
 #endif
 
 /*! \brief The Updater class is used to check for updates and download new versions of the program. */
-class Updater : public QObject
+class Q_DECL_EXPORT Updater : public QObject
 {
 		Q_OBJECT
 	public:

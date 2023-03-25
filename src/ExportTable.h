@@ -25,7 +25,7 @@
 #include "ExerciseValidator.h"
 
 /*! \brief The ExportTable class provides a table for typing test results. */
-class ExportTable : public QTableView
+class Q_DECL_EXPORT ExportTable : public QTableView
 {
 		Q_OBJECT
 		Q_PROPERTY(int contentWidth READ contentWidth NOTIFY contentWidthChanged)

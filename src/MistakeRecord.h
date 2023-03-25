@@ -21,17 +21,11 @@
 #ifndef MISTAKERECORD_H
 #define MISTAKERECORD_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QVariant>
 
 /*! \brief The MistakeRecord class can be used to store mistake records. */
-class CORE_LIB_EXPORT MistakeRecord
+class Q_DECL_EXPORT MistakeRecord
 {
 		Q_GADGET
 		Q_PROPERTY(int position READ position WRITE setPosition)

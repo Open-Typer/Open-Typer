@@ -22,12 +22,6 @@
 #ifndef LANGUAGEMANAGER_H
 #define LANGUAGEMANAGER_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QLocale>
 #include <QVector>
@@ -49,7 +43,7 @@ extern QTranslator *translator_qt;
  *
  * \see LanguageList
  */
-class CORE_LIB_EXPORT LanguageManager : public QObject
+class Q_DECL_EXPORT LanguageManager : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString languageStr READ languageStr NOTIFY languageStrChanged)
@@ -75,6 +69,6 @@ class CORE_LIB_EXPORT LanguageManager : public QObject
 		void languageStrChanged();
 };
 
-extern LanguageManager CORE_LIB_EXPORT globalLanguageManager;
+extern LanguageManager Q_DECL_EXPORT globalLanguageManager;
 
 #endif // LANGUAGEMANAGER_H

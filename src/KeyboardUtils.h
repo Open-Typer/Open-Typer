@@ -21,18 +21,12 @@
 #ifndef KEYBOARDUTILS_H
 #define KEYBOARDUTILS_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QKeyEvent>
 #include "QmlKeyboardHandler.h"
 
 /*! \brief The KeyboardUtils class provides functions related to keyboard and input method. */
-class CORE_LIB_EXPORT KeyboardUtils : public QObject
+class Q_DECL_EXPORT KeyboardUtils : public QObject
 {
 		Q_OBJECT
 	public:

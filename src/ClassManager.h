@@ -21,12 +21,6 @@
 #ifndef CLASSMANAGER_H
 #define CLASSMANAGER_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QQmlListProperty>
 #include <QJsonDocument>
@@ -37,7 +31,7 @@
  *
  * \since Open-Typer 5.1.0
  */
-class CORE_LIB_EXPORT ClassManager : public QObject
+class Q_DECL_EXPORT ClassManager : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QQmlListProperty<Class> classes READ classes NOTIFY classesChanged)
@@ -78,6 +72,6 @@ class CORE_LIB_EXPORT ClassManager : public QObject
 		static const QString targetHitsProperty;
 };
 
-extern ClassManager CORE_LIB_EXPORT globalClassManager;
+extern ClassManager Q_DECL_EXPORT globalClassManager;
 
 #endif // CLASSMANAGER_H

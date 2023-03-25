@@ -30,7 +30,7 @@
  * Note: It does not support any events and needs to be repainted manually.\n
  * The widget can be only created in C++ and used in QML using QQmlContext#setContextProperty().
  */
-class QmlWidget : public QQuickPaintedItem
+class Q_DECL_EXPORT QmlWidget : public QQuickPaintedItem
 {
 		Q_OBJECT
 		Q_PROPERTY(QWidget *widget READ widget WRITE setWidget NOTIFY widgetChanged)

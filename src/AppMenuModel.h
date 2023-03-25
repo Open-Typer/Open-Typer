@@ -21,18 +21,12 @@
 #ifndef APPMENUMODEL_H
 #define APPMENUMODEL_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QQmlListProperty>
 #include "AppMenuItem.h"
 
 /*! \brief The AppMenuModel class provides a menu model for the application menu bar. */
-class CORE_LIB_EXPORT AppMenuModel : public QObject
+class Q_DECL_EXPORT AppMenuModel : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)

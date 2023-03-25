@@ -35,16 +35,10 @@
 Q_MOC_INCLUDE("IAddon.h")
 #endif
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
-class CORE_LIB_EXPORT IAddon;
+class Q_DECL_EXPORT IAddon;
 
 /*! \brief The AddonApi class provides an API for addons. */
-class CORE_LIB_EXPORT AddonApi : public QObject
+class Q_DECL_EXPORT AddonApi : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QVector<IAddon *> loadedAddons READ loadedAddons WRITE setLoadedAddons)
@@ -121,6 +115,6 @@ class CORE_LIB_EXPORT AddonApi : public QObject
 		void exInfoButtonsChanged(QList<AddonButton *> buttons);
 };
 
-extern AddonApi CORE_LIB_EXPORT globalAddonApi;
+extern AddonApi Q_DECL_EXPORT globalAddonApi;
 
 #endif // ADDONAPI_H

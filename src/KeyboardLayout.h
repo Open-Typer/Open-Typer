@@ -26,14 +26,8 @@
 #include <QPoint>
 #include "Key.h"
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 /*! \brief The KeyboardLayout class provides information about a keyboard layout. */
-class CORE_LIB_EXPORT KeyboardLayout : public QObject
+class Q_DECL_EXPORT KeyboardLayout : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString layoutId READ layoutId WRITE setLayoutId NOTIFY layoutIdChanged)

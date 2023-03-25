@@ -36,7 +36,7 @@ class IAddon;
  *
  * Don't create instances of AddonManager. Use globalAddonManager instead.
  */
-class AddonManager : public QObject
+class Q_DECL_EXPORT AddonManager : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QList<AddonModel *> addons READ addons NOTIFY addonsChanged)
@@ -72,6 +72,6 @@ class AddonManager : public QObject
 		void addonsChanged();
 };
 
-extern AddonManager globalAddonManager;
+extern AddonManager Q_DECL_EXPORT globalAddonManager;
 
 #endif // ADDONMANAGER_H

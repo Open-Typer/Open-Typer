@@ -21,16 +21,10 @@
 #ifndef SETTINGSCATEGORY_H
 #define SETTINGSCATEGORY_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 
 /*! \brief The SettingsCategory class provides a model for settings categories. */
-class CORE_LIB_EXPORT SettingsCategory : public QObject
+class Q_DECL_EXPORT SettingsCategory : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)

@@ -21,12 +21,6 @@
 #ifndef CLASS_H
 #define CLASS_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QMap>
 
@@ -35,7 +29,7 @@
  *
  * \since Open-Typer 5.1.0
  */
-class CORE_LIB_EXPORT Class : public QObject
+class Q_DECL_EXPORT Class : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)

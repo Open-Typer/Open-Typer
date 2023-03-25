@@ -23,14 +23,8 @@
 
 #include <QObject>
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 /*! \brief The AddonButton class provides a button for addons. */
-class CORE_LIB_EXPORT AddonButton : public QObject
+class Q_DECL_EXPORT AddonButton : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)

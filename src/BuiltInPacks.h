@@ -22,17 +22,11 @@
 #ifndef BUILTINPACKS_H
 #define BUILTINPACKS_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QString>
 
 /*! \brief The BuiltInPacks class provides functions for built-in pack settings. */
-class CORE_LIB_EXPORT BuiltInPacks : public QObject
+class Q_DECL_EXPORT BuiltInPacks : public QObject
 {
 		Q_OBJECT
 	public:

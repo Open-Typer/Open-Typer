@@ -27,7 +27,7 @@
 #include "AddonItemModel.h"
 
 /*! \brief The AddonListModel class provides a model for the addon list in addon settings. */
-class AddonListModel : public QObject
+class Q_DECL_EXPORT AddonListModel : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QQmlListProperty<AddonItemModel> items READ items NOTIFY itemsChanged)

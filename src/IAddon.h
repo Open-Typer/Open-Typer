@@ -25,14 +25,8 @@
 #include <QtPlugin>
 #include "AddonApi.h"
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 /*! \brief The IAddon class provides an interface for addons. */
-class CORE_LIB_EXPORT IAddon
+class Q_DECL_EXPORT IAddon
 {
 	public:
 		virtual ~IAddon(void) = default;

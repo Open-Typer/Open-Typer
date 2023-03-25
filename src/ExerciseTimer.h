@@ -21,17 +21,11 @@
 #ifndef EXERCISETIMER_H
 #define EXERCISETIMER_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QElapsedTimer>
 
 /*! \brief The ExerciseTimer class provides a simple elapsed timer for QML. */
-class CORE_LIB_EXPORT ExerciseTimer : public QObject
+class Q_DECL_EXPORT ExerciseTimer : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(int elapsed MEMBER m_elapsed NOTIFY elapsedChanged)

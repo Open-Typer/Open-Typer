@@ -21,12 +21,6 @@
 #ifndef STRINGUTILS_H
 #define STRINGUTILS_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QString>
 #include <QVector>
@@ -36,7 +30,7 @@
 #include "CharacterRecord.h"
 
 /*! \brief The StringUtils class contains functions related to strings. */
-class CORE_LIB_EXPORT StringUtils : public QObject
+class Q_DECL_EXPORT StringUtils : public QObject
 {
 		Q_OBJECT
 	public:

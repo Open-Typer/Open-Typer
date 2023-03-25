@@ -21,12 +21,6 @@
 #ifndef APPMENUBAR_H
 #define APPMENUBAR_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include "AbstractMenuBar.h"
 
@@ -36,7 +30,7 @@
  * Note: This model shouldn't be created more than once because the application is intended to have only one menu bar.
  * Use globalMenuBar to access the model.
  */
-class CORE_LIB_EXPORT AppMenuBar : public AbstractMenuBar
+class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 {
 		Q_OBJECT
 		Q_PROPERTY(AppMenuItem *openAction READ openAction NOTIFY openActionChanged)
@@ -113,6 +107,6 @@ class CORE_LIB_EXPORT AppMenuBar : public AbstractMenuBar
 		void aboutProgramActionChanged();
 };
 
-extern AppMenuBar CORE_LIB_EXPORT globalMenuBar;
+extern AppMenuBar Q_DECL_EXPORT globalMenuBar;
 
 #endif // APPMENUBAR_H

@@ -21,16 +21,10 @@
 #ifndef HISTORYENTRY_H
 #define HISTORYENTRY_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 
 /*! \brief The HistoryEntry class is an entry in the exercise history. */
-class CORE_LIB_EXPORT HistoryEntry
+class Q_DECL_EXPORT HistoryEntry
 {
 		Q_GADGET
 		Q_PROPERTY(int grossHitsPerMinute READ grossHitsPerMinute WRITE setGrossHitsPerMinute)

@@ -21,19 +21,13 @@
 #ifndef EXERCISEVALIDATOR_H
 #define EXERCISEVALIDATOR_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include "MistakeRecord.h"
 #include "CharacterRecord.h"
 #include "ClassManager.h"
 
 /*! \brief The ExerciseValidator class provides methods for exercise validation to QML code. */
-class CORE_LIB_EXPORT ExerciseValidator : public QObject
+class Q_DECL_EXPORT ExerciseValidator : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString exerciseText READ exerciseText WRITE setExerciseText NOTIFY exerciseTextChanged)

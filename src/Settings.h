@@ -21,12 +21,6 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QSettings>
 #include <QApplication>
 #include <QRgb>
@@ -87,7 +81,7 @@
  *  - Settings#gradeStartLetter() - The letter to start with during grading.
  *  - Settings#gradeEndLetter() - The letter to end with during grading.
  */
-class CORE_LIB_EXPORT Settings : public QObject
+class Q_DECL_EXPORT Settings : public QObject
 {
 		Q_OBJECT
 	public:

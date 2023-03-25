@@ -22,12 +22,6 @@
 #ifndef HISTORYPARSER_H
 #define HISTORYPARSER_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QFile>
 #include <QJsonDocument>
@@ -37,7 +31,7 @@
 #include "HistoryEntry.h"
 
 /*! \brief The HistoryParser class provides functions for exercise history and statistics. */
-class CORE_LIB_EXPORT HistoryParser : public QObject
+class Q_DECL_EXPORT HistoryParser : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString lessonPack READ lessonPack WRITE setLessonPack NOTIFY lessonPackChanged)

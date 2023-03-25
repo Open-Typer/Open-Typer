@@ -22,12 +22,6 @@
 #ifndef THEMEENGINE_H
 #define THEMEENGINE_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QApplication>
 #include <QWidget>
@@ -40,7 +34,7 @@
 class Settings;
 
 /*! \brief The ThemeEngine class provides theme functions. */
-class CORE_LIB_EXPORT ThemeEngine : public QObject
+class Q_DECL_EXPORT ThemeEngine : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QFont font READ font WRITE setFont NOTIFY fontChanged)
@@ -168,6 +162,6 @@ class CORE_LIB_EXPORT ThemeEngine : public QObject
 		void themeChanged();
 };
 
-extern ThemeEngine CORE_LIB_EXPORT globalThemeEngine;
+extern ThemeEngine Q_DECL_EXPORT globalThemeEngine;
 
 #endif // THEMEENGINE_H

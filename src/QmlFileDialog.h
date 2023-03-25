@@ -21,19 +21,13 @@
 #ifndef QMLFILEDIALOG_H
 #define QMLFILEDIALOG_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 
 /*!
  * \brief The QmlFileDialog class provides a file dialog for QML.
  * This file dialog supports file uploads on WebAssembly.
  */
-class CORE_LIB_EXPORT QmlFileDialog : public QObject
+class Q_DECL_EXPORT QmlFileDialog : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QStringList nameFilters READ nameFilters WRITE setNameFilters NOTIFY nameFiltersChanged)

@@ -21,21 +21,15 @@
 #ifndef APPMENUITEM_H
 #define APPMENUITEM_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 Q_MOC_INCLUDE("AppMenuModel.h")
 #endif
 
-class CORE_LIB_EXPORT AppMenuModel;
+class Q_DECL_EXPORT AppMenuModel;
 
 /*! \brief The AppMenuItem class provides a model for a menu item. */
-class CORE_LIB_EXPORT AppMenuItem : public QObject
+class Q_DECL_EXPORT AppMenuItem : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)

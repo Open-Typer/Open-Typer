@@ -25,7 +25,7 @@
 #include <QVersionNumber>
 
 /*! \brief The AddonModel class provides a model for installed addons. */
-class AddonModel : public QObject
+class Q_DECL_EXPORT AddonModel : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)

@@ -25,14 +25,8 @@
 #include <QObject>
 #include "KeyboardUtils.h"
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 /*! \brief The Key class is used for the keys on the on screen keyboard. */
-class CORE_LIB_EXPORT Key
+class Q_DECL_EXPORT Key
 {
 		Q_GADGET
 		Q_PROPERTY(QString text READ text WRITE setText)

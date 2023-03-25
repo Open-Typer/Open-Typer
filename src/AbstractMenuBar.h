@@ -21,18 +21,12 @@
 #ifndef ABSTRACTMENUBAR_H
 #define ABSTRACTMENUBAR_H
 
-#if defined CORE_SHARED_LIB
-#define CORE_LIB_EXPORT Q_DECL_EXPORT
-#else
-#define CORE_LIB_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <QObject>
 #include <QQmlListProperty>
 #include "AppMenuModel.h"
 
 /*! \brief The AbstractMenuBar class provides a model for a menu bar. */
-class CORE_LIB_EXPORT AbstractMenuBar : public QObject
+class Q_DECL_EXPORT AbstractMenuBar : public QObject
 {
 		Q_OBJECT
 		Q_PROPERTY(QQmlListProperty<AppMenuModel> menus READ menus NOTIFY menusChanged)
