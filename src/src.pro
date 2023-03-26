@@ -19,6 +19,10 @@ CONFIG += c++17
 CONFIG += lrelease
 CONFIG += embed_translations
 
+macx {
+    PRE_TARGETDEPS += compiler_lrelease_make_all
+}
+
 TEMPLATE = lib
 TARGET = opentyper-core
 DESTDIR = $$_PRO_FILE_PWD_/..
