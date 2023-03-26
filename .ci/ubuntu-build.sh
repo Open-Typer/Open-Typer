@@ -20,9 +20,9 @@ sudo mv appimagetool*.AppImage /usr/bin/appimagetool
 mkdir -p AppDir/usr/bin &&
 mkdir -p AppDir/usr/lib &&
 mkdir -p AppDir/usr/share/applications &&
-cp -r app/res/linux-release/usr/share/pixmaps AppDir/usr/share/ &&
-cp app/res/linux-release/usr/share/applications/open-typer-appimage.desktop AppDir/usr/share/applications/open-typer.desktop &&
+cp -r res/linux-release/usr/share/pixmaps AppDir/usr/share/ &&
+cp res/linux-release/usr/share/applications/open-typer-appimage.desktop AppDir/usr/share/applications/open-typer.desktop &&
 cp "$executable_name" AppDir/usr/bin/
 cp *.so* AppDir/usr/lib/
-./linuxdeployqt AppDir/usr/share/applications/*.desktop -qmldir=app/ui/qml -updateinformation="zsync|${appimage_zsync_url}" -appimage &&
+./linuxdeployqt AppDir/usr/share/applications/*.desktop -qmldir=src -updateinformation="zsync|${appimage_zsync_url}" -appimage &&
 rm linuxdeployqt
