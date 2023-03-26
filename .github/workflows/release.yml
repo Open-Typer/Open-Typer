@@ -117,7 +117,7 @@ jobs:
         move *.dll release/
         cd release
         windeployqt ${{ env.executable_name }}.exe --qmldir ..\src || exit 5
-        windeployqt opentyper-*.dll || exit 5
+        for %%v in (opentyper-*.dll) do windeployqt "%%v" || exit 5
       shell: cmd
     - if: contains(matrix.os, 'windows')
       name: Finalize Windows build
