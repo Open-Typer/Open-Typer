@@ -10,8 +10,8 @@ VERSION_MAJOR=$(echo $VERSION | sed 's/\..*//')
 mkdir -p ${app_name}.app/Contents/Frameworks
 mv *.dylib ${app_name}.app/Contents/Frameworks/
 install_name_tool -change \
-	libopentyper-core.${VERSION_MAJOR}.dylib \
-	@rpath/libopentyper-core.${VERSION_MAJOR}.dylib \
+	libopentyper-*.${VERSION_MAJOR}.dylib \
+	@rpath/libopentyper-*.${VERSION_MAJOR}.dylib \
 	${app_name}.app/Contents/MacOS/${executable_name}
 macdeployqt ${app_name}.app -qmldir=src
 
