@@ -7,6 +7,7 @@ linux {
 
 !wasm {
     QT += printsupport
+    CONFIG += shared
     LIBS += -lssl -lcrypto
 }
 
@@ -15,7 +16,6 @@ win32 {
 }
 
 CONFIG += c++17
-CONFIG += shared
 CONFIG += lrelease
 CONFIG += embed_translations
 
