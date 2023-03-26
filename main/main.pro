@@ -2,7 +2,7 @@ TEMPLATE = app
 TARGET = open-typer
 DESTDIR = $$_PRO_FILE_PWD_/..
 
-QT += core gui quick quickcontrols2
+QT += core gui widgets quick quickcontrols2
 QTPLUGIN += qsvg
 
 !wasm {
