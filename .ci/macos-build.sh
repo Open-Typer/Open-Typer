@@ -8,11 +8,11 @@ VERSION_MAJOR=$(echo $VERSION | sed 's/\..*//')
 . .ci/common/build.sh macos
 
 mkdir -p ${app_name}.app/Contents/Frameworks
-mv *.dylib ${app_name}.app/Contents/Frameworks/
 for f in libopentyper-*.dylib; do
 	install_name_tool -change $f @rpath/$f \
 		${app_name}.app/Contents/MacOS/${executable_name}
 done
+mv *.dylib ${app_name}.app/Contents/Frameworks/
 macdeployqt ${app_name}.app -qmldir=src
 
 npm install -g appdmg
