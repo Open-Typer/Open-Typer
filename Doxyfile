@@ -26,8 +26,7 @@ ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
 STRIP_FROM_PATH        =
-STRIP_FROM_INC_PATH    = app/src \
-                         libcore/src
+STRIP_FROM_INC_PATH    = src
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
 JAVADOC_BANNER         = NO
@@ -104,8 +103,7 @@ WARN_NO_PARAMDOC       = NO
 WARN_AS_ERROR          = NO
 WARN_FORMAT            = "$file:$line: $text"
 WARN_LOGFILE           =
-INPUT                  = app/src \
-                         libcore/src \
+INPUT                  = src \
                          docs-data/pages
 
 INPUT_ENCODING         = UTF-8

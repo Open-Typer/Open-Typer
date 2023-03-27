@@ -8,13 +8,13 @@ VERSION_MAJOR=$(echo $VERSION | sed 's/\..*//')
 . .ci/common/build.sh macos
 
 mkdir -p ${app_name}.app/Contents/Frameworks
+for f in libopentyper-*.dylib; do
+	install_name_tool -change $f @rpath/$f \
+		${app_name}.app/Contents/MacOS/${executable_name}
+done
 mv *.dylib ${app_name}.app/Contents/Frameworks/
-install_name_tool -change \
-	libopentyper-core.${VERSION_MAJOR}.dylib \
-	@rpath/libopentyper-core.${VERSION_MAJOR}.dylib \
-	${app_name}.app/Contents/MacOS/${executable_name}
-macdeployqt ${app_name}.app -qmldir=app/ui/qml
+macdeployqt ${app_name}.app -qmldir=src
 
 npm install -g appdmg
-mv ${app_name}.app app/res/macos-release/
-appdmg app/res/macos-release/open-typer.json ${app_name}.dmg
+mv ${app_name}.app res/macos-release/
+appdmg res/macos-release/open-typer.json ${app_name}.dmg

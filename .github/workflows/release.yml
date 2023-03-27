@@ -110,15 +110,14 @@ jobs:
     - if: contains(matrix.os, 'windows')
       name: Windows build
       run: |
-        lrelease ${{ env.app_name }}.pro || exit 2
         qmake INCLUDEPATH+=C:\OpenSSL\include LIBS+=-LC:\OpenSSL\lib || exit 3
         mingw32-make -j4 || exit 4
         mkdir release
         move ${{ env.executable_name }}.exe release/
         move *.dll release/
         cd release
-        windeployqt ${{ env.executable_name }}.exe --qmldir ..\app\ui\qml || exit 5
-        windeployqt opentyper-core.dll || exit 5
+        windeployqt ${{ env.executable_name }}.exe --qmldir ..\src || exit 5
+        for %%v in (opentyper-*.dll) do windeployqt "%%v" || exit 5
       shell: cmd
     - if: contains(matrix.os, 'windows')
       name: Finalize Windows build

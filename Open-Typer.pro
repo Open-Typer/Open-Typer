@@ -1,7 +1,7 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    app \
-    libcore
+    main \
+    src
 
-app.depends = libcore
+main.depends = src
