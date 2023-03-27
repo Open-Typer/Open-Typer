@@ -19,7 +19,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Open-Typer/Open-Typer">
-    <img src="app/res/linux-release/usr/share/pixmaps/open-typer.png" alt="Logo" width="80" height="80">
+    <img src="res/linux-release/usr/share/pixmaps/open-typer.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Open-Typer</h3>
@@ -128,7 +128,7 @@ To ensure that the code style is same in all C++ source files, please use `clang
 
 Run `clang-format` on all C++ source and header files you've changed:
 
-`clang-format -i app/src/*.cpp`
+`clang-format -i src/*.cpp`
 
 Omitting this step will cause the checks in your pull request to fail.
 
