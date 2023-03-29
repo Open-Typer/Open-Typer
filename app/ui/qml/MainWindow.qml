@@ -1378,7 +1378,7 @@ ApplicationWindow {
 		height = oldHeight;
 		if(Settings.windowMaximized())
 		{
-			if(QmlUtils.qtVersionMajor() < 6)
+			if(QmlUtils.osWindows() && (QmlUtils.qtVersionMajor() < 6))
 				showFullScreen();
 			showMaximized();
 		}
