@@ -45,7 +45,7 @@ ThemeEngine::ThemeEngine(QObject *parent) :
 /*! Returns selected font. */
 QFont ThemeEngine::font(void)
 {
-	if(!Settings::containsThemeFont() || !Settings::containsThemeFontSize() || !Settings::containsThemeFontBold() || !Settings::containsThemeFontItalic() || !Settings::containsThemeFontUnderline())
+	if(!Settings::containsThemeFont() || !Settings::containsThemeFontSize() || !Settings::containsThemeFontBold())
 	{
 		setFontFamily("");
 		setFontSize(20);
