@@ -147,17 +147,17 @@ class Q_DECL_EXPORT Settings : public QObject
 		Q_INVOKABLE static bool containsThemeFontSize(void);
 		Q_INVOKABLE static void setThemeFontSize(int value);
 		// themeFontBold
-		Q_INVOKABLE static bool themeFontBold(void);
-		Q_INVOKABLE static bool containsThemeFontBold(void);
-		Q_INVOKABLE static void setThemeFontBold(bool value);
+		Q_INVOKABLE Q_DECL_DEPRECATED static bool themeFontBold(void);
+		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsThemeFontBold(void);
+		Q_INVOKABLE Q_DECL_DEPRECATED static void setThemeFontBold(bool value);
 		// themeFontItalic
-		Q_INVOKABLE static bool themeFontItalic(void);
-		Q_INVOKABLE static bool containsThemeFontItalic(void);
-		Q_INVOKABLE static void setThemeFontItalic(bool value);
+		Q_INVOKABLE Q_DECL_DEPRECATED static bool themeFontItalic(void);
+		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsThemeFontItalic(void);
+		Q_INVOKABLE Q_DECL_DEPRECATED static void setThemeFontItalic(bool value);
 		// themeFontUnderline
-		Q_INVOKABLE static bool themeFontUnderline(void);
-		Q_INVOKABLE static bool containsThemeFontUnderline(void);
-		Q_INVOKABLE static void setThemeFontUnderline(bool value);
+		Q_INVOKABLE Q_DECL_DEPRECATED static bool themeFontUnderline(void);
+		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsThemeFontUnderline(void);
+		Q_INVOKABLE Q_DECL_DEPRECATED static void setThemeFontUnderline(bool value);
 		// customExerciseTextColor
 		Q_INVOKABLE static bool customExerciseTextColor(void);
 		Q_INVOKABLE static bool containsCustomExerciseTextColor(void);

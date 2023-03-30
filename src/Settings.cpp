@@ -318,35 +318,35 @@ void Settings::setThemeFontSize(int value) { set("theme/fontsize", value); }
 
 // themeFontBold
 
-/*! Getter for theme/fontbold. */
+/*! Getter for theme/fontbold. \deprecated Custom font style is deprecated. */
 bool Settings::themeFontBold(void) { return get("theme/fontbold", true).toBool(); }
 
-/*! Returns true if there's a theme/fontbold key. */
+/*! Returns true if there's a theme/fontbold key. \deprecated Custom font style is deprecated. */
 bool Settings::containsThemeFontBold(void) { return contains("theme/fontbold"); }
 
-/*! Setter for theme/fontbold. */
+/*! Setter for theme/fontbold. \deprecated Custom font style is deprecated. */
 void Settings::setThemeFontBold(bool value) { set("theme/fontbold", value); }
 
 // themeFontItalic
 
-/*! Getter for theme/fontitalic. */
+/*! Getter for theme/fontitalic. \deprecated Custom font style is deprecated. */
 bool Settings::themeFontItalic(void) { return get("theme/fontitalic", false).toBool(); }
 
-/*! Returns true if there's a theme/fontitalic key. */
+/*! Returns true if there's a theme/fontitalic key. \deprecated Custom font style is deprecated. */
 bool Settings::containsThemeFontItalic(void) { return contains("theme/fontitalic"); }
 
-/*! Setter for theme/fontitalic. */
+/*! Setter for theme/fontitalic. \deprecated Custom font style is deprecated. */
 void Settings::setThemeFontItalic(bool value) { set("theme/fontitalic", value); }
 
 // themeFontUnderline
 
-/*! Getter for theme/fontunderline. */
+/*! Getter for theme/fontunderline. \deprecated Custom font style is deprecated. */
 bool Settings::themeFontUnderline(void) { return get("theme/fontunderline", false).toBool(); }
 
-/*! Returns true if there's a theme/fontunderline key. */
+/*! Returns true if there's a theme/fontunderline key. \deprecated Custom font style is deprecated. */
 bool Settings::containsThemeFontUnderline(void) { return contains("theme/fontunderline"); }
 
-/*! Setter for theme/fontunderline. */
+/*! Setter for theme/fontunderline. \deprecated Custom font style is deprecated. */
 void Settings::setThemeFontUnderline(bool value) { set("theme/fontunderline", value); }
 
 // customExerciseTextColor
