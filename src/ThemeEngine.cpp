@@ -42,7 +42,10 @@ ThemeEngine::ThemeEngine(QObject *parent) :
 	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::currentAccentColorChanged);
 }
 
-/*! The selected font. */
+/*!
+ * The selected font.\n
+ * Note: Font style such as bold, italic or underlined is not supported.
+ */
 QFont ThemeEngine::font(void)
 {
 	if(!Settings::containsThemeFont() || !Settings::containsThemeFontSize() || !Settings::containsThemeFontBold())
@@ -112,7 +115,10 @@ int ThemeEngine::maxFontSize(void)
 	return 24;
 }
 
-/*! Whether the selected font is bold. */
+/*!
+ * Whether the selected font is bold.
+ * \deprecated The font is bold by default.
+ */
 bool ThemeEngine::fontBold(void)
 {
 	return font().bold();

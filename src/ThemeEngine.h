@@ -40,7 +40,7 @@ class Q_DECL_EXPORT ThemeEngine : public QObject
 		Q_PROPERTY(QFont font READ font WRITE setFont NOTIFY fontChanged)
 		Q_PROPERTY(QString fontFamily READ fontFamily WRITE setFontFamily NOTIFY fontFamilyChanged)
 		Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
-		Q_PROPERTY(bool fontBold READ fontBold WRITE setFontBold NOTIFY fontBoldChanged)
+		Q_PROPERTY(bool fontBold READ fontBold WRITE setFontBold NOTIFY fontBoldChanged) // deprecated
 		Q_PROPERTY(QColor exerciseTextColor READ exerciseTextColor WRITE setExerciseTextColor NOTIFY exerciseTextColorChanged)
 		Q_PROPERTY(QColor inputTextColor READ inputTextColor WRITE setInputTextColor NOTIFY inputTextColorChanged)
 		Q_PROPERTY(QColor bgColor READ bgColor WRITE setBgColor NOTIFY bgColorChanged)
@@ -82,8 +82,8 @@ class Q_DECL_EXPORT ThemeEngine : public QObject
 		void setFontSize(int size);
 		Q_INVOKABLE void increaseFontSize(int delta);
 		Q_INVOKABLE int maxFontSize(void);
-		bool fontBold(void);
-		void setFontBold(bool value);
+		Q_DECL_DEPRECATED bool fontBold(void);
+		Q_DECL_DEPRECATED void setFontBold(bool value);
 		// Exercise text color
 		Q_INVOKABLE bool customExerciseTextColor(void);
 		QColor exerciseTextColor(void);
