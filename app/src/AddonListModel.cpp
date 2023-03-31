@@ -105,6 +105,8 @@ void AddonListModel::load(QString filter)
 	connect(manager, &QNetworkAccessManager::finished, [this, manager, repoUrl, filter](QNetworkReply *reply) {
 		if(reply->error() != QNetworkReply::NoError)
 		{
+			m_items.clear();
+			emit itemsChanged();
 			emit loaded();
 			return;
 		}
