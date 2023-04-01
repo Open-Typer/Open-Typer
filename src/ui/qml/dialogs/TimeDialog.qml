@@ -43,6 +43,7 @@ CustomDialog {
 			Layout.fillHeight: true
 			RowLayout {
 				Label {
+					id: minutesLabel
 					text: qsTr("Minutes:")
 				}
 				SpinBox {
@@ -50,10 +51,12 @@ CustomDialog {
 					value: 15
 					to: 60
 					editable: true
+					Accessible.description: minutesLabel.text
 				}
 			}
 			RowLayout {
 				Label {
+					id: secondsLabel
 					text: qsTr("Seconds:")
 				}
 				SpinBox {
@@ -61,6 +64,7 @@ CustomDialog {
 					value: 0
 					to: 59
 					editable: true
+					Accessible.description: secondsLabel.text
 				}
 			}
 		}
