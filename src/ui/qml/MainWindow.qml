@@ -103,10 +103,13 @@ ApplicationWindow {
 			wasMaximized = true;
 		else if(visibility == ApplicationWindow.Windowed)
 		{
-			width = oldWidth;
-			height = oldHeight;
-			x = oldX;
-			y = oldY;
+			if(!QmlUtils.osMac())
+			{
+				width = oldWidth;
+				height = oldHeight;
+				x = oldX;
+				y = oldY;
+			}
 			wasMaximized = false;
 		}
 	}
