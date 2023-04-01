@@ -66,6 +66,7 @@ class CORE_LIB_EXPORT QmlUtils : public QObject
 		Q_INVOKABLE static void restartApplication(void);
 		Q_INVOKABLE static bool osWindows(void);
 		Q_INVOKABLE static bool osWasm(void);
+		Q_INVOKABLE static bool osMac(void);
 		Q_INVOKABLE void reloadMenuBar(void);
 		Q_INVOKABLE static void printExercise(int lesson, int sublesson, int exercise, QString text);
 		Q_INVOKABLE static void printExercise(QString text);

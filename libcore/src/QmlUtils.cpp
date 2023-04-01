@@ -161,6 +161,16 @@ bool QmlUtils::osWasm(void)
 #endif
 }
 
+/*! Returns true if the platform is macOS. \since Open-Typer 5.0.3 */
+bool QmlUtils::osMac(void)
+{
+#ifdef Q_OS_MACOS
+	return true;
+#else
+	return false;
+#endif
+}
+
 /*! Reloads the menu bar (e. g. after language change). */
 void QmlUtils::reloadMenuBar(void)
 {
