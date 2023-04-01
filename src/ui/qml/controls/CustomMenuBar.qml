@@ -140,23 +140,31 @@ MenuBar {
 
 	Component.onCompleted: reload();
 
-	onEnabledChanged: platformMenuBar.reload();
+	onEnabledChanged: {
+		if(platformMenuBarLoader.active)
+			platformMenuBarLoader.item.reload();
+	}
 
-	Platform.MenuBar {
-		id: platformMenuBar
-		function reload() {
-			clear();
-			if(QmlUtils.nativeMenuBar() && root.enabled)
-				createMenuBar(platformMenuBar, "Platform.Menu", "Platform.MenuItem", "Platform.MenuSeparator");
-		}
+	Loader {
+		id: platformMenuBarLoader
+		active: QmlUtils.nativeMenuBar()
 
-		Connections {
-			target: QmlUtils
-			onMenuBarReloadTriggered: {
-				platformMenuBar.reload();
+		sourceComponent: Platform.MenuBar {
+			id: platformMenuBar
+			function reload() {
+				clear();
+				if(QmlUtils.nativeMenuBar() && root.enabled)
+					createMenuBar(platformMenuBar, "Platform.Menu", "Platform.MenuItem", "Platform.MenuSeparator");
 			}
-		}
 
-		Component.onCompleted: reload();
+			Connections {
+				target: QmlUtils
+				onMenuBarReloadTriggered: {
+					platformMenuBar.reload();
+				}
+			}
+
+			Component.onCompleted: reload();
+		}
 	}
 }
