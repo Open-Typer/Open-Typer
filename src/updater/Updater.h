@@ -27,7 +27,7 @@
 #include <QProcess>
 #include <QDateTime>
 #ifndef Q_OS_WASM
-#include "AddonListModel.h"
+#include "addons/AddonListModel.h"
 #endif
 
 /*! \brief The Updater class is used to check for updates and download new versions of the program. */
