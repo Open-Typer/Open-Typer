@@ -88,7 +88,7 @@ CustomDialog {
 						icon.name: "add"
 						text: qsTr("Add class")
 						onClicked: ClassManager.createNewClass()
-						KeyNavigation.tab: listView
+						KeyNavigation.tab: listView.count > 0 ? listView : standardButton(Dialog.Close)
 					}
 				}
 
