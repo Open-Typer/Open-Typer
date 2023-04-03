@@ -2,7 +2,6 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     app \
-    addons \
     export \
     framework \
     grades \
@@ -10,9 +9,13 @@ SUBDIRS += \
     updater
 
 app.depends = \
-    addons \
     export \
     framework \
     grades \
     history \
     updater
+
+!wasm {
+    SUBDIRS += addons
+    app.depends += addons
+}
