@@ -1,5 +1,5 @@
 TEMPLATE = lib
-QT += core qml
+QT += core widgets qml
 CONFIG += staticlib
 
 !wasm {
