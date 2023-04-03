@@ -121,11 +121,11 @@ int main(int argc, char *argv[])
 	qmlRegisterSingletonType<AppMenuBar>("OpenTyper", 1, 0, "AppMenuBar", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalMenuBar;
 	});
+#ifndef Q_OS_WASM
 	QQmlEngine::setObjectOwnership(&globalAddonApi, QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<AddonApi>("OpenTyper", 1, 0, "AddonApi", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalAddonApi;
 	});
-#ifndef Q_OS_WASM
 	QQmlEngine::setObjectOwnership(&globalAddonManager, QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<AddonManager>("OpenTyper", 1, 0, "AddonManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalAddonManager;
@@ -153,16 +153,19 @@ int main(int argc, char *argv[])
 	qmlRegisterType<AddonItemModel>("OpenTyper", 1, 0, "AddonItemModel");
 	qmlRegisterType<AddonListModel>("OpenTyper", 1, 0, "AddonListModel");
 	qmlRegisterType<AddonModel>("OpenTyper", 1, 0, "AddonModel");
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
+#else
+	qmlRegisterUncreatableType<AddonButton>("OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
+#endif
+	qRegisterMetaType<QList<AddonButton *>>();
 #endif
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterUncreatableMetaObject(MistakeRecord::staticMetaObject, "OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
-	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
 #else
 	qmlRegisterUncreatableType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
-	qmlRegisterUncreatableType<AddonButton>("OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
 #endif
 	qRegisterMetaType<QList<MistakeRecord>>();
-	qRegisterMetaType<QList<AddonButton *>>();
 	qRegisterMetaType<QMap<int, int>>();
 	qRegisterMetaType<CharacterRecord>();
 	qRegisterMetaType<HistoryEntry>();
