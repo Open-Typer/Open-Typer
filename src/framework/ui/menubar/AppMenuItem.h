@@ -23,7 +23,7 @@
 
 #include <QObject>
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-Q_MOC_INCLUDE("AppMenuModel.h")
+Q_MOC_INCLUDE("framework/ui/menubar/AppMenuModel.h")
 #endif
 
 class Q_DECL_EXPORT AppMenuModel;
