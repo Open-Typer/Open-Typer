@@ -16,7 +16,10 @@ macx {
     QT += svg
 }
 
-LIBS += -L../addons -laddons
+!wasm {
+        LIBS += -L../addons -laddons
+}
+
 LIBS += -L../export -lexport
 LIBS += -L../grades -lgrades
 LIBS += -L../history -lhistory
