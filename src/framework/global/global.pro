@@ -10,4 +10,5 @@ SOURCES += \
 HEADERS += \
     FileUtils.h \
     global.h \
-    StringUtils.h
+    StringUtils.h \
+    modularity/IModuleSetup.h
