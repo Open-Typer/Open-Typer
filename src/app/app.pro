@@ -12,6 +12,10 @@ linux {
     QT += printsupport
 }
 
+macx {
+    QT += svg
+}
+
 LIBS += -L../addons -laddons
 LIBS += -L../export -lexport
 LIBS += -L../grades -lgrades
