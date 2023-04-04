@@ -33,7 +33,6 @@
 #include "addons/AddonApi.h"
 #include "addons/AddonButton.h"
 #include "lessonpack/ConfigParser.h"
-#include "keyboard/QmlKeyboardHandler.h"
 #include "utils/ExerciseTimer.h"
 #include "validator/CharacterRecord.h"
 #include "validator/MistakeRecord.h"
@@ -42,8 +41,6 @@
 #include "uicomponents/QmlFileDialog.h"
 #include "BuiltInPacks.h"
 #include "history/HistoryParser.h"
-#include "keyboard/KeyboardLayout.h"
-#include "keyboard/Key.h"
 #include "uicomponents/QmlWidget.h"
 #include "export/ExportProvider.h"
 #include "export/ExportTable.h"
@@ -110,9 +107,6 @@ int App::run(int argc, char **argv)
 	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalThemeEngine;
 	});
-	qmlRegisterSingletonType<KeyboardUtils>("OpenTyper", 1, 0, "KeyboardUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return new KeyboardUtils;
-	});
 	qmlRegisterSingletonType<QmlUtils>("OpenTyper", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		QmlUtils *qmlUtils = new QmlUtils;
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
@@ -142,11 +136,9 @@ int App::run(int argc, char **argv)
 		return &globalClassManager;
 	});
 	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
-	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
-	qmlRegisterType<KeyboardLayout>("OpenTyper", 1, 0, "KeyboardLayout");
 	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
 	qmlRegisterType<QmlWidget>("OpenTyper", 1, 0, "Widget");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
@@ -175,8 +167,6 @@ int App::run(int argc, char **argv)
 	qRegisterMetaType<QMap<int, int>>();
 	qRegisterMetaType<CharacterRecord>();
 	qRegisterMetaType<HistoryEntry>();
-	qRegisterMetaType<Key>();
-	qRegisterMetaType<KeyboardRow>();
 	qRegisterMetaType<ClassManager::GradingMethod>();
 	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
 	// TODO: Remove this after fully switching to Qt 6

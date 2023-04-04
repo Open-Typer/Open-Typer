@@ -5,12 +5,14 @@ CONFIG += staticlib
 SOURCES += \
     Key.cpp \
     KeyboardLayout.cpp \
+    KeyboardModule.cpp \
     KeyboardUtils.cpp \
     QmlKeyboardHandler.cpp
 
 HEADERS += \
     Key.h \
     KeyboardLayout.h \
+    KeyboardModule.h \
     KeyboardUtils.h \
     QmlKeyboardHandler.h
 
