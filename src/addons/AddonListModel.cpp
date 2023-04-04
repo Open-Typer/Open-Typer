@@ -22,9 +22,9 @@
 #include <QNetworkReply>
 #include "AddonListModel.h"
 #include "AddonManager.h"
-#include "framework/global/FileUtils.h"
-#include "framework/global/StringUtils.h"
-#include "framework/global/global.h"
+#include "global/FileUtils.h"
+#include "global/StringUtils.h"
+#include "global/global.h"
 
 /*! Constructs AddonListModel. */
 AddonListModel::AddonListModel(QObject *parent) :

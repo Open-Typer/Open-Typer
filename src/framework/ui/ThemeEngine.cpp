@@ -20,7 +20,7 @@
  */
 
 #include "ThemeEngine.h"
-#include "framework/settings/Settings.h"
+#include "settings/Settings.h"
 #include "QmlUtils.h"
 
 ThemeEngine globalThemeEngine;

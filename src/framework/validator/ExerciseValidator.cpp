@@ -19,7 +19,7 @@
  */
 
 #include "ExerciseValidator.h"
-#include "framework/global/StringUtils.h"
+#include "global/StringUtils.h"
 
 /*! Constructs ExerciseValidator. */
 ExerciseValidator::ExerciseValidator(QObject *parent) :

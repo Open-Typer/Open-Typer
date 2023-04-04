@@ -26,7 +26,7 @@
 #include <QAbstractTextDocumentLayout>
 #endif // Q_OS_WASM
 #include "ExportProvider.h"
-#include "framework/ui/ThemeEngine.h"
+#include "ui/ThemeEngine.h"
 
 /*! Constructs ExportProvider. */
 ExportProvider::ExportProvider(QObject *parent) :

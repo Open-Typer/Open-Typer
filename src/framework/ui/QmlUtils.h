@@ -24,8 +24,8 @@
 #include <QObject>
 #include <QQuickItem>
 #include <QFont>
-#include "framework/validator/MistakeRecord.h"
-#include "framework/validator/CharacterRecord.h"
+#include "validator/MistakeRecord.h"
+#include "validator/CharacterRecord.h"
 
 /*! \brief The QmlUtils class acts like a bridge for QML code. */
 class Q_DECL_EXPORT QmlUtils : public QObject

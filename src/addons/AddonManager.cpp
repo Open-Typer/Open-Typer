@@ -25,7 +25,7 @@
 #include <QProcessEnvironment>
 #include <QCoreApplication>
 #include "AddonManager.h"
-#include "framework/global/FileUtils.h"
+#include "global/FileUtils.h"
 #include "IAddon.h"
 
 const QString AddonManager::addonModelNameProperty = "name";

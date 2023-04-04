@@ -23,7 +23,7 @@
 
 #include <QAbstractTableModel>
 #include <QSize>
-#include "framework/validator/ExerciseValidator.h"
+#include "validator/ExerciseValidator.h"
 
 /*!
  * \brief The ExportTableModel class provides a table model for typing test results.

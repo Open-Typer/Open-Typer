@@ -22,7 +22,7 @@
 #define EXPORTTABLE_H
 
 #include <QTableView>
-#include "framework/validator/ExerciseValidator.h"
+#include "validator/ExerciseValidator.h"
 
 /*! \brief The ExportTable class provides a table for typing test results. */
 class Q_DECL_EXPORT ExportTable : public QTableView

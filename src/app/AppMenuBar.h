@@ -22,7 +22,7 @@
 #define APPMENUBAR_H
 
 #include <QObject>
-#include "framework/ui/menubar/AbstractMenuBar.h"
+#include "ui/menubar/AbstractMenuBar.h"
 
 /*!
  * \brief The AppMenuBar class provides a model for the application menu bar.

@@ -25,7 +25,7 @@
 #include <QFile>
 #include <QBuffer>
 #include <QString>
-#include "framework/global/StringUtils.h"
+#include "global/StringUtils.h"
 
 namespace publicPos {
 	Q_DECL_EXPORT Q_NAMESPACE;

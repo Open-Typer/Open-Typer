@@ -25,7 +25,7 @@
 #include <QString>
 #include <QVector>
 #include "FileUtils.h"
-#include "framework/settings/Settings.h"
+#include "settings/Settings.h"
 
 /*! \brief The StringUtils class contains functions related to strings. */
 class Q_DECL_EXPORT StringUtils : public QObject

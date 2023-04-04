@@ -29,7 +29,7 @@
 #include <QFontDatabase>
 #include <QColor>
 #include <QFile>
-#include "framework/global/FileUtils.h"
+#include "global/FileUtils.h"
 
 class Settings;
 

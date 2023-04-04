@@ -20,7 +20,7 @@
  */
 
 #include "HistoryParser.h"
-#include "framework/global/FileUtils.h"
+#include "global/FileUtils.h"
 
 const QString HistoryParser::historyFile = "/history.json";
 const QString HistoryParser::speedProperty = "speed";

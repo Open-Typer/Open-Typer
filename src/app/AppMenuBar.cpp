@@ -22,7 +22,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include "AppMenuBar.h"
-#include "framework/ui/ThemeEngine.h"
+#include "ui/ThemeEngine.h"
 
 AppMenuBar globalMenuBar;
 

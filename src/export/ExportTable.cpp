@@ -22,7 +22,7 @@
 #include <QLabel>
 #include "ExportTable.h"
 #include "ExportTableModel.h"
-#include "framework/ui/ThemeEngine.h"
+#include "ui/ThemeEngine.h"
 
 /*! Constructs ExportTable. */
 ExportTable::ExportTable(QWidget *parent) :

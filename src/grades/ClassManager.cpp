@@ -22,8 +22,8 @@
 #include <QJsonObject>
 #include <QDate>
 #include "ClassManager.h"
-#include "framework/global/FileUtils.h"
-#include "framework/settings/Settings.h"
+#include "global/FileUtils.h"
+#include "settings/Settings.h"
 
 const QString ClassManager::nameProperty = "name";
 const QString ClassManager::descriptionProperty = "description";

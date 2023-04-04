@@ -30,7 +30,7 @@
 #include <QLayout>
 #include "app/settings/SettingsCategory.h"
 #include "AddonButton.h"
-#include "framework/ui/menubar/AppMenuModel.h"
+#include "ui/menubar/AppMenuModel.h"
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 Q_MOC_INCLUDE("IAddon.h")
 #endif

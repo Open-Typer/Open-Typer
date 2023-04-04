@@ -35,8 +35,8 @@
 #endif
 #include "QmlUtils.h"
 #include "ThemeEngine.h"
-#include "framework/lessonpack/ConfigParser.h"
-#include "framework/global/global.h"
+#include "lessonpack/ConfigParser.h"
+#include "global/global.h"
 
 /*!
  * Returns QML background blur source.

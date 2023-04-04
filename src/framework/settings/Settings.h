@@ -25,8 +25,8 @@
 #include <QApplication>
 #include <QRgb>
 #include <QColor>
-#include "framework/global/FileUtils.h"
-#include "framework/ui/ThemeEngine.h"
+#include "global/FileUtils.h"
+#include "ui/ThemeEngine.h"
 #include "grades/ClassManager.h"
 
 /*!

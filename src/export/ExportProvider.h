@@ -23,7 +23,7 @@
 
 #include <QWidget>
 #include <QTextEdit>
-#include "framework/validator/ExerciseValidator.h"
+#include "validator/ExerciseValidator.h"
 #include "ExportTable.h"
 
 /*! \brief The ExportProvider class provides methods for the export dialog. */

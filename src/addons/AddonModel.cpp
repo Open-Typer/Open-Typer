@@ -24,7 +24,7 @@
 #include <QDir>
 #include <QFile>
 #include "AddonModel.h"
-#include "framework/global/FileUtils.h"
+#include "global/FileUtils.h"
 
 /*! Constructs AddonModel. */
 AddonModel::AddonModel(QObject *parent) :

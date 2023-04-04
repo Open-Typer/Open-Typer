@@ -24,7 +24,7 @@
 #include "updater/Updater.h"
 #ifndef Q_OS_WASM
 #include "addons/AddonManager.h"
-#include "framework/global/global.h"
+#include "global/global.h"
 
 AddonListModel Updater::listModel;
 QList<AddonItemModel *> Updater::updatableAddons;

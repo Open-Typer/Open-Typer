@@ -19,7 +19,7 @@
  */
 
 #include "Settings.h"
-#include "framework/translations/LanguageManager.h"
+#include "translations/LanguageManager.h"
 
 QSettings *Settings::settingsInstance = nullptr;
 QSettings *Settings::mainSettingsInstance = nullptr;
