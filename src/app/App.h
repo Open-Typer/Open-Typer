@@ -33,6 +33,7 @@ class App
 
 	private:
 		void changeSplashMessage(QSplashScreen *splash, QString message);
+		QList<IModuleSetup *> m_modules;
 };
 
 #endif // APP_H

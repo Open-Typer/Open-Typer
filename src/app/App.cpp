@@ -54,10 +54,14 @@
 #include "addons/AddonManager.h"
 #endif
 #include "global/global.h"
+#include "global/GlobalModule.h"
 #include "updater/Updater.h"
+
+static GlobalModule globalModule;
 
 App::App()
 {
+	addModule(&globalModule);
 }
 
 int App::run(int argc, char **argv)
@@ -74,6 +78,13 @@ int App::run(int argc, char **argv)
 #ifdef BUILD_VERSION
 	QCoreApplication::setApplicationVersion(BUILD_VERSION);
 #endif // BUILD_VERSION
+	for(IModuleSetup *module : m_modules)
+	{
+		module->registerResources();
+		module->registerUiTypes();
+	}
+	for(IModuleSetup *module : m_modules)
+		module->onPreInit();
 	// Initialize settings
 	Settings::init();
 	// Set language
@@ -182,11 +193,15 @@ int App::run(int argc, char **argv)
 	int currentExitCode;
 	do
 	{
+		for(IModuleSetup *module : m_modules)
+			module->onInit();
 #ifndef Q_OS_WASM
 		if(!addonsLoaded)
 			globalAddonManager.loadAddons();
 #endif
 		QQmlApplicationEngine engine;
+		for(IModuleSetup *module : m_modules)
+			module->setRootContextProperties(engine.rootContext());
 		engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
 		Settings settings;
@@ -202,9 +217,13 @@ int App::run(int argc, char **argv)
 		ExportTable table;
 		engine.rootContext()->setContextProperty("exportTable", &table);
 		engine.load("qrc:/qml/MainWindow.qml");
+		for(IModuleSetup *module : m_modules)
+			module->onStartApp();
 		if(splash.isVisible())
 			splash.close();
 		currentExitCode = a.exec();
+		for(IModuleSetup *module : m_modules)
+			module->onDeinit();
 #ifndef Q_OS_WASM
 		globalAddonManager.unloadAddons();
 		addonsLoaded = false;
@@ -212,7 +231,17 @@ int App::run(int argc, char **argv)
 		if(Settings::isFrozen())
 			Settings::saveChanges();
 	} while(currentExitCode == EXIT_CODE_REBOOT);
+
+	for(IModuleSetup *module : m_modules)
+		module->onDestroy();
+	qDeleteAll(m_modules);
+	m_modules.clear();
 	return currentExitCode;
+}
+
+void App::addModule(IModuleSetup *module)
+{
+	m_modules.append(module);
 }
 
 void App::changeSplashMessage(QSplashScreen *splash, QString message)
