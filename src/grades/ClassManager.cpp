@@ -23,7 +23,7 @@
 #include <QDate>
 #include "ClassManager.h"
 #include "global/FileUtils.h"
-#include "settings/Settings.h"
+#include "global/Settings.h"
 
 const QString ClassManager::nameProperty = "name";
 const QString ClassManager::descriptionProperty = "description";

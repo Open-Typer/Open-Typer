@@ -20,7 +20,7 @@
 
 #include <QDate>
 #include "ExportTableModel.h"
-#include "settings/Settings.h"
+#include "global/Settings.h"
 
 const QMap<QPair<int, int>, QPair<int, int>> ExportTableModel::spans = {
 	{ { 0, 0 }, { 1, 4 } },

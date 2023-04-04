@@ -28,7 +28,7 @@
 #include <QtSvg>
 #endif
 #include "App.h"
-#include "settings/Settings.h"
+#include "global/Settings.h"
 #include "translations/LanguageManager.h"
 #include "addons/AddonApi.h"
 #include "addons/AddonButton.h"

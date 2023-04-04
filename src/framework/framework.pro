@@ -4,7 +4,6 @@ SUBDIRS += \
     global \
     lessonpack \
     keyboard \
-    settings \
     translations \
     ui \
     uicomponents \
