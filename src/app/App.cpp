@@ -204,16 +204,10 @@ int App::run(int argc, char **argv)
 			module->setRootContextProperties(engine.rootContext());
 		engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
-		Settings settings;
-		engine.rootContext()->setContextProperty("Settings", &settings);
 		Updater updater;
 		engine.rootContext()->setContextProperty("Updater", &updater);
-		FileUtils fileUtils;
-		engine.rootContext()->setContextProperty("FileUtils", &fileUtils);
 		BuiltInPacks builtInPacks;
 		engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
-		StringUtils stringUtils;
-		engine.rootContext()->setContextProperty("StringUtils", &stringUtils);
 		ExportTable table;
 		engine.rootContext()->setContextProperty("exportTable", &table);
 		engine.load("qrc:/qml/MainWindow.qml");
