@@ -27,12 +27,14 @@ LIBS += -L../updater -lupdater
 include(../framework/framework.pri)
 
 SOURCES += \
+    App.cpp \
     AppMenuBar.cpp \
     BuiltInPacks.cpp \
     main.cpp \
     settings/SettingsCategory.cpp
 
 HEADERS += \
+    App.h \
     AppMenuBar.h \
     BuiltInPacks.h \
     settings/SettingsCategory.h
