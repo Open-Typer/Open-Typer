@@ -37,8 +37,8 @@ release/
 *.qm
 moc_predefs.h
 qmlcache_loader.cpp
-ui_qml_*_qml.cpp
-ui_qml_*_qmlcache.qrc
+*ui_qml_*_qml.cpp
+*ui_qml_*_qmlcache.qrc
 qmake_*.qrc
 open-typer
 
