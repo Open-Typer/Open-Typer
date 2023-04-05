@@ -21,6 +21,7 @@
 #include <QQmlEngine>
 #include "AppModule.h"
 #include "AppMenuBar.h"
+#include "settings/SettingsCategory.h"
 
 std::string AppModule::moduleName() const
 {
@@ -33,6 +34,7 @@ void AppModule::registerUiTypes()
 	qmlRegisterSingletonType<AppMenuBar>("OpenTyper", 1, 0, "AppMenuBar", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalMenuBar;
 	});
+	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
 }
 
 void AppModule::setRootContextProperties(QQmlContext *context)

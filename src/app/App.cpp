@@ -28,7 +28,6 @@
 #include <QtSvg>
 #endif
 #include "App.h"
-#include "settings/SettingsCategory.h"
 #include "translations/LanguageManager.h"
 #include "global/global.h"
 #include "global/GlobalModule.h"
@@ -67,7 +66,6 @@ int App::run(int argc, char **argv)
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
-	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
 	qRegisterMetaType<QMap<int, int>>();
 	// TODO: Remove this after fully switching to Qt 6
 	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
