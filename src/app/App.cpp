@@ -30,9 +30,6 @@
 #include "translations/LanguageManager.h"
 #include "addons/AddonApi.h"
 #include "addons/AddonButton.h"
-#include "validator/CharacterRecord.h"
-#include "validator/MistakeRecord.h"
-#include "validator/ExerciseValidator.h"
 #include "BuiltInPacks.h"
 #include "history/HistoryParser.h"
 #include "export/ExportProvider.h"
@@ -106,7 +103,6 @@ int App::run(int argc, char **argv)
 	qmlRegisterSingletonType<ClassManager>("OpenTyper", 1, 0, "ClassManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalClassManager;
 	});
-	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
@@ -123,14 +119,7 @@ int App::run(int argc, char **argv)
 #endif
 	qRegisterMetaType<QList<AddonButton *>>();
 #endif
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	qmlRegisterUncreatableMetaObject(MistakeRecord::staticMetaObject, "OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
-#else
-	qmlRegisterUncreatableType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
-#endif
-	qRegisterMetaType<QList<MistakeRecord>>();
 	qRegisterMetaType<QMap<int, int>>();
-	qRegisterMetaType<CharacterRecord>();
 	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<ClassManager::GradingMethod>();
 	// TODO: Remove this after fully switching to Qt 6

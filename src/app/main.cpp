@@ -26,6 +26,7 @@
 #include "ui/UiModule.h"
 #include "uicomponents/UiComponentsModule.h"
 #include "utils/UtilsModule.h"
+#include "validator/ValidatorModule.h"
 
 int main(int argc, char *argv[])
 {
@@ -36,5 +37,6 @@ int main(int argc, char *argv[])
 	app.addModule(new UiModule);
 	app.addModule(new UiComponentsModule);
 	app.addModule(new UtilsModule);
+	app.addModule(new ValidatorModule);
 	return app.run(argc, argv);
 }
