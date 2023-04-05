@@ -1,9 +1,11 @@
 TEMPLATE = lib
-QT += core
+QT += core qml
 CONFIG += staticlib
 
 SOURCES += \
-    ExerciseTimer.cpp
+    ExerciseTimer.cpp \
+    UtilsModule.cpp
 
 HEADERS += \
-    ExerciseTimer.h
+    ExerciseTimer.h \
+    UtilsModule.h

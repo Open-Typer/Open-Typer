@@ -30,7 +30,6 @@
 #include "translations/LanguageManager.h"
 #include "addons/AddonApi.h"
 #include "addons/AddonButton.h"
-#include "utils/ExerciseTimer.h"
 #include "validator/CharacterRecord.h"
 #include "validator/MistakeRecord.h"
 #include "validator/ExerciseValidator.h"
@@ -107,7 +106,6 @@ int App::run(int argc, char **argv)
 	qmlRegisterSingletonType<ClassManager>("OpenTyper", 1, 0, "ClassManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalClassManager;
 	});
-	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
