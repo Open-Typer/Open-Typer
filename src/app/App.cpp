@@ -30,11 +30,9 @@
 #include "translations/LanguageManager.h"
 #include "addons/AddonApi.h"
 #include "addons/AddonButton.h"
-#include "BuiltInPacks.h"
 #include "history/HistoryParser.h"
 #include "export/ExportProvider.h"
 #include "export/ExportTable.h"
-#include "AppMenuBar.h"
 #include "grades/ClassManager.h"
 #ifndef Q_OS_WASM
 #include "addons/AddonListModel.h"
@@ -85,10 +83,6 @@ int App::run(int argc, char **argv)
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
-	QQmlEngine::setObjectOwnership(&globalMenuBar, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<AppMenuBar>("OpenTyper", 1, 0, "AppMenuBar", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalMenuBar;
-	});
 #ifndef Q_OS_WASM
 	QQmlEngine::setObjectOwnership(&globalAddonApi, QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<AddonApi>("OpenTyper", 1, 0, "AddonApi", [](QQmlEngine *, QJSEngine *) -> QObject * {
@@ -149,8 +143,6 @@ int App::run(int argc, char **argv)
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
 		Updater updater;
 		engine.rootContext()->setContextProperty("Updater", &updater);
-		BuiltInPacks builtInPacks;
-		engine.rootContext()->setContextProperty("BuiltInPacks", &builtInPacks);
 		ExportTable table;
 		engine.rootContext()->setContextProperty("exportTable", &table);
 		engine.load("qrc:/qml/MainWindow.qml");

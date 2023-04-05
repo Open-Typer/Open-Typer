@@ -29,6 +29,7 @@ include(../framework/framework.pri)
 SOURCES += \
     App.cpp \
     AppMenuBar.cpp \
+    AppModule.cpp \
     BuiltInPacks.cpp \
     main.cpp \
     settings/SettingsCategory.cpp
@@ -36,6 +37,7 @@ SOURCES += \
 HEADERS += \
     App.h \
     AppMenuBar.h \
+    AppModule.h \
     BuiltInPacks.h \
     settings/SettingsCategory.h
 

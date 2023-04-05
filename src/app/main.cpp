@@ -20,6 +20,7 @@
  */
 
 #include "App.h"
+#include "AppModule.h"
 #include "keyboard/KeyboardModule.h"
 #include "lessonpack/LessonPackModule.h"
 #include "translations/TranslationsModule.h"
@@ -31,6 +32,7 @@
 int main(int argc, char *argv[])
 {
 	App app;
+	// Framework
 	app.addModule(new KeyboardModule);
 	app.addModule(new LessonPackModule);
 	app.addModule(new TranslationsModule);
@@ -38,5 +40,7 @@ int main(int argc, char *argv[])
 	app.addModule(new UiComponentsModule);
 	app.addModule(new UtilsModule);
 	app.addModule(new ValidatorModule);
+	// Application modules
+	app.addModule(new AppModule);
 	return app.run(argc, argv);
 }
