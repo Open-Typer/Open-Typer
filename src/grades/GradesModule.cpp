@@ -35,4 +35,5 @@ void GradesModule::registerUiTypes()
 	});
 	qmlRegisterType<Class>("OpenTyper", 1, 0, "Class");
 	qRegisterMetaType<ClassManager::GradingMethod>();
+	qRegisterMetaType<QMap<int, int>>();
 }
