@@ -22,7 +22,6 @@
 #define SETTINGS_H
 
 #include <QSettings>
-#include <QApplication>
 #include <QRgb>
 #include <QColor>
 #include "global/FileUtils.h"

@@ -18,6 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QApplication>
 #include "Settings.h"
 #include "translations/LanguageManager.h"
 
