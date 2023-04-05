@@ -83,12 +83,6 @@ int App::run(int argc, char **argv)
 		module->onPreInit();
 	// Initialize settings
 	Settings::init();
-	// Set language
-	globalLanguageManager.init();
-	if(Settings::language() == "")
-		globalLanguageManager.setLanguage(-1);
-	else
-		globalLanguageManager.setLanguage(globalLanguageManager.getBoxItems().indexOf(Settings::language()) - 1);
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();
@@ -111,10 +105,6 @@ int App::run(int argc, char **argv)
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
 		QObject::connect(&globalThemeEngine, &ThemeEngine::themeChanged, qmlUtils, &QmlUtils::reloadMenuBar);
 		return qmlUtils;
-	});
-	QQmlEngine::setObjectOwnership(&globalLanguageManager, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<LanguageManager>("OpenTyper", 1, 0, "LanguageManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalLanguageManager;
 	});
 	QQmlEngine::setObjectOwnership(&globalMenuBar, QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<AppMenuBar>("OpenTyper", 1, 0, "AppMenuBar", [](QQmlEngine *, QJSEngine *) -> QObject * {
