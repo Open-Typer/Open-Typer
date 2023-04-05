@@ -19,6 +19,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QApplication>
 #include "ThemeEngine.h"
 #include "global/Settings.h"
 #include "QmlUtils.h"

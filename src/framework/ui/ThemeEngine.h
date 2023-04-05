@@ -23,7 +23,6 @@
 #define THEMEENGINE_H
 
 #include <QObject>
-#include <QApplication>
 #include <QWidget>
 #include <QFont>
 #include <QFontDatabase>
