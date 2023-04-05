@@ -21,6 +21,7 @@
 #include <QStyle>
 #include <QFontDatabase>
 #include <QFontInfo>
+#include <QApplication>
 #ifndef Q_OS_WASM
 #include <QPrinter>
 #include <QPrintPreviewDialog>
