@@ -32,7 +32,6 @@
 #include "translations/LanguageManager.h"
 #include "addons/AddonApi.h"
 #include "addons/AddonButton.h"
-#include "lessonpack/ConfigParser.h"
 #include "utils/ExerciseTimer.h"
 #include "validator/CharacterRecord.h"
 #include "validator/MistakeRecord.h"
@@ -135,7 +134,6 @@ int App::run(int argc, char **argv)
 	qmlRegisterSingletonType<ClassManager>("OpenTyper", 1, 0, "ClassManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalClassManager;
 	});
-	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
 	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
@@ -168,7 +166,6 @@ int App::run(int argc, char **argv)
 	qRegisterMetaType<CharacterRecord>();
 	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<ClassManager::GradingMethod>();
-	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
 	// TODO: Remove this after fully switching to Qt 6
 	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

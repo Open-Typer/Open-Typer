@@ -1,9 +1,8 @@
 /*
- * main.cpp
+ * LessonPackModule.cpp
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2023 - adazem009
- * Copyright (C) 2022-2023 - Roker2
+ * Copyright (C) 2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,14 +18,17 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "App.h"
-#include "keyboard/KeyboardModule.h"
-#include "lessonpack/LessonPackModule.h"
+#include <QQmlEngine>
+#include "LessonPackModule.h"
+#include "ConfigParser.h"
 
-int main(int argc, char *argv[])
+std::string LessonPackModule::moduleName() const
 {
-	App app;
-	app.addModule(new KeyboardModule);
-	app.addModule(new LessonPackModule);
-	return app.run(argc, argv);
+	return "lessonpack";
+}
+
+void LessonPackModule::registerUiTypes()
+{
+	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
+	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
 }

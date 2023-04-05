@@ -1,9 +1,8 @@
 /*
- * main.cpp
+ * LessonPackModule.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2023 - adazem009
- * Copyright (C) 2022-2023 - Roker2
+ * Copyright (C) 2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,14 +18,17 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "App.h"
-#include "keyboard/KeyboardModule.h"
-#include "lessonpack/LessonPackModule.h"
+#ifndef LESSONPACKMODULE_H
+#define LESSONPACKMODULE_H
 
-int main(int argc, char *argv[])
+#include <global/modularity/IModuleSetup.h>
+
+class LessonPackModule : public IModuleSetup
 {
-	App app;
-	app.addModule(new KeyboardModule);
-	app.addModule(new LessonPackModule);
-	return app.run(argc, argv);
-}
+	public:
+		std::string moduleName() const override;
+
+		void registerUiTypes() override;
+};
+
+#endif // LESSONPACKMODULE_H
