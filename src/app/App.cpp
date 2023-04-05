@@ -27,17 +27,12 @@
 #include <QtSvg>
 #endif
 #include "App.h"
+#include "settings/SettingsCategory.h"
 #include "translations/LanguageManager.h"
-#include "addons/AddonApi.h"
-#include "addons/AddonButton.h"
 #include "history/HistoryParser.h"
 #include "export/ExportProvider.h"
 #include "export/ExportTable.h"
 #include "grades/ClassManager.h"
-#ifndef Q_OS_WASM
-#include "addons/AddonListModel.h"
-#include "addons/AddonManager.h"
-#endif
 #include "global/global.h"
 #include "global/GlobalModule.h"
 #include "updater/Updater.h"
@@ -73,26 +68,9 @@ int App::run(int argc, char **argv)
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();
-#ifndef Q_OS_WASM
-	changeSplashMessage(&splash, QObject::tr("Loading addons..."));
-	a.processEvents();
-	globalAddonManager.loadAddons();
-	Updater::getAddonUpdates();
-	bool addonsLoaded = true;
-#endif
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
-#ifndef Q_OS_WASM
-	QQmlEngine::setObjectOwnership(&globalAddonApi, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<AddonApi>("OpenTyper", 1, 0, "AddonApi", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalAddonApi;
-	});
-	QQmlEngine::setObjectOwnership(&globalAddonManager, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<AddonManager>("OpenTyper", 1, 0, "AddonManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalAddonManager;
-	});
-#endif
 	QQmlEngine::setObjectOwnership(&globalClassManager, QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<ClassManager>("OpenTyper", 1, 0, "ClassManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalClassManager;
@@ -102,17 +80,6 @@ int App::run(int argc, char **argv)
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
 	qmlRegisterType<Class>("OpenTyper", 1, 0, "Class");
-#ifndef Q_OS_WASM
-	qmlRegisterType<AddonItemModel>("OpenTyper", 1, 0, "AddonItemModel");
-	qmlRegisterType<AddonListModel>("OpenTyper", 1, 0, "AddonListModel");
-	qmlRegisterType<AddonModel>("OpenTyper", 1, 0, "AddonModel");
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
-#else
-	qmlRegisterUncreatableType<AddonButton>("OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
-#endif
-	qRegisterMetaType<QList<AddonButton *>>();
-#endif
 	qRegisterMetaType<QMap<int, int>>();
 	qRegisterMetaType<HistoryEntry>();
 	qRegisterMetaType<ClassManager::GradingMethod>();
@@ -132,10 +99,6 @@ int App::run(int argc, char **argv)
 	{
 		for(IModuleSetup *module : m_modules)
 			module->onInit();
-#ifndef Q_OS_WASM
-		if(!addonsLoaded)
-			globalAddonManager.loadAddons();
-#endif
 		QQmlApplicationEngine engine;
 		for(IModuleSetup *module : m_modules)
 			module->setRootContextProperties(engine.rootContext());
@@ -153,10 +116,6 @@ int App::run(int argc, char **argv)
 		currentExitCode = a.exec();
 		for(IModuleSetup *module : m_modules)
 			module->onDeinit();
-#ifndef Q_OS_WASM
-		globalAddonManager.unloadAddons();
-		addonsLoaded = false;
-#endif
 	} while(currentExitCode == EXIT_CODE_REBOOT);
 
 	for(IModuleSetup *module : m_modules)

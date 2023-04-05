@@ -28,6 +28,9 @@
 #include "uicomponents/UiComponentsModule.h"
 #include "utils/UtilsModule.h"
 #include "validator/ValidatorModule.h"
+#ifndef Q_OS_WASM
+#include "addons/AddonsModule.h"
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -42,5 +45,8 @@ int main(int argc, char *argv[])
 	app.addModule(new ValidatorModule);
 	// Application modules
 	app.addModule(new AppModule);
+#ifndef Q_OS_WASM
+	app.addModule(new AddonsModule);
+#endif
 	return app.run(argc, argv);
 }

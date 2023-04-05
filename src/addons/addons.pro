@@ -8,7 +8,8 @@ SOURCES += \
     AddonItemModel.cpp \
     AddonListModel.cpp \
     AddonManager.cpp \
-    AddonModel.cpp
+    AddonModel.cpp \
+    AddonsModule.cpp
 
 HEADERS += \
     AddonApi.h \
@@ -17,4 +18,5 @@ HEADERS += \
     AddonListModel.h \
     AddonManager.h \
     AddonModel.h \
+    AddonsModule.h \
     IAddon.h
