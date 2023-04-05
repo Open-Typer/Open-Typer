@@ -34,6 +34,7 @@
 #include "export/ExportModule.h"
 #include "grades/GradesModule.h"
 #include "history/HistoryModule.h"
+#include "updater/UpdaterModule.h"
 
 int main(int argc, char *argv[])
 {
@@ -54,5 +55,6 @@ int main(int argc, char *argv[])
 	app.addModule(new ExportModule);
 	app.addModule(new GradesModule);
 	app.addModule(new HistoryModule);
+	app.addModule(new UpdaterModule);
 	return app.run(argc, argv);
 }

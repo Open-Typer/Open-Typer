@@ -32,7 +32,6 @@
 #include "translations/LanguageManager.h"
 #include "global/global.h"
 #include "global/GlobalModule.h"
-#include "updater/Updater.h"
 
 static GlobalModule globalModule;
 
@@ -92,8 +91,6 @@ int App::run(int argc, char **argv)
 			module->setRootContextProperties(engine.rootContext());
 		engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
-		Updater updater;
-		engine.rootContext()->setContextProperty("Updater", &updater);
 		engine.load("qrc:/qml/MainWindow.qml");
 		for(IModuleSetup *module : m_modules)
 			module->onStartApp();

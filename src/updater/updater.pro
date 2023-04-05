@@ -3,7 +3,9 @@ QT += core qml
 CONFIG += staticlib
 
 SOURCES += \
-    Updater.cpp
+    Updater.cpp \
+    UpdaterModule.cpp
 
 HEADERS += \
-    Updater.h
+    Updater.h \
+    UpdaterModule.h
