@@ -65,12 +65,6 @@ int App::run(int argc, char **argv)
 	splash.show();
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
-	// Register QML types
-	// TODO: Remove this after fully switching to Qt 6
-	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	qmlRegisterModule("QtGraphicalEffects", 1, 0);
-#endif
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
 	// Set icon

@@ -33,4 +33,9 @@ void UiComponentsModule::registerUiTypes()
 	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
 	qmlRegisterType<QmlWidget>("OpenTyper", 1, 0, "Widget");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
+	// TODO: Remove this after fully switching to Qt 6
+	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	qmlRegisterModule("QtGraphicalEffects", 1, 0);
+#endif
 }

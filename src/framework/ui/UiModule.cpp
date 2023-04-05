@@ -44,4 +44,9 @@ void UiModule::registerUiTypes()
 	});
 	qmlRegisterType<AppMenuModel>("OpenTyper", 1, 0, "AppMenuModel");
 	qmlRegisterType<AppMenuItem>("OpenTyper", 1, 0, "AppMenuItem");
+	// TODO: Remove this after fully switching to Qt 6
+	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	qmlRegisterModule("QtGraphicalEffects", 1, 0);
+#endif
 }
