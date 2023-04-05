@@ -33,7 +33,6 @@
 #include "utils/ExerciseTimer.h"
 #include "validator/CharacterRecord.h"
 #include "validator/MistakeRecord.h"
-#include "ui/QmlUtils.h"
 #include "validator/ExerciseValidator.h"
 #include "uicomponents/QmlFileDialog.h"
 #include "BuiltInPacks.h"
@@ -92,16 +91,6 @@ int App::run(int argc, char **argv)
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
-	QQmlEngine::setObjectOwnership(&globalThemeEngine, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalThemeEngine;
-	});
-	qmlRegisterSingletonType<QmlUtils>("OpenTyper", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		QmlUtils *qmlUtils = new QmlUtils;
-		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
-		QObject::connect(&globalThemeEngine, &ThemeEngine::themeChanged, qmlUtils, &QmlUtils::reloadMenuBar);
-		return qmlUtils;
-	});
 	QQmlEngine::setObjectOwnership(&globalMenuBar, QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<AppMenuBar>("OpenTyper", 1, 0, "AppMenuBar", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalMenuBar;
@@ -127,8 +116,6 @@ int App::run(int argc, char **argv)
 	qmlRegisterType<QmlWidget>("OpenTyper", 1, 0, "Widget");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
-	qmlRegisterType<AppMenuModel>("OpenTyper", 1, 0, "AppMenuModel");
-	qmlRegisterType<AppMenuItem>("OpenTyper", 1, 0, "AppMenuItem");
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
 	qmlRegisterType<Class>("OpenTyper", 1, 0, "Class");
 #ifndef Q_OS_WASM
