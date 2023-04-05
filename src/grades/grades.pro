@@ -4,8 +4,10 @@ CONFIG += staticlib
 
 SOURCES += \
     Class.cpp \
-    ClassManager.cpp
+    ClassManager.cpp \
+    GradesModule.cpp
 
 HEADERS += \
     Class.h \
-    ClassManager.h
+    ClassManager.h \
+    GradesModule.h

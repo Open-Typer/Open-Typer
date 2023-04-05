@@ -32,6 +32,7 @@
 #include "addons/AddonsModule.h"
 #endif
 #include "export/ExportModule.h"
+#include "grades/GradesModule.h"
 
 int main(int argc, char *argv[])
 {
@@ -50,5 +51,6 @@ int main(int argc, char *argv[])
 	app.addModule(new AddonsModule);
 #endif
 	app.addModule(new ExportModule);
+	app.addModule(new GradesModule);
 	return app.run(argc, argv);
 }

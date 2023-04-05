@@ -31,7 +31,6 @@
 #include "settings/SettingsCategory.h"
 #include "translations/LanguageManager.h"
 #include "history/HistoryParser.h"
-#include "grades/ClassManager.h"
 #include "global/global.h"
 #include "global/GlobalModule.h"
 #include "updater/Updater.h"
@@ -70,17 +69,11 @@ int App::run(int argc, char **argv)
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
-	QQmlEngine::setObjectOwnership(&globalClassManager, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<ClassManager>("OpenTyper", 1, 0, "ClassManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalClassManager;
-	});
 	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
-	qmlRegisterType<Class>("OpenTyper", 1, 0, "Class");
 	qRegisterMetaType<QMap<int, int>>();
 	qRegisterMetaType<HistoryEntry>();
-	qRegisterMetaType<ClassManager::GradingMethod>();
 	// TODO: Remove this after fully switching to Qt 6
 	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
