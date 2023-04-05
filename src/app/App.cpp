@@ -93,6 +93,7 @@ int App::run(int argc, char **argv)
 
 	for(IModuleSetup *module : m_modules)
 		module->onDestroy();
+	m_modules.removeAll(&globalModule);
 	qDeleteAll(m_modules);
 	m_modules.clear();
 	return currentExitCode;
