@@ -20,6 +20,7 @@
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QCoreApplication>
 #include "AddonListModel.h"
 #include "AddonManager.h"
 #include "global/FileUtils.h"
