@@ -4,8 +4,10 @@ CONFIG += staticlib
 
 SOURCES += \
     QmlFileDialog.cpp \
-    QmlWidget.cpp
+    QmlWidget.cpp \
+    UiComponentsModule.cpp
 
 HEADERS += \
     QmlFileDialog.h \
-    QmlWidget.h
+    QmlWidget.h \
+    UiComponentsModule.h

@@ -34,10 +34,8 @@
 #include "validator/CharacterRecord.h"
 #include "validator/MistakeRecord.h"
 #include "validator/ExerciseValidator.h"
-#include "uicomponents/QmlFileDialog.h"
 #include "BuiltInPacks.h"
 #include "history/HistoryParser.h"
-#include "uicomponents/QmlWidget.h"
 #include "export/ExportProvider.h"
 #include "export/ExportTable.h"
 #include "AppMenuBar.h"
@@ -111,9 +109,7 @@ int App::run(int argc, char **argv)
 	});
 	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
 	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
-	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
 	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
-	qmlRegisterType<QmlWidget>("OpenTyper", 1, 0, "Widget");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");

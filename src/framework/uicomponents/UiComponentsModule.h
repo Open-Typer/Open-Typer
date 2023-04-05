@@ -1,9 +1,8 @@
 /*
- * main.cpp
+ * UiComponentsModule.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2023 - adazem009
- * Copyright (C) 2022-2023 - Roker2
+ * Copyright (C) 2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,20 +18,17 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "App.h"
-#include "keyboard/KeyboardModule.h"
-#include "lessonpack/LessonPackModule.h"
-#include "translations/TranslationsModule.h"
-#include "ui/UiModule.h"
-#include "uicomponents/UiComponentsModule.h"
+#ifndef UICOMPONENTSMODULE_H
+#define UICOMPONENTSMODULE_H
 
-int main(int argc, char *argv[])
+#include <global/modularity/IModuleSetup.h>
+
+class UiComponentsModule : public IModuleSetup
 {
-	App app;
-	app.addModule(new KeyboardModule);
-	app.addModule(new LessonPackModule);
-	app.addModule(new TranslationsModule);
-	app.addModule(new UiModule);
-	app.addModule(new UiComponentsModule);
-	return app.run(argc, argv);
-}
+	public:
+		std::string moduleName() const override;
+
+		void registerUiTypes() override;
+};
+
+#endif // UICOMPONENTSMODULE_H
