@@ -31,6 +31,7 @@
 #ifndef Q_OS_WASM
 #include "addons/AddonsModule.h"
 #endif
+#include "export/ExportModule.h"
 
 int main(int argc, char *argv[])
 {
@@ -48,5 +49,6 @@ int main(int argc, char *argv[])
 #ifndef Q_OS_WASM
 	app.addModule(new AddonsModule);
 #endif
+	app.addModule(new ExportModule);
 	return app.run(argc, argv);
 }

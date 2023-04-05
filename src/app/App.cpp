@@ -20,6 +20,7 @@
 
 #include <QApplication>
 #include <QSplashScreen>
+#include <QIcon>
 #include <QQuickStyle>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -30,8 +31,6 @@
 #include "settings/SettingsCategory.h"
 #include "translations/LanguageManager.h"
 #include "history/HistoryParser.h"
-#include "export/ExportProvider.h"
-#include "export/ExportTable.h"
 #include "grades/ClassManager.h"
 #include "global/global.h"
 #include "global/GlobalModule.h"
@@ -77,7 +76,6 @@ int App::run(int argc, char **argv)
 	});
 	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
 	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
-	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
 	qmlRegisterType<Class>("OpenTyper", 1, 0, "Class");
 	qRegisterMetaType<QMap<int, int>>();
@@ -106,8 +104,6 @@ int App::run(int argc, char **argv)
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
 		Updater updater;
 		engine.rootContext()->setContextProperty("Updater", &updater);
-		ExportTable table;
-		engine.rootContext()->setContextProperty("exportTable", &table);
 		engine.load("qrc:/qml/MainWindow.qml");
 		for(IModuleSetup *module : m_modules)
 			module->onStartApp();
