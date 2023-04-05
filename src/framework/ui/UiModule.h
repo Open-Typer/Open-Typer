@@ -21,7 +21,7 @@
 #ifndef UIMODULE_H
 #define UIMODULE_H
 
-#include <global/modularity/IModuleSetup.h>
+#include "global/modularity/IModuleSetup.h"
 
 class UiModule : public IModuleSetup
 {

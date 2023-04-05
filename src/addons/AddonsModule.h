@@ -21,7 +21,7 @@
 #ifndef ADDONSMODULE_H
 #define ADDONSMODULE_H
 
-#include <global/modularity/IModuleSetup.h>
+#include "global/modularity/IModuleSetup.h"
 
 class AddonsModule : public IModuleSetup
 {

@@ -21,7 +21,7 @@
 #ifndef LESSONPACKMODULE_H
 #define LESSONPACKMODULE_H
 
-#include <global/modularity/IModuleSetup.h>
+#include "global/modularity/IModuleSetup.h"
 
 class LessonPackModule : public IModuleSetup
 {

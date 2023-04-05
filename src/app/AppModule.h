@@ -21,7 +21,7 @@
 #ifndef APPMODULE_H
 #define APPMODULE_H
 
-#include <global/modularity/IModuleSetup.h>
+#include "global/modularity/IModuleSetup.h"
 #include "BuiltInPacks.h"
 
 class AppModule : public IModuleSetup

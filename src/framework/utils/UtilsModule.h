@@ -21,7 +21,7 @@
 #ifndef UTILSMODULE_H
 #define UTILSMODULE_H
 
-#include <global/modularity/IModuleSetup.h>
+#include "global/modularity/IModuleSetup.h"
 
 class UtilsModule : public IModuleSetup
 {

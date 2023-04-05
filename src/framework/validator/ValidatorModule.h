@@ -21,7 +21,7 @@
 #ifndef VALIDATORMODULE_H
 #define VALIDATORMODULE_H
 
-#include <global/modularity/IModuleSetup.h>
+#include "global/modularity/IModuleSetup.h"
 
 class ValidatorModule : public IModuleSetup
 {
