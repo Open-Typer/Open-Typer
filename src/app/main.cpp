@@ -33,6 +33,7 @@
 #endif
 #include "export/ExportModule.h"
 #include "grades/GradesModule.h"
+#include "history/HistoryModule.h"
 
 int main(int argc, char *argv[])
 {
@@ -52,5 +53,6 @@ int main(int argc, char *argv[])
 #endif
 	app.addModule(new ExportModule);
 	app.addModule(new GradesModule);
+	app.addModule(new HistoryModule);
 	return app.run(argc, argv);
 }
