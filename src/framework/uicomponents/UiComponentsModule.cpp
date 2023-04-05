@@ -32,4 +32,5 @@ void UiComponentsModule::registerUiTypes()
 {
 	qmlRegisterType<QmlFileDialog>("OpenTyper", 1, 0, "QmlFileDialog");
 	qmlRegisterType<QmlWidget>("OpenTyper", 1, 0, "Widget");
+	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 }

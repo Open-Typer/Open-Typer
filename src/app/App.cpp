@@ -67,7 +67,6 @@ int App::run(int argc, char **argv)
 	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
 	a.processEvents();
 	// Register QML types
-	qmlRegisterType<QWidget>("OpenTyper", 1, 0, "QWidget");
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
 	qRegisterMetaType<QMap<int, int>>();
 	// TODO: Remove this after fully switching to Qt 6
