@@ -20,6 +20,7 @@
  */
 
 #include <QApplication>
+#include <QPalette>
 #include "ThemeEngine.h"
 #include "global/Settings.h"
 #include "QmlUtils.h"
