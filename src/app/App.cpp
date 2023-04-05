@@ -19,7 +19,6 @@
  */
 
 #include <QApplication>
-#include <QSettings>
 #include <QSplashScreen>
 #include <QQuickStyle>
 #include <QQmlApplicationEngine>
@@ -28,7 +27,6 @@
 #include <QtSvg>
 #endif
 #include "App.h"
-#include "global/Settings.h"
 #include "translations/LanguageManager.h"
 #include "addons/AddonApi.h"
 #include "addons/AddonButton.h"
@@ -81,8 +79,6 @@ int App::run(int argc, char **argv)
 	}
 	for(IModuleSetup *module : m_modules)
 		module->onPreInit();
-	// Initialize settings
-	Settings::init();
 	QPixmap pixmap(":/res/images/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();
@@ -199,8 +195,6 @@ int App::run(int argc, char **argv)
 		globalAddonManager.unloadAddons();
 		addonsLoaded = false;
 #endif
-		if(Settings::isFrozen())
-			Settings::saveChanges();
 	} while(currentExitCode == EXIT_CODE_REBOOT);
 
 	for(IModuleSetup *module : m_modules)

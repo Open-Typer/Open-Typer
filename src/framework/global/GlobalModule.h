@@ -32,6 +32,9 @@ class GlobalModule : public IModuleSetup
 
 		void setRootContextProperties(QQmlContext *context) override;
 
+		void onPreInit() override;
+		void onDeinit() override;
+
 	private:
 		Settings m_settings;
 		FileUtils m_fileUtils;

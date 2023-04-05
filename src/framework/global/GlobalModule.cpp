@@ -31,3 +31,15 @@ void GlobalModule::setRootContextProperties(QQmlContext *context)
 	context->setContextProperty("FileUtils", &m_fileUtils);
 	context->setContextProperty("StringUtils", &m_stringUtils);
 }
+
+void GlobalModule::onPreInit()
+{
+
+	Settings::init();
+}
+
+void GlobalModule::onDeinit()
+{
+	if(Settings::isFrozen())
+		Settings::saveChanges();
+}
