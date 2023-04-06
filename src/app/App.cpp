@@ -28,6 +28,7 @@
 #include <QtSvg>
 #endif
 #include "App.h"
+#include "internal/SplashScreen.h"
 #include "translations/LanguageManager.h"
 #include "global/global.h"
 #include "global/GlobalModule.h"
@@ -53,6 +54,8 @@ int App::run(int argc, char **argv)
 #ifdef BUILD_VERSION
 	QCoreApplication::setApplicationVersion(BUILD_VERSION);
 #endif // BUILD_VERSION
+	SplashScreen splash;
+	splash.show();
 	for(IModuleSetup *module : m_modules)
 	{
 		module->registerResources();
@@ -60,11 +63,6 @@ int App::run(int argc, char **argv)
 	}
 	for(IModuleSetup *module : m_modules)
 		module->onPreInit();
-	QPixmap pixmap(":/res/images/splash.png");
-	QSplashScreen splash(pixmap);
-	splash.show();
-	changeSplashMessage(&splash, QObject::tr("Opening main window..."));
-	a.processEvents();
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
 	// Set icon
@@ -84,8 +82,7 @@ int App::run(int argc, char **argv)
 		engine.load("qrc:/qml/MainWindow.qml");
 		for(IModuleSetup *module : m_modules)
 			module->onStartApp();
-		if(splash.isVisible())
-			splash.close();
+		splash.hide();
 		currentExitCode = a.exec();
 		for(IModuleSetup *module : m_modules)
 			module->onDeinit();
@@ -102,13 +99,4 @@ int App::run(int argc, char **argv)
 void App::addModule(IModuleSetup *module)
 {
 	m_modules.append(module);
-}
-
-void App::changeSplashMessage(QSplashScreen *splash, QString message)
-{
-	// Add application version (if defined)
-	QString versionStr = "";
-	if(!QCoreApplication::applicationVersion().isEmpty())
-		versionStr = QObject::tr("Version: %1").arg(QCoreApplication::applicationVersion());
-	splash->showMessage(versionStr + "\n" + message, Qt::AlignHCenter | Qt::AlignBottom, Qt::white);
 }

@@ -31,6 +31,7 @@ SOURCES += \
     AppMenuBar.cpp \
     AppModule.cpp \
     BuiltInPacks.cpp \
+    internal/SplashScreen.cpp \
     main.cpp \
     settings/SettingsCategory.cpp
 
@@ -39,6 +40,7 @@ HEADERS += \
     AppMenuBar.h \
     AppModule.h \
     BuiltInPacks.h \
+    internal/SplashScreen.h \
     settings/SettingsCategory.h
 
 RESOURCES += \

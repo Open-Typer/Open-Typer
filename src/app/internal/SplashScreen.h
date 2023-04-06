@@ -1,5 +1,5 @@
 /*
- * App.h
+ * SplashScreen.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,21 +18,25 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef APP_H
-#define APP_H
+#ifndef SPLASHSCREEN_H
+#define SPLASHSCREEN_H
 
 #include <QSplashScreen>
-#include "global/modularity/IModuleSetup.h"
 
-class App
+/*! \brief The SplashScreen class displays the application loading screen. \since Open-Typer 5.1.0 */
+class SplashScreen : public QObject
 {
+		Q_OBJECT
 	public:
-		App();
-		int run(int argc, char **argv);
-		void addModule(IModuleSetup *module);
+		SplashScreen(QObject *parent = nullptr);
+		~SplashScreen();
+
+		void show();
+		void hide();
 
 	private:
-		QList<IModuleSetup *> m_modules;
+		void setText(const QString &text);
+		QSplashScreen *m_splash = nullptr;
 };
 
-#endif // APP_H
+#endif // SPLASHSCREEN_H
