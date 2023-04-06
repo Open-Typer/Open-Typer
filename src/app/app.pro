@@ -50,8 +50,8 @@ RESOURCES += \
     ../../src/ui/qml/qml.qrc
 
 RESOURCES += \
-    ../../dark-theme/dark-style.qrc \
-    ../../light-theme/light-style.qrc
+    ../../res/styles/dark/dark-style.qrc \
+    ../../res/styles/light/light-style.qrc
 
 TRANSLATIONS += \
     ../translations/Open-Typer_sk_SK.ts \
