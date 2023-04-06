@@ -41,3 +41,8 @@ void AppModule::setRootContextProperties(QQmlContext *context)
 {
 	context->setContextProperty("BuiltInPacks", &m_builtInPacks);
 }
+
+void AppModule::onPreInit()
+{
+	globalMenuBar.init();
+}
