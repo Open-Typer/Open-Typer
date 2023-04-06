@@ -44,9 +44,9 @@ HEADERS += \
     settings/SettingsCategory.h
 
 RESOURCES += \
+    app.qrc \
     ../../res/icons/icons.qrc \
     ../../res/packs/packs.qrc \
-    ../../res/splash/splash.qrc \
     ../../src/ui/qml/qml.qrc
 
 RESOURCES += \

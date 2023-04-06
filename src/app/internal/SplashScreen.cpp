@@ -25,7 +25,7 @@
 SplashScreen::SplashScreen(QObject *parent) :
 	QObject(parent)
 {
-	QPixmap pixmap(":/res/images/splash.png");
+	QPixmap pixmap(":/res/splash.png");
 	m_splash = new QSplashScreen(pixmap);
 }
 
