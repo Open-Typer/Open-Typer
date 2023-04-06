@@ -34,6 +34,7 @@ class Q_DECL_EXPORT AbstractMenuBar : public QObject
 	public:
 		AbstractMenuBar(QObject *parent = nullptr);
 
+		void init();
 		QQmlListProperty<AppMenuModel> menus(void);
 		QList<AppMenuModel *> getMenus(void);
 		void setMenus(QList<AppMenuModel *> newMenus);

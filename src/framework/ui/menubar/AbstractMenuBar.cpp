@@ -26,8 +26,13 @@ AbstractMenuBar::AbstractMenuBar(QObject *parent) :
 	QObject(parent)
 {
 	m_menus.clear();
-	QMetaObject::invokeMethod(this, "createMenus", Qt::QueuedConnection);
-	QMetaObject::invokeMethod(this, "updateMenus", Qt::QueuedConnection);
+}
+
+/*! Run this method to create menus. */
+void AbstractMenuBar::init()
+{
+	createMenus();
+	updateMenus();
 }
 
 /*! Override this method to create menus. */
