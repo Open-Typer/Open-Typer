@@ -46,8 +46,7 @@ HEADERS += \
 RESOURCES += \
     app.qrc \
     ../../res/icons/icons.qrc \
-    ../../res/packs/packs.qrc \
-    ../../src/ui/qml/qml.qrc
+    ../../res/packs/packs.qrc
 
 RESOURCES += \
     ../../res/styles/dark/dark-style.qrc \

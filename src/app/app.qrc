@@ -2,5 +2,23 @@
     <qresource prefix="/">
         <file>res/splash_base.png</file>
         <file>res/splash.png</file>
+        <file>qml/ExerciseSummary.qml</file>
+        <file>qml/KeyboardLayoutList.qml</file>
+        <file>qml/LanguageList.qml</file>
+        <file>qml/LessonPackList.qml</file>
+        <file>qml/MainWindow.qml</file>
+        <file>qml/Paper.qml</file>
+        <file>qml/core/BackgroundBlur.qml</file>
+        <file>qml/core/MenuBarManager.qml</file>
+        <file>qml/dialogs/AboutDialog.qml</file>
+        <file>qml/dialogs/ExportDialog.qml</file>
+        <file>qml/dialogs/InitialSetup.qml</file>
+        <file>qml/dialogs/SettingsDialog.qml</file>
+        <file>qml/dialogs/TimeDialog.qml</file>
+        <file>qml/dialogs/TypingTestDialog.qml</file>
+        <file>qml/settings/AppearanceSettings.qml</file>
+        <file>qml/settings/BehaviorSettings.qml</file>
+        <file>qml/settings/KeyboardSettings.qml</file>
+        <file>qml/settings/LanguageSettings.qml</file>
     </qresource>
 </RCC>
