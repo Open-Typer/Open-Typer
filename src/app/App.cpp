@@ -58,7 +58,10 @@ int App::run(int argc, char **argv)
 	SplashScreen splash;
 	splash.show();
 	for(IModuleSetup *module : m_modules)
+	{
+		module->registerExports();
 		module->onPreInit();
+	}
 	for(IModuleSetup *module : m_modules)
 	{
 		module->registerResources();
