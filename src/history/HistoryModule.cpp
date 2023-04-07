@@ -34,6 +34,6 @@ void HistoryModule::registerResources()
 
 void HistoryModule::registerUiTypes()
 {
-	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");
+	qmlRegisterType<HistoryParser>("OpenTyper.History", 1, 0, "HistoryParser");
 	qRegisterMetaType<HistoryEntry>();
 }

@@ -24,10 +24,16 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Material 2.5
 import QtGraphicalEffects 1.0
 import Qt5Compat.GraphicalEffects 1.0
-import OpenTyper 1.0
+import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
 import OpenTyper.Addons 1.0
 import OpenTyper.Updater 1.0
+import OpenTyper.History 1.0
+import OpenTyper.LessonPack 1.0
+import OpenTyper.Utils 1.0
+import OpenTyper.Keyboard 1.0
+import OpenTyper.Validator 1.0
+import OpenTyper.Translations 1.0
 import "dialogs"
 import "core"
 
@@ -1181,7 +1187,7 @@ ApplicationWindow {
 		exerciseInProgress = false;
 		fullInput.replace(/‘/g, "'");
 		displayExercise.replace(/‘/g, "'");
-		var validator = Qt.createQmlObject("import OpenTyper 1.0; ExerciseValidator {}", root);
+		var validator = Qt.createQmlObject("import OpenTyper.Validator 1.0; ExerciseValidator {}", root);
 		validator.exerciseText = displayExercise;
 		validator.inputText = fullInput;
 		validator.clearCharacters();

@@ -22,7 +22,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
 import QtQuick.Window 2.12
-import OpenTyper 1.0
+import OpenTyper.Ui 1.0
 
 // An auto-resizing ComboBox (based on its items)
 // Fixes: material style popup background color

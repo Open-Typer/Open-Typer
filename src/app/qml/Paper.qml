@@ -24,7 +24,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Material 2.5
 import QtGraphicalEffects 1.0
 import Qt5Compat.GraphicalEffects 1.0
-import OpenTyper 1.0
+import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
 import OpenTyper.Keyboard 1.0
 import OpenTyper.History 1.0

@@ -21,7 +21,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
-import OpenTyper 1.0
+import OpenTyper.Ui 1.0
 
 Menu {
 	property bool isSubMenu: false

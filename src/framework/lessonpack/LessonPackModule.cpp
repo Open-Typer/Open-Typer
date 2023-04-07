@@ -29,6 +29,6 @@ std::string LessonPackModule::moduleName() const
 
 void LessonPackModule::registerUiTypes()
 {
-	qmlRegisterType<ConfigParser>("OpenTyper", 1, 0, "ConfigParser");
-	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
+	qmlRegisterType<ConfigParser>("OpenTyper.LessonPack", 1, 0, "ConfigParser");
+	qmlRegisterUncreatableMetaObject(publicPos::staticMetaObject, "OpenTyper.LessonPack", 1, 0, "PublicPos", "Error: PublicPos is uncreatable");
 }

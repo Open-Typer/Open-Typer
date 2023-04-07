@@ -39,18 +39,18 @@ void UiModule::registerExports()
 
 void UiModule::registerUiTypes()
 {
-	qmlRegisterSingletonType<QmlUtils>("OpenTyper", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+	qmlRegisterSingletonType<QmlUtils>("OpenTyper.Ui", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		QmlUtils *qmlUtils = new QmlUtils;
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
 		QObject::connect(&globalThemeEngine, &ThemeEngine::themeChanged, qmlUtils, &QmlUtils::reloadMenuBar);
 		return qmlUtils;
 	});
 	QQmlEngine::setObjectOwnership(&globalThemeEngine, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<ThemeEngine>("OpenTyper", 1, 0, "ThemeEngine", [](QQmlEngine *, QJSEngine *) -> QObject * {
+	qmlRegisterSingletonType<ThemeEngine>("OpenTyper.Ui", 1, 0, "ThemeEngine", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalThemeEngine;
 	});
-	qmlRegisterType<AppMenuModel>("OpenTyper", 1, 0, "AppMenuModel");
-	qmlRegisterType<AppMenuItem>("OpenTyper", 1, 0, "AppMenuItem");
+	qmlRegisterType<AppMenuModel>("OpenTyper.Ui", 1, 0, "AppMenuModel");
+	qmlRegisterType<AppMenuItem>("OpenTyper.Ui", 1, 0, "AppMenuItem");
 	// TODO: Remove this after fully switching to Qt 6
 	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

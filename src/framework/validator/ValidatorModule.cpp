@@ -29,12 +29,12 @@ std::string ValidatorModule::moduleName() const
 
 void ValidatorModule::registerUiTypes()
 {
-	qmlRegisterType<ExerciseValidator>("OpenTyper", 1, 0, "ExerciseValidator");
+	qmlRegisterType<ExerciseValidator>("OpenTyper.Validator", 1, 0, "ExerciseValidator");
 	qRegisterMetaType<CharacterRecord>();
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	qmlRegisterUncreatableMetaObject(MistakeRecord::staticMetaObject, "OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
+	qmlRegisterUncreatableMetaObject(MistakeRecord::staticMetaObject, "OpenTyper.Validator", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
 #else
-	qmlRegisterUncreatableType<MistakeRecord>("OpenTyper", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
+	qmlRegisterUncreatableType<MistakeRecord>("OpenTyper.Validator", 1, 0, "MistakeRecord", "Please use QmlUtils.createMistakeRecord()");
 #endif
 	qRegisterMetaType<QList<MistakeRecord>>();
 }

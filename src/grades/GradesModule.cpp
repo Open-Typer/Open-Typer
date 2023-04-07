@@ -35,10 +35,10 @@ void GradesModule::registerResources()
 void GradesModule::registerUiTypes()
 {
 	QQmlEngine::setObjectOwnership(&globalClassManager, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<ClassManager>("OpenTyper", 1, 0, "ClassManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
+	qmlRegisterSingletonType<ClassManager>("OpenTyper.Grades", 1, 0, "ClassManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalClassManager;
 	});
-	qmlRegisterType<Class>("OpenTyper", 1, 0, "Class");
+	qmlRegisterType<Class>("OpenTyper.Grades", 1, 0, "Class");
 	qRegisterMetaType<ClassManager::GradingMethod>();
 	qRegisterMetaType<QMap<int, int>>();
 }

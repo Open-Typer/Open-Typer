@@ -37,20 +37,20 @@ void AddonsModule::registerResources()
 void AddonsModule::registerUiTypes()
 {
 	QQmlEngine::setObjectOwnership(&globalAddonApi, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<AddonApi>("OpenTyper", 1, 0, "AddonApi", [](QQmlEngine *, QJSEngine *) -> QObject * {
+	qmlRegisterSingletonType<AddonApi>("OpenTyper.Addons", 1, 0, "AddonApi", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalAddonApi;
 	});
 	QQmlEngine::setObjectOwnership(&globalAddonManager, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<AddonManager>("OpenTyper", 1, 0, "AddonManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
+	qmlRegisterSingletonType<AddonManager>("OpenTyper.Addons", 1, 0, "AddonManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalAddonManager;
 	});
-	qmlRegisterType<AddonItemModel>("OpenTyper", 1, 0, "AddonItemModel");
-	qmlRegisterType<AddonListModel>("OpenTyper", 1, 0, "AddonListModel");
-	qmlRegisterType<AddonModel>("OpenTyper", 1, 0, "AddonModel");
+	qmlRegisterType<AddonItemModel>("OpenTyper.Addons", 1, 0, "AddonItemModel");
+	qmlRegisterType<AddonListModel>("OpenTyper.Addons", 1, 0, "AddonListModel");
+	qmlRegisterType<AddonModel>("OpenTyper.Addons", 1, 0, "AddonModel");
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
+	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper.Addons", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
 #else
-	qmlRegisterUncreatableType<AddonButton>("OpenTyper", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
+	qmlRegisterUncreatableType<AddonButton>("OpenTyper.Addons", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
 #endif
 	qRegisterMetaType<QList<AddonButton *>>();
 }

@@ -35,11 +35,11 @@ void KeyboardModule::registerResources()
 
 void KeyboardModule::registerUiTypes()
 {
-	qmlRegisterSingletonType<KeyboardUtils>("OpenTyper", 1, 0, "KeyboardUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+	qmlRegisterSingletonType<KeyboardUtils>("OpenTyper.Keyboard", 1, 0, "KeyboardUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return new KeyboardUtils;
 	});
-	qmlRegisterType<QmlKeyboardHandler>("OpenTyper", 1, 0, "KeyboardHandler");
-	qmlRegisterType<KeyboardLayout>("OpenTyper", 1, 0, "KeyboardLayout");
+	qmlRegisterType<QmlKeyboardHandler>("OpenTyper.Keyboard", 1, 0, "KeyboardHandler");
+	qmlRegisterType<KeyboardLayout>("OpenTyper.Keyboard", 1, 0, "KeyboardLayout");
 	qRegisterMetaType<Key>();
 	qRegisterMetaType<KeyboardRow>();
 }

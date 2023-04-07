@@ -29,5 +29,5 @@ std::string UtilsModule::moduleName() const
 
 void UtilsModule::registerUiTypes()
 {
-	qmlRegisterType<ExerciseTimer>("OpenTyper", 1, 0, "ExerciseTimer");
+	qmlRegisterType<ExerciseTimer>("OpenTyper.Utils", 1, 0, "ExerciseTimer");
 }

@@ -21,7 +21,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
-import OpenTyper 1.0
+import OpenTyper.Addons 1.0
 import "internal"
 
 // This settings page can be used only in SettingsDialog!

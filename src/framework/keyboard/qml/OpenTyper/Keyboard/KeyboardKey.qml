@@ -20,7 +20,8 @@
 
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-import OpenTyper 1.0
+import OpenTyper.Keyboard 1.0
+import OpenTyper.Ui 1.0
 
 Item {
 	property int keyRow

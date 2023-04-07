@@ -22,7 +22,8 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import QtCharts 2.3
-import OpenTyper 1.0
+import OpenTyper.Ui 1.0
+import OpenTyper.History 1.0
 
 ColumnLayout {
 	id: root

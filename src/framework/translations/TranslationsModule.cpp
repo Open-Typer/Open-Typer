@@ -31,7 +31,7 @@ std::string TranslationsModule::moduleName() const
 void TranslationsModule::registerUiTypes()
 {
 	QQmlEngine::setObjectOwnership(&globalLanguageManager, QQmlEngine::CppOwnership);
-	qmlRegisterSingletonType<LanguageManager>("OpenTyper", 1, 0, "LanguageManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
+	qmlRegisterSingletonType<LanguageManager>("OpenTyper.Translations", 1, 0, "LanguageManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalLanguageManager;
 	});
 }

@@ -24,6 +24,7 @@ import QtQuick.Controls.Material 2.5
 import QtQuick.Layouts 1.12
 import Qt.labs.platform 1.1 as Platform
 import OpenTyper 1.0
+import OpenTyper.Ui 1.0
 
 MenuBar {
 	id: root

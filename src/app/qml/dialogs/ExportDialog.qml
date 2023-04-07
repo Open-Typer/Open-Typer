@@ -22,8 +22,9 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
 import QtQuick.Layouts 1.12
-import OpenTyper 1.0
 import OpenTyper.UiComponents 1.0
+import OpenTyper.Export 1.0
+import OpenTyper.Validator 1.0
 
 CustomDialog {
 	readonly property string studentName: contentItem.studentName

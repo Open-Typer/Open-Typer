@@ -29,7 +29,7 @@ std::string ExportModule::moduleName() const
 
 void ExportModule::registerUiTypes()
 {
-	qmlRegisterType<ExportProvider>("OpenTyper", 1, 0, "ExportProvider");
+	qmlRegisterType<ExportProvider>("OpenTyper.Export", 1, 0, "ExportProvider");
 }
 
 void ExportModule::setRootContextProperties(QQmlContext *context)
