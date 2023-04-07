@@ -29,12 +29,13 @@
 class UiEngine : public IUiEngine
 {
 	public:
-		static UiEngine *instance();
+		static std::shared_ptr<UiEngine> instance();
 		QQmlEngine *qmlEngine() override;
 		void setQmlEngine(QQmlEngine *engine);
 		void addSourceImportPath(const QString &path) override;
 
 	private:
+		static std::shared_ptr<UiEngine> m_instance;
 		QQmlEngine *m_qmlEngine = nullptr;
 };
 

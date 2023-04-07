@@ -20,11 +20,12 @@
 
 #include "UiEngine.h"
 
+std::shared_ptr<UiEngine> UiEngine::m_instance = std::make_shared<UiEngine>();
+
 /*! Returns a pointer to the UiEngine global instance. */
-UiEngine *UiEngine::instance()
+std::shared_ptr<UiEngine> UiEngine::instance()
 {
-	static UiEngine instance;
-	return &instance;
+	return m_instance;
 }
 
 /*! Returns a pointer to the QQmlEngine. */
