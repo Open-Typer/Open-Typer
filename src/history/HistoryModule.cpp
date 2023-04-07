@@ -27,6 +27,11 @@ std::string HistoryModule::moduleName() const
 	return "history";
 }
 
+void HistoryModule::registerResources()
+{
+	Q_INIT_RESOURCE(history);
+}
+
 void HistoryModule::registerUiTypes()
 {
 	qmlRegisterType<HistoryParser>("OpenTyper", 1, 0, "HistoryParser");

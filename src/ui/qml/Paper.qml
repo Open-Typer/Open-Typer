@@ -27,6 +27,7 @@ import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
 import OpenTyper.UiComponents 1.0
 import OpenTyper.Keyboard 1.0
+import OpenTyper.History 1.0
 import "core"
 
 Item {
