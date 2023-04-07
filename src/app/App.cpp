@@ -32,6 +32,7 @@
 #include "translations/LanguageManager.h"
 #include "global/global.h"
 #include "global/GlobalModule.h"
+#include "ui/internal/UiEngine.h"
 
 static GlobalModule globalModule;
 
@@ -57,12 +58,12 @@ int App::run(int argc, char **argv)
 	SplashScreen splash;
 	splash.show();
 	for(IModuleSetup *module : m_modules)
+		module->onPreInit();
+	for(IModuleSetup *module : m_modules)
 	{
 		module->registerResources();
 		module->registerUiTypes();
 	}
-	for(IModuleSetup *module : m_modules)
-		module->onPreInit();
 	// Set icon theme
 	QIcon::setThemeName("open-typer");
 	// Set icon
