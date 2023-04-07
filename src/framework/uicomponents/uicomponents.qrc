@@ -18,5 +18,6 @@
         <file>qml/OpenTyper/UiComponents/Panel.qml</file>
         <file>qml/OpenTyper/UiComponents/VerticalStackView.qml</file>
         <file>qml/OpenTyper/UiComponents/qmldir</file>
+        <file>qml/OpenTyper/UiComponents/MessageBox.qml</file>
     </qresource>
 </RCC>

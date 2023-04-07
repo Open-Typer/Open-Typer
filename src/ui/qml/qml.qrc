@@ -9,7 +9,6 @@
         <file>controls/UpdateQuestion.qml</file>
         <file>dialogs/TimeDialog.qml</file>
         <file>dialogs/TypingTestDialog.qml</file>
-        <file>dialogs/MessageBox.qml</file>
         <file>dialogs/InitialSetup.qml</file>
         <file>dialogs/SettingsDialog.qml</file>
         <file>MainWindow.qml</file>

@@ -14,5 +14,6 @@ FontComboBox 1.0 FontComboBox.qml
 HoverToolTip 1.0 HoverToolTip.qml
 ListButton 1.0 ListButton.qml
 MenuButton 1.0 MenuButton.qml
+MessageBox 1.0 MessageBox.qml
 Panel 1.0 Panel.qml
 VerticalStackView 1.0 VerticalStackView.qml
