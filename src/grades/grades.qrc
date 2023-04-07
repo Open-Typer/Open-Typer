@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/OpenTyper/Grades/GradeSettings.qml</file>
+        <file>qml/OpenTyper/Grades/qmldir</file>
+        <file>qml/OpenTyper/Grades/internal/GradingClassConfig.qml</file>
+        <file>qml/OpenTyper/Grades/internal/GradingConfig.qml</file>
+    </qresource>
+</RCC>

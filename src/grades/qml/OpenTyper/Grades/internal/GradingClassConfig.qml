@@ -23,8 +23,6 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import OpenTyper 1.0
 import OpenTyper.UiComponents 1.0
-import "../core"
-import ".."
 
 CustomDialog {
 	id: root

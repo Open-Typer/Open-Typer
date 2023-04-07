@@ -27,6 +27,11 @@ std::string GradesModule::moduleName() const
 	return "grades";
 }
 
+void GradesModule::registerResources()
+{
+	Q_INIT_RESOURCE(grades);
+}
+
 void GradesModule::registerUiTypes()
 {
 	QQmlEngine::setObjectOwnership(&globalClassManager, QQmlEngine::CppOwnership);

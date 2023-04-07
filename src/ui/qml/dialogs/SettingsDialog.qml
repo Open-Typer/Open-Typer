@@ -55,7 +55,7 @@ CustomDialog {
 				SettingsCategory {
 					name: qsTr("Grades")
 					iconName: "medal"
-					qmlFileName: "settings/GradeSettings.qml"
+					qmlFileName: "OpenTyper/Grades/GradeSettings.qml"
 				},
 				SettingsCategory {
 					name: qsTr("Keyboard")
