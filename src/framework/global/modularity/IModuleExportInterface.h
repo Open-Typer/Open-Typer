@@ -1,5 +1,5 @@
 /*
- * GlobalModule.cpp
+ * IModuleExportInterface.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,29 +18,17 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "GlobalModule.h"
-#include "modularity/ioc.h"
+#ifndef IMODULEEXPORTINTERFACE_H
+#define IMODULEEXPORTINTERFACE_H
 
-std::string GlobalModule::moduleName() const
-{
-	return "global";
-}
+#define MODULE_EXPORT_INTERFACE \
+public                          \
+	IModuleExportInterface
 
-void GlobalModule::setRootContextProperties(QQmlContext *context)
+class IModuleExportInterface
 {
-	context->setContextProperty("Settings", &m_settings);
-	context->setContextProperty("FileUtils", &m_fileUtils);
-	context->setContextProperty("StringUtils", &m_stringUtils);
-}
+	public:
+		virtual ~IModuleExportInterface() { }
+};
 
-void GlobalModule::onPreInit()
-{
-	ModulesIoC::init();
-	Settings::init();
-}
-
-void GlobalModule::onDeinit()
-{
-	if(Settings::isFrozen())
-		Settings::saveChanges();
-}
+#endif // IMODULEEXPORTINTERFACE_H

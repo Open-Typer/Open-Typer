@@ -15,4 +15,7 @@ HEADERS += \
     global.h \
     Settings.h \
     StringUtils.h \
-    modularity/IModuleSetup.h
+    modularity/IModuleExportInterface.h \
+    modularity/IModuleSetup.h \
+    modularity/ModulesIoC.h \
+    modularity/ioc.h
