@@ -19,7 +19,7 @@
  */
 
 import QtQuick 2.12
-import "../controls"
+import OpenTyper.UiComponents 1.0
 
 Repeater {
 	CustomToolButton {

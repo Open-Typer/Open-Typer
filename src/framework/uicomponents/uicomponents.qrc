@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/OpenTyper/UiComponents/AccentButton.qml</file>
+        <file>qml/OpenTyper/UiComponents/AccentButtonBox.qml</file>
+        <file>qml/OpenTyper/UiComponents/ColorButton.qml</file>
+        <file>qml/OpenTyper/UiComponents/CustomComboBox.qml</file>
+        <file>qml/OpenTyper/UiComponents/CustomDialog.qml</file>
+        <file>qml/OpenTyper/UiComponents/CustomFlickable.qml</file>
+        <file>qml/OpenTyper/UiComponents/CustomMenu.qml</file>
+        <file>qml/OpenTyper/UiComponents/CustomMenuBar.qml</file>
+        <file>qml/OpenTyper/UiComponents/CustomMenuItem.qml</file>
+        <file>qml/OpenTyper/UiComponents/CustomMenuSeparator.qml</file>
+        <file>qml/OpenTyper/UiComponents/CustomToolButton.qml</file>
+        <file>qml/OpenTyper/UiComponents/FontComboBox.qml</file>
+        <file>qml/OpenTyper/UiComponents/HoverToolTip.qml</file>
+        <file>qml/OpenTyper/UiComponents/ListButton.qml</file>
+        <file>qml/OpenTyper/UiComponents/MenuButton.qml</file>
+        <file>qml/OpenTyper/UiComponents/Panel.qml</file>
+        <file>qml/OpenTyper/UiComponents/VerticalStackView.qml</file>
+        <file>qml/OpenTyper/UiComponents/qmldir</file>
+    </qresource>
+</RCC>

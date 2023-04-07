@@ -26,7 +26,6 @@ import QtQuick.Window 2.12
 import QtGraphicalEffects 1.0
 import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
-import "../controls"
 
 Item {
 	property Item blur: QmlUtils.bgBlur

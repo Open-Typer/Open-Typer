@@ -1,0 +1,18 @@
+module OpenTyper.UiComponents
+AccentButtonBox 1.0 AccentButtonBox.qml
+AccentButton 1.0 AccentButton.qml
+ColorButton 1.0 ColorButton.qml
+CustomComboBox 1.0 CustomComboBox.qml
+CustomDialog 1.0 CustomDialog.qml
+CustomFlickable 1.0 CustomFlickable.qml
+CustomMenuBar 1.0 CustomMenuBar.qml
+CustomMenuItem 1.0 CustomMenuItem.qml
+CustomMenu 1.0 CustomMenu.qml
+CustomMenuSeparator 1.0 CustomMenuSeparator.qml
+CustomToolButton 1.0 CustomToolButton.qml
+FontComboBox 1.0 FontComboBox.qml
+HoverToolTip 1.0 HoverToolTip.qml
+ListButton 1.0 ListButton.qml
+MenuButton 1.0 MenuButton.qml
+Panel 1.0 Panel.qml
+VerticalStackView 1.0 VerticalStackView.qml
