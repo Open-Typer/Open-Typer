@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/OpenTyper/Keyboard/KeyboardKey.qml</file>
+        <file>qml/OpenTyper/Keyboard/KeyboardView.qml</file>
+        <file>qml/OpenTyper/Keyboard/qmldir</file>
+    </qresource>
+</RCC>

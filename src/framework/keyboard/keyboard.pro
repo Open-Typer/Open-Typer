@@ -2,6 +2,8 @@ TEMPLATE = lib
 QT += core quick
 CONFIG += staticlib
 
+QML_IMPORT_PATH += qml
+
 SOURCES += \
     Key.cpp \
     KeyboardLayout.cpp \
@@ -19,3 +21,5 @@ HEADERS += \
 # Third party
 include(../../../3rdparty/xkeyboard-config/xkeyboard-config.pri)
 include(../../../3rdparty/libxkbcommon/libxkbcommon.pri)
+
+RESOURCES += keyboard.qrc

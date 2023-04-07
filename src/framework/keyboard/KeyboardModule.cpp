@@ -29,6 +29,7 @@ std::string KeyboardModule::moduleName() const
 
 void KeyboardModule::registerResources()
 {
+	Q_INIT_RESOURCE(keyboard);
 	Q_INIT_RESOURCE(symbols);
 }
 
