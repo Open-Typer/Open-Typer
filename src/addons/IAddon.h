@@ -24,6 +24,7 @@
 #include <QVector>
 #include <QtPlugin>
 #include "AddonApi.h"
+#include "global/modularity/ioc.h"
 
 /*! \brief The IAddon class provides an interface for addons. */
 class Q_DECL_EXPORT IAddon
@@ -32,6 +33,7 @@ class Q_DECL_EXPORT IAddon
 		virtual ~IAddon(void) = default;
 		virtual void addonEvent(AddonApi::Event type, QVariantMap args) = 0;
 		virtual QString version() = 0;
+		virtual void setIoC(ModulesIoC *ioc) { ModulesIoC::setCustomInstance(ioc); }
 };
 
 Q_DECLARE_INTERFACE(IAddon, "opentyper.addon")

@@ -26,6 +26,7 @@
 #include <QCoreApplication>
 #include "AddonManager.h"
 #include "global/FileUtils.h"
+#include "global/modularity/ioc.h"
 #include "IAddon.h"
 
 const QString AddonManager::addonModelNameProperty = "name";
@@ -155,6 +156,7 @@ QList<QPluginLoader *> AddonManager::loadAddons(const QString &path)
 					continue;
 				if(loadedAddonsClasses.contains(className))
 					continue;
+				addonInterface->setIoC(modularity::ioc());
 				loadedAddons.append(addonInterface);
 				loadedAddonsClasses += className;
 				loaderList.append(pluginLoader);
