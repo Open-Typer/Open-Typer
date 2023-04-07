@@ -36,6 +36,7 @@ class IModuleSetup
 
 		virtual std::string moduleName() const = 0;
 
+		virtual void registerExports() { }
 		virtual void registerResources() { }
 		virtual void registerUiTypes() { }
 		virtual void setRootContextProperties(QQmlContext *context) { Q_UNUSED(context); }
