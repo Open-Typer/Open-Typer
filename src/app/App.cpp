@@ -80,6 +80,8 @@ int App::run(int argc, char **argv)
 			module->setRootContextProperties(engine.rootContext());
 		engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
 		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
+		UiEngine::instance()->setQmlEngine(&engine);
+		UiEngine::instance()->addSourceImportPath(":/qml");
 		engine.load("qrc:/qml/MainWindow.qml");
 		for(IModuleSetup *module : m_modules)
 			module->onStartApp();
