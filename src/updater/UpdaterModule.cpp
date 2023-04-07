@@ -26,6 +26,11 @@ std::string UpdaterModule::moduleName() const
 	return "updater";
 }
 
+void UpdaterModule::registerResources()
+{
+	Q_INIT_RESOURCE(updater);
+}
+
 void UpdaterModule::setRootContextProperties(QQmlContext *context)
 {
 	Updater updater;

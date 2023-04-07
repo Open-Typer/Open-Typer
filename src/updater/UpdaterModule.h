@@ -28,6 +28,7 @@ class UpdaterModule : public IModuleSetup
 	public:
 		std::string moduleName() const override;
 
+		void registerResources() override;
 		void setRootContextProperties(QQmlContext *context) override;
 };
 

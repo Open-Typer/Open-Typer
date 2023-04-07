@@ -27,7 +27,7 @@ import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
 import OpenTyper.UiComponents 1.0
 import OpenTyper.Addons 1.0
-import "controls"
+import OpenTyper.Updater 1.0
 import "dialogs"
 import "core"
 
