@@ -24,10 +24,17 @@
 #include "ThemeEngine.h"
 #include "menubar/AppMenuModel.h"
 #include "translations/LanguageManager.h"
+#include "global/modularity/ioc.h"
+#include "internal/UiEngine.h"
 
 std::string UiModule::moduleName() const
 {
 	return "ui";
+}
+
+void UiModule::registerExports()
+{
+	modularity::ioc()->registerExport<IUiEngine>(UiEngine::instance());
 }
 
 void UiModule::registerUiTypes()

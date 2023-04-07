@@ -1,5 +1,5 @@
 /*
- * UiModule.h
+ * UiEngine.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,18 +18,31 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UIMODULE_H
-#define UIMODULE_H
+#include "UiEngine.h"
 
-#include "global/modularity/IModuleSetup.h"
-
-class UiModule : public IModuleSetup
+/*! Returns a pointer to the UiEngine global instance. */
+UiEngine *UiEngine::instance()
 {
-	public:
-		std::string moduleName() const override;
+	static UiEngine instance;
+	return &instance;
+}
 
-		void registerExports() override;
-		void registerUiTypes() override;
-};
+/*! Returns a pointer to the QQmlEngine. */
+QQmlEngine *UiEngine::qmlEngine()
+{
+	return m_qmlEngine;
+}
 
-#endif // UIMODULE_H
+/*! Sets the QQmlEngine. */
+void UiEngine::setQmlEngine(QQmlEngine *engine)
+{
+	m_qmlEngine = engine;
+}
+
+/*! Adds a QML import path. */
+void UiEngine::addSourceImportPath(const QString &path)
+{
+	Q_ASSERT(m_qmlEngine);
+	if(m_qmlEngine)
+		m_qmlEngine->addImportPath(path);
+}

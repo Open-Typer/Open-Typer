@@ -1,5 +1,5 @@
 /*
- * UiModule.h
+ * IUiEngine.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,18 +18,18 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UIMODULE_H
-#define UIMODULE_H
+#ifndef IUIENGINE_H
+#define IUIENGINE_H
 
-#include "global/modularity/IModuleSetup.h"
+#include <QQmlEngine>
+#include "global/modularity/ioc.h"
 
-class UiModule : public IModuleSetup
+class IUiEngine : MODULE_EXPORT_INTERFACE
 {
 	public:
-		std::string moduleName() const override;
-
-		void registerExports() override;
-		void registerUiTypes() override;
+		virtual ~IUiEngine() { }
+		virtual QQmlEngine *qmlEngine() = 0;
+		virtual void addSourceImportPath(const QString &path) = 0;
 };
 
-#endif // UIMODULE_H
+#endif // IUIENGINE_H

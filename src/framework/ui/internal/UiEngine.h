@@ -1,5 +1,5 @@
 /*
- * UiModule.h
+ * UiEngine.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,18 +18,24 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UIMODULE_H
-#define UIMODULE_H
+#ifndef UIENGINE_H
+#define UIENGINE_H
 
-#include "global/modularity/IModuleSetup.h"
+#include <memory>
 
-class UiModule : public IModuleSetup
+#include "../IUiEngine.h"
+
+/*! \brief The UiEngine class manages the QQmlEngine of the application. */
+class UiEngine : public IUiEngine
 {
 	public:
-		std::string moduleName() const override;
+		static UiEngine *instance();
+		QQmlEngine *qmlEngine() override;
+		void setQmlEngine(QQmlEngine *engine);
+		void addSourceImportPath(const QString &path) override;
 
-		void registerExports() override;
-		void registerUiTypes() override;
+	private:
+		QQmlEngine *m_qmlEngine = nullptr;
 };
 
-#endif // UIMODULE_H
+#endif // UIENGINE_H
