@@ -2,6 +2,8 @@ TEMPLATE = lib
 QT += core widgets qml network
 CONFIG += staticlib
 
+QML_IMPORT_PATH += qml
+
 SOURCES += \
     AddonApi.cpp \
     AddonButton.cpp \
@@ -20,3 +22,6 @@ HEADERS += \
     AddonModel.h \
     AddonsModule.h \
     IAddon.h
+
+RESOURCES += \
+        addons.qrc

@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/OpenTyper/Addons/AddonSettings.qml</file>
+        <file>qml/OpenTyper/Addons/qmldir</file>
+        <file>qml/OpenTyper/Addons/internal/AddonInfo.qml</file>
+        <file>qml/OpenTyper/Addons/internal/AddonItem.qml</file>
+        <file>qml/OpenTyper/Addons/AddonButtonRepeater.qml</file>
+    </qresource>
+</RCC>

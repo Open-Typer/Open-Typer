@@ -29,6 +29,11 @@ std::string AddonsModule::moduleName() const
 	return "addons";
 }
 
+void AddonsModule::registerResources()
+{
+	Q_INIT_RESOURCE(addons);
+}
+
 void AddonsModule::registerUiTypes()
 {
 	QQmlEngine::setObjectOwnership(&globalAddonApi, QQmlEngine::CppOwnership);

@@ -23,7 +23,6 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.2
 import OpenTyper 1.0
 import OpenTyper.UiComponents 1.0
-import "dialogs"
 
 Item {
 	property AddonItemModel itemModel

@@ -70,7 +70,7 @@ CustomDialog {
 				SettingsCategory {
 					name: qsTr("Addons")
 					iconName: "add"
-					qmlFileName: "settings/AddonSettings.qml"
+					qmlFileName: "OpenTyper/Addons/AddonSettings.qml"
 					visible: !QmlUtils.osWasm()
 				}
 			]

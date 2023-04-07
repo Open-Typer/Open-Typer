@@ -16,12 +16,8 @@
         <file>settings/KeyboardSettings.qml</file>
         <file>settings/LanguageSettings.qml</file>
         <file>dialogs/ExportDialog.qml</file>
-        <file>core/AddonButtonRepeater.qml</file>
         <file>core/MenuBarManager.qml</file>
         <file>dialogs/AboutDialog.qml</file>
-        <file>settings/AddonSettings.qml</file>
-        <file>AddonItem.qml</file>
-        <file>AddonInfo.qml</file>
         <file>core/BackgroundBlur.qml</file>
     </qresource>
 </RCC>
