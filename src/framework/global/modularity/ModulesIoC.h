@@ -57,7 +57,7 @@ class ModulesIoC
 		}
 
 		template <class I>
-		void registerExport(I *instance)
+		void registerExport(std::shared_ptr<I> instance)
 		{
 			QString id = typeid(I).name();
 			auto it = m_map.find(id);
