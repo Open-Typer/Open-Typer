@@ -21,7 +21,9 @@
 #include <QQmlEngine>
 #include "TranslationsModule.h"
 #include "LanguageManager.h"
-#include "global/internal/Settings.h"
+
+static const QString module = "translations";
+static const ISettings::Key LANGUAGE(module, "language");
 
 std::string TranslationsModule::moduleName() const
 {
@@ -44,12 +46,13 @@ void TranslationsModule::registerUiTypes()
 void TranslationsModule::onPreInit()
 {
 	globalLanguageManager.init();
-	QString language = settings()->getValue("translations", "language").toString();
+	QString language = settings()->getValue(LANGUAGE).toString();
 	if(language == "")
 		globalLanguageManager.setLanguage(-1);
 	else
 		globalLanguageManager.setLanguage(globalLanguageManager.getBoxItems().indexOf(language) - 1);
-	settings()->connect(settings().get(), &ISettings::discarded, [language]() {
+	settings()->connect(settings().get(), &ISettings::discarded, [this]() {
+		QString language = settings()->getValue(LANGUAGE).toString();
 		globalLanguageManager.setLanguage(globalLanguageManager.getBoxItems().indexOf(language) - 1);
 	});
 }
