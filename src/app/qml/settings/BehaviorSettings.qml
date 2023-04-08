@@ -48,8 +48,8 @@ ColumnLayout {
 	CheckBox {
 		id: mistakeLimitCheckBox
 		text: qsTr("Limit number of mistakes")
-		checked: Settings.mistakeLimit()
-		onCheckedChanged: Settings.setMistakeLimit(checked)
+		checked: Settings.getValue("validator", "mistakeLimit")
+		onCheckedChanged: Settings.setValue("validator", "mistakeLimit", checked)
 	}
 	RowLayout {
 		enabled: mistakeLimitCheckBox.checked
@@ -62,8 +62,8 @@ ColumnLayout {
 		SpinBox {
 			from: 1
 			to: 100
-			value: Settings.mistakeChars()
-			onValueChanged: Settings.setMistakeChars(value)
+			value: Settings.getValue("validator", "mistakeChars")
+			onValueChanged: Settings.setValue("validator", "mistakeChars", value)
 			Accessible.description: maxCharsLabel.text
 		}
 	}

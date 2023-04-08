@@ -247,28 +247,6 @@ void Settings::copyTempSettings(void)
 }
 #endif // Q_OS_WASM
 
-// mistakeLimit
-
-/*! Getter for main/mistakelimit. */
-bool Settings::mistakeLimit(void) { return get("main/mistakelimit", true).toBool(); }
-
-/*! Returns true if there's a main/mistakelimit key. */
-bool Settings::containsMistakeLimit(void) { return contains("main/mistakelimit"); }
-
-/*! Setter for main/mistakelimit. */
-void Settings::setMistakeLimit(bool value) { set("main/mistakelimit", value); }
-
-// mistakeChars
-
-/*! Getter for main/mistakechars. */
-int Settings::mistakeChars(void) { return get("main/mistakechars", 6).toInt(); }
-
-/*! Returns true if there's a main/mistakechars key. */
-bool Settings::containsMistakeChars(void) { return contains("main/mistakechars"); }
-
-/*! Setter for main/mistakechars. */
-void Settings::setMistakeChars(int value) { set("main/mistakechars", value); }
-
 // editorGeometry
 
 /*! Getter for main/editorGeometry. \deprecated The pack editor window doesn't use "geometry" anymore. */

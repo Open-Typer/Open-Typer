@@ -22,8 +22,11 @@
 #include "global/StringUtils.h"
 #include "global/internal/Settings.h"
 
+static const QString module = "grades";
 static const QString gradesModule = "grades";
 static const QString appModule = "app";
+static const ISettings::Key MISTAKE_LIMIT(module, "mistakeLimit");
+static const ISettings::Key MISTAKE_CHARS(module, "mistakeChars");
 static const ISettings::Key GRADE_NET_HITS(gradesModule, "gradeNetHits");
 static const ISettings::Key GRADING_METHOD(gradesModule, "gradingMethod");
 static const ISettings::Key GRADE_START_NUM(gradesModule, "gradeStartNumber");
@@ -635,9 +638,9 @@ QList<MistakeRecord> ExerciseValidator::findMistakes(QString exerciseText, QStri
 				int wordStart = pos;
 				auto diff = compareStrings(differences[i].previousText(), inputWords[i], &recordedCharacters, &hits, &pos);
 				// Ensure there's max. one mistake per n characters (depends on settings)
-				if(Settings::mistakeLimit())
+				if(settings()->getValue(MISTAKE_LIMIT).toBool())
 				{
-					int charCount = Settings::mistakeChars();
+					int charCount = settings()->getValue(MISTAKE_CHARS).toInt();
 					int lastMistakePos = -1;
 					for(int i2 = 0; i2 < diff.count(); i2++)
 					{

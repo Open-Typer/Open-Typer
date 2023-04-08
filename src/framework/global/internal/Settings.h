@@ -37,8 +37,6 @@
  * Use Settings#init() to initialize settings when the application starts.\n
  * \n
  * <b>List of settings keys:</b>
- *  - Settings#mistakeLimit() - Whether to limit number of mistakes in per characters in words.
- *  - Settings#mistakeChars() - Number of characters in one word with max. 1 mistake.
  *  - Settings#editorGeometry() - Deprecated, do not use in new code. There'll be a new pack editor window soon.
  */
 class Q_DECL_EXPORT Settings : public ISettings
@@ -58,14 +56,6 @@ class Q_DECL_EXPORT Settings : public ISettings
 		Q_INVOKABLE void saveChanges(void) override;
 		Q_INVOKABLE void discardChanges(void) override;
 		Q_INVOKABLE bool isFrozen(void) override;
-		// mistakeLimit
-		Q_INVOKABLE static bool mistakeLimit(void);
-		Q_INVOKABLE static bool containsMistakeLimit(void);
-		Q_INVOKABLE static void setMistakeLimit(bool value);
-		// mistakeChars
-		Q_INVOKABLE static int mistakeChars(void);
-		Q_INVOKABLE static bool containsMistakeChars(void);
-		Q_INVOKABLE static void setMistakeChars(int value);
 		// editorGeometry
 		Q_INVOKABLE Q_DECL_DEPRECATED static QByteArray editorGeometry(void);
 		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsEditorGeometry(void);

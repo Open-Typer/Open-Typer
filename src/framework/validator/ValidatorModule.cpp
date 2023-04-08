@@ -21,10 +21,17 @@
 #include <QQmlEngine>
 #include "ValidatorModule.h"
 #include "ExerciseValidator.h"
+#include "global/ISettings.h"
 
 std::string ValidatorModule::moduleName() const
 {
 	return "validator";
+}
+
+void ValidatorModule::initSettings()
+{
+	INIT_SETTINGS_KEY("mistakeLimit", "main/mistakelimit", true);
+	INIT_SETTINGS_KEY("mistakeChars", "main/mistakechars", 6);
 }
 
 void ValidatorModule::registerUiTypes()

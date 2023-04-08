@@ -28,6 +28,7 @@ class ValidatorModule : public IModuleSetup
 	public:
 		std::string moduleName() const override;
 
+		void initSettings() override;
 		void registerUiTypes() override;
 };
 
