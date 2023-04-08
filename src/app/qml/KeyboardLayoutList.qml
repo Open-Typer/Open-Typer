@@ -34,8 +34,8 @@ ListView {
 			clear();
 			for(var i = 0; i < items.length; i++)
 				append({"name": items[i]});
-			if(Settings.containsLessonPack() && (Settings.lessonPack() !== "") && !noAutoLayout)
-				currentIndex = items.indexOf(BuiltInPacks.keyboardLayoutForPack(Settings.lessonPack()));
+			if(Settings.containsKey("app", "lessonPack") && (Settings.getValue("app", "lessonPack") !== "") && !noAutoLayout)
+				currentIndex = items.indexOf(BuiltInPacks.keyboardLayoutForPack(Settings.getValue("app", "lessonPack")));
 			itemsLoaded();
 		}
 		Component.onCompleted: loadItems()

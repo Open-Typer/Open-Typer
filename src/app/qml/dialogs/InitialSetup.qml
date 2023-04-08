@@ -59,14 +59,14 @@ CustomDialog {
 	}
 	function skipPage() { skipPageTimer.start(); }
 	onAboutToShow: {
-		if(!Settings.containsAppTheme() || !Settings.containsInitFinished())
+		if(!Settings.containsKey("ui", "appTheme") || !Settings.containsKey("app", "initFinished"))
 		{
 			ThemeEngine.setDefaultTheme();
-			Settings.setInitFinished(false);
+			Settings.setValue("app", "initFinished", false);
 		}
-		if(!Settings.containsLessonPack() || (Settings.lessonPack() === ""))
+		if(!Settings.containsKey("app", "lessonPack") || (Settings.getValue("app", "lessonPack") === ""))
 		{
-			Settings.setLessonPack("en_US-default-A"); // lesson pack will be changed during initial setup anyway
+			Settings.setValue("app", "lessonPack", "en_US-default-A"); // lesson pack will be changed during initial setup anyway
 			noAutoLayout = true;
 		}
 		focusTimer.start();
@@ -108,7 +108,7 @@ CustomDialog {
 				//: To finish the initial setup
 				text: qsTr("Finish")
 				onClicked: {
-					Settings.setInitFinished(true);
+					Settings.setValue("app", "initFinished", true);
 					root.close();
 				}
 				KeyNavigation.tab: stack.currentItem

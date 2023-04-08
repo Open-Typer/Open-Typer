@@ -247,84 +247,6 @@ void Settings::copyTempSettings(void)
 }
 #endif // Q_OS_WASM
 
-/*! Getter for main/windowX. */
-int Settings::windowX(void) { return get("main/windowX", 0).toInt(); }
-
-/*! Returns true if there's a main/windowX key. */
-bool Settings::containsWindowX(void) { return contains("main/windowX"); }
-
-/*! Setter for main/windowX. */
-void Settings::setWindowX(int value) { set("main/windowX", value); }
-
-/*! Getter for main/windowY. */
-int Settings::windowY(void) { return get("main/windowY", 0).toInt(); }
-
-/*! Returns true if there's a main/windowY key. */
-bool Settings::containsWindowY(void) { return contains("main/windowY"); }
-
-/*! Setter for main/windowY. */
-void Settings::setWindowY(int value) { set("main/windowY", value); }
-
-/*! Getter for main/windowWidth. */
-int Settings::windowWidth(void) { return get("main/windowWidth", 1200).toInt(); }
-
-/*! Returns true if there's a main/windowWidth key. */
-bool Settings::containsWindowWidth(void) { return contains("main/windowWidth"); }
-
-/*! Setter for main/windowWidth. */
-void Settings::setWindowWidth(int value) { set("main/windowWidth", value); }
-
-/*! Getter for main/windowHeight. */
-int Settings::windowHeight(void) { return get("main/windowHeight", 800).toInt(); }
-
-/*! Returns true if there's a main/windowHeight key. */
-bool Settings::containsWindowHeight(void) { return contains("main/windowHeight"); }
-
-/*! Setter for main/windowHeight. */
-void Settings::setWindowHeight(int value) { set("main/windowHeight", value); }
-
-/*! Getter for main/windowMaximized. */
-bool Settings::windowMaximized(void) { return get("main/windowMaximized", true).toBool(); }
-
-/*! Returns true if there's a main/windowMaximized key. */
-bool Settings::containsWindowMaximized(void) { return contains("main/windowMaximized"); }
-
-/*! Setter for main/windowMaximized. */
-void Settings::setWindowMaximized(bool value) { set("main/windowMaximized", value); }
-
-// lessonPack
-
-/*! Getter for main/configfile. */
-QString Settings::lessonPack(void) { return get("main/configfile", "").toString(); }
-
-/*! Returns true if there's a main/configfile key. */
-bool Settings::containsLessonPack(void) { return contains("main/configfile"); }
-
-/*! Setter for main/configfile. */
-void Settings::setLessonPack(QString value) { set("main/configfile", value); }
-
-// customLessonPack
-
-/*! Getter for main/customconfig. */
-bool Settings::customLessonPack(void) { return get("main/customconfig", false).toBool(); }
-
-/*! Returns true if there's a main/customconfig key. */
-bool Settings::containsCustomLessonPack(void) { return contains("main/customconfig"); }
-
-/*! Setter for main/customconfig. */
-void Settings::setCustomLessonPack(bool value) { set("main/customconfig", value); }
-
-// errorPenalty
-
-/*! Getter for main/errorpenalty. */
-int Settings::errorPenalty(void) { return get("main/errorpenalty", 10).toInt(); }
-
-/*! Returns true if there's a main/errorpenalty key. */
-bool Settings::containsErrorPenalty(void) { return contains("main/errorpenalty"); }
-
-/*! Setter for main/errorpenalty. */
-void Settings::setErrorPenalty(int value) { set("main/errorpenalty", value); }
-
 // mistakeLimit
 
 /*! Getter for main/mistakelimit. */
@@ -357,14 +279,3 @@ bool Settings::containsEditorGeometry(void) { return contains("main/editorGeomet
 
 /*! Setter for main/editorGeometry. \deprecated The pack editor window doesn't use "geometry" anymore. */
 void Settings::setEditorGeometry(QByteArray value) { set("main/editorGeometry", value); }
-
-// initFinished
-
-/*! Getter for main/initfinished. */
-bool Settings::initFinished(void) { return get("main/initfinished", false).toBool(); }
-
-/*! Returns true if there's a main/initfinished key. */
-bool Settings::containsInitFinished(void) { return contains("main/initfinished"); }
-
-/*! Setter for main/initfinished. */
-void Settings::setInitFinished(bool value) { set("main/initfinished", value); }

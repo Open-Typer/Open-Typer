@@ -34,8 +34,8 @@ ListView {
 			clear();
 			for(var i = 0; i < items.length; i++)
 				append({"name": BuiltInPacks.packName(items[i])});
-			if(Settings.containsLessonPack() && (Settings.lessonPack() !== ""))
-				currentIndex = items.indexOf(Settings.lessonPack());
+			if(Settings.containsKey("app", "lessonPack") && (Settings.getValue("app", "lessonPack") !== ""))
+				currentIndex = items.indexOf(Settings.getValue("app", "lessonPack"));
 			itemsLoaded();
 		}
 		Component.onCompleted: {
@@ -49,7 +49,7 @@ ListView {
 		highlighted: ListView.isCurrentItem
 		onClicked: {
 			root.currentIndex = index;
-			Settings.setLessonPack(items[currentIndex]);
+			Settings.setValue("app", "lessonPack", items[currentIndex]);
 			QmlUtils.screenKeyboardChanged(true);
 		}
 	}

@@ -22,10 +22,24 @@
 #include "AppModule.h"
 #include "AppMenuBar.h"
 #include "settings/SettingsCategory.h"
+#include "global/ISettings.h"
 
 std::string AppModule::moduleName() const
 {
 	return "app";
+}
+
+void AppModule::initSettings()
+{
+	INIT_SETTINGS_KEY("windowX", "main/windowX", 0);
+	INIT_SETTINGS_KEY("windowY", "main/windowY", 0);
+	INIT_SETTINGS_KEY("windowWidth", "main/windowWidth", 1200);
+	INIT_SETTINGS_KEY("windowHeight", "main/windowHeight", 800);
+	INIT_SETTINGS_KEY("windowMaximized", "main/windowMaximized", true);
+	INIT_SETTINGS_KEY("lessonPack", "main/configfile", "");
+	INIT_SETTINGS_KEY("customLessonPack", "main/customconfig", false);
+	INIT_SETTINGS_KEY("errorPenalty", "main/errorpenalty", 10);
+	INIT_SETTINGS_KEY("initFinished", "main/initfinished", false);
 }
 
 void AppModule::registerUiTypes()

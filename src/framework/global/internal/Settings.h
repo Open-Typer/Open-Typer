@@ -37,18 +37,9 @@
  * Use Settings#init() to initialize settings when the application starts.\n
  * \n
  * <b>List of settings keys:</b>
- *  - Settings#windowX - Main window X position.
- *  - Settings#windowY - Main window Y position.
- *  - Settings#windowWidth - Main window width.
- *  - Settings#windowHeight - Main window height.
- *  - Settings#windowMaximized - Whether the main window was maximized when closed.
- *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
- *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
- *  - Settings#errorPenalty() - Number of hits subtracted from net hits on every mistake.
  *  - Settings#mistakeLimit() - Whether to limit number of mistakes in per characters in words.
  *  - Settings#mistakeChars() - Number of characters in one word with max. 1 mistake.
  *  - Settings#editorGeometry() - Deprecated, do not use in new code. There'll be a new pack editor window soon.
- *  - Settings#initFinished() - If true, initial setup has been finished.
  */
 class Q_DECL_EXPORT Settings : public ISettings
 {
@@ -67,38 +58,6 @@ class Q_DECL_EXPORT Settings : public ISettings
 		Q_INVOKABLE void saveChanges(void) override;
 		Q_INVOKABLE void discardChanges(void) override;
 		Q_INVOKABLE bool isFrozen(void) override;
-		// windowX
-		Q_INVOKABLE static int windowX(void);
-		Q_INVOKABLE static bool containsWindowX(void);
-		Q_INVOKABLE static void setWindowX(int value);
-		// windowY
-		Q_INVOKABLE static int windowY(void);
-		Q_INVOKABLE static bool containsWindowY(void);
-		Q_INVOKABLE static void setWindowY(int value);
-		// windowWidth
-		Q_INVOKABLE static int windowWidth(void);
-		Q_INVOKABLE static bool containsWindowWidth(void);
-		Q_INVOKABLE static void setWindowWidth(int value);
-		// windowHeight
-		Q_INVOKABLE static int windowHeight(void);
-		Q_INVOKABLE static bool containsWindowHeight(void);
-		Q_INVOKABLE static void setWindowHeight(int value);
-		// windowMaximized
-		Q_INVOKABLE static bool windowMaximized(void);
-		Q_INVOKABLE static bool containsWindowMaximized(void);
-		Q_INVOKABLE static void setWindowMaximized(bool value);
-		// lessonPack
-		Q_INVOKABLE static QString lessonPack(void);
-		Q_INVOKABLE static bool containsLessonPack(void);
-		Q_INVOKABLE static void setLessonPack(QString value);
-		// customLessonPack
-		Q_INVOKABLE static bool customLessonPack(void);
-		Q_INVOKABLE static bool containsCustomLessonPack(void);
-		Q_INVOKABLE static void setCustomLessonPack(bool value);
-		// errorPenalty
-		Q_INVOKABLE static int errorPenalty(void);
-		Q_INVOKABLE static bool containsErrorPenalty(void);
-		Q_INVOKABLE static void setErrorPenalty(int value);
 		// mistakeLimit
 		Q_INVOKABLE static bool mistakeLimit(void);
 		Q_INVOKABLE static bool containsMistakeLimit(void);
@@ -111,10 +70,6 @@ class Q_DECL_EXPORT Settings : public ISettings
 		Q_INVOKABLE Q_DECL_DEPRECATED static QByteArray editorGeometry(void);
 		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsEditorGeometry(void);
 		Q_INVOKABLE Q_DECL_DEPRECATED static void setEditorGeometry(QByteArray value);
-		// initFinished
-		Q_INVOKABLE static bool initFinished(void);
-		Q_INVOKABLE static bool containsInitFinished(void);
-		Q_INVOKABLE static void setInitFinished(bool value);
 
 	protected:
 		static QVariant get(QString key, QVariant defaultValue);

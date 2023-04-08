@@ -55,7 +55,7 @@ ColumnLayout {
 	spacing: keySpacing
 
 	function loadLayout() {
-		layout.xkbLayout = BuiltInPacks.keyboardLayoutXkb(BuiltInPacks.keyboardLayoutForPack(Settings.lessonPack()));
+		layout.xkbLayout = BuiltInPacks.keyboardLayoutXkb(BuiltInPacks.keyboardLayoutForPack(Settings.getValue("app", "lessonPack")));
 	}
 
 	function findKeyInRow(key, rowRepeater) {

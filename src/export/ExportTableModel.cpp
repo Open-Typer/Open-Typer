@@ -20,7 +20,6 @@
 
 #include <QDate>
 #include "ExportTableModel.h"
-#include "global/internal/Settings.h"
 
 const QMap<QPair<int, int>, QPair<int, int>> ExportTableModel::spans = {
 	{ { 0, 0 }, { 1, 4 } },
@@ -89,7 +88,7 @@ void ExportTableModel::loadData(void)
 	tableData.clear();
 	if(!m_validator)
 		return;
-	int penalty = Settings::errorPenalty();
+	int penalty = settings()->getValue("app", "errorPenalty").toInt();
 	int netHits = std::max(0, m_validator->grossHits() - m_validator->mistakeCount() * penalty);
 	qreal timeMins = m_validator->time() / 60.0;
 	qreal netHitsPerMinute = netHits / timeMins;

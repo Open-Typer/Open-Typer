@@ -27,7 +27,7 @@ import OpenTyper.History 1.0
 
 ColumnLayout {
 	id: root
-	property int errorPenalty: Settings.errorPenalty()
+	property int errorPenalty: Settings.getValue("app", "errorPenalty")
 	property string lessonPack
 	property int lesson
 	property int sublesson

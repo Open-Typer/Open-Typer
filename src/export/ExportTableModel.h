@@ -24,6 +24,7 @@
 #include <QAbstractTableModel>
 #include <QSize>
 #include "validator/ExerciseValidator.h"
+#include "global/ISettings.h"
 
 /*!
  * \brief The ExportTableModel class provides a table model for typing test results.
@@ -33,6 +34,7 @@
 class Q_DECL_EXPORT ExportTableModel : public QAbstractTableModel
 {
 		Q_OBJECT
+		INJECT(ISettings, settings)
 		Q_PROPERTY(QString studentName READ studentName WRITE setStudentName NOTIFY studentNameChanged)
 		Q_PROPERTY(QString className READ className WRITE setClassName NOTIFY classNameChanged)
 		Q_PROPERTY(QString testNumber READ testNumber WRITE setTestNumber NOTIFY testNumberChanged)

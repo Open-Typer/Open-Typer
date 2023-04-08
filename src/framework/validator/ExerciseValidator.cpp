@@ -23,12 +23,14 @@
 #include "global/internal/Settings.h"
 
 static const QString gradesModule = "grades";
+static const QString appModule = "app";
 static const ISettings::Key GRADE_NET_HITS(gradesModule, "gradeNetHits");
 static const ISettings::Key GRADING_METHOD(gradesModule, "gradingMethod");
 static const ISettings::Key GRADE_START_NUM(gradesModule, "gradeStartNumber");
 static const ISettings::Key GRADE_END_NUM(gradesModule, "gradeEndNumber");
 static const ISettings::Key GRADE_START_LETTER(gradesModule, "gradeStartLetter");
 static const ISettings::Key GRADE_END_LETTER(gradesModule, "gradeEndLetter");
+static const ISettings::Key ERROR_PENALTY(appModule, "errorPenalty");
 
 /*! Constructs ExerciseValidator. */
 ExerciseValidator::ExerciseValidator(QObject *parent) :
@@ -355,7 +357,7 @@ const QString &ExerciseValidator::grade(void) const
 /*! Calculates the grade and updates the grade property. \since Open-Typer 5.1.0 */
 void ExerciseValidator::updateGrade(void)
 {
-	qreal hits = m_useNetHitsForGrading ? std::max(0, m_grossHits - m_mistakeCount * Settings::errorPenalty()) : m_grossHits;
+	qreal hits = m_useNetHitsForGrading ? std::max(0, m_grossHits - m_mistakeCount * settings()->getValue(ERROR_PENALTY).toInt()) : m_grossHits;
 	qreal hpm = hits * (60 / m_time);
 	QVariantList grades;
 	if(m_gradingMethod == ClassManager::GradingMethod_Numbers)

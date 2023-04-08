@@ -29,6 +29,7 @@ class AppModule : public IModuleSetup
 	public:
 		std::string moduleName() const override;
 
+		void initSettings() override;
 		void registerUiTypes() override;
 		void setRootContextProperties(QQmlContext *context) override;
 

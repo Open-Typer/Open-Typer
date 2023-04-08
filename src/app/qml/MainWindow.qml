@@ -634,7 +634,7 @@ ApplicationWindow {
 
 	function reload() {
 		// Pack name
-		packName = Settings.lessonPack();
+		packName = Settings.getValue("app", "lessonPack");
 		console.assert(packName != "");
 		var packChanged = false;
 		if(packName == oldPackName)
@@ -643,7 +643,7 @@ ApplicationWindow {
 			packChanged = true;
 		oldPackName = packName;
 		// Custom pack
-		customPack = Settings.customLessonPack();
+		customPack = Settings.getValue("app", "customLessonPack");
 		// Load on screen keyboard layout
 		keyboard.loadLayout();
 		// Load the pack and start
@@ -661,7 +661,7 @@ ApplicationWindow {
 			updateLessonList();
 			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
 		}
-		paper.errorPenalty = Settings.errorPenalty();
+		paper.errorPenalty = Settings.getValue("app", "errorPenalty");
 		highlightNextKey();
 		keyboard.releaseAllKeys();
 		AddonApi.sendEvent(AddonApi.Event_RefreshApp);
@@ -691,7 +691,7 @@ ApplicationWindow {
 				openSuccess = parser.open(packPath);
 			if(!openSuccess && !bufferOpened)
 			{
-				Settings.setLessonPack("");
+				Settings.setValue("app", "lessonPack", "");
 				reload();
 				return "";
 			}
@@ -703,7 +703,7 @@ ApplicationWindow {
 		if(customPack)
 			packName = packPath;
 		// Save selected pack to settings
-		Settings.setLessonPack(packName);
+		Settings.setValue("app", "lessonPack", packName);
 		if(customPack)
 			packFriendlyName = FileUtils.fileName(packName);
 		else
@@ -1212,10 +1212,10 @@ ApplicationWindow {
 			totalHits = validator.grossHits();
 			exerciseMistakes = validator.mistakeCount();
 			errorWords = validator.errorWords();
-			netHits = Math.max(0, totalHits - (exerciseMistakes * Settings.errorPenalty()));
+			netHits = Math.max(0, totalHits - (exerciseMistakes * Settings.getValue("app", "errorPenalty")));
 		}
 		validator.generateMistakeText(correctMistakes);
-		netHits = Math.max(0, totalHits - exerciseMistakes * Settings.errorPenalty());
+		netHits = Math.max(0, totalHits - exerciseMistakes * Settings.getValue("app", "errorPenalty"));
 		var netHitsPerMinute = netHits * (60 / lastTime);
 		var grossHitsPerMinute = totalHits * (60 / lastTime);
 		var time = lastTime;
@@ -1361,13 +1361,13 @@ ApplicationWindow {
 	}
 
 	Component.onCompleted: {
-		visibility = Settings.windowMaximized() ? ApplicationWindow.Maximized : ApplicationWindow.Windowed;
+		visibility = Settings.getValue("app", "windowMaximized") ? ApplicationWindow.Maximized : ApplicationWindow.Windowed;
 		wasMaximized = (visibility == ApplicationWindow.Maximized);
-		oldX = Settings.windowX();
-		oldY = Settings.windowY();
-		oldWidth = Settings.windowWidth();
-		oldHeight = Settings.windowHeight();
-		if(!Settings.containsWindowX() || !Settings.containsWindowY())
+		oldX = Settings.getValue("app", "windowX");
+		oldY = Settings.getValue("app", "windowY");
+		oldWidth = Settings.getValue("app", "windowWidth");
+		oldHeight = Settings.getValue("app", "windowHeight");
+		if(!Settings.containsKey("app", "windowX") || !Settings.containsKey("app", "windowY"))
 		{
 			oldX = (screen.width - oldWidth) / 2;
 			oldY = (screen.height - oldHeight) / 2;
@@ -1377,7 +1377,7 @@ ApplicationWindow {
 		y = oldY;
 		width = oldWidth;
 		height = oldHeight;
-		if(Settings.windowMaximized())
+		if(Settings.getValue("app", "windowMaximized"))
 		{
 			if(QmlUtils.osWindows() && (QmlUtils.qtVersionMajor() < 6))
 				showFullScreen();
@@ -1388,7 +1388,7 @@ ApplicationWindow {
 		QmlUtils.menuBarBlur = menuBarBlur;
 		QmlUtils.activeFocusItem = Qt.binding(function() { return root.activeFocusItem; });
 		AddonApi.sendEvent(AddonApi.Event_InitApp);
-		if(!Settings.initFinished())
+		if(!Settings.getValue("app", "initFinished"))
 			initialSetup.open();
 		reload();
 		paper.forceActiveFocus();
@@ -1397,18 +1397,18 @@ ApplicationWindow {
 	onClosing: {
 		if(visibility != ApplicationWindow.Windowed)
 		{
-			Settings.setWindowX(oldX);
-			Settings.setWindowY(oldY);
-			Settings.setWindowWidth(oldWidth);
-			Settings.setWindowHeight(oldHeight);
+			Settings.setValue("app", "windowX", oldX);
+			Settings.setValue("app", "windowY", oldY);
+			Settings.setValue("app", "windowWidth", oldWidth);
+			Settings.setValue("app", "windowHeight", oldHeight);
 		}
 		else
 		{
-			Settings.setWindowX(root.x);
-			Settings.setWindowY(root.y);
-			Settings.setWindowWidth(root.width);
-			Settings.setWindowHeight(root.height);
+			Settings.setValue("app", "windowX", root.x);
+			Settings.setValue("app", "windowY", root.y);
+			Settings.setValue("app", "windowWidth", root.width);
+			Settings.setValue("app", "windowHeight", root.height);
 		}
-		Settings.setWindowMaximized(wasMaximized);
+		Settings.setValue("app", "windowMaximized", wasMaximized);
 	}
 }

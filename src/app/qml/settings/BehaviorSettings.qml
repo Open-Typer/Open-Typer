@@ -40,8 +40,8 @@ ColumnLayout {
 		SpinBox {
 			from: 0
 			to: 100
-			value: Settings.errorPenalty()
-			onValueChanged: Settings.setErrorPenalty(value)
+			value: Settings.getValue("app", "errorPenalty")
+			onValueChanged: Settings.setValue("app", "errorPenalty", value)
 			Accessible.description: validationLabel.text + " " + errorPenaltyLabel.text
 		}
 	}
