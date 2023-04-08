@@ -25,11 +25,13 @@
 #include "MistakeRecord.h"
 #include "CharacterRecord.h"
 #include "grades/ClassManager.h"
+#include "global/ISettings.h"
 
 /*! \brief The ExerciseValidator class provides methods for exercise validation to QML code. */
 class Q_DECL_EXPORT ExerciseValidator : public QObject
 {
 		Q_OBJECT
+		INJECT(ISettings, settings)
 		Q_PROPERTY(QString exerciseText READ exerciseText WRITE setExerciseText NOTIFY exerciseTextChanged)
 		Q_PROPERTY(QString inputText READ inputText WRITE setInputText NOTIFY inputTextChanged)
 		Q_PROPERTY(QList<MistakeRecord> mistakes READ mistakes WRITE setMistakes NOTIFY mistakesChanged)

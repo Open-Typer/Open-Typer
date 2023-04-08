@@ -21,6 +21,7 @@
 #include <QQmlEngine>
 #include "GradesModule.h"
 #include "ClassManager.h"
+#include "global/ISettings.h"
 
 std::string GradesModule::moduleName() const
 {
@@ -30,6 +31,18 @@ std::string GradesModule::moduleName() const
 void GradesModule::registerResources()
 {
 	Q_INIT_RESOURCE(grades);
+}
+
+void GradesModule::initSettings()
+{
+	INIT_SETTINGS_KEY("targetHitsPerMinute", "grading/targethits", 130);
+	INIT_SETTINGS_KEY("gradeNetHits", "grading/gradenethits", true);
+	INIT_SETTINGS_KEY("selectedClass", "grading/class", -1);
+	INIT_SETTINGS_KEY("gradingMethod", "grading/gradingmethod", ClassManager::GradingMethod_Numbers);
+	INIT_SETTINGS_KEY("gradeStartNumber", "grading/startnumber", 5);
+	INIT_SETTINGS_KEY("gradeEndNumber", "grading/endnumber", 1);
+	INIT_SETTINGS_KEY("gradeStartLetter", "grading/startletter", 'F');
+	INIT_SETTINGS_KEY("gradeEndLetter", "grading/endletter", 'A');
 }
 
 void GradesModule::registerUiTypes()

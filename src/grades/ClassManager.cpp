@@ -25,6 +25,10 @@
 #include "global/FileUtils.h"
 #include "global/internal/Settings.h"
 
+static const QString module = "grades";
+static const ISettings::Key TARGET_HPM(module, "targetHitsPerMinute");
+static const ISettings::Key SELECTED_CLASS(module, "selectedClass");
+
 const QString ClassManager::nameProperty = "name";
 const QString ClassManager::descriptionProperty = "description";
 const QString ClassManager::gradingProperty = "grading";
@@ -102,7 +106,7 @@ void ClassManager::createNewClass(void)
 {
 	Class *newClass = new Class(this);
 	newClass->setName(tr("Unnamed class"));
-	newClass->setTargetHitsPerMinute(Settings::targetHitsPerMinute());
+	newClass->setTargetHitsPerMinute(settings()->getValue(TARGET_HPM).toInt());
 	connect(newClass, &Class::modified, this, &ClassManager::write);
 	m_classes.append(newClass);
 	write();
@@ -120,14 +124,14 @@ void ClassManager::removeClass(Class *classPtr)
 /*! Returns target hits per minute based on selected class and current month. */
 int ClassManager::targetHitsPerMinute(void)
 {
-	return targetHitsPerMinute(Settings::selectedClass());
+	return targetHitsPerMinute(settings()->getValue(SELECTED_CLASS).toInt());
 }
 
 /*! Returns target hits per minute based on the given class and current month. */
 int ClassManager::targetHitsPerMinute(int selectedClass)
 {
 	if(selectedClass == -1)
-		return Settings::targetHitsPerMinute();
+		return settings()->getValue(TARGET_HPM).toInt();
 	else
 	{
 		Class *classPtr = globalClassManager.m_classes[selectedClass];

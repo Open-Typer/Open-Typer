@@ -95,8 +95,8 @@ ColumnLayout {
 		id: targetHitsBox
 		from: 25
 		to: 750
-		value: currentClass == null ? Settings.targetHitsPerMinute() : currentClass.targetHitsPerMinute
-		onValueChanged: currentClass == null ? Settings.setTargetHitsPerMinute(value) : currentClass.targetHitsPerMinute = value
+		value: currentClass == null ? Settings.getValue("grades", "targetHitsPerMinute") : currentClass.targetHitsPerMinute
+		onValueChanged: currentClass == null ? Settings.setValue("grades", "targetHitsPerMinute", value) : currentClass.targetHitsPerMinute = value
 		Accessible.description: targetHitsLabel.text
 	}
 
@@ -113,10 +113,10 @@ ColumnLayout {
 		id: numbersButton
 		text: qsTr("Use numbers")
 		visible: currentClass == null
-		checked: Settings.gradingMethod() === ClassManager.GradingMethod_Numbers
+		checked: Settings.getValue("grades", "gradingMethod") === ClassManager.GradingMethod_Numbers
 		onCheckedChanged: {
 			if(checked)
-				Settings.setGradingMethod(ClassManager.GradingMethod_Numbers);
+				Settings.setValue("grades", "gradingMethod", ClassManager.GradingMethod_Numbers);
 		}
 	}
 
@@ -125,10 +125,10 @@ ColumnLayout {
 		//: Use "characters" would be valid too
 		text: qsTr("Use letters")
 		visible: currentClass == null
-		checked: Settings.gradingMethod() === ClassManager.GradingMethod_Letters
+		checked: Settings.getValue("grades", "gradingMethod") === ClassManager.GradingMethod_Letters
 		onCheckedChanged: {
 			if(checked)
-				Settings.setGradingMethod(ClassManager.GradingMethod_Letters);
+				Settings.setValue("grades", "gradingMethod", ClassManager.GradingMethod_Letters);
 		}
 	}
 
@@ -145,16 +145,16 @@ ColumnLayout {
 			visible: numbersButton.checked
 			from: 0
 			to: 100
-			value: Settings.gradeStartNumber()
-			onValueChanged: Settings.setGradeStartNumber(value)
+			value: Settings.getValue("grades", "gradeStartNumber")
+			onValueChanged: Settings.setValue("grades", "gradeStartNumber", value)
 			Accessible.description: worstGradeLabel.text
 		}
 
 		CustomComboBox {
 			visible: lettersButton.checked
 			model: alphabet.split("")
-			currentIndex: alphabet.indexOf(Settings.gradeStartLetter())
-			onCurrentTextChanged: Settings.setGradeStartLetter(currentText)
+			currentIndex: alphabet.indexOf(Settings.getValue("grades", "gradeStartLetter"))
+			onCurrentTextChanged: Settings.setValue("grades", "gradeStartLetter", currentText)
 			Accessible.name: worstGradeLabel.text
 		}
 	}
@@ -172,16 +172,16 @@ ColumnLayout {
 			visible: numbersButton.checked
 			from: 0
 			to: 100
-			value: Settings.gradeEndNumber()
-			onValueChanged: Settings.setGradeEndNumber(value)
+			value: Settings.getValue("grades", "gradeEndNumber")
+			onValueChanged: Settings.setValue("grades", "gradeEndNumber", value)
 			Accessible.description: bestGradeLabel.text
 		}
 
 		CustomComboBox {
 			visible: lettersButton.checked
 			model: alphabet.split("")
-			currentIndex: alphabet.indexOf(Settings.gradeEndLetter())
-			onCurrentTextChanged: Settings.setGradeEndLetter(currentText)
+			currentIndex: alphabet.indexOf(Settings.getValue("grades", "gradeEndLetter"))
+			onCurrentTextChanged: Settings.setValue("grades", "gradeEndLetter", currentText)
 			Accessible.name: bestGradeLabel.text
 		}
 	}
@@ -201,13 +201,13 @@ ColumnLayout {
 
 		RadioButton {
 			text: qsTr("Net hits")
-			checked: Settings.gradeNetHits()
-			onCheckedChanged: Settings.setGradeNetHits(checked)
+			checked: Settings.getValue("grades", "gradeNetHits")
+			onCheckedChanged: Settings.setValue("grades", "gradeNetHits", checked)
 		}
 
 		RadioButton {
 			text: qsTr("Gross hits")
-			checked: !Settings.gradeNetHits()
+			checked: !Settings.getValue("grades", "gradeNetHits")
 		}
 	}
 

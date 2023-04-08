@@ -22,12 +22,20 @@
 #include "global/StringUtils.h"
 #include "global/internal/Settings.h"
 
+static const QString gradesModule = "grades";
+static const ISettings::Key GRADE_NET_HITS(gradesModule, "gradeNetHits");
+static const ISettings::Key GRADING_METHOD(gradesModule, "gradingMethod");
+static const ISettings::Key GRADE_START_NUM(gradesModule, "gradeStartNumber");
+static const ISettings::Key GRADE_END_NUM(gradesModule, "gradeEndNumber");
+static const ISettings::Key GRADE_START_LETTER(gradesModule, "gradeStartLetter");
+static const ISettings::Key GRADE_END_LETTER(gradesModule, "gradeEndLetter");
+
 /*! Constructs ExerciseValidator. */
 ExerciseValidator::ExerciseValidator(QObject *parent) :
 	QObject(parent)
 {
-	m_useNetHitsForGrading = Settings::gradeNetHits();
-	m_gradingMethod = Settings::gradingMethod();
+	m_useNetHitsForGrading = settings()->getValue(GRADE_NET_HITS).toBool();
+	m_gradingMethod = static_cast<ClassManager::GradingMethod>(settings()->getValue(GRADING_METHOD).toInt());
 	connect(this, &ExerciseValidator::targetHitsPerMinuteChanged, this, &ExerciseValidator::updateGrade);
 	connect(this, &ExerciseValidator::useNetHitsForGradingChanged, this, &ExerciseValidator::updateGrade);
 	connect(this, &ExerciseValidator::gradingMethodChanged, this, &ExerciseValidator::updateGrade);
@@ -352,8 +360,8 @@ void ExerciseValidator::updateGrade(void)
 	QVariantList grades;
 	if(m_gradingMethod == ClassManager::GradingMethod_Numbers)
 	{
-		int start = Settings::gradeStartNumber();
-		int end = Settings::gradeEndNumber();
+		int start = settings()->getValue(GRADE_START_NUM).toInt();
+		int end = settings()->getValue(GRADE_END_NUM).toInt();
 		if(start < end)
 		{
 			for(int i = start; i <= end; i++)
@@ -368,8 +376,8 @@ void ExerciseValidator::updateGrade(void)
 	else if(m_gradingMethod == ClassManager::GradingMethod_Letters)
 	{
 		QString alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		int start = alphabet.indexOf(Settings::gradeStartLetter());
-		int end = alphabet.indexOf(Settings::gradeEndLetter());
+		int start = alphabet.indexOf(settings()->getValue(GRADE_START_LETTER).toChar());
+		int end = alphabet.indexOf(settings()->getValue(GRADE_END_LETTER).toChar());
 		Q_ASSERT(start >= 0);
 		Q_ASSERT(end >= 0);
 		if(start < end)

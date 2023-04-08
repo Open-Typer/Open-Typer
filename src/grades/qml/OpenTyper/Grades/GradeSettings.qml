@@ -47,8 +47,8 @@ ColumnLayout {
 				let arr2 = ClassManager.classNames;
 				return arr1.concat(arr2);
 			}
-			currentIndex: Settings.selectedClass() + 1
-			onCurrentIndexChanged: Settings.setSelectedClass(currentIndex - 1)
+			currentIndex: Settings.getValue("grades", "selectedClass") + 1
+			onCurrentIndexChanged: Settings.setValue("grades", "selectedClass", currentIndex - 1)
 			Accessible.name: selectedClassLabel.text
 		}
 	}
