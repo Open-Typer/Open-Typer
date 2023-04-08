@@ -57,10 +57,12 @@ int App::run(int argc, char **argv)
 #endif // BUILD_VERSION
 	SplashScreen splash;
 	splash.show();
+	globalModule.onPreInit();
 	for(IModuleSetup *module : m_modules)
 	{
 		module->registerExports();
-		module->onPreInit();
+		if(module != &globalModule)
+			module->onPreInit();
 	}
 	for(IModuleSetup *module : m_modules)
 	{
