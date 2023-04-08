@@ -28,6 +28,11 @@ std::string TranslationsModule::moduleName() const
 	return "translations";
 }
 
+void TranslationsModule::initSettings()
+{
+	INIT_SETTINGS_KEY("language", "main/language", "");
+}
+
 void TranslationsModule::registerUiTypes()
 {
 	QQmlEngine::setObjectOwnership(&globalLanguageManager, QQmlEngine::CppOwnership);
@@ -39,8 +44,12 @@ void TranslationsModule::registerUiTypes()
 void TranslationsModule::onPreInit()
 {
 	globalLanguageManager.init();
-	if(Settings::language() == "")
+	QString language = settings()->getValue("translations", "language").toString();
+	if(language == "")
 		globalLanguageManager.setLanguage(-1);
 	else
-		globalLanguageManager.setLanguage(globalLanguageManager.getBoxItems().indexOf(Settings::language()) - 1);
+		globalLanguageManager.setLanguage(globalLanguageManager.getBoxItems().indexOf(language) - 1);
+	settings()->connect(settings().get(), &ISettings::discarded, [language]() {
+		globalLanguageManager.setLanguage(globalLanguageManager.getBoxItems().indexOf(language) - 1);
+	});
 }

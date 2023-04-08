@@ -22,12 +22,16 @@
 #define TRANSLATIONSMODULE_H
 
 #include "global/modularity/IModuleSetup.h"
+#include "global/modularity/ioc.h"
+#include "global/ISettings.h"
 
 class TranslationsModule : public IModuleSetup
 {
+		INJECT(ISettings, settings)
 	public:
 		std::string moduleName() const override;
 
+		void initSettings() override;
 		void registerUiTypes() override;
 
 		void onPreInit() override;

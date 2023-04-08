@@ -37,7 +37,6 @@ class GlobalModule : public IModuleSetup
 		void onDeinit() override;
 
 	private:
-		Settings m_settings;
 		FileUtils m_fileUtils;
 		StringUtils m_stringUtils;
 };

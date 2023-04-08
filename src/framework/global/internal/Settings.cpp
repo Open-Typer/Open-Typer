@@ -132,8 +132,6 @@ void Settings::discardChanges(void)
 	settingsInstance = mainSettingsInstance;
 	// Emit ThemeEngine signals to update UI
 	emit globalThemeEngine.themeChanged();
-	// Restore previous language
-	globalLanguageManager.setLanguage(globalLanguageManager.getBoxItems().indexOf(language()) - 1);
 	frozen = false;
 	emit stateChanged();
 	emit discarded();
@@ -233,17 +231,6 @@ void Settings::copyTempSettings(void)
 	tempSettingsCopied = true;
 }
 #endif // Q_OS_WASM
-
-// language
-
-/*! Getter for main/language. */
-QString Settings::language(void) { return get("main/language", "").toString(); }
-
-/*! Returns true if there's a main/language key. */
-bool Settings::containsLanguage(void) { return contains("main/language"); }
-
-/*! Setter for main/language. */
-void Settings::setLanguage(QString value) { set("main/language", value); }
 
 /*! Getter for main/windowX. */
 int Settings::windowX(void) { return get("main/windowX", 0).toInt(); }

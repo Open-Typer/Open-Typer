@@ -34,7 +34,7 @@ void GlobalModule::registerExports()
 
 void GlobalModule::setRootContextProperties(QQmlContext *context)
 {
-	context->setContextProperty("Settings", &m_settings);
+	context->setContextProperty("Settings", Settings::instance().get());
 	context->setContextProperty("FileUtils", &m_fileUtils);
 	context->setContextProperty("StringUtils", &m_stringUtils);
 }

@@ -32,10 +32,10 @@ ListView {
 			clear();
 			for(var i = 0; i < items.length; i++)
 				append({"name": items[i]});
-			if(!Settings.containsLanguage() || (Settings.language() === ""))
+			if(!Settings.containsKey("translations", "language") || (Settings.getValue("translations", "language") === ""))
 				root.currentIndex = 0;
 			else
-				root.currentIndex = items.indexOf(Settings.language());
+				root.currentIndex = items.indexOf(Settings.getValue("translations", "language"));
 		}
 		Component.onCompleted: {
 			loadItems();
@@ -52,9 +52,9 @@ ListView {
 		onClicked: {
 			root.currentIndex = index
 			if(currentIndex == 0)
-				Settings.setLanguage("");
+				Settings.setValue("translations", "language", "");
 			else
-				Settings.setLanguage(items[currentIndex]);
+				Settings.setValue("translations", "language", items[currentIndex]);
 			LanguageManager.setLanguage(currentIndex - 1);
 		}
 	}

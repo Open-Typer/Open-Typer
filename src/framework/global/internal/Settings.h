@@ -38,7 +38,6 @@
  * Use Settings#init() to initialize settings when the application starts.\n
  * \n
  * <b>List of settings keys:</b>
- *  - Settings#language() - Application language name. Unset to use the system language.
  *  - Settings#windowX - Main window X position.
  *  - Settings#windowY - Main window Y position.
  *  - Settings#windowWidth - Main window width.
@@ -93,10 +92,6 @@ class Q_DECL_EXPORT Settings : public ISettings
 		Q_INVOKABLE void saveChanges(void) override;
 		Q_INVOKABLE void discardChanges(void) override;
 		Q_INVOKABLE bool isFrozen(void) override;
-		// language
-		Q_INVOKABLE static QString language(void);
-		Q_INVOKABLE static bool containsLanguage(void);
-		Q_INVOKABLE static void setLanguage(QString value);
 		// windowX
 		Q_INVOKABLE static int windowX(void);
 		Q_INVOKABLE static bool containsWindowX(void);
