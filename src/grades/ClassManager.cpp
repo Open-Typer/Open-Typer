@@ -21,8 +21,8 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QDate>
+#include <QFile>
 #include "ClassManager.h"
-#include "global/internal/Settings.h"
 
 static const QString module = "grades";
 static const ISettings::Key TARGET_HPM(module, "targetHitsPerMinute");
