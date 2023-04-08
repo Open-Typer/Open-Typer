@@ -72,9 +72,9 @@ QVariant Settings::getValue(QString moduleName, QString keyName)
 	{
 		Key k = m_keys[key];
 		QVariant value = get(k.key, k.defaultValue);
-		if(value.canConvert<bool>())
+		if((value == "true") || (value == "false"))
 			value = value.toBool();
-		else if(value.canConvert<qreal>())
+		else if(value.toReal() == value)
 			value = value.toReal();
 		return value;
 	}
