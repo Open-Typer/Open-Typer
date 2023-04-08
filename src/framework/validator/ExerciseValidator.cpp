@@ -19,7 +19,6 @@
  */
 
 #include "ExerciseValidator.h"
-#include "global/internal/Settings.h"
 
 static const QString module = "grades";
 static const QString gradesModule = "grades";
