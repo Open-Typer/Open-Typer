@@ -24,7 +24,6 @@
 #include "ThemeEngine.h"
 #include "menubar/AppMenuModel.h"
 #include "translations/LanguageManager.h"
-#include "global/modularity/ioc.h"
 #include "internal/UiEngine.h"
 
 std::string UiModule::moduleName() const
@@ -35,6 +34,34 @@ std::string UiModule::moduleName() const
 void UiModule::registerExports()
 {
 	modularity::ioc()->registerExport<IUiEngine>(UiEngine::instance());
+}
+
+void UiModule::initSettings()
+{
+	INIT_SETTINGS_KEY("fontFamily", "theme/font", "");
+	INIT_SETTINGS_KEY("fontSize", "theme/fontsize", 20);
+	INIT_SETTINGS_KEY("customExerciseTextColor", "theme/customleveltextcolor", false);
+	INIT_SETTINGS_KEY("exerciseTextColorR", "theme/leveltextred", 0);
+	INIT_SETTINGS_KEY("exerciseTextColorG", "theme/leveltextgreen", 0);
+	INIT_SETTINGS_KEY("exerciseTextColorB", "theme/leveltextblue", 0);
+	INIT_SETTINGS_KEY("customInputTextColor", "theme/custominputtextcolor", false);
+	INIT_SETTINGS_KEY("inputTextColorR", "theme/inputtextred", 0);
+	INIT_SETTINGS_KEY("inputTextColorG", "theme/inputtextgreen", 0);
+	INIT_SETTINGS_KEY("inputTextColorB", "theme/inputtextblue", 0);
+	INIT_SETTINGS_KEY("customBgColor", "theme/custombgcolor", false);
+	INIT_SETTINGS_KEY("bgColorR", "theme/bgred", 0);
+	INIT_SETTINGS_KEY("bgColorG", "theme/bggreen", 0);
+	INIT_SETTINGS_KEY("bgColorB", "theme/bgblue", 0);
+	INIT_SETTINGS_KEY("customPaperColor", "theme/custompapercolor", false);
+	INIT_SETTINGS_KEY("paperColorR", "theme/paperred", 0);
+	INIT_SETTINGS_KEY("paperColorG", "theme/papergreen", 0);
+	INIT_SETTINGS_KEY("paperColorB", "theme/paperblue", 0);
+	INIT_SETTINGS_KEY("customPanelColor", "theme/custompanelcolor", false);
+	INIT_SETTINGS_KEY("panelColorR", "theme/panelred", 0);
+	INIT_SETTINGS_KEY("panelColorG", "theme/panelgreen", 0);
+	INIT_SETTINGS_KEY("panelColorB", "theme/panelblue", 0);
+	INIT_SETTINGS_KEY("accentColorId", "theme/accentcolorid", ThemeEngine::Accent_LightBlue);
+	INIT_SETTINGS_KEY("appTheme", "theme/apptheme", static_cast<int>(ThemeEngine::Theme::LightTheme));
 }
 
 void UiModule::registerUiTypes()
@@ -56,4 +83,6 @@ void UiModule::registerUiTypes()
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterModule("QtGraphicalEffects", 1, 0);
 #endif
+	QObject::connect(settings().get(), &ISettings::discarded, &globalThemeEngine, &ThemeEngine::themeChanged);
+	QObject::connect(settings().get(), &ISettings::discarded, &globalThemeEngine, &ThemeEngine::panelColorChanged);
 }

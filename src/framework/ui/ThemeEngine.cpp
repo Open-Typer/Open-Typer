@@ -22,20 +22,43 @@
 #include <QApplication>
 #include <QPalette>
 #include "ThemeEngine.h"
-#include "global/internal/Settings.h"
 #include "QmlUtils.h"
 
 ThemeEngine globalThemeEngine;
+
+static const QString module = "ui";
+static const ISettings::Key FONT_FAMILY(module, "fontFamily");
+static const ISettings::Key FONT_SIZE(module, "fontSize");
+static const ISettings::Key CUSTOM_EX_TEXT_COLOR(module, "customExerciseTextColor");
+static const ISettings::Key EX_TEXT_R(module, "exerciseTextColorR");
+static const ISettings::Key EX_TEXT_G(module, "exerciseTextColorG");
+static const ISettings::Key EX_TEXT_B(module, "exerciseTextColorB");
+static const ISettings::Key CUSTOM_IN_TEXT_COLOR(module, "customInputTextColor");
+static const ISettings::Key IN_TEXT_R(module, "inputTextColorR");
+static const ISettings::Key IN_TEXT_G(module, "inputTextColorG");
+static const ISettings::Key IN_TEXT_B(module, "inputTextColorB");
+static const ISettings::Key CUSTOM_BG_COLOR(module, "customBgColor");
+static const ISettings::Key BG_R(module, "bgColorR");
+static const ISettings::Key BG_G(module, "bgColorG");
+static const ISettings::Key BG_B(module, "bgColorB");
+static const ISettings::Key CUSTOM_PAPER_COLOR(module, "customPaperColor");
+static const ISettings::Key PAPER_R(module, "paperColorR");
+static const ISettings::Key PAPER_G(module, "paperColorG");
+static const ISettings::Key PAPER_B(module, "paperColorB");
+static const ISettings::Key CUSTOM_PANEL_COLOR(module, "customPanelColor");
+static const ISettings::Key PANEL_R(module, "panelColorR");
+static const ISettings::Key PANEL_G(module, "panelColorG");
+static const ISettings::Key PANEL_B(module, "panelColorB");
+static const ISettings::Key ACCENT_ID(module, "accentColorId");
+static const ISettings::Key APP_THEME(module, "appTheme");
 
 /*! Constructs ThemeEngine. */
 ThemeEngine::ThemeEngine(QObject *parent) :
 	QObject(parent)
 {
 	// Connections
-	connect(this, &ThemeEngine::fontBoldChanged, this, &ThemeEngine::fontStyleChanged);
 	connect(this, &ThemeEngine::fontFamilyChanged, this, &ThemeEngine::fontChanged);
 	connect(this, &ThemeEngine::fontSizeChanged, this, &ThemeEngine::fontChanged);
-	connect(this, &ThemeEngine::fontStyleChanged, this, &ThemeEngine::fontChanged);
 	connect(this, &ThemeEngine::exerciseTextColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::inputTextColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::bgColorChanged, this, &ThemeEngine::colorChanged);
@@ -50,18 +73,17 @@ ThemeEngine::ThemeEngine(QObject *parent) :
  */
 QFont ThemeEngine::font(void)
 {
-	if(!Settings::containsThemeFont() || !Settings::containsThemeFontSize() || !Settings::containsThemeFontBold())
+	if(!settings()->containsKey(FONT_FAMILY) || !settings()->containsKey(FONT_SIZE))
 	{
 		setFontFamily("");
 		setFontSize(20);
-		setFontBold(true);
 	}
 	QFont _font;
-	_font.setFamily(Settings::themeFont());
-	_font.setPointSize(Settings::themeFontSize());
-	_font.setBold(Settings::themeFontBold());
-	_font.setItalic(Settings::themeFontItalic());
-	_font.setUnderline(Settings::themeFontUnderline());
+	_font.setFamily(settings()->getValue(FONT_FAMILY).toString());
+	_font.setPointSize(settings()->getValue(FONT_SIZE).toInt());
+	_font.setBold(true);
+	_font.setItalic(false);
+	_font.setUnderline(false);
 	return _font;
 }
 
@@ -69,7 +91,6 @@ void ThemeEngine::setFont(QFont newFont)
 {
 	setFontFamily(newFont.family());
 	setFontSize(newFont.pointSize());
-	setFontBold(newFont.bold());
 }
 
 /*! Font family of the selected font. */
@@ -83,7 +104,7 @@ void ThemeEngine::setFontFamily(QString family)
 	QStringList families = QmlUtils::fontFamilies(true);
 	if(!families.contains(family))
 		family = families[0];
-	Settings::setThemeFont(family);
+	settings()->setValue(FONT_FAMILY, family);
 	emit fontFamilyChanged();
 }
 
@@ -95,7 +116,7 @@ int ThemeEngine::fontSize(void)
 
 void ThemeEngine::setFontSize(int size)
 {
-	Settings::setThemeFontSize(size);
+	settings()->setValue(FONT_SIZE, size);
 	emit fontSizeChanged();
 }
 
@@ -117,37 +138,26 @@ int ThemeEngine::maxFontSize(void)
 	return 24;
 }
 
-/*!
- * Whether the selected font is bold.
- * \deprecated The font is bold by default.
- */
-bool ThemeEngine::fontBold(void)
-{
-	return font().bold();
-}
-
-void ThemeEngine::setFontBold(bool value)
-{
-	Settings::setThemeFontBold(value);
-	emit fontBoldChanged();
-}
-
 /*! Returns true if there's a custom exercise text color set. */
 bool ThemeEngine::customExerciseTextColor(void)
 {
-	return Settings::customExerciseTextColor();
+	return settings()->getValue(CUSTOM_EX_TEXT_COLOR).toBool();
 }
 
 /*! Exercise text color. */
 QColor ThemeEngine::exerciseTextColor(void)
 {
-	return QColor(Settings::exerciseTextColor());
+	return QColor(settings()->getValue(EX_TEXT_R).toInt(),
+		settings()->getValue(EX_TEXT_G).toInt(),
+		settings()->getValue(EX_TEXT_B).toInt());
 }
 
 void ThemeEngine::setExerciseTextColor(QColor color)
 {
-	Settings::setExerciseTextColor(color.rgb());
-	Settings::setCustomExerciseTextColor(true);
+	settings()->setValue(EX_TEXT_R, color.red());
+	settings()->setValue(EX_TEXT_G, color.green());
+	settings()->setValue(EX_TEXT_B, color.blue());
+	settings()->setValue(CUSTOM_EX_TEXT_COLOR, true);
 	emit exerciseTextColorChanged();
 }
 
@@ -155,7 +165,7 @@ void ThemeEngine::setExerciseTextColor(QColor color)
 void ThemeEngine::resetExerciseTextColor(void)
 {
 	setExerciseTextColor(defaultExerciseTextColor(theme() == Theme::DarkTheme));
-	Settings::setCustomExerciseTextColor(false);
+	settings()->setValue(CUSTOM_EX_TEXT_COLOR, false);
 }
 
 /*! Returns default exercise text color. */
@@ -189,19 +199,23 @@ QColor ThemeEngine::defaultExerciseTextColor(QColor accent, bool dark)
 bool ThemeEngine::customInputTextColor(void)
 {
 
-	return Settings::customInputTextColor();
+	return settings()->getValue(CUSTOM_IN_TEXT_COLOR).toBool();
 }
 
 /*! Input text color. */
 QColor ThemeEngine::inputTextColor(void)
 {
-	return QColor(Settings::inputTextColor());
+	return QColor(settings()->getValue(IN_TEXT_R).toInt(),
+		settings()->getValue(IN_TEXT_G).toInt(),
+		settings()->getValue(IN_TEXT_B).toInt());
 }
 
 void ThemeEngine::setInputTextColor(QColor color)
 {
-	Settings::setInputTextColor(color.rgb());
-	Settings::setCustomInputTextColor(true);
+	settings()->setValue(IN_TEXT_R, color.red());
+	settings()->setValue(IN_TEXT_G, color.green());
+	settings()->setValue(IN_TEXT_B, color.blue());
+	settings()->setValue(CUSTOM_IN_TEXT_COLOR, true);
 	emit inputTextColorChanged();
 }
 
@@ -209,7 +223,7 @@ void ThemeEngine::setInputTextColor(QColor color)
 void ThemeEngine::resetInputTextColor(void)
 {
 	setInputTextColor(defaultInputTextColor(theme() == Theme::DarkTheme));
-	Settings::setCustomInputTextColor(false);
+	settings()->setValue(CUSTOM_IN_TEXT_COLOR, false);
 }
 
 /*! Returns default input text color. */
@@ -224,19 +238,23 @@ QColor ThemeEngine::defaultInputTextColor(bool dark)
 /*! Returns true if there's a custom background color set. */
 bool ThemeEngine::customBgColor(void)
 {
-	return Settings::customBgColor();
+	return settings()->getValue(CUSTOM_BG_COLOR).toBool();
 }
 
 /*! Background color. */
 QColor ThemeEngine::bgColor(void)
 {
-	return QColor(Settings::bgColor());
+	return QColor(settings()->getValue(BG_R).toInt(),
+		settings()->getValue(BG_G).toInt(),
+		settings()->getValue(BG_B).toInt());
 }
 
 void ThemeEngine::setBgColor(QColor color)
 {
-	Settings::setBgColor(color.rgb());
-	Settings::setCustomBgColor(true);
+	settings()->setValue(BG_R, color.red());
+	settings()->setValue(BG_G, color.green());
+	settings()->setValue(BG_B, color.blue());
+	settings()->setValue(CUSTOM_BG_COLOR, true);
 	emit bgColorChanged();
 }
 
@@ -244,7 +262,7 @@ void ThemeEngine::setBgColor(QColor color)
 void ThemeEngine::resetBgColor(void)
 {
 	setBgColor(defaultBgColor(theme() == Theme::DarkTheme));
-	Settings::setCustomBgColor(false);
+	settings()->setValue(CUSTOM_BG_COLOR, false);
 }
 
 /*! Returns default background color. */
@@ -259,19 +277,23 @@ QColor ThemeEngine::defaultBgColor(bool dark)
 /*! Returns true if there's a custom paper color set. */
 bool ThemeEngine::customPaperColor(void)
 {
-	return Settings::customPaperColor();
+	return settings()->getValue(CUSTOM_PAPER_COLOR).toBool();
 }
 
 /*! Paper color. */
 QColor ThemeEngine::paperColor(void)
 {
-	return QColor(Settings::paperColor());
+	return QColor(settings()->getValue(PAPER_R).toInt(),
+		settings()->getValue(PAPER_G).toInt(),
+		settings()->getValue(PAPER_B).toInt());
 }
 
 void ThemeEngine::setPaperColor(QColor color)
 {
-	Settings::setPaperColor(color.rgb());
-	Settings::setCustomPaperColor(true);
+	settings()->setValue(PAPER_R, color.red());
+	settings()->setValue(PAPER_G, color.green());
+	settings()->setValue(PAPER_B, color.blue());
+	settings()->setValue(CUSTOM_PAPER_COLOR, true);
 	emit paperColorChanged();
 }
 
@@ -279,7 +301,7 @@ void ThemeEngine::setPaperColor(QColor color)
 void ThemeEngine::resetPaperColor(void)
 {
 	setPaperColor(defaultPaperColor(theme() == Theme::DarkTheme));
-	Settings::setCustomPaperColor(false);
+	settings()->setValue(CUSTOM_PAPER_COLOR, false);
 }
 
 /*! Returns default paper color. */
@@ -294,19 +316,23 @@ QColor ThemeEngine::defaultPaperColor(bool dark)
 /*! Returns true if there's a custom panel color set. */
 bool ThemeEngine::customPanelColor(void)
 {
-	return Settings::customPanelColor();
+	return settings()->getValue(CUSTOM_PANEL_COLOR).toBool();
 }
 
 /*! Panel color. */
 QColor ThemeEngine::panelColor(void)
 {
-	return QColor(Settings::panelColor());
+	return QColor(settings()->getValue(PANEL_R).toInt(),
+		settings()->getValue(PANEL_G).toInt(),
+		settings()->getValue(PANEL_B).toInt());
 }
 
 void ThemeEngine::setPanelColor(QColor color)
 {
-	Settings::setPanelColor(color.rgb());
-	Settings::setCustomPanelColor(true);
+	settings()->setValue(PANEL_R, color.red());
+	settings()->setValue(PANEL_G, color.green());
+	settings()->setValue(PANEL_B, color.blue());
+	settings()->setValue(CUSTOM_PANEL_COLOR, true);
 	emit panelColorChanged();
 }
 
@@ -314,7 +340,7 @@ void ThemeEngine::setPanelColor(QColor color)
 void ThemeEngine::resetPanelColor(void)
 {
 	setPanelColor(defaultPanelColor(theme() == Theme::DarkTheme));
-	Settings::setCustomPanelColor(false);
+	settings()->setValue(CUSTOM_PANEL_COLOR, false);
 }
 
 /*! Returns default panel color. */
@@ -329,12 +355,12 @@ QColor ThemeEngine::defaultPanelColor(bool dark)
 /*! Current accent color ID. */
 ThemeEngine::AccentColor ThemeEngine::accentColor(void)
 {
-	return Settings::accentColorId();
+	return static_cast<AccentColor>(settings()->getValue(ACCENT_ID).toInt());
 }
 
 void ThemeEngine::setAccentColor(ThemeEngine::AccentColor color)
 {
-	Settings::setAccentColorId(color);
+	settings()->setValue(ACCENT_ID, color);
 	emit accentColorChanged();
 	emit currentAccentColorChanged();
 }
@@ -381,7 +407,7 @@ QColor ThemeEngine::currentAccentColor(void)
 /*! Current application theme. */
 ThemeEngine::Theme ThemeEngine::theme(void)
 {
-	return Settings::appTheme();
+	return static_cast<Theme>(settings()->getValue(APP_THEME).toInt());
 }
 
 void ThemeEngine::setTheme(ThemeEngine::Theme newTheme)
@@ -398,7 +424,7 @@ void ThemeEngine::setTheme(ThemeEngine::Theme newTheme)
 			applyStyleSheetFromFile(":/light-theme/style.qss");
 			break;
 	}
-	Settings::setAppTheme(newTheme);
+	settings()->setValue(APP_THEME, static_cast<int>(newTheme));
 	resetExerciseTextColor();
 	resetInputTextColor();
 	resetBgColor();
@@ -410,7 +436,7 @@ void ThemeEngine::setTheme(ThemeEngine::Theme newTheme)
 /*! Loads and sets application style. */
 void ThemeEngine::updateTheme(void)
 {
-	setTheme(Settings::appTheme());
+	setTheme(static_cast<Theme>(settings()->getValue(APP_THEME).toInt()));
 }
 
 /*! Sets theme based on system theme. */

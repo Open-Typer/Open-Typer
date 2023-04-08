@@ -26,7 +26,6 @@
 #include <QColor>
 #include "../ISettings.h"
 #include "global/FileUtils.h"
-#include "ui/ThemeEngine.h"
 #include "grades/ClassManager.h"
 
 /*!
@@ -49,24 +48,6 @@
  *  - Settings#errorPenalty() - Number of hits subtracted from net hits on every mistake.
  *  - Settings#mistakeLimit() - Whether to limit number of mistakes in per characters in words.
  *  - Settings#mistakeChars() - Number of characters in one word with max. 1 mistake.
- *  - Settings#themeFont() - Text font family name.
- *  - Settings#themeFontSize() - Text font size.
- *  - Settings#themeFontBold() - Whether to use a bold font in exercise and input text.
- *  - Settings#themeFontItalic() - Whether to use an italic font in exercise and input text.
- *  - Settings#themeFontUnderline() - Whether to use an underlined font in exercise and input text.
- *  - Settings#customExerciseTextColor() - If false, the exercise text color is based on the theme.
- *  - Settings#exerciseTextColor() - Exercise text color.
- *  - Settings#inputTextColor() - Input text color.
- *  - Settings#customInputTextColor() - If false, the default input text color is used.
- *  - Settings#customBgColor() - If false, the background color is based on the theme.
- *  - Settings#bgColor() - Background color.
- *  - Settings#customPaperColor() - If false, the paper color is based on the theme.
- *  - Settings#paperColor() - Paper color.
- *  - Settings#customPanelColor() - If false, the panel color is based on the theme.
- *  - Settings#panelColor() - Top and bottom panel color.
- *  - Settings#accentColorId() - Current accent color (accent colors are defined in ThemeEngine).
- *  - Settings#appTheme() - The application theme (0 = light, 1 = dark).
- *  - Settings#advancedTheme() - Whether to allow the user to select advanced themes (dark, light, light blue, etc.).
  *  - Settings#editorGeometry() - Deprecated, do not use in new code. There'll be a new pack editor window soon.
  *  - Settings#initFinished() - If true, initial setup has been finished.
  *  - Settings#targetHitsPerMinute() - Number of hits per minute for the best grade.
@@ -139,78 +120,6 @@ class Q_DECL_EXPORT Settings : public ISettings
 		Q_INVOKABLE static int mistakeChars(void);
 		Q_INVOKABLE static bool containsMistakeChars(void);
 		Q_INVOKABLE static void setMistakeChars(int value);
-		// themeFont
-		Q_INVOKABLE static QString themeFont(void);
-		Q_INVOKABLE static bool containsThemeFont(void);
-		Q_INVOKABLE static void setThemeFont(QString value);
-		// themeFontSize
-		Q_INVOKABLE static int themeFontSize(void);
-		Q_INVOKABLE static bool containsThemeFontSize(void);
-		Q_INVOKABLE static void setThemeFontSize(int value);
-		// themeFontBold
-		Q_INVOKABLE Q_DECL_DEPRECATED static bool themeFontBold(void);
-		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsThemeFontBold(void);
-		Q_INVOKABLE Q_DECL_DEPRECATED static void setThemeFontBold(bool value);
-		// themeFontItalic
-		Q_INVOKABLE Q_DECL_DEPRECATED static bool themeFontItalic(void);
-		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsThemeFontItalic(void);
-		Q_INVOKABLE Q_DECL_DEPRECATED static void setThemeFontItalic(bool value);
-		// themeFontUnderline
-		Q_INVOKABLE Q_DECL_DEPRECATED static bool themeFontUnderline(void);
-		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsThemeFontUnderline(void);
-		Q_INVOKABLE Q_DECL_DEPRECATED static void setThemeFontUnderline(bool value);
-		// customExerciseTextColor
-		Q_INVOKABLE static bool customExerciseTextColor(void);
-		Q_INVOKABLE static bool containsCustomExerciseTextColor(void);
-		Q_INVOKABLE static void setCustomExerciseTextColor(bool value);
-		// exerciseTextColor
-		Q_INVOKABLE static QRgb exerciseTextColor(void);
-		Q_INVOKABLE static bool containsExerciseTextColor(void);
-		Q_INVOKABLE static void setExerciseTextColor(QRgb value);
-		// inputTextColor
-		Q_INVOKABLE static QRgb inputTextColor(void);
-		Q_INVOKABLE static bool containsInputTextColor(void);
-		Q_INVOKABLE static void setInputTextColor(QRgb value);
-		// customInputTextColor
-		Q_INVOKABLE static bool customInputTextColor(void);
-		Q_INVOKABLE static bool containsCustomInputTextColor(void);
-		Q_INVOKABLE static void setCustomInputTextColor(bool value);
-		// customBgColor
-		Q_INVOKABLE static bool customBgColor(void);
-		Q_INVOKABLE static bool containsCustomBgColor(void);
-		Q_INVOKABLE static void setCustomBgColor(bool value);
-		// bgColor
-		Q_INVOKABLE static QRgb bgColor(void);
-		Q_INVOKABLE static bool containsBgColor(void);
-		Q_INVOKABLE static void setBgColor(QRgb value);
-		// customPaperColor
-		Q_INVOKABLE static bool customPaperColor(void);
-		Q_INVOKABLE static bool containsCustomPaperColor(void);
-		Q_INVOKABLE static void setCustomPaperColor(bool value);
-		// paperColor
-		Q_INVOKABLE static QRgb paperColor(void);
-		Q_INVOKABLE static bool containsPaperColor(void);
-		Q_INVOKABLE static void setPaperColor(QRgb value);
-		// customPanelColor
-		Q_INVOKABLE static bool customPanelColor(void);
-		Q_INVOKABLE static bool containsCustomPanelColor(void);
-		Q_INVOKABLE static void setCustomPanelColor(bool value);
-		// panelColor
-		Q_INVOKABLE static QRgb panelColor(void);
-		Q_INVOKABLE static bool containsPanelColor(void);
-		Q_INVOKABLE static void setPanelColor(QRgb value);
-		// accentColorId
-		Q_INVOKABLE static ThemeEngine::AccentColor accentColorId(void);
-		Q_INVOKABLE static bool containsAccentColorId(void);
-		Q_INVOKABLE static void setAccentColorId(ThemeEngine::AccentColor value);
-		// appTheme
-		Q_INVOKABLE static ThemeEngine::Theme appTheme(void);
-		Q_INVOKABLE static bool containsAppTheme(void);
-		Q_INVOKABLE static void setAppTheme(ThemeEngine::Theme value);
-		// advancedTheme
-		Q_INVOKABLE static bool advancedTheme(void);
-		Q_INVOKABLE static bool containsAdvancedTheme(void);
-		Q_INVOKABLE static void setAdvancedTheme(bool value);
 		// editorGeometry
 		Q_INVOKABLE Q_DECL_DEPRECATED static QByteArray editorGeometry(void);
 		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsEditorGeometry(void);

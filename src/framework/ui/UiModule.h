@@ -22,13 +22,16 @@
 #define UIMODULE_H
 
 #include "global/modularity/IModuleSetup.h"
+#include "global/ISettings.h"
 
 class UiModule : public IModuleSetup
 {
+		INJECT(ISettings, settings)
 	public:
 		std::string moduleName() const override;
 
 		void registerExports() override;
+		void initSettings() override;
 		void registerUiTypes() override;
 };
 

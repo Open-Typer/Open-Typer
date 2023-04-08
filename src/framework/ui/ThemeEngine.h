@@ -28,6 +28,7 @@
 #include <QColor>
 #include <QFile>
 #include "global/FileUtils.h"
+#include "global/ISettings.h"
 
 class Settings;
 
@@ -35,10 +36,10 @@ class Settings;
 class Q_DECL_EXPORT ThemeEngine : public QObject
 {
 		Q_OBJECT
+		INJECT(ISettings, settings)
 		Q_PROPERTY(QFont font READ font WRITE setFont NOTIFY fontChanged)
 		Q_PROPERTY(QString fontFamily READ fontFamily WRITE setFontFamily NOTIFY fontFamilyChanged)
 		Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
-		Q_PROPERTY(bool fontBold READ fontBold WRITE setFontBold NOTIFY fontBoldChanged) // deprecated
 		Q_PROPERTY(QColor exerciseTextColor READ exerciseTextColor WRITE setExerciseTextColor NOTIFY exerciseTextColorChanged)
 		Q_PROPERTY(QColor inputTextColor READ inputTextColor WRITE setInputTextColor NOTIFY inputTextColorChanged)
 		Q_PROPERTY(QColor bgColor READ bgColor WRITE setBgColor NOTIFY bgColorChanged)
@@ -80,8 +81,6 @@ class Q_DECL_EXPORT ThemeEngine : public QObject
 		void setFontSize(int size);
 		Q_INVOKABLE void increaseFontSize(int delta);
 		Q_INVOKABLE int maxFontSize(void);
-		Q_DECL_DEPRECATED bool fontBold(void);
-		Q_DECL_DEPRECATED void setFontBold(bool value);
 		// Exercise text color
 		Q_INVOKABLE bool customExerciseTextColor(void);
 		QColor exerciseTextColor(void);
@@ -136,10 +135,6 @@ class Q_DECL_EXPORT ThemeEngine : public QObject
 		void fontFamilyChanged();
 		/*! A signal, which is emitted when the font point size changes. */
 		void fontSizeChanged();
-		/*! A signal, which is emitted when the font style (bold, italic or underline) changes. */
-		void fontStyleChanged();
-		/*! A signal, which is emitted when the font weight changes. */
-		void fontBoldChanged();
 		/*! A signal, which is emitted when a color changes. */
 		void colorChanged();
 		/*! A signal, which is emitted when exercise text color changes. */
