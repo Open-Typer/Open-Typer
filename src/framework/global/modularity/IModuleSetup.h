@@ -38,6 +38,7 @@ class IModuleSetup
 
 		virtual void registerExports() { }
 		virtual void registerResources() { }
+		virtual void initSettings() { }
 		virtual void registerUiTypes() { }
 		virtual void setRootContextProperties(QQmlContext *context) { Q_UNUSED(context); }
 

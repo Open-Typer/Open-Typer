@@ -21,8 +21,8 @@
 #ifndef GLOBALMODULE_H
 #define GLOBALMODULE_H
 
-#include "Settings.h"
 #include "StringUtils.h"
+#include "internal/Settings.h"
 #include "global/modularity/IModuleSetup.h"
 
 class GlobalModule : public IModuleSetup
@@ -30,6 +30,7 @@ class GlobalModule : public IModuleSetup
 	public:
 		std::string moduleName() const override;
 
+		void registerExports() override;
 		void setRootContextProperties(QQmlContext *context) override;
 
 		void onPreInit() override;

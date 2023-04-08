@@ -20,10 +20,16 @@
 
 #include "GlobalModule.h"
 #include "modularity/ioc.h"
+#include "internal/Settings.h"
 
 std::string GlobalModule::moduleName() const
 {
 	return "global";
+}
+
+void GlobalModule::registerExports()
+{
+	modularity::ioc()->registerExport<ISettings>(Settings::instance());
 }
 
 void GlobalModule::setRootContextProperties(QQmlContext *context)
@@ -41,6 +47,6 @@ void GlobalModule::onPreInit()
 
 void GlobalModule::onDeinit()
 {
-	if(Settings::isFrozen())
-		Settings::saveChanges();
+	if(Settings::instance()->isFrozen())
+		Settings::instance()->saveChanges();
 }

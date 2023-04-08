@@ -61,6 +61,7 @@ int App::run(int argc, char **argv)
 	for(IModuleSetup *module : m_modules)
 	{
 		module->registerExports();
+		module->initSettings();
 		if(module != &globalModule)
 			module->onPreInit();
 	}

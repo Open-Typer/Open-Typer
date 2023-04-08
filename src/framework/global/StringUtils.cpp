@@ -18,6 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QMap>
 #include "StringUtils.h"
 
 /*! Returns number of words in the string. */

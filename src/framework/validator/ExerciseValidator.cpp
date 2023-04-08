@@ -20,6 +20,7 @@
 
 #include "ExerciseValidator.h"
 #include "global/StringUtils.h"
+#include "global/internal/Settings.h"
 
 /*! Constructs ExerciseValidator. */
 ExerciseValidator::ExerciseValidator(QObject *parent) :

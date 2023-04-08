@@ -21,7 +21,7 @@
 #include <QQmlEngine>
 #include "TranslationsModule.h"
 #include "LanguageManager.h"
-#include "global/Settings.h"
+#include "global/internal/Settings.h"
 
 std::string TranslationsModule::moduleName() const
 {

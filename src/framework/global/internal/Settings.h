@@ -24,6 +24,7 @@
 #include <QSettings>
 #include <QRgb>
 #include <QColor>
+#include "../ISettings.h"
 #include "global/FileUtils.h"
 #include "ui/ThemeEngine.h"
 #include "grades/ClassManager.h"
@@ -80,15 +81,20 @@
  *  - Settings#gradeStartLetter() - The letter to start with during grading.
  *  - Settings#gradeEndLetter() - The letter to end with during grading.
  */
-class Q_DECL_EXPORT Settings : public QObject
+class Q_DECL_EXPORT Settings : public QObject, public ISettings
 {
 		Q_OBJECT
 	public:
+		static std::shared_ptr<Settings> instance();
 		static void init(void);
-		Q_INVOKABLE static void freeze(void);
-		Q_INVOKABLE static void saveChanges(void);
-		Q_INVOKABLE static void discardChanges(void);
-		Q_INVOKABLE static bool isFrozen(void);
+		void addKey(QString moduleName, QString keyName, QString key, QVariant defaultValue) override;
+		Q_INVOKABLE void setValue(QString moduleName, QString keyName, QVariant value) override;
+		Q_INVOKABLE QVariant getValue(QString moduleName, QString keyName) override;
+		Q_INVOKABLE bool containsKey(QString moduleName, QString keyName) override;
+		Q_INVOKABLE void freeze(void) override;
+		Q_INVOKABLE void saveChanges(void) override;
+		Q_INVOKABLE void discardChanges(void) override;
+		Q_INVOKABLE bool isFrozen(void) override;
 		// language
 		Q_INVOKABLE static QString language(void);
 		Q_INVOKABLE static bool containsLanguage(void);
@@ -264,9 +270,23 @@ class Q_DECL_EXPORT Settings : public QObject
 		static void set(QString key, QVariant value);
 
 	private:
+		struct Key
+		{
+				Key() = default;
+				Key(QString key, QVariant defaultValue)
+				{
+					this->key = key;
+					this->defaultValue = defaultValue;
+				}
+				QString key;
+				QVariant defaultValue;
+		};
+
+		static std::shared_ptr<Settings> m_instance;
 		static QSettings *settingsInstance;
 		static QSettings *mainSettingsInstance;
 		static bool frozen;
+		static QMap<QPair<QString, QString>, Key> m_keys;
 		static void copySettings(QSettings *source, QSettings *target);
 #ifdef Q_OS_WASM
 		static bool tempSettingsCopied;

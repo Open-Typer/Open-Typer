@@ -22,12 +22,20 @@
 #include "Settings.h"
 #include "translations/LanguageManager.h"
 
+std::shared_ptr<Settings> Settings::m_instance = std::make_shared<Settings>();
 QSettings *Settings::settingsInstance = nullptr;
 QSettings *Settings::mainSettingsInstance = nullptr;
 bool Settings::frozen = false;
+QMap<QPair<QString, QString>, Settings::Key> Settings::m_keys;
 #ifdef Q_OS_WASM
 bool Settings::tempSettingsCopied = false;
 #endif // Q_OS_WASM
+
+/*! Returns the static instance of Settings. */
+std::shared_ptr<Settings> Settings::instance()
+{
+	return m_instance;
+}
 
 /*! Initializes settings. Run Settings#init() after the application starts. */
 void Settings::init(void)
@@ -37,6 +45,54 @@ void Settings::init(void)
 #else
 	settingsInstance = new QSettings(FileUtils::mainSettingsLocation(), QSettings::IniFormat, qApp);
 #endif
+}
+
+/*! Registers a key. */
+void Settings::addKey(QString moduleName, QString keyName, QString key, QVariant defaultValue)
+{
+	Key k(key, defaultValue);
+	m_keys.insert({ moduleName, keyName }, k);
+}
+
+/*! Sets the key value. */
+void Settings::setValue(QString moduleName, QString keyName, QVariant value)
+{
+	QPair<QString, QString> key = { moduleName, keyName };
+	Q_ASSERT(m_keys.contains(key));
+	if(m_keys.contains(key))
+		set(m_keys[key].key, value);
+}
+
+/*! Returns the value of the given key. */
+QVariant Settings::getValue(QString moduleName, QString keyName)
+{
+	QPair<QString, QString> key = { moduleName, keyName };
+	Q_ASSERT(m_keys.contains(key));
+	if(m_keys.contains(key))
+	{
+		Key k = m_keys[key];
+		QVariant value = get(k.key, k.defaultValue);
+		if(value.canConvert<bool>())
+			value = value.toBool();
+		else if(value.canConvert<qreal>())
+			value = value.toReal();
+		return value;
+	}
+	else
+		return QVariant();
+}
+
+/*! Returns true if the given key exists. */
+bool Settings::containsKey(QString moduleName, QString keyName)
+{
+	QPair<QString, QString> key = { moduleName, keyName };
+	Q_ASSERT(m_keys.contains(key));
+	if(m_keys.contains(key))
+	{
+		return contains(m_keys[key].key);
+	}
+	else
+		return false;
 }
 
 /*!
