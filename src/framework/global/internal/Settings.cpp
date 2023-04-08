@@ -172,7 +172,7 @@ QVariant Settings::get(QString key, QVariant defaultValue)
 	else
 	{
 		// Use temporary settings until sandbox is initialized
-		QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
+		QSettings settings(FileUtils::instance()->mainSettingsLocation(), QSettings::IniFormat);
 		return settings.value(key, defaultValue);
 	}
 #else
@@ -194,7 +194,7 @@ bool Settings::contains(QString key)
 	else
 	{
 		// Use temporary settings until sandbox is initialized
-		QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
+		QSettings settings(FileUtils::instance()->mainSettingsLocation(), QSettings::IniFormat);
 		return settings.contains(key);
 	}
 #else
@@ -217,7 +217,7 @@ void Settings::set(QString key, QVariant value)
 	else
 	{
 		// Use temporary settings until sandbox is initialized
-		QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
+		QSettings settings(FileUtils::instance()->mainSettingsLocation(), QSettings::IniFormat);
 		settings.setValue(key, value);
 	}
 #else
@@ -240,7 +240,7 @@ void Settings::copySettings(QSettings *source, QSettings *target)
 /*! Copies temporary settings to real settings after the WebAssembly sandbox gets initialized. */
 void Settings::copyTempSettings(void)
 {
-	QSettings settings(FileUtils::mainSettingsLocation(), QSettings::IniFormat);
+	QSettings settings(FileUtils::instance()->mainSettingsLocation(), QSettings::IniFormat);
 	copySettings(&settings, settingsInstance);
 	settingsInstance->sync();
 	tempSettingsCopied = true;
