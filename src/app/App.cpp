@@ -59,9 +59,11 @@ int App::run(int argc, char **argv)
 	splash.show();
 	globalModule.onPreInit();
 	for(IModuleSetup *module : m_modules)
-	{
 		module->registerExports();
+	for(IModuleSetup *module : m_modules)
 		module->initSettings();
+	for(IModuleSetup *module : m_modules)
+	{
 		if(module != &globalModule)
 			module->onPreInit();
 	}
