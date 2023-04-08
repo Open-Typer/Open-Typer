@@ -19,7 +19,6 @@
  */
 
 #include "UpdaterModule.h"
-#include "Updater.h"
 
 std::string UpdaterModule::moduleName() const
 {
@@ -33,6 +32,5 @@ void UpdaterModule::registerResources()
 
 void UpdaterModule::setRootContextProperties(QQmlContext *context)
 {
-	Updater updater;
-	context->setContextProperty("Updater", &updater);
+	context->setContextProperty("Updater", &m_updater);
 }

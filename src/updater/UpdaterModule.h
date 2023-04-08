@@ -22,6 +22,7 @@
 #define UPDATERMODULE_H
 
 #include "global/modularity/IModuleSetup.h"
+#include "Updater.h"
 
 class UpdaterModule : public IModuleSetup
 {
@@ -30,6 +31,9 @@ class UpdaterModule : public IModuleSetup
 
 		void registerResources() override;
 		void setRootContextProperties(QQmlContext *context) override;
+
+	private:
+		Updater m_updater;
 };
 
 #endif // UPDATERMODULE_H
