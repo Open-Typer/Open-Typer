@@ -28,17 +28,7 @@
 #include "global/FileUtils.h"
 #include "grades/ClassManager.h"
 
-/*!
- * \brief The Settings class contains functions for application settings.
- *
- * You should use this class instead of QSettings.\n
- * If there is a new settings key, create getter and setter functions for it.
- * and don't forget to describe it in the list below.\n
- * Use Settings#init() to initialize settings when the application starts.\n
- * \n
- * <b>List of settings keys:</b>
- *  - Settings#editorGeometry() - Deprecated, do not use in new code. There'll be a new pack editor window soon.
- */
+/*! \brief The Settings class manages the application settings. */
 class Q_DECL_EXPORT Settings : public ISettings
 {
 		Q_OBJECT
@@ -56,10 +46,6 @@ class Q_DECL_EXPORT Settings : public ISettings
 		Q_INVOKABLE void saveChanges(void) override;
 		Q_INVOKABLE void discardChanges(void) override;
 		Q_INVOKABLE bool isFrozen(void) override;
-		// editorGeometry
-		Q_INVOKABLE Q_DECL_DEPRECATED static QByteArray editorGeometry(void);
-		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsEditorGeometry(void);
-		Q_INVOKABLE Q_DECL_DEPRECATED static void setEditorGeometry(QByteArray value);
 
 	protected:
 		static QVariant get(QString key, QVariant defaultValue);

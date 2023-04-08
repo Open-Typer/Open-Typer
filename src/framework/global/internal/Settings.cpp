@@ -246,14 +246,3 @@ void Settings::copyTempSettings(void)
 	tempSettingsCopied = true;
 }
 #endif // Q_OS_WASM
-
-// editorGeometry
-
-/*! Getter for main/editorGeometry. \deprecated The pack editor window doesn't use "geometry" anymore. */
-QByteArray Settings::editorGeometry(void) { return get("main/editorGeometry", "").toByteArray(); }
-
-/*! Returns true if there's a main/editorGeometry key. \deprecated The pack editor window doesn't use "geometry" anymore. */
-bool Settings::containsEditorGeometry(void) { return contains("main/editorGeometry"); }
-
-/*! Setter for main/editorGeometry. \deprecated The pack editor window doesn't use "geometry" anymore. */
-void Settings::setEditorGeometry(QByteArray value) { set("main/editorGeometry", value); }
