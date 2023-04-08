@@ -23,20 +23,20 @@
 
 #include "ModulesIoC.h"
 
-#define INJECT(Interface, getter)                                \
-private:                                                         \
-	mutable std::shared_ptr<Interface> _##getter = nullptr;      \
-                                                                 \
-public:                                                          \
-	std::shared_ptr<Interface> getter() const                    \
-	{                                                            \
-		if(!_##getter)                                           \
-		{                                                        \
-			_##getter = modularity::ioc()->resolve<Interface>(); \
-		}                                                        \
-		return _##getter;                                        \
-	}                                                            \
-	void set##getter(std::shared_ptr<Interface> impl) { _##getter = impl; }
+#define INJECT(Interface, getter)                                 \
+private:                                                          \
+	static inline std::shared_ptr<Interface> _##getter = nullptr; \
+                                                                  \
+public:                                                           \
+	static std::shared_ptr<Interface> getter()                    \
+	{                                                             \
+		if(!_##getter)                                            \
+		{                                                         \
+			_##getter = modularity::ioc()->resolve<Interface>();  \
+		}                                                         \
+		return _##getter;                                         \
+	}                                                             \
+	static void set##getter(std::shared_ptr<Interface> impl) { _##getter = impl; }
 
 namespace modularity {
 	inline ModulesIoC *ioc()
