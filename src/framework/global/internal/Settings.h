@@ -79,7 +79,7 @@
  *  - Settings#gradeStartLetter() - The letter to start with during grading.
  *  - Settings#gradeEndLetter() - The letter to end with during grading.
  */
-class Q_DECL_EXPORT Settings : public QObject, public ISettings
+class Q_DECL_EXPORT Settings : public ISettings
 {
 		Q_OBJECT
 	public:

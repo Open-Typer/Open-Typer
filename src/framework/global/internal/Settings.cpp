@@ -106,6 +106,7 @@ void Settings::freeze(void)
 	settingsInstance = new QSettings(FileUtils::mainSettingsLocation() + ".tmp", QSettings::IniFormat, qApp);
 	copySettings(mainSettingsInstance, settingsInstance);
 	frozen = true;
+	emit stateChanged();
 }
 
 /*! Saves changes to real settings and switches back to them. \see freeze() */
@@ -118,6 +119,8 @@ void Settings::saveChanges(void)
 	settingsInstance->deleteLater();
 	settingsInstance = mainSettingsInstance;
 	frozen = false;
+	emit stateChanged();
+	emit saved();
 }
 
 /*! Discards changes and switches back to real settings. \see freeze() */
@@ -132,6 +135,8 @@ void Settings::discardChanges(void)
 	// Restore previous language
 	globalLanguageManager.setLanguage(globalLanguageManager.getBoxItems().indexOf(language()) - 1);
 	frozen = false;
+	emit stateChanged();
+	emit discarded();
 }
 
 /*! Returns true if settings are frozen. \see freeze(). */

@@ -27,8 +27,9 @@
 #define INIT_SETTINGS_KEY(keyName, key, defaultValue) \
 	modularity::ioc()->resolve<ISettings>()->addKey(QString::fromStdString(moduleName()), keyName, key, defaultValue)
 
-class ISettings : MODULE_EXPORT_INTERFACE
+class ISettings : public QObject, MODULE_EXPORT_INTERFACE
 {
+		Q_OBJECT
 	public:
 		virtual ~ISettings() { }
 
@@ -41,6 +42,11 @@ class ISettings : MODULE_EXPORT_INTERFACE
 		virtual void saveChanges() = 0;
 		virtual void discardChanges() = 0;
 		virtual bool isFrozen() = 0;
+
+	signals:
+		void stateChanged();
+		void saved();
+		void discarded();
 };
 
 #endif // ISETTINGS_H
