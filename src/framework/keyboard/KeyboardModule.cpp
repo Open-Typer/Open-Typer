@@ -21,6 +21,7 @@
 #include "KeyboardModule.h"
 #include "KeyboardUtils.h"
 #include "KeyboardLayout.h"
+#include "global/ISettings.h"
 
 std::string KeyboardModule::moduleName() const
 {
@@ -31,6 +32,12 @@ void KeyboardModule::registerResources()
 {
 	Q_INIT_RESOURCE(keyboard);
 	Q_INIT_RESOURCE(symbols);
+}
+
+void KeyboardModule::initSettings()
+{
+	INIT_SETTINGS_KEY("keyboardVisible", "view/keyboardvisible", true);
+	INIT_SETTINGS_KEY("keyboardFingerColors", "theme/keyboardfingercolors", true);
 }
 
 void KeyboardModule::registerUiTypes()

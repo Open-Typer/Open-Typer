@@ -69,9 +69,7 @@
  *  - Settings#appTheme() - The application theme (0 = light, 1 = dark).
  *  - Settings#advancedTheme() - Whether to allow the user to select advanced themes (dark, light, light blue, etc.).
  *  - Settings#editorGeometry() - Deprecated, do not use in new code. There'll be a new pack editor window soon.
- *  - Settings#keyboardVisible() - Whether to show the virtual keyboard.
  *  - Settings#initFinished() - If true, initial setup has been finished.
- *  - Settings#keyboardFingerColors() - If true, the keys on the screen keyboard use a different color for fingers.
  *  - Settings#targetHitsPerMinute() - Number of hits per minute for the best grade.
  *  - Settings#gradeNetHits() - Whether to use net hits per minute for grading.
  *  - Settings#selectedClass() - Index of selected class.
@@ -219,18 +217,10 @@ class Q_DECL_EXPORT Settings : public QObject, public ISettings
 		Q_INVOKABLE Q_DECL_DEPRECATED static QByteArray editorGeometry(void);
 		Q_INVOKABLE Q_DECL_DEPRECATED static bool containsEditorGeometry(void);
 		Q_INVOKABLE Q_DECL_DEPRECATED static void setEditorGeometry(QByteArray value);
-		// keyboardVisible
-		Q_INVOKABLE static bool keyboardVisible(void);
-		Q_INVOKABLE static bool containsKeyboardVisible(void);
-		Q_INVOKABLE static void setKeyboardVisible(bool value);
 		// initFinished
 		Q_INVOKABLE static bool initFinished(void);
 		Q_INVOKABLE static bool containsInitFinished(void);
 		Q_INVOKABLE static void setInitFinished(bool value);
-		// keyboardFingerColors
-		Q_INVOKABLE static bool keyboardFingerColors(void);
-		Q_INVOKABLE static bool containsKeyboardFingerColors(void);
-		Q_INVOKABLE static void setKeyboardFingerColors(bool value);
 		// targetHitsPerMinute
 		Q_INVOKABLE static int targetHitsPerMinute(void);
 		Q_INVOKABLE static bool containsTargetHitsPerMinute(void);

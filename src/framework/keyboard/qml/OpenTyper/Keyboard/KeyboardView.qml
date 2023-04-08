@@ -26,7 +26,7 @@ import OpenTyper.Keyboard 1.0
 ColumnLayout {
 	property int keySpacing: 7
 	readonly property alias layout: layout
-	property bool opened: Settings.keyboardVisible()
+	property bool opened: Settings.getValue("keyboard", "keyboardVisible")
 	readonly property var keys: {
 		let out = [];
 		for(var i = 0; i < rowB.count; i++)
@@ -186,7 +186,7 @@ ColumnLayout {
 	}
 
 	ColumnLayout {
-		property real yScale: Settings.keyboardVisible() ? 1 : 0
+		property real yScale: Settings.getValue("keyboard", "keyboardVisible") ? 1 : 0
 		id: mainLayout
 		transform: Scale {
 			yScale: mainLayout.yScale
@@ -413,7 +413,7 @@ ColumnLayout {
 		icon.name: opened ? "down" : "up"
 		onClicked: {
 			opened = !opened
-			Settings.setKeyboardVisible(opened);
+			Settings.setValue("keyboard", "keyboardVisible", opened);
 			if(opened)
 			{
 				closeAnimation.stop();

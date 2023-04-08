@@ -312,9 +312,9 @@ ColumnLayout {
 	CheckBox {
 		visible: !simple
 		text: qsTr("Use key colors based on fingers")
-		checked: Settings.keyboardFingerColors()
+		checked: Settings.getValue("keyboard", "keyboardFingerColors")
 		onCheckedChanged: {
-			Settings.setKeyboardFingerColors(checked);
+			Settings.setValue("keyboard", "keyboardFingerColors", checked);
 			QmlUtils.screenKeyboardChanged(false);
 		}
 	}

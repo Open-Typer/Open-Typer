@@ -99,7 +99,7 @@ Item {
 		readonly property int keyWidth: parent.width
 		readonly property int keyHeight: isReturn ? 105 : parent.height
 		function getKeyColor() {
-			if(Settings.keyboardFingerColors())
+			if(Settings.getValue("keyboard", "keyboardFingerColors"))
 			{
 				var finger = layout.keyFinger(keyRow, keyId);
 				var darkFactor = ThemeEngine.theme == ThemeEngine.DarkTheme ? 0.85 : 1.73

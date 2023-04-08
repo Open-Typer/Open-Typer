@@ -635,17 +635,6 @@ bool Settings::containsEditorGeometry(void) { return contains("main/editorGeomet
 /*! Setter for main/editorGeometry. \deprecated The pack editor window doesn't use "geometry" anymore. */
 void Settings::setEditorGeometry(QByteArray value) { set("main/editorGeometry", value); }
 
-// keyboardVisible
-
-/*! Getter for view/keyboardvisible. */
-bool Settings::keyboardVisible(void) { return get("view/keyboardvisible", true).toBool(); }
-
-/*! Returns true if there's a view/keyboardvisible key. */
-bool Settings::containsKeyboardVisible(void) { return contains("view/keyboardvisible"); }
-
-/*! Setter for view/keyboardvisible. */
-void Settings::setKeyboardVisible(bool value) { set("view/keyboardvisible", value); }
-
 // initFinished
 
 /*! Getter for main/initfinished. */
@@ -656,17 +645,6 @@ bool Settings::containsInitFinished(void) { return contains("main/initfinished")
 
 /*! Setter for main/initfinished. */
 void Settings::setInitFinished(bool value) { set("main/initfinished", value); }
-
-// keyboardFingerColors
-
-/*! Getter for theme/keyboardfingercolors. */
-bool Settings::keyboardFingerColors(void) { return get("theme/keyboardfingercolors", true).toBool(); }
-
-/*! Returns true if there's a theme/keyboardfingercolors key. */
-bool Settings::containsKeyboardFingerColors(void) { return contains("theme/keyboardfingercolors"); }
-
-/*! Setter for theme/keyboardfingercolors. */
-void Settings::setKeyboardFingerColors(bool value) { set("theme/keyboardfingercolors", value); }
 
 // targetHitsPerMinute
 
