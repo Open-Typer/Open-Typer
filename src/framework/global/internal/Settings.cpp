@@ -292,17 +292,6 @@ bool Settings::containsWindowMaximized(void) { return contains("main/windowMaxim
 /*! Setter for main/windowMaximized. */
 void Settings::setWindowMaximized(bool value) { set("main/windowMaximized", value); }
 
-// updateChecks
-
-/*! Getter for main/updatechecks. */
-bool Settings::updateChecks(void) { return get("main/updatechecks", true).toBool(); }
-
-/*! Returns true if there's a main/updatechecks key. */
-bool Settings::containsUpdateChecks(void) { return contains("main/updatechecks"); }
-
-/*! Setter for main/updatechecks. */
-void Settings::setUpdateChecks(bool value) { set("main/updatechecks", value); }
-
 // lessonPack
 
 /*! Getter for main/configfile. */

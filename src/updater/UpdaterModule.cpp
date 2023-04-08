@@ -19,6 +19,7 @@
  */
 
 #include "UpdaterModule.h"
+#include "global/ISettings.h"
 
 std::string UpdaterModule::moduleName() const
 {
@@ -28,6 +29,11 @@ std::string UpdaterModule::moduleName() const
 void UpdaterModule::registerResources()
 {
 	Q_INIT_RESOURCE(updater);
+}
+
+void UpdaterModule::initSettings()
+{
+	INIT_SETTINGS_KEY("updateChecks", "main/updatechecks", true);
 }
 
 void UpdaterModule::setRootContextProperties(QQmlContext *context)

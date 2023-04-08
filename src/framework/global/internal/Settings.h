@@ -42,7 +42,6 @@
  *  - Settings#windowWidth - Main window width.
  *  - Settings#windowHeight - Main window height.
  *  - Settings#windowMaximized - Whether the main window was maximized when closed.
- *  - Settings#updateChecks() - Whether automatic update checks are enabled (on supported platforms).
  *  - Settings#lessonPack() - Selected lesson pack (or keyboard layout in the settings).
  *  - Settings#customLessonPack() - Whether to load lesson pack from a file (if true, the file name is in Settings#lessonPack()).
  *  - Settings#errorPenalty() - Number of hits subtracted from net hits on every mistake.
@@ -88,10 +87,6 @@ class Q_DECL_EXPORT Settings : public ISettings
 		Q_INVOKABLE static bool windowMaximized(void);
 		Q_INVOKABLE static bool containsWindowMaximized(void);
 		Q_INVOKABLE static void setWindowMaximized(bool value);
-		// updateChecks
-		Q_INVOKABLE static bool updateChecks(void);
-		Q_INVOKABLE static bool containsUpdateChecks(void);
-		Q_INVOKABLE static void setUpdateChecks(bool value);
 		// lessonPack
 		Q_INVOKABLE static QString lessonPack(void);
 		Q_INVOKABLE static bool containsLessonPack(void);

@@ -76,7 +76,7 @@ ColumnLayout {
 	CheckBox {
 		visible: QmlUtils.osWindows()
 		text: qsTr("Check for updates on startup")
-		checked: Settings.updateChecks()
-		onCheckedChanged: Settings.setUpdateChecks(checked)
+		checked: Settings.getValue("updater", "updateChecks")
+		onCheckedChanged: Settings.setValue("updater", "updateChecks", checked)
 	}
 }

@@ -30,6 +30,7 @@ class UpdaterModule : public IModuleSetup
 		std::string moduleName() const override;
 
 		void registerResources() override;
+		void initSettings() override;
 		void setRootContextProperties(QQmlContext *context) override;
 
 	private:
