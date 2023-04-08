@@ -21,6 +21,14 @@
 #include <QMap>
 #include "StringUtils.h"
 
+std::shared_ptr<StringUtils> StringUtils::m_instance = std::make_shared<StringUtils>();
+
+/*! Returns the static instance of StringUtils. */
+std::shared_ptr<StringUtils> StringUtils::instance()
+{
+	return m_instance;
+}
+
 /*! Returns number of words in the string. */
 int StringUtils::wordCount(QString str)
 {

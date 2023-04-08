@@ -19,7 +19,6 @@
  */
 
 #include "ExerciseValidator.h"
-#include "global/StringUtils.h"
 #include "global/internal/Settings.h"
 
 static const QString module = "grades";
@@ -412,7 +411,7 @@ void ExerciseValidator::updateGrade(void)
 QList<MistakeRecord> ExerciseValidator::compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord> *recordedCharacters, int *hits, int *inputPos)
 {
 	QList<MistakeRecord> out;
-	auto lcs = StringUtils::longestCommonSubsequence(source, target);
+	auto lcs = stringUtils()->longestCommonSubsequence(source, target);
 	int sourcePos = 0, targetPos = 0;
 	int count = std::max(source.count(), target.count());
 	for(int i = 0; i < count; i++)

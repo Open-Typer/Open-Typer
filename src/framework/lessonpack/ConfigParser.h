@@ -25,7 +25,7 @@
 #include <QFile>
 #include <QBuffer>
 #include <QString>
-#include "global/StringUtils.h"
+#include "global/IStringUtils.h"
 
 namespace publicPos {
 	Q_DECL_EXPORT Q_NAMESPACE;
@@ -53,6 +53,7 @@ namespace publicPos {
 class Q_DECL_EXPORT ConfigParser : public QObject
 {
 		Q_OBJECT
+		INJECT(IStringUtils, stringUtils)
 	public:
 		explicit ConfigParser(QObject *parent = nullptr);
 		Q_INVOKABLE bool open(const QString fileName);

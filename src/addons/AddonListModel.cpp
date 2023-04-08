@@ -24,7 +24,6 @@
 #include <QDir>
 #include "AddonListModel.h"
 #include "AddonManager.h"
-#include "global/StringUtils.h"
 #include "global/global.h"
 
 /*! Constructs AddonListModel. */

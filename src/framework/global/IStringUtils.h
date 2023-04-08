@@ -1,5 +1,5 @@
 /*
- * GlobalModule.h
+ * IStringUtils.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,22 +18,23 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GLOBALMODULE_H
-#define GLOBALMODULE_H
+#ifndef ISTRINGUTILS_H
+#define ISTRINGUTILS_H
 
-#include "internal/Settings.h"
-#include "global/modularity/IModuleSetup.h"
+#include <QtGlobal>
+#include "modularity/ioc.h"
 
-class GlobalModule : public IModuleSetup
+class IStringUtils : MODULE_EXPORT_INTERFACE
 {
 	public:
-		std::string moduleName() const override;
-
-		void registerExports() override;
-		void setRootContextProperties(QQmlContext *context) override;
-
-		void onPreInit() override;
-		void onDeinit() override;
+		virtual int wordCount(QString str) = 0;
+		virtual int charCount(QString str, QChar ch) = 0;
+		virtual QString word(QString str, int id) = 0;
+		virtual QString wordAt(QString str, int index) = 0;
+		virtual QString repeatString(QString string, int n) = 0;
+		virtual QList<QVariant> longestCommonSubsequence(QList<QVariant> source, QList<QVariant> target) = 0;
+		virtual QString longestCommonSubsequence(QString source, QString target) = 0;
+		virtual QString normalizeString(QString str) = 0;
 };
 
-#endif // GLOBALMODULE_H
+#endif // ISTRINGUTILS_H

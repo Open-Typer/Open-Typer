@@ -21,6 +21,7 @@
 #include "GlobalModule.h"
 #include "modularity/ioc.h"
 #include "internal/Settings.h"
+#include "internal/StringUtils.h"
 
 std::string GlobalModule::moduleName() const
 {
@@ -31,13 +32,14 @@ void GlobalModule::registerExports()
 {
 	modularity::ioc()->registerExport<ISettings>(Settings::instance());
 	modularity::ioc()->registerExport<IFileUtils>(FileUtils::instance());
+	modularity::ioc()->registerExport<IStringUtils>(StringUtils::instance());
 }
 
 void GlobalModule::setRootContextProperties(QQmlContext *context)
 {
 	context->setContextProperty("Settings", Settings::instance().get());
 	context->setContextProperty("FileUtils", FileUtils::instance().get());
-	context->setContextProperty("StringUtils", &m_stringUtils);
+	context->setContextProperty("StringUtils", StringUtils::instance().get());
 }
 
 void GlobalModule::onPreInit()
