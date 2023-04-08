@@ -26,6 +26,7 @@
 #include <QJsonDocument>
 #include "Class.h"
 #include "global/ISettings.h"
+#include "global/IFileUtils.h"
 
 /*!
  * \brief The ClassManager class provides access to grading configuration of each class.
@@ -36,6 +37,7 @@ class Q_DECL_EXPORT ClassManager : public QObject
 {
 		Q_OBJECT
 		INJECT(ISettings, settings)
+		INJECT(IFileUtils, fileUtils)
 		Q_PROPERTY(QQmlListProperty<Class> classes READ classes NOTIFY classesChanged)
 		Q_PROPERTY(QStringList classNames READ classNames NOTIFY classNamesChanged)
 	public:
@@ -47,6 +49,7 @@ class Q_DECL_EXPORT ClassManager : public QObject
 		Q_ENUM(GradingMethod)
 
 		ClassManager(QObject *parent = nullptr);
+		void init();
 
 		QQmlListProperty<Class> classes(void);
 		void setClasses(QList<Class *> newClasses);

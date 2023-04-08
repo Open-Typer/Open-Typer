@@ -30,12 +30,13 @@ std::string GlobalModule::moduleName() const
 void GlobalModule::registerExports()
 {
 	modularity::ioc()->registerExport<ISettings>(Settings::instance());
+	modularity::ioc()->registerExport<IFileUtils>(FileUtils::instance());
 }
 
 void GlobalModule::setRootContextProperties(QQmlContext *context)
 {
 	context->setContextProperty("Settings", Settings::instance().get());
-	context->setContextProperty("FileUtils", &m_fileUtils);
+	context->setContextProperty("FileUtils", FileUtils::instance().get());
 	context->setContextProperty("StringUtils", &m_stringUtils);
 }
 

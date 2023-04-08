@@ -1,8 +1,8 @@
 /*
- * FileUtils.h
+ * IFileUtils.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2023 - adazem009
+ * Copyright (C) 2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,24 +18,21 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FILEUTILS_H
-#define FILEUTILS_H
+#ifndef IFILEUTILS_H
+#define IFILEUTILS_H
 
-#include <QString>
-#include <QStandardPaths>
-#include <QDir>
+#include <QtGlobal>
+#include "modularity/ioc.h"
 
-/*! \brief The FileUtils class contains functions for file or directory paths. */
-class Q_DECL_EXPORT FileUtils : public QObject
+class IFileUtils : MODULE_EXPORT_INTERFACE
 {
-		Q_OBJECT
 	public:
-		Q_INVOKABLE static QString configLocation(void);
-		Q_INVOKABLE static QString mainSettingsLocation(void);
-		Q_INVOKABLE static QString addonConfigLocation(void);
-		Q_INVOKABLE static QString addonDirectory(void);
-		Q_INVOKABLE static QString classConfigLocation(void);
-		Q_INVOKABLE static QString fileName(QString path);
+		virtual QString configLocation(void) = 0;
+		virtual QString mainSettingsLocation(void) = 0;
+		virtual QString addonConfigLocation(void) = 0;
+		virtual QString addonDirectory(void) = 0;
+		virtual QString classConfigLocation(void) = 0;
+		virtual QString fileName(QString path) = 0;
 };
 
-#endif // FILEUTILS_H
+#endif // IFILEUTILS_H

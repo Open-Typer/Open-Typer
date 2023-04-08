@@ -28,6 +28,7 @@
 #include <QMap>
 #include "AddonModel.h"
 #include "AddonItemModel.h"
+#include "global/IFileUtils.h"
 
 class IAddon;
 
@@ -39,9 +40,11 @@ class IAddon;
 class Q_DECL_EXPORT AddonManager : public QObject
 {
 		Q_OBJECT
+		INJECT(IFileUtils, fileUtils)
 		Q_PROPERTY(QList<AddonModel *> addons READ addons NOTIFY addonsChanged)
 	public:
 		explicit AddonManager(QObject *parent = nullptr);
+		void init();
 
 		QList<AddonModel *> addons(void);
 

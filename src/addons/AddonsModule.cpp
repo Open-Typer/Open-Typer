@@ -57,6 +57,7 @@ void AddonsModule::registerUiTypes()
 
 void AddonsModule::onPreInit()
 {
+	globalAddonManager.init();
 	globalAddonManager.loadAddons();
 	Updater::getAddonUpdates();
 	addonsLoaded = true;

@@ -20,6 +20,14 @@
 
 #include "FileUtils.h"
 
+std::shared_ptr<FileUtils> FileUtils::m_instance = std::make_shared<FileUtils>();
+
+/*! Returns the static instance of FileUtils. */
+std::shared_ptr<FileUtils> FileUtils::instance()
+{
+	return m_instance;
+}
+
 /*!
  * Returns the path to the program configuration directory.\n
  * For example: <tt>/home/user/.config/Open-Typer</tt>

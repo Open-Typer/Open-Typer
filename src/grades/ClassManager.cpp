@@ -22,7 +22,6 @@
 #include <QJsonObject>
 #include <QDate>
 #include "ClassManager.h"
-#include "global/FileUtils.h"
 #include "global/internal/Settings.h"
 
 static const QString module = "grades";
@@ -40,8 +39,13 @@ ClassManager globalClassManager;
 ClassManager::ClassManager(QObject *parent) :
 	QObject(parent)
 {
+}
+
+/*! Initializes the ClassManager instance. */
+void ClassManager::init()
+{
 	// Open class configuration
-	QFile file(FileUtils::classConfigLocation());
+	QFile file(fileUtils()->classConfigLocation());
 	if(!file.exists())
 	{
 		bool ret = file.open(QFile::WriteOnly | QFile::Text);
@@ -166,7 +170,7 @@ void ClassManager::write(void)
 	}
 	doc.setArray(arr);
 
-	QFile file(FileUtils::classConfigLocation());
+	QFile file(fileUtils()->classConfigLocation());
 	bool ret = file.open(QFile::WriteOnly | QFile::Text);
 	Q_ASSERT(ret);
 	if(ret)

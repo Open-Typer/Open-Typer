@@ -42,7 +42,7 @@ void Settings::init(void)
 #ifdef Q_OS_WASM
 	settingsInstance = new QSettings(qApp);
 #else
-	settingsInstance = new QSettings(FileUtils::mainSettingsLocation(), QSettings::IniFormat, qApp);
+	settingsInstance = new QSettings(FileUtils::instance()->mainSettingsLocation(), QSettings::IniFormat, qApp);
 #endif
 }
 
@@ -120,7 +120,7 @@ void Settings::freeze(void)
 {
 	Q_ASSERT(!frozen);
 	mainSettingsInstance = settingsInstance;
-	settingsInstance = new QSettings(FileUtils::mainSettingsLocation() + ".tmp", QSettings::IniFormat, qApp);
+	settingsInstance = new QSettings(FileUtils::instance()->mainSettingsLocation() + ".tmp", QSettings::IniFormat, qApp);
 	copySettings(mainSettingsInstance, settingsInstance);
 	frozen = true;
 	emit stateChanged();

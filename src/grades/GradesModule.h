@@ -31,6 +31,8 @@ class GradesModule : public IModuleSetup
 		void registerResources() override;
 		void initSettings() override;
 		void registerUiTypes() override;
+
+		void onPreInit() override;
 };
 
 #endif // GRADESMODULE_H

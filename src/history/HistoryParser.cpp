@@ -20,7 +20,6 @@
  */
 
 #include "HistoryParser.h"
-#include "global/FileUtils.h"
 
 const QString HistoryParser::historyFile = "/history.json";
 const QString HistoryParser::speedProperty = "speed";
@@ -124,7 +123,7 @@ void HistoryParser::append(HistoryEntry entry)
 	docObject.insert(m_lessonPack, packObject);
 	// Save JSON document
 	QJsonDocument document(docObject);
-	QString pathToHistoryFile = FileUtils::configLocation() + historyFile;
+	QString pathToHistoryFile = fileUtils()->configLocation() + historyFile;
 	QFile historyFile(pathToHistoryFile);
 	if(historyFile.open(QIODevice::WriteOnly | QIODevice::Text))
 		historyFile.write(document.toJson(QJsonDocument::Indented));
@@ -140,7 +139,7 @@ void HistoryParser::append(int grossHitsPerMinute, int mistakes, int timeSecs)
 /*! Returns JSON document of the history JSON file. */
 QJsonDocument HistoryParser::historyDocument(void)
 {
-	QString pathToHistoryFile = FileUtils::configLocation() + historyFile;
+	QString pathToHistoryFile = fileUtils()->configLocation() + historyFile;
 	QFile historyFile(pathToHistoryFile);
 	if(historyFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		return QJsonDocument::fromJson(historyFile.readAll());

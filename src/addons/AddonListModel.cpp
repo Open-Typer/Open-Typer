@@ -21,9 +21,9 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QCoreApplication>
+#include <QDir>
 #include "AddonListModel.h"
 #include "AddonManager.h"
-#include "global/FileUtils.h"
 #include "global/StringUtils.h"
 #include "global/global.h"
 
@@ -54,13 +54,13 @@ void AddonListModel::load(QString filter)
 			itemModel->setName(model->name());
 			itemModel->setDescription(model->description());
 			itemModel->setVersion(model->version());
-			itemModel->setIconUrl("file://" + FileUtils::addonDirectory() + "/" + model->id() + "/" + model->iconFileName());
+			itemModel->setIconUrl("file://" + fileUtils()->addonDirectory() + "/" + model->id() + "/" + model->iconFileName());
 			QStringList downloadUrls;
-			QDir addonDir(FileUtils::addonDirectory() + "/" + model->id());
+			QDir addonDir(fileUtils()->addonDirectory() + "/" + model->id());
 			QStringList addonFiles = addonDir.entryList(QDir::Files);
 			addonFiles.removeAll(model->iconFileName());
 			for(int i = 0; i < addonFiles.length(); i++)
-				downloadUrls.append("file://" + FileUtils::addonDirectory() + "/" + model->id() + "/" + addonFiles[i]);
+				downloadUrls.append("file://" + fileUtils()->addonDirectory() + "/" + model->id() + "/" + addonFiles[i]);
 			itemModel->setDownloadUrls(downloadUrls);
 			// Append i to the name to avoid duplicate keys
 			localItemMap.insert(itemModel->name() + QString::number(i), itemModel);

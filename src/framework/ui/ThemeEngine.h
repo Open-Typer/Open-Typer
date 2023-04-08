@@ -27,7 +27,6 @@
 #include <QFontDatabase>
 #include <QColor>
 #include <QFile>
-#include "global/FileUtils.h"
 #include "global/ISettings.h"
 
 class Settings;

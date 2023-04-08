@@ -23,11 +23,13 @@
 
 #include <QObject>
 #include <QVersionNumber>
+#include "global/IFileUtils.h"
 
 /*! \brief The AddonModel class provides a model for installed addons. */
 class Q_DECL_EXPORT AddonModel : public QObject
 {
 		Q_OBJECT
+		INJECT(IFileUtils, fileUtils)
 		Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)
 		Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 		Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)

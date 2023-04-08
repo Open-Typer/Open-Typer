@@ -55,3 +55,8 @@ void GradesModule::registerUiTypes()
 	qRegisterMetaType<ClassManager::GradingMethod>();
 	qRegisterMetaType<QMap<int, int>>();
 }
+
+void GradesModule::onPreInit()
+{
+	globalClassManager.init();
+}

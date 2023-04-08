@@ -29,11 +29,13 @@
 #include <QJsonArray>
 #include <QVariant>
 #include "HistoryEntry.h"
+#include "global/IFileUtils.h"
 
 /*! \brief The HistoryParser class provides functions for exercise history and statistics. */
 class Q_DECL_EXPORT HistoryParser : public QObject
 {
 		Q_OBJECT
+		INJECT(IFileUtils, fileUtils)
 		Q_PROPERTY(QString lessonPack READ lessonPack WRITE setLessonPack NOTIFY lessonPackChanged)
 		Q_PROPERTY(int lesson READ lesson WRITE setLesson NOTIFY lessonChanged)
 		Q_PROPERTY(int sublesson READ sublesson WRITE setSublesson NOTIFY sublessonChanged)
