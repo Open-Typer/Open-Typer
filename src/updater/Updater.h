@@ -29,11 +29,13 @@
 #ifndef Q_OS_WASM
 #include "addons/AddonListModel.h"
 #endif
+#include "global/ISettings.h"
 
 /*! \brief The Updater class is used to check for updates and download new versions of the program. */
 class Q_DECL_EXPORT Updater : public QObject
 {
 		Q_OBJECT
+		INJECT(ISettings, settings)
 	public:
 		Q_INVOKABLE static bool updateAvailable(void);
 		Q_INVOKABLE static void installUpdate(void);

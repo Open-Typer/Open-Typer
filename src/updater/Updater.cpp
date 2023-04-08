@@ -26,6 +26,9 @@
 #include "addons/AddonManager.h"
 #include "global/global.h"
 
+static const QString module = "updater";
+static const ISettings::Key UPDATE_CHECKS(module, "updateChecks");
+
 AddonListModel Updater::listModel;
 QList<AddonItemModel *> Updater::updatableAddons;
 #endif
@@ -33,6 +36,8 @@ QList<AddonItemModel *> Updater::updatableAddons;
 /*! Checks for updates and returns true if there's an update available (only supports Windows). */
 bool Updater::updateAvailable(void)
 {
+	if(!settings()->getValue(UPDATE_CHECKS).toBool())
+		return false;
 #ifdef Q_OS_WINDOWS
 	auto currentDate = QDateTime::currentDateTimeUtc().date();
 	// Disable updates on Windows 7 and 8 after May 2023
@@ -72,7 +77,7 @@ void Updater::installUpdate(void)
 /*! Checks for addon updates. */
 void Updater::getAddonUpdates(void)
 {
-	if(!internetConnected())
+	if(!settings()->getValue(UPDATE_CHECKS).toBool() || !internetConnected())
 		return;
 	// Get installed addons
 	listModel.setLocalAddons(true);
