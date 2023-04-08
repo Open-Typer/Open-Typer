@@ -86,8 +86,11 @@ class Q_DECL_EXPORT Settings : public ISettings
 		static void init(void);
 		void addKey(QString moduleName, QString keyName, QString key, QVariant defaultValue) override;
 		Q_INVOKABLE void setValue(QString moduleName, QString keyName, QVariant value) override;
+		void setValue(Key key, QVariant value) override;
 		Q_INVOKABLE QVariant getValue(QString moduleName, QString keyName) override;
+		QVariant getValue(Key key) override;
 		Q_INVOKABLE bool containsKey(QString moduleName, QString keyName) override;
+		bool containsKey(Key key) override;
 		Q_INVOKABLE void freeze(void) override;
 		Q_INVOKABLE void saveChanges(void) override;
 		Q_INVOKABLE void discardChanges(void) override;
@@ -255,18 +258,6 @@ class Q_DECL_EXPORT Settings : public ISettings
 		static void set(QString key, QVariant value);
 
 	private:
-		struct Key
-		{
-				Key() = default;
-				Key(QString key, QVariant defaultValue)
-				{
-					this->key = key;
-					this->defaultValue = defaultValue;
-				}
-				QString key;
-				QVariant defaultValue;
-		};
-
 		static std::shared_ptr<Settings> m_instance;
 		static QSettings *settingsInstance;
 		static QSettings *mainSettingsInstance;

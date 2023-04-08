@@ -50,7 +50,7 @@ void Settings::init(void)
 /*! Registers a key. */
 void Settings::addKey(QString moduleName, QString keyName, QString key, QVariant defaultValue)
 {
-	Key k(key, defaultValue);
+	Key k(moduleName, key, defaultValue);
 	m_keys.insert({ moduleName, keyName }, k);
 }
 
@@ -61,6 +61,12 @@ void Settings::setValue(QString moduleName, QString keyName, QVariant value)
 	Q_ASSERT(m_keys.contains(key));
 	if(m_keys.contains(key))
 		set(m_keys[key].key, value);
+}
+
+/*! Sets the key value (module name and key name are stored in the Key object). */
+void Settings::setValue(Key key, QVariant value)
+{
+	setValue(key.moduleName, key.key, value);
 }
 
 /*! Returns the value of the given key. */
@@ -82,7 +88,13 @@ QVariant Settings::getValue(QString moduleName, QString keyName)
 		return QVariant();
 }
 
-/*! Returns true if the given key exists. */
+/*! Returns the value of the given key (module name and key name are stored in the Key object). */
+QVariant Settings::getValue(Key key)
+{
+	return getValue(key.moduleName, key.key);
+}
+
+/*! Returns true if the given key is defined. */
 bool Settings::containsKey(QString moduleName, QString keyName)
 {
 	QPair<QString, QString> key = { moduleName, keyName };
@@ -93,6 +105,12 @@ bool Settings::containsKey(QString moduleName, QString keyName)
 	}
 	else
 		return false;
+}
+
+/*! Returns true if the given key is defined (module name and key name are stored in the Key object). */
+bool Settings::containsKey(Key key)
+{
+	return containsKey(key.moduleName, key.key);
 }
 
 /*!

@@ -31,12 +31,37 @@ class ISettings : public QObject, MODULE_EXPORT_INTERFACE
 {
 		Q_OBJECT
 	public:
+		struct Key
+		{
+				Key() = default;
+
+				Key(QString moduleName, QString key)
+				{
+					this->moduleName = moduleName;
+					this->key = key;
+				}
+
+				Key(QString moduleName, QString key, QVariant defaultValue)
+				{
+					this->moduleName = moduleName;
+					this->key = key;
+					this->defaultValue = defaultValue;
+				}
+
+				QString moduleName;
+				QString key;
+				QVariant defaultValue;
+		};
+
 		virtual ~ISettings() { }
 
 		virtual void addKey(QString moduleName, QString keyName, QString key, QVariant defaultValue) = 0;
 		virtual void setValue(QString moduleName, QString keyName, QVariant value) = 0;
+		virtual void setValue(Key key, QVariant value) = 0;
 		virtual QVariant getValue(QString moduleName, QString keyName) = 0;
+		virtual QVariant getValue(Key key) = 0;
 		virtual bool containsKey(QString moduleName, QString keyName) = 0;
+		virtual bool containsKey(Key key) = 0;
 
 		virtual void freeze() = 0;
 		virtual void saveChanges() = 0;
