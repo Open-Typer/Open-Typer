@@ -26,12 +26,12 @@
 #include "addons/AddonManager.h"
 #include "global/global.h"
 
-static const QString module = "updater";
-static const ISettings::Key UPDATE_CHECKS(module, "updateChecks");
-
 AddonListModel Updater::listModel;
 QList<AddonItemModel *> Updater::updatableAddons;
 #endif
+
+static const QString module = "updater";
+static const ISettings::Key UPDATE_CHECKS(module, "updateChecks");
 
 /*! Checks for updates and returns true if there's an update available (only supports Windows). */
 bool Updater::updateAvailable(void)
