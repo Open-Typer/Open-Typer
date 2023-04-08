@@ -20,7 +20,6 @@
 
 #include <QApplication>
 #include "Settings.h"
-#include "translations/LanguageManager.h"
 
 std::shared_ptr<Settings> Settings::m_instance = std::make_shared<Settings>();
 QSettings *Settings::settingsInstance = nullptr;
