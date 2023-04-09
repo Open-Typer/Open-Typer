@@ -24,7 +24,6 @@
 #include <QObject>
 #include "MistakeRecord.h"
 #include "CharacterRecord.h"
-#include "grades/ClassManager.h"
 #include "global/ISettings.h"
 #include "global/IStringUtils.h"
 
@@ -40,10 +39,6 @@ class Q_DECL_EXPORT ExerciseValidator : public QObject
 		Q_PROPERTY(QList<CharacterRecord> characters READ characters WRITE setCharacters NOTIFY charactersChanged)
 		Q_PROPERTY(bool timed READ timed WRITE setTimed NOTIFY timedChanged)
 		Q_PROPERTY(qreal time READ time WRITE setTime NOTIFY timeChanged)
-		Q_PROPERTY(int targetHitsPerMinute READ targetHitsPerMinute WRITE setTargetHitsPerMinute NOTIFY targetHitsPerMinuteChanged)
-		Q_PROPERTY(bool useNetHitsForGrading READ useNetHitsForGrading WRITE setUseNetHitsForGrading NOTIFY useNetHitsForGradingChanged)
-		Q_PROPERTY(ClassManager::GradingMethod gradingMethod READ gradingMethod WRITE setGradingMethod NOTIFY gradingMethodChanged)
-		Q_PROPERTY(QString grade READ grade NOTIFY gradeChanged)
 	public:
 		ExerciseValidator(QObject *parent = nullptr);
 		QString exerciseText(void);
@@ -72,16 +67,8 @@ class Q_DECL_EXPORT ExerciseValidator : public QObject
 		Q_INVOKABLE QString generatedInputText(void);
 		Q_INVOKABLE QString generatedMistakeText(void);
 		Q_INVOKABLE QString textWithMistakes(void);
-		int targetHitsPerMinute(void) const;
-		void setTargetHitsPerMinute(int newTargetHitsPerMinute);
-		bool useNetHitsForGrading(void) const;
-		void setUseNetHitsForGrading(bool newUseNetHitsForGrading);
-		const ClassManager::GradingMethod &gradingMethod(void) const;
-		void setGradingMethod(const ClassManager::GradingMethod &newGradingMethod);
-		const QString &grade(void) const;
 
 	private:
-		void updateGrade(void);
 		QList<MistakeRecord> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
 		QList<MistakeRecord> compareStrings(QString source, QString target, QVector<CharacterRecord> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
 		QMap<int, MistakeRecord> generateDiffList(QStringList *sourceWords, QStringList *targetWords, QList<int> *mergeList = nullptr);
@@ -100,22 +87,15 @@ class Q_DECL_EXPORT ExerciseValidator : public QObject
 		QStringList m_errorWords;
 		QString m_generatedInputText;
 		QString m_generatedMistakeText;
-		int m_targetHitsPerMinute;
-		bool m_useNetHitsForGrading;
-		ClassManager::GradingMethod m_gradingMethod;
-		QString m_grade;
 
 	signals:
+		void validated();
 		void exerciseTextChanged(QString text);
 		void inputTextChanged(QString text);
 		void mistakesChanged(QList<MistakeRecord> mistakeList);
 		void charactersChanged(QList<CharacterRecord> characterList);
 		void timedChanged(bool value);
 		void timeChanged(qreal seconds);
-		void targetHitsPerMinuteChanged();
-		void useNetHitsForGradingChanged();
-		void gradingMethodChanged();
-		void gradeChanged();
 };
 
 #endif // EXERCISEVALIDATOR_H
