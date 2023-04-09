@@ -44,22 +44,20 @@ class Q_DECL_EXPORT MistakeRecord
 		};
 		Q_ENUM(Type)
 
-		int position(void);
-		void setPosition(int pos);
-		Type type(void);
-		void setType(Type type);
-		QString previousText(void);
-		void setPreviousText(QString text);
-		QVariant previousVariant(void);
-		void setPreviousVariant(QVariant value);
-		int previousPosition(void);
-		void setPreviousPosition(int pos);
-		bool enabled(void);
-		bool isEnabled(void);
-		void setEnabled(bool enabled);
-		bool merged(void);
-		bool isMerged(void);
-		void setMerged(bool merged);
+		int position(void) { return m_position; };
+		void setPosition(int pos) { m_position = pos; };
+		Type type(void) { return m_type; };
+		void setType(Type type) { m_type = type; };
+		QString previousText(void) { return m_previousText; };
+		void setPreviousText(QString text) { m_previousText = text; };
+		QVariant previousVariant(void) { return m_previousVariant; };
+		void setPreviousVariant(QVariant value) { m_previousVariant = value; };
+		int previousPosition(void) { return m_previousPosition; };
+		void setPreviousPosition(int pos) { m_previousPosition = pos; };
+		bool enabled(void) { return m_enabled; };
+		void setEnabled(bool enabled) { m_enabled = enabled; };
+		bool merged(void) { return m_merged; };
+		void setMerged(bool merged) { m_merged = merged; };
 
 	private:
 		int m_position;

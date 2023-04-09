@@ -513,7 +513,7 @@ QList<MistakeRecord> ExerciseValidator::findMistakes(QString exerciseText, QStri
 							lastMistakePos = diff[i2].position();
 					}
 				}
-				bool merged = differences[i].isMerged();
+				bool merged = differences[i].merged();
 				// Translate mistake position
 				for(int i2 = 0; i2 < diff.count(); i2++)
 				{
@@ -671,7 +671,7 @@ QList<MistakeRecord> ExerciseValidator::validateExercise(QString exerciseText, Q
 			mistakesToRemove += recordedMistakes[i];
 		else
 		{
-			if(recordedMistakes[i].isEnabled())
+			if(recordedMistakes[i].enabled())
 				*mistakeCount = (*mistakeCount) + 1;
 		}
 	}

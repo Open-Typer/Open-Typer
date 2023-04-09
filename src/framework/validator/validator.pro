@@ -3,8 +3,6 @@ QT += core widgets qml
 CONFIG += staticlib
 
 SOURCES += \
-    CharacterRecord.cpp \
-    MistakeRecord.cpp \
     ValidatorModule.cpp \
     internal/ExerciseValidator.cpp
 

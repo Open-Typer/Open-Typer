@@ -34,10 +34,10 @@ class Q_DECL_EXPORT CharacterRecord
 		Q_PROPERTY(QString keyText READ keyText WRITE setKeyText)
 		Q_PROPERTY(int hits READ hits WRITE setHits)
 	public:
-		QString keyText(void);
-		void setKeyText(QString text);
-		int hits(void);
-		void setHits(int count);
+		QString keyText(void) { return m_keyText; };
+		void setKeyText(QString text) { m_keyText = text; };
+		int hits(void) { return m_hits; };
+		void setHits(int count) { m_hits = count; };
 
 	private:
 		QString m_keyText;

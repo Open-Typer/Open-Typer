@@ -70,7 +70,7 @@ void ExportProvider::setValidator(IExerciseValidator *validator)
 			if(mistakesMap.contains(pos))
 			{
 				MistakeRecord *currentMistake = mistakesMap[pos];
-				if(currentMistake->isEnabled())
+				if(currentMistake->enabled())
 					lineMistakes++;
 				if(append == "")
 					append.prepend("&nbsp;");
