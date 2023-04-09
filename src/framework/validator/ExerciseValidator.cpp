@@ -18,6 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QVector>
 #include "ExerciseValidator.h"
 
 static const QString module = "grades";
