@@ -23,13 +23,13 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
 import QtQuick.Layouts 1.12
 import Qt.labs.platform 1.1 as Platform
-import OpenTyper 1.0
 import OpenTyper.Ui 1.0
 
 MenuBar {
 	id: root
-	readonly property var menuList: AppMenuBar.menus
+	property var menuList: null
 	property var menuObjects: []
+	onMenuListChanged: reload()
 
 	function getComponentString(typeName) {
 		var imports = "import QtQuick 2.12; import QtQuick.Controls 2.5; import Qt.labs.platform 1.1 as Platform;"
@@ -116,6 +116,10 @@ MenuBar {
 	}
 
 	function reload() {
+		let isNull = (menuList == null);
+		console.assert(!isNull);
+		if(isNull)
+			return;
 		if(QmlUtils.nativeMenuBar())
 		{
 			root.visible = false;
