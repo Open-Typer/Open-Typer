@@ -20,7 +20,7 @@
 
 #include <QQmlEngine>
 #include "UiModule.h"
-#include "QmlUtils.h"
+#include "internal/QmlUtils.h"
 #include "ThemeEngine.h"
 #include "menubar/AppMenuModel.h"
 #include "internal/UiEngine.h"

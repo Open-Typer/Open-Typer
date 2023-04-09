@@ -11,9 +11,9 @@ linux {
 }
 
 SOURCES += \
-    QmlUtils.cpp \
     ThemeEngine.cpp \
     UiModule.cpp \
+    internal/QmlUtils.cpp \
     internal/UiEngine.cpp \
     menubar/AbstractMenuBar.cpp \
     menubar/AppMenuItem.cpp \
@@ -21,9 +21,9 @@ SOURCES += \
 
 HEADERS += \
     IUiEngine.h \
-    QmlUtils.h \
     ThemeEngine.h \
     UiModule.h \
+    internal/QmlUtils.h \
     internal/UiEngine.h \
     menubar/AbstractMenuBar.h \
     menubar/AppMenuItem.h \

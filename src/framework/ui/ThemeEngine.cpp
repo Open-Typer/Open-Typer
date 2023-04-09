@@ -22,7 +22,7 @@
 #include <QApplication>
 #include <QPalette>
 #include "ThemeEngine.h"
-#include "QmlUtils.h"
+#include "internal/QmlUtils.h"
 
 ThemeEngine globalThemeEngine;
 
