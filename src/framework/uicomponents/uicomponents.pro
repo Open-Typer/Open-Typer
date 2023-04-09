@@ -5,14 +5,14 @@ CONFIG += staticlib
 QML_IMPORT_PATH += qml
 
 SOURCES += \
-    QmlFileDialog.cpp \
-    QmlWidget.cpp \
-    UiComponentsModule.cpp
+    UiComponentsModule.cpp \
+    internal/QmlFileDialog.cpp \
+    internal/QmlWidget.cpp
 
 HEADERS += \
-    QmlFileDialog.h \
-    QmlWidget.h \
-    UiComponentsModule.h
+    UiComponentsModule.h \
+    internal/QmlFileDialog.h \
+    internal/QmlWidget.h
 
 RESOURCES += \
         uicomponents.qrc

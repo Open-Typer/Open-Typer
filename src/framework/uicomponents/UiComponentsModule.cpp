@@ -20,8 +20,8 @@
 
 #include <QQmlEngine>
 #include "UiComponentsModule.h"
-#include "QmlFileDialog.h"
-#include "QmlWidget.h"
+#include "internal/QmlFileDialog.h"
+#include "internal/QmlWidget.h"
 
 std::string UiComponentsModule::moduleName() const
 {
