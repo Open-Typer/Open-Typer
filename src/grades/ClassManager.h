@@ -66,6 +66,7 @@ class Q_DECL_EXPORT ClassManager : public QObject
 		void classNamesChanged();
 
 	private:
+		QString configLocation();
 		void write(void);
 		QList<Class *> m_classes;
 		QStringList m_classNames;

@@ -46,12 +46,6 @@ QString FileUtils::mainSettingsLocation(void)
 	return configLocation() + "/config.ini";
 }
 
-/*! Returns the path to the class grading configuration JSON file. */
-QString FileUtils::classConfigLocation()
-{
-	return configLocation() + "/classes.json";
-}
-
 /*! Uses QFileInfo to get the file name of a file. */
 QString FileUtils::fileName(QString path)
 {

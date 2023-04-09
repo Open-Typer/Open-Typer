@@ -45,7 +45,7 @@ ClassManager::ClassManager(QObject *parent) :
 void ClassManager::init()
 {
 	// Open class configuration
-	QFile file(fileUtils()->classConfigLocation());
+	QFile file(configLocation());
 	if(!file.exists())
 	{
 		bool ret = file.open(QFile::WriteOnly | QFile::Text);
@@ -147,6 +147,12 @@ int ClassManager::targetHitsPerMinute(int selectedClass)
 	}
 }
 
+/*! Returns the path to the class grading configuration JSON file. */
+QString ClassManager::configLocation()
+{
+	return fileUtils()->configLocation() + "/classes.json";
+}
+
 /*! Writes all classes into the configuration file. */
 void ClassManager::write(void)
 {
@@ -170,7 +176,7 @@ void ClassManager::write(void)
 	}
 	doc.setArray(arr);
 
-	QFile file(fileUtils()->classConfigLocation());
+	QFile file(configLocation());
 	bool ret = file.open(QFile::WriteOnly | QFile::Text);
 	Q_ASSERT(ret);
 	if(ret)
