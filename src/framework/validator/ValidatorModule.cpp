@@ -20,7 +20,7 @@
 
 #include <QQmlEngine>
 #include "ValidatorModule.h"
-#include "ExerciseValidator.h"
+#include "internal/ExerciseValidator.h"
 #include "global/ISettings.h"
 
 std::string ValidatorModule::moduleName() const

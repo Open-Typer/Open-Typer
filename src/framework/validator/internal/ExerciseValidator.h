@@ -22,13 +22,14 @@
 #define EXERCISEVALIDATOR_H
 
 #include <QObject>
+#include "../IExerciseValidator.h"
 #include "MistakeRecord.h"
 #include "CharacterRecord.h"
 #include "global/ISettings.h"
 #include "global/IStringUtils.h"
 
 /*! \brief The ExerciseValidator class provides methods for exercise validation to QML code. */
-class Q_DECL_EXPORT ExerciseValidator : public QObject
+class Q_DECL_EXPORT ExerciseValidator : public IExerciseValidator
 {
 		Q_OBJECT
 		INJECT(ISettings, settings)
@@ -40,33 +41,31 @@ class Q_DECL_EXPORT ExerciseValidator : public QObject
 		Q_PROPERTY(bool timed READ timed WRITE setTimed NOTIFY timedChanged)
 		Q_PROPERTY(qreal time READ time WRITE setTime NOTIFY timeChanged)
 	public:
-		ExerciseValidator(QObject *parent = nullptr);
-		QString exerciseText(void);
-		void setExerciseText(QString text);
-		QString inputText(void);
-		void setInputText(QString text);
-		Q_INVOKABLE void clearMistakes(void);
-		Q_INVOKABLE void addMistake(MistakeRecord mistake);
-		QList<MistakeRecord> mistakes(void);
-		void setMistakes(QList<MistakeRecord> mistakeList);
-		Q_INVOKABLE void clearCharacters(void);
-		Q_INVOKABLE void addCharacter(CharacterRecord character);
-		QList<CharacterRecord> characters(void);
-		void setCharacters(QList<CharacterRecord> characterList);
-		bool timed(void);
-		Q_DECL_DEPRECATED bool isTimed(void);
-		void setTimed(bool value);
-		qreal time(void);
-		void setTime(qreal seconds);
-		Q_INVOKABLE void validate(void);
-		Q_INVOKABLE void validate(int grossHits, QStringList errorWords);
-		Q_INVOKABLE int grossHits(void);
-		Q_INVOKABLE int mistakeCount(void);
-		Q_INVOKABLE QStringList errorWords(void);
-		Q_INVOKABLE void generateMistakeText(bool correctMistakes);
-		Q_INVOKABLE QString generatedInputText(void);
-		Q_INVOKABLE QString generatedMistakeText(void);
-		Q_INVOKABLE QString textWithMistakes(void);
+		QString exerciseText(void) override;
+		void setExerciseText(QString text) override;
+		QString inputText(void) override;
+		void setInputText(QString text) override;
+		Q_INVOKABLE void clearMistakes(void) override;
+		Q_INVOKABLE void addMistake(MistakeRecord mistake) override;
+		QList<MistakeRecord> mistakes(void) override;
+		void setMistakes(QList<MistakeRecord> mistakeList) override;
+		Q_INVOKABLE void clearCharacters(void) override;
+		Q_INVOKABLE void addCharacter(CharacterRecord character) override;
+		QList<CharacterRecord> characters(void) override;
+		void setCharacters(QList<CharacterRecord> characterList) override;
+		bool timed(void) override;
+		void setTimed(bool value) override;
+		qreal time(void) override;
+		void setTime(qreal seconds) override;
+		Q_INVOKABLE void validate(void) override;
+		Q_INVOKABLE void validate(int grossHits, QStringList errorWords) override;
+		Q_INVOKABLE int grossHits(void) override;
+		Q_INVOKABLE int mistakeCount(void) override;
+		Q_INVOKABLE QStringList errorWords(void) override;
+		Q_INVOKABLE void generateMistakeText(bool correctMistakes) override;
+		Q_INVOKABLE QString generatedInputText(void) override;
+		Q_INVOKABLE QString generatedMistakeText(void) override;
+		Q_INVOKABLE QString textWithMistakes(void) override;
 
 	private:
 		QList<MistakeRecord> compareLists(QList<QVariant> source, QList<QVariant> target, QVector<CharacterRecord> *recordedCharacters = nullptr, int *hits = nullptr, int *inputPos = nullptr);
@@ -87,15 +86,6 @@ class Q_DECL_EXPORT ExerciseValidator : public QObject
 		QStringList m_errorWords;
 		QString m_generatedInputText;
 		QString m_generatedMistakeText;
-
-	signals:
-		void validated();
-		void exerciseTextChanged(QString text);
-		void inputTextChanged(QString text);
-		void mistakesChanged(QList<MistakeRecord> mistakeList);
-		void charactersChanged(QList<CharacterRecord> characterList);
-		void timedChanged(bool value);
-		void timeChanged(qreal seconds);
 };
 
 #endif // EXERCISEVALIDATOR_H

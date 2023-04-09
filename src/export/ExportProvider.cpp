@@ -32,12 +32,12 @@ ExportProvider::ExportProvider(QObject *parent) :
 	QObject(parent) { }
 
 /*! The ExerciseValidator used to get the input text and mistakes. */
-ExerciseValidator *ExportProvider::validator(void)
+IExerciseValidator *ExportProvider::validator(void)
 {
 	return m_validator;
 }
 
-void ExportProvider::setValidator(ExerciseValidator *validator)
+void ExportProvider::setValidator(IExerciseValidator *validator)
 {
 	m_validator = validator;
 	if(!validator)

@@ -23,7 +23,7 @@
 
 #include <QAbstractTableModel>
 #include <QSize>
-#include "validator/ExerciseValidator.h"
+#include "validator/IExerciseValidator.h"
 #include "global/ISettings.h"
 
 /*!
@@ -39,7 +39,7 @@ class Q_DECL_EXPORT ExportTableModel : public QAbstractTableModel
 		Q_PROPERTY(QString className READ className WRITE setClassName NOTIFY classNameChanged)
 		Q_PROPERTY(QString testNumber READ testNumber WRITE setTestNumber NOTIFY testNumberChanged)
 		Q_PROPERTY(QString grade READ grade WRITE setGrade NOTIFY gradeChanged)
-		Q_PROPERTY(ExerciseValidator *validator READ validator WRITE setValidator NOTIFY validatorChanged)
+		Q_PROPERTY(IExerciseValidator *validator READ validator WRITE setValidator NOTIFY validatorChanged)
 	public:
 		explicit ExportTableModel(QObject *parent = nullptr);
 		int rowCount(const QModelIndex & = QModelIndex()) const override;
@@ -57,8 +57,8 @@ class Q_DECL_EXPORT ExportTableModel : public QAbstractTableModel
 		void setTestNumber(QString number);
 		QString grade(void);
 		void setGrade(QString grade);
-		ExerciseValidator *validator(void);
-		void setValidator(ExerciseValidator *validator);
+		IExerciseValidator *validator(void);
+		void setValidator(IExerciseValidator *validator);
 
 	private:
 		static const QMap<QPair<int, int>, QPair<int, int>> spans;
@@ -67,14 +67,14 @@ class Q_DECL_EXPORT ExportTableModel : public QAbstractTableModel
 		QString m_className;
 		QString m_testNumber;
 		QString m_grade;
-		ExerciseValidator *m_validator = nullptr;
+		IExerciseValidator *m_validator = nullptr;
 
 	signals:
 		void studentNameChanged(QString name);
 		void classNameChanged(QString name);
 		void testNumberChanged(QString number);
 		void gradeChanged(QString grade);
-		void validatorChanged(ExerciseValidator *validator);
+		void validatorChanged(IExerciseValidator *validator);
 };
 
 #endif // EXPORTTABLEMODEL_H

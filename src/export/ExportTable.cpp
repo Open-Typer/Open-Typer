@@ -170,12 +170,12 @@ void ExportTable::setGrade(QString grade)
 }
 
 /*! The ExerciseValidator used to get the typing results. */
-ExerciseValidator *ExportTable::validator(void)
+IExerciseValidator *ExportTable::validator(void)
 {
 	return m_validator;
 }
 
-void ExportTable::setValidator(ExerciseValidator *validator)
+void ExportTable::setValidator(IExerciseValidator *validator)
 {
 	m_validator = validator;
 	emit validatorChanged(validator);

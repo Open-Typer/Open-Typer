@@ -22,7 +22,7 @@
 #define EXPORTTABLE_H
 
 #include <QTableView>
-#include "validator/ExerciseValidator.h"
+#include "validator/IExerciseValidator.h"
 #include "ui/IThemeEngine.h"
 
 /*! \brief The ExportTable class provides a table for typing test results. */
@@ -36,7 +36,7 @@ class Q_DECL_EXPORT ExportTable : public QTableView
 		Q_PROPERTY(QString className READ className WRITE setClassName NOTIFY classNameChanged)
 		Q_PROPERTY(QString testNumber READ testNumber WRITE setTestNumber NOTIFY testNumberChanged)
 		Q_PROPERTY(QString grade READ grade WRITE setGrade NOTIFY gradeChanged)
-		Q_PROPERTY(ExerciseValidator *validator READ validator WRITE setValidator NOTIFY validatorChanged)
+		Q_PROPERTY(IExerciseValidator *validator READ validator WRITE setValidator NOTIFY validatorChanged)
 	public:
 		ExportTable(QWidget *parent = nullptr);
 		void setModel(QAbstractItemModel *model) override;
@@ -52,8 +52,8 @@ class Q_DECL_EXPORT ExportTable : public QTableView
 		void setTestNumber(QString number);
 		QString grade(void);
 		void setGrade(QString grade);
-		ExerciseValidator *validator(void);
-		void setValidator(ExerciseValidator *validator);
+		IExerciseValidator *validator(void);
+		void setValidator(IExerciseValidator *validator);
 
 	protected:
 		int sizeHintForColumn(int column) const override;
@@ -64,7 +64,7 @@ class Q_DECL_EXPORT ExportTable : public QTableView
 		QString m_className;
 		QString m_testNumber;
 		QString m_grade;
-		ExerciseValidator *m_validator = nullptr;
+		IExerciseValidator *m_validator = nullptr;
 
 	signals:
 		void contentWidthChanged(int width);
@@ -73,7 +73,7 @@ class Q_DECL_EXPORT ExportTable : public QTableView
 		void classNameChanged(QString name);
 		void testNumberChanged(QString number);
 		void gradeChanged(QString grade);
-		void validatorChanged(ExerciseValidator *validator);
+		void validatorChanged(IExerciseValidator *validator);
 		void modelChanged();
 };
 

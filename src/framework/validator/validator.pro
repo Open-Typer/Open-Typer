@@ -4,12 +4,13 @@ CONFIG += staticlib
 
 SOURCES += \
     CharacterRecord.cpp \
-    ExerciseValidator.cpp \
     MistakeRecord.cpp \
-    ValidatorModule.cpp
+    ValidatorModule.cpp \
+    internal/ExerciseValidator.cpp
 
 HEADERS += \
     CharacterRecord.h \
-    ExerciseValidator.h \
+    IExerciseValidator.h \
     MistakeRecord.h \
-    ValidatorModule.h
+    ValidatorModule.h \
+    internal/ExerciseValidator.h

@@ -23,8 +23,8 @@
 
 #include <QWidget>
 #include <QTextEdit>
-#include "validator/ExerciseValidator.h"
 #include "ExportTable.h"
+#include "validator/IExerciseValidator.h"
 #include "lessonpack/ConfigParser.h"
 #include "ui/IThemeEngine.h"
 
@@ -33,13 +33,13 @@ class Q_DECL_EXPORT ExportProvider : public QObject
 {
 		Q_OBJECT
 		INJECT(IThemeEngine, themeEngine)
-		Q_PROPERTY(ExerciseValidator *validator READ validator WRITE setValidator NOTIFY validatorChanged)
+		Q_PROPERTY(IExerciseValidator *validator READ validator WRITE setValidator NOTIFY validatorChanged)
 		Q_PROPERTY(QString exportText READ exportText NOTIFY exportTextChanged)
 		Q_PROPERTY(ExportTable *table READ table WRITE setTable NOTIFY tableChanged)
 	public:
 		explicit ExportProvider(QObject *parent = nullptr);
-		ExerciseValidator *validator(void);
-		void setValidator(ExerciseValidator *validator);
+		IExerciseValidator *validator(void);
+		void setValidator(IExerciseValidator *validator);
 		QString exportText(void);
 		ExportTable *table(void);
 		void setTable(ExportTable *table);
@@ -48,12 +48,12 @@ class Q_DECL_EXPORT ExportProvider : public QObject
 		Q_INVOKABLE void printExercise(QString text);
 
 	private:
-		ExerciseValidator *m_validator;
+		IExerciseValidator *m_validator;
 		QString m_exportText;
 		ExportTable *m_table;
 
 	signals:
-		void validatorChanged(ExerciseValidator *validator);
+		void validatorChanged(IExerciseValidator *validator);
 		void exportTextChanged(QString text);
 		void tableChanged(ExportTable *table);
 };
