@@ -22,6 +22,7 @@
 #include <QFontDatabase>
 #include <QFontInfo>
 #include <QApplication>
+#include <QBuffer>
 #ifndef Q_OS_WASM
 #include <QPrinter>
 #include <QPrintPreviewDialog>
@@ -36,7 +37,6 @@
 #endif
 #include "QmlUtils.h"
 #include "ThemeEngine.h"
-#include "lessonpack/ConfigParser.h"
 #include "global/global.h"
 
 /*!
@@ -188,74 +188,6 @@ bool QmlUtils::osMac(void)
 void QmlUtils::reloadMenuBar(void)
 {
 	emit menuBarReloadTriggered();
-}
-
-/*! Prints the exercise text. */
-void QmlUtils::printExercise(int lesson, int sublesson, int exercise, QString text)
-{
-#ifndef Q_OS_WASM
-	// Set up printer
-	QPrinter printer(QPrinter::HighResolution);
-	QPrinter *printerPtr = &printer;
-	QPrintPreviewDialog dialog(&printer);
-	auto dialogPtr = &dialog;
-	QObject::connect(&dialog, &QPrintPreviewDialog::paintRequested, &dialog, [printerPtr, dialogPtr, lesson, sublesson, exercise, text]() {
-		// Print
-		printerPtr->setPageMargins(QMarginsF(25, 25, 15, 25), QPageLayout::Millimeter);
-		QPainter painter;
-		painter.begin(printerPtr);
-		QFont font = globalThemeEngine.font();
-		painter.setFont(font);
-		QTextEdit textEdit; // is there any other way to get rid of line wrap?
-		textEdit.setPlainText(text);
-		textEdit.setLineWrapMode(QTextEdit::NoWrap);
-		QTextDocument *document = textEdit.document()->clone(dialogPtr);
-		QString title = "";
-		if(lesson + sublesson + exercise != 0)
-			title = QString("<u>%1 / %2 / %3</u><br><br>").arg(ConfigParser::lessonTr(lesson), ConfigParser::sublessonName(sublesson), ConfigParser::exerciseTr(exercise));
-		document->setHtml(QString("<body>%1%2</body>").arg(title, text.toHtmlEscaped().replace("\n", "<br>")));
-		font.setPointSize(50);
-		document->adjustSize();
-		document->setDefaultFont(font);
-		document->documentLayout()->setPaintDevice(printerPtr);
-		document->setDefaultStyleSheet("body { color: black; }");
-		document->setPageSize(printerPtr->pageRect(QPrinter::DevicePixel).size());
-		double scale = printerPtr->pageRect(QPrinter::DevicePixel).width() / double(document->size().width());
-		int fontHeight = QFontMetrics(painter.font(), printerPtr).height();
-		QStringList lines = document->toHtml().split("<br>");
-		int relativeLine = 0, page = 0, fromPage = printerPtr->fromPage() - 1, toPage = printerPtr->toPage() - 1;
-		for(int i = 0; i < lines.count(); i++)
-		{
-			int rangeEnd = toPage;
-			if(rangeEnd == -1)
-				rangeEnd = page + 1;
-			if(fontHeight * relativeLine > printerPtr->pageRect(QPrinter::DevicePixel).height())
-			{
-				if(((page + 1 >= fromPage) && (page + 1 <= rangeEnd)) && ((page >= fromPage) && (page <= rangeEnd)))
-					printerPtr->newPage();
-				relativeLine = 0;
-				page++;
-			}
-			document->setHtml(lines[i]);
-			if((page >= fromPage) && (page <= rangeEnd))
-			{
-				painter.resetTransform();
-				painter.scale(scale, scale);
-				painter.translate(0, fontHeight * relativeLine);
-				document->drawContents(&painter);
-			}
-			relativeLine++;
-		}
-		painter.end();
-	});
-	dialog.exec();
-#endif // Q_OS_WASM
-}
-
-/*! Prints the text of a custom exercise. */
-void QmlUtils::printExercise(QString text)
-{
-	printExercise(0, 0, 0, text);
 }
 
 /*! Returns the given message box standard icon. */

@@ -34,6 +34,7 @@ import OpenTyper.Utils 1.0
 import OpenTyper.Keyboard 1.0
 import OpenTyper.Validator 1.0
 import OpenTyper.Translations 1.0
+import OpenTyper.Export 1.0
 import "dialogs"
 import "core"
 
@@ -181,6 +182,10 @@ ApplicationWindow {
 
 	ExerciseTimer {
 		id: exerciseTimer
+	}
+
+	ExportProvider {
+		id: exportProvider
 	}
 
 	Timer {
@@ -355,9 +360,9 @@ ApplicationWindow {
 					visible: !QmlUtils.osWasm();
 					onClicked: {
 						if(customExerciseLoaded)
-							QmlUtils.printExercise(displayExercise);
+							exportProvider.printExercise(displayExercise);
 						else
-							QmlUtils.printExercise(currentLesson, currentAbsoluteSublesson, currentExercise, displayExercise);
+							exportProvider.printExercise(currentLesson, currentAbsoluteSublesson, currentExercise, displayExercise);
 					}
 				}
 				AddonButtonRepeater { model: AddonApi.mainButtons }

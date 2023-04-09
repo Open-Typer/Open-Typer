@@ -25,6 +25,7 @@
 #include <QTextEdit>
 #include "validator/ExerciseValidator.h"
 #include "ExportTable.h"
+#include "lessonpack/ConfigParser.h"
 
 /*! \brief The ExportProvider class provides methods for the export dialog. */
 class Q_DECL_EXPORT ExportProvider : public QObject
@@ -41,6 +42,8 @@ class Q_DECL_EXPORT ExportProvider : public QObject
 		ExportTable *table(void);
 		void setTable(ExportTable *table);
 		Q_INVOKABLE void print(void);
+		Q_INVOKABLE void printExercise(int lesson, int sublesson, int exercise, QString text);
+		Q_INVOKABLE void printExercise(QString text);
 
 	private:
 		ExerciseValidator *m_validator;
