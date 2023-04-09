@@ -20,7 +20,7 @@
 
 #include <QQmlEngine>
 #include "ExportModule.h"
-#include "ExportProvider.h"
+#include "internal/ExportProvider.h"
 
 std::string ExportModule::moduleName() const
 {

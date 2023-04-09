@@ -22,7 +22,7 @@
 #define EXPORTMODULE_H
 
 #include "global/modularity/IModuleSetup.h"
-#include "ExportTable.h"
+#include "internal/ExportTable.h"
 
 class ExportModule : public IModuleSetup
 {
