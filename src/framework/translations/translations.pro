@@ -3,9 +3,10 @@ QT += core qml
 CONFIG += staticlib
 
 SOURCES += \
-    LanguageManager.cpp \
-    TranslationsModule.cpp
+    TranslationsModule.cpp \
+    internal/LanguageManager.cpp
 
 HEADERS += \
-    LanguageManager.h \
-    TranslationsModule.h
+    ILanguageManager.h \
+    TranslationsModule.h \
+    internal/LanguageManager.h

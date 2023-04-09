@@ -28,6 +28,7 @@
 #include <QTranslator>
 #include <QCoreApplication>
 #include <QLibraryInfo>
+#include "../ILanguageManager.h"
 
 extern QTranslator *translator_app;
 extern QTranslator *translator_libcore;
@@ -42,32 +43,27 @@ extern QTranslator *translator_qt;
  *
  * \see LanguageList
  */
-class Q_DECL_EXPORT LanguageManager : public QObject
+class Q_DECL_EXPORT LanguageManager : public ILanguageManager
 {
 		Q_OBJECT
 		Q_PROPERTY(QString languageStr READ languageStr NOTIFY languageStrChanged)
 		using LanguageCountry = std::pair<QLocale::Language, QLocale::Country>;
 
 	public:
-		LanguageManager(QObject *parent = nullptr);
+		static std::shared_ptr<LanguageManager> instance();
 		void init(void);
-		Q_INVOKABLE void setLanguage(int index);
-		Q_INVOKABLE QStringList getBoxItems();
-		QLocale getLocale(int index);
+		Q_INVOKABLE void setLanguage(int index) override;
+		Q_INVOKABLE QStringList getBoxItems() override;
+		QLocale getLocale(int index) override;
 
-		QString languageStr(void);
+		QString languageStr(void) override;
 
 	private:
+		static std::shared_ptr<LanguageManager> m_instance;
 		static const QList<LanguageCountry> supportedLanguagesList;
 		static const QString boxLangItemTemplate;
 		bool initComplete = false;
 		int m_index = -1;
-
-	signals:
-		void languageChanged(void);
-		void languageStrChanged();
 };
-
-extern LanguageManager Q_DECL_EXPORT globalLanguageManager;
 
 #endif // LANGUAGEMANAGER_H

@@ -20,23 +20,23 @@
  */
 
 #include "LanguageManager.h"
-#include "app/AppMenuBar.h"
 
 QTranslator *translator_app = nullptr;
 QTranslator *translator_libcore = nullptr;
 QTranslator *translator_qt = nullptr;
-LanguageManager globalLanguageManager;
 
-/*! Constructs LanguageManager. */
-LanguageManager::LanguageManager(QObject *parent) :
-	QObject(parent)
+std::shared_ptr<LanguageManager> LanguageManager::m_instance = std::make_shared<LanguageManager>();
+
+/*! Returns the static instance of LanguageManager. */
+std::shared_ptr<LanguageManager> LanguageManager::instance()
 {
-	connect(this, &LanguageManager::languageChanged, this, &LanguageManager::languageStrChanged);
+	return m_instance;
 }
 
 /*! Initializes the language manager. */
 void LanguageManager::init(void)
 {
+	connect(this, &LanguageManager::languageChanged, this, &LanguageManager::languageStrChanged);
 	if(initComplete)
 		return;
 	initComplete = true;
@@ -69,7 +69,6 @@ void LanguageManager::setLanguage(int index)
 #else
 	std::ignore = translator_qt->load(targetLocale.language(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 #endif
-	globalMenuBar.updateMenus();
 	emit languageChanged();
 }
 

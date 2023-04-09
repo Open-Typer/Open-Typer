@@ -23,7 +23,6 @@
 #include "QmlUtils.h"
 #include "ThemeEngine.h"
 #include "menubar/AppMenuModel.h"
-#include "translations/LanguageManager.h"
 #include "internal/UiEngine.h"
 
 std::string UiModule::moduleName() const
@@ -68,7 +67,7 @@ void UiModule::registerUiTypes()
 {
 	qmlRegisterSingletonType<QmlUtils>("OpenTyper.Ui", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		QmlUtils *qmlUtils = new QmlUtils;
-		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
+		QObject::connect(languageManager().get(), &ILanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
 		QObject::connect(&globalThemeEngine, &ThemeEngine::themeChanged, qmlUtils, &QmlUtils::reloadMenuBar);
 		return qmlUtils;
 	});

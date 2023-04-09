@@ -29,7 +29,7 @@
 #endif
 #include "App.h"
 #include "internal/SplashScreen.h"
-#include "translations/LanguageManager.h"
+#include "translations/internal/LanguageManager.h"
 #include "global/global.h"
 #include "global/GlobalModule.h"
 #include "ui/internal/UiEngine.h"
@@ -86,8 +86,8 @@ int App::run(int argc, char **argv)
 		QQmlApplicationEngine engine;
 		for(IModuleSetup *module : m_modules)
 			module->setRootContextProperties(engine.rootContext());
-		engine.rootContext()->setContextProperty("rootItem", &globalLanguageManager);
-		QObject::connect(&globalLanguageManager, &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
+		engine.rootContext()->setContextProperty("rootItem", LanguageManager::instance().get());
+		QObject::connect(LanguageManager::instance().get(), &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
 		UiEngine::instance()->setQmlEngine(&engine);
 		UiEngine::instance()->addSourceImportPath(":/qml");
 		engine.load("qrc:/qml/MainWindow.qml");

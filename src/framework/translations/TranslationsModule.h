@@ -31,6 +31,7 @@ class TranslationsModule : public IModuleSetup
 	public:
 		std::string moduleName() const override;
 
+		void registerExports() override;
 		void initSettings() override;
 		void registerUiTypes() override;
 

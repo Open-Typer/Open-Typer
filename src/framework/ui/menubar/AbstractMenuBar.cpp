@@ -31,6 +31,7 @@ AbstractMenuBar::AbstractMenuBar(QObject *parent) :
 /*! Run this method to create menus. */
 void AbstractMenuBar::init()
 {
+	connect(languageManager().get(), &ILanguageManager::languageChanged, this, &AbstractMenuBar::updateMenus);
 	createMenus();
 	updateMenus();
 }

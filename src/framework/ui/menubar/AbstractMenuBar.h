@@ -24,11 +24,13 @@
 #include <QObject>
 #include <QQmlListProperty>
 #include "AppMenuModel.h"
+#include "translations/ILanguageManager.h"
 
 /*! \brief The AbstractMenuBar class provides a model for a menu bar. */
 class Q_DECL_EXPORT AbstractMenuBar : public QObject
 {
 		Q_OBJECT
+		INJECT(ILanguageManager, languageManager)
 		Q_PROPERTY(QQmlListProperty<AppMenuModel> menus READ menus NOTIFY menusChanged)
 
 	public:

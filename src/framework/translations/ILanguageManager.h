@@ -1,5 +1,5 @@
 /*
- * UiModule.h
+ * ILanguageManager.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,23 +18,27 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UIMODULE_H
-#define UIMODULE_H
+#ifndef ILANGUAGEMANAGER_H
+#define ILANGUAGEMANAGER_H
 
-#include "global/modularity/IModuleSetup.h"
-#include "global/ISettings.h"
-#include "translations/ILanguageManager.h"
+#include <QLocale>
+#include "global/modularity/ioc.h"
 
-class UiModule : public IModuleSetup
+class ILanguageManager : public QObject, MODULE_EXPORT_INTERFACE
 {
-		INJECT(ISettings, settings)
-		INJECT(ILanguageManager, languageManager)
+		Q_OBJECT
 	public:
-		std::string moduleName() const override;
+		virtual ~ILanguageManager() { }
 
-		void registerExports() override;
-		void initSettings() override;
-		void registerUiTypes() override;
+		virtual void setLanguage(int index) = 0;
+		virtual QStringList getBoxItems() = 0;
+		virtual QLocale getLocale(int index) = 0;
+
+		virtual QString languageStr(void) = 0;
+
+	signals:
+		void languageChanged(void);
+		void languageStrChanged();
 };
 
-#endif // UIMODULE_H
+#endif // ILANGUAGEMANAGER_H
