@@ -46,18 +46,6 @@ QString FileUtils::mainSettingsLocation(void)
 	return configLocation() + "/config.ini";
 }
 
-/*! Returns the path to the addon configuration JSON file. */
-QString FileUtils::addonConfigLocation(void)
-{
-	return configLocation() + "/addons.json";
-}
-
-/*! Returns the path to the directory where installed addons are stored. */
-QString FileUtils::addonDirectory(void)
-{
-	return configLocation() + "/addons";
-}
-
 /*! Returns the path to the class grading configuration JSON file. */
 QString FileUtils::classConfigLocation()
 {

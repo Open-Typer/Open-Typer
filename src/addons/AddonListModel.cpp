@@ -53,13 +53,13 @@ void AddonListModel::load(QString filter)
 			itemModel->setName(model->name());
 			itemModel->setDescription(model->description());
 			itemModel->setVersion(model->version());
-			itemModel->setIconUrl("file://" + fileUtils()->addonDirectory() + "/" + model->id() + "/" + model->iconFileName());
+			itemModel->setIconUrl("file://" + AddonManager::addonDirectory() + "/" + model->id() + "/" + model->iconFileName());
 			QStringList downloadUrls;
-			QDir addonDir(fileUtils()->addonDirectory() + "/" + model->id());
+			QDir addonDir(AddonManager::addonDirectory() + "/" + model->id());
 			QStringList addonFiles = addonDir.entryList(QDir::Files);
 			addonFiles.removeAll(model->iconFileName());
 			for(int i = 0; i < addonFiles.length(); i++)
-				downloadUrls.append("file://" + fileUtils()->addonDirectory() + "/" + model->id() + "/" + addonFiles[i]);
+				downloadUrls.append("file://" + AddonManager::addonDirectory() + "/" + model->id() + "/" + addonFiles[i]);
 			itemModel->setDownloadUrls(downloadUrls);
 			// Append i to the name to avoid duplicate keys
 			localItemMap.insert(itemModel->name() + QString::number(i), itemModel);

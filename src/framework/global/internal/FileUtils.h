@@ -34,8 +34,6 @@ class Q_DECL_EXPORT FileUtils : public QObject, public IFileUtils
 		static std::shared_ptr<FileUtils> instance();
 		Q_INVOKABLE QString configLocation(void) override;
 		Q_INVOKABLE QString mainSettingsLocation(void) override;
-		Q_INVOKABLE QString addonConfigLocation(void) override;
-		Q_INVOKABLE QString addonDirectory(void) override;
 		Q_INVOKABLE QString classConfigLocation(void) override;
 		Q_INVOKABLE QString fileName(QString path) override;
 

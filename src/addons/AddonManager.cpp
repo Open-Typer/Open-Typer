@@ -47,7 +47,7 @@ AddonManager::AddonManager(QObject *parent) :
 /*! Initializes the AddonManager instance. */
 void AddonManager::init()
 {
-	QFile jsonFile(fileUtils()->addonConfigLocation());
+	QFile jsonFile(configLocation());
 	if(jsonFile.open(QFile::ReadOnly | QFile::Text))
 	{
 		document = QJsonDocument::fromJson(jsonFile.readAll());
@@ -71,6 +71,12 @@ void AddonManager::init()
 		}
 		emit addonsChanged();
 	}
+}
+
+/*! Returns the path to the directory where installed addons are stored. */
+QString AddonManager::addonDirectory()
+{
+	return fileUtils()->configLocation() + "/addons";
 }
 
 /*! List of installed addons (and addons that are currently being installed). */
@@ -122,7 +128,7 @@ void AddonManager::uninstallAddon(const QString &id)
 		return;
 	if(!model->installed())
 		return;
-	QDir addonDir(fileUtils()->addonDirectory() + "/" + model->id());
+	QDir addonDir(addonDirectory() + "/" + model->id());
 	addonDir.removeRecursively();
 	m_addons.removeAll(model);
 	emit addonsChanged();
@@ -131,7 +137,7 @@ void AddonManager::uninstallAddon(const QString &id)
 	QJsonObject obj = document.object();
 	obj.remove(id);
 	document.setObject(obj);
-	QFile jsonFile(fileUtils()->addonConfigLocation());
+	QFile jsonFile(configLocation());
 	if(jsonFile.open(QFile::WriteOnly | QFile::Text))
 		jsonFile.write(document.toJson(QJsonDocument::Compact));
 }
@@ -177,12 +183,18 @@ QList<QPluginLoader *> AddonManager::loadAddons(const QString &path)
 	return loaderList;
 }
 
+/*! Returns the path to the addon configuration JSON file. */
+QString AddonManager::configLocation(void)
+{
+	return fileUtils()->configLocation() + "/addons.json";
+}
+
 /*! Loads all installed addons. */
 void AddonManager::loadAddons(void)
 {
 	pluginLoaders.clear();
 	for(int i = 0; i < m_addons.length(); i++)
-		pluginLoaders.insert(m_addons[i]->id(), loadAddons(fileUtils()->addonDirectory() + "/" + m_addons[i]->id()));
+		pluginLoaders.insert(m_addons[i]->id(), loadAddons(addonDirectory() + "/" + m_addons[i]->id()));
 }
 
 /*! Unloads all addons. */
@@ -222,7 +234,7 @@ void AddonManager::saveAddon(AddonModel *model)
 	QJsonObject obj = document.object();
 	obj[model->id()] = addonObj;
 	document.setObject(obj);
-	QFile jsonFile(fileUtils()->addonConfigLocation());
+	QFile jsonFile(configLocation());
 	if(jsonFile.open(QFile::WriteOnly | QFile::Text))
 		jsonFile.write(document.toJson(QJsonDocument::Compact));
 }

@@ -46,6 +46,7 @@ class Q_DECL_EXPORT AddonManager : public QObject
 		explicit AddonManager(QObject *parent = nullptr);
 		void init();
 
+		static QString addonDirectory();
 		QList<AddonModel *> addons(void);
 
 		Q_INVOKABLE AddonModel *findAddon(const QString &addonId);
@@ -55,6 +56,7 @@ class Q_DECL_EXPORT AddonManager : public QObject
 		Q_INVOKABLE void unloadAddons(void);
 
 	private:
+		static QString configLocation();
 		QList<QPluginLoader *> loadAddons(const QString &path);
 		void unloadAddon(const QString &id);
 		void saveAddon(AddonModel *model);
