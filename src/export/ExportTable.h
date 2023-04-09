@@ -23,11 +23,13 @@
 
 #include <QTableView>
 #include "validator/ExerciseValidator.h"
+#include "ui/IThemeEngine.h"
 
 /*! \brief The ExportTable class provides a table for typing test results. */
 class Q_DECL_EXPORT ExportTable : public QTableView
 {
 		Q_OBJECT
+		INJECT(IThemeEngine, themeEngine)
 		Q_PROPERTY(int contentWidth READ contentWidth NOTIFY contentWidthChanged)
 		Q_PROPERTY(int contentHeight READ contentHeight NOTIFY contentHeightChanged)
 		Q_PROPERTY(QString studentName READ studentName WRITE setStudentName NOTIFY studentNameChanged)

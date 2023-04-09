@@ -26,7 +26,6 @@
 #include <QAbstractTextDocumentLayout>
 #endif // Q_OS_WASM
 #include "ExportProvider.h"
-#include "ui/ThemeEngine.h"
 
 /*! Constructs ExportProvider. */
 ExportProvider::ExportProvider(QObject *parent) :
@@ -120,7 +119,7 @@ void ExportProvider::print(void)
 		printerPtr->setPageMargins(QMarginsF(25, 25, 15, 25), QPageLayout::Millimeter);
 		QPainter painter;
 		painter.begin(printerPtr);
-		QFont font = globalThemeEngine.font();
+		QFont font = themeEngine()->font();
 		font.setPointSize(12);
 		painter.setFont(font);
 		QTextEdit *textEdit = new QTextEdit;
@@ -199,7 +198,7 @@ void ExportProvider::printExercise(int lesson, int sublesson, int exercise, QStr
 		printerPtr->setPageMargins(QMarginsF(25, 25, 15, 25), QPageLayout::Millimeter);
 		QPainter painter;
 		painter.begin(printerPtr);
-		QFont font = globalThemeEngine.font();
+		QFont font = themeEngine()->font();
 		painter.setFont(font);
 		QTextEdit textEdit; // is there any other way to get rid of line wrap?
 		textEdit.setPlainText(text);

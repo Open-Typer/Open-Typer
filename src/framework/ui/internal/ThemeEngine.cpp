@@ -22,9 +22,7 @@
 #include <QApplication>
 #include <QPalette>
 #include "ThemeEngine.h"
-#include "internal/QmlUtils.h"
-
-ThemeEngine globalThemeEngine;
+#include "QmlUtils.h"
 
 static const QString module = "ui";
 static const ISettings::Key FONT_FAMILY(module, "fontFamily");
@@ -52,9 +50,10 @@ static const ISettings::Key PANEL_B(module, "panelColorB");
 static const ISettings::Key ACCENT_ID(module, "accentColorId");
 static const ISettings::Key APP_THEME(module, "appTheme");
 
+std::shared_ptr<ThemeEngine> ThemeEngine::m_instance = std::make_shared<ThemeEngine>();
+
 /*! Constructs ThemeEngine. */
-ThemeEngine::ThemeEngine(QObject *parent) :
-	QObject(parent)
+ThemeEngine::ThemeEngine()
 {
 	// Connections
 	connect(this, &ThemeEngine::fontFamilyChanged, this, &ThemeEngine::fontChanged);
@@ -65,6 +64,12 @@ ThemeEngine::ThemeEngine(QObject *parent) :
 	connect(this, &ThemeEngine::paperColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::panelColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::currentAccentColorChanged);
+}
+
+/*! Returns the static instance of ThemeEngine. */
+std::shared_ptr<ThemeEngine> ThemeEngine::instance()
+{
+	return m_instance;
 }
 
 /*!

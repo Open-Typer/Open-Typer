@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include "ui/menubar/AbstractMenuBar.h"
+#include "ui/IThemeEngine.h"
 
 /*!
  * \brief The AppMenuBar class provides a model for the application menu bar.
@@ -33,6 +34,7 @@
 class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 {
 		Q_OBJECT
+		INJECT(IThemeEngine, themeEngine)
 		Q_PROPERTY(AppMenuItem *openAction READ openAction NOTIFY openActionChanged)
 		Q_PROPERTY(AppMenuItem *printAction READ printAction NOTIFY printActionChanged)
 		Q_PROPERTY(AppMenuItem *typingTestAction READ typingTestAction NOTIFY typingTestActionChanged)

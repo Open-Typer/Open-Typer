@@ -21,7 +21,7 @@
 #include <QQmlEngine>
 #include "UiModule.h"
 #include "internal/QmlUtils.h"
-#include "ThemeEngine.h"
+#include "internal/ThemeEngine.h"
 #include "menubar/AppMenuModel.h"
 #include "internal/UiEngine.h"
 
@@ -33,6 +33,7 @@ std::string UiModule::moduleName() const
 void UiModule::registerExports()
 {
 	modularity::ioc()->registerExport<IUiEngine>(UiEngine::instance());
+	modularity::ioc()->registerExport<IThemeEngine>(ThemeEngine::instance());
 }
 
 void UiModule::initSettings()
@@ -68,12 +69,12 @@ void UiModule::registerUiTypes()
 	qmlRegisterSingletonType<QmlUtils>("OpenTyper.Ui", 1, 0, "QmlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		QmlUtils *qmlUtils = new QmlUtils;
 		QObject::connect(languageManager().get(), &ILanguageManager::languageChanged, qmlUtils, &QmlUtils::reloadMenuBar);
-		QObject::connect(&globalThemeEngine, &ThemeEngine::themeChanged, qmlUtils, &QmlUtils::reloadMenuBar);
+		QObject::connect(ThemeEngine::instance().get(), &ThemeEngine::themeChanged, qmlUtils, &QmlUtils::reloadMenuBar);
 		return qmlUtils;
 	});
-	QQmlEngine::setObjectOwnership(&globalThemeEngine, QQmlEngine::CppOwnership);
+	QQmlEngine::setObjectOwnership(ThemeEngine::instance().get(), QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<ThemeEngine>("OpenTyper.Ui", 1, 0, "ThemeEngine", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalThemeEngine;
+		return ThemeEngine::instance().get();
 	});
 	qmlRegisterType<AppMenuModel>("OpenTyper.Ui", 1, 0, "AppMenuModel");
 	qmlRegisterType<AppMenuItem>("OpenTyper.Ui", 1, 0, "AppMenuItem");
@@ -82,6 +83,6 @@ void UiModule::registerUiTypes()
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	qmlRegisterModule("QtGraphicalEffects", 1, 0);
 #endif
-	QObject::connect(settings().get(), &ISettings::discarded, &globalThemeEngine, &ThemeEngine::themeChanged);
-	QObject::connect(settings().get(), &ISettings::discarded, &globalThemeEngine, &ThemeEngine::panelColorChanged);
+	QObject::connect(settings().get(), &ISettings::discarded, ThemeEngine::instance().get(), &ThemeEngine::themeChanged);
+	QObject::connect(settings().get(), &ISettings::discarded, ThemeEngine::instance().get(), &ThemeEngine::panelColorChanged);
 }

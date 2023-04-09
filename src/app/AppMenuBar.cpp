@@ -22,7 +22,6 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include "AppMenuBar.h"
-#include "ui/ThemeEngine.h"
 
 AppMenuBar globalMenuBar;
 
@@ -48,15 +47,15 @@ void AppMenuBar::createMenus(void)
 
 	// View
 	darkThemeAction.setCheckable(true);
-	darkThemeAction.setChecked(globalThemeEngine.theme() == ThemeEngine::Theme::DarkTheme);
+	darkThemeAction.setChecked(themeEngine()->theme() == IThemeEngine::Theme::DarkTheme);
 	connect(&darkThemeAction, &AppMenuItem::checkedChanged, [this](bool checked) {
 		if(blockDarkThemeActionConnection)
 			return;
-		globalThemeEngine.setTheme(checked ? ThemeEngine::Theme::DarkTheme : ThemeEngine::Theme::LightTheme);
+		themeEngine()->setTheme(checked ? IThemeEngine::Theme::DarkTheme : IThemeEngine::Theme::LightTheme);
 	});
-	connect(&globalThemeEngine, &ThemeEngine::themeChanged, [this]() {
+	connect(themeEngine().get(), &IThemeEngine::themeChanged, [this]() {
 		blockDarkThemeActionConnection = true;
-		darkThemeAction.setChecked(globalThemeEngine.theme() == ThemeEngine::Theme::DarkTheme);
+		darkThemeAction.setChecked(themeEngine()->theme() == IThemeEngine::Theme::DarkTheme);
 		blockDarkThemeActionConnection = false;
 	});
 	uiMenu.addItem(&darkThemeAction);

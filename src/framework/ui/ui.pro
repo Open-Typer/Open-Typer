@@ -11,19 +11,20 @@ linux {
 }
 
 SOURCES += \
-    ThemeEngine.cpp \
     UiModule.cpp \
     internal/QmlUtils.cpp \
+    internal/ThemeEngine.cpp \
     internal/UiEngine.cpp \
     menubar/AbstractMenuBar.cpp \
     menubar/AppMenuItem.cpp \
     menubar/AppMenuModel.cpp
 
 HEADERS += \
+    IThemeEngine.h \
     IUiEngine.h \
-    ThemeEngine.h \
     UiModule.h \
     internal/QmlUtils.h \
+    internal/ThemeEngine.h \
     internal/UiEngine.h \
     menubar/AbstractMenuBar.h \
     menubar/AppMenuItem.h \

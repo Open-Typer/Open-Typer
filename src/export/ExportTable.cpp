@@ -22,7 +22,6 @@
 #include <QLabel>
 #include "ExportTable.h"
 #include "ExportTableModel.h"
-#include "ui/ThemeEngine.h"
 
 /*! Constructs ExportTable. */
 ExportTable::ExportTable(QWidget *parent) :
@@ -96,7 +95,7 @@ void ExportTable::updateStyle(bool forceLight)
 	if(forceLight)
 		dark = false;
 	else
-		dark = globalThemeEngine.theme() == ThemeEngine::Theme::DarkTheme;
+		dark = themeEngine()->theme() == IThemeEngine::Theme::DarkTheme;
 	QString style;
 	style += "QWidget { background-color: transparent; border: none; color: %1; }";
 	style += "QTableView::item { border: 1px solid %1; padding: 5px; }";
