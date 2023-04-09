@@ -5,18 +5,18 @@ CONFIG += staticlib
 QML_IMPORT_PATH += qml
 
 SOURCES += \
-    Key.cpp \
-    KeyboardLayout.cpp \
     KeyboardModule.cpp \
-    KeyboardUtils.cpp \
-    QmlKeyboardHandler.cpp
+    internal/Key.cpp \
+    internal/KeyboardLayout.cpp \
+    internal/KeyboardUtils.cpp \
+    internal/QmlKeyboardHandler.cpp
 
 HEADERS += \
-    Key.h \
-    KeyboardLayout.h \
     KeyboardModule.h \
-    KeyboardUtils.h \
-    QmlKeyboardHandler.h
+    internal/Key.h \
+    internal/KeyboardLayout.h \
+    internal/KeyboardUtils.h \
+    internal/QmlKeyboardHandler.h
 
 # Third party
 include(../../../3rdparty/xkeyboard-config/xkeyboard-config.pri)

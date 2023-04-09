@@ -19,8 +19,8 @@
  */
 
 #include "KeyboardModule.h"
-#include "KeyboardUtils.h"
-#include "KeyboardLayout.h"
+#include "internal/KeyboardUtils.h"
+#include "internal/KeyboardLayout.h"
 #include "global/ISettings.h"
 
 std::string KeyboardModule::moduleName() const
