@@ -5,14 +5,14 @@ CONFIG += staticlib
 QML_IMPORT_PATH += qml
 
 SOURCES += \
-    HistoryEntry.cpp \
     HistoryModule.cpp \
-    HistoryParser.cpp
+    internal/HistoryEntry.cpp \
+    internal/HistoryParser.cpp
 
 HEADERS += \
-    HistoryEntry.h \
     HistoryModule.h \
-    HistoryParser.h
+    internal/HistoryEntry.h \
+    internal/HistoryParser.h
 
 RESOURCES += \
         history.qrc

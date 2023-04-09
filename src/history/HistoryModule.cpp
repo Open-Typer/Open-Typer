@@ -20,7 +20,7 @@
 
 #include <QQmlEngine>
 #include "HistoryModule.h"
-#include "HistoryParser.h"
+#include "internal/HistoryParser.h"
 
 std::string HistoryModule::moduleName() const
 {
