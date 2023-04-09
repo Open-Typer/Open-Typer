@@ -21,6 +21,7 @@
 #include <QQmlEngine>
 #include "GradesModule.h"
 #include "ClassManager.h"
+#include "internal/GradeCalculator.h"
 #include "global/ISettings.h"
 
 std::string GradesModule::moduleName() const
@@ -52,6 +53,7 @@ void GradesModule::registerUiTypes()
 		return &globalClassManager;
 	});
 	qmlRegisterType<Class>("OpenTyper.Grades", 1, 0, "Class");
+	qmlRegisterType<GradeCalculator>("OpenTyper.Grades", 1, 0, "GradeCalculator");
 	qRegisterMetaType<ClassManager::GradingMethod>();
 	qRegisterMetaType<QMap<int, int>>();
 }

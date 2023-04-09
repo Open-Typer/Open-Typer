@@ -52,7 +52,14 @@ Rectangle {
 	}
 
 	function updateGrade() {
-		validator.targetHitsPerMinute = ClassManager.targetHitsPerMinute(classComboBox.currentIndex - 1);
+		if(validator == null)
+			return;
+		gradeCalc.validator = validator;
+		gradeCalc.targetHitsPerMinute = ClassManager.targetHitsPerMinute(classComboBox.currentIndex - 1);
+	}
+
+	GradeCalculator {
+		id: gradeCalc
 	}
 
 	ColumnLayout {
@@ -176,7 +183,7 @@ Rectangle {
 				font.pointSize: fontPointSize
 			}
 			Label {
-				text: validator == null ? "" : validator.grade
+				text: validator == null ? "" : gradeCalc.grade
 				font.pointSize: fontPointSize
 			}
 		}
