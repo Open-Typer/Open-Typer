@@ -54,8 +54,16 @@ ColumnLayout {
 	id: root
 	spacing: keySpacing
 
-	function loadLayout() {
-		layout.xkbLayout = BuiltInPacks.keyboardLayoutXkb(BuiltInPacks.keyboardLayoutForPack(Settings.getValue("app", "lessonPack")));
+	QtObject {
+		id: priv
+		property string layoutName: ""
+		property string layoutVariant: ""
+	}
+
+	function loadLayout(l) {
+		priv.layoutName = l[0];
+		priv.layoutVariant = l[1];
+		layout.load();
 	}
 
 	function findKeyInRow(key, rowRepeater) {
@@ -183,6 +191,10 @@ ColumnLayout {
 		id: layout
 		layoutId: xkbLayout[0]
 		variant: xkbLayout[1]
+
+		function load() {
+			xkbLayout = [priv.layoutName, priv.layoutVariant];
+		}
 	}
 
 	ColumnLayout {

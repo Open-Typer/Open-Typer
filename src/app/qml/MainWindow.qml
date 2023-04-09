@@ -246,7 +246,7 @@ ApplicationWindow {
 		target: QmlUtils
 		onScreenKeyboardChanged: {
 			if(layoutChanged)
-				keyboard.loadLayout();
+				keyboard.loadLayout(getKeyboardLayout());
 		}
 	}
 
@@ -645,7 +645,7 @@ ApplicationWindow {
 		// Custom pack
 		customPack = Settings.getValue("app", "customLessonPack");
 		// Load on screen keyboard layout
-		keyboard.loadLayout();
+		keyboard.loadLayout(getKeyboardLayout());
 		// Load the pack and start
 		if(packChanged)
 		{
@@ -1358,6 +1358,10 @@ ApplicationWindow {
 				keyboard.highlightKey(futureEvent);
 			}
 		}
+	}
+
+	function getKeyboardLayout() {
+		return BuiltInPacks.keyboardLayoutXkb(BuiltInPacks.keyboardLayoutForPack(Settings.getValue("app", "lessonPack")));
 	}
 
 	Component.onCompleted: {
