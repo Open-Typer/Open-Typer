@@ -54,9 +54,9 @@ void AddonsModule::registerUiTypes()
 	qmlRegisterType<AddonListModel>("OpenTyper.Addons", 1, 0, "AddonListModel");
 	qmlRegisterType<AddonModel>("OpenTyper.Addons", 1, 0, "AddonModel");
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	qmlRegisterUncreatableMetaObject(AddonButton::staticMetaObject, "OpenTyper.Addons", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
+	qmlRegisterUncreatableMetaObject(IAddonButton::staticMetaObject, "OpenTyper.Addons", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
 #else
-	qmlRegisterUncreatableType<AddonButton>("OpenTyper.Addons", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
+	qmlRegisterUncreatableType<IAddonButton>("OpenTyper.Addons", 1, 0, "AddonButton", "Please use AddonApi to create buttons");
 #endif
 	qRegisterMetaType<QList<AddonButton *>>();
 }
