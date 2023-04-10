@@ -9,3 +9,7 @@ LIBS += \
     -luicomponents \
     -lutils \
     -lvalidator
+
+!wasm {
+    LIBS += -lnetwork
+}

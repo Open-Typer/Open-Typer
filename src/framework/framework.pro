@@ -9,3 +9,7 @@ SUBDIRS += \
     uicomponents \
     utils \
     validator
+
+!wasm {
+    SUBDIRS += network
+}

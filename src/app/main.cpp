@@ -30,6 +30,7 @@
 #include "validator/ValidatorModule.h"
 #ifndef Q_OS_WASM
 #include "addons/AddonsModule.h"
+#include "network/NetworkModule.h"
 #endif
 #include "export/ExportModule.h"
 #include "grades/GradesModule.h"
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
 	app.addModule(new AppModule);
 #ifndef Q_OS_WASM
 	app.addModule(new AddonsModule);
+	app.addModule(new NetworkModule);
 #endif
 	app.addModule(new ExportModule);
 	app.addModule(new GradesModule);

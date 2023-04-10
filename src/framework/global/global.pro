@@ -4,7 +4,6 @@ CONFIG += staticlib
 
 SOURCES += \
     GlobalModule.cpp \
-    global.cpp \
     internal/FileUtils.cpp \
     internal/Settings.cpp \
     internal/StringUtils.cpp

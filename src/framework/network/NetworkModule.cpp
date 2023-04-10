@@ -1,5 +1,5 @@
 /*
- * global.cpp
+ * NetworkModule.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,31 +18,15 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QEventLoop>
-#include <QTimer>
-#include <QDnsLookup>
-#include "global.h"
+#include "NetworkModule.h"
+#include "internal/NetUtils.h"
 
-bool internetConnected(void)
+std::string NetworkModule::moduleName() const
 {
-	QTimer timer;
-	timer.setInterval(3000);
-	timer.setSingleShot(true);
-	QEventLoop eventLoop;
-	QObject::connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
-	QDnsLookup lookup;
-	QObject::connect(&lookup, &QDnsLookup::finished, &eventLoop, &QEventLoop::quit);
-	lookup.setType(QDnsLookup::A);
-	lookup.setName("dns.google.com");
-	lookup.lookup();
-	timer.start();
-	eventLoop.exec();
-	if(timer.remainingTime() == 0)
-	{
-		lookup.abort();
-		return false;
-	}
-	if(lookup.error() != QDnsLookup::NoError)
-		return false;
-	return true;
+	return "network";
+}
+
+void NetworkModule::registerExports()
+{
+	modularity::ioc()->registerExport<INetUtils>(NetUtils::instance());
 }

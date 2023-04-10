@@ -226,7 +226,7 @@ void AddonManager::unloadAddon(const QString &id)
 void AddonManager::getAddonUpdates(void)
 {
 	// TODO: Add an option to disable addon updates
-	if(!internetConnected())
+	if(!netUtils()->internetConnected())
 		return;
 	// Get installed addons
 	updateListModel.setLocalAddons(true);

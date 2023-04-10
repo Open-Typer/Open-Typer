@@ -1,5 +1,5 @@
 /*
- * global.h
+ * NetUtils.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,11 +18,20 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#ifndef NETUTILS_H
+#define NETUTILS_H
 
-#include <QObject>
+#include "INetUtils.h"
 
-static int const EXIT_CODE_REBOOT = -123456789;
+/*! \brief The NetUtils class provides network-related methods. */
+class NetUtils : public INetUtils
+{
+	public:
+		static std::shared_ptr<NetUtils> instance();
+		bool internetConnected(void) override;
 
-#endif // GLOBAL_H
+	private:
+		static std::shared_ptr<NetUtils> m_instance;
+};
+
+#endif // NETUTILS_H

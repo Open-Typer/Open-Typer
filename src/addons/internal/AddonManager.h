@@ -30,6 +30,7 @@
 #include "AddonListModel.h"
 #include "global/IFileUtils.h"
 #include "global/ISettings.h"
+#include "network/INetUtils.h"
 
 class IAddon;
 
@@ -39,6 +40,7 @@ class Q_DECL_EXPORT AddonManager : public IAddonManager
 		Q_OBJECT
 		INJECT(IFileUtils, fileUtils)
 		INJECT(ISettings, settings)
+		INJECT(INetUtils, netUtils)
 		Q_PROPERTY(QList<AddonModel *> addons READ addons NOTIFY addonsChanged)
 	public:
 		static std::shared_ptr<AddonManager> instance();

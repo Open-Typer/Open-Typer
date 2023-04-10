@@ -1,5 +1,5 @@
 /*
- * global.h
+ * NetworkModule.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,11 +18,16 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#ifndef NETWORKMODULE_H
+#define NETWORKMODULE_H
 
-#include <QObject>
+#include "global/modularity/IModuleSetup.h"
 
-static int const EXIT_CODE_REBOOT = -123456789;
+class NetworkModule : public IModuleSetup
+{
+	public:
+		std::string moduleName() const override;
+		void registerExports() override;
+};
 
-#endif // GLOBAL_H
+#endif // NETWORKMODULE_H

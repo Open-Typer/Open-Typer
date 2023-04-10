@@ -26,12 +26,14 @@
 #include <QQmlListProperty>
 #include "AddonItemModel.h"
 #include "global/IFileUtils.h"
+#include "network/INetUtils.h"
 
 /*! \brief The AddonListModel class provides a model for the addon list in addon settings. */
 class Q_DECL_EXPORT AddonListModel : public QObject
 {
 		Q_OBJECT
 		INJECT(IFileUtils, fileUtils)
+		INJECT(INetUtils, netUtils)
 		Q_PROPERTY(QQmlListProperty<AddonItemModel> items READ items NOTIFY itemsChanged)
 		Q_PROPERTY(bool localAddons READ localAddons WRITE setLocalAddons NOTIFY localAddonsChanged)
 	public:

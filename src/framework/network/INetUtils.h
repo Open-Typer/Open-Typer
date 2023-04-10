@@ -1,5 +1,5 @@
 /*
- * global.h
+ * INetUtils.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,11 +18,17 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#ifndef INETUTILS_H
+#define INETUTILS_H
 
-#include <QObject>
+#include "global/modularity/ioc.h"
 
-static int const EXIT_CODE_REBOOT = -123456789;
+class INetUtils : MODULE_EXPORT_INTERFACE
+{
+	public:
+		virtual ~INetUtils() { }
 
-#endif // GLOBAL_H
+		virtual bool internetConnected(void) = 0;
+};
+
+#endif // INETUTILS_H

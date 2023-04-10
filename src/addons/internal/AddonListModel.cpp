@@ -24,7 +24,6 @@
 #include <QDir>
 #include "AddonListModel.h"
 #include "internal/AddonManager.h"
-#include "global/global.h"
 
 /*! Constructs AddonListModel. */
 AddonListModel::AddonListModel(QObject *parent) :
@@ -80,7 +79,7 @@ void AddonListModel::load(QString filter)
 		return;
 	}
 
-	if(!internetConnected())
+	if(!netUtils()->internetConnected())
 	{
 		int i;
 		for(i = 0; i < m_items.length(); i++)
