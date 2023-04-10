@@ -38,7 +38,11 @@ extern QTranslator *translator_qt;
  * \brief The LanguageManager class provides a list of supported languages.
  *
  * \code
- * QStringList items = globalLanguageManager.boxItems; // list of languages which can be used in selector widgets
+ * class MyClass {
+ *	INJECT(ILanguageManager, languageManager)
+ *	...
+ *
+ * QStringList items = languageManager()->getBoxItems(); // list of languages which can be used in selector widgets
  * \endcode
  *
  * \see LanguageList
