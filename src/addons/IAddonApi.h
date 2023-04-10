@@ -24,7 +24,7 @@
 #include <QObject>
 #include <QQmlListProperty>
 #include "global/modularity/ioc.h"
-#include "internal/AddonButton.h"
+#include "IAddonButton.h"
 #include "ui/menubar/AppMenuModel.h"
 #include "app/settings/SettingsCategory.h"
 
@@ -52,17 +52,17 @@ class IAddonApi : public QObject, MODULE_EXPORT_INTERFACE
 		virtual void addMenu(AppMenuModel *menu) = 0;
 		virtual QQmlListProperty<AppMenuModel> menus(void) = 0;
 
-		virtual AddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource = "") = 0;
-		virtual QQmlListProperty<AddonButton> mainButtons(void) = 0;
+		virtual IAddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource = "") = 0;
+		virtual QQmlListProperty<IAddonButton> mainButtons(void) = 0;
 
-		virtual AddonButton *addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource = "") = 0;
-		virtual QQmlListProperty<AddonButton> exOptionsButtons(void) = 0;
+		virtual IAddonButton *addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource = "") = 0;
+		virtual QQmlListProperty<IAddonButton> exOptionsButtons(void) = 0;
 
-		virtual AddonButton *addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource = "") = 0;
-		virtual QQmlListProperty<AddonButton> navigationButtons(void) = 0;
+		virtual IAddonButton *addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource = "") = 0;
+		virtual QQmlListProperty<IAddonButton> navigationButtons(void) = 0;
 
-		virtual AddonButton *addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource = "") = 0;
-		virtual QQmlListProperty<AddonButton> exInfoButtons(void) = 0;
+		virtual IAddonButton *addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource = "") = 0;
+		virtual QQmlListProperty<IAddonButton> exInfoButtons(void) = 0;
 
 	signals:
 		void settingsCategoriesChanged();

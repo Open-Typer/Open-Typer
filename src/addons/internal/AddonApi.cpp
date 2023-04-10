@@ -22,6 +22,7 @@
 #include <QFile>
 #include "AddonApi.h"
 #include "IAddon.h"
+#include "AddonButton.h"
 #include "app/AppMenuBar.h"
 
 std::shared_ptr<AddonApi> AddonApi::m_instance = std::make_shared<AddonApi>();
@@ -144,21 +145,21 @@ void AddonApi::deleteMainButtons(void)
 }
 
 /*! Adds a new button to the main section. */
-AddonButton *AddonApi::addMainButton(QString text, QString toolTip, QString iconName, QString iconSource)
+IAddonButton *AddonApi::addMainButton(QString text, QString toolTip, QString iconName, QString iconSource)
 {
-	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
+	IAddonButton *button = createButton(text, toolTip, iconName, iconSource);
 	m_mainButtons.append(button);
 	emit mainButtonsChanged();
 	return button;
 }
 
 /*! The list of buttons in the main section. */
-QQmlListProperty<AddonButton> AddonApi::mainButtons(void)
+QQmlListProperty<IAddonButton> AddonApi::mainButtons(void)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-	return QQmlListProperty<AddonButton>(this, &m_mainButtons);
+	return QQmlListProperty<IAddonButton>(this, &m_mainButtons);
 #else
-	return QQmlListProperty<AddonButton>(this, m_mainButtons);
+	return QQmlListProperty<IAddonButton>(this, m_mainButtons);
 #endif
 }
 
@@ -170,21 +171,21 @@ void AddonApi::deleteExOptionsButtons(void)
 }
 
 /*! Adds a new button to the exercise options section. */
-AddonButton *AddonApi::addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource)
+IAddonButton *AddonApi::addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource)
 {
-	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
+	IAddonButton *button = createButton(text, toolTip, iconName, iconSource);
 	m_exOptionsButtons.append(button);
 	emit exOptionsButtonsChanged();
 	return button;
 }
 
 /*! The list of buttons in the exercise options section. */
-QQmlListProperty<AddonButton> AddonApi::exOptionsButtons(void)
+QQmlListProperty<IAddonButton> AddonApi::exOptionsButtons(void)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-	return QQmlListProperty<AddonButton>(this, &m_exOptionsButtons);
+	return QQmlListProperty<IAddonButton>(this, &m_exOptionsButtons);
 #else
-	return QQmlListProperty<AddonButton>(this, m_exOptionsButtons);
+	return QQmlListProperty<IAddonButton>(this, m_exOptionsButtons);
 #endif
 }
 
@@ -196,21 +197,21 @@ void AddonApi::deleteNavigationButtons(void)
 }
 
 /*! Adds a new button to the navigation section. */
-AddonButton *AddonApi::addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource)
+IAddonButton *AddonApi::addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource)
 {
-	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
+	IAddonButton *button = createButton(text, toolTip, iconName, iconSource);
 	m_navigationButtons.append(button);
 	emit navigationButtonsChanged();
 	return button;
 }
 
 /*! The list of buttons in the navigation section. */
-QQmlListProperty<AddonButton> AddonApi::navigationButtons(void)
+QQmlListProperty<IAddonButton> AddonApi::navigationButtons(void)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-	return QQmlListProperty<AddonButton>(this, &m_navigationButtons);
+	return QQmlListProperty<IAddonButton>(this, &m_navigationButtons);
 #else
-	return QQmlListProperty<AddonButton>(this, m_navigationButtons);
+	return QQmlListProperty<IAddonButton>(this, m_navigationButtons);
 #endif
 }
 
@@ -222,26 +223,26 @@ void AddonApi::deleteExInfoButtons(void)
 }
 
 /*! Adds a new button to the exercise info section. */
-AddonButton *AddonApi::addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource)
+IAddonButton *AddonApi::addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource)
 {
-	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
+	IAddonButton *button = createButton(text, toolTip, iconName, iconSource);
 	m_exInfoButtons.append(button);
 	emit exInfoButtonsChanged();
 	return button;
 }
 
 /*! The list of buttons in the exercise info section. */
-QQmlListProperty<AddonButton> AddonApi::exInfoButtons(void)
+QQmlListProperty<IAddonButton> AddonApi::exInfoButtons(void)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-	return QQmlListProperty<AddonButton>(this, &m_exInfoButtons);
+	return QQmlListProperty<IAddonButton>(this, &m_exInfoButtons);
 #else
-	return QQmlListProperty<AddonButton>(this, m_exInfoButtons);
+	return QQmlListProperty<IAddonButton>(this, m_exInfoButtons);
 #endif
 }
 
 /*! Deletes all buttons in the given list and clears it. */
-void AddonApi::deleteButtons(QList<AddonButton *> *buttonList)
+void AddonApi::deleteButtons(QList<IAddonButton *> *buttonList)
 {
 	QList<QObject *> objList;
 	for(int i = 0; i < buttonList->length(); i++)
@@ -263,9 +264,10 @@ void AddonApi::deleteObjects(QList<QObject *> *objList)
 }
 
 /*! Creates a new button. */
-AddonButton *AddonApi::createButton(QString text, QString toolTip, QString iconName, QString iconSource)
+IAddonButton *AddonApi::createButton(QString text, QString toolTip, QString iconName, QString iconSource)
 {
-	AddonButton *button = new AddonButton(qApp);
+	AddonButton *button = new AddonButton;
+	button->setParent(qApp);
 	button->setText(text);
 	button->setToolTip(toolTip);
 	button->setIconName(iconName);

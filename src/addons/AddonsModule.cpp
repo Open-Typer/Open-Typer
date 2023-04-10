@@ -20,6 +20,7 @@
 
 #include <QQmlEngine>
 #include "AddonsModule.h"
+#include "internal/AddonButton.h"
 #include "internal/AddonApi.h"
 #include "internal/AddonManager.h"
 

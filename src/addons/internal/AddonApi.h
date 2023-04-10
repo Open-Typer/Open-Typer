@@ -30,7 +30,7 @@
 #include <QLayout>
 #include "IAddonApi.h"
 #include "app/settings/SettingsCategory.h"
-#include "AddonButton.h"
+#include "IAddonButton.h"
 #include "ui/menubar/AppMenuModel.h"
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 Q_MOC_INCLUDE("IAddon.h")
@@ -45,10 +45,10 @@ class Q_DECL_EXPORT AddonApi : public IAddonApi
 		Q_PROPERTY(QVector<IAddon *> loadedAddons READ loadedAddons WRITE setLoadedAddons)
 		Q_PROPERTY(QQmlListProperty<SettingsCategory> settingsCategories READ settingsCategories NOTIFY settingsCategoriesChanged)
 		Q_PROPERTY(QQmlListProperty<AppMenuModel> menus READ menus NOTIFY menusChanged)
-		Q_PROPERTY(QQmlListProperty<AddonButton> mainButtons READ mainButtons NOTIFY mainButtonsChanged)
-		Q_PROPERTY(QQmlListProperty<AddonButton> exOptionsButtons READ exOptionsButtons NOTIFY exOptionsButtonsChanged)
-		Q_PROPERTY(QQmlListProperty<AddonButton> navigationButtons READ navigationButtons NOTIFY navigationButtonsChanged)
-		Q_PROPERTY(QQmlListProperty<AddonButton> exInfoButtons READ exInfoButtons NOTIFY exInfoButtonsChanged)
+		Q_PROPERTY(QQmlListProperty<IAddonButton> mainButtons READ mainButtons NOTIFY mainButtonsChanged)
+		Q_PROPERTY(QQmlListProperty<IAddonButton> exOptionsButtons READ exOptionsButtons NOTIFY exOptionsButtonsChanged)
+		Q_PROPERTY(QQmlListProperty<IAddonButton> navigationButtons READ navigationButtons NOTIFY navigationButtonsChanged)
+		Q_PROPERTY(QQmlListProperty<IAddonButton> exInfoButtons READ exInfoButtons NOTIFY exInfoButtonsChanged)
 	public:
 		static std::shared_ptr<AddonApi> instance();
 		Q_INVOKABLE void sendEvent(Event type, QVariantMap args = QVariantMap());
@@ -56,23 +56,23 @@ class Q_DECL_EXPORT AddonApi : public IAddonApi
 		QVector<IAddon *> loadedAddons(void);
 		void setLoadedAddons(QVector<IAddon *> newLoadedAddons);
 
-		bool addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource = "");
-		QQmlListProperty<SettingsCategory> settingsCategories(void);
+		bool addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource = "") override;
+		QQmlListProperty<SettingsCategory> settingsCategories(void) override;
 
-		void addMenu(AppMenuModel *menu);
-		QQmlListProperty<AppMenuModel> menus(void);
+		void addMenu(AppMenuModel *menu) override;
+		QQmlListProperty<AppMenuModel> menus(void) override;
 
-		AddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
-		QQmlListProperty<AddonButton> mainButtons(void);
+		IAddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource = "") override;
+		QQmlListProperty<IAddonButton> mainButtons(void) override;
 
-		AddonButton *addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
-		QQmlListProperty<AddonButton> exOptionsButtons(void);
+		IAddonButton *addExOptionsButton(QString text, QString toolTip, QString iconName, QString iconSource = "") override;
+		QQmlListProperty<IAddonButton> exOptionsButtons(void) override;
 
-		AddonButton *addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
-		QQmlListProperty<AddonButton> navigationButtons(void);
+		IAddonButton *addNavigationButton(QString text, QString toolTip, QString iconName, QString iconSource = "") override;
+		QQmlListProperty<IAddonButton> navigationButtons(void) override;
 
-		AddonButton *addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource = "");
-		QQmlListProperty<AddonButton> exInfoButtons(void);
+		IAddonButton *addExInfoButton(QString text, QString toolTip, QString iconName, QString iconSource = "") override;
+		QQmlListProperty<IAddonButton> exInfoButtons(void) override;
 
 	private:
 		void deleteSettingsCategories(void);
@@ -81,17 +81,17 @@ class Q_DECL_EXPORT AddonApi : public IAddonApi
 		void deleteExOptionsButtons(void);
 		void deleteNavigationButtons(void);
 		void deleteExInfoButtons(void);
-		void deleteButtons(QList<AddonButton *> *buttonList);
+		void deleteButtons(QList<IAddonButton *> *buttonList);
 		void deleteObjects(QList<QObject *> *objList);
-		AddonButton *createButton(QString text, QString toolTip, QString iconName, QString iconSource);
+		IAddonButton *createButton(QString text, QString toolTip, QString iconName, QString iconSource);
 		static std::shared_ptr<AddonApi> m_instance;
 		QVector<IAddon *> m_loadedAddons;
 		QList<SettingsCategory *> m_settingsCategories;
 		QList<AppMenuModel *> m_menus;
-		QList<AddonButton *> m_mainButtons;
-		QList<AddonButton *> m_exOptionsButtons;
-		QList<AddonButton *> m_navigationButtons;
-		QList<AddonButton *> m_exInfoButtons;
+		QList<IAddonButton *> m_mainButtons;
+		QList<IAddonButton *> m_exOptionsButtons;
+		QList<IAddonButton *> m_navigationButtons;
+		QList<IAddonButton *> m_exInfoButtons;
 };
 
 #endif // ADDONAPI_H

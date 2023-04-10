@@ -20,10 +20,6 @@
 
 #include "AddonButton.h"
 
-/*! Constructs AddonButton. */
-AddonButton::AddonButton(QObject *parent) :
-	QObject(parent) { }
-
 /*! Whether the button is visible. */
 bool AddonButton::visible() const
 {
@@ -33,7 +29,7 @@ bool AddonButton::visible() const
 void AddonButton::setVisible(bool newVisible)
 {
 	m_visible = newVisible;
-	emit visibleChanged(newVisible);
+	emit visibleChanged();
 }
 
 /*! The button text. */
@@ -45,7 +41,7 @@ QString AddonButton::text()
 void AddonButton::setText(QString newText)
 {
 	m_text = newText;
-	emit textChanged(newText);
+	emit textChanged();
 }
 
 /*! The tool tip text. */
@@ -57,7 +53,7 @@ QString AddonButton::toolTip()
 void AddonButton::setToolTip(QString newToolTip)
 {
 	m_toolTip = newToolTip;
-	emit toolTipChanged(newToolTip);
+	emit toolTipChanged();
 }
 
 /*! The icon name. */
@@ -69,7 +65,7 @@ QString AddonButton::iconName()
 void AddonButton::setIconName(QString newIconName)
 {
 	m_iconName = newIconName;
-	emit iconNameChanged(newIconName);
+	emit iconNameChanged();
 }
 
 /*! The icon source (URL). */
@@ -81,5 +77,5 @@ QString AddonButton::iconSource()
 void AddonButton::setIconSource(QString newIconSource)
 {
 	m_iconSource = newIconSource;
-	emit iconSourceChanged(newIconSource);
+	emit iconSourceChanged();
 }

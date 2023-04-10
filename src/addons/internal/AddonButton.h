@@ -21,10 +21,10 @@
 #ifndef ADDONBUTTON_H
 #define ADDONBUTTON_H
 
-#include <QObject>
+#include "IAddonButton.h"
 
 /*! \brief The AddonButton class provides a button for addons. */
-class Q_DECL_EXPORT AddonButton : public QObject
+class Q_DECL_EXPORT AddonButton : public IAddonButton
 {
 		Q_OBJECT
 		Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
@@ -34,8 +34,6 @@ class Q_DECL_EXPORT AddonButton : public QObject
 		Q_PROPERTY(QString iconSource READ iconSource WRITE setIconSource NOTIFY iconSourceChanged)
 
 	public:
-		explicit AddonButton(QObject *parent = nullptr);
-
 		bool visible() const;
 		void setVisible(bool newVisible);
 
@@ -57,14 +55,6 @@ class Q_DECL_EXPORT AddonButton : public QObject
 		QString m_toolTip;
 		QString m_iconName;
 		QString m_iconSource;
-
-	signals:
-		void visibleChanged(bool visible);
-		void textChanged(QString text);
-		void toolTipChanged(QString text);
-		void iconNameChanged(QString name);
-		void iconSourceChanged(QString source);
-		void clicked();
 };
 
 #endif // ADDONBUTTON_H

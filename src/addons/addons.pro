@@ -17,6 +17,7 @@ HEADERS += \
     AddonsModule.h \
     IAddon.h \
     IAddonApi.h \
+    IAddonButton.h \
     IAddonManager.h \
     internal/AddonApi.h \
     internal/AddonButton.h \
