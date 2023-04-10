@@ -24,7 +24,7 @@
 #include <QDir>
 #include <QFile>
 #include "AddonModel.h"
-#include "AddonManager.h"
+#include "internal/AddonManager.h"
 
 /*! Constructs AddonModel. */
 AddonModel::AddonModel(QObject *parent) :
@@ -100,7 +100,7 @@ void AddonModel::downloadFiles(QStringList urls)
 /*! Returns the path to the directory of the addon. */
 QString AddonModel::addonDirectory()
 {
-	QDir addonDir(AddonManager::addonDirectory() + "/" + m_id);
+	QDir addonDir(AddonManager::instance()->addonDirectory() + "/" + m_id);
 	if(!addonDir.exists())
 		addonDir.mkpath(".");
 	return addonDir.absolutePath();

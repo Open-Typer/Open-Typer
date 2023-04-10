@@ -23,7 +23,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include "AddonListModel.h"
-#include "AddonManager.h"
+#include "internal/AddonManager.h"
 #include "global/global.h"
 
 /*! Constructs AddonListModel. */
@@ -37,7 +37,7 @@ void AddonListModel::load(QString filter)
 	if(m_localAddons)
 	{
 		localItemMap.clear();
-		auto addons = globalAddonManager.addons();
+		auto addons = AddonManager::instance()->addons();
 		for(int i = 0; i < addons.length(); i++)
 		{
 			auto model = addons[i];
@@ -53,13 +53,13 @@ void AddonListModel::load(QString filter)
 			itemModel->setName(model->name());
 			itemModel->setDescription(model->description());
 			itemModel->setVersion(model->version());
-			itemModel->setIconUrl("file://" + AddonManager::addonDirectory() + "/" + model->id() + "/" + model->iconFileName());
+			itemModel->setIconUrl("file://" + AddonManager::instance()->addonDirectory() + "/" + model->id() + "/" + model->iconFileName());
 			QStringList downloadUrls;
-			QDir addonDir(AddonManager::addonDirectory() + "/" + model->id());
+			QDir addonDir(AddonManager::instance()->addonDirectory() + "/" + model->id());
 			QStringList addonFiles = addonDir.entryList(QDir::Files);
 			addonFiles.removeAll(model->iconFileName());
 			for(int i = 0; i < addonFiles.length(); i++)
-				downloadUrls.append("file://" + AddonManager::addonDirectory() + "/" + model->id() + "/" + addonFiles[i]);
+				downloadUrls.append("file://" + AddonManager::instance()->addonDirectory() + "/" + model->id() + "/" + addonFiles[i]);
 			itemModel->setDownloadUrls(downloadUrls);
 			// Append i to the name to avoid duplicate keys
 			localItemMap.insert(itemModel->name() + QString::number(i), itemModel);

@@ -37,12 +37,12 @@ const QString AddonManager::addonModelRepositoryUrlProperty = "repositoryUrl";
 const QString AddonManager::addonModelVersionProperty = "version";
 const QString AddonManager::addonModelQtMajorProperty = "qtMajor";
 
-AddonManager globalAddonManager;
+std::shared_ptr<AddonManager> AddonManager::m_instance = std::make_shared<AddonManager>();
 
-/*! Constructs AddonManager. */
-AddonManager::AddonManager(QObject *parent) :
-	QObject(parent)
+/*! Returns the static instance of AddonManager. */
+std::shared_ptr<AddonManager> AddonManager::instance()
 {
+	return m_instance;
 }
 
 /*! Initializes the AddonManager instance. */
@@ -274,11 +274,11 @@ bool AddonManager::addonUpdateAvailable(void)
 /*! Updates installed addons. Run getAddonUpdates() before using this function. */
 void AddonManager::updateAddons()
 {
-	globalAddonManager.unloadAddons();
+	AddonManager::instance()->unloadAddons();
 	for(int i = 0; i < updatableAddons.length(); i++)
 	{
-		globalAddonManager.uninstallAddon(updatableAddons[i]->id());
-		auto model = globalAddonManager.installAddon(updatableAddons[i]);
+		AddonManager::instance()->uninstallAddon(updatableAddons[i]->id());
+		auto model = AddonManager::instance()->installAddon(updatableAddons[i]);
 		QEventLoop eventLoop;
 		connect(model, &AddonModel::installedChanged, [model, &eventLoop]() {
 			if(model->installed())

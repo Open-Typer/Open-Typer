@@ -26,47 +26,43 @@
 #include <QJsonDocument>
 #include <QPluginLoader>
 #include <QMap>
-#include "AddonModel.h"
-#include "AddonItemModel.h"
+#include "IAddonManager.h"
 #include "AddonListModel.h"
 #include "global/IFileUtils.h"
 #include "global/ISettings.h"
 
 class IAddon;
 
-/*!
- * \brief The AddonManager class is used to load, install, uninstall and update addons.
- *
- * Don't create instances of AddonManager. Use globalAddonManager instead.
- */
-class Q_DECL_EXPORT AddonManager : public QObject
+/*! \brief The AddonManager class is used to load, install, uninstall and update addons. */
+class Q_DECL_EXPORT AddonManager : public IAddonManager
 {
 		Q_OBJECT
 		INJECT(IFileUtils, fileUtils)
 		INJECT(ISettings, settings)
 		Q_PROPERTY(QList<AddonModel *> addons READ addons NOTIFY addonsChanged)
 	public:
-		explicit AddonManager(QObject *parent = nullptr);
+		static std::shared_ptr<AddonManager> instance();
 		void init();
 
-		static QString addonDirectory();
-		QList<AddonModel *> addons(void);
+		QString addonDirectory() override;
+		QList<AddonModel *> addons(void) override;
 
-		Q_INVOKABLE AddonModel *findAddon(const QString &addonId);
-		Q_INVOKABLE AddonModel *installAddon(AddonItemModel *itemModel);
-		Q_INVOKABLE void uninstallAddon(const QString &id);
-		Q_INVOKABLE void loadAddons(void);
-		Q_INVOKABLE void unloadAddons(void);
+		Q_INVOKABLE AddonModel *findAddon(const QString &addonId) override;
+		Q_INVOKABLE AddonModel *installAddon(AddonItemModel *itemModel) override;
+		Q_INVOKABLE void uninstallAddon(const QString &id) override;
+		Q_INVOKABLE void loadAddons(void) override;
+		Q_INVOKABLE void unloadAddons(void) override;
 
-		Q_INVOKABLE void getAddonUpdates(void);
-		Q_INVOKABLE bool addonUpdateAvailable(void);
-		Q_INVOKABLE void updateAddons(void);
+		Q_INVOKABLE void getAddonUpdates(void) override;
+		Q_INVOKABLE bool addonUpdateAvailable(void) override;
+		Q_INVOKABLE void updateAddons(void) override;
 
 	private:
-		static QString configLocation();
+		QString configLocation();
 		QList<QPluginLoader *> loadAddons(const QString &path);
 		void unloadAddon(const QString &id);
 		void saveAddon(AddonModel *model);
+		static std::shared_ptr<AddonManager> m_instance;
 		QList<AddonModel *> m_addons;
 		QJsonDocument document;
 		QMap<QString, QList<QPluginLoader *>> pluginLoaders;
@@ -81,11 +77,6 @@ class Q_DECL_EXPORT AddonManager : public QObject
 		static const QString addonModelRepositoryUrlProperty;
 		static const QString addonModelQtMajorProperty;
 		static const QString addonModelVersionProperty;
-
-	signals:
-		void addonsChanged();
 };
-
-extern AddonManager Q_DECL_EXPORT globalAddonManager;
 
 #endif // ADDONMANAGER_H

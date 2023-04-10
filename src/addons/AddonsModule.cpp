@@ -21,11 +21,16 @@
 #include <QQmlEngine>
 #include "AddonsModule.h"
 #include "AddonApi.h"
-#include "AddonManager.h"
+#include "internal/AddonManager.h"
 
 std::string AddonsModule::moduleName() const
 {
 	return "addons";
+}
+
+void AddonsModule::registerExports()
+{
+	modularity::ioc()->registerExport<IAddonManager>(AddonManager::instance());
 }
 
 void AddonsModule::registerResources()
@@ -39,9 +44,9 @@ void AddonsModule::registerUiTypes()
 	qmlRegisterSingletonType<AddonApi>("OpenTyper.Addons", 1, 0, "AddonApi", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &globalAddonApi;
 	});
-	QQmlEngine::setObjectOwnership(&globalAddonManager, QQmlEngine::CppOwnership);
+	QQmlEngine::setObjectOwnership(AddonManager::instance().get(), QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<AddonManager>("OpenTyper.Addons", 1, 0, "AddonManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalAddonManager;
+		return AddonManager::instance().get();
 	});
 	qmlRegisterType<AddonItemModel>("OpenTyper.Addons", 1, 0, "AddonItemModel");
 	qmlRegisterType<AddonListModel>("OpenTyper.Addons", 1, 0, "AddonListModel");
@@ -56,20 +61,20 @@ void AddonsModule::registerUiTypes()
 
 void AddonsModule::onPreInit()
 {
-	globalAddonManager.init();
-	globalAddonManager.loadAddons();
-	globalAddonManager.getAddonUpdates();
+	AddonManager::instance()->init();
+	AddonManager::instance()->loadAddons();
+	AddonManager::instance()->getAddonUpdates();
 	addonsLoaded = true;
 }
 
 void AddonsModule::onInit()
 {
 	if(!addonsLoaded)
-		globalAddonManager.loadAddons();
+		AddonManager::instance()->loadAddons();
 }
 
 void AddonsModule::onDeinit()
 {
-	globalAddonManager.unloadAddons();
+	AddonManager::instance()->unloadAddons();
 	addonsLoaded = false;
 }
