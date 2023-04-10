@@ -3,6 +3,12 @@ TARGET = open-typer
 
 QT += core gui widgets quick quickcontrols2
 QTPLUGIN += qsvg
+CONFIG += lrelease
+CONFIG += embed_translations
+
+macx {
+    PRE_TARGETDEPS += compiler_lrelease_make_all
+}
 
 linux {
     QT += dbus
@@ -52,15 +58,10 @@ RESOURCES += \
     ../../res/styles/dark/dark-style.qrc \
     ../../res/styles/light/light-style.qrc
 
-TRANSLATIONS += \
-    ../translations/Open-Typer_sk_SK.ts \
-    ../translations/Open-Typer_de_DE.ts \
-    ../translations/Open-Typer_ru_RU.ts
-
-TRANSLATIONS += \
-    ../translations/libcore_sk_SK.ts \
-    ../translations/libcore_de_DE.ts \
-    ../translations/libcore_ru_RU.ts
+EXTRA_TRANSLATIONS += \
+    ../../translations/Open-Typer_sk_SK.ts \
+    ../../translations/Open-Typer_de_DE.ts \
+    ../../translations/Open-Typer_ru_RU.ts
 
 win32:RC_ICONS += ../../res/icons/icon.ico
 macx:ICON = ../../res/macos-release/open-typer.icns

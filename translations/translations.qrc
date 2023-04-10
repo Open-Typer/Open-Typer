@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/res/lang">
-        <file>Open-Typer_sk_SK.qm</file>
-        <file>Open-Typer_de_DE.qm</file>
-        <file>Open-Typer_ru_RU.qm</file>
-    </qresource>
-</RCC>
