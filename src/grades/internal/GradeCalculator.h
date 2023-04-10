@@ -51,9 +51,9 @@ class GradeCalculator : public QObject
 	private:
 		IExerciseValidator *m_validator = nullptr;
 		void updateGrade(void);
-		int m_targetHitsPerMinute;
-		bool m_useNetHitsForGrading;
-		ClassManager::GradingMethod m_gradingMethod;
+		int m_targetHitsPerMinute = 0;
+		bool m_useNetHitsForGrading = true;
+		ClassManager::GradingMethod m_gradingMethod = ClassManager::GradingMethod_Numbers;
 		QString m_grade;
 
 	signals:

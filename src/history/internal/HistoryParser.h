@@ -59,9 +59,9 @@ class Q_DECL_EXPORT HistoryParser : public QObject
 		static QJsonDocument historyDocument(void);
 		static QJsonValue historyPackValue(QString pack);
 		QString m_lessonPack;
-		int m_lesson;
-		int m_sublesson;
-		int m_exercise;
+		int m_lesson = 0;
+		int m_sublesson = 0;
+		int m_exercise = 0;
 
 		static const QString historyFile;
 		static const QString speedProperty;

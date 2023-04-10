@@ -81,9 +81,9 @@ class Q_DECL_EXPORT AddonModel : public QObject
 		QString m_description;
 		QString m_repositoryUrl;
 		QVersionNumber m_version;
-		int m_qtMajor;
-		bool m_installed;
-		qreal m_installationProgress;
+		int m_qtMajor = -1;
+		bool m_installed = false;
+		qreal m_installationProgress = 0;
 		QString m_iconFileName;
 
 		qreal iconDownloadProgress = 0;

@@ -57,7 +57,7 @@ class Q_DECL_EXPORT Class : public QObject
 	private:
 		QString m_name;
 		QString m_description;
-		int m_targetHitsPerMinute;
+		int m_targetHitsPerMinute = 0;
 		QMap<int, int> m_gradeConfig;
 
 	signals:

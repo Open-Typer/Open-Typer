@@ -62,8 +62,8 @@ class Q_DECL_EXPORT Key
 		KeyboardUtils::KeyType m_type = KeyboardUtils::KeyType_Any;
 		QString m_displayText;
 		QString m_displayShiftText;
-		bool m_dead;
-		bool m_shiftDead;
+		bool m_dead = false;
+		bool m_shiftDead = false;
 };
 
 using KeyboardRow = QList<Key>;

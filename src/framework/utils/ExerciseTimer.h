@@ -37,8 +37,8 @@ class Q_DECL_EXPORT ExerciseTimer : public QObject
 
 	private:
 		QElapsedTimer m_timer;
-		bool m_running;
-		int m_elapsed;
+		bool m_running = false;
+		int m_elapsed = 0;
 
 	public slots:
 		void start(void);
