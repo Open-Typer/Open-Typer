@@ -18,12 +18,25 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QQmlEngine>
 #include "UpdaterModule.h"
 #include "global/ISettings.h"
+#ifdef Q_OS_WINDOWS
+#include "platform/windows/WindowsUpdater.h"
+using PlatformUpdater = WindowsUpdater;
+#else
+#include "platform/stub/StubUpdater.h"
+using PlatformUpdater = StubUpdater;
+#endif
 
 std::string UpdaterModule::moduleName() const
 {
 	return "updater";
+}
+
+void UpdaterModule::registerExports()
+{
+	modularity::ioc()->registerExport<IUpdater>(PlatformUpdater::instance());
 }
 
 void UpdaterModule::registerResources()
@@ -36,7 +49,10 @@ void UpdaterModule::initSettings()
 	INIT_SETTINGS_KEY("updateChecks", "main/updatechecks", true);
 }
 
-void UpdaterModule::setRootContextProperties(QQmlContext *context)
+void UpdaterModule::registerUiTypes()
 {
-	context->setContextProperty("Updater", &m_updater);
+	QQmlEngine::setObjectOwnership(PlatformUpdater::instance().get(), QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<PlatformUpdater>("OpenTyper.Updater", 1, 0, "Updater", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return PlatformUpdater::instance().get();
+	});
 }

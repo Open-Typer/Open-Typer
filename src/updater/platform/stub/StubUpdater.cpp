@@ -1,5 +1,5 @@
 /*
- * UpdaterModule.h
+ * StubUpdater.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,20 +18,20 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UPDATERMODULE_H
-#define UPDATERMODULE_H
+#include "StubUpdater.h"
 
-#include "global/modularity/IModuleSetup.h"
+std::shared_ptr<StubUpdater> StubUpdater::m_instance = std::make_shared<StubUpdater>();
 
-class UpdaterModule : public IModuleSetup
+std::shared_ptr<StubUpdater> StubUpdater::instance()
 {
-	public:
-		std::string moduleName() const override;
+	return m_instance;
+}
 
-		void registerExports() override;
-		void registerResources() override;
-		void initSettings() override;
-		void registerUiTypes() override;
-};
+bool StubUpdater::updateAvailable()
+{
+	return false;
+}
 
-#endif // UPDATERMODULE_H
+void StubUpdater::installUpdate()
+{
+}

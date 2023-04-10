@@ -1,5 +1,5 @@
 /*
- * UpdaterModule.h
+ * StubUpdater.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,20 +18,22 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UPDATERMODULE_H
-#define UPDATERMODULE_H
+#ifndef STUBUPDATER_H
+#define STUBUPDATER_H
 
-#include "global/modularity/IModuleSetup.h"
+#include <QObject>
+#include "IUpdater.h"
 
-class UpdaterModule : public IModuleSetup
+class StubUpdater : public QObject, public IUpdater
 {
+		Q_OBJECT
 	public:
-		std::string moduleName() const override;
+		static std::shared_ptr<StubUpdater> instance();
+		Q_INVOKABLE bool updateAvailable() override;
+		Q_INVOKABLE void installUpdate() override;
 
-		void registerExports() override;
-		void registerResources() override;
-		void initSettings() override;
-		void registerUiTypes() override;
+	private:
+		static std::shared_ptr<StubUpdater> m_instance;
 };
 
-#endif // UPDATERMODULE_H
+#endif // STUBUPDATER_H

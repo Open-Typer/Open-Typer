@@ -1,5 +1,5 @@
 /*
- * Updater.h
+ * WindowsUpdater.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2023 - adazem009
@@ -18,27 +18,23 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UPDATER_H
-#define UPDATER_H
+#ifndef WINDOWSUPDATER_H
+#define WINDOWSUPDATER_H
 
-#include <QCoreApplication>
-#include <QFile>
-#include <QFileInfo>
-#include <QProcess>
-#include <QDateTime>
-#ifndef Q_OS_WASM
-#include "addons/AddonListModel.h"
-#endif
+#include "IUpdater.h"
 #include "global/ISettings.h"
 
-/*! \brief The Updater class is used to check for updates and download new versions of the program. */
-class Q_DECL_EXPORT Updater : public QObject
+class Q_DECL_EXPORT WindowsUpdater : public QObject, IUpdater
 {
 		Q_OBJECT
 		INJECT(ISettings, settings)
 	public:
-		Q_INVOKABLE static bool updateAvailable(void);
-		Q_INVOKABLE static void installUpdate(void);
+		static std::shared_ptr<WindowsUpdater> instance();
+		Q_INVOKABLE bool updateAvailable() override;
+		Q_INVOKABLE void installUpdate() override;
+
+	private:
+		static std::shared_ptr<WindowsUpdater> m_instance;
 };
 
-#endif // UPDATER_H
+#endif // WINDOWSUPDATER_H

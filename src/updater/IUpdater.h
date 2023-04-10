@@ -1,5 +1,5 @@
 /*
- * UpdaterModule.h
+ * IUpdater.h
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -18,20 +18,26 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UPDATERMODULE_H
-#define UPDATERMODULE_H
+#ifndef IUPDATER_H
+#define IUPDATER_H
 
-#include "global/modularity/IModuleSetup.h"
+#include "global/modularity/ioc.h"
+#include "global/ISettings.h"
 
-class UpdaterModule : public IModuleSetup
+class IUpdater : MODULE_EXPORT_INTERFACE
 {
 	public:
-		std::string moduleName() const override;
+		virtual ~IUpdater() { }
 
-		void registerExports() override;
-		void registerResources() override;
-		void initSettings() override;
-		void registerUiTypes() override;
+		virtual bool updateAvailable() = 0;
+		virtual void installUpdate() = 0;
+
+	protected:
+		// Use this to check if updates are enabled
+		virtual bool updatesEnabled() final
+		{
+			return modularity::ioc()->resolve<ISettings>()->getValue("updater", "updateChecks").toBool();
+		}
 };
 
-#endif // UPDATERMODULE_H
+#endif // IUPDATER_H

@@ -1,5 +1,5 @@
 /*
- * Updater.cpp
+ * WindowsUpdater.cpp
  * This file is part of Open-Typer
  *
  * Copyright (C) 2021-2023 - adazem009
@@ -18,20 +18,25 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef Q_OS_WINDOWS
 #include <QSysInfo>
-#endif
-#include "updater/Updater.h"
+#include <QCoreApplication>
+#include <QFile>
+#include <QFileInfo>
+#include <QProcess>
+#include <QDateTime>
+#include "WindowsUpdater.h"
 
-static const QString module = "updater";
-static const ISettings::Key UPDATE_CHECKS(module, "updateChecks");
+std::shared_ptr<WindowsUpdater> WindowsUpdater::m_instance = std::make_shared<WindowsUpdater>();
 
-/*! Checks for updates and returns true if there's an update available (only supports Windows). */
-bool Updater::updateAvailable(void)
+std::shared_ptr<WindowsUpdater> WindowsUpdater::instance()
 {
-	if(!settings()->getValue(UPDATE_CHECKS).toBool())
+	return m_instance;
+}
+
+bool WindowsUpdater::updateAvailable()
+{
+	if(!updatesEnabled())
 		return false;
-#ifdef Q_OS_WINDOWS
 	auto currentDate = QDateTime::currentDateTimeUtc().date();
 	// Disable updates on Windows 7 and 8 after May 2023
 	if((QSysInfo::productVersion().split(' ').at(0).toInt() < 10) && ((currentDate.year() > 2023) || ((currentDate.year() == 2023) && (currentDate.month() >= 6))))
@@ -49,19 +54,15 @@ bool Updater::updateAvailable(void)
 	process->waitForFinished();
 	if(process->readAllStandardOutput().contains("<update"))
 		return true;
-#endif // Q_OS_WINDOWS
 	return false;
 }
 
-/*! Starts maintenance tool and installs the update (only supports Windows). */
-void Updater::installUpdate(void)
+void WindowsUpdater::installUpdate()
 {
-#ifdef Q_OS_WINDOWS
 	QProcess *process = new QProcess(qApp);
 	QStringList args;
 	args += "--updater";
 	args += "updateSource=" + QFileInfo(QCoreApplication::applicationFilePath()).fileName();
 	process->startDetached(QCoreApplication::applicationDirPath() + "/../maintenancetool", args);
 	exit(0);
-#endif // Q_OS_WINDOWS
 }

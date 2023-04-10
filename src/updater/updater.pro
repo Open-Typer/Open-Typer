@@ -5,12 +5,19 @@ CONFIG += staticlib
 QML_IMPORT_PATH += qml
 
 SOURCES += \
-    Updater.cpp \
     UpdaterModule.cpp
 
 HEADERS += \
-    Updater.h \
+    IUpdater.h \
     UpdaterModule.h
+
+win32 {
+    SOURCES += platform/windows/WindowsUpdater.cpp
+    HEADERS += platform/windows/WindowsUpdater.h
+} else {
+    SOURCES += platform/stub/StubUpdater.cpp
+    HEADERS += platform/stub/StubUpdater.h
+}
 
 RESOURCES += \
         updater.qrc
