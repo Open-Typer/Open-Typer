@@ -43,14 +43,14 @@ CustomDialog {
 	ExportProvider {
 		id: provider
 		validator: root.validator
-		table: exportTable
+		table: ExportTable
 	}
 
 	Timer {
 		id: repaintTimer
 		interval: 16
 		repeat: false
-		onTriggered: exportTable.updateModel()
+		onTriggered: ExportTable.updateModel()
 	}
 
 	contentComponent: ColumnLayout {
@@ -143,36 +143,36 @@ CustomDialog {
 
 					Widget {
 						id: tableWidget
-						width: exportTable.contentWidth
-						height: exportTable.contentHeight
-						widget: exportTable
+						width: ExportTable.contentWidth
+						height: ExportTable.contentHeight
+						widget: ExportTable
 
 						Binding {
-							target: exportTable
+							target: ExportTable
 							property: "studentName"
 							value: root.studentName
 						}
 
 						Binding {
-							target: exportTable
+							target: ExportTable
 							property: "className"
 							value: root.className
 						}
 
 						Binding {
-							target: exportTable
+							target: ExportTable
 							property: "testNumber"
 							value: root.testNumber
 						}
 
 						Binding {
-							target: exportTable
+							target: ExportTable
 							property: "grade"
 							value: root.grade
 						}
 
 						Binding {
-							target: exportTable
+							target: ExportTable
 							property: "validator"
 							value: root.validator
 						}
@@ -180,13 +180,13 @@ CustomDialog {
 						Connections {
 							target: ThemeEngine
 							onThemeChanged: {
-								exportTable.updateStyle();
+								ExportTable.updateStyle();
 								tableWidget.update();
 							}
 						}
 
 						Connections {
-							target: exportTable
+							target: ExportTable
 							onModelChanged: {
 								tableWidget.update();
 							}

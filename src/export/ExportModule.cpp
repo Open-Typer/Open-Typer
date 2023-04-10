@@ -30,11 +30,10 @@ std::string ExportModule::moduleName() const
 void ExportModule::registerUiTypes()
 {
 	qmlRegisterType<ExportProvider>("OpenTyper.Export", 1, 0, "ExportProvider");
-}
-
-void ExportModule::setRootContextProperties(QQmlContext *context)
-{
-	context->setContextProperty("exportTable", m_table);
+	QQmlEngine::setObjectOwnership(m_table, QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<ExportTable>("OpenTyper.Export", 1, 0, "ExportTable", [this](QQmlEngine *, QJSEngine *) -> QObject * {
+		return m_table;
+	});
 }
 
 void ExportModule::onPreInit()

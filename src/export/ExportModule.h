@@ -30,7 +30,6 @@ class ExportModule : public IModuleSetup
 		std::string moduleName() const override;
 
 		void registerUiTypes() override;
-		void setRootContextProperties(QQmlContext *context) override;
 
 		void onPreInit() override;
 
