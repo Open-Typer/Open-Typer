@@ -22,8 +22,8 @@
 #define IADDONMANAGER_H
 
 #include "global/modularity/ioc.h"
-#include "AddonModel.h"
-#include "AddonItemModel.h"
+#include "internal/AddonModel.h"
+#include "internal/AddonItemModel.h"
 
 class IAddonManager : public QObject, MODULE_EXPORT_INTERFACE
 {

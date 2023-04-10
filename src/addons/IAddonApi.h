@@ -24,7 +24,7 @@
 #include <QObject>
 #include <QQmlListProperty>
 #include "global/modularity/ioc.h"
-#include "AddonButton.h"
+#include "internal/AddonButton.h"
 #include "ui/menubar/AppMenuModel.h"
 #include "app/settings/SettingsCategory.h"
 

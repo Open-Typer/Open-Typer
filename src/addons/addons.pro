@@ -5,25 +5,25 @@ CONFIG += staticlib
 QML_IMPORT_PATH += qml
 
 SOURCES += \
-    AddonButton.cpp \
-    AddonItemModel.cpp \
-    AddonListModel.cpp \
-    AddonModel.cpp \
     AddonsModule.cpp \
     internal/AddonApi.cpp \
-    internal/AddonManager.cpp
+    internal/AddonButton.cpp \
+    internal/AddonItemModel.cpp \
+    internal/AddonListModel.cpp \
+    internal/AddonManager.cpp \
+    internal/AddonModel.cpp
 
 HEADERS += \
-    AddonButton.h \
-    AddonItemModel.h \
-    AddonListModel.h \
-    AddonModel.h \
     AddonsModule.h \
     IAddon.h \
     IAddonApi.h \
     IAddonManager.h \
     internal/AddonApi.h \
-    internal/AddonManager.h
+    internal/AddonButton.h \
+    internal/AddonItemModel.h \
+    internal/AddonListModel.h \
+    internal/AddonManager.h \
+    internal/AddonModel.h
 
 RESOURCES += \
         addons.qrc
