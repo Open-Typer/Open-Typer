@@ -180,7 +180,7 @@ QList<QPluginLoader *> AddonManager::loadAddons(const QString &path)
 			}
 		}
 	}
-	AddonApi::setLoadedAddons(loadedAddons);
+	AddonApi::instance()->setLoadedAddons(loadedAddons);
 	return loaderList;
 }
 
@@ -219,7 +219,7 @@ void AddonManager::unloadAddon(const QString &id)
 		list[i]->deleteLater();
 	}
 	pluginLoaders.remove(id);
-	AddonApi::setLoadedAddons(loadedAddons);
+	AddonApi::instance()->setLoadedAddons(loadedAddons);
 }
 
 /*! Checks for addon updates. */

@@ -28,6 +28,7 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QLayout>
+#include "IAddonApi.h"
 #include "app/settings/SettingsCategory.h"
 #include "AddonButton.h"
 #include "ui/menubar/AppMenuModel.h"
@@ -38,7 +39,7 @@ Q_MOC_INCLUDE("IAddon.h")
 class Q_DECL_EXPORT IAddon;
 
 /*! \brief The AddonApi class provides an API for addons. */
-class Q_DECL_EXPORT AddonApi : public QObject
+class Q_DECL_EXPORT AddonApi : public IAddonApi
 {
 		Q_OBJECT
 		Q_PROPERTY(QVector<IAddon *> loadedAddons READ loadedAddons WRITE setLoadedAddons)
@@ -49,22 +50,11 @@ class Q_DECL_EXPORT AddonApi : public QObject
 		Q_PROPERTY(QQmlListProperty<AddonButton> navigationButtons READ navigationButtons NOTIFY navigationButtonsChanged)
 		Q_PROPERTY(QQmlListProperty<AddonButton> exInfoButtons READ exInfoButtons NOTIFY exInfoButtonsChanged)
 	public:
-		enum Event
-		{
-			Event_InitApp = 0,
-			Event_RefreshApp = 1,
-			Event_InitExercise = 2,
-			Event_EndStockExercise = 3,
-			Event_EndTypingTest = 4,
-			Event_ChangeMode = 5,
-			Event_CustomExLoaded = 6
-		};
-		Q_ENUM(Event)
+		static std::shared_ptr<AddonApi> instance();
+		Q_INVOKABLE void sendEvent(Event type, QVariantMap args = QVariantMap());
 
-		Q_INVOKABLE static void sendEvent(Event type, QVariantMap args = QVariantMap());
-
-		static QVector<IAddon *> loadedAddons(void);
-		static void setLoadedAddons(QVector<IAddon *> newLoadedAddons);
+		QVector<IAddon *> loadedAddons(void);
+		void setLoadedAddons(QVector<IAddon *> newLoadedAddons);
 
 		bool addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource = "");
 		QQmlListProperty<SettingsCategory> settingsCategories(void);
@@ -94,27 +84,14 @@ class Q_DECL_EXPORT AddonApi : public QObject
 		void deleteButtons(QList<AddonButton *> *buttonList);
 		void deleteObjects(QList<QObject *> *objList);
 		AddonButton *createButton(QString text, QString toolTip, QString iconName, QString iconSource);
-		static QMap<int, QString> m_loadExTargets;
-		static bool m_blockLoadedEx;
-		static QVector<IAddon *> m_loadedAddons;
+		static std::shared_ptr<AddonApi> m_instance;
+		QVector<IAddon *> m_loadedAddons;
 		QList<SettingsCategory *> m_settingsCategories;
 		QList<AppMenuModel *> m_menus;
 		QList<AddonButton *> m_mainButtons;
 		QList<AddonButton *> m_exOptionsButtons;
 		QList<AddonButton *> m_navigationButtons;
 		QList<AddonButton *> m_exInfoButtons;
-
-	signals:
-		void changeMode(int mode);
-		void startTypingTest(QByteArray text, int lineLength, bool includeNewLines, int mode, int time, bool correctMistakes, bool lockUi, bool hideText);
-		void settingsCategoriesChanged(QList<SettingsCategory *>);
-		void menusChanged(QList<AppMenuModel *> menus);
-		void mainButtonsChanged(QList<AddonButton *> buttons);
-		void exOptionsButtonsChanged(QList<AddonButton *> buttons);
-		void navigationButtonsChanged(QList<AddonButton *> buttons);
-		void exInfoButtonsChanged(QList<AddonButton *> buttons);
 };
-
-extern AddonApi Q_DECL_EXPORT globalAddonApi;
 
 #endif // ADDONAPI_H

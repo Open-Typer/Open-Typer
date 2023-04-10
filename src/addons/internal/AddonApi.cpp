@@ -24,10 +24,7 @@
 #include "IAddon.h"
 #include "app/AppMenuBar.h"
 
-AddonApi globalAddonApi;
-QMap<int, QString> AddonApi::m_loadExTargets;
-bool AddonApi::m_blockLoadedEx;
-QVector<IAddon *> AddonApi::m_loadedAddons;
+std::shared_ptr<AddonApi> AddonApi::m_instance = std::make_shared<AddonApi>();
 
 /*! List of loaded addon interfaces. Automatically set by AddonManager. */
 QVector<IAddon *> AddonApi::loadedAddons(void)
@@ -56,7 +53,7 @@ bool AddonApi::addSettingsCategory(QString categoryName, QString qmlFileName, QS
 	category->setIconName(iconName);
 	category->setIconSource(iconSource);
 	m_settingsCategories.append(category);
-	emit settingsCategoriesChanged(m_settingsCategories);
+	emit settingsCategoriesChanged();
 	return true;
 }
 
@@ -78,7 +75,13 @@ void AddonApi::deleteSettingsCategories(void)
 		objList.append(m_settingsCategories[i]);
 	deleteObjects(&objList);
 	m_settingsCategories.clear();
-	emit settingsCategoriesChanged(m_settingsCategories);
+	emit settingsCategoriesChanged();
+}
+
+/*! Returns the static instance of AddonApi. */
+std::shared_ptr<AddonApi> AddonApi::instance()
+{
+	return m_instance;
 }
 
 /*! Sends an event with the given type to each loaded addon. */
@@ -86,12 +89,12 @@ void AddonApi::sendEvent(Event type, QVariantMap args)
 {
 	if(type == Event_InitApp)
 	{
-		globalAddonApi.deleteSettingsCategories();
-		globalAddonApi.deleteMenus();
-		globalAddonApi.deleteMainButtons();
-		globalAddonApi.deleteExOptionsButtons();
-		globalAddonApi.deleteNavigationButtons();
-		globalAddonApi.deleteExInfoButtons();
+		deleteSettingsCategories();
+		deleteMenus();
+		deleteMainButtons();
+		deleteExOptionsButtons();
+		deleteNavigationButtons();
+		deleteExInfoButtons();
 	}
 	for(int i = 0; i < m_loadedAddons.count(); i++)
 		m_loadedAddons[i]->addonEvent(type, args);
@@ -113,7 +116,7 @@ void AddonApi::deleteMenus(void)
 	globalMenuBar.blockSignals(false);
 	globalMenuBar.menusChanged();
 	m_menus.clear();
-	emit menusChanged(m_menus);
+	emit menusChanged();
 }
 
 /*! Adds a menu. */
@@ -137,7 +140,7 @@ QQmlListProperty<AppMenuModel> AddonApi::menus(void)
 void AddonApi::deleteMainButtons(void)
 {
 	deleteButtons(&m_mainButtons);
-	emit mainButtonsChanged(m_mainButtons);
+	emit mainButtonsChanged();
 }
 
 /*! Adds a new button to the main section. */
@@ -145,7 +148,7 @@ AddonButton *AddonApi::addMainButton(QString text, QString toolTip, QString icon
 {
 	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
 	m_mainButtons.append(button);
-	emit mainButtonsChanged(m_mainButtons);
+	emit mainButtonsChanged();
 	return button;
 }
 
@@ -163,7 +166,7 @@ QQmlListProperty<AddonButton> AddonApi::mainButtons(void)
 void AddonApi::deleteExOptionsButtons(void)
 {
 	deleteButtons(&m_exOptionsButtons);
-	emit exOptionsButtonsChanged(m_exOptionsButtons);
+	emit exOptionsButtonsChanged();
 }
 
 /*! Adds a new button to the exercise options section. */
@@ -171,7 +174,7 @@ AddonButton *AddonApi::addExOptionsButton(QString text, QString toolTip, QString
 {
 	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
 	m_exOptionsButtons.append(button);
-	emit exOptionsButtonsChanged(m_exOptionsButtons);
+	emit exOptionsButtonsChanged();
 	return button;
 }
 
@@ -189,7 +192,7 @@ QQmlListProperty<AddonButton> AddonApi::exOptionsButtons(void)
 void AddonApi::deleteNavigationButtons(void)
 {
 	deleteButtons(&m_navigationButtons);
-	emit navigationButtonsChanged(m_navigationButtons);
+	emit navigationButtonsChanged();
 }
 
 /*! Adds a new button to the navigation section. */
@@ -197,7 +200,7 @@ AddonButton *AddonApi::addNavigationButton(QString text, QString toolTip, QStrin
 {
 	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
 	m_navigationButtons.append(button);
-	emit navigationButtonsChanged(m_navigationButtons);
+	emit navigationButtonsChanged();
 	return button;
 }
 
@@ -215,7 +218,7 @@ QQmlListProperty<AddonButton> AddonApi::navigationButtons(void)
 void AddonApi::deleteExInfoButtons(void)
 {
 	deleteButtons(&m_exInfoButtons);
-	emit exInfoButtonsChanged(m_exInfoButtons);
+	emit exInfoButtonsChanged();
 }
 
 /*! Adds a new button to the exercise info section. */
@@ -223,7 +226,7 @@ AddonButton *AddonApi::addExInfoButton(QString text, QString toolTip, QString ic
 {
 	AddonButton *button = createButton(text, toolTip, iconName, iconSource);
 	m_exInfoButtons.append(button);
-	emit exInfoButtonsChanged(m_exInfoButtons);
+	emit exInfoButtonsChanged();
 	return button;
 }
 

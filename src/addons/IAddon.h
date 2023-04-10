@@ -23,7 +23,7 @@
 
 #include <QVector>
 #include <QtPlugin>
-#include "AddonApi.h"
+#include "internal/AddonApi.h"
 #include "global/modularity/ioc.h"
 
 /*! \brief The IAddon class provides an interface for addons. */

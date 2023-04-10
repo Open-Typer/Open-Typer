@@ -20,7 +20,7 @@
 
 #include <QQmlEngine>
 #include "AddonsModule.h"
-#include "AddonApi.h"
+#include "internal/AddonApi.h"
 #include "internal/AddonManager.h"
 
 std::string AddonsModule::moduleName() const
@@ -31,6 +31,7 @@ std::string AddonsModule::moduleName() const
 void AddonsModule::registerExports()
 {
 	modularity::ioc()->registerExport<IAddonManager>(AddonManager::instance());
+	modularity::ioc()->registerExport<IAddonApi>(AddonApi::instance());
 }
 
 void AddonsModule::registerResources()
@@ -40,9 +41,9 @@ void AddonsModule::registerResources()
 
 void AddonsModule::registerUiTypes()
 {
-	QQmlEngine::setObjectOwnership(&globalAddonApi, QQmlEngine::CppOwnership);
+	QQmlEngine::setObjectOwnership(AddonApi::instance().get(), QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<AddonApi>("OpenTyper.Addons", 1, 0, "AddonApi", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalAddonApi;
+		return AddonApi::instance().get();
 	});
 	QQmlEngine::setObjectOwnership(AddonManager::instance().get(), QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<AddonManager>("OpenTyper.Addons", 1, 0, "AddonManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
