@@ -24,7 +24,7 @@
 #include <QObject>
 #include <QQmlListProperty>
 #include "global/modularity/ioc.h"
-#include "Class.h"
+#include "internal/Class.h"
 
 class IClassManager : public QObject, MODULE_EXPORT_INTERFACE
 {
