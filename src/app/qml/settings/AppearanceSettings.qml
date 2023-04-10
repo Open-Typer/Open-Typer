@@ -25,6 +25,7 @@ import QtQuick.Layouts 1.12
 import Qt.labs.platform 1.1 as Platform
 import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
+import OpenTyper.Global 1.0
 
 ColumnLayout {
 	property bool simple: false

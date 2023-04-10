@@ -18,6 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QQmlEngine>
 #include "GlobalModule.h"
 #include "modularity/ioc.h"
 #include "internal/Settings.h"
@@ -35,11 +36,20 @@ void GlobalModule::registerExports()
 	modularity::ioc()->registerExport<IStringUtils>(StringUtils::instance());
 }
 
-void GlobalModule::setRootContextProperties(QQmlContext *context)
+void GlobalModule::registerUiTypes()
 {
-	context->setContextProperty("Settings", Settings::instance().get());
-	context->setContextProperty("FileUtils", FileUtils::instance().get());
-	context->setContextProperty("StringUtils", StringUtils::instance().get());
+	QQmlEngine::setObjectOwnership(Settings::instance().get(), QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<Settings>("OpenTyper.Global", 1, 0, "Settings", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return Settings::instance().get();
+	});
+	QQmlEngine::setObjectOwnership(FileUtils::instance().get(), QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<FileUtils>("OpenTyper.Global", 1, 0, "FileUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return FileUtils::instance().get();
+	});
+	QQmlEngine::setObjectOwnership(StringUtils::instance().get(), QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<StringUtils>("OpenTyper.Global", 1, 0, "StringUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return StringUtils::instance().get();
+	});
 }
 
 void GlobalModule::onPreInit()

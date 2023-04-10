@@ -30,7 +30,7 @@ class GlobalModule : public IModuleSetup
 		std::string moduleName() const override;
 
 		void registerExports() override;
-		void setRootContextProperties(QQmlContext *context) override;
+		void registerUiTypes() override;
 
 		void onPreInit() override;
 		void onDeinit() override;

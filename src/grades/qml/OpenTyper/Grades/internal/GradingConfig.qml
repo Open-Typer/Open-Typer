@@ -25,6 +25,7 @@ import QtQuick.Layouts 1.12
 import OpenTyper.Grades 1.0
 import OpenTyper.UiComponents 1.0
 import OpenTyper.Translations 1.0
+import OpenTyper.Global 1.0
 
 ColumnLayout {
 	property Class currentClass: null

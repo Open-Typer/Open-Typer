@@ -26,6 +26,7 @@ import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
 import OpenTyper.Validator 1.0
 import OpenTyper.Grades 1.0
+import OpenTyper.Global 1.0
 
 Rectangle {
 	property int padding: 10

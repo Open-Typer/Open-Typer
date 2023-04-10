@@ -36,6 +36,7 @@ import OpenTyper.Keyboard 1.0
 import OpenTyper.Validator 1.0
 import OpenTyper.Translations 1.0
 import OpenTyper.Export 1.0
+import OpenTyper.Global 1.0
 import "dialogs"
 import "core"
 
