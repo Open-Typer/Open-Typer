@@ -24,7 +24,7 @@
 #include "IUpdater.h"
 #include "global/ISettings.h"
 
-class Q_DECL_EXPORT WindowsUpdater : public QObject, IUpdater
+class WindowsUpdater : public QObject, public IUpdater
 {
 		Q_OBJECT
 		INJECT(ISettings, settings)
