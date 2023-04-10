@@ -521,14 +521,13 @@ ApplicationWindow {
 			onOpacityChanged: mainLayoutSource.render()
 			onVisibleChanged: mainLayoutSource.render()
 		}
-		UpdateQuestion {
+		AddonUpdateQuestion {
 			id: addonUpdateQuestion
 			visible: false
-			addons: true
 			Layout.fillWidth: true
-			onAccepted: Updater.updateAddons()
+			onAccepted: AddonManager.updateAddons()
 			Component.onCompleted: {
-				if(Updater.addonUpdateAvailable())
+				if(AddonManager.addonUpdateAvailable())
 					visible = true;
 			}
 			onOpacityChanged: mainLayoutSource.render()

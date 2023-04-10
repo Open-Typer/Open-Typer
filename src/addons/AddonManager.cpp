@@ -27,6 +27,7 @@
 #include <QDir>
 #include "AddonManager.h"
 #include "global/modularity/ioc.h"
+#include "global/global.h"
 #include "IAddon.h"
 
 const QString AddonManager::addonModelNameProperty = "name";
@@ -219,6 +220,74 @@ void AddonManager::unloadAddon(const QString &id)
 	}
 	pluginLoaders.remove(id);
 	AddonApi::setLoadedAddons(loadedAddons);
+}
+
+/*! Checks for addon updates. */
+void AddonManager::getAddonUpdates(void)
+{
+	// TODO: Add an option to disable addon updates
+	if(!internetConnected())
+		return;
+	// Get installed addons
+	updateListModel.setLocalAddons(true);
+	updateListModel.load(); // load() is synchronous with local addons
+	auto addons = updateListModel.getItems();
+
+	// Get online addons
+	updateListModel.setLocalAddons(false);
+	QEventLoop eventLoop;
+	connect(&updateListModel, &AddonListModel::loaded, &eventLoop, &QEventLoop::quit);
+	updateListModel.load();
+	eventLoop.exec();
+	auto onlineAddons = updateListModel.getItems();
+
+	// Compare versions
+	for(int i = 0; i < addons.length(); i++)
+	{
+		int index = -1;
+		for(int j = 0; j < onlineAddons.length(); j++)
+		{
+			if(onlineAddons[j]->downloadUrls().isEmpty())
+				continue;
+			if(onlineAddons[j]->id() == addons[i]->id())
+			{
+				index = j;
+				break;
+			}
+		}
+		if(index != -1)
+		{
+			QVersionNumber currentVersion = addons[i]->version();
+			QVersionNumber newVersion = onlineAddons[index]->version();
+			if(newVersion > currentVersion)
+				updatableAddons.append(onlineAddons[index]);
+		}
+	}
+}
+
+/*! Returns true if there are addon updates available. Run getAddonUpdates() before using this function. */
+bool AddonManager::addonUpdateAvailable(void)
+{
+	return !updatableAddons.isEmpty();
+}
+
+/*! Updates installed addons. Run getAddonUpdates() before using this function. */
+void AddonManager::updateAddons()
+{
+	globalAddonManager.unloadAddons();
+	for(int i = 0; i < updatableAddons.length(); i++)
+	{
+		globalAddonManager.uninstallAddon(updatableAddons[i]->id());
+		auto model = globalAddonManager.installAddon(updatableAddons[i]);
+		QEventLoop eventLoop;
+		connect(model, &AddonModel::installedChanged, [model, &eventLoop]() {
+			if(model->installed())
+				eventLoop.quit();
+		});
+		eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+	}
+	updatableAddons.clear();
+	qApp->exit(EXIT_CODE_REBOOT);
 }
 
 /*! Saves the installed addon in the JSON file. */

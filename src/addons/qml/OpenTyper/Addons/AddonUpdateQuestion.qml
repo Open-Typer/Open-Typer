@@ -1,8 +1,8 @@
 /*
- * UpdateQuestion.qml
+ * AddonUpdateQuestion.qml
  * This file is part of Open-Typer
  *
- * Copyright (C) 2022-2023 - adazem009
+ * Copyright (C) 2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,5 +22,5 @@ import QtQuick 2.12
 import OpenTyper.UiComponents 1.0
 
 Question {
-	text: qsTr("There's a new update available. Would you like to download and install it?")
+	text: qsTr("There's a new update of one or more addons available. Would you like to update them?")
 }

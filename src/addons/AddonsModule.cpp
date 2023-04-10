@@ -22,7 +22,6 @@
 #include "AddonsModule.h"
 #include "AddonApi.h"
 #include "AddonManager.h"
-#include "updater/Updater.h"
 
 std::string AddonsModule::moduleName() const
 {
@@ -59,7 +58,7 @@ void AddonsModule::onPreInit()
 {
 	globalAddonManager.init();
 	globalAddonManager.loadAddons();
-	Updater::getAddonUpdates();
+	globalAddonManager.getAddonUpdates();
 	addonsLoaded = true;
 }
 

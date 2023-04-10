@@ -28,7 +28,9 @@
 #include <QMap>
 #include "AddonModel.h"
 #include "AddonItemModel.h"
+#include "AddonListModel.h"
 #include "global/IFileUtils.h"
+#include "global/ISettings.h"
 
 class IAddon;
 
@@ -41,6 +43,7 @@ class Q_DECL_EXPORT AddonManager : public QObject
 {
 		Q_OBJECT
 		INJECT(IFileUtils, fileUtils)
+		INJECT(ISettings, settings)
 		Q_PROPERTY(QList<AddonModel *> addons READ addons NOTIFY addonsChanged)
 	public:
 		explicit AddonManager(QObject *parent = nullptr);
@@ -55,6 +58,10 @@ class Q_DECL_EXPORT AddonManager : public QObject
 		Q_INVOKABLE void loadAddons(void);
 		Q_INVOKABLE void unloadAddons(void);
 
+		Q_INVOKABLE void getAddonUpdates(void);
+		Q_INVOKABLE bool addonUpdateAvailable(void);
+		Q_INVOKABLE void updateAddons(void);
+
 	private:
 		static QString configLocation();
 		QList<QPluginLoader *> loadAddons(const QString &path);
@@ -65,6 +72,8 @@ class Q_DECL_EXPORT AddonManager : public QObject
 		QMap<QString, QList<QPluginLoader *>> pluginLoaders;
 		QVector<IAddon *> loadedAddons;
 		QStringList loadedAddonsClasses;
+		AddonListModel updateListModel;
+		QList<AddonItemModel *> updatableAddons;
 
 		static const QString addonModelNameProperty;
 		static const QString addonModelDescriptionProperty;

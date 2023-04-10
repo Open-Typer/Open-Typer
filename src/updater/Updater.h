@@ -39,17 +39,6 @@ class Q_DECL_EXPORT Updater : public QObject
 	public:
 		Q_INVOKABLE static bool updateAvailable(void);
 		Q_INVOKABLE static void installUpdate(void);
-#ifndef Q_OS_WASM
-		Q_INVOKABLE static void getAddonUpdates(void);
-		Q_INVOKABLE static bool addonUpdateAvailable(void);
-		Q_INVOKABLE static void updateAddons(void);
-#endif
-
-	private:
-#ifndef Q_OS_WASM
-		static AddonListModel listModel;
-		static QList<AddonItemModel *> updatableAddons;
-#endif
 };
 
 #endif // UPDATER_H

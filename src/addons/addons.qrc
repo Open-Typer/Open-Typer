@@ -5,5 +5,6 @@
         <file>qml/OpenTyper/Addons/internal/AddonInfo.qml</file>
         <file>qml/OpenTyper/Addons/internal/AddonItem.qml</file>
         <file>qml/OpenTyper/Addons/AddonButtonRepeater.qml</file>
+        <file>qml/OpenTyper/Addons/AddonUpdateQuestion.qml</file>
     </qresource>
 </RCC>

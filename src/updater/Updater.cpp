@@ -22,13 +22,6 @@
 #include <QSysInfo>
 #endif
 #include "updater/Updater.h"
-#ifndef Q_OS_WASM
-#include "addons/AddonManager.h"
-#include "global/global.h"
-
-AddonListModel Updater::listModel;
-QList<AddonItemModel *> Updater::updatableAddons;
-#endif
 
 static const QString module = "updater";
 static const ISettings::Key UPDATE_CHECKS(module, "updateChecks");
@@ -72,72 +65,3 @@ void Updater::installUpdate(void)
 	exit(0);
 #endif // Q_OS_WINDOWS
 }
-
-#ifndef Q_OS_WASM
-/*! Checks for addon updates. */
-void Updater::getAddonUpdates(void)
-{
-	if(!settings()->getValue(UPDATE_CHECKS).toBool() || !internetConnected())
-		return;
-	// Get installed addons
-	listModel.setLocalAddons(true);
-	listModel.load(); // load() is synchronous with local addons
-	auto addons = listModel.getItems();
-
-	// Get online addons
-	listModel.setLocalAddons(false);
-	QEventLoop eventLoop;
-	connect(&listModel, &AddonListModel::loaded, &eventLoop, &QEventLoop::quit);
-	listModel.load();
-	eventLoop.exec();
-	auto onlineAddons = listModel.getItems();
-
-	// Compare versions
-	for(int i = 0; i < addons.length(); i++)
-	{
-		int index = -1;
-		for(int j = 0; j < onlineAddons.length(); j++)
-		{
-			if(onlineAddons[j]->downloadUrls().isEmpty())
-				continue;
-			if(onlineAddons[j]->id() == addons[i]->id())
-			{
-				index = j;
-				break;
-			}
-		}
-		if(index != -1)
-		{
-			QVersionNumber currentVersion = addons[i]->version();
-			QVersionNumber newVersion = onlineAddons[index]->version();
-			if(newVersion > currentVersion)
-				updatableAddons.append(onlineAddons[index]);
-		}
-	}
-}
-
-/*! Returns true if there are addon updates available. Run getAddonUpdates() before using this function. */
-bool Updater::addonUpdateAvailable(void)
-{
-	return !updatableAddons.isEmpty();
-}
-
-/*! Updates installed addons. Run getAddonUpdates() before using this function. */
-void Updater::updateAddons()
-{
-	globalAddonManager.unloadAddons();
-	for(int i = 0; i < updatableAddons.length(); i++)
-	{
-		globalAddonManager.uninstallAddon(updatableAddons[i]->id());
-		auto model = globalAddonManager.installAddon(updatableAddons[i]);
-		QEventLoop eventLoop;
-		connect(model, &AddonModel::installedChanged, [model, &eventLoop]() {
-			if(model->installed())
-				eventLoop.quit();
-		});
-		eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
-	}
-	updatableAddons.clear();
-	qApp->exit(EXIT_CODE_REBOOT);
-}
-#endif
