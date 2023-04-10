@@ -48,12 +48,11 @@ void AppModule::registerUiTypes()
 	qmlRegisterSingletonType<AppMenuBar>("OpenTyper", 1, 0, "AppMenuBar", [](QQmlEngine *, QJSEngine *) -> QObject * {
 		return AppMenuBar::instance().get();
 	});
+	QQmlEngine::setObjectOwnership(&m_builtInPacks, QQmlEngine::CppOwnership);
+	qmlRegisterSingletonType<BuiltInPacks>("OpenTyper", 1, 0, "BuiltInPacks", [this](QQmlEngine *, QJSEngine *) -> QObject * {
+		return &m_builtInPacks;
+	});
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
-}
-
-void AppModule::setRootContextProperties(QQmlContext *context)
-{
-	context->setContextProperty("BuiltInPacks", &m_builtInPacks);
 }
 
 void AppModule::onPreInit()

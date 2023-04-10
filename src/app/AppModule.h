@@ -31,7 +31,6 @@ class AppModule : public IModuleSetup
 
 		void initSettings() override;
 		void registerUiTypes() override;
-		void setRootContextProperties(QQmlContext *context) override;
 
 		void onPreInit() override;
 
