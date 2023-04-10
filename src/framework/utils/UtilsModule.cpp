@@ -20,7 +20,7 @@
 
 #include <QQmlEngine>
 #include "UtilsModule.h"
-#include "ExerciseTimer.h"
+#include "internal/ExerciseTimer.h"
 
 std::string UtilsModule::moduleName() const
 {

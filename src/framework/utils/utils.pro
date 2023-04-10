@@ -3,9 +3,9 @@ QT += core qml
 CONFIG += staticlib
 
 SOURCES += \
-    ExerciseTimer.cpp \
-    UtilsModule.cpp
+    UtilsModule.cpp \
+    internal/ExerciseTimer.cpp
 
 HEADERS += \
-    ExerciseTimer.h \
-    UtilsModule.h
+    UtilsModule.h \
+    internal/ExerciseTimer.h
