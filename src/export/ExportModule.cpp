@@ -22,6 +22,10 @@
 #include "ExportModule.h"
 #include "internal/ExportProvider.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+static ExportTable *tablePtr = nullptr;
+#endif
+
 std::string ExportModule::moduleName() const
 {
 	return "export";
@@ -31,9 +35,16 @@ void ExportModule::registerUiTypes()
 {
 	qmlRegisterType<ExportProvider>("OpenTyper.Export", 1, 0, "ExportProvider");
 	QQmlEngine::setObjectOwnership(m_table, QQmlEngine::CppOwnership);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	qmlRegisterSingletonType<ExportTable>("OpenTyper.Export", 1, 0, "ExportTable", [this](QQmlEngine *, QJSEngine *) -> QObject * {
 		return m_table;
 	});
+#else
+	tablePtr = m_table;
+	qmlRegisterSingletonType<ExportTable>("OpenTyper.Export", 1, 0, "ExportTable", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return tablePtr;
+	});
+#endif
 }
 
 void ExportModule::onPreInit()
