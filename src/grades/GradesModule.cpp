@@ -20,13 +20,18 @@
 
 #include <QQmlEngine>
 #include "GradesModule.h"
-#include "ClassManager.h"
+#include "internal/ClassManager.h"
 #include "internal/GradeCalculator.h"
 #include "global/ISettings.h"
 
 std::string GradesModule::moduleName() const
 {
 	return "grades";
+}
+
+void GradesModule::registerExports()
+{
+	modularity::ioc()->registerExport<IClassManager>(ClassManager::instance());
 }
 
 void GradesModule::registerResources()
@@ -48,9 +53,9 @@ void GradesModule::initSettings()
 
 void GradesModule::registerUiTypes()
 {
-	QQmlEngine::setObjectOwnership(&globalClassManager, QQmlEngine::CppOwnership);
+	QQmlEngine::setObjectOwnership(ClassManager::instance().get(), QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<ClassManager>("OpenTyper.Grades", 1, 0, "ClassManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalClassManager;
+		return ClassManager::instance().get();
 	});
 	qmlRegisterType<Class>("OpenTyper.Grades", 1, 0, "Class");
 	qmlRegisterType<GradeCalculator>("OpenTyper.Grades", 1, 0, "GradeCalculator");
@@ -60,5 +65,5 @@ void GradesModule::registerUiTypes()
 
 void GradesModule::onPreInit()
 {
-	globalClassManager.init();
+	ClassManager::instance()->init();
 }

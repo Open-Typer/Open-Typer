@@ -33,12 +33,12 @@ const QString ClassManager::descriptionProperty = "description";
 const QString ClassManager::gradingProperty = "grading";
 const QString ClassManager::targetHitsProperty = "targetHitsPerMinute";
 
-ClassManager globalClassManager;
+std::shared_ptr<ClassManager> ClassManager::m_instance = std::make_shared<ClassManager>();
 
-/*! Constructs ClassManager. */
-ClassManager::ClassManager(QObject *parent) :
-	QObject(parent)
+/*! Returns the static instance of ClassManager. */
+std::shared_ptr<ClassManager> ClassManager::instance()
 {
+	return m_instance;
 }
 
 /*! Initializes the ClassManager instance. */
@@ -138,7 +138,7 @@ int ClassManager::targetHitsPerMinute(int selectedClass)
 		return settings()->getValue(TARGET_HPM).toInt();
 	else
 	{
-		Class *classPtr = globalClassManager.m_classes[selectedClass];
+		Class *classPtr = m_classes[selectedClass];
 		int hitsForMonth = classPtr->targetHitsForMonth(QDate::currentDate().month());
 		if(hitsForMonth == 0)
 			return classPtr->targetHitsPerMinute();

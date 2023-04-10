@@ -26,7 +26,6 @@
 #include <QColor>
 #include "../ISettings.h"
 #include "global/internal/FileUtils.h"
-#include "grades/ClassManager.h"
 
 /*! \brief The Settings class manages the application settings. */
 class Q_DECL_EXPORT Settings : public ISettings

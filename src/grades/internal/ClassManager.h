@@ -22,9 +22,8 @@
 #define CLASSMANAGER_H
 
 #include <QObject>
-#include <QQmlListProperty>
 #include <QJsonDocument>
-#include "Class.h"
+#include "IClassManager.h"
 #include "global/ISettings.h"
 #include "global/IFileUtils.h"
 
@@ -33,7 +32,7 @@
  *
  * \since Open-Typer 5.1.0
  */
-class Q_DECL_EXPORT ClassManager : public QObject
+class Q_DECL_EXPORT ClassManager : public IClassManager
 {
 		Q_OBJECT
 		INJECT(ISettings, settings)
@@ -41,33 +40,23 @@ class Q_DECL_EXPORT ClassManager : public QObject
 		Q_PROPERTY(QQmlListProperty<Class> classes READ classes NOTIFY classesChanged)
 		Q_PROPERTY(QStringList classNames READ classNames NOTIFY classNamesChanged)
 	public:
-		enum GradingMethod
-		{
-			GradingMethod_Numbers = 0,
-			GradingMethod_Letters = 1
-		};
-		Q_ENUM(GradingMethod)
-
-		ClassManager(QObject *parent = nullptr);
+		static std::shared_ptr<ClassManager> instance();
 		void init();
 
-		QQmlListProperty<Class> classes(void);
-		void setClasses(QList<Class *> newClasses);
+		QQmlListProperty<Class> classes(void) override;
+		void setClasses(QList<Class *> newClasses) override;
 
-		QStringList classNames(void);
+		QStringList classNames(void) override;
 
-		Q_INVOKABLE void createNewClass(void);
-		Q_INVOKABLE void removeClass(Class *classPtr);
-		Q_INVOKABLE static int targetHitsPerMinute(void);
-		Q_INVOKABLE static int targetHitsPerMinute(int selectedClass);
-
-	signals:
-		void classesChanged();
-		void classNamesChanged();
+		Q_INVOKABLE void createNewClass(void) override;
+		Q_INVOKABLE void removeClass(Class *classPtr) override;
+		Q_INVOKABLE int targetHitsPerMinute(void) override;
+		Q_INVOKABLE int targetHitsPerMinute(int selectedClass) override;
 
 	private:
 		QString configLocation();
 		void write(void);
+		static std::shared_ptr<ClassManager> m_instance;
 		QList<Class *> m_classes;
 		QStringList m_classNames;
 		QJsonDocument doc;
@@ -77,7 +66,5 @@ class Q_DECL_EXPORT ClassManager : public QObject
 		static const QString gradingProperty;
 		static const QString targetHitsProperty;
 };
-
-extern ClassManager Q_DECL_EXPORT globalClassManager;
 
 #endif // CLASSMANAGER_H
