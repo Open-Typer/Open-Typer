@@ -25,7 +25,7 @@
 #include <QTextEdit>
 #include "ExportTable.h"
 #include "validator/IExerciseValidator.h"
-#include "lessonpack/ConfigParser.h"
+#include "lessonpack/IConfigParser.h"
 #include "ui/IThemeEngine.h"
 
 /*! \brief The ExportProvider class provides methods for the export dialog. */
@@ -33,6 +33,7 @@ class Q_DECL_EXPORT ExportProvider : public QObject
 {
 		Q_OBJECT
 		INJECT(IThemeEngine, themeEngine)
+		INJECT(IConfigParser, configParser)
 		Q_PROPERTY(IExerciseValidator *validator READ validator WRITE setValidator NOTIFY validatorChanged)
 		Q_PROPERTY(QString exportText READ exportText NOTIFY exportTextChanged)
 		Q_PROPERTY(ExportTable *table READ table WRITE setTable NOTIFY tableChanged)

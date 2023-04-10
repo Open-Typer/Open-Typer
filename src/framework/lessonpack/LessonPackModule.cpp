@@ -20,11 +20,16 @@
 
 #include <QQmlEngine>
 #include "LessonPackModule.h"
-#include "ConfigParser.h"
+#include "internal/ConfigParser.h"
 
 std::string LessonPackModule::moduleName() const
 {
 	return "lessonpack";
+}
+
+void LessonPackModule::registerExports()
+{
+	modularity::ioc()->registerExport<IConfigParser>(ConfigParser::instance());
 }
 
 void LessonPackModule::registerUiTypes()

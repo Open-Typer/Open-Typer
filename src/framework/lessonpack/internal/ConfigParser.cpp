@@ -25,11 +25,19 @@ namespace publicPos {
 	int currentLesson = 0, currentSublesson = 0, currentExercise = 0;
 }
 
+std::shared_ptr<ConfigParser> ConfigParser::m_instance = std::make_shared<ConfigParser>();
+
 /*! Constructs ConfigParser. */
 ConfigParser::ConfigParser(QObject *parent) :
 	QObject(parent)
 {
 	currentDevice = &configFile;
+}
+
+/*! Returns the static instance of ConfigParser. */
+std::shared_ptr<ConfigParser> ConfigParser::instance()
+{
+	return m_instance;
 }
 
 /*!

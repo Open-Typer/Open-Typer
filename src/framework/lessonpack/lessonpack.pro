@@ -3,9 +3,10 @@ QT += core widgets qml
 CONFIG += staticlib
 
 SOURCES += \
-    ConfigParser.cpp \
-    LessonPackModule.cpp
+    LessonPackModule.cpp \
+    internal/ConfigParser.cpp
 
 HEADERS += \
-    ConfigParser.h \
-    LessonPackModule.h
+    IConfigParser.h \
+    LessonPackModule.h \
+    internal/ConfigParser.h

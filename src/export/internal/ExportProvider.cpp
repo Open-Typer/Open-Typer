@@ -206,7 +206,7 @@ void ExportProvider::printExercise(int lesson, int sublesson, int exercise, QStr
 		QTextDocument *document = textEdit.document()->clone(dialogPtr);
 		QString title = "";
 		if(lesson + sublesson + exercise != 0)
-			title = QString("<u>%1 / %2 / %3</u><br><br>").arg(ConfigParser::lessonTr(lesson), ConfigParser::sublessonName(sublesson), ConfigParser::exerciseTr(exercise));
+			title = QString("<u>%1 / %2 / %3</u><br><br>").arg(configParser()->lessonTr(lesson), configParser()->sublessonName(sublesson), configParser()->exerciseTr(exercise));
 		document->setHtml(QString("<body>%1%2</body>").arg(title, text.toHtmlEscaped().replace("\n", "<br>")));
 		font.setPointSize(50);
 		document->adjustSize();
