@@ -24,6 +24,10 @@
 #include "settings/SettingsCategory.h"
 #include "global/ISettings.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+static BuiltInPacks *builtInPacksPtr = nullptr;
+#endif
+
 std::string AppModule::moduleName() const
 {
 	return "app";
@@ -49,9 +53,16 @@ void AppModule::registerUiTypes()
 		return AppMenuBar::instance().get();
 	});
 	QQmlEngine::setObjectOwnership(&m_builtInPacks, QQmlEngine::CppOwnership);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	qmlRegisterSingletonType<BuiltInPacks>("OpenTyper", 1, 0, "BuiltInPacks", [this](QQmlEngine *, QJSEngine *) -> QObject * {
 		return &m_builtInPacks;
 	});
+#else
+	builtInPacksPtr = &m_builtInPacks;
+	qmlRegisterSingletonType<BuiltInPacks>("OpenTyper", 1, 0, "BuiltInPacks", [](QQmlEngine *, QJSEngine *) -> QObject * {
+		return builtInPacksPtr;
+	});
+#endif
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
 }
 
