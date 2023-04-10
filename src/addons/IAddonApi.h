@@ -25,7 +25,6 @@
 #include <QQmlListProperty>
 #include "global/modularity/ioc.h"
 #include "IAddonButton.h"
-#include "ui/menubar/AppMenuModel.h"
 #include "app/settings/SettingsCategory.h"
 
 class IAddonApi : public QObject, MODULE_EXPORT_INTERFACE
@@ -47,10 +46,6 @@ class IAddonApi : public QObject, MODULE_EXPORT_INTERFACE
 		Q_ENUM(Event)
 
 		virtual bool addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource = "") = 0;
-		virtual QQmlListProperty<SettingsCategory> settingsCategories(void) = 0;
-
-		virtual void addMenu(AppMenuModel *menu) = 0;
-		virtual QQmlListProperty<AppMenuModel> menus(void) = 0;
 
 		virtual IAddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource = "") = 0;
 		virtual QQmlListProperty<IAddonButton> mainButtons(void) = 0;

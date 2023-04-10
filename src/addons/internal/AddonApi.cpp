@@ -23,7 +23,6 @@
 #include "AddonApi.h"
 #include "IAddon.h"
 #include "AddonButton.h"
-#include "app/AppMenuBar.h"
 
 std::shared_ptr<AddonApi> AddonApi::m_instance = std::make_shared<AddonApi>();
 
@@ -91,7 +90,6 @@ void AddonApi::sendEvent(Event type, QVariantMap args)
 	if(type == Event_InitApp)
 	{
 		deleteSettingsCategories();
-		deleteMenus();
 		deleteMainButtons();
 		deleteExOptionsButtons();
 		deleteNavigationButtons();
@@ -99,42 +97,6 @@ void AddonApi::sendEvent(Event type, QVariantMap args)
 	}
 	for(int i = 0; i < m_loadedAddons.count(); i++)
 		m_loadedAddons[i]->addonEvent(type, args);
-}
-
-/*! Deletes all menus. */
-void AddonApi::deleteMenus(void)
-{
-	AppMenuBar::instance()->blockSignals(true);
-	for(int i = 0; i < m_menus.length(); i++)
-	{
-		auto *menu = m_menus[i];
-		if(menu)
-		{
-			AppMenuBar::instance()->removeMenu(menu);
-			menu->deleteLater();
-		}
-	}
-	AppMenuBar::instance()->blockSignals(false);
-	emit AppMenuBar::instance()->menusChanged();
-	m_menus.clear();
-	emit menusChanged();
-}
-
-/*! Adds a menu. */
-void AddonApi::addMenu(AppMenuModel *menu)
-{
-	AppMenuBar::instance()->addMenu(menu);
-	m_menus.append(menu);
-}
-
-/*! List of menus. */
-QQmlListProperty<AppMenuModel> AddonApi::menus(void)
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-	return QQmlListProperty<AppMenuModel>(this, &m_menus);
-#else
-	return QQmlListProperty<AppMenuModel>(this, m_menus);
-#endif
 }
 
 /*! Deletes all buttons in the main section. */

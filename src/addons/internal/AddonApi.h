@@ -31,7 +31,6 @@
 #include "IAddonApi.h"
 #include "app/settings/SettingsCategory.h"
 #include "IAddonButton.h"
-#include "ui/menubar/AppMenuModel.h"
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 Q_MOC_INCLUDE("IAddon.h")
 #endif
@@ -44,7 +43,6 @@ class Q_DECL_EXPORT AddonApi : public IAddonApi
 		Q_OBJECT
 		Q_PROPERTY(QVector<IAddon *> loadedAddons READ loadedAddons WRITE setLoadedAddons)
 		Q_PROPERTY(QQmlListProperty<SettingsCategory> settingsCategories READ settingsCategories NOTIFY settingsCategoriesChanged)
-		Q_PROPERTY(QQmlListProperty<AppMenuModel> menus READ menus NOTIFY menusChanged)
 		Q_PROPERTY(QQmlListProperty<IAddonButton> mainButtons READ mainButtons NOTIFY mainButtonsChanged)
 		Q_PROPERTY(QQmlListProperty<IAddonButton> exOptionsButtons READ exOptionsButtons NOTIFY exOptionsButtonsChanged)
 		Q_PROPERTY(QQmlListProperty<IAddonButton> navigationButtons READ navigationButtons NOTIFY navigationButtonsChanged)
@@ -57,10 +55,7 @@ class Q_DECL_EXPORT AddonApi : public IAddonApi
 		void setLoadedAddons(QVector<IAddon *> newLoadedAddons);
 
 		bool addSettingsCategory(QString categoryName, QString qmlFileName, QString iconName, QString iconSource = "") override;
-		QQmlListProperty<SettingsCategory> settingsCategories(void) override;
-
-		void addMenu(AppMenuModel *menu) override;
-		QQmlListProperty<AppMenuModel> menus(void) override;
+		QQmlListProperty<SettingsCategory> settingsCategories(void);
 
 		IAddonButton *addMainButton(QString text, QString toolTip, QString iconName, QString iconSource = "") override;
 		QQmlListProperty<IAddonButton> mainButtons(void) override;
@@ -76,7 +71,6 @@ class Q_DECL_EXPORT AddonApi : public IAddonApi
 
 	private:
 		void deleteSettingsCategories(void);
-		void deleteMenus(void);
 		void deleteMainButtons(void);
 		void deleteExOptionsButtons(void);
 		void deleteNavigationButtons(void);
@@ -87,7 +81,6 @@ class Q_DECL_EXPORT AddonApi : public IAddonApi
 		static std::shared_ptr<AddonApi> m_instance;
 		QVector<IAddon *> m_loadedAddons;
 		QList<SettingsCategory *> m_settingsCategories;
-		QList<AppMenuModel *> m_menus;
 		QList<IAddonButton *> m_mainButtons;
 		QList<IAddonButton *> m_exOptionsButtons;
 		QList<IAddonButton *> m_navigationButtons;
