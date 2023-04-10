@@ -103,18 +103,18 @@ void AddonApi::sendEvent(Event type, QVariantMap args)
 /*! Deletes all menus. */
 void AddonApi::deleteMenus(void)
 {
-	globalMenuBar.blockSignals(true);
+	AppMenuBar::instance()->blockSignals(true);
 	for(int i = 0; i < m_menus.length(); i++)
 	{
 		auto *menu = m_menus[i];
 		if(menu)
 		{
-			globalMenuBar.removeMenu(menu);
+			AppMenuBar::instance()->removeMenu(menu);
 			menu->deleteLater();
 		}
 	}
-	globalMenuBar.blockSignals(false);
-	globalMenuBar.menusChanged();
+	AppMenuBar::instance()->blockSignals(false);
+	emit AppMenuBar::instance()->menusChanged();
 	m_menus.clear();
 	emit menusChanged();
 }
@@ -122,7 +122,7 @@ void AddonApi::deleteMenus(void)
 /*! Adds a menu. */
 void AddonApi::addMenu(AppMenuModel *menu)
 {
-	globalMenuBar.addMenu(menu);
+	AppMenuBar::instance()->addMenu(menu);
 	m_menus.append(menu);
 }
 

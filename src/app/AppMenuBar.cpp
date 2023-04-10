@@ -23,7 +23,7 @@
 #include <QUrl>
 #include "AppMenuBar.h"
 
-AppMenuBar globalMenuBar;
+std::shared_ptr<AppMenuBar> AppMenuBar::m_instance = std::make_shared<AppMenuBar>();
 
 /*! Creates default menus. */
 void AppMenuBar::createMenus(void)
@@ -89,6 +89,12 @@ void AppMenuBar::createMenus(void)
 	m_menus.append(&helpMenu);
 
 	updateMenus();
+}
+
+/*! Returns the static instance of AppMenuBar. */
+std::shared_ptr<AppMenuBar> AppMenuBar::instance()
+{
+	return m_instance;
 }
 
 /*! Updates default menus. */

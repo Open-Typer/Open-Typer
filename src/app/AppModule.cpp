@@ -44,9 +44,9 @@ void AppModule::initSettings()
 
 void AppModule::registerUiTypes()
 {
-	QQmlEngine::setObjectOwnership(&globalMenuBar, QQmlEngine::CppOwnership);
+	QQmlEngine::setObjectOwnership(AppMenuBar::instance().get(), QQmlEngine::CppOwnership);
 	qmlRegisterSingletonType<AppMenuBar>("OpenTyper", 1, 0, "AppMenuBar", [](QQmlEngine *, QJSEngine *) -> QObject * {
-		return &globalMenuBar;
+		return AppMenuBar::instance().get();
 	});
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
 }
@@ -58,5 +58,5 @@ void AppModule::setRootContextProperties(QQmlContext *context)
 
 void AppModule::onPreInit()
 {
-	globalMenuBar.init();
+	AppMenuBar::instance()->init();
 }

@@ -46,6 +46,7 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 		Q_PROPERTY(AppMenuItem *aboutProgramAction READ aboutProgramAction NOTIFY aboutProgramActionChanged)
 
 	public:
+		static std::shared_ptr<AppMenuBar> instance();
 		void updateMenus(void) override;
 
 		AppMenuItem *openAction(void);
@@ -60,6 +61,7 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 
 	private:
 		void createMenus(void) override;
+		static std::shared_ptr<AppMenuBar> m_instance;
 		bool blockDarkThemeActionConnection = false;
 
 		// File
@@ -108,7 +110,5 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 		void preferencesActionChanged();
 		void aboutProgramActionChanged();
 };
-
-extern AppMenuBar Q_DECL_EXPORT globalMenuBar;
 
 #endif // APPMENUBAR_H
