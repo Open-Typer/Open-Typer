@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/OpenTyper/History/ExerciseHistory.qml</file>
+        <file>qml/OpenTyper/History/qmldir</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,4 @@
+module OpenTyper.Addons
+AddonButtonRepeater 1.0 AddonButtonRepeater.qml
+AddonSettings 1.0 AddonSettings.qml
+AddonUpdateQuestion 1.0 AddonUpdateQuestion.qml

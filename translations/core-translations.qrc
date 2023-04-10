@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/res/lang">
-        <file>libcore_sk_SK.qm</file>
-        <file>libcore_de_DE.qm</file>
-        <file>libcore_ru_RU.qm</file>
-    </qresource>
-</RCC>

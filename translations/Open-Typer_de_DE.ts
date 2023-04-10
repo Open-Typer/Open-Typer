@@ -60,6 +60,96 @@
     </message>
 </context>
 <context>
+    <name>AddonUpdateQuestion</name>
+    <message>
+        <source>There&apos;s a new update of one or more addons available. Would you like to update them?</source>
+        <translation type="unfinished">Es ist ein neues Update von einem oder mehreren Addons verfügbar. Möchten Sie sie aktualisieren?</translation>
+    </message>
+</context>
+<context>
+    <name>AppMenuBar</name>
+    <message>
+        <source>&amp;File</source>
+        <translation>&amp;Datei</translation>
+    </message>
+    <message>
+        <source>Open...</source>
+        <translation>Öffnen...</translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation>Drucken</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Beenden</translation>
+    </message>
+    <message>
+        <source>&amp;View</source>
+        <translation>&amp;Sicht</translation>
+    </message>
+    <message>
+        <source>User interface</source>
+        <translation>Benutzeroberfläche</translation>
+    </message>
+    <message>
+        <source>Dark theme</source>
+        <translation>Dunkles Thema</translation>
+    </message>
+    <message>
+        <source>&amp;Tools</source>
+        <translation>&amp;Werkzeuge</translation>
+    </message>
+    <message>
+        <source>Typing test</source>
+        <translation>Tipp Test</translation>
+    </message>
+    <message>
+        <source>&amp;Exercise</source>
+        <translation>&amp;Aufgabe</translation>
+    </message>
+    <message>
+        <source>Exercise history</source>
+        <translation>Aufgabe Verlauf</translation>
+    </message>
+    <message>
+        <source>Timed exercise</source>
+        <translation>Zeitbegrenzte Aufgabe</translation>
+    </message>
+    <message>
+        <source>Text from error words</source>
+        <translation>Text aus Fehlerwörtern</translation>
+    </message>
+    <message>
+        <source>Reverse text</source>
+        <translation>Text umkehren</translation>
+    </message>
+    <message>
+        <source>&amp;Options</source>
+        <translation>&amp;Optionen</translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation>Präferenzen</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation>&amp;Hilfe</translation>
+    </message>
+    <message>
+        <source>&amp;Online documentation</source>
+        <translation>&amp;Online Dokumentation</translation>
+    </message>
+    <message>
+        <source>About program...</source>
+        <translation>Über Programm...</translation>
+    </message>
+    <message>
+        <source>About Qt...</source>
+        <translation>Über Qt...</translation>
+    </message>
+</context>
+<context>
     <name>AppearanceSettings</name>
     <message>
         <source>Set custom</source>
@@ -158,6 +248,44 @@
     </message>
 </context>
 <context>
+    <name>ClassManager</name>
+    <message>
+        <source>Unnamed class</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConfigParser</name>
+    <message>
+        <source>Touch</source>
+        <translation>Berühren</translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation>Wörter</translation>
+    </message>
+    <message>
+        <source>Sentences</source>
+        <translation>Sätze</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Lesson %1</source>
+        <translation>Lektion %1</translation>
+    </message>
+    <message>
+        <source>Sublesson %1</source>
+        <translation>Unter Lektion %1</translation>
+    </message>
+    <message>
+        <source>Exercise %1</source>
+        <translation>Aufgabe %1</translation>
+    </message>
+</context>
+<context>
     <name>ExerciseHistory</name>
     <message>
         <source>Error penalty: %1</source>
@@ -206,6 +334,18 @@
     <message>
         <source>Accuracy:</source>
         <translation>Richtigkeit:</translation>
+    </message>
+    <message>
+        <source>Class:</source>
+        <translation type="unfinished">Klasse:</translation>
+    </message>
+    <message>
+        <source>No class selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grade:</source>
+        <translation type="unfinished">Kennzeichen:</translation>
     </message>
 </context>
 <context>
@@ -299,6 +439,103 @@
     </message>
 </context>
 <context>
+    <name>GradeSettings</name>
+    <message>
+        <source>Selected class:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No class selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure grading for classes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GradingClassConfig</name>
+    <message>
+        <source>Classes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add class</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GradingConfig</name>
+    <message>
+        <source>Name:</source>
+        <extracomment>Class name</extracomment>
+        <translation type="unfinished">Name:</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished">Beschreibung:</translation>
+    </message>
+    <message>
+        <source>Enter description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Target number of hits per minute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grades</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use letters</source>
+        <extracomment>Use &quot;characters&quot; would be valid too</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Worst grade:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Best grade:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <extracomment>Type of something</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Net hits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gross hits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grading based on months</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset (%1)</source>
+        <extracomment>To reset a value</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>InitialSetup</name>
     <message>
         <source>%1 Setup</source>
@@ -354,6 +591,13 @@
     <message>
         <source>Show keyboard</source>
         <translation>Anzeigen die Tastatur</translation>
+    </message>
+</context>
+<context>
+    <name>LanguageManager</name>
+    <message>
+        <source>System (default)</source>
+        <translation>System (Standard)</translation>
     </message>
 </context>
 <context>
@@ -447,148 +691,34 @@
     </message>
 </context>
 <context>
-    <name>PackEditor</name>
-    <message>
-        <source>Open-Typer Pack Editor</source>
-        <translation>Open-Typer Packet Editor</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation>Datei</translation>
-    </message>
-    <message>
-        <source>Sublesson:</source>
-        <translation>Unter Lektion:</translation>
-    </message>
-    <message>
-        <source>Exercise:</source>
-        <translation>Aufgabe:</translation>
-    </message>
-    <message>
-        <source>Lesson:</source>
-        <translation>Lektion:</translation>
-    </message>
-    <message>
-        <source>Lesson options:</source>
-        <translation>Lektions Optionen:</translation>
-    </message>
-    <message>
-        <source>Description:</source>
-        <translation>Beschreibung:</translation>
-    </message>
-    <message>
-        <source>Revision</source>
-        <translation>Revision</translation>
-    </message>
-    <message>
-        <source>Exercise options:</source>
-        <translation>Aufgaben Optionen:</translation>
-    </message>
-    <message>
-        <source>Repeating:</source>
-        <translation>Wiederholend:</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Keine</translation>
-    </message>
-    <message>
-        <source>Words</source>
-        <translation>Wörter</translation>
-    </message>
-    <message>
-        <source>Line length:</source>
-        <translation>Zeilen Länge:</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Neu</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
-    </message>
-    <message>
-        <source>Open built-in pack</source>
-        <translation>Built-In Packet öffnen</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Speichern</translation>
-    </message>
-    <message>
-        <source>Save As...</source>
-        <translation>Speichern unter...</translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation>Unbenannt</translation>
-    </message>
-    <message>
-        <source>Save changes to &quot;%1&quot; before closing?</source>
-        <translation>Änderungen speichern als &quot;%1&quot; bevor schließen?</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <source>Close without saving</source>
-        <translation>Ohne speichern schließen</translation>
-    </message>
-    <message>
-        <source>empty</source>
-        <translation>Leer</translation>
-    </message>
-    <message>
-        <source>New exercise</source>
-        <translation>Neue Aufgabe</translation>
-    </message>
-    <message>
-        <source>Text length:</source>
-        <translation>Text länge:</translation>
-    </message>
-    <message>
-        <source>Open-Typer pack files</source>
-        <translation>Open-Typer-Paketdateien</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation>Alle Dateien</translation>
-    </message>
-</context>
-<context>
-    <name>PackSelector</name>
-    <message>
-        <source>Open built-in pack</source>
-        <translation>Built-In Packet öffnen</translation>
-    </message>
-    <message>
-        <source>Choose built-in pack:</source>
-        <translation>Built-In Packet auswählen:</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <source>Load</source>
-        <translation>Laden</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
         <source>Version: %1</source>
         <translation>Version: %1</translation>
     </message>
     <message>
-        <source>Opening main window...</source>
-        <translation>Hauptfenster wird geöffnet...</translation>
+        <source>Revision</source>
+        <translation>Revision</translation>
     </message>
     <message>
-        <source>Loading addons...</source>
-        <translation>Addons werden geladen...</translation>
+        <source>Shift</source>
+        <comment>Shift key</comment>
+        <translation>Shift</translation>
+    </message>
+    <message>
+        <source>auto-generated</source>
+        <translation>automatisch generiert</translation>
+    </message>
+    <message>
+        <source>Unknown pack</source>
+        <translation>Unbekanntes Paket</translation>
+    </message>
+</context>
+<context>
+    <name>QmlFileDialog</name>
+    <message>
+        <source>All files</source>
+        <translation>Alle Dateien</translation>
     </message>
 </context>
 <context>
@@ -616,6 +746,17 @@
     <message>
         <source>Addons</source>
         <translation>Addons</translation>
+    </message>
+    <message>
+        <source>Grades</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SplashScreen</name>
+    <message>
+        <source>Loading...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -699,10 +840,6 @@
     <message>
         <source>There&apos;s a new update available. Would you like to download and install it?</source>
         <translation>Es ist ein neues Update verfügbar. Möchtest du es herunterladen und installieren?</translation>
-    </message>
-    <message>
-        <source>There&apos;s a new update of one or more addons available. Would you like to update them?</source>
-        <translation>Es ist ein neues Update von einem oder mehreren Addons verfügbar. Möchten Sie sie aktualisieren?</translation>
     </message>
 </context>
 </TS>

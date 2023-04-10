@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/OpenTyper/Updater/UpdateQuestion.qml</file>
+        <file>qml/OpenTyper/Updater/qmldir</file>
+    </qresource>
+</RCC>
