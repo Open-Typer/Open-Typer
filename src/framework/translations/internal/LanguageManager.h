@@ -31,7 +31,6 @@
 #include "../ILanguageManager.h"
 
 extern QTranslator *translator_app;
-extern QTranslator *translator_libcore;
 extern QTranslator *translator_qt;
 
 /*!

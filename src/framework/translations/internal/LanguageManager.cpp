@@ -22,7 +22,6 @@
 #include "LanguageManager.h"
 
 QTranslator *translator_app = nullptr;
-QTranslator *translator_libcore = nullptr;
 QTranslator *translator_qt = nullptr;
 
 std::shared_ptr<LanguageManager> LanguageManager::m_instance = std::make_shared<LanguageManager>();
@@ -51,11 +50,6 @@ void LanguageManager::setLanguage(int index)
 		translator_app = new QTranslator(qApp);
 		QCoreApplication::installTranslator(translator_app);
 	}
-	if(!translator_libcore)
-	{
-		translator_libcore = new QTranslator(qApp);
-		QCoreApplication::installTranslator(translator_libcore);
-	}
 	if(!translator_qt)
 	{
 		translator_qt = new QTranslator(qApp);
@@ -63,7 +57,6 @@ void LanguageManager::setLanguage(int index)
 	}
 	m_index = index;
 	std::ignore = translator_app->load(targetLocale, "Open-Typer", "_", ":/i18n");
-	std::ignore = translator_libcore->load(targetLocale, "libcore", "_", ":/i18n");
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	std::ignore = translator_qt->load(targetLocale.language(), "qt", "_", QLibraryInfo::path(QLibraryInfo::TranslationsPath));
 #else
