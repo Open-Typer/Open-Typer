@@ -137,7 +137,7 @@ CustomDialog {
 					Label {
 						text: provider.exportText
 						font.family: ThemeEngine.fontFamily
-						font.bold: ThemeEngine.fontBold
+						font.bold: true
 						font.pointSize: 14
 					}
 
