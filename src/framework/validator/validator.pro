@@ -1,5 +1,5 @@
 TEMPLATE = lib
-QT += core widgets qml
+QT += core qml
 CONFIG += staticlib
 
 SOURCES += \

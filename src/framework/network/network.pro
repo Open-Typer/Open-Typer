@@ -1,5 +1,5 @@
 TEMPLATE = lib
-QT += core qml network
+QT += core network
 CONFIG += staticlib
 
 HEADERS += \
