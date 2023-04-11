@@ -22,7 +22,6 @@
 #define IMODULESETUP_H
 
 #include <string>
-#include <QQmlContext>
 
 /*!
  * \brief An interface for setting up modules.
@@ -40,7 +39,6 @@ class IModuleSetup
 		virtual void registerResources() { }
 		virtual void initSettings() { }
 		virtual void registerUiTypes() { }
-		virtual void setRootContextProperties(QQmlContext *context) { Q_UNUSED(context); }
 
 		virtual void onPreInit() { }
 		virtual void onInit() { }

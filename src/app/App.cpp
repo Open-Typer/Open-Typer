@@ -84,8 +84,6 @@ int App::run(int argc, char **argv)
 		for(IModuleSetup *module : m_modules)
 			module->onInit();
 		QQmlApplicationEngine engine;
-		for(IModuleSetup *module : m_modules)
-			module->setRootContextProperties(engine.rootContext());
 		engine.rootContext()->setContextProperty("rootItem", LanguageManager::instance().get());
 		QObject::connect(LanguageManager::instance().get(), &LanguageManager::languageChanged, &engine, &QQmlApplicationEngine::retranslate);
 		UiEngine::instance()->setQmlEngine(&engine);
