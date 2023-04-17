@@ -27,6 +27,8 @@
 class IStringUtils : MODULE_EXPORT_INTERFACE
 {
 	public:
+		virtual ~IStringUtils() { }
+
 		virtual int wordCount(QString str) = 0;
 		virtual int charCount(QString str, QChar ch) = 0;
 		virtual QString word(QString str, int id) = 0;

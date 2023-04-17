@@ -27,6 +27,8 @@
 class IFileUtils : MODULE_EXPORT_INTERFACE
 {
 	public:
+		virtual ~IFileUtils() { }
+
 		virtual QString configLocation(void) = 0;
 		virtual QString mainSettingsLocation(void) = 0;
 		virtual QString fileName(QString path) = 0;
