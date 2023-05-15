@@ -64,12 +64,6 @@ void AppModule::registerUiTypes()
 	});
 #endif
 	qmlRegisterType<SettingsCategory>("OpenTyper", 1, 0, "SettingsCategory");
-
-#ifdef Q_OS_WASM
-	qmlRegisterModule("OpenTyper.Addons", 1, 0);
-	qmlRegisterType<QObject *>("OpenTyper.Addons", 1, 0, "AddonButtonRepeater");
-	qmlRegisterType<QObject *>("OpenTyper.Addons", 1, 0, "AddonUpdateQuestion");
-#endif
 }
 
 void AppModule::onPreInit()
