@@ -25,7 +25,6 @@ import QtQuick.Window 2.12
 import OpenTyper 1.0
 import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
-import OpenTyper.Addons 1.0
 import OpenTyper.Global 1.0
 import "../core"
 import "../settings"
@@ -69,12 +68,6 @@ CustomDialog {
 					name: qsTr("Appearance")
 					iconName: "appearance"
 					qmlFileName: "settings/AppearanceSettings.qml"
-				},
-				SettingsCategory {
-					name: qsTr("Addons")
-					iconName: "add"
-					qmlFileName: "OpenTyper/Addons/AddonSettings.qml"
-					visible: !QmlUtils.osWasm()
 				}
 			]
 			id: listView
@@ -97,18 +90,6 @@ CustomDialog {
 			}
 			implicitHeight: contentHeight
 			model: categories
-			function updateAddonCategories() {
-				for(var i = 0; i < AddonApi.settingsCategories.length; i++)
-				{
-					listView.categories.push(AddonApi.settingsCategories[i]);
-				}
-			}
-			Connections {
-				target: AddonApi
-				onSettingsCategoriesChanged: {
-					updateAddonCategories();
-				}
-			}
 			delegate: ItemDelegate {
 				property string source: "../" + modelData.qmlFileName
 				text: modelData.name
@@ -147,7 +128,6 @@ CustomDialog {
 			FontMetrics {
 				id: metrics
 			}
-			Component.onCompleted: updateAddonCategories()
 			onActiveFocusChanged: {
 				if(forceListFocus)
 				{
