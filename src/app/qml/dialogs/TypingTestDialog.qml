@@ -23,7 +23,7 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import OpenTyper.UiComponents 1.0
 
-CustomDialog {
+OldCustomDialog {
 	property var parserObj: null
 	property string exerciseText
 	property bool timed: contentItem.timeLimitCheckBox.checked

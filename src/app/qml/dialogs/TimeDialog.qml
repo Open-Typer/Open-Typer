@@ -23,7 +23,7 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import OpenTyper.UiComponents 1.0
 
-CustomDialog {
+OldCustomDialog {
 	readonly property var itemStrings: ["1 min", "2 min 30 s", "5 min", "10 min"]
 	readonly property var itemValues: [60, 150, 300, 600]
 	property int timeSecs: contentItem.timeSecs

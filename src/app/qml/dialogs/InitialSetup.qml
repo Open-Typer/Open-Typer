@@ -28,7 +28,7 @@ import OpenTyper.Global 1.0
 import "../settings"
 import ".."
 
-CustomDialog {
+OldCustomDialog {
 	readonly property var pages: [ localizationPage, lessonPackPage, appearancePage ]
 	property int currentIndex: 0
 	property int keyboardLayout: -1

@@ -24,7 +24,7 @@ import QtQuick.Layouts 1.12
 import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
 
-CustomDialog {
+OldCustomDialog {
 	//: For example "About Open-Typer" (%1 is the app name)
 	windowTitle: qsTr("About %1").arg(Qt.application.displayName)
 	standardButtons: Dialog.Ok

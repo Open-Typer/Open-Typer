@@ -25,7 +25,7 @@ import OpenTyper.Grades 1.0
 import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
 
-CustomDialog {
+OldCustomDialog {
 	id: root
 	windowTitle: qsTr("Classes")
 	draggable: false

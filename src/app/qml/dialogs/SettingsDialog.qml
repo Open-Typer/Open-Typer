@@ -29,7 +29,7 @@ import OpenTyper.Global 1.0
 import "../core"
 import "../settings"
 
-CustomDialog {
+OldCustomDialog {
 	property bool focusFromList: false
 	property bool forceListFocus: false
 	property bool freezeList: false

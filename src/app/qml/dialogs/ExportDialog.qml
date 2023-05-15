@@ -27,7 +27,7 @@ import OpenTyper.UiComponents 1.0
 import OpenTyper.Export 1.0
 import OpenTyper.Validator 1.0
 
-CustomDialog {
+OldCustomDialog {
 	readonly property string studentName: contentItem.studentName
 	readonly property string className: contentItem.className
 	readonly property string testNumber: contentItem.testNumber
