@@ -192,17 +192,33 @@ KeyboardLayout::Hand KeyboardLayout::fingerHand(Finger finger)
  * Ď -> LShift + ´ (ˇ) + RShift + d\n
  * (on Slovak keyboard layout)
  */
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 KeyboardRow KeyboardLayout::characterKeys(QChar character)
+#else
+QVariantList KeyboardLayout::characterKeys(QChar character)
+#endif
 {
 	if(character == ' ')
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 		return { Key(" ", " ") };
+#else
+		return { QVariant::fromValue(Key(" ", " ")) };
+#endif
 	else if(character == '\n')
 	{
 		Key returnKey("\n", "\n");
 		returnKey.setType(KeyboardUtils::KeyType_Return);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 		return { returnKey };
+#else
+		return { QVariant::fromValue(returnKey) };
+#endif
 	}
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	QList<Key> keys;
+#else
+	QVariantList keys;
+#endif
 	Row row;
 	int id;
 	bool shift, ok;
@@ -213,11 +229,23 @@ KeyboardRow KeyboardLayout::characterKeys(QChar character)
 		{
 			Key shiftKey;
 			shiftKey.setType(getShiftKey(row, id));
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 			keys.append(shiftKey);
+#else
+			keys.append(QVariant::fromValue(shiftKey));
+#endif
 		}
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 		keys.append(k);
+#else
+		keys.append(QVariant::fromValue(k));
+#endif
 		if(k.isDead())
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 			keys.append(Key(" ", ""));
+#else
+			keys.append(QVariant::fromValue(Key(" ", "")));
+#endif
 	}
 	else
 	{
@@ -227,12 +255,20 @@ KeyboardRow KeyboardLayout::characterKeys(QChar character)
 			k = findKey(normalized[i], &row, &id, &shift, &ok);
 			if(ok)
 			{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 				keys.prepend(k);
+#else
+				keys.prepend(QVariant::fromValue(k));
+#endif
 				if(shift)
 				{
 					Key shiftKey;
 					shiftKey.setType(getShiftKey(row, id));
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 					keys.prepend(shiftKey);
+#else
+					keys.prepend(QVariant::fromValue(shiftKey));
+#endif
 				}
 			}
 		}

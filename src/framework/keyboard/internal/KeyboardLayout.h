@@ -97,7 +97,11 @@ class Q_DECL_EXPORT KeyboardLayout : public QObject
 #endif
 		Q_INVOKABLE Finger keyFinger(Row row, int id);
 		Q_INVOKABLE Hand fingerHand(Finger finger);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 		Q_INVOKABLE KeyboardRow characterKeys(QChar character);
+#else
+		Q_INVOKABLE QVariantList characterKeys(QChar character);
+#endif
 
 	private:
 		void init(void);
