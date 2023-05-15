@@ -27,7 +27,6 @@ import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper 1.0
 import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
-import OpenTyper.Addons 1.0
 import OpenTyper.Updater 1.0
 import OpenTyper.History 1.0
 import OpenTyper.LessonPack 1.0
@@ -368,7 +367,6 @@ ApplicationWindow {
 							exportProvider.printExercise(currentLesson, currentAbsoluteSublesson, currentExercise, displayExercise);
 					}
 				}
-				AddonButtonRepeater { model: AddonApi.mainButtons }
 				ToolSeparator {}
 				CustomToolButton {
 					id: typingTestButton
@@ -431,7 +429,6 @@ ApplicationWindow {
 						loadText(newText, true);
 					}
 				}
-				AddonButtonRepeater { model: AddonApi.exOptionsButtons }
 			}
 		}
 		Panel {
@@ -470,7 +467,6 @@ ApplicationWindow {
 					toolTipText: qsTr("Next exercise")
 					onClicked: nextExercise();
 				}
-				AddonButtonRepeater { model: AddonApi.navigationButtons }
 				CustomComboBox { id: lessonBox; onActivated: selectLesson(index); }
 				CustomComboBox { id: sublessonBox; onActivated: selectSublesson(index); }
 				CustomComboBox { id: exerciseBox; onActivated: selectExercise(index); }
@@ -481,7 +477,6 @@ ApplicationWindow {
 					text: qsTr("Exercise history")
 					checkable: true
 				}
-				AddonButtonRepeater { model: AddonApi.exInfoButtons }
 			}
 		}
 		Panel {
@@ -517,18 +512,6 @@ ApplicationWindow {
 			onAccepted: Updater.installUpdate()
 			Component.onCompleted: {
 				if(Updater.updateAvailable())
-					visible = true;
-			}
-			onOpacityChanged: mainLayoutSource.render()
-			onVisibleChanged: mainLayoutSource.render()
-		}
-		AddonUpdateQuestion {
-			id: addonUpdateQuestion
-			visible: false
-			Layout.fillWidth: true
-			onAccepted: AddonManager.updateAddons()
-			Component.onCompleted: {
-				if(AddonManager.addonUpdateAvailable())
 					visible = true;
 			}
 			onOpacityChanged: mainLayoutSource.render()
@@ -671,7 +654,6 @@ ApplicationWindow {
 		paper.errorPenalty = Settings.getValue("app", "errorPenalty");
 		highlightNextKey();
 		keyboard.releaseAllKeys();
-		AddonApi.sendEvent(AddonApi.Event_RefreshApp);
 	}
 
 	function loadPack(name) {
@@ -796,7 +778,6 @@ ApplicationWindow {
 		panel2.contents.statsButton.enabled = enableStats;
 		// Reload menu bar
 		QmlUtils.reloadMenuBar();
-		AddonApi.sendEvent(AddonApi.Event_InitExercise);
 	}
 
 	function updateText() {
@@ -1236,8 +1217,6 @@ ApplicationWindow {
 				"mistakes": exerciseMistakes,
 				"time": time
 			};
-			AddonApi.sendEvent(AddonApi.Event_EndStockExercise, eventArgs);
-			// The result will always be saved locally - even if an addon uses it
 			historyParser.append(grossHitsPerMinute, exerciseMistakes, time);
 		}
 		if(testLoaded)
@@ -1256,7 +1235,6 @@ ApplicationWindow {
 				"inputText": fullInput,
 				"time": time
 			};
-			AddonApi.sendEvent(AddonApi.Event_EndTypingTest, args);
 			uiLocked = false;
 			testLoaded = false;
 		}
@@ -1305,7 +1283,6 @@ ApplicationWindow {
 	}
 
 	function loadTestFinished() {
-		AddonApi.sendEvent(AddonApi.Event_CustomExLoaded);
 		initTest(typingTestDialog.exerciseText, parser.defaultLineLength(), true, (typingTestDialog.timed ? 1 : 0),
 			 typingTestDialog.timeLimitSecs, typingTestDialog.correctMistakes, typingTestDialog.lockUi, typingTestDialog.hideText);
 	}
@@ -1328,7 +1305,6 @@ ApplicationWindow {
 
 	function changeMode(mode) {
 		currentMode = mode;
-		AddonApi.sendEvent(AddonApi.Event_ChangeMode);
 	}
 
 	function startTimedExercise(time)
@@ -1397,7 +1373,6 @@ ApplicationWindow {
 		QmlUtils.bgBlur = bgBlur;
 		QmlUtils.menuBarBlur = menuBarBlur;
 		QmlUtils.activeFocusItem = Qt.binding(function() { return root.activeFocusItem; });
-		AddonApi.sendEvent(AddonApi.Event_InitApp);
 		if(!Settings.getValue("app", "initFinished"))
 			initialSetup.open();
 		reload();
