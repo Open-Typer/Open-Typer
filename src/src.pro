@@ -14,8 +14,3 @@ app.depends = \
     grades \
     history \
     updater
-
-!wasm {
-    SUBDIRS += addons
-    app.depends += addons
-}

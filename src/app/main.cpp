@@ -29,7 +29,6 @@
 #include "utils/UtilsModule.h"
 #include "validator/ValidatorModule.h"
 #ifndef Q_OS_WASM
-#include "addons/AddonsModule.h"
 #include "network/NetworkModule.h"
 #endif
 #include "export/ExportModule.h"
@@ -51,7 +50,6 @@ int main(int argc, char *argv[])
 	// Application modules
 	app.addModule(new AppModule);
 #ifndef Q_OS_WASM
-	app.addModule(new AddonsModule);
 	app.addModule(new NetworkModule);
 #endif
 	app.addModule(new ExportModule);
