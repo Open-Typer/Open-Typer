@@ -27,17 +27,17 @@ import OpenTyper.UiComponents 1.0
 import OpenTyper.Export 1.0
 import OpenTyper.Validator 1.0
 
-OldCustomDialog {
-	readonly property string studentName: contentItem.studentName
-	readonly property string className: contentItem.className
-	readonly property string testNumber: contentItem.testNumber
-	readonly property string grade: contentItem.grade
+CustomDialog {
+	readonly property string studentName: contents.studentName
+	readonly property string className: contents.className
+	readonly property string testNumber: contents.testNumber
+	readonly property string grade: contents.grade
 	property ExerciseValidator validator
 	id: root
-	windowTitle: qsTr("Export text")
+	title: qsTr("Export text")
 	standardButtons: Dialog.Close
-	fillWindow: true
-	draggable: false
+	fixedSize: false
+	maximized: true
 	onAboutToShow: repaintTimer.start()
 
 	ExportProvider {
@@ -53,7 +53,7 @@ OldCustomDialog {
 		onTriggered: ExportTable.updateModel()
 	}
 
-	contentComponent: ColumnLayout {
+	contentItem: ColumnLayout {
 		readonly property string studentName: studentNameField.text
 		readonly property string className: classNameField.text
 		readonly property string testNumber: testNumberField.text
