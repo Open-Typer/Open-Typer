@@ -38,7 +38,6 @@ Item {
 	readonly property alias dialog: control
 	property alias contentItem: contentsLoader.sourceComponent
 	readonly property alias contents: contentsLoader.item
-	property bool draggable: true
 	property bool fixedSize: true
 	property bool maximized: false
 	property int nativeDialogMinimumWidth
@@ -217,9 +216,9 @@ Item {
 					text: root.title
 					horizontalAlignment: Qt.AlignHCenter
 					visible: text != ""
-					Drag.active: draggable
+					Drag.active: !maximized || fixedSize
 					MouseArea {
-						enabled: draggable
+						enabled: !maximized || fixedSize
 						anchors.fill: parent
 						drag.target: dialogMask
 						onPressed: dialogMask.anchors.centerIn = undefined;
