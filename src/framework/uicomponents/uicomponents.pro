@@ -8,12 +8,14 @@ SOURCES += \
     UiComponentsModule.cpp \
     internal/QmlFileDialog.cpp \
     internal/QmlWidget.cpp \
+    internal/QuickWindow.cpp \
     view/DialogView.cpp
 
 HEADERS += \
     UiComponentsModule.h \
     internal/QmlFileDialog.h \
     internal/QmlWidget.h \
+    internal/QuickWindow.h \
     view/DialogView.h
 
 wasm {
