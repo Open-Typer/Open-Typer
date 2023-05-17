@@ -36,8 +36,7 @@ Item {
 	property int standardButtons: Dialog.NoButton
 	readonly property color dialogColor: ThemeEngine.bgColor
 	readonly property alias dialog: control
-	property alias contentComponent: contentsLoader.sourceComponent
-	readonly property alias contentItem: contentsLoader.item
+	property alias contentItem: contentsLoader.sourceComponent
 	property bool draggable: true
 	property bool fixedSize: true
 	property bool maximized: false
@@ -169,7 +168,7 @@ Item {
 		height: maximized && !fixedSize ? parent.height - 100 : (standardButtons !== Dialog.NoButton ? headerLayout.implicitHeight + buttonBoxLoader.item.height : headerLayout.implicitHeight)
 		standardButtons: root.standardButtons
 		modal: true
-		Accessible.name: windowTitle
+		Accessible.name: root.title
 		onAboutToShow: {
 			contentsLoader.active = 1;
 			blur.show();
@@ -212,7 +211,7 @@ Item {
 					id: windowTitleLabel
 					Layout.fillWidth: true
 					padding: 0
-					text: root.windowTitle
+					text: root.title
 					horizontalAlignment: Qt.AlignHCenter
 					visible: text != ""
 					Drag.active: draggable
@@ -225,7 +224,7 @@ Item {
 				}
 				MenuSeparator {
 					Layout.fillWidth: true
-					visible: root.windowTitle != ""
+					visible: root.title != ""
 				}
 				Pane {
 					padding: 10
