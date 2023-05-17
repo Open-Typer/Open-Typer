@@ -41,6 +41,8 @@ Item {
 	property bool draggable: true
 	property bool fixedSize: true
 	property bool maximized: false
+	property int nativeDialogMinimumWidth
+	property int nativeDialogMinimumHeight
 	property bool showShadow: true
 	property Item previousFocusItem: null
 	signal accepted()

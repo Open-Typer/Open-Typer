@@ -36,6 +36,8 @@ Item {
 	property string title: Qt.application.displayName
 	property bool fixedSize: true
 	property bool maximized: false
+	property int nativeDialogMinimumWidth: dialog.contentItem.contentLayout.implicitWidth
+	property int nativeDialogMinimumHeight: dialog.contentItem.contentLayout.implicitHeight
 	signal accepted()
 	signal applied()
 	signal discarded()
@@ -84,15 +86,17 @@ Item {
 		id: dialog
 		title: root.title
 		visible: false
-		minimumWidth: contentItem.contentLayout.implicitWidth
-		minimumHeight: contentItem.contentLayout.implicitHeight
+		minimumWidth: nativeDialogMinimumWidth
+		minimumHeight: nativeDialogMinimumHeight
 		maximumWidth: {
+			let contentWidth = contentItem.contentLayout.implicitWidth;
 			if(fixedSize)
-				return minimumWidth;
+				return Math.max(contentWidth, minimumWidth);
 		}
 		maximumHeight: {
+			let contentHeight = contentItem.contentLayout.implicitHeight;
 			if(fixedSize)
-				return minimumHeight;
+				return Math.max(contentHeight, minimumHeight);
 		}
 
 		contentItem: Rectangle {
