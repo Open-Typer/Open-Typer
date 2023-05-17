@@ -31,6 +31,7 @@ Item {
 	id: root
 
 	property Component contentItem: Item {}
+	readonly property alias contents: dialog.contents
 	property int standardButtons
 	property string title: Qt.application.displayName
 	property bool fixedSize: true
@@ -79,6 +80,7 @@ Item {
 	}
 
 	DialogView {
+		readonly property Item contents: contentItem.contentsLoader.item
 		id: dialog
 		title: root.title
 		visible: false
@@ -95,6 +97,7 @@ Item {
 
 		contentItem: Rectangle {
 			property alias contentLayout: contentLayout
+			property alias contentsLoader: contentsLoader
 			anchors.fill: parent
 			color: ThemeEngine.bgColor
 			Material.background: ThemeEngine.bgColor
@@ -105,6 +108,7 @@ Item {
 				anchors.fill: parent
 
 				Loader {
+					id: contentsLoader
 					sourceComponent: root.contentItem
 					Layout.fillWidth: true
 					Layout.fillHeight: true

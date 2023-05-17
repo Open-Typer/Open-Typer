@@ -37,6 +37,7 @@ Item {
 	readonly property color dialogColor: ThemeEngine.bgColor
 	readonly property alias dialog: control
 	property alias contentItem: contentsLoader.sourceComponent
+	readonly property alias contents: contentsLoader.item
 	property bool draggable: true
 	property bool fixedSize: true
 	property bool maximized: false
