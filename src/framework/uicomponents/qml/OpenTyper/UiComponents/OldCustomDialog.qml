@@ -27,6 +27,7 @@ import QtGraphicalEffects 1.0
 import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper.Ui 1.0
 import OpenTyper.Translations 1.0
+import "internal"
 
 Item {
 	property Item blur: QmlUtils.bgBlur
@@ -252,75 +253,20 @@ Item {
 				}
 			}
 		}
-		Component {
-			id: buttonBoxComponent
-			AccentButtonBox {
-				id: dialogButtonBox
-				font.capitalization: Font.MixedCase
+		footer: Loader {
+			id: buttonBoxLoader
+			sourceComponent: CustomDialogButtonBox {
 				standardButtons: control.standardButtons
-				background: Rectangle {
-					color: dialogColor
-					radius: control.radius
-				}
+				bgColor: dialogColor
+				radius: control.radius
 				onAccepted: control.accept()
 				onApplied: control.applied()
 				onDiscarded: control.discarded()
 				onHelpRequested: control.helpRequested()
 				onRejected: control.reject()
 				onReset: control.reset()
-				function retranslateButtons() {
-					if(standardButton(Dialog.Ok))
-						standardButton(Dialog.Ok).text = QmlUtils.translateStandardButton("OK");
-					if(standardButton(Dialog.Open))
-						standardButton(Dialog.Open).text = QmlUtils.translateStandardButton("Open");
-					if(standardButton(Dialog.Save))
-						standardButton(Dialog.Save).text = QmlUtils.translateStandardButton("Save");
-					if(standardButton(Dialog.Cancel))
-						standardButton(Dialog.Cancel).text = QmlUtils.translateStandardButton("Cancel");
-					if(standardButton(Dialog.Close))
-						standardButton(Dialog.Close).text = QmlUtils.translateStandardButton("Close");
-					if(standardButton(Dialog.Discard))
-						standardButton(Dialog.Discard).text = QmlUtils.translateStandardButton("Discard");
-					if(standardButton(Dialog.Apply))
-						standardButton(Dialog.Apply).text = QmlUtils.translateStandardButton("Apply");
-					if(standardButton(Dialog.Reset))
-						standardButton(Dialog.Reset).text = QmlUtils.translateStandardButton("Reset");
-					if(standardButton(Dialog.RestoreDefaults))
-						standardButton(Dialog.RestoreDefaults).text = QmlUtils.translateStandardButton("Restore Defaults");
-					if(standardButton(Dialog.Help))
-						standardButton(Dialog.Help).text = QmlUtils.translateStandardButton("Help");
-					if(standardButton(Dialog.SaveAll))
-						standardButton(Dialog.SaveAll).text = QmlUtils.translateStandardButton("Save All");
-					if(standardButton(Dialog.Yes))
-						standardButton(Dialog.Yes).text = QmlUtils.translateStandardButton("Yes");
-					if(standardButton(Dialog.YesToAll))
-						standardButton(Dialog.YesToAll).text = QmlUtils.translateStandardButton("Yes to All");
-					if(standardButton(Dialog.No))
-						standardButton(Dialog.No).text = QmlUtils.translateStandardButton("No");
-					if(standardButton(Dialog.NoToAll))
-						standardButton(Dialog.NoToAll).text = QmlUtils.translateStandardButton("No to All");
-					if(standardButton(Dialog.Abort))
-						standardButton(Dialog.Abort).text = QmlUtils.translateStandardButton("Abort");
-					if(standardButton(Dialog.Retry))
-						standardButton(Dialog.Retry).text = QmlUtils.translateStandardButton("Retry");
-					if(standardButton(Dialog.Ignore))
-						standardButton(Dialog.Ignore).text = QmlUtils.translateStandardButton("Ignore");
-				}
-				Connections {
-					readonly property Item firstButton: dialogButtonBox.contentChildren[0]
-					target: firstButton
-					onActiveFocusChanged: {
-						if(!firstButton.activeFocus)
-							root.forceActiveFocus(Qt.TabFocus);
-					}
-				}
-				Component.onCompleted: retranslateButtons()
-				onStandardButtonsChanged: retranslateButtons()
+				onFocusOut: root.forceActiveFocus(Qt.TabFocus);
 			}
-		}
-		footer: Loader {
-			id: buttonBoxLoader
-			sourceComponent: buttonBoxComponent
 			Connections {
 				target: LanguageManager
 				onLanguageChanged: {
