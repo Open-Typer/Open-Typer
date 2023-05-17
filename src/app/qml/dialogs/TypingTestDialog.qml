@@ -227,7 +227,7 @@ OldCustomDialog {
 		Loader {
 			id: timeLimitLoader
 			visible: timeLimitCheckBox.checked
-			sourceComponent: timeDialog.contentComponent
+			sourceComponent: timeDialog.contentItem
 		}
 		MenuSeparator { Layout.fillWidth: true }
 		CheckBox {
