@@ -16,5 +16,11 @@ HEADERS += \
     internal/QmlWidget.h \
     view/DialogView.h
 
+wasm {
+    RESOURCES += qml/OpenTyper/UiComponents/platform/wasm/wasm.qrc
+} else {
+    RESOURCES += qml/OpenTyper/UiComponents/platform/desktop/desktop.qrc
+}
+
 RESOURCES += \
         uicomponents.qrc
