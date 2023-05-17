@@ -23,34 +23,34 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import OpenTyper.UiComponents 1.0
 
-OldCustomDialog {
+CustomDialog {
 	property var parserObj: null
 	property string exerciseText
-	property bool timed: contentItem.timeLimitCheckBox.checked
-	property int timeLimitSecs: contentItem.timeSecs
-	property bool correctMistakes: contentItem.correctMistakesCheckBox.checked
-	property bool lockUi: contentItem.lockUiCheckBox.checked
-	property bool hideText: contentItem.hideTextCheckBox.checked
+	property bool timed: contents.timeLimitCheckBox.checked
+	property int timeLimitSecs: contents.timeSecs
+	property bool correctMistakes: contents.correctMistakesCheckBox.checked
+	property bool lockUi: contents.lockUiCheckBox.checked
+	property bool hideText: contents.hideTextCheckBox.checked
 	property bool firstLoad
 	id: control
-	windowTitle: qsTr("Typing test")
+	title: qsTr("Typing test")
 	standardButtons: Dialog.Cancel | Dialog.Ok
 	onAboutToShow: {
 		console.assert(parserObj != null);
 		firstLoad = true;
-		contentItem.lessonBox.load();
-		contentItem.sublessonBox.load();
-		contentItem.exerciseBox.load();
+		contents.lessonBox.load();
+		contents.sublessonBox.load();
+		contents.exerciseBox.load();
 		firstLoad = false;
 	}
 	function updateText() {
-		var lesson = contentItem.lessonBox.currentIndex + 1;
-		var sublesson = contentItem.sublessonBox.currentSublesson();
-		var exercise = contentItem.exerciseBox.currentIndex + 1;
+		var lesson = contents.lessonBox.currentIndex + 1;
+		var sublesson = contents.sublessonBox.currentSublesson();
+		var exercise = contents.exerciseBox.currentIndex + 1;
 		exerciseText = parserObj.initExercise(parserObj.exerciseText(lesson, sublesson, exercise),
 							  parserObj.exerciseLineLength(lesson, sublesson, exercise));
 	}
-	contentComponent: ColumnLayout {
+	contentItem: ColumnLayout {
 		property alias lessonBox: lessonBox
 		property alias sublessonBox: sublessonBox
 		property alias exerciseBox: exerciseBox
