@@ -46,14 +46,19 @@ Item {
 	signal reset()
 	signal opened()
 	signal closed()
+	signal aboutToShow()
+	signal aboutToHide()
 
 	visible: dialog.visible
 	onVisibleChanged: {
 		dialog.visible = visible;
-		if(visible)
+		if(visible) {
+			aboutToShow();
 			opened();
-		else
+		} else {
+			aboutToHide();
 			closed();
+		}
 		visible = Qt.binding(function() { return dialog.visible });
 	}
 	onMaximizedChanged: {
