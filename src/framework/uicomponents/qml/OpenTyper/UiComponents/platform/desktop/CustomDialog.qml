@@ -86,6 +86,10 @@ Item {
 		rejected();
 	}
 
+	function standardButton(button) {
+		return dialog.contentItem.buttonBoxLoader.item.standardButton(button);
+	}
+
 	DialogView {
 		readonly property Item contents: contentItem.contentsLoader.item
 		id: dialog
@@ -107,6 +111,7 @@ Item {
 		contentItem: Rectangle {
 			property alias contentLayout: contentLayout
 			property alias contentsLoader: contentsLoader
+			property alias buttonBoxLoader: buttonBoxLoader
 			anchors.fill: parent
 			color: ThemeEngine.bgColor
 			Material.background: ThemeEngine.bgColor
