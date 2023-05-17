@@ -36,6 +36,7 @@ Item {
 	property string title: Qt.application.displayName
 	property bool fixedSize: true
 	property bool maximized: false
+	property bool autoClose: true
 	property int nativeDialogMinimumWidth: dialog.contentItem.contentLayout.implicitWidth
 	property int nativeDialogMinimumHeight: dialog.contentItem.contentLayout.implicitHeight
 	signal accepted()
@@ -58,7 +59,10 @@ Item {
 		} else {
 			aboutToHide();
 			closed();
+			if(!priv.closedFromQml)
+				rejected();
 		}
+		priv.closedFromQml = false;
 		visible = Qt.binding(function() { return dialog.visible });
 	}
 	onMaximizedChanged: {
@@ -73,6 +77,7 @@ Item {
 	}
 
 	function close() {
+		priv.closedFromQml = true;
 		visible = false;
 	}
 
@@ -90,11 +95,17 @@ Item {
 		return dialog.contentItem.buttonBoxLoader.item.standardButton(button);
 	}
 
+	QtObject {
+		id: priv
+		property bool closedFromQml: true
+	}
+
 	DialogView {
 		readonly property Item contents: contentItem.contentsLoader.item
 		id: dialog
 		title: root.title
 		visible: false
+		autoClose: root.autoClose
 		minimumWidth: nativeDialogMinimumWidth
 		minimumHeight: nativeDialogMinimumHeight
 		maximumWidth: {

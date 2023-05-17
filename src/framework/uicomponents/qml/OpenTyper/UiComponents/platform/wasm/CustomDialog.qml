@@ -40,6 +40,7 @@ Item {
 	readonly property alias contents: contentsLoader.item
 	property bool fixedSize: true
 	property bool maximized: false
+	property bool autoClose: true
 	property int nativeDialogMinimumWidth
 	property int nativeDialogMinimumHeight
 	property bool showShadow: true
@@ -170,6 +171,7 @@ Item {
 		height: maximized && !fixedSize ? parent.height - 100 : (standardButtons !== Dialog.NoButton ? headerLayout.implicitHeight + buttonBoxLoader.item.height : headerLayout.implicitHeight)
 		standardButtons: root.standardButtons
 		modal: true
+		closePolicy: autoClose ? Popup.CloseOnPressOutside | Popup.CloseOnEscape : Popup.NoAutoClose
 		Accessible.name: root.title
 		onAboutToShow: {
 			contentsLoader.active = 1;
