@@ -21,8 +21,8 @@
 #ifndef DIALOGVIEW_H
 #define DIALOGVIEW_H
 
-#include <QQuickWindow>
 #include <QQuickItem>
+#include "internal/QuickWindow.h"
 
 /*! \brief The DialogView class is a native dialog for QML. */
 class DialogView : public QObject
@@ -36,6 +36,7 @@ class DialogView : public QObject
 		Q_PROPERTY(int minimumHeight READ minimumHeight WRITE setMinimumHeight NOTIFY minimumHeightChanged)
 		Q_PROPERTY(int maximumWidth READ maximumWidth WRITE setMaximumWidth NOTIFY maximumWidthChanged)
 		Q_PROPERTY(int maximumHeight READ maximumHeight WRITE setMaximumHeight NOTIFY maximumHeightChanged)
+		Q_PROPERTY(bool autoClose READ autoClose WRITE setAutoClose NOTIFY autoCloseChanged)
 	public:
 		explicit DialogView(QObject *parent = nullptr);
 
@@ -68,6 +69,9 @@ class DialogView : public QObject
 		Q_INVOKABLE void showMaximized();
 		Q_INVOKABLE void showNormal();
 
+		bool autoClose() const;
+		void setAutoClose(bool newAutoClose);
+
 	signals:
 		void contentItemChanged();
 		void visibleChanged();
@@ -77,9 +81,10 @@ class DialogView : public QObject
 		void minimumHeightChanged();
 		void maximumWidthChanged();
 		void maximumHeightChanged();
+		void autoCloseChanged();
 
 	private:
-		QQuickWindow m_window;
+		QuickWindow m_window;
 		QQuickItem *m_contentItem;
 		bool m_modal = true;
 };

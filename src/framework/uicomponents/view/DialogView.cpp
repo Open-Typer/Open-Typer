@@ -39,6 +39,7 @@ DialogView::DialogView(QObject *parent) :
 	connect(&m_window, &QQuickWindow::minimumHeightChanged, this, &DialogView::minimumHeightChanged);
 	connect(&m_window, &QQuickWindow::maximumWidthChanged, this, &DialogView::maximumWidthChanged);
 	connect(&m_window, &QQuickWindow::maximumHeightChanged, this, &DialogView::maximumHeightChanged);
+	connect(&m_window, &QuickWindow::autoCloseChanged, this, &DialogView::autoCloseChanged);
 }
 
 /*! The root item of the dialog. */
@@ -162,4 +163,15 @@ void DialogView::showMaximized()
 void DialogView::showNormal()
 {
 	m_window.showNormal();
+}
+
+/*! Whether to close the dialog when escape is pressed. */
+bool DialogView::autoClose() const
+{
+	return m_window.autoClose();
+}
+
+void DialogView::setAutoClose(bool newAutoClose)
+{
+	m_window.setAutoClose(newAutoClose);
 }
