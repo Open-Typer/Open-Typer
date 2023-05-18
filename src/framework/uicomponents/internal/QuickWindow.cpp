@@ -39,7 +39,7 @@ QuickWindow::QuickWindow(QWindow *parent) :
 
 void QuickWindow::keyPressEvent(QKeyEvent *event)
 {
-	if(event->key() == Qt::Key_Escape && m_autoClose)
+	if(event->key() == Qt::Key_Escape && m_autoClose && m_closable)
 		close();
 	QQuickWindow::keyPressEvent(event);
 }
@@ -51,9 +51,12 @@ void QuickWindow::showEvent(QShowEvent *event)
 	QAccessible::updateAccessibility(&accessibleEvent);
 }
 
-bool QuickWindow::autoClose() const
+void QuickWindow::closeEvent(QCloseEvent *event)
 {
-	return m_autoClose;
+	if(m_closable)
+		QQuickWindow::closeEvent(event);
+	else
+		event->ignore();
 }
 
 void QuickWindow::setAutoClose(bool newAutoClose)
@@ -62,4 +65,22 @@ void QuickWindow::setAutoClose(bool newAutoClose)
 		return;
 	m_autoClose = newAutoClose;
 	emit autoCloseChanged();
+}
+
+bool QuickWindow::closable() const
+{
+	return m_closable;
+}
+
+void QuickWindow::setClosable(bool newClosable)
+{
+	if(m_closable == newClosable)
+		return;
+	m_closable = newClosable;
+	emit closableChanged();
+}
+
+bool QuickWindow::autoClose() const
+{
+	return m_autoClose;
 }
