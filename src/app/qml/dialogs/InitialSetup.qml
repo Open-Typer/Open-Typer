@@ -28,7 +28,7 @@ import OpenTyper.Global 1.0
 import "../settings"
 import ".."
 
-OldCustomDialog {
+CustomDialog {
 	readonly property var pages: [ localizationPage, lessonPackPage, appearancePage ]
 	property int currentIndex: 0
 	property int keyboardLayout: -1
@@ -37,16 +37,17 @@ OldCustomDialog {
 	property bool lastOperationNext
 	id: root
 	//: Application Setup, for example Open-Typer Setup
-	windowTitle: qsTr("%1 Setup").arg(Qt.application.displayName)
-	draggable: false
-	fillWindow: true
-	dialog.closePolicy: Popup.NoAutoClose
+	title: qsTr("%1 Setup").arg(Qt.application.displayName)
+	fixedSize: false
+	maximized: !isNative
+	nativeDialogMinimumWidth: 800
+	nativeDialogMinimumHeight: 600
 	function previousPage() {
 		if(currentIndex > 0)
 		{
 			lastOperationNext = false;
 			currentIndex--;
-			contentItem.stack.replace(contentItem.currentItem, pages[currentIndex], StackView.PopTransition);
+			contents.stack.replace(contents.currentItem, pages[currentIndex], StackView.PopTransition);
 			focusTimer.start();
 		}
 	}
@@ -55,7 +56,7 @@ OldCustomDialog {
 		{
 			lastOperationNext = true;
 			currentIndex++;
-			contentItem.stack.replace(contentItem.stack.currentItem, pages[currentIndex], StackView.PushTransition);
+			contents.stack.replace(contents.stack.currentItem, pages[currentIndex], StackView.PushTransition);
 			focusTimer.start();
 		}
 	}
@@ -73,7 +74,8 @@ OldCustomDialog {
 		}
 		focusTimer.start();
 	}
-	contentComponent: ColumnLayout {
+	onRejected: Qt.quit()
+	contentItem: ColumnLayout {
 		property alias stack: stack
 		anchors.fill: parent
 		StackView {
@@ -133,7 +135,7 @@ OldCustomDialog {
 		running: false
 		interval: 16
 		repeat: false
-		onTriggered: contentItem.stack.currentItem.forceActiveFocus(Qt.TabFocus)
+		onTriggered: contents.stack.currentItem.forceActiveFocus(Qt.TabFocus)
 	}
 	Component {
 		id: localizationPage
