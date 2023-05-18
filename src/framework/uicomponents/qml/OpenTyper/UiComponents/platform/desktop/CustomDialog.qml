@@ -40,6 +40,7 @@ Item {
 	property int nativeDialogMinimumWidth: dialog.contentItem.contentLayout.implicitWidth
 	property int nativeDialogMinimumHeight: dialog.contentItem.contentLayout.implicitHeight
 	readonly property bool isNative: true
+	property bool closable: true
 	signal accepted()
 	signal applied()
 	signal discarded()
@@ -108,6 +109,7 @@ Item {
 		title: root.title
 		visible: false
 		autoClose: root.autoClose
+		closable: root.closable
 		minimumWidth: nativeDialogMinimumWidth
 		minimumHeight: nativeDialogMinimumHeight
 		maximumWidth: {
