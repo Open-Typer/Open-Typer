@@ -22,6 +22,8 @@
 #define QUICKWINDOW_H
 
 #include <QQuickWindow>
+#include <QWidget>
+#include <QAccessibleWidget>
 
 class QuickWindow : public QQuickWindow
 {
@@ -38,9 +40,12 @@ class QuickWindow : public QQuickWindow
 
 	protected:
 		void keyPressEvent(QKeyEvent *event) override;
+		void showEvent(QShowEvent *event) override;
 
 	private:
 		bool m_autoClose = true;
+		QWidget m_widget;
+		QAccessibleWidget *m_accessibleWidget;
 };
 
 #endif // QUICKWINDOW_H
