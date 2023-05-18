@@ -29,16 +29,16 @@ import OpenTyper.Global 1.0
 import "../core"
 import "../settings"
 
-OldCustomDialog {
+CustomDialog {
 	property bool focusFromList: false
 	property bool forceListFocus: false
 	property bool freezeList: false
 	signal settingsSynced()
 	id: control
-	windowTitle: qsTr("Settings")
+	title: qsTr("Settings")
 	standardButtons: Dialog.Cancel | Dialog.Ok
-	dialog.closePolicy: Popup.NoAutoClose
-	contentComponent: RowLayout {
+	autoClose: false
+	contentItem: RowLayout {
 		property alias listView: listView
 		property alias stack: stack
 		ListView {
@@ -224,7 +224,7 @@ OldCustomDialog {
 	}
 	onAboutToShow: {
 		Settings.freeze();
-		contentItem.listView.forceActiveFocus(Qt.TabFocus);
+		contents.listView.forceActiveFocus(Qt.TabFocus);
 	}
 	onAboutToHide: freezeList = true
 	onClosed: freezeList = false
@@ -238,12 +238,9 @@ OldCustomDialog {
 			Settings.discardChanges();
 		settingsSynced();
 	}
-	onActiveFocusChanged: {
-		if(activeFocus)
-		{
-			focusFromList = false;
-			forceListFocus = true;
-			contentItem.listView.forceActiveFocus(Qt.TabFocus);
-		}
+	onFocusReset: {
+		focusFromList = false;
+		forceListFocus = true;
+		contents.listView.forceActiveFocus(Qt.TabFocus);
 	}
 }
