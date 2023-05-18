@@ -29,7 +29,7 @@ void QuickWindow::keyPressEvent(QKeyEvent *event)
 {
 	if(event->key() == Qt::Key_Escape && m_autoClose)
 		close();
-	event->accept();
+	QQuickWindow::keyPressEvent(event);
 }
 
 bool QuickWindow::autoClose() const
