@@ -49,6 +49,7 @@ Item {
 	signal closed()
 	signal aboutToShow()
 	signal aboutToHide()
+	signal focusReset()
 
 	visible: dialog.visible
 	onVisibleChanged: {
@@ -149,7 +150,10 @@ Item {
 						onHelpRequested: root.helpRequested()
 						onRejected: root.reject()
 						onReset: root.reset()
-						onFocusOut: dialog.contentItem.forceActiveFocus(Qt.TabFocus)
+						onFocusOut: {
+							root.focusReset();
+							root.forceActiveFocus(Qt.TabFocus);
+						}
 					}
 					Layout.fillWidth: true
 					Connections {

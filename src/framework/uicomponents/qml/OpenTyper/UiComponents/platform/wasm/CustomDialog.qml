@@ -55,6 +55,7 @@ Item {
 	signal aboutToHide()
 	signal opened()
 	signal closed()
+	signal focusReset()
 	id: root
 	width: Window.contentItem.width
 	height: Window.contentItem.height
@@ -269,7 +270,10 @@ Item {
 				onHelpRequested: control.helpRequested()
 				onRejected: control.reject()
 				onReset: control.reset()
-				onFocusOut: root.forceActiveFocus(Qt.TabFocus);
+				onFocusOut: {
+					root.focusReset();
+					root.forceActiveFocus(Qt.TabFocus);
+				}
 			}
 			Connections {
 				target: LanguageManager
