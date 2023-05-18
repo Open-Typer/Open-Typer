@@ -40,6 +40,7 @@ DialogView::DialogView(QObject *parent) :
 	connect(&m_window, &QQuickWindow::maximumWidthChanged, this, &DialogView::maximumWidthChanged);
 	connect(&m_window, &QQuickWindow::maximumHeightChanged, this, &DialogView::maximumHeightChanged);
 	connect(&m_window, &QuickWindow::autoCloseChanged, this, &DialogView::autoCloseChanged);
+	connect(&m_window, &QuickWindow::closableChanged, this, &DialogView::closableChanged);
 }
 
 /*! The root item of the dialog. */
@@ -174,4 +175,15 @@ bool DialogView::autoClose() const
 void DialogView::setAutoClose(bool newAutoClose)
 {
 	m_window.setAutoClose(newAutoClose);
+}
+
+/*! Whether to allow closing the dialog using the close button or escape key when autoClose is true. */
+bool DialogView::closable() const
+{
+	return m_window.closable();
+}
+
+void DialogView::setClosable(bool newClosable)
+{
+	m_window.setClosable(newClosable);
 }

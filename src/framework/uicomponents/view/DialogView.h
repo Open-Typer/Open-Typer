@@ -37,6 +37,7 @@ class DialogView : public QObject
 		Q_PROPERTY(int maximumWidth READ maximumWidth WRITE setMaximumWidth NOTIFY maximumWidthChanged)
 		Q_PROPERTY(int maximumHeight READ maximumHeight WRITE setMaximumHeight NOTIFY maximumHeightChanged)
 		Q_PROPERTY(bool autoClose READ autoClose WRITE setAutoClose NOTIFY autoCloseChanged)
+		Q_PROPERTY(bool closable READ closable WRITE setClosable NOTIFY closableChanged)
 	public:
 		explicit DialogView(QObject *parent = nullptr);
 
@@ -72,6 +73,9 @@ class DialogView : public QObject
 		bool autoClose() const;
 		void setAutoClose(bool newAutoClose);
 
+		bool closable() const;
+		void setClosable(bool newClosable);
+
 	signals:
 		void contentItemChanged();
 		void visibleChanged();
@@ -82,6 +86,7 @@ class DialogView : public QObject
 		void maximumWidthChanged();
 		void maximumHeightChanged();
 		void autoCloseChanged();
+		void closableChanged();
 
 	private:
 		QuickWindow m_window;
