@@ -43,6 +43,7 @@ Item {
 	property bool autoClose: true
 	property int nativeDialogMinimumWidth
 	property int nativeDialogMinimumHeight
+	readonly property bool isNative: false
 	property bool showShadow: true
 	property Item previousFocusItem: null
 	signal accepted()

@@ -39,6 +39,7 @@ Item {
 	property bool autoClose: true
 	property int nativeDialogMinimumWidth: dialog.contentItem.contentLayout.implicitWidth
 	property int nativeDialogMinimumHeight: dialog.contentItem.contentLayout.implicitHeight
+	readonly property bool isNative: true
 	signal accepted()
 	signal applied()
 	signal discarded()
