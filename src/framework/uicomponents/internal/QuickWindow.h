@@ -46,7 +46,11 @@ class QuickWindow : public QQuickWindow
 	protected:
 		void keyPressEvent(QKeyEvent *event) override;
 		void showEvent(QShowEvent *event) override;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 		void closeEvent(QCloseEvent *event) override;
+#else
+		bool event(QEvent *event) override;
+#endif
 
 	private:
 		bool m_autoClose = true;

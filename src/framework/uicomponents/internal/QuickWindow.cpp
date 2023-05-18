@@ -51,6 +51,7 @@ void QuickWindow::showEvent(QShowEvent *event)
 	QAccessible::updateAccessibility(&accessibleEvent);
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 void QuickWindow::closeEvent(QCloseEvent *event)
 {
 	if(m_closable)
@@ -58,6 +59,19 @@ void QuickWindow::closeEvent(QCloseEvent *event)
 	else
 		event->ignore();
 }
+#else
+bool QuickWindow::event(QEvent *event)
+{
+	if(event->type() == QEvent::Close)
+	{
+		if(m_closable)
+			return QQuickWindow::event(event);
+		return true;
+	}
+	else
+		return QQuickWindow::event(event);
+}
+#endif
 
 void QuickWindow::setAutoClose(bool newAutoClose)
 {
