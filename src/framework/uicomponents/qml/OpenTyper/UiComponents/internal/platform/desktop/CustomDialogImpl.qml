@@ -1,5 +1,5 @@
 /*
- * CustomDialog.qml
+ * CustomDialogImpl.qml
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -25,7 +25,6 @@ import QtQuick.Layouts 1.12
 import OpenTyper.UiComponents 1.0
 import OpenTyper.Ui 1.0
 import OpenTyper.Translations 1.0
-import "internal"
 
 Item {
 	id: root

@@ -19,9 +19,9 @@ HEADERS += \
     view/DialogView.h
 
 wasm {
-    RESOURCES += qml/OpenTyper/UiComponents/platform/wasm/wasm.qrc
+    RESOURCES += qml/OpenTyper/UiComponents/internal/platform/wasm/wasm.qrc
 } else {
-    RESOURCES += qml/OpenTyper/UiComponents/platform/desktop/desktop.qrc
+    RESOURCES += qml/OpenTyper/UiComponents/internal/platform/desktop/desktop.qrc
 }
 
 RESOURCES += \

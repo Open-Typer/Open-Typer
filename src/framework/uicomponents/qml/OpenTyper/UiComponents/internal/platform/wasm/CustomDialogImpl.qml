@@ -1,5 +1,5 @@
 /*
- * CustomDialog.qml
+ * CustomDialogImpl.qml
  * This file is part of Open-Typer
  *
  * Copyright (C) 2022-2023 - adazem009
@@ -27,7 +27,6 @@ import QtGraphicalEffects 1.0
 import Qt5Compat.GraphicalEffects 1.0
 import OpenTyper.Ui 1.0
 import OpenTyper.Translations 1.0
-import "internal"
 
 Item {
 	property Item blur: QmlUtils.bgBlur

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/qml/OpenTyper/UiComponents/internal">
+        <file>CustomDialogImpl.qml</file>
+    </qresource>
+</RCC>
