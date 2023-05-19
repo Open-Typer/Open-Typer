@@ -4,7 +4,6 @@
         <file>qml/OpenTyper/UiComponents/AccentButtonBox.qml</file>
         <file>qml/OpenTyper/UiComponents/ColorButton.qml</file>
         <file>qml/OpenTyper/UiComponents/CustomComboBox.qml</file>
-        <file>qml/OpenTyper/UiComponents/OldCustomDialog.qml</file>
         <file>qml/OpenTyper/UiComponents/CustomFlickable.qml</file>
         <file>qml/OpenTyper/UiComponents/CustomMenu.qml</file>
         <file>qml/OpenTyper/UiComponents/CustomMenuBar.qml</file>
