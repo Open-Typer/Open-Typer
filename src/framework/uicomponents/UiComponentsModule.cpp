@@ -32,6 +32,11 @@ std::string UiComponentsModule::moduleName() const
 void UiComponentsModule::registerResources()
 {
 	Q_INIT_RESOURCE(uicomponents);
+#ifdef Q_OS_WASM
+	Q_INIT_RESOURCE(wasm);
+#else
+	Q_INIT_RESOURCE(desktop);
+#endif
 }
 
 void UiComponentsModule::registerUiTypes()
