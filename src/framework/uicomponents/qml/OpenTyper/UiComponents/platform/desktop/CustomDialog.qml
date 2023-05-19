@@ -139,6 +139,7 @@ Item {
 				Loader {
 					id: contentsLoader
 					sourceComponent: root.contentItem
+					active: dialog.visible
 					Layout.fillWidth: true
 					Layout.fillHeight: true
 				}
