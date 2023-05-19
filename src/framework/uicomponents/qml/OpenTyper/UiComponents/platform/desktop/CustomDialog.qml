@@ -55,6 +55,10 @@ Item {
 
 	visible: dialog.visible
 	onVisibleChanged: {
+		if(!priv.initialized) {
+			priv.initialized = true;
+			return;
+		}
 		dialog.visible = visible;
 		if(visible) {
 			aboutToShow();
@@ -101,6 +105,7 @@ Item {
 	QtObject {
 		id: priv
 		property bool closedFromQml: true
+		property bool initialized: false
 	}
 
 	DialogView {
