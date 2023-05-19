@@ -29,9 +29,7 @@ DialogView::DialogView(QObject *parent) :
 		m_window.setModality(Qt::ApplicationModal);
 	else
 		m_window.setModality(Qt::NonModal);
-	m_window.setFlag(Qt::Window, false);
-	m_window.setFlag(Qt::Dialog, true);
-	m_window.setFlag(Qt::WindowCloseButtonHint, true);
+	m_window.setFlags(m_window.flags() | Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
 
 	connect(&m_window, &QQuickWindow::visibleChanged, this, &DialogView::visibleChanged);
 	connect(&m_window, &QQuickWindow::windowTitleChanged, this, &DialogView::titleChanged);
