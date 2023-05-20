@@ -116,16 +116,8 @@ Item {
 		closable: root.closable
 		minimumWidth: nativeDialogMinimumWidth
 		minimumHeight: nativeDialogMinimumHeight
-		maximumWidth: {
-			let contentWidth = contentItem.contentLayout.implicitWidth;
-			if(fixedSize)
-				return Math.max(contentWidth, minimumWidth);
-		}
-		maximumHeight: {
-			let contentHeight = contentItem.contentLayout.implicitHeight;
-			if(fixedSize)
-				return Math.max(contentHeight, minimumHeight);
-		}
+		maximumWidth: fixedSize ? Math.max(contentItem.contentLayout.implicitWidth, minimumWidth) : { maximumWidth = maximumWidth }
+		maximumHeight: fixedSize? Math.max(contentItem.contentLayout.implicitHeight, minimumHeight) : { maximumHeight = maximumHeight }
 
 		contentItem: Rectangle {
 			property alias contentLayout: contentLayout
