@@ -60,8 +60,6 @@ Item {
 		}
 
 		priv.contentsActive = visible;
-		if(visible)
-			priv.sizeUpdate = !priv.sizeUpdate;
 		dialog.visible = visible;
 		if(visible) {
 			aboutToShow();
@@ -109,8 +107,7 @@ Item {
 		id: priv
 		property bool closedFromQml: true
 		property bool initialized: false
-		property bool contentsActive: false
-		property bool sizeUpdate: false
+		property bool contentsActive: true
 	}
 
 	DialogView {
@@ -122,14 +119,8 @@ Item {
 		closable: root.closable
 		minimumWidth: nativeDialogMinimumWidth
 		minimumHeight: nativeDialogMinimumHeight
-		maximumWidth: {
-			priv.sizeUpdate;
-			return fixedSize ? Math.max(contentItem.contentLayout.implicitWidth, minimumWidth) : { maximumWidth = maximumWidth };
-		}
-		maximumHeight: {
-			priv.sizeUpdate;
-			return fixedSize? Math.max(contentItem.contentLayout.implicitHeight, minimumHeight) : { maximumHeight = maximumHeight };
-		}
+		maximumWidth: fixedSize ? Math.max(contentItem.contentLayout.implicitWidth, minimumWidth) : { maximumWidth = maximumWidth }
+		maximumHeight: fixedSize? Math.max(contentItem.contentLayout.implicitHeight, minimumHeight) : { maximumHeight = maximumHeight }
 
 		contentItem: Rectangle {
 			property alias contentLayout: contentLayout
@@ -189,5 +180,8 @@ Item {
 		}
 	}
 
-	Component.onCompleted: maximizedChanged()
+	Component.onCompleted: {
+		priv.contentsActive = false;
+		maximizedChanged();
+	}
 }
