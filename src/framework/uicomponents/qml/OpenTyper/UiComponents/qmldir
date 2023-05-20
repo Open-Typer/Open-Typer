@@ -15,6 +15,7 @@ HoverToolTip 1.0 HoverToolTip.qml
 ListButton 1.0 ListButton.qml
 MenuButton 1.0 MenuButton.qml
 MessageBox 1.0 MessageBox.qml
+OldCustomDialog 1.0 OldCustomDialog.qml
 Panel 1.0 Panel.qml
 Question 1.0 Question.qml
 VerticalStackView 1.0 VerticalStackView.qml

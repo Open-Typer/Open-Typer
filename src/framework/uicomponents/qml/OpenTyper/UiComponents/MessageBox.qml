@@ -31,15 +31,16 @@ CustomDialog {
 		Critical,
 		Question
 	}
-	property string title: ""
+	property string text: ""
 	property int icon: MessageBox.NoIcon
+	id: root
 	standardButtons: Dialog.Ok
-	contentComponent: RowLayout {
+	contentItem: RowLayout {
 		Image {
 			source: icon === MessageBox.NoIcon ? null : QmlUtils.standardIconStr(getIcon(icon))
 		}
 		Label {
-			text: title
+			text: root.text
 			font.bold: true
 			font.pointSize: 14
 		}

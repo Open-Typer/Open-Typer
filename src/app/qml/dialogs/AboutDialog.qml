@@ -26,10 +26,10 @@ import OpenTyper.UiComponents 1.0
 
 CustomDialog {
 	//: For example "About Open-Typer" (%1 is the app name)
-	windowTitle: qsTr("About %1").arg(Qt.application.displayName)
+	title: qsTr("About %1").arg(Qt.application.displayName)
 	standardButtons: Dialog.Ok
 
-	contentComponent: RowLayout {
+	contentItem: RowLayout {
 		spacing: 25
 
 		Image {

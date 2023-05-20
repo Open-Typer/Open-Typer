@@ -27,16 +27,18 @@ import OpenTyper.UiComponents 1.0
 
 CustomDialog {
 	id: root
-	windowTitle: qsTr("Classes")
-	draggable: false
-	fillWindow: true
+	title: qsTr("Classes")
+	fixedSize: false
+	maximized: true
 	standardButtons: Dialog.Close
+	nativeDialogMinimumWidth: 800
+	nativeDialogMinimumHeight: 600
 	onActiveFocusChanged: {
 		if(activeFocus)
-			contentItem.currentItem.forceActiveFocus(Qt.TabFocus);
+			contents.currentItem.forceActiveFocus(Qt.TabFocus);
 	}
 
-	contentComponent: StackView {
+	contentItem: StackView {
 		id: stackView
 		initialItem: listComponent
 
@@ -173,7 +175,7 @@ CustomDialog {
 		target: standardButton(Dialog.Close)
 		onActiveFocusChanged: {
 			if(!target.activeFocus)
-				root.contentItem.currentItem.forceActiveFocus(Qt.TabFocus);
+				root.contents.currentItem.forceActiveFocus(Qt.TabFocus);
 		}
 	}
 }

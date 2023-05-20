@@ -26,19 +26,25 @@ import OpenTyper.UiComponents 1.0
 CustomDialog {
 	readonly property var itemStrings: ["1 min", "2 min 30 s", "5 min", "10 min"]
 	readonly property var itemValues: [60, 150, 300, 600]
-	property int timeSecs: contentItem.timeSecs
-	windowTitle: qsTr("Time limit")
+	property int timeSecs: contents.timeSecs
+	title: qsTr("Time limit")
 	standardButtons: Dialog.Cancel | Dialog.Ok
-	contentComponent: ColumnLayout {
+	nativeDialogMinimumWidth: contents.minWidth
+	nativeDialogMinimumHeight: contents.minHeight
+	contentItem: ColumnLayout {
 		property int timeSecs: timeComboBox.customTime ? minBox.value * 60 + secBox.value : itemValues[timeComboBox.currentIndex]
+		readonly property int minWidth: customTimeLayout.implicitWidth
+		readonly property int minHeight: timeComboBox.implicitHeight + customTimeLayout.implicitHeight + 100
 		CustomComboBox {
 			readonly property bool customTime: currentIndex == model.length - 1
 			id: timeComboBox
 			model: itemStrings.concat([qsTr("Custom")])
 			currentIndex: 3 // 10 min by default
 			Layout.fillWidth: true
+			Layout.alignment: Qt.AlignTop
 		}
 		ColumnLayout {
+			id: customTimeLayout
 			visible: timeComboBox.customTime
 			Layout.fillHeight: true
 			RowLayout {

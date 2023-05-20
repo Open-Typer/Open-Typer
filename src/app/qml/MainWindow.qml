@@ -591,8 +591,8 @@ ApplicationWindow {
 
 	MessageBox {
 		id: largeFileBox
-		windowTitle: qsTr("Error");
-		title: qsTr("This file is too large!")
+		title: qsTr("Error");
+		text: qsTr("This file is too large!")
 		icon: MessageBox.Critical
 	}
 
@@ -609,8 +609,8 @@ ApplicationWindow {
 
 	MessageBox {
 		id: noErrorWordsBox
-		windowTitle: qsTr("No error words");
-		title: qsTr("You don't have any error words.")
+		title: qsTr("No error words");
+		text: qsTr("You don't have any error words.")
 		icon: MessageBox.Information
 	}
 

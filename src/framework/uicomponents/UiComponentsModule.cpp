@@ -22,6 +22,7 @@
 #include "UiComponentsModule.h"
 #include "internal/QmlFileDialog.h"
 #include "internal/QmlWidget.h"
+#include "view/DialogView.h"
 
 std::string UiComponentsModule::moduleName() const
 {
@@ -31,6 +32,11 @@ std::string UiComponentsModule::moduleName() const
 void UiComponentsModule::registerResources()
 {
 	Q_INIT_RESOURCE(uicomponents);
+#ifdef Q_OS_WASM
+	Q_INIT_RESOURCE(wasm);
+#else
+	Q_INIT_RESOURCE(desktop);
+#endif
 }
 
 void UiComponentsModule::registerUiTypes()
@@ -38,6 +44,7 @@ void UiComponentsModule::registerUiTypes()
 	qmlRegisterType<QmlFileDialog>("OpenTyper.UiComponents", 1, 0, "QmlFileDialog");
 	qmlRegisterType<QmlWidget>("OpenTyper.UiComponents", 1, 0, "Widget");
 	qmlRegisterType<QWidget>("OpenTyper.UiComponents", 1, 0, "QWidget");
+	qmlRegisterType<DialogView>("OpenTyper.UiComponents", 1, 0, "DialogView");
 	// TODO: Remove this after fully switching to Qt 6
 	qmlRegisterModule("Qt5Compat.GraphicalEffects", 1, 0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
