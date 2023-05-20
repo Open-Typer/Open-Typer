@@ -64,6 +64,7 @@ Item {
 		if(visible) {
 			aboutToShow();
 			opened();
+			priv.sizeUpdate = !priv.sizeUpdate;
 		} else {
 			aboutToHide();
 			closed();
@@ -107,6 +108,7 @@ Item {
 		id: priv
 		property bool closedFromQml: true
 		property bool initialized: false
+		property bool sizeUpdate: false
 		property bool contentsActive: true
 	}
 
@@ -119,8 +121,14 @@ Item {
 		closable: root.closable
 		minimumWidth: nativeDialogMinimumWidth
 		minimumHeight: nativeDialogMinimumHeight
-		maximumWidth: fixedSize ? Math.max(contentItem.contentLayout.implicitWidth, minimumWidth) : { maximumWidth = maximumWidth }
-		maximumHeight: fixedSize? Math.max(contentItem.contentLayout.implicitHeight, minimumHeight) : { maximumHeight = maximumHeight }
+		maximumWidth: {
+			priv.sizeUpdate;
+			return fixedSize ? Math.max(contentItem.contentLayout.implicitWidth, minimumWidth) : { maximumWidth = maximumWidth };
+		}
+		maximumHeight: {
+			priv.sizeUpdate;
+			return fixedSize? Math.max(contentItem.contentLayout.implicitHeight, minimumHeight) : { maximumHeight = maximumHeight };
+		}
 
 		contentItem: Rectangle {
 			property alias contentLayout: contentLayout
