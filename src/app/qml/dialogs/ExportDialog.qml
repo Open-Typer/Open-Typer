@@ -40,6 +40,11 @@ CustomDialog {
 	maximized: true
 	onAboutToShow: repaintTimer.start()
 
+	function setStudentName(name) { contents.studentName = name }
+	function setClassName(name) { contents.className = name }
+	function setTestNumber(num) { contents.testNumber = num }
+	function setGrade(grade) { contents.grade = grade }
+
 	ExportProvider {
 		id: provider
 		validator: root.validator
@@ -54,10 +59,10 @@ CustomDialog {
 	}
 
 	contentItem: ColumnLayout {
-		readonly property string studentName: studentNameField.text
-		readonly property string className: classNameField.text
-		readonly property string testNumber: testNumberField.text
-		readonly property string grade: gradeField.text
+		property alias studentName: studentNameField.text
+		property alias className: classNameField.text
+		property alias testNumber: testNumberField.text
+		property alias grade: gradeField.text
 		RowLayout {
 			AccentButton {
 				text: qsTr("Print")
