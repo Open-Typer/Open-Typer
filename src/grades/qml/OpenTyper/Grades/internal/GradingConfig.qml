@@ -92,7 +92,7 @@ ColumnLayout {
 		font.bold: true
 	}
 
-	SpinBox {
+	CustomSpinBox {
 		id: targetHitsBox
 		from: 25
 		to: 750
@@ -142,7 +142,7 @@ ColumnLayout {
 			Layout.alignment: Qt.AlignVCenter
 		}
 
-		SpinBox {
+		CustomSpinBox {
 			visible: numbersButton.checked
 			from: 0
 			to: 100
@@ -169,7 +169,7 @@ ColumnLayout {
 			Layout.alignment: Qt.AlignVCenter
 		}
 
-		SpinBox {
+		CustomSpinBox {
 			visible: numbersButton.checked
 			from: 0
 			to: 100
@@ -247,7 +247,7 @@ ColumnLayout {
 							text: locale.standaloneMonthName(index, Locale.LongFormat)
 						}
 
-						SpinBox {
+						CustomSpinBox {
 							value: {
 								let targetHits = currentClass.targetHitsForMonth(index + 1);
 								currentClass.gradeConfig;
@@ -258,7 +258,6 @@ ColumnLayout {
 							}
 							from: targetHitsBox.from
 							to: targetHitsBox.to
-							editable: true
 							up.indicator: null
 							down.indicator: null
 							implicitWidth: 66
