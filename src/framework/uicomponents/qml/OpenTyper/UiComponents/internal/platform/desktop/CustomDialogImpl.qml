@@ -189,7 +189,8 @@ Item {
 	}
 
 	Component.onCompleted: {
-		priv.contentsActive = false;
+		if(!visible)
+			priv.contentsActive = false;
 		maximizedChanged();
 	}
 }
