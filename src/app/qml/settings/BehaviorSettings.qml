@@ -22,6 +22,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import OpenTyper.Ui 1.0
+import OpenTyper.UiComponents 1.0
 import OpenTyper.Global 1.0
 
 ColumnLayout {
@@ -38,7 +39,7 @@ ColumnLayout {
 			text: qsTr("Error penalty:")
 			Layout.fillWidth: true
 		}
-		SpinBox {
+		CustomSpinBox {
 			from: 0
 			to: 100
 			value: Settings.getValue("app", "errorPenalty")
@@ -60,7 +61,7 @@ ColumnLayout {
 			text: qsTr("Number of characters in one word with max. 1 mistake:")
 			Layout.fillWidth: true
 		}
-		SpinBox {
+		CustomSpinBox {
 			from: 1
 			to: 100
 			value: Settings.getValue("validator", "mistakeChars")
