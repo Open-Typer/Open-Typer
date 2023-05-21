@@ -38,6 +38,7 @@ Rectangle {
 	property int grossHits
 	property int mistakes
 	property real accuracy
+	readonly property string grade: validator == null ? "" : gradeCalc.grade
 	height: columnLayout.implicitHeight + padding * 2
 	radius: 10
 	color: ThemeEngine.panelColor
