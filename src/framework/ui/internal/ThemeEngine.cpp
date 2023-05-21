@@ -108,7 +108,19 @@ void ThemeEngine::setFontFamily(QString family)
 {
 	QStringList families = QmlUtils::fontFamilies(true);
 	if(!families.contains(family))
+	{
+#if defined(Q_OS_LINUX)
+		family = "FreeMono";
+		if(!families.contains(family))
+			family = families[0];
+#elif defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
+		family = "Courier New";
+		if(!families.contains(family))
+			family = families[0];
+#else
 		family = families[0];
+#endif
+	}
 	settings()->setValue(FONT_FAMILY, family);
 	emit fontFamilyChanged();
 }
