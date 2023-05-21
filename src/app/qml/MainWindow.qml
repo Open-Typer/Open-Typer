@@ -617,6 +617,7 @@ ApplicationWindow {
 
 	ExportDialog {
 		id: exportDialog
+		onAboutToShow: setGrade(paper.summary.grade)
 	}
 
 	AboutDialog {
