@@ -51,7 +51,7 @@ CustomDialog {
 				RowLayout {
 					Label {
 						Layout.fillWidth: true
-						text: windowTitle
+						text: root.title
 						font.pointSize: 12
 						font.bold: true
 					}
