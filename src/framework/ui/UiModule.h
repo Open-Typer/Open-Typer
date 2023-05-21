@@ -35,6 +35,8 @@ class UiModule : public IModuleSetup
 		void registerExports() override;
 		void initSettings() override;
 		void registerUiTypes() override;
+
+		void onInit() override;
 };
 
 #endif // UIMODULE_H

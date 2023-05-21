@@ -86,3 +86,8 @@ void UiModule::registerUiTypes()
 	QObject::connect(settings().get(), &ISettings::discarded, ThemeEngine::instance().get(), &ThemeEngine::themeChanged);
 	QObject::connect(settings().get(), &ISettings::discarded, ThemeEngine::instance().get(), &ThemeEngine::panelColorChanged);
 }
+
+void UiModule::onInit()
+{
+	ThemeEngine::instance()->init();
+}

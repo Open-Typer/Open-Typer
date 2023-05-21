@@ -49,6 +49,7 @@ class Q_DECL_EXPORT ThemeEngine : public IThemeEngine
 	public:
 		ThemeEngine();
 		static std::shared_ptr<ThemeEngine> instance();
+		void init();
 
 		// Font
 		QFont font(void) override;
@@ -105,6 +106,7 @@ class Q_DECL_EXPORT ThemeEngine : public IThemeEngine
 
 	private:
 		static std::shared_ptr<ThemeEngine> m_instance;
+		void updateStyleSheet();
 		void applyStyleSheetFromFile(const QString &stylePath);
 };
 

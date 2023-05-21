@@ -72,6 +72,12 @@ std::shared_ptr<ThemeEngine> ThemeEngine::instance()
 	return m_instance;
 }
 
+/*! Initializes the ThemeEngine. */
+void ThemeEngine::init()
+{
+	updateStyleSheet();
+}
+
 /*!
  * The selected font.\n
  * Note: Font style such as bold, italic or underlined is not supported.
@@ -429,19 +435,8 @@ ThemeEngine::Theme ThemeEngine::theme(void)
 
 void ThemeEngine::setTheme(ThemeEngine::Theme newTheme)
 {
-	// TODO: Remove style sheets
-	switch(newTheme)
-	{
-		case Theme::DarkTheme:
-			// Dark
-			applyStyleSheetFromFile(":/dark-theme/style.qss");
-			break;
-		case Theme::LightTheme:
-			// Light
-			applyStyleSheetFromFile(":/light-theme/style.qss");
-			break;
-	}
 	settings()->setValue(APP_THEME, static_cast<int>(newTheme));
+	updateStyleSheet();
 	resetExerciseTextColor();
 	resetInputTextColor();
 	resetBgColor();
@@ -463,6 +458,21 @@ void ThemeEngine::setDefaultTheme(void)
 		setTheme(Theme::DarkTheme);
 	else
 		setTheme(Theme::LightTheme);
+}
+
+void ThemeEngine::updateStyleSheet()
+{
+	switch(theme())
+	{
+		case Theme::DarkTheme:
+			// Dark
+			applyStyleSheetFromFile(":/dark-theme/style.qss");
+			break;
+		case Theme::LightTheme:
+			// Light
+			applyStyleSheetFromFile(":/light-theme/style.qss");
+			break;
+	}
 }
 
 void ThemeEngine::applyStyleSheetFromFile(const QString &stylePath)
