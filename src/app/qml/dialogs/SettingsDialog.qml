@@ -236,6 +236,7 @@ CustomDialog {
 	onRejected: {
 		if(Settings.isFrozen())
 			Settings.discardChanges();
+		ThemeEngine.updateTheme();
 		settingsSynced();
 	}
 	onFocusReset: {
