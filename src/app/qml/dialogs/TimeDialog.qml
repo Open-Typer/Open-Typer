@@ -52,11 +52,10 @@ CustomDialog {
 					id: minutesLabel
 					text: qsTr("Minutes:")
 				}
-				SpinBox {
+				CustomSpinBox {
 					id: minBox
 					value: 15
 					to: 60
-					editable: true
 					Accessible.description: minutesLabel.text
 				}
 			}
@@ -65,11 +64,10 @@ CustomDialog {
 					id: secondsLabel
 					text: qsTr("Seconds:")
 				}
-				SpinBox {
+				CustomSpinBox {
 					id: secBox
 					value: 0
 					to: 59
-					editable: true
 					Accessible.description: secondsLabel.text
 				}
 			}
