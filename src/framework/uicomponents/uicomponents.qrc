@@ -21,5 +21,6 @@
         <file>qml/OpenTyper/UiComponents/Question.qml</file>
         <file>qml/OpenTyper/UiComponents/internal/CustomDialogButtonBox.qml</file>
         <file>qml/OpenTyper/UiComponents/CustomDialog.qml</file>
+        <file>qml/OpenTyper/UiComponents/CustomSpinBox.qml</file>
     </qresource>
 </RCC>
