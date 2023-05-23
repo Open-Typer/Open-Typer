@@ -627,9 +627,8 @@ ApplicationWindow {
 	function reload() {
 		// Pack name
 		packName = Settings.getValue("app", "lessonPack");
-		console.assert(packName != "");
 		var packChanged = false;
-		if(packName == oldPackName)
+		if(packName == oldPackName && packName != "")
 			packChanged = false;
 		else
 			packChanged = true;
@@ -662,8 +661,20 @@ ApplicationWindow {
 		return loadPackContent(name, "");
 	}
 
+	function invalidPack() {
+		Settings.setValue("app", "lessonPack", "");
+		Settings.setValue("app", "initFinished", false);
+		initialSetup.open();
+		reload();
+		paper.forceActiveFocus();
+	}
+
 	function loadPackContent(name, content) {
 		customExerciseLoaded = false;
+		if(name === "") {
+			invalidPack();
+			return "";
+		}
 		var packPath = "";
 		if(customPack)
 			packPath = configName;
@@ -682,8 +693,7 @@ ApplicationWindow {
 				openSuccess = parser.open(packPath);
 			if(!openSuccess && !bufferOpened)
 			{
-				Settings.setValue("app", "lessonPack", "");
-				reload();
+				invalidPack();
 				return "";
 			}
 		}
