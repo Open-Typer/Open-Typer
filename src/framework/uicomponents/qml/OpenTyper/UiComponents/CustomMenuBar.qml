@@ -71,7 +71,7 @@ MenuBar {
 				item.onCheckedChanged.connect(function() { itemData.checked = item.checked; });
 				itemData.onCheckedChanged.connect(function() { item.checked = itemData.checked; });
 				if(typeof itemData.onClicked != "undefined")
-					item.onTriggered.connect(itemData.onClicked);
+					item.onTriggered.connect(function() { itemData.onClicked() });
 			}
 			else
 			{
