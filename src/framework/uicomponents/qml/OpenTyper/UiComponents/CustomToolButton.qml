@@ -21,8 +21,9 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
+import OpenTyper.Ui 1.0
 
-// Similar to ToolButton, but it's always a rectangle
+// Similar to ToolButton, but it's always a (rounded) rectangle
 // Double click events are not supported, use the clicked() signal like with a QPushButton
 Button {
 	property color foregroundColor: Material.theme === Material.Dark ? "white" : "black"
@@ -39,4 +40,9 @@ Button {
 	Accessible.role: Accessible.Button
 	Accessible.name: text
 	Accessible.description: accessibleDescription == "" ? toolTipText : accessibleDescription
+	Component.onCompleted: {
+		// TODO: Set roundedScale directly after dropping Qt <6.5
+		if((QmlUtils.qtVersionMajor() === 6 && QmlUtils.qtVersionMinor() >= 5) || QmlUtils.qtVersionMajor() > 6)
+			Material.roundedScale = Material.SmallScale;
+	}
 }
