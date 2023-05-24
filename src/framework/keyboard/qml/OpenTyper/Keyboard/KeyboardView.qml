@@ -23,6 +23,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.5
 import OpenTyper.Keyboard 1.0
 import OpenTyper.Global 1.0
+import OpenTyper.UiComponents 1.0
 
 ColumnLayout {
 	property int keySpacing: 7
@@ -420,7 +421,7 @@ ColumnLayout {
 	}
 
 	// Close button
-	Button {
+	CustomButton {
 		signal clicked()
 		Layout.alignment: Qt.AlignHCenter
 		icon.name: opened ? "down" : "up"
