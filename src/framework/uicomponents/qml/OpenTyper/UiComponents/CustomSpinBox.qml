@@ -22,5 +22,13 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 
 SpinBox {
+	id: control
 	editable: true
+	implicitHeight: metrics.height + 20
+
+	TextMetrics {
+		id: metrics
+		font: control.font
+		text: control.displayText
+	}
 }
