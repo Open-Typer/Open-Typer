@@ -54,7 +54,7 @@ ColumnLayout {
 		}
 	}
 
-	Button {
+	CustomButton {
 		text: qsTr("Configure grading for classes")
 		font.capitalization: Font.MixedCase
 		onClicked: classConfig.open()
