@@ -1,5 +1,5 @@
 /*
- * AccentButton.qml
+ * CustomButton.qml
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -20,13 +20,12 @@
 
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-import QtQuick.Controls.Material 2.5
 import OpenTyper.Ui 1.0
 
-CustomButton {
-	readonly property color accent: Material.accent
-	Material.foreground: ThemeEngine.theme == ThemeEngine.DarkTheme ? "white" : "black"
-	Material.background: Qt.rgba(accent.r, accent.g, accent.b, 0.3)
-	background.layer.enabled: false
-	font.capitalization: Font.MixedCase
+Button {
+	Component.onCompleted: {
+		// TODO: Set roundedScale directly after dropping Qt <6.5
+		if((QmlUtils.qtVersionMajor() === 6 && QmlUtils.qtVersionMinor() >= 5) || QmlUtils.qtVersionMajor() > 6)
+			Material.roundedScale = Material.SmallScale;
+	}
 }
