@@ -1,7 +1,5 @@
 # Build instructions
 
-As of writing, Open-Typer (officially) supports Qt 5 (from 5.12 to 5.15) and Qt 6 (6.4).
-
 **Install dependencies (Ubuntu):**
 
 ```
@@ -19,8 +17,8 @@ is a large download.~~ Currently, the only option available is the online instal
 Select one of the Qt versions in the installer
 that is compatable with Open-Typer. 
 
-Finish installing Qt, while making sure to select in the
-Qt 6.4.3 folder (at the time of writing) Qt 5 Compatability Module, Qt Shader Tools, MinGW
+Finish installing Qt, while making sure to select in the folder of the supported
+Qt version(see the table below) the Qt 5 Compatability Module, Qt Shader Tools, MinGW
 and in the Additional Libraries folder, Qt Charts on the "Select Components" page.
 
 **Build (Windows)**
@@ -40,3 +38,13 @@ make -j$(nproc --all)
 ```
 
 You may need to use the platform-specifc deploy tool to add shared libraries, for example `windeployqt` for Windows and `macdeployqt` for MacOS.
+
+**Supported Qt versions**
+
+| Platform          | Qt versions          |
+| ----------------- |:--------------------:|
+| Microsoft Windows | 6.5                  |
+| macOS             | 6.5                  |
+| GNU/Linux         | 5.12-5.15, 6.4 - 6.5 |
+
+Qt 5 might work on Windows and macOS, but is not supported anymore.
