@@ -14,9 +14,9 @@ jobs:
         qt-target: ['desktop']
         include:
           - os: windows-latest
-            qt-version: '5.15.2'
+            qt-version: '6.5.1'
             qt-target: 'desktop'
-            mingw-version: 81
+            mingw-version: '11.2.0'
           - os: macos-latest
             qt-version: '6.5.1'
             qt-target: 'desktop'
@@ -66,7 +66,7 @@ jobs:
       with:
         version: ${{ matrix.qt-version }}
         host: 'windows'
-        arch: 'win64_mingw${{ matrix.mingw-version }}'
+        arch: 'win64_mingw'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
     - if: contains(matrix.os, 'windows')
@@ -82,6 +82,7 @@ jobs:
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: x64
+        version: ${{ matrix.mingw-version }}
     # Ubuntu
     - if: contains(matrix.os, 'ubuntu')
       name: Install Qt
