@@ -30,7 +30,7 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
-        aqtversion: '==3.1.0'
+        aqtversion: '==3.1.6'
         py7zrversion: '==0.20.2'
         host: 'linux'
         arch: 'gcc_64'
@@ -40,7 +40,7 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
-        aqtversion: '==3.1.0'
+        aqtversion: '==3.1.6'
         py7zrversion: '==0.20.2'
         host: 'linux'
         arch: 'wasm_multithread'
