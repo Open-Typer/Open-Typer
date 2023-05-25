@@ -197,7 +197,7 @@ jobs:
     - name: Install emscripten
       uses: mymindstorm/setup-emsdk@v11
       with:
-        version: 3.1.14
+        version: 3.1.25
         actions-cache-folder: 'emsdk-cache2'
     # Install Qt
     - name: Install desktop Qt
