@@ -1,3 +1,2 @@
 app/res/linux-release/usr/share/applications/open-typer.desktop /usr/share/applications
 app/res/linux-release/usr/share/pixmaps/open-typer.png /usr/share/pixmaps
-libopentyper-core*.so* /usr/lib
