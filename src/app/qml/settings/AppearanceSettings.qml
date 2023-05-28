@@ -179,7 +179,7 @@ ColumnLayout {
 			text: qsTr("Exercise text color:")
 		}
 
-		Button {
+		CustomButton {
 			visible: !QmlUtils.osWasm()
 			text: customColorStr
 			font.capitalization: Font.MixedCase
@@ -215,7 +215,7 @@ ColumnLayout {
 			text: qsTr("Input text color:")
 		}
 
-		Button {
+		CustomButton {
 			visible: !QmlUtils.osWasm()
 			text: customColorStr
 			font.capitalization: Font.MixedCase
@@ -249,7 +249,7 @@ ColumnLayout {
 			text: qsTr("Background color:")
 		}
 
-		Button {
+		CustomButton {
 			visible: !QmlUtils.osWasm()
 			text: customColorStr
 			font.capitalization: Font.MixedCase
@@ -283,7 +283,7 @@ ColumnLayout {
 			text: qsTr("Paper color:")
 		}
 
-		Button {
+		CustomButton {
 			visible: !QmlUtils.osWasm()
 			text: customColorStr
 			font.capitalization: Font.MixedCase

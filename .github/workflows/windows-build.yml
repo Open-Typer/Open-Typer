@@ -14,15 +14,8 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            qt-version: '5.15.2'
+            qt-version: '6.5.1'
             qt-target: 'desktop'
-            qt-mingw-version: 81
-            qt-modules: 'qtcharts'
-            mingw-version: '8.1.0'
-          - os: windows-latest
-            qt-version: '6.4.3'
-            qt-target: 'desktop'
-            qt-mingw-version: ''
             qt-modules: 'qtcharts qt5compat qtshadertools'
             mingw-version: '11.2.0'
     steps:
@@ -49,7 +42,7 @@ jobs:
       with:
         version: ${{ matrix.qt-version }}
         host: 'windows'
-        arch: 'win64_mingw${{ matrix.qt-mingw-version }}'
+        arch: 'win64_mingw'
         target: ${{ matrix.qt-target }}
         modules: ${{ matrix.qt-modules }}
     - name: Install Qt IFW (Windows)

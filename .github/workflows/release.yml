@@ -14,11 +14,11 @@ jobs:
         qt-target: ['desktop']
         include:
           - os: windows-latest
-            qt-version: '5.15.2'
+            qt-version: '6.5.1'
             qt-target: 'desktop'
-            mingw-version: 81
+            mingw-version: '11.2.0'
           - os: macos-latest
-            qt-version: '6.4.3'
+            qt-version: '6.5.1'
             qt-target: 'desktop'
     steps:
     - uses: actions/checkout@v3
@@ -66,7 +66,7 @@ jobs:
       with:
         version: ${{ matrix.qt-version }}
         host: 'windows'
-        arch: 'win64_mingw${{ matrix.mingw-version }}'
+        arch: 'win64_mingw'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
     - if: contains(matrix.os, 'windows')
@@ -82,6 +82,7 @@ jobs:
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: x64
+        version: ${{ matrix.mingw-version }}
     # Ubuntu
     - if: contains(matrix.os, 'ubuntu')
       name: Install Qt
@@ -186,7 +187,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        qt-version: ['6.4.3']
+        qt-version: ['6.5.1']
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v3
@@ -197,14 +198,14 @@ jobs:
     - name: Install emscripten
       uses: mymindstorm/setup-emsdk@v11
       with:
-        version: 3.1.14
-        actions-cache-folder: 'emsdk-cache2'
+        version: 3.1.25
+        actions-cache-folder: 'emsdk-cache'
     # Install Qt
     - name: Install desktop Qt
       uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
-        aqtversion: '==3.1.0'
+        aqtversion: '==3.1.6'
         py7zrversion: '==0.20.2'
         host: 'linux'
         arch: 'gcc_64'
@@ -214,10 +215,10 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
-        aqtversion: '==3.1.0'
+        aqtversion: '==3.1.6'
         py7zrversion: '==0.20.2'
         host: 'linux'
-        arch: 'wasm_32'
+        arch: 'wasm_multithread'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts qt5compat qtshadertools'
     # Build

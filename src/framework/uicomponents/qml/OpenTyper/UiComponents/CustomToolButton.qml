@@ -22,9 +22,9 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
 
-// Similar to ToolButton, but it's always a rectangle
+// Similar to ToolButton, but it's always a (rounded) rectangle
 // Double click events are not supported, use the clicked() signal like with a QPushButton
-Button {
+CustomButton {
 	property color foregroundColor: Material.theme === Material.Dark ? "white" : "black"
 	property string toolTipText
 	property string accessibleDescription: ""

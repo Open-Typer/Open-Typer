@@ -4,10 +4,11 @@
 .ci/common/build.sh linux &&
 
 # Build linuxdeployqt
-sudo apt install -y zsync patchelf desktop-file-utils
+sudo apt install -y zsync patchelf desktop-file-utils libxcb-cursor0
+sudo apt install -y qtbase5-dev
 git clone https://github.com/Open-Typer/linuxdeployqt linuxdeployqt-build
 cd linuxdeployqt-build
-qmake
+/usr/bin/qmake
 make -j$(nproc --all)
 mv bin/linuxdeployqt ..
 cd ..

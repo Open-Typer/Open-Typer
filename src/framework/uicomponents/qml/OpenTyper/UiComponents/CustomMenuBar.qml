@@ -52,10 +52,10 @@ MenuBar {
 	function createMenu(parentItem, itemList, menuType, menuItemType, menuSeparatorType) {
 		for(var j = 0; j < itemList.length; j++)
 		{
-			var itemData = itemList[j];
-			var itemComponent;
-			var item;
-			var overrideAddItem = false;
+			let itemData = itemList[j];
+			let itemComponent;
+			let item;
+			let overrideAddItem = false;
 			if(itemData.isSeparator)
 			{
 				itemComponent = Qt.createQmlObject(getComponentString(menuSeparatorType), parentItem);
@@ -71,7 +71,7 @@ MenuBar {
 				item.onCheckedChanged.connect(function() { itemData.checked = item.checked; });
 				itemData.onCheckedChanged.connect(function() { item.checked = itemData.checked; });
 				if(typeof itemData.onClicked != "undefined")
-					item.onTriggered.connect(itemData.onClicked);
+					item.onTriggered.connect(function() { itemData.onClicked() });
 			}
 			else
 			{

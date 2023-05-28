@@ -8,7 +8,7 @@ PLATFORM=$1
 # 4: build (make) failed
 
 if [[ "$PLATFORM" == "wasm" ]]; then
-	$RUNNER_WORKSPACE/Qt/*/wasm_32/bin/qmake || exit 3
+	$RUNNER_WORKSPACE/Qt/*/wasm_*/bin/qmake || exit 3
 else
 	qmake || exit 3
 fi

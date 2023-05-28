@@ -2,6 +2,7 @@ module OpenTyper.UiComponents
 AccentButtonBox 1.0 AccentButtonBox.qml
 AccentButton 1.0 AccentButton.qml
 ColorButton 1.0 ColorButton.qml
+CustomButton 1.0 CustomButton.qml
 CustomComboBox 1.0 CustomComboBox.qml
 CustomDialog 1.0 CustomDialog.qml
 CustomFlickable 1.0 CustomFlickable.qml

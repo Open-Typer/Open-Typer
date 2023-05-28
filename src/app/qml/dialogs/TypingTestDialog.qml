@@ -161,7 +161,7 @@ CustomDialog {
 					updateText()
 				}
 			}
-			Button {
+			CustomButton {
 				text: qsTr("Preview")
 				font.capitalization: Font.MixedCase
 				onClicked: {
@@ -199,7 +199,7 @@ CustomDialog {
 		}
 		RowLayout {
 			enabled: fromFileButton.checked
-			Button {
+			CustomButton {
 				id: browseButton
 				text: qsTr("Browse")
 				font.capitalization: Font.MixedCase

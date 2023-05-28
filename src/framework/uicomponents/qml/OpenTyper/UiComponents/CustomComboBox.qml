@@ -37,6 +37,10 @@ ComboBox {
 	Binding on implicitWidth {
 		value: computeWidth(model)
 	}
+	Binding on implicitHeight {
+		value: fontMetric.boundingRect(currentText).height + 30
+	}
+	// TODO: Material.background is not needed in Qt 6.5 and above
 	Material.background: Qt.rgba(accent.r, accent.g, accent.b, 0.3);
 	background.layer.enabled: false
 
@@ -70,5 +74,19 @@ ComboBox {
 		pwidth += control.contentItem.rightPadding + control.contentItem.leftPadding;
 		pwidth += control.indicator.width
 		return pwidth;
+	}
+
+	Component {
+		id: bgRect
+		Rectangle {
+			color: Material.background
+			anchors.fill: parent
+			radius: 5
+		}
+	}
+
+	Component.onCompleted: {
+		if((QmlUtils.qtVersionMajor() === 6 && QmlUtils.qtVersionMinor() >= 5) || QmlUtils.qtVersionMajor() > 6)
+			bgRect.createObject(background);
 	}
 }
