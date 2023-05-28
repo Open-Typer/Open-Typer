@@ -24,7 +24,7 @@ jobs:
       uses: mymindstorm/setup-emsdk@v11
       with:
         version: 3.1.25
-        actions-cache-folder: 'emsdk-cache2'
+        actions-cache-folder: 'emsdk-cache'
     # Install Qt
     - name: Install desktop Qt
       uses: jurplel/install-qt-action@v3
