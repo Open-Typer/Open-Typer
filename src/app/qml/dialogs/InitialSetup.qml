@@ -135,7 +135,7 @@ CustomDialog {
 		running: false
 		interval: 16
 		repeat: false
-		onTriggered: contents.stack.currentItem.forceActiveFocus(Qt.TabFocus)
+		onTriggered: contents.stack.currentItem.forceActiveFocus(Qt.TabFocusReason)
 	}
 	Component {
 		id: localizationPage
@@ -192,7 +192,7 @@ CustomDialog {
 			}
 			onFocusChanged: {
 				if(focus)
-					languageList.forceActiveFocus(Qt.TabFocus);
+					languageList.forceActiveFocus(Qt.TabFocusReason);
 			}
 		}
 	}
@@ -225,7 +225,7 @@ CustomDialog {
 			}
 			onFocusChanged: {
 				if(focus)
-					packList.forceActiveFocus(Qt.TabFocus);
+					packList.forceActiveFocus(Qt.TabFocusReason);
 			}
 		}
 	}

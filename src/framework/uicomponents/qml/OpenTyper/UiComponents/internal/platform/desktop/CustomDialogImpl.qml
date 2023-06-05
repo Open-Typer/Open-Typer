@@ -163,7 +163,7 @@ Item {
 						onReset: root.reset()
 						onFocusOut: {
 							root.focusReset();
-							root.forceActiveFocus(Qt.TabFocus);
+							root.forceActiveFocus(Qt.TabFocusReason);
 						}
 					}
 					Layout.fillWidth: true

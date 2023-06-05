@@ -35,7 +35,7 @@ CustomDialog {
 	nativeDialogMinimumHeight: 600
 	onActiveFocusChanged: {
 		if(activeFocus)
-			contents.currentItem.forceActiveFocus(Qt.TabFocus);
+			contents.currentItem.forceActiveFocus(Qt.TabFocusReason);
 	}
 
 	contentItem: StackView {
@@ -62,9 +62,9 @@ CustomDialog {
 							if(activeFocus)
 							{
 								if(editButton.visible)
-									editButton.forceActiveFocus(Qt.TabFocus);
+									editButton.forceActiveFocus(Qt.TabFocusReason);
 								else
-									addButton.forceActiveFocus(Qt.TabFocus);
+									addButton.forceActiveFocus(Qt.TabFocusReason);
 							}
 						}
 					}
@@ -113,7 +113,7 @@ CustomDialog {
 						if(activeFocus)
 						{
 							if(count == 0)
-								editButton.forceActiveFocus(Qt.TabFocus);
+								editButton.forceActiveFocus(Qt.TabFocusReason);
 							else if(currentIndex == -1)
 								currentIndex = 0;
 						}
@@ -122,7 +122,7 @@ CustomDialog {
 
 				onFocusChanged: {
 					if(focus)
-						focusControl.forceActiveFocus(Qt.TabFocus);
+						focusControl.forceActiveFocus(Qt.TabFocusReason);
 				}
 			}
 		}
@@ -165,7 +165,7 @@ CustomDialog {
 
 				onFocusChanged: {
 					if(focus)
-						backButton.forceActiveFocus(Qt.TabFocus);
+						backButton.forceActiveFocus(Qt.TabFocusReason);
 				}
 			}
 		}
@@ -175,7 +175,7 @@ CustomDialog {
 		target: standardButton(Dialog.Close)
 		onActiveFocusChanged: {
 			if(!target.activeFocus)
-				root.contents.currentItem.forceActiveFocus(Qt.TabFocus);
+				root.contents.currentItem.forceActiveFocus(Qt.TabFocusReason);
 		}
 	}
 }

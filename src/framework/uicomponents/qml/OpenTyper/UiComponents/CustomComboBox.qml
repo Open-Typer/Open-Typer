@@ -54,8 +54,8 @@ ComboBox {
 	}
 	popup.y: height
 	popup.contentItem.focus: true
-	popup.onAboutToShow: popup.forceActiveFocus(Qt.TabFocus)
-	popup.onClosed: control.forceActiveFocus(Qt.TabFocus)
+	popup.onAboutToShow: popup.forceActiveFocus(Qt.TabFocusReason)
+	popup.onClosed: control.forceActiveFocus(Qt.TabFocusReason)
 	background.clip: true
 	function computeWidth(mdl) {
 		if (mdl === null || mdl === undefined)

@@ -37,7 +37,7 @@ ColumnLayout {
 	}
 	onActiveFocusChanged: {
 		if(activeFocus)
-			list.forceActiveFocus(Qt.TabFocus);
+			list.forceActiveFocus(Qt.TabFocusReason);
 	}
 	Component.onCompleted: {
 		// Fill SettingsDialog's Flickable
