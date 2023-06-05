@@ -131,19 +131,19 @@ CustomDialog {
 			onActiveFocusChanged: {
 				if(forceListFocus)
 				{
-					forceActiveFocus(Qt.TabFocus);
+					forceActiveFocus(Qt.TabFocusReason);
 					currentIndex = currentIndex + 0;
 					return;
 				}
 				if(!activeFocus)
 				{
 					focusFromList = true;
-					stack.currentItem.contentItem.children[0].forceActiveFocus(Qt.TabFocus);
+					stack.currentItem.contentItem.children[0].forceActiveFocus(Qt.TabFocusReason);
 				}
 			}
 			onFocusChanged: {
 				if(focus)
-					forceActiveFocus(Qt.TabFocus);
+					forceActiveFocus(Qt.TabFocusReason);
 			}
 			Keys.onTabPressed: {
 				focusFromList = true;
@@ -177,26 +177,26 @@ CustomDialog {
 						{
 							if(!focusFromList)
 							{
-								listView.currentItem.forceActiveFocus(Qt.TabFocus);
+								listView.currentItem.forceActiveFocus(Qt.TabFocusReason);
 								return;
 							}
 							focusFromList = false;
 							let item = QmlUtils.findFirstControl(children[0]);
 							if(item === null)
-								children[0].forceActiveFocus(Qt.TabFocus);
+								children[0].forceActiveFocus(Qt.TabFocusReason);
 							else
 							{
 								let nextItem = item.nextItemInFocusChain();
 								if(item.parent === nextItem.parent)
-									item.forceActiveFocus(Qt.TabFocus);
+									item.forceActiveFocus(Qt.TabFocusReason);
 								else
 								{
 									if(QmlUtils.itemHasChild(children[0], nextItem))
-										nextItem.forceActiveFocus(Qt.TabFocus);
+										nextItem.forceActiveFocus(Qt.TabFocusReason);
 									else if(item.activeFocusOnTab)
-										item.forceActiveFocus(Qt.TabFocus);
+										item.forceActiveFocus(Qt.TabFocusReason);
 									else
-										children[0].forceActiveFocus(Qt.TabFocus);
+										children[0].forceActiveFocus(Qt.TabFocusReason);
 								}
 							}
 						}
@@ -224,7 +224,7 @@ CustomDialog {
 	}
 	onAboutToShow: {
 		Settings.freeze();
-		contents.listView.forceActiveFocus(Qt.TabFocus);
+		contents.listView.forceActiveFocus(Qt.TabFocusReason);
 	}
 	onAboutToHide: freezeList = true
 	onClosed: freezeList = false
@@ -242,6 +242,6 @@ CustomDialog {
 	onFocusReset: {
 		focusFromList = false;
 		forceListFocus = true;
-		contents.listView.forceActiveFocus(Qt.TabFocus);
+		contents.listView.forceActiveFocus(Qt.TabFocusReason);
 	}
 }

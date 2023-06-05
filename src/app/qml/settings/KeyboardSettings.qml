@@ -60,7 +60,7 @@ RowLayout {
 	}
 	onActiveFocusChanged: {
 		if(activeFocus)
-			layoutList.forceActiveFocus(Qt.TabFocus);
+			layoutList.forceActiveFocus(Qt.TabFocusReason);
 	}
 	Component.onCompleted: {
 		// Fill SettingsDialog's Flickable

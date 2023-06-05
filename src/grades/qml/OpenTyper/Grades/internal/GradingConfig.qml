@@ -289,6 +289,6 @@ ColumnLayout {
 
 	onActiveFocusChanged: {
 		if(activeFocus)
-			QmlUtils.findFirstControl(root).forceActiveFocus(Qt.TabFocus);
+			QmlUtils.findFirstControl(root).forceActiveFocus(Qt.TabFocusReason);
 	}
 }

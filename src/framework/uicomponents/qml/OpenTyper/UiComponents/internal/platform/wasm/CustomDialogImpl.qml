@@ -79,7 +79,7 @@ Item {
 
 	function restoreFocus() {
 		if(previousFocusItem != null)
-			previousFocusItem.forceActiveFocus(Qt.TabFocus);
+			previousFocusItem.forceActiveFocus(Qt.TabFocusReason);
 	}
 
 	function open() {
@@ -247,9 +247,9 @@ Item {
 								return;
 							let target = QmlUtils.findFirstControl(item);
 							if(target === null)
-								item.forceActiveFocus(Qt.TabFocus);
+								item.forceActiveFocus(Qt.TabFocusReason);
 							else
-								target.forceActiveFocus(Qt.TabFocus);
+								target.forceActiveFocus(Qt.TabFocusReason);
 						}
 					}
 				}
@@ -273,7 +273,7 @@ Item {
 				onReset: control.reset()
 				onFocusOut: {
 					root.focusReset();
-					root.forceActiveFocus(Qt.TabFocus);
+					root.forceActiveFocus(Qt.TabFocusReason);
 				}
 			}
 			Connections {

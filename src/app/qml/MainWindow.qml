@@ -312,7 +312,7 @@ ApplicationWindow {
 		spacing: 0
 		onFocusChanged: {
 			if(focus)
-				panel1.contents.settingsButton.forceActiveFocus(Qt.TabFocus);
+				panel1.contents.settingsButton.forceActiveFocus(Qt.TabFocusReason);
 		}
 		Keys.forwardTo: keyboardHandler
 
