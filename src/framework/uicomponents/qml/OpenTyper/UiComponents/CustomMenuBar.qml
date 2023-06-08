@@ -137,7 +137,7 @@ MenuBar {
 
 	Connections {
 		target: QmlUtils
-        function onMenuBarReloadTriggered() {
+		function onMenuBarReloadTriggered() {
 			for(var i = 0; i < root.count; i++)
 				root.menuAt(i).close();
 			root.reload();
