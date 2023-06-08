@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
+ * Copyright (C) 2023 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -74,8 +75,9 @@ AccentButtonBox {
 	Connections {
 		readonly property Item firstButton: dialogButtonBox.contentChildren[0]
 		target: firstButton
-		onActiveFocusChanged: {
-			if(!firstButton.activeFocus)
+        function onActiveFocusChanged(activeFocus) {
+            console.log("active focus: ", activeFocus)
+            if(!activeFocus)
 				focusOut();
 		}
 	}
