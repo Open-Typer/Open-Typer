@@ -3,6 +3,7 @@
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
+ * Copyright (C) 2023 - Roker2
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +36,7 @@ Item {
 	Connections {
 		target: AppMenuBar.openAction
 
-		onClicked: {
+        function onClicked() {
 			openToggled();
 		}
 	}
@@ -43,7 +44,7 @@ Item {
 	Connections {
 		target: AppMenuBar.printAction
 
-		onClicked: {
+        function onClicked() {
 			printToggled();
 		}
 	}
@@ -51,7 +52,7 @@ Item {
 	Connections {
 		target: AppMenuBar.typingTestAction
 
-		onClicked: {
+        function onClicked() {
 			typingTestToggled();
 		}
 	}
@@ -59,7 +60,7 @@ Item {
 	Connections {
 		target: AppMenuBar.exerciseHistoryAction
 
-		onClicked: {
+        function onClicked() {
 			exerciseHistoryToggled();
 		}
 	}
@@ -67,7 +68,7 @@ Item {
 	Connections {
 		target: AppMenuBar.timedExAction
 
-		onClicked: {
+        function onClicked() {
 			timedExToggled();
 		}
 	}
@@ -75,7 +76,7 @@ Item {
 	Connections {
 		target: AppMenuBar.errorWordsAction
 
-		onClicked: {
+        function onClicked() {
 			errorWordsToggled();
 		}
 	}
@@ -83,7 +84,7 @@ Item {
 	Connections {
 		target: AppMenuBar.reverseTextAction
 
-		onClicked: {
+        function onClicked() {
 			reverseTextToggled();
 		}
 	}
@@ -91,7 +92,7 @@ Item {
 	Connections {
 	target: AppMenuBar.preferencesAction
 
-		onClicked: {
+        function onClicked() {
 			preferencesToggled();
 		}
 	}
@@ -99,7 +100,7 @@ Item {
 	Connections {
 	target: AppMenuBar.aboutProgramAction
 
-		onClicked: {
+        function onClicked() {
 			aboutProgramToggled();
 		}
 	}
