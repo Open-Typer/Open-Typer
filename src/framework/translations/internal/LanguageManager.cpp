@@ -94,6 +94,7 @@ const QList<LanguageManager::LanguageCountry> LanguageManager::supportedLanguage
 	{ QLocale::English, QLocale::UnitedStates },
 	{ QLocale::Slovak, QLocale::Slovakia },
 	{ QLocale::Russian, QLocale::Russia },
+	{ QLocale::Ukrainian, QLocale::Ukraine },
 };
 
 /*! The string representation of current locale. \since Open-Typer 5.1.0 */
