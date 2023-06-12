@@ -19,6 +19,7 @@
  */
 
 #include "KeyboardModule.h"
+#include "internal/KeyEvent.h"
 #include "internal/KeyboardUtils.h"
 #include "internal/KeyboardLayout.h"
 #include "global/ISettings.h"
@@ -49,4 +50,5 @@ void KeyboardModule::registerUiTypes()
 	qmlRegisterType<KeyboardLayout>("OpenTyper.Keyboard", 1, 0, "KeyboardLayout");
 	qRegisterMetaType<Key>();
 	qRegisterMetaType<KeyboardRow>();
+	qRegisterMetaType<KeyEvent>();
 }
