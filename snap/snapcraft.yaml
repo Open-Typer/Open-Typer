@@ -24,7 +24,6 @@ parts:
       craftctl set grade=stable
     override-build: |
       qmake
-      lrelease *.pro &#124;&#124; true
       make -j$(nproc --all)
       cp open-typer $SNAPCRAFT_PART_INSTALL/usr/bin
       cp *.so* $SNAPCRAFT_PART_INSTALL/usr/lib/ &#124;&#124; true
