@@ -49,7 +49,7 @@ void QmlKeyboardHandler::inputMethodEvent(QInputMethodEvent *event)
  */
 void QmlKeyboardHandler::keyPressEvent(QKeyEvent *event)
 {
-	emit keyPressed(convertEvent(event));
+	emit keyPressed(event);
 }
 
 /*!
@@ -60,19 +60,6 @@ void QmlKeyboardHandler::keyPressEvent(QKeyEvent *event)
 void QmlKeyboardHandler::keyReleaseEvent(QKeyEvent *event)
 {
 	if(KeyboardUtils::isDeadKey(event->key()))
-		emit keyPressed(convertEvent(event));
-	emit keyReleased(convertEvent(event));
-}
-
-/*! Converts the QKeyEvent to a QVariantMap that can be used from QML. */
-QVariantMap QmlKeyboardHandler::convertEvent(QKeyEvent *event)
-{
-	QVariantMap out;
-	out["key"] = event->key();
-	out["text"] = event->text();
-	out["modifiers"] = (int) event->modifiers();
-	out["isAutoRepeat"] = event->isAutoRepeat();
-	out["nativeScanCode"] = event->nativeScanCode();
-	out["nativeVirtualKey"] = event->nativeVirtualKey();
-	return out;
+		emit keyPressed(event);
+	emit keyReleased(event);
 }

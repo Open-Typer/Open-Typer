@@ -28,16 +28,10 @@
  * Returns true if the key is a special key.\n
  * Special keys are ignored by default.
  */
-bool KeyboardUtils::isSpecialKey(QKeyEvent *event)
+bool KeyboardUtils::isSpecialKey(const KeyEvent &event)
 {
-	return isSpecialKey(QmlKeyboardHandler::convertEvent(event));
-}
-
-/*! Implementation of isSpecialKey() for QVariantMap events. */
-bool KeyboardUtils::isSpecialKey(QVariantMap event)
-{
-	int keyID = event["key"].toInt();
-	if((event["text"].toString() == "") && (keyID != Qt::Key_Return) && (keyID != Qt::Key_Enter))
+	const Qt::Key keyID = event.key();
+	if((event.text() == "") && (keyID != Qt::Key_Return) && (keyID != Qt::Key_Enter))
 		return true;
 	switch(keyID)
 	{

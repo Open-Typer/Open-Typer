@@ -103,42 +103,42 @@ ColumnLayout {
 	}
 
 	function getKey(event, normalizeText = false) {
-		if(event["key"] === Qt.Key_Backspace)
+		if(event.key === Qt.Key_Backspace)
 			return backspace;
-		else if(event["key"] === Qt.Key_Tab || event["text"] === "\t")
+		else if(event.key === Qt.Key_Tab || event.text === "\t")
 			return tab;
-		else if(event["key"] === Qt.Key_CapsLock)
+		else if(event.key === Qt.Key_CapsLock)
 			return capsLock;
-		else if(event["key"] === Qt.Key_Return || event["text"] === "\n")
+		else if(event.key === Qt.Key_Return || event.text === "\n")
 			return returnKey;
-		else if(event["key"] === Qt.Key_Shift)
+		else if(event.key === Qt.Key_Shift)
 		{
-			if(event["rShift"] || KeyboardUtils.isRShift(event["nativeScanCode"], event["nativeVirtualKey"]))
+			if(event.rightShift || KeyboardUtils.isRShift(event.nativeScanCode, event.nativeVirtualKey))
 				return rShift;
 			else
 				return lShift;
 		}
-		else if(event["key"] === Qt.Key_Control)
+		else if(event.key === Qt.Key_Control)
 		{
-			if(KeyboardUtils.isRControl(event["nativeScanCode"], event["nativeVirtualKey"]))
+			if(KeyboardUtils.isRControl(event.nativeScanCode, event.nativeVirtualKey))
 				return rCtrl;
 			else
 				return lCtrl;
 		}
-		else if(event["key"] === Qt.Key_Alt)
+		else if(event.key === Qt.Key_Alt)
 			return lAlt;
-		else if(event["key"] === Qt.Key_AltGr)
+		else if(event.key === Qt.Key_AltGr)
 			return rAlt;
-		else if(event["key"] === Qt.Key_Space || event["text"] === " ")
+		else if(event.key === Qt.Key_Space || event.text === " ")
 			return space;
-		if(event["text"] === undefined)
+		if(event.text === undefined)
 			return;
 		var keyText;
-		var normalized = StringUtils.normalizeString(event["text"]);
+		var normalized = StringUtils.normalizeString(event.text);
 		if(normalizeText && normalized.length > 0)
 			keyText = normalized[0].toLowerCase();
 		else
-			keyText = event["text"].toLowerCase();
+			keyText = event.text.toLowerCase();
 		var ret = getKeyFromRow(keyText, layout.rowB);
 		if(ret !== null)
 			return ret;
