@@ -258,3 +258,8 @@ bool KeyboardUtils::isRControl(int nativeScanCode, int nativeVirtualKey)
 	return false;
 #endif
 }
+
+KeyEvent KeyboardUtils::createKeyEvent(Qt::Key key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, const QString &text)
+{
+	return KeyEvent(key, modifiers, nativeScanCode, nativeVirtualKey, text);
+}
