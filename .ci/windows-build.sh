@@ -11,5 +11,4 @@ else
 	cd release
 	cp C:/OpenSSL/bin/*.dll ./
 	cd ..
-	mv release ../
 fi

@@ -78,12 +78,15 @@ jobs:
     - name: Finalize Windows build
       run: .ci/windows-build.sh 1
       shell: bash
-    ## Package
-    - name: Package
-      uses: vimtor/action-zip@v1
+    ## Upload
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
       with:
-        files: ../release/
-        dest: ../${{ env.app_name }}-win32.zip
+        name: build-Qt-${{ matrix.qt-version }}
+        path: release/
+    - name: Move artifacts
+      run: mv release ../
+      shell: bash
     ## Build installer
     - if: env.create_windows_installer == 1
       name: Get installer configuration
@@ -99,16 +102,9 @@ jobs:
       shell: bash
     - if: env.create_windows_installer == 1
       name: Build installer
-      run: |
-        ../windows-repo.sh
-        mv ../*.zip ./
+      run: ../windows-repo.sh
       shell: bash
-    ## Upload
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-Qt-${{ matrix.qt-version }}
-        path: '*.zip'
+    ## Upload installer
     - name: Upload installer
       uses: actions/upload-artifact@v3
       with:

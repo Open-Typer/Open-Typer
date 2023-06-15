@@ -122,7 +122,9 @@ jobs:
       shell: cmd
     - if: contains(matrix.os, 'windows')
       name: Finalize Windows build
-      run: .ci/${{ env.os_name }}-build.sh 1
+      run: |
+        .ci/${{ env.os_name }}-build.sh 1
+        mv release ../
       shell: bash
     - if: contains(matrix.os, 'ubuntu')
       name: Build (Ubuntu)
