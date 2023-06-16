@@ -65,6 +65,7 @@ ThemeEngine::ThemeEngine()
 	connect(this, &ThemeEngine::panelColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::currentAccentColorChanged);
 	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::borderColorChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::foregroundColorChanged);
 }
 
 /*! Returns the static instance of ThemeEngine. */
@@ -487,4 +488,9 @@ void ThemeEngine::applyStyleSheetFromFile(const QString &stylePath)
 QColor ThemeEngine::borderColor() const
 {
 	return theme() == Theme::DarkTheme ? QColor(255, 255, 255, 64) : QColor(0, 0, 0, 64);
+}
+
+QColor ThemeEngine::foregroundColor() const
+{
+	return theme() == Theme::DarkTheme ? QColor(255, 255, 255) : QColor(0, 0, 0);
 }

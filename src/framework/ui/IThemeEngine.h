@@ -105,6 +105,8 @@ class IThemeEngine : public QObject, MODULE_EXPORT_INTERFACE
 
 		virtual QColor borderColor() const = 0;
 
+		virtual QColor foregroundColor() const = 0;
+
 	signals:
 		/*! A signal, which is emitted when the font changes. */
 		void fontChanged();
@@ -131,6 +133,7 @@ class IThemeEngine : public QObject, MODULE_EXPORT_INTERFACE
 		/*! A signal, which is emitted when the application theme changes. */
 		void themeChanged();
 		void borderColorChanged();
+		void foregroundColorChanged();
 };
 
 #endif // ITHEMEENGINE_H
