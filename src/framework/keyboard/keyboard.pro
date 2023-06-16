@@ -7,6 +7,7 @@ QML_IMPORT_PATH += qml
 SOURCES += \
     KeyboardModule.cpp \
     internal/Key.cpp \
+    internal/KeyEvent.cpp \
     internal/KeyboardLayout.cpp \
     internal/KeyboardUtils.cpp \
     internal/QmlKeyboardHandler.cpp
@@ -14,6 +15,7 @@ SOURCES += \
 HEADERS += \
     KeyboardModule.h \
     internal/Key.h \
+    internal/KeyEvent.h \
     internal/KeyboardLayout.h \
     internal/KeyboardUtils.h \
     internal/QmlKeyboardHandler.h

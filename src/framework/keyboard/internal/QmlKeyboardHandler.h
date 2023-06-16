@@ -23,6 +23,7 @@
 
 #include <QQuickItem>
 #include "KeyboardUtils.h"
+#include "KeyEvent.h"
 
 /*! \brief The QmlKeyboardHandler class can be used to receive any key presses (including dead keys). */
 class Q_DECL_EXPORT QmlKeyboardHandler : public QQuickItem
@@ -30,7 +31,6 @@ class Q_DECL_EXPORT QmlKeyboardHandler : public QQuickItem
 		Q_OBJECT
 	public:
 		explicit QmlKeyboardHandler(QQuickItem *parent = nullptr);
-		static QVariantMap convertEvent(QKeyEvent *event);
 
 	protected:
 		void inputMethodEvent(QInputMethodEvent *event) override;
@@ -38,8 +38,8 @@ class Q_DECL_EXPORT QmlKeyboardHandler : public QQuickItem
 		void keyReleaseEvent(QKeyEvent *event) override;
 
 	signals:
-		void keyPressed(QVariantMap event);
-		void keyReleased(QVariantMap event);
+		void keyPressed(KeyEvent event);
+		void keyReleased(KeyEvent event);
 };
 
 #endif // QMLKEYBOARDHANDLER_H

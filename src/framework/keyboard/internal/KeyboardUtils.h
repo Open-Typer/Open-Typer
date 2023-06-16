@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QKeyEvent>
 #include "QmlKeyboardHandler.h"
+#include "KeyEvent.h"
 
 /*! \brief The KeyboardUtils class provides functions related to keyboard and input method. */
 class Q_DECL_EXPORT KeyboardUtils : public QObject
@@ -46,13 +47,14 @@ class Q_DECL_EXPORT KeyboardUtils : public QObject
 		};
 		Q_ENUM(KeyType)
 
-		static bool isSpecialKey(QKeyEvent *event);
-		Q_INVOKABLE static bool isSpecialKey(QVariantMap event);
+		Q_INVOKABLE static bool isSpecialKey(const KeyEvent &event);
 		Q_INVOKABLE static bool isDeadKey(int key);
 		Q_INVOKABLE static QString deadKeyToString(Qt::Key key);
 		Q_INVOKABLE static QString deadKeyToReadableString(Qt::Key key);
 		Q_INVOKABLE static bool isRShift(int nativeScanCode, int nativeVirtualKey);
 		Q_INVOKABLE static bool isRControl(int nativeScanCode, int nativeVirtualKey);
+
+		Q_INVOKABLE static KeyEvent createKeyEvent(Qt::Key key = Qt::Key_unknown, Qt::KeyboardModifiers modifiers = Qt::NoModifier, quint32 nativeScanCode = 0, quint32 nativeVirtualKey = 0, const QString &text = QString());
 };
 
 #endif // KEYBOARDUTILS_H

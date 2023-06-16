@@ -319,7 +319,7 @@ ApplicationWindow {
 		KeyboardHandler {
 			id: keyboardHandler
 			onKeyPressed: {
-				if(event["key"] !== Qt.Key_Tab && event["key"] !== Qt.Key_Enter && event["key"] !== Qt.Key_Return && event["key"] !== Qt.Key_Space)
+				if(event.key !== Qt.Key_Tab && event.key !== Qt.Key_Enter && event.key !== Qt.Key_Return && event.key !== Qt.Key_Space)
 					paper.forceActiveFocus();
 			}
 		}
@@ -955,21 +955,21 @@ ApplicationWindow {
 	function keyPress(event) {
 		if(eventInProgress || blockInput || ((currentMode == 1) && !timedExStarted))
 			return;
-		var keyID = event["key"];
+		var keyID = event.key;
 		var isDeadKey = KeyboardUtils.isDeadKey(keyID);
 		if(!isDeadKey)
 		{
 			if(deadKeys > 0)
 			{
 				keyboard.releaseAllKeys();
-				if(lastDeadKey === event["text"])
+				if(lastDeadKey === event.text)
 					blockNextDeadKey = true;
 			}
 			else
 				blockNextDeadKey = false;
 			keyboard.pressKey(event);
 		}
-		if(event["isAutoRepeat"])
+		if(event.isAutoRepeat)
 			return;
 		if(isDeadKey)
 		{
@@ -980,11 +980,11 @@ ApplicationWindow {
 				return;
 			}
 			deadKeys++;
-			lastDeadKey = KeyboardUtils.deadKeyToReadableString(event["key"]);
+			lastDeadKey = KeyboardUtils.deadKeyToReadableString(event.key);
 			// Count modifier key used with the dead key
-			if(event["modifiers"] !== Qt.NoModifier)
+			if(event.modifiers !== Qt.NoModifier)
 				deadKeys++;
-			event["text"] = KeyboardUtils.deadKeyToString(event["key"]);
+			event.text = KeyboardUtils.deadKeyToString(event.key);
 			keyboard.pressKey(event);
 			return;
 		}
@@ -998,7 +998,7 @@ ApplicationWindow {
 			exerciseInProgress = true;
 		}
 		var ignoreBackspace = false;
-		var keyText = event["text"];
+		var keyText = event.text;
 		var rawKeyText = keyText;
 		if((keyText === "'") && (displayExercise[displayPos] === "‘"))
 			keyText = "‘";
@@ -1087,7 +1087,7 @@ ApplicationWindow {
 				absolutePos++;
 				var charHits = 1;
 				// Count modifier keys
-				if(event["modifiers"] !== Qt.NoModifier)
+				if(event.modifiers !== Qt.NoModifier)
 					charHits++;
 				// Count dead keys
 				charHits += deadKeys;
@@ -1176,9 +1176,9 @@ ApplicationWindow {
 
 	function keyRelease(event) {
 		keyboard.releaseKey(event);
-		if(lastKey !== event["text"])
+		if(lastKey !== event.text)
 		{
-			event["text"] = lastKey;
+			event.text = lastKey;
 			keyboard.releaseKey(event);
 		}
 	}
@@ -1340,15 +1340,23 @@ ApplicationWindow {
 			var keys = keyboard.layout.characterKeys(displayExercise[displayPos]);
 			for(var i = 0; i < keys.length; i++)
 			{
-				var futureEvent;
+				let text = "";
+				let keyId = Qt.Key_unknown;
+				let rShift = false;
 				if(keys[i].type === KeyboardUtils.KeyType_Any)
-					futureEvent = { "text": keys[i].displayText };
-				else if(keys[i].type === KeyboardUtils.KeyType_RShift)
-					futureEvent = { "text": "", "key": Qt.Key_Shift, "rShift": true };
+					text = keys[i].displayText;
+				else if(keys[i].type === KeyboardUtils.KeyType_RShift) {
+					keyId = Qt.Key_Shift;
+					rShift = true;
+				}
 				else if(keys[i].type === KeyboardUtils.KeyType_LShift)
-					futureEvent = { "text": "", "key": Qt.Key_Shift };
-				else
-					futureEvent = { "text": "\n", "key": Qt.Key_Return };
+					keyId = Qt.Key_Shift;
+				else {
+					text = "\n";
+					keyId = Qt.Key_Return;
+				}
+				let futureEvent = KeyboardUtils.createKeyEvent(keyId, Qt.NoModifier, 0, 0, text);
+				futureEvent.rightShift = rShift;
 				keyboard.highlightKey(futureEvent);
 			}
 		}

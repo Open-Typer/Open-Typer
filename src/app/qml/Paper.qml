@@ -87,7 +87,7 @@ Item {
 	KeyboardHandler {
 		id: keyboardHandler
 		onKeyPressed: {
-			if(event["key"] === Qt.Key_Tab)
+			if(event.key === Qt.Key_Tab)
 				control.parent.forceActiveFocus();
 			else
 				control.keyPressed(event);
