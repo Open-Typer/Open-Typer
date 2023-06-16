@@ -98,10 +98,12 @@ class IThemeEngine : public QObject, MODULE_EXPORT_INTERFACE
 		virtual QColor getAccentColor(AccentColor colorId) = 0;
 		virtual QColor currentAccentColor(void) = 0;
 
-		virtual Theme theme(void) = 0;
+		virtual Theme theme(void) const = 0;
 		virtual void setTheme(Theme newTheme) = 0;
 		virtual void updateTheme(void) = 0;
 		virtual void setDefaultTheme(void) = 0;
+
+		virtual QColor borderColor() const = 0;
 
 	signals:
 		/*! A signal, which is emitted when the font changes. */
@@ -128,6 +130,7 @@ class IThemeEngine : public QObject, MODULE_EXPORT_INTERFACE
 		void currentAccentColorChanged();
 		/*! A signal, which is emitted when the application theme changes. */
 		void themeChanged();
+		void borderColorChanged();
 };
 
 #endif // ITHEMEENGINE_H

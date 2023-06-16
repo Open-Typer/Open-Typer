@@ -64,6 +64,7 @@ ThemeEngine::ThemeEngine()
 	connect(this, &ThemeEngine::paperColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::panelColorChanged, this, &ThemeEngine::colorChanged);
 	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::currentAccentColorChanged);
+	connect(this, &ThemeEngine::themeChanged, this, &ThemeEngine::borderColorChanged);
 }
 
 /*! Returns the static instance of ThemeEngine. */
@@ -428,7 +429,7 @@ QColor ThemeEngine::currentAccentColor(void)
 }
 
 /*! Current application theme. */
-ThemeEngine::Theme ThemeEngine::theme(void)
+ThemeEngine::Theme ThemeEngine::theme(void) const
 {
 	return static_cast<Theme>(settings()->getValue(APP_THEME).toInt());
 }
@@ -481,4 +482,9 @@ void ThemeEngine::applyStyleSheetFromFile(const QString &stylePath)
 	styleFile.setFileName(stylePath);
 	if(styleFile.open(QFile::ReadOnly | QFile::Text))
 		qApp->setStyleSheet(styleFile.readAll());
+}
+
+QColor ThemeEngine::borderColor() const
+{
+	return theme() == Theme::DarkTheme ? QColor(255, 255, 255, 64) : QColor(0, 0, 0, 64);
 }
