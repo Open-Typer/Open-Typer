@@ -36,7 +36,7 @@ Menu {
 	font.pointSize: 10
 	background: Rectangle {
 		color: ThemeEngine.bgColor;
-		border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+		border.color: ThemeEngine.borderColor
 		radius: 10
 		implicitHeight: 40
 	}

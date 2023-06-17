@@ -42,7 +42,7 @@ Rectangle {
 	height: columnLayout.implicitHeight + padding * 2
 	radius: 10
 	color: ThemeEngine.panelColor
-	border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+	border.color: ThemeEngine.borderColor
 	clip: true
 	onValidatorChanged: {
 		resetClass();

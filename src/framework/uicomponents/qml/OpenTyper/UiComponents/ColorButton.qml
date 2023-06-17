@@ -21,6 +21,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
+import OpenTyper.Ui 1.0
 
 RoundButton {
 	property color color: Material.background
@@ -32,7 +33,7 @@ RoundButton {
 		anchors.centerIn: parent
 		radius: width / 2
 		color: Qt.rgba(0, 0, 0, 0)
-		border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+		border.color: ThemeEngine.borderColor
 	}
 	Rectangle {
 		visible: control.checked

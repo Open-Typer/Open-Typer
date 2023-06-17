@@ -22,6 +22,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
 import QtQuick.Layouts 1.12
+import OpenTyper.Ui 1.0
 
 ItemDelegate {
 	property url iconUrl: ""
@@ -36,7 +37,7 @@ ItemDelegate {
 		anchors.fill: parent
 		color: "transparent"
 		radius: 10
-		border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+		border.color: ThemeEngine.borderColor
 	}
 
 	contentItem: RowLayout {

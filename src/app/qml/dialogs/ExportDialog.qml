@@ -126,7 +126,7 @@ CustomDialog {
 			clip: true
 			background: Rectangle {
 				radius: 10
-				border.color: ThemeEngine.theme == ThemeEngine.DarkTheme ? Qt.rgba(1, 1, 1, 0.25) : Qt.rgba(0, 0, 0, 0.25)
+				border.color: ThemeEngine.borderColor
 				color: "transparent"
 			}
 

@@ -23,6 +23,7 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
 import QtQuick.Layouts 1.12
 import OpenTyper.Grades 1.0
+import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
 import OpenTyper.Translations 1.0
 import OpenTyper.Global 1.0
@@ -75,7 +76,7 @@ ColumnLayout {
 			implicitWidth: 200
 			implicitHeight: 40
 			color: "transparent"
-			border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+			border.color: ThemeEngine.borderColor
 			radius: 10
 		}
 		KeyNavigation.priority: KeyNavigation.BeforeItem
@@ -234,7 +235,7 @@ ColumnLayout {
 					Layout.fillWidth: true
 					background: Rectangle {
 						color: "transparent"
-						border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+						border.color: ThemeEngine.borderColor
 						radius: 10
 					}
 
