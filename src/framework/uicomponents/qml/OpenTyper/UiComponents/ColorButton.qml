@@ -42,6 +42,6 @@ RoundButton {
 		anchors.centerIn: parent
 		radius: width / 2
 		color: Qt.rgba(0, 0, 0, 0)
-		border.color: Material.theme == Material.Dark ? Qt.rgba(1, 1, 1, 1) : Qt.rgba(0, 0, 0, 1)
+		border.color: ThemeEngine.foregroundColor
 	}
 }

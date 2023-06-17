@@ -490,7 +490,7 @@ ApplicationWindow {
 				Item { Layout.fillWidth: true }
 				Label {
 					text: formattedExerciseRemainingTime
-					color: Material.theme === Material.Light ? "black" : "white"
+					color: ThemeEngine.foregroundColor
 					font.pointSize: 20
 					font.bold: true
 				}
