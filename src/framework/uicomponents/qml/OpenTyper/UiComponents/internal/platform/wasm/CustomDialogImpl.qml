@@ -103,7 +103,7 @@ Item {
 		radius: control.radius
 		visible: shadow.visible
 		border.width: 1
-		border.color: Material.theme === Material.Light ? Qt.rgba(0, 0, 0, 0.25) : Qt.rgba(1, 1, 1, 0.25)
+		border.color: ThemeEngine.borderColor
 		Component.onCompleted: resetPos();
 		onXChanged: checkPos();
 		onYChanged: checkPos();

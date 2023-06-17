@@ -328,7 +328,7 @@ ApplicationWindow {
 			visible: customMenuBar.visible
 			Layout.fillWidth: true
 			implicitHeight: 1
-			color: Material.theme == Material.Dark ? Qt.rgba(1, 1, 1, 0.2) : Qt.rgba(0, 0, 0, 0.2);
+			color: ThemeEngine.borderColor
 		}
 
 		Panel {
@@ -490,7 +490,7 @@ ApplicationWindow {
 				Item { Layout.fillWidth: true }
 				Label {
 					text: formattedExerciseRemainingTime
-					color: Material.theme === Material.Light ? "black" : "white"
+					color: ThemeEngine.foregroundColor
 					font.pointSize: 20
 					font.bold: true
 				}

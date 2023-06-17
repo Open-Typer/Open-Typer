@@ -200,7 +200,7 @@ ColumnLayout {
 		}
 
 		ColorButton {
-			color: ThemeEngine.theme === ThemeEngine.DarkTheme ? Qt.rgba(1, 1, 1, 1) : Qt.rgba(0, 0, 0, 1)
+			color: ThemeEngine.foregroundColor
 			checked: ThemeEngine.exerciseTextColor == color
 			autoExclusive: true
 			checkable: true

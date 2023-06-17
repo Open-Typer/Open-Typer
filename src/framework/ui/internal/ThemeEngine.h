@@ -45,6 +45,8 @@ class Q_DECL_EXPORT ThemeEngine : public IThemeEngine
 		Q_PROPERTY(QColor panelColor READ panelColor WRITE setPanelColor NOTIFY panelColorChanged)
 		Q_PROPERTY(AccentColor accentColor READ accentColor WRITE setAccentColor NOTIFY accentColorChanged)
 		Q_PROPERTY(QColor currentAccentColor READ currentAccentColor NOTIFY currentAccentColorChanged)
+		Q_PROPERTY(QColor borderColor READ borderColor NOTIFY borderColorChanged)
+		Q_PROPERTY(QColor foregroundColor READ foregroundColor NOTIFY foregroundColorChanged)
 		Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
 	public:
 		ThemeEngine();
@@ -99,10 +101,14 @@ class Q_DECL_EXPORT ThemeEngine : public IThemeEngine
 		Q_INVOKABLE QColor getAccentColor(AccentColor colorId) override;
 		QColor currentAccentColor(void) override;
 		// Theme
-		ThemeEngine::Theme theme(void) override;
+		Theme theme(void) const override;
 		void setTheme(ThemeEngine::Theme newTheme) override;
 		Q_INVOKABLE void updateTheme(void) override;
 		Q_INVOKABLE void setDefaultTheme(void) override;
+		// Border color
+		QColor borderColor() const override;
+		// Foreground color
+		QColor foregroundColor() const override;
 
 	private:
 		static std::shared_ptr<ThemeEngine> m_instance;
