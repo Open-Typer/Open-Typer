@@ -62,6 +62,7 @@ Item {
 		priv.contentsActive = visible;
 		dialog.visible = visible;
 		if(visible) {
+			QmlUtils.activeFocusItem = dialog.activeFocusItem;
 			aboutToShow();
 			opened();
 			priv.sizeUpdate = !priv.sizeUpdate;
@@ -129,6 +130,7 @@ Item {
 			priv.sizeUpdate;
 			return fixedSize? Math.max(contentItem.contentLayout.implicitHeight, minimumHeight) : { maximumHeight = maximumHeight };
 		}
+		onActiveFocusItemChanged: QmlUtils.activeFocusItem = activeFocusItem
 
 		contentItem: Rectangle {
 			property alias contentLayout: contentLayout

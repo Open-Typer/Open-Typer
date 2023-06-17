@@ -109,6 +109,7 @@ ApplicationWindow {
 	onYChanged: geometryTimer.start()
 	onWidthChanged: geometryTimer.start()
 	onHeightChanged: geometryTimer.start()
+	onActiveFocusItemChanged: QmlUtils.activeFocusItem = activeFocusItem
 	onVisibilityChanged: {
 		if(visibility == ApplicationWindow.Maximized)
 			wasMaximized = true;
@@ -1384,7 +1385,7 @@ ApplicationWindow {
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.bgBlur = bgBlur;
 		QmlUtils.menuBarBlur = menuBarBlur;
-		QmlUtils.activeFocusItem = Qt.binding(function() { return root.activeFocusItem; });
+		QmlUtils.activeFocusItem = root.activeFocusItem;
 		if(!Settings.getValue("app", "initFinished"))
 			initialSetup.open();
 		reload();
