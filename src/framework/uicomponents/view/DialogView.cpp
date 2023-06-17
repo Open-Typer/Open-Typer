@@ -39,6 +39,7 @@ DialogView::DialogView(QObject *parent) :
 	connect(&m_window, &QQuickWindow::maximumHeightChanged, this, &DialogView::maximumHeightChanged);
 	connect(&m_window, &QuickWindow::autoCloseChanged, this, &DialogView::autoCloseChanged);
 	connect(&m_window, &QuickWindow::closableChanged, this, &DialogView::closableChanged);
+	connect(&m_window, &QQuickWindow::activeFocusItemChanged, this, &DialogView::activeFocusItemChanged);
 }
 
 /*! The root item of the dialog. */
@@ -184,4 +185,10 @@ bool DialogView::closable() const
 void DialogView::setClosable(bool newClosable)
 {
 	m_window.setClosable(newClosable);
+}
+
+/*! The currently active focus item. \since Open-Typer 5.1.1 */
+QQuickItem *DialogView::activeFocusItem() const
+{
+	return m_window.activeFocusItem();
 }
