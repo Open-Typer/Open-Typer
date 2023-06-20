@@ -55,7 +55,10 @@ CustomDialog {
 		id: repaintTimer
 		interval: 16
 		repeat: false
-		onTriggered: ExportTable.updateModel()
+		onTriggered: {
+			ExportTable.updateModel()
+			ExportTable.updateStyle();
+		}
 	}
 
 	contentItem: ColumnLayout {
