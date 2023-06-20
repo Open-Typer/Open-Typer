@@ -313,13 +313,31 @@ ApplicationWindow {
 		color: ThemeEngine.borderColor
 	}
 
+	Rectangle {
+		id: tabBarRect
+		width: parent.width
+		height: tabBar.visible ? tabBar.height : 0
+		anchors.top: menuBarLine.bottom
+		color: ThemeEngine.panelColor
+
+		CustomTabBar {
+			id: tabBar
+			hideOnSingleTab: true
+
+			CustomTabButton {
+				text: qsTr("Home")
+			}
+		}
+	}
+
 	ColumnLayout {
 		property int minWidth: Math.max(implicitWidth, paper.paperRect.width)
 		property int minHeight: implicitHeight
 		id: mainLayout
 		width: parent.width
-		anchors.top: menuBarLine.bottom
+		anchors.top: tabBarRect.bottom
 		anchors.bottom: parent.bottom
+		anchors.topMargin: 1
 		spacing: 0
 		onFocusChanged: {
 			if(focus)
