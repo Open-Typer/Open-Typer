@@ -305,11 +305,21 @@ ApplicationWindow {
 		visible: true
 	}
 
+	Rectangle {
+		id: menuBarLine
+		visible: customMenuBar.visible
+		width: parent.width
+		implicitHeight: 1
+		color: ThemeEngine.borderColor
+	}
+
 	ColumnLayout {
 		property int minWidth: Math.max(implicitWidth, paper.paperRect.width)
 		property int minHeight: implicitHeight
 		id: mainLayout
-		anchors.fill: parent
+		width: parent.width
+		anchors.top: menuBarLine.bottom
+		anchors.bottom: parent.bottom
 		spacing: 0
 		onFocusChanged: {
 			if(focus)
@@ -323,13 +333,6 @@ ApplicationWindow {
 				if(event.key !== Qt.Key_Tab && event.key !== Qt.Key_Enter && event.key !== Qt.Key_Return && event.key !== Qt.Key_Space)
 					paper.forceActiveFocus();
 			}
-		}
-
-		Rectangle {
-			visible: customMenuBar.visible
-			Layout.fillWidth: true
-			implicitHeight: 1
-			color: ThemeEngine.borderColor
 		}
 
 		Panel {
