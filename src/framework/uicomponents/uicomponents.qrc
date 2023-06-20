@@ -24,5 +24,6 @@
         <file>qml/OpenTyper/UiComponents/CustomSpinBox.qml</file>
         <file>qml/OpenTyper/UiComponents/CustomButton.qml</file>
         <file>qml/OpenTyper/UiComponents/CustomTabButton.qml</file>
+        <file>qml/OpenTyper/UiComponents/CustomTabBar.qml</file>
     </qresource>
 </RCC>

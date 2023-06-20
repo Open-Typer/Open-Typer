@@ -11,6 +11,7 @@ CustomMenuItem 1.0 CustomMenuItem.qml
 CustomMenu 1.0 CustomMenu.qml
 CustomMenuSeparator 1.0 CustomMenuSeparator.qml
 CustomSpinBox 1.0 CustomSpinBox.qml
+CustomTabBar 1.0 CustomTabBar.qml
 CustomTabButton 1.0 CustomTabButton.qml
 CustomToolButton 1.0 CustomToolButton.qml
 FontComboBox 1.0 FontComboBox.qml
