@@ -167,6 +167,12 @@ ApplicationWindow {
 				text: qsTr("Home")
 			}
 		}
+
+		BackgroundBlur {
+			id: tabBarBlur
+			anchors.fill: tabBar
+			source: tabBar
+		}
 	}
 
 	StackLayout {
@@ -232,6 +238,7 @@ ApplicationWindow {
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.bgBlur = bgBlur;
 		QmlUtils.menuBarBlur = menuBarBlur;
+		QmlUtils.tabBarBlur = tabBarBlur;
 		QmlUtils.activeFocusItem = root.activeFocusItem;
 		if(!Settings.getValue("app", "initFinished"))
 			initialSetup.open();
