@@ -31,6 +31,7 @@ import OpenTyper.Translations 1.0
 Item {
 	property Item blur: QmlUtils.bgBlur
 	property Item menuBarBlur: QmlUtils.menuBarBlur
+	property Item tabBarBlur: QmlUtils.tabBarBlur
 	property string title: Qt.application.displayName
 	property int standardButtons: Dialog.NoButton
 	readonly property color dialogColor: ThemeEngine.bgColor
@@ -179,6 +180,7 @@ Item {
 			contentsLoader.active = 1;
 			blur.show();
 			menuBarBlur.show();
+			tabBarBlur.show();
 			if(showShadow)
 			{
 				shadowInAnimation.running = true;
@@ -192,6 +194,7 @@ Item {
 			{
 				shadowOutAnimation.running = true;
 				menuBarBlur.hide();
+				tabBarBlur.hide();
 			}
 			shadow.visible = false
 			root.aboutToHide();
