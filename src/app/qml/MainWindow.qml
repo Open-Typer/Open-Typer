@@ -50,7 +50,7 @@ ApplicationWindow {
 	Material.accent: ThemeEngine.currentAccentColor
 	color: ThemeEngine.bgColor
 	minimumWidth: mainLayout.minWidth
-	minimumHeight: mainLayout.minHeight
+	minimumHeight: mainLayout.y - menuBarLine.y + mainLayout.minHeight
 	visible: true
 	id: root
 	onXChanged: geometryTimer.start()
