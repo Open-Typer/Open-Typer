@@ -78,6 +78,20 @@ void QmlUtils::setMenuBarBlur(QQuickItem *item)
 	emit menuBarBlurChanged(item);
 }
 
+/*! QML tab bar blur item. \since Open-Typer 5.2.0 */
+QQuickItem *QmlUtils::tabBarBlur() const
+{
+	return m_tabBarBlur;
+}
+
+void QmlUtils::setTabBarBlur(QQuickItem *newTabBarBlur)
+{
+	if(m_tabBarBlur == newTabBarBlur)
+		return;
+	m_tabBarBlur = newTabBarBlur;
+	emit tabBarBlurChanged(m_tabBarBlur);
+}
+
 /*! Same as Window.activeFocusItem. \since Open-Typer 5.0.1 */
 QQuickItem *QmlUtils::activeFocusItem(void)
 {
