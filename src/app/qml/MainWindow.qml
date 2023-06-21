@@ -141,7 +141,7 @@ ApplicationWindow {
 		id: menuBarLine
 		visible: customMenuBar.visible
 		width: parent.width
-		implicitHeight: 1
+		implicitHeight: visible ? 1 : 0
 		color: ThemeEngine.borderColor
 	}
 
@@ -176,7 +176,7 @@ ApplicationWindow {
 		width: parent.width
 		anchors.top: tabBarRect.bottom
 		anchors.bottom: parent.bottom
-		anchors.topMargin: 1
+		anchors.topMargin: tabBar.visible ? 1 : 0
 		currentIndex: tabBar.currentIndex
 		onCurrentIndexChanged: renderSource()
 
