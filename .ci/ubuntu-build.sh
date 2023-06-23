@@ -3,27 +3,52 @@
 # Build
 .ci/common/build.sh linux &&
 
-# Build linuxdeployqt
-sudo apt install -y zsync patchelf desktop-file-utils libxcb-cursor0
-sudo apt install -y qtbase5-dev
-git clone https://github.com/Open-Typer/linuxdeployqt linuxdeployqt-build
-cd linuxdeployqt-build
-/usr/bin/qmake
-make -j$(nproc --all)
-mv bin/linuxdeployqt ..
-cd ..
-rm -rf linuxdeployqt-build
-wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
-chmod +x appimagetool*.AppImage
-sudo mv appimagetool*.AppImage /usr/bin/appimagetool
+# Build linuxdeploy
+sudo apt install -y zsync patchelf desktop-file-utils libxcb-cursor0 &&
+git clone https://github.com/linuxdeploy/linuxdeploy linuxdeploy-build --recurse-submodules &&
+mkdir linuxdeploy-build/build
+cd linuxdeploy-build/build &&
+# Add src/core/copyright to include paths (see https://github.com/linuxdeploy/linuxdeploy/issues/212)
+cmake -DCMAKE_CXX_FLAGS=-isystem\ $(pwd)/../src/core/copyright .. &&
+make -j$(nproc --all) &&
+mv bin/linuxdeploy ../.. &&
+cd ../.. &&
+rm -rf linuxdeploy-build &&
+
+# Build linuxdeploy-plugin-appimage
+git clone https://github.com/linuxdeploy/linuxdeploy-plugin-appimage plugin-appimage --recurse-submodules &&
+mkdir plugin-appimage/build &&
+cd plugin-appimage/build &&
+cmake .. &&
+make -j$(nproc --all) &&
+mv src/linuxdeploy-plugin-appimage ../.. &&
+cd ../.. &&
+rm -rf plugin-appimage &&
+
+# Build linuxdeploy-plugin-qt
+sudo apt install -y nlohmann-json3-dev &&
+git clone https://github.com/linuxdeploy/linuxdeploy-plugin-qt plugin-qt --recurse-submodules &&
+mkdir plugin-qt/build &&
+cd plugin-qt/build &&
+cmake .. &&
+make -j$(nproc --all) &&
+mv bin/linuxdeploy-plugin-qt ../.. &&
+cd ../.. &&
+rm -rf plugin-qt &&
+
+# Build AppImageKit
+sudo apt install -y snapd squashfs-tools &&
+sudo snap install docker &&
+git clone https://github.com/AppImage/AppImageKit --recurse-submodules &&
+cd AppImageKit &&
+sudo env ARCH=$(arch) bash ci/build.sh
+sudo cp out/appimagetool /usr/bin/ &&
+sudo cp out/digest /usr/bin/ &&
+sudo cp out/validate /usr/bin/ &&
+cd .. &&
+sudo mkdir -p /usr/lib/appimagekit &&
+sudo ln -s /usr/bin/mksquashfs /usr/lib/appimagekit/mksquashfs &&
 
 # Build AppImage
-mkdir -p AppDir/usr/bin &&
-mkdir -p AppDir/usr/lib &&
-mkdir -p AppDir/usr/share/applications &&
-cp -r res/linux-release/usr/share/pixmaps AppDir/usr/share/ &&
-cp res/linux-release/usr/share/applications/open-typer-appimage.desktop AppDir/usr/share/applications/open-typer.desktop &&
-cp "$executable_name" AppDir/usr/bin/
-cp *.so* AppDir/usr/lib/
-./linuxdeployqt AppDir/usr/share/applications/*.desktop -qmldir=src -updateinformation="zsync|${appimage_zsync_url}" -appimage &&
-rm linuxdeployqt
+export QML_SOURCES_PATHS=src &&
+./linuxdeploy --appdir AppDir -e open-typer -i snap/gui/open-typer.png -d res/linux-release/usr/share/applications/open-typer-appimage.desktop --plugin qt --output appimage
