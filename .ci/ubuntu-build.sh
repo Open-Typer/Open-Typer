@@ -51,4 +51,5 @@ sudo ln -s /usr/bin/mksquashfs /usr/lib/appimagekit/mksquashfs &&
 
 # Build AppImage
 export QML_SOURCES_PATHS=src &&
+export EXTRA_QT_PLUGINS="svg;" &&
 ./linuxdeploy --appdir AppDir -e open-typer -i snap/gui/open-typer.png -d res/linux-release/usr/share/applications/open-typer-appimage.desktop --plugin qt --output appimage
