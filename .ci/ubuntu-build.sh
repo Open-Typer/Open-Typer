@@ -4,7 +4,7 @@
 .ci/common/build.sh linux &&
 
 # Build linuxdeploy
-sudo apt install -y zsync patchelf desktop-file-utils libxcb-cursor0 &&
+sudo apt install -y zsync desktop-file-utils libxcb-cursor0 &&
 git clone https://github.com/linuxdeploy/linuxdeploy linuxdeploy-build --recurse-submodules &&
 mkdir linuxdeploy-build/build
 cd linuxdeploy-build/build &&
@@ -48,6 +48,12 @@ sudo cp out/validate /usr/bin/ &&
 cd .. &&
 sudo mkdir -p /usr/lib/appimagekit &&
 sudo ln -s /usr/bin/mksquashfs /usr/lib/appimagekit/mksquashfs &&
+
+# Install patchelf from PyPI (see https://github.com/linuxdeploy/linuxdeploy-plugin-qt/issues/133#issuecomment-1608168363)
+# TODO: Remove this after dropping Ubuntu 20.04
+sudo apt install -y python3-pip
+pip3 install patchelf
+export PATH=$PATH:~/.local/bin
 
 # Build AppImage
 export QML_SOURCES_PATHS=src &&
