@@ -38,7 +38,7 @@ echo "Target architecture: ${target_arch} (${target_arch_name})"
 # Install dependencies
 ${root_path}/.ci/qt6-dependencies.sh || exit 1
 sudo apt install -y qemu-user-static || exit 1
-sudo apt install -y "g++-${toolchain_name}"
+sudo apt install -y "g++-${toolchain_name}" symlinks || exit 1
 
 # Clone Qt
 git clone https://github.com/qt/qt5 qt || exit 1
@@ -67,6 +67,7 @@ sudo cp /etc/resolv.conf "${sysroot_path}/etc" || exit 1
 sudo chmod 1777 "${sysroot_path}/tmp" || exit 1
 sudo cp "${root_path}/.ci/qt6-dependencies.sh" "${sysroot_path}/"
 sudo chroot "$sysroot_path" /bin/bash -c "/qt6-dependencies.sh" || exit 1
+sudo chroot "$sysroot_path" /bin/bash -c "apt install -y symlinks && symlinks -rc /" || exit 1
 
 # Build Qt (cross)
 mkdir cross-build
