@@ -15,10 +15,20 @@ jobs:
         qt-version: ['5.12.8', '5.15.2']
         qt-target: ['desktop']
         qt-modules: ['qtcharts']
+        arch: ['amd64']
         include:
           - qt-version: '6.5.1'
             qt-target: 'desktop'
             qt-modules: 'qtcharts qt5compat qtshadertools'
+            arch: 'amd64'
+          - qt-version: '6.5.1'
+            qt-target: 'desktop'
+            qt-modules: 'qtcharts qt5compat qtshadertools'
+            arch: 'aarch64'
+          #- qt-version: '6.5.1'
+          #  qt-target: 'desktop'
+          #  qt-modules: 'qtcharts qt5compat qtshadertools'
+          #  arch: 'armv7'
     steps:
     - uses: actions/checkout@v3
       with:
@@ -30,26 +40,35 @@ jobs:
         sed -i -e '/^$/d' .github/config.env
         cat .github/config.env >> "${GITHUB_ENV}"
       shell: bash
-    - name: Install dependencies
+    - if: contains(matrix.arch, 'amd64')
+      name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y libxkbcommon-x11-0
       shell: bash
     ## Install Qt
-    - name: Install Qt (Ubuntu)
+    - if: contains(matrix.arch, 'amd64')
+      name: Install Qt (Ubuntu)
       uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
         host: 'linux'
         target: ${{ matrix.qt-target }}
         modules: ${{ matrix.qt-modules }}
+    - if: "!contains(matrix.arch, 'amd64')"
+      name: Cross-compile Qt
+      shell: bash
+      run: |
+        .ci/build-qt6.sh "${{ matrix.qt-version }}" "${{ matrix.qt-modules }}" "${{ matrix.arch }}"
+        echo "$(pwd)/qt-cross/bin" >> $GITHUB_PATH
+        echo "LD_LIBRARY_PATH=$(pwd)/qt-cross/lib:$(pwd)/qt-host/lib" >> "${GITHUB_ENV}"
     ## Build
-    - name: Build
+    - name: Build AppImage
       run: .ci/ubuntu-build.sh
       shell: 'script -q -e -c "bash {0}"'
     ## Upload
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: build-Qt-${{ matrix.qt-version }}
+        name: build-Qt-${{ matrix.qt-version }}-${{ matrix.arch }}
         path: '*.AppImage'
