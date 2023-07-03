@@ -56,6 +56,17 @@ jobs:
         target: ${{ matrix.qt-target }}
         modules: ${{ matrix.qt-modules }}
     - if: "!contains(matrix.arch, 'amd64')"
+      name: Restore cross-compiled Qt from cache
+      id: cache-qt-cross
+      uses: actions/cache@v3
+      with:
+        path: |
+          ./qt-host/
+          ./qt-cross/
+        key: qt-cross-${{ runner.os }}-${{ matrix.qt-version }}-${{ matrix.qt-target }}-${{ matrix.qt-modules }}-${{ matrix.arch }}
+        restore-keys:
+          qt-cross-${{ runner.os }}-${{ matrix.qt-version }}-${{ matrix.qt-target }}-${{ matrix.qt-modules }}-${{ matrix.arch }}
+    - if: "!contains(matrix.arch, 'amd64') && steps.cache-qt-cross.outputs.cache-hit != 'true'"
       name: Cross-compile Qt
       shell: bash
       run: |
