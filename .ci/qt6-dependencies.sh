@@ -33,6 +33,6 @@ sudo apt install -y libboost-all-dev libudev-dev libinput-dev libts-dev \
                     libxcb-glx0-dev libxi-dev libdrm-dev libxcb-xinerama0 libxcb-xinerama0-dev \
                     libatspi2.0-dev libxcursor-dev libxcomposite-dev libxdamage-dev libxss-dev \
                     libxtst-dev libpci-dev libcap-dev libxrandr-dev libdirectfb-dev libaudio-dev \
-                    libxkbcommon-x11-dev || exit 1
+                    libxkbcommon-x11-dev libclang-dev || exit 1
 
 #sudo apt install -y gstreamer1.0-omx || exit 1
