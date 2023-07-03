@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Build
-.ci/common/build.sh linux &&
+if [[ "$1" != "0" ]]; then
+    .ci/common/build.sh linux || exit 1
+fi
 
 # Build linuxdeploy
 sudo apt install -y zsync desktop-file-utils libxcb-cursor0 &&
