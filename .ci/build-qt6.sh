@@ -90,3 +90,6 @@ rm -rf cross-build
 
 # Cleanup
 sudo umount "${sysroot_path}/dev" || exit 1
+sudo rm -rf "${sysroot_path}"
+cd ..
+rm -rf qt
