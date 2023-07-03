@@ -55,6 +55,7 @@ cmake --build . --parallel $(nproc --all) || exit 1
 echo "Installing host Qt..."
 cmake --install . || exit 1
 cd ..
+rm -rf host-build
 
 # Prepare sysroot
 echo "Preparing sysroot..."
@@ -85,6 +86,7 @@ cmake --build . --parallel $(nproc --all) || exit 1
 echo "Installing cross-compiled Qt..."
 cmake --install . || exit 1
 cd ..
+rm -rf cross-build
 
 # Cleanup
 sudo umount "${sysroot_path}/dev" || exit 1
