@@ -85,6 +85,16 @@ jobs:
         export PATH=$(pwd)/qt-cross/bin:$PATH
         export LD_LIBRARY_PATH=$(pwd)/qt-cross/lib:$(pwd)/qt-host/lib
         .ci/install-cross-compiler.sh "${{ matrix.arch }}"
+        if [[ "${{ matrix.arch }}" == "armv7" ]]; then
+        echo "QMAKE_CC=arm-linux-gnueabihf-gcc
+        QMAKE_CXX=arm-linux-gnueabihf-g++
+        QMAKE_LINK=arm-linux-gnueabihf-g++
+        QMAKE_LINK_SHLIB=arm-linux-gnueabihf-g++
+        QMAKE_AR=arm-linux-gnueabihf-ar cqs
+        QMAKE_OBJCOPY=arm-linux-gnueabihf-objcopy
+        QMAKE_NM=arm-linux-gnueabihf-nm -P
+        QMAKE_STRIP=arm-linux-gnueabihf-strip" >> .qmake.conf
+        fi
         .ci/common/build.sh linux
     - if: "!contains(matrix.arch, 'amd64')"
       name: Build AppImage (cross)
