@@ -1,5 +1,11 @@
 #!/bin/bash
 
+sudo ()
+{
+    [[ $EUID = 0 ]] || set -- command sudo "$@"
+    "$@"
+}
+
 # Build
 if [[ "$1" != "0" ]]; then
     .ci/common/build.sh linux || exit 1
