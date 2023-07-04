@@ -37,8 +37,9 @@ echo "Target architecture: ${target_arch} (${target_arch_name})"
 
 # Install dependencies
 ${root_path}/.ci/qt6-dependencies.sh || exit 1
+${root_path}/.ci/install-cross-compiler.sh "${target_arch}" || exit 1
 sudo apt install -y qemu-user-static || exit 1
-sudo apt install -y "g++-${toolchain_name}" symlinks || exit 1
+sudo apt install -y symlinks || exit 1
 
 # Clone Qt
 git clone https://github.com/qt/qt5 qt || exit 1

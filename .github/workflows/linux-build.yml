@@ -83,6 +83,7 @@ jobs:
       run: |
         export PATH=$(pwd)/qt-cross/bin:$PATH
         export LD_LIBRARY_PATH=$(pwd)/qt-cross/lib:$(pwd)/qt-host/lib
+        .ci/install-cross-compiler.sh "${{ matrix.arch }}"
         .ci/common/build.sh linux
     - if: "!contains(matrix.arch, 'amd64')"
       name: Build AppImage (cross)
