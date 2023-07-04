@@ -97,3 +97,5 @@ rm -rf cross-build
 sudo umount "${sysroot_path}/dev" || exit 1
 cd ..
 rm -rf qt
+# Required for cache
+sudo chmod 777 -R ${sysroot_path}
