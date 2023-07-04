@@ -12,7 +12,7 @@ if [[ "$1" != "0" ]]; then
 fi
 
 # Build linuxdeploy
-sudo apt install -y zsync desktop-file-utils libxcb-cursor0 &&
+sudo apt install -y build-essential g++ pkg-config curl wget libpng-dev libjpeg-dev zsync desktop-file-utils libxcb-cursor0 &&
 git clone https://github.com/linuxdeploy/linuxdeploy linuxdeploy-build --recurse-submodules &&
 mkdir linuxdeploy-build/build
 cd linuxdeploy-build/build &&
