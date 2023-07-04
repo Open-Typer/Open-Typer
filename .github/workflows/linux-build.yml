@@ -28,10 +28,10 @@ jobs:
             qt-modules: 'qtcharts qt5compat qtshadertools'
             arch: 'aarch64'
             ubuntu-version: '20.04'
-          #- qt-version: '6.5.1'
-          #  qt-target: 'desktop'
-          #  qt-modules: 'qtcharts qt5compat qtshadertools'
-          #  arch: 'armv7'
+          - qt-version: '6.5.1'
+            qt-target: 'desktop'
+            qt-modules: 'qtcharts qt5compat qtshadertools'
+            arch: 'armv7'
     steps:
     - uses: actions/checkout@v3
       with:

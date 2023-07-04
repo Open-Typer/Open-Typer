@@ -11,16 +11,20 @@ cross_prefix="${root_path}/qt-cross"
 target_prefix="/usr/local/qt"
 toolchain_config="${root_path}/.ci/qt6-toolchain.cmake"
 
-toolchain_name="${target_arch}-linux-gnu"
-toolchain_prefix="${toolchain_name}-"
-
-target_platform="linux-${target_arch}-gnu-g++"
-
 case "$target_arch" in
     aarch64)
         target_arch_name="armv8-a"
+        toolchain_name="aarch64-linux-gnu"
+        target_platform="linux-aarch64-gnu-g++"
+        ;;
+    armv7)
+        target_arch_name="armv7-a"
+        toolchain_name="arm-linux-gnueabihf"
+        target_platform="linux-arm-gnueabi-g++"
         ;;
 esac
+
+toolchain_prefix="${toolchain_name}-"
 
 case "$target_arch" in
     aarch64)
