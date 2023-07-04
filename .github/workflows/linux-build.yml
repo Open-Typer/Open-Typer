@@ -66,6 +66,7 @@ jobs:
         path: |
           ./qt-host/
           ./qt-cross/
+          ./sysroot/
         key: qt-cross-${{ runner.os }}-${{ matrix.qt-version }}-${{ matrix.qt-target }}-${{ matrix.qt-modules }}-${{ matrix.arch }}
         restore-keys:
           qt-cross-${{ runner.os }}-${{ matrix.qt-version }}-${{ matrix.qt-target }}-${{ matrix.qt-modules }}-${{ matrix.arch }}
