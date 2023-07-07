@@ -49,7 +49,7 @@ sudo apt install -y symlinks || exit 1
 git clone https://github.com/qt/qt5 qt || exit 1
 cd qt
 git checkout "v$qt_version" || exit 1
-./init-repository --module-subset=qtbase,qttools,qtdeclarative,${qt_modules} || exit 1
+./init-repository --module-subset=qtbase,qttools,qtdeclarative,qtsvg,${qt_modules} || exit 1
 
 # Build Qt (host)
 mkdir host-build
