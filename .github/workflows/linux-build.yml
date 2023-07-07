@@ -76,49 +76,13 @@ jobs:
       shell: bash
       run: .ci/build-qt6.sh "${{ matrix.qt-version }}" "${{ matrix.qt-modules }}" "${{ matrix.arch }}"
     ## Build
-    - if: contains(matrix.arch, 'amd64')
-      name: Build AppImage (amd64)
+    - if: "!contains(matrix.arch, 'amd64')"
+      name: Prepare cross-compilation environment
+      run: .ci/prepare-cross-build.sh "${{ matrix.arch }}"
+      shell: bash
+    - name: Build AppImage
       run: .ci/ubuntu-build.sh
       shell: 'script -q -e -c "bash {0}"'
-    - if: "!contains(matrix.arch, 'amd64')"
-      name: Cross-compile the application
-      run: |
-        export PATH=$(pwd)/qt-cross/bin:$PATH
-        export LD_LIBRARY_PATH=$(pwd)/qt-cross/lib:$(pwd)/qt-host/lib
-        .ci/install-cross-compiler.sh "${{ matrix.arch }}"
-        if [[ "${{ matrix.arch }}" == "armv7" ]]; then
-        echo "QMAKE_CC=arm-linux-gnueabihf-gcc
-        QMAKE_CXX=arm-linux-gnueabihf-g++
-        QMAKE_LINK=arm-linux-gnueabihf-g++
-        QMAKE_LINK_SHLIB=arm-linux-gnueabihf-g++
-        QMAKE_AR=arm-linux-gnueabihf-ar cqs
-        QMAKE_OBJCOPY=arm-linux-gnueabihf-objcopy
-        QMAKE_NM=arm-linux-gnueabihf-nm -P
-        QMAKE_STRIP=arm-linux-gnueabihf-strip" >> .qmake.conf
-        fi
-        .ci/common/build.sh linux
-    - if: "!contains(matrix.arch, 'amd64')"
-      name: Build AppImage (cross)
-      uses: uraimo/run-on-arch-action@v2
-      with:
-        arch: ${{ matrix.arch }}
-        distro: "ubuntu${{ matrix.ubuntu-version }}"
-        githubToken: ${{ github.token }}
-        dockerRunArgs: |
-          --volume "${PWD}:/repository"
-        shell: /bin/bash
-        install: |
-          apt-get update -q -y
-          apt-get upgrade -q -y
-          apt-get install -q -y git build-essential g++ python3-pip libxkbcommon-x11-0
-          pip3 install patchelf
-        run: |
-          export PATH=$PATH:~/.local/bin
-          cd /repository
-          export PATH=$(pwd)/qt-cross/bin:$PATH
-          export LD_LIBRARY_PATH=$(pwd)/qt-cross/lib:$(pwd)/qt-host/lib
-          alias sudo=''
-          .ci/ubuntu-build.sh 0
     ## Upload
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
