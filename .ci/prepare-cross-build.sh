@@ -2,6 +2,15 @@
 
 target_arch="$1"
 
+case "$target_arch" in
+    aarch64)
+        toolchain_prefix="aarch64-linux-gnu-"
+        ;;
+    armv7)
+        toolchain_prefix="arm-linux-gnueabihf-"
+        ;;
+esac
+
 echo "$(pwd)/qt-cross/bin:$PATH" >> $GITHUB_PATH
 echo "LD_LIBRARY_PATH=$(pwd)/qt-cross/lib:$(pwd)/qt-host/lib" >> "${GITHUB_ENV}"
 .ci/install-cross-compiler.sh "$target_arch"
@@ -15,3 +24,10 @@ if [[ "$target_arch" == "armv7" ]]; then
     QMAKE_NM=arm-linux-gnueabihf-nm -P
     QMAKE_STRIP=arm-linux-gnueabihf-strip" >> .qmake.conf
 fi
+
+# Prepare cross-tools for linuxdeploy
+sudo cp /usr/bin/${toolchain_prefix}strip strip
+sudo mv /usr/bin/ldd /usr/bin/ldd-amd64
+sudo cp .ci/bin/xldd /usr/bin/${toolchain_prefix}ldd
+sudo ln -s /usr/bin/${toolchain_prefix}ldd /usr/bin/ldd
+echo "CT_XLDD_ROOT=$(pwd)/sysroot" >> "${GITHUB_ENV}"
