@@ -23,16 +23,6 @@ mv bin/linuxdeploy ../.. &&
 cd ../.. &&
 rm -rf linuxdeploy-build &&
 
-# Build linuxdeploy-plugin-appimage
-git clone https://github.com/linuxdeploy/linuxdeploy-plugin-appimage plugin-appimage --recurse-submodules &&
-mkdir plugin-appimage/build &&
-cd plugin-appimage/build &&
-cmake .. &&
-make -j$(nproc --all) &&
-mv src/linuxdeploy-plugin-appimage ../.. &&
-cd ../.. &&
-rm -rf plugin-appimage &&
-
 # Build linuxdeploy-plugin-qt
 sudo apt install -y nlohmann-json3-dev &&
 git clone https://github.com/linuxdeploy/linuxdeploy-plugin-qt plugin-qt --recurse-submodules &&
@@ -66,4 +56,18 @@ export PATH=$PATH:~/.local/bin
 # Build AppImage
 export QML_SOURCES_PATHS=src &&
 export EXTRA_QT_PLUGINS="svg;" &&
-./linuxdeploy --appdir AppDir -e open-typer -i snap/gui/open-typer.png -d res/linux-release/usr/share/applications/open-typer-appimage.desktop --plugin qt --output appimage
+./linuxdeploy --appdir AppDir -e open-typer -i snap/gui/open-typer.png -d res/linux-release/usr/share/applications/open-typer-appimage.desktop --plugin qt
+
+case "$(qmake -query QMAKE_XSPEC)" in
+    linux-g++)
+        appimagetool AppDir
+        ;;
+    linux-arm-gnueabi-g++)
+        wget https://github.com/AppImage/AppImageKit/releases/download/continuous/runtime-armhf
+        ARCH=arm appimagetool --runtime-file runtime-armhf AppDir
+        ;;
+    linux-aarch64-gnu-g++)
+        wget https://github.com/AppImage/AppImageKit/releases/download/continuous/runtime-aarch64
+        ARCH=arm_aarch64 appimagetool --runtime-file runtime-aarch64 AppDir
+        ;;
+esac
