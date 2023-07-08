@@ -13,7 +13,7 @@ fi
 
 # Build linuxdeploy
 sudo apt install -y build-essential g++ pkg-config curl wget libpng-dev libjpeg-dev zsync desktop-file-utils libxcb-cursor0 &&
-git clone https://github.com/linuxdeploy/linuxdeploy linuxdeploy-build --recurse-submodules &&
+git clone https://github.com/Open-Typer/linuxdeploy linuxdeploy-build --recurse-submodules &&
 mkdir linuxdeploy-build/build
 cd linuxdeploy-build/build &&
 # Add src/core/copyright to include paths (see https://github.com/linuxdeploy/linuxdeploy/issues/212)
@@ -25,7 +25,7 @@ rm -rf linuxdeploy-build &&
 
 # Build linuxdeploy-plugin-qt
 sudo apt install -y nlohmann-json3-dev &&
-git clone https://github.com/linuxdeploy/linuxdeploy-plugin-qt plugin-qt --recurse-submodules &&
+git clone https://github.com/Open-Typer/linuxdeploy-plugin-qt plugin-qt --recurse-submodules &&
 mkdir plugin-qt/build &&
 cd plugin-qt/build &&
 cmake .. &&
