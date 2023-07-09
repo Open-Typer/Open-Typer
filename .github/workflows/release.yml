@@ -89,20 +89,20 @@ jobs:
       name: Do not upload packages to the PPA if this is a pre-release
       run: echo upload_to_ppa=0 >> "${GITHUB_ENV}"
       shell: bash
-    - if: env.upload_to_ppa == 1
+    - if: env.upload_to_ppa == 1 && contains(matrix.arch, 'amd64')
       name: Import GPG key
       id: gpgkey
       uses: crazy-max/ghaction-import-gpg@v5
       with:
         gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
         passphrase: ${{ secrets.GPG_PASSPHRASE }}
-    - if: env.upload_to_ppa == 1
+    - if: env.upload_to_ppa == 1 && contains(matrix.arch, 'amd64')
       name: Save GPG info
       run: |
         echo gpg_name=${{ steps.gpgkey.outputs.name }} >> "${GITHUB_ENV}"
         echo gpg_email=${{ steps.gpgkey.outputs.email }} >> "${GITHUB_ENV}"
       shell: bash
-    - if: env.upload_to_ppa == 1
+    - if: env.upload_to_ppa == 1 && contains(matrix.arch, 'amd64')
       name: Upload source packages to PPA
       run: .ci/ubuntu-ppa.sh
       shell: bash
