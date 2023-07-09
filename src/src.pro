@@ -6,6 +6,7 @@ SUBDIRS += \
     framework \
     grades \
     history \
+    packeditor \
     updater
 
 app.depends = \

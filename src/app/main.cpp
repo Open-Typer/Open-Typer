@@ -35,6 +35,7 @@
 #include "grades/GradesModule.h"
 #include "history/HistoryModule.h"
 #include "updater/UpdaterModule.h"
+#include "packeditor/PackEditorModule.h"
 
 int main(int argc, char *argv[])
 {
@@ -56,5 +57,6 @@ int main(int argc, char *argv[])
 	app.addModule(new GradesModule);
 	app.addModule(new HistoryModule);
 	app.addModule(new UpdaterModule);
+	app.addModule(new PackEditorModule);
 	return app.run(argc, argv);
 }
