@@ -76,7 +76,7 @@ jobs:
       shell: bash
     - name: Build
       run: .ci/ubuntu-build.sh
-      shell: bash
+      shell: 'script -q -e -c "bash {0}"'
     # Upload artifacts
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
