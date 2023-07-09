@@ -5,21 +5,12 @@ on:
     tags: '*'
 
 jobs:
-  build-release:
-    runs-on: ${{ matrix.os }}
+  build-linux-release:
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-        os: [ubuntu-20.04]
-        qt-version: ['5.15.2']
+        qt-version: ['6.5.1']
         qt-target: ['desktop']
-        include:
-          - os: windows-latest
-            qt-version: '6.5.1'
-            qt-target: 'desktop'
-            mingw-version: '11.2.0'
-          - os: macos-latest
-            qt-version: '6.5.1'
-            qt-target: 'desktop'
     steps:
     - uses: actions/checkout@v3
       with:
@@ -36,8 +27,7 @@ jobs:
     - if: env.build_on_new_tags != 1
       name: Cancel if build on new tags is disabled
       uses: andymckay/cancel-action@0.2
-    - if: contains(matrix.os, 'ubuntu')
-      name: Install dependencies (Ubuntu)
+    - name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y libxkbcommon-x11-0
@@ -52,16 +42,84 @@ jobs:
       name: Check if this is a pre-release
       run: echo is_prerelease=1 >> "${GITHUB_ENV}"
       shell: bash
-    - name: Get OS name
-      run: |
-        IFS='-'
-        read -a arr <<< ${{ matrix.os }}
-        echo "os_name=${arr[0]}" >> "${GITHUB_ENV}"
+    # Install Qt
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt-version }}
+        host: 'linux'
+        target: ${{ matrix.qt-target }}
+        modules: 'qtcharts'
+    # Build
+    - name: Build
+      run: .ci/ubuntu-build.sh
       shell: bash
-    ## Install Qt
-    # Windows
-    - if: contains(matrix.os, 'windows')
-      name: Install Qt (Windows)
+    # Upload artifacts
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-ubuntu
+        path: |
+          *.AppImage
+          *.zsync
+    - if: env.is_prerelease == 1
+      name: Do not upload packages to the PPA if this is a pre-release
+      run: echo upload_to_ppa=0 >> "${GITHUB_ENV}"
+      shell: bash
+    - if: env.upload_to_ppa == 1
+      name: Import GPG key
+      id: gpgkey
+      uses: crazy-max/ghaction-import-gpg@v5
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+        passphrase: ${{ secrets.GPG_PASSPHRASE }}
+    - if: env.upload_to_ppa == 1
+      name: Save GPG info
+      run: |
+        echo gpg_name=${{ steps.gpgkey.outputs.name }} >> "${GITHUB_ENV}"
+        echo gpg_email=${{ steps.gpgkey.outputs.email }} >> "${GITHUB_ENV}"
+      shell: bash
+    - if: env.upload_to_ppa == 1
+      name: Upload source packages to PPA
+      run: .ci/ubuntu-ppa.sh
+      shell: bash
+
+  build-windows-release:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - qt-version: '6.5.1'
+            qt-target: 'desktop'
+            mingw-version: '11.2.0'
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        submodules: true
+    - name: Setup environment
+      run: |
+        sed -i -e '/^#/d' .github/config.env
+        sed -i -e '/^$/d' .github/config.env
+        cat .github/config.env >> "${GITHUB_ENV}"
+      shell: bash
+    - name: Set up node.js
+      uses: actions/setup-node@v3
+    - if: env.build_on_new_tags != 1
+      name: Cancel if build on new tags is disabled
+      uses: andymckay/cancel-action@0.2
+    - name: Get version
+      run: |
+        version=$(head -n 1 .qmake.conf)
+        version=${version:8}
+        echo previous_tag=$version >> "${GITHUB_ENV}"
+      shell: bash
+    - if: contains(github.ref, '-')
+      name: Check if this is a pre-release
+      run: echo is_prerelease=1 >> "${GITHUB_ENV}"
+      shell: bash
+    # Install Qt
+    - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
@@ -69,47 +127,25 @@ jobs:
         arch: 'win64_mingw'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts'
-    - if: contains(matrix.os, 'windows')
-      name: Install Qt IFW (Windows)
+    - name: Install Qt IFW
       run: |
         curl -o aqt.exe -L https://github.com/miurahr/aqtinstall/releases/download/v2.2.1/aqt.exe
         ./aqt.exe install-tool windows desktop tools_ifw
         mv Tools ..
         echo ${pwd}/../Tools/QtInstallerFramework/*/bin >> "${GITHUB_PATH}"
       shell: bash
-    - if: contains(matrix.os, 'windows')
-      name: Install MinGW
+    - name: Install MinGW
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: x64
         version: ${{ matrix.mingw-version }}
-    # Ubuntu
-    - if: contains(matrix.os, 'ubuntu')
-      name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: ${{ matrix.qt-version }}
-        host: 'linux'
-        target: ${{ matrix.qt-target }}
-        modules: 'qtcharts'
-    # MacOS
-    - if: contains(matrix.os, 'macos')
-      name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: ${{ matrix.qt-version }}
-        host: 'mac'
-        target: ${{ matrix.qt-target }}
-        modules: 'qtcharts qt5compat qtshadertools'
-    ## Build
-    - if: contains(matrix.os, 'windows')
-      name: Build (Windows)
+    # Build
+    - name: Build
       run: |
         cp .ci/windows-repo.sh ..
         .ci/windows-build.sh
       shell: bash
-    - if: contains(matrix.os, 'windows')
-      name: Windows build
+    - name: Windows build
       run: |
         qmake INCLUDEPATH+=C:\OpenSSL\include LIBS+=-LC:\OpenSSL\lib || exit 3
         mingw32-make -j4 || exit 4
@@ -120,72 +156,90 @@ jobs:
         windeployqt ${{ env.executable_name }}.exe --qmldir ..\src || exit 5
         for %%v in (opentyper-*.dll) do windeployqt "%%v" || exit 5
       shell: cmd
-    - if: contains(matrix.os, 'windows')
-      name: Finalize Windows build
+    - name: Finalize Windows build
       run: |
-        .ci/${{ env.os_name }}-build.sh 1
+        .ci/windows-build.sh 1
         mv release ../
       shell: bash
-    - if: contains(matrix.os, 'ubuntu')
-      name: Build (Ubuntu)
-      run: .ci/ubuntu-build.sh
-      shell: bash
-    - if: contains(matrix.os, 'macos')
-      name: Build (macOS)
-      run: .ci/macos-build.sh
-      shell: bash
-    ## Update Windows repository
-    - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1
+    # Update Windows repository
+    - if: env.create_windows_installer == 1
       name: Get installer configuration
       uses: actions/checkout@v3
       with:
         repository: ${{ github.repository_owner }}/${{ env.windows_installer_repo }}
         fetch-depth: 0
         token: ${{ secrets.PUSH_TOKEN }}
-    - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1 && env.is_prerelease == 1
+    - if: env.create_windows_installer == 1 && env.is_prerelease == 1
       name: Do not update Windows repo if this is a pre-release
       run: |
         echo update_windows_installer=0 >> "${GITHUB_ENV}"
         echo update_windows_repository=0 >> "${GITHUB_ENV}"
       shell: bash
-    - if: contains(matrix.os, 'windows') && env.create_windows_installer == 1
+    - if: env.create_windows_installer == 1
       name: Build installer and repository for Windows
       run: ../windows-repo.sh
+      shell: bash
+    # Upload artifacts
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-windows
+        path: '*.exe'
+
+  build-macos-release:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        qt-version: ['6.5.1']
+        qt-target: ['desktop']
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        submodules: true
+    - name: Setup environment
+      run: |
+        sed -i -e '/^#/d' .github/config.env
+        sed -i -e '/^$/d' .github/config.env
+        cat .github/config.env >> "${GITHUB_ENV}"
+      shell: bash
+    - name: Set up node.js
+      uses: actions/setup-node@v3
+    - if: env.build_on_new_tags != 1
+      name: Cancel if build on new tags is disabled
+      uses: andymckay/cancel-action@0.2
+    - name: Get version
+      run: |
+        version=$(head -n 1 .qmake.conf)
+        version=${version:8}
+        echo previous_tag=$version >> "${GITHUB_ENV}"
+      shell: bash
+    - if: contains(github.ref, '-')
+      name: Check if this is a pre-release
+      run: echo is_prerelease=1 >> "${GITHUB_ENV}"
+      shell: bash
+    # Install Qt
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt-version }}
+        host: 'mac'
+        target: ${{ matrix.qt-target }}
+        modules: 'qtcharts qt5compat qtshadertools'
+    # Build
+    - if: contains(matrix.os, 'macos')
+      name: Build (macOS)
+      run: .ci/macos-build.sh
       shell: bash
     ## Upload artifacts
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: build-${{ env.os_name }}
-        path: |
-          *.exe
-          *.AppImage
-          *.zsync
-          *.dmg
-    - if: contains(matrix.os, 'ubuntu') && env.is_prerelease == 1
-      name: Do not upload packages to the PPA if this is a pre-release
-      run: echo upload_to_ppa=0 >> "${GITHUB_ENV}"
-      shell: bash
-    - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
-      name: Import GPG key
-      id: gpgkey
-      uses: crazy-max/ghaction-import-gpg@v5
-      with:
-        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-        passphrase: ${{ secrets.GPG_PASSPHRASE }}
-    - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
-      name: Save GPG info
-      run: |
-        echo gpg_name=${{ steps.gpgkey.outputs.name }} >> "${GITHUB_ENV}"
-        echo gpg_email=${{ steps.gpgkey.outputs.email }} >> "${GITHUB_ENV}"
-      shell: bash
-    - if: contains(matrix.os, 'ubuntu') && env.upload_to_ppa == 1
-      name: Upload source packages to PPA
-      run: .ci/ubuntu-ppa.sh
-      shell: bash
+        name: build-macos
+        path: '*.dmg'
 
   # WebAssembly
-  wasm-build-release:
+  build-wasm-release:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -238,7 +292,7 @@ jobs:
   # Release
   release:
     runs-on: ubuntu-latest
-    needs: [build-release, wasm-build-release]
+    needs: [build-linux-release, build-windows-release, build-macos-release, build-wasm-release]
     steps:
     - uses: actions/checkout@v3
       with:
