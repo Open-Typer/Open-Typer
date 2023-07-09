@@ -5,7 +5,10 @@ qt_modules="$(echo $2 | tr ' ' ',')"
 target_arch="$3"
 root_path="$(pwd)"
 sysroot_path="${root_path}/sysroot"
-sysroot_ubuntu_version="20.04.5"
+ubuntu_description="$(lsb_release -ds)"
+ubuntu_description_arr=(${ubuntu_description// / })
+sysroot_ubuntu_version="${ubuntu_description_arr[1]}"
+sysroot_ubuntu_codename="$(lsb_release -cs)"
 host_prefix="${root_path}/qt-host"
 cross_prefix="${root_path}/qt-cross"
 target_prefix="/usr/local/qt"
@@ -64,7 +67,7 @@ rm -rf host-build
 
 # Prepare sysroot
 echo "Preparing sysroot..."
-curl "https://cdimage.ubuntu.com/ubuntu-base/releases/focal/release/ubuntu-base-${sysroot_ubuntu_version}-base-${target_arch_debian_name}.tar.gz" > ./ubuntu-base.tar.gz || exit 1
+curl "https://cdimage.ubuntu.com/ubuntu-base/releases/${sysroot_ubuntu_codename}/release/ubuntu-base-${sysroot_ubuntu_version}-base-${target_arch_debian_name}.tar.gz" > ./ubuntu-base.tar.gz || exit 1
 mkdir -p "$sysroot_path"
 sudo tar -xvzf ubuntu-base.tar.gz -C "$sysroot_path" || exit 1
 sudo update-binfmts --enable qemu-arm || exit 1
