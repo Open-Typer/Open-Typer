@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt install -y lsb-release
+
 qt_version="$1"
 qt_modules="$(echo $2 | tr ' ' ',')"
 target_arch="$3"
