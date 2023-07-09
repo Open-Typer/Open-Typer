@@ -26,47 +26,6 @@
     </message>
 </context>
 <context>
-    <name>AddonInfo</name>
-    <message>
-        <source>Uninstall</source>
-        <translation>Видалити</translation>
-    </message>
-    <message>
-        <source>Installing...</source>
-        <translation>Встановлення...</translation>
-    </message>
-    <message>
-        <source>Install</source>
-        <translation>Встановити</translation>
-    </message>
-    <message>
-        <source>The application needs to restart.</source>
-        <translation>Додаток потрібно перезапустити.</translation>
-    </message>
-</context>
-<context>
-    <name>AddonSettings</name>
-    <message>
-        <source>Search</source>
-        <translation>Пошук</translation>
-    </message>
-    <message>
-        <source>Online</source>
-        <translation>Онлайн</translation>
-    </message>
-    <message>
-        <source>Installed addons</source>
-        <translation>Встановлені аддони</translation>
-    </message>
-</context>
-<context>
-    <name>AddonUpdateQuestion</name>
-    <message>
-        <source>There&apos;s a new update of one or more addons available. Would you like to update them?</source>
-        <translation>Там нове оновлення одного або декількох додатків доступні. Бажаєте оновити їх?</translation>
-    </message>
-</context>
-<context>
     <name>AppMenuBar</name>
     <message>
         <source>&amp;File</source>
@@ -536,6 +495,89 @@
     </message>
 </context>
 <context>
+    <name>Home</name>
+    <message>
+        <source>Text files</source>
+        <translation>Текстові файли</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>Опції</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Відкрити</translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation>Друк</translation>
+    </message>
+    <message>
+        <source>Typing test</source>
+        <translation>Тест набору тексту</translation>
+    </message>
+    <message>
+        <source>Timed exercise</source>
+        <translation>Вправа на певний час</translation>
+    </message>
+    <message>
+        <source>Text from error words</source>
+        <translation>Згенерувати текст зі слів із помилками</translation>
+    </message>
+    <message>
+        <source>Reverse text</source>
+        <translation>Перевернути текст</translation>
+    </message>
+    <message>
+        <source>Repeat exercise</source>
+        <translation>Повторіть вправу</translation>
+    </message>
+    <message>
+        <source>Start typing</source>
+        <translation>Почніть вводити текст</translation>
+    </message>
+    <message>
+        <source>Close loaded exercise</source>
+        <translation>Закрити завантажену вправу</translation>
+    </message>
+    <message>
+        <source>Previous exercise</source>
+        <translation>Попередня вправа</translation>
+    </message>
+    <message>
+        <source>Next exercise</source>
+        <translation>Наступна вправа</translation>
+    </message>
+    <message>
+        <source>Exercise history</source>
+        <translation>Історія вправ</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Стоп</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>Експорт</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Помилка</translation>
+    </message>
+    <message>
+        <source>This file is too large!</source>
+        <translation>Цей файл занадто великий!</translation>
+    </message>
+    <message>
+        <source>No error words</source>
+        <translation>Немає помилкових слів</translation>
+    </message>
+    <message>
+        <source>You don&apos;t have any error words.</source>
+        <translation>У Вас немає жодних помилкових слів.</translation>
+    </message>
+</context>
+<context>
     <name>InitialSetup</name>
     <message>
         <source>%1 Setup</source>
@@ -610,84 +652,8 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Typing test</source>
-        <translation>Тест набору тексту</translation>
-    </message>
-    <message>
-        <source>Timed exercise</source>
-        <translation>Вправа на певний час</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Відкрити</translation>
-    </message>
-    <message>
-        <source>Text from error words</source>
-        <translation>Текст зі слів із помилками</translation>
-    </message>
-    <message>
-        <source>Exercise history</source>
-        <translation>Історія вправ</translation>
-    </message>
-    <message>
-        <source>This file is too large!</source>
-        <translation>Цей файл занадто великий!</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>Текстові файли</translation>
-    </message>
-    <message>
-        <source>You don&apos;t have any error words.</source>
-        <translation>У Вас немає жодних помилкових слів.</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation>Опції</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Друк</translation>
-    </message>
-    <message>
-        <source>Reverse text</source>
-        <translation>Перевернути текст</translation>
-    </message>
-    <message>
-        <source>Repeat exercise</source>
-        <translation>Повторіть вправу</translation>
-    </message>
-    <message>
-        <source>Close loaded exercise</source>
-        <translation>Закрити завантажену вправу</translation>
-    </message>
-    <message>
-        <source>Previous exercise</source>
-        <translation>Попередня вправа</translation>
-    </message>
-    <message>
-        <source>Next exercise</source>
-        <translation>Наступна вправа</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Стоп</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Помилка</translation>
-    </message>
-    <message>
-        <source>No error words</source>
-        <translation>Немає помилкових слів</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation>Експорт</translation>
-    </message>
-    <message>
-        <source>Start typing</source>
-        <translation>Почніть вводити текст</translation>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -742,10 +708,6 @@
     <message>
         <source>Keyboard</source>
         <translation>Клавіатура</translation>
-    </message>
-    <message>
-        <source>Addons</source>
-        <translation>Аддони</translation>
     </message>
     <message>
         <source>Grades</source>

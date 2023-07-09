@@ -26,47 +26,6 @@
     </message>
 </context>
 <context>
-    <name>AddonInfo</name>
-    <message>
-        <source>Uninstall</source>
-        <translation>Deinstallieren</translation>
-    </message>
-    <message>
-        <source>Installing...</source>
-        <translation>Installieren...</translation>
-    </message>
-    <message>
-        <source>Install</source>
-        <translation>Installieren</translation>
-    </message>
-    <message>
-        <source>The application needs to restart.</source>
-        <translation>Die Anwendung muss neu gestartet werden.</translation>
-    </message>
-</context>
-<context>
-    <name>AddonSettings</name>
-    <message>
-        <source>Search</source>
-        <translation>Suchen</translation>
-    </message>
-    <message>
-        <source>Online</source>
-        <translation>Online</translation>
-    </message>
-    <message>
-        <source>Installed addons</source>
-        <translation>Installierte Addons</translation>
-    </message>
-</context>
-<context>
-    <name>AddonUpdateQuestion</name>
-    <message>
-        <source>There&apos;s a new update of one or more addons available. Would you like to update them?</source>
-        <translation type="unfinished">Es ist ein neues Update von einem oder mehreren Addons verfügbar. Möchten Sie sie aktualisieren?</translation>
-    </message>
-</context>
-<context>
     <name>AppMenuBar</name>
     <message>
         <source>&amp;File</source>
@@ -251,7 +210,7 @@
     <name>ClassManager</name>
     <message>
         <source>Unnamed class</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannte Klasse</translation>
     </message>
 </context>
 <context>
@@ -337,15 +296,15 @@
     </message>
     <message>
         <source>Class:</source>
-        <translation type="unfinished">Klasse:</translation>
+        <translation>Klasse:</translation>
     </message>
     <message>
         <source>No class selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Klasse ausgewählt</translation>
     </message>
     <message>
         <source>Grade:</source>
-        <translation type="unfinished">Kennzeichen:</translation>
+        <translation>Kennzeichen:</translation>
     </message>
 </context>
 <context>
@@ -442,11 +401,11 @@
     <name>GradeSettings</name>
     <message>
         <source>Selected class:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählte Klasse:</translation>
     </message>
     <message>
         <source>No class selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Klasse ausgewählt</translation>
     </message>
     <message>
         <source>Configure grading for classes</source>
@@ -477,11 +436,11 @@
     <message>
         <source>Name:</source>
         <extracomment>Class name</extracomment>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Beschreibung:</translation>
+        <translation>Beschreibung:</translation>
     </message>
     <message>
         <source>Enter description</source>
@@ -533,6 +492,89 @@
         <source>Reset (%1)</source>
         <extracomment>To reset a value</extracomment>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Home</name>
+    <message>
+        <source>Text files</source>
+        <translation>Text Dateien</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>Optionen</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Öffnen</translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation>Drucken</translation>
+    </message>
+    <message>
+        <source>Typing test</source>
+        <translation>Tipp Test</translation>
+    </message>
+    <message>
+        <source>Timed exercise</source>
+        <translation>Zeitbegrenzte Aufgabe</translation>
+    </message>
+    <message>
+        <source>Text from error words</source>
+        <translation>Text aus Fehlerwörtern</translation>
+    </message>
+    <message>
+        <source>Reverse text</source>
+        <translation>Text umkehren</translation>
+    </message>
+    <message>
+        <source>Repeat exercise</source>
+        <translation>Aufgabe wiederholen</translation>
+    </message>
+    <message>
+        <source>Start typing</source>
+        <translation>Anfangen zu tippen</translation>
+    </message>
+    <message>
+        <source>Close loaded exercise</source>
+        <translation>Geladene Aufgabe schließen</translation>
+    </message>
+    <message>
+        <source>Previous exercise</source>
+        <translation>Vorherige Aufgabe</translation>
+    </message>
+    <message>
+        <source>Next exercise</source>
+        <translation>Nächste Aufgabe</translation>
+    </message>
+    <message>
+        <source>Exercise history</source>
+        <translation>Aufgabe Verlauf</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Halten</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>Exportieren</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Error</translation>
+    </message>
+    <message>
+        <source>This file is too large!</source>
+        <translation>Diese Datei ist zu groß!</translation>
+    </message>
+    <message>
+        <source>No error words</source>
+        <translation>Keine Fehlerwörter</translation>
+    </message>
+    <message>
+        <source>You don&apos;t have any error words.</source>
+        <translation>Sie haben keine Fehlerwörter.</translation>
     </message>
 </context>
 <context>
@@ -610,84 +652,8 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Typing test</source>
-        <translation>Tipp Test</translation>
-    </message>
-    <message>
-        <source>Timed exercise</source>
-        <translation>Zeitbegrenzte Aufgabe</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
-    </message>
-    <message>
-        <source>Text from error words</source>
-        <translation>Text aus Fehlerwörtern</translation>
-    </message>
-    <message>
-        <source>Exercise history</source>
-        <translation>Aufgabe Verlauf</translation>
-    </message>
-    <message>
-        <source>This file is too large!</source>
-        <translation>Diese Datei ist zu groß!</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>Text Dateien</translation>
-    </message>
-    <message>
-        <source>You don&apos;t have any error words.</source>
-        <translation>Sie haben keine Fehlerwörter.</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation>Optionen</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Drucken</translation>
-    </message>
-    <message>
-        <source>Reverse text</source>
-        <translation>Text umkehren</translation>
-    </message>
-    <message>
-        <source>Repeat exercise</source>
-        <translation>Aufgabe wiederholen</translation>
-    </message>
-    <message>
-        <source>Close loaded exercise</source>
-        <translation>Geladene Aufgabe schließen</translation>
-    </message>
-    <message>
-        <source>Previous exercise</source>
-        <translation>Vorherige Aufgabe</translation>
-    </message>
-    <message>
-        <source>Next exercise</source>
-        <translation>Nächste Aufgabe</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Halten</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Error</translation>
-    </message>
-    <message>
-        <source>No error words</source>
-        <translation>Keine Fehlerwörter</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation>Exportieren</translation>
-    </message>
-    <message>
-        <source>Start typing</source>
-        <translation>Anfangen zu tippen</translation>
+        <source>Home</source>
+        <translation>Startseite</translation>
     </message>
 </context>
 <context>
@@ -744,10 +710,6 @@
         <translation>Tastatur</translation>
     </message>
     <message>
-        <source>Addons</source>
-        <translation>Addons</translation>
-    </message>
-    <message>
         <source>Grades</source>
         <translation type="unfinished"></translation>
     </message>
@@ -756,7 +718,7 @@
     <name>SplashScreen</name>
     <message>
         <source>Loading...</source>
-        <translation type="unfinished"></translation>
+        <translation>Wird geladen...</translation>
     </message>
 </context>
 <context>

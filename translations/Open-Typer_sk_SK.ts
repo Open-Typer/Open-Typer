@@ -31,55 +31,6 @@
     </message>
 </context>
 <context>
-    <name>AddonInfo</name>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/internal/AddonInfo.qml" line="80"/>
-        <source>Uninstall</source>
-        <translation>Odinštalovať</translation>
-    </message>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/internal/AddonInfo.qml" line="80"/>
-        <source>Installing...</source>
-        <translation>Prebieha inštalácia...</translation>
-    </message>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/internal/AddonInfo.qml" line="80"/>
-        <source>Install</source>
-        <translation>Inštalovať</translation>
-    </message>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/internal/AddonInfo.qml" line="107"/>
-        <source>The application needs to restart.</source>
-        <translation>Aplikácia sa musí reštartovať.</translation>
-    </message>
-</context>
-<context>
-    <name>AddonSettings</name>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/AddonSettings.qml" line="63"/>
-        <source>Search</source>
-        <translation>Hľadať</translation>
-    </message>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/AddonSettings.qml" line="88"/>
-        <source>Online</source>
-        <translation>Online</translation>
-    </message>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/AddonSettings.qml" line="93"/>
-        <source>Installed addons</source>
-        <translation>Nainštalované rozšírenia</translation>
-    </message>
-</context>
-<context>
-    <name>AddonUpdateQuestion</name>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/AddonUpdateQuestion.qml" line="25"/>
-        <source>There&apos;s a new update of one or more addons available. Would you like to update them?</source>
-        <translation type="unfinished">Je dostupná nová verzia jedného alebo viac rozšírení. Prajete si ich aktualizovať?</translation>
-    </message>
-</context>
-<context>
     <name>AppMenuBar</name>
     <message>
         <location filename="../src/app/AppMenuBar.cpp" line="104"/>
@@ -272,32 +223,32 @@
 <context>
     <name>BehaviorSettings</name>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="30"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="31"/>
         <source>Exercise validation</source>
         <translation>Vyhodnocovanie cvičenia</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="38"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="39"/>
         <source>Error penalty:</source>
         <translation>Penalizácia chýb:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="51"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="52"/>
         <source>Limit number of mistakes</source>
         <translation>Limitovať počet chýb</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="60"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="61"/>
         <source>Number of characters in one word with max. 1 mistake:</source>
         <translation>Počet znakov v jednom slove s max. 1 chybou:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="73"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="74"/>
         <source>Updates</source>
         <translation>Aktualizácie</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="79"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="80"/>
         <source>Check for updates on startup</source>
         <translation>Nájsť aktualizácie pri štarte</translation>
     </message>
@@ -307,7 +258,7 @@
     <message>
         <location filename="../src/grades/internal/ClassManager.cpp" line="112"/>
         <source>Unnamed class</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepomenovaná trieda</translation>
     </message>
 </context>
 <context>
@@ -380,47 +331,47 @@
 <context>
     <name>ExerciseSummary</name>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="110"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="111"/>
         <source>Number of net hits per minute:</source>
         <translation>Počet čistých úderov za minútu:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="97"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="98"/>
         <source>Total number of hits:</source>
         <translation>Celkový počet úderov:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="136"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="137"/>
         <source>Mistakes:</source>
         <translation>Počet chýb:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="149"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="150"/>
         <source>Accuracy:</source>
         <translation>Presnosť:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="163"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="164"/>
         <source>Class:</source>
-        <translation type="unfinished">Trieda:</translation>
+        <translation>Trieda:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="170"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="171"/>
         <source>No class selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadna vybraná trieda</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="182"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="183"/>
         <source>Grade:</source>
-        <translation type="unfinished">Známka:</translation>
+        <translation>Známka:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="74"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="75"/>
         <source>Total time:</source>
         <translation>Celkový čas:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="123"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="124"/>
         <source>Number of gross hits per minute:</source>
         <translation>Počet hrubých úderov za minútu:</translation>
     </message>
@@ -433,27 +384,27 @@
         <translation>Exportovať text</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="63"/>
+        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="71"/>
         <source>Print</source>
         <translation>Tlačiť</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="74"/>
+        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="82"/>
         <source>Name:</source>
         <translation>Meno:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="85"/>
+        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="93"/>
         <source>Class:</source>
         <translation>Trieda:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="96"/>
+        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="104"/>
         <source>Typing test number:</source>
         <translation>Číslo odpisu:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="107"/>
+        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="115"/>
         <source>Grade:</source>
         <translation>Známka:</translation>
     </message>
@@ -541,17 +492,17 @@
     <message>
         <location filename="../src/grades/qml/OpenTyper/Grades/GradeSettings.qml" line="41"/>
         <source>Selected class:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybraná trieda:</translation>
     </message>
     <message>
         <location filename="../src/grades/qml/OpenTyper/Grades/GradeSettings.qml" line="47"/>
         <source>No class selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadna vybraná trieda</translation>
     </message>
     <message>
         <location filename="../src/grades/qml/OpenTyper/Grades/GradeSettings.qml" line="58"/>
         <source>Configure grading for classes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť známkovanie pre triedy</translation>
     </message>
 </context>
 <context>
@@ -559,140 +510,243 @@
     <message>
         <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="30"/>
         <source>Classes</source>
-        <translation type="unfinished"></translation>
+        <translation>Triedy</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="73"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="75"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="80"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="82"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="88"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="90"/>
         <source>Add class</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať triedu</translation>
     </message>
 </context>
 <context>
     <name>GradingConfig</name>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="44"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="45"/>
         <source>Name:</source>
         <extracomment>Class name</extracomment>
-        <translation type="unfinished">Meno:</translation>
+        <translation>Meno:</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="57"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="58"/>
         <source>Description:</source>
-        <translation type="unfinished">Popis:</translation>
+        <translation>Popis:</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="63"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="64"/>
         <source>Enter description</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadajte popis</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="90"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="91"/>
         <source>Target number of hits per minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Cieľový počet úderov za minútu</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="107"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="108"/>
         <source>Grades</source>
-        <translation type="unfinished"></translation>
+        <translation>Známky</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="115"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="116"/>
         <source>Use numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Používať čísla</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="127"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="128"/>
         <source>Use letters</source>
         <extracomment>Use &quot;characters&quot; would be valid too</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Používať písmená</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="141"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="142"/>
         <source>Worst grade:</source>
-        <translation type="unfinished"></translation>
+        <translation>Najhoršia známka:</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="168"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="169"/>
         <source>Best grade:</source>
-        <translation type="unfinished"></translation>
+        <translation>Najlepšia známka:</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="194"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="195"/>
         <source>Type</source>
         <extracomment>Type of something</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="204"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="205"/>
         <source>Net hits</source>
-        <translation type="unfinished"></translation>
+        <translation>Čisté údery</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="210"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="211"/>
         <source>Gross hits</source>
-        <translation type="unfinished"></translation>
+        <translation>Hrubé údery</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="218"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="219"/>
         <source>Grading based on months</source>
-        <translation type="unfinished"></translation>
+        <translation>Známkovanie podľa mesiacov</translation>
     </message>
     <message>
         <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="277"/>
         <source>Reset (%1)</source>
         <extracomment>To reset a value</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Obnoviť (%1)</translation>
+    </message>
+</context>
+<context>
+    <name>Home</name>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="181"/>
+        <source>Text files</source>
+        <translation>Textové súbory</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="238"/>
+        <source>Options</source>
+        <translation>Možnosti</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="244"/>
+        <source>Open</source>
+        <translation>Otvoriť</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="250"/>
+        <source>Print</source>
+        <translation>Tlačiť</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="263"/>
+        <source>Typing test</source>
+        <translation>Kontrolný odpis</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="271"/>
+        <source>Timed exercise</source>
+        <translation>Cvičenie na čas</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="277"/>
+        <source>Text from error words</source>
+        <translation>Text z chybných slov</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="312"/>
+        <source>Reverse text</source>
+        <translation>Obrátiť text</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="336"/>
+        <source>Repeat exercise</source>
+        <translation>Opakovať cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="338"/>
+        <source>Start typing</source>
+        <translation>Začať písať</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="343"/>
+        <source>Close loaded exercise</source>
+        <translation>Zatvoriť načítané cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="351"/>
+        <source>Previous exercise</source>
+        <translation>Predchádzajúce cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="356"/>
+        <source>Next exercise</source>
+        <translation>Nasledujúce cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="366"/>
+        <source>Exercise history</source>
+        <translation>História cvičenia</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="388"/>
+        <source>Stop</source>
+        <translation>Zastaviť</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="412"/>
+        <source>Export</source>
+        <translation>Exportovať</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="470"/>
+        <source>Error</source>
+        <translation>Chyba</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="471"/>
+        <source>This file is too large!</source>
+        <translation>Tento súbor je príliš veľký!</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="488"/>
+        <source>No error words</source>
+        <translation>Žiadne chybné slová</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="489"/>
+        <source>You don&apos;t have any error words.</source>
+        <translation>Nemáte žiadne chybné slová.</translation>
     </message>
 </context>
 <context>
     <name>InitialSetup</name>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="39"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="40"/>
         <source>%1 Setup</source>
         <extracomment>Application Setup, for example Open-Typer Setup</extracomment>
         <translation>Nastavenie programu %1</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="89"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="92"/>
         <source>Previous</source>
         <extracomment>Previous page</extracomment>
         <translation>Späť</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="98"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="101"/>
         <source>Next</source>
         <extracomment>Next page</extracomment>
         <translation>Pokračovať</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="110"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="113"/>
         <source>Finish</source>
         <extracomment>To finish the initial setup</extracomment>
         <translation>Dokončiť</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="149"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="152"/>
         <source>User interface language</source>
         <extracomment>The language for the user interface</extracomment>
         <translation>Jazyk prostredia</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="169"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="172"/>
         <source>Keyboard layout</source>
         <translation>Rozloženie klávesnice</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="201"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="204"/>
         <source>Lesson pack</source>
         <translation>Balík lekcií</translation>
     </message>
@@ -713,12 +767,12 @@
 <context>
     <name>KeyboardView</name>
     <message>
-        <location filename="../src/framework/keyboard/qml/OpenTyper/Keyboard/KeyboardView.qml" line="443"/>
+        <location filename="../src/framework/keyboard/qml/OpenTyper/Keyboard/KeyboardView.qml" line="444"/>
         <source>Hide keyboard</source>
         <translation>Skryť klávesnicu</translation>
     </message>
     <message>
-        <location filename="../src/framework/keyboard/qml/OpenTyper/Keyboard/KeyboardView.qml" line="443"/>
+        <location filename="../src/framework/keyboard/qml/OpenTyper/Keyboard/KeyboardView.qml" line="444"/>
         <source>Show keyboard</source>
         <translation>Zobraziť klávesnicu</translation>
     </message>
@@ -726,7 +780,7 @@
 <context>
     <name>LanguageManager</name>
     <message>
-        <location filename="../src/framework/translations/internal/LanguageManager.cpp" line="81"/>
+        <location filename="../src/framework/translations/internal/LanguageManager.cpp" line="74"/>
         <source>System (default)</source>
         <translation>Systémový (predvolené)</translation>
     </message>
@@ -742,104 +796,9 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="350"/>
-        <source>Options</source>
-        <translation>Možnosti</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="362"/>
-        <source>Print</source>
-        <translation>Tlačiť</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="376"/>
-        <source>Typing test</source>
-        <translation>Kontrolný odpis</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="425"/>
-        <source>Reverse text</source>
-        <translation>Obrátiť text</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="450"/>
-        <source>Repeat exercise</source>
-        <translation>Opakovať cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="452"/>
-        <source>Start typing</source>
-        <translation>Začať písať</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="457"/>
-        <source>Close loaded exercise</source>
-        <translation>Zatvoriť načítané cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="465"/>
-        <source>Previous exercise</source>
-        <translation>Predchádzajúce cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="470"/>
-        <source>Next exercise</source>
-        <translation>Nasledujúce cvičenie</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="504"/>
-        <source>Stop</source>
-        <translation>Zastaviť</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="540"/>
-        <source>Export</source>
-        <translation>Exportovať</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="611"/>
-        <source>Error</source>
-        <translation>Chyba</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="629"/>
-        <source>No error words</source>
-        <translation>Žiadne chybné slová</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="384"/>
-        <source>Timed exercise</source>
-        <translation>Cvičenie na čas</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="356"/>
-        <source>Open</source>
-        <translation>Otvoriť</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="390"/>
-        <source>Text from error words</source>
-        <translation>Text z chybných slov</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="481"/>
-        <source>Exercise history</source>
-        <translation>História cvičenia</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="612"/>
-        <source>This file is too large!</source>
-        <translation>Tento súbor je príliš veľký!</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="231"/>
-        <source>Text files</source>
-        <translation>Textové súbory</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="630"/>
-        <source>You don&apos;t have any error words.</source>
-        <translation>Nemáte žiadne chybné slová.</translation>
+        <location filename="../src/app/qml/MainWindow.qml" line="160"/>
+        <source>Home</source>
+        <translation>Domov</translation>
     </message>
 </context>
 <context>
@@ -882,39 +841,34 @@
 <context>
     <name>SettingsDialog</name>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="39"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="38"/>
         <source>Settings</source>
         <translation>Nastavenia</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="49"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="48"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="54"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="53"/>
         <source>Behavior</source>
         <translation>Správanie</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="59"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="58"/>
         <source>Grades</source>
-        <translation type="unfinished"></translation>
+        <translation>Známky</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="64"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="63"/>
         <source>Keyboard</source>
         <translation>Klávesnica</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="69"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="68"/>
         <source>Appearance</source>
         <translation>Vzhľad</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="74"/>
-        <source>Addons</source>
-        <translation>Rozšírenia</translation>
     </message>
 </context>
 <context>
@@ -922,7 +876,7 @@
     <message>
         <location filename="../src/app/internal/SplashScreen.cpp" line="41"/>
         <source>Loading...</source>
-        <translation type="unfinished"></translation>
+        <translation>Načítava sa...</translation>
     </message>
 </context>
 <context>
@@ -933,17 +887,17 @@
         <translation>Časový limit</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="37"/>
+        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="41"/>
         <source>Custom</source>
         <translation>Vlastný</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="47"/>
+        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="53"/>
         <source>Minutes:</source>
         <translation>Minúty:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="60"/>
+        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="65"/>
         <source>Seconds:</source>
         <translation>Sekundy:</translation>
     </message>

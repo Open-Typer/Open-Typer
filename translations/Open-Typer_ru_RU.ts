@@ -31,55 +31,6 @@
     </message>
 </context>
 <context>
-    <name>AddonInfo</name>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/internal/AddonInfo.qml" line="80"/>
-        <source>Uninstall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/internal/AddonInfo.qml" line="80"/>
-        <source>Installing...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/internal/AddonInfo.qml" line="80"/>
-        <source>Install</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/internal/AddonInfo.qml" line="107"/>
-        <source>The application needs to restart.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>AddonSettings</name>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/AddonSettings.qml" line="63"/>
-        <source>Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/AddonSettings.qml" line="88"/>
-        <source>Online</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/AddonSettings.qml" line="93"/>
-        <source>Installed addons</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>AddonUpdateQuestion</name>
-    <message>
-        <location filename="../src/addons/qml/OpenTyper/Addons/AddonUpdateQuestion.qml" line="25"/>
-        <source>There&apos;s a new update of one or more addons available. Would you like to update them?</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AppMenuBar</name>
     <message>
         <location filename="../src/app/AppMenuBar.cpp" line="104"/>
@@ -221,7 +172,7 @@
     <message>
         <location filename="../src/app/qml/settings/AppearanceSettings.qml" line="154"/>
         <source>Text</source>
-        <translation type="unfinished">Текст</translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <location filename="../src/app/qml/settings/AppearanceSettings.qml" line="162"/>
@@ -272,32 +223,32 @@
 <context>
     <name>BehaviorSettings</name>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="30"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="31"/>
         <source>Exercise validation</source>
         <translation>Проверка выполнения упражнения</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="38"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="39"/>
         <source>Error penalty:</source>
         <translation>Штраф за ошибку:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="51"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="52"/>
         <source>Limit number of mistakes</source>
         <translation>Включить лимит количества ошибок</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="60"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="61"/>
         <source>Number of characters in one word with max. 1 mistake:</source>
         <translation>Количество символов в одном слове с макс. 1 ошибкой:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="73"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="74"/>
         <source>Updates</source>
         <translation>Обновления</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="79"/>
+        <location filename="../src/app/qml/settings/BehaviorSettings.qml" line="80"/>
         <source>Check for updates on startup</source>
         <translation>Проверять обновления при запуске приложения</translation>
     </message>
@@ -380,49 +331,49 @@
 <context>
     <name>ExerciseSummary</name>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="74"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="75"/>
         <source>Total time:</source>
         <translation>Всего времени:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="136"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="137"/>
         <source>Mistakes:</source>
         <translation>Ошибки:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="123"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="124"/>
         <source>Number of gross hits per minute:</source>
         <translation>Количество грубых попаданий в минуту:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="97"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="98"/>
         <source>Total number of hits:</source>
         <translation>Количество попаданий:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="110"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="111"/>
         <source>Number of net hits per minute:</source>
         <translation>Количество чистых попаданий в минуту:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="149"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="150"/>
         <source>Accuracy:</source>
         <translation>Точность:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="163"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="164"/>
         <source>Class:</source>
-        <translation type="unfinished">Класс:</translation>
+        <translation>Класс:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="170"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="171"/>
         <source>No class selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/ExerciseSummary.qml" line="182"/>
+        <location filename="../src/app/qml/ExerciseSummary.qml" line="183"/>
         <source>Grade:</source>
-        <translation type="unfinished">Ступень обучения:</translation>
+        <translation>Ступень обучения:</translation>
     </message>
 </context>
 <context>
@@ -433,28 +384,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="63"/>
+        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="71"/>
         <source>Print</source>
         <translation>Распечатать</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="74"/>
+        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="82"/>
         <source>Name:</source>
         <translation>Имя:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="85"/>
+        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="93"/>
         <source>Class:</source>
         <translatorcomment>В СНГ это была бы буква класса</translatorcomment>
         <translation>Класс:</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="96"/>
+        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="104"/>
         <source>Typing test number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="107"/>
+        <location filename="../src/app/qml/dialogs/ExportDialog.qml" line="115"/>
         <source>Grade:</source>
         <translatorcomment>В СНГ это был бы номер класса</translatorcomment>
         <translation>Ступень обучения:</translation>
@@ -564,17 +515,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="73"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="75"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="80"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="82"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="88"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingClassConfig.qml" line="90"/>
         <source>Add class</source>
         <translation type="unfinished"></translation>
     </message>
@@ -582,70 +533,70 @@
 <context>
     <name>GradingConfig</name>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="44"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="45"/>
         <source>Name:</source>
         <extracomment>Class name</extracomment>
-        <translation type="unfinished">Имя:</translation>
+        <translation>Имя:</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="57"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="58"/>
         <source>Description:</source>
-        <translation type="unfinished">Описание:</translation>
+        <translation>Описание:</translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="63"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="64"/>
         <source>Enter description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="90"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="91"/>
         <source>Target number of hits per minute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="107"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="108"/>
         <source>Grades</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="115"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="116"/>
         <source>Use numbers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="127"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="128"/>
         <source>Use letters</source>
         <extracomment>Use &quot;characters&quot; would be valid too</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="141"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="142"/>
         <source>Worst grade:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="168"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="169"/>
         <source>Best grade:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="194"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="195"/>
         <source>Type</source>
         <extracomment>Type of something</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="204"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="205"/>
         <source>Net hits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="210"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="211"/>
         <source>Gross hits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="218"/>
+        <location filename="../src/grades/qml/OpenTyper/Grades/internal/GradingConfig.qml" line="219"/>
         <source>Grading based on months</source>
         <translation type="unfinished"></translation>
     </message>
@@ -657,44 +608,147 @@
     </message>
 </context>
 <context>
+    <name>Home</name>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="181"/>
+        <source>Text files</source>
+        <translation>Текстовые файлы</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="238"/>
+        <source>Options</source>
+        <translation>Опции</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="244"/>
+        <source>Open</source>
+        <translation>Открыть</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="250"/>
+        <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="263"/>
+        <source>Typing test</source>
+        <translation>Вводимый тест</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="271"/>
+        <source>Timed exercise</source>
+        <translation>Упражнение на время</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="277"/>
+        <source>Text from error words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="312"/>
+        <source>Reverse text</source>
+        <translation>Перевернуть текст</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="336"/>
+        <source>Repeat exercise</source>
+        <translation>Повторить упражнение</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="338"/>
+        <source>Start typing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="343"/>
+        <source>Close loaded exercise</source>
+        <translation>Закрыть загруженное упражнение</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="351"/>
+        <source>Previous exercise</source>
+        <translation>Предыдущее упражнение</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="356"/>
+        <source>Next exercise</source>
+        <translation>Следующее упражнение</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="366"/>
+        <source>Exercise history</source>
+        <translation>История урока</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="388"/>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="412"/>
+        <source>Export</source>
+        <translation>Экспорт</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="470"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="471"/>
+        <source>This file is too large!</source>
+        <translation>Этот файл слишком большой!</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="488"/>
+        <source>No error words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="489"/>
+        <source>You don&apos;t have any error words.</source>
+        <translation>У Вас нет никаких ошибочных слов.</translation>
+    </message>
+</context>
+<context>
     <name>InitialSetup</name>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="39"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="40"/>
         <source>%1 Setup</source>
         <extracomment>Application Setup, for example Open-Typer Setup</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="89"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="92"/>
         <source>Previous</source>
         <extracomment>Previous page</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="98"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="101"/>
         <source>Next</source>
         <extracomment>Next page</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="110"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="113"/>
         <source>Finish</source>
         <extracomment>To finish the initial setup</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="149"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="152"/>
         <source>User interface language</source>
         <extracomment>The language for the user interface</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="169"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="172"/>
         <source>Keyboard layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="201"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="204"/>
         <source>Lesson pack</source>
         <translation>Набор уроков</translation>
     </message>
@@ -715,12 +769,12 @@
 <context>
     <name>KeyboardView</name>
     <message>
-        <location filename="../src/framework/keyboard/qml/OpenTyper/Keyboard/KeyboardView.qml" line="443"/>
+        <location filename="../src/framework/keyboard/qml/OpenTyper/Keyboard/KeyboardView.qml" line="444"/>
         <source>Hide keyboard</source>
         <translation>Скрыть клавиатуру</translation>
     </message>
     <message>
-        <location filename="../src/framework/keyboard/qml/OpenTyper/Keyboard/KeyboardView.qml" line="443"/>
+        <location filename="../src/framework/keyboard/qml/OpenTyper/Keyboard/KeyboardView.qml" line="444"/>
         <source>Show keyboard</source>
         <translation>Показать клавиатуру</translation>
     </message>
@@ -728,7 +782,7 @@
 <context>
     <name>LanguageManager</name>
     <message>
-        <location filename="../src/framework/translations/internal/LanguageManager.cpp" line="81"/>
+        <location filename="../src/framework/translations/internal/LanguageManager.cpp" line="74"/>
         <source>System (default)</source>
         <translation>Системный (стандартный)</translation>
     </message>
@@ -744,104 +798,9 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="350"/>
-        <source>Options</source>
-        <translation>Опции</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="362"/>
-        <source>Print</source>
-        <translation>Распечатать</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="376"/>
-        <source>Typing test</source>
-        <translation>Вводимый тест</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="425"/>
-        <source>Reverse text</source>
-        <translation>Перевернуть текст</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="450"/>
-        <source>Repeat exercise</source>
-        <translation>Повторить упражнение</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="452"/>
-        <source>Start typing</source>
+        <location filename="../src/app/qml/MainWindow.qml" line="160"/>
+        <source>Home</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="457"/>
-        <source>Close loaded exercise</source>
-        <translation>Закрыть загруженное упражнение</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="465"/>
-        <source>Previous exercise</source>
-        <translation>Предыдущее упражнение</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="470"/>
-        <source>Next exercise</source>
-        <translation>Следующее упражнение</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="504"/>
-        <source>Stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="540"/>
-        <source>Export</source>
-        <translation>Экспорт</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="611"/>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="629"/>
-        <source>No error words</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="384"/>
-        <source>Timed exercise</source>
-        <translation>Упражнение на время</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="356"/>
-        <source>Open</source>
-        <translation>Открыть</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="390"/>
-        <source>Text from error words</source>
-        <translation>Текст из слов с ошибками</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="481"/>
-        <source>Exercise history</source>
-        <translation>История урока</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="612"/>
-        <source>This file is too large!</source>
-        <translation>Этот файл слишком большой!</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="231"/>
-        <source>Text files</source>
-        <translation>Текстовые файлы</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="630"/>
-        <source>You don&apos;t have any error words.</source>
-        <translation>У Вас нет никаких ошибочных слов.</translation>
     </message>
 </context>
 <context>
@@ -884,39 +843,34 @@
 <context>
     <name>SettingsDialog</name>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="39"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="38"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="49"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="48"/>
         <source>Language</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="54"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="53"/>
         <source>Behavior</source>
         <translation>Поведение</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="59"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="58"/>
         <source>Grades</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="64"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="63"/>
         <source>Keyboard</source>
         <translation>Клавиатура</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="69"/>
+        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="68"/>
         <source>Appearance</source>
         <translation>Оформление</translation>
-    </message>
-    <message>
-        <location filename="../src/app/qml/dialogs/SettingsDialog.qml" line="74"/>
-        <source>Addons</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -935,17 +889,17 @@
         <translation>Лимит времени</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="37"/>
+        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="41"/>
         <source>Custom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="47"/>
+        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="53"/>
         <source>Minutes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="60"/>
+        <location filename="../src/app/qml/dialogs/TimeDialog.qml" line="65"/>
         <source>Seconds:</source>
         <translation type="unfinished"></translation>
     </message>
