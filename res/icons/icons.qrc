@@ -22,6 +22,8 @@
         <file>add.svg</file>
         <file>medal.svg</file>
         <file>edit.svg</file>
+        <file>save.svg</file>
+        <file>save-as.svg</file>
     </qresource>
     <qresource prefix="/icons/open-typer">
         <file>index.theme</file>
