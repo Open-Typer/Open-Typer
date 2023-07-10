@@ -20,16 +20,39 @@
 
 import QtQuick 2.12
 import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.5
 
 TabButton {
+	property bool closable: false
+	signal closed()
 	id: control
-	width: implicitWidth
+	width: closable ? implicitWidth + closeButton.width - 15 : implicitWidth
 	height: metrics.boundingRect.height + 15
 	font.capitalization: Font.MixedCase
+
+	contentItem: Text {
+		text: control.text
+		font: control.font
+		color: Material.foreground
+		horizontalAlignment: Text.AlignLeft
+		verticalAlignment: Text.AlignVCenter
+	}
 
 	TextMetrics {
 		id: metrics
 		font: control.font
 		text: control.text
+	}
+
+	RoundToolButton {
+		id: closeButton
+		visible: closable
+		anchors.right: parent.right
+		anchors.verticalCenter: parent.verticalCenter
+		icon.name: "close"
+		icon.height: parent.height / 2
+		icon.width: icon.height
+		toolTipText: qsTr("Close tab")
+		onClicked: closed()
 	}
 }
