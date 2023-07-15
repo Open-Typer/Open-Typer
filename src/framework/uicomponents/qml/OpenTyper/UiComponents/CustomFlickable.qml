@@ -86,7 +86,7 @@ Flickable {
 	}
 
 	ScrollBar.horizontal: ScrollBar {
-		width: 10
+		height: 10
 		position: flickable.visibleArea.xPosition
 		policy: showHorizontalScrollBar && interactive ? ScrollBar.AsNeeded : ScrollBar.AlwaysOff
 	}
