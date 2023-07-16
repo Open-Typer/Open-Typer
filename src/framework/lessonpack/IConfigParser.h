@@ -28,6 +28,7 @@ class IConfigParser : MODULE_EXPORT_INTERFACE
 	public:
 		virtual ~IConfigParser() { }
 
+		virtual std::shared_ptr<IConfigParser> createInstance() const = 0;
 		virtual bool open(const QString fileName) = 0;
 		virtual void loadToBuffer(const QByteArray content) = 0;
 		virtual QByteArray data(void) = 0;

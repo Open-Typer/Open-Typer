@@ -41,6 +41,16 @@ std::shared_ptr<ConfigParser> ConfigParser::instance()
 }
 
 /*!
+ * Creates a new instance of ConfigParser.
+ * This is useful if you need more than one instance of ConfigParser.
+ * \since Open-Typer 5.2.0
+ */
+std::shared_ptr<IConfigParser> ConfigParser::createInstance() const
+{
+	return std::reinterpret_pointer_cast<IConfigParser>(std::make_shared<ConfigParser>());
+}
+
+/*!
  * Opens a pack file.\n
  * Returns true if successful.
  * \see reopen()

@@ -54,6 +54,7 @@ class Q_DECL_EXPORT ConfigParser : public QObject, public IConfigParser
 	public:
 		explicit ConfigParser(QObject *parent = nullptr);
 		static std::shared_ptr<ConfigParser> instance();
+		std::shared_ptr<IConfigParser> createInstance() const override;
 		Q_INVOKABLE bool open(const QString fileName) override;
 		Q_INVOKABLE void loadToBuffer(const QByteArray content) override;
 		Q_INVOKABLE QByteArray data(void) override;
