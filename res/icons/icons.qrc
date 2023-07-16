@@ -24,6 +24,8 @@
         <file>edit.svg</file>
         <file>save.svg</file>
         <file>save-as.svg</file>
+        <file>undo.svg</file>
+        <file>redo.svg</file>
     </qresource>
     <qresource prefix="/icons/open-typer">
         <file>index.theme</file>
