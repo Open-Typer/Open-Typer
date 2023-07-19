@@ -140,6 +140,7 @@ void PackEditorModel::open()
 
 	if(m_opened)
 	{
+		m_parser->loadToBuffer(m_parser->data());
 		m_lesson = 1;
 		m_sublesson = 1;
 		m_exercise = 1;
