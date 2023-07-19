@@ -29,6 +29,7 @@ std::string PackEditorModule::moduleName() const
 
 void PackEditorModule::registerResources()
 {
+	Q_INIT_RESOURCE(packeditor);
 }
 
 void PackEditorModule::registerUiTypes()
