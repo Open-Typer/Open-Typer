@@ -210,11 +210,19 @@ ColumnLayout {
 			anchors.left: parent.left
 			anchors.right: parent.right
 			anchors.margins: 10
-			contentWidth: Math.max(width, resultMetrics.boundingRect(resultEdit.text).width)
+            contentWidth: Math.max(width, calculateTextWidth(resultEdit.text))
 			contentHeight: Math.max(1, resultEdit.text.split('\n').length) * resultMetrics.height
 			showHorizontalScrollBar: true
 			showVerticalScrollBar: true
 			clip: true
+
+            function calculateTextWidth(text) {
+                let lines = text.split("\n");
+                let maxValue = 0;
+                for(var i = 0; i < lines.length; i++)
+                    maxValue = Math.max(maxValue, resultMetrics.boundingRect(lines[i]).width);
+                return maxValue;
+            }
 
 			TextEdit {
 				id: resultEdit
@@ -223,6 +231,7 @@ ColumnLayout {
 				width: resultFlickable.contentWidth
 				height: Math.max(resultFlickable.height, resultFlickable.contentHeight)
 				readOnly: true
+                text: editorModel.currentText
 
 				FontMetrics {
 					id: resultMetrics

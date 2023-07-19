@@ -41,6 +41,7 @@ class PackEditorModel : public QObject
 		Q_PROPERTY(QStringList lessonList READ lessonList NOTIFY lessonListChanged)
 		Q_PROPERTY(QStringList sublessonList READ sublessonList NOTIFY sublessonListChanged)
 		Q_PROPERTY(QStringList exerciseList READ exerciseList NOTIFY exerciseListChanged)
+		Q_PROPERTY(QString currentText READ currentText NOTIFY currentTextChanged)
 	public:
 		explicit PackEditorModel(QObject *parent = nullptr);
 		~PackEditorModel();
@@ -70,6 +71,8 @@ class PackEditorModel : public QObject
 		const QStringList &sublessonList() const;
 
 		const QStringList &exerciseList() const;
+
+		QString currentText() const;
 
 		Q_INVOKABLE void open();
 
@@ -110,6 +113,7 @@ class PackEditorModel : public QObject
 		void lessonListChanged();
 		void sublessonListChanged();
 		void exerciseListChanged();
+		void currentTextChanged();
 };
 
 #endif // PACKEDITORMODEL_H

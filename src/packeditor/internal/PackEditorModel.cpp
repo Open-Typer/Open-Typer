@@ -29,6 +29,8 @@ PackEditorModel::PackEditorModel(QObject *parent) :
 
 	// Update lists when language changes
 	connect(languageManager().get(), &ILanguageManager::languageChanged, this, &PackEditorModel::updateLists);
+
+	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentTextChanged);
 }
 
 PackEditorModel::~PackEditorModel()
@@ -131,6 +133,13 @@ const QStringList &PackEditorModel::sublessonList() const
 const QStringList &PackEditorModel::exerciseList() const
 {
 	return m_exerciseList;
+}
+
+QString PackEditorModel::currentText() const
+{
+	QString text = m_parser->exerciseText(m_lesson, m_sublesson, m_exercise);
+	int lineLength = m_parser->exerciseLineLength(m_lesson, m_sublesson, m_exercise);
+	return m_parser->initExercise(text, lineLength);
 }
 
 void PackEditorModel::open()
