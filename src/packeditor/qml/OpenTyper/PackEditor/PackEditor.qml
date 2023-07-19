@@ -42,6 +42,7 @@ ColumnLayout {
 		id: editorModel
 		fileName: root.fileName
 		onCurrentRawTextChanged: inputEdit.text = currentRawText
+		onCurrentLengthLimitChanged: lengthLimitBox.value = currentLengthLimit
 	}
 
 	Panel {
@@ -175,9 +176,11 @@ ColumnLayout {
 				}
 
 				CustomSpinBox {
+					id: lengthLimitBox
 					from: 1
 					to: 729
 					stepSize: 10
+					onValueChanged: editorModel.currentLengthLimit = value
 				}
 			}
 

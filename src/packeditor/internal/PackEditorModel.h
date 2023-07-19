@@ -44,6 +44,7 @@ class PackEditorModel : public QObject
 		Q_PROPERTY(QString currentText READ currentText NOTIFY currentTextChanged)
 		Q_PROPERTY(QString currentRawText READ currentRawText WRITE setCurrentRawText NOTIFY currentRawTextChanged)
 		Q_PROPERTY(QString currentRepeatType READ currentRepeatType WRITE setCurrentRepeatType NOTIFY currentRepeatTypeChanged)
+		Q_PROPERTY(int currentLengthLimit READ currentLengthLimit WRITE setCurrentLengthLimit NOTIFY currentLengthLimitChanged)
 	public:
 		explicit PackEditorModel(QObject *parent = nullptr);
 		~PackEditorModel();
@@ -81,6 +82,9 @@ class PackEditorModel : public QObject
 
 		QString currentRepeatType() const;
 		void setCurrentRepeatType(const QString &newRepeatType);
+
+		int currentLengthLimit() const;
+		void setCurrentLengthLimit(int newLengthLimit);
 
 		Q_INVOKABLE void open();
 
@@ -128,6 +132,7 @@ class PackEditorModel : public QObject
 		void currentTextChanged();
 		void currentRawTextChanged();
 		void currentRepeatTypeChanged();
+		void currentLengthLimitChanged();
 };
 
 #endif // PACKEDITORMODEL_H

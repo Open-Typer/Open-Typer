@@ -36,9 +36,11 @@ PackEditorModel::PackEditorModel(QObject *parent) :
 
 	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentRawTextChanged);
 	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentRepeatTypeChanged);
+	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentLengthLimitChanged);
 
 	connect(this, &PackEditorModel::currentRawTextChanged, this, &PackEditorModel::currentTextChanged);
 	connect(this, &PackEditorModel::currentRepeatTypeChanged, this, &PackEditorModel::currentTextChanged);
+	connect(this, &PackEditorModel::currentLengthLimitChanged, this, &PackEditorModel::currentTextChanged);
 }
 
 PackEditorModel::~PackEditorModel()
@@ -190,6 +192,26 @@ void PackEditorModel::setCurrentRepeatType(const QString &newRepeatType)
 	editExercise(repeat, newRepeatType, repeatLimit, lineLength, desc, rawText);
 
 	emit currentRepeatTypeChanged();
+}
+
+int PackEditorModel::currentLengthLimit() const
+{
+	return m_parser->exerciseRepeatLimit(m_lesson, m_absoluteSublesson, m_exercise);
+}
+
+void PackEditorModel::setCurrentLengthLimit(int newLengthLimit)
+{
+	bool repeat = m_parser->exerciseRepeatBool(m_lesson, m_absoluteSublesson, m_exercise);
+	QString repeatType = m_parser->exerciseRepeatType(m_lesson, m_absoluteSublesson, m_exercise);
+	int lineLength = m_parser->exerciseLineLength(m_lesson, m_absoluteSublesson, m_exercise);
+	QString desc = "";
+	if(m_exercise == 1)
+		desc = m_parser->lessonDesc(m_lesson);
+	QString rawText = m_parser->exerciseRawText(m_lesson, m_absoluteSublesson, m_exercise);
+
+	editExercise(repeat, repeatType, newLengthLimit, lineLength, desc, rawText);
+
+	emit currentLengthLimitChanged();
 }
 
 void PackEditorModel::open()
