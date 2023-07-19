@@ -88,6 +88,7 @@ class PackEditorModel : public QObject
 		void updateLessonList();
 		void updateSublessonList();
 		void updateExerciseList();
+		void updateAbsoluteSublesson();
 
 		std::shared_ptr<IConfigParser> m_parser = nullptr;
 		QString m_fileName;
@@ -96,6 +97,7 @@ class PackEditorModel : public QObject
 		bool m_readOnly = false;
 		int m_lesson = 0;
 		int m_sublesson = 0;
+		int m_absoluteSublesson = 0;
 		int m_exercise = 0;
 		QStringList m_lessonList;
 		QStringList m_sublessonList;

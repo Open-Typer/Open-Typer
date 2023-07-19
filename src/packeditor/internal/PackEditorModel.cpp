@@ -30,6 +30,8 @@ PackEditorModel::PackEditorModel(QObject *parent) :
 	// Update lists when language changes
 	connect(languageManager().get(), &ILanguageManager::languageChanged, this, &PackEditorModel::updateLists);
 
+	connect(this, &PackEditorModel::lessonChanged, this, &PackEditorModel::updateAbsoluteSublesson);
+	connect(this, &PackEditorModel::sublessonChanged, this, &PackEditorModel::updateAbsoluteSublesson);
 	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentTextChanged);
 }
 
@@ -137,8 +139,8 @@ const QStringList &PackEditorModel::exerciseList() const
 
 QString PackEditorModel::currentText() const
 {
-	QString text = m_parser->exerciseText(m_lesson, m_sublesson, m_exercise);
-	int lineLength = m_parser->exerciseLineLength(m_lesson, m_sublesson, m_exercise);
+	QString text = m_parser->exerciseText(m_lesson, m_absoluteSublesson, m_exercise);
+	int lineLength = m_parser->exerciseLineLength(m_lesson, m_absoluteSublesson, m_exercise);
 	return m_parser->initExercise(text, lineLength);
 }
 
@@ -164,7 +166,7 @@ void PackEditorModel::open()
 
 void PackEditorModel::nextExercise()
 {
-	int count = m_parser->exerciseCount(m_lesson, m_sublesson);
+	int count = m_parser->exerciseCount(m_lesson, m_absoluteSublesson);
 	Q_ASSERT(m_exercise <= count);
 
 	if(m_exercise >= count)
@@ -185,7 +187,7 @@ void PackEditorModel::previousExercise()
 	if(m_exercise == 0)
 	{
 		previousSublesson();
-		m_exercise = m_parser->exerciseCount(m_lesson, m_sublesson);
+		m_exercise = m_parser->exerciseCount(m_lesson, m_absoluteSublesson);
 	}
 	emit exerciseChanged();
 }
@@ -276,13 +278,15 @@ void PackEditorModel::updateLessonList()
 void PackEditorModel::updateSublessonList()
 {
 	m_sublessonList.clear();
-	int i2 = 0;
+	int j = 0;
 	int count = m_parser->sublessonCount(m_lesson);
 
-	for(int i = 1; i <= count + i2; i++)
+	for(int i = 1; i <= count + j; i++)
 	{
 		if(m_parser->exerciseCount(m_lesson, i) > 0)
 			m_sublessonList.push_back(m_parser->sublessonName(i));
+		else
+			j++;
 	}
 
 	emit sublessonListChanged();
@@ -290,11 +294,31 @@ void PackEditorModel::updateSublessonList()
 
 void PackEditorModel::updateExerciseList()
 {
+	updateAbsoluteSublesson();
 	m_exerciseList.clear();
-	int count = m_parser->exerciseCount(m_lesson, m_sublesson);
+	int count = m_parser->exerciseCount(m_lesson, m_absoluteSublesson);
 
 	for(int i = 1; i <= count; i++)
 		m_exerciseList.push_back(m_parser->exerciseTr(i));
 
 	emit exerciseListChanged();
+}
+
+void PackEditorModel::updateAbsoluteSublesson()
+{
+	int count = m_parser->sublessonCount(m_lesson);
+	int sublessonListStart = 0;
+	int i, j = 0;
+
+	for(i = 1; i <= count + j; i++)
+	{
+		if(m_parser->exerciseCount(m_lesson, i) == 0)
+		{
+			j++;
+			if(m_sublesson + j > i)
+				sublessonListStart++;
+		}
+	}
+
+	m_absoluteSublesson = m_sublesson + sublessonListStart;
 }
