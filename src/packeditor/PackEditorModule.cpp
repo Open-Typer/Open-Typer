@@ -18,7 +18,9 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QQmlEngine>
 #include "PackEditorModule.h"
+#include "internal/PackEditorModel.h"
 
 std::string PackEditorModule::moduleName() const
 {
@@ -31,4 +33,5 @@ void PackEditorModule::registerResources()
 
 void PackEditorModule::registerUiTypes()
 {
+	qmlRegisterType<PackEditorModel>("OpenTyper.PackEditor", 1, 0, "PackEditorModel");
 }

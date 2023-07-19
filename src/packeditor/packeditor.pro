@@ -5,10 +5,12 @@ CONFIG += staticlib
 QML_IMPORT_PATH += qml
 
 SOURCES += \
-    PackEditorModule.cpp
+    PackEditorModule.cpp \
+    internal/PackEditorModel.cpp
 
 HEADERS += \
-    PackEditorModule.h
+    PackEditorModule.h \
+    internal/PackEditorModel.h
 
 RESOURCES += \
     packeditor.qrc
