@@ -41,7 +41,7 @@ ColumnLayout {
 	PackEditorModel {
 		id: editorModel
 		fileName: root.fileName
-        onCurrentRawTextChanged: inputEdit.text = currentRawText
+		onCurrentRawTextChanged: inputEdit.text = currentRawText
 	}
 
 	Panel {
@@ -119,76 +119,79 @@ ColumnLayout {
 			CustomComboBox {
 				id: lessonBox
 				model: editorModel.lessonList
-                currentIndex: editorModel.lesson - 1
-                onActivated: editorModel.lesson = currentIndex + 1
+				currentIndex: editorModel.lesson - 1
+				onActivated: editorModel.lesson = currentIndex + 1
 			}
 
 			CustomComboBox {
 				id: sublessonBox
 				model: editorModel.sublessonList
-                currentIndex: editorModel.sublesson - 1
-                onActivated: editorModel.sublesson = currentIndex + 1
+				currentIndex: editorModel.sublesson - 1
+				onActivated: editorModel.sublesson = currentIndex + 1
 			}
 
 			CustomComboBox {
 				id: exerciseBox
 				model: editorModel.exerciseList
-                currentIndex: editorModel.exercise - 1
-                onActivated: editorModel.exercise = currentIndex + 1
+				currentIndex: editorModel.exercise - 1
+				onActivated: editorModel.exercise = currentIndex + 1
 			}
 		}
 	}
 
-    Rectangle {
-        // TODO: Move this into a popup
-        radius: 10
-        border.color: ThemeEngine.borderColor
-        color: ThemeEngine.paperColor
-        Layout.topMargin: 10
-        Layout.fillWidth: true
-        height: exerciseOptionsLayout.height + exerciseOptionsLayout.anchors.margins * 2
+	Rectangle {
+		// TODO: Move this into a popup
+		radius: 10
+		border.color: ThemeEngine.borderColor
+		color: ThemeEngine.paperColor
+		Layout.topMargin: 10
+		Layout.fillWidth: true
+		height: exerciseOptionsLayout.height + exerciseOptionsLayout.anchors.margins * 2
 
-        ColumnLayout {
-            id: exerciseOptionsLayout
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.margins: 10
+		ColumnLayout {
+			id: exerciseOptionsLayout
+			anchors.left: parent.left
+			anchors.top: parent.top
+			anchors.margins: 10
 
-            RowLayout {
-                Label {
-                    text: qsTr("Repeating:")
-                }
+			RowLayout {
+				Label {
+					text: qsTr("Repeating:")
+				}
 
-                CustomComboBox {
-                    model: [qsTr("None"), qsTr("Words")]
-                }
-            }
+				CustomComboBox {
+					id: repeatingComboBox
+					model: [qsTr("None"), qsTr("Words")]
+				}
+			}
 
-            RowLayout {
-                Label {
-                    text: qsTr("Length limit:")
-                }
+			RowLayout {
+				enabled: repeatingComboBox.currentIndex > 0
 
-                CustomSpinBox {
-                    from: 1
-                    to: 729
-                    stepSize: 10
-                }
-            }
+				Label {
+					text: qsTr("Length limit:")
+				}
 
-            RowLayout {
-                Label {
-                    text: qsTr("Line length:")
-                }
+				CustomSpinBox {
+					from: 1
+					to: 729
+					stepSize: 10
+				}
+			}
 
-                CustomSpinBox {
-                    from: 30
-                    to: 120
-                    stepSize: 10
-                }
-            }
-        }
-    }
+			RowLayout {
+				Label {
+					text: qsTr("Line length:")
+				}
+
+				CustomSpinBox {
+					from: 30
+					to: 120
+					stepSize: 10
+				}
+			}
+		}
+	}
 
 	Rectangle {
 		radius: 10
@@ -227,7 +230,7 @@ ColumnLayout {
 				color: ThemeEngine.foregroundColor
 				width: inputFlickable.contentWidth
 				height: Math.max(inputFlickable.height, inputFlickable.contentHeight)
-                onTextChanged: editorModel.currentRawText = text
+				onTextChanged: editorModel.currentRawText = text
 
 				FontMetrics {
 					id: inputMetrics
@@ -263,19 +266,19 @@ ColumnLayout {
 			anchors.left: parent.left
 			anchors.right: parent.right
 			anchors.margins: 10
-            contentWidth: Math.max(width, calculateTextWidth(resultEdit.text))
+			contentWidth: Math.max(width, calculateTextWidth(resultEdit.text))
 			contentHeight: Math.max(1, resultEdit.text.split('\n').length) * resultMetrics.height
 			showHorizontalScrollBar: true
 			showVerticalScrollBar: true
 			clip: true
 
-            function calculateTextWidth(text) {
-                let lines = text.split("\n");
-                let maxValue = 0;
-                for(var i = 0; i < lines.length; i++)
-                    maxValue = Math.max(maxValue, resultMetrics.boundingRect(lines[i]).width);
-                return maxValue;
-            }
+			function calculateTextWidth(text) {
+				let lines = text.split("\n");
+				let maxValue = 0;
+				for(var i = 0; i < lines.length; i++)
+					maxValue = Math.max(maxValue, resultMetrics.boundingRect(lines[i]).width);
+				return maxValue;
+			}
 
 			TextEdit {
 				id: resultEdit
@@ -284,7 +287,7 @@ ColumnLayout {
 				width: resultFlickable.contentWidth
 				height: Math.max(resultFlickable.height, resultFlickable.contentHeight)
 				readOnly: true
-                text: editorModel.currentText
+				text: editorModel.currentText
 
 				FontMetrics {
 					id: resultMetrics
