@@ -162,6 +162,8 @@ ColumnLayout {
 				CustomComboBox {
 					id: repeatingComboBox
 					model: [qsTr("None"), qsTr("Words")]
+					currentIndex: editorModel.currentRepeatType == "w" ? 1 : 0
+					onActivated: editorModel.currentRepeatType = currentIndex == 1 ? "w" : "0"
 				}
 			}
 

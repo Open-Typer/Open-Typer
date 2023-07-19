@@ -33,8 +33,12 @@ PackEditorModel::PackEditorModel(QObject *parent) :
 
 	connect(this, &PackEditorModel::lessonChanged, this, &PackEditorModel::updateAbsoluteSublesson);
 	connect(this, &PackEditorModel::sublessonChanged, this, &PackEditorModel::updateAbsoluteSublesson);
+
 	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentRawTextChanged);
+	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentRepeatTypeChanged);
+
 	connect(this, &PackEditorModel::currentRawTextChanged, this, &PackEditorModel::currentTextChanged);
+	connect(this, &PackEditorModel::currentRepeatTypeChanged, this, &PackEditorModel::currentTextChanged);
 }
 
 PackEditorModel::~PackEditorModel()
@@ -161,11 +165,31 @@ void PackEditorModel::setCurrentRawText(const QString &newRawText)
 	if(m_exercise == 1)
 		desc = m_parser->lessonDesc(m_lesson);
 
-	// TODO: There isn't any API for replacing an exercise yet, so delete it and add a new one
-	deleteExerciseLine(m_lesson, m_absoluteSublesson, m_exercise);
-	m_parser->addExercise(m_lesson, m_absoluteSublesson, m_exercise, repeat, repeatType, repeatLimit, lineLength, desc, newRawText);
+	editExercise(repeat, repeatType, repeatLimit, lineLength, desc, newRawText);
 
 	emit currentRawTextChanged();
+}
+
+QString PackEditorModel::currentRepeatType() const
+{
+	bool repeat = m_parser->exerciseRepeatBool(m_lesson, m_absoluteSublesson, m_exercise);
+	QString repeatType = m_parser->exerciseRepeatType(m_lesson, m_absoluteSublesson, m_exercise);
+	return repeat ? repeatType : "0";
+}
+
+void PackEditorModel::setCurrentRepeatType(const QString &newRepeatType)
+{
+	bool repeat = newRepeatType == "0" ? false : true;
+	int repeatLimit = m_parser->exerciseRepeatLimit(m_lesson, m_absoluteSublesson, m_exercise);
+	int lineLength = m_parser->exerciseLineLength(m_lesson, m_absoluteSublesson, m_exercise);
+	QString desc = "";
+	if(m_exercise == 1)
+		desc = m_parser->lessonDesc(m_lesson);
+	QString rawText = m_parser->exerciseRawText(m_lesson, m_absoluteSublesson, m_exercise);
+
+	editExercise(repeat, newRepeatType, repeatLimit, lineLength, desc, rawText);
+
+	emit currentRepeatTypeChanged();
 }
 
 void PackEditorModel::open()
@@ -345,6 +369,13 @@ void PackEditorModel::updateAbsoluteSublesson()
 	}
 
 	m_absoluteSublesson = m_sublesson + sublessonListStart;
+}
+
+void PackEditorModel::editExercise(bool repeat, const QString &repeatType, int repeatLimit, int lineLength, const QString &desc, const QString &rawText)
+{
+	// TODO: There isn't any API for replacing an exercise yet, so delete it and add a new one
+	deleteExerciseLine(m_lesson, m_absoluteSublesson, m_exercise);
+	m_parser->addExercise(m_lesson, m_absoluteSublesson, m_exercise, repeat, repeatType, repeatLimit, lineLength, desc, rawText);
 }
 
 void PackEditorModel::deleteExerciseLine(int lesson, int sublesson, int exercise)
