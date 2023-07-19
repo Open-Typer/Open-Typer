@@ -41,6 +41,7 @@ ColumnLayout {
 	PackEditorModel {
 		id: editorModel
 		fileName: root.fileName
+        onCurrentRawTextChanged: inputEdit.text = currentRawText
 	}
 
 	Panel {
@@ -175,6 +176,7 @@ ColumnLayout {
 				color: ThemeEngine.foregroundColor
 				width: inputFlickable.contentWidth
 				height: Math.max(inputFlickable.height, inputFlickable.contentHeight)
+                onTextChanged: editorModel.currentRawText = text
 
 				FontMetrics {
 					id: inputMetrics

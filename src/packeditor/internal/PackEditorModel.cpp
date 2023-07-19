@@ -18,6 +18,7 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QBuffer>
 #include "PackEditorModel.h"
 
 PackEditorModel::PackEditorModel(QObject *parent) :
@@ -32,7 +33,8 @@ PackEditorModel::PackEditorModel(QObject *parent) :
 
 	connect(this, &PackEditorModel::lessonChanged, this, &PackEditorModel::updateAbsoluteSublesson);
 	connect(this, &PackEditorModel::sublessonChanged, this, &PackEditorModel::updateAbsoluteSublesson);
-	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentTextChanged);
+	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentRawTextChanged);
+	connect(this, &PackEditorModel::currentRawTextChanged, this, &PackEditorModel::currentTextChanged);
 }
 
 PackEditorModel::~PackEditorModel()
@@ -142,6 +144,28 @@ QString PackEditorModel::currentText() const
 	QString text = m_parser->exerciseText(m_lesson, m_absoluteSublesson, m_exercise);
 	int lineLength = m_parser->exerciseLineLength(m_lesson, m_absoluteSublesson, m_exercise);
 	return m_parser->initExercise(text, lineLength);
+}
+
+QString PackEditorModel::currentRawText() const
+{
+	return m_parser->exerciseRawText(m_lesson, m_absoluteSublesson, m_exercise);
+}
+
+void PackEditorModel::setCurrentRawText(const QString &newRawText)
+{
+	bool repeat = m_parser->exerciseRepeatBool(m_lesson, m_absoluteSublesson, m_exercise);
+	QString repeatType = m_parser->exerciseRepeatType(m_lesson, m_absoluteSublesson, m_exercise);
+	int repeatLimit = m_parser->exerciseRepeatLimit(m_lesson, m_absoluteSublesson, m_exercise);
+	int lineLength = m_parser->exerciseLineLength(m_lesson, m_absoluteSublesson, m_exercise);
+	QString desc = "";
+	if(m_exercise == 1)
+		desc = m_parser->lessonDesc(m_lesson);
+
+	// TODO: There isn't any API for replacing an exercise yet, so delete it and add a new one
+	deleteExerciseLine(m_lesson, m_absoluteSublesson, m_exercise);
+	m_parser->addExercise(m_lesson, m_absoluteSublesson, m_exercise, repeat, repeatType, repeatLimit, lineLength, desc, newRawText);
+
+	emit currentRawTextChanged();
 }
 
 void PackEditorModel::open()
@@ -321,4 +345,26 @@ void PackEditorModel::updateAbsoluteSublesson()
 	}
 
 	m_absoluteSublesson = m_sublesson + sublessonListStart;
+}
+
+void PackEditorModel::deleteExerciseLine(int lesson, int sublesson, int exercise)
+{
+	// TODO: Add removeExercise() and replaceExercise() to ConfigParser
+	int targetLine, curLine;
+	targetLine = m_parser->exerciseLine(lesson, sublesson, exercise);
+	QBuffer buffer;
+	buffer.open(QBuffer::ReadWrite);
+	buffer.write(m_parser->data());
+	QByteArray out;
+	buffer.seek(0);
+	curLine = 0;
+	while(!buffer.atEnd())
+	{
+		curLine++;
+		QByteArray line = buffer.readLine();
+		if(curLine != targetLine)
+			out += line;
+	}
+	buffer.close();
+	m_parser->loadToBuffer(out);
 }

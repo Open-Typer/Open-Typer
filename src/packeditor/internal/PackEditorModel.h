@@ -42,6 +42,7 @@ class PackEditorModel : public QObject
 		Q_PROPERTY(QStringList sublessonList READ sublessonList NOTIFY sublessonListChanged)
 		Q_PROPERTY(QStringList exerciseList READ exerciseList NOTIFY exerciseListChanged)
 		Q_PROPERTY(QString currentText READ currentText NOTIFY currentTextChanged)
+		Q_PROPERTY(QString currentRawText READ currentRawText WRITE setCurrentRawText NOTIFY currentRawTextChanged)
 	public:
 		explicit PackEditorModel(QObject *parent = nullptr);
 		~PackEditorModel();
@@ -74,6 +75,9 @@ class PackEditorModel : public QObject
 
 		QString currentText() const;
 
+		QString currentRawText() const;
+		void setCurrentRawText(const QString &newRawText);
+
 		Q_INVOKABLE void open();
 
 		Q_INVOKABLE void nextExercise();
@@ -89,6 +93,7 @@ class PackEditorModel : public QObject
 		void updateSublessonList();
 		void updateExerciseList();
 		void updateAbsoluteSublesson();
+		void deleteExerciseLine(int lesson, int sublesson, int exercise);
 
 		std::shared_ptr<IConfigParser> m_parser = nullptr;
 		QString m_fileName;
@@ -116,6 +121,7 @@ class PackEditorModel : public QObject
 		void sublessonListChanged();
 		void exerciseListChanged();
 		void currentTextChanged();
+		void currentRawTextChanged();
 };
 
 #endif // PACKEDITORMODEL_H
