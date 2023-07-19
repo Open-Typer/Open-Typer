@@ -139,6 +139,57 @@ ColumnLayout {
 		}
 	}
 
+    Rectangle {
+        // TODO: Move this into a popup
+        radius: 10
+        border.color: ThemeEngine.borderColor
+        color: ThemeEngine.paperColor
+        Layout.topMargin: 10
+        Layout.fillWidth: true
+        height: exerciseOptionsLayout.height + exerciseOptionsLayout.anchors.margins * 2
+
+        ColumnLayout {
+            id: exerciseOptionsLayout
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.margins: 10
+
+            RowLayout {
+                Label {
+                    text: qsTr("Repeating:")
+                }
+
+                CustomComboBox {
+                    model: [qsTr("None"), qsTr("Words")]
+                }
+            }
+
+            RowLayout {
+                Label {
+                    text: qsTr("Length limit:")
+                }
+
+                CustomSpinBox {
+                    from: 1
+                    to: 729
+                    stepSize: 10
+                }
+            }
+
+            RowLayout {
+                Label {
+                    text: qsTr("Line length:")
+                }
+
+                CustomSpinBox {
+                    from: 30
+                    to: 120
+                    stepSize: 10
+                }
+            }
+        }
+    }
+
 	Rectangle {
 		radius: 10
 		border.color: ThemeEngine.borderColor
