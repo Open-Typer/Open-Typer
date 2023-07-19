@@ -47,7 +47,7 @@ std::shared_ptr<ConfigParser> ConfigParser::instance()
  */
 std::shared_ptr<IConfigParser> ConfigParser::createInstance() const
 {
-	return std::reinterpret_pointer_cast<IConfigParser>(std::make_shared<ConfigParser>());
+	return std::dynamic_pointer_cast<IConfigParser>(std::make_shared<ConfigParser>());
 }
 
 /*!
