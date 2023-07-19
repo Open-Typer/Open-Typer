@@ -80,6 +80,8 @@ void PackEditorModel::setLesson(int newLesson)
 	updateSublessonList();
 	updateExerciseList();
 	emit lessonChanged();
+	emit sublessonChanged();
+	emit exerciseChanged();
 }
 
 int PackEditorModel::sublesson() const
@@ -95,6 +97,7 @@ void PackEditorModel::setSublesson(int newSublesson)
 	m_exercise = 1;
 	updateExerciseList();
 	emit sublessonChanged();
+	emit exerciseChanged();
 }
 
 int PackEditorModel::exercise() const
