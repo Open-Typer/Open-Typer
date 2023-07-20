@@ -100,7 +100,7 @@ ColumnLayout {
 	Keys.forwardTo: keyboardHandler
 
 	MenuBarManager {
-		onOpenToggled: panel1.contents.openButton.clicked()
+		onOpenExerciseToggled: panel1.contents.openButton.clicked()
 		onPrintToggled: panel1.contents.printButton.clicked()
 		onTypingTestToggled: panel1.contents.typingTestButton.clicked()
 		onExerciseHistoryToggled: panel2.contents.statsButton.checked = true

@@ -22,7 +22,8 @@ import QtQuick 2.12
 import OpenTyper 1.0
 
 Item {
-	signal openToggled()
+	signal openExerciseToggled()
+	signal openPackToggled()
 	signal printToggled()
 	signal typingTestToggled()
 	signal exerciseHistoryToggled()
@@ -33,10 +34,18 @@ Item {
 	signal aboutProgramToggled()
 
 	Connections {
-		target: AppMenuBar.openAction
+		target: AppMenuBar.openExerciseAction
 
 		onClicked: {
-			openToggled();
+			openExerciseToggled();
+		}
+	}
+
+	Connections {
+		target: AppMenuBar.openPackAction
+
+		onClicked: {
+			openPackToggled();
 		}
 	}
 

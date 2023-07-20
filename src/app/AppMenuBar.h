@@ -35,7 +35,8 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 {
 		Q_OBJECT
 		INJECT(IThemeEngine, themeEngine)
-		Q_PROPERTY(AppMenuItem *openAction READ openAction NOTIFY openActionChanged)
+		Q_PROPERTY(AppMenuItem *openExerciseAction READ openExerciseAction NOTIFY openExerciseActionChanged)
+		Q_PROPERTY(AppMenuItem *openPackAction READ openPackAction NOTIFY openPackActionChanged)
 		Q_PROPERTY(AppMenuItem *printAction READ printAction NOTIFY printActionChanged)
 		Q_PROPERTY(AppMenuItem *typingTestAction READ typingTestAction NOTIFY typingTestActionChanged)
 		Q_PROPERTY(AppMenuItem *exerciseHistoryAction READ exerciseHistoryAction NOTIFY exerciseHistoryActionChanged)
@@ -49,7 +50,8 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 		static std::shared_ptr<AppMenuBar> instance();
 		void updateMenus(void) override;
 
-		AppMenuItem *openAction(void);
+		AppMenuItem *openExerciseAction(void);
+		AppMenuItem *openPackAction(void);
 		AppMenuItem *printAction(void);
 		AppMenuItem *typingTestAction(void);
 		AppMenuItem *exerciseHistoryAction(void);
@@ -66,7 +68,10 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 
 		// File
 		AppMenuModel fileMenu;
-		AppMenuItem m_openAction;
+		AppMenuItem openMenuAction;
+		AppMenuModel openMenu;
+		AppMenuItem m_openExerciseAction;
+		AppMenuItem m_openPackAction;
 		AppMenuItem fileSeparator1;
 		AppMenuItem fileSeparator2;
 		AppMenuItem m_printAction;
@@ -100,7 +105,8 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 		AppMenuItem aboutQtAction;
 
 	signals:
-		void openActionChanged();
+		void openExerciseActionChanged();
+		void openPackActionChanged();
 		void printActionChanged();
 		void typingTestActionChanged();
 		void exerciseHistoryActionChanged();
