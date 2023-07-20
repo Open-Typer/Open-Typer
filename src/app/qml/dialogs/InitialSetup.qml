@@ -72,6 +72,7 @@ CustomDialog {
 			Settings.setValue("app", "lessonPack", "en_US-default-A"); // lesson pack will be changed during initial setup anyway
 			noAutoLayout = true;
 		}
+		Settings.setValue("app", "customLessonPack", false);
 		focusTimer.start();
 	}
 	onRejected: Qt.quit()
