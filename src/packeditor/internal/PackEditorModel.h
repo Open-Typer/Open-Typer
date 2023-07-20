@@ -46,6 +46,7 @@ class PackEditorModel : public QObject
 		Q_PROPERTY(QString currentRepeatType READ currentRepeatType WRITE setCurrentRepeatType NOTIFY currentRepeatTypeChanged)
 		Q_PROPERTY(int currentLengthLimit READ currentLengthLimit WRITE setCurrentLengthLimit NOTIFY currentLengthLimitChanged)
 		Q_PROPERTY(int currentLineLength READ currentLineLength WRITE setCurrentLineLength NOTIFY currentLineLengthChanged)
+		Q_PROPERTY(QList<int> unusedSublessons READ unusedSublessons NOTIFY unusedSublessonsChanged)
 	public:
 		explicit PackEditorModel(QObject *parent = nullptr);
 		~PackEditorModel();
@@ -90,10 +91,18 @@ class PackEditorModel : public QObject
 		int currentLineLength() const;
 		void setCurrentLineLength(int newLineLength);
 
+		QList<int> unusedSublessons() const;
+
 		Q_INVOKABLE void open();
 
 		Q_INVOKABLE void nextExercise();
 		Q_INVOKABLE void previousExercise();
+
+		Q_INVOKABLE QString sublessonName(int id);
+
+		Q_INVOKABLE void addLesson();
+		Q_INVOKABLE void addSublesson(int id);
+		Q_INVOKABLE void addExercise();
 
 	private:
 		void nextSublesson();
@@ -138,6 +147,7 @@ class PackEditorModel : public QObject
 		void currentRepeatTypeChanged();
 		void currentLengthLimitChanged();
 		void currentLineLengthChanged();
+		void unusedSublessonsChanged();
 };
 
 #endif // PACKEDITORMODEL_H

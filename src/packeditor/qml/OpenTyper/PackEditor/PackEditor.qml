@@ -94,14 +94,28 @@ ColumnLayout {
 
 					CustomMenuItem {
 						text: qsTr("Lesson")
+						onTriggered: editorModel.addLesson()
 					}
 
-					CustomMenuItem {
-						text: qsTr("Sublesson")
+					CustomMenu {
+						id: addSublessonMenu
+						title: qsTr("Sublesson")
+						enabled: addSublessonRepeater.model.length > 0
+
+						Repeater {
+							id: addSublessonRepeater
+							model: editorModel.unusedSublessons
+
+							CustomMenuItem {
+								text: editorModel.sublessonName(modelData)
+								onTriggered: editorModel.addSublesson(modelData)
+							}
+						}
 					}
 
 					CustomMenuItem {
 						text: qsTr("Exercise")
+						onTriggered: editorModel.addExercise()
 					}
 				}
 			}

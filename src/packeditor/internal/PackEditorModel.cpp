@@ -32,6 +32,7 @@ PackEditorModel::PackEditorModel(QObject *parent) :
 	connect(languageManager().get(), &ILanguageManager::languageChanged, this, &PackEditorModel::updateLists);
 
 	connect(this, &PackEditorModel::lessonChanged, this, &PackEditorModel::updateAbsoluteSublesson);
+	connect(this, &PackEditorModel::lessonChanged, this, &PackEditorModel::unusedSublessonsChanged);
 	connect(this, &PackEditorModel::sublessonChanged, this, &PackEditorModel::updateAbsoluteSublesson);
 
 	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentRawTextChanged);
@@ -235,6 +236,20 @@ void PackEditorModel::setCurrentLineLength(int newLineLength)
 	emit currentLineLengthChanged();
 }
 
+QList<int> PackEditorModel::unusedSublessons() const
+{
+	QList<int> ret;
+	int count = 4; // loop through touch, words, sentences and text
+
+	for(int i = 1; i <= count; i++)
+	{
+		if(m_parser->exerciseCount(m_lesson, i) == 0)
+			ret.push_back(i);
+	}
+
+	return ret;
+}
+
 void PackEditorModel::open()
 {
 	m_parser->close();
@@ -280,6 +295,45 @@ void PackEditorModel::previousExercise()
 		previousSublesson();
 		m_exercise = m_parser->exerciseCount(m_lesson, m_absoluteSublesson);
 	}
+	emit exerciseChanged();
+}
+
+QString PackEditorModel::sublessonName(int id)
+{
+	return m_parser->sublessonName(id);
+}
+
+void PackEditorModel::addLesson()
+{
+	m_lesson = m_parser->lessonCount() + 1;
+
+	addSublesson(1);
+	updateLessonList();
+	emit lessonChanged();
+}
+
+void PackEditorModel::addSublesson(int id)
+{
+	Q_ASSERT(unusedSublessons().contains(id));
+	m_sublesson = id;
+	updateAbsoluteSublesson();
+
+	addExercise();
+	updateSublessonList();
+	emit unusedSublessonsChanged();
+	emit sublessonChanged();
+}
+
+void PackEditorModel::addExercise()
+{
+	m_exercise = m_parser->exerciseCount(m_lesson, m_absoluteSublesson) + 1;
+
+	int repeatLimit = m_parser->defaultRepeatLimit();
+	int lineLength = m_parser->defaultLineLength();
+	QString rawText = tr("New exercise");
+	m_parser->addExercise(m_lesson, m_absoluteSublesson, m_exercise, false, "0", repeatLimit, lineLength, "", rawText);
+	updateExerciseList();
+
 	emit exerciseChanged();
 }
 
