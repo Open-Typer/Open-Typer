@@ -121,12 +121,14 @@ ColumnLayout {
 			}
 
 			CustomToolButton {
+				enabled: editorModel.canRemove
 				icon.name: "left"
 				toolTipText: qsTr("Previous exercise")
 				onClicked: editorModel.previousExercise()
 			}
 
 			CustomToolButton {
+				enabled: editorModel.canRemove
 				icon.name: "right"
 				toolTipText: qsTr("Next exercise")
 				onClicked: editorModel.nextExercise()
@@ -151,6 +153,13 @@ ColumnLayout {
 				model: editorModel.exerciseList
 				currentIndex: editorModel.exercise - 1
 				onActivated: editorModel.exercise = currentIndex + 1
+			}
+
+			CustomToolButton {
+				enabled: editorModel.canRemove
+				icon.name: "delete"
+				toolTipText: qsTr("Remove exercise")
+				onClicked: editorModel.removeCurrentExercise()
 			}
 		}
 	}

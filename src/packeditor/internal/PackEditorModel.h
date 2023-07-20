@@ -47,6 +47,7 @@ class PackEditorModel : public QObject
 		Q_PROPERTY(int currentLengthLimit READ currentLengthLimit WRITE setCurrentLengthLimit NOTIFY currentLengthLimitChanged)
 		Q_PROPERTY(int currentLineLength READ currentLineLength WRITE setCurrentLineLength NOTIFY currentLineLengthChanged)
 		Q_PROPERTY(QList<int> unusedSublessons READ unusedSublessons NOTIFY unusedSublessonsChanged)
+		Q_PROPERTY(bool canRemove READ canRemove NOTIFY canRemoveChanged)
 	public:
 		explicit PackEditorModel(QObject *parent = nullptr);
 		~PackEditorModel();
@@ -93,6 +94,8 @@ class PackEditorModel : public QObject
 
 		QList<int> unusedSublessons() const;
 
+		bool canRemove() const;
+
 		Q_INVOKABLE void open();
 
 		Q_INVOKABLE void nextExercise();
@@ -103,6 +106,8 @@ class PackEditorModel : public QObject
 		Q_INVOKABLE void addLesson();
 		Q_INVOKABLE void addSublesson(int id);
 		Q_INVOKABLE void addExercise();
+
+		Q_INVOKABLE void removeCurrentExercise();
 
 	private:
 		void nextSublesson();
@@ -116,6 +121,8 @@ class PackEditorModel : public QObject
 		void updateAbsoluteSublesson();
 		void deleteExerciseLine(int lesson, int sublesson, int exercise);
 		void editExercise(bool repeat, const QString &repeatType, int repeatLimit, int lineLength, const QString &desc, const QString &rawText);
+		void moveExercise(int lesson, int sublesson, int exercise, int newLesson, int newSublesson, int newExercise);
+		void moveLesson(int lesson, int newLesson);
 
 		std::shared_ptr<IConfigParser> m_parser = nullptr;
 		QString m_fileName;
@@ -148,6 +155,7 @@ class PackEditorModel : public QObject
 		void currentLengthLimitChanged();
 		void currentLineLengthChanged();
 		void unusedSublessonsChanged();
+		void canRemoveChanged();
 };
 
 #endif // PACKEDITORMODEL_H

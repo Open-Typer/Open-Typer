@@ -250,6 +250,23 @@ QList<int> PackEditorModel::unusedSublessons() const
 	return ret;
 }
 
+bool PackEditorModel::canRemove() const
+{
+	if(m_parser->lessonCount() == 0)
+		return false;
+
+	if(m_parser->lessonCount() > 1)
+		return true;
+
+	if(m_parser->sublessonCount(m_lesson) > 1)
+		return true;
+
+	if(m_parser->exerciseCount(m_lesson, m_absoluteSublesson) > 1)
+		return true;
+
+	return false;
+}
+
 void PackEditorModel::open()
 {
 	m_parser->close();
@@ -265,6 +282,8 @@ void PackEditorModel::open()
 		emit sublessonChanged();
 		emit exerciseChanged();
 		updateLists();
+		emit unusedSublessonsChanged();
+		emit canRemoveChanged();
 	}
 
 	emit openedChanged();
@@ -335,6 +354,57 @@ void PackEditorModel::addExercise()
 	updateExerciseList();
 
 	emit exerciseChanged();
+	emit canRemoveChanged();
+}
+
+void PackEditorModel::removeCurrentExercise()
+{
+	int lessonCount = m_parser->lessonCount();
+	int sublessonCount = m_parser->sublessonCount(m_lesson);
+	int exerciseCount = m_parser->exerciseCount(m_lesson, m_absoluteSublesson);
+
+	// Remove the exercise
+	deleteExerciseLine(m_lesson, m_absoluteSublesson, m_exercise);
+
+	if(exerciseCount == 1)
+	{
+		if(sublessonCount == 1)
+		{
+			// Move lessons after the removed lesson
+			for(int i = m_lesson; i <= lessonCount - 1; i++)
+				moveLesson(i + 1, i);
+
+			// Select last lesson if the previous last lesson was removed
+			if(m_lesson == lessonCount)
+				m_lesson = lessonCount - 1;
+
+			updateLessonList();
+			emit lessonChanged();
+		}
+		else
+		{
+			// Select last sublesson if the previous last sublesson was removed
+			if(m_sublesson == sublessonCount)
+				m_sublesson = sublessonCount - 1;
+		}
+
+		updateSublessonList();
+		emit sublessonChanged();
+	}
+	else
+	{
+		// Move exercises after the removed exercise
+		for(int i = m_exercise; i <= exerciseCount - 1; i++)
+			moveExercise(m_lesson, m_absoluteSublesson, i + 1, m_lesson, m_absoluteSublesson, i);
+
+		// Select last exercise if the previous last exercise was removed
+		if(m_exercise == exerciseCount)
+			m_exercise = exerciseCount - 1;
+	}
+
+	updateExerciseList();
+	emit exerciseChanged();
+	emit canRemoveChanged();
 }
 
 void PackEditorModel::nextSublesson()
@@ -473,6 +543,40 @@ void PackEditorModel::editExercise(bool repeat, const QString &repeatType, int r
 	// TODO: There isn't any API for replacing an exercise yet, so delete it and add a new one
 	deleteExerciseLine(m_lesson, m_absoluteSublesson, m_exercise);
 	m_parser->addExercise(m_lesson, m_absoluteSublesson, m_exercise, repeat, repeatType, repeatLimit, lineLength, desc, rawText);
+}
+
+void PackEditorModel::moveExercise(int lesson, int sublesson, int exercise, int newLesson, int newSublesson, int newExercise)
+{
+	int lengthLimit = m_parser->exerciseRepeatLimit(lesson, sublesson, exercise);
+	int lineLength = m_parser->exerciseLineLength(lesson, sublesson, exercise);
+	QString repeatType = m_parser->exerciseRepeatType(lesson, sublesson, exercise);
+	bool repeat = (repeatType != "0");
+	QString lessonDesc = "";
+	if(newExercise == 1) // the first exercise of a lesson holds the description
+		lessonDesc = m_parser->lessonDesc(newLesson);
+	QString targetText = m_parser->exerciseRawText(lesson, sublesson, exercise);
+
+	deleteExerciseLine(lesson, sublesson, exercise);
+	m_parser->addExercise(newLesson, newSublesson, newExercise, repeat, repeatType, lengthLimit, lineLength, lessonDesc, targetText);
+}
+
+void PackEditorModel::moveLesson(int lesson, int newLesson)
+{
+	int sublessonCount = m_parser->sublessonCount(lesson);
+	int j = 0;
+
+	for(int i = 1; i <= sublessonCount + j; i++)
+	{
+		int exerciseCount = m_parser->exerciseCount(lesson, i);
+
+		if(exerciseCount == 0)
+			j++;
+		else
+		{
+			for(int k = 1; k <= exerciseCount; k++)
+				moveExercise(lesson, i, k, newLesson, i, k);
+		}
+	}
 }
 
 void PackEditorModel::deleteExerciseLine(int lesson, int sublesson, int exercise)
