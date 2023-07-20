@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest]
-        qt-version: ['6.5.1']
+        qt-version: ['6.5.2']
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v3

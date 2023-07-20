@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        qt-version: ['6.5.1']
+        qt-version: ['6.5.2']
         qt-target: ['desktop']
         qt-modules: ['qtcharts qt5compat qtshadertools']
         arch: ['amd64', 'aarch64', 'armv7']
@@ -113,7 +113,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - qt-version: '6.5.1'
+          - qt-version: '6.5.2'
             qt-target: 'desktop'
             mingw-version: '11.2.0'
     steps:
@@ -214,7 +214,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        qt-version: ['6.5.1']
+        qt-version: ['6.5.2']
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v3
@@ -267,7 +267,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        qt-version: ['6.5.1']
+        qt-version: ['6.5.2']
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v3
