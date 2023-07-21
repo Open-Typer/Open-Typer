@@ -34,6 +34,16 @@ mv bin/linuxdeploy-plugin-qt ../.. &&
 cd ../.. &&
 rm -rf plugin-qt &&
 
+# Build linuxdeploy-plugin-appimage
+git clone https://github.com/linuxdeploy/linuxdeploy-plugin-appimage plugin-appimage --recurse-submodules &&
+mkdir plugin-appimage/build &&
+cd plugin-appimage/build &&
+cmake .. &&
+make -j$(nproc --all) &&
+mv src/linuxdeploy-plugin-appimage ../.. &&
+cd ../.. &&
+rm -rf plugin-appimage &&
+
 # Build AppImageKit
 sudo apt install -y snapd squashfs-tools &&
 sudo snap install docker &&
@@ -58,18 +68,18 @@ export QML_SOURCES_PATHS=src &&
 export EXTRA_QT_PLUGINS="svg;" &&
 export LDAI_UPDATE_INFORMATION="${appimage_zsync_prefix}${app_name}*-${APPIMAGE_ARCH-$(arch)}.AppImage.zsync"
 echo "AppImage update information: ${LDAI_UPDATE_INFORMATION}"
-./linuxdeploy --appdir AppDir -e open-typer -i snap/gui/open-typer.png -d res/linux-release/usr/share/applications/open-typer-appimage.desktop --plugin qt
 
 case "$(qmake -query QMAKE_XSPEC)" in
-    linux-g++)
-        appimagetool AppDir
-        ;;
     linux-arm-gnueabi-g++)
         wget https://github.com/AppImage/AppImageKit/releases/download/continuous/runtime-armhf
-        ARCH=arm appimagetool --runtime-file runtime-armhf AppDir
+        export ARCH=arm
+        export LDAI_RUNTIME_FILE=runtime-armhf
         ;;
     linux-aarch64-gnu-g++)
         wget https://github.com/AppImage/AppImageKit/releases/download/continuous/runtime-aarch64
-        ARCH=arm_aarch64 appimagetool --runtime-file runtime-aarch64 AppDir
+        export ARCH=arm_aarch64
+        export LDAI_RUNTIME_FILE=runtime-aarch64
         ;;
 esac
+
+./linuxdeploy --appdir AppDir -e open-typer -i snap/gui/open-typer.png -d res/linux-release/usr/share/applications/open-typer-appimage.desktop --plugin qt --output appimage
