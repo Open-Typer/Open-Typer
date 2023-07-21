@@ -83,7 +83,12 @@ ColumnLayout {
 				enabled: !editorModel.saved
 				icon.name: "save"
 				toolTipText: qsTr("Save")
-				onClicked: editorModel.save()
+				onClicked: {
+					if(editorModel.readOnly)
+						saveAs();
+					else
+						editorModel.save();
+				}
 			}
 
 			CustomToolButton {

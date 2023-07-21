@@ -96,6 +96,7 @@ class PackEditorModel : public QObject
 
 		bool canRemove() const;
 
+		Q_INVOKABLE void newFile();
 		Q_INVOKABLE void open();
 		Q_INVOKABLE bool save();
 		Q_INVOKABLE bool saveAs(const QString &fileName);
@@ -112,6 +113,7 @@ class PackEditorModel : public QObject
 		Q_INVOKABLE void removeCurrentExercise();
 
 	private:
+		void init();
 		void nextSublesson();
 		void previousSublesson();
 		void nextLesson(bool updateExList = true);

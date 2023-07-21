@@ -280,6 +280,23 @@ bool PackEditorModel::canRemove() const
 	return false;
 }
 
+void PackEditorModel::newFile()
+{
+	m_parser->close();
+	m_parser->loadToBuffer("");
+	m_readOnly = true;
+	m_opened = true;
+	emit readOnlyChanged();
+	emit openedChanged();
+	init();
+
+	addExercise();
+	updateLessonList();
+	updateSublessonList();
+	emit lessonChanged();
+	emit sublessonChanged();
+}
+
 void PackEditorModel::open()
 {
 	m_parser->close();
@@ -289,16 +306,7 @@ void PackEditorModel::open()
 	{
 		m_parser->loadToBuffer(m_parser->data());
 		m_saved = true;
-		m_lesson = 1;
-		m_sublesson = 1;
-		m_exercise = 1;
-		emit savedChanged();
-		emit lessonChanged();
-		emit sublessonChanged();
-		emit exerciseChanged();
-		updateLists();
-		emit unusedSublessonsChanged();
-		emit canRemoveChanged();
+		init();
 	}
 
 	emit openedChanged();
@@ -457,6 +465,20 @@ void PackEditorModel::removeCurrentExercise()
 	emit savedChanged();
 
 	emit exerciseChanged();
+	emit canRemoveChanged();
+}
+
+void PackEditorModel::init()
+{
+	m_lesson = 1;
+	m_sublesson = 1;
+	m_exercise = 1;
+	emit savedChanged();
+	emit lessonChanged();
+	emit sublessonChanged();
+	emit exerciseChanged();
+	updateLists();
+	emit unusedSublessonsChanged();
 	emit canRemoveChanged();
 }
 
