@@ -197,6 +197,8 @@ ColumnLayout {
 		onFileContentReady: {
 			Settings.setValue("app", "lessonPack", fileName);
 			Settings.setValue("app", "customLessonPack", true);
+			if(!customPack)
+				Settings.setValue("app", "keyboardLayout", BuiltInPacks.keyboardLayoutForPack(packName));
 			reload();
 		}
 	}
@@ -1249,6 +1251,13 @@ ColumnLayout {
 	}
 
 	function getKeyboardLayout() {
-		return BuiltInPacks.keyboardLayoutXkb(BuiltInPacks.keyboardLayoutForPack(Settings.getValue("app", "lessonPack")));
+		let layout;
+
+		if(customPack)
+			layout = Settings.getValue("app", "keyboardLayout")
+		else
+			layout = BuiltInPacks.keyboardLayoutForPack(Settings.getValue("app", "lessonPack"))
+
+		return BuiltInPacks.keyboardLayoutXkb(layout);
 	}
 }

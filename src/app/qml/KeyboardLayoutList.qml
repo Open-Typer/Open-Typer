@@ -21,6 +21,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import OpenTyper 1.0
+import OpenTyper.Ui 1.0
 import OpenTyper.Global 1.0
 
 ListView {
@@ -35,7 +36,12 @@ ListView {
 			clear();
 			for(var i = 0; i < items.length; i++)
 				append({"name": items[i]});
-			if(Settings.containsKey("app", "lessonPack") && (Settings.getValue("app", "lessonPack") !== "") && !noAutoLayout)
+			if(Settings.getValue("app", "customLessonPack"))
+			{
+				if(!noAutoLayout)
+					currentIndex = items.indexOf(Settings.getValue("app", "keyboardLayout"));
+			}
+			else if(Settings.containsKey("app", "lessonPack") && (Settings.getValue("app", "lessonPack") !== "") && !noAutoLayout)
 				currentIndex = items.indexOf(BuiltInPacks.keyboardLayoutForPack(Settings.getValue("app", "lessonPack")));
 			itemsLoaded();
 		}
@@ -46,7 +52,9 @@ ListView {
 		width: root.width
 		highlighted: ListView.isCurrentItem
 		onClicked: {
-			root.currentIndex = index
+			root.currentIndex = index;
+			Settings.setValue("app", "keyboardLayout", name);
+			QmlUtils.screenKeyboardChanged(true);
 		}
 	}
 	clip: true
