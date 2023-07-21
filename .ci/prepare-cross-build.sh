@@ -14,6 +14,7 @@ esac
 echo "$(pwd)/qt-cross/bin:$(pwd)/qt-host/libexec" >> $GITHUB_PATH
 echo "LD_LIBRARY_PATH=$(pwd)/qt-cross/lib:$(pwd)/qt-host/lib" >> "${GITHUB_ENV}"
 .ci/install-cross-compiler.sh "$target_arch"
+.ci/qt6-dependencies.sh
 if [[ "$target_arch" == "armv7" ]]; then
     echo "QMAKE_CC=arm-linux-gnueabihf-gcc
     QMAKE_CXX=arm-linux-gnueabihf-g++
