@@ -19,6 +19,7 @@
  */
 
 #include <QBuffer>
+#include <QFile>
 #include "PackEditorModel.h"
 
 PackEditorModel::PackEditorModel(QObject *parent) :
@@ -172,6 +173,9 @@ void PackEditorModel::setCurrentRawText(const QString &newRawText)
 
 	editExercise(repeat, repeatType, repeatLimit, lineLength, desc, newRawText);
 
+	m_saved = false;
+	emit savedChanged();
+
 	emit currentRawTextChanged();
 }
 
@@ -194,6 +198,9 @@ void PackEditorModel::setCurrentRepeatType(const QString &newRepeatType)
 
 	editExercise(repeat, newRepeatType, repeatLimit, lineLength, desc, rawText);
 
+	m_saved = false;
+	emit savedChanged();
+
 	emit currentRepeatTypeChanged();
 }
 
@@ -214,6 +221,9 @@ void PackEditorModel::setCurrentLengthLimit(int newLengthLimit)
 
 	editExercise(repeat, repeatType, newLengthLimit, lineLength, desc, rawText);
 
+	m_saved = false;
+	emit savedChanged();
+
 	emit currentLengthLimitChanged();
 }
 
@@ -231,6 +241,9 @@ void PackEditorModel::setCurrentLineLength(int newLineLength)
 	if(m_exercise == 1)
 		desc = m_parser->lessonDesc(m_lesson);
 	QString rawText = m_parser->exerciseRawText(m_lesson, m_absoluteSublesson, m_exercise);
+
+	m_saved = false;
+	emit savedChanged();
 
 	editExercise(repeat, repeatType, repeatLimit, newLineLength, desc, rawText);
 	emit currentLineLengthChanged();
@@ -275,9 +288,11 @@ void PackEditorModel::open()
 	if(m_opened)
 	{
 		m_parser->loadToBuffer(m_parser->data());
+		m_saved = true;
 		m_lesson = 1;
 		m_sublesson = 1;
 		m_exercise = 1;
+		emit savedChanged();
 		emit lessonChanged();
 		emit sublessonChanged();
 		emit exerciseChanged();
@@ -287,6 +302,19 @@ void PackEditorModel::open()
 	}
 
 	emit openedChanged();
+}
+
+void PackEditorModel::save()
+{
+	QFile file(m_fileName);
+	bool ok = file.open(QFile::WriteOnly | QFile::Text);
+
+	if(ok)
+	{
+		file.write(m_parser->data());
+		m_saved = true;
+		emit savedChanged();
+	}
 }
 
 void PackEditorModel::nextExercise()
@@ -353,6 +381,9 @@ void PackEditorModel::addExercise()
 	m_parser->addExercise(m_lesson, m_absoluteSublesson, m_exercise, false, "0", repeatLimit, lineLength, "", rawText);
 	updateExerciseList();
 
+	m_saved = false;
+	emit savedChanged();
+
 	emit exerciseChanged();
 	emit canRemoveChanged();
 }
@@ -403,6 +434,10 @@ void PackEditorModel::removeCurrentExercise()
 	}
 
 	updateExerciseList();
+
+	m_saved = false;
+	emit savedChanged();
+
 	emit exerciseChanged();
 	emit canRemoveChanged();
 }

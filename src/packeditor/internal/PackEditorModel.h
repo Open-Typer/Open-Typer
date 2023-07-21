@@ -97,6 +97,7 @@ class PackEditorModel : public QObject
 		bool canRemove() const;
 
 		Q_INVOKABLE void open();
+		Q_INVOKABLE void save();
 
 		Q_INVOKABLE void nextExercise();
 		Q_INVOKABLE void previousExercise();
