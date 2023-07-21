@@ -100,7 +100,8 @@ ColumnLayout {
 	Keys.forwardTo: keyboardHandler
 
 	MenuBarManager {
-		onOpenToggled: panel1.contents.openButton.clicked()
+		onOpenExerciseToggled: panel1.contents.openButton.clicked()
+		onOpenPackToggled: openCustomPack()
 		onPrintToggled: panel1.contents.printButton.clicked()
 		onTypingTestToggled: panel1.contents.typingTestButton.clicked()
 		onExerciseHistoryToggled: panel2.contents.statsButton.checked = true
@@ -187,6 +188,18 @@ ColumnLayout {
 				exerciseLineLength = parser.defaultLineLength();
 				loadText(content, true);
 			}
+		}
+	}
+
+	QmlFileDialog {
+		id: customPackFileDialog
+		nameFilters: [qsTr("Open-Typer pack files") + "(*.typer)"]
+		onFileContentReady: {
+			Settings.setValue("app", "lessonPack", fileName);
+			Settings.setValue("app", "customLessonPack", true);
+			if(!customPack)
+				Settings.setValue("app", "keyboardLayout", BuiltInPacks.keyboardLayoutForPack(packName));
+			reload();
 		}
 	}
 
@@ -532,6 +545,10 @@ ColumnLayout {
 		return loadPackContent(name, "");
 	}
 
+	function openCustomPack() {
+		customPackFileDialog.getOpenFileContent();
+	}
+
 	function invalidPack() {
 		Settings.setValue("app", "lessonPack", "");
 		Settings.setValue("app", "initFinished", false);
@@ -548,7 +565,7 @@ ColumnLayout {
 		}
 		var packPath = "";
 		if(customPack)
-			packPath = configName;
+			packPath = packName;
 		else
 			packPath = ":/res/configs/" + packName;
 		// Open selected pack
@@ -558,7 +575,7 @@ ColumnLayout {
 		{
 			var bufferOpened = parser.bufferOpened();
 			var openSuccess;
-			if(bufferOpened && customConfig)
+			if(bufferOpened && customPack)
 				openSuccess = true;
 			else
 				openSuccess = parser.open(packPath);
@@ -1234,6 +1251,13 @@ ColumnLayout {
 	}
 
 	function getKeyboardLayout() {
-		return BuiltInPacks.keyboardLayoutXkb(BuiltInPacks.keyboardLayoutForPack(Settings.getValue("app", "lessonPack")));
+		let layout;
+
+		if(customPack)
+			layout = Settings.getValue("app", "keyboardLayout")
+		else
+			layout = BuiltInPacks.keyboardLayoutForPack(Settings.getValue("app", "lessonPack"))
+
+		return BuiltInPacks.keyboardLayoutXkb(layout);
 	}
 }

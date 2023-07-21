@@ -42,6 +42,7 @@ void AppModule::initSettings()
 	INIT_SETTINGS_KEY("windowMaximized", "main/windowMaximized", true);
 	INIT_SETTINGS_KEY("lessonPack", "main/configfile", "");
 	INIT_SETTINGS_KEY("customLessonPack", "main/customconfig", false);
+	INIT_SETTINGS_KEY("keyboardLayout", "main/keyboardLayout", "");
 	INIT_SETTINGS_KEY("errorPenalty", "main/errorpenalty", 10);
 	INIT_SETTINGS_KEY("initFinished", "main/initfinished", false);
 }

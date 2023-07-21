@@ -31,7 +31,10 @@ void AppMenuBar::createMenus(void)
 	m_menus.clear();
 
 	// File
-	fileMenu.addItem(&m_openAction);
+	fileMenu.addItem(&openMenuAction);
+	openMenu.addItem(&m_openExerciseAction);
+	openMenu.addItem(&m_openPackAction);
+	openMenuAction.setSubmenu(&openMenu);
 	fileSeparator1.setIsSeparator(true);
 	fileMenu.addItem(&fileSeparator1);
 #ifndef Q_OS_WASM
@@ -102,7 +105,9 @@ void AppMenuBar::updateMenus(void)
 {
 	// File
 	fileMenu.setTitle(tr("&File"));
-	m_openAction.setText(tr("Open..."));
+	openMenuAction.setText(tr("Open..."));
+	m_openExerciseAction.setText(tr("Exercise", "To open \"Exercise\""));
+	m_openPackAction.setText(tr("Lesson pack", "To open \"Lesson pack\""));
 	m_printAction.setText(tr("Print"));
 	quitAction.setText(tr("Quit"));
 
@@ -135,9 +140,14 @@ void AppMenuBar::updateMenus(void)
 	emit menusChanged();
 }
 
-AppMenuItem *AppMenuBar::openAction(void)
+AppMenuItem *AppMenuBar::openExerciseAction(void)
 {
-	return &m_openAction;
+	return &m_openExerciseAction;
+}
+
+AppMenuItem *AppMenuBar::openPackAction(void)
+{
+	return &m_openPackAction;
 }
 
 AppMenuItem *AppMenuBar::printAction(void)

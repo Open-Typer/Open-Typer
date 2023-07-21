@@ -22,6 +22,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import OpenTyper 1.0
 import OpenTyper.Ui 1.0
+import OpenTyper.UiComponents 1.0
 import OpenTyper.Global 1.0
 
 ListView {
@@ -36,7 +37,10 @@ ListView {
 			clear();
 			for(var i = 0; i < items.length; i++)
 				append({"name": BuiltInPacks.packName(items[i])});
-			if(Settings.containsKey("app", "lessonPack") && (Settings.getValue("app", "lessonPack") !== ""))
+			append({"name": qsTr("Custom lesson pack"), "customPack": true});
+			if(Settings.getValue("app", "customLessonPack"))
+				currentIndex = items.length; // custom pack
+			else if(Settings.containsKey("app", "lessonPack") && (Settings.getValue("app", "lessonPack") !== ""))
 				currentIndex = items.indexOf(Settings.getValue("app", "lessonPack"));
 			itemsLoaded();
 		}
@@ -50,10 +54,31 @@ ListView {
 		width: root.width
 		highlighted: ListView.isCurrentItem
 		onClicked: {
-			root.currentIndex = index;
-			Settings.setValue("app", "lessonPack", items[currentIndex]);
-			QmlUtils.screenKeyboardChanged(true);
+			if(root.currentIndex === index)
+				return;
+
+			if(customPack)
+				customPackFileDialog.getOpenFileContent();
+			else
+			{
+				root.currentIndex = index;
+				Settings.setValue("app", "lessonPack", items[currentIndex]);
+				Settings.setValue("app", "customLessonPack", false);
+				QmlUtils.screenKeyboardChanged(true);
+			}
 		}
 	}
 	clip: true
+
+	QmlFileDialog {
+		id: customPackFileDialog
+		nameFilters: [qsTr("Open-Typer pack files") + "(*.typer)"]
+		onFileContentReady: {
+			root.currentIndex = items.length; // custom pack
+			Settings.setValue("app", "lessonPack", fileName);
+			Settings.setValue("app", "customLessonPack", true);
+			Settings.setValue("app", "keyboardLayout", keyboardLayout);
+			QmlUtils.screenKeyboardChanged(true);
+		}
+	}
 }
