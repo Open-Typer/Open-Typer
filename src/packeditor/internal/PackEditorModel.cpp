@@ -304,7 +304,7 @@ void PackEditorModel::open()
 	emit openedChanged();
 }
 
-void PackEditorModel::save()
+bool PackEditorModel::save()
 {
 	QFile file(m_fileName);
 	bool ok = file.open(QFile::WriteOnly | QFile::Text);
@@ -314,7 +314,25 @@ void PackEditorModel::save()
 		file.write(m_parser->data());
 		m_saved = true;
 		emit savedChanged();
+		return true;
 	}
+
+	return false;
+}
+
+bool PackEditorModel::saveAs(const QString &fileName)
+{
+	QString oldName = m_fileName;
+	m_fileName = fileName;
+
+	if(save())
+	{
+		emit fileNameChanged();
+		return true;
+	}
+
+	m_fileName = oldName;
+	return false;
 }
 
 void PackEditorModel::nextExercise()

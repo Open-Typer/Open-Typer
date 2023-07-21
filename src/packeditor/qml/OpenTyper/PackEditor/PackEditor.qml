@@ -60,6 +60,21 @@ ColumnLayout {
 		}
 	}
 
+	QmlFileDialog {
+		id: fileDialog
+		nameFilters: [qsTr("Open-Typer pack files") + " (*.typer)"]
+		defaultSuffix: "typer"
+		// TODO: Set defaultSuffix based on selected filter in QmlFileDialog
+		showAllFiles: false
+	}
+
+	function saveAs() {
+		let fileName = fileDialog.getSaveFileName();
+
+		if(fileName !== "")
+			editorModel.saveAs(fileName);
+	}
+
 	Panel {
 		id: panel1
 		Layout.fillWidth: true
@@ -74,6 +89,7 @@ ColumnLayout {
 			CustomToolButton {
 				icon.name: "save-as"
 				toolTipText: qsTr("Save as...")
+				onClicked: saveAs()
 			}
 
 			CustomToolButton {
