@@ -65,6 +65,20 @@ QString QmlFileDialog::shortFileName(void)
 	return fileInfo.fileName();
 }
 
+/*! Use this to set a file extension for saving. \since Open-Typer 5.2.0 */
+const QString &QmlFileDialog::defaultSuffix() const
+{
+	return m_defaultSuffix;
+}
+
+void QmlFileDialog::setDefaultSuffix(const QString &newDefaultSuffix)
+{
+	if(m_defaultSuffix == newDefaultSuffix)
+		return;
+	m_defaultSuffix = newDefaultSuffix;
+	emit defaultSuffixChanged();
+}
+
 /*! Shows a file dialog and emits fileContentReady() after a file is selected. */
 void QmlFileDialog::getOpenFileContent(void)
 {
@@ -80,10 +94,7 @@ void QmlFileDialog::getOpenFileContent(void)
 #ifdef Q_OS_WASM
 	QFileDialog::getOpenFileContent(QString(), fileContentReadyLambda);
 #else
-	QString filtersStr = m_nameFilters.join(";;");
-	if(m_showAllFiles)
-		filtersStr += ";;" + tr("All files") + " (*)";
-	QString fileName = QFileDialog::getOpenFileName(nullptr, QString(), QString(), filtersStr);
+	QString fileName = QFileDialog::getOpenFileName(nullptr, QString(), QString(), getFilters());
 	if(fileName != "")
 	{
 		QFile file(fileName);
@@ -91,4 +102,28 @@ void QmlFileDialog::getOpenFileContent(void)
 			fileContentReadyLambda(fileName, file.readAll());
 	}
 #endif
+}
+
+/*! Shows a file dialog and returns a file name selected by the user. \since Open-Typer 5.2.0 */
+QString QmlFileDialog::getSaveFileName()
+{
+	QFileDialog dialog(nullptr, QString(), QString(), getFilters());
+	dialog.setFileMode(QFileDialog::AnyFile);
+	dialog.setAcceptMode(QFileDialog::AcceptSave);
+	dialog.setDefaultSuffix(m_defaultSuffix);
+
+	if(dialog.exec() == QDialog::Accepted)
+		return dialog.selectedFiles().at(0);
+	else
+		return "";
+}
+
+QString QmlFileDialog::getFilters()
+{
+	QString filtersStr = m_nameFilters.join(";;");
+
+	if(m_showAllFiles)
+		filtersStr += ";;" + tr("All files") + " (*)";
+
+	return filtersStr;
 }
