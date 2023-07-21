@@ -56,6 +56,8 @@ export PATH=$PATH:~/.local/bin
 # Build AppImage
 export QML_SOURCES_PATHS=src &&
 export EXTRA_QT_PLUGINS="svg;" &&
+export LDAI_UPDATE_INFORMATION="${appimage_zsync_prefix}${app_name}*-${APPIMAGE_ARCH-$(arch)}.AppImage.zsync"
+echo "AppImage update information: ${LDAI_UPDATE_INFORMATION}"
 ./linuxdeploy --appdir AppDir -e open-typer -i snap/gui/open-typer.png -d res/linux-release/usr/share/applications/open-typer-appimage.desktop --plugin qt
 
 case "$(qmake -query QMAKE_XSPEC)" in
