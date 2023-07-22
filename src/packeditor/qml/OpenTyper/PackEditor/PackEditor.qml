@@ -28,13 +28,7 @@ import OpenTyper.PackEditor 1.0
 
 ColumnLayout {
 	property string fileName
-	property int currentLesson
-	property int currentSublesson
-	property int currentExercise
-	property int sublessonListStart
-	property int lessonCount
-	property int sublessonCount
-	property int exerciseCount
+	readonly property bool saved: editorModel.saved
 	id: root
 	spacing: 0
 
@@ -46,6 +40,7 @@ ColumnLayout {
 	PackEditorModel {
 		id: editorModel
 		fileName: root.fileName
+		onFileNameChanged: root.fileName = fileName
 		onCurrentRawTextChanged: {
 			priv.skipChange = true;
 			inputEdit.text = currentRawText;
