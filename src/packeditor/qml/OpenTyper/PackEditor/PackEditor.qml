@@ -29,12 +29,30 @@ import OpenTyper.PackEditor 1.0
 ColumnLayout {
 	property string fileName
 	readonly property bool saved: editorModel.saved
+	signal aboutToClose()
 	id: root
 	spacing: 0
 
 	QtObject {
 		property bool skipChange: false
+		property bool closeOnSave: false
 		id: priv
+	}
+
+	function newFile() {
+		editorModel.newFile();
+	}
+
+	function close() {
+		if(!saved)
+			saveDialog.open();
+		else
+			forceClose();
+	}
+
+	function forceClose() {
+		aboutToClose();
+		destroy();
 	}
 
 	PackEditorModel {
@@ -55,6 +73,18 @@ ColumnLayout {
 		}
 	}
 
+	MessageBox {
+		id: saveDialog
+		text: qsTr("Do you want to save your changes?")
+		standardButtons: Dialog.Save | Dialog.Discard | Dialog.Cancel
+		icon: MessageBox.Question
+		onAccepted: {
+			priv.closeOnSave = true;
+			save();
+		}
+		onDiscarded: forceClose()
+	}
+
 	QmlFileDialog {
 		id: fileDialog
 		nameFilters: [qsTr("Open-Typer pack files") + " (*.typer)"]
@@ -67,7 +97,20 @@ ColumnLayout {
 		let fileName = fileDialog.getSaveFileName();
 
 		if(fileName !== "")
+		{
 			editorModel.saveAs(fileName);
+			if(priv.closeOnSave)
+				forceClose();
+		}
+
+		priv.closeOnSave = false;
+	}
+
+	function save() {
+		if(editorModel.readOnly)
+			saveAs();
+		else
+			editorModel.save();
 	}
 
 	Panel {
@@ -78,12 +121,7 @@ ColumnLayout {
 				enabled: !editorModel.saved
 				icon.name: "save"
 				toolTipText: qsTr("Save")
-				onClicked: {
-					if(editorModel.readOnly)
-						saveAs();
-					else
-						editorModel.save();
-				}
+				onClicked: save()
 			}
 
 			CustomToolButton {
