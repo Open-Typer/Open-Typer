@@ -295,6 +295,8 @@ void PackEditorModel::newFile()
 	updateSublessonList();
 	emit lessonChanged();
 	emit sublessonChanged();
+	m_fileName = tr("Unnamed", "Unnamed (lesson pack)") + ".typer";
+	emit fileNameChanged();
 }
 
 void PackEditorModel::open()
