@@ -170,9 +170,10 @@ ColumnLayout {
 					CustomMenu {
 						id: addSublessonMenu
 						title: qsTr("Sublesson")
-						enabled: addSublessonRepeater.model.length > 0
+						enabled: editorModel.unusedSublessons.length > 0
 
-						Repeater {
+						// TODO: Use a Repeater after fully switching to Qt 6
+						/*Repeater {
 							id: addSublessonRepeater
 							model: editorModel.unusedSublessons
 
@@ -180,6 +181,30 @@ ColumnLayout {
 								text: editorModel.sublessonName(modelData)
 								onTriggered: editorModel.addSublesson(modelData)
 							}
+						}*/
+
+						CustomMenuItem {
+							text: editorModel.sublessonName(1)
+							enabled: editorModel.unusedSublessons.includes(1)
+							onTriggered: editorModel.addSublesson(1)
+						}
+
+						CustomMenuItem {
+							text: editorModel.sublessonName(2)
+							enabled: editorModel.unusedSublessons.includes(2)
+							onTriggered: editorModel.addSublesson(2)
+						}
+
+						CustomMenuItem {
+							text: editorModel.sublessonName(3)
+							enabled: editorModel.unusedSublessons.includes(3)
+							onTriggered: editorModel.addSublesson(3)
+						}
+
+						CustomMenuItem {
+							text: editorModel.sublessonName(4)
+							enabled: editorModel.unusedSublessons.includes(4)
+							onTriggered: editorModel.addSublesson(4)
 						}
 					}
 
