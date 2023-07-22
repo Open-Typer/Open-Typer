@@ -227,7 +227,7 @@ ApplicationWindow {
 		id: packEditorTabButtonComponent
 
 		CustomTabButton {
-			property PackEditor editor: PackEditor {}
+			property PackEditor editor
 			id: editorButton
 			text: FileUtils.fileName(editor.fileName) + (editor.saved ? "" : "*")
 			closable: true
