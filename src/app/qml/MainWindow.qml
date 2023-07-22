@@ -108,6 +108,7 @@ ApplicationWindow {
 		}
 
 		onAboutProgramToggled: aboutDialog.open()
+		onPreferencesToggled: settingsDialog.open()
 	}
 
 	ShaderEffectSource {
@@ -205,6 +206,11 @@ ApplicationWindow {
 	InitialSetup {
 		id: initialSetup
 		onAboutToHide: reload()
+	}
+
+	SettingsDialog {
+		id: settingsDialog
+		onSettingsSynced: homeTab.reload()
 	}
 
 	AboutDialog {
