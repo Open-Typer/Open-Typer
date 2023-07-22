@@ -31,6 +31,7 @@ void AppMenuBar::createMenus(void)
 	m_menus.clear();
 
 	// File
+	fileMenu.addItem(&m_newLessonPackAction);
 	fileMenu.addItem(&openMenuAction);
 	openMenu.addItem(&m_openExerciseAction);
 	openMenu.addItem(&m_openPackAction);
@@ -105,6 +106,7 @@ void AppMenuBar::updateMenus(void)
 {
 	// File
 	fileMenu.setTitle(tr("&File"));
+	m_newLessonPackAction.setText(tr("New lesson pack"));
 	openMenuAction.setText(tr("Open..."));
 	m_openExerciseAction.setText(tr("Exercise", "To open \"Exercise\""));
 	m_openPackAction.setText(tr("Lesson pack", "To open \"Lesson pack\""));
@@ -138,6 +140,11 @@ void AppMenuBar::updateMenus(void)
 	aboutQtAction.setText(tr("About Qt..."));
 
 	emit menusChanged();
+}
+
+AppMenuItem *AppMenuBar::newLessonPackAction(void)
+{
+	return &m_newLessonPackAction;
 }
 
 AppMenuItem *AppMenuBar::openExerciseAction(void)

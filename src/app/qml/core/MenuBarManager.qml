@@ -22,6 +22,7 @@ import QtQuick 2.12
 import OpenTyper 1.0
 
 Item {
+	signal newLessonPackToggled()
 	signal openExerciseToggled()
 	signal openPackToggled()
 	signal printToggled()
@@ -32,6 +33,14 @@ Item {
 	signal reverseTextToggled()
 	signal preferencesToggled()
 	signal aboutProgramToggled()
+
+	Connections {
+		target: AppMenuBar.newLessonPackAction
+
+		onClicked: {
+			newLessonPackToggled();
+		}
+	}
 
 	Connections {
 		target: AppMenuBar.openExerciseAction
