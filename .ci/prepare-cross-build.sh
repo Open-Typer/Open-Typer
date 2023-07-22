@@ -5,9 +5,11 @@ target_arch="$1"
 case "$target_arch" in
     aarch64)
         toolchain_prefix="aarch64-linux-gnu-"
+        echo "APPIMAGE_ARCH=aarch64" >> "${GITHUB_ENV}"
         ;;
     armv7)
         toolchain_prefix="arm-linux-gnueabihf-"
+        echo "APPIMAGE_ARCH=armhf" >> "${GITHUB_ENV}"
         ;;
 esac
 

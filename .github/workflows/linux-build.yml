@@ -88,4 +88,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: build-Qt-${{ matrix.qt-version }}-${{ matrix.arch }}
-        path: '*.AppImage'
+        path: |
+          *.AppImage
+          *.zsync
