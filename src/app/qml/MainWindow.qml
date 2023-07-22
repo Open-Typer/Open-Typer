@@ -30,6 +30,7 @@ import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
 import OpenTyper.Translations 1.0
 import OpenTyper.Global 1.0
+import OpenTyper.PackEditor 1.0
 import "dialogs"
 import "core"
 
@@ -101,6 +102,11 @@ ApplicationWindow {
 	}
 
 	MenuBarManager {
+		onNewLessonPackToggled: {
+			let editor = openPackEditor();
+			editor.newFile();
+		}
+
 		onAboutProgramToggled: aboutDialog.open()
 	}
 
@@ -203,6 +209,36 @@ ApplicationWindow {
 
 	AboutDialog {
 		id: aboutDialog
+	}
+
+	Component {
+		id: packEditorComponent
+
+		PackEditor {}
+	}
+
+	Component {
+		id: packEditorTabButtonComponent
+
+		CustomTabButton {
+			property PackEditor editor: PackEditor {}
+			id: editorButton
+			text: FileUtils.fileName(editor.fileName) + (editor.saved ? "" : "*")
+			closable: true
+			onClosed: editor.close()
+
+			Connections {
+				target: editorButton.editor
+				onAboutToClose: tabBar.removeItem(editorButton);
+			}
+		}
+	}
+
+	function openPackEditor() {
+		let editorObject = packEditorComponent.createObject(mainLayout);
+		let editorButton = packEditorTabButtonComponent.createObject(tabBar, { editor: editorObject });
+
+		return editorObject;
 	}
 
 	Component.onCompleted: {
