@@ -37,6 +37,7 @@ class Q_DECL_EXPORT AppMenuItem : public QObject
 		Q_PROPERTY(bool isSeparator READ isSeparator WRITE setIsSeparator NOTIFY isSeparatorChanged)
 		Q_PROPERTY(bool checkable READ checkable WRITE setCheckable NOTIFY checkableChanged)
 		Q_PROPERTY(bool checked READ checked WRITE setChecked NOTIFY checkedChanged)
+		Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 	public:
 		explicit AppMenuItem(QObject *parent = nullptr);
 
@@ -55,12 +56,16 @@ class Q_DECL_EXPORT AppMenuItem : public QObject
 		bool checked(void);
 		void setChecked(bool newChecked);
 
+		bool enabled() const;
+		void setEnabled(bool newEnabled);
+
 	private:
 		QString m_text;
 		AppMenuModel *m_submenu = nullptr;
 		bool m_isSeparator = false;
 		bool m_checkable = false;
 		bool m_checked = false;
+		bool m_enabled = true;
 
 	signals:
 		void textChanged(QString text);
@@ -69,6 +74,7 @@ class Q_DECL_EXPORT AppMenuItem : public QObject
 		void checkableChanged(bool checkable);
 		void checkedChanged(bool checked);
 		void clicked();
+		void enabledChanged();
 };
 
 #endif // APPMENUITEM_H
