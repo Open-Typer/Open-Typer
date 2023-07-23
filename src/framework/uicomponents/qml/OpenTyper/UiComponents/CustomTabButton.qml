@@ -51,7 +51,7 @@ TabButton {
 		anchors.verticalCenter: parent.verticalCenter
 		icon.name: "close"
 		icon.height: parent.height / 2
-		icon.width: icon.height
+		icon.width: parent.height / 2
 		toolTipText: qsTr("Close tab")
 		onClicked: closed()
 	}
