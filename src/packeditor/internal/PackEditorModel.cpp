@@ -385,13 +385,12 @@ void PackEditorModel::addLesson()
 void PackEditorModel::addSublesson(int id)
 {
 	Q_ASSERT(unusedSublessons().contains(id));
-	m_sublesson = id;
-	updateAbsoluteSublesson();
+	m_absoluteSublesson = id;
 
 	addExercise();
 	updateSublessonList();
 	emit unusedSublessonsChanged();
-	emit sublessonChanged();
+	setAbsoluteSublesson(id);
 }
 
 void PackEditorModel::addExercise()
@@ -608,6 +607,25 @@ void PackEditorModel::updateAbsoluteSublesson()
 	}
 
 	m_absoluteSublesson = m_sublesson + sublessonListStart;
+}
+
+void PackEditorModel::setAbsoluteSublesson(int absoluteSublesson)
+{
+	int count = m_parser->sublessonCount(m_lesson);
+	int i, j = 0;
+
+	for(i = 1; i <= count + j; i++)
+	{
+		if(m_parser->exerciseCount(m_lesson, i) == 0)
+			j++;
+		else if(i == absoluteSublesson)
+		{
+			m_sublesson = i - j;
+			m_absoluteSublesson = absoluteSublesson;
+		}
+	}
+
+	emit sublessonChanged();
 }
 
 void PackEditorModel::editExercise(bool repeat, const QString &repeatType, int repeatLimit, int lineLength, const QString &desc, const QString &rawText)

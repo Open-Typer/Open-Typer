@@ -120,6 +120,7 @@ class PackEditorModel : public QObject
 		void updateSublessonList();
 		void updateExerciseList();
 		void updateAbsoluteSublesson();
+		void setAbsoluteSublesson(int absoluteSublesson);
 		void deleteExerciseLine(int lesson, int sublesson, int exercise);
 		void editExercise(bool repeat, const QString &repeatType, int repeatLimit, int lineLength, const QString &desc, const QString &rawText);
 		void moveExercise(int lesson, int sublesson, int exercise, int newLesson, int newSublesson, int newExercise);
