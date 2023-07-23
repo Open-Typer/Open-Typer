@@ -269,6 +269,7 @@ ApplicationWindow {
 	function openPackEditor() {
 		let editorObject = packEditorComponent.createObject(mainLayout);
 		let editorButton = packEditorTabButtonComponent.createObject(tabBar, { editor: editorObject });
+		tabBar.currentIndex = tabBar.count - 1;
 
 		return editorObject;
 	}
