@@ -324,6 +324,15 @@ ApplicationWindow {
 	}
 
 	onClosing: {
+		// Close pack editor tabs
+		if(tabBar.count > 1)
+		{
+			close.accepted = false;
+			tabBar.itemAt(1).editor.onAboutToClose.connect(function() { root.close() });
+			tabBar.itemAt(1).closed();
+		}
+
+		// Save window geometry
 		if(visibility != ApplicationWindow.Windowed)
 		{
 			Settings.setValue("app", "windowX", oldX);
