@@ -257,7 +257,22 @@ ApplicationWindow {
 			id: editorButton
 			text: FileUtils.fileName(editor.fileName) + (editor.saved ? "" : "*")
 			closable: true
-			onClosed: editor.close()
+			onClosed: {
+				let index = -1;
+
+				for(var i = 0; i < tabBar.contentChildren.length; i++)
+				{
+					if(tabBar.contentChildren[i] == this)
+					{
+						index = i;
+						break;
+					}
+				}
+
+				console.assert(index != -1);
+				tabBar.currentIndex = index;
+				editor.close()
+			}
 
 			Connections {
 				target: editorButton.editor
