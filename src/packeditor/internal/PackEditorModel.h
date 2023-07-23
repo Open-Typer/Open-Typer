@@ -30,7 +30,6 @@ class PackEditorModel : public QObject
 		Q_OBJECT
 		INJECT(IConfigParser, configParser)
 		INJECT(ILanguageManager, languageManager)
-		Q_PROPERTY(IConfigParser *parser READ parser NOTIFY parserChanged)
 		Q_PROPERTY(QString fileName READ fileName WRITE setFileName NOTIFY fileNameChanged)
 		Q_PROPERTY(bool opened READ opened NOTIFY openedChanged)
 		Q_PROPERTY(bool saved READ saved NOTIFY savedChanged)
@@ -51,8 +50,6 @@ class PackEditorModel : public QObject
 	public:
 		explicit PackEditorModel(QObject *parent = nullptr);
 		~PackEditorModel();
-
-		IConfigParser *parser() const;
 
 		const QString &fileName() const;
 		void setFileName(const QString &newFileName);
@@ -143,7 +140,6 @@ class PackEditorModel : public QObject
 
 	signals:
 		void openedChanged();
-		void parserChanged();
 		void fileNameChanged();
 		void savedChanged();
 		void readOnlyChanged();

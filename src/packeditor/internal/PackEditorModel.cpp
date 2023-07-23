@@ -52,11 +52,6 @@ PackEditorModel::~PackEditorModel()
 	m_parser->close();
 }
 
-IConfigParser *PackEditorModel::parser() const
-{
-	return m_parser.get();
-}
-
 const QString &PackEditorModel::fileName() const
 {
 	return m_fileName;
