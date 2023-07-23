@@ -68,8 +68,10 @@ MenuBar {
 				item.text = itemData.text;
 				item.checkable = itemData.checkable;
 				item.checked = itemData.checked;
+				item.enabled = itemData.enabled;
 				item.onCheckedChanged.connect(function() { itemData.checked = item.checked; });
 				itemData.onCheckedChanged.connect(function() { item.checked = itemData.checked; });
+				itemData.onEnabledChanged.connect(function() { item.enabled = itemData.enabled; });
 				if(typeof itemData.onClicked != "undefined")
 					item.onTriggered.connect(function() { itemData.onClicked() });
 			}
