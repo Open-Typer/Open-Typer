@@ -417,6 +417,9 @@ void PackEditorModel::removeCurrentExercise()
 	int exerciseCount = m_parser->exerciseCount(m_lesson, m_absoluteSublesson);
 
 	// Remove the exercise
+	QString lessonDesc;
+	if(m_sublesson == 1 && m_exercise == 1)
+		lessonDesc = m_parser->lessonDesc(m_lesson);
 	deleteExerciseLine(m_lesson, m_absoluteSublesson, m_exercise);
 
 	if(exerciseCount == 1)
@@ -453,6 +456,18 @@ void PackEditorModel::removeCurrentExercise()
 		// Select last exercise if the previous last exercise was removed
 		if(m_exercise == exerciseCount)
 			m_exercise = exerciseCount - 1;
+	}
+
+	// Restore lesson description
+	if(!lessonDesc.isEmpty())
+	{
+		bool repeat = m_parser->exerciseRepeatBool(m_lesson, m_absoluteSublesson, m_exercise);
+		QString repeatType = m_parser->exerciseRepeatType(m_lesson, m_absoluteSublesson, m_exercise);
+		int repeatLimit = m_parser->exerciseRepeatLimit(m_lesson, m_absoluteSublesson, m_exercise);
+		int lineLength = m_parser->exerciseLineLength(m_lesson, m_absoluteSublesson, m_exercise);
+		QString rawText = m_parser->exerciseRawText(m_lesson, m_absoluteSublesson, m_exercise);
+
+		editExercise(repeat, repeatType, repeatLimit, lineLength, lessonDesc, rawText);
 	}
 
 	updateExerciseList();
@@ -643,7 +658,9 @@ void PackEditorModel::moveExercise(int lesson, int sublesson, int exercise, int 
 	QString repeatType = m_parser->exerciseRepeatType(lesson, sublesson, exercise);
 	bool repeat = (repeatType != "0");
 	QString lessonDesc = "";
-	if(newExercise == 1) // the first exercise of a lesson holds the description
+	if(exercise == 1) // the first exercise of a lesson holds the description
+		lessonDesc = m_parser->lessonDesc(lesson);
+	else if(newExercise == 1)
 		lessonDesc = m_parser->lessonDesc(newLesson);
 	QString targetText = m_parser->exerciseRawText(lesson, sublesson, exercise);
 
