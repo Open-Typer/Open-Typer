@@ -35,6 +35,7 @@ void AppMenuBar::createMenus(void)
 	fileMenu.addItem(&openMenuAction);
 	openMenu.addItem(&m_openExerciseAction);
 	openMenu.addItem(&m_openPackAction);
+	openMenu.addItem(&m_openPackInEditorAction);
 	openMenuAction.setSubmenu(&openMenu);
 	fileSeparator1.setIsSeparator(true);
 	fileMenu.addItem(&fileSeparator1);
@@ -110,6 +111,7 @@ void AppMenuBar::updateMenus(void)
 	openMenuAction.setText(tr("Open..."));
 	m_openExerciseAction.setText(tr("Exercise", "To open \"Exercise\""));
 	m_openPackAction.setText(tr("Lesson pack", "To open \"Lesson pack\""));
+	m_openPackInEditorAction.setText(tr("Lesson pack (in editor)", "To open \"Lesson pack\" in editor"));
 	m_printAction.setText(tr("Print"));
 	quitAction.setText(tr("Quit"));
 
@@ -155,6 +157,11 @@ AppMenuItem *AppMenuBar::openExerciseAction(void)
 AppMenuItem *AppMenuBar::openPackAction(void)
 {
 	return &m_openPackAction;
+}
+
+AppMenuItem *AppMenuBar::openPackInEditorAction()
+{
+	return &m_openPackInEditorAction;
 }
 
 AppMenuItem *AppMenuBar::printAction(void)

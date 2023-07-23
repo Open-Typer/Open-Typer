@@ -38,6 +38,7 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 		Q_PROPERTY(AppMenuItem *newLessonPackAction READ newLessonPackAction NOTIFY newLessonPackActionChanged)
 		Q_PROPERTY(AppMenuItem *openExerciseAction READ openExerciseAction NOTIFY openExerciseActionChanged)
 		Q_PROPERTY(AppMenuItem *openPackAction READ openPackAction NOTIFY openPackActionChanged)
+		Q_PROPERTY(AppMenuItem *openPackInEditorAction READ openPackInEditorAction NOTIFY openPackInEditorActionChanged)
 		Q_PROPERTY(AppMenuItem *printAction READ printAction NOTIFY printActionChanged)
 		Q_PROPERTY(AppMenuItem *typingTestAction READ typingTestAction NOTIFY typingTestActionChanged)
 		Q_PROPERTY(AppMenuItem *exerciseHistoryAction READ exerciseHistoryAction NOTIFY exerciseHistoryActionChanged)
@@ -54,6 +55,7 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 		AppMenuItem *newLessonPackAction(void);
 		AppMenuItem *openExerciseAction(void);
 		AppMenuItem *openPackAction(void);
+		AppMenuItem *openPackInEditorAction(void);
 		AppMenuItem *printAction(void);
 		AppMenuItem *typingTestAction(void);
 		AppMenuItem *exerciseHistoryAction(void);
@@ -75,6 +77,7 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 		AppMenuModel openMenu;
 		AppMenuItem m_openExerciseAction;
 		AppMenuItem m_openPackAction;
+		AppMenuItem m_openPackInEditorAction;
 		AppMenuItem fileSeparator1;
 		AppMenuItem fileSeparator2;
 		AppMenuItem m_printAction;
@@ -111,6 +114,7 @@ class Q_DECL_EXPORT AppMenuBar : public AbstractMenuBar
 		void newLessonPackActionChanged();
 		void openExerciseActionChanged();
 		void openPackActionChanged();
+		void openPackInEditorActionChanged();
 		void printActionChanged();
 		void typingTestActionChanged();
 		void exerciseHistoryActionChanged();

@@ -107,6 +107,7 @@ ApplicationWindow {
 			editor.newFile();
 		}
 
+		onOpenPackInEditorToggled: lessonPackFileDialog.getOpenFileContent()
 		onAboutProgramToggled: aboutDialog.open()
 		onPreferencesToggled: settingsDialog.open()
 	}
@@ -215,6 +216,15 @@ ApplicationWindow {
 
 	AboutDialog {
 		id: aboutDialog
+	}
+
+	QmlFileDialog {
+		id: lessonPackFileDialog
+		nameFilters: [qsTr("Open-Typer pack files") + "(*.typer)"]
+		onFileContentReady: {
+			let editor = openPackEditor();
+			editor.fileName = fileName;
+		}
 	}
 
 	Component {

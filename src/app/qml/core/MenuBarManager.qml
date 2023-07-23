@@ -25,6 +25,7 @@ Item {
 	signal newLessonPackToggled()
 	signal openExerciseToggled()
 	signal openPackToggled()
+	signal openPackInEditorToggled()
 	signal printToggled()
 	signal typingTestToggled()
 	signal exerciseHistoryToggled()
@@ -55,6 +56,14 @@ Item {
 
 		onClicked: {
 			openPackToggled();
+		}
+	}
+
+	Connections {
+		target: AppMenuBar.openPackInEditorAction
+
+		onClicked: {
+			openPackInEditorToggled();
 		}
 	}
 
