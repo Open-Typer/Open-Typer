@@ -34,6 +34,7 @@ PackEditorModel::PackEditorModel(QObject *parent) :
 
 	connect(this, &PackEditorModel::lessonChanged, this, &PackEditorModel::updateAbsoluteSublesson);
 	connect(this, &PackEditorModel::lessonChanged, this, &PackEditorModel::unusedSublessonsChanged);
+	connect(this, &PackEditorModel::lessonChanged, this, &PackEditorModel::currentLessonDescriptionChanged);
 	connect(this, &PackEditorModel::sublessonChanged, this, &PackEditorModel::updateAbsoluteSublesson);
 
 	connect(this, &PackEditorModel::exerciseChanged, this, &PackEditorModel::currentRawTextChanged);
@@ -45,6 +46,7 @@ PackEditorModel::PackEditorModel(QObject *parent) :
 	connect(this, &PackEditorModel::currentRepeatTypeChanged, this, &PackEditorModel::currentTextChanged);
 	connect(this, &PackEditorModel::currentLengthLimitChanged, this, &PackEditorModel::currentTextChanged);
 	connect(this, &PackEditorModel::currentLineLengthChanged, this, &PackEditorModel::currentTextChanged);
+	connect(this, &PackEditorModel::currentLessonDescriptionChanged, this, &PackEditorModel::updateLessonList);
 }
 
 PackEditorModel::~PackEditorModel()
@@ -242,6 +244,28 @@ void PackEditorModel::setCurrentLineLength(int newLineLength)
 
 	editExercise(repeat, repeatType, repeatLimit, newLineLength, desc, rawText);
 	emit currentLineLengthChanged();
+}
+
+QString PackEditorModel::currentLessonDescription() const
+{
+	return m_parser->lessonDesc(m_lesson);
+}
+
+void PackEditorModel::setCurrentLessonDescription(const QString &newLessonDescription)
+{
+	bool repeat = m_parser->exerciseRepeatBool(m_lesson, m_absoluteSublesson, m_exercise);
+	QString repeatType = m_parser->exerciseRepeatType(m_lesson, m_absoluteSublesson, m_exercise);
+	int repeatLimit = m_parser->exerciseRepeatLimit(m_lesson, m_absoluteSublesson, m_exercise);
+	int lineLength = m_parser->exerciseLineLength(m_lesson, m_absoluteSublesson, m_exercise);
+	QString rawText = m_parser->exerciseRawText(m_lesson, m_absoluteSublesson, m_exercise);
+
+	// TODO: There isn't any API for replacing an exercise yet, so delete it and add a new one
+	deleteExerciseLine(m_lesson, m_absoluteSublesson, 1);
+	m_parser->addExercise(m_lesson, m_absoluteSublesson, 1, repeat, repeatType, repeatLimit, lineLength, newLessonDescription, rawText);
+
+	m_saved = false;
+	emit savedChanged();
+	emit currentLessonDescriptionChanged();
 }
 
 QList<int> PackEditorModel::unusedSublessons() const

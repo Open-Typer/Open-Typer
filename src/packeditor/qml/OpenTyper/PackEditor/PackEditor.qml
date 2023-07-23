@@ -71,6 +71,7 @@ ColumnLayout {
 			priv.skipChange = true;
 			lineLengthBox.value = currentLineLength;
 		}
+		onCurrentLessonDescriptionChanged: lessonDescField.text = currentLessonDescription
 	}
 
 	MessageBox {
@@ -325,6 +326,29 @@ ColumnLayout {
 							priv.skipChange = false;
 					}
 				}
+			}
+
+			RowLayout {
+				Label {
+					text: qsTr("Letters learned in this lesson:")
+				}
+
+				TextField {
+					id: lessonDescField
+					onTextEdited: editorModel.currentLessonDescription = text
+				}
+			}
+
+			RadioButton {
+				text: qsTr("Revision")
+				checked: lessonDescField.text == "%r"
+				onPressed: editorModel.currentLessonDescription = "%r"
+			}
+
+			RadioButton {
+				text: qsTr("Shift", "Shift key")
+				checked: lessonDescField.text == "%s"
+				onPressed: editorModel.currentLessonDescription = "%s"
 			}
 		}
 	}

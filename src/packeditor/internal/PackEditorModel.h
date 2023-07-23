@@ -45,6 +45,7 @@ class PackEditorModel : public QObject
 		Q_PROPERTY(QString currentRepeatType READ currentRepeatType WRITE setCurrentRepeatType NOTIFY currentRepeatTypeChanged)
 		Q_PROPERTY(int currentLengthLimit READ currentLengthLimit WRITE setCurrentLengthLimit NOTIFY currentLengthLimitChanged)
 		Q_PROPERTY(int currentLineLength READ currentLineLength WRITE setCurrentLineLength NOTIFY currentLineLengthChanged)
+		Q_PROPERTY(QString currentLessonDescription READ currentLessonDescription WRITE setCurrentLessonDescription NOTIFY currentLessonDescriptionChanged)
 		Q_PROPERTY(QList<int> unusedSublessons READ unusedSublessons NOTIFY unusedSublessonsChanged)
 		Q_PROPERTY(bool canRemove READ canRemove NOTIFY canRemoveChanged)
 	public:
@@ -88,6 +89,9 @@ class PackEditorModel : public QObject
 
 		int currentLineLength() const;
 		void setCurrentLineLength(int newLineLength);
+
+		QString currentLessonDescription() const;
+		void setCurrentLessonDescription(const QString &newLessonDescription);
 
 		QList<int> unusedSublessons() const;
 
@@ -155,6 +159,7 @@ class PackEditorModel : public QObject
 		void currentRepeatTypeChanged();
 		void currentLengthLimitChanged();
 		void currentLineLengthChanged();
+		void currentLessonDescriptionChanged();
 		void unusedSublessonsChanged();
 		void canRemoveChanged();
 };
