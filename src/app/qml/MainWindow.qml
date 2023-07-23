@@ -186,7 +186,23 @@ ApplicationWindow {
 		anchors.bottom: parent.bottom
 		anchors.topMargin: tabBar.visible ? 1 : 0
 		currentIndex: tabBar.currentIndex
-		onCurrentIndexChanged: renderSource()
+		onCurrentIndexChanged: {
+			renderSource();
+
+			// Enable or disable home tab menu items
+			let isHomeTab = (itemAt(currentIndex) === homeTab);
+
+			AppMenuBar.openExerciseAction.enabled = isHomeTab;
+			AppMenuBar.openPackAction.enabled = isHomeTab;
+			AppMenuBar.printAction.enabled = isHomeTab;
+
+			AppMenuBar.typingTestAction.enabled = isHomeTab;
+
+			AppMenuBar.exerciseHistoryAction.enabled = isHomeTab;
+			AppMenuBar.timedExAction.enabled = isHomeTab;
+			AppMenuBar.errorWordsAction.enabled = isHomeTab;
+			AppMenuBar.reverseTextAction.enabled = isHomeTab;
+		}
 
 		function renderSource() {
 			mainLayoutSource.render();
