@@ -462,6 +462,7 @@ void PackEditorModel::removeCurrentExercise()
 
 	emit exerciseChanged();
 	emit canRemoveChanged();
+	emit unusedSublessonsChanged();
 }
 
 void PackEditorModel::init()
