@@ -251,8 +251,7 @@ jobs:
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts qt5compat qtshadertools'
     # Build
-    - if: contains(matrix.os, 'macos')
-      name: Build (macOS)
+    - name: Build (macOS)
       run: .ci/macos-build.sh
       shell: bash
     ## Upload artifacts
