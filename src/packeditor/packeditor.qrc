@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/OpenTyper/PackEditor/PackEditor.qml</file>
+        <file>qml/OpenTyper/PackEditor/qmldir</file>
+    </qresource>
+</RCC>

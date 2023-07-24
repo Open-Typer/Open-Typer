@@ -1,8 +1,8 @@
 /*
- * PackSelector.h
+ * PackEditorModule.h
  * This file is part of Open-Typer
  *
- * Copyright (C) 2021-2023 - adazem009
+ * Copyright (C) 2023 - adazem009
  *
  * Open-Typer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,34 +18,18 @@
  * along with Open-Typer. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PACKSELECTOR_H
-#define PACKSELECTOR_H
+#ifndef PACKEDITORMODULE_H
+#define PACKEDITORMODULE_H
 
-#include <QDialog>
-#include <QDirIterator>
-#include "StringUtils.h"
-#include "BuiltInPacks.h"
+#include "global/modularity/IModuleSetup.h"
 
-namespace Ui {
-	class PackSelector;
-}
-
-/*!
- * \brief The PackSelector class is a QDialog, which allows the user to select a built-in pack.
- *
- * \image html PackSelector.png
- */
-class Q_DECL_EXPORT PackSelector : public QDialog
+class PackEditorModule : public IModuleSetup
 {
-		Q_OBJECT
 	public:
-		explicit PackSelector(QWidget *parent = nullptr);
-		~PackSelector();
-		QString selectedConfig(void);
-		QStringList rawItems;
+		std::string moduleName() const override;
 
-	private:
-		Ui::PackSelector *ui;
+		void registerResources() override;
+		void registerUiTypes() override;
 };
 
-#endif // PACKSELECTOR_H
+#endif // PACKEDITORMODULE_H

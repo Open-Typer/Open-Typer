@@ -82,3 +82,17 @@ void AppMenuItem::setChecked(bool newChecked)
 	m_checked = newChecked;
 	emit checkedChanged(newChecked);
 }
+
+/*! Whether the menu item is enabled (can be clicked). \since Open-Typer 5.2.0 */
+bool AppMenuItem::enabled() const
+{
+	return m_enabled;
+}
+
+void AppMenuItem::setEnabled(bool newEnabled)
+{
+	if(m_enabled == newEnabled)
+		return;
+	m_enabled = newEnabled;
+	emit enabledChanged();
+}

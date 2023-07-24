@@ -30,6 +30,7 @@ import OpenTyper.Ui 1.0
 import OpenTyper.UiComponents 1.0
 import OpenTyper.Translations 1.0
 import OpenTyper.Global 1.0
+import OpenTyper.PackEditor 1.0
 import "dialogs"
 import "core"
 
@@ -101,7 +102,14 @@ ApplicationWindow {
 	}
 
 	MenuBarManager {
+		onNewLessonPackToggled: {
+			let editor = openPackEditor();
+			editor.newFile();
+		}
+
+		onOpenPackInEditorToggled: lessonPackFileDialog.getOpenFileContent()
 		onAboutProgramToggled: aboutDialog.open()
+		onPreferencesToggled: settingsDialog.open()
 	}
 
 	ShaderEffectSource {
@@ -178,7 +186,23 @@ ApplicationWindow {
 		anchors.bottom: parent.bottom
 		anchors.topMargin: tabBar.visible ? 1 : 0
 		currentIndex: tabBar.currentIndex
-		onCurrentIndexChanged: renderSource()
+		onCurrentIndexChanged: {
+			renderSource();
+
+			// Enable or disable home tab menu items
+			let isHomeTab = (itemAt(currentIndex) === homeTab);
+
+			AppMenuBar.openExerciseAction.enabled = isHomeTab;
+			AppMenuBar.openPackAction.enabled = isHomeTab;
+			AppMenuBar.printAction.enabled = isHomeTab;
+
+			AppMenuBar.typingTestAction.enabled = isHomeTab;
+
+			AppMenuBar.exerciseHistoryAction.enabled = isHomeTab;
+			AppMenuBar.timedExAction.enabled = isHomeTab;
+			AppMenuBar.errorWordsAction.enabled = isHomeTab;
+			AppMenuBar.reverseTextAction.enabled = isHomeTab;
+		}
 
 		function renderSource() {
 			mainLayoutSource.render();
@@ -201,8 +225,68 @@ ApplicationWindow {
 		onAboutToHide: reload()
 	}
 
+	SettingsDialog {
+		id: settingsDialog
+		onSettingsSynced: homeTab.reload()
+	}
+
 	AboutDialog {
 		id: aboutDialog
+	}
+
+	QmlFileDialog {
+		id: lessonPackFileDialog
+		nameFilters: [qsTr("Open-Typer pack files") + "(*.typer)"]
+		onFileContentReady: {
+			let editor = openPackEditor();
+			editor.fileName = fileName;
+		}
+	}
+
+	Component {
+		id: packEditorComponent
+
+		PackEditor {}
+	}
+
+	Component {
+		id: packEditorTabButtonComponent
+
+		CustomTabButton {
+			property PackEditor editor
+			id: editorButton
+			text: FileUtils.fileName(editor.fileName) + (editor.saved ? "" : "*")
+			closable: true
+			onClosed: {
+				let index = -1;
+
+				for(var i = 0; i < tabBar.contentChildren.length; i++)
+				{
+					if(tabBar.contentChildren[i] == this)
+					{
+						index = i;
+						break;
+					}
+				}
+
+				console.assert(index != -1);
+				tabBar.currentIndex = index;
+				editor.close()
+			}
+
+			Connections {
+				target: editorButton.editor
+				onAboutToClose: tabBar.removeItem(editorButton);
+			}
+		}
+	}
+
+	function openPackEditor() {
+		let editorObject = packEditorComponent.createObject(mainLayout);
+		let editorButton = packEditorTabButtonComponent.createObject(tabBar, { editor: editorObject });
+		tabBar.currentIndex = tabBar.count - 1;
+
+		return editorObject;
 	}
 
 	Component.onCompleted: {
@@ -240,6 +324,15 @@ ApplicationWindow {
 	}
 
 	onClosing: {
+		// Close pack editor tabs
+		if(tabBar.count > 1)
+		{
+			close.accepted = false;
+			tabBar.itemAt(1).editor.onAboutToClose.connect(function() { root.close() });
+			tabBar.itemAt(1).closed();
+		}
+
+		// Save window geometry
 		if(visibility != ApplicationWindow.Windowed)
 		{
 			Settings.setValue("app", "windowX", oldX);

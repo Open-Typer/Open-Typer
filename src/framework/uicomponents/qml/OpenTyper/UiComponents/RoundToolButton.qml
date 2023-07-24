@@ -1,5 +1,5 @@
 /*
- * CustomTabButton.qml
+ * RoundToolButton.qml
  * This file is part of Open-Typer
  *
  * Copyright (C) 2023 - adazem009
@@ -22,37 +22,20 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.5
 
-TabButton {
-	property bool closable: false
-	signal closed()
+// Double click events are not supported, use the clicked() signal like with a QPushButton
+ToolButton {
+	property color foregroundColor: Material.theme === Material.Dark ? "white" : "black"
+	property string toolTipText
+	property string accessibleDescription: ""
+	signal clicked()
 	id: control
-	width: closable ? implicitWidth + closeButton.width - 15 : implicitWidth
-	height: metrics.boundingRect.height + 15
 	font.capitalization: Font.MixedCase
-
-	contentItem: Text {
-		text: control.text
-		font: control.font
-		color: Material.foreground
-		horizontalAlignment: Text.AlignLeft
-		verticalAlignment: Text.AlignVCenter
-	}
-
-	TextMetrics {
-		id: metrics
-		font: control.font
-		text: control.text
-	}
-
-	RoundToolButton {
-		id: closeButton
-		visible: closable
-		anchors.right: parent.right
-		anchors.verticalCenter: parent.verticalCenter
-		icon.name: "close"
-		icon.height: parent.height / 2
-		icon.width: parent.height / 2
-		toolTipText: qsTr("Close tab")
-		onClicked: closed()
-	}
+	Material.background: Qt.rgba(0, 0, 0, 0)
+	Material.foreground: foregroundColor
+	icon.color: foregroundColor
+	onReleased: clicked()
+	HoverToolTip { text: toolTipText }
+	Accessible.role: Accessible.Button
+	Accessible.name: text
+	Accessible.description: accessibleDescription == "" ? toolTipText : accessibleDescription
 }

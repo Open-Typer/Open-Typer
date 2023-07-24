@@ -108,7 +108,6 @@ ColumnLayout {
 		onTimedExToggled: panel1.contents.timedExButton.clicked()
 		onErrorWordsToggled: panel1.contents.errorWordsButton.clicked()
 		onReverseTextToggled: panel1.contents.reverseTextButton.clicked()
-		onPreferencesToggled: settingsDialog.open()
 	}
 
 	Connections {
@@ -249,7 +248,7 @@ ColumnLayout {
 				id: settingsButton
 				icon.name: "settings"
 				toolTipText: qsTr("Options")
-				onClicked: settingsDialog.open()
+				onClicked: AppMenuBar.preferencesAction.clicked()
 			}
 			CustomToolButton {
 				id: openButton
@@ -471,11 +470,6 @@ ColumnLayout {
 			duration: 125
 			easing.type: Easing.InCubic
 		}
-	}
-
-	SettingsDialog {
-		id: settingsDialog
-		onSettingsSynced: reload()
 	}
 
 	MessageBox {

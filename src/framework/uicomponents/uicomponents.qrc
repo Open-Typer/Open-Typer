@@ -25,5 +25,6 @@
         <file>qml/OpenTyper/UiComponents/CustomButton.qml</file>
         <file>qml/OpenTyper/UiComponents/CustomTabButton.qml</file>
         <file>qml/OpenTyper/UiComponents/CustomTabBar.qml</file>
+        <file>qml/OpenTyper/UiComponents/RoundToolButton.qml</file>
     </qresource>
 </RCC>

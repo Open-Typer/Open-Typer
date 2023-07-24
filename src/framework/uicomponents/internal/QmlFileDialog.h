@@ -34,19 +34,30 @@ class Q_DECL_EXPORT QmlFileDialog : public QObject
 		Q_PROPERTY(bool showAllFiles READ showAllFiles WRITE setShowAllFiles NOTIFY showAllFilesChanged)
 		Q_PROPERTY(QString fileName READ fileName NOTIFY fileNameChanged)
 		Q_PROPERTY(QString shortFileName READ shortFileName NOTIFY shortFileNameChanged)
+		Q_PROPERTY(QString defaultSuffix READ defaultSuffix WRITE setDefaultSuffix NOTIFY defaultSuffixChanged)
 	public:
 		QStringList nameFilters(void);
 		void setNameFilters(QStringList filters);
+
 		bool showAllFiles(void);
 		void setShowAllFiles(bool value);
+
 		QString fileName(void);
 		QString shortFileName(void);
+
+		const QString &defaultSuffix() const;
+		void setDefaultSuffix(const QString &newDefaultSuffix);
+
 		Q_INVOKABLE void getOpenFileContent(void);
+		Q_INVOKABLE QString getSaveFileName();
 
 	private:
+		QString getFilters();
+
 		QStringList m_nameFilters;
 		bool m_showAllFiles = true;
 		QString m_fileName;
+		QString m_defaultSuffix;
 
 	signals:
 		void nameFiltersChanged(QStringList filters);
@@ -54,6 +65,7 @@ class Q_DECL_EXPORT QmlFileDialog : public QObject
 		void fileNameChanged(QString name);
 		void shortFileNameChanged(QString name);
 		void fileContentReady(QString content);
+		void defaultSuffixChanged();
 };
 
 #endif // QMLFILEDIALOG_H

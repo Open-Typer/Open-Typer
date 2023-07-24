@@ -25,12 +25,21 @@ import OpenTyper.Ui 1.0
 
 Menu {
 	property bool isSubMenu: false
+
 	function updateWidth() {
 		let maxWidth = 0;
 		for(let i = 0; i < count; i++)
 			maxWidth = Math.max(maxWidth, itemAt(i).implicitWidth);
 		background.implicitWidth = maxWidth;
 	}
+
+	function toggle() {
+		if(visible)
+			close();
+		else
+			open();
+	}
+
 	x: isSubMenu ? parent.width : 0
 	y: isSubMenu ? 0 : parent.height
 	font.pointSize: 10

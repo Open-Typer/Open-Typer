@@ -26,6 +26,7 @@ LIBS += -L../export -lexport
 LIBS += -L../grades -lgrades
 LIBS += -L../history -lhistory
 LIBS += -L../updater -lupdater
+LIBS += -L../packeditor -lpackeditor
 include(../framework/framework.pri)
 
 SOURCES += \
