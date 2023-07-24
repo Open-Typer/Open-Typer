@@ -33,102 +33,125 @@
 <context>
     <name>AppMenuBar</name>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="104"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="109"/>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="105"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="110"/>
+        <source>New lesson pack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppMenuBar.cpp" line="111"/>
         <source>Open...</source>
         <translation>Открыть...</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="106"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="112"/>
+        <source>Exercise</source>
+        <comment>To open &quot;Exercise&quot;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppMenuBar.cpp" line="113"/>
+        <source>Lesson pack</source>
+        <comment>To open &quot;Lesson pack&quot;</comment>
+        <translation>Набор уроков</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppMenuBar.cpp" line="114"/>
+        <source>Lesson pack (in editor)</source>
+        <comment>To open &quot;Lesson pack&quot; in editor</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppMenuBar.cpp" line="115"/>
         <source>Print</source>
         <translation>Печать</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="107"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="116"/>
         <source>Quit</source>
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="110"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="119"/>
         <source>&amp;View</source>
         <translation>&amp;Вид</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="111"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="120"/>
         <source>User interface</source>
         <translation>Пользовательский интерфейс</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="112"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="121"/>
         <source>Dark theme</source>
         <translation>Темная тема</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="115"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="124"/>
         <source>&amp;Tools</source>
         <translation>&amp;Инструменты</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="116"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="125"/>
         <source>Typing test</source>
         <translation>Вводимый тест</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="119"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="128"/>
         <source>&amp;Exercise</source>
         <translation>&amp;Упражнение</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="120"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="129"/>
         <source>Exercise history</source>
         <translation>История урока</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="121"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="130"/>
         <source>Timed exercise</source>
         <translation>Упражнение на время</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="122"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="131"/>
         <source>Text from error words</source>
         <translation>Сгенерировать текст из слов с ошибками</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="123"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="132"/>
         <source>Reverse text</source>
         <translation>Перевернуть текст</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="126"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="135"/>
         <source>&amp;Options</source>
         <translation>&amp;Опции</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="127"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="136"/>
         <source>Preferences</source>
         <translation>Персональные настройки</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="130"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="139"/>
         <source>&amp;Help</source>
         <translation>&amp;Помощь</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="131"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="140"/>
         <source>&amp;Online documentation</source>
         <translation>&amp;Онлайн документация</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="132"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="141"/>
         <source>About program...</source>
         <translation>О программе...</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="133"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="142"/>
         <source>About Qt...</source>
         <translation>О Qt...</translation>
     </message>
@@ -264,39 +287,47 @@
 <context>
     <name>ConfigParser</name>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="316"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="326"/>
         <source>Touch</source>
         <translation>Касание</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="319"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="329"/>
         <source>Words</source>
         <translation>Слова</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="322"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="332"/>
         <source>Sentences</source>
         <translation>Предложения</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="325"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="335"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="336"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="346"/>
         <source>Lesson %1</source>
         <translation>Урок %1</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="342"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="352"/>
         <source>Sublesson %1</source>
         <translation>Подурок %1</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="348"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="358"/>
         <source>Exercise %1</source>
         <translation>Упражнение %1</translation>
+    </message>
+</context>
+<context>
+    <name>CustomTabButton</name>
+    <message>
+        <location filename="../src/framework/uicomponents/qml/OpenTyper/UiComponents/CustomTabButton.qml" line="55"/>
+        <source>Close tab</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -615,97 +646,102 @@
         <translation>Текстовые файлы</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="238"/>
+        <location filename="../src/app/qml/Home.qml" line="195"/>
+        <source>Open-Typer pack files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="250"/>
         <source>Options</source>
         <translation>Опции</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="244"/>
+        <location filename="../src/app/qml/Home.qml" line="256"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="250"/>
+        <location filename="../src/app/qml/Home.qml" line="262"/>
         <source>Print</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="263"/>
+        <location filename="../src/app/qml/Home.qml" line="275"/>
         <source>Typing test</source>
         <translation>Вводимый тест</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="271"/>
+        <location filename="../src/app/qml/Home.qml" line="283"/>
         <source>Timed exercise</source>
         <translation>Упражнение на время</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="277"/>
+        <location filename="../src/app/qml/Home.qml" line="289"/>
         <source>Text from error words</source>
-        <translation type="unfinished"></translation>
+        <translation>Сгенерировать текст из слов с ошибками</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="312"/>
+        <location filename="../src/app/qml/Home.qml" line="324"/>
         <source>Reverse text</source>
         <translation>Перевернуть текст</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="336"/>
+        <location filename="../src/app/qml/Home.qml" line="348"/>
         <source>Repeat exercise</source>
         <translation>Повторить упражнение</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="338"/>
+        <location filename="../src/app/qml/Home.qml" line="350"/>
         <source>Start typing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="343"/>
+        <location filename="../src/app/qml/Home.qml" line="355"/>
         <source>Close loaded exercise</source>
         <translation>Закрыть загруженное упражнение</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="351"/>
+        <location filename="../src/app/qml/Home.qml" line="363"/>
         <source>Previous exercise</source>
         <translation>Предыдущее упражнение</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="356"/>
+        <location filename="../src/app/qml/Home.qml" line="368"/>
         <source>Next exercise</source>
         <translation>Следующее упражнение</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="366"/>
+        <location filename="../src/app/qml/Home.qml" line="378"/>
         <source>Exercise history</source>
         <translation>История урока</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="388"/>
+        <location filename="../src/app/qml/Home.qml" line="400"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="412"/>
+        <location filename="../src/app/qml/Home.qml" line="424"/>
         <source>Export</source>
         <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="470"/>
+        <location filename="../src/app/qml/Home.qml" line="477"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="471"/>
+        <location filename="../src/app/qml/Home.qml" line="478"/>
         <source>This file is too large!</source>
         <translation>Этот файл слишком большой!</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="488"/>
+        <location filename="../src/app/qml/Home.qml" line="495"/>
         <source>No error words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="489"/>
+        <location filename="../src/app/qml/Home.qml" line="496"/>
         <source>You don&apos;t have any error words.</source>
         <translation>У Вас нет никаких ошибочных слов.</translation>
     </message>
@@ -719,36 +755,36 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="92"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="93"/>
         <source>Previous</source>
         <extracomment>Previous page</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="101"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="102"/>
         <source>Next</source>
         <extracomment>Next page</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="113"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="114"/>
         <source>Finish</source>
         <extracomment>To finish the initial setup</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="152"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="153"/>
         <source>User interface language</source>
         <extracomment>The language for the user interface</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="172"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="173"/>
         <source>Keyboard layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="204"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="205"/>
         <source>Lesson pack</source>
         <translation>Набор уроков</translation>
     </message>
@@ -796,10 +832,161 @@
     </message>
 </context>
 <context>
+    <name>LessonPackList</name>
+    <message>
+        <location filename="../src/app/qml/LessonPackList.qml" line="40"/>
+        <source>Custom lesson pack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/LessonPackList.qml" line="75"/>
+        <source>Open-Typer pack files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="160"/>
+        <location filename="../src/app/qml/MainWindow.qml" line="168"/>
         <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/MainWindow.qml" line="239"/>
+        <source>Open-Typer pack files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PackEditor</name>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="79"/>
+        <source>Do you want to save your changes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="91"/>
+        <source>Open-Typer pack files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="124"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="130"/>
+        <source>Save as...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="136"/>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="143"/>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="160"/>
+        <source>Add...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="167"/>
+        <source>Lesson</source>
+        <translation>Урок</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="173"/>
+        <source>Sublesson</source>
+        <translation>Подурок</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="213"/>
+        <source>Exercise</source>
+        <translation>Упражнение</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="222"/>
+        <source>Previous exercise</source>
+        <translation>Предыдущее упражнение</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="229"/>
+        <source>Next exercise</source>
+        <translation>Следующее упражнение</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="257"/>
+        <source>Remove exercise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="280"/>
+        <source>Repeating:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="285"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="285"/>
+        <source>Words</source>
+        <translation>Слова</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="295"/>
+        <source>Length limit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="314"/>
+        <source>Line length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="333"/>
+        <source>Letters learned in this lesson:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="343"/>
+        <source>Revision</source>
+        <translation>Ревизия</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="349"/>
+        <source>Shift</source>
+        <comment>Shift key</comment>
+        <translation>Shift</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="366"/>
+        <source>Input text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="419"/>
+        <source>Result:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PackEditorModel</name>
+    <message>
+        <location filename="../src/packeditor/internal/PackEditorModel.cpp" line="317"/>
+        <source>Unnamed</source>
+        <comment>Unnamed (lesson pack)</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/internal/PackEditorModel.cpp" line="426"/>
+        <source>New exercise</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -811,12 +998,12 @@
         <translation>Версия: %1</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="272"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="282"/>
         <source>Revision</source>
         <translation>Ревизия</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="287"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="297"/>
         <source>Shift</source>
         <comment>Shift key</comment>
         <translation>Shift</translation>
@@ -835,7 +1022,7 @@
 <context>
     <name>QmlFileDialog</name>
     <message>
-        <location filename="../src/framework/uicomponents/internal/QmlFileDialog.cpp" line="85"/>
+        <location filename="../src/framework/uicomponents/internal/QmlFileDialog.cpp" line="126"/>
         <source>All files</source>
         <translation>Все файлы</translation>
     </message>

@@ -107,6 +107,25 @@
         <source>About Qt...</source>
         <translation>Про Qt...</translation>
     </message>
+    <message>
+        <source>New lesson pack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exercise</source>
+        <comment>To open &quot;Exercise&quot;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lesson pack</source>
+        <comment>To open &quot;Lesson pack&quot;</comment>
+        <translation>Набір уроків</translation>
+    </message>
+    <message>
+        <source>Lesson pack (in editor)</source>
+        <comment>To open &quot;Lesson pack&quot; in editor</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AppearanceSettings</name>
@@ -242,6 +261,13 @@
     <message>
         <source>Exercise %1</source>
         <translation>Вправа %1</translation>
+    </message>
+</context>
+<context>
+    <name>CustomTabButton</name>
+    <message>
+        <source>Close tab</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -576,6 +602,10 @@
         <source>You don&apos;t have any error words.</source>
         <translation>У Вас немає жодних помилкових слів.</translation>
     </message>
+    <message>
+        <source>Open-Typer pack files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>InitialSetup</name>
@@ -650,9 +680,132 @@
     </message>
 </context>
 <context>
+    <name>LessonPackList</name>
+    <message>
+        <source>Custom lesson pack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open-Typer pack files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open-Typer pack files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PackEditor</name>
+    <message>
+        <source>Do you want to save your changes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open-Typer pack files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lesson</source>
+        <translation>Урок</translation>
+    </message>
+    <message>
+        <source>Sublesson</source>
+        <translation>Підурок</translation>
+    </message>
+    <message>
+        <source>Exercise</source>
+        <translation>Вправа</translation>
+    </message>
+    <message>
+        <source>Previous exercise</source>
+        <translation>Попередня вправа</translation>
+    </message>
+    <message>
+        <source>Next exercise</source>
+        <translation>Наступна вправа</translation>
+    </message>
+    <message>
+        <source>Remove exercise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeating:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation>Слова</translation>
+    </message>
+    <message>
+        <source>Length limit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letters learned in this lesson:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Revision</source>
+        <translation>Ревізія</translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <comment>Shift key</comment>
+        <translation>Shift</translation>
+    </message>
+    <message>
+        <source>Input text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PackEditorModel</name>
+    <message>
+        <source>Unnamed</source>
+        <comment>Unnamed (lesson pack)</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New exercise</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

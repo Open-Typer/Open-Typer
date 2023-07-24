@@ -33,102 +33,125 @@
 <context>
     <name>AppMenuBar</name>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="104"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="109"/>
         <source>&amp;File</source>
         <translation>&amp;Súbor</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="105"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="110"/>
+        <source>New lesson pack</source>
+        <translation>Nový balík lekcií</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppMenuBar.cpp" line="111"/>
         <source>Open...</source>
         <translation>Otvoriť...</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="106"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="112"/>
+        <source>Exercise</source>
+        <comment>To open &quot;Exercise&quot;</comment>
+        <translation>Cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppMenuBar.cpp" line="113"/>
+        <source>Lesson pack</source>
+        <comment>To open &quot;Lesson pack&quot;</comment>
+        <translation>Balík lekcií</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppMenuBar.cpp" line="114"/>
+        <source>Lesson pack (in editor)</source>
+        <comment>To open &quot;Lesson pack&quot; in editor</comment>
+        <translation>Balík lekcií (v editore)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppMenuBar.cpp" line="115"/>
         <source>Print</source>
         <translation>Tlačiť</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="107"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="116"/>
         <source>Quit</source>
         <translation>Odísť</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="110"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="119"/>
         <source>&amp;View</source>
         <translation>&amp;Zobrazenie</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="111"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="120"/>
         <source>User interface</source>
         <translation>Používateľské rozhranie</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="112"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="121"/>
         <source>Dark theme</source>
         <translation>Tmavý motív</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="115"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="124"/>
         <source>&amp;Tools</source>
         <translation>&amp;Nástroje</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="116"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="125"/>
         <source>Typing test</source>
         <translation>Kontrolný odpis</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="119"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="128"/>
         <source>&amp;Exercise</source>
         <translation>&amp;Cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="120"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="129"/>
         <source>Exercise history</source>
         <translation>História cvičenia</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="121"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="130"/>
         <source>Timed exercise</source>
         <translation>Cvičenie na čas</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="122"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="131"/>
         <source>Text from error words</source>
         <translation>Text z chybných slov</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="123"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="132"/>
         <source>Reverse text</source>
         <translation>Obrátiť text</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="126"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="135"/>
         <source>&amp;Options</source>
         <translation>&amp;Možnosti</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="127"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="136"/>
         <source>Preferences</source>
         <translation>Nastavenia</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="130"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="139"/>
         <source>&amp;Help</source>
         <translation>&amp;Pomoc</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="131"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="140"/>
         <source>&amp;Online documentation</source>
         <translation>&amp;Online dokumentácia</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="132"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="141"/>
         <source>About program...</source>
         <translation>O programe...</translation>
     </message>
     <message>
-        <location filename="../src/app/AppMenuBar.cpp" line="133"/>
+        <location filename="../src/app/AppMenuBar.cpp" line="142"/>
         <source>About Qt...</source>
         <translation>O Qt...</translation>
     </message>
@@ -264,39 +287,47 @@
 <context>
     <name>ConfigParser</name>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="316"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="326"/>
         <source>Touch</source>
         <translation>Hmaty</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="319"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="329"/>
         <source>Words</source>
         <translation>Slová</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="322"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="332"/>
         <source>Sentences</source>
         <translation>Vety</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="325"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="335"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="336"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="346"/>
         <source>Lesson %1</source>
         <translation>Lekcia %1</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="342"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="352"/>
         <source>Sublesson %1</source>
         <translation>Podlekcia %1</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="348"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="358"/>
         <source>Exercise %1</source>
         <translation>Cvičenie %1</translation>
+    </message>
+</context>
+<context>
+    <name>CustomTabButton</name>
+    <message>
+        <location filename="../src/framework/uicomponents/qml/OpenTyper/UiComponents/CustomTabButton.qml" line="55"/>
+        <source>Close tab</source>
+        <translation>Zatvoriť kartu</translation>
     </message>
 </context>
 <context>
@@ -613,97 +644,102 @@
         <translation>Textové súbory</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="238"/>
+        <location filename="../src/app/qml/Home.qml" line="195"/>
+        <source>Open-Typer pack files</source>
+        <translation>Balíky lekcií programu Open-Typer</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/Home.qml" line="250"/>
         <source>Options</source>
         <translation>Možnosti</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="244"/>
+        <location filename="../src/app/qml/Home.qml" line="256"/>
         <source>Open</source>
         <translation>Otvoriť</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="250"/>
+        <location filename="../src/app/qml/Home.qml" line="262"/>
         <source>Print</source>
         <translation>Tlačiť</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="263"/>
+        <location filename="../src/app/qml/Home.qml" line="275"/>
         <source>Typing test</source>
         <translation>Kontrolný odpis</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="271"/>
+        <location filename="../src/app/qml/Home.qml" line="283"/>
         <source>Timed exercise</source>
         <translation>Cvičenie na čas</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="277"/>
+        <location filename="../src/app/qml/Home.qml" line="289"/>
         <source>Text from error words</source>
         <translation>Text z chybných slov</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="312"/>
+        <location filename="../src/app/qml/Home.qml" line="324"/>
         <source>Reverse text</source>
         <translation>Obrátiť text</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="336"/>
+        <location filename="../src/app/qml/Home.qml" line="348"/>
         <source>Repeat exercise</source>
         <translation>Opakovať cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="338"/>
+        <location filename="../src/app/qml/Home.qml" line="350"/>
         <source>Start typing</source>
         <translation>Začať písať</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="343"/>
+        <location filename="../src/app/qml/Home.qml" line="355"/>
         <source>Close loaded exercise</source>
         <translation>Zatvoriť načítané cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="351"/>
+        <location filename="../src/app/qml/Home.qml" line="363"/>
         <source>Previous exercise</source>
         <translation>Predchádzajúce cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="356"/>
+        <location filename="../src/app/qml/Home.qml" line="368"/>
         <source>Next exercise</source>
         <translation>Nasledujúce cvičenie</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="366"/>
+        <location filename="../src/app/qml/Home.qml" line="378"/>
         <source>Exercise history</source>
         <translation>História cvičenia</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="388"/>
+        <location filename="../src/app/qml/Home.qml" line="400"/>
         <source>Stop</source>
         <translation>Zastaviť</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="412"/>
+        <location filename="../src/app/qml/Home.qml" line="424"/>
         <source>Export</source>
         <translation>Exportovať</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="470"/>
+        <location filename="../src/app/qml/Home.qml" line="477"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="471"/>
+        <location filename="../src/app/qml/Home.qml" line="478"/>
         <source>This file is too large!</source>
         <translation>Tento súbor je príliš veľký!</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="488"/>
+        <location filename="../src/app/qml/Home.qml" line="495"/>
         <source>No error words</source>
         <translation>Žiadne chybné slová</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/Home.qml" line="489"/>
+        <location filename="../src/app/qml/Home.qml" line="496"/>
         <source>You don&apos;t have any error words.</source>
         <translation>Nemáte žiadne chybné slová.</translation>
     </message>
@@ -717,36 +753,36 @@
         <translation>Nastavenie programu %1</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="92"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="93"/>
         <source>Previous</source>
         <extracomment>Previous page</extracomment>
         <translation>Späť</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="101"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="102"/>
         <source>Next</source>
         <extracomment>Next page</extracomment>
         <translation>Pokračovať</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="113"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="114"/>
         <source>Finish</source>
         <extracomment>To finish the initial setup</extracomment>
         <translation>Dokončiť</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="152"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="153"/>
         <source>User interface language</source>
         <extracomment>The language for the user interface</extracomment>
         <translation>Jazyk prostredia</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="172"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="173"/>
         <source>Keyboard layout</source>
         <translation>Rozloženie klávesnice</translation>
     </message>
     <message>
-        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="204"/>
+        <location filename="../src/app/qml/dialogs/InitialSetup.qml" line="205"/>
         <source>Lesson pack</source>
         <translation>Balík lekcií</translation>
     </message>
@@ -794,11 +830,162 @@
     </message>
 </context>
 <context>
+    <name>LessonPackList</name>
+    <message>
+        <location filename="../src/app/qml/LessonPackList.qml" line="40"/>
+        <source>Custom lesson pack</source>
+        <translation>Vlastný balík lekcií</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/LessonPackList.qml" line="75"/>
+        <source>Open-Typer pack files</source>
+        <translation>Balíky lekcií programu Open-Typer</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/app/qml/MainWindow.qml" line="160"/>
+        <location filename="../src/app/qml/MainWindow.qml" line="168"/>
         <source>Home</source>
         <translation>Domov</translation>
+    </message>
+    <message>
+        <location filename="../src/app/qml/MainWindow.qml" line="239"/>
+        <source>Open-Typer pack files</source>
+        <translation>Balíky lekcií programu Open-Typer</translation>
+    </message>
+</context>
+<context>
+    <name>PackEditor</name>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="79"/>
+        <source>Do you want to save your changes?</source>
+        <translation>Prajete si uložiť zmeny?</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="91"/>
+        <source>Open-Typer pack files</source>
+        <translation>Balíky lekcií programu Open-Typer</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="124"/>
+        <source>Save</source>
+        <translation>Uložiť</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="130"/>
+        <source>Save as...</source>
+        <translation>Uložiť ako...</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="136"/>
+        <source>Undo</source>
+        <translation>Vrátiť späť</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="143"/>
+        <source>Redo</source>
+        <translation>Znova</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="160"/>
+        <source>Add...</source>
+        <translation>Pridať...</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="167"/>
+        <source>Lesson</source>
+        <translation>Lekcia</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="173"/>
+        <source>Sublesson</source>
+        <translation>Podlekcia</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="213"/>
+        <source>Exercise</source>
+        <translation>Cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="222"/>
+        <source>Previous exercise</source>
+        <translation>Predchádzajúce cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="229"/>
+        <source>Next exercise</source>
+        <translation>Nasledujúce cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="257"/>
+        <source>Remove exercise</source>
+        <translation>Odstrániť cvičenie</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="280"/>
+        <source>Repeating:</source>
+        <translation>Opakovanie:</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="285"/>
+        <source>None</source>
+        <translation>Žiadne</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="285"/>
+        <source>Words</source>
+        <translation>Slová</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="295"/>
+        <source>Length limit:</source>
+        <translation>Dĺžkový limit:</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="314"/>
+        <source>Line length:</source>
+        <translation>Dĺžka riadka:</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="333"/>
+        <source>Letters learned in this lesson:</source>
+        <translation>Znaky naučené v tejto lekcii:</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="343"/>
+        <source>Revision</source>
+        <translation>Opakovanie</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="349"/>
+        <source>Shift</source>
+        <comment>Shift key</comment>
+        <translation>Shift</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="366"/>
+        <source>Input text:</source>
+        <translation>Vstupný text:</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/qml/OpenTyper/PackEditor/PackEditor.qml" line="419"/>
+        <source>Result:</source>
+        <translation>Výsledok:</translation>
+    </message>
+</context>
+<context>
+    <name>PackEditorModel</name>
+    <message>
+        <location filename="../src/packeditor/internal/PackEditorModel.cpp" line="317"/>
+        <source>Unnamed</source>
+        <comment>Unnamed (lesson pack)</comment>
+        <translation>Nepomenovaný</translation>
+    </message>
+    <message>
+        <location filename="../src/packeditor/internal/PackEditorModel.cpp" line="426"/>
+        <source>New exercise</source>
+        <translation>Nové cvičenie</translation>
     </message>
 </context>
 <context>
@@ -809,12 +996,12 @@
         <translation>Verzia: %1</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="272"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="282"/>
         <source>Revision</source>
         <translation>Opakovanie</translation>
     </message>
     <message>
-        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="287"/>
+        <location filename="../src/framework/lessonpack/internal/ConfigParser.cpp" line="297"/>
         <source>Shift</source>
         <comment>Shift key</comment>
         <translation>Shift</translation>
@@ -833,7 +1020,7 @@
 <context>
     <name>QmlFileDialog</name>
     <message>
-        <location filename="../src/framework/uicomponents/internal/QmlFileDialog.cpp" line="85"/>
+        <location filename="../src/framework/uicomponents/internal/QmlFileDialog.cpp" line="126"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
