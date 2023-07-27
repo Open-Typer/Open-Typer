@@ -115,6 +115,7 @@ jobs:
         include:
           - qt-version: '6.5.2'
             qt-target: 'desktop'
+            qt-modules: 'qtcharts qt5compat qtshadertools'
             mingw-version: '11.2.0'
     steps:
     - uses: actions/checkout@v3
@@ -150,7 +151,7 @@ jobs:
         host: 'windows'
         arch: 'win64_mingw'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts'
+        modules: ${{ matrix.qt-modules }}
     - name: Install Qt IFW
       run: |
         curl -o aqt.exe -L https://github.com/miurahr/aqtinstall/releases/download/v2.2.1/aqt.exe
@@ -216,6 +217,7 @@ jobs:
       matrix:
         qt-version: ['6.5.2']
         qt-target: ['desktop']
+        qt-modules: ['qtcharts qt5compat qtshadertools']
     steps:
     - uses: actions/checkout@v3
       with:
@@ -249,7 +251,7 @@ jobs:
         version: ${{ matrix.qt-version }}
         host: 'mac'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts qt5compat qtshadertools'
+        modules: ${{ matrix.qt-modules }}
     # Build
     - name: Build (macOS)
       run: .ci/macos-build.sh
@@ -268,6 +270,7 @@ jobs:
       matrix:
         qt-version: ['6.5.2']
         qt-target: ['desktop']
+        qt-modules: 'qtcharts qt5compat qtshadertools'
     steps:
     - uses: actions/checkout@v3
       with:
@@ -289,7 +292,7 @@ jobs:
         host: 'linux'
         arch: 'gcc_64'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts qt5compat qtshadertools'
+        modules: ${{ matrix.qt-modules }}
     - name: Install WASM Qt
       uses: jurplel/install-qt-action@v3
       with:
@@ -299,7 +302,7 @@ jobs:
         host: 'linux'
         arch: 'wasm_multithread'
         target: ${{ matrix.qt-target }}
-        modules: 'qtcharts qt5compat qtshadertools'
+        modules: ${{ matrix.qt-modules }}
     # Build
     - run: source .ci/common/build.sh wasm
       shell: bash
