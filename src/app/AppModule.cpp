@@ -19,6 +19,8 @@
  */
 
 #include <QQmlEngine>
+#include <QScreen>
+#include <QApplication>
 #include "AppModule.h"
 #include "AppMenuBar.h"
 #include "settings/SettingsCategory.h"
@@ -35,10 +37,18 @@ std::string AppModule::moduleName() const
 
 void AppModule::initSettings()
 {
-	INIT_SETTINGS_KEY("windowX", "main/windowX", 0);
-	INIT_SETTINGS_KEY("windowY", "main/windowY", 0);
-	INIT_SETTINGS_KEY("windowWidth", "main/windowWidth", 1200);
-	INIT_SETTINGS_KEY("windowHeight", "main/windowHeight", 800);
+	QScreen *screen = qApp->primaryScreen();
+	QRect screenGeometry;
+	if(screen)
+		screenGeometry = screen->geometry();
+
+	int initialWidth = 1200;
+	int initialHeight = 800;
+
+	INIT_SETTINGS_KEY("windowX", "main/windowX", (screenGeometry.width() - initialWidth) / 2);
+	INIT_SETTINGS_KEY("windowY", "main/windowY", (screenGeometry.height() - initialHeight) / 2);
+	INIT_SETTINGS_KEY("windowWidth", "main/windowWidth", initialWidth);
+	INIT_SETTINGS_KEY("windowHeight", "main/windowHeight", initialHeight);
 	INIT_SETTINGS_KEY("windowMaximized", "main/windowMaximized", true);
 	INIT_SETTINGS_KEY("lessonPack", "main/configfile", "");
 	INIT_SETTINGS_KEY("customLessonPack", "main/customconfig", false);
