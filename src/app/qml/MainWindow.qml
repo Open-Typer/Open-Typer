@@ -302,16 +302,6 @@ ApplicationWindow {
 	}
 
 	Component.onCompleted: {
-		QmlUtils.blurSource = mainLayout;
-		QmlUtils.bgBlur = bgBlur;
-		QmlUtils.menuBarBlur = menuBarBlur;
-		QmlUtils.tabBarBlur = tabBarBlur;
-		QmlUtils.activeFocusItem = root.activeFocusItem;
-		if(!Settings.getValue("app", "initFinished"))
-			initialSetup.open();
-		homeTab.reload();
-		homeTab.paper.forceActiveFocus();
-
 		// Restore window geometry
 		let windowVisibility = Settings.getValue("app", "windowMaximized") ? ApplicationWindow.Maximized : ApplicationWindow.Windowed;
 		x = Settings.getValue("app", "windowX");
@@ -323,6 +313,18 @@ ApplicationWindow {
 		oldWidth = width;
 		oldHeight = height;
 		wasMaximized = (windowVisibility === ApplicationWindow.Maximized);
+
+		QmlUtils.blurSource = mainLayout;
+		QmlUtils.bgBlur = bgBlur;
+		QmlUtils.menuBarBlur = menuBarBlur;
+		QmlUtils.tabBarBlur = tabBarBlur;
+		QmlUtils.activeFocusItem = root.activeFocusItem;
+		if(!Settings.getValue("app", "initFinished"))
+			initialSetup.open();
+		homeTab.reload();
+		homeTab.paper.forceActiveFocus();
+
+		// Restore window visibility
 		visibility = windowVisibility;
 	}
 
