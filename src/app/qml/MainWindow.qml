@@ -40,6 +40,7 @@ ApplicationWindow {
 	property int oldX
 	property int oldY
 	property bool wasMaximized
+	property bool geometryInitialized: false
 	Material.theme: ThemeEngine.theme === ThemeEngine.DarkTheme ? Material.Dark : Material.Light
 	Material.accent: ThemeEngine.currentAccentColor
 	color: ThemeEngine.bgColor
@@ -47,12 +48,18 @@ ApplicationWindow {
 	minimumHeight: mainLayout.y - menuBarLine.y + mainLayout.minHeight
 	visible: true
 	id: root
-	onXChanged: geometryTimer.start()
-	onYChanged: geometryTimer.start()
-	onWidthChanged: geometryTimer.start()
-	onHeightChanged: geometryTimer.start()
+	onXChanged: updateGeometry()
+	onYChanged: updateGeometry()
+	onWidthChanged: updateGeometry()
+	onHeightChanged: updateGeometry()
 	onActiveFocusItemChanged: QmlUtils.activeFocusItem = activeFocusItem
 	onVisibilityChanged: {
+		if(!geometryInitialized)
+		{
+			geometryInitialized = true;
+			return;
+		}
+
 		if(visibility == ApplicationWindow.Maximized)
 			wasMaximized = true;
 		else if(visibility == ApplicationWindow.Windowed)
@@ -66,6 +73,11 @@ ApplicationWindow {
 			}
 			wasMaximized = false;
 		}
+	}
+
+	function updateGeometry() {
+		if(geometryInitialized)
+			geometryTimer.start()
 	}
 
 	Timer {
@@ -290,28 +302,6 @@ ApplicationWindow {
 	}
 
 	Component.onCompleted: {
-		visibility = Settings.getValue("app", "windowMaximized") ? ApplicationWindow.Maximized : ApplicationWindow.Windowed;
-		wasMaximized = (visibility == ApplicationWindow.Maximized);
-		oldX = Settings.getValue("app", "windowX");
-		oldY = Settings.getValue("app", "windowY");
-		oldWidth = Settings.getValue("app", "windowWidth");
-		oldHeight = Settings.getValue("app", "windowHeight");
-		if(!Settings.containsKey("app", "windowX") || !Settings.containsKey("app", "windowY"))
-		{
-			oldX = (screen.width - oldWidth) / 2;
-			oldY = (screen.height - oldHeight) / 2;
-		}
-		showNormal();
-		x = oldX;
-		y = oldY;
-		width = oldWidth;
-		height = oldHeight;
-		if(Settings.getValue("app", "windowMaximized"))
-		{
-			if(QmlUtils.osWindows() && (QmlUtils.qtVersionMajor() < 6))
-				showFullScreen();
-			showMaximized();
-		}
 		QmlUtils.blurSource = mainLayout;
 		QmlUtils.bgBlur = bgBlur;
 		QmlUtils.menuBarBlur = menuBarBlur;
@@ -321,6 +311,19 @@ ApplicationWindow {
 			initialSetup.open();
 		homeTab.reload();
 		homeTab.paper.forceActiveFocus();
+
+		// Restore window geometry
+		let windowVisibility = Settings.getValue("app", "windowMaximized") ? ApplicationWindow.Maximized : ApplicationWindow.Windowed;
+		x = Settings.getValue("app", "windowX");
+		y = Settings.getValue("app", "windowY");
+		width = Settings.getValue("app", "windowWidth");
+		height = Settings.getValue("app", "windowHeight");
+		oldX = x;
+		oldY = y;
+		oldWidth = width;
+		oldHeight = height;
+		wasMaximized = (windowVisibility === ApplicationWindow.Maximized);
+		visibility = windowVisibility;
 	}
 
 	onClosing: {
@@ -333,8 +336,9 @@ ApplicationWindow {
 		}
 
 		// Save window geometry
-		if(visibility != ApplicationWindow.Windowed)
+		if(visibility == ApplicationWindow.Maximized || wasMaximized)
 		{
+			Settings.setValue("app", "windowMaximized", true);
 			Settings.setValue("app", "windowX", oldX);
 			Settings.setValue("app", "windowY", oldY);
 			Settings.setValue("app", "windowWidth", oldWidth);
@@ -342,11 +346,11 @@ ApplicationWindow {
 		}
 		else
 		{
+			Settings.setValue("app", "windowMaximized", false);
 			Settings.setValue("app", "windowX", root.x);
 			Settings.setValue("app", "windowY", root.y);
 			Settings.setValue("app", "windowWidth", root.width);
 			Settings.setValue("app", "windowHeight", root.height);
 		}
-		Settings.setValue("app", "windowMaximized", wasMaximized);
 	}
 }
