@@ -270,7 +270,7 @@ jobs:
       matrix:
         qt-version: ['6.5.2']
         qt-target: ['desktop']
-        qt-modules: 'qtcharts qt5compat qtshadertools'
+        qt-modules: ['qtcharts qt5compat qtshadertools']
     steps:
     - uses: actions/checkout@v3
       with:
