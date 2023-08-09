@@ -62,6 +62,7 @@ class Q_DECL_EXPORT QmlUtils : public QObject
 		Q_INVOKABLE static int qtVersionMinor(void);
 		Q_INVOKABLE static int qtVersionPatch(void);
 		Q_INVOKABLE static int compareQtVersions(int major1, int minor1, int patch1, int major2, int minor2, int patch2);
+		Q_INVOKABLE static bool qtVersionAtLeast(int major, int minor, int patch);
 		Q_INVOKABLE static QString applicationRevision(void);
 		Q_INVOKABLE static int applicationBuildYear(void);
 		Q_INVOKABLE static void restartApplication(void);

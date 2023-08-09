@@ -171,6 +171,12 @@ int QmlUtils::compareQtVersions(int major1, int minor1, int patch1, int major2, 
 		return -1;
 }
 
+/*! Returns true if the Qt version is at least the given version. */
+bool QmlUtils::qtVersionAtLeast(int major, int minor, int patch)
+{
+	return compareQtVersions(qtVersionMajor(), qtVersionMinor(), qtVersionPatch(), major, minor, patch) >= 0;
+}
+
 /*!
  * Returns the application git revision.\n
  * Use QCoreApplication#applicationVersion() or Qt.application.version in QML to get the version.
