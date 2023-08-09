@@ -18,17 +18,17 @@ jobs:
         arch: ['amd64']
         ubuntu-version: ['20.04']
         include:
-          - qt-version: '6.5.2'
+          - qt-version: '6.4.3'
             qt-target: 'desktop'
             qt-modules: 'qtcharts qt5compat qtshadertools'
             arch: 'amd64'
             ubuntu-version: '20.04'
-          - qt-version: '6.5.2'
+          - qt-version: '6.4.3'
             qt-target: 'desktop'
             qt-modules: 'qtcharts qt5compat qtshadertools'
             arch: 'aarch64'
             ubuntu-version: '20.04'
-          - qt-version: '6.5.2'
+          - qt-version: '6.4.3'
             qt-target: 'desktop'
             qt-modules: 'qtcharts qt5compat qtshadertools'
             arch: 'armv7'
