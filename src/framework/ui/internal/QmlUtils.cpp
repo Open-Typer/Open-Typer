@@ -142,6 +142,42 @@ int QmlUtils::qtVersionPatch(void)
 }
 
 /*!
+ * Compares the given Qt versions.\n
+ * Returns 0 if they're equal,
+ * 1 if the first version is greater than the second
+ * and -1 - if the first version is less than the second.
+ */
+int QmlUtils::compareQtVersions(int major1, int minor1, int patch1, int major2, int minor2, int patch2)
+{
+	if(major1 == major2)
+	{
+		if(minor1 == minor2)
+		{
+			if(patch1 == patch2)
+				return 0;
+			else if(patch1 > patch2)
+				return 1;
+			else
+				return -1;
+		}
+		else if(minor1 > minor2)
+			return 1;
+		else
+			return -1;
+	}
+	else if(major1 > major2)
+		return 1;
+	else
+		return -1;
+}
+
+/*! Returns true if the Qt version is at least the given version. */
+bool QmlUtils::qtVersionAtLeast(int major, int minor, int patch)
+{
+	return compareQtVersions(qtVersionMajor(), qtVersionMinor(), qtVersionPatch(), major, minor, patch) >= 0;
+}
+
+/*!
  * Returns the application git revision.\n
  * Use QCoreApplication#applicationVersion() or Qt.application.version in QML to get the version.
  */

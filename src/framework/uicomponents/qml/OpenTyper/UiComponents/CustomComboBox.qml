@@ -86,7 +86,7 @@ ComboBox {
 	}
 
 	Component.onCompleted: {
-		if((QmlUtils.qtVersionMajor() === 6 && QmlUtils.qtVersionMinor() >= 5) || QmlUtils.qtVersionMajor() > 6)
+		if(QmlUtils.qtVersionAtLeast(6, 5, 0))
 			bgRect.createObject(background);
 	}
 }
