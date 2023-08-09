@@ -14,7 +14,7 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            qt-version: '6.5.2'
+            qt-version: '6.4.3'
             qt-target: 'desktop'
             qt-modules: 'qtcharts qt5compat qtshadertools'
             mingw-version: '11.2.0'

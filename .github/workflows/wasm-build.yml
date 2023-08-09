@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        qt-version: ['6.5.2']
+        qt-version: ['6.4.3']
         qt-target: ['desktop']
     steps:
     - uses: actions/checkout@v3
@@ -43,7 +43,7 @@ jobs:
         aqtversion: '==3.1.6'
         py7zrversion: '==0.20.2'
         host: 'linux'
-        arch: 'wasm_multithread'
+        arch: 'wasm_32'
         target: ${{ matrix.qt-target }}
         modules: 'qtcharts qt5compat qtshadertools'
     # Build
