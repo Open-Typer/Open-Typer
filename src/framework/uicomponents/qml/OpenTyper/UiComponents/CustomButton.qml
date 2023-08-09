@@ -25,7 +25,7 @@ import OpenTyper.Ui 1.0
 Button {
 	Component.onCompleted: {
 		// TODO: Set roundedScale directly after dropping Qt <6.5
-		if((QmlUtils.qtVersionMajor() === 6 && QmlUtils.qtVersionMinor() >= 5) || QmlUtils.qtVersionMajor() > 6)
+		if(QmlUtils.qtVersionAtLeast(6, 5, 0))
 			Material.roundedScale = Material.SmallScale;
 	}
 }
