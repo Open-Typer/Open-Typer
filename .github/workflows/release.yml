@@ -300,7 +300,7 @@ jobs:
         aqtversion: '==3.1.6'
         py7zrversion: '==0.20.2'
         host: 'linux'
-        arch: 'wasm_multithread'
+        arch: 'wasm_singlethread'
         target: ${{ matrix.qt-target }}
         modules: ${{ matrix.qt-modules }}
     # Build
