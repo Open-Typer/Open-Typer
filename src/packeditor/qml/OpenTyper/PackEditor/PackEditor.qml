@@ -34,7 +34,6 @@ ColumnLayout {
 	spacing: 0
 
 	QtObject {
-		property bool skipChange: false
 		property bool closeOnSave: false
 		id: priv
 	}
@@ -59,18 +58,9 @@ ColumnLayout {
 		id: editorModel
 		fileName: root.fileName
 		onFileNameChanged: root.fileName = fileName
-		onCurrentRawTextChanged: {
-			priv.skipChange = true;
-			inputEdit.text = currentRawText;
-		}
-		onCurrentLengthLimitChanged: {
-			priv.skipChange = true;
-			lengthLimitBox.value = currentLengthLimit;
-		}
-		onCurrentLineLengthChanged: {
-			priv.skipChange = true;
-			lineLengthBox.value = currentLineLength;
-		}
+		onCurrentRawTextChanged: inputEdit.text = currentRawText
+		onCurrentLengthLimitChanged: lengthLimitBox.value = currentLengthLimit
+		onCurrentLineLengthChanged: lineLengthBox.value = currentLineLength
 		onCurrentLessonDescriptionChanged: lessonDescField.text = currentLessonDescription
 	}
 
@@ -300,12 +290,7 @@ ColumnLayout {
 					from: 1
 					to: 729
 					stepSize: 10
-					onValueChanged: {
-						if(!priv.skipChange)
-							editorModel.currentLengthLimit = value
-						else
-							priv.skipChange = false
-					}
+					onValueChanged: editorModel.currentLengthLimit = value
 				}
 			}
 
@@ -319,12 +304,7 @@ ColumnLayout {
 					from: 30
 					to: 120
 					stepSize: 10
-					onValueChanged: {
-						if(!priv.skipChange)
-							editorModel.currentLineLength = value
-						else
-							priv.skipChange = false;
-					}
+					onValueChanged: editorModel.currentLineLength = value
 				}
 			}
 
@@ -390,12 +370,7 @@ ColumnLayout {
 				color: ThemeEngine.foregroundColor
 				width: inputFlickable.contentWidth
 				height: Math.max(inputFlickable.height, inputFlickable.contentHeight)
-				onTextChanged: {
-					if(!priv.skipChange)
-						editorModel.currentRawText = text
-					else
-						priv.skipChange = false;
-				}
+				onTextChanged: editorModel.currentRawText = text
 
 				FontMetrics {
 					id: inputMetrics
