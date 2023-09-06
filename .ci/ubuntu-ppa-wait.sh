@@ -1,6 +1,12 @@
 #!/bin/bash
 
 ### This script waits until the new release is available in the PPA for Ubuntu
+sudo ()
+{
+    [[ $EUID = 0 ]] || set -- command sudo "$@"
+    "$@"
+}
+
 sudo apt install -y python3-launchpadlib
 VERSION=$(head -n 1 .qmake.conf)
 VERSION=${VERSION:8}

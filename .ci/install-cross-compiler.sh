@@ -1,5 +1,11 @@
 #!/bin/bash
 
+sudo ()
+{
+    [[ $EUID = 0 ]] || set -- command sudo "$@"
+    "$@"
+}
+
 sudo apt update
 case "$1" in
     aarch64)
