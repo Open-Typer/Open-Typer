@@ -1,0 +1,97 @@
+name: Linux arm build
+
+on:
+  push:
+    branches: '*'
+    tags: '*'
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:18.04
+      options: --user root --privileged --security-opt seccomp=unconfined
+    strategy:
+      matrix:
+        include:
+          - qt-version: '6.5.2'
+            qt-target: 'desktop'
+            qt-modules: 'qtcharts qt5compat qtshadertools'
+            arch: 'aarch64'
+          - qt-version: '6.5.2'
+            qt-target: 'desktop'
+            qt-modules: 'qtcharts qt5compat qtshadertools'
+            arch: 'armv7'
+    steps:
+    - name: Update git
+      run: |
+        apt-get update
+        apt-get install -y software-properties-common
+        add-apt-repository -y ppa:git-core/ppa
+        apt-get install -y git
+      shell: bash
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        submodules: true
+    - name: Setup environment
+      run: |
+        sed -i -e '/^#/d' .github/config.env
+        sed -i -e '/^$/d' .github/config.env
+        cat .github/config.env >> "${GITHUB_ENV}"
+      shell: bash
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt-get install -y libxkbcommon-x11-0 wget curl
+        wget https://apt.kitware.com/keys/kitware-archive-latest.asc
+        apt-key add kitware-archive-latest.asc
+        apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+        add-apt-repository ppa:ubuntu-toolchain-r/test
+        apt-get update
+        apt-get install -y cmake gcc-9 g++-9
+        update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
+        update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-9 9
+        update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
+        update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-9 9
+        update-alternatives --set gcc /usr/bin/gcc-9
+        update-alternatives --set cc /usr/bin/gcc-9
+        update-alternatives --set g++ /usr/bin/g++-9
+        update-alternatives --set c++ /usr/bin/g++-9
+      shell: bash
+    - name: Build cross compiler
+      run: .ci/build-cross-compiler.sh "${{ matrix.arch }}"
+      shell: bash
+    ## Install Qt
+    - name: Restore cross-compiled Qt from cache
+      id: cache-qt-cross
+      uses: actions/cache@v3
+      with:
+        path: |
+          ./qt-host/
+          ./qt-cross/
+          ./sysroot/
+        key: qt-cross-${{ runner.os }}-${{ matrix.qt-version }}-${{ matrix.qt-target }}-${{ matrix.qt-modules }}-${{ matrix.arch }}
+        restore-keys:
+          qt-cross-${{ runner.os }}-${{ matrix.qt-version }}-${{ matrix.qt-target }}-${{ matrix.qt-modules }}-${{ matrix.arch }}
+    - if: "steps.cache-qt-cross.outputs.cache-hit != 'true'"
+      name: Cross-compile Qt
+      shell: bash
+      run: .ci/build-qt6.sh "${{ matrix.qt-version }}" "${{ matrix.qt-modules }}" "${{ matrix.arch }}"
+    ## Build
+    - name: Prepare cross-compilation environment
+      run: .ci/prepare-cross-build.sh "${{ matrix.arch }}"
+      shell: bash
+    - name: Build AppImage
+      run: .ci/ubuntu-build.sh
+      shell: 'script -q -e -c "bash {0}"'
+    ## Upload
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-Qt-${{ matrix.qt-version }}-${{ matrix.arch }}
+        path: |
+          *.AppImage
+          *.zsync

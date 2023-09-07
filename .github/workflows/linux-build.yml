@@ -15,24 +15,10 @@ jobs:
         qt-version: ['5.12.8', '5.15.2']
         qt-target: ['desktop']
         qt-modules: ['qtcharts']
-        arch: ['amd64']
-        ubuntu-version: ['20.04']
         include:
           - qt-version: '6.5.2'
             qt-target: 'desktop'
             qt-modules: 'qtcharts qt5compat qtshadertools'
-            arch: 'amd64'
-            ubuntu-version: '20.04'
-          - qt-version: '6.5.2'
-            qt-target: 'desktop'
-            qt-modules: 'qtcharts qt5compat qtshadertools'
-            arch: 'aarch64'
-            ubuntu-version: '20.04'
-          - qt-version: '6.5.2'
-            qt-target: 'desktop'
-            qt-modules: 'qtcharts qt5compat qtshadertools'
-            arch: 'armv7'
-            ubuntu-version: '20.04'
     steps:
     - uses: actions/checkout@v3
       with:
@@ -44,42 +30,20 @@ jobs:
         sed -i -e '/^$/d' .github/config.env
         cat .github/config.env >> "${GITHUB_ENV}"
       shell: bash
-    - if: contains(matrix.arch, 'amd64')
-      name: Install dependencies
+    - name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y libxkbcommon-x11-0
       shell: bash
     ## Install Qt
-    - if: contains(matrix.arch, 'amd64')
-      name: Install Qt (Ubuntu)
+    - name: Install Qt (Ubuntu)
       uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt-version }}
         host: 'linux'
         target: ${{ matrix.qt-target }}
         modules: ${{ matrix.qt-modules }}
-    - if: "!contains(matrix.arch, 'amd64')"
-      name: Restore cross-compiled Qt from cache
-      id: cache-qt-cross
-      uses: actions/cache@v3
-      with:
-        path: |
-          ./qt-host/
-          ./qt-cross/
-          ./sysroot/
-        key: qt-cross-${{ runner.os }}-${{ matrix.qt-version }}-${{ matrix.qt-target }}-${{ matrix.qt-modules }}-${{ matrix.arch }}
-        restore-keys:
-          qt-cross-${{ runner.os }}-${{ matrix.qt-version }}-${{ matrix.qt-target }}-${{ matrix.qt-modules }}-${{ matrix.arch }}
-    - if: "!contains(matrix.arch, 'amd64') && steps.cache-qt-cross.outputs.cache-hit != 'true'"
-      name: Cross-compile Qt
-      shell: bash
-      run: .ci/build-qt6.sh "${{ matrix.qt-version }}" "${{ matrix.qt-modules }}" "${{ matrix.arch }}"
     ## Build
-    - if: "!contains(matrix.arch, 'amd64')"
-      name: Prepare cross-compilation environment
-      run: .ci/prepare-cross-build.sh "${{ matrix.arch }}"
-      shell: bash
     - name: Build AppImage
       run: .ci/ubuntu-build.sh
       shell: 'script -q -e -c "bash {0}"'
@@ -87,7 +51,7 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: build-Qt-${{ matrix.qt-version }}-${{ matrix.arch }}
+        name: build-Qt-${{ matrix.qt-version }}-amd64
         path: |
           *.AppImage
           *.zsync

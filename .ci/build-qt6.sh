@@ -13,7 +13,7 @@ qt_modules="$(echo $2 | tr ' ' ',')"
 target_arch="$3"
 root_path="$(pwd)"
 sysroot_path="${root_path}/sysroot"
-sysroot_ubuntu_version="$(lsb_release -rs).1"
+sysroot_ubuntu_version="$(lsb_release -rs).5"
 sysroot_ubuntu_codename="$(lsb_release -cs)"
 host_prefix="${root_path}/qt-host"
 cross_prefix="${root_path}/qt-cross"
@@ -50,6 +50,7 @@ echo "Target architecture: ${target_arch} (${target_arch_name})"
 
 # Install dependencies
 ${root_path}/.ci/qt6-dependencies.sh || exit 1
+# TODO: Uncomment this later
 ${root_path}/.ci/install-cross-compiler.sh "${target_arch}" || exit 1
 sudo apt install -y qemu-user-static || exit 1
 sudo apt install -y symlinks || exit 1
@@ -77,12 +78,29 @@ curl "https://cdimage.ubuntu.com/ubuntu-base/releases/${sysroot_ubuntu_codename}
 mkdir -p "$sysroot_path"
 sudo tar -xvzf ubuntu-base.tar.gz -C "$sysroot_path" || exit 1
 sudo update-binfmts --enable qemu-arm || exit 1
+sudo update-binfmts --enable qemu-aarch64 || exit 1
 sudo mount -o bind /dev "${sysroot_path}/dev" || exit 1
 sudo cp /etc/resolv.conf "${sysroot_path}/etc" || exit 1
 sudo chmod 1777 "${sysroot_path}/tmp" || exit 1
+sudo cp /usr/bin/qemu-arm-static "${sysroot_path}/usr/bin/"
+sudo cp /usr/bin/qemu-aarch64-static "${sysroot_path}/usr/bin/"
+
+# TODO: Remove this after dropping Ubuntu 18.04
+case "$target_arch" in
+    aarch64)
+        curl http://launchpadlibrarian.net/377890883/apt_1.7.0~alpha2_arm64.deb > "${sysroot_path}/apt.deb" || exit 1
+        curl http://launchpadlibrarian.net/377890885/libapt-pkg5.0_1.7.0~alpha2_arm64.deb > "${sysroot_path}/libapt-pkg.deb" || exit 1
+        ;;
+    armv7)
+        curl http://launchpadlibrarian.net/377891765/apt_1.7.0~alpha2_armhf.deb > "${sysroot_path}/apt.deb" || exit 1
+        curl http://launchpadlibrarian.net/377891767/libapt-pkg5.0_1.7.0~alpha2_armhf.deb > "${sysroot_path}/libapt-pkg.deb" || exit 1
+        ;;
+esac
+sudo chroot "$sysroot_path" /bin/bash -c "dpkg -i *.deb" || exit 1
+
+sudo chroot "$sysroot_path" /bin/bash -c "apt-get clean && apt-get update && apt install -y symlinks && symlinks -rc /" || exit 1
 sudo cp "${root_path}/.ci/qt6-dependencies.sh" "${sysroot_path}/"
 sudo chroot "$sysroot_path" /bin/bash -c "/qt6-dependencies.sh" || exit 1
-sudo chroot "$sysroot_path" /bin/bash -c "apt install -y symlinks && symlinks -rc /" || exit 1
 
 # Build Qt (cross)
 mkdir cross-build
