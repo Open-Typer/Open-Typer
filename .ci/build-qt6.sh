@@ -64,6 +64,7 @@ echo "Building host Qt..."
 cmake --build . --parallel $(nproc --all) || exit 1
 echo "Installing host Qt..."
 cmake --install . || exit 1
+cmake clean .
 cd ..
 rm -rf host-build
 
