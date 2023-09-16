@@ -52,14 +52,7 @@ jobs:
         add-apt-repository ppa:ubuntu-toolchain-r/test
         apt-get update
         apt-get install -y cmake gcc-9 g++-9
-        update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
-        update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-9 9
-        update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
-        update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-9 9
-        update-alternatives --set gcc /usr/bin/gcc-9
-        update-alternatives --set cc /usr/bin/gcc-9
-        update-alternatives --set g++ /usr/bin/g++-9
-        update-alternatives --set c++ /usr/bin/g++-9
+        .ci/update-gcc-path.sh
       shell: bash
     - name: Build cross compiler
       run: .ci/build-cross-compiler.sh "${{ matrix.arch }}"

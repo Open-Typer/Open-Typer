@@ -40,6 +40,8 @@ echo "Target architecture: ${target_arch} (${target_arch_name})"
 
 # Install dependencies
 ${root_path}/.ci/qt6-dependencies.sh || exit 1
+# TODO: Remove this after dropping Ubuntu 18.04
+.ci/update-gcc-path.sh
 # TODO: Uncomment this later
 #${root_path}/.ci/install-cross-compiler.sh "${target_arch}" || exit 1
 

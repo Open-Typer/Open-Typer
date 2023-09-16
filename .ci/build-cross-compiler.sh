@@ -8,7 +8,9 @@ sudo ()
 
 target_arch="$1"
 
-sudo apt install -y sed flex bison gzip gettext texinfo libelf-dev libgomp1 make tar libgmp-dev libmpfr-dev libmpc-dev libisl-dev build-essential || exit $?
+sudo apt install -y sed flex bison gzip gettext texinfo libelf-dev libgomp1 make tar libgmp-dev libmpfr-dev libmpc-dev libisl-dev || exit $?
+# TODO: Remove this after dropping Ubuntu 18.04
+.ci/update-gcc-path.sh
 
 echo "Preparing sysroot..."
 sysroot_path=$(.ci/prepare-sysroot.sh "$target_arch")
