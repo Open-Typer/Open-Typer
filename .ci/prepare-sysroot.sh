@@ -21,9 +21,11 @@ sysroot_ubuntu_codename="$(lsb_release -cs)"
 case "$target_arch" in
     aarch64)
         target_arch_debian_name="arm64"
+        toolchain_name="aarch64-linux-gnu"
         ;;
     armv7)
         target_arch_debian_name="armhf"
+        toolchain_name="arm-linux-gnueabihf"
         ;;
 esac
 
@@ -55,3 +57,10 @@ esac
 sudo chroot "$sysroot_path" /bin/bash -c "dpkg -i *.deb" || exit 1
 
 sudo chroot "$sysroot_path" /bin/bash -c "apt-get clean && apt-get update && apt install -y symlinks && symlinks -rc /" || exit 1
+sudo chroot "$sysroot_path" /bin/bash -c "apt-get install -y libc6-dev" || exit 1
+
+# Create missing symlinks
+sudo ln -s "${toolchain_name}/bits" "${sysroot_path}/usr/include/bits"
+sudo ln -s "${toolchain_name}/sys" "${sysroot_path}/usr/include/sys"
+sudo ln -s "${toolchain_name}/gnu" "${sysroot_path}/usr/include/gnu"
+sudo ln -s "${toolchain_name}/asm" "${sysroot_path}/usr/include/asm"
