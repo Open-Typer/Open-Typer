@@ -13,7 +13,8 @@ sudo apt install -y sed flex bison gzip gettext texinfo libelf-dev libgomp1 make
 .ci/update-gcc-path.sh
 
 echo "Preparing sysroot..."
-sysroot_path=$(.ci/prepare-sysroot.sh "$target_arch")
+.ci/prepare-sysroot.sh "$target_arch"
+sysroot_path=$(pwd)/sysroot
 
 #git clone https://github.com/Open-Typer/gcc-cross-compiler || exit $?
 git init gcc-cross-compiler || exit $?

@@ -11,7 +11,7 @@ root_path="$(pwd)"
 sysroot_path="${root_path}/sysroot"
 
 if [ -d "$sysroot_path" ]; then
-    echo "$sysroot_path"
+    echo "warning: sysroot already exists"
     exit 0
 fi
 
@@ -55,5 +55,3 @@ esac
 sudo chroot "$sysroot_path" /bin/bash -c "dpkg -i *.deb" || exit 1
 
 sudo chroot "$sysroot_path" /bin/bash -c "apt-get clean && apt-get update && apt install -y symlinks && symlinks -rc /" || exit 1
-
-echo "$sysroot_path"
