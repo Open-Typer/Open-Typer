@@ -26,12 +26,12 @@ git checkout master || exit $?
 case "$target_arch" in
     aarch64)
         sudo ./toolchain.py --arch aarch64 --install yes --cores $(nproc --all) --sysroot "$sysroot_path" || exit $?
-        update-alternatives --install /usr/bin/aarch64-linux-gnu-gcc aarch64-linux-gnu-gcc /usr/local/cross/aarch64/bin/aarch64-linux-gnu-gcc 10 || exit $?
-        update-alternatives --install /usr/bin/aarch64-linux-gnu-g++ aarch64-linux-gnu-g++ /usr/local/cross/aarch64/bin/aarch64-linux-gnu-g++ 10 || exit $?
+        sudo update-alternatives --install /usr/bin/aarch64-linux-gnu-gcc aarch64-linux-gnu-gcc /usr/local/cross/aarch64/bin/aarch64-linux-gnu-gcc 10 || exit $?
+        sudo update-alternatives --install /usr/bin/aarch64-linux-gnu-g++ aarch64-linux-gnu-g++ /usr/local/cross/aarch64/bin/aarch64-linux-gnu-g++ 10 || exit $?
         ;;
     armv7)
         sudo ./toolchain.py --arch armhf --install yes --cores $(nproc --all) --sysroot "$sysroot_path" || exit $?
-        update-alternatives --install /usr/bin/arm-linux-gnueabihf-gcc arm-linux-gnueabihf-gcc /usr/local/cross/armhf/bin/arm-linux-gnueabihf-gcc 10 || exit $?
-        update-alternatives --install /usr/bin/arm-linux-gnueabihf-g++ arm-linux-gnueabihf-g++ /usr/local/cross/armhf/bin/arm-linux-gnueabihf-g++ 10 || exit $?
+        sudo update-alternatives --install /usr/bin/arm-linux-gnueabihf-gcc arm-linux-gnueabihf-gcc /usr/local/cross/armhf/bin/arm-linux-gnueabihf-gcc 10 || exit $?
+        sudo update-alternatives --install /usr/bin/arm-linux-gnueabihf-g++ arm-linux-gnueabihf-g++ /usr/local/cross/armhf/bin/arm-linux-gnueabihf-g++ 10 || exit $?
         ;;
 esac
