@@ -64,7 +64,7 @@ rm -rf host-build
 
 # Prepare sysroot
 echo "Preparing sysroot..."
-.ci/prepare-sysroot.sh "$target_arch"
+${root_path}/.ci/prepare-sysroot.sh "$target_arch"
 sysroot_path=$(pwd)/sysroot
 sudo cp "${root_path}/.ci/qt6-dependencies.sh" "${sysroot_path}/"
 sudo chroot "$sysroot_path" /bin/bash -c "/qt6-dependencies.sh" || exit 1
