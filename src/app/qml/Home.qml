@@ -112,7 +112,7 @@ ColumnLayout {
 
 	Connections {
 		target: rootItem
-		onLanguageChanged: {
+		function onLanguageChanged() {
 			updateLessonList();
 			panel2.contents.lessonBox.currentIndex = currentLesson - 1;
 			loadLesson(currentLesson, currentSublesson);
@@ -179,7 +179,7 @@ ColumnLayout {
 	QmlFileDialog {
 		id: customExFileDialog
 		nameFilters: [qsTr("Text files") + "(*.txt)"]
-		onFileContentReady: {
+		onFileContentReady: (content)=> {
 			if(content.length > 8192) // Maximum size
 				largeFileBox.open();
 			else
@@ -204,7 +204,7 @@ ColumnLayout {
 
 	Connections {
 		target: QmlUtils
-		onScreenKeyboardChanged: {
+		function onScreenKeyboardChanged(layoutChanged) {
 			if(layoutChanged)
 				keyboard.loadLayout(getKeyboardLayout());
 		}
@@ -212,7 +212,7 @@ ColumnLayout {
 
 	KeyboardHandler {
 		id: keyboardHandler
-		onKeyPressed: {
+		onKeyPressed: (event)=> {
 			if(event.key !== Qt.Key_Tab && event.key !== Qt.Key_Enter && event.key !== Qt.Key_Return && event.key !== Qt.Key_Space)
 				paper.forceActiveFocus();
 		}
@@ -220,15 +220,15 @@ ColumnLayout {
 
 	Connections {
 		target: root
-		onWidthChanged: { parent.renderSource(); }
-		onHeightChanged: { parent.renderSource(); }
-		onPreviewChanged: { parent.renderSource(); }
-		onCurrentModeChanged: { parent.renderSource(); }
+		function onWidthChanged() { parent.renderSource(); }
+		function onHeightChanged() { parent.renderSource(); }
+		function onPreviewChanged() { parent.renderSource(); }
+		function onCurrentModeChanged() { parent.renderSource(); }
 	}
 
 	Connections {
 		target: paper.paperRect
-		onWidthChanged: { parent.renderSource(); }
+		function onWidthChanged() { parent.renderSource(); }
 	}
 
 	Panel {
@@ -438,8 +438,8 @@ ColumnLayout {
 		lesson: root.currentLesson
 		sublesson: root.currentAbsoluteSublesson
 		exercise: root.currentExercise
-		onKeyPressed: keyPress(event);
-		onKeyReleased: keyRelease(event);
+		onKeyPressed: (event)=> keyPress(event);
+		onKeyReleased: (event)=> keyRelease(event);
 		onExerciseHistoryChanged: {
 			if(exerciseHistory)
 			{
