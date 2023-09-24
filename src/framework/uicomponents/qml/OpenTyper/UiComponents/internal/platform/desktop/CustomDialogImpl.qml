@@ -171,7 +171,7 @@ Item {
 					Layout.fillWidth: true
 					Connections {
 						target: LanguageManager
-						onLanguageChanged: {
+						function onLanguageChanged() {
 							translationTimer.start();
 						}
 					}
