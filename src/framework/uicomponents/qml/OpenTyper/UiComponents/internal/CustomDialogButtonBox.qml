@@ -74,7 +74,7 @@ AccentButtonBox {
 	Connections {
 		readonly property Item firstButton: dialogButtonBox.contentChildren[0]
 		target: firstButton
-		onActiveFocusChanged: {
+		function onActiveFocusChanged() {
 			if(!firstButton.activeFocus)
 				focusOut();
 		}
