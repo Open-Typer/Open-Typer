@@ -1,5 +1,11 @@
 #!/bin/bash
 
+sudo ()
+{
+    [[ $EUID = 0 ]] || set -- command sudo "$@"
+    "$@"
+}
+
 sudo apt install -y devscripts dput debhelper python3-launchpadlib
 
 CHANNELS=( $(./.ci/common/get-supported-releases.py) )

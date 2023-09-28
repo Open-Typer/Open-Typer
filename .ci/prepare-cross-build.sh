@@ -1,5 +1,11 @@
 #!/bin/bash
 
+sudo ()
+{
+    [[ $EUID = 0 ]] || set -- command sudo "$@"
+    "$@"
+}
+
 target_arch="$1"
 
 case "$target_arch" in
