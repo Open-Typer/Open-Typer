@@ -155,7 +155,7 @@ CustomDialog {
 
 					Connections {
 						target: QmlUtils
-						onActiveFocusItemChanged: {
+						function onActiveFocusItemChanged() {
 							let focusItem = QmlUtils.activeFocusItem;
 							if(QmlUtils.itemHasChild(gradingConfig, focusItem))
 								flickable.ensureVisible(focusItem);
@@ -173,7 +173,7 @@ CustomDialog {
 
 	Connections {
 		target: standardButton(Dialog.Close)
-		onActiveFocusChanged: {
+		function onActiveFocusChanged() {
 			if(!target.activeFocus)
 				root.contents.currentItem.forceActiveFocus(Qt.TabFocusReason);
 		}

@@ -38,7 +38,7 @@ Item {
 	Connections {
 		target: AppMenuBar.newLessonPackAction
 
-		onClicked: {
+		function onClicked() {
 			newLessonPackToggled();
 		}
 	}
@@ -46,7 +46,7 @@ Item {
 	Connections {
 		target: AppMenuBar.openExerciseAction
 
-		onClicked: {
+		function onClicked() {
 			openExerciseToggled();
 		}
 	}
@@ -54,7 +54,7 @@ Item {
 	Connections {
 		target: AppMenuBar.openPackAction
 
-		onClicked: {
+		function onClicked() {
 			openPackToggled();
 		}
 	}
@@ -62,7 +62,7 @@ Item {
 	Connections {
 		target: AppMenuBar.openPackInEditorAction
 
-		onClicked: {
+		function onClicked() {
 			openPackInEditorToggled();
 		}
 	}
@@ -70,7 +70,7 @@ Item {
 	Connections {
 		target: AppMenuBar.printAction
 
-		onClicked: {
+		function onClicked() {
 			printToggled();
 		}
 	}
@@ -78,7 +78,7 @@ Item {
 	Connections {
 		target: AppMenuBar.typingTestAction
 
-		onClicked: {
+		function onClicked() {
 			typingTestToggled();
 		}
 	}
@@ -86,7 +86,7 @@ Item {
 	Connections {
 		target: AppMenuBar.exerciseHistoryAction
 
-		onClicked: {
+		function onClicked() {
 			exerciseHistoryToggled();
 		}
 	}
@@ -94,7 +94,7 @@ Item {
 	Connections {
 		target: AppMenuBar.timedExAction
 
-		onClicked: {
+		function onClicked() {
 			timedExToggled();
 		}
 	}
@@ -102,7 +102,7 @@ Item {
 	Connections {
 		target: AppMenuBar.errorWordsAction
 
-		onClicked: {
+		function onClicked() {
 			errorWordsToggled();
 		}
 	}
@@ -110,23 +110,23 @@ Item {
 	Connections {
 		target: AppMenuBar.reverseTextAction
 
-		onClicked: {
+		function onClicked() {
 			reverseTextToggled();
 		}
 	}
 
 	Connections {
-	target: AppMenuBar.preferencesAction
+		target: AppMenuBar.preferencesAction
 
-		onClicked: {
+		function onClicked() {
 			preferencesToggled();
 		}
 	}
 
 	Connections {
-	target: AppMenuBar.aboutProgramAction
+		target: AppMenuBar.aboutProgramAction
 
-		onClicked: {
+		function onClicked() {
 			aboutProgramToggled();
 		}
 	}

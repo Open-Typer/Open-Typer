@@ -86,13 +86,13 @@ Item {
 
 	KeyboardHandler {
 		id: keyboardHandler
-		onKeyPressed: {
+		onKeyPressed: (event)=> {
 			if(event.key === Qt.Key_Tab)
 				control.parent.forceActiveFocus();
 			else
 				control.keyPressed(event);
 		}
-		onKeyReleased: control.keyReleased(event);
+		onKeyReleased: (event)=> control.keyReleased(event);
 	}
 
 	PropertyAnimation {

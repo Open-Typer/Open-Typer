@@ -146,14 +146,14 @@ Item {
 
 		Connections {
 			target: QmlUtils
-			onScreenKeyboardChanged: {
+			function onScreenKeyboardChanged() {
 				keyRect.updateKeyColor();
 			}
 		}
 
 		Connections {
 			target: ThemeEngine
-			onCurrentAccentColorChanged: {
+			function onCurrentAccentColorChanged() {
 				keyRect.updateKeyColor();
 			}
 		}

@@ -53,16 +53,16 @@ ApplicationWindow {
 	onWidthChanged: updateGeometry()
 	onHeightChanged: updateGeometry()
 	onActiveFocusItemChanged: QmlUtils.activeFocusItem = activeFocusItem
-	onVisibilityChanged: {
+	onVisibilityChanged: (visibility)=> {
 		if(!geometryInitialized)
 		{
 			geometryInitialized = true;
 			return;
 		}
 
-		if(visibility == ApplicationWindow.Maximized)
+		if(visibility === ApplicationWindow.Maximized)
 			wasMaximized = true;
-		else if(visibility == ApplicationWindow.Windowed)
+		else if(visibility === ApplicationWindow.Windowed)
 		{
 			if(!QmlUtils.osMac())
 			{
@@ -136,12 +136,12 @@ ApplicationWindow {
 
 		Connections {
 			target: ThemeEngine
-			onCurrentAccentColorChanged: { mainLayoutSource.render(); }
+			function onCurrentAccentColorChanged() { mainLayoutSource.render(); }
 		}
 
 		Connections {
 			target: LanguageManager
-			onLanguageChanged: { mainLayoutSource.render(); }
+			function onLanguageChanged() { mainLayoutSource.render(); }
 		}
 	}
 
@@ -288,7 +288,7 @@ ApplicationWindow {
 
 			Connections {
 				target: editorButton.editor
-				onAboutToClose: tabBar.removeItem(editorButton);
+				function onAboutToClose() { tabBar.removeItem(editorButton); }
 			}
 		}
 	}

@@ -281,7 +281,7 @@ Item {
 			}
 			Connections {
 				target: LanguageManager
-				onLanguageChanged: {
+				function onLanguageChanged() {
 					translationTimer.start();
 				}
 			}

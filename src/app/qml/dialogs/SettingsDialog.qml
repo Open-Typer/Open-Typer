@@ -204,7 +204,7 @@ CustomDialog {
 				}
 				Connections {
 					target: QmlUtils
-					onActiveFocusItemChanged: {
+					function onActiveFocusItemChanged() {
 						let focusItem = QmlUtils.activeFocusItem;
 						if(QmlUtils.itemHasChild(focusScope, focusItem))
 							flickable.ensureVisible(focusItem);
