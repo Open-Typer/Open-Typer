@@ -411,9 +411,12 @@ void KeyboardLayout::loadLayout(QString rawData, QString variantName)
 		if(buffer.length() >= 2 && buffer.right(2) == "//")
 #endif
 		{
+			data += buffer.left(buffer.length() - 2);
 			while(i < rawData.length() && rawData[i] != '\n')
 				i++;
 			buffer.clear();
+			if(i < rawData.length())
+				data += "\n";
 			continue;
 		}
 		if(rawData[i] == '\n')
